@@ -1,0 +1,33 @@
+<results>
+  <test name='mid(str2,(num0+5)*.3,num1)'>
+    <sql>
+      SELECT (CASE WHEN ((&quot;Calcs&quot;.&quot;num0&quot; + 5) * 0.29999999999999999) IS NULL THEN NULL ELSE SUBSTR(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT), INT4LARGER(1,CAST(FLOOR(((&quot;Calcs&quot;.&quot;num0&quot; + 5) * 0.29999999999999999)) AS INTEGER)), INT4LARGER(0,CAST(FLOOR(&quot;Calcs&quot;.&quot;num1&quot;) AS INTEGER))) END) AS &quot;TEMP(Test)(1934432200)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      75.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1934432200)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ive&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

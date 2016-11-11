@@ -1,0 +1,5 @@
+CHAR(65)
+
+//These are of questionable value and generate a new expected file for virtually every datasource.
+//char(num4*7)
+//char(int2)

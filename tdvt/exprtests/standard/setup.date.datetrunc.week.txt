@@ -1,0 +1,4 @@
+DATETRUNC('week', [date2])
+
+DATETRUNC('week', [datetime0])
+

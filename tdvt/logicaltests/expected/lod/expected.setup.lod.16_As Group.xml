@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.16_As Group.dbo.xml'>
+    <sql>
+      SELECT [t1].[LOD - Fixed - 4 (group)] AS [LOD - Fixed - 4 (group)],&#10;  [t6].[__measure__3] AS [avg:Calculation_4821225012418421:ok],&#10;  [t1].[avg:Price:ok] AS [avg:Price:ok],&#10;  [t11].[__measure__6] AS [sum:Calculation_4621225004123988:ok]&#10;FROM (&#10;  SELECT (CASE WHEN (DATEDIFF(month,[t0].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t0].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t0].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END) AS [LOD - Fixed - 4 (group)],&#10;    AVG(cast([Staples].[Price] as float)) AS [avg:Price:ok]&#10;  FROM [dbo].[Staples] [Staples]&#10;    CROSS JOIN (&#10;    SELECT MIN([Staples].[Order Date]) AS [__measure__0]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY ()&#10;  ) [t0]&#10;  GROUP BY (CASE WHEN (DATEDIFF(month,[t0].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t0].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t0].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END)&#10;) [t1]&#10;  INNER JOIN (&#10;  SELECT [t3].[LOD - Fixed - 4 (group)] AS [LOD - Fixed - 4 (group)],&#10;    CAST(MIN([t5].[__measure__2]) as float) AS [__measure__3]&#10;  FROM (&#10;    SELECT DATEPART(month,[t2].[__measure__1]) AS [Calculation_8741225012317469],&#10;      (CASE WHEN (DATEDIFF(month,[t2].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t2].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t2].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END) AS [LOD - Fixed - 4 (group)]&#10;    FROM [dbo].[Staples] [Staples]&#10;      CROSS JOIN (&#10;      SELECT MIN([Staples].[Order Date]) AS [__measure__1],&#10;        MIN([Staples].[Order Date]) AS [__measure__0]&#10;      FROM [dbo].[Staples] [Staples]&#10;      GROUP BY ()&#10;    ) [t2]&#10;    GROUP BY DATEPART(month,[t2].[__measure__1]),&#10;      (CASE WHEN (DATEDIFF(month,[t2].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t2].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t2].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END)&#10;  ) [t3]&#10;    INNER JOIN (&#10;    SELECT DATEPART(month,[t4].[__measure__1]) AS [Calculation_8741225012317469],&#10;      SUM([Staples].[Order Quantity]) AS [__measure__2]&#10;    FROM [dbo].[Staples] [Staples]&#10;      CROSS JOIN (&#10;      SELECT MIN([Staples].[Order Date]) AS [__measure__1]&#10;      FROM [dbo].[Staples] [Staples]&#10;      GROUP BY ()&#10;    ) [t4]&#10;    GROUP BY DATEPART(month,[t4].[__measure__1])&#10;  ) [t5] ON (([t3].[Calculation_8741225012317469] = [t5].[Calculation_8741225012317469]) OR (([t3].[Calculation_8741225012317469] IS NULL) AND ([t5].[Calculation_8741225012317469] IS NULL)))&#10;  GROUP BY [t3].[LOD - Fixed - 4 (group)]&#10;) [t6] ON ([t1].[LOD - Fixed - 4 (group)] = [t6].[LOD - Fixed - 4 (group)])&#10;  INNER JOIN (&#10;  SELECT [t8].[LOD - Fixed - 4 (group)] AS [LOD - Fixed - 4 (group)],&#10;    SUM([t10].[__measure__5]) AS [__measure__6]&#10;  FROM (&#10;    SELECT (CASE WHEN (DATEDIFF(month,[t7].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t7].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t7].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END) AS [LOD - Fixed - 4 (group)],&#10;      [Staples].[Prod Type1] AS [Prod Type1]&#10;    FROM [dbo].[Staples] [Staples]&#10;      CROSS JOIN (&#10;      SELECT MIN([Staples].[Order Date]) AS [__measure__0]&#10;      FROM [dbo].[Staples] [Staples]&#10;      GROUP BY ()&#10;    ) [t7]&#10;    GROUP BY (CASE WHEN (DATEDIFF(month,[t7].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t7].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t7].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END),&#10;      [Staples].[Prod Type1]&#10;  ) [t8]&#10;    INNER JOIN (&#10;    SELECT (CASE WHEN (DATEDIFF(month,[t9].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t9].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t9].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END) AS [LOD - Fixed - 4 (group)],&#10;      [Staples].[Prod Type1] AS [Prod Type1],&#10;      SUM([Staples].[Sales Total]) AS [__measure__5]&#10;    FROM [dbo].[Staples] [Staples]&#10;      CROSS JOIN (&#10;      SELECT MIN([Staples].[Order Date]) AS [__measure__0]&#10;      FROM [dbo].[Staples] [Staples]&#10;      GROUP BY ()&#10;    ) [t9]&#10;    GROUP BY (CASE WHEN (DATEDIFF(month,[t9].[__measure__0],[Staples].[Order Date]) IN (0, 1, 2, 3, 4, 5, 6)) THEN 0 WHEN (DATEDIFF(month,[t9].[__measure__0],[Staples].[Order Date]) IN (16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64)) THEN 16 WHEN (DATEDIFF(month,[t9].[__measure__0],[Staples].[Order Date]) IN (10, 11, 12, 13, 14, 15, 7, 8, 9)) THEN 7 ELSE 71 END),&#10;      [Staples].[Prod Type1]&#10;  ) [t10] ON (([t8].[LOD - Fixed - 4 (group)] = [t10].[LOD - Fixed - 4 (group)]) AND (([t8].[Prod Type1] = [t10].[Prod Type1]) OR (([t8].[Prod Type1] IS NULL) AND ([t10].[Prod Type1] IS NULL))))&#10;  GROUP BY [t8].[LOD - Fixed - 4 (group)]&#10;) [t11] ON ([t1].[LOD - Fixed - 4 (group)] = [t11].[LOD - Fixed - 4 (group)])
+    </sql>
+    <query-time>
+      368.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[LOD - Fixed - 4 (group)]</column>
+        <column>[Staples.sqlserver].[avg:Calculation_4821225012418421:ok]</column>
+        <column>[Staples.sqlserver].[avg:Price:ok]</column>
+        <column>[Staples.sqlserver].[sum:Calculation_4621225004123988:ok]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+        <value>1390980.0</value>
+        <value>83.376849</value>
+        <value>9334296.5</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+        <value>1390980.0</value>
+        <value>90.50068</value>
+        <value>12192129.0</value>
+      </tuple>
+      <tuple>
+        <value>16</value>
+        <value>1390980.0</value>
+        <value>85.679629</value>
+        <value>67941185.0</value>
+      </tuple>
+      <tuple>
+        <value>71</value>
+        <value>1390980.0</value>
+        <value>82.764691</value>
+        <value>9220327.3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

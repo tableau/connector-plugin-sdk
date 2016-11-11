@@ -1,0 +1,150 @@
+<results>
+  <test name='DATETRUNC(&apos;quarter&apos;, [date2], &apos;monday&apos;)'>
+    <sql>
+      SELECT CAST(TO_CHAR(CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP), &apos;YYYY-&apos;) || CAST((3*(EXTRACT(QUARTER FROM CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP))-1)+1) AS INTEGER) || &apos;-01 00:00:00&apos; AS TIMESTAMP) AS &quot;TEMP(Test)(4146692480)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4146692480)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-10-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, [date2], &apos;sunday&apos;)'>
+    <sql>
+      SELECT CAST(TO_CHAR(CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP), &apos;YYYY-&apos;) || CAST((3*(EXTRACT(QUARTER FROM CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP))-1)+1) AS INTEGER) || &apos;-01 00:00:00&apos; AS TIMESTAMP) AS &quot;TEMP(Test)(560528826)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(560528826)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-10-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, [datetime0], &apos;monday&apos;)'>
+    <sql>
+      SELECT CAST(TO_CHAR(CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS TIMESTAMP), &apos;YYYY-&apos;) || CAST((3*(EXTRACT(QUARTER FROM CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS TIMESTAMP))-1)+1) AS INTEGER) || &apos;-01 00:00:00&apos; AS TIMESTAMP) AS &quot;TEMP(Test)(105511240)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(105511240)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, [datetime0], &apos;sunday&apos;)'>
+    <sql>
+      SELECT CAST(TO_CHAR(CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS TIMESTAMP), &apos;YYYY-&apos;) || CAST((3*(EXTRACT(QUARTER FROM CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS TIMESTAMP))-1)+1) AS INTEGER) || &apos;-01 00:00:00&apos; AS TIMESTAMP) AS &quot;TEMP(Test)(755301458)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(755301458)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,114 @@
+<results>
+  <test name='LOG([int2])'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int2&quot; &gt; 0 THEN LOG(&quot;Calcs&quot;.&quot;int2&quot;) ELSE NULL END) AS &quot;TEMP(Test)(114283928)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(114283928)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.30103</value>
+      </tuple>
+      <tuple>
+        <value>0.47712125</value>
+      </tuple>
+      <tuple>
+        <value>0.60205999</value>
+      </tuple>
+      <tuple>
+        <value>0.69897</value>
+      </tuple>
+      <tuple>
+        <value>0.77815125</value>
+      </tuple>
+      <tuple>
+        <value>0.95424251</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LOG([int2],2)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int2&quot; &gt; 0 AND 2 &gt; 0 AND 2 &lt;&gt; 1 THEN LOG(CAST(2 AS NUMERIC),CAST(&quot;Calcs&quot;.&quot;int2&quot; AS NUMERIC)) ELSE NULL END) AS &quot;TEMP(Test)(3322085183)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3322085183)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1.0</value>
+      </tuple>
+      <tuple>
+        <value>1.5849625</value>
+      </tuple>
+      <tuple>
+        <value>2.0</value>
+      </tuple>
+      <tuple>
+        <value>2.3219281</value>
+      </tuple>
+      <tuple>
+        <value>2.5849625</value>
+      </tuple>
+      <tuple>
+        <value>3.169925</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='log(num0)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num0&quot; &gt; 0 THEN LOG(&quot;Calcs&quot;.&quot;num0&quot;) ELSE NULL END) AS &quot;TEMP(Test)(1814892178)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1814892178)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.54406804</value>
+      </tuple>
+      <tuple>
+        <value>1.0</value>
+      </tuple>
+      <tuple>
+        <value>1.0899051</value>
+      </tuple>
+      <tuple>
+        <value>1.1958997</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='log(num0,2)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num0&quot; &gt; 0 AND 2 &gt; 0 AND 2 &lt;&gt; 1 THEN LOG(CAST(2 AS NUMERIC),CAST(&quot;Calcs&quot;.&quot;num0&quot; AS NUMERIC)) ELSE NULL END) AS &quot;TEMP(Test)(3081102343)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3081102343)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1.8073549</value>
+      </tuple>
+      <tuple>
+        <value>3.3219281</value>
+      </tuple>
+      <tuple>
+        <value>3.6205864</value>
+      </tuple>
+      <tuple>
+        <value>3.9726927</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logical-query>
+  <selects>
+    <field>[Str2 (group)]</field>
+  </selects>
+  <domainOp class="logical-operator" type="snowflake">
+    <aggregateOp class="logical-operator">
+      <measures>
+      </measures>
+      <groupbys>
+        <binding name="[Str2 (group)]">
+          <identifierExp class="logical-expression" identifier="[Str2 (group)]" />
+        </binding>
+      </groupbys>
+      <projectOp class="logical-operator">
+        <expressions>
+          <binding name="[Str2 (group)]">
+            <caseExp class="logical-expression">
+              <identifierExp class="logical-expression" identifier="[str2]" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;fifteen&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;five&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;fourteen&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;nine&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;one&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;six&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;sixteen&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;ten&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;three&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;twelve&quot;" />
+              <literalExp charset="280" class="logical-expression" collation="LEN_RUS_S2" datatype="string" value="&quot;eleven&quot;" />
+              <identifierExp class="logical-expression" identifier="[str2]" />
+            </caseExp>
+          </binding>
+        </expressions>
+        <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+          <relation name="Calcs" table="$Calcs$" type="table" />
+          <cols>
+          </cols>
+          <type>
+            <schema>
+              <field name="[bool0_]">
+                <type name="top" />
+              </field>
+              <field name="[bool1_]">
+                <type name="top" />
+              </field>
+              <field name="[bool2_]">
+                <type name="top" />
+              </field>
+              <field name="[bool3_]">
+                <type name="top" />
+              </field>
+              <field name="[date0]">
+                <type name="top" />
+              </field>
+              <field name="[date1]">
+                <type name="top" />
+              </field>
+              <field name="[date2]">
+                <type name="top" />
+              </field>
+              <field name="[date3]">
+                <type name="top" />
+              </field>
+              <field name="[datetime0]">
+                <type name="top" />
+              </field>
+              <field name="[datetime1]">
+                <type name="top" />
+              </field>
+              <field name="[int0]">
+                <type name="top" />
+              </field>
+              <field name="[int1]">
+                <type name="top" />
+              </field>
+              <field name="[int2]">
+                <type name="top" />
+              </field>
+              <field name="[int3]">
+                <type name="top" />
+              </field>
+              <field name="[key]">
+                <type name="top" />
+              </field>
+              <field name="[num0]">
+                <type name="top" />
+              </field>
+              <field name="[num1]">
+                <type name="top" />
+              </field>
+              <field name="[num2]">
+                <type name="top" />
+              </field>
+              <field name="[num3]">
+                <type name="top" />
+              </field>
+              <field name="[num4]">
+                <type name="top" />
+              </field>
+              <field name="[str0]">
+                <type name="top" />
+              </field>
+              <field name="[str1]">
+                <type name="top" />
+              </field>
+              <field name="[str2]">
+                <type name="top" />
+              </field>
+              <field name="[str3]">
+                <type name="top" />
+              </field>
+              <field name="[time0]">
+                <type name="top" />
+              </field>
+              <field name="[time1]">
+                <type name="top" />
+              </field>
+              <field name="[zzz]">
+                <type name="top" />
+              </field>
+            </schema>
+            <schema>
+            </schema>
+          </type>
+        </relationOp>
+      </projectOp>
+    </aggregateOp>
+  </domainOp>
+</logical-query>

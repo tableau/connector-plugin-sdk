@@ -1,0 +1,5 @@
+MIN([int0])
+MIN([date3])
+MIN([num4])
+MIN([str2])
+MIN([int0], [int1])

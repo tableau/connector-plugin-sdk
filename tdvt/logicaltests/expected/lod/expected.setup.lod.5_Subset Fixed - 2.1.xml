@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.5_Subset Fixed - 2.test_lower.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT &quot;t0&quot;.&quot;Market_Segment&quot; AS &quot;Market_Segment&quot;,&#10;  &quot;t0&quot;.&quot;Prod_Type2&quot; AS &quot;Prod_Type2&quot;,&#10;  CAST(&quot;t1&quot;.&quot;X_measure__0&quot; AS FLOAT) AS &quot;avg_LOD___Fixed___1__copy__ok&quot;&#10;FROM (&#10;  SELECT &quot;Staples&quot;.&quot;Market Segment&quot; AS &quot;Market_Segment&quot;,&#10;    &quot;Staples&quot;.&quot;Prod Type2&quot; AS &quot;Prod_Type2&quot;&#10;  FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;  GROUP BY &quot;Staples&quot;.&quot;Market Segment&quot;,&#10;    &quot;Staples&quot;.&quot;Prod Type2&quot;&#10;) &quot;t0&quot;&#10;  INNER JOIN (&#10;  SELECT &quot;Staples&quot;.&quot;Prod Type2&quot; AS &quot;Prod_Type2&quot;,&#10;    SUM(&quot;Staples&quot;.&quot;Product Base Margin&quot;) AS &quot;X_measure__0&quot;&#10;  FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;  GROUP BY &quot;Staples&quot;.&quot;Prod Type2&quot;&#10;) &quot;t1&quot; ON ((&quot;t0&quot;.&quot;Prod_Type2&quot; = &quot;t1&quot;.&quot;Prod_Type2&quot;) OR ((&quot;t0&quot;.&quot;Prod_Type2&quot; IS NULL) AND (&quot;t1&quot;.&quot;Prod_Type2&quot; IS NULL)))
+    </sql>
+    <query-time>
+      322.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sybaseiq].[Market Segment]</column>
+        <column>[Staples.lod.sybaseiq].[Prod Type2]</column>
+        <column>[Staples.lod.sybaseiq].[avg:LOD - Fixed - 1 (copy):ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>1554.89</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>2181.5801</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>882.51001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>1530.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>2990.1001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>235.78</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>556.67999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>759.23999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>2726.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>1063.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>2955.3899</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>2443.3101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>552.34998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>675.91998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>2484.99</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;TABLES&quot;</value>
+        <value>1653.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>3030.8101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>1554.89</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>2181.5801</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>882.51001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>1530.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>2990.1001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>235.78</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>556.67999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>759.23999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>2726.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>1063.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>2955.3899</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>2443.3101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>552.34998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>675.91998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>2484.99</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;TABLES&quot;</value>
+        <value>1653.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>3030.8101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>1554.89</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>2181.5801</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>882.51001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>1530.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>2990.1001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>235.78</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>556.67999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>759.23999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>2726.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>1063.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>2955.3899</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>2443.3101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>552.34998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>675.91998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>2484.99</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;TABLES&quot;</value>
+        <value>1653.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>3030.8101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>1554.89</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>2181.5801</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>882.51001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>1530.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>2990.1001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>235.78</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>556.67999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>759.23999</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>2726.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>1063.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>2955.3899</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>2443.3101</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>552.34998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>675.91998</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>2484.99</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;TABLES&quot;</value>
+        <value>1653.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>3030.8101</value>
+      </tuple>
+    </table>
+  </test>
+</results>

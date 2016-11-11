@@ -1,0 +1,58 @@
+<results>
+  <test name='LN([int2])'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int2&quot; &gt; 0 THEN LN(&quot;Calcs&quot;.&quot;int2&quot;) ELSE NULL END) AS &quot;TEMP(Test)(2832324438)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2832324438)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.69314718</value>
+      </tuple>
+      <tuple>
+        <value>1.0986123</value>
+      </tuple>
+      <tuple>
+        <value>1.3862944</value>
+      </tuple>
+      <tuple>
+        <value>1.6094379</value>
+      </tuple>
+      <tuple>
+        <value>1.7917595</value>
+      </tuple>
+      <tuple>
+        <value>2.1972246</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ln(num0)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num0&quot; &gt; 0 THEN LN(&quot;Calcs&quot;.&quot;num0&quot;) ELSE NULL END) AS &quot;TEMP(Test)(1125921255)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1125921255)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1.252763</value>
+      </tuple>
+      <tuple>
+        <value>2.3025851</value>
+      </tuple>
+      <tuple>
+        <value>2.5095993</value>
+      </tuple>
+      <tuple>
+        <value>2.7536607</value>
+      </tuple>
+    </table>
+  </test>
+</results>

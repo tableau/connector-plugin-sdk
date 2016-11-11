@@ -1,0 +1,16 @@
+<results>
+  <test name='ISDATE(&quot;2015-01-01&quot;)'>
+    <sql>
+      Unknown function ISDATE called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='ISDATE(&quot;data&quot;)'>
+    <sql>
+      Unknown function ISDATE called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+</results>

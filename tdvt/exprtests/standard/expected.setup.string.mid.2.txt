@@ -1,0 +1,115 @@
+<results>
+  <test name='mid(str1,6)'>
+    <sql>
+      SELECT (CASE WHEN 6 IS NULL THEN NULL ELSE SUBSTR(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), INT4LARGER(1,CAST(FLOOR(6) AS INTEGER))) END) AS &quot;TEMP(Test)(98307893)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(98307893)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; ON LAMPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ATRIX PRINTERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;D KEYBOARDS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ESS COPIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ESS ENVELOPES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ESS KEYBOARDS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MEDIA&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;NG MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;NG SUPPLIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;R ACCESSORIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;R CLIPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RENCE PHONES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;S&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SON&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;URIFIERS&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='mid(str1,2, 4)'>
+    <sql>
+      SELECT (CASE WHEN 2 IS NULL THEN NULL ELSE SUBSTR(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), INT4LARGER(1,CAST(FLOOR(2) AS INTEGER)), INT4LARGER(0,CAST(FLOOR(4) AS INTEGER))) END) AS &quot;TEMP(Test)(3472698691)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3472698691)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;D-R &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;INDE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;INDI&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;IR P&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LAMP&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LOCK&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;NSWE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ONFE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ORDE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ORDL&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OT M&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RICS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;USIN&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;VD&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

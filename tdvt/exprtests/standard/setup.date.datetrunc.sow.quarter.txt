@@ -1,0 +1,6 @@
+DATETRUNC('quarter', [date2], 'monday')
+DATETRUNC('quarter', [date2], 'sunday')
+
+DATETRUNC('quarter', [datetime0], 'monday')
+DATETRUNC('quarter', [datetime0], 'sunday')
+

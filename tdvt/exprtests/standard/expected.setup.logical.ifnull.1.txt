@@ -1,0 +1,18 @@
+<results>
+  <test name='IFNULL(COUNTD(num2), 0)'>
+    <sql>
+      SELECT COALESCE(COUNT(DISTINCT &quot;Calcs&quot;.&quot;num2&quot;), 0) AS &quot;TEMP(Test)(957319405)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      23.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(957319405)(0)]</column>
+      </schema>
+      <tuple>
+        <value>13.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

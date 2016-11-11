@@ -1,0 +1,68 @@
+<results>
+  <test name='MIN([date2], [date3])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;date2&quot; IS NULL OR &quot;Calcs&quot;.&quot;date3&quot; IS NULL THEN NULL&#10;&#9;WHEN &quot;Calcs&quot;.&quot;date2&quot; &lt; &quot;Calcs&quot;.&quot;date3&quot; THEN &quot;Calcs&quot;.&quot;date2&quot;&#10;&#9;ELSE &quot;Calcs&quot;.&quot;date3&quot; END) AS &quot;TEMP(Test)(3951339438)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3951339438)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-12#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20#</value>
+      </tuple>
+      <tuple>
+        <value>#1979-04-01#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05#</value>
+      </tuple>
+      <tuple>
+        <value>#1992-01-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-02#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([date2])'>
+    <sql>
+      SELECT MIN(&quot;Calcs&quot;.&quot;date2&quot;) AS &quot;TEMP(Test)(1465246653)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1465246653)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([datetime0])'>
+    <sql>
+      SELECT MIN(&quot;Calcs&quot;.&quot;datetime0&quot;) AS &quot;TEMP(Test)(2572329321)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2572329321)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:28#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

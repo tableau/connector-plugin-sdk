@@ -1,0 +1,3 @@
+DATETRUNC('hour', [datetime0], 'monday')
+DATETRUNC('hour', [datetime0], 'sunday')
+

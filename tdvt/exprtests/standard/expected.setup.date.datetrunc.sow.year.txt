@@ -1,0 +1,120 @@
+<results>
+  <test name='DATETRUNC(&apos;year&apos;, [date2], &apos;monday&apos;)'>
+    <sql>
+      SELECT DATE_TRUNC( &apos;YEAR&apos;, CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP) ) AS &quot;TEMP(Test)(433583207)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(433583207)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, [date2], &apos;sunday&apos;)'>
+    <sql>
+      SELECT DATE_TRUNC( &apos;YEAR&apos;, CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP) ) AS &quot;TEMP(Test)(1289371916)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1289371916)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, [datetime0], &apos;monday&apos;)'>
+    <sql>
+      SELECT DATE_TRUNC( &apos;YEAR&apos;, CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS TIMESTAMP) ) AS &quot;TEMP(Test)(3917841362)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3917841362)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, [datetime0], &apos;sunday&apos;)'>
+    <sql>
+      SELECT DATE_TRUNC( &apos;YEAR&apos;, CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS TIMESTAMP) ) AS &quot;TEMP(Test)(1921815362)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1921815362)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

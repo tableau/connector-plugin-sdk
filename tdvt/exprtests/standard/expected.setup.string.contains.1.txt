@@ -1,0 +1,34 @@
+<results>
+  <test name='CONTAINS(str2, &quot;e&quot;)'>
+    <sql>
+      SELECT (CASE WHEN (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str2&quot; IS NULL OR  &apos;e&apos; IS NULL THEN 0&#10;&#9;ELSE POSITION( &apos;e&apos; IN &quot;Calcs&quot;.&quot;str2&quot;)&#10;&#9;END &gt; 0) THEN 1 WHEN NOT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str2&quot; IS NULL OR  &apos;e&apos; IS NULL THEN 0&#10;&#9;ELSE POSITION( &apos;e&apos; IN &quot;Calcs&quot;.&quot;str2&quot;)&#10;&#9;END &gt; 0) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1364536471)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1364536471)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='CONTAINS(str1, &quot;IND&quot;)'>
+    <sql>
+      SELECT (CASE WHEN (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str1&quot; IS NULL OR  &apos;IND&apos; IS NULL THEN 0&#10;&#9;ELSE POSITION( &apos;IND&apos; IN &quot;Calcs&quot;.&quot;str1&quot;)&#10;&#9;END &gt; 0) THEN 1 WHEN NOT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str1&quot; IS NULL OR  &apos;IND&apos; IS NULL THEN 0&#10;&#9;ELSE POSITION( &apos;IND&apos; IN &quot;Calcs&quot;.&quot;str1&quot;)&#10;&#9;END &gt; 0) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1380546255)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1380546255)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

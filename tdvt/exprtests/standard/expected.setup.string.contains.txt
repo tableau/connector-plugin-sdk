@@ -1,0 +1,37 @@
+<results>
+  <test name='CONTAINS(str2, &quot;e&quot;)'>
+    <sql>
+      SELECT (STRPOS(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT),CAST(&apos;e&apos; AS TEXT)) &gt; 0) AS &quot;TEMP(Test)(1364536471)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1364536471)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='CONTAINS(str1, &quot;IND&quot;)'>
+    <sql>
+      SELECT (STRPOS(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT),CAST(&apos;IND&apos; AS TEXT)) &gt; 0) AS &quot;TEMP(Test)(1380546255)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1380546255)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

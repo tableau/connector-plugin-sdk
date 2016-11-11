@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.2.Two-level Agg.dbo.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT [t0].[Call Center Region] AS [Call Center Region],&#10;  SUM([t2].[__measure__1]) AS [sum:Calculation_4560203111140559:ok]&#10;FROM (&#10;  SELECT [Staples].[Customer State] AS [Customer State],&#10;    [Staples].[Call Center Region] AS [Call Center Region]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Customer State],&#10;    [Staples].[Call Center Region]&#10;) [t0]&#10;  INNER JOIN (&#10;  SELECT [t1].[Customer State] AS [Customer State],&#10;    AVG([t1].[__measure__0]) AS [__measure__1]&#10;  FROM (&#10;    SELECT [Staples].[Customer State] AS [Customer State],&#10;      [Staples].[Call Center Region] AS [Call Center Region],&#10;      SUM([Staples].[Sales Total]) AS [__measure__0]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Customer State],&#10;      [Staples].[Call Center Region]&#10;  ) [t1]&#10;  GROUP BY [t1].[Customer State]&#10;) [t2] ON ([t0].[Customer State] = [t2].[Customer State])&#10;GROUP BY [t0].[Call Center Region]
+    </sql>
+    <query-time>
+      321.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Call Center Region]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_4560203111140559:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>21059849.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>50720765.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>26907323.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

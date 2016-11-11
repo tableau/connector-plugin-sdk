@@ -1,0 +1,83 @@
+<results>
+  <test name='MIN(&quot;Data&quot;, &quot;Tableau&quot;)'>
+    <sql>
+      SELECT &apos;Data&apos; AS &quot;TEMP(Test)(535453017)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(535453017)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Data&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN(str1, str2)'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str1&quot; IS NULL OR &quot;Calcs&quot;.&quot;str2&quot; IS NULL THEN NULL&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str1&quot; &lt; &quot;Calcs&quot;.&quot;str2&quot; THEN &quot;Calcs&quot;.&quot;str1&quot;&#10;&#9;ELSE &quot;Calcs&quot;.&quot;str2&quot; END) AS &quot;TEMP(Test)(497224717)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(497224717)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;AIR PURIFIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ANSWERING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDER CLIPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BUSINESS COPIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BUSINESS ENVELOPES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CD-R MEDIA&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CLAMP ON LAMPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CLOCKS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONFERENCE PHONES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORDLESS KEYBOARDS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DOT MATRIX PRINTERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DVD&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN(str2, str3)'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str2&quot; IS NULL OR &quot;Calcs&quot;.&quot;str3&quot; IS NULL THEN NULL&#10;&#9;WHEN &quot;Calcs&quot;.&quot;str2&quot; &lt; &quot;Calcs&quot;.&quot;str3&quot; THEN &quot;Calcs&quot;.&quot;str2&quot;&#10;&#9;ELSE &quot;Calcs&quot;.&quot;str3&quot; END) AS &quot;TEMP(Test)(1239505702)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1239505702)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

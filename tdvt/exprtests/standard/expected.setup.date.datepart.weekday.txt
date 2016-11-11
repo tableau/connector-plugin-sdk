@@ -1,0 +1,114 @@
+<results>
+  <test name='DATEPART(&apos;weekday&apos;, [date2])'>
+    <sql>
+      SELECT (1 + CAST(EXTRACT(DOW FROM &quot;Calcs&quot;.&quot;date2&quot;) AS INTEGER)) AS &quot;TEMP(Test)(3854194266)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3854194266)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, [date2])'>
+    <sql>
+      SELECT (1 + CAST(EXTRACT(DOW FROM &quot;Calcs&quot;.&quot;date2&quot;) AS INTEGER)) AS &quot;TEMP(Test)(3854194266)(1)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3854194266)(1)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, [datetime0])'>
+    <sql>
+      SELECT (1 + CAST(EXTRACT(DOW FROM &quot;Calcs&quot;.&quot;datetime0&quot;) AS INTEGER)) AS &quot;TEMP(Test)(621889678)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(621889678)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, [datetime0])'>
+    <sql>
+      SELECT (1 + CAST(EXTRACT(DOW FROM &quot;Calcs&quot;.&quot;datetime0&quot;) AS INTEGER)) AS &quot;TEMP(Test)(621889678)(1)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(621889678)(1)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,5 @@
+DIV([int2],2)
+div(int0,int1)
+div(int0,int1)
+div(int3,int2)
+div(int3,int2)

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B1713.postgres91.xml'>
+    <sql>
+      SELECT &quot;Calcs&quot;.&quot;str0&quot; AS &quot;str0&quot;&#10;FROM &quot;Calcs&quot;&#10;  INNER JOIN (&#10;  SELECT COUNT(1) AS &quot;_Tableau_join_flag&quot;,&#10;    &quot;Calcs&quot;.&quot;str0&quot; AS &quot;str0&quot;,&#10;    SUM(CAST(TRUNC(&quot;Calcs&quot;.&quot;int2&quot;) AS BIGINT)) AS &quot;$__alias__0&quot;&#10;  FROM &quot;Calcs&quot;&#10;  WHERE ((&quot;Calcs&quot;.&quot;str0&quot; &gt;= &apos;FURNITURE&apos;) AND (&quot;Calcs&quot;.&quot;str0&quot; &lt;= &apos;TECHNOLOGY&apos;))&#10;  GROUP BY 2&#10;  ORDER BY 3 DESC NULLS LAST&#10;  LIMIT 2&#10;) &quot;t0&quot; ON (&quot;Calcs&quot;.&quot;str0&quot; = &quot;t0&quot;.&quot;str0&quot;)&#10;  INNER JOIN (&#10;  SELECT COUNT(1) AS &quot;_Tableau_join_flag&quot;,&#10;    &quot;Calcs&quot;.&quot;str1&quot; AS &quot;str1&quot;,&#10;    SUM(CAST(TRUNC(&quot;Calcs&quot;.&quot;int1&quot;) AS BIGINT)) AS &quot;$__alias__1&quot;&#10;  FROM &quot;Calcs&quot;&#10;  WHERE (((&quot;Calcs&quot;.&quot;str1&quot; &gt;= &apos;AIR PURIFIERS&apos;) AND (&quot;Calcs&quot;.&quot;str1&quot; &lt;= &apos;CD-R MEDIA&apos;)) OR ((&quot;Calcs&quot;.&quot;str1&quot; &gt;= &apos;CONFERENCE PHONES&apos;) AND (&quot;Calcs&quot;.&quot;str1&quot; &lt;= &apos;ERICSSON&apos;)))&#10;  GROUP BY 2&#10;  ORDER BY 3 DESC NULLS LAST&#10;  LIMIT 5&#10;) &quot;t1&quot; ON (&quot;Calcs&quot;.&quot;str1&quot; = &quot;t1&quot;.&quot;str1&quot;)&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str0]</column>
+      </schema>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

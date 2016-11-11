@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Filter.FilterBy-to-no-results.postgres91.xml'>
+    <sql>
+      SELECT &quot;Calcs&quot;.&quot;str2&quot; AS &quot;str2&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;HAVING (SUM(CAST(TRUNC(&quot;Calcs&quot;.&quot;int2&quot;) AS BIGINT)) &gt; 1000)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str2]</column>
+      </schema>
+    </table>
+  </test>
+</results>

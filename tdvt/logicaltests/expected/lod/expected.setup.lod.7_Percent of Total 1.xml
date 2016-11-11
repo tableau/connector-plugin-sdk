@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.7_Percent of Total 1.dbo.xml'>
+    <sql>
+      SELECT [t0].[Market Segment] AS [Market Segment],&#10;  [t0].[Prod Type1] AS [Prod Type1],&#10;  [t1].[__measure__0] AS [TEMP(Calculation_5091225004312306)(3462396638)(0)],&#10;  [t0].[TEMP(Calculation_5091225004312306)(357447720)(0)] AS [TEMP(Calculation_5091225004312306)(357447720)(0)],&#10;  [t1].[__measure__2] AS [TEMP(Calculation_5091225004312306)(61826508)(0)]&#10;FROM (&#10;  SELECT [Staples].[Market Segment] AS [Market Segment],&#10;    [Staples].[Prod Type1] AS [Prod Type1],&#10;    SUM([Staples].[Sales Total]) AS [TEMP(Calculation_5091225004312306)(357447720)(0)]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Market Segment],&#10;    [Staples].[Prod Type1]&#10;) [t0]&#10;  INNER JOIN (&#10;  SELECT [Staples].[Market Segment] AS [Market Segment],&#10;    SUM([Staples].[Sales Total]) AS [__measure__0],&#10;    SUM([Staples].[Sales Total]) AS [__measure__2]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Market Segment]&#10;) [t1] ON (([t0].[Market Segment] = [t1].[Market Segment]) OR (([t0].[Market Segment] IS NULL) AND ([t1].[Market Segment] IS NULL)))
+    </sql>
+    <query-time>
+      102.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[Market Segment]</column>
+        <column>[Staples.sqlserver].[Prod Type1]</column>
+        <column>[Staples.sqlserver].[TEMP(Calculation_5091225004312306)(3462396638)(0)]</column>
+        <column>[Staples.sqlserver].[TEMP(Calculation_5091225004312306)(357447720)(0)]</column>
+        <column>[Staples.sqlserver].[TEMP(Calculation_5091225004312306)(61826508)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>19889172.0</value>
+        <value>6987300.0</value>
+        <value>19889172.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>19889172.0</value>
+        <value>4599668.9</value>
+        <value>19889172.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>19889172.0</value>
+        <value>8302202.8</value>
+        <value>19889172.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>35593890.0</value>
+        <value>12325807.0</value>
+        <value>35593890.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>35593890.0</value>
+        <value>8644838.2</value>
+        <value>35593890.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>35593890.0</value>
+        <value>14623245.0</value>
+        <value>35593890.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>24513651.0</value>
+        <value>8354019.3</value>
+        <value>24513651.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>24513651.0</value>
+        <value>6116307.0</value>
+        <value>24513651.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>24513651.0</value>
+        <value>10043325.0</value>
+        <value>24513651.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>18691224.0</value>
+        <value>6341959.4</value>
+        <value>18691224.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>18691224.0</value>
+        <value>4653925.8</value>
+        <value>18691224.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>18691224.0</value>
+        <value>7695338.8</value>
+        <value>18691224.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

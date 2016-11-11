@@ -1,0 +1,4 @@
+DATEADD('quarter', 1, [date2])
+
+DATEADD('quarter', 1, [datetime0])
+

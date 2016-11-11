@@ -1,0 +1,2 @@
+power(int0,0.5)
+power(num1,0.1*num0)

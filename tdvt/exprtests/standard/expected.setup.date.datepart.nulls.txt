@@ -1,0 +1,223 @@
+<results>
+  <test name='DATEPART(&apos;year&apos;, DATE(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(YEAR FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(2074921570)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2074921570)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;year&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(YEAR FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(2348327946)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2348327946)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;quarter&apos;, DATE(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(QUARTER FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(3062347157)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3062347157)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;quarter&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(QUARTER FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(1236088422)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1236088422)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;month&apos;, DATE(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(MONTH FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(1709161123)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1709161123)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;month&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(MONTH FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(941741456)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(941741456)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;week&apos;, DATE(null))'>
+    <sql>
+      SELECT FLOOR((7 + EXTRACT(DOY FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)))) / 7) AS &quot;TEMP(Test)(4070818381)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4070818381)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;week&apos;, DATETIME(null))'>
+    <sql>
+      SELECT FLOOR((7 + EXTRACT(DOY FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)))) / 7) AS &quot;TEMP(Test)(1209329404)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1209329404)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, DATE(null))'>
+    <sql>
+      SELECT (1 + CAST(EXTRACT(DOW FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER)) AS &quot;TEMP(Test)(2284623665)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2284623665)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, DATETIME(null))'>
+    <sql>
+      SELECT (1 + CAST(EXTRACT(DOW FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER)) AS &quot;TEMP(Test)(3556637072)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3556637072)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;day&apos;, DATE(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(DAY FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(20465857)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(20465857)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;day&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(DAY FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(3365622206)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3365622206)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;dayofyear&apos;, DATE(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(DOY FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(1193407708)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1193407708)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;dayofyear&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(DOY FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(3498421513)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3498421513)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;hour&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(HOUR FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(1756144708)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1756144708)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;minute&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(MINUTE FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(2635020195)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2635020195)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;second&apos;, DATETIME(null))'>
+    <sql>
+      SELECT CAST(EXTRACT(SECOND FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) AS INTEGER) AS &quot;TEMP(Test)(2744314424)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2744314424)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

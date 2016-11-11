@@ -1,0 +1,54 @@
+<results>
+  <test name='DATEPART(&apos;minute&apos;, [datetime0])'>
+    <sql>
+      SELECT CAST(EXTRACT(MINUTE FROM &quot;Calcs&quot;.&quot;datetime0&quot;) AS INTEGER) AS &quot;TEMP(Test)(1256004566)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1256004566)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>14</value>
+      </tuple>
+      <tuple>
+        <value>16</value>
+      </tuple>
+      <tuple>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>30</value>
+      </tuple>
+      <tuple>
+        <value>34</value>
+      </tuple>
+      <tuple>
+        <value>43</value>
+      </tuple>
+      <tuple>
+        <value>49</value>
+      </tuple>
+      <tuple>
+        <value>54</value>
+      </tuple>
+      <tuple>
+        <value>57</value>
+      </tuple>
+      <tuple>
+        <value>59</value>
+      </tuple>
+    </table>
+  </test>
+</results>

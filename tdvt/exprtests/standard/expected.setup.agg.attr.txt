@@ -1,0 +1,9 @@
+<results>
+  <test name='ATTR([int0])'>
+    <sql>
+      Unknown function ATTR called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+</results>

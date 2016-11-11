@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\P4\data-dev_wsu_wsu_readCode\tableau-tests\tdvt\logicaltests\setup\staples\setup.BUGS.B530764.kognitio.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT SUM((CASE WHEN 1.1000000000000001 = 0 THEN CAST(NULL AS FLOAT) ELSE &quot;Staples&quot;.&quot;Price&quot; / CAST(1.1000000000000001 AS FLOAT) END)) AS &quot;sum:Calculation_555068687593533440:ok&quot;&#10;FROM &quot;TestV1&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      1316.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.kognitio].[sum:Calculation_555068687593533440:ok]</column>
+      </schema>
+      <tuple>
+        <value>4275856.2</value>
+      </tuple>
+    </table>
+  </test>
+</results>

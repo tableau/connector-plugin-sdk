@@ -1,0 +1,461 @@
+<results>
+  <test name='iif(bool0,date0,date1) '>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date0` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date1` ELSE NULL END) AS `TEMP(Test)(3513628645)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date0` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date1` ELSE NULL END)
+    </sql>
+    <query-time>
+      831.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(3513628645)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='iif(bool0,str2,str3,str0) '>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str2` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str3` ELSE `testv1_Calcs`.`str0` END) AS `TEMP(Test)(1007528555)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str2` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str3` ELSE `testv1_Calcs`.`str0` END)
+    </sql>
+    <query-time>
+      1302.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1007528555)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='iif(bool0,num0,num1,num2) '>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`num0` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`num1` ELSE `testv1_Calcs`.`num2` END) AS `TEMP(Test)(3428504110)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`num0` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`num1` ELSE `testv1_Calcs`.`num2` END)
+    </sql>
+    <query-time>
+      1309.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(3428504110)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-15.7</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>2.47</value>
+      </tuple>
+      <tuple>
+        <value>6.71</value>
+      </tuple>
+      <tuple>
+        <value>7.87</value>
+      </tuple>
+      <tuple>
+        <value>8.98</value>
+      </tuple>
+      <tuple>
+        <value>9.05</value>
+      </tuple>
+      <tuple>
+        <value>11.38</value>
+      </tuple>
+      <tuple>
+        <value>11.5</value>
+      </tuple>
+      <tuple>
+        <value>12.3</value>
+      </tuple>
+      <tuple>
+        <value>13.04</value>
+      </tuple>
+      <tuple>
+        <value>16.81</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='iif(bool0,date0,date1,date2) '>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date0` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date1` ELSE `testv1_Calcs`.`date2` END) AS `TEMP(Test)(1581504649)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date0` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date1` ELSE `testv1_Calcs`.`date2` END)
+    </sql>
+    <query-time>
+      857.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1581504649)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='iif(bool0,num0,num1) '>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN CAST(`testv1_Calcs`.`num0` AS DOUBLE) WHEN NOT `testv1_Calcs`.`bool0` THEN CAST(`testv1_Calcs`.`num1` AS DOUBLE) ELSE NULL END) AS `TEMP(Test)(750655768)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN CAST(`testv1_Calcs`.`num0` AS DOUBLE) WHEN NOT `testv1_Calcs`.`bool0` THEN CAST(`testv1_Calcs`.`num1` AS DOUBLE) ELSE NULL END)
+    </sql>
+    <query-time>
+      1277.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(750655768)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-15.7</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>2.47</value>
+      </tuple>
+      <tuple>
+        <value>6.71</value>
+      </tuple>
+      <tuple>
+        <value>9.05</value>
+      </tuple>
+      <tuple>
+        <value>11.38</value>
+      </tuple>
+      <tuple>
+        <value>12.3</value>
+      </tuple>
+      <tuple>
+        <value>16.81</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='iif(bool0,bool1,bool2) '>
+    <sql>
+      SELECT ((`testv1_Calcs`.`bool0` AND `testv1_Calcs`.`bool1`) OR ((NOT `testv1_Calcs`.`bool0`) AND `testv1_Calcs`.`bool2`)) AS `TEMP(Test)(1656302737)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY ((`testv1_Calcs`.`bool0` AND `testv1_Calcs`.`bool1`) OR ((NOT `testv1_Calcs`.`bool0`) AND `testv1_Calcs`.`bool2`))
+    </sql>
+    <query-time>
+      1214.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1656302737)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='isnull(bool0) '>
+    <sql>
+      SELECT (`testv1_Calcs`.`bool0` IS NULL) AS `TEMP(Test)(4006206882)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (`testv1_Calcs`.`bool0` IS NULL)
+    </sql>
+    <query-time>
+      659.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(4006206882)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='iif(bool0,str2,str3) '>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str2` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str3` ELSE NULL END) AS `TEMP(Test)(4173709053)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str2` WHEN NOT `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str3` ELSE NULL END)
+    </sql>
+    <query-time>
+      921.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(4173709053)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name=' (if bool0 then int(bool1) else int(bool2) end) == int(true)'>
+    <sql>
+      SELECT ((CASE WHEN `testv1_Calcs`.`bool0` THEN (CASE&#10;&#9;WHEN `testv1_Calcs`.`bool1` THEN 1&#10;&#9;WHEN NOT `testv1_Calcs`.`bool1` THEN 0&#10;&#9;ELSE NULL END) ELSE (CASE&#10;&#9;WHEN `testv1_Calcs`.`bool2` THEN 1&#10;&#9;WHEN NOT `testv1_Calcs`.`bool2` THEN 0&#10;&#9;ELSE NULL END) END) = 1) AS `TEMP(Test)(1285160207)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY ((CASE WHEN `testv1_Calcs`.`bool0` THEN (CASE&#10;&#9;WHEN `testv1_Calcs`.`bool1` THEN 1&#10;&#9;WHEN NOT `testv1_Calcs`.`bool1` THEN 0&#10;&#9;ELSE NULL END) ELSE (CASE&#10;&#9;WHEN `testv1_Calcs`.`bool2` THEN 1&#10;&#9;WHEN NOT `testv1_Calcs`.`bool2` THEN 0&#10;&#9;ELSE NULL END) END) = 1)
+    </sql>
+    <query-time>
+      1439.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1285160207)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name=' if bool0 then num0 else num1 end'>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`num0` ELSE `testv1_Calcs`.`num1` END) AS `TEMP(Test)(898375479)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`num0` ELSE `testv1_Calcs`.`num1` END)
+    </sql>
+    <query-time>
+      1556.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(898375479)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-15.7</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>2.47</value>
+      </tuple>
+      <tuple>
+        <value>6.71</value>
+      </tuple>
+      <tuple>
+        <value>7.12</value>
+      </tuple>
+      <tuple>
+        <value>9.05</value>
+      </tuple>
+      <tuple>
+        <value>9.38</value>
+      </tuple>
+      <tuple>
+        <value>9.47</value>
+      </tuple>
+      <tuple>
+        <value>9.78</value>
+      </tuple>
+      <tuple>
+        <value>10.37</value>
+      </tuple>
+      <tuple>
+        <value>11.38</value>
+      </tuple>
+      <tuple>
+        <value>12.05</value>
+      </tuple>
+      <tuple>
+        <value>12.3</value>
+      </tuple>
+      <tuple>
+        <value>12.4</value>
+      </tuple>
+      <tuple>
+        <value>16.81</value>
+      </tuple>
+    </table>
+  </test>
+  <test name=' if bool0 then date0 else date1 end'>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date0` ELSE `testv1_Calcs`.`date1` END) AS `TEMP(Test)(3012038505)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`date0` ELSE `testv1_Calcs`.`date1` END)
+    </sql>
+    <query-time>
+      786.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(3012038505)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name=' if bool0 then str2 else str3 end'>
+    <sql>
+      SELECT (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str2` ELSE `testv1_Calcs`.`str3` END) AS `TEMP(Test)(490796425)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE WHEN `testv1_Calcs`.`bool0` THEN `testv1_Calcs`.`str2` ELSE `testv1_Calcs`.`str3` END)
+    </sql>
+    <query-time>
+      846.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(490796425)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

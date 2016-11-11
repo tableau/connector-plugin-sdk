@@ -1,0 +1,298 @@
+<results>
+  <test name='DATETIME([date2])'>
+    <sql>
+      SELECT CAST(&quot;Calcs&quot;.&quot;date2&quot; AS TIMESTAMP) AS &quot;TEMP(Test)(1486024523)(0)&quot;&#10;FROM &quot;ADMIN&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.netezza].[TEMP(Test)(1486024523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FLOAT([date2])'>
+    <sql>
+      SELECT CAST(TO_CHAR(&quot;Calcs&quot;.&quot;date2&quot;, &apos;J&apos;) AS NUMERIC) - 2415021 AS &quot;TEMP(Test)(2671902822)(0)&quot;&#10;FROM &quot;ADMIN&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.netezza].[TEMP(Test)(2671902822)(0)]</column>
+      </schema>
+      <tuple>
+        <value>26490.0</value>
+      </tuple>
+      <tuple>
+        <value>27103.0</value>
+      </tuple>
+      <tuple>
+        <value>27150.0</value>
+      </tuple>
+      <tuple>
+        <value>28010.0</value>
+      </tuple>
+      <tuple>
+        <value>28162.0</value>
+      </tuple>
+      <tuple>
+        <value>28233.0</value>
+      </tuple>
+      <tuple>
+        <value>29426.0</value>
+      </tuple>
+      <tuple>
+        <value>29530.0</value>
+      </tuple>
+      <tuple>
+        <value>32145.0</value>
+      </tuple>
+      <tuple>
+        <value>34442.0</value>
+      </tuple>
+      <tuple>
+        <value>34852.0</value>
+      </tuple>
+      <tuple>
+        <value>34943.0</value>
+      </tuple>
+      <tuple>
+        <value>35578.0</value>
+      </tuple>
+      <tuple>
+        <value>35690.0</value>
+      </tuple>
+      <tuple>
+        <value>36017.0</value>
+      </tuple>
+      <tuple>
+        <value>36924.0</value>
+      </tuple>
+      <tuple>
+        <value>37371.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([date2]))'>
+    <sql>
+      SELECT LTRIM(RTRIM(CAST(&quot;Calcs&quot;.&quot;date2&quot; AS NVARCHAR(1024)), &apos; &apos;), &apos; &apos;) AS &quot;TEMP(Test)(3929621149)(0)&quot;&#10;FROM &quot;ADMIN&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.netezza].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972-07-12&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-03-17&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-05-03&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976-09-09&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-02-08&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-04-20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-07-26&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-11-07&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988-01-05&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994-04-20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-06-04&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-09-03&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-05-30&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-09-19&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998-08-12&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001-02-04&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002-04-27&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ROUND(FLOAT([datetime0]), 2)'>
+    <sql>
+      SELECT ROUND(CAST(CAST(TO_CHAR(&quot;Calcs&quot;.&quot;datetime0&quot;, &apos;J&apos;) AS NUMERIC) - 2415021 AS NUMERIC),CAST(2 AS INTEGER)) AS &quot;TEMP(Test)(102700322)(0)&quot;&#10;FROM &quot;ADMIN&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.netezza].[TEMP(Test)(102700322)(0)]</column>
+      </schema>
+      <tuple>
+        <value>38170.0</value>
+      </tuple>
+      <tuple>
+        <value>38171.0</value>
+      </tuple>
+      <tuple>
+        <value>38175.0</value>
+      </tuple>
+      <tuple>
+        <value>38178.0</value>
+      </tuple>
+      <tuple>
+        <value>38180.0</value>
+      </tuple>
+      <tuple>
+        <value>38183.0</value>
+      </tuple>
+      <tuple>
+        <value>38185.0</value>
+      </tuple>
+      <tuple>
+        <value>38188.0</value>
+      </tuple>
+      <tuple>
+        <value>38189.0</value>
+      </tuple>
+      <tuple>
+        <value>38191.0</value>
+      </tuple>
+      <tuple>
+        <value>38192.0</value>
+      </tuple>
+      <tuple>
+        <value>38194.0</value>
+      </tuple>
+      <tuple>
+        <value>38197.0</value>
+      </tuple>
+      <tuple>
+        <value>38199.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([datetime0]))'>
+    <sql>
+      SELECT LTRIM(RTRIM(CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS NVARCHAR(1024)), &apos; &apos;), &apos; &apos;) AS &quot;TEMP(Test)(1103404331)(0)&quot;&#10;FROM &quot;ADMIN&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.netezza].[TEMP(Test)(1103404331)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2004-07-04 22:49:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-05 13:14:20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-09 10:17:35&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-12 17:30:16&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 07:43:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 08:16:44&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-17 14:01:56&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-19 22:21:31&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-22 00:30:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-23 21:13:37&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-25 15:22:26&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-26 12:30:34&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 06:54:50&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 12:34:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 23:30:22&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-31 11:57:52&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-08-02 07:59:23&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

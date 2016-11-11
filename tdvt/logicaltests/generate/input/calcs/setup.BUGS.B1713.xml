@@ -1,0 +1,465 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logical-query>
+  <selects>
+    <field>[str0]</field>
+  </selects>
+  <domainOp class="logical-operator" type="snowflake">
+    <aggregateOp class="logical-operator">
+      <measures>
+      </measures>
+      <groupbys>
+        <binding name="[str0]">
+          <identifierExp class="logical-expression" identifier="[str0]" />
+        </binding>
+      </groupbys>
+      <selectOp class="logical-operator">
+        <predicate>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="!" shape="scalar">
+              <funcallExp class="logical-expression" function="isnull" shape="scalar">
+                <lookupExp class="logical-expression" domain="partial">
+                  <topnOp class="logical-operator">
+                    <top count="2" units="records" />
+                    <orderbys>
+                      <expression direction="DESC">
+                        <identifierExp class="logical-expression" identifier="[__measure__0]" />
+                      </expression>
+                    </orderbys>
+                    <aggregateOp class="logical-operator">
+                      <measures>
+                        <binding name="[__measure__0]">
+                          <funcallExp class="logical-expression" function="sum" shape="aggregate">
+                            <funcallExp class="logical-expression" function="$EXTEND_INT$" shape="scalar">
+                              <identifierExp class="logical-expression" identifier="[int2]" />
+                            </funcallExp>
+                          </funcallExp>
+                        </binding>
+                        <binding name="[_Tableau_join_flag]">
+                          <funcallExp class="logical-expression" function="count" shape="aggregate">
+                            <literalExp class="logical-expression" datatype="integer" value="1" />
+                          </funcallExp>
+                        </binding>
+                      </measures>
+                      <groupbys>
+                        <binding name="[str0]">
+                          <identifierExp class="logical-expression" identifier="[str0]" />
+                        </binding>
+                      </groupbys>
+                      <selectOp class="logical-operator">
+                        <predicate>
+                          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+                            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+                              <identifierExp class="logical-expression" identifier="[str0]" />
+                              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;FURNITURE&quot;" />
+                            </funcallExp>
+                            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+                              <identifierExp class="logical-expression" identifier="[str0]" />
+                              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;TECHNOLOGY&quot;" />
+                            </funcallExp>
+                          </funcallExp>
+                        </predicate>
+                        <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+                          <relation name="Calcs" table="$Calcs$" type="table" />
+                          <cols>
+                          </cols>
+                          <type>
+                            <schema>
+                              <field name="[bool0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[bool1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[bool2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[bool3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[datetime0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[datetime1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[key]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num4]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[time0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[time1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[zzz]">
+                                <type name="top" />
+                              </field>
+                            </schema>
+                            <schema>
+                              <field name="">
+                                <type name="top" />
+                              </field>
+                              <field name="[int2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str0]">
+                                <type name="top" />
+                              </field>
+                            </schema>
+                          </type>
+                        </relationOp>
+                      </selectOp>
+                    </aggregateOp>
+                  </topnOp>
+                  <indices>
+                    <funcallExp class="logical-expression" function="$ASSERT_NOT_NULL$" shape="scalar">
+                      <identifierExp class="logical-expression" identifier="[str0]" />
+                    </funcallExp>
+                  </indices>
+                  <schema>
+                    <funcallExp class="logical-expression" function="$ASSERT_NOT_NULL$" shape="scalar">
+                      <identifierExp class="logical-expression" identifier="[str0]" />
+                    </funcallExp>
+                  </schema>
+                  <output-value>
+                    <identifierExp class="logical-expression" identifier="[_Tableau_join_flag]" />
+                  </output-value>
+                  <default-value>
+                    <literalExp class="logical-expression" datatype="integer" value="%null%" />
+                  </default-value>
+                </lookupExp>
+              </funcallExp>
+            </funcallExp>
+            <funcallExp class="logical-expression" function="!" shape="scalar">
+              <funcallExp class="logical-expression" function="isnull" shape="scalar">
+                <lookupExp class="logical-expression" domain="partial">
+                  <topnOp class="logical-operator">
+                    <top count="5" units="records" />
+                    <orderbys>
+                      <expression direction="DESC">
+                        <identifierExp class="logical-expression" identifier="[__measure__1]" />
+                      </expression>
+                    </orderbys>
+                    <aggregateOp class="logical-operator">
+                      <measures>
+                        <binding name="[__measure__1]">
+                          <funcallExp class="logical-expression" function="sum" shape="aggregate">
+                            <funcallExp class="logical-expression" function="$EXTEND_INT$" shape="scalar">
+                              <identifierExp class="logical-expression" identifier="[int1]" />
+                            </funcallExp>
+                          </funcallExp>
+                        </binding>
+                        <binding name="[_Tableau_join_flag]">
+                          <funcallExp class="logical-expression" function="count" shape="aggregate">
+                            <literalExp class="logical-expression" datatype="integer" value="1" />
+                          </funcallExp>
+                        </binding>
+                      </measures>
+                      <groupbys>
+                        <binding name="[str1]">
+                          <identifierExp class="logical-expression" identifier="[str1]" />
+                        </binding>
+                      </groupbys>
+                      <selectOp class="logical-operator">
+                        <predicate>
+                          <funcallExp class="logical-expression" function="$SYS_NARY_OR$" shape="scalar">
+                            <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+                              <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+                                <identifierExp class="logical-expression" identifier="[str1]" />
+                                <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;AIR PURIFIERS&quot;" />
+                              </funcallExp>
+                              <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+                                <identifierExp class="logical-expression" identifier="[str1]" />
+                                <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;CD-R MEDIA&quot;" />
+                              </funcallExp>
+                            </funcallExp>
+                            <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+                              <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+                                <identifierExp class="logical-expression" identifier="[str1]" />
+                                <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;CONFERENCE PHONES&quot;" />
+                              </funcallExp>
+                              <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+                                <identifierExp class="logical-expression" identifier="[str1]" />
+                                <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;ERICSSON&quot;" />
+                              </funcallExp>
+                            </funcallExp>
+                          </funcallExp>
+                        </predicate>
+                        <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+                          <relation name="Calcs" table="$Calcs$" type="table" />
+                          <cols>
+                          </cols>
+                          <type>
+                            <schema>
+                              <field name="[bool0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[bool1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[bool2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[bool3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[date3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[datetime0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[datetime1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[int3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[key]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[num4]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str2]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str3]">
+                                <type name="top" />
+                              </field>
+                              <field name="[time0]">
+                                <type name="top" />
+                              </field>
+                              <field name="[time1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[zzz]">
+                                <type name="top" />
+                              </field>
+                            </schema>
+                            <schema>
+                              <field name="">
+                                <type name="top" />
+                              </field>
+                              <field name="[int1]">
+                                <type name="top" />
+                              </field>
+                              <field name="[str1]">
+                                <type name="top" />
+                              </field>
+                            </schema>
+                          </type>
+                        </relationOp>
+                      </selectOp>
+                    </aggregateOp>
+                  </topnOp>
+                  <indices>
+                    <funcallExp class="logical-expression" function="$ASSERT_NOT_NULL$" shape="scalar">
+                      <identifierExp class="logical-expression" identifier="[str1]" />
+                    </funcallExp>
+                  </indices>
+                  <schema>
+                    <funcallExp class="logical-expression" function="$ASSERT_NOT_NULL$" shape="scalar">
+                      <identifierExp class="logical-expression" identifier="[str1]" />
+                    </funcallExp>
+                  </schema>
+                  <output-value>
+                    <identifierExp class="logical-expression" identifier="[_Tableau_join_flag]" />
+                  </output-value>
+                  <default-value>
+                    <literalExp class="logical-expression" datatype="integer" value="%null%" />
+                  </default-value>
+                </lookupExp>
+              </funcallExp>
+            </funcallExp>
+          </funcallExp>
+        </predicate>
+        <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+          <relation name="Calcs" table="$Calcs$" type="table" />
+          <cols>
+          </cols>
+          <type>
+            <schema>
+              <field name="[bool0]">
+                <type name="top" />
+              </field>
+              <field name="[bool1]">
+                <type name="top" />
+              </field>
+              <field name="[bool2]">
+                <type name="top" />
+              </field>
+              <field name="[bool3]">
+                <type name="top" />
+              </field>
+              <field name="[date0]">
+                <type name="top" />
+              </field>
+              <field name="[date1]">
+                <type name="top" />
+              </field>
+              <field name="[date2]">
+                <type name="top" />
+              </field>
+              <field name="[date3]">
+                <type name="top" />
+              </field>
+              <field name="[datetime0]">
+                <type name="top" />
+              </field>
+              <field name="[datetime1]">
+                <type name="top" />
+              </field>
+              <field name="[int0]">
+                <type name="top" />
+              </field>
+              <field name="[int1]">
+                <type name="top" />
+              </field>
+              <field name="[int2]">
+                <type name="top" />
+              </field>
+              <field name="[int3]">
+                <type name="top" />
+              </field>
+              <field name="[key]">
+                <type name="top" />
+              </field>
+              <field name="[num0]">
+                <type name="top" />
+              </field>
+              <field name="[num1]">
+                <type name="top" />
+              </field>
+              <field name="[num2]">
+                <type name="top" />
+              </field>
+              <field name="[num3]">
+                <type name="top" />
+              </field>
+              <field name="[num4]">
+                <type name="top" />
+              </field>
+              <field name="[str0]">
+                <type name="top" />
+              </field>
+              <field name="[str1]">
+                <type name="top" />
+              </field>
+              <field name="[str2]">
+                <type name="top" />
+              </field>
+              <field name="[str3]">
+                <type name="top" />
+              </field>
+              <field name="[time0]">
+                <type name="top" />
+              </field>
+              <field name="[time1]">
+                <type name="top" />
+              </field>
+              <field name="[zzz]">
+                <type name="top" />
+              </field>
+            </schema>
+            <schema>
+              <field name="[str0]">
+                <type name="top" />
+              </field>
+              <field name="[str1]">
+                <type name="top" />
+              </field>
+            </schema>
+          </type>
+        </relationOp>
+      </selectOp>
+    </aggregateOp>
+  </domainOp>
+</logical-query>

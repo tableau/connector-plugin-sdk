@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logical-query>
+  <selects>
+    <field>[DayDiffs1 (bin)]</field>
+    <field>[DayDiffs2 (bin)]</field>
+    <field>[DayDiffs3 (bin)]</field>
+    <field>[YearDiffs1 (bin)]</field>
+    <field>[YearDiffs2 (bin)]</field>
+    <field>[YearDiffs3 (bin)]</field>
+  </selects>
+  <domainOp class="logical-operator" type="snowflake">
+    <aggregateOp class="logical-operator">
+      <measures>
+      </measures>
+      <groupbys>
+        <binding name="[DayDiffs1 (bin)]">
+          <identifierExp class="logical-expression" identifier="[DayDiffs1 (bin)]" />
+        </binding>
+        <binding name="[DayDiffs2 (bin)]">
+          <identifierExp class="logical-expression" identifier="[DayDiffs2 (bin)]" />
+        </binding>
+        <binding name="[DayDiffs3 (bin)]">
+          <identifierExp class="logical-expression" identifier="[DayDiffs3 (bin)]" />
+        </binding>
+        <binding name="[YearDiffs1 (bin)]">
+          <identifierExp class="logical-expression" identifier="[YearDiffs1 (bin)]" />
+        </binding>
+        <binding name="[YearDiffs2 (bin)]">
+          <identifierExp class="logical-expression" identifier="[YearDiffs2 (bin)]" />
+        </binding>
+        <binding name="[YearDiffs3 (bin)]">
+          <identifierExp class="logical-expression" identifier="[YearDiffs3 (bin)]" />
+        </binding>
+      </groupbys>
+      <projectOp class="logical-operator">
+        <expressions>
+          <binding name="[DayDiffs1 (bin)]">
+            <funcallExp class="logical-expression" function="SYS_NUMBIN" shape="scalar">
+              <funcallExp class="logical-expression" function="DATEDIFF" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;day&quot;" />
+                <identifierExp class="logical-expression" identifier="[datetime0]" />
+                <identifierExp class="logical-expression" identifier="[date0]" />
+              </funcallExp>
+              <literalExp class="logical-expression" datatype="integer" value="2" />
+            </funcallExp>
+          </binding>
+          <binding name="[DayDiffs2 (bin)]">
+            <funcallExp class="logical-expression" function="SYS_NUMBIN" shape="scalar">
+              <funcallExp class="logical-expression" function="DATEDIFF" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;day&quot;" />
+                <identifierExp class="logical-expression" identifier="[date0]" />
+                <identifierExp class="logical-expression" identifier="[datetime0]" />
+              </funcallExp>
+              <literalExp class="logical-expression" datatype="integer" value="3" />
+            </funcallExp>
+          </binding>
+          <binding name="[DayDiffs3 (bin)]">
+            <funcallExp class="logical-expression" function="SYS_NUMBIN" shape="scalar">
+              <funcallExp class="logical-expression" function="DATEDIFF" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;day&quot;" />
+                <identifierExp class="logical-expression" identifier="[date1]" />
+                <identifierExp class="logical-expression" identifier="[date0]" />
+              </funcallExp>
+              <literalExp class="logical-expression" datatype="integer" value="4" />
+            </funcallExp>
+          </binding>
+          <binding name="[YearDiffs1 (bin)]">
+            <funcallExp class="logical-expression" function="SYS_NUMBIN" shape="scalar">
+              <funcallExp class="logical-expression" function="DATEDIFF" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;year&quot;" />
+                <identifierExp class="logical-expression" identifier="[datetime0]" />
+                <identifierExp class="logical-expression" identifier="[date0]" />
+              </funcallExp>
+              <literalExp class="logical-expression" datatype="integer" value="2" />
+            </funcallExp>
+          </binding>
+          <binding name="[YearDiffs2 (bin)]">
+            <funcallExp class="logical-expression" function="SYS_NUMBIN" shape="scalar">
+              <funcallExp class="logical-expression" function="DATEDIFF" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;year&quot;" />
+                <identifierExp class="logical-expression" identifier="[date0]" />
+                <identifierExp class="logical-expression" identifier="[datetime0]" />
+              </funcallExp>
+              <literalExp class="logical-expression" datatype="integer" value="3" />
+            </funcallExp>
+          </binding>
+          <binding name="[YearDiffs3 (bin)]">
+            <funcallExp class="logical-expression" function="SYS_NUMBIN" shape="scalar">
+              <funcallExp class="logical-expression" function="DATEDIFF" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;year&quot;" />
+                <identifierExp class="logical-expression" identifier="[date1]" />
+                <identifierExp class="logical-expression" identifier="[date0]" />
+              </funcallExp>
+              <literalExp class="logical-expression" datatype="integer" value="4" />
+            </funcallExp>
+          </binding>
+        </expressions>
+        <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+          <relation name="Calcs" table="$Calcs$" type="table" />
+          <cols>
+          </cols>
+          <type>
+            <schema>
+              <field name="[bool0]">
+                <type name="top" />
+              </field>
+              <field name="[bool1]">
+                <type name="top" />
+              </field>
+              <field name="[bool2]">
+                <type name="top" />
+              </field>
+              <field name="[bool3]">
+                <type name="top" />
+              </field>
+              <field name="[date0]">
+                <type name="top" />
+              </field>
+              <field name="[date1]">
+                <type name="top" />
+              </field>
+              <field name="[date2]">
+                <type name="top" />
+              </field>
+              <field name="[date3]">
+                <type name="top" />
+              </field>
+              <field name="[datetime0]">
+                <type name="top" />
+              </field>
+              <field name="[datetime1]">
+                <type name="top" />
+              </field>
+              <field name="[int0]">
+                <type name="top" />
+              </field>
+              <field name="[int1]">
+                <type name="top" />
+              </field>
+              <field name="[int2]">
+                <type name="top" />
+              </field>
+              <field name="[int3]">
+                <type name="top" />
+              </field>
+              <field name="[key]">
+                <type name="top" />
+              </field>
+              <field name="[num0]">
+                <type name="top" />
+              </field>
+              <field name="[num1]">
+                <type name="top" />
+              </field>
+              <field name="[num2]">
+                <type name="top" />
+              </field>
+              <field name="[num3]">
+                <type name="top" />
+              </field>
+              <field name="[num4]">
+                <type name="top" />
+              </field>
+              <field name="[str0]">
+                <type name="top" />
+              </field>
+              <field name="[str1]">
+                <type name="top" />
+              </field>
+              <field name="[str2]">
+                <type name="top" />
+              </field>
+              <field name="[str3]">
+                <type name="top" />
+              </field>
+              <field name="[time0]">
+                <type name="top" />
+              </field>
+              <field name="[time1]">
+                <type name="top" />
+              </field>
+              <field name="[zzz]">
+                <type name="top" />
+              </field>
+            </schema>
+            <schema>
+            </schema>
+          </type>
+        </relationOp>
+      </projectOp>
+    </aggregateOp>
+  </domainOp>
+</logical-query>

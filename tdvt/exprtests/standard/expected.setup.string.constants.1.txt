@@ -1,0 +1,67 @@
+<results>
+  <test name='&apos;      &apos; + str2 + &apos;      &apos;'>
+    <sql>
+      SELECT ((&apos;      &apos; + [Calcs].[str2]) + &apos;      &apos;) AS [TEMP(Test)(2313738384)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ((&apos;      &apos; + [Calcs].[str2]) + &apos;      &apos;)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2313738384)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      eight&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      five&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      fourteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      nine&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      one&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      sixteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      ten&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      three&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      twelve&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='&apos;CONST&apos;'>
+    <sql>
+      SELECT &apos;CONST&apos; AS [TEMP(Test)(3972932107)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3972932107)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CONST&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,102 @@
+<results>
+  <test name='ATAN([int2])'>
+    <sql>
+      SELECT {fn ATAN(&quot;Calcs&quot;.&quot;int2&quot;)} AS &quot;TEMP_Test__3655856496__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY {fn ATAN(&quot;Calcs&quot;.&quot;int2&quot;)}
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(3655856496)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-1.4601391</value>
+      </tuple>
+      <tuple>
+        <value>-1.4464413</value>
+      </tuple>
+      <tuple>
+        <value>-1.4056476</value>
+      </tuple>
+      <tuple>
+        <value>-1.3734008</value>
+      </tuple>
+      <tuple>
+        <value>-1.3258177</value>
+      </tuple>
+      <tuple>
+        <value>-1.2490458</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>1.1071487</value>
+      </tuple>
+      <tuple>
+        <value>1.2490458</value>
+      </tuple>
+      <tuple>
+        <value>1.3258177</value>
+      </tuple>
+      <tuple>
+        <value>1.3734008</value>
+      </tuple>
+      <tuple>
+        <value>1.4056476</value>
+      </tuple>
+      <tuple>
+        <value>1.4601391</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='atan(num0)'>
+    <sql>
+      SELECT {fn ATAN(&quot;Calcs&quot;.&quot;num0&quot;)} AS &quot;TEMP_Test__4053915117__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY {fn ATAN(&quot;Calcs&quot;.&quot;num0&quot;)}
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(4053915117)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-1.507188</value>
+      </tuple>
+      <tuple>
+        <value>-1.4896739</value>
+      </tuple>
+      <tuple>
+        <value>-1.2924967</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>1.2924967</value>
+      </tuple>
+      <tuple>
+        <value>1.4711277</value>
+      </tuple>
+      <tuple>
+        <value>1.4896739</value>
+      </tuple>
+      <tuple>
+        <value>1.507188</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ATAN2([int2],1)'>
+    <sql>
+      Unknown function ATAN2 called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='atan2(num0,num1)'>
+    <sql>
+      Unknown function atan2 called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+</results>

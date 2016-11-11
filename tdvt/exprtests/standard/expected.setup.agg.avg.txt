@@ -1,0 +1,28 @@
+<results>
+  <test name='AVG([int0])'>
+    <sql>
+      SELECT AVG(&quot;Calcs&quot;.&quot;int0&quot;) AS &quot;TEMP(Test)(3952218057)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3952218057)(0)]</column>
+      </schema>
+      <tuple>
+        <value>6.1818182</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='AVG([num4])'>
+    <sql>
+      SELECT AVG(&quot;Calcs&quot;.&quot;num4&quot;) AS &quot;TEMP(Test)(1371989636)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1371989636)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2.0016667</value>
+      </tuple>
+    </table>
+  </test>
+</results>

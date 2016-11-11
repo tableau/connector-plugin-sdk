@@ -1,0 +1,866 @@
+<results>
+  <test name='DATEDIFF(&apos;day&apos;, NOW(), NOW())'>
+    <sql>
+      SELECT CAST((CAST({fn CURRENT_TIMESTAMP(0)} AS TIMESTAMP) - CAST({fn CURRENT_TIMESTAMP(0)} AS TIMESTAMP)) DAY(8) AS INT) AS &quot;TEMP(Test)(3926981592)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      97.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(3926981592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;day&apos;, TODAY(), TODAY())'>
+    <sql>
+      SELECT CAST((CAST({fn CURDATE()} AS TIMESTAMP) - CAST({fn CURDATE()} AS TIMESTAMP)) DAY(8) AS INT) AS &quot;TEMP(Test)(1915846221)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      55.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1915846221)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] - [date2]'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date2&quot; - &quot;Calcs&quot;.&quot;date2&quot;) / 86400.00 AS &quot;TEMP(Test)(1152843842)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      70.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1152843842)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] + 1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date2&quot; + CAST(1 AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(715809068)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      80.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(715809068)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-21 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-27 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-21 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] + 1.5'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date2&quot; + CAST(FLOOR(1.5) AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(299505631)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      107.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(299505631)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-21 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-27 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-21 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] - 1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date2&quot; + CAST(-1 AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(709470143)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      73.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(709470143)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-11 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-29 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-11 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-26 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] - 1.5'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date2&quot; - CAST(CEIL(1.5) AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(1620718980)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      75.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1620718980)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-24 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-28 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-25 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] - [datetime0]'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;datetime0&quot; - &quot;Calcs&quot;.&quot;datetime0&quot;) / 86400.00 AS &quot;TEMP(Test)(2141740056)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      76.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(2141740056)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] - 1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;datetime0&quot; + CAST(-1 AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(1797652325)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      78.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1797652325)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-03 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-04 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-08 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-11 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-16 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-18 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-21 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-30 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] + 1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;datetime0&quot; + CAST(1 AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(2686481578)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      74.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(2686481578)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-05 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-06 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-10 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-18 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-20 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-03 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] - 1.5'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;datetime0&quot; - CAST(CEIL(1.5) AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(2341796372)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      60.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(2341796372)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-02 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-03 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-07 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-10 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-20 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-21 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] + 1.5'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;datetime0&quot; + CAST(FLOOR(1.5) AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(4017290474)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      69.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(4017290474)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-05 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-06 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-10 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-18 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-20 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-03 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] = [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;datetime0&quot; = &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;datetime0&quot; = &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3033382267)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      54.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(3033382267)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &gt; [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;datetime0&quot; &gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;datetime0&quot; &gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(4196472080)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      88.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(4196472080)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &gt;= [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;datetime0&quot; &gt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;datetime0&quot; &gt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1829388090)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      57.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1829388090)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &lt; [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;datetime0&quot; &lt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;datetime0&quot; &lt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(2087345109)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      66.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(2087345109)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &lt;= [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;datetime0&quot; &lt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;datetime0&quot; &lt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3187080314)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      56.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(3187080314)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &lt;&gt; [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;datetime0&quot; &lt;&gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;datetime0&quot; &lt;&gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(436529008)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      61.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(436529008)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] = [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; = &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; = &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1122166960)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      58.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1122166960)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt; [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(2476649334)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      60.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(2476649334)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt;= [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &gt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &gt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1267352367)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      68.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1267352367)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt; [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &lt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &lt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(668774393)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      50.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(668774393)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;= [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &lt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &lt;= &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(2801366337)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      54.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(2801366337)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;&gt; [datetime0]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &lt;&gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &lt;&gt; &quot;Calcs&quot;.&quot;datetime0&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(6065346)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      69.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(6065346)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] =  [date2]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; = &quot;Calcs&quot;.&quot;date2&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; = &quot;Calcs&quot;.&quot;date2&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(4213376628)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      51.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(4213376628)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt;  [date2]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &gt; &quot;Calcs&quot;.&quot;date2&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &gt; &quot;Calcs&quot;.&quot;date2&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(284925583)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      53.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(284925583)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt;= [date2]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &gt;= &quot;Calcs&quot;.&quot;date2&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &gt;= &quot;Calcs&quot;.&quot;date2&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1365124261)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      56.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1365124261)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;  [date2]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &lt; &quot;Calcs&quot;.&quot;date2&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &lt; &quot;Calcs&quot;.&quot;date2&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(4277161941)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      57.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(4277161941)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;= [date2]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &lt;= &quot;Calcs&quot;.&quot;date2&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &lt;= &quot;Calcs&quot;.&quot;date2&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(932571096)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      59.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(932571096)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;&gt; [date2]'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date2&quot; &lt;&gt; &quot;Calcs&quot;.&quot;date2&quot;) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date2&quot; &lt;&gt; &quot;Calcs&quot;.&quot;date2&quot;) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3666462064)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      55.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(3666462064)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

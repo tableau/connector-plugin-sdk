@@ -1,0 +1,36 @@
+<results>
+  <test name='right(str0,num4)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num4&quot; &gt;= 0 THEN SUBSTR(CAST(&quot;Calcs&quot;.&quot;str0&quot; AS TEXT), (LENGTH(CAST(&quot;Calcs&quot;.&quot;str0&quot; AS TEXT)) - CAST(FLOOR(&quot;Calcs&quot;.&quot;num4&quot;) AS INTEGER) + 1) ) ELSE NULL END) AS &quot;TEMP(Test)(3619367444)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3619367444)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E SUPPLIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LOGY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;NOLOGY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OGY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SUPPLIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

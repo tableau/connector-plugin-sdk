@@ -1,0 +1,1 @@
+DATENAME('hour', [datetime0])

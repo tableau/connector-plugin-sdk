@@ -1,0 +1,4 @@
+DATEDIFF('month', [date3], [date2])
+
+DATEDIFF('month', DATETIME([date2]), [datetime0])
+

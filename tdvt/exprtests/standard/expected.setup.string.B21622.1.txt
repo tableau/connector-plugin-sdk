@@ -1,0 +1,48 @@
+<results>
+  <test name='str(int([num4]))'>
+    <sql>
+      SELECT CAST(CAST(TRUNC(&quot;Calcs&quot;.&quot;num4&quot;) AS BIGINT) AS VARCHAR(21)) AS &quot;TEMP(Test)(1425036653)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      102.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(1425036653)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;10&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;19&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;8&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-10&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-13&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-14&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-6&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

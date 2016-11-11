@@ -1,0 +1,18 @@
+<results>
+  <test name='&apos; &apos; + &apos;tail trimmed&apos; + &apos;     &apos;'>
+    <sql>
+      SELECT (text &apos; tail trimmed     &apos;) AS &quot;TEMP(Test)(1321171487)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING ((count 1) &gt; 0)
+    </sql>
+    <query-time>
+      80.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1321171487)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot; tail trimmed&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

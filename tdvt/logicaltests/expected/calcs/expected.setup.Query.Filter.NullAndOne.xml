@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Query.Filter.NullAndOne.postgres91.xml'>
+    <sql>
+      SELECT &quot;Calcs&quot;.&quot;str2&quot; AS &quot;str2&quot;,&#10;  SUM(&quot;Calcs&quot;.&quot;num3&quot;) AS &quot;sum:num3:ok&quot;&#10;FROM &quot;Calcs&quot;&#10;WHERE ((&quot;Calcs&quot;.&quot;str2&quot; IN (&apos;sixteen&apos;)) OR (&quot;Calcs&quot;.&quot;str2&quot; IS NULL))&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str2]</column>
+        <column>[cast_calcs.postgres91].[sum:num3:ok]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+        <value>-5.54</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteen&quot;</value>
+        <value>-10.98</value>
+      </tuple>
+    </table>
+  </test>
+</results>

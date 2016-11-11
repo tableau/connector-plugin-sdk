@@ -1,0 +1,223 @@
+<results>
+  <test name='DATENAME(&apos;year&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;YYYY&apos;) AS &quot;TEMP(Test)(2699142763)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2699142763)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;year&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR(date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;YYYY&apos;) AS &quot;TEMP(Test)(1634134069)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1634134069)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;Q&apos;) AS &quot;TEMP(Test)(1949844743)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1949844743)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR(date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;Q&apos;) AS &quot;TEMP(Test)(3376136658)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3376136658)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMMonth&apos;) AS &quot;TEMP(Test)(3672267408)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3672267408)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR(date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMMonth&apos;) AS &quot;TEMP(Test)(2406708804)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2406708804)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;week&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT CAST(FLOOR((7 + EXTRACT(DOY FROM (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, (CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;)))) / 7) AS TEXT) AS &quot;TEMP(Test)(1073594909)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1073594909)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;week&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT CAST(FLOOR((7 + EXTRACT(DOY FROM date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;)))) / 7) AS TEXT) AS &quot;TEMP(Test)(4016689999)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4016689999)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMDay&apos;) AS &quot;TEMP(Test)(3405047399)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3405047399)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR(date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMDay&apos;) AS &quot;TEMP(Test)(55506858)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(55506858)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMDDD&apos;) AS &quot;TEMP(Test)(3460070750)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3460070750)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR(date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMDDD&apos;) AS &quot;TEMP(Test)(1494289478)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1494289478)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;day&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMDD&apos;) AS &quot;TEMP(Test)(3227046355)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3227046355)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;day&apos;, DATE(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR(date_trunc(&apos;day&apos;, CAST(&apos;1900-01-01&apos; AS DATE) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMDD&apos;) AS &quot;TEMP(Test)(1233941598)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1233941598)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;hour&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMHH24&apos;) AS &quot;TEMP(Test)(3874232094)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3874232094)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;minute&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMMI&apos;) AS &quot;TEMP(Test)(1546814749)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1546814749)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;second&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <sql>
+      SELECT TO_CHAR((CAST(&apos;1900-01-01 00:00:00&apos; AS TIMESTAMP) + NULL * INTERVAL &apos;1 DAY&apos;), &apos;FMSS&apos;) AS &quot;TEMP(Test)(3692431276)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3692431276)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

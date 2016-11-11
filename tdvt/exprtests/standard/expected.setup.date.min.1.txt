@@ -1,0 +1,68 @@
+<results>
+  <test name='MIN([date2], [date3])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN [Calcs].[date2] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[date3] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[date2] &gt; [Calcs].[date3] THEN [Calcs].[date3]&#10;&#9;ELSE [Calcs].[date2] END) AS [TEMP(Test)(3951339438)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN [Calcs].[date2] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[date3] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[date2] &gt; [Calcs].[date3] THEN [Calcs].[date3]&#10;&#9;ELSE [Calcs].[date2] END)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3951339438)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1979-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1992-01-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-02 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([date2])'>
+    <sql>
+      SELECT MIN([Calcs].[date2]) AS [TEMP(Test)(1465246653)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1465246653)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([datetime0])'>
+    <sql>
+      SELECT MIN([Calcs].[datetime0]) AS [TEMP(Test)(2572329321)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2572329321)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:28#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

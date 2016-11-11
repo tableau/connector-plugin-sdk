@@ -1,0 +1,64 @@
+<results>
+  <test name='DATENAME(&apos;month&apos;, [date2])'>
+    <sql>
+      SELECT CAST(MONTH(`testv1_Calcs`.`date2`) AS STRING) AS `TEMP(Test)(477986140)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(MONTH(`testv1_Calcs`.`date2`) AS STRING)
+    </sql>
+    <query-time>
+      1767.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(477986140)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;11&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;5&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;8&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;9&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [datetime0])'>
+    <sql>
+      SELECT CAST(MONTH(`testv1_Calcs`.`datetime0`) AS STRING) AS `TEMP(Test)(2224240773)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(MONTH(`testv1_Calcs`.`datetime0`) AS STRING)
+    </sql>
+    <query-time>
+      1678.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(2224240773)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;8&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

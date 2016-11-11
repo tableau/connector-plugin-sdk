@@ -1,0 +1,79 @@
+<results>
+  <test name='MIN([int0])'>
+    <sql>
+      SELECT (MIN([Calcs].[int0])) AS [TEMP(Test)(4016644369)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(4016644369)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([date3])'>
+    <sql>
+      SELECT MIN([Calcs].[date3]) AS [TEMP(Test)(3378300904)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3378300904)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1979-04-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([num4])'>
+    <sql>
+      SELECT MIN([Calcs].[num4]) AS [TEMP(Test)(512350875)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(512350875)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-14.21</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([str2])'>
+    <sql>
+      SELECT MIN([Calcs].[str2]) AS [TEMP(Test)(3910790823)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3910790823)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([int0], [int1])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN [Calcs].[int0] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int1] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int0] &gt; [Calcs].[int1] THEN [Calcs].[int1]&#10;&#9;ELSE [Calcs].[int0] END) AS [TEMP(Test)(3683900016)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN [Calcs].[int0] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int1] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int0] &gt; [Calcs].[int1] THEN [Calcs].[int1]&#10;&#9;ELSE [Calcs].[int0] END)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3683900016)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.9.Fixed.dbo.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT [t0].[Prod Type2] AS [Prod Type2],&#10;  SUM([t1].[__measure__0]) AS [sum:Calculation_8940203110829613:ok]&#10;FROM (&#10;  SELECT [Staples].[Market Segment] AS [Market Segment],&#10;    [Staples].[Prod Type2] AS [Prod Type2]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Market Segment],&#10;    [Staples].[Prod Type2]&#10;) [t0]&#10;  INNER JOIN (&#10;  SELECT [Staples].[Market Segment] AS [Market Segment],&#10;    SUM([Staples].[Product Base Margin]) AS [__measure__0]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Market Segment]&#10;) [t1] ON ([t0].[Market Segment] = [t1].[Market Segment])&#10;GROUP BY [t0].[Prod Type2]
+    </sql>
+    <query-time>
+      565.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Prod Type2]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_8940203110829613:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+    </table>
+  </test>
+</results>

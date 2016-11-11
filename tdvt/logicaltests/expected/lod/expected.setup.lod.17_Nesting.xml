@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.17_Nesting.dbo.xml'>
+    <sql>
+      SELECT [t4].[Prod Type1] AS [Prod Type1],&#10;  [t4].[Ship Mode] AS [Ship Mode],&#10;  [t8].[__measure__1] AS [TEMP(attr:LOD - Nesting - 1 (copy):qk)(1075333431)(0)],&#10;  [t8].[__measure__3] AS [TEMP(attr:LOD - Nesting - 1 (copy):qk)(260755027)(0)],&#10;  [t4].[avg:Calculation_8601225013155991:ok] AS [avg:Calculation_8601225013155991:ok],&#10;  [t8].[__measure__10] AS [sum:Calculation_9271225012544475:ok],&#10;  [t8].[__measure__12] AS [sum:LOD - Nesting - 2 (copy):ok],&#10;  [t10].[__measure__14] AS [sum:LOD - Nesting - 3 (copy):ok]&#10;FROM (&#10;  SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;    [Staples].[Ship Mode] AS [Ship Mode],&#10;    AVG(cast((CASE WHEN [t3].[__measure__7] = 0 THEN NULL ELSE (CAST((([t1].[__measure__5] + CAST([t2].[__measure__6] as float)) + [Staples].[Sales Total]) as float) / [t3].[__measure__7]) END) as float)) AS [avg:Calculation_8601225013155991:ok]&#10;  FROM [dbo].[Staples] [Staples]&#10;    INNER JOIN (&#10;    SELECT [t0].[Prod Type1] AS [Prod Type1],&#10;      AVG(cast([t0].[__measure__4] as float)) AS [__measure__5]&#10;    FROM (&#10;      SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;        [Staples].[Prod Type3] AS [Prod Type3],&#10;        [Staples].[Prod Type2] AS [Prod Type2],&#10;        SUM([Staples].[Sales Total]) AS [__measure__4]&#10;      FROM [dbo].[Staples] [Staples]&#10;      GROUP BY [Staples].[Prod Type1],&#10;        [Staples].[Prod Type3],&#10;        [Staples].[Prod Type2]&#10;    ) [t0]&#10;    GROUP BY [t0].[Prod Type1]&#10;  ) [t1] ON (([Staples].[Prod Type1] = [t1].[Prod Type1]) OR (([Staples].[Prod Type1] IS NULL) AND ([t1].[Prod Type1] IS NULL)))&#10;    INNER JOIN (&#10;    SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;      [Staples].[Ship Mode] AS [Ship Mode],&#10;      SUM([Staples].[Sales Total]) AS [__measure__6]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Prod Type1],&#10;      [Staples].[Ship Mode]&#10;  ) [t2] ON ((([Staples].[Prod Type1] = [t2].[Prod Type1]) OR (([Staples].[Prod Type1] IS NULL) AND ([t2].[Prod Type1] IS NULL))) AND (([Staples].[Ship Mode] = [t2].[Ship Mode]) OR (([Staples].[Ship Mode] IS NULL) AND ([t2].[Ship Mode] IS NULL))))&#10;    INNER JOIN (&#10;    SELECT [Staples].[Market Segment] AS [Market Segment],&#10;      SUM([Staples].[Product Base Margin]) AS [__measure__7]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Market Segment]&#10;  ) [t3] ON (([Staples].[Market Segment] = [t3].[Market Segment]) OR (([Staples].[Market Segment] IS NULL) AND ([t3].[Market Segment] IS NULL)))&#10;  GROUP BY [Staples].[Prod Type1],&#10;    [Staples].[Ship Mode]&#10;) [t4]&#10;  INNER JOIN (&#10;  SELECT [t5].[Prod Type1] AS [Prod Type1],&#10;    [t5].[Ship Mode] AS [Ship Mode],&#10;    AVG(cast([t5].[__measure__0] as float)) AS [__measure__1],&#10;    AVG(cast([t5].[__measure__2] as float)) AS [__measure__3],&#10;    SUM(CAST([t6].[__measure__9] as float)) AS [__measure__10],&#10;    SUM(CAST([t7].[__measure__11] as float)) AS [__measure__12]&#10;  FROM (&#10;    SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;      [Staples].[Ship Mode] AS [Ship Mode],&#10;      [Staples].[Prod Type3] AS [Prod Type3],&#10;      [Staples].[Prod Type2] AS [Prod Type2],&#10;      SUM([Staples].[Sales Total]) AS [__measure__0],&#10;      SUM([Staples].[Sales Total]) AS [__measure__2]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Prod Type1],&#10;      [Staples].[Ship Mode],&#10;      [Staples].[Prod Type3],&#10;      [Staples].[Prod Type2]&#10;  ) [t5]&#10;    INNER JOIN (&#10;    SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;      [Staples].[Ship Mode] AS [Ship Mode],&#10;      SUM([Staples].[Sales Total]) AS [__measure__9]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Prod Type1],&#10;      [Staples].[Ship Mode]&#10;  ) [t6] ON ((([t5].[Prod Type1] = [t6].[Prod Type1]) OR (([t5].[Prod Type1] IS NULL) AND ([t6].[Prod Type1] IS NULL))) AND (([t5].[Ship Mode] = [t6].[Ship Mode]) OR (([t5].[Ship Mode] IS NULL) AND ([t6].[Ship Mode] IS NULL))))&#10;    INNER JOIN (&#10;    SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;      SUM([Staples].[Sales Total]) AS [__measure__11]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Prod Type1]&#10;  ) [t7] ON (([t5].[Prod Type1] = [t7].[Prod Type1]) OR (([t5].[Prod Type1] IS NULL) AND ([t7].[Prod Type1] IS NULL)))&#10;  GROUP BY [t5].[Prod Type1],&#10;    [t5].[Ship Mode]&#10;) [t8] ON ((([t4].[Prod Type1] = [t8].[Prod Type1]) OR (([t4].[Prod Type1] IS NULL) AND ([t8].[Prod Type1] IS NULL))) AND (([t4].[Ship Mode] = [t8].[Ship Mode]) OR (([t4].[Ship Mode] IS NULL) AND ([t8].[Ship Mode] IS NULL))))&#10;  INNER JOIN (&#10;  SELECT [t9].[Prod Type1] AS [Prod Type1],&#10;    AVG(cast([t9].[__measure__13] as float)) AS [__measure__14]&#10;  FROM (&#10;    SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;      [Staples].[Prod Type3] AS [Prod Type3],&#10;      [Staples].[Prod Type2] AS [Prod Type2],&#10;      SUM([Staples].[Sales Total]) AS [__measure__13]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Prod Type1],&#10;      [Staples].[Prod Type3],&#10;      [Staples].[Prod Type2]&#10;  ) [t9]&#10;  GROUP BY [t9].[Prod Type1]&#10;) [t10] ON (([t4].[Prod Type1] = [t10].[Prod Type1]) OR (([t4].[Prod Type1] IS NULL) AND ([t10].[Prod Type1] IS NULL)))
+    </sql>
+    <query-time>
+      516.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[Prod Type1]</column>
+        <column>[Staples.sqlserver].[Ship Mode]</column>
+        <column>[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(1075333431)(0)]</column>
+        <column>[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(260755027)(0)]</column>
+        <column>[Staples.sqlserver].[avg:Calculation_8601225013155991:ok]</column>
+        <column>[Staples.sqlserver].[sum:Calculation_9271225012544475:ok]</column>
+        <column>[Staples.sqlserver].[sum:LOD - Nesting - 2 (copy):ok]</column>
+        <column>[Staples.sqlserver].[sum:LOD - Nesting - 3 (copy):ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>4002620.2</value>
+        <value>4002620.2</value>
+        <value>4271.0757</value>
+        <value>1.9612839e+08</value>
+        <value>2.380636e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>76460.766</value>
+        <value>76460.766</value>
+        <value>443.56198</value>
+        <value>9251752.7</value>
+        <value>3.7409995e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>468152.41</value>
+        <value>468152.41</value>
+        <value>1046.4216</value>
+        <value>56646441.0</value>
+        <value>3.7409995e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>819224.44</value>
+        <value>819224.44</value>
+        <value>435.20844</value>
+        <value>7373020.0</value>
+        <value>72044220.0</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>83280.028</value>
+        <value>83280.028</value>
+        <value>501.43046</value>
+        <value>1.0201803e+08</value>
+        <value>8.405159e+08</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>532636.16</value>
+        <value>532636.16</value>
+        <value>2729.3706</value>
+        <value>6.524793e+08</value>
+        <value>8.405159e+08</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>6038779.5</value>
+        <value>6038779.5</value>
+        <value>2386.7716</value>
+        <value>24155118.0</value>
+        <value>81328223.0</value>
+        <value>4518234.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>445944.71</value>
+        <value>445944.71</value>
+        <value>1143.9339</value>
+        <value>28540462.0</value>
+        <value>3.2531289e+08</value>
+        <value>4518234.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>3127374.3</value>
+        <value>3127374.3</value>
+        <value>4182.9544</value>
+        <value>2.0015196e+08</value>
+        <value>3.2531289e+08</value>
+        <value>4518234.6</value>
+      </tuple>
+    </table>
+  </test>
+</results>

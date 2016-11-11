@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B59740.postgres91.xml'>
+    <sql>
+      SELECT &quot;t0&quot;.&quot;Str2 (group)&quot; AS &quot;Str2 (group)&quot;&#10;FROM &quot;Calcs&quot;&#10;  INNER JOIN &quot;#Tableau_0_3_Group&quot; &quot;t0&quot; ON (&quot;Calcs&quot;.&quot;str2&quot; IS NOT DISTINCT FROM &quot;t0&quot;.&quot;str2&quot;)&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[Str2 (group)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

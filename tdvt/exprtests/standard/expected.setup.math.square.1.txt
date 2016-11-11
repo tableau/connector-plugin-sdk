@@ -1,0 +1,64 @@
+<results>
+  <test name='SQUARE([int2])'>
+    <sql>
+      SELECT POWER(&quot;Calcs&quot;.&quot;int2&quot;,2) AS &quot;TEMP_Test__3898674109__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY POWER(&quot;Calcs&quot;.&quot;int2&quot;,2)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(3898674109)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>4.0</value>
+      </tuple>
+      <tuple>
+        <value>9.0</value>
+      </tuple>
+      <tuple>
+        <value>16.0</value>
+      </tuple>
+      <tuple>
+        <value>25.0</value>
+      </tuple>
+      <tuple>
+        <value>36.0</value>
+      </tuple>
+      <tuple>
+        <value>64.0</value>
+      </tuple>
+      <tuple>
+        <value>81.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='square(num0)'>
+    <sql>
+      SELECT POWER(&quot;Calcs&quot;.&quot;num0&quot;,2) AS &quot;TEMP_Test__1119897860__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY POWER(&quot;Calcs&quot;.&quot;num0&quot;,2)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(1119897860)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>12.25</value>
+      </tuple>
+      <tuple>
+        <value>100.0</value>
+      </tuple>
+      <tuple>
+        <value>151.29</value>
+      </tuple>
+      <tuple>
+        <value>246.49</value>
+      </tuple>
+    </table>
+  </test>
+</results>

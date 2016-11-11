@@ -1,0 +1,30 @@
+<results>
+  <test name='mid(str2,(num0+5)*.3,num1)'>
+    <sql>
+      SELECT SUBSTR(&quot;Calcs&quot;.&quot;str2&quot;,((&quot;Calcs&quot;.&quot;num0&quot; + 5) * 0.29999999999999999),&quot;Calcs&quot;.&quot;num1&quot;) AS &quot;TEMP(Test)(1934432200)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY SUBSTR(&quot;Calcs&quot;.&quot;str2&quot;,((&quot;Calcs&quot;.&quot;num0&quot; + 5) * 0.29999999999999999),&quot;Calcs&quot;.&quot;num1&quot;)
+    </sql>
+    <query-time>
+      49.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(1934432200)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ive&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;wo&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

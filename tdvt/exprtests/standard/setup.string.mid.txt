@@ -1,0 +1,2 @@
+mid(str1,6)
+mid(str1,2, 4)

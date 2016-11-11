@@ -1,0 +1,46 @@
+<results>
+  <test name='MIN([int0])'>
+    <sql>
+      SELECT MIN(&quot;Calcs&quot;.&quot;int0&quot;) AS &quot;TEMP(Test)(4016644369)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4016644369)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([int1], [int2])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;int1&quot; IS NULL OR &quot;Calcs&quot;.&quot;int2&quot; IS NULL THEN NULL&#10;&#9;WHEN &quot;Calcs&quot;.&quot;int1&quot; &lt; &quot;Calcs&quot;.&quot;int2&quot; THEN &quot;Calcs&quot;.&quot;int1&quot;&#10;&#9;ELSE &quot;Calcs&quot;.&quot;int2&quot; END) AS &quot;TEMP(Test)(1701645592)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1701645592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-6</value>
+      </tuple>
+      <tuple>
+        <value>-5</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

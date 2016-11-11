@@ -1,0 +1,211 @@
+<results>
+  <test name='DATEADD(&apos;year&apos;, 1, DATE(null))'>
+    <sql>
+      SELECT ((CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER)) + 1 * INTERVAL &apos;1&apos; YEAR) AS &quot;temp(test)(1053114602)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1053114602)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;year&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; YEAR) AS &quot;temp(test)(955333125)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(955333125)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;quarter&apos;, 1, DATE(null))'>
+    <sql>
+      SELECT ((CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER)) + 1 * 3 * INTERVAL &apos;1&apos; MONTH) AS &quot;temp(test)(2396988690)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2396988690)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;quarter&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * 3 * INTERVAL &apos;1&apos; MONTH) AS &quot;temp(test)(2232502461)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2232502461)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;month&apos;, 1, DATE(null))'>
+    <sql>
+      [Teradata][ODBC Teradata Driver][Teradata Database] ADD_MONTHS has been called with wrong data types or values. &#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;month&apos;, 1, DATETIME(null))'>
+    <sql>
+      [Teradata][ODBC Teradata Driver][Teradata Database] ADD_MONTHS has been called with wrong data types or values. &#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;week&apos;, 1, DATE(null))'>
+    <sql>
+      SELECT ((CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER)) + 1 * 7 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(359186020)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(359186020)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;week&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * 7 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(3060670302)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3060670302)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;weekday&apos;, 1, DATE(null))'>
+    <sql>
+      SELECT ((CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER)) + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(592740370)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(592740370)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;weekday&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(4169571243)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4169571243)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;dayofyear&apos;, 1, DATE(null))'>
+    <sql>
+      SELECT ((CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER)) + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(2477057371)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2477057371)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;dayofyear&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(3817976182)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3817976182)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;day&apos;, 1, DATE(null))'>
+    <sql>
+      SELECT ((CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER)) + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(2329360898)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2329360898)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;day&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(1469842605)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1469842605)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;hour&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; HOUR) AS &quot;temp(test)(4189387493)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4189387493)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;minute&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; MINUTE) AS &quot;temp(test)(3720439076)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3720439076)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;second&apos;, 1, DATETIME(null))'>
+    <sql>
+      SELECT ((CAST(CAST(&apos;1900-01-01&apos; AS DATE) + CAST(NULL AS INTEGER) AS TIMESTAMP)) + 1 * INTERVAL &apos;1&apos; SECOND) AS &quot;temp(test)(2985757783)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2985757783)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

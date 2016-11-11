@@ -1,0 +1,51 @@
+<results>
+  <test name='TAN([int2])'>
+    <sql>
+      SELECT TAN(&quot;Calcs&quot;.&quot;int2&quot;) AS &quot;TEMP(Test)(1227693937)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1227693937)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-3.380515</value>
+      </tuple>
+      <tuple>
+        <value>-2.1850399</value>
+      </tuple>
+      <tuple>
+        <value>-1.1578213</value>
+      </tuple>
+      <tuple>
+        <value>-0.45231566</value>
+      </tuple>
+      <tuple>
+        <value>-0.29100619</value>
+      </tuple>
+      <tuple>
+        <value>-0.14254654</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>0.14254654</value>
+      </tuple>
+      <tuple>
+        <value>0.29100619</value>
+      </tuple>
+      <tuple>
+        <value>0.45231566</value>
+      </tuple>
+      <tuple>
+        <value>1.1578213</value>
+      </tuple>
+      <tuple>
+        <value>3.380515</value>
+      </tuple>
+      <tuple>
+        <value>6.7997115</value>
+      </tuple>
+    </table>
+  </test>
+</results>

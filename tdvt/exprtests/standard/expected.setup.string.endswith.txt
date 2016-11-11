@@ -1,0 +1,34 @@
+<results>
+  <test name='ENDSWITH(str1, &quot;s&quot;)'>
+    <sql>
+      SELECT (SUBSTR(RTRIM(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), &apos; &apos;), (CASE WHEN (LENGTH(RTRIM(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), &apos; &apos;)) - LENGTH(CAST(&apos;s&apos; AS TEXT))) &lt; 0 THEN 1 ELSE LENGTH(RTRIM(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), &apos; &apos;)) - LENGTH(CAST(&apos;s&apos; AS TEXT)) + 1 END), LENGTH(CAST(&apos;s&apos; AS TEXT))) = CAST(&apos;s&apos; AS TEXT)) AS &quot;TEMP(Test)(1759936097)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1759936097)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ENDSWITH(str2, &quot;een&quot;)'>
+    <sql>
+      SELECT (SUBSTR(RTRIM(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT), &apos; &apos;), (CASE WHEN (LENGTH(RTRIM(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT), &apos; &apos;)) - LENGTH(CAST(&apos;een&apos; AS TEXT))) &lt; 0 THEN 1 ELSE LENGTH(RTRIM(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT), &apos; &apos;)) - LENGTH(CAST(&apos;een&apos; AS TEXT)) + 1 END), LENGTH(CAST(&apos;een&apos; AS TEXT))) = CAST(&apos;een&apos; AS TEXT)) AS &quot;TEMP(Test)(3179156403)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3179156403)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

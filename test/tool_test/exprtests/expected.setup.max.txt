@@ -1,0 +1,18 @@
+<results>
+  <test name='max(int1)'>
+    <sql>
+      (restrict&#10;  (aggregate&#10;    (table [Extract].[Extract])&#10;    ()&#10;    (&#10;      ([TEMP(Test)(2328214861)(0)]&#10;        (max [int1])&#10;        )&#10;      )&#10;    )&#10;  ([TEMP(Test)(2328214861)(0)])&#10;  )&#10;
+    </sql>
+    <query-time>
+      21.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.tde].[TEMP(Test)(2328214861)(0)]</column>
+      </schema>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,50 @@
+<results>
+  <test name='DATEPARSE(&apos;y-MM-dd&apos;, &apos;1234-06-01&apos;)'>
+    <sql>
+      SELECT TO_TIMESTAMP(N&apos;1234-06-01&apos;, &apos;YYYY-MM-DD&apos;) AS &quot;TEMP(Test)(1408155083)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      43.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(1408155083)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1234-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yy-MM-dd&apos;, &apos;12-06-01&apos;)'>
+    <sql>
+      SELECT TO_TIMESTAMP(N&apos;12-06-01&apos;, &apos;RR-MM-DD&apos;) AS &quot;TEMP(Test)(54082523)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      30.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(54082523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1234-06-01&apos;)'>
+    <sql>
+      SELECT TO_TIMESTAMP(N&apos;1234-06-01&apos;, &apos;YYYY-MM-DD&apos;) AS &quot;TEMP(Test)(2040050501)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      37.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(2040050501)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1234-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

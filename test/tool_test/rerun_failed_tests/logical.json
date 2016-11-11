@@ -1,0 +1,21 @@
+{
+    "actual_exp_paths_relative_to": "this", 
+    "failed_tests": [
+        {
+            "actual": "test\\tool_test\\logical\\expected\\calcs\\actual.setup.xml", 
+            "case": ".setup.xml", 
+            "class": "TDVT", 
+            "expected": "", 
+            "failtype": "test_failure", 
+            "message": "Expected does not match any actual file.", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -q test\\tool_test\\logical\\setup\\calcs\\setup.sum.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "test\\tool_test\\logical\\setup\\calcs\\setup.sum.xml", 
+            "test_type": "-q"
+        }
+    ], 
+    "harness_name": "TDVT", 
+    "successful_tests": []
+}

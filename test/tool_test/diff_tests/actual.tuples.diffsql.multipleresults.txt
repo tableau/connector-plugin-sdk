@@ -1,0 +1,28 @@
+<results>
+  <test name='COUNT([int0])'>
+    <sql>
+      SELECT COUNDFSDFSDFSDT_BIG([Calcs].[int0]) AS [TEMP(Test)(3910975586)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3910975586)(0)]</column>
+      </schema>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([bool0])'>
+    <sql>
+      SELECT COUNT_BIG(CASE WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1 WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0 ELSE NULL END) AS [TEMP(Test)(1133866179)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1133866179)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+</results>

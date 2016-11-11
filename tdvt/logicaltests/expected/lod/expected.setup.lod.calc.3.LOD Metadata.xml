@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.3.LOD Metadata.dbo.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT [t0].[Prod Type1] AS [Prod Type1],&#10;  [t0].[__measure__0] AS [sum:Calculation_0140203111132437:ok],&#10;  [t3].[__measure__2] AS [sum:Calculation_8060203111105400:ok]&#10;FROM (&#10;  SELECT [Staples].[Prod Type1] AS [Prod Type1],&#10;    SUM([Staples].[Sales Total]) AS [__measure__0]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Prod Type1]&#10;) [t0]&#10;  INNER JOIN (&#10;  SELECT [t1].[Prod Type1] AS [Prod Type1],&#10;    SUM([t2].[__measure__1]) AS [__measure__2]&#10;  FROM (&#10;    SELECT [Staples].[Market Segment] AS [Market Segment],&#10;      [Staples].[Prod Type1] AS [Prod Type1]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Market Segment],&#10;      [Staples].[Prod Type1]&#10;  ) [t1]&#10;    INNER JOIN (&#10;    SELECT [Staples].[Market Segment] AS [Market Segment],&#10;      SUM([Staples].[Product Base Margin]) AS [__measure__1]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Market Segment]&#10;  ) [t2] ON ([t1].[Market Segment] = [t2].[Market Segment])&#10;  GROUP BY [t1].[Prod Type1]&#10;) [t3] ON ([t0].[Prod Type1] = [t3].[Prod Type1])
+    </sql>
+    <query-time>
+      712.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Prod Type1]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_0140203111132437:ok]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_8060203111105400:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>34009086.0</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>24014740.0</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>40664111.0</value>
+        <value>28278.32</value>
+      </tuple>
+    </table>
+  </test>
+</results>

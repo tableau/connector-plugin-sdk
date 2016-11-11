@@ -1,0 +1,54 @@
+<results>
+  <test name='DATENAME(&apos;hour&apos;, [datetime0])'>
+    <sql>
+      SELECT CAST(CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS FORMAT &apos;HH&apos;) AS VARCHAR(50)) AS &quot;temp(test)(3233853797)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3233853797)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;06&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;07&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;08&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;10&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;11&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;12&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;13&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;14&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;15&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;17&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;21&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;22&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;23&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

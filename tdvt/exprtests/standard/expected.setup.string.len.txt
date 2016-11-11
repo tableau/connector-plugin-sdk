@@ -1,0 +1,46 @@
+<results>
+  <test name='LEN(&quot;data&quot;)'>
+    <sql>
+      SELECT 4 AS &quot;TEMP(Test)(5037157)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(5037157)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='len(str2)'>
+    <sql>
+      SELECT LENGTH(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT)) AS &quot;TEMP(Test)(382448263)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(382448263)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+</results>

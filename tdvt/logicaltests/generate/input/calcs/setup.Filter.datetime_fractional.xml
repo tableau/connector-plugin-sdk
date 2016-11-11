@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logical-query>
+  <selects>
+    <field>[Calculation_958703807427547136]</field>
+  </selects>
+  <domainOp class="logical-operator" type="snowflake">
+    <aggregateOp class="logical-operator">
+      <measures>
+      </measures>
+      <groupbys>
+        <binding name="[Calculation_958703807427547136]">
+          <identifierExp class="logical-expression" identifier="[Calculation_958703807427547136]" />
+        </binding>
+      </groupbys>
+      <selectOp class="logical-operator">
+        <predicate>
+          <funcallExp class="logical-expression" function="==" shape="scalar">
+            <identifierExp class="logical-expression" identifier="[Calculation_958703807427547136]" />
+            <literalExp class="logical-expression" datatype="datetime" value="#2016-07-15 10:11:12.123#" />
+          </funcallExp>
+        </predicate>
+        <projectOp class="logical-operator">
+          <expressions>
+            <binding name="[Calculation_958703807427547136]">
+              <funcallExp class="logical-expression" function="datetime" shape="scalar">
+                <literalExp charset="0" class="logical-expression" collation="LROOT" datatype="string" value="&quot;2016-07-15 10:11:12.123&quot;" />
+              </funcallExp>
+            </binding>
+          </expressions>
+          <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+            <relation name="Calcs" table="$Calcs$" type="table" />
+            <cols>
+            </cols>
+            <type>
+              <schema>
+                <field name="[bool0]">
+                  <type name="top" />
+                </field>
+                <field name="[bool1]">
+                  <type name="top" />
+                </field>
+                <field name="[bool2]">
+                  <type name="top" />
+                </field>
+                <field name="[bool3]">
+                  <type name="top" />
+                </field>
+                <field name="[date0]">
+                  <type name="top" />
+                </field>
+                <field name="[date1]">
+                  <type name="top" />
+                </field>
+                <field name="[date2]">
+                  <type name="top" />
+                </field>
+                <field name="[date3]">
+                  <type name="top" />
+                </field>
+                <field name="[datetime0]">
+                  <type name="top" />
+                </field>
+                <field name="[datetime1]">
+                  <type name="top" />
+                </field>
+                <field name="[int0]">
+                  <type name="top" />
+                </field>
+                <field name="[int1]">
+                  <type name="top" />
+                </field>
+                <field name="[int2]">
+                  <type name="top" />
+                </field>
+                <field name="[int3]">
+                  <type name="top" />
+                </field>
+                <field name="[key]">
+                  <type name="top" />
+                </field>
+                <field name="[num0]">
+                  <type name="top" />
+                </field>
+                <field name="[num1]">
+                  <type name="top" />
+                </field>
+                <field name="[num2]">
+                  <type name="top" />
+                </field>
+                <field name="[num3]">
+                  <type name="top" />
+                </field>
+                <field name="[num4]">
+                  <type name="top" />
+                </field>
+                <field name="[str0]">
+                  <type name="top" />
+                </field>
+                <field name="[str1]">
+                  <type name="top" />
+                </field>
+                <field name="[str2]">
+                  <type name="top" />
+                </field>
+                <field name="[str3]">
+                  <type name="top" />
+                </field>
+                <field name="[time0]">
+                  <type name="top" />
+                </field>
+                <field name="[time1]">
+                  <type name="top" />
+                </field>
+                <field name="[zzz]">
+                  <type name="top" />
+                </field>
+              </schema>
+              <schema>
+              </schema>
+            </type>
+          </relationOp>
+        </projectOp>
+      </selectOp>
+    </aggregateOp>
+  </domainOp>
+</logical-query>

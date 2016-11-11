@@ -1,0 +1,130 @@
+<results>
+  <test name='INT([int1])'>
+    <sql>
+      SELECT CAST(TRUNC(&quot;Calcs&quot;.&quot;int1&quot;) AS BIGINT) AS &quot;TEMP(Test)(551720338)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(551720338)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-6</value>
+      </tuple>
+      <tuple>
+        <value>-4</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='INT([bool0])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;bool0&quot; THEN 1&#10;&#9;WHEN NOT &quot;Calcs&quot;.&quot;bool0&quot; THEN 0&#10;&#9;ELSE NULL END) AS &quot;TEMP(Test)(2695057561)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2695057561)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='INT([date0])'>
+    <sql>
+      SELECT FLOOR((EXTRACT(EPOCH FROM &quot;Calcs&quot;.&quot;date0&quot;) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS &quot;TEMP(Test)(2234960540)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2234960540)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>26482</value>
+      </tuple>
+      <tuple>
+        <value>27708</value>
+      </tuple>
+      <tuple>
+        <value>38090</value>
+      </tuple>
+      <tuple>
+        <value>38140</value>
+      </tuple>
+      <tuple>
+        <value>38155</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='INT([num2])'>
+    <sql>
+      SELECT CAST(TRUNC(&quot;Calcs&quot;.&quot;num2&quot;) AS BIGINT) AS &quot;TEMP(Test)(1665700248)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1665700248)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>10</value>
+      </tuple>
+      <tuple>
+        <value>11</value>
+      </tuple>
+      <tuple>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>16</value>
+      </tuple>
+      <tuple>
+        <value>17</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='INT([str2])'>
+    <sql>
+      ERROR: invalid input syntax for type double precision: &quot;one&quot;;&#10;Error while executing the query&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+</results>

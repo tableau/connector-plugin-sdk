@@ -1,0 +1,39 @@
+<results>
+  <test name='left(str0,num4)'>
+    <sql>
+      SELECT (CASE WHEN `Calcs`.`num4` &gt;= 0 THEN LEFT(`Calcs`.`str0`,`Calcs`.`num4`) ELSE NULL END) AS `TEMP(Test)(1907571572)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql56].[TEMP(Test)(1907571572)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE S&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPP&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TEC&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECH&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHN&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOL&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

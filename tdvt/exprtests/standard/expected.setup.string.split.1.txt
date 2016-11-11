@@ -1,0 +1,22 @@
+<results>
+  <test name='SPLIT(&quot;a-b-c&quot;, &quot;-&quot;, -2) //c'>
+    <sql>
+      Splitting from right is not supported by the data source.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='SPLIT(&quot;a-b-c&quot;, &quot;-&quot;, 2) //b'>
+    <sql>
+      SELECT (CASE WHEN INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)= 0 THEN NULL WHEN NOT INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)= 0 THEN (CASE WHEN INSTR(SUBSTR(N&apos;a-b-c&apos;,INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)+ 1),N&apos;-&apos;)= 0 THEN SUBSTR(N&apos;a-b-c&apos;,INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)+ 1) WHEN NOT INSTR(SUBSTR(N&apos;a-b-c&apos;,INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)+ 1),N&apos;-&apos;)= 0 THEN SUBSTR(SUBSTR(N&apos;a-b-c&apos;,INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)+ 1), 1, INSTR(SUBSTR(N&apos;a-b-c&apos;,INSTR(N&apos;a-b-c&apos;,N&apos;-&apos;)+ 1),N&apos;-&apos;)- 1) ELSE NULL END) ELSE NULL END) AS &quot;TEMP(Test)(1221977364)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(1221977364)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;b&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,36 @@
+<results>
+  <test name='POWER([int2], 2)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int2&quot; IS NULL OR 2 IS NULL OR &quot;Calcs&quot;.&quot;int2&quot; &lt; 0 THEN NULL ELSE &quot;Calcs&quot;.&quot;int2&quot;**2 END) AS &quot;temp(test)(3037854782)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3037854782)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>4.0</value>
+      </tuple>
+      <tuple>
+        <value>9.0</value>
+      </tuple>
+      <tuple>
+        <value>16.0</value>
+      </tuple>
+      <tuple>
+        <value>25.0</value>
+      </tuple>
+      <tuple>
+        <value>36.0</value>
+      </tuple>
+      <tuple>
+        <value>81.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

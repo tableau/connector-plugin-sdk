@@ -1,0 +1,30 @@
+<results>
+  <test name='mid(str2,(num0+5)*.3,num1)'>
+    <sql>
+      SELECT SUBSTR(&quot;Calcs&quot;.&quot;str2&quot;,cast((CAST((&quot;Calcs&quot;.&quot;num0&quot; + 5) AS FLOAT) * 0.29999999999999999) AS INTEGER),cast(&quot;Calcs&quot;.&quot;num1&quot; AS INTEGER)) AS &quot;TEMP(Test)(1934432200)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      94.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.kognitio].[TEMP(Test)(1934432200)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ve&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

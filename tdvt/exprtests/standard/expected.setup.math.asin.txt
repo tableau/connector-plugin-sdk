@@ -1,0 +1,39 @@
+<results>
+  <test name='asin(num0/20)'>
+    <sql>
+      SELECT ASIN((CASE WHEN 20 = 0 THEN NULL ELSE CAST(&quot;Calcs&quot;.&quot;num0&quot; AS DOUBLE PRECISION) / 20 END)) AS &quot;TEMP(Test)(1317198372)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1317198372)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-0.90269613</value>
+      </tuple>
+      <tuple>
+        <value>-0.66238597</value>
+      </tuple>
+      <tuple>
+        <value>-0.17590577</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>0.17590577</value>
+      </tuple>
+      <tuple>
+        <value>0.52359878</value>
+      </tuple>
+      <tuple>
+        <value>0.66238597</value>
+      </tuple>
+      <tuple>
+        <value>0.90269613</value>
+      </tuple>
+    </table>
+  </test>
+</results>

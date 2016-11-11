@@ -1,0 +1,4 @@
+DATEDIFF('dayofyear', [date3], [date2])
+
+DATEDIFF('dayofyear', DATETIME([date2]), [datetime0])
+

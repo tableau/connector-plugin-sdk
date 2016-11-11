@@ -1,0 +1,54 @@
+<results>
+  <test name='RTRIM(&quot; &quot; + str2 + &quot; &quot;)'>
+    <sql>
+      SELECT RTRIM(CAST(((&apos; &apos; || &quot;Calcs&quot;.&quot;str2&quot;) || &apos; &apos;) AS TEXT), &apos; &apos;) AS &quot;TEMP(Test)(2277366246)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2277366246)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot; eight&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; five&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; fourteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; nine&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; one&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; sixteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; ten&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; three&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; twelve&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot; two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

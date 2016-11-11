@@ -1,0 +1,58 @@
+<results>
+  <test name='DATEPART(&apos;month&apos;, [date2])'>
+    <sql>
+      SELECT CAST(EXTRACT(MONTH FROM &quot;Calcs&quot;.&quot;date2&quot;) AS INTEGER) AS &quot;TEMP(Test)(2634030884)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2634030884)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>9</value>
+      </tuple>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;month&apos;, [datetime0])'>
+    <sql>
+      SELECT CAST(EXTRACT(MONTH FROM &quot;Calcs&quot;.&quot;datetime0&quot;) AS INTEGER) AS &quot;TEMP(Test)(4000895377)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4000895377)(0)]</column>
+      </schema>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+</results>

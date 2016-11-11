@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.MultipleFilters.postgres91.xml'>
+    <sql>
+      SELECT &quot;Staples&quot;.&quot;Call Center Region&quot; AS &quot;Call Center Region&quot;,&#10;  &quot;Staples&quot;.&quot;Order ID&quot; AS &quot;Order ID&quot;,&#10;  &quot;Staples&quot;.&quot;Product Container&quot; AS &quot;Product Container&quot;,&#10;  AVG(&quot;Staples&quot;.&quot;Gross Profit&quot;) AS &quot;avg:Gross Profit:ok&quot;,&#10;  CAST(EXTRACT(MONTH FROM &quot;Staples&quot;.&quot;Order Date&quot;) AS INTEGER) AS &quot;mn:Order Date:ok&quot;,&#10;  SUM(&quot;Staples&quot;.&quot;Price&quot;) AS &quot;sum:Price:ok&quot;,&#10;  CAST(EXTRACT(YEAR FROM &quot;Staples&quot;.&quot;Order Date&quot;) AS INTEGER) AS &quot;yr:Order Date:ok&quot;&#10;FROM &quot;Staples&quot;&#10;WHERE ((&quot;Staples&quot;.&quot;Call Center Region&quot; = &apos;WEST&apos;) AND (&quot;Staples&quot;.&quot;Discount&quot; &gt;= 0.27489599999999997) AND (&quot;Staples&quot;.&quot;Discount&quot; &lt;= 0.39001000000000002) AND (((&quot;Staples&quot;.&quot;Order ID&quot; &gt;= &apos;1&apos;) AND (&quot;Staples&quot;.&quot;Order ID&quot; &lt;= &apos;35361&apos;)) OR ((&quot;Staples&quot;.&quot;Order ID&quot; &gt;= &apos;35363&apos;) AND (&quot;Staples&quot;.&quot;Order ID&quot; &lt;= &apos;9991&apos;))) AND (&quot;Staples&quot;.&quot;Product Container&quot; = &apos;MEDIUM BOX&apos;) AND (CAST(EXTRACT(MONTH FROM &quot;Staples&quot;.&quot;Order Date&quot;) AS INTEGER) IN (1, 4, 7, 10)))&#10;GROUP BY 1,&#10;  2,&#10;  3,&#10;  5,&#10;  7
+    </sql>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Call Center Region]</column>
+        <column>[Staples.postgres91].[Order ID]</column>
+        <column>[Staples.postgres91].[Product Container]</column>
+        <column>[Staples.postgres91].[avg:Gross Profit:ok]</column>
+        <column>[Staples.postgres91].[mn:Order Date:ok]</column>
+        <column>[Staples.postgres91].[sum:Price:ok]</column>
+        <column>[Staples.postgres91].[yr:Order Date:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;23143&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>-93.18</value>
+        <value>10</value>
+        <value>11.33</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;30086&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>4660.61</value>
+        <value>7</value>
+        <value>500.98</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;47653&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>-38.72</value>
+        <value>7</value>
+        <value>21.78</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;7266&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>-21.82</value>
+        <value>7</value>
+        <value>9.77</value>
+        <value>2002</value>
+      </tuple>
+    </table>
+  </test>
+</results>

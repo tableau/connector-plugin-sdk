@@ -1,0 +1,4 @@
+DATEADD('dayofyear', 1, [date2])
+
+DATEADD('dayofyear', 1, [datetime0])
+

@@ -1,0 +1,4 @@
+DATETRUNC('day', [date2])
+
+DATETRUNC('day', [datetime0])
+

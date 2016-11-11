@@ -1,0 +1,2 @@
+HEXBINX([int2],2)
+HEXBINY([int2],2)

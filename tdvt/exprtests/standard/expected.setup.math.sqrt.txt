@@ -1,0 +1,64 @@
+<results>
+  <test name='SQRT([int2])'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int2&quot; &lt; 0 THEN NULL ELSE SQRT(&quot;Calcs&quot;.&quot;int2&quot;) END) AS &quot;TEMP(Test)(2398974448)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2398974448)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>1.4142136</value>
+      </tuple>
+      <tuple>
+        <value>1.7320508</value>
+      </tuple>
+      <tuple>
+        <value>2.0</value>
+      </tuple>
+      <tuple>
+        <value>2.236068</value>
+      </tuple>
+      <tuple>
+        <value>2.4494897</value>
+      </tuple>
+      <tuple>
+        <value>3.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='sqrt(num0)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num0&quot; &lt; 0 THEN NULL ELSE SQRT(&quot;Calcs&quot;.&quot;num0&quot;) END) AS &quot;TEMP(Test)(634651992)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(634651992)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>1.8708287</value>
+      </tuple>
+      <tuple>
+        <value>3.1622777</value>
+      </tuple>
+      <tuple>
+        <value>3.5071356</value>
+      </tuple>
+      <tuple>
+        <value>3.9623226</value>
+      </tuple>
+    </table>
+  </test>
+</results>

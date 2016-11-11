@@ -1,0 +1,73 @@
+<results>
+  <test name='power(int0,0.5)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int0&quot; &lt; 0 AND FLOOR(0.5) &lt;&gt; 0.5 THEN NULL ELSE POW(&quot;Calcs&quot;.&quot;int0&quot;,0.5) END) AS &quot;TEMP(Test)(3264960529)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3264960529)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1.0</value>
+      </tuple>
+      <tuple>
+        <value>1.7320508</value>
+      </tuple>
+      <tuple>
+        <value>2.0</value>
+      </tuple>
+      <tuple>
+        <value>2.6457513</value>
+      </tuple>
+      <tuple>
+        <value>2.8284271</value>
+      </tuple>
+      <tuple>
+        <value>3.1622777</value>
+      </tuple>
+      <tuple>
+        <value>3.3166248</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='power(num1,0.1*num0)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num1&quot; &lt; 0 AND FLOOR((0.10000000000000001 * &quot;Calcs&quot;.&quot;num0&quot;)) &lt;&gt; (0.10000000000000001 * &quot;Calcs&quot;.&quot;num0&quot;) THEN NULL ELSE POW(&quot;Calcs&quot;.&quot;num1&quot;,(0.10000000000000001 * &quot;Calcs&quot;.&quot;num0&quot;)) END) AS &quot;TEMP(Test)(2631457506)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2631457506)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.042908918</value>
+      </tuple>
+      <tuple>
+        <value>0.096190305</value>
+      </tuple>
+      <tuple>
+        <value>0.45680306</value>
+      </tuple>
+      <tuple>
+        <value>1.0</value>
+      </tuple>
+      <tuple>
+        <value>2.1618572</value>
+      </tuple>
+      <tuple>
+        <value>9.47</value>
+      </tuple>
+      <tuple>
+        <value>13.744656</value>
+      </tuple>
+      <tuple>
+        <value>35.878312</value>
+      </tuple>
+    </table>
+  </test>
+</results>

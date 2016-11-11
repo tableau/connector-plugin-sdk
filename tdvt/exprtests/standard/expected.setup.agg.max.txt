@@ -1,0 +1,76 @@
+<results>
+  <test name='MAX([int0])'>
+    <sql>
+      SELECT MAX(&quot;Calcs&quot;.&quot;int0&quot;) AS &quot;TEMP(Test)(56370746)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(56370746)(0)]</column>
+      </schema>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([date3])'>
+    <sql>
+      SELECT MAX(&quot;Calcs&quot;.&quot;date3&quot;) AS &quot;TEMP(Test)(277748206)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(277748206)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1999-08-20#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([num4])'>
+    <sql>
+      SELECT MAX(&quot;Calcs&quot;.&quot;num4&quot;) AS &quot;TEMP(Test)(4154938655)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4154938655)(0)]</column>
+      </schema>
+      <tuple>
+        <value>19.39</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([str2])'>
+    <sql>
+      SELECT MAX(&quot;Calcs&quot;.&quot;str2&quot;) AS &quot;TEMP(Test)(1812249092)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1812249092)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([int0], [int1])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN &quot;Calcs&quot;.&quot;int0&quot; IS NULL OR &quot;Calcs&quot;.&quot;int1&quot; IS NULL THEN NULL&#10;&#9;WHEN &quot;Calcs&quot;.&quot;int0&quot; &gt; &quot;Calcs&quot;.&quot;int1&quot; THEN &quot;Calcs&quot;.&quot;int0&quot;&#10;&#9;ELSE &quot;Calcs&quot;.&quot;int1&quot; END) AS &quot;TEMP(Test)(1523549003)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1523549003)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,2 @@
+LN([int2])
+ln(num0)

@@ -1,0 +1,45 @@
+//Need to expand each of these into multiple tests.
+IF TRUE AND TRUE THEN TRUE END
+CASE [int0] WHEN 1 THEN 'test1' WHEN 3 THEN 'test3' ELSE 'testelse' END
+IF [int0] = 1 THEN 'yes' ELSE 'no' END
+IF [int0] = 1 THEN 'yes' ELSEIF [int0] = 3 THEN 'yes3' ELSE 'no' END
+IFNULL([int0], 0)
+IIF([int0] > 3, 'yes', 'no')
+IIF([int0] > 3, 'yes', 'no', 'I dont know')
+ISNULL([int0])
+IF NOT FALSE THEN 'yes' END
+IF NOT [int0] = 1 THEN 'yes' ELSE 'no' END
+
+//From the if_calcs datasource.
+
+iif(num0>num1,num0,num1) 
+isnull(num4) 
+isnull(str2) 
+iif(str0>str1,str2,str3) 
+min(date0,date1) 
+iif(num0>num1,date0,date1,date2) 
+lower(str0) 
+iif(num0>num1,str2,str3,str0) 
+iif(num0>num1,date0,date1) 
+iif(num0>num1,num0,num1,num2) 
+min(lower(str0),str2) 
+IFNULL(date0, #4/12/2010#) 
+IFNULL(num4, -1) 
+IFNULL(str2, "i'm null") 
+isnull(date0) 
+
+//From ifcase_calcs.
+ (if num0>num1 then int(bool1) else int(bool2) end) == int(true)
+ if num0>num1 then num0 else num1 end
+ if num0>num1 then date0 else date1 end
+ if str0>str1 then str2 else str3 end
+ case int(num0>num1) when int(true) then num0 when int(false) then num1 else num2 end
+ case int(num0>num1) when int(true) then date0 when int(false) then date1 else date2 end
+ case int(num0>num1) when int(true) then str2 when int(false) then str3 else str0 end
+ case int(bool0) when int(true) then num0 when int(false) then num1 else num2 end
+ case int(bool0) when int(true) then date0 when int(false) then date1 else date2 end
+ case datepart('weekday',date1) when 7 then null when 1 then null else date1 end
+ case int(bool0) when int(true) then str2 when int(false) then str3 else str0 end
+if [str1] = "CLOCKS" then "*Anonymous*" elseif [str1] = "DVD" then "*Public*" else [str1] end
+
+

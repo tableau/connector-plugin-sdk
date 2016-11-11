@@ -1,0 +1,37 @@
+<results>
+  <test name='ENDSWITH(str1, &quot;s&quot;)'>
+    <sql>
+      SELECT (CASE WHEN ([Calcs].[str1] LIKE &apos;%&apos; + &apos;s&apos;) THEN 1 WHEN NOT ([Calcs].[str1] LIKE &apos;%&apos; + &apos;s&apos;) THEN 0 ELSE NULL END) AS [TEMP(Test)(1759936097)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE WHEN ([Calcs].[str1] LIKE &apos;%&apos; + &apos;s&apos;) THEN 1 WHEN NOT ([Calcs].[str1] LIKE &apos;%&apos; + &apos;s&apos;) THEN 0 ELSE NULL END)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1759936097)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ENDSWITH(str2, &quot;een&quot;)'>
+    <sql>
+      SELECT (CASE WHEN ([Calcs].[str2] LIKE &apos;%&apos; + &apos;een&apos;) THEN 1 WHEN NOT ([Calcs].[str2] LIKE &apos;%&apos; + &apos;een&apos;) THEN 0 ELSE NULL END) AS [TEMP(Test)(3179156403)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE WHEN ([Calcs].[str2] LIKE &apos;%&apos; + &apos;een&apos;) THEN 1 WHEN NOT ([Calcs].[str2] LIKE &apos;%&apos; + &apos;een&apos;) THEN 0 ELSE NULL END)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3179156403)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

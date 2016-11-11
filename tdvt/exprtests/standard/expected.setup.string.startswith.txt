@@ -1,0 +1,47 @@
+<results>
+  <test name='STARTSWITH(&quot;Data&quot;, &quot;D&quot;)'>
+    <sql>
+      SELECT TRUE AS &quot;TEMP(Test)(3252316215)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3252316215)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='STARTSWITH([str1], &quot;BI&quot; )'>
+    <sql>
+      SELECT (SUBSTR(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), 1, LENGTH(CAST(&apos;BI&apos; AS TEXT))) = CAST(&apos;BI&apos; AS TEXT)) AS &quot;TEMP(Test)(535799381)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(535799381)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='STARTSWITH([str1], [str2])'>
+    <sql>
+      SELECT (SUBSTR(CAST(&quot;Calcs&quot;.&quot;str1&quot; AS TEXT), 1, LENGTH(CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT))) = CAST(&quot;Calcs&quot;.&quot;str2&quot; AS TEXT)) AS &quot;TEMP(Test)(2377293421)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2377293421)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

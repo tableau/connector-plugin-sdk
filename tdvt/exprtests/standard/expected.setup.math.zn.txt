@@ -1,0 +1,36 @@
+<results>
+  <test name='ZN([int1])'>
+    <sql>
+      SELECT COALESCE(&quot;Calcs&quot;.&quot;int1&quot;, 0) AS &quot;TEMP(Test)(3976315675)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3976315675)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-6</value>
+      </tuple>
+      <tuple>
+        <value>-4</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

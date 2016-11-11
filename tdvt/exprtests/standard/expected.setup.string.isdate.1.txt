@@ -1,0 +1,28 @@
+<results>
+  <test name='ISDATE(&quot;2015-01-01&quot;)'>
+    <sql>
+      SELECT (CASE WHEN (1=1) THEN 1 WHEN NOT (1=1) THEN 0 ELSE NULL END) AS [TEMP(Test)(3095770696)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3095770696)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ISDATE(&quot;data&quot;)'>
+    <sql>
+      SELECT (CASE WHEN (1=0) THEN 1 WHEN NOT (1=0) THEN 0 ELSE NULL END) AS [TEMP(Test)(334867691)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(334867691)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

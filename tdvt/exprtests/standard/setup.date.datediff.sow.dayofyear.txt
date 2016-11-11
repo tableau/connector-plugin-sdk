@@ -1,0 +1,6 @@
+DATEDIFF('dayofyear', [date3], [date2], 'monday')
+DATEDIFF('dayofyear', [date3], [date2], 'sunday')
+
+DATEDIFF('dayofyear', DATETIME([date2]), [datetime0], 'monday')
+DATEDIFF('dayofyear', DATETIME([date2]), [datetime0], 'sunday')
+

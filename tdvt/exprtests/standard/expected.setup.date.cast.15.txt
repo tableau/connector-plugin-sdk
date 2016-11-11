@@ -1,0 +1,322 @@
+<results>
+  <test name='DATETIME([date2])'>
+    <sql>
+      SELECT CAST(&quot;CALCS&quot;.&quot;date2&quot; AS TIMESTAMP_NTZ) AS &quot;TEMP(Test)(1486024523)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      385.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1486024523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FLOAT([date2])'>
+    <sql>
+      SELECT ((EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;date2&quot;) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS &quot;TEMP(Test)(2671902822)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      547.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(2671902822)(0)]</column>
+      </schema>
+      <tuple>
+        <value>26490.0</value>
+      </tuple>
+      <tuple>
+        <value>27103.0</value>
+      </tuple>
+      <tuple>
+        <value>27150.0</value>
+      </tuple>
+      <tuple>
+        <value>28010.0</value>
+      </tuple>
+      <tuple>
+        <value>28162.0</value>
+      </tuple>
+      <tuple>
+        <value>28233.0</value>
+      </tuple>
+      <tuple>
+        <value>29426.0</value>
+      </tuple>
+      <tuple>
+        <value>29530.0</value>
+      </tuple>
+      <tuple>
+        <value>32145.0</value>
+      </tuple>
+      <tuple>
+        <value>34442.0</value>
+      </tuple>
+      <tuple>
+        <value>34852.0</value>
+      </tuple>
+      <tuple>
+        <value>34943.0</value>
+      </tuple>
+      <tuple>
+        <value>35578.0</value>
+      </tuple>
+      <tuple>
+        <value>35690.0</value>
+      </tuple>
+      <tuple>
+        <value>36017.0</value>
+      </tuple>
+      <tuple>
+        <value>36924.0</value>
+      </tuple>
+      <tuple>
+        <value>37371.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([date2]))'>
+    <sql>
+      SELECT TRIM(TO_CHAR(&quot;CALCS&quot;.&quot;date2&quot;,&apos;YYYY-MM-DD HH:MM:SS&apos;)) AS &quot;TEMP(Test)(3929621149)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      455.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972-07-12 00:07:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-03-17 00:03:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-05-03 00:05:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976-09-09 00:09:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-02-08 00:02:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-04-20 00:04:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-07-26 00:07:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-11-07 00:11:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988-01-05 00:01:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994-04-20 00:04:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-06-04 00:06:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-09-03 00:09:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-05-30 00:05:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-09-19 00:09:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998-08-12 00:08:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001-02-04 00:02:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002-04-27 00:04:00&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ROUND(FLOAT([datetime0]), 2)'>
+    <sql>
+      SELECT ROUND(((EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;datetime0&quot;) / ( 60 * 60 * 24)) + (365 * 70 + 17)),2) AS &quot;TEMP(Test)(102700322)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      496.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(102700322)(0)]</column>
+      </schema>
+      <tuple>
+        <value>38170.95</value>
+      </tuple>
+      <tuple>
+        <value>38171.55</value>
+      </tuple>
+      <tuple>
+        <value>38175.43</value>
+      </tuple>
+      <tuple>
+        <value>38178.73</value>
+      </tuple>
+      <tuple>
+        <value>38180.32</value>
+      </tuple>
+      <tuple>
+        <value>38180.34</value>
+      </tuple>
+      <tuple>
+        <value>38183.58</value>
+      </tuple>
+      <tuple>
+        <value>38185.93</value>
+      </tuple>
+      <tuple>
+        <value>38188.02</value>
+      </tuple>
+      <tuple>
+        <value>38189.88</value>
+      </tuple>
+      <tuple>
+        <value>38191.64</value>
+      </tuple>
+      <tuple>
+        <value>38192.52</value>
+      </tuple>
+      <tuple>
+        <value>38194.29</value>
+      </tuple>
+      <tuple>
+        <value>38194.52</value>
+      </tuple>
+      <tuple>
+        <value>38194.98</value>
+      </tuple>
+      <tuple>
+        <value>38197.5</value>
+      </tuple>
+      <tuple>
+        <value>38199.33</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([datetime0]))'>
+    <sql>
+      SELECT TRIM(TO_CHAR(&quot;CALCS&quot;.&quot;datetime0&quot;,&apos;YYYY-MM-DD HH:MM:SS&apos;)) AS &quot;TEMP(Test)(1103404331)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      469.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1103404331)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2004-07-04 22:07:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-05 13:07:20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-09 10:07:35&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-12 17:07:16&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 07:07:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 08:07:44&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-17 14:07:56&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-19 22:07:31&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-22 00:07:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-23 21:07:37&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-25 15:07:26&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-26 12:07:34&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 06:07:50&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 12:07:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 23:07:22&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-31 11:07:52&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-08-02 07:08:23&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

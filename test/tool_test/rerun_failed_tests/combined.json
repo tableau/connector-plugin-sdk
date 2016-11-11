@@ -1,0 +1,44 @@
+{
+    "actual_exp_paths_relative_to": "this", 
+    "successful_tests": [], 
+    "harness_name": "TDVT", 
+    "failed_tests": [
+        {
+            "case": ".sum", 
+            "class": "TDVT", 
+            "expected": "test\\tool_test\\exprtests\\expected.setup.sum.txt", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -e test\\tool_test\\exprtests\\setup.sum.txt-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "test\\tool_test\\exprtests\\setup.sum.txt", 
+            "test_type": "-e"
+        }, 
+        {
+            "case": ".max", 
+            "class": "TDVT", 
+            "expected": "test\\tool_test\\exprtests\\expected.setup.max.txt", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -e test\\tool_test\\exprtests\\setup.max.txt-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "test\\tool_test\\exprtests\\setup.max.txt", 
+            "test_type": "-e"
+        },
+        {
+            "actual": "test\\tool_test\\logical\\expected\\calcs\\actual.setup.xml", 
+            "case": ".setup.xml", 
+            "class": "TDVT", 
+            "expected": "", 
+            "failtype": "test_failure", 
+            "message": "Expected does not match any actual file.", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -q test\\tool_test\\logical\\setup\\calcs\\setup.sum.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "test\\tool_test\\logical\\setup\\calcs\\setup.sum.xml", 
+            "test_type": "-q"
+        }
+    ]
+}
+

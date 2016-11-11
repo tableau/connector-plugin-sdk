@@ -1,0 +1,36 @@
+<results>
+  <test name='left(str0,num4)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;num4&quot; &gt;= 0 THEN SUBSTR(CAST(&quot;Calcs&quot;.&quot;str0&quot; AS TEXT), 1, CAST(FLOOR(&quot;Calcs&quot;.&quot;num4&quot;) AS INTEGER)) ELSE NULL END) AS &quot;TEMP(Test)(1907571572)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1907571572)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE S&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUP&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TEC&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECH&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNO&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

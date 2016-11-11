@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.17_Nesting.test_lower.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT &quot;t4&quot;.&quot;Prod_Type1&quot; AS &quot;Prod_Type1&quot;,&#10;  &quot;t4&quot;.&quot;Ship_Mode&quot; AS &quot;Ship_Mode&quot;,&#10;  &quot;t8&quot;.&quot;X_measure__1&quot; AS &quot;TEMP_attr_LOD___Nesting___1__copy__qk__1075333431__0_&quot;,&#10;  &quot;t8&quot;.&quot;X_measure__3&quot; AS &quot;TEMP_attr_LOD___Nesting___1__copy__qk__260755027__0_&quot;,&#10;  &quot;t4&quot;.&quot;avg_Calculation_8601225013155991_ok&quot; AS &quot;avg_Calculation_8601225013155991_ok&quot;,&#10;  &quot;t8&quot;.&quot;X_measure__10&quot; AS &quot;sum_Calculation_9271225012544475_ok&quot;,&#10;  &quot;t8&quot;.&quot;X_measure__12&quot; AS &quot;sum_LOD___Nesting___2__copy__ok&quot;,&#10;  &quot;t10&quot;.&quot;X_measure__14&quot; AS &quot;sum_LOD___Nesting___3__copy__ok&quot;&#10;FROM (&#10;  SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;    &quot;Staples&quot;.&quot;Ship Mode&quot; AS &quot;Ship_Mode&quot;,&#10;    AVG((CASE WHEN &quot;t3&quot;.&quot;X_measure__7&quot; = 0 THEN NULL ELSE ((&quot;t1&quot;.&quot;X_measure__5&quot; + CAST(&quot;t2&quot;.&quot;X_measure__6&quot; AS FLOAT)) + &quot;Staples&quot;.&quot;Sales Total&quot;) / &quot;t3&quot;.&quot;X_measure__7&quot; END)) AS &quot;avg_Calculation_8601225013155991_ok&quot;&#10;  FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    INNER JOIN (&#10;    SELECT &quot;t0&quot;.&quot;Prod_Type1&quot; AS &quot;Prod_Type1&quot;,&#10;      AVG(&quot;t0&quot;.&quot;X_measure__4&quot;) AS &quot;X_measure__5&quot;&#10;    FROM (&#10;      SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;        &quot;Staples&quot;.&quot;Prod Type3&quot; AS &quot;Prod_Type3&quot;,&#10;        &quot;Staples&quot;.&quot;Prod Type2&quot; AS &quot;Prod_Type2&quot;,&#10;        SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__4&quot;&#10;      FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;      GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;,&#10;        &quot;Staples&quot;.&quot;Prod Type3&quot;,&#10;        &quot;Staples&quot;.&quot;Prod Type2&quot;&#10;    ) &quot;t0&quot;&#10;    GROUP BY &quot;t0&quot;.&quot;Prod_Type1&quot;&#10;  ) &quot;t1&quot; ON ((&quot;Staples&quot;.&quot;Prod Type1&quot; = &quot;t1&quot;.&quot;Prod_Type1&quot;) OR ((&quot;Staples&quot;.&quot;Prod Type1&quot; IS NULL) AND (&quot;t1&quot;.&quot;Prod_Type1&quot; IS NULL)))&#10;    INNER JOIN (&#10;    SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Ship Mode&quot; AS &quot;Ship_Mode&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__6&quot;&#10;    FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Ship Mode&quot;&#10;  ) &quot;t2&quot; ON (((&quot;Staples&quot;.&quot;Prod Type1&quot; = &quot;t2&quot;.&quot;Prod_Type1&quot;) OR ((&quot;Staples&quot;.&quot;Prod Type1&quot; IS NULL) AND (&quot;t2&quot;.&quot;Prod_Type1&quot; IS NULL))) AND ((&quot;Staples&quot;.&quot;Ship Mode&quot; = &quot;t2&quot;.&quot;Ship_Mode&quot;) OR ((&quot;Staples&quot;.&quot;Ship Mode&quot; IS NULL) AND (&quot;t2&quot;.&quot;Ship_Mode&quot; IS NULL))))&#10;    INNER JOIN (&#10;    SELECT &quot;Staples&quot;.&quot;Market Segment&quot; AS &quot;Market_Segment&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Product Base Margin&quot;) AS &quot;X_measure__7&quot;&#10;    FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    GROUP BY &quot;Staples&quot;.&quot;Market Segment&quot;&#10;  ) &quot;t3&quot; ON ((&quot;Staples&quot;.&quot;Market Segment&quot; = &quot;t3&quot;.&quot;Market_Segment&quot;) OR ((&quot;Staples&quot;.&quot;Market Segment&quot; IS NULL) AND (&quot;t3&quot;.&quot;Market_Segment&quot; IS NULL)))&#10;  GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;,&#10;    &quot;Staples&quot;.&quot;Ship Mode&quot;&#10;) &quot;t4&quot;&#10;  INNER JOIN (&#10;  SELECT &quot;t5&quot;.&quot;Prod_Type1&quot; AS &quot;Prod_Type1&quot;,&#10;    &quot;t5&quot;.&quot;Ship_Mode&quot; AS &quot;Ship_Mode&quot;,&#10;    AVG(&quot;t5&quot;.&quot;X_measure__0&quot;) AS &quot;X_measure__1&quot;,&#10;    AVG(&quot;t5&quot;.&quot;X_measure__2&quot;) AS &quot;X_measure__3&quot;,&#10;    SUM(CAST(&quot;t6&quot;.&quot;X_measure__9&quot; AS FLOAT)) AS &quot;X_measure__10&quot;,&#10;    SUM(CAST(&quot;t7&quot;.&quot;X_measure__11&quot; AS FLOAT)) AS &quot;X_measure__12&quot;&#10;  FROM (&#10;    SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Ship Mode&quot; AS &quot;Ship_Mode&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type3&quot; AS &quot;Prod_Type3&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type2&quot; AS &quot;Prod_Type2&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__0&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__2&quot;&#10;    FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Ship Mode&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type3&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type2&quot;&#10;  ) &quot;t5&quot;&#10;    INNER JOIN (&#10;    SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Ship Mode&quot; AS &quot;Ship_Mode&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__9&quot;&#10;    FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Ship Mode&quot;&#10;  ) &quot;t6&quot; ON (((&quot;t5&quot;.&quot;Prod_Type1&quot; = &quot;t6&quot;.&quot;Prod_Type1&quot;) OR ((&quot;t5&quot;.&quot;Prod_Type1&quot; IS NULL) AND (&quot;t6&quot;.&quot;Prod_Type1&quot; IS NULL))) AND ((&quot;t5&quot;.&quot;Ship_Mode&quot; = &quot;t6&quot;.&quot;Ship_Mode&quot;) OR ((&quot;t5&quot;.&quot;Ship_Mode&quot; IS NULL) AND (&quot;t6&quot;.&quot;Ship_Mode&quot; IS NULL))))&#10;    INNER JOIN (&#10;    SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__11&quot;&#10;    FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;&#10;  ) &quot;t7&quot; ON ((&quot;t5&quot;.&quot;Prod_Type1&quot; = &quot;t7&quot;.&quot;Prod_Type1&quot;) OR ((&quot;t5&quot;.&quot;Prod_Type1&quot; IS NULL) AND (&quot;t7&quot;.&quot;Prod_Type1&quot; IS NULL)))&#10;  GROUP BY &quot;t5&quot;.&quot;Prod_Type1&quot;,&#10;    &quot;t5&quot;.&quot;Ship_Mode&quot;&#10;) &quot;t8&quot; ON (((&quot;t4&quot;.&quot;Prod_Type1&quot; = &quot;t8&quot;.&quot;Prod_Type1&quot;) OR ((&quot;t4&quot;.&quot;Prod_Type1&quot; IS NULL) AND (&quot;t8&quot;.&quot;Prod_Type1&quot; IS NULL))) AND ((&quot;t4&quot;.&quot;Ship_Mode&quot; = &quot;t8&quot;.&quot;Ship_Mode&quot;) OR ((&quot;t4&quot;.&quot;Ship_Mode&quot; IS NULL) AND (&quot;t8&quot;.&quot;Ship_Mode&quot; IS NULL))))&#10;  INNER JOIN (&#10;  SELECT &quot;t9&quot;.&quot;Prod_Type1&quot; AS &quot;Prod_Type1&quot;,&#10;    AVG(&quot;t9&quot;.&quot;X_measure__13&quot;) AS &quot;X_measure__14&quot;&#10;  FROM (&#10;    SELECT &quot;Staples&quot;.&quot;Prod Type1&quot; AS &quot;Prod_Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type3&quot; AS &quot;Prod_Type3&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type2&quot; AS &quot;Prod_Type2&quot;,&#10;      SUM(&quot;Staples&quot;.&quot;Sales Total&quot;) AS &quot;X_measure__13&quot;&#10;    FROM &quot;test&quot;.&quot;Staples&quot; &quot;Staples&quot;&#10;    GROUP BY &quot;Staples&quot;.&quot;Prod Type1&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type3&quot;,&#10;      &quot;Staples&quot;.&quot;Prod Type2&quot;&#10;  ) &quot;t9&quot;&#10;  GROUP BY &quot;t9&quot;.&quot;Prod_Type1&quot;&#10;) &quot;t10&quot; ON ((&quot;t4&quot;.&quot;Prod_Type1&quot; = &quot;t10&quot;.&quot;Prod_Type1&quot;) OR ((&quot;t4&quot;.&quot;Prod_Type1&quot; IS NULL) AND (&quot;t10&quot;.&quot;Prod_Type1&quot; IS NULL)))
+    </sql>
+    <query-time>
+      475.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sybaseiq].[Prod Type1]</column>
+        <column>[Staples.lod.sybaseiq].[Ship Mode]</column>
+        <column>[Staples.lod.sybaseiq].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(1075333431)(0)]</column>
+        <column>[Staples.lod.sybaseiq].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(260755027)(0)]</column>
+        <column>[Staples.lod.sybaseiq].[avg:Calculation_8601225013155991:ok]</column>
+        <column>[Staples.lod.sybaseiq].[sum:Calculation_9271225012544475:ok]</column>
+        <column>[Staples.lod.sybaseiq].[sum:LOD - Nesting - 2 (copy):ok]</column>
+        <column>[Staples.lod.sybaseiq].[sum:LOD - Nesting - 3 (copy):ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>4002620.2</value>
+        <value>4002620.2</value>
+        <value>4271.0758</value>
+        <value>1.9612839e+08</value>
+        <value>2.3806362e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>76460.766</value>
+        <value>76460.766</value>
+        <value>443.56199</value>
+        <value>9251752.8</value>
+        <value>3.7409997e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>468152.41</value>
+        <value>468152.41</value>
+        <value>1046.4216</value>
+        <value>56646442.0</value>
+        <value>3.7409997e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>819224.44</value>
+        <value>819224.44</value>
+        <value>435.20843</value>
+        <value>7373019.8</value>
+        <value>72044220.0</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>83280.028</value>
+        <value>83280.028</value>
+        <value>501.43046</value>
+        <value>1.0201804e+08</value>
+        <value>8.405159e+08</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>532636.16</value>
+        <value>532636.16</value>
+        <value>2729.3706</value>
+        <value>6.5247931e+08</value>
+        <value>8.405159e+08</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>6038779.5</value>
+        <value>6038779.5</value>
+        <value>2386.7716</value>
+        <value>24155118.0</value>
+        <value>81328224.0</value>
+        <value>4518234.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>445944.71</value>
+        <value>445944.71</value>
+        <value>1143.9339</value>
+        <value>28540462.0</value>
+        <value>3.253129e+08</value>
+        <value>4518234.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>3127374.3</value>
+        <value>3127374.3</value>
+        <value>4182.9543</value>
+        <value>2.0015195e+08</value>
+        <value>3.253129e+08</value>
+        <value>4518234.6</value>
+      </tuple>
+    </table>
+  </test>
+</results>

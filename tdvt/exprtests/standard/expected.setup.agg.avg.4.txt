@@ -1,0 +1,34 @@
+<results>
+  <test name='AVG([int0])'>
+    <sql>
+      SELECT AVG(&quot;CALCS&quot;.&quot;int0&quot;) AS &quot;TEMP(Test)(3952218057)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      312.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(3952218057)(0)]</column>
+      </schema>
+      <tuple>
+        <value>6.181</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='AVG([num4])'>
+    <sql>
+      SELECT AVG(&quot;CALCS&quot;.&quot;num4&quot;) AS &quot;TEMP(Test)(1371989636)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      303.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1371989636)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2.0016667</value>
+      </tuple>
+    </table>
+  </test>
+</results>

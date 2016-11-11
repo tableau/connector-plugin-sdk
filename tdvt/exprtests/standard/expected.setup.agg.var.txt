@@ -1,0 +1,28 @@
+<results>
+  <test name='VAR([num4])'>
+    <sql>
+      SELECT VARIANCE(&quot;Calcs&quot;.&quot;num4&quot;) AS &quot;TEMP(Test)(1358865)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1358865)(0)]</column>
+      </schema>
+      <tuple>
+        <value>113.51803</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='VARP([num4])'>
+    <sql>
+      SELECT (CASE WHEN COUNT(&quot;Calcs&quot;.&quot;num4&quot;) = 1 THEN 0.0 WHEN COUNT(&quot;Calcs&quot;.&quot;num4&quot;) &gt; 0 THEN POW(STDDEV(&quot;Calcs&quot;.&quot;num4&quot;) * SQRT(COUNT(&quot;Calcs&quot;.&quot;num4&quot;) - 1) / SQRT(COUNT(&quot;Calcs&quot;.&quot;num4&quot;)), 2) ELSE NULL END) AS &quot;TEMP(Test)(2532468070)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2532468070)(0)]</column>
+      </schema>
+      <tuple>
+        <value>104.0582</value>
+      </tuple>
+    </table>
+  </test>
+</results>

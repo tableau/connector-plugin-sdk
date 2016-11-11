@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.5.LOD Set.dbo.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT [t0].[Calculation_4190203111004094] AS [Calculation_4190203111004094],&#10;  [t0].[io:Set 1:nk] AS [io:Set 1:nk]&#10;FROM (&#10;  SELECT [Staples].[Market Segment] AS [Market Segment],&#10;    SUM(CAST(([Staples].[Item Count]) as BIGINT)) AS [__measure__0],&#10;    SUM(CAST(([Staples].[Item Count]) as BIGINT)) AS [Calculation_4190203111004094],&#10;    (CASE WHEN (1=0) THEN 1 WHEN NOT (1=0) THEN 0 ELSE NULL END) AS [io:Set 1:nk]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Market Segment]&#10;) [t0]&#10;GROUP BY [t0].[Calculation_4190203111004094],&#10;  [t0].[io:Set 1:nk]
+    </sql>
+    <query-time>
+      256.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Calculation_4190203111004094]</column>
+        <column>[Staples.lod.sqlserver].[io:Set 1:nk]</column>
+      </schema>
+      <tuple>
+        <value>10547</value>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>10807</value>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>13674</value>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>19832</value>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

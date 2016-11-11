@@ -1,0 +1,4 @@
+DATEDIFF('weekday', [date3], [date2])
+
+DATEDIFF('weekday', DATETIME([date2]), [datetime0])
+

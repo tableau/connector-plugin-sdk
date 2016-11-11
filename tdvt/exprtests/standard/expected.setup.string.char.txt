@@ -1,0 +1,15 @@
+<results>
+  <test name='CHAR(65)'>
+    <sql>
+      SELECT (CASE WHEN (65 &gt;= 0) AND (65 &lt; 256) THEN CHR(CAST(FLOOR(65) AS INTEGER)) ELSE NULL END) AS &quot;TEMP(Test)(3578809945)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3578809945)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;A&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

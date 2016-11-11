@@ -1,0 +1,6 @@
+DATEDIFF('quarter', [date3], [date2], 'monday')
+DATEDIFF('quarter', [date3], [date2], 'sunday')
+
+DATEDIFF('quarter', DATETIME([date2]), [datetime0], 'monday')
+DATEDIFF('quarter', DATETIME([date2]), [datetime0], 'sunday')
+

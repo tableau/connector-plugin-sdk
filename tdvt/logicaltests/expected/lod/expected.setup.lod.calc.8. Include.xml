@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.8. Include.dbo.xml'>
+    <sql>
+      &#10;&#10;--&#10;&#10;SELECT [t0].[Market Segment] AS [Market Segment],&#10;  [t2].[__measure__1] AS [sum:Calculation_6390203110846546:ok],&#10;  [t0].[sum:Sales Total:ok] AS [sum:Sales Total:ok]&#10;FROM (&#10;  SELECT [Staples].[Market Segment] AS [Market Segment],&#10;    SUM([Staples].[Sales Total]) AS [sum:Sales Total:ok]&#10;  FROM [dbo].[Staples] [Staples]&#10;  GROUP BY [Staples].[Market Segment]&#10;) [t0]&#10;  INNER JOIN (&#10;  SELECT [t1].[Market Segment] AS [Market Segment],&#10;    SUM([t1].[__measure__0]) AS [__measure__1]&#10;  FROM (&#10;    SELECT [Staples].[Market Segment] AS [Market Segment],&#10;      [Staples].[Prod Type1] AS [Prod Type1],&#10;      SUM([Staples].[Sales Total]) AS [__measure__0]&#10;    FROM [dbo].[Staples] [Staples]&#10;    GROUP BY [Staples].[Market Segment],&#10;      [Staples].[Prod Type1]&#10;  ) [t1]&#10;  GROUP BY [t1].[Market Segment]&#10;) [t2] ON ([t0].[Market Segment] = [t2].[Market Segment])
+    </sql>
+    <query-time>
+      392.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Market Segment]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_6390203110846546:ok]</column>
+        <column>[Staples.lod.sqlserver].[sum:Sales Total:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>19889172.0</value>
+        <value>19889172.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>35593890.0</value>
+        <value>35593890.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>24513651.0</value>
+        <value>24513651.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>18691224.0</value>
+        <value>18691224.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

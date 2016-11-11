@@ -1,0 +1,4 @@
+DATEDIFF('week', [date3], [date2])
+
+DATEDIFF('week', DATETIME([date2]), [datetime0])
+

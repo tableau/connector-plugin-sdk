@@ -1,0 +1,3 @@
+DATEADD('year', 1, [date2])
+
+DATEADD('year', 1, [datetime0])

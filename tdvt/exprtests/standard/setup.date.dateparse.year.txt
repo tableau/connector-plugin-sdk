@@ -1,0 +1,3 @@
+DATEPARSE('y-MM-dd', '1234-06-01')
+DATEPARSE('yy-MM-dd', '12-06-01')
+DATEPARSE('yyyy-MM-dd', '1234-06-01')

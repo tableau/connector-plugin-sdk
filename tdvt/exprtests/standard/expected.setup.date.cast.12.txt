@@ -1,0 +1,322 @@
+<results>
+  <test name='DATETIME([date2])'>
+    <sql>
+      SELECT CAST(`testv1_Calcs`.`date2` AS TIMESTAMP) AS `TEMP(Test)(1486024523)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(`testv1_Calcs`.`date2` AS TIMESTAMP)
+    </sql>
+    <query-time>
+      1587.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1486024523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FLOAT([date2])'>
+    <sql>
+      SELECT CAST(`testv1_Calcs`.`date2` AS DOUBLE) AS `TEMP(Test)(2671902822)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(`testv1_Calcs`.`date2` AS DOUBLE)
+    </sql>
+    <query-time>
+      1988.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(2671902822)(0)]</column>
+      </schema>
+      <tuple>
+        <value>79772400.0</value>
+      </tuple>
+      <tuple>
+        <value>1.327356e+08</value>
+      </tuple>
+      <tuple>
+        <value>1.367964e+08</value>
+      </tuple>
+      <tuple>
+        <value>2.111004e+08</value>
+      </tuple>
+      <tuple>
+        <value>2.242368e+08</value>
+      </tuple>
+      <tuple>
+        <value>2.303712e+08</value>
+      </tuple>
+      <tuple>
+        <value>3.334428e+08</value>
+      </tuple>
+      <tuple>
+        <value>3.42432e+08</value>
+      </tuple>
+      <tuple>
+        <value>5.68368e+08</value>
+      </tuple>
+      <tuple>
+        <value>7.668252e+08</value>
+      </tuple>
+      <tuple>
+        <value>8.022492e+08</value>
+      </tuple>
+      <tuple>
+        <value>8.101116e+08</value>
+      </tuple>
+      <tuple>
+        <value>8.649756e+08</value>
+      </tuple>
+      <tuple>
+        <value>8.746524e+08</value>
+      </tuple>
+      <tuple>
+        <value>9.029052e+08</value>
+      </tuple>
+      <tuple>
+        <value>9.812736e+08</value>
+      </tuple>
+      <tuple>
+        <value>1.0198908e+09</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([date2]))'>
+    <sql>
+      SELECT TRIM(CAST(`testv1_Calcs`.`date2` AS STRING)) AS `TEMP(Test)(3929621149)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY TRIM(CAST(`testv1_Calcs`.`date2` AS STRING))
+    </sql>
+    <query-time>
+      760.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972-07-12 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-03-17 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-05-03 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976-09-09 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-02-08 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-04-20 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-07-26 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-11-07 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988-01-05 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994-04-20 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-06-04 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-09-03 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-05-30 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-09-19 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998-08-12 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001-02-04 00:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002-04-27 00:00:00&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ROUND(FLOAT([datetime0]), 2)'>
+    <sql>
+      SELECT ROUND(CAST(`testv1_Calcs`.`datetime0` AS DOUBLE),2) AS `TEMP(Test)(102700322)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY ROUND(CAST(`testv1_Calcs`.`datetime0` AS DOUBLE),2)
+    </sql>
+    <query-time>
+      466.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(102700322)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1.0890066e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0890585e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0893935e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0896786e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0898162e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0898182e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0900981e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0903009e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0904814e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0906424e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0907941e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0908702e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0910229e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0910433e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0910826e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0913003e+09</value>
+      </tuple>
+      <tuple>
+        <value>1.0914588e+09</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([datetime0]))'>
+    <sql>
+      SELECT TRIM(CAST(`testv1_Calcs`.`datetime0` AS STRING)) AS `TEMP(Test)(1103404331)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY TRIM(CAST(`testv1_Calcs`.`datetime0` AS STRING))
+    </sql>
+    <query-time>
+      549.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1103404331)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2004-07-04 22:49:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-05 13:14:20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-09 10:17:35&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-12 17:30:16&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 07:43:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 08:16:44&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-17 14:01:56&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-19 22:21:31&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-22 00:30:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-23 21:13:37&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-25 15:22:26&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-26 12:30:34&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 06:54:50&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 12:34:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 23:30:22&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-31 11:57:52&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-08-02 07:59:23&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

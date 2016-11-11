@@ -1,0 +1,298 @@
+<results>
+  <test name='DATETIME([date2])'>
+    <sql>
+      SELECT TO_TIMESTAMP(&quot;Calcs&quot;.&quot;date2&quot;) AS &quot;TEMP_Test__BEIGACEFCD__A_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(1486024523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FLOAT([date2])'>
+    <sql>
+      SELECT CAST((&quot;Calcs&quot;.&quot;date2&quot; - {d &apos;1900-01-01&apos;}) AS INTEGER) AS &quot;TEMP_Test__CGHBJACICC__A_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(2671902822)(0)]</column>
+      </schema>
+      <tuple>
+        <value>26490.0</value>
+      </tuple>
+      <tuple>
+        <value>27103.0</value>
+      </tuple>
+      <tuple>
+        <value>27150.0</value>
+      </tuple>
+      <tuple>
+        <value>28010.0</value>
+      </tuple>
+      <tuple>
+        <value>28162.0</value>
+      </tuple>
+      <tuple>
+        <value>28233.0</value>
+      </tuple>
+      <tuple>
+        <value>29426.0</value>
+      </tuple>
+      <tuple>
+        <value>29530.0</value>
+      </tuple>
+      <tuple>
+        <value>32145.0</value>
+      </tuple>
+      <tuple>
+        <value>34442.0</value>
+      </tuple>
+      <tuple>
+        <value>34852.0</value>
+      </tuple>
+      <tuple>
+        <value>34943.0</value>
+      </tuple>
+      <tuple>
+        <value>35578.0</value>
+      </tuple>
+      <tuple>
+        <value>35690.0</value>
+      </tuple>
+      <tuple>
+        <value>36017.0</value>
+      </tuple>
+      <tuple>
+        <value>36924.0</value>
+      </tuple>
+      <tuple>
+        <value>37371.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([date2]))'>
+    <sql>
+      SELECT TRIM(TO_CHAR(&quot;Calcs&quot;.&quot;date2&quot;, &apos;Mon DD YYYY&apos;)) AS &quot;TEMP_Test__DJCJGCBBEJ__A_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Apr 20 1977&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Apr 20 1994&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Apr 27 2002&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Aug 12 1998&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb 04 2001&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb 08 1977&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jan 05 1988&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 12 1972&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 26 1980&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jun 04 1995&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mar 17 1974&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May 03 1974&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May 30 1997&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nov 07 1980&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 03 1995&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 09 1976&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 19 1997&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ROUND(FLOAT([datetime0]), 2)'>
+    <sql>
+      SELECT {fn ROUND(TO_NUMBER(TO_CHAR(&quot;Calcs&quot;.&quot;datetime0&quot;, &apos;J&apos;)) - 2415021.0,2)} AS &quot;TEMP_Test__BACHAADCC__A_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(102700322)(0)]</column>
+      </schema>
+      <tuple>
+        <value>38170.0</value>
+      </tuple>
+      <tuple>
+        <value>38171.0</value>
+      </tuple>
+      <tuple>
+        <value>38175.0</value>
+      </tuple>
+      <tuple>
+        <value>38178.0</value>
+      </tuple>
+      <tuple>
+        <value>38180.0</value>
+      </tuple>
+      <tuple>
+        <value>38183.0</value>
+      </tuple>
+      <tuple>
+        <value>38185.0</value>
+      </tuple>
+      <tuple>
+        <value>38188.0</value>
+      </tuple>
+      <tuple>
+        <value>38189.0</value>
+      </tuple>
+      <tuple>
+        <value>38191.0</value>
+      </tuple>
+      <tuple>
+        <value>38192.0</value>
+      </tuple>
+      <tuple>
+        <value>38194.0</value>
+      </tuple>
+      <tuple>
+        <value>38197.0</value>
+      </tuple>
+      <tuple>
+        <value>38199.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(STR([datetime0]))'>
+    <sql>
+      SELECT TRIM(TO_CHAR(&quot;Calcs&quot;.&quot;datetime0&quot;, &apos;Mon DD YYYY HH24:MI:SS&apos;)) AS &quot;TEMP_Test__BBADEAEDDB__A_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(1103404331)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Aug 02 2004 07:59:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 04 2004 22:49:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 05 2004 13:14:20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 09 2004 10:17:35&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 12 2004 17:30:16&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 14 2004 07:43:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 14 2004 08:16:44&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 17 2004 14:01:56&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 19 2004 22:21:31&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 22 2004 00:30:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 23 2004 21:13:37&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 25 2004 15:22:26&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 26 2004 12:30:34&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 28 2004 06:54:50&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 28 2004 12:34:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 28 2004 23:30:22&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 31 2004 11:57:52&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

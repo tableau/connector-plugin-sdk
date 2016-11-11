@@ -1,0 +1,72 @@
+<results>
+  <test name='DATENAME(&apos;quarter&apos;, [date2], &apos;monday&apos;)'>
+    <sql>
+      SELECT CHAR(QUARTER(&quot;Calcs&quot;.&quot;date2&quot;)) AS &quot;TEMP(Test)(2643375604)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CHAR(QUARTER(&quot;Calcs&quot;.&quot;date2&quot;))
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(2643375604)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, [date2], &apos;sunday&apos;)'>
+    <sql>
+      SELECT CHAR(QUARTER(&quot;Calcs&quot;.&quot;date2&quot;)) AS &quot;TEMP(Test)(2986242609)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CHAR(QUARTER(&quot;Calcs&quot;.&quot;date2&quot;))
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(2986242609)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, [datetime0], &apos;monday&apos;)'>
+    <sql>
+      SELECT CHAR(QUARTER(&quot;Calcs&quot;.&quot;datetime0&quot;)) AS &quot;TEMP(Test)(1608337423)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CHAR(QUARTER(&quot;Calcs&quot;.&quot;datetime0&quot;))
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(1608337423)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;3          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, [datetime0], &apos;sunday&apos;)'>
+    <sql>
+      SELECT CHAR(QUARTER(&quot;Calcs&quot;.&quot;datetime0&quot;)) AS &quot;TEMP(Test)(925465559)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CHAR(QUARTER(&quot;Calcs&quot;.&quot;datetime0&quot;))
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(925465559)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;3          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

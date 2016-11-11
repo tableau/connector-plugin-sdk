@@ -1,0 +1,28 @@
+<results>
+  <test name='SUM([int0])'>
+    <sql>
+      SELECT SUM(&quot;Calcs&quot;.&quot;int0&quot;) AS &quot;TEMP(Test)(645427419)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(645427419)(0)]</column>
+      </schema>
+      <tuple>
+        <value>68</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([num4])'>
+    <sql>
+      SELECT SUM(&quot;Calcs&quot;.&quot;num4&quot;) AS &quot;TEMP(Test)(1450575838)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1450575838)(0)]</column>
+      </schema>
+      <tuple>
+        <value>24.02</value>
+      </tuple>
+    </table>
+  </test>
+</results>

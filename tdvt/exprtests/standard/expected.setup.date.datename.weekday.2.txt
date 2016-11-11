@@ -1,0 +1,58 @@
+<results>
+  <test name='DATENAME(&apos;weekday&apos;, [date2])'>
+    <sql>
+      SELECT TO_CHAR(DAYOFWEEK(&quot;Calcs&quot;.&quot;date2&quot;)) AS &quot;TEMP_Test__4107590482__0_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY TO_CHAR(DAYOFWEEK(&quot;Calcs&quot;.&quot;date2&quot;))
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.hana].[TEMP(Test)(4107590482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;5&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0])'>
+    <sql>
+      SELECT TO_CHAR(DAYOFWEEK(&quot;Calcs&quot;.&quot;datetime0&quot;)) AS &quot;TEMP_Test__766794695__0_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY TO_CHAR(DAYOFWEEK(&quot;Calcs&quot;.&quot;datetime0&quot;))
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.hana].[TEMP(Test)(766794695)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;5&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

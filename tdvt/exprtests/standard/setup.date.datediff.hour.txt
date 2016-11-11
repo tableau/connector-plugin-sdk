@@ -1,0 +1,2 @@
+DATEDIFF('hour', DATETIME([date2]), [datetime0])
+

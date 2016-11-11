@@ -1,0 +1,67 @@
+<results>
+  <test name='COUNTD([int0])'>
+    <sql>
+      SELECT COUNT(DISTINCT &quot;Calcs&quot;.&quot;int0&quot;) AS &quot;TEMP(Test)(1467453495)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1467453495)(0)]</column>
+      </schema>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([bool0])'>
+    <sql>
+      SELECT COUNT(DISTINCT &quot;Calcs&quot;.&quot;bool0&quot;) AS &quot;TEMP(Test)(1408008556)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1408008556)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([date3])'>
+    <sql>
+      SELECT COUNT(DISTINCT &quot;Calcs&quot;.&quot;date3&quot;) AS &quot;TEMP(Test)(175600811)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(175600811)(0)]</column>
+      </schema>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([num4])'>
+    <sql>
+      SELECT COUNT(DISTINCT &quot;Calcs&quot;.&quot;num4&quot;) AS &quot;TEMP(Test)(41874160)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(41874160)(0)]</column>
+      </schema>
+      <tuple>
+        <value>12</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([str2])'>
+    <sql>
+      SELECT COUNT(DISTINCT &quot;Calcs&quot;.&quot;str2&quot;) AS &quot;TEMP(Test)(2954817995)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2954817995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>13</value>
+      </tuple>
+    </table>
+  </test>
+</results>
