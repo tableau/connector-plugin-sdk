@@ -11,12 +11,14 @@ import argparse
 import subprocess
 import shutil
 import threading
+import queue
 import time
 import xml.etree.ElementTree
 import glob
 import json
 import csv
 import configparser
+import logging
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .resources import *
@@ -29,7 +31,6 @@ TDS_CONFIG_ARG = '--tds'
 TDS_CONFIG_ARG_SHORT = '-d'
 ALWAYS_GENERATE_EXPECTED = False
 VERBOSE = False
-MAX_SUBPROCESSES = 12
 ABORT_TEST_RUN = False
 
 class TestCaseResult(object):
@@ -91,86 +92,6 @@ class TestCaseResult(object):
     def __json__(self):
         return {'tested_sql' : self.tested_sql, 'tested_tuples' : self.tested_tuples, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
 
-class TdvtTestConfig(object):
-    """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, tested_sql = False, tested_tuples = False, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 4):
-        self.tested_sql = tested_sql
-        self.tested_tuples = tested_tuples
-        self.expected_dir = expected_dir
-        self.output_dir = output_dir
-        self.logical = logical
-        self.config_file = config
-        self.suite_name = suite_name
-        self.invocation_name = ''
-        self.invocation_extra_args = ''
-        self.d_override = override
-        self.verbose = verbose
-        self.tds = tds
-        self.noheader = False
-        self.thread_count = thread_count
-        if from_args:
-            self.init_from_args(from_args)
-
-    def init_from_args(self, args):
-        self.tested_sql = True if args.compare_sql else False
-        self.tested_tuples = False if args.nocompare_tuples else True
-        self.expected_dir = args.expected_dir if args.expected_dir else ''
-        self.logical = True if args.logical_query_config else False
-        self.suite_name = args.suite if args.suite else ''
-        self.output_dir = args.output_dir if args.output_dir else ''
-        self.d_override = args.d_override if args.d_override else ''
-        self.invocation_name = ''
-        self.invocation_extra_args = ''
-        self.noheader = True if args.noheader else False
-        self.thread_count = args.thread_count if args.thread_count else 4
-        if args.expression_config:
-            self.config_file = args.expression_config
-        elif args.logical_query_config:
-            self.config_file = args.logical_query_config
-
-    def __str__(self):
-        return "[{}]: suite [{}]: tested sql [{}]: tested tuples [{}]: expected dir [{}]: output dir [{}]: logical [{}]: invocation args [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]".format(self.invocation_name, self.suite_name, self.tested_sql, self.tested_tuples, self.expected_dir, self.output_dir, self.logical, self.invocation_extra_args, self.config_file, self.d_override, self.tds, self.thread_count)
-
-    def set_invocation(self, args):
-        """Strip out the known arguments and just save the 'extra' ones. This is used for logging/rerunning failed tests from the logs.
-            The 'main' arguments like -tds and -e or -q are removed since they are captured elsewhere. The secondary arguments like --compare-sql
-            are captured here and logged in the json file. This way tdvt -f will rerun those failed tests exactly as they were run orginally.
-        """
-        possible_config_args = EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT, LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT
-        possible_tds_args = TDS_CONFIG_ARG, TDS_CONFIG_ARG_SHORT
-        prog_name = args[0]
-        config_index = 0
-        #Go through all the valid config args and see if one is set.
-        for config_arg in possible_config_args:
-            try:
-                config_index = args.index(config_arg)
-            except:
-                pass
-
-        if config_index > 0:
-            #Skip this and the next one (ie the value) since they will be replaced later by an individual file invocation.
-            del args[config_index]
-            del args[config_index]
-        
-        tds_index = 0
-        for tds_arg in possible_tds_args:
-            try:
-                tds_index = args.index(tds_arg)
-            except:
-                pass
-
-        if tds_index > 0:
-            #Skip this and the next one since they will be replaced later by an individual file invocation.
-            del args[tds_index]
-            del args[tds_index]
-
-        extra_args = ''
-        for arg in args[1:]:
-            extra_args += ' ' + arg
-
-        self.invocation_name = prog_name
-        self.invocation_extra_args = extra_args 
-    
 class TestOutput(object):
     """A collection of individual test case runs.
         
@@ -237,28 +158,82 @@ class TestOutput(object):
     def __json__(self):
         return {'test_cases' : self.test_case_map}
 
-class TestExecution(object):
-    """Test execution information."""
-    def __init__(self, repro_cmdline = '', tds = '', test_file = '', test_type = '', suite = '', other_args = ''):
-        #A command line you could run to repro this test.
-        self.cmdline = repro_cmdline
+class TdvtTestConfig(object):
+    """Track how items were tested. This captures how tdvt was invoked."""
+    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 12, from_json = None):
+        self.tested_sql = tested_sql
+        self.tested_tuples = tested_tuples
+        self.expected_dir = expected_dir
+        self.output_dir = output_dir
+        self.logical = logical
+        self.config_file = config
+        self.suite_name = suite_name
+        self.d_override = override
+        self.verbose = verbose
         self.tds = tds
-        self.test_file = test_file
-        self.test_type = test_type
-        self.suite_name = suite
-        self.other_args = other_args
+        self.command_line = ''
+        self.noheader = False
+        self.thread_count = thread_count
+        if from_args:
+            self.init_from_args(from_args)
+        if from_json:
+            self.init_from_json(from_json)
+
+    def init_from_args(self, args):
+        if args.compare_sql: 
+            self.tested_sql = args.compare_sql 
+        if args.nocompare_tuples:
+            self.tested_tuples = False
+        if args.expected_dir:
+            self.expected_dir = args.expected_dir
+
+        if args.thread_count_tdvt:
+            self.thread_count = args.thread_count_tdvt if args.thread_count else 12
+
+    def init_from_json(self, json):
+         self.tested_sql = json['tested_sql']
+         self.tested_tuples = json['tested_tuples']
+         self.expected_dir = json['expected_dir']
+         self.output_dir = json['output_dir']
+         self.logical = json['logical']
+         self.config_file = json['config_file']
+         self.suite_name = json['suite_name']
+         self.d_override = json['d_override']
+         self.verbose = json['verbose']
+         self.tds = json['tds']
+         self.noheader = json['noheader']
+         self.thread_count = json['thread_count']
+
+    def __str__(self):
+        return "suite [{}]: tested sql [{}]: tested tuples [{}]: expected dir [{}]: output dir [{}]: logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]".format(self.suite_name, self.tested_sql, self.tested_tuples, self.expected_dir, self.output_dir, self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
+
+    def __json__(self):
+        return {
+        'tested_sql' : self.tested_sql, 
+        'tested_tuples' : self.tested_tuples, 
+        'expected_dir' : self.expected_dir, 
+        'output_dir' : self.output_dir, 
+        'logical' : self.logical, 
+        'config_file' : self.config_file, 
+        'suite_name' : self.suite_name, 
+        'd_override' : self.d_override, 
+        'verbose' : self.verbose, 
+        'tds' : self.tds, 
+        'noheader' : self.noheader, 
+        'thread_count' : self.thread_count }
 
 class TestResult(object):
     """Information about a test suite run."""
-    def __init__(self, base_name = '', test_env = TestExecution()):
+    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = ''):
         self.name = base_name
-        self.test_execution = test_env
+        self.test_config = test_config
         self.matched_expected_version = 0
         self.test_failed_to_run = False
         self.test_timed_out = False
         self.actual_results = None
         self.diff_count = 0
         self.best_matching_expected_results = None
+        self.test_file = test_file
         self.path_to_expected = ''
         self.path_to_actual = ''
 
@@ -329,17 +304,18 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         if type(obj) is not TestResult:
             return "failed" + str(obj) 
 
-        suite_name = '' if not obj.test_execution.suite_name else obj.test_execution.suite_name
+        suite_name = '' if not obj.test_config.suite_name else obj.test_config.suite_name
         case_name = '' if not obj.get_name() else obj.get_name()
+        test_type = '-q' if obj.test_config.logical else '-e' 
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
                 #This includes suite to differentiate the results for Narc.py.
                 'case' : suite_name + '.' + case_name, 
-                'test_file' : obj.test_execution.test_file, 
-                'test_type' : obj.test_execution.test_type, 
-                'tds' : obj.test_execution.tds, 
-                'other_args' : obj.test_execution.other_args, 
-                'repro' : obj.test_execution.cmdline,
+                'test_file' : obj.test_file, 
+                'test_type' : test_type, 
+                'test_config' : obj.test_config.__json__(),
+                'tds' : obj.test_config.tds, 
+                'repro' : obj.test_config.command_line,
                 'expected' : obj.path_to_expected,
                }
         if obj.all_passed():
@@ -351,143 +327,117 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         json_output['actual'] = obj.path_to_actual
         return json_output
 
-class test_thread(threading.Thread):
-    def __init__(self, thread_num, tds_file, test_file, test_config, thread_lock, all_test_results):
-        threading.Thread.__init__(self)
-        self.tds_file = tds_file
-        self.test_file = test_file
+    
+class QueueWork(object):
+    def __init__(self, test_config, test_file):
         self.test_config = test_config
-        self.thread_lock = thread_lock
-        self.all_test_results = all_test_results
-        self.logical = test_config.logical
-        self.name = "thread " + str(thread_num)
-        self.daemon = True
+        self.test_file = test_file
+        self.results = {}
         self.timeout_seconds = 1200
-
-        self.start()
-
-    def run(self):
+        
+def do_test_queue_work(i, q):
+    while True:
+        work = q.get()
+        
         global ABORT_TEST_RUN
-        self.thread_lock.acquire()
 
-        LOG.log("\nRunning test:" + self.test_file)
-        if not os.path.isfile(self.test_file):
-            LOG.log("Error opening file:" + self.test_file)
-            self.thread_lock.release()
-            return
+        logging.debug("\nRunning test:" + work.test_file)
+        if not os.path.isfile(work.test_file):
+            logging.debug("Error opening file:" + work.test_file)
+            q.task_done()
+            continue
 
-        cli_arg = "-q" if self.logical else "-e"
+        cli_arg = "-q" if work.test_config.logical else "-e"
 
         cmdline = [TAB_CLI_EXE]
-        cmdline_base = [cli_arg, self.test_file]
+        cmdline_base = [cli_arg, work.test_file]
         cmdline.extend(cmdline_base)
-        tds_arg = ["-d", self.tds_file]
+        tds_arg = ["-d", work.test_config.tds]
         cmdline.extend(tds_arg)
         cmdline.extend(["--combined"])
 
-        expected_output_dir = self.test_config.output_dir
+        expected_output_dir = work.test_config.output_dir
 
-        if self.logical:
-            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(self.test_file, self.test_config.output_dir)
+        if work.test_config.logical:
+            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
             expected_output_dir = expected_output_dir if expected_output_dir else expected_dir
 
         if expected_output_dir:
             if not os.path.isdir(expected_output_dir):
-                LOG.log("Making dir: {}".format(expected_output_dir))
-                os.makedirs(expected_output_dir)
+                logging.debug("Making dir: {}".format(expected_output_dir))
+                try:
+                    os.makedirs(expected_output_dir)
+                except FileExistsError:
+                    pass
             cmdline.extend(["--output-dir", expected_output_dir])
 
-        if self.test_config.d_override:
-            cmdline.extend(["-D" + self.test_config.d_override])
+        if work.test_config.d_override:
+            cmdline.extend(["-D" + work.test_config.d_override])
 
-        repro_cmdline = self.test_config.invocation_name + ' ' + ' '.join(cmdline_base) + ' '.join(tds_arg) + ' ' + self.test_config.invocation_extra_args
-        test_execution = TestExecution(repro_cmdline, self.tds_file, self.test_file, cli_arg, self.test_config.suite_name, self.test_config.invocation_extra_args)
+        work.test_config.command_line = cmdline
 
         if ABORT_TEST_RUN:
             #Do this here so we have to repro information from above.
-            LOG.log("\nAborting test:" + self.test_file)
-            result = TestResult(get_base_test(self.test_file), test_execution)
+            logging.debug("\nAborting test:" + work.test_file)
+            result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
             result.test_failed_to_run = True
-            self.all_test_results[self.test_file] = result
-            self.thread_lock.release()
+            work.results[work.test_file] = result
+            q.task_done()
             return
 
-        LOG.log(self.name + " calling " + ' '.join(cmdline))
+        logging.debug(" calling " + ' '.join(cmdline))
 
-        self.thread_lock.release()
         cmd_output = None
         try:
-            cmd_output = subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=self.timeout_seconds)
+            cmd_output = subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=work.timeout_seconds)
         except subprocess.CalledProcessError as e:
             cmd_output = e.output
+            if not VERBOSE: sys.stdout.write('F')
         except subprocess.TimeoutExpired as e:
-            self.thread_lock.acquire()
-            LOG.log("Test timed out: " + self.test_file)
-            result = TestResult(get_base_test(self.test_file), test_execution)
+            logging.debug("Test timed out: " + work.test_file)
+            result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
             result.test_timed_out = True
-            self.all_test_results[self.test_file] = result
-            if not VERBOSE:
-                sys.stdout.write('F')
-            self.thread_lock.release()
+            work.results[work.test_file] = result
+            if not VERBOSE: sys.stdout.write('F')
             exit()
 
-            
-        self.thread_lock.acquire()
         if cmd_output:
-            LOG.log(str(cmd_output))
+            logging.debug(str(cmd_output))
 
-        if self.logical:
-            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(self.test_file, self.test_config.output_dir)
+        test_name = get_base_test(work.test_file)
+        if work.test_config.logical:
+            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
             if not os.path.isfile( existing_output_filepath ):
-                LOG.log("Error: could not find test output file:" + existing_output_filepath)
-                result = TestResult(base_test_name, test_execution)
-                self.all_test_results[self.test_file] = result
-                if not VERBOSE:
-                    sys.stdout.write('F')
-                self.thread_lock.release()
+                logging.debug("Error: could not find test output file:" + existing_output_filepath)
+                result = TestResult(base_test_name, work.test_config, work.test_file)
+                work.results[work.test_file] = result
+                if not VERBOSE: sys.stdout.write('F')
                 exit()
             #Copy the test process filename to the actual. filename.
-            LOG.log("Copying {0} to {1}".format(existing_output_filepath, actual_output_filepath))
+            logging.debug("Copying {0} to {1}".format(existing_output_filepath, actual_output_filepath))
             try_move(existing_output_filepath, actual_output_filepath)
 
-            self.test_file = base_filepath
+            #Make sure to set the generic (ie non-templatized) test name.
+            test_name = get_base_test(base_filepath)
 
-        result = compare_results(self.test_file, self.test_config)
-        result.test_execution = test_execution
+        result = compare_results(test_name, work.test_file, work.test_config)
+        result.test_config = work.test_config
 
         if result == None:
-            result = TestResult()
+            result = TestResult(test_file = work.test_file)
             result.test_failed_to_run = True
 
         if not VERBOSE:
             sys.stdout.write('.' if result.all_passed() else 'F')
             sys.stdout.flush()
 
-        self.all_test_results[self.test_file] = result
+        work.results[work.test_file] = result
         #If this failed with a password, connection error or similar then abort this entire test run (which uses the same tds file). This will prevent running hundreds of tests that have to wait for a timeout before failing.
         for ex in result.get_exceptions():
             if ex in ['BadPassword', 'Disconnect', 'NoDriver', 'UnableToConnect', 'Unlicensed', 'ExpiredPassword', 'NoPassword']:
                 ABORT_TEST_RUN = True
 
-        self.thread_lock.release()
-
-    def __del__(self):
-        # Make sure we're not still holding onto the lock for some reason
-        try: self.thread_lock.release()
-        except Exception: pass
-
-class Logger(object):
-    def __init__(self, root_dir, verbose, output_dir=None ):
-        self.log_dir = output_dir if output_dir else root_dir
-        self.log_file = open(os.path.join(self.log_dir, 'tdvt_log.txt'), 'w', encoding='utf8')
-        self.verbose = verbose
-
-    def log(self, msg):
-        if self.verbose: print (msg)
-        self.log_file.write(str(time.asctime()) + ":" + msg + "\n")
-
-    def __delf__(self):
-        self.log_file.close()
+        q.task_done()
 
 def try_move(srcfile, destfile):
     moved = False
@@ -590,7 +540,7 @@ def diff_test_results(result, expected_output):
 
 def save_results_diff(actual_file, diff_file, expected_file, diff_string):
     #Save a diff against the best matching file.
-    LOG.log("Saving diff of actual and expected as [{}]".format(diff_file))
+    logging.debug("Saving diff of actual and expected as [{}]".format(diff_file))
     try:
         f = open(diff_file, 'w')
         f.write("Diff of [{}] and [{}].\n".format(actual_file, expected_file))
@@ -599,47 +549,44 @@ def save_results_diff(actual_file, diff_file, expected_file, diff_string):
     except:
         pass
 
-def compare_results(test_file, test_config):
+def compare_results(test_name, test_file, test_config):
     """Return a TestResult object that specifies what was tested and whether it passed.
        test_file is the full path to the test file (base test name).
 
     """
-    #eg 'setup.math.txt'
     base_test_file = get_base_test(test_file)
     test_file_root = os.path.split(test_file)[0]
     actual_file, actual_diff_file, setup, expected_files = get_test_file_paths(test_file_root, base_test_file, test_config.expected_dir, test_config.output_dir)
-    result = TestResult(base_test_file)
-
+    result = TestResult(test_name, test_file = test_file)
     #There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
-        LOG.log("Did not find actual file: " + actual_file)
+        logging.debug("Did not find actual file: " + actual_file)
         return result
 
-    
     try:
         actual_xml = xml.etree.ElementTree.parse(actual_file).getroot()
         actual_output = TestOutput(actual_xml, test_config)
         result.add_actual_output(actual_output, actual_file)
     except xml.etree.ElementTree.ParseError as e:
-        LOG.log("Exception parsing actual file: " + actual_file + " exception: " + str(e))
+        logging.debug("Exception parsing actual file: " + actual_file + " exception: " + str(e))
         return result
 
     expected_file_version = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
-            LOG.log("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
+            logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
             #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
             try_move(actual_file, expected_file)
             return result
         #Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
-        LOG.log(threading.current_thread().name + " Comparing " + actual_file + " to " + expected_file)
+        logging.debug(threading.current_thread().name + " Comparing " + actual_file + " to " + expected_file)
         expected_output = TestOutput(xml.etree.ElementTree.parse(expected_file).getroot(), test_config)
         
         diff_counts, diff_string = diff_test_results(result, expected_output)
         result.set_best_matching_expected_output(expected_output, expected_file, expected_file_version, diff_counts)
 
         if result.all_passed():
-            LOG.log(threading.current_thread().name + " Results match expected number: " + str(expected_file_version))
+            logging.debug(threading.current_thread().name + " Results match expected number: " + str(expected_file_version))
             result.matched_expected_version = expected_file_version
             try:
                 os.remove(actual_file)
@@ -684,7 +631,7 @@ def write_standard_test_output(all_test_results, output_dir):
         json_file.write(json_str)
         json_file.close()
     except Exception:
-        LOG.log("Error writing ouput file [{0}].".format(json_file_path))
+        logging.debug("Error writing ouput file [{0}].".format(json_file_path))
 
 def get_csv_row_data(tds_name, test_name, passed, expected=None, diff_count=None, test_case=None, error_msg=None, error_type=None, time=None, generated_sql=None, actual_tuples=None, expected_tuples=None):
     return [tds_name, test_name, passed, expected, diff_count, test_case, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
@@ -694,7 +641,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
     except IOError:
-        LOG.log("Could not open output file [{0}].".format(csv_file_path))
+        logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
     
     #A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
@@ -755,6 +702,8 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     return total_failed_tests
 
 def process_test_results(all_test_results, tds_file, skip_header, output_dir):
+    if not all_test_results:
+        return
     #Required for tube compatability.
     write_standard_test_output(all_test_results, output_dir)
     failed_test_count = write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
@@ -763,24 +712,26 @@ def process_test_results(all_test_results, tds_file, skip_header, output_dir):
 def run_tests_parallel(test_names, test_config):
     all_test_results = {}
     tds_file = test_config.tds
-    threads = []
-    thread_lock = threading.Lock()
+    test_queue = queue.Queue()
+    all_work = []
 
-    thread_count = 0
+    #Create the worker threads.
+    logging.debug("Running " + str(test_config.thread_count) + " worker threads.")
+    for i in range(0, test_config.thread_count):
+        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
+        worker.setDaemon(True)
+        worker.start()
 
-    print ("LR Max threads: " + str(MAX_SUBPROCESSES))
     for test_file in test_names:
-        while threading.activeCount() > (MAX_SUBPROCESSES):
-            #print ("LR Sleeping: active threads " + str(threading.activeCount()))
-            time.sleep(.05)
+        work = QueueWork(test_config, test_file)
+        test_queue.put(work)
+        all_work.append(work)
 
-        thread_count += 1
-        print ("LR starting thread : " + str(thread_count))
-        threads.append(test_thread(thread_count, tds_file, test_file, test_config, thread_lock, all_test_results))
-
-    for thread in threads:
-        thread.join() #Wait until all threads are done executing
+    test_queue.join()
     
+    for work in all_work:
+        all_test_results = {**all_test_results, **work.results}
+
     return all_test_results
 
 def generate_test_file_list_from_file(root_directory, config_file):
@@ -807,10 +758,10 @@ def generate_test_file_list_from_file(root_directory, config_file):
             reading_exclude = True
         else:
             if reading_allowed:
-                LOG.log("Allowing " + line)
+                logging.debug("Allowing " + line)
                 allowed_tests.append(line)
             elif reading_exclude:
-                LOG.log("Excluding " + line)
+                logging.debug("Excluding " + line)
                 exclude_tests.append(line)
         
 
@@ -819,23 +770,23 @@ def generate_test_file_list_from_file(root_directory, config_file):
     for a in allowed_tests:
         allowed_path = os.path.join(root_directory, a)
         if os.path.isfile(allowed_path):
-            LOG.log("Adding file " + allowed_path)
+            logging.debug("Adding file " + allowed_path)
             tests_to_run.append(allowed_path)
         elif os.path.isdir(allowed_path):
-            LOG.log("Iterating directory " + allowed_path)
+            logging.debug("Iterating directory " + allowed_path)
             for f in os.listdir(allowed_path):
                 full_filename = os.path.join(allowed_path, f)
                 if os.path.isfile(full_filename):
-                    LOG.log("Adding file " + full_filename)
+                    logging.debug("Adding file " + full_filename)
                     tests_to_run.append(full_filename)
         else:
             for f in glob.glob(allowed_path):
                 full_filename = os.path.join(allowed_path, f)
                 if os.path.isfile(full_filename):
-                    LOG.log("Adding globbed file " + full_filename)
+                    logging.debug("Adding globbed file " + full_filename)
                     tests_to_run.append(full_filename)
 
-    LOG.log("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
+    logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 
     final_test_list = list(tests_to_run)
     for test in tests_to_run:
@@ -843,7 +794,7 @@ def generate_test_file_list_from_file(root_directory, config_file):
             try:
                 regex = re.compile(ex)
                 if re.search(regex, test) and test in final_test_list:
-                    if VERBOSE: LOG.log("Removing test that matched: " + ex)
+                    if VERBOSE: logging.debug("Removing test that matched: " + ex)
                     final_test_list.remove(test)
             except:
                 print ("Error compiling regular expression for test file exclusions.")
@@ -881,12 +832,12 @@ def generate_test_file_list(root_directory, logical_query_config, combined_confi
         for d in dir_list:
             d = os.path.join(d, expected_sub_dir)
             if not os.path.isdir(d):
-                LOG.log("Making dir: {}".format(d))
+                logging.debug("Making dir: {}".format(d))
                 os.makedirs(d)
 
-    LOG.log("Found final list of " + str(len(final_test_list)) + " tests to run.")
+    logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
     for x in final_test_list:
-        LOG.log("test " + x)
+        logging.debug("test " + x)
 
     return final_test_list
 
@@ -918,9 +869,9 @@ def generate_files(force=False):
     logical_input = get_path('logicaltests/generate/input/')
     logical_output = get_path('logicaltests/setup')
     generate_logical_files(logical_input, logical_output, force)
-    LOG.log("Generating logical setup files...")
+    logging.debug("Generating logical setup files...")
     generate_config_files(os.path.join(root_directory, os.path.join("config", "gen")), force)
-    LOG.log("Generating config files...")
+    logging.debug("Generating config files...")
     return 0
 
 def get_logical_test_file_paths(test_file, output_dir):
@@ -1000,44 +951,45 @@ def get_test_file_paths(root_directory, test_name, expected_sub_dir, output_dir)
         expected_file_list.append(expected_file_path)
 
     for filepath in expected_file_list:
-        LOG.log("Found expected filepath " + filepath)
+        logging.debug("Found expected filepath " + filepath)
 
     return (actualfile_path, diff_file_path, setupfile_path, expected_file_list)
 
-def run_diff(test_config, root_directory, diff):
+def run_diff(test_config, diff):
+    root_directory = get_root_dir()
     allowed_test_path = os.path.join(root_directory, diff)
     test_path_base = os.path.split(allowed_test_path)[0]
     test_name = os.path.split(allowed_test_path)[1]
 
     actual, actual_diff, setup, expected_files = get_test_file_paths(test_path_base, test_name, test_config.expected_dir, test_config.output_dir)
 
-    LOG.log('actual_path: ' + actual)
+    logging.debug('actual_path: ' + actual)
     diff_count_map = {}
 
     for f in expected_files:
-        LOG.log('expected_path: ' + f)
+        logging.debug('expected_path: ' + f)
         if os.path.isfile(f) and os.path.isfile(actual):
-            LOG.log("Diffing " + actual + " and " + f)
+            logging.debug("Diffing " + actual + " and " + f)
             actual_xml = xml.etree.ElementTree.parse(actual).getroot()
             expected_xml = xml.etree.ElementTree.parse(f).getroot()
             result = TestResult()
             result.add_actual_output(TestOutput(actual_xml, test_config), actual)
             expected_output = TestOutput(expected_xml, test_config)
             num_diffs, diff_string = diff_test_results(result, expected_output)
-            LOG.log(diff_string)
+            logging.debug(diff_string)
             diff_count_map[f] = sum(num_diffs)
 
     for t in diff_count_map:
-        LOG.log(t + ' Number of differences: ' + str(diff_count_map[t]))
+        logging.debug(t + ' Number of differences: ' + str(diff_count_map[t]))
     return 0
 
-def run_failed_tests_impl(run_file, root_directory, parser):
+def run_failed_tests_impl(run_file, root_directory):
     """Run the failed tests from the json output file."""
     tests = {}
     try:
         tests = json.load(open(run_file, 'r', encoding='utf8'))
     except:
-        LOG.log("Error opening " + run_file)
+        logging.debug("Error opening " + run_file)
         return
 
     test_to_run = {}
@@ -1048,7 +1000,7 @@ def run_failed_tests_impl(run_file, root_directory, parser):
 
     failed_tests = tests['failed_tests']
     for f in failed_tests:
-        LOG.log("Found failed test: " + f['test_file'])
+        logging.debug("Found failed test: " + f['test_file'])
         tt = f['test_type']
         tds = f['tds']
         if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
@@ -1065,66 +1017,37 @@ def run_failed_tests_impl(run_file, root_directory, parser):
     for tds in expr_tests:
         if len(expr_tests[tds]) > 0:
             #Get the saved additional arguments.
-            new_args = parser.parse_args(f['other_args'].split())
-            test_config = TdvtTestConfig(from_args=new_args, tds_file=tds)
+            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
             test_config.logical = False
             results = run_tests_parallel(expr_tests[tds], test_config)
             all_test_results.update(results)
     
     for tds in log_tests:
         if len(log_tests[tds]) > 0:
-            new_args = parser.parse_args(f['other_args'].split())
-            test_config = TdvtTestConfig(from_args=new_args, tds_file=tds)
+            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
             test_config.logical = True
             results = run_tests_parallel(log_tests[tds], test_config)
             all_test_results.update(results)
     return all_test_results
 
-def run_failed_tests(run_file, root_directory, parser):
+def run_failed_tests(run_file):
     """Run the failed tests from the json output file."""
     #See if we need to generate test setup files.
-    generate_files(False)
-    all_test_results = run_failed_tests_impl(run_file, root_directory, parser)
+    root_directory = get_root_dir()
+    all_test_results = run_failed_tests_impl(run_file, root_directory)
     return process_test_results(all_test_results, '', False, root_directory)
 
 def run_tests(test_config):
     #See if we need to generate test setup files.
     root_directory = get_root_dir()
-    generate_files( False)
+    output_dir = test_config.output_dir if test_config.output_dir else root_directory
 
     tds_file = get_tds_full_path(root_directory, test_config.tds)
     test_config.tds = tds_file
     all_test_results = {}
 
     all_test_results = run_tests_parallel(generate_test_file_list(root_directory, test_config.logical, test_config.config_file, test_config.expected_dir), test_config)
-    output_dir = test_config.output_dir if test_config.output_dir else root_directory
     return process_test_results(all_test_results, tds_file, test_config.noheader, output_dir)
-
-def init_logging(root_directory=None, verbose=False, output_dir=''):
-    global LOG
-    if not root_directory:
-        root_directory = get_root_dir()
-    LOG = Logger(root_directory, verbose, output_dir)
-    return LOG
-
-def init_arg_parser():
-    parser = argparse.ArgumentParser(description='Tableau Datasource Verification Tool. Return code is the number of failed tests.')
-    parser.add_argument(EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT, dest='expression_config', help='Config file (*.cfg) containing relative paths to expression tests or a path to a test file.', required=False)
-    parser.add_argument(LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT, dest='logical_query_config', help='Config file (*.cfg) containing relative paths to logical query files or a path to a test file.', required=False)
-    parser.add_argument('-f', dest='run_file', help='Json file containing failed tests to run.', required=False)
-    parser.add_argument(TDS_CONFIG_ARG, TDS_CONFIG_ARG_SHORT, dest='tds', help='TDS file to use when running the tests.', required=False)
-    parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
-    parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
-    parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
-    parser.add_argument('--noheader', dest='noheader', action='store_true', help='Do not write a header in the resulting csv file.', required=False)
-    parser.add_argument('--generate', dest='generate', action='store_true', help='Generate the config and logical query files.', required=False)
-    parser.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
-    parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
-    parser.add_argument('--expected-dir', dest='expected_dir', help='Unique subdirectory for expected files.', required=False)
-    parser.add_argument('--output-dir', dest='output_dir', help='Absolute path to directory to store actual files.', required=False)
-    parser.add_argument('--suite', dest='suite', help='Name of the test suite.', required=False)
-    parser.add_argument('-DOverride', dest='d_override', help='Tableau override option. -D is prepended to the value and it is then passed to tabquerycli. For example [-DOverride ModifyDialect=1] becomes [-DModifyDialect=1] while [-DOverride Override=DrillConnector] becomes [-DOverride=DrillConnector]', required=False)
-    return parser
 
 def configure_tabquery_path():
     global TAB_CLI_EXE
@@ -1142,46 +1065,3 @@ def configure_tabquery_path():
 def get_root_dir():
     return get_path('')
 
-def main():
-    configure_tabquery_path()
-    parser = init_arg_parser()
-    global args
-    args = parser.parse_args()
-    VERBOSE = False
-    if args.verbose:
-        VERBOSE = True
-    if args.diff:
-        #Set verbose so the user sees something.
-        VERBOSE = True
-
-    root_directory = get_root_dir()
-    return_code = 0
-
-    args_copy = list(sys.argv)
-    test_config = TdvtTestConfig(from_args=args)
-    test_config.set_invocation(args_copy)
-
-    LOG = init_logging(root_directory, VERBOSE, test_config.output_dir)
-    LOG.log("Starting : " + str(test_config))
-    LOG.log("Using root_dir: " + root_directory)
-
-    if args.thread_count:
-        MAX_SUBPROCESSES = args.thread_count
-        LOG.log("Setting max thread count to: " + str(MAX_SUBPROCESSES))
-
-    if args.generate:
-        return_code = generate_files( True)
-    elif args.diff:
-        return_code = run_diff(test_config, root_directory, args.diff)
-    elif args.run_file:
-        return_code = run_failed_tests(args.run_file, root_directory, parser)
-    elif args.combined_config:
-        test_config.tds_file = args.tds
-        return_code = run_tests(test_config)
-    else:
-        print ("No valid run options found.")
-
-    sys.exit(return_code)
-
-if __name__ == '__main__':
-    main()

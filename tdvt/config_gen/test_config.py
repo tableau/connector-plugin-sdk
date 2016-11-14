@@ -4,6 +4,7 @@
 """
 
 import os
+import tempfile
 from ..resources import *
 
 class TestSet(object):
@@ -97,7 +98,6 @@ class TestConfig(object):
     def write_config_file(self, name, dir, allow, exclude):
         filename = os.path.join(dir, name)
         f = open(get_path('config/gen/', name), 'w')
-        #f = open(filename, 'w')
         f.write('allow:\n')
         f.write(allow + '\n')
         if len(exclude) > 0:
@@ -105,4 +105,54 @@ class TestConfig(object):
             for exclude_pattern in exclude.split(','):
                 f.write(exclude_pattern + '\n')
         f.close()
+
+class SingleTestConfig(object):
+    """Maintain information about running a single test. This is different that running a test suite which has a premade config file."""
+    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_name):
+        self.valid = False
+        self.ds_name = ds_name
+        self.test_pattern = test_pattern
+        self.tds_pattern = tds_pattern
+        self.tds_name = self.tds_pattern.replace('*', ds_name)
+        self.exclude_pattern = exclude_pattern
+
+    def write_cfg(self):
+        if self.test_pattern and self.tds_pattern:
+            try:
+                fd, tmppath = tempfile.mkstemp(suffix='.cfg')
+                tmpcfg = open(tmppath, 'w')
+                tmpcfg.write("allow:\n")
+                tmpcfg.write(self.test_pattern)
+                tmpcfg.write("\n")
+                if self.exclude_pattern:
+                    tmpcfg.write("exclude:\n")
+                    tmpcfg.write(self.exclude_pattern)
+                    tmpcfg.write("\n")
+                tmpcfg.close()
+                os.close(fd)
+            except IOError:
+                return
+
+            self.temp_cfg_path = tmppath
+            self.valid = True
+
+    def __del__(self):
+        if not self.valid:
+            return
+        try:
+            os.remove(self.temp_cfg_path)
+        except OSError:
+            pass
+
+class SingleLogicalTestConfig(SingleTestConfig):
+    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
+        super(SingleLogicalTestConfig, self).__init__(test_pattern, tds_pattern, exclude_pattern, ds_info.dsname)
+        self.test_pattern = self.test_pattern.replace('?', ds_info.logical_config_name)
+        super(SingleLogicalTestConfig, self).write_cfg()
+
+class SingleExpressionTestConfig(SingleTestConfig):
+    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
+        super(SingleExpressionTestConfig, self).__init__(test_pattern, tds_pattern, exclude_pattern, ds_info.dsname)
+        super(SingleExpressionTestConfig, self).write_cfg()
+    pass
 
