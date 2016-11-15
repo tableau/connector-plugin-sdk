@@ -10,6 +10,20 @@
             "other_args": " --verbose", 
             "repro": "tdvt.py -e test\\tool_test\\exprtests\\setup.sum.txt-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
             "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": true, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
             "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
             "test_file": "test\\tool_test\\exprtests\\setup.sum.txt", 
             "test_type": "-e"
@@ -21,6 +35,20 @@
             "other_args": " --verbose", 
             "repro": "tdvt.py -e test\\tool_test\\exprtests\\setup.max.txt-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
             "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": true, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
             "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
             "test_file": "test\\tool_test\\exprtests\\setup.max.txt", 
             "test_type": "-e"
@@ -33,10 +61,24 @@
             "failtype": "test_failure", 
             "message": "Expected does not match any actual file.", 
             "other_args": " --verbose", 
-            "repro": "tdvt.py -q test\\tool_test\\logical\\setup\\calcs\\setup.sum.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "repro": "tdvt.py -q test\\tool_test\\logical\\setup\\calcs\\setup.sum.tde.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
             "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": true, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
             "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
-            "test_file": "test\\tool_test\\logical\\setup\\calcs\\setup.sum.xml", 
+            "test_file": "test\\tool_test\\logical\\setup\\calcs\\setup.sum.tde.xml", 
             "test_type": "-q"
         }
     ]

@@ -2,6 +2,7 @@
 tdvt_output*.json
 test_results*.csv
 tdvt_log*.txt
+tdvt_test_log*.txt
 tdvt_actuals*.zip
 
 #Test actual files.

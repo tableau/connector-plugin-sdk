@@ -27,14 +27,15 @@ import os
 import unittest
 import xml.etree.ElementTree
 import pkg_resources
+import logging
 from tdvt import tdvt
 from tdvt.config_gen import datasource_list
-from tdvt.config_gen.test_config import TestConfig,TestSet
+from tdvt.config_gen.test_config import TestSet
 from tdvt.resources import get_path
 
 class DiffTest(unittest.TestCase):
     def test_diff(self):
-        LOG.log("Starting diff tests:\n")
+        logging.debug("Starting diff tests:\n")
         subdir = 'diff_tests'
         #Go through the 'expected' files as the driver.
         test_files = []
@@ -49,7 +50,7 @@ class DiffTest(unittest.TestCase):
             actual_file = os.path.join(os.path.join(TEST_DIRECTORY, subdir), actual_file)
             expected_file = os.path.join(os.path.join(TEST_DIRECTORY, subdir), test)
 
-            LOG.log("Testing: " + test)
+            logging.debug("Testing: " + test)
             actual_xml = xml.etree.ElementTree.parse(actual_file).getroot()
             expected_xml = xml.etree.ElementTree.parse(expected_file).getroot()
             compare_sql = False
@@ -62,7 +63,7 @@ class DiffTest(unittest.TestCase):
                 compare_tuples = True
                 compare_sql = True
             results = tdvt.TestResult()
-            test_config = tdvt.TestConfig(compare_sql, compare_tuples)
+            test_config = tdvt.TdvtTestConfig(compare_sql, compare_tuples)
             results.add_actual_output(tdvt.TestOutput(actual_xml, test_config), actual_file)
             expected_output = tdvt.TestOutput(expected_xml, test_config)
 
@@ -70,23 +71,23 @@ class DiffTest(unittest.TestCase):
             results.set_best_matching_expected_output(expected_output, expected_file, 0, [0])
 
             if results.all_passed() and 'shouldfail' not in test:
-                LOG.log("Test passed: " + test)
+                logging.debug("Test passed: " + test)
                 self.assertTrue(True)
             elif not results.all_passed() and 'shouldfail' in test:
-                LOG.log("Test passed: " + test)
+                logging.debug("Test passed: " + test)
                 self.assertTrue(True)
             else:
-                LOG.log("Test failed: " + test)
+                logging.debug("Test failed: " + test)
                 failed_tests.append(test)
                 self.assertTrue(False)
-            LOG.log("\n")
+            logging.debug("\n")
 
         if failed_tests:
-            LOG.log("All failed tests:\n")
+            logging.debug("All failed tests:\n")
             for item in failed_tests:
-                LOG.log("Failed -- " + item)
+                logging.debug("Failed -- " + item)
 
-        LOG.log("Ending diff tests:\n")
+        logging.debug("Ending diff tests:\n")
         return len(test_files), len(failed_tests)
 
 class BaseTDVTTest(unittest.TestCase):
@@ -103,25 +104,25 @@ class BaseTDVTTest(unittest.TestCase):
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
         self.config_file = 'tool_test/config/expression.tde.cfg'
-        self.tds_file = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
-        self.test_config = tdvt.TestConfig()
+        self.test_config = tdvt.TdvtTestConfig()
+        self.test_config.tds = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
     def test_expression_tests(self):
         all_test_results = {}
-        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.tds_file, self.test_config)
+        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
 
         self.check_results(all_test_results, 2)
 
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
         self.config_file = 'tool_test/config/logical.tde.cfg'
-        self.tds_file = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
-        self.test_config = tdvt.TestConfig()
+        self.test_config = tdvt.TdvtTestConfig()
+        self.test_config.tds = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
 
     def test_logical_tests(self):
         all_test_results = {}
-        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.tds_file, self.test_config)
+        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
 
         self.check_results(all_test_results, 1)
 
@@ -130,39 +131,40 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.test_dir = TEST_DIRECTORY
         self.config_file = 'tool_test/config/logical.tde.cfg'
         self.tds_file = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
-        self.test_config = tdvt.TestConfig()
+        self.test_config = tdvt.TdvtTestConfig()
         self.test_config.logical = True
+        self.test_config.config_file = self.config_file
+        self.test_config.tds = self.tds_file
 
     def test_failed_test_output(self):
         """Make sure TDVT writes the correct output file for rerunning failed tests."""
         all_test_results = {}
         #This will cause the test to fail as expected.
         self.test_config.tested_sql = True
-        self.test_config.invocation_extra_args = '--compare-sql'
-        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.tds_file, self.test_config)
+        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
         tdvt.write_standard_test_output(all_test_results, self.test_dir)
 
         self.check_results(all_test_results, 1, False)
 
         #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY, tdvt.init_arg_parser())
+        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY)
 
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), ROOT_DIRECTORY, tdvt.init_arg_parser())
+        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), ROOT_DIRECTORY)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), ROOT_DIRECTORY, tdvt.init_arg_parser())
+        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), ROOT_DIRECTORY)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), get_path(ROOT_DIRECTORY, module_name=__name__), tdvt.init_arg_parser())
+        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), get_path(ROOT_DIRECTORY, module_name=__name__))
         self.check_results(all_test_results, 3)
 
     def test_logical_rerun_fail(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY, tdvt.init_arg_parser())
+        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY)
         self.check_results(all_test_results, 1, False)
 
 class PathTest(unittest.TestCase):
@@ -328,12 +330,12 @@ ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))
-LOG = tdvt.init_logging(TEST_DIRECTORY, True)
+logging.basicConfig(filename='tdvt_test_log.txt',level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
 tdvt.configure_tabquery_path()
 if __name__ == '__main__':
 
-    LOG.log("Starting TDVT tests\n")
+    logging.debug("Starting TDVT tests\n")
 
     unittest.main()
 
-    LOG.log("Ending TDVT tests\n")
+    logging.debug("Ending TDVT tests\n")

@@ -398,7 +398,7 @@ def run_desired_tests(args, ds_registry):
     for test_thread in test_threads:
         if args.noclean:
             print ("Left temp dir: " + test_thread.temp_dir)
-        error_code += test_thread.error_code
+        error_code += test_thread.error_code if test_thread.error_code else 0
 
     print ('\n')
     print ("Total time: " + str(time.time() - start_time))
@@ -423,7 +423,7 @@ elif args.diff:
 elif args.run_file:
     sys.exit(run_failed_tests(args.run_file))
 elif args.list_ds is not None:
-    print_configurations(ds_reg, args.list_ds)
+    print_configurations(ds_registry, args.list_ds)
     sys.exit(0)
 
 error_code = run_desired_tests(args, ds_registry)

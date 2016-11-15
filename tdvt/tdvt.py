@@ -191,18 +191,18 @@ class TdvtTestConfig(object):
             self.thread_count = args.thread_count_tdvt if args.thread_count else 12
 
     def init_from_json(self, json):
-         self.tested_sql = json['tested_sql']
-         self.tested_tuples = json['tested_tuples']
-         self.expected_dir = json['expected_dir']
-         self.output_dir = json['output_dir']
-         self.logical = json['logical']
-         self.config_file = json['config_file']
-         self.suite_name = json['suite_name']
-         self.d_override = json['d_override']
-         self.verbose = json['verbose']
-         self.tds = json['tds']
-         self.noheader = json['noheader']
-         self.thread_count = json['thread_count']
+        self.tested_sql = json['tested_sql']
+        self.tested_tuples = json['tested_tuples']
+        self.expected_dir = json['expected_dir']
+        self.output_dir = json['output_dir']
+        self.logical = json['logical']
+        self.config_file = json['config_file']
+        self.suite_name = json['suite_name']
+        self.d_override = json['d_override']
+        self.verbose = json['verbose']
+        self.tds = json['tds']
+        self.noheader = json['noheader']
+        self.thread_count = json['thread_count']
 
     def __str__(self):
         return "suite [{}]: tested sql [{}]: tested tuples [{}]: expected dir [{}]: output dir [{}]: logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]".format(self.suite_name, self.tested_sql, self.tested_tuples, self.expected_dir, self.output_dir, self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
@@ -309,13 +309,11 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         test_type = '-q' if obj.test_config.logical else '-e' 
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
-                #This includes suite to differentiate the results for Narc.py.
                 'case' : suite_name + '.' + case_name, 
                 'test_file' : obj.test_file, 
                 'test_type' : test_type, 
                 'test_config' : obj.test_config.__json__(),
                 'tds' : obj.test_config.tds, 
-                'repro' : obj.test_config.command_line,
                 'expected' : obj.path_to_expected,
                }
         if obj.all_passed():
@@ -405,6 +403,7 @@ def do_test_queue_work(i, q):
             logging.debug(str(cmd_output))
 
         test_name = get_base_test(work.test_file)
+        new_test_file = work.test_file
         if work.test_config.logical:
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
             if not os.path.isfile( existing_output_filepath ):
@@ -419,8 +418,9 @@ def do_test_queue_work(i, q):
 
             #Make sure to set the generic (ie non-templatized) test name.
             test_name = get_base_test(base_filepath)
+            new_test_file = base_filepath
 
-        result = compare_results(test_name, work.test_file, work.test_config)
+        result = compare_results(test_name, new_test_file, work.test_file, work.test_config)
         result.test_config = work.test_config
 
         if result == None:
@@ -549,15 +549,16 @@ def save_results_diff(actual_file, diff_file, expected_file, diff_string):
     except:
         pass
 
-def compare_results(test_name, test_file, test_config):
+def compare_results(test_name, test_file, full_test_file, test_config):
     """Return a TestResult object that specifies what was tested and whether it passed.
-       test_file is the full path to the test file (base test name).
+       test_file is the full path to the test file (base test name without any logical specification).
+       full_test_file is the full path to the actual test file.
 
     """
     base_test_file = get_base_test(test_file)
     test_file_root = os.path.split(test_file)[0]
     actual_file, actual_diff_file, setup, expected_files = get_test_file_paths(test_file_root, base_test_file, test_config.expected_dir, test_config.output_dir)
-    result = TestResult(test_name, test_file = test_file)
+    result = TestResult(test_name, test_file = full_test_file)
     #There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
         logging.debug("Did not find actual file: " + actual_file)
@@ -743,6 +744,7 @@ def generate_test_file_list_from_file(root_directory, config_file):
 
     reading_allowed = False
     reading_exclude = False
+
     for line in open(config_file, 'r', encoding='utf8'):
         if line[0] == '#':
             continue
@@ -836,6 +838,10 @@ def generate_test_file_list(root_directory, logical_query_config, combined_confi
                 os.makedirs(d)
 
     logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
+    if len(final_test_list) == 0:
+        logging.warn("Did not find any tests to run.")
+        print("Did not find any tests to run.")
+
     for x in final_test_list:
         logging.debug("test " + x)
 
@@ -877,8 +883,8 @@ def generate_files(force=False):
 def get_logical_test_file_paths(test_file, output_dir):
     """ Given the full path to logical test file, return all the paths to the expected output and gold result files.
         This depends on the logical tests main directory having 2 levels of subdirectories
-        eg  tableau-tests/tdvt/logicaltests/setup/calcs
-        and tableau-tests/tdvt/logicaltests/expected/calcs
+        eg  tdvt/logicaltests/setup/calcs
+        and tdvt/logicaltests/expected/calcs
     """
     #eg d:/dev/data-dev/tableau-tests/tdvt/logicaltests/setup/calcs
     expected_base_dir = os.path.split(test_file)[0]
@@ -952,7 +958,6 @@ def get_test_file_paths(root_directory, test_name, expected_sub_dir, output_dir)
 
     for filepath in expected_file_list:
         logging.debug("Found expected filepath " + filepath)
-
     return (actualfile_path, diff_file_path, setupfile_path, expected_file_list)
 
 def run_diff(test_config, diff):
