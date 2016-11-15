@@ -14,6 +14,5 @@ setup(
     description='A Python module for testing datasource compatability with Tableau.',
     test_suite='test',
     scripts=['tdvt.py', 'tdvt_runner.py'],
-    
     include_package_data = True
 )

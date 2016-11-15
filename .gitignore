@@ -20,3 +20,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#Package building stuff.
+dist
+tdvt.egg-info

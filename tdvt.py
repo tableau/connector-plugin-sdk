@@ -10,8 +10,7 @@
 # -----------------------------------------------------------------------------
 
 """
-    Tableau Datasource Verification Tool
-    Run logical queiries and expression tests against datasources.
+    Test driver script for the Tableau Datasource Verification Tool
 
 """
 
@@ -25,6 +24,6 @@ import sys
 #venv_launcher.rerun_this_script_using('3.4.0', '3.4.0')
 #END Tableau environment specific.
 
-from tdvt import tdvt
+import tdvt.tdvt
 
-tdvt.main()
+tdvt.__main__()

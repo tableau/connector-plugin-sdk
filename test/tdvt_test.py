@@ -15,11 +15,11 @@
 
     You can run these like:
     All tests:
-        py -3 test_tdvt.py
+        py -3 test_tdvt_core.py
     A Class:
-        py -3 test_tdvt.py ReRunFailedTestsTest
+        py -3 test_tdvt_core.py ReRunFailedTestsTest
     One specific test:
-        py -3 test_tdvt.py ReRunFailedTestsTest.test_logical_rerun_fail
+        py -3 test_tdvt_core.py ReRunFailedTestsTest.test_logical_rerun_fail
 """
 
 import configparser
@@ -28,7 +28,7 @@ import unittest
 import xml.etree.ElementTree
 import pkg_resources
 import logging
-from tdvt import tdvt
+from tdvt import tdvt_core
 from tdvt.config_gen import datasource_list
 from tdvt.config_gen.test_config import TestSet
 from tdvt.resources import get_path
@@ -62,12 +62,12 @@ class DiffTest(unittest.TestCase):
             if 'expected.both' in test:
                 compare_tuples = True
                 compare_sql = True
-            results = tdvt.TestResult()
-            test_config = tdvt.TdvtTestConfig(compare_sql, compare_tuples)
-            results.add_actual_output(tdvt.TestOutput(actual_xml, test_config), actual_file)
-            expected_output = tdvt.TestOutput(expected_xml, test_config)
+            results = tdvt_core.TestResult()
+            test_config = tdvt_core.TdvtTestConfig(compare_sql, compare_tuples)
+            results.add_actual_output(tdvt_core.TestOutput(actual_xml, test_config), actual_file)
+            expected_output = tdvt_core.TestOutput(expected_xml, test_config)
 
-            num_diffs, diff_string = tdvt.diff_test_results(results, expected_output)
+            num_diffs, diff_string = tdvt_core.diff_test_results(results, expected_output)
             results.set_best_matching_expected_output(expected_output, expected_file, 0, [0])
 
             if results.all_passed() and 'shouldfail' not in test:
@@ -104,25 +104,25 @@ class BaseTDVTTest(unittest.TestCase):
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
         self.config_file = 'tool_test/config/expression.tde.cfg'
-        self.test_config = tdvt.TdvtTestConfig()
-        self.test_config.tds = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
+        self.test_config = tdvt_core.TdvtTestConfig()
+        self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
     def test_expression_tests(self):
         all_test_results = {}
-        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
+        all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
 
         self.check_results(all_test_results, 2)
 
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
         self.config_file = 'tool_test/config/logical.tde.cfg'
-        self.test_config = tdvt.TdvtTestConfig()
-        self.test_config.tds = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
+        self.test_config = tdvt_core.TdvtTestConfig()
+        self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
 
     def test_logical_tests(self):
         all_test_results = {}
-        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
+        all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
 
         self.check_results(all_test_results, 1)
 
@@ -130,8 +130,8 @@ class ReRunFailedTestsTest(BaseTDVTTest):
     def setUp(self):
         self.test_dir = TEST_DIRECTORY
         self.config_file = 'tool_test/config/logical.tde.cfg'
-        self.tds_file = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
-        self.test_config = tdvt.TdvtTestConfig()
+        self.tds_file = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
+        self.test_config = tdvt_core.TdvtTestConfig()
         self.test_config.logical = True
         self.test_config.config_file = self.config_file
         self.test_config.tds = self.tds_file
@@ -141,42 +141,42 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         all_test_results = {}
         #This will cause the test to fail as expected.
         self.test_config.tested_sql = True
-        all_test_results = tdvt.run_tests_parallel(tdvt.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
-        tdvt.write_standard_test_output(all_test_results, self.test_dir)
+        all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
+        tdvt_core.write_standard_test_output(all_test_results, self.test_dir)
 
         self.check_results(all_test_results, 1, False)
 
         #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY)
 
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), ROOT_DIRECTORY)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), ROOT_DIRECTORY)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), get_path(ROOT_DIRECTORY, module_name=__name__))
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), get_path(ROOT_DIRECTORY, module_name=__name__))
         self.check_results(all_test_results, 3)
 
     def test_logical_rerun_fail(self):
-        all_test_results = tdvt.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY)
         self.check_results(all_test_results, 1, False)
 
 class PathTest(unittest.TestCase):
     def test_config_file_path(self):
-        cfg_path = tdvt.get_config_file_full_path(ROOT_DIRECTORY, 'tool_test/config/logical.tde.cfg')
+        cfg_path = tdvt_core.get_config_file_full_path(ROOT_DIRECTORY, 'tool_test/config/logical.tde.cfg')
         self.assertTrue(os.path.isfile(cfg_path))
 
     def test_config_file_default_path(self):
-        cfg_path = tdvt.get_config_file_full_path(os.path.join(ROOT_DIRECTORY, 'tool_test'), 'logical.tde.cfg')
+        cfg_path = tdvt_core.get_config_file_full_path(os.path.join(ROOT_DIRECTORY, 'tool_test'), 'logical.tde.cfg')
         self.assertTrue(os.path.isfile(cfg_path))
 
-        #        self.tds_file = tdvt.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
+        #        self.tds_file = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
 class ConfigTest(unittest.TestCase):
     def test_load_ini(self):
@@ -331,7 +331,7 @@ TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))
 logging.basicConfig(filename='tdvt_test_log.txt',level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
-tdvt.configure_tabquery_path()
+tdvt_core.configure_tabquery_path()
 if __name__ == '__main__':
 
     logging.debug("Starting TDVT tests\n")
