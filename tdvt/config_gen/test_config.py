@@ -78,12 +78,6 @@ class TestConfig(object):
     def get_expression_tests(self, config_filter=None):
         return self.expression_test_set if not config_filter else [ ts for ts in self.expression_test_set if config_filter in ts.config_file_name ]
 
-    def ensure_config_dir_exists(self, root_dir):
-        try:
-            os.mkdir(root_dir)
-        except:
-            pass
-
     def config_files_exist(self, root_dir):
         all_cfg = [x.config_file_name for x in (self.logical_test_set + self.expression_test_set)]
         for f in all_cfg:

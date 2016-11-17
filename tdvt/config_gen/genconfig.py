@@ -25,10 +25,13 @@ def generate_config_files(output_dir, force=False):
     tests = TestRegistry('')
 
     #Generate all the config files.
+    try:
+        os.mkdir(base_output_dir)
+    except:
+        pass
+
     for ds in tests.dsnames:
         cfg = tests.dsnames[ds]
         if not cfg.config_files_exist(base_output_dir) or force:
-            need_config_gen = True
-            cfg.ensure_config_dir_exists(base_output_dir)
             cfg.write_config_files(base_output_dir)
 
