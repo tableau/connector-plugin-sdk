@@ -731,7 +731,7 @@ def run_tests_parallel(test_names, test_config):
     test_queue.join()
     
     for work in all_work:
-        all_test_results.ipdate(work.results}
+        all_test_results.update(work.results}
 
     return all_test_results
 
