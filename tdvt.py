@@ -24,6 +24,6 @@ import sys
 #venv_launcher.rerun_this_script_using('3.4.0', '3.4.0')
 #END Tableau environment specific.
 
-import tdvt.tdvt
+from tdvt import tdvt
 
-tdvt.__main__()
+tdvt.main()

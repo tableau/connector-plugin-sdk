@@ -17,6 +17,7 @@
 import configparser
 import glob
 import os.path
+import logging
 
 from ..resources import *
 from .test_config import TestConfig,TestSet,build_config_name,build_tds_name
@@ -105,8 +106,9 @@ class TestRegistry(object):
         self.suite_map = {}
 
         #Read all the datasource ini files and load the test configuration.
-        ini_files = get_all_ini_files('config')
+        ini_files = get_all_ini_files_local_first('config')
         for f in ini_files:
+            logging.debug("Reading ini file [{}]".format(f))
             config = configparser.ConfigParser()
             config.read(f)
             self.add_test(LoadTest(config))
@@ -117,7 +119,9 @@ class TestRegistry(object):
         try:
             #Create the test suites (groups of datasources to test)
             config = configparser.ConfigParser()
-            config.read(get_ini_path('config/registry', 'tdvt'))
+            tdvt_ini_file = get_ini_path_local_first('config/registry', 'tdvt')
+            logging.debug("Reading registry ini file [{}]".format(tdvt_ini_file))
+            config.read(get_ini_path_local_first('config/registry', 'tdvt'))
             ds = config['DatasourceRegistry']
 
             suite_all = self.interpret_ds_list(ds.get('all', ''))

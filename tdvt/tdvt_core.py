@@ -867,6 +867,10 @@ def get_config_file_full_path(root_directory, combined_config):
 
 def get_tds_full_path(root_directory, tds):
     """Return the full path to the tds file to use for this test run."""
+    #First look for a local tds file (in the place you ran this module, not in the module installation dir).
+    local_file = find_file_path(os.getcwd(), tds, "tds")
+    if os.path.isfile(local_file):
+        return local_file
     return find_file_path(root_directory, tds, "tds")
 
 def generate_files(force=False):
@@ -1058,7 +1062,9 @@ def configure_tabquery_path():
     global TAB_CLI_EXE
     config = configparser.ConfigParser()
     
-    config.read(get_ini_path('config/tdvt', 'tdvt'))
+    tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
+    logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
+    config.read(tdvt_cfg)
 
     if sys.platform.startswith("darwin"):
         TAB_CLI_EXE = config['DEFAULT']['TAB_CLI_EXE_MAC']
