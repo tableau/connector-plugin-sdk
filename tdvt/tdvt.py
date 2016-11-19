@@ -413,7 +413,7 @@ def main():
         print ("Generating config files...")
         generate_files(True)
         print ("Done")
-        sys.exit(0)
+        #It's ok to call generate and then run some tests, so don't exit here.
     elif args.diff:
         #Set verbose so the user sees something from the diff.
         VERBOSE = True
