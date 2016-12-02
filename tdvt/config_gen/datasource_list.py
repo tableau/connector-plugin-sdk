@@ -119,9 +119,9 @@ class TestRegistry(object):
         try:
             #Create the test suites (groups of datasources to test)
             config = configparser.ConfigParser()
-            tdvt_ini_file = get_ini_path_local_first('config/registry', 'tdvt')
-            logging.debug("Reading registry ini file [{}]".format(tdvt_ini_file))
-            config.read(get_ini_path_local_first('config/registry', 'tdvt'))
+            registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
+            logging.debug("Reading registry ini file [{}]".format(registry_ini_file))
+            config.read(registry_ini_file)
             ds = config['DatasourceRegistry']
 
             suite_all = self.interpret_ds_list(ds.get('all', ''))
@@ -167,11 +167,11 @@ class TestRegistry(object):
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""
     def __init__(self):
-        super(WindowsRegistry, self).__init__('windows.ini')
+        super(WindowsRegistry, self).__init__('windows')
 
 
 class MacRegistry(TestRegistry):
     """Mac specific test suites."""
     def __init__(self):
-        super(MacRegistry, self).__init__('mac.ini')
+        super(MacRegistry, self).__init__('mac')
 
