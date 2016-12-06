@@ -1,0 +1,50 @@
+<results>
+  <test name='REGEXP_EXTRACT(&apos;&apos;,&apos;office+\s+(\w+)&apos;)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;&apos;, E&apos;office+\\s+(\\w+)&apos;))[1]) AS &quot;TEMP(Test)(2768823478)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      35.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2768823478)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&apos;office supplies&apos;,&apos;office+\s+(\w+)&apos;)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;office supplies&apos;, E&apos;office+\\s+(\\w+)&apos;))[1]) AS &quot;TEMP(Test)(3671376512)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      31.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3671376512)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;supplies&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&apos;office supplies&apos;,&apos;&apos;)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;office supplies&apos;, &apos;&apos;))[1]) AS &quot;TEMP(Test)(1946532558)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      32.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1946532558)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

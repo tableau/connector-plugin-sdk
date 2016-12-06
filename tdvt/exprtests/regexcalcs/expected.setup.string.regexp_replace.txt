@@ -1,0 +1,66 @@
+<results>
+  <test name='REGEXP_REPLACE(&quot;!@#abc| w-$ %^&amp;&quot;,&apos;\$&apos;,&apos;dollar&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;!@#abc| w-$ %^&amp;&apos;, E&apos;\\$&apos;, &apos;dollar&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(3492008265)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      13.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3492008265)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;!@\#abc| w-dollar \%^&amp;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;!@#abc$$| w-$ %^&amp;&quot;,&apos;\$&apos;,&apos;dollar&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;!@#abc$$| w-$ %^&amp;&apos;, E&apos;\\$&apos;, &apos;dollar&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(445696206)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      9.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(445696206)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;!@\#abcdollardollar| w-dollar \%^&amp;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&apos;&apos;,&apos;\$&apos;,&apos;dollar&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;&apos;, E&apos;\\$&apos;, &apos;dollar&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(3012625620)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      9.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3012625620)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;I am a string&quot;,&apos;&apos;,&apos;replaceme&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;I am a string&apos;, &apos;&apos;, &apos;replaceme&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(257907328)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      9.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(257907328)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;I am a string&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

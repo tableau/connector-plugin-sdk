@@ -14,6 +14,8 @@ _Repository
 
 #Generate logical query files.
 tdvt/logicaltests/setup/*
+#Generated config files.
+tdvt/config/gen/*
 
 #Compiled Python.
 __pycache__/

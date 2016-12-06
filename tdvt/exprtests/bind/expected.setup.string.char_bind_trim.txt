@@ -1,0 +1,21 @@
+<results>
+  <test name='[Product In Stock]'>
+    <sql>
+      SELECT &quot;Staples&quot;.&quot;Product In Stock&quot; AS &quot;TEMP(Test)(137914982)(0)&quot;&#10;FROM &quot;Staples&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      78.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.postgres].[TEMP(Test)(137914982)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;NO&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;YES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -31,7 +31,7 @@ TDS_CONFIG_ARG = '--tds'
 TDS_CONFIG_ARG_SHORT = '-d'
 ALWAYS_GENERATE_EXPECTED = False
 VERBOSE = False
-ABORT_TEST_RUN = False
+abort_test_run = False
 
 class TestCaseResult(object):
     """The actual or expected results of a test run.
@@ -160,7 +160,7 @@ class TestOutput(object):
 
 class TdvtTestConfig(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 12, from_json = None):
+    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 4, from_json = None):
         self.tested_sql = tested_sql
         self.tested_tuples = tested_tuples
         self.expected_dir = expected_dir
@@ -188,7 +188,7 @@ class TdvtTestConfig(object):
             self.expected_dir = args.expected_dir
 
         if args.thread_count_tdvt:
-            self.thread_count = args.thread_count_tdvt if args.thread_count else 12
+            self.thread_count = args.thread_count_tdvt
 
     def init_from_json(self, json):
         self.tested_sql = json['tested_sql']
@@ -334,10 +334,14 @@ class QueueWork(object):
         self.timeout_seconds = 1200
         
 def do_test_queue_work(i, q):
+    """This will be called in a queue.join() context, so make sure to mark all work items as done and
+    continue through the loop. Don't try and exit or return from here if there are still work items in the queue.
+    See the python queue documentation."""
+
+    abort_test_run = False
     while True:
+        #This blocks if the queue is empty.
         work = q.get()
-        
-        global ABORT_TEST_RUN
 
         logging.debug("\nRunning test:" + work.test_file)
         if not os.path.isfile(work.test_file):
@@ -374,14 +378,14 @@ def do_test_queue_work(i, q):
 
         work.test_config.command_line = cmdline
 
-        if ABORT_TEST_RUN:
-            #Do this here so we have to repro information from above.
+        if abort_test_run:
+            #Do this here so we have the repro information from above.
             logging.debug("\nAborting test:" + work.test_file)
             result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
             result.test_failed_to_run = True
             work.results[work.test_file] = result
             q.task_done()
-            return
+            continue
 
         logging.debug(" calling " + ' '.join(cmdline))
 
@@ -397,7 +401,8 @@ def do_test_queue_work(i, q):
             result.test_timed_out = True
             work.results[work.test_file] = result
             if not VERBOSE: sys.stdout.write('F')
-            exit()
+            q.task_done()
+            continue
 
         if cmd_output:
             logging.debug(str(cmd_output))
@@ -411,7 +416,9 @@ def do_test_queue_work(i, q):
                 result = TestResult(base_test_name, work.test_config, work.test_file)
                 work.results[work.test_file] = result
                 if not VERBOSE: sys.stdout.write('F')
-                exit()
+                q.task_done()
+                continue
+
             #Copy the test process filename to the actual. filename.
             logging.debug("Copying {0} to {1}".format(existing_output_filepath, actual_output_filepath))
             try_move(existing_output_filepath, actual_output_filepath)
@@ -435,7 +442,7 @@ def do_test_queue_work(i, q):
         #If this failed with a password, connection error or similar then abort this entire test run (which uses the same tds file). This will prevent running hundreds of tests that have to wait for a timeout before failing.
         for ex in result.get_exceptions():
             if ex in ['BadPassword', 'Disconnect', 'NoDriver', 'UnableToConnect', 'Unlicensed', 'ExpiredPassword', 'NoPassword']:
-                ABORT_TEST_RUN = True
+                abort_test_run = True
 
         q.task_done()
 
@@ -723,13 +730,16 @@ def run_tests_parallel(test_names, test_config):
         worker.setDaemon(True)
         worker.start()
 
+    #Build the queue of work.
     for test_file in test_names:
         work = QueueWork(test_config, test_file)
         test_queue.put(work)
         all_work.append(work)
 
+    #Do the work.
     test_queue.join()
     
+    #Analyze the results of the work.
     for work in all_work:
         all_test_results.update(work.results)
 

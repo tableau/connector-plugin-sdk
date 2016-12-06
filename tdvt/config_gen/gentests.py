@@ -35,7 +35,7 @@ def get_new_field_name(field, attrs):
     if 'bool_underscore' in attrs:
         m = re.search('\[(bool[0-9])\]', new_field)
         if m:
-            new_field = '[' + new_field + '_]'
+            new_field = '[' + m.group(1) + '_]'
     if 'fieldnameLower' in attrs:
         new_field = new_field.lower()        
     if 'fieldnameNoSpace' in attrs:

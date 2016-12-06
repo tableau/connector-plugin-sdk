@@ -1,0 +1,50 @@
+<results>
+  <test name='REGEXP_MATCH(&apos;Hello 1234 World&apos;,&apos;(\w+)\s+(\d+)\s+(\w+)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;Hello 1234 World&apos;, E&apos;(\\w+)\\s+(\\d+)\\s+(\\w+)&apos;) AS &quot;TEMP(Test)(4132828061)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      11.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4132828061)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;&apos;,&apos;(\w+)\s+(\d+)\s+(\w+)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;&apos;, E&apos;(\\w+)\\s+(\\d+)\\s+(\\w+)&apos;) AS &quot;TEMP(Test)(2473026489)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      11.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2473026489)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;Hello 1234 World&apos;,&apos;&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;Hello 1234 World&apos;, &apos;&apos;) AS &quot;TEMP(Test)(400627863)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      9.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(400627863)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

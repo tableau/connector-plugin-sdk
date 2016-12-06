@@ -48,6 +48,10 @@ class TestRunner(threading.Thread):
             for actual in actual_files:
                 myzip.write( actual )
 
+    def set_thread_count(self, threads):
+        self.sub_thread_count = threads
+        self.test_config.thread_count = threads
+
     def copy_output_files(self):
         self.copy_output_file("test_results.csv", TestOutputFiles.output_csv, True)
 
@@ -102,9 +106,8 @@ class TestRunner(threading.Thread):
         DEVNULL = open(os.devnull, 'wb')
         output = DEVNULL if not self.verbose else None
         self.thread_lock.acquire()
-        print ('\n')
-        print ("Calling " + str(self.test_config))
-        print ('\n')
+        logging.debug( "\nRunning " + str(self.test_config) + "\n")
+        print ("\nRunning {0} {1}\n".format( self.test_config.suite_name, self.test_config.config_file) )
         self.thread_lock.release()
 
         start_time = time.time()
@@ -118,6 +121,8 @@ class TestRunner(threading.Thread):
         except Exception as e:
             print (e)
             pass
+        logging.debug( "\nFinished " + str(self.test_config) + "\n")
+        print ("\nFinished {0} {1}\n".format( self.test_config.suite_name, self.test_config.config_file) )
         self.thread_lock.release()
         
         self.error_code = error_code
@@ -218,7 +223,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_thre
 
 def get_level_of_parallelization(args, total_threads):
     #This indicates how many database/test suite combinations to run at once
-    max_threads = 12
+    max_threads = 4
     #This indicates how many tests in each test suite thread to run at once. Each test is a database connection.
     max_sub_threads = 4
 
@@ -227,12 +232,7 @@ def get_level_of_parallelization(args, total_threads):
             max_threads = args.thread_count
         if args.thread_count_tdvt:
             max_sub_threads = args.thread_count_tdvt
-    else:
-        if total_threads < max_threads and total_threads > 0:
-            #There are fewer main threads needed than available threads, so increase the tdvt threads.
-            sub_threads = int((max_threads * max_sub_threads)/total_threads)
-            #Keep it reasonable.
-            max_sub_threads = min(sub_threads, 16)
+
     print ("Setting tdvt thread count to: " + str(max_threads))
     print ("Setting sub thread count to : " + str(max_sub_threads))
     return max_threads, max_sub_threads
@@ -384,10 +384,10 @@ def run_desired_tests(args, ds_registry):
     max_threads, max_sub_threads = get_level_of_parallelization(args, len(test_threads))
 
     for test_thread in test_threads:
-        test_thread.sub_thread_count = max_sub_threads
+        test_thread.set_thread_count(max_sub_threads)
 
     for test_thread in test_threads:
-        while active_thread_count(test_threads) > max_threads:
+        while active_thread_count(test_threads) >= max_threads:
             time.sleep(0.5)
         test_thread.daemon = True
         test_thread.start()
@@ -407,6 +407,7 @@ def run_desired_tests(args, ds_registry):
     return error_code
 
 def main():
+
     parser, ds_registry, args = init()
 
     if args.generate:

@@ -1,0 +1,66 @@
+<results>
+  <test name='REGEXP_EXTRACT_NTH(&quot;&quot;,&apos;([a-z]+)\s+(\w+)&apos;,2)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;&apos;, E&apos;([a-z]+)\\s+(\\w+)&apos;))[2]) AS &quot;TEMP(Test)(2389407215)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      32.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2389407215)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcc @#$%^^ abcd abce &quot;,&apos;([a-z]+)\s+(\w+)&apos;,2)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;abcc @#$%^^ abcd abce &apos;, E&apos;([a-z]+)\\s+(\\w+)&apos;))[2]) AS &quot;TEMP(Test)(3284414667)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      32.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3284414667)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abce&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcc @#$%^^ abcd abce &quot;,&apos;([a-z]+)\s+(\w+)&apos;,0)'>
+    <sql>
+      SELECT SUBSTRING( &apos;abcc @#$%^^ abcd abce &apos;, &apos;(&apos; || E&apos;([a-z]+)\\s+(\\w+)&apos; || &apos;)&apos;) AS &quot;TEMP(Test)(3474476659)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      34.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3474476659)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abcd abce&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcc @#$%^^ abcd abce &quot;,&apos;&apos;,2)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;abcc @#$%^^ abcd abce &apos;, &apos;&apos;))[2]) AS &quot;TEMP(Test)(2805951702)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      29.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2805951702)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

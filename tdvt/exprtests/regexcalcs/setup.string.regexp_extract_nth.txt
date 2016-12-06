@@ -1,0 +1,4 @@
+REGEXP_EXTRACT_NTH("",'([a-z]+)\s+(\w+)',2)
+REGEXP_EXTRACT_NTH("abcc @#$%^^ abcd abce ",'([a-z]+)\s+(\w+)',2)
+REGEXP_EXTRACT_NTH("abcc @#$%^^ abcd abce ",'([a-z]+)\s+(\w+)',0)
+REGEXP_EXTRACT_NTH("abcc @#$%^^ abcd abce ",'',2)

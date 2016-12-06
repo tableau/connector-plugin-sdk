@@ -119,6 +119,7 @@ class TestRegistry(object):
         try:
             #Create the test suites (groups of datasources to test)
             config = configparser.ConfigParser()
+            logging.debug("Reading registry ini file [{}]".format(ini_file))
             registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
             logging.debug("Reading registry ini file [{}]".format(registry_ini_file))
             config.read(registry_ini_file)

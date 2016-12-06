@@ -1,0 +1,4 @@
+REGEXP_REPLACE("!@#abc| w-$ %^&",'\$','dollar')
+REGEXP_REPLACE("!@#abc$$| w-$ %^&",'\$','dollar')
+REGEXP_REPLACE('','\$','dollar')
+REGEXP_REPLACE("I am a string",'','replaceme')
