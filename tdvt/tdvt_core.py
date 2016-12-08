@@ -334,7 +334,25 @@ class QueueWork(object):
         self.test_file = test_file
         self.results = {}
         self.timeout_seconds = 1200
-        
+
+
+def handle_test_failure(q, work, result=None):
+    if result == None:
+        result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+    work.results[work.test_file] = result
+    q.task_done()
+       
+def handle_timeout_test_failure(q, work):
+    result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+    result.test_timed_out = True
+    handle_test_failure(q, work, result)
+
+def handle_starting_test_failure(q, work):
+    result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+    result.test_failed_to_run = True
+    handle_test_failure(q, work, result)
+
+
 def do_test_queue_work(i, q):
     """This will be called in a queue.join() context, so make sure to mark all work items as done and
     continue through the loop. Don't try and exit or return from here if there are still work items in the queue.
@@ -383,10 +401,8 @@ def do_test_queue_work(i, q):
         if abort_test_run:
             #Do this here so we have the repro information from above.
             logging.debug("\nAborting test:" + work.test_file)
-            result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
-            result.test_failed_to_run = True
-            work.results[work.test_file] = result
-            q.task_done()
+            if not VERBOSE: sys.stdout.write('A')
+            handle_starting_test_failure(q, work)
             continue
 
         logging.debug(" calling " + ' '.join(cmdline))
@@ -397,15 +413,12 @@ def do_test_queue_work(i, q):
         except subprocess.CalledProcessError as e:
             logging.debug("CalledProcessError " + e.output)
             if not VERBOSE: sys.stdout.write('E')
-            q.task_done()
+            handle_test_failure(q, work)
             continue
         except subprocess.TimeoutExpired as e:
             logging.debug("Test timed out: " + work.test_file)
-            result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
-            result.test_timed_out = True
-            work.results[work.test_file] = result
             if not VERBOSE: sys.stdout.write('T')
-            q.task_done()
+            handle_timeout_test_failure(q, work)
             continue
 
         if cmd_output:
@@ -417,10 +430,8 @@ def do_test_queue_work(i, q):
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
             if not os.path.isfile( existing_output_filepath ):
                 logging.debug("Error: could not find test output file:" + existing_output_filepath)
-                result = TestResult(base_test_name, work.test_config, work.test_file)
-                work.results[work.test_file] = result
                 if not VERBOSE: sys.stdout.write('?')
-                q.task_done()
+                handle_test_failure(q, work)
                 continue
 
             #Copy the test process filename to the actual. filename.

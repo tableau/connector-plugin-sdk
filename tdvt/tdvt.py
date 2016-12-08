@@ -420,7 +420,7 @@ def create_setup_structure():
 
     try:
         tdvt_ini = open('config/tdvt/tdvt_override.ini', 'w')
-        tdvt_ini.write('#Add paths (using forward slashes) to the tabqueryclie.exe executable.\n')
+        tdvt_ini.write('#Add paths to tabquerycli.exe.\n')
         tdvt_ini.write('[DEFAULT]\n')
         tdvt_ini.write('TAB_CLI_EXE_X64 = \n')
         tdvt_ini.write('TAB_CLI_EXE_MAC = \n')
