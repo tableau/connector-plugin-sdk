@@ -174,6 +174,7 @@ class TdvtTestConfig(object):
         self.command_line = ''
         self.noheader = False
         self.thread_count = thread_count
+        self.leave_temp_dir = False
         if from_args:
             self.init_from_args(from_args)
         if from_json:
@@ -186,7 +187,8 @@ class TdvtTestConfig(object):
             self.tested_tuples = False
         if args.expected_dir:
             self.expected_dir = args.expected_dir
-
+        if args.noclean:
+            self.leave_temp_dir = True
         if args.thread_count_tdvt:
             self.thread_count = args.thread_count_tdvt
 
@@ -393,14 +395,16 @@ def do_test_queue_work(i, q):
         try:
             cmd_output = subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=work.timeout_seconds)
         except subprocess.CalledProcessError as e:
-            cmd_output = e.output
-            if not VERBOSE: sys.stdout.write('F')
+            logging.debug("CalledProcessError " + e.output)
+            if not VERBOSE: sys.stdout.write('E')
+            q.task_done()
+            continue
         except subprocess.TimeoutExpired as e:
             logging.debug("Test timed out: " + work.test_file)
             result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
             result.test_timed_out = True
             work.results[work.test_file] = result
-            if not VERBOSE: sys.stdout.write('F')
+            if not VERBOSE: sys.stdout.write('T')
             q.task_done()
             continue
 
@@ -415,7 +419,7 @@ def do_test_queue_work(i, q):
                 logging.debug("Error: could not find test output file:" + existing_output_filepath)
                 result = TestResult(base_test_name, work.test_config, work.test_file)
                 work.results[work.test_file] = result
-                if not VERBOSE: sys.stdout.write('F')
+                if not VERBOSE: sys.stdout.write('?')
                 q.task_done()
                 continue
 
@@ -883,15 +887,15 @@ def get_tds_full_path(root_directory, tds):
         return local_file
     return find_file_path(root_directory, tds, "tds")
 
-def generate_files(force=False):
+def generate_files(ds_registry, force=False):
     """Generate the config files and logical query test permutations."""
     root_directory = get_root_dir()
     logical_input = get_path('logicaltests/generate/input/')
     logical_output = get_path('logicaltests/setup')
+    logging.debug("Checking generated logical setup files...")
     generate_logical_files(logical_input, logical_output, force)
-    logging.debug("Generating logical setup files...")
-    generate_config_files(os.path.join(root_directory, os.path.join("config", "gen")), force)
-    logging.debug("Generating config files...")
+    logging.debug("Checking generated config files...")
+    generate_config_files(os.path.join(root_directory, os.path.join("config", "gen")), ds_registry, force)
     return 0
 
 def get_logical_test_file_paths(test_file, output_dir):
@@ -1049,12 +1053,12 @@ def run_failed_tests_impl(run_file, root_directory):
             all_test_results.update(results)
     return all_test_results
 
-def run_failed_tests(run_file):
+def run_failed_tests(run_file, output_dir):
     """Run the failed tests from the json output file."""
     #See if we need to generate test setup files.
     root_directory = get_root_dir()
     all_test_results = run_failed_tests_impl(run_file, root_directory)
-    return process_test_results(all_test_results, '', False, root_directory)
+    return process_test_results(all_test_results, '', False, output_dir)
 
 def run_tests(test_config):
     #See if we need to generate test setup files.

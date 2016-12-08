@@ -98,7 +98,6 @@ def LoadTest(config):
 
     return test_config
         
-
 class TestRegistry(object):
     """Add a new datasource here and then add it to the appropriate registries below."""
     def __init__(self, ini_file):
@@ -119,7 +118,6 @@ class TestRegistry(object):
         try:
             #Create the test suites (groups of datasources to test)
             config = configparser.ConfigParser()
-            logging.debug("Reading registry ini file [{}]".format(ini_file))
             registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
             logging.debug("Reading registry ini file [{}]".format(registry_ini_file))
             config.read(registry_ini_file)

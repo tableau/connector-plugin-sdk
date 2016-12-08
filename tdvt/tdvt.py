@@ -129,7 +129,8 @@ class TestRunner(threading.Thread):
 
     def __del__(self):
         try:
-            shutil.rmtree(self.temp_dir)
+            if not self.test_config.leave_temp_dir:
+                shutil.rmtree(self.temp_dir)
         except:
             pass
 
@@ -146,7 +147,7 @@ def delete_output_files(root_dir):
 def get_datasource_registry(platform):
     """Get the datasources to run based on the suite parameter."""
     if sys.platform.startswith("darwin"):
-        reg= MacRegistry()
+        reg = MacRegistry()
     else:
         reg = WindowsRegistry()
 
@@ -292,6 +293,7 @@ def create_parser():
     parser = argparse.ArgumentParser(description='TDVT Driver.', usage=usage_text())
     parser.add_argument('--list', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
     parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
+    parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     parser.add_argument('--run', '-r', dest='ds', help='Comma separated list of Datasource names to test or \'all\'.', required=False)
     parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='', nargs='?')
     parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='', nargs='?')
@@ -337,7 +339,7 @@ def active_thread_count(threads):
     return active
 
 def run_desired_tests(args, ds_registry):
-    generate_files(False)
+    generate_files(ds_registry, False)
     lock = threading.Lock()
     ds_to_run = ds_registry.get_datasources(args.ds)
     if not ds_to_run:
@@ -406,13 +408,36 @@ def run_desired_tests(args, ds_registry):
     
     return error_code
 
+def create_setup_structure():
+    try:
+        os.mkdir('tds')
+    except:
+        pass
+    try:
+        os.makedirs('config/tdvt')
+    except:
+        pass
+
+    try:
+        tdvt_ini = open('config/tdvt/tdvt_override.ini', 'w')
+        tdvt_ini.write('#Add paths (using forward slashes) to the tabqueryclie.exe executable.\n')
+        tdvt_ini.write('[DEFAULT]\n')
+        tdvt_ini.write('TAB_CLI_EXE_X64 = \n')
+        tdvt_ini.write('TAB_CLI_EXE_MAC = \n')
+    except:
+        pass
+
 def main():
 
     parser, ds_registry, args = init()
 
-    if args.generate:
+    if args.setup:
+        print ("Creating setup files...")
+        create_setup_structure()
+        sys.exit(0)
+    elif args.generate:
         print ("Generating config files...")
-        generate_files(True)
+        generate_files(ds_registry, True)
         print ("Done")
         #It's ok to call generate and then run some tests, so don't exit here.
     elif args.diff:
@@ -422,7 +447,8 @@ def main():
         run_diff(test_config, args.diff)
         sys.exit(0)
     elif args.run_file:
-        sys.exit(run_failed_tests(args.run_file))
+        output_dir = os.getcwd()
+        sys.exit(run_failed_tests(args.run_file, output_dir))
     elif args.list_ds is not None:
         print_configurations(ds_registry, args.list_ds)
         sys.exit(0)
