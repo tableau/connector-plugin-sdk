@@ -39,52 +39,82 @@ def LoadTest(config):
     CALCS_TDS = 'cast_calcs.'
     STAPLES_TDS = 'Staples.'
 
-    dsconfig = config['Datasource']
+    standard_tests = 'StandardTests'
+    lod_tests = 'LODTests'
+    staples_data_test = 'StaplesDataTest'
+    new_expression_test = 'NewExpressionTest'
+    new_logical_test = 'NewLogicalTest'
+    datasource_section = 'Datasource'
+
+    #Check the ini sections to make sure there is nothing that is unrecognized. This should be empty by the time we are done.
+    all_ini_sections = config.sections()
+
+    #This is required.
+    dsconfig = config[datasource_section]
+    all_ini_sections.remove(datasource_section)
     test_config = TestConfig(dsconfig['Name'], dsconfig['LogicalQueryFormat'], dsconfig.get('CommandLineOverride', ''))
 
     #Add the standard test suites.
-    try:
-        standard = config['StandardTests']
-        
-        test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'))
-        test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'))
-        test_config.add_expression_test('expression_test.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/')
-    except KeyError:
-        pass
+    if standard_tests in config.sections():
+        try:
+            standard = config[standard_tests]
+            all_ini_sections.remove(standard_tests)
+            
+            test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'))
+            test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'))
+            test_config.add_expression_test('expression_test.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/')
+        except KeyError as e:
+            logging.debug(e)
+            pass
 
     #Add the optional LOD tests.
-    try:
-        lod = config['LODTests']
-        test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'))
-        test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''), 'exprtests/lodcalcs/setup.*.txt')
-    except KeyError:
-        pass
+    if lod_tests in config.sections():
+        try:
+            lod = config[lod_tests]
+            all_ini_sections.remove(lod_tests)
+            test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'))
+            test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''), 'exprtests/lodcalcs/setup.*.txt')
+        except KeyError as e:
+            logging.debug(e)
+            pass
 
     #Add the optional Staples data check test.
-    try:
-        staples_data = config['StaplesDataTest']
-        test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt')
-    except KeyError:
-        pass
+    if staples_data_test in config.sections():
+        try:
+            staples_data = config[staples_data_test]
+            all_ini_sections.remove(staples_data_test)
+            test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt')
+        except KeyError as e:
+            logging.debug(e)
+            pass
 
     #Add any extra expression tests.
     for section in config.sections():
-        if 'NewExpressionTest' in section:
+        if new_expression_test in section:
             try:
                 sect = config[section]
+                all_ini_sections.remove(section)
                 test_config.add_expression_test(sect.get('Name',''), sect.get('TDS',''), sect.get('Exclusions',''), sect.get('TestPath',''))
-            except KeyError:
+            except KeyError as e:
+                logging.debug(e)
                 pass
 
     #Add any extra logical tests.
     for section in config.sections():
-        if 'NewLogicalTest' in section:
+        if new_logical_test in section:
             try:
                 sect = config[section]
+                all_ini_sections.remove(section)
                 test_config.add_logical_test(sect.get('Name',''), sect.get('TDS',''), sect.get('Exclusions',''), sect.get('TestPath',''))
-            except KeyError:
+            except KeyError as e:
+                logging.debug(e)
                 pass
+    if all_ini_sections:
+        logging.debug("Found unparsed sections in the ini file.")
+        for section in all_ini_sections:
+            logging.debug("Unparsed section: {0}".format(section))
 
+    logging.debug(test_config)
     return test_config
         
 class TestRegistry(object):
@@ -98,7 +128,12 @@ class TestRegistry(object):
         for f in ini_files:
             logging.debug("Reading ini file [{}]".format(f))
             config = configparser.ConfigParser()
-            config.read(f)
+            try:
+                config.read(f)
+            except configparser.ParsingError as e:
+                logging.debug(e)
+                continue
+
             self.add_test(LoadTest(config))
 
         self.load_registry(ini_file)
