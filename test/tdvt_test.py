@@ -256,6 +256,22 @@ class ConfigTest(unittest.TestCase):
             found = [y for y in x if y == test] 
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
+    def test_load_windows_override(self):
+        ini_file = get_path('tool_test/ini', 'windows_override.ini', __name__)
+        reg = datasource_list.TestRegistry('')
+        reg.load_registry(ini_file)
+       
+        standard = ['teradata', 'netezza']
+        all_passing = ['teradata', 'netezza', 'bigquery', 'exasolution']
+        all_test = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'teradata', 'netezza', 'bigquery', 'exasolution']
+        all_test2 = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'teradata', 'netezza', 'bigquery', 'exasolution', 'teradata', 'netezza', 'bigquery', 'exasolution']
+
+        self.assertTrue(standard == reg.get_datasources('standard'))
+        self.assertTrue(all_passing == reg.get_datasources('all_passing'))
+        self.assertTrue(all_test == reg.get_datasources('all_test'))
+        self.assertTrue(all_test2 == reg.get_datasources('all_test2'))
+ 
+
     def test_load_override(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'override.ini', __name__))

@@ -154,10 +154,6 @@ def get_datasource_registry(platform):
     return reg
 
 def print_configurations(ds_reg, dsname):
-    print ("\nAvailable datasources")
-    ds_all = ds_reg.get_datasources('all')
-    for ds in sorted(ds_all):
-        print (ds)
     if dsname:
         ds_to_run = ds_reg.get_datasources(dsname)
         print ("\nDatasource set: " + dsname)
@@ -168,13 +164,18 @@ def print_configurations(ds_reg, dsname):
                 continue
             print ("\tLogical tests:")
             for x in test_config.get_logical_tests():
-                print ("\t"*2 + x.config_file_name)
+                print ("\t"*2 + str(x))
             print ("\tExpression tests:")
             for x in test_config.get_expression_tests():
-                print ("\t"*2 + x.config_file_name)
-    print ("\nAvailable suites:")
-    for suite in ds_reg.suite_map:
-        print (suite)
+                print ("\t"*2 + str(x))
+    else:
+        print ("\nAvailable datasources")
+        ds_all = ds_reg.get_datasources('all')
+        for ds in sorted(ds_all):
+            print (ds)
+        print ("\nAvailable suites:")
+        for suite in ds_reg.suite_map:
+            print (suite)
 
 def get_temporary_logical_test_config(temp_configs, test_pattern, tds_pattern, exclude_pattern, ds_info):
         if not test_pattern or not tds_pattern:

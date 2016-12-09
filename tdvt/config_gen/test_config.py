@@ -18,7 +18,7 @@ class TestSet(object):
         self.allow_pattern = allow_pattern
 
     def __str__(self):
-        return "[{0}] [{1}] [{2}] [{3}]".format(self.config_file_name, self.tds_name, self.exclusions, self.allow_pattern)
+        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}]".format(self.config_file_name, self.tds_name, self.exclusions, self.allow_pattern)
     
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -100,25 +100,11 @@ class TestConfig(object):
                 f.write(exclude_pattern + '\n')
         f.close()
 
-    def print_config_files(self):
-        msg = ""
-        for test in self.logical_test_set + self.expression_test_set:
-            msg += self.print_config_file(test.config_file_name, test.allow_pattern, test.exclusions, msg)
-            msg += "\n"
-        return msg
-
-    def print_config_file(self, name, allow, exclude, msg):
-        msg = name + '\n'
-        msg += '\tallow:\n'
-        msg +=  '\t' + allow + '\n'
-        if len(exclude) > 0:
-            msg += '\n\texclude:\n'
-            for exclude_pattern in exclude.split(','):
-                msg += '\t' + exclude_pattern + '\n'
-        return msg
-
     def __str__(self):
-        return self.print_config_files()
+        msg = ''
+        for test in self.get_logical_tests() + self.get_expression_tests():
+            msg += str(test) + "\n"
+        return msg
 
 class SingleTestConfig(object):
     """Maintain information about running a single test. This is different that running a test suite which has a premade config file."""

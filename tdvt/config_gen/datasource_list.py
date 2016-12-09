@@ -149,35 +149,31 @@ class TestRegistry(object):
 
             self.add_test(LoadTest(config))
 
-        self.load_registry(ini_file)
+        self.load_ini_file(ini_file)
 
-    def load_registry(self, ini_file):
+    def load_ini_file(self, ini_file):
+        #Create the test suites (groups of datasources to test)
+        registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
+        logging.debug("Reading registry ini file [{}]".format(registry_ini_file))
+        self.load_registry(registry_ini_file)
+
+    def load_registry(self, registry_ini_file):
         try:
-            #Create the test suites (groups of datasources to test)
             config = configparser.ConfigParser()
-            registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
-            logging.debug("Reading registry ini file [{}]".format(registry_ini_file))
             config.read(registry_ini_file)
             ds = config['DatasourceRegistry']
 
-            suite_all = self.interpret_ds_list(ds.get('all', ''))
-            if suite_all:
-                self.suite_map['all'] = suite_all
-            suite_standard = self.interpret_ds_list(ds.get('standard', ''))
-            if suite_standard:
-                self.suite_map['standard'] = suite_standard
-            suite_slow = self.interpret_ds_list(ds.get('slow', ''))
-            if suite_slow:
-                self.suite_map['slow'] = suite_slow
+            for suite_name in ds:
+                self.suite_map[suite_name] = self.interpret_ds_list(ds[suite_name], False).split(',')
 
         except KeyError:
             #Create a simple default.
             self.suite_map['all'] = self.dsnames
 
-    def interpret_ds_list(self, ds_list):
+    def interpret_ds_list(self, ds_list, built_list=None):
         if ds_list == '*':
-            return [x for x in self.dsnames]
-        return [x.strip() for x in ds_list.split(',')]
+            return ','.join([x for x in self.dsnames])
+        return ds_list
 
     def add_test(self, test_config):
         self.dsnames[test_config.dsname] = test_config
@@ -194,7 +190,7 @@ class TestRegistry(object):
         for ds in suite.split(','):
             ds = ds.strip()
             if ds in self.suite_map:
-                ds_to_run.extend(self.suite_map[ds])
+                ds_to_run.extend(self.get_datasources(','.join(self.suite_map[ds])))
             elif ds:
                 ds_to_run.append(ds)
         
