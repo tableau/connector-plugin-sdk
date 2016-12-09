@@ -29,6 +29,8 @@ def LoadTest(config):
 
     [StaplesDataTest]
 
+    [UnionTest]
+
     [NewExpressionTest1]
     Name = expression_test_dates.
     TDS = cast_calcs.bigquery_sql_dates.tds
@@ -44,6 +46,7 @@ def LoadTest(config):
     staples_data_test = 'StaplesDataTest'
     new_expression_test = 'NewExpressionTest'
     new_logical_test = 'NewLogicalTest'
+    union_test = 'UnionTest'
     datasource_section = 'Datasource'
 
     #Check the ini sections to make sure there is nothing that is unrecognized. This should be empty by the time we are done.
@@ -62,7 +65,7 @@ def LoadTest(config):
             
             test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'))
             test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'))
-            test_config.add_expression_test('expression_test.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/')
+            test_config.add_expression_test('expression.standard.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/')
         except KeyError as e:
             logging.debug(e)
             pass
@@ -84,6 +87,16 @@ def LoadTest(config):
             staples_data = config[staples_data_test]
             all_ini_sections.remove(staples_data_test)
             test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt')
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
+    #Add the optional Union test.
+    if union_test in config.sections():
+        try:
+            union = config[union_test]
+            all_ini_sections.remove(union_test)
+            test_config.add_expression_test('logical.union.', CALCS_TDS, '', test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'))
         except KeyError as e:
             logging.debug(e)
             pass
