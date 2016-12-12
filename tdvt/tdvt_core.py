@@ -170,7 +170,6 @@ class TdvtTestConfig(object):
         self.suite_name = suite_name
         self.d_override = override
         self.verbose = verbose
-        self.tds = tds
         self.command_line = ''
         self.noheader = False
         self.thread_count = thread_count
@@ -179,6 +178,8 @@ class TdvtTestConfig(object):
             self.init_from_args(from_args)
         if from_json:
             self.init_from_json(from_json)
+        if tds:
+            self.tds = tds
 
     def init_from_args(self, args):
         if args.compare_sql: 
@@ -1026,42 +1027,44 @@ def run_failed_tests_impl(run_file, root_directory):
         logging.debug("Error opening " + run_file)
         return
 
-    test_to_run = {}
-    test_to_run['logical'] = {}
-    test_to_run['expression'] = {}
-    expr_tests = test_to_run['expression']
-    log_tests = test_to_run['logical']
+    expr_tests = {}
+    log_tests = {}
 
     failed_tests = tests['failed_tests']
     for f in failed_tests:
-        logging.debug("Found failed test: " + f['test_file'])
+        logging.debug("Found failed test: " + f['test_file'] + " and tds " + f['tds'])
         tt = f['test_type']
         tds = f['tds']
         if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
             if tds not in expr_tests:
                 expr_tests[tds] = []
-            expr_tests[tds].append(f['test_file'])
+            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+            test_config.logical = False
+            expr_tests[tds].append( [f['test_file'], test_config] )
 
         if tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
             if tds not in log_tests:
                 log_tests[tds] = []
-            log_tests[tds].append(f['test_file'])
+            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+            test_config.logical = True
+            log_tests[tds].append( [f['test_file'], test_config] )
 
     all_test_results = {}
     for tds in expr_tests:
-        if len(expr_tests[tds]) > 0:
-            #Get the saved additional arguments.
-            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
-            test_config.logical = False
-            results = run_tests_parallel(expr_tests[tds], test_config)
-            all_test_results.update(results)
+        for test_pair in expr_tests[tds]:
+            if len(test_pair) == 2:
+                test_files = test_pair[0]
+                test_config = test_pair[1]
+                results = run_tests_parallel([test_files], test_config)
+                all_test_results.update(results)
     
     for tds in log_tests:
-        if len(log_tests[tds]) > 0:
-            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
-            test_config.logical = True
-            results = run_tests_parallel(log_tests[tds], test_config)
-            all_test_results.update(results)
+        for test_pair in log_tests[tds]:
+            if len(test_pair) == 2:
+                test_files = test_pair[0]
+                test_config = test_pair[1]
+                results = run_tests_parallel([test_files], test_config)
+                all_test_results.update(results)
     return all_test_results
 
 def run_failed_tests(run_file, output_dir):
