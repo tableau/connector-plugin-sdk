@@ -5,7 +5,7 @@ except ImportError:
 
 setup(
     name='tdvt',
-    version='1.1.7',
+    version='1.1.8',
     author='Tableau',
     author_email='github@tableau.com',
     url='https://github.com/tableau/TODO',
