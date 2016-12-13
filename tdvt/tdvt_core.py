@@ -160,7 +160,7 @@ class TestOutput(object):
 
 class TdvtTestConfig(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 4, from_json = None):
+    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6, from_json = None):
         self.tested_sql = tested_sql
         self.tested_tuples = tested_tuples
         self.expected_dir = expected_dir
