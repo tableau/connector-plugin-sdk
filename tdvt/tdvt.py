@@ -178,7 +178,6 @@ def print_configurations(ds_reg, dsname):
             print (suite)
             print ("\t" + ','.join(ds_reg.suite_map[suite]))
             print ('\n')
-                    
 
 def get_temporary_logical_test_config(temp_configs, test_pattern, tds_pattern, exclude_pattern, ds_info):
         if not test_pattern or not tds_pattern:
