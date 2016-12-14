@@ -176,6 +176,9 @@ def print_configurations(ds_reg, dsname):
         print ("\nAvailable suites:")
         for suite in ds_reg.suite_map:
             print (suite)
+            print ("\t" + ','.join(ds_reg.suite_map[suite]))
+            print ('\n')
+                    
 
 def get_temporary_logical_test_config(temp_configs, test_pattern, tds_pattern, exclude_pattern, ds_info):
         if not test_pattern or not tds_pattern:
@@ -225,7 +228,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_thre
 
 def get_level_of_parallelization(args, total_threads):
     #This indicates how many database/test suite combinations to run at once
-    max_threads = 4
+    max_threads = 6
     #This indicates how many tests in each test suite thread to run at once. Each test is a database connection.
     max_sub_threads = 4
 
