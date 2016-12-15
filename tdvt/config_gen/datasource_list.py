@@ -207,3 +207,7 @@ class MacRegistry(TestRegistry):
     def __init__(self):
         super(MacRegistry, self).__init__('mac')
 
+class LinuxRegistry(TestRegistry):
+    """Linux specific test suites."""
+    def __init__(self):
+        super(LinuxRegistry, self).__init__('linux')

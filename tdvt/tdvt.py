@@ -19,7 +19,7 @@ from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, co
 from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
 
 #This contains the dictionary of configs you can run.
-from .config_gen.datasource_list import WindowsRegistry,MacRegistry
+from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistry
 from .config_gen.test_config import TestSet
 
 class TestOutputFiles(object):
@@ -148,6 +148,8 @@ def get_datasource_registry(platform):
     """Get the datasources to run based on the suite parameter."""
     if sys.platform.startswith("darwin"):
         reg = MacRegistry()
+    elif sys.platform.startswith("linux"):
+        reg = LinuxRegistry()
     else:
         reg = WindowsRegistry()
 
