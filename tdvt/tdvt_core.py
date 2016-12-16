@@ -598,9 +598,10 @@ def compare_results(test_name, test_file, full_test_file, test_config):
     expected_file_version = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
-            logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
+            #logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
             #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
-            try_move(actual_file, expected_file)
+            #Commenting this out for now since it can make tests pass when they should really fail. Might be a good command line option though.
+            #try_move(actual_file, expected_file)
             return result
         #Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(threading.current_thread().name + " Comparing " + actual_file + " to " + expected_file)
