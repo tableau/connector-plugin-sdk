@@ -31,9 +31,9 @@ Adding a new datasource is easy. To run the expression tests first create a tds 
 2. Open the tds file in a text editor and embed the password in the <connection> tag of the tds file.
 3. Rename the connection names to 'leaf'. See one of the checked in tds files for an example. `<named-connection name='leaf'> and <relation connection='leaf' >`
 4. Create an ini file in tdvt/config. The ini file names the test suite and specifies which tests to run.
-5. Run: `tdvt --generate`
+5. Run: `-m tdvt.tdvt --generate`
 
-Now you can run the tests using `tdvt_runner.py --run your_suite_name`
+Now you can run the tests using `-m tdvt.tdvt.py --run your_suite_name`
 
 TDC files are also supported through the Tableau Repository.
 

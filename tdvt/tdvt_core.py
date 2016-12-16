@@ -148,11 +148,11 @@ class TestOutput(object):
             self.test_case_map[i].diff_count = diff_counts[i]
     
     def get_error_messages(self):
-        err_msgs = [ tc.error_message for tc in self.test_case_map if tc.error_message ]
+        err_msgs = [ tc.error_message for tc in self.test_case_map if not tc.all_passed() and tc.error_message ]
         return err_msgs
 
     def get_exceptions(self):
-        exceptions = [ tc.error_type for tc in self.test_case_map if tc.error_type ]
+        exceptions = [ tc.error_type for tc in self.test_case_map if not tc.all_passed() and tc.error_type ]
         return exceptions
 
     def __json__(self):
@@ -259,7 +259,7 @@ class TestResult(object):
             msgs = self.actual_results.get_error_messages()
             if not msgs:
                 return "Expected does not match any actual file."
-            return ".".join(msgs)
+            return ''
         else:
             return "No results found."
         return "Unknown failure."
@@ -598,9 +598,10 @@ def compare_results(test_name, test_file, full_test_file, test_config):
     expected_file_version = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
-            logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
+            #logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
             #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
-            try_move(actual_file, expected_file)
+            #Commenting this out for now since it can make tests pass when they should really fail. Might be a good command line option though.
+            #try_move(actual_file, expected_file)
             return result
         #Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(threading.current_thread().name + " Comparing " + actual_file + " to " + expected_file)
@@ -716,7 +717,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
 
                 error_msg = None
                 if passed == 0:
-                    error_msg = test_result.get_failure_message() if case.error_message is None or case.error_message is '' else case.error_message
+                    error_msg = case.error_message if case.error_message else test_result.get_failure_message()
 
                 csv_out.writerow([tdsname, test_name, str(passed), str(matched), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples])
                 test_case_index += 1

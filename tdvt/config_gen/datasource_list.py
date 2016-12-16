@@ -96,7 +96,7 @@ def LoadTest(config):
         try:
             union = config[union_test]
             all_ini_sections.remove(union_test)
-            test_config.add_expression_test('logical.union.', CALCS_TDS, '', test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'))
+            test_config.add_logical_test('logical.union.', CALCS_TDS, '', test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'))
         except KeyError as e:
             logging.debug(e)
             pass
