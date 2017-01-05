@@ -1,0 +1,18 @@
+<results>
+  <test name='HOST(&apos;http://www.tableau.com/support/drivers&apos;)'>
+    <sql>
+      SELECT HOST(&apos;http://www.tableau.com/support/drivers&apos;) AS [TEMP_Test__145165639__0_],&#10;  1 AS [X__alias__0]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 2
+    </sql>
+    <query-time>
+      890.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(145165639)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;www.tableau.com&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,18 @@
+<results>
+  <test name='DOMAIN(&apos;http://www.tableau.com/support/drivers&apos;)'>
+    <sql>
+      SELECT DOMAIN(&apos;http://www.tableau.com/support/drivers&apos;) AS [TEMP_Test__3133343847__0_],&#10;  1 AS [X__alias__0]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 2
+    </sql>
+    <query-time>
+      1617.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3133343847)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;tableau.com&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

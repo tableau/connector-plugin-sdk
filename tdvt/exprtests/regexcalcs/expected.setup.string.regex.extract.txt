@@ -1,0 +1,24 @@
+<results>
+  <test name='REGEXP_EXTRACT([str0], &apos;(E.{3})&apos;)'>
+    <sql>
+      SELECT REGEXP_EXTRACT([str0],&apos;(E.{3})&apos;) AS [TEMP_Test__2625345313__0_]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      820.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(2625345313)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E SU&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ECHN&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

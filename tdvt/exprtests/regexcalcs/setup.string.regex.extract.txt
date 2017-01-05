@@ -1,0 +1,1 @@
+REGEXP_EXTRACT([str0], '(E.{3})')

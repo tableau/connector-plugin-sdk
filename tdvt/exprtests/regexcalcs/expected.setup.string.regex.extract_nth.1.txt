@@ -1,0 +1,46 @@
+<results>
+  <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 0)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT_NTH(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(E.)&apos;, 0) AS &quot;TEMP(Test)(24557538)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY TABLEAU.REGEXP_EXTRACT_NTH(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(E.)&apos;, 0)
+    </sql>
+    <query-time>
+      12.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(24557538)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 1)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT_NTH(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(E.)&apos;, 1) AS &quot;TEMP(Test)(3541328736)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY TABLEAU.REGEXP_EXTRACT_NTH(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(E.)&apos;, 1)
+    </sql>
+    <query-time>
+      10.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3541328736)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -48,6 +48,9 @@ def LoadTest(config):
     new_logical_test = 'NewLogicalTest'
     union_test = 'UnionTest'
     datasource_section = 'Datasource'
+    regex_test = 'RegexTest'
+
+    KEY_EXCLUSIONS = 'Exclusions'
 
     #Check the ini sections to make sure there is nothing that is unrecognized. This should be empty by the time we are done.
     all_ini_sections = config.sections()
@@ -101,13 +104,23 @@ def LoadTest(config):
             logging.debug(e)
             pass
 
+    #Add the optional Regex test.
+    if regex_test in config.sections():
+        try:
+            regex = config[regex_test]
+            all_ini_sections.remove(regex_test)
+            test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''), 'exprtests/regexcalcs')
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
     #Add any extra expression tests.
     for section in config.sections():
         if new_expression_test in section:
             try:
                 sect = config[section]
                 all_ini_sections.remove(section)
-                test_config.add_expression_test(sect.get('Name',''), sect.get('TDS',''), sect.get('Exclusions',''), sect.get('TestPath',''))
+                test_config.add_expression_test(sect.get('Name',''), sect.get('TDS',''), sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''))
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -118,7 +131,7 @@ def LoadTest(config):
             try:
                 sect = config[section]
                 all_ini_sections.remove(section)
-                test_config.add_logical_test(sect.get('Name',''), sect.get('TDS',''), sect.get('Exclusions',''), sect.get('TestPath',''))
+                test_config.add_logical_test(sect.get('Name',''), sect.get('TDS',''), sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''))
             except KeyError as e:
                 logging.debug(e)
                 pass
