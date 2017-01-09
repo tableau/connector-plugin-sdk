@@ -239,6 +239,7 @@ class TestResult(object):
         self.test_file = test_file
         self.path_to_expected = ''
         self.path_to_actual = ''
+        self.overall_error_message = ''
 
     def __json__(self):
         return {'all_passed' : self.all_passed(), 'name' : self.name, 
@@ -259,9 +260,12 @@ class TestResult(object):
             msgs = self.actual_results.get_error_messages()
             if not msgs:
                 return "Expected does not match any actual file."
-            return ''
+            return "Errors: " + ". ".join(msgs)
+        elif self.overall_error_message:
+            return self.overall_error_message
         else:
             return "No results found."
+
         return "Unknown failure."
 
     def get_exceptions(self):
@@ -337,9 +341,13 @@ class QueueWork(object):
         self.timeout_seconds = 1200
 
 
-def handle_test_failure(q, work, result=None):
+def handle_test_failure(q, work, result=None, error_msg=None):
     if result == None:
         result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+
+    if error_msg:
+        result.overall_error_message = error_msg
+
     work.results[work.test_file] = result
     q.task_done()
        
@@ -408,14 +416,15 @@ def do_test_queue_work(i, q):
 
         logging.debug(" calling " + ' '.join(cmdline))
 
+        saved_error_message = None
         cmd_output = None
         try:
             cmd_output = subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=work.timeout_seconds)
         except subprocess.CalledProcessError as e:
-            logging.debug("CalledProcessError " + e.output)
-            if not VERBOSE: sys.stdout.write('E')
-            handle_test_failure(q, work)
-            continue
+            logging.debug("CalledProcessError for " + work.test_file + ". Error: "  + e.output)
+            #Let processing continue so it can try and find any output file which will contain database error messages.
+            #Save the error message in case there is no result file to get it from.
+            saved_error_message = e.output
         except subprocess.TimeoutExpired as e:
             logging.debug("Test timed out: " + work.test_file)
             if not VERBOSE: sys.stdout.write('T')
@@ -423,7 +432,7 @@ def do_test_queue_work(i, q):
             continue
 
         if cmd_output:
-            logging.debug(str(cmd_output))
+            logging.debug("Command line output for " + work.test_file + ". " + str(cmd_output))
 
         test_name = get_base_test(work.test_file)
         new_test_file = work.test_file
@@ -432,7 +441,7 @@ def do_test_queue_work(i, q):
             if not os.path.isfile( existing_output_filepath ):
                 logging.debug("Error: could not find test output file:" + existing_output_filepath)
                 if not VERBOSE: sys.stdout.write('?')
-                handle_test_failure(q, work)
+                handle_test_failure(q, work, error_msg = saved_error_message)
                 continue
 
             #Copy the test process filename to the actual. filename.
