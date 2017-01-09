@@ -1,0 +1,46 @@
+<results>
+  <test name='REGEXP_REPLACE([str0], &apos;OFFICE&apos;, &apos;ZZZ&apos;)'>
+    <sql>
+      SELECT REGEXP_REPLACE([str0],&apos;OFFICE&apos;,&apos;ZZZ&apos;) AS [TEMP_Test__3716627254__0_]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      834.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3716627254)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ZZZ SUPPLIES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE([str0], &apos;Z&apos;, &apos;o&apos;)'>
+    <sql>
+      SELECT REGEXP_REPLACE([str0],&apos;Z&apos;,&apos;o&apos;) AS [TEMP_Test__2192623610__0_]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      853.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(2192623610)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

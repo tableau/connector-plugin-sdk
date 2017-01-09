@@ -1,0 +1,57 @@
+<results>
+  <test name='STR(STR([str2]))'>
+    <sql>
+      SELECT CAST(CAST([Calcs].[str2] as nvarchar(1024)) as nvarchar(1024)) AS [TEMP(Test)(2730627169)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY CAST(CAST([Calcs].[str2] as nvarchar(1024)) as nvarchar(1024))
+    </sql>
+    <query-time>
+      57.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(2730627169)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;five&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fourteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;nine&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ten&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;three&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;twelve&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
