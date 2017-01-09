@@ -191,7 +191,7 @@ class ConfigTest(unittest.TestCase):
 
         test3 = TestSet('logical.lod.aurora.cfg', 'Staples.aurora.tds', '', 'logicaltests/setup/lod/setup.*.bool_.xml')
 
-        test4 = TestSet('expression_test.aurora.cfg', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/')
+        test4 = TestSet('expression.standard.aurora.cfg', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/')
 
         test5 = TestSet('expression.lod.aurora.cfg', 'cast_calcs.aurora.tds', '', 'exprtests/lodcalcs/setup.*.txt')
 
@@ -199,7 +199,8 @@ class ConfigTest(unittest.TestCase):
         
         for test in tests:
             found = [y for y in x if y == test] 
-            self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
+            msg = "[Did not find expected value of [{0}]".format(test)
+            self.assertTrue(found, msg)
 
 
     def test_load_ini_missing(self):
@@ -212,7 +213,7 @@ class ConfigTest(unittest.TestCase):
 
         test2 = TestSet('logical.staples.aurora.cfg', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml')
 
-        test3 = TestSet('expression_test.aurora.cfg', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/')
+        test3 = TestSet('expression.standard.aurora.cfg', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/')
 
         tests = [test1, test2, test3]
         
@@ -230,7 +231,7 @@ class ConfigTest(unittest.TestCase):
 
         test2 = TestSet('logical.staples.aurora.cfg', 'Staples.aurora.tds', '', 'logicaltests/setup/staples/setup.*.bool_.xml')
 
-        test3 = TestSet('expression_test.aurora.cfg', 'cast_calcs.aurora.tds', '', 'exprtests/standard/')
+        test3 = TestSet('expression.standard.aurora.cfg', 'cast_calcs.aurora.tds', '', 'exprtests/standard/')
 
         tests = [test1, test2, test3]
         
@@ -248,7 +249,7 @@ class ConfigTest(unittest.TestCase):
 
         test2 = TestSet('logical.staples.bigquery.cfg', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml')
 
-        test3 = TestSet('expression_test.bigquery.cfg', 'cast_calcs.bigquery.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse', 'exprtests/standard/')
+        test3 = TestSet('expression.standard.bigquery.cfg', 'cast_calcs.bigquery.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse', 'exprtests/standard/')
 
         tests = [test1, test2, test3]
         
@@ -282,7 +283,7 @@ class ConfigTest(unittest.TestCase):
 
         test2 = TestSet('logical.staples.bigquery.cfg', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml')
 
-        test3 = TestSet('expression_test.bigquery.cfg', 'cast_calcs.bigquery.tds', '', 'exprtests/standard/')
+        test3 = TestSet('expression.standard.bigquery.cfg', 'cast_calcs.bigquery.tds', '', 'exprtests/standard/')
 
         tests = [test1, test2, test3]
         
@@ -304,7 +305,7 @@ class ConfigTest(unittest.TestCase):
 
         test3 = TestSet('logical.lod.bigquery_sql.cfg', 'Staples.bigquery_sql.tds', '', 'logicaltests/setup/lod/setup.*.bigquery_sql.xml')
 
-        test4 = TestSet('expression_test.bigquery_sql.cfg', 'cast_calcs.bigquery_sql.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls,logical', 'exprtests/standard/')
+        test4 = TestSet('expression.standard.bigquery_sql.cfg', 'cast_calcs.bigquery_sql.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls,logical', 'exprtests/standard/')
 
         test5 = TestSet('expression_test_dates.bigquery_sql.cfg', 'cast_calcs.bigquery_sql_dates.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls', 'exprtests/standard/')
 
