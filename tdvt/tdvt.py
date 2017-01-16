@@ -38,6 +38,7 @@ class TestRunner(threading.Thread):
         self.temp_dir = tempfile.mkdtemp(prefix=self.test_config.suite_name)
         self.test_config.output_dir = self.temp_dir
         self.sub_thread_count = 1
+        self.sub_thread_count_set = False
 
     def copy_actual_files(self):
         dst = os.path.join(os.getcwd(), TestOutputFiles.output_actuals)
@@ -49,8 +50,17 @@ class TestRunner(threading.Thread):
                 myzip.write( actual )
 
     def set_thread_count(self, threads):
+        logging.debug("test suite " + self.test_config.suite_name + " subthread set to: " + str(threads))
         self.sub_thread_count = threads
         self.test_config.thread_count = threads
+        self.sub_thread_count_set = True
+
+    def get_thread_count(self):
+        return self.sub_thread_count
+
+    def has_set_thread_count(self):
+        return self.sub_thread_count_set
+    
 
     def copy_output_files(self):
         self.copy_output_file("test_results.csv", TestOutputFiles.output_csv, True)
@@ -224,14 +234,26 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_thre
         test_config.config_file = test_set.config_file_name
 
         runner = TestRunner(test_set, test_config, lock, VERBOSE)
+
+        #if ini file has subthread setting, set it now.
+        if ds_info.maxsubthread > 0:
+            runner.set_thread_count(ds_info.maxsubthread);
+
         test_threads.append(runner)
         test_run += 1
 
-def get_level_of_parallelization(args, total_threads):
+def get_level_of_parallelization(args, total_threads, max_thread_p_d, max_subthread_p_d):
     #This indicates how many database/test suite combinations to run at once
     max_threads = 6
     #This indicates how many tests in each test suite thread to run at once. Each test is a database connection.
     max_sub_threads = 4
+
+    #arg thread setting has first priority.
+    #thread setting on ini file has second priority
+    if max_thread_p_d > 0:
+        max_threads = max_thread_p_d
+    if max_subthread_p_d > 0:
+        max_sub_threads = max_subthread_p_d
 
     if args.thread_count or args.thread_count_tdvt:
         if args.thread_count:
@@ -359,12 +381,21 @@ def run_desired_tests(args, ds_registry):
     error_code = 0
     test_run = 0
     start_time = time.time()
+    max_threads_per_datasource = 0
+    max_sub_threads_per_datasource = 0
+
     for ds in ds_to_run:
         ds_info = ds_registry.get_datasource_info(ds)
         if not ds_info:
             continue
 
         print ("Testing " + ds)
+        max_threads_per_datasource = ds_info.maxthread;
+        max_sub_threads_per_datasource = ds_info.maxsubthread;
+        if max_threads_per_datasource > 0:
+            print ("thread setting in " + ds +".ini = " + str(max_threads_per_datasource))
+        if max_sub_threads_per_datasource > 0:
+            print ("subthread setting in " + ds + ".ini = " + str(max_sub_threads_per_datasource))
 
         suite = ds
         run_expr_tests = True if args.logical_only is None and args.logical_pattern is None else False
@@ -388,10 +419,17 @@ def run_desired_tests(args, ds_registry):
         print ("No tests found. Check arguments.")
         sys.exit()
 
-    max_threads, max_sub_threads = get_level_of_parallelization(args, len(test_threads))
+    #if has multi datasource to run, then max_threads_per_datasource can not apply.
+    if len(ds_to_run) > 1:
+        max_threads_per_datasource = 0
+        max_sub_threads_per_datasource = 0
+
+    max_threads, max_sub_threads = get_level_of_parallelization(args, len(test_threads), max_threads_per_datasource, max_sub_threads_per_datasource)
 
     for test_thread in test_threads:
-        test_thread.set_thread_count(max_sub_threads)
+        #if this test_thread has already set subthread_count, ignore it.
+        if test_thread.has_set_thread_count() == False:
+            test_thread.set_thread_count(max_sub_threads)
 
     for test_thread in test_threads:
         while active_thread_count(test_threads) >= max_threads:
