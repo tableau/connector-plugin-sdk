@@ -71,6 +71,7 @@ LogicalExclusions_Staples = Filter.Trademark
 ExpressionExclusions_Standard = string.ascii,string.char,logical
 
 *#If you remove this section the your test sute will not include the Level of Detail tests.*
+
 [LODTests]
 
 *\#You don't need to specify anything to add this test suite, but you can exclude tests here too:*
@@ -80,18 +81,27 @@ ExpressionExclusions_Standard = string.ascii,string.char,logical
 *ExpressionExclusions_Calcs = *
 
 *#This test will verify that your Staples table is loaded correctly.* 
+
 [StaplesDataTest]
 
 *\#You can add a new arbitrary test suite like this.*
+
 [NewExpressionTest1]
+
 *You could add a new logical test instead:*
+
 *[NewLogicalTest1]*
+
 Name = expression_test_dates.
+
 TDS = cast_calcs.your_datasource.tds
+
 Exclusions = string.ascii,string.char
+
 TestPath = exprtests/standard/
 
 Recommended ini file for full test coverage:
+
 *[StandardTests]*
 
 *[StaplesDataTest]*
