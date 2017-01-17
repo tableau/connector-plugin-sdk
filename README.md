@@ -51,6 +51,7 @@ It should show you a list of test suites associated with this datasource.
 INI file structure
 ---------------
 [Datasource]
+
 Name = your_datasource_name
 
 LogicalQueryFormat = dbo
@@ -60,15 +61,22 @@ MaxThread = 6   #You can add this to control Max Thread number when you use TDVT
 MaxSubThread = 4    #you can add this to control Max Sub Thread number for each test suit for this type of datasource
 
 [StandardTests]
+
 *\#You can put in comma separated string values that match part or all of a test name to exclude them. The asterix works as a wildcard.*
+
 LogicalExclusions_Calcs = string.right
+
 LogicalExclusions_Staples = Filter.Trademark
+
 ExpressionExclusions_Standard = string.ascii,string.char,logical
 
 *#If you remove this section the your test sute will not include the Level of Detail tests.*
 [LODTests]
+
 *\#You don't need to specify anything to add this test suite, but you can exclude tests here too:*
+
 *LogicalExclusions_Staples = *
+
 *ExpressionExclusions_Calcs = *
 
 *#This test will verify that your Staples table is loaded correctly.* 
