@@ -18,11 +18,13 @@ Installation
 ---------------
 
 1. Install TDVT Python module
-    TODO pip install
-    TODO install from module zip
+    * Install from an archive file: `pip install tdvt-1.1.13.tar.gz`
+    * TODO pip install
 2. Run this from your working directory to create the necessary setup directories.
-    tdvt.py --setup
+    `tdvt.py --setup`
 3. Edit config/tdvt/tdvt_override.ini and set the path to tabquerycli.exe.
+    * For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 10.1\bin\tabquerycli.exe` 
+
 
 Adding a new datasource
 ---------------
