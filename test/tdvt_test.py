@@ -178,6 +178,47 @@ class PathTest(unittest.TestCase):
 
         #        self.tds_file = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
+class CommandLineTest(unittest.TestCase):
+    def test_command_line_full(self):
+        test_config = tdvt_core.TdvtTestConfig()
+        test_config.logical = False
+        test_config.tds = 'mytds.tds'
+        #Optional.
+        test_config.output_dir = 'my/output/dir'
+        test_config.d_override = 'LogLevel=Debug'
+
+        test_file = 'some/test/file.txt'
+        work = tdvt_core.QueueWork(test_config, test_file)
+        cmd_line = tdvt_core.build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined --output-dir my/output/dir -DLogLevel=Debug'
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
+    def test_command_line_no_expected(self):
+        test_config = tdvt_core.TdvtTestConfig()
+        test_config.logical = False
+        test_config.tds = 'mytds.tds'
+
+        test_file = 'some/test/file.txt'
+        work = tdvt_core.QueueWork(test_config, test_file)
+        cmd_line = tdvt_core.build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined'
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
+    def test_command_line_multiple_override(self):
+        test_config = tdvt_core.TdvtTestConfig()
+        test_config.logical = False
+        test_config.tds = 'mytds.tds'
+        test_config.d_override = 'LogLevel=Debug UseJDBC Override=MongoDBConnector:on,SomethingElse:off'
+
+        test_file = 'some/test/file.txt'
+        work = tdvt_core.QueueWork(test_config, test_file)
+        cmd_line = tdvt_core.build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
 class ConfigTest(unittest.TestCase):
     def test_load_ini(self):
         config = configparser.ConfigParser()
@@ -273,7 +314,7 @@ class ConfigTest(unittest.TestCase):
         self.assertTrue(all_test2 == reg.get_datasources('all_test2'))
  
 
-    def test_load_override(self):
+    def test_load_command_line_override(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'override.ini', __name__))
         test_config = datasource_list.LoadTest(config)
@@ -287,7 +328,7 @@ class ConfigTest(unittest.TestCase):
 
         tests = [test1, test2, test3]
         
-        self.assertTrue(test_config.d_override == 'DWorkFaster=True', 'Override did not match.')
+        self.assertTrue(test_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.d_override)
 
         for test in tests:
             found = [y for y in x if y == test] 

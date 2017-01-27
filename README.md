@@ -58,6 +58,8 @@ Name = your_datasource_name
 
 LogicalQueryFormat = dbo
 
+CommandLineOverride = LogLevel=Debug #Space separated list of arguments that are passed through to tabquerycli.exe. Each is prepended with -D.
+
 MaxThread = 6   #You can add this to control Max Thread number when you use TDVT to run single datasource, it cannot apply with multi datasource
 
 MaxSubThread = 4    #you can add this to control Max Sub Thread number for each test suit for this type of datasource
