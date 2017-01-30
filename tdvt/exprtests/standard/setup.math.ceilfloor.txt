@@ -1,0 +1,6 @@
+CEILING([num0])
+CEILING([num1])
+CEILING([num3]+[num4])
+FLOOR([num0])
+FLOOR([num1])
+FLOOR([num3]+[num4])
