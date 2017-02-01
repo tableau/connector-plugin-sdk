@@ -29,10 +29,12 @@ Installation
 Adding a new datasource
 ---------------
 Adding a new datasource is easy. To run the expression tests first create a tds file that connectis to the Calcs table on your database.
+You will need a `cast_calcs.*.tds` and a `Staples.*.tds` file. The `*` should match the name you choose in step 4 below.
+
 1. The easiest way to create this is to connect to the table in Tableau desktop and then right click on the datasource and pick 'Add to Saved Datasources'. Save this in the tdvt/tds directory.
 2. Open the tds file in a text editor and embed the password in the <connection> tag of the tds file.
 3. Rename the connection names to 'leaf'. See one of the checked in tds files for an example. `<named-connection name='leaf'> and <relation connection='leaf' >`
-4. Create an ini file in tdvt/config. The ini file names the test suite and specifies which tests to run.
+4. Create an ini file in tdvt/config. The ini file names the test suite and specifies which tests to run. The `Name` section of the ini file is used to find your TDS files. For example, if you set `Name = mydb` then your TDS files should be named `cast_calcs.mydb.tds` and `Staples.mydb.tds`.
 5. Run: `-m tdvt.tdvt --generate`
 
 Now you can run the tests using `-m tdvt.tdvt.py --run your_suite_name`
@@ -47,7 +49,7 @@ Logical query files take a little more work since they need to be customized to 
 5. Add this line to your ini file under the [Datasource] heading: LogicalQueryFormat = dbo
 6. run: `tdvt --generate`
 
-Verify your new test suite by running: tdvt_runner --list your_datasource_name
+Verify your new test suite by running: `-m tdvt.tdvt --list your_datasource_name`
 It should show you a list of test suites associated with this datasource.
 
 INI file structure
@@ -152,7 +154,7 @@ tdvt_log.txt - Verbose logging from tdvt.
 tdvt_output.json - JSON output of test results. Suitable for re-running failed tests. See tdvt --help.
 tdvt_results.csv - Tableau friendly result file. Load with a double quote text qualifier.
 
-The above files have versions named *_combined.*, such as tdvt_log_combined.txt. This indicates the file contains combined results from tdvt_runner.
+The above files have versions named *_combined.*, such as tdvt_log_combined.txt. This indicates the file contains combined results from several test suites.
 
 TDS Workaround
 ---------------

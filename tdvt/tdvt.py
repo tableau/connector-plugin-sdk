@@ -15,7 +15,7 @@ import json
 import logging
 from zipfile import ZipFile
 import glob
-from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, configure_tabquery_path, TdvtTestConfig
+from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, configure_tabquery_path, tabquerycli_exists, TdvtTestConfig
 from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
 
 #This contains the dictionary of configs you can run.
@@ -375,6 +375,10 @@ def run_desired_tests(args, ds_registry):
 
     if len(ds_to_run) > 0:
         delete_output_files(os.getcwd())
+
+    if not tabquerycli_exists():
+        print ("Could not find Tabquerycli.exe.")
+        sys.exit(0)
 
     temporary_test_configs = []
     test_threads = []

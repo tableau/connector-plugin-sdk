@@ -1109,6 +1109,14 @@ def run_tests(test_config):
     all_test_results = run_tests_parallel(generate_test_file_list(root_directory, test_config.logical, test_config.config_file, test_config.expected_dir), test_config)
     return process_test_results(all_test_results, tds_file, test_config.noheader, output_dir)
 
+def tabquerycli_exists():
+    if os.path.isfile(TAB_CLI_EXE):
+        logging.debug("Found tabquerycli.exe at [{0}]".format(TAB_CLI_EXE))
+        return True
+
+    logging.debug("Could not find tabquerycli.exe at [{0}]".format(TAB_CLI_EXE))
+    return False
+
 def configure_tabquery_path():
     global TAB_CLI_EXE
     config = configparser.ConfigParser()

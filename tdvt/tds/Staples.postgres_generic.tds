@@ -1,133 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<!-- build 10000.16.0403.1152                               -->
-<datasource formatted-name='leaf' inline='true' source-platform='win' version='10.0' xmlns:user='http://www.tableausoftware.com/xml/user'>
+<!-- build data-dev.0.0000.0000                             -->
+<datasource formatted-name='Staples.postgres' inline='true' source-platform='win' version='9.3' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <connection class='federated'>
     <named-connections>
-      <named-connection caption='postgres91' name='leaf'>
-        <connection class='genericodbc' dbname='TestV1' odbc-connect-string-extras='SSLmode=disable;ReadOnly=0;Protocol=7.4;FakeOidIndex=0;ShowOidColumn=0;RowVersioning=0;ShowSystemTables=0;ConnSettings=;Fetch=100;Socket=4096;UnknownSizes=0;MaxVarcharSize=255;MaxLongVarcharSize=8190;Debug=0;CommLog=0;Optimizer=0;Ksqo=1;UseDeclareFetch=0;TextAsLongVarchar=1;UnknownsAsLongVarchar=0;BoolsAsChar=1;Parse=0;CancelAsFreeStmt=0;ExtraSysTablePrefixes=dd_;LFConversion=1;UpdatableCursors=1;DisallowPremature=0;TrueIsMinus1=0;BI=0;ByteaAsLongVarBinary=0;UseServerSidePrepare=1;LowerCaseIdentifier=0;GssAuthUseGSS=0;XaOpt=1' odbc-dbms-name='PostgreSQL' odbc-driver='PostgreSQL Unicode(x64)' odbc-dsn='' odbc-suppress-connection-pooling='' odbc-use-connection-pooling='' port='5432' schema='public' server='postgres91' username='test' password='password'>
-          <connection-customization class='genericodbc' enabled='true' version='10.0'>
-            <vendor name='PostgreSQL' />
-            <driver name='PostgreSQL Unicode(x64)' />
-            <customizations>
-              <customization name='CAP_CREATE_TEMP_TABLES' value='yes' />
-              <customization name='CAP_ISOLATION_LEVEL_READ_COMMITTED' value='no' />
-              <customization name='CAP_ISOLATION_LEVEL_READ_UNCOMMITTED' value='no' />
-              <customization name='CAP_ISOLATION_LEVEL_REPEATABLE_READS' value='no' />
-              <customization name='CAP_ISOLATION_LEVEL_SERIALIZABLE' value='no' />
-              <customization name='CAP_ODBC_BIND_DETECT_ALIAS_CASE_FOLDING' value='no' />
-              <customization name='CAP_ODBC_BIND_FORCE_DATETIME_AS_CHAR' value='no' />
-              <customization name='CAP_ODBC_BIND_FORCE_DATE_AS_CHAR' value='no' />
-              <customization name='CAP_ODBC_BIND_FORCE_MAX_STRING_BUFFERS' value='no' />
-              <customization name='CAP_ODBC_BIND_FORCE_MEDIUM_STRING_BUFFERS' value='no' />
-              <customization name='CAP_ODBC_BIND_FORCE_SIGNED' value='no' />
-              <customization name='CAP_ODBC_BIND_FORCE_SMALL_STRING_BUFFERS' value='no' />
-              <customization name='CAP_ODBC_BIND_SUPPRESS_INT64' value='no' />
-              <customization name='CAP_ODBC_BIND_SUPPRESS_PREFERRED_TYPES' value='no' />
-              <customization name='CAP_ODBC_BIND_SUPPRESS_WIDE_CHAR' value='no' />
-              <customization name='CAP_ODBC_CURSOR_DYNAMIC' value='no' />
-              <customization name='CAP_ODBC_CURSOR_FORWARD_ONLY' value='no' />
-              <customization name='CAP_ODBC_CURSOR_KEYSET_DRIVEN' value='no' />
-              <customization name='CAP_ODBC_CURSOR_STATIC' value='no' />
-              <customization name='CAP_ODBC_ERROR_IGNORE_FALSE_ALARM' value='no' />
-              <customization name='CAP_ODBC_FETCH_BUFFERS_RESIZABLE' value='no' />
-              <customization name='CAP_ODBC_FETCH_BUFFERS_SIZE_MASSIVE' value='no' />
-              <customization name='CAP_ODBC_FETCH_CONTINUE_ON_ERROR' value='no' />
-              <customization name='CAP_ODBC_METADATA_STRING_LENGTH_UNKNOWN' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_PREPARED_QUERY' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_SELECT_STAR' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_SQLCOLUMNS_API' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_SQLFOREIGNKEYS_API' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_SQLPRIMARYKEYS_API' value='no' />
-              <customization name='CAP_ODBC_METADATA_SUPPRESS_SQLSTATISTICS_API' value='no' />
-              <customization name='CAP_ODBC_REBIND_SKIP_UNBIND' value='no' />
-              <customization name='CAP_ODBC_TRIM_VARCHAR_PADDING' value='no' />
-              <customization name='CAP_ODBC_UNBIND_AUTO' value='no' />
-              <customization name='CAP_ODBC_UNBIND_BATCH' value='no' />
-              <customization name='CAP_ODBC_UNBIND_EACH' value='no' />
-              <customization name='CAP_QUERY_BOOLEXPR_TO_INTEXPR' value='yes' />
-              <customization name='CAP_QUERY_FROM_REQUIRES_ALIAS' value='no' />
-              <customization name='CAP_QUERY_GROUP_BY_ALIAS' value='no' />
-              <customization name='CAP_QUERY_GROUP_BY_DEGREE' value='no' />
-              <customization name='CAP_QUERY_HAVING_REQUIRES_GROUP_BY' value='no' />
-              <customization name='CAP_QUERY_HAVING_UNSUPPORTED' value='no' />
-              <customization name='CAP_QUERY_JOIN_ACROSS_SCHEMAS' value='no' />
-              <customization name='CAP_QUERY_JOIN_REQUIRES_SCOPE' value='no' />
-              <customization name='CAP_QUERY_NULL_REQUIRES_CAST' value='no' />
-              <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' />
-              <customization name='CAP_QUERY_SORT_BY_DEGREE' value='yes' />
-              <customization name='CAP_QUERY_SUBQUERIES' value='no' />
-              <customization name='CAP_QUERY_SUBQUERIES_WITH_TOP' value='yes' />
-              <customization name='CAP_QUERY_SUBQUERY_QUERY_CONTEXT' value='no' />
-              <customization name='CAP_QUERY_TOPSTYLE_LIMIT' value='yes' />
-              <customization name='CAP_QUERY_TOPSTYLE_ROWNUM' value='no' />
-              <customization name='CAP_QUERY_TOPSTYLE_TOP' value='no' />
-              <customization name='CAP_QUERY_TOP_0_METADATA' value='no' />
-              <customization name='CAP_QUERY_TOP_N' value='yes' />
-              <customization name='CAP_QUERY_WHERE_FALSE_METADATA' value='no' />
-              <customization name='CAP_SELECT_INTO' value='yes' />
-              <customization name='CAP_SELECT_TOP_INTO' value='yes' />
-              <customization name='CAP_SET_ISOLATION_LEVEL_VIA_ODBC_API' value='no' />
-              <customization name='CAP_SET_ISOLATION_LEVEL_VIA_SQL' value='no' />
-              <customization name='CAP_SUPPRESS_CONNECTION_POOLING' value='no' />
-              <customization name='CAP_SUPPRESS_DISCOVERY_QUERIES' value='yes' />
-              <customization name='SQL_AGGREGATE_FUNCTIONS' value='64' />
-              <customization name='SQL_CATALOG_NAME_SEPARATOR' value='.' />
-              <customization name='SQL_CATALOG_TERM' value='catalog' />
-              <customization name='SQL_CATALOG_USAGE' value='1' />
-              <customization name='SQL_COLUMN_ALIAS' value='Y' />
-              <customization name='SQL_CONVERT_BIGINT' value='0' />
-              <customization name='SQL_CONVERT_BINARY' value='0' />
-              <customization name='SQL_CONVERT_BIT' value='4104' />
-              <customization name='SQL_CONVERT_CHAR' value='0' />
-              <customization name='SQL_CONVERT_DATE' value='0' />
-              <customization name='SQL_CONVERT_DECIMAL' value='0' />
-              <customization name='SQL_CONVERT_DOUBLE' value='0' />
-              <customization name='SQL_CONVERT_FLOAT' value='0' />
-              <customization name='SQL_CONVERT_FUNCTIONS' value='1' />
-              <customization name='SQL_CONVERT_INTEGER' value='4104' />
-              <customization name='SQL_CONVERT_LONGVARBINARY' value='0' />
-              <customization name='SQL_CONVERT_NUMERIC' value='0' />
-              <customization name='SQL_CONVERT_REAL' value='0' />
-              <customization name='SQL_CONVERT_SMALLINT' value='4104' />
-              <customization name='SQL_CONVERT_TIME' value='0' />
-              <customization name='SQL_CONVERT_TIMESTAMP' value='0' />
-              <customization name='SQL_CONVERT_TINYINT' value='4104' />
-              <customization name='SQL_CONVERT_VARBINARY' value='0' />
-              <customization name='SQL_CONVERT_VARCHAR' value='4104' />
-              <customization name='SQL_CURSOR_COMMIT_BEHAVIOR' value='2' />
-              <customization name='SQL_DBMS_NAME' value='PostgreSQL' />
-              <customization name='SQL_DBMS_VER' value='9.1.19' />
-              <customization name='SQL_DRIVER_ODBC_VER' value='03.51' />
-              <customization name='SQL_DRIVER_VER' value='09.03.0400' />
-              <customization name='SQL_IDENTIFIER_QUOTE_CHAR' value='&quot;' />
-              <customization name='SQL_MAX_IDENTIFIER_LEN' value='64' />
-              <customization name='SQL_NUMERIC_FUNCTIONS' value='0' />
-              <customization name='SQL_ODBC_INTERFACE_CONFORMANCE' value='1' />
-              <customization name='SQL_ODBC_VER' value='03.80.0000' />
-              <customization name='SQL_OJ_CAPABILITIES' value='127' />
-              <customization name='SQL_QUOTED_IDENTIFIER_CASE' value='3' />
-              <customization name='SQL_SCHEMA_TERM' value='schema' />
-              <customization name='SQL_SCHEMA_USAGE' value='29' />
-              <customization name='SQL_SPECIAL_CHARACTERS' value='_' />
-              <customization name='SQL_SQL92_DATETIME_FUNCTIONS' value='7' />
-              <customization name='SQL_SQL92_NUMERIC_VALUE_FUNCTIONS' value='63' />
-              <customization name='SQL_SQL92_PREDICATES' value='16007' />
-              <customization name='SQL_SQL92_RELATIONAL_JOIN_OPERATORS' value='1022' />
-              <customization name='SQL_SQL92_STRING_FUNCTIONS' value='255' />
-              <customization name='SQL_SQL92_VALUE_EXPRESSIONS' value='15' />
-              <customization name='SQL_SQL_CONFORMANCE' value='1' />
-              <customization name='SQL_STRING_FUNCTIONS' value='7289' />
-              <customization name='SQL_SYSTEM_FUNCTIONS' value='0' />
-              <customization name='SQL_TABLE_TERM' value='table' />
-              <customization name='SQL_TIMEDATE_ADD_INTERVALS' value='0' />
-              <customization name='SQL_TIMEDATE_DIFF_INTERVALS' value='0' />
-              <customization name='SQL_TIMEDATE_FUNCTIONS' value='1' />
-              <customization name='SQL_TXN_CAPABLE' value='2' />
-            </customizations>
-          </connection-customization>
-        </connection>
+      <named-connection name='leaf'>
+        <connection class='postgres' dbname='TestV1' odbc-native-protocol='yes' port='' server='postgres' tablename='Staples' username='test' password='test' />
       </named-connection>
     </named-connections>
     <relation connection='leaf' name='Staples' table='[Staples]' type='table' />
@@ -159,7 +37,7 @@
         <aggregation>Count</aggregation>
         <width>14</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -177,7 +55,7 @@
         <aggregation>Count</aggregation>
         <width>15</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -195,7 +73,7 @@
         <aggregation>Count</aggregation>
         <width>13</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -211,7 +89,7 @@
         <ordinal>5</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -227,7 +105,7 @@
         <ordinal>6</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -243,7 +121,7 @@
         <ordinal>7</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -259,7 +137,7 @@
         <ordinal>8</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -277,7 +155,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -293,7 +171,7 @@
         <ordinal>10</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -309,7 +187,7 @@
         <ordinal>11</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -361,7 +239,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -379,7 +257,7 @@
         <aggregation>Count</aggregation>
         <width>4</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -397,7 +275,7 @@
         <aggregation>Count</aggregation>
         <width>255</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -413,7 +291,7 @@
         <ordinal>17</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -448,7 +326,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -466,7 +344,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -484,7 +362,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -500,7 +378,7 @@
         <ordinal>22</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -518,7 +396,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -536,7 +414,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -554,7 +432,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -572,7 +450,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -590,7 +468,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -608,7 +486,7 @@
         <aggregation>Count</aggregation>
         <width>100</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -626,7 +504,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -644,7 +522,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -662,7 +540,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -678,7 +556,7 @@
         <ordinal>32</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -696,7 +574,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -714,7 +592,7 @@
         <aggregation>Count</aggregation>
         <width>50</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -732,7 +610,7 @@
         <aggregation>Count</aggregation>
         <width>10</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -813,7 +691,7 @@
         <aggregation>Count</aggregation>
         <width>2</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -829,7 +707,7 @@
         <ordinal>41</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -847,7 +725,7 @@
         <aggregation>Count</aggregation>
         <width>5</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -863,7 +741,7 @@
         <ordinal>43</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -926,7 +804,7 @@
         <ordinal>47</ordinal>
         <local-type>real</local-type>
         <aggregation>Sum</aggregation>
-        <precision>15</precision>
+        <precision>17</precision>
         <contains-null>false</contains-null>
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_FLOAT&quot;</attribute>
@@ -944,7 +822,7 @@
         <aggregation>Count</aggregation>
         <width>3</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -978,7 +856,7 @@
         <aggregation>Count</aggregation>
         <width>25</width>
         <contains-null>false</contains-null>
-        <collation flag='0' name='binary' />
+        <collation flag='0' name='LEN_RUS' />
         <attributes>
           <attribute datatype='string' name='DebugRemoteType'>&quot;SQL_WVARCHAR&quot;</attribute>
           <attribute datatype='string' name='DebugWireType'>&quot;SQL_C_WCHAR&quot;</attribute>
@@ -987,17 +865,15 @@
       </metadata-record>
     </metadata-records>
   </connection>
-  <aliases enabled='yes' />
   <column datatype='string' name='[Customer State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
   <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
     <calculation class='tableau' formula='1' />
   </column>
-  <column datatype='integer' name='[Order Day]' role='dimension' type='quantitative' />
-  <column datatype='integer' name='[Order Month]' role='dimension' type='quantitative' />
-  <column datatype='integer' name='[Order Year]' role='dimension' type='quantitative' />
+  <column datatype='integer' name='[PID]' role='dimension' type='ordinal' />
   <column datatype='string' name='[Supplier State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
-  <layout dim-ordering='alphabetic' dim-percentage='0.676923' measure-ordering='alphabetic' measure-percentage='0.323077' show-structure='true' />
+  <layout dim-ordering='alphabetic' dim-percentage='0.556266' measure-ordering='alphabetic' measure-percentage='0.443734' show-structure='true' />
   <semantic-values>
     <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
   </semantic-values>
 </datasource>
+
