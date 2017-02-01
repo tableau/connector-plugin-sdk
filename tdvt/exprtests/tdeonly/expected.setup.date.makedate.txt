@@ -1,0 +1,50 @@
+<results>
+  <test name='MAKEDATE(2014,4,17)'>
+    <sql>
+      SELECT (DATE &apos;2014-04-17&apos;) AS &quot;TEMP(Test)(2231772716)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      15.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2231772716)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-04-17#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKEDATE(2005,13,17)'>
+    <sql>
+      SELECT null::date AS &quot;TEMP(Test)(300724777)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      14.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(300724777)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKEDATE(1800,12,15)'>
+    <sql>
+      SELECT (DATE &apos;1800-12-15&apos;) AS &quot;TEMP(Test)(3028832228)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      15.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3028832228)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1800-12-15#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

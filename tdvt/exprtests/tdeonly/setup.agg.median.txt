@@ -1,0 +1,4 @@
+MEDIAN([int2])
+MEDIAN([num2])
+MEDIAN([num4])
+MEDIAN(DATEPART('year',[date2]))
