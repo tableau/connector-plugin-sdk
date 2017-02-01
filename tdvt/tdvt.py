@@ -17,6 +17,7 @@ from zipfile import ZipFile
 import glob
 from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, configure_tabquery_path, tabquerycli_exists, TdvtTestConfig
 from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
+from .config_gen.gentests import list_configs
 
 #This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistry
@@ -164,6 +165,12 @@ def get_datasource_registry(platform):
         reg = WindowsRegistry()
 
     return reg
+
+def print_logical_configurations():
+    print ("Available logical query configurations: \n")
+    for config in list_configs():
+        print (config)
+
 
 def print_configurations(ds_reg, dsname):
     if dsname:
@@ -319,6 +326,7 @@ def usage_text():
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT Driver.', usage=usage_text())
     parser.add_argument('--list', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--list_logical_configs', dest='list_logical_configs', action='store_true', help='List available logical configs.', required=False, default=None)
     parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
     parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     parser.add_argument('--run', '-r', dest='ds', help='Comma separated list of Datasource names to test or \'all\'.', required=False)
@@ -370,7 +378,6 @@ def run_desired_tests(args, ds_registry):
     lock = threading.Lock()
     ds_to_run = ds_registry.get_datasources(args.ds)
     if not ds_to_run:
-        print ("Nothing to run.")
         sys.exit(0)
 
     if len(ds_to_run) > 0:
@@ -484,8 +491,11 @@ def main():
         sys.exit(0)
     elif args.generate:
         print ("Generating config files...")
+        start_time = time.time()
         generate_files(ds_registry, True)
-        print ("Done")
+        end_time = time.time() - start_time
+        print ("Done: " + str(end_time))
+        
         #It's ok to call generate and then run some tests, so don't exit here.
     elif args.diff:
         #Set verbose so the user sees something from the diff.
@@ -496,6 +506,9 @@ def main():
     elif args.run_file:
         output_dir = os.getcwd()
         sys.exit(run_failed_tests(args.run_file, output_dir))
+    elif args.list_logical_configs:
+        print_logical_configurations()
+        sys.exit(0)
     elif args.list_ds is not None:
         print_configurations(ds_registry, args.list_ds)
         sys.exit(0)

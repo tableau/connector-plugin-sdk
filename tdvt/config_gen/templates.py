@@ -1,65 +1,73 @@
-"""This module maintains the information about the set of attribute
-definitions (aka "descriptions") that apply to each datasource type.
+"""
+This defines a mapping to the table and columns in the datasource. It is used to generate a set of logical query tests that will work with the peculiarities of the data source.
+
+You can run [tdvt --list_logical_configs] to see the resulting values.
+
+The value on the left is the key that is used in your datasource ini file.
+Keys you can set to control the generation are:
+
+This should always be present. $dsName will be replaced with Calcs or Staples.
+     'tablename' : '$dsName',
+
+This is prefixed to the table name.
+     'tablePrefix' : '[TESTV1].',
+
+Upper cases all table name.
+     'tablenameUpper' : True,
+
+Lower case table names.
+     'tablenameLower' : True,
+
+If the table has `Date_` instead of `Date` columns.
+     'fieldnameDate_underscore' : True,
+
+Field name is lower and contains underscores instead of spaces.
+     'fieldnameLower_underscore' : True,
+
+Do the `Bool0` fields look like `Bool0_`?
+     'bool_underscore' : True
+
+Instead of a space there is nothing. Ie ' ' vs ''.
+     'fieldnameNoSpace' : True,
 """
 
 
-# The leaf-strings in this data structure are really
-# lightweight templates per the Templates class in
-# Python's string module.  Bound names are:
-# $dbPath -- Path to file-based local databases (e.g. csv files)
-# $dsName -- Datasource name (e.g. 'Staples' or 'Calcs')
-# $testDbName -- The current test database name, e.g. 'TestV1'
 global attributes
 attributes = {
 
     #TESTV1.Calcs
     'TESTV1' : { 
                  'tablename' : '$dsName',
-                 #'tablenameUpper' : True,
-                 #'fieldnameUpper' : True,
                  'tablePrefix' : '[TESTV1].',
                  },
 
     #TEST.Calcs
     'TEST' : { 
                  'tablename' : '$dsName',
-                 #'tablenameUpper' : True,
-                 #'fieldnameUpper' : True,
                  'tablePrefix' : '[TEST].',
                  },
 
     #test.Calcs
     'test_lower' : { 
                  'tablename' : '$dsName',
-                 #'tablenameUpper' : True,
-                 #'fieldnameUpper' : True,
                  'tablePrefix' : '[test].',
                  },
 
     #ADMIN.Calcs
     'ADMIN' : { 
                  'tablename' : '$dsName',
-                 #'tablenameUpper' : True,
-                 #'fieldnameUpper' : True,
                  'tablePrefix' : '[ADMIN].',
                  },
 
     #default.testv1_Calcs
     'default_testv1_' : { 
                  'tablename' : 'testv1_$dsName',
-                 #'tablenameUpper' : True,
-                 #'tablenameLower' : True,
-                 #'fieldnameUpper' : True,
                  'tablePrefix' : '[default].',
                  },
 
     #testv1_Calcs
     'testv1_' : { 
                  'tablename' : 'testv1_$dsName',
-                 #'tablenameUpper' : True,
-                 #'tablenameLower' : True,
-                 #'fieldnameUpper' : True,
-                 #'tablePrefix' : '[default].',
                  'fieldnameDate_underscore' : True,
                  'fieldnameLower_underscore' : True,
                  },
@@ -67,9 +75,7 @@ attributes = {
     #testv1_Calcs
     'default_testv1_lower' : { 
                  'tablename' : 'testv1_$dsName',
-                 #'tablenameUpper' : True,
                  'tablenameLower' : True,
-                 #'fieldnameUpper' : True,
                  'fieldnameDate_underscore' : True,
                  'fieldnameLower_underscore' : True,
                  'tablePrefix' : '[default].',
@@ -79,7 +85,6 @@ attributes = {
     'PUBLIC' : { 
                  'tablename' : '$dsName',
                  'tablenameUpper' : True,
-                 #'fieldnameUpper' : True,
                  'tablePrefix' : '[PUBLIC].'
                  },
 
@@ -93,14 +98,12 @@ attributes = {
     #TestV1.Calcs with boolean underscore.
     'prefix_bool_' : { 
                      'tablename' : '$dsName',
-                     'schema' : '$testDbName',
                      'tablePrefix' : '[$testDbName].',
                      'bool_underscore' : True
                       },
     #TestV1.Calcs
     'prefix' : { 
                      'tablename' : '$dsName',
-                     'schema' : '$testDbName',
                      'tablePrefix' : '[$testDbName].'
                       },
     #Calcs
@@ -115,13 +118,11 @@ attributes = {
                      'dbname' : '$testDbName',
                      'tablename' : '$dsName',
                      'tablenameLower' : True,
-                     #'tablePrefix' : '[public].'
                      },
      #calcs
     'simple_public' : {
                      'dbname' : '$testDbName',
                      'tablename' : '$dsName',
-                     #'tablenameLower' : True,
                      'tablePrefix' : '[public].'
                      },
     
@@ -131,7 +132,6 @@ attributes = {
                      'tablename' : '$dsName',
                      'tablenameLower' : True,
                      'fieldnameLower': True,
-                     #'tablePrefix' : '[public].'
                      },
 
     #dbo.Calcs

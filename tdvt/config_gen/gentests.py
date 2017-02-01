@@ -50,6 +50,25 @@ def get_new_field_name(field, attrs):
 
     return new_field
 
+def get_modified_line(line, attrs, fields):
+    new_line = line
+    if 'test name' in line:
+         return new_line
+    if 'query-function' in line:
+        return new_line
+    if 'runquery-column' in line:
+        return new_line
+
+    for field in fields:
+        new_field = get_new_field_name(field, attrs)
+        new_line = new_line.replace(field, new_field)
+
+    calcs_table_name = get_customized_table_name(attrs, 'Calcs')
+    staples_table_name = get_customized_table_name(attrs, 'Staples')
+    new_line = new_line.replace('$Calcs$', calcs_table_name)
+    new_line = new_line.replace('$Staples$', staples_table_name)
+    return new_line
+
 def process_test_file( filename, output_dir, staples_fields, calcs_fields ):
     if debug: print ("Processing " + filename )
     for ds in attributes:
@@ -66,26 +85,31 @@ def process_test_file( filename, output_dir, staples_fields, calcs_fields ):
 
         setup_file = open( os.path.join( output_dir, 'setup.' + test_name + '.' + ds + '.xml'), 'w', encoding='utf-8' )
 
+        fields = staples_fields + calcs_fields
         for line in input_file:
-            if 'test name' in line:
-                continue 
-            if 'query-function' in line:
-                continue
-            if 'runquery-column' in line:
-                continue
-
-            for field in staples_fields + calcs_fields:
-                new_field = get_new_field_name(field, attributes[ds])
-                line = line.replace(field, new_field)
-
-            calcs_table_name = get_customized_table_name(attributes[ds], 'Calcs')
-            staples_table_name = get_customized_table_name(attributes[ds], 'Staples')
-            line = line.replace('$Calcs$', calcs_table_name)
-            line = line.replace('$Staples$', staples_table_name)
-            setup_file.write( line )
+            new_line = get_modified_line(line, attributes[ds], fields)
+            setup_file.write( new_line )
 
         setup_file.close()
         input_file.close()
+
+def process_text(ds, text, attributes, fields):
+    new_text = ''
+    for line in text:
+        new_line = get_modified_line(line, attributes, fields)
+        new_line = new_line.replace('$Name$', ds)
+        new_text += new_line + '\n'
+    return new_text
+
+def list_configs():
+    configs = []
+    fields = ['[Camel Case]', '[bool0]', '[Date]']
+    sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', '[Camel Case] = ' + fields[0], '[bool0] = ' + fields[1], '[Date] = ' + fields[2] ]
+
+    for ds in sorted(attributes.keys(), key=str.lower):
+        cfg = process_text(ds, sample_text, attributes[ds], fields)
+        configs.append(cfg)
+    return configs
 
 def create_dir(new_dir):
     #Make the output dir if needed, otherwise continue on our way since its there.

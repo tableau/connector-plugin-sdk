@@ -45,9 +45,12 @@ Logical query files take a little more work since they need to be customized to 
 1. Create a tds file that connects to the Staples table on your database.
 2. Open the tds in a text editor and look for the relation xml tag. For example: `<relation connection='leaf' name='Calcs' table='[dbo].[Calcs]'>`
 3. Note the value for 'table', in this case '[dbo].[Calcs]'.
-4. Open tdvt/logicaltests/generate/templates.py and search for a value that matches your table value. In this case 'dbo' matches.
-5. Add this line to your ini file under the [Datasource] heading: LogicalQueryFormat = dbo
+4. Run `tdvt --list_logical_configs`. This will print out all the logical query versions and some information about how they map things. The Calcs value should match what you found in step 3. for example. There are also mappings for some column names in case your database does not support the names as provided in the Calcs and Staples data files. For example, some databases may not support spaces in identifiers, in which case you can look for a logical configuration that replaces them with underscors and name the columns in your table accordingly.
+4. In this case the logical configuration named 'dbo' matches.
+5. Note the Name of the logical configuration and add this line to your ini file under the [Datasource] heading: LogicalQueryFormat = dbo
 6. run: `tdvt --generate`
+
+If none of the logical configurations work for your datasource then you can create a new version in tdvt/logicaltests/generate/templates.py.
 
 Verify your new test suite by running: `-m tdvt.tdvt --list your_datasource_name`
 It should show you a list of test suites associated with this datasource.
