@@ -104,7 +104,7 @@ def process_text(ds, text, attributes, fields):
 def list_configs():
     configs = []
     fields = ['[Camel Case]', '[bool0]', '[Date]']
-    sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', '[Camel Case] = ' + fields[0], '[bool0] = ' + fields[1], '[Date] = ' + fields[2] ]
+    sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', 'Camel Case = ' + fields[0], 'bool0 = ' + fields[1], 'Date = ' + fields[2] ]
 
     for ds in sorted(attributes.keys(), key=str.lower):
         cfg = process_text(ds, sample_text, attributes[ds], fields)
