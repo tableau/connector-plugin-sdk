@@ -3,8 +3,12 @@
 
 """
 
-import os
 import sys
+
+if sys.version_info[0] < 3:
+    raise EnvironmentError("TDVT requires Python 3 or greater.")
+
+import os
 import argparse
 import subprocess
 import shutil

@@ -1,9 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<query-function aggregation="true" class="runquery" connection="leaf" include-empty="false" query-caching="normal">
-  <runquery-columns>
-    <runquery-column expr-type="error" name="[str_calcs.sqlserver_2014].[str2]">[str_calcs.sqlserver_2014].[str2]</runquery-column>
-    <runquery-column expr-type="error" name="[str_calcs.sqlserver_2014].[sum:num3:ok]">[str_calcs.sqlserver_2014].[sum:num3:ok]</runquery-column>
-  </runquery-columns>
   <logical-query>
     <selects>
       <field>[str2]</field>
@@ -139,4 +134,3 @@
       </selectOp>
     </aggregateOp>
   </logical-query>
-</query-function>
