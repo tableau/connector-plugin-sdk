@@ -4,6 +4,7 @@
 
 import sys
 import os
+import shutil
 import argparse
 from .templates import *
 from string import Template
@@ -111,6 +112,13 @@ def list_configs():
         configs.append(cfg)
     return configs
 
+def clean_create_dir(new_dir):
+    try:
+        shutil.rmtree(new_dir, True)
+        create_dir(new_dir)
+    except OSError:
+        return
+
 def create_dir(new_dir):
     #Make the output dir if needed, otherwise continue on our way since its there.
     try:
@@ -216,7 +224,7 @@ def generate_logical_files(input_dir, output_dir, force=False):
             if not any_test_files or force:
                 print (input_dir)
                 print (output_dir)
-                create_dir(output_dir)
+                clean_create_dir(output_dir)
                 for input_root, input_dirs, input_files in os.walk(input_dir):
                     for input_filename in input_files:
                         process_test_file( os.path.join(input_root, input_filename), output_dir, staples_fields, calcs_fields )
