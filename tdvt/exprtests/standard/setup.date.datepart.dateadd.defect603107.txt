@@ -1,0 +1,1 @@
+DATEADD('day',-DATEPART('weekday',[Order Date])+1,[Order Date])
