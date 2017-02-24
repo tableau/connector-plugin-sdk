@@ -12,6 +12,9 @@ actual.setup*.txt
 #Bogus Tableau repository.
 _Repository
 
+#Locally built packages.
+tdvt-1.*/
+
 #Generate logical query files.
 tdvt/logicaltests/setup/*
 #Generated config files.
