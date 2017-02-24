@@ -24,9 +24,9 @@ def get_customized_table_name(attributes, base_table):
     t = Template('[' + table_name + ']')
     #These substitution holders are in templates.py.
     if 'tablenameUpper' in attributes:
-        table_name = t.substitute(testDbName='TestV1', dsName=base_table.upper())
+        table_name = t.substitute(dsName=base_table.upper())
     else:
-        table_name = t.substitute(testDbName='TestV1', dsName=base_table)
+        table_name = t.substitute(dsName=base_table)
 
     if 'tablenameLower' in attributes:
         table_name = table_name.lower()

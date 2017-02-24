@@ -90,7 +90,6 @@ attributes = {
 
     #Calcs with boolean underscore.
     'bool_' : { 
-                 'dbname' : '$testDbName',
                  'tablename' : '$dsName',
                  'bool_underscore' : True
                  },
@@ -98,37 +97,32 @@ attributes = {
     #TestV1.Calcs with boolean underscore.
     'prefix_bool_' : { 
                      'tablename' : '$dsName',
-                     'tablePrefix' : '[$testDbName].',
+                     'tablePrefix' : '[TestV1].',
                      'bool_underscore' : True
                       },
     #TestV1.Calcs
     'prefix' : { 
                      'tablename' : '$dsName',
-                     'tablePrefix' : '[$testDbName].'
+                     'tablePrefix' : '[TestV1].'
                       },
     #Calcs
     'simple' : { 
-                     'dbname' : '$testDbName',
                      'tablename' : '$dsName',
-                     #'tablePrefix' : '[public].'
                      },
 
     #calcs
     'simple_lower' : { 
-                     'dbname' : '$testDbName',
                      'tablename' : '$dsName',
                      'tablenameLower' : True,
                      },
      #calcs
     'simple_public' : {
-                     'dbname' : '$testDbName',
                      'tablename' : '$dsName',
                      'tablePrefix' : '[public].'
                      },
     
     #calcs
     'simple_lower_lower' : { 
-                     'dbname' : '$testDbName',
                      'tablename' : '$dsName',
                      'tablenameLower' : True,
                      'fieldnameLower': True,
@@ -136,14 +130,12 @@ attributes = {
 
     #dbo.Calcs
     'dbo' : { 
-                         'dbname' : 'TestV1',
                          'tablename' : '$dsName',
                          'tablePrefix' : '[dbo].'
                          },
 
     #[TestV1].Calcs 
     'testv1_underscore' : { 
-                        'dbname' : 'TestV1',
                         'tablename' : '$dsName',
                         'tablePrefix' : '[TestV1].',
                         'bool_underscore' : True
@@ -151,7 +143,6 @@ attributes = {
 
     #tactile-pulsar-824:TestV1.Calcs
     'bigquery' : { 
-                         'dbname' : 'TestV1',
                          'tablename' : '$dsName',
                          'fieldnameNoSpace' : True,
                          'tablePrefix' : '[tactile-pulsar-824:TestV1].'
@@ -160,7 +151,6 @@ attributes = {
 
     #tactile-pulsar-824.TestV1.Calcs
     'bigquery_sql' : { 
-                         'dbname' : 'TestV1',
                          'tablename' : '$dsName',
                          'fieldnameNoSpace' : True,
                          'tablePrefix' : '[tactile-pulsar-824.TestV1].'
@@ -168,7 +158,6 @@ attributes = {
 						 
     #[hive.default].
     'hive_default' : { 
-                         'dbname' : 'TestV1',
                          'tablename' : 'testv1_$dsName',
                          'tablenameLower' : True,
                          'fieldnameDate_underscore' : True,
@@ -177,7 +166,6 @@ attributes = {
                          },
 
     'default_lower' : { 
-                         'dbname' : 'TestV1',
                          'tablename' : '$dsName',
                          'tablenameLower' : True,
                          'tablePrefix' : '[DEFAULT].'
