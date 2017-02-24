@@ -175,4 +175,11 @@ attributes = {
                          'fieldnameLower_underscore' : True,
                          'tablePrefix' : '[hive.testv1_raw].'
                          },
+
+    'default_lower' : { 
+                         'dbname' : 'TestV1',
+                         'tablename' : '$dsName',
+                         'tablenameLower' : True,
+                         'tablePrefix' : '[DEFAULT].'
+                         },
 }

@@ -69,6 +69,15 @@ class TestCaseResult(object):
 
         return tuple_list
 
+    def get_error_message(self):
+        if self.error_message:
+            return self.error_message
+
+        if not self.all_passed():
+            return 'Actual does not match expected.'
+
+        return ''
+
     def all_passed(self):
         """Return true if all aspects of the test passed."""
         passed = True
@@ -256,12 +265,7 @@ class TestResult(object):
         elif self.test_timed_out:
             return "Test timed out."
 
-        if self.actual_results:
-            msgs = self.actual_results.get_error_messages()
-            if not msgs:
-                return "Expected does not match any actual file."
-            return "Errors: " + ". ".join(msgs)
-        elif self.overall_error_message:
+        if self.overall_error_message:
             return self.overall_error_message
         else:
             return "No results found."
@@ -739,7 +743,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
 
                 error_msg = None
                 if passed == 0:
-                    error_msg = case.error_message if case.error_message else test_result.get_failure_message()
+                    error_msg = case.get_error_message() if case.get_error_message() else test_result.get_failure_message()
 
                 csv_out.writerow([tdsname, test_name, str(passed), str(matched), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples])
                 test_case_index += 1

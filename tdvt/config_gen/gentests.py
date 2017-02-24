@@ -20,16 +20,19 @@ def get_customized_table_name(attributes, base_table):
         table_prefix = attributes['tablePrefix']
 
     table_name = attributes['tablename']
-    t = Template(table_prefix + '[' + table_name + ']')
+
+    t = Template('[' + table_name + ']')
     #These substitution holders are in templates.py.
     if 'tablenameUpper' in attributes:
         table_name = t.substitute(testDbName='TestV1', dsName=base_table.upper())
     else:
         table_name = t.substitute(testDbName='TestV1', dsName=base_table)
-    
+
     if 'tablenameLower' in attributes:
         table_name = table_name.lower()
-    return table_name
+
+    
+    return table_prefix + table_name
 
 def get_new_field_name(field, attrs):
     new_field = field
