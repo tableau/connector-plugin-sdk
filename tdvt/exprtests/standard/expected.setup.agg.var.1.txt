@@ -1,0 +1,34 @@
+<results>
+  <test name='VAR([num4])'>
+    <sql>
+      SELECT POWER((STD(`Calcs`.`num4`) * SQRT(count(`Calcs`.`num4`) / (count(`Calcs`.`num4`) - 1))), 2) AS `TEMP(Test)(1358865)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      215.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.mongo].[TEMP(Test)(1358865)(0)]</column>
+      </schema>
+      <tuple>
+        <value>113.51709</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='VARP([num4])'>
+    <sql>
+      SELECT POWER(STD(`Calcs`.`num4`),2) AS `TEMP(Test)(2532468070)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      227.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.mongo].[TEMP(Test)(2532468070)(0)]</column>
+      </schema>
+      <tuple>
+        <value>104.0582</value>
+      </tuple>
+    </table>
+  </test>
+</results>
