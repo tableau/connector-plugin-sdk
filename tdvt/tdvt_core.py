@@ -104,7 +104,7 @@ class TestCaseResult(object):
 class TestOutput(object):
     """A collection of individual test case runs.
         
-        ie All of the math.round results. See TestCaseResult above.
+        ie All of the math.round results.
 
     """
     def __init__(self, test_xml, tested_config):
@@ -126,6 +126,7 @@ class TestOutput(object):
 
         """
         self.test_case_map = []
+        self.tested_config = tested_config
         #Go through all the test nodes under 'results'.
         for i in range(0, len(list(test_xml))):
             test_child = test_xml[i]
@@ -234,14 +235,33 @@ class TdvtTestConfig(object):
         'noheader' : self.noheader, 
         'thread_count' : self.thread_count }
 
+class TestErrorState(object):
+    """The cause of a test failure."""
+    def __init__(self):
+        pass
+
+    def get_error(self):
+        pass
+
+class TestErrorAbort(object):
+    def get_error(self):
+        return "Test was aborted."
+    
+class TestErrorStartup(object):
+    def get_error(self):
+        return "Test did not start."
+
+class TestErrorTimeout(object):
+    def get_error(self):
+        return "Test timed out."
+
 class TestResult(object):
     """Information about a test suite run."""
     def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = ''):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
-        self.test_failed_to_run = False
-        self.test_timed_out = False
+        self.error_status = None
         self.actual_results = None
         self.diff_count = 0
         self.best_matching_expected_results = None
@@ -260,10 +280,8 @@ class TestResult(object):
         self.path_to_actual = actual_path
 
     def get_failure_message(self):
-        if self.test_failed_to_run:
-            return "Test did not run."
-        elif self.test_timed_out:
-            return "Test timed out."
+        if self.error_status:
+            return self.error_status.get_error()
 
         if self.overall_error_message:
             return self.overall_error_message
@@ -273,7 +291,7 @@ class TestResult(object):
         return "Unknown failure."
 
     def get_exceptions(self):
-        if self.test_failed_to_run or not self.actual_results:
+        if self.error_status or not self.actual_results:
             return []
         return self.actual_results.get_exceptions()
 
@@ -296,7 +314,7 @@ class TestResult(object):
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
-        if self.test_failed_to_run:
+        if self.error_status:
             return False
         if not self.actual_results:
             return False
@@ -357,12 +375,12 @@ def handle_test_failure(q, work, result=None, error_msg=None):
        
 def handle_timeout_test_failure(q, work):
     result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
-    result.test_timed_out = True
+    result.error_status = TestErrorTimeout()
     handle_test_failure(q, work, result)
 
-def handle_starting_test_failure(q, work):
+def handle_abort_test_failure(q, work):
     result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
-    result.test_failed_to_run = True
+    result.error_status = TestErrorAbort()
     handle_test_failure(q, work, result)
 
 def build_tabquery_command_line_local(work):
@@ -428,7 +446,7 @@ def do_test_queue_work(i, q):
             #Do this here so we have the repro information from above.
             logging.debug("\nAborting test:" + work.test_file)
             if not VERBOSE: sys.stdout.write('A')
-            handle_starting_test_failure(q, work)
+            handle_abort_test_failure(q, work)
             continue
 
         logging.debug(" calling " + ' '.join(cmdline))
@@ -474,7 +492,7 @@ def do_test_queue_work(i, q):
 
         if result == None:
             result = TestResult(test_file = work.test_file)
-            result.test_failed_to_run = True
+            result.error_case = TestErrorStartup()
 
         if not VERBOSE:
             sys.stdout.write('.' if result.all_passed() else 'F')
@@ -684,8 +702,48 @@ def write_standard_test_output(all_test_results, output_dir):
     except Exception:
         logging.debug("Error writing ouput file [{0}].".format(json_file_path))
 
-def get_csv_row_data(tds_name, test_name, passed, expected=None, diff_count=None, test_case=None, error_msg=None, error_type=None, time=None, generated_sql=None, actual_tuples=None, expected_tuples=None):
-    return [tds_name, test_name, passed, expected, diff_count, test_case, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+def get_tuple_display_limit():
+    return 100
+
+def get_csv_row_data(tds_name, test_name, test_result, test_case_index=0):
+    #A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
+    passed = 0
+    matched_expected=None
+    diff_count=None
+    test_case_name=None
+    error_msg = None
+    error_type = None
+    time=None
+    generated_sql=None
+    actual_tuples=None
+    expected_tuples=None
+    suite = test_result.actual_results.tested_config.suite_name if test_result and test_result.actual_results else ''
+
+    if not test_result or not test_result.actual_results:
+        error_msg= test_result.get_failure_message() if test_result else None
+        error_type= test_result.get_failure_message() if test_result else None
+        return [suite, tds_name, test_name, passed, matched_expected, diff_count, test_case_name, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+
+    case = test_result.actual_results.test_case_map[test_case_index]
+    matched_expected = test_result.matched_expected_version
+    diff_count = case.diff_count
+    passed = 0
+    if case.all_passed():
+        passed = 1
+    generated_sql = case.get_sql_text()
+    test_case_name = case.name
+
+    actual_tuples = "\n".join(case.get_tuples()[0:get_tuple_display_limit()])
+    if not test_result.best_matching_expected_results:
+        expected_tuples = ''
+    else:
+        expected_tuples = "\n".join(test_result.best_matching_expected_results.test_case_map[test_case_index].get_tuples()[0:get_tuple_display_limit()])
+
+    if passed == 0:
+        error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
+        error_type= case.error_type if case else None
+
+    return [suite, tds_name, test_name, str(passed), str(matched_expected), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -695,18 +753,16 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
     
-    #A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
-    TUPLE_DISPLAY_LIMIT = 100
     custom_dialect = csv.excel
     custom_dialect.lineterminator = '\n'
     custom_dialect.delimiter = ','
     custom_dialect.strict = True
     custom_dialect.skipinitialspace = True
     csv_out = csv.writer(file_out, dialect=custom_dialect, quoting=csv.QUOTE_MINIMAL)
-    tupleLimitStr = '(' + str(TUPLE_DISPLAY_LIMIT) + ')tuples'
+    tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    csvheader = ['TDSName','TestName','Passed','Closest Expected','Diff count','Test Case','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    csvheader = ['Suite','TDSName','TestName','Passed','Closest Expected','Diff count','Test Case','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     if not skip_header:
         csv_out.writerow(csvheader)
 
@@ -717,36 +773,16 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
         if test_result is None or test_result.actual_results is None:
-            row_data = [tdsname, test_name, '0']
-            if test_result is not None:
-                row_data = get_csv_row_data(tdsname, test_name, '0', error_msg = test_result.get_failure_message(), error_type=test_result.get_failure_message())
+            row_data = get_csv_row_data(tdsname, test_name, test_result)
             csv_out.writerow(row_data)
             total_failed_tests += 1
         else:
-            matched = test_result.matched_expected_version
             test_case_index = 0
-            for case in test_result.actual_results.test_case_map:
-                diff_count = case.diff_count
-                passed = 0
-                if case.all_passed():
-                    passed = 1
-                else:
+            for case_index in range(0, len(test_result.actual_results.test_case_map)):
+                if not test_result.actual_results.test_case_map[case_index].all_passed():
                     total_failed_tests += 1
-                generated_sql = case.get_sql_text()
-                test_case_name = case.name
 
-                actual_tuples = "\n".join(case.get_tuples()[0:TUPLE_DISPLAY_LIMIT])
-                if not test_result.best_matching_expected_results:
-                    expected_tuples = ''
-                else:
-                    expected_tuples = "\n".join(test_result.best_matching_expected_results.test_case_map[test_case_index].get_tuples()[0:TUPLE_DISPLAY_LIMIT])
-
-                error_msg = None
-                if passed == 0:
-                    error_msg = case.get_error_message() if case.get_error_message() else test_result.get_failure_message()
-
-                csv_out.writerow([tdsname, test_name, str(passed), str(matched), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples])
-                test_case_index += 1
+                csv_out.writerow(get_csv_row_data(tdsname, test_name, test_result, case_index))
 
     file_out.close()
 
