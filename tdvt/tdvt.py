@@ -8,6 +8,8 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
+__version__ = '1.1.21'
+
 import os
 import argparse
 import subprocess
@@ -366,6 +368,7 @@ def init():
         ch.setLevel(logging.DEBUG)
         logger.addHandler(ch)
     
+    logging.debug('TDVT version: ' + str(__version__))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
 

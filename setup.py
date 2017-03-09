@@ -3,9 +3,11 @@ try:
 except ImportError:
     from distutils.core import setup
 
+from tdvt.tdvt import __version__
+
 setup(
     name='tdvt',
-    version='1.1.20',
+    version=__version__,
     author='Tableau',
     author_email='github@tableau.com',
     url='https://github.com/tableau/TODO',
