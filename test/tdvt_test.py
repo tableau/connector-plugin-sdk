@@ -32,6 +32,7 @@ from tdvt import tdvt_core
 from tdvt.config_gen import datasource_list
 from tdvt.config_gen.test_config import TestSet
 from tdvt.resources import get_path
+from tdvt.test_results import *
 
 class DiffTest(unittest.TestCase):
     def test_diff(self):
