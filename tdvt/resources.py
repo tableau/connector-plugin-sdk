@@ -1,5 +1,6 @@
 import pkg_resources
 import os
+import logging
 
 def get_ini_file_names(base_ini_name):
     return (base_ini_name + '.ini', base_ini_name + '_override.ini')
@@ -48,3 +49,116 @@ def get_all_ini_files(base_ini_dir):
 def get_path(base_dir, file_name=None, module_name='tdvt'):
     path_to_get = base_dir if not file_name else base_dir + '/' + file_name
     return pkg_resources.resource_filename(module_name, path_to_get)
+
+def get_root_dir():
+    return get_path('')
+
+def get_logical_test_file_paths(test_file, output_dir):
+    """ Given the full path to logical test file, return all the paths to the expected output and gold result files.
+        This depends on the logical tests main directory having 2 levels of subdirectories
+        eg  tdvt/logicaltests/setup/calcs
+        and tdvt/logicaltests/expected/calcs
+    """
+    #eg d:/dev/data-dev/tableau-tests/tdvt/logicaltests/setup/calcs
+    expected_base_dir = os.path.split(test_file)[0]
+    expected_base_dir, logical_subdir = os.path.split(expected_base_dir)
+    #Split again to remove the 'setup' dir.
+    expected_base_dir = os.path.split(expected_base_dir)[0]
+    #eg d:/dev/data-dev/tableau-tests/tdvt/logicaltests/expected/calcs
+    expected_base_dir = os.path.join(expected_base_dir, 'expected', logical_subdir)
+    expected_output_dir = expected_base_dir
+
+    #eg setup.bugs.b1713.dbo.xml
+    expected_base_filename = os.path.split(test_file)[1]
+    #Get the abstract test name without the datasource specific customization.
+    #eg setup.bugs.b1713.xml
+    new_base_filename = ".".join(expected_base_filename.split(".")[:-2]) + ".xml"
+    #eg setup.bugs.b1713.dbo-combined.xml
+    expected_output_filename = expected_base_filename.replace('.xml', '-combined.xml')
+    
+    temp_output_dir = output_dir if output_dir else expected_base_dir
+    #eg full path to above file.
+    existing_output_filepath = os.path.join(temp_output_dir, expected_output_filename)
+    #if not os.path.isfile( existing_output_filepath ):
+    #The filename and full path to the expected output from tabquery.
+    new_output_filename = "actual." + new_base_filename
+    new_output_filepath = os.path.join(temp_output_dir, new_output_filename)
+    #Full path the expected file.
+    new_base_filepath = os.path.join(expected_base_dir, new_base_filename)
+    
+    return existing_output_filepath, new_output_filepath, new_base_filename, new_base_filepath, expected_output_dir
+
+def get_test_file_paths(root_directory, test_name, expected_sub_dir, output_dir):
+    """Given a test name like 'exprtests/setup.calcs_data.txt', return full paths to the setup file its self, any actual file, and a list of any existing expected files (can be numbered)."""
+    
+    #d:\...\tdvt\exprtests
+    test_path_base = os.path.join(root_directory, os.path.split(test_name)[0])
+    test_name = os.path.split(test_name)[1]
+
+    setupfile_path = os.path.join(test_path_base, test_name)
+    actual_dir = output_dir if output_dir else test_path_base
+    actualfile_path = os.path.join(actual_dir, test_name.replace('setup', 'actual.setup'))
+    diff_file, diff_ext = os.path.splitext(actualfile_path)
+    diff_file_path = diff_file + "_diff" + diff_ext
+
+    expected_file_version = 0
+    expected_filename = 'expected.' + test_name
+    #Allow an expected subdir. This lets you run the standard set of tests with unique expected files (ie query timing or sql generation).
+    expected_file_path = test_path_base
+    if expected_sub_dir is not None and expected_sub_dir != '':
+        expected_file_path = os.path.join(expected_file_path, expected_sub_dir)
+
+    expected_file_path = os.path.join(expected_file_path, expected_filename)
+
+    expected_file_list = []
+    while os.path.isfile(expected_file_path):
+        expected_file_list.append(expected_file_path)
+
+        expected_file_version += 1
+        #Everything but the ending.
+        expected_file_parts = expected_filename.split(".")[:-1]
+        #Put the number in.
+        expected_file_parts.append( str(expected_file_version) )
+        #Add the ending again.
+        expected_file_parts.append( expected_filename.split(".")[-1] )
+        expected_file = ".".join(expected_file_parts)
+
+        expected_file_path = os.path.join(test_path_base, expected_file)
+
+    if not expected_file_list:
+        #Always add the base expected file even if it doesn't exist. The callers will use this to copy the actual.
+        expected_file_list.append(expected_file_path)
+
+    for filepath in expected_file_list:
+        logging.debug("Found expected filepath " + filepath)
+    return (actualfile_path, diff_file_path, setupfile_path, expected_file_list)
+
+def find_file_path(root_directory, base_file, default_dir):
+    """Return the full path to base_file using either the root_directory and base_file, or a default directory and base_file from there."""
+    path_verbatim = os.path.join(root_directory, base_file)
+    if os.path.isfile(path_verbatim):
+        return path_verbatim
+
+    path_inferred = os.path.join(root_directory, default_dir)
+    path_inferred = os.path.join(path_inferred, base_file)
+    return path_inferred
+
+def get_config_file_full_path(root_directory, combined_config):
+    """Return the full path to the config file to use for this test run."""
+    config_file = combined_config
+    
+    if config_file[-4:] != '.cfg':
+        return ''
+    return find_file_path(root_directory, config_file, os.path.join("config", "gen"))
+
+def get_tds_full_path(root_directory, tds):
+    """Return the full path to the tds file to use for this test run."""
+    #First look for a local tds file (in the place you ran this module, not in the module installation dir).
+    local_file = find_file_path(os.getcwd(), tds, "tds")
+    if os.path.isfile(local_file):
+        return local_file
+    return find_file_path(root_directory, tds, "tds")
+
+def get_base_test(test_file):
+    return os.path.split(test_file)[1]
+

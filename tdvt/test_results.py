@@ -305,3 +305,23 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         json_output['actual'] = obj.path_to_actual
         return json_output
 
+def handle_test_failure(q, work, result=None, error_msg=None):
+    if result == None:
+        result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+
+    if error_msg:
+        result.overall_error_message = error_msg
+
+    work.results[work.test_file] = result
+    q.task_done()
+       
+def handle_timeout_test_failure(q, work):
+    result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+    result.error_status = TestErrorTimeout()
+    handle_test_failure(q, work, result)
+
+def handle_abort_test_failure(q, work):
+    result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+    result.error_status = TestErrorAbort()
+    handle_test_failure(q, work, result)
+
