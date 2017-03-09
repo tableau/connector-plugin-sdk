@@ -17,12 +17,12 @@ import xml.etree.ElementTree
 import glob
 import json
 import csv
-import configparser
 import logging
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .resources import *
 from .test_results import *
+from .tabquery import *
 
 EXPR_CONFIG_ARG = '--expression-config'
 EXPR_CONFIG_ARG_SHORT = '-e'
@@ -43,47 +43,25 @@ class QueueWork(object):
         self.results = {}
         self.timeout_seconds = 1200
 
+    def handle_test_failure(self, result=None, error_msg=None):
+        if result == None:
+            result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
 
-def build_tabquery_command_line_local(work):
-    """To facilitate testing. Just get the executalbe name and not the full path to the executable which depends on where the test is run."""
-    cmd = build_tabquery_command_line(work)
-    new_cmd = []
-    new_cmd.append(os.path.split(cmd[0])[1])
-    new_cmd += cmd[1:]
-    return new_cmd
+        if error_msg:
+            result.overall_error_message = error_msg
 
-def build_tabquery_command_line(work):
-    """Build the command line string for calling tabquerycli."""
-    cli_arg = "-q" if work.test_config.logical else "-e"
+        self.results[work.test_file] = result
+           
+    def handle_timeout_test_failure(self):
+        result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+        result.error_status = TestErrorTimeout()
+        self.handle_test_failure(result)
 
-    cmdline = [TAB_CLI_EXE]
-    cmdline_base = [cli_arg, work.test_file]
-    cmdline.extend(cmdline_base)
-    tds_arg = ["-d", work.test_config.tds]
-    cmdline.extend(tds_arg)
-    cmdline.extend(["--combined"])
+    def handle_abort_test_failure(self):
+        result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+        result.error_status = TestErrorAbort()
+        self.handle_test_failure(result)
 
-    expected_output_dir = work.test_config.output_dir
-
-    if work.test_config.logical:
-        existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
-        expected_output_dir = expected_output_dir if expected_output_dir else expected_dir
-
-    if expected_output_dir:
-        if not os.path.isdir(expected_output_dir):
-            logging.debug("Making dir: {}".format(expected_output_dir))
-            try:
-                os.makedirs(expected_output_dir)
-            except FileExistsError:
-                pass
-        cmdline.extend(["--output-dir", expected_output_dir])
-
-    if work.test_config.d_override:
-        for override in work.test_config.d_override.split(' '):
-            cmdline.extend(["-D" + override])
-
-    work.test_config.command_line = cmdline
-    return cmdline
 
 def do_test_queue_work(i, q):
     """This will be called in a queue.join() context, so make sure to mark all work items as done and
@@ -107,7 +85,8 @@ def do_test_queue_work(i, q):
             #Do this here so we have the repro information from above.
             logging.debug("\nAborting test:" + work.test_file)
             if not VERBOSE: sys.stdout.write('A')
-            handle_abort_test_failure(q, work)
+            work.handle_abort_test_failure()
+            q.task_done()
             continue
 
         logging.debug(" calling " + ' '.join(cmdline))
@@ -124,7 +103,8 @@ def do_test_queue_work(i, q):
         except subprocess.TimeoutExpired as e:
             logging.debug("Test timed out: " + work.test_file)
             if not VERBOSE: sys.stdout.write('T')
-            handle_timeout_test_failure(q, work)
+            work.handle_timeout_test_failure()
+            q.task_done()
             continue
 
         if cmd_output:
@@ -137,7 +117,8 @@ def do_test_queue_work(i, q):
             if not os.path.isfile( existing_output_filepath ):
                 logging.debug("Error: could not find test output file:" + existing_output_filepath)
                 if not VERBOSE: sys.stdout.write('?')
-                handle_test_failure(q, work, error_msg = saved_error_message)
+                work.handle_test_failure(error_msg = saved_error_message)
+                q.task_done()
                 continue
 
             #Copy the test process filename to the actual. filename.
@@ -699,27 +680,4 @@ def run_tests(test_config):
 
     all_test_results = run_tests_parallel(generate_test_file_list(root_directory, test_config.logical, test_config.config_file, test_config.expected_dir), test_config)
     return process_test_results(all_test_results, tds_file, test_config.noheader, output_dir)
-
-def tabquerycli_exists():
-    if os.path.isfile(TAB_CLI_EXE):
-        logging.debug("Found tabquerycli.exe at [{0}]".format(TAB_CLI_EXE))
-        return True
-
-    logging.debug("Could not find tabquerycli.exe at [{0}]".format(TAB_CLI_EXE))
-    return False
-
-def configure_tabquery_path():
-    global TAB_CLI_EXE
-    config = configparser.ConfigParser()
-    
-    tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
-    logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
-    config.read(tdvt_cfg)
-
-    if sys.platform.startswith("darwin"):
-        TAB_CLI_EXE = config['DEFAULT']['TAB_CLI_EXE_MAC']
-    elif sys.platform.startswith("linux"):
-        TAB_CLI_EXE = config['DEFAULT']['TAB_CLI_EXE_LINUX']
-    else:
-        TAB_CLI_EXE = config['DEFAULT']['TAB_CLI_EXE_X64']
 

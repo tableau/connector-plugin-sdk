@@ -19,9 +19,10 @@ import json
 import logging
 from zipfile import ZipFile
 import glob
-from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, configure_tabquery_path, tabquerycli_exists, TdvtTestConfig
+from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig
 from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
 from .config_gen.gentests import list_configs
+from .tabquery import *
 
 #This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistry

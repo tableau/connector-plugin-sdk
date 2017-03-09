@@ -1,14 +1,3 @@
-# -----------------------------------------------------------------------------
-# 
-# This file is the copyrighted property of Tableau Software and is protected 
-# by registered patents and other applicable U.S. and international laws and 
-# regulations.
-# 
-# Unlicensed use of the contents of this file is prohibited. Please refer to 
-# the NOTICES.txt file for further details.
-# 
-# -----------------------------------------------------------------------------
-
 """
     Tableau Datasource Verification Tool Tester - TDVTT
     Test the TDVT.
@@ -33,6 +22,7 @@ from tdvt.config_gen import datasource_list
 from tdvt.config_gen.test_config import TestSet
 from tdvt.resources import get_path
 from tdvt.test_results import *
+from tdvt.tabquery import *
 
 class DiffTest(unittest.TestCase):
     def test_diff(self):
@@ -391,7 +381,7 @@ TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))
 logging.basicConfig(filename='tdvt_test_log.txt',level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
-tdvt_core.configure_tabquery_path()
+configure_tabquery_path()
 if __name__ == '__main__':
 
     logging.debug("Starting TDVT tests\n")
