@@ -25,6 +25,7 @@ from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, Td
 from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
 from .config_gen.gentests import list_configs
 from .tabquery import *
+from .setup_env import create_test_environment, add_datasource
 
 #This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistry
@@ -336,6 +337,7 @@ def create_parser():
     parser.add_argument('--list_logical_configs', dest='list_logical_configs', action='store_true', help='List available logical configs.', required=False, default=None)
     parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
     parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
+    parser.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
     parser.add_argument('--run', '-r', dest='ds', help='Comma separated list of Datasource names to test or \'all\'.', required=False)
     parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='', nargs='?')
     parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='', nargs='?')
@@ -470,32 +472,20 @@ def run_desired_tests(args, ds_registry):
     
     return error_code
 
-def create_setup_structure():
-    try:
-        os.mkdir('tds')
-    except:
-        pass
-    try:
-        os.makedirs('config/tdvt')
-    except:
-        pass
-
-    try:
-        tdvt_ini = open('config/tdvt/tdvt_override.ini', 'w')
-        tdvt_ini.write('#Add paths to tabquerycli.exe.\n')
-        tdvt_ini.write('[DEFAULT]\n')
-        tdvt_ini.write('TAB_CLI_EXE_X64 = \n')
-        tdvt_ini.write('TAB_CLI_EXE_MAC = \n')
-    except:
-        pass
-
 def main():
 
     parser, ds_registry, args = init()
 
     if args.setup:
         print ("Creating setup files...")
-        create_setup_structure()
+        create_test_environment()
+        sys.exit(0)
+    if args.add_ds:
+        print ("Adding a new datasource [" + args.add_ds + "] ...")
+        print ("Make sure you have already saved the appropriate TDS files in the tds directory.")
+        add_datasource(args.add_ds)
+        print ("Generating config files...")
+        generate_files(ds_registry, True)
         sys.exit(0)
     elif args.generate:
         print ("Generating config files...")

@@ -161,4 +161,3 @@ def get_tds_full_path(root_directory, tds):
 
 def get_base_test(test_file):
     return os.path.split(test_file)[1]
-
