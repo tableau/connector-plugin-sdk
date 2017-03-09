@@ -170,4 +170,12 @@ attributes = {
                          'tablenameLower' : True,
                          'tablePrefix' : '[DEFAULT].'
                          },
+
+    'testv1_testv1_lower' : { 
+                 'tablename' : 'testv1_$dsName',
+                 'tablenameLower' : True,
+                 'fieldnameDate_underscore' : True,
+                 'fieldnameLower_underscore' : True,
+                 'tablePrefix' : '[testv1].',
+                 },
 }
