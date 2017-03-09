@@ -39,7 +39,7 @@ class TestCaseResult(object):
         ie The math.round test contains ROUND(int), ROUND(num) etc test cases.
 
     """
-    def __init__(self, name, id, sql, query_time, error_msg, error_type, table, tested_config):
+    def __init__(self, name, id, sql, query_time, error_msg, error_type, table, test_config):
         self.name = name
         self.id = id
         self.sql = sql
@@ -49,9 +49,9 @@ class TestCaseResult(object):
         self.error_type = error_type
         self.diff_count = 0
         self.diff_string = ''
-        self.tested_config = tested_config
         self.passed_sql = False
         self.passed_tuples = False
+        self.tested_config = test_config
 
     def set_diff(self, diff_string, diff_count):
         self.diff_string = diff_string
@@ -101,72 +101,6 @@ class TestCaseResult(object):
     def __json__(self):
         return {'tested_sql' : self.tested_sql, 'tested_tuples' : self.tested_tuples, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
 
-class TestOutput(object):
-    """A collection of individual test case runs.
-        
-        ie All of the math.round results.
-
-    """
-    def __init__(self, test_xml, tested_config):
-        """
-            <results>
-            <test name='blah'
-            <sql>text</sql>
-            <query-time> 2.96439e-323 </query-time>
-            <error> Any query errors </error> --Optional
-            <error-type> Interpreted Tableau error type </error-type> --Optional
-            <table>
-            <schema></schema>
-            <tuple>
-            <value></value>
-            <value></value>
-            </tuple>
-            </table>
-            </results>
-
-        """
-        self.test_case_map = []
-        self.tested_config = tested_config
-        #Go through all the test nodes under 'results'.
-        for i in range(0, len(list(test_xml))):
-            test_child = test_xml[i]
-
-            node= test_child.find('error')
-            error_msg = node.text if node is not None else ''
-
-            node = test_child.find('error-type')
-            error_type = node.text.strip() if node is not None else ''
-
-            node = test_child.find('query-time')
-            query_time = node.text if node is not None else '0'
-
-            test_result = TestCaseResult(test_child.get('name'), str(i), test_child.find('sql'), query_time, error_msg, error_type, test_child.find('table'), tested_config)
-            self.test_case_map.append(test_result)
-
-    def all_passed(self):
-        """Return true if all aspects of the test passed."""
-        passed = True
-        for test_case in self.test_case_map:
-            if test_case.all_passed() == False:
-                return False
-        return True
-
-    def set_diff_counts(self, diff_counts):
-        if len(diff_counts) != len(self.test_case_map):
-            return
-        for i in range(0, len(self.test_case_map)):
-            self.test_case_map[i].diff_count = diff_counts[i]
-    
-    def get_error_messages(self):
-        err_msgs = [ tc.error_message for tc in self.test_case_map if not tc.all_passed() and tc.error_message ]
-        return err_msgs
-
-    def get_exceptions(self):
-        exceptions = [ tc.error_type for tc in self.test_case_map if not tc.all_passed() and tc.error_type ]
-        return exceptions
-
-    def __json__(self):
-        return {'test_cases' : self.test_case_map}
 
 class TdvtTestConfig(object):
     """Track how items were tested. This captures how tdvt was invoked."""
@@ -256,28 +190,61 @@ class TestErrorTimeout(object):
         return "Test timed out."
 
 class TestResult(object):
-    """Information about a test suite run."""
+    """Information about a test run. A test can contain one or more test cases."""
     def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = ''):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
         self.error_status = None
-        self.actual_results = None
         self.diff_count = 0
         self.best_matching_expected_results = None
         self.test_file = test_file
         self.path_to_expected = ''
         self.path_to_actual = ''
         self.overall_error_message = ''
+        self.test_case_map = []
+        self.path_to_actual = ''
 
     def __json__(self):
         return {'all_passed' : self.all_passed(), 'name' : self.name, 
                 'matched_expected' : self.matched_expected_version, 'expected_diffs' : self.diff_count,
-                'actual_results' : self.actual_results, 'expected_results' : self.best_matching_expected_results}
+                'test_cases' : self.test_case_map, 'expected_results' : self.best_matching_expected_results}
 
-    def add_actual_output(self, result_output, actual_path):
-        self.actual_results = result_output
+    def add_test_results(self, test_xml, actual_path):
+        """
+            <results>
+            <test name='blah'
+            <sql>text</sql>
+            <query-time> 2.96439e-323 </query-time>
+            <error> Any query errors </error> --Optional
+            <error-type> Interpreted Tableau error type </error-type> --Optional
+            <table>
+            <schema></schema>
+            <tuple>
+            <value></value>
+            <value></value>
+            </tuple>
+            </table>
+            </results>
+
+        """
+        self.test_case_map = []
         self.path_to_actual = actual_path
+        #Go through all the test nodes under 'results'.
+        for i in range(0, len(list(test_xml))):
+            test_child = test_xml[i]
+
+            node= test_child.find('error')
+            error_msg = node.text if node is not None else ''
+
+            node = test_child.find('error-type')
+            error_type = node.text.strip() if node is not None else ''
+
+            node = test_child.find('query-time')
+            query_time = node.text if node is not None else '0'
+
+            test_result = TestCaseResult(test_child.get('name'), str(i), test_child.find('sql'), query_time, error_msg, error_type, test_child.find('table'), self.test_config)
+            self.test_case_map.append(test_result)
 
     def get_failure_message(self):
         if self.error_status:
@@ -291,16 +258,22 @@ class TestResult(object):
         return "Unknown failure."
 
     def get_exceptions(self):
-        if self.error_status or not self.actual_results:
+        if self.error_status:
             return []
-        return self.actual_results.get_exceptions()
+        return [ tc.error_type for tc in self.test_case_map if not tc.all_passed() and tc.error_type ]
+
+    def set_diff_counts(self, diff_counts):
+        if len(diff_counts) != len(self.test_case_map):
+            return
+        for i in range(0, len(self.test_case_map)):
+            self.test_case_map[i].diff_count = diff_counts[i]
 
     def set_best_matching_expected_output(self, expected_output, expected_path, expected_number, diff_counts):
         diff_count = sum(diff_counts)
         if self.best_matching_expected_results is None or self.diff_count > diff_count:
             self.best_matching_expected_results = expected_output
             self.matched_expected_version = expected_number
-            self.actual_results.set_diff_counts(diff_counts)
+            self.set_diff_counts(diff_counts)
             self.diff_count = diff_count
             self.path_to_expected = expected_path
 
@@ -314,11 +287,20 @@ class TestResult(object):
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
-        if self.error_status:
+        if self.error_status or not self.test_case_map:
             return False
-        if not self.actual_results:
-            return False
-        return self.actual_results.all_passed()
+        for test_case in self.test_case_map:
+            if test_case.all_passed() == False:
+                return False
+        return True
+
+    def get_failure_count(self):
+        failures = 0
+        for test_case in self.test_case_map:
+            if test_case.all_passed() == False:
+                failures += 1
+
+        return failures
 
 class TestResultEncoder(json.JSONEncoder):
     """For writing JSON output."""
@@ -577,19 +559,19 @@ def diff_table_node(actual_table, expected_table, diff_string):
 def diff_test_results(result, expected_output):
     """Compare the actual results to the expected test output based on the given rules."""
 
-    test_case_count = len(result.actual_results.test_case_map)
+    test_case_count = len(result.test_case_map)
     diff_counts = [0] * test_case_count
     diff_string = ''
     #Go through all test cases.
     for test_case in range(0, test_case_count):
         expected_testcase_result = expected_output.test_case_map[test_case]
-        actual_testcase_result = result.actual_results.test_case_map[test_case]
+        actual_testcase_result = result.test_case_map[test_case]
         if expected_testcase_result is None:
             actual_testcase_result.passed_sql = False
             actual_testcase_result.passed_tuples = False
             continue
 
-        config = actual_testcase_result.tested_config
+        config = result.test_config
         #Compare the SQL.
         if config.tested_sql:
             diff, diff_string = diff_sql_node(actual_testcase_result.sql, expected_testcase_result.sql, diff_string)
@@ -625,7 +607,7 @@ def compare_results(test_name, test_file, full_test_file, test_config):
     base_test_file = get_base_test(test_file)
     test_file_root = os.path.split(test_file)[0]
     actual_file, actual_diff_file, setup, expected_files = get_test_file_paths(test_file_root, base_test_file, test_config.expected_dir, test_config.output_dir)
-    result = TestResult(test_name, test_file = full_test_file)
+    result = TestResult(test_name, test_config, full_test_file)
     #There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
         logging.debug("Did not find actual file: " + actual_file)
@@ -633,8 +615,7 @@ def compare_results(test_name, test_file, full_test_file, test_config):
 
     try:
         actual_xml = xml.etree.ElementTree.parse(actual_file).getroot()
-        actual_output = TestOutput(actual_xml, test_config)
-        result.add_actual_output(actual_output, actual_file)
+        result.add_test_results(actual_xml, actual_file)
     except xml.etree.ElementTree.ParseError as e:
         logging.debug("Exception parsing actual file: " + actual_file + " exception: " + str(e))
         return result
@@ -649,7 +630,8 @@ def compare_results(test_name, test_file, full_test_file, test_config):
             return result
         #Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(threading.current_thread().name + " Comparing " + actual_file + " to " + expected_file)
-        expected_output = TestOutput(xml.etree.ElementTree.parse(expected_file).getroot(), test_config)
+        expected_output = TestResult(test_config=test_config)
+        expected_output.add_test_results(xml.etree.ElementTree.parse(expected_file).getroot(), '')
         
         diff_counts, diff_string = diff_test_results(result, expected_output)
         result.set_best_matching_expected_output(expected_output, expected_file, expected_file_version, diff_counts)
@@ -717,14 +699,14 @@ def get_csv_row_data(tds_name, test_name, test_result, test_case_index=0):
     generated_sql=None
     actual_tuples=None
     expected_tuples=None
-    suite = test_result.actual_results.tested_config.suite_name if test_result and test_result.actual_results else ''
+    suite = test_result.test_config.suite_name if test_result else ''
 
-    if not test_result or not test_result.actual_results:
+    if not test_result or not test_result.test_case_map:
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
         return [suite, tds_name, test_name, passed, matched_expected, diff_count, test_case_name, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
 
-    case = test_result.actual_results.test_case_map[test_case_index]
+    case = test_result.test_case_map[test_case_index]
     matched_expected = test_result.matched_expected_version
     diff_count = case.diff_count
     passed = 0
@@ -752,7 +734,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     except IOError:
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
-    
+   
     custom_dialect = csv.excel
     custom_dialect.lineterminator = '\n'
     custom_dialect.delimiter = ','
@@ -772,16 +754,14 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     for path, test_result in all_test_results.items():
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
-        if test_result is None or test_result.actual_results is None:
+        if not test_result or not test_result.test_case_map:
             row_data = get_csv_row_data(tdsname, test_name, test_result)
             csv_out.writerow(row_data)
             total_failed_tests += 1
         else:
             test_case_index = 0
-            for case_index in range(0, len(test_result.actual_results.test_case_map)):
-                if not test_result.actual_results.test_case_map[case_index].all_passed():
-                    total_failed_tests += 1
-
+            total_failed_tests += test_result.get_failure_count()
+            for case_index in range(0, len(test_result.test_case_map)):
                 csv_out.writerow(get_csv_row_data(tdsname, test_name, test_result, case_index))
 
     file_out.close()
@@ -1070,9 +1050,10 @@ def run_diff(test_config, diff):
             logging.debug("Diffing " + actual + " and " + f)
             actual_xml = xml.etree.ElementTree.parse(actual).getroot()
             expected_xml = xml.etree.ElementTree.parse(f).getroot()
-            result = TestResult()
-            result.add_actual_output(TestOutput(actual_xml, test_config), actual)
-            expected_output = TestOutput(expected_xml, test_config)
+            result = TestResult(test_config=test_config)
+            result.add_test_results(actual_xml, actual)
+            expected_output = TestResult(test_config=test_config)
+            expected_output.add_test_results(expected_xml, '')
             num_diffs, diff_string = diff_test_results(result, expected_output)
             logging.debug(diff_string)
             diff_count_map[f] = sum(num_diffs)

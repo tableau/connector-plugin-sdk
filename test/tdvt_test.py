@@ -62,10 +62,11 @@ class DiffTest(unittest.TestCase):
             if 'expected.both' in test:
                 compare_tuples = True
                 compare_sql = True
-            results = tdvt_core.TestResult()
             test_config = tdvt_core.TdvtTestConfig(compare_sql, compare_tuples)
-            results.add_actual_output(tdvt_core.TestOutput(actual_xml, test_config), actual_file)
-            expected_output = tdvt_core.TestOutput(expected_xml, test_config)
+            results = tdvt_core.TestResult(test_config=test_config)
+            results.add_test_results(actual_xml, actual_file)
+            expected_output = tdvt_core.TestResult(test_config=test_config)
+            expected_output.add_test_results(expected_xml, '')
 
             num_diffs, diff_string = tdvt_core.diff_test_results(results, expected_output)
             results.set_best_matching_expected_output(expected_output, expected_file, 0, [0])
