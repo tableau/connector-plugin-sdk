@@ -45,20 +45,20 @@ class QueueWork(object):
 
     def handle_test_failure(self, result=None, error_msg=None):
         if result == None:
-            result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+            result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
 
         if error_msg:
             result.overall_error_message = error_msg
 
-        self.results[work.test_file] = result
+        self.results[self.test_file] = result
            
     def handle_timeout_test_failure(self):
-        result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+        result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
         result.error_status = TestErrorTimeout()
         self.handle_test_failure(result)
 
     def handle_abort_test_failure(self):
-        result = TestResult(get_base_test(work.test_file), work.test_config, work.test_file)
+        result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
         result.error_status = TestErrorAbort()
         self.handle_test_failure(result)
 
