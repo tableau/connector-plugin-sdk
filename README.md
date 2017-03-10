@@ -1,10 +1,10 @@
 TDVT - Tableau Datasource Verification Tool
 
-Requirements
-    1. Python 3.
-    2. An ODBC driver for your database.
-    3. The 'Calcs' and 'Staples' table loaded in your database.
-    4. Optional: The TPCH 1GB dataset loaded in your database.
+### Requirements ###
+1. Python 3.
+2. An ODBC driver for your database.
+3. The 'Calcs' and 'Staples' table loaded in your database.
+4. Optional: The TPCH 1GB dataset loaded in your database.
     
 
 How it works
