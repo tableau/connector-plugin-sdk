@@ -1,4 +1,5 @@
 TDVT - Tableau Datasource Verification Tool
+---------------
 
 ### Requirements ###
 1. Python 3.
