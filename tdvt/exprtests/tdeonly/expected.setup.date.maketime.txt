@@ -1,10 +1,10 @@
 <results>
   <test name='MAKETIME(7,4,60)'>
     <sql>
-      SELECT &apos;1899-12-30 07:05:00.000&apos; AS &quot;TEMP(Test)(987836511)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT &apos;1899-12-30 07:05:00.000&apos;::timestamp AS &quot;TEMP(Test)(987836511)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      215.000
     </query-time>
     <table>
       <schema>
@@ -17,10 +17,10 @@
   </test>
   <test name='MAKETIME(7,60,60)'>
     <sql>
-      SELECT &apos;1899-12-30 08:01:00.000&apos; AS &quot;TEMP(Test)(464692403)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT &apos;1899-12-30 08:01:00.000&apos;::timestamp AS &quot;TEMP(Test)(464692403)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      206.000
     </query-time>
     <table>
       <schema>
@@ -33,10 +33,10 @@
   </test>
   <test name='MAKETIME(7,59,60)'>
     <sql>
-      SELECT &apos;1899-12-30 08:00:00.000&apos; AS &quot;TEMP(Test)(1372325843)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT &apos;1899-12-30 08:00:00.000&apos;::timestamp AS &quot;TEMP(Test)(1372325843)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      7.000
+      207.000
     </query-time>
     <table>
       <schema>
@@ -49,10 +49,10 @@
   </test>
   <test name='MAKETIME(7,120,65)'>
     <sql>
-      SELECT &apos;1899-12-30 09:01:05.000&apos; AS &quot;TEMP(Test)(4236861232)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT &apos;1899-12-30 09:01:05.000&apos;::timestamp AS &quot;TEMP(Test)(4236861232)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      216.000
     </query-time>
     <table>
       <schema>
@@ -65,10 +65,10 @@
   </test>
   <test name='MAKETIME(11,45,30)'>
     <sql>
-      SELECT &apos;1899-12-30 11:45:30.000&apos; AS &quot;TEMP(Test)(2707000699)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT &apos;1899-12-30 11:45:30.000&apos;::timestamp AS &quot;TEMP(Test)(2707000699)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      217.000
     </query-time>
     <table>
       <schema>
@@ -76,6 +76,223 @@
       </schema>
       <tuple>
         <value>#11:45:30#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(23,59,60)'>
+    <sql>
+      SELECT (DATE &apos;1899-12-31&apos;) AS &quot;TEMP(Test)(3762143655)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      216.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3762143655)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-12-31 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(24,41,47)'>
+    <sql>
+      SELECT &apos;1899-12-31 00:41:47.000&apos;::timestamp AS &quot;TEMP(Test)(2046978312)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2046978312)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-12-31 00:41:47#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(27,50,50)'>
+    <sql>
+      SELECT &apos;1899-12-31 03:50:50.000&apos;::timestamp AS &quot;TEMP(Test)(52440932)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(52440932)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-12-31 03:50:50#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(24,60,60)'>
+    <sql>
+      SELECT &apos;1899-12-31 01:01:00.000&apos;::timestamp AS &quot;TEMP(Test)(3751394242)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      206.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3751394242)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-12-31 01:01:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(0,0,0)'>
+    <sql>
+      SELECT &apos;1899-12-30 00:00:00.000&apos;::timestamp AS &quot;TEMP(Test)(585174199)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      206.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(585174199)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(0,0,1)'>
+    <sql>
+      SELECT &apos;1899-12-30 00:00:01.000&apos;::timestamp AS &quot;TEMP(Test)(1558112192)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1558112192)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#00:00:01#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(1,1,0)'>
+    <sql>
+      SELECT &apos;1899-12-30 01:01:00.000&apos;::timestamp AS &quot;TEMP(Test)(457599811)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      206.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(457599811)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#01:01:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME(-1,0,0)'>
+    <sql>
+      SELECT null::timestamp AS &quot;TEMP(Test)(1287742516)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1287742516)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKETIME([int3]+[int3], [int3], [int3])'>
+    <sql>
+      SELECT (CAST(&apos;1899-12-30 00:00:00&apos; AS TIMESTAMP) + CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL) * INTERVAL &apos;1 HOUR&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 MINUTE&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 SECOND&apos;) AS &quot;TEMP(Test)(2023874562)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CAST(&apos;1899-12-30 00:00:00&apos; AS TIMESTAMP) + CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL) * INTERVAL &apos;1 HOUR&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 MINUTE&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 SECOND&apos;)
+    </sql>
+    <query-time>
+      217.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2023874562)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#04:02:02#</value>
+      </tuple>
+      <tuple>
+        <value>#06:03:03#</value>
+      </tuple>
+      <tuple>
+        <value>#10:05:05#</value>
+      </tuple>
+      <tuple>
+        <value>#14:07:07#</value>
+      </tuple>
+      <tuple>
+        <value>#16:08:08#</value>
+      </tuple>
+      <tuple>
+        <value>#18:09:09#</value>
+      </tuple>
+      <tuple>
+        <value>#22:11:11#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-31 02:13:13#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-31 10:17:17#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-31 12:18:18#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;hour&apos;,MAKETIME([int3]+[int3], [int3], [int3]))'>
+    <sql>
+      SELECT CAST(TRUNC(EXTRACT(HOUR FROM (CAST(&apos;1899-12-30 00:00:00&apos; AS TIMESTAMP) + CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL) * INTERVAL &apos;1 HOUR&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 MINUTE&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 SECOND&apos;))) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1279254292)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(TRUNC(EXTRACT(HOUR FROM (CAST(&apos;1899-12-30 00:00:00&apos; AS TIMESTAMP) + CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL) * INTERVAL &apos;1 HOUR&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 MINUTE&apos; + CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL) * INTERVAL &apos;1 SECOND&apos;))) AS BIGINT OR NULL)
+    </sql>
+    <query-time>
+      215.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1279254292)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>10</value>
+      </tuple>
+      <tuple>
+        <value>12</value>
+      </tuple>
+      <tuple>
+        <value>14</value>
+      </tuple>
+      <tuple>
+        <value>16</value>
+      </tuple>
+      <tuple>
+        <value>18</value>
+      </tuple>
+      <tuple>
+        <value>22</value>
       </tuple>
     </table>
   </test>
