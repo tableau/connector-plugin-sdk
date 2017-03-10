@@ -344,9 +344,9 @@ def write_standard_test_output(all_test_results, output_dir):
 def get_tuple_display_limit():
     return 100
 
-def get_csv_row_data(tds_name, test_name, test_result, test_case_index=0):
+def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0):
     #A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
-    passed = 0
+    passed = False
     matched_expected=None
     diff_count=None
     test_case_name=None
@@ -361,14 +361,14 @@ def get_csv_row_data(tds_name, test_name, test_result, test_case_index=0):
     if not test_result or not test_result.test_case_map:
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
-        return [suite, tds_name, test_name, passed, matched_expected, diff_count, test_case_name, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
 
     case = test_result.test_case_map[test_case_index]
     matched_expected = test_result.matched_expected_version
     diff_count = case.diff_count
-    passed = 0
+    passed = False
     if case.all_passed():
-        passed = 1
+        passed = True
     generated_sql = case.get_sql_text()
     test_case_name = case.name
 
@@ -378,11 +378,11 @@ def get_csv_row_data(tds_name, test_name, test_result, test_case_index=0):
     else:
         expected_tuples = "\n".join(test_result.best_matching_expected_results.test_case_map[test_case_index].get_tuples()[0:get_tuple_display_limit()])
 
-    if passed == 0:
+    if passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_type= case.error_type if case else None
 
-    return [suite, tds_name, test_name, str(passed), str(matched_expected), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -401,7 +401,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    csvheader = ['Suite','TDSName','TestName','Passed','Closest Expected','Diff count','Test Case','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     if not skip_header:
         csv_out.writerow(csvheader)
 
@@ -412,14 +412,14 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
         if not test_result or not test_result.test_case_map:
-            row_data = get_csv_row_data(tdsname, test_name, test_result)
+            row_data = get_csv_row_data(tdsname, test_name, path, test_result)
             csv_out.writerow(row_data)
             total_failed_tests += 1
         else:
             test_case_index = 0
             total_failed_tests += test_result.get_failure_count()
             for case_index in range(0, len(test_result.test_case_map)):
-                csv_out.writerow(get_csv_row_data(tdsname, test_name, test_result, case_index))
+                csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, case_index))
 
     file_out.close()
 

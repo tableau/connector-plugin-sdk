@@ -172,7 +172,6 @@ class TestResult(object):
         self.path_to_actual = ''
         self.overall_error_message = ''
         self.test_case_map = []
-        self.path_to_actual = ''
 
     def __json__(self):
         return {'all_passed' : self.all_passed(), 'name' : self.name, 
