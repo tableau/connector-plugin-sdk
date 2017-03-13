@@ -94,6 +94,12 @@ attributes = {
                  'bool_underscore' : True
                  },
 
+    'bool_lower' : { 
+                     'tablename' : '$dsName',
+                     'tablenameLower' : True,
+                     'bool_underscore' : True
+                 },
+
     #TestV1.Calcs with boolean underscore.
     'prefix_bool_' : { 
                      'tablename' : '$dsName',
