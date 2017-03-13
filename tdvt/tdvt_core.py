@@ -42,10 +42,12 @@ class QueueWork(object):
         self.test_file = test_file
         self.results = {}
         self.timeout_seconds = 1200
+        self.cmd_output = None
 
     def handle_test_failure(self, result=None, error_msg=None):
         if result == None:
             result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
+            result.cmd_output = self.cmd_output
 
         if error_msg:
             result.overall_error_message = error_msg
@@ -100,6 +102,7 @@ def do_test_queue_work(i, q):
             #Let processing continue so it can try and find any output file which will contain database error messages.
             #Save the error message in case there is no result file to get it from.
             saved_error_message = e.output
+            work.cmd_output = e.output
         except subprocess.TimeoutExpired as e:
             logging.debug("Test timed out: " + work.test_file)
             if not VERBOSE: sys.stdout.write('T')
@@ -108,6 +111,7 @@ def do_test_queue_work(i, q):
             continue
 
         if cmd_output:
+            work.cmd_output = str(cmd_output)
             logging.debug("Command line output for " + work.test_file + ". " + str(cmd_output))
 
         test_name = get_base_test(work.test_file)
@@ -131,6 +135,7 @@ def do_test_queue_work(i, q):
 
         result = compare_results(test_name, new_test_file, work.test_file, work.test_config)
         result.test_config = work.test_config
+        result.cmd_output = work.cmd_output
 
         if result == None:
             result = TestResult(test_file = work.test_file)
@@ -357,11 +362,12 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     actual_tuples=None
     expected_tuples=None
     suite = test_result.test_config.suite_name if test_result else ''
+    cmd_output = test_result.cmd_output if test_result else ''
 
     if not test_result or not test_result.test_case_map:
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
-        return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
 
     case = test_result.test_case_map[test_case_index]
     matched_expected = test_result.matched_expected_version
@@ -378,11 +384,11 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     else:
         expected_tuples = "\n".join(test_result.best_matching_expected_results.test_case_map[test_case_index].get_tuples()[0:get_tuple_display_limit()])
 
-    if passed:
+    if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_type= case.error_type if case else None
 
-    return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -401,7 +407,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     if not skip_header:
         csv_out.writerow(csvheader)
 
@@ -412,8 +418,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
         if not test_result or not test_result.test_case_map:
-            row_data = get_csv_row_data(tdsname, test_name, path, test_result)
-            csv_out.writerow(row_data)
+            csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
             total_failed_tests += 1
         else:
             test_case_index = 0
