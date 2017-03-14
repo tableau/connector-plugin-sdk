@@ -1018,19 +1018,6 @@
       </tuple>
     </table>
   </test>
-  <test name='num4 + date0'>
-    <sql>
-      
-    </sql>
-    <query-time>
-      0.000
-    </query-time>
-    <error>
-      Can&apos;t add float and datetime values&#10;
-    </error>
-    <table>
-    </table>
-  </test>
   <test name='num0 + num1'>
     <sql>
       SELECT (&quot;testv1_calcs&quot;.&quot;num0&quot; + &quot;testv1_calcs&quot;.&quot;num1&quot;) AS &quot;TEMP(Test)(977554451)(0)&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY (&quot;testv1_calcs&quot;.&quot;num0&quot; + &quot;testv1_calcs&quot;.&quot;num1&quot;)

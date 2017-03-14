@@ -1081,13 +1081,6 @@
       </tuple>
     </table>
   </test>
-  <test name='num4 + date0'>
-    <sql>
-      Can&apos;t add float and date values&#10;
-    </sql>
-    <table>
-    </table>
-  </test>
   <test name='num0 + num1'>
     <sql>
       SELECT ([Calcs].[num0] + [Calcs].[num1]) AS [TEMP_Test__977554451__0_]&#10;FROM [Calcs]&#10;GROUP BY ([Calcs].[num0] + [Calcs].[num1])

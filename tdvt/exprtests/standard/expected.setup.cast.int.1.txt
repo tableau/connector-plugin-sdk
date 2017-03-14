@@ -1,11 +1,14 @@
 <results>
   <test name='INT([int1])'>
     <sql>
-      SELECT ([Calcs].[int1]) AS [TEMP(Test)(551720338)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ([Calcs].[int1])
+      SELECT CAST(&quot;testv1_calcs&quot;.&quot;int1&quot; AS BIGINT) AS &quot;temp_test__5517203&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      357.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(551720338)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(551720338)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -35,11 +38,14 @@
   </test>
   <test name='INT([bool0])'>
     <sql>
-      SELECT (CASE&#10;&#9;WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1&#10;&#9;WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0&#10;&#9;ELSE NULL END) AS [TEMP(Test)(2695057561)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1&#10;&#9;WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0&#10;&#9;ELSE NULL END)
+      SELECT (CASE&#10;&#9;WHEN &quot;testv1_calcs&quot;.&quot;bool0&quot; = TRUE THEN 1&#10;&#9;WHEN NOT &quot;testv1_calcs&quot;.&quot;bool0&quot; = TRUE THEN 0&#10;&#9;ELSE CAST(NULL AS BIGINT) END) AS &quot;temp_test__2695057&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      367.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2695057561)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(2695057561)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -54,39 +60,45 @@
   </test>
   <test name='INT([date0])'>
     <sql>
-      SELECT CAST(FLOOR(CAST(CAST([Calcs].[date0] as datetime) as float)) as bigint) AS [TEMP(Test)(2234960540)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY CAST(FLOOR(CAST(CAST([Calcs].[date0] as datetime) as float)) as bigint)
+      SELECT TO_UNIXTIME(&quot;testv1_calcs&quot;.&quot;date0&quot;) AS &quot;temp_test__2234960&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      362.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2234960540)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(2234960540)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>26482</value>
+        <value>79056000</value>
       </tuple>
       <tuple>
-        <value>27708</value>
+        <value>184982400</value>
       </tuple>
       <tuple>
-        <value>38090</value>
+        <value>1081987200</value>
       </tuple>
       <tuple>
-        <value>38140</value>
+        <value>1086307200</value>
       </tuple>
       <tuple>
-        <value>38155</value>
+        <value>1087603200</value>
       </tuple>
     </table>
   </test>
   <test name='INT([num2])'>
     <sql>
-      SELECT CAST([Calcs].[num2] as bigint) AS [TEMP(Test)(1665700248)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY CAST([Calcs].[num2] as bigint)
+      SELECT CAST(CASE WHEN &quot;testv1_calcs&quot;.&quot;num2&quot; &gt;=0 THEN FLOOR(&quot;testv1_calcs&quot;.&quot;num2&quot;) ELSE CEIL(&quot;testv1_calcs&quot;.&quot;num2&quot;) END AS BIGINT) AS &quot;temp_test__1665700&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      370.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1665700248)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(1665700248)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -117,19 +129,6 @@
       </tuple>
       <tuple>
         <value>17</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='INT([str2])'>
-    <sql>
-      SELECT (CASE&#10;&#9;WHEN 0 = ISNUMERIC(CAST([Calcs].[str2] AS VARCHAR)) THEN NULL&#10;&#9;ELSE CAST(CAST(CAST([Calcs].[str2] AS VARCHAR) as float) as bigint) END) AS [TEMP(Test)(2779514991)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN 0 = ISNUMERIC(CAST([Calcs].[str2] AS VARCHAR)) THEN NULL&#10;&#9;ELSE CAST(CAST(CAST([Calcs].[str2] AS VARCHAR) as float) as bigint) END)
-    </sql>
-    <table>
-      <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2779514991)(0)]</column>
-      </schema>
-      <tuple>
-        <value>%null%</value>
       </tuple>
     </table>
   </test>

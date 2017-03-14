@@ -1018,22 +1018,6 @@
       </tuple>
     </table>
   </test>
-  <test name='num4 + date0'>
-    <sql>
-      
-    </sql>
-    <query-time>
-      0.000
-    </query-time>
-    <error>
-      Can&apos;t add float and date values&#10;
-    </error>
-    <error-type>
-      Invalid Expression
-    </error-type>
-    <table>
-    </table>
-  </test>
   <test name='num0 + num1'>
     <sql>
       SELECT (`testv1_Calcs`.`num0` + `testv1_Calcs`.`num1`) AS `temp_test__977554451__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (`testv1_Calcs`.`num0` + `testv1_Calcs`.`num1`)

@@ -132,11 +132,4 @@
       </tuple>
     </table>
   </test>
-  <test name='FLOAT([str2])'>
-    <sql>
-      ERROR: invalid input syntax for type double precision: &quot;one&quot;;&#10;Error while executing the query&#10;
-    </sql>
-    <table>
-    </table>
-  </test>
 </results>

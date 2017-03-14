@@ -913,13 +913,6 @@
       </tuple>
     </table>
   </test>
-  <test name='num4 + date0'>
-    <sql>
-      Can&apos;t add float and datetime values&#10;
-    </sql>
-    <table>
-    </table>
-  </test>
   <test name='num0 + num1'>
     <sql>
       SELECT ([Calcs].[num0] + [Calcs].[num1]) AS [TEMP(Test)(977554451)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ([Calcs].[num0] + [Calcs].[num1])
