@@ -184,4 +184,13 @@ attributes = {
                  'fieldnameLower_underscore' : True,
                  'tablePrefix' : '[testv1].',
                  },
+
+    'view_lower' : { 
+                 'tablename' : '$dsName',
+                 'tablenamePostfix' : '_view',
+                 'tablenameLower' : True,
+                 'tablePrefix' : '[testv1].',
+                 'fieldnameLower_underscore' : True,
+                 'bool_underscore' : True
+                 },
 }
