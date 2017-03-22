@@ -221,13 +221,15 @@ def diff_table_node(actual_table, expected_table, diff_string):
 def diff_test_results(result, expected_output):
     """Compare the actual results to the expected test output based on the given rules."""
 
-    test_case_count = len(result.test_case_map)
+    test_case_count = result.get_test_case_count()
     diff_counts = [0] * test_case_count
     diff_string = ''
     #Go through all test cases.
     for test_case in range(0, test_case_count):
-        expected_testcase_result = expected_output.test_case_map[test_case]
-        actual_testcase_result = result.test_case_map[test_case]
+        expected_testcase_result = expected_output.get_test_case(test_case)
+        actual_testcase_result = result.get_test_case(test_case)
+        if not actual_testcase_result:
+            continue
         if expected_testcase_result is None:
             actual_testcase_result.passed_sql = False
             actual_testcase_result.passed_tuples = False
@@ -367,12 +369,12 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if test_result and test_result.test_config:
         test_type = 'logical' if test_result.test_config.logical else 'expression'
 
-    if not test_result or not test_result.test_case_map:
+    if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
         return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
 
-    case = test_result.test_case_map[test_case_index]
+    case = test_result.get_test_case(test_case_index)
     matched_expected = test_result.matched_expected_version
     diff_count = case.diff_count
     passed = False
@@ -385,7 +387,9 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if not test_result.best_matching_expected_results:
         expected_tuples = ''
     else:
-        expected_tuples = "\n".join(test_result.best_matching_expected_results.test_case_map[test_case_index].get_tuples()[0:get_tuple_display_limit()])
+        expected_case = test_result.best_matching_expected_results.get_test_case(test_case_index)
+        expected_tuples = expected_case.get_tuples() if expected_case else ""
+        expected_tuples = "\n".join(expected_tuples[0:get_tuple_display_limit()])
 
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
@@ -420,13 +424,13 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     for path, test_result in all_test_results.items():
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
-        if not test_result or not test_result.test_case_map:
+        if not test_result or not test_result.get_test_case_count():
             csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
             total_failed_tests += 1
         else:
             test_case_index = 0
             total_failed_tests += test_result.get_failure_count()
-            for case_index in range(0, len(test_result.test_case_map)):
+            for case_index in range(0, test_result.get_test_case_count()):
                 csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, case_index))
 
     file_out.close()

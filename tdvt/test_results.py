@@ -271,6 +271,18 @@ class TestResult(object):
 
         return failures
 
+    def get_test_case_count(self):
+        return len(self.test_case_map) if self.test_case_map else 0
+
+    def get_test_case(self, index):
+        case = None
+        try:
+            case = self.test_case_map[index]
+        except IndexError:
+            pass
+
+        return case
+
 class TestResultEncoder(json.JSONEncoder):
     """For writing JSON output."""
     def default(self, obj):
