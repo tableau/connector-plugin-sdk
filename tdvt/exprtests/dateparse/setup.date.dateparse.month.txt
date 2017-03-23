@@ -1,4 +1,4 @@
 DATEPARSE('yyyy-MM-dd', '1234-06-01')
-DATEPARSE('MMMM,yyyy','February,1997')
 DATEPARSE('d.M.yy','16.8.97')
-DATEPARSE('MMM,yyyy','Dec,2000')
+DATEPARSE('d/M/yy','7/12/97')
+DATEPARSE('dd-MMM-yy','15-Dec-73')

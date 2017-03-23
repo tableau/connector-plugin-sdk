@@ -4,7 +4,7 @@
       SELECT TIMESTAMP(STR_TO_DATE(&apos;1234-06-01&apos;, &apos;%Y-%m-%d&apos;)) AS `TEMP(Test)(2040050501)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      220.000
+      241.000
     </query-time>
     <table>
       <schema>
@@ -15,28 +15,12 @@
       </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(&apos;MMMM,yyyy&apos;,&apos;February,1997&apos;)'>
-    <sql>
-      SELECT TIMESTAMP(STR_TO_DATE(&apos;February,1997&apos;, &apos;%M,%Y&apos;)) AS `TEMP(Test)(2878265274)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
-    </sql>
-    <query-time>
-      236.000
-    </query-time>
-    <table>
-      <schema>
-        <column>[cast_calcs.mysql].[TEMP(Test)(2878265274)(0)]</column>
-      </schema>
-      <tuple>
-        <value>%null%</value>
-      </tuple>
-    </table>
-  </test>
   <test name='DATEPARSE(&apos;d.M.yy&apos;,&apos;16.8.97&apos;)'>
     <sql>
       SELECT TIMESTAMP(STR_TO_DATE(&apos;16.8.97&apos;, &apos;%e.%c.%y&apos;)) AS `TEMP(Test)(2214730030)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      217.000
+      194.000
     </query-time>
     <table>
       <schema>
@@ -47,19 +31,35 @@
       </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(&apos;MMM,yyyy&apos;,&apos;Dec,2000&apos;)'>
+  <test name='DATEPARSE(&apos;d/M/yy&apos;,&apos;7/12/97&apos;)'>
     <sql>
-      SELECT TIMESTAMP(STR_TO_DATE(&apos;Dec,2000&apos;, &apos;%b,%Y&apos;)) AS `TEMP(Test)(4052003862)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TIMESTAMP(STR_TO_DATE(&apos;7/12/97&apos;, &apos;%e/%c/%y&apos;)) AS `TEMP(Test)(1828934517)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      207.000
+      197.000
     </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.mysql].[TEMP(Test)(4052003862)(0)]</column>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1828934517)(0)]</column>
       </schema>
       <tuple>
-        <value>%null%</value>
+        <value>#1997-12-07 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;dd-MMM-yy&apos;,&apos;15-Dec-73&apos;)'>
+    <sql>
+      SELECT TIMESTAMP(STR_TO_DATE(&apos;15-Dec-73&apos;, &apos;%d-%b-%y&apos;)) AS `TEMP(Test)(999782064)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      200.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(999782064)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1973-12-15 00:00:00#</value>
       </tuple>
     </table>
   </test>
