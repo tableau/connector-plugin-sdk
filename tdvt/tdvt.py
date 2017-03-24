@@ -481,9 +481,24 @@ def main():
         create_test_environment()
         sys.exit(0)
     if args.add_ds:
-        print ("Adding a new datasource [" + args.add_ds + "] ...")
         print ("Make sure you have already saved the appropriate TDS files in the tds directory.")
-        add_datasource(args.add_ds)
+        print ("Adding a new datasource [" + args.add_ds + "] ...")
+        password = input("Enter the datasource password:")
+        picked = False
+        logical = None
+        while not picked:
+            logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")
+            if logical == 'list':
+                print_logical_configurations()
+            else:
+                logical = logical.replace("\"", "")
+                logical = logical.replace("\'", "")
+                logical = logical.strip()
+                picked = True
+            if logical == 's':
+                logical = None
+
+        add_datasource(args.add_ds, password, logical)
         print ("Generating config files...")
         generate_files(ds_registry, True)
         sys.exit(0)

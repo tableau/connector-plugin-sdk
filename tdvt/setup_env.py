@@ -31,12 +31,12 @@ def create_tdvt_ini_file():
     except:
         pass
 
-def add_datasource(name):
+def add_datasource(name, password, logical_config):
     """Create the datasource ini file and try to rename the connections in the tds file. This is a necessary step for the logical query tests."""
-    create_ds_ini_file(name)
-    update_tds_files(name)
+    create_ds_ini_file(name, logical_config)
+    update_tds_files(name, password)
 
-def create_ds_ini_file(name):
+def create_ds_ini_file(name, logical_config):
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
@@ -45,7 +45,10 @@ def create_ds_ini_file(name):
 
         ini.write('[Datasource]\n')
         ini.write('Name = ' + name + '\n')
-        ini.write('LogicalQueryFormat = TODO\n')
+        if not logical_config:
+            ini.write('LogicalQueryFormat = TODO\n')
+        else:
+            ini.write('LogicalQueryFormat = ' + logical_config + '\n')
         ini.write('\n')
         ini.write('[StandardTests]\n')
         ini.write('\n')
@@ -55,20 +58,22 @@ def create_ds_ini_file(name):
         ini.write('\n')
 
         print ("Created ini file: " + ini_path)
-        print ("Please set the LogicalQueryFormat value to the expected format.")
+        if not logical_config:
+            print ("Please set the LogicalQueryFormat value to the expected format.")
 
     except:
         pass
    
-def update_tds_files(name):
-     mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'))
-     mangle_tds(get_tds_full_path(get_root_dir(), 'Staples.' + name + '.tds'))
+def update_tds_files(name, password):
+     mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'), password)
+     mangle_tds(get_tds_full_path(get_root_dir(), 'Staples.' + name + '.tds'), password)
 
-def mangle_tds(file_path):
+def mangle_tds(file_path, password):
     print ('Modifying ' + file_path)
     try:
-        r1 = re.compile('(^.*<named-connection .*? name=\').*?(\'>)') 
-        r2 = re.compile('(^.*<relation connection=\').*?(\' .*>)') 
+        r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)') 
+        r2 = re.compile('(^\s*<relation connection=\').*?(\' .*>)') 
+        r3 = re.compile('(^\s*<connection .*?)(\s*/>)') 
 
         f =  open(file_path, 'r')
         new_tds = ''
@@ -77,9 +82,14 @@ def mangle_tds(file_path):
             m1 = r1.match(line)
             if m1:
                 new_line = m1.group(1) + 'leaf' + m1.group(2)
+
             m2 = r2.match(line)
             if m2:
                 new_line = m2.group(1) + 'leaf' + m2.group(2)
+
+            m3 = r3.match(line)
+            if m3:
+                new_line = m3.group(1) + ' password=\'' + password + '\' ' + m3.group(2)
 
             new_tds += new_line + '\n'
 
