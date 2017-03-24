@@ -35,28 +35,35 @@ def get_customized_table_name(attributes, base_table):
     elif 'staplesnameLower' in attributes and 'staples' in table_name.lower():
         table_name= table_name.lower()
 
+    if 'tablenamePrefix' in attributes:
+        table_name = attributes['tablenamePrefix'] + table_name 
     if 'tablenamePostfix' in attributes:
         table_name += attributes['tablenamePostfix']
-    
+
     return table_prefix + '[' + table_name + ']'
 
 def get_new_field_name(field, attrs):
     new_field = field
     if 'bool_underscore' in attrs:
-        m = re.search('\[(bool[0-9])\]', new_field)
+        m = re.search('\[(bool[0-9])\]', new_field, flags=re.IGNORECASE)
         if m:
             new_field = '[' + m.group(1) + '_]'
+
+    if 'fieldnameDate_underscore' in attrs:
+        m = re.search('\[(.*? date)\]', new_field, flags=re.IGNORECASE)
+        if m:
+            new_field = '[' + m.group(1) + '_]'
+
     if 'fieldnameLower' in attrs:
-        new_field = new_field.lower()
+        new_field = new_field.lower()        
+    if 'fieldnameUpper' in attrs:
+        new_field = new_field.upper()
     if 'fieldnameNoSpace' in attrs:
         new_field = new_field.replace(' ', '')
     if 'fieldnameLower_underscore' in attrs:
         new_field = new_field.lower().replace(' ', '_')
-    if 'fieldnameDate_underscore' in attrs:
-            if 'date]' in new_field:
-                new_field = new_field.replace('date]', 'date_]')
-            elif 'Date]' in new_field:
-                new_field = new_field.replace('Date]', 'Date_]')
+    if 'fieldnameUnderscoreNotSpace' in attrs:
+        new_field = new_field.replace(' ', '_')
 
     return new_field
 

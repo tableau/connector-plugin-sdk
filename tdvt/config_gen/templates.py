@@ -6,8 +6,12 @@ You can run [tdvt --list_logical_configs] to see the resulting values.
 The value on the left is the key that is used in your datasource ini file.
 Keys you can set to control the generation are:
 
-This should always be present. $dsName will be replaced with Calcs or Staples.
+This should always be present. $dsName will be replaced with Calcs or Staples. You can put a string before the $dsName token to append something to your table name but if you want to set something on the end you need to use tablenamePostfix.
      'tablename' : '$dsName',
+
+To change the table name: Say your table is called 'test_Calcs_view'. You can achieve this by setting:
+     'tablename' : 'test_$dsName'
+     'tablenamePostfix' : '_view',
 
 This is prefixed to the table name.
      'tablePrefix' : '[TESTV1].',
@@ -29,6 +33,13 @@ Do the `Bool0` fields look like `Bool0_`?
 
 Instead of a space there is nothing. Ie ' ' vs ''.
      'fieldnameNoSpace' : True,
+
+Instead of a space there is an underscore.
+     'fieldnameUnderscoreNotSpace' : True,
+
+Uppercase field names:
+    'fieldnameUpper' : True
+
 """
 
 
@@ -39,6 +50,16 @@ attributes = {
     'TESTV1' : { 
                  'tablename' : '$dsName',
                  'tablePrefix' : '[TESTV1].',
+                 },
+
+    'TESTV1_TESTV1' : { 
+                 'tablename' : '$dsName',
+                 'tablenamePrefix' : 'TESTV1_',
+                 'tablePrefix' : '[TESTV1].',
+                 'tablenameUpper' : True,
+                 'fieldnameDate_underscore' : True,
+                 'fieldnameUnderscoreNotSpace' : True,
+                 'fieldnameUpper' : True,
                  },
 
     #TEST.Calcs
@@ -68,20 +89,23 @@ attributes = {
 
     #default.testv1_Calcs
     'default_testv1_' : { 
-                 'tablename' : 'testv1_$dsName',
+                 'tablename' : '$dsName',
+                 'tablenamePrefix' : 'testv1_',
                  'tablePrefix' : '[default].',
                  },
 
     #testv1_Calcs
     'testv1_' : { 
-                 'tablename' : 'testv1_$dsName',
+                 'tablename' : '$dsName',
+                 'tablenamePrefix' : 'testv1_',
                  'fieldnameDate_underscore' : True,
                  'fieldnameLower_underscore' : True,
                  },
 
     #testv1_Calcs
     'default_testv1_lower' : { 
-                 'tablename' : 'testv1_$dsName',
+                 'tablename' : '$dsName',
+                 'tablenamePrefix' : 'testv1_',
                  'tablenameLower' : True,
                  'fieldnameDate_underscore' : True,
                  'fieldnameLower_underscore' : True,
@@ -171,7 +195,8 @@ attributes = {
 						 
     #[hive.default].
     'hive_default' : { 
-                         'tablename' : 'testv1_$dsName',
+                         'tablename' : '$dsName',
+                         'tablenamePrefix' : 'testv1_',
                          'tablenameLower' : True,
                          'fieldnameDate_underscore' : True,
                          'fieldnameLower_underscore' : True,
@@ -185,7 +210,8 @@ attributes = {
                          },
 
     'testv1_testv1_lower' : { 
-                 'tablename' : 'testv1_$dsName',
+                 'tablename' : '$dsName',
+                 'tablenamePrefix' : 'testv1_',
                  'tablenameLower' : True,
                  'fieldnameDate_underscore' : True,
                  'fieldnameLower_underscore' : True,
