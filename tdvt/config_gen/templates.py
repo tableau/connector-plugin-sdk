@@ -59,6 +59,13 @@ attributes = {
                  'tablePrefix' : '[ADMIN].',
                  },
 
+    #admin.calcs
+    'admin' : {
+                'tablename' : '$dsName',
+                'calcsnameLower' : True,
+                'tablePrefix' : '[admin].'
+                },
+
     #default.testv1_Calcs
     'default_testv1_' : { 
                  'tablename' : 'testv1_$dsName',

@@ -30,6 +30,10 @@ def get_customized_table_name(attributes, base_table):
 
     if 'tablenameLower' in attributes:
         table_name = table_name.lower()
+    elif 'calcsnameLower' in attributes and 'calcs' in table_name.lower():
+        table_name = table_name.lower()
+    elif 'staplesnameLower' in attributes and 'staples' in table_name.lower():
+        table_name= table_name.lower()
 
     
     return table_prefix + table_name
@@ -41,7 +45,7 @@ def get_new_field_name(field, attrs):
         if m:
             new_field = '[' + m.group(1) + '_]'
     if 'fieldnameLower' in attrs:
-        new_field = new_field.lower()        
+        new_field = new_field.lower()
     if 'fieldnameNoSpace' in attrs:
         new_field = new_field.replace(' ', '')
     if 'fieldnameLower_underscore' in attrs:
