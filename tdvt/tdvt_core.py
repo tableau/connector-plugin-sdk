@@ -363,11 +363,14 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     expected_tuples=None
     suite = test_result.test_config.suite_name if test_result else ''
     cmd_output = test_result.cmd_output if test_result else ''
+    test_type = 'unknown'
+    if test_result and test_result.test_config:
+        test_type = 'logical' if test_result.test_config.logical else 'expression'
 
     if not test_result or not test_result.test_case_map:
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
-        return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
 
     case = test_result.test_case_map[test_case_index]
     matched_expected = test_result.matched_expected_version
@@ -388,7 +391,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_type= case.error_type if case else None
 
-    return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -407,7 +410,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Test Type','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     if not skip_header:
         csv_out.writerow(csvheader)
 

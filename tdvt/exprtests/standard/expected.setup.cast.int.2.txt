@@ -1,11 +1,14 @@
 <results>
   <test name='INT([int1])'>
     <sql>
-      SELECT TRUNCATE(`Calcs`.`int1`,0) AS `TEMP(Test)(551720338)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
+      SELECT CAST(`testv1_Calcs`.`int1` AS BIGINT) AS `TEMP(Test)(551720338)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(`testv1_Calcs`.`int1` AS BIGINT)
     </sql>
+    <query-time>
+      691.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.mysql56].[TEMP(Test)(551720338)(0)]</column>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(551720338)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -35,11 +38,14 @@
   </test>
   <test name='INT([bool0])'>
     <sql>
-      SELECT TRUNCATE(`Calcs`.`bool0_`,0) AS `TEMP(Test)(2695057561)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
+      SELECT (CASE&#10;&#9;WHEN `testv1_Calcs`.`bool0` THEN 1&#10;&#9;WHEN NOT `testv1_Calcs`.`bool0` THEN 0&#10;&#9;ELSE NULL END) AS `TEMP(Test)(2695057561)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (CASE&#10;&#9;WHEN `testv1_Calcs`.`bool0` THEN 1&#10;&#9;WHEN NOT `testv1_Calcs`.`bool0` THEN 0&#10;&#9;ELSE NULL END)
     </sql>
+    <query-time>
+      830.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.mysql56].[TEMP(Test)(2695057561)(0)]</column>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(2695057561)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -54,39 +60,45 @@
   </test>
   <test name='INT([date0])'>
     <sql>
-      SELECT (TO_DAYS(`Calcs`.`date0`) - 693961) AS `TEMP(Test)(2234960540)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
+      SELECT CAST(`testv1_Calcs`.`date0` AS BIGINT) AS `TEMP(Test)(2234960540)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(`testv1_Calcs`.`date0` AS BIGINT)
     </sql>
+    <query-time>
+      797.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.mysql56].[TEMP(Test)(2234960540)(0)]</column>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(2234960540)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>26482</value>
+        <value>79081200</value>
       </tuple>
       <tuple>
-        <value>27708</value>
+        <value>185011200</value>
       </tuple>
       <tuple>
-        <value>38090</value>
+        <value>1082012400</value>
       </tuple>
       <tuple>
-        <value>38140</value>
+        <value>1086332400</value>
       </tuple>
       <tuple>
-        <value>38155</value>
+        <value>1087628400</value>
       </tuple>
     </table>
   </test>
   <test name='INT([num2])'>
     <sql>
-      SELECT TRUNCATE(`Calcs`.`num2`,0) AS `TEMP(Test)(1665700248)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
+      SELECT CAST(`testv1_Calcs`.`num2` AS BIGINT) AS `TEMP(Test)(1665700248)(0)`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(`testv1_Calcs`.`num2` AS BIGINT)
     </sql>
+    <query-time>
+      909.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.mysql56].[TEMP(Test)(1665700248)(0)]</column>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(1665700248)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -117,22 +129,6 @@
       </tuple>
       <tuple>
         <value>17</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='INT([str2])'>
-    <sql>
-      SELECT TRUNCATE(`Calcs`.`str2`,0) AS `TEMP(Test)(2779514991)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
-    </sql>
-    <table>
-      <schema>
-        <column>[cast_calcs.mysql56].[TEMP(Test)(2779514991)(0)]</column>
-      </schema>
-      <tuple>
-        <value>%null%</value>
-      </tuple>
-      <tuple>
-        <value>0</value>
       </tuple>
     </table>
   </test>

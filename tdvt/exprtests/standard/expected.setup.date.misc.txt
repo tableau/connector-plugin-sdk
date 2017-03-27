@@ -100,13 +100,6 @@
       </tuple>
     </table>
   </test>
-  <test name='ISDATE(&quot;2015-01-01&quot;)'>
-    <sql>
-      Unknown function ISDATE called.&#10;
-    </sql>
-    <table>
-    </table>
-  </test>
   <test name='MONTH(DATE([date2]))'>
     <sql>
       SELECT CAST(EXTRACT(MONTH FROM CAST(&quot;Calcs&quot;.&quot;date2&quot; AS DATE)) AS INTEGER) AS &quot;TEMP(Test)(1165289219)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1

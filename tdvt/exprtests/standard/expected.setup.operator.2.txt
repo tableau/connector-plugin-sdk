@@ -877,13 +877,6 @@
       </tuple>
     </table>
   </test>
-  <test name='num4 + date0'>
-    <sql>
-      Can&apos;t add float and datetime values&#10;
-    </sql>
-    <table>
-    </table>
-  </test>
   <test name='num0 + num1'>
     <sql>
       SELECT (&quot;Calcs&quot;.&quot;num0&quot; + &quot;Calcs&quot;.&quot;num1&quot;) AS &quot;TEMP(Test)(977554451)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (&quot;Calcs&quot;.&quot;num0&quot; + &quot;Calcs&quot;.&quot;num1&quot;)

@@ -1,0 +1,34 @@
+<results>
+  <test name='DATEPARSE(&apos;eee,MMMM dd,yyyy HH:mm:ss&apos;,&apos;Fri,December 13,2013 17:18:35&apos;)'>
+    <sql>
+      SELECT TIMESTAMP(STR_TO_DATE(&apos;Fri,December 13,2013 17:18:35&apos;, &apos;%a,%M %d,%Y %H:%i:%s&apos;)) AS `TEMP(Test)(2793689406)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      211.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(2793689406)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-13 17:18:35#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;eeee,MMMM dd,yyyy&apos;,&apos;Friday,November 15,2013&apos;)'>
+    <sql>
+      SELECT TIMESTAMP(STR_TO_DATE(&apos;Friday,November 15,2013&apos;, &apos;%W,%M %d,%Y&apos;)) AS `TEMP(Test)(1539912136)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      215.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1539912136)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-11-15 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,11 +1,14 @@
 <results>
   <test name='FLOAT([int1])'>
     <sql>
-      SELECT CAST(&quot;Calcs&quot;.&quot;int1&quot; AS FLOAT) AS &quot;TEMP_Test__1533389080__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(&quot;Calcs&quot;.&quot;int1&quot; AS FLOAT)
+      SELECT CAST(&quot;testv1_calcs&quot;.&quot;int1&quot; AS DOUBLE) AS &quot;temp_test__1533389&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      357.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sybaseiq].[TEMP(Test)(1533389080)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(1533389080)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -35,11 +38,14 @@
   </test>
   <test name='FLOAT([bool0])'>
     <sql>
-      SELECT (CASE&#10;&#9;WHEN (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 1.0&#10;&#9;WHEN NOT (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 0.0&#10;&#9;ELSE NULL END) AS &quot;TEMP_Test__2538631291__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE&#10;&#9;WHEN (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 1.0&#10;&#9;WHEN NOT (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 0.0&#10;&#9;ELSE NULL END)
+      SELECT (CASE&#10;&#9;WHEN &quot;testv1_calcs&quot;.&quot;bool0&quot; = TRUE THEN 1.0&#10;&#9;WHEN NOT &quot;testv1_calcs&quot;.&quot;bool0&quot; = TRUE THEN 0.0&#10;&#9;ELSE CAST(NULL AS DOUBLE) END) AS &quot;temp_test__2538631&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      381.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sybaseiq].[TEMP(Test)(2538631291)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(2538631291)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -54,39 +60,45 @@
   </test>
   <test name='FLOAT([date0])'>
     <sql>
-      SELECT DATEDIFF(DAY, {d &apos;1900-01-01&apos;}, &quot;Calcs&quot;.&quot;date0&quot;) AS &quot;TEMP_Test__64617177__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY DATEDIFF(DAY, {d &apos;1900-01-01&apos;}, &quot;Calcs&quot;.&quot;date0&quot;)
+      SELECT CAST(TO_UNIXTIME(&quot;testv1_calcs&quot;.&quot;date0&quot;) AS DOUBLE) AS &quot;temp_test__6461717&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      371.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sybaseiq].[TEMP(Test)(64617177)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(64617177)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>26482.0</value>
+        <value>79056000.0</value>
       </tuple>
       <tuple>
-        <value>27708.0</value>
+        <value>1.849824e+08</value>
       </tuple>
       <tuple>
-        <value>38090.0</value>
+        <value>1.0819872e+09</value>
       </tuple>
       <tuple>
-        <value>38140.0</value>
+        <value>1.0863072e+09</value>
       </tuple>
       <tuple>
-        <value>38155.0</value>
+        <value>1.0876032e+09</value>
       </tuple>
     </table>
   </test>
   <test name='FLOAT([num2])'>
     <sql>
-      SELECT CAST(&quot;Calcs&quot;.&quot;num2&quot; AS FLOAT) AS &quot;TEMP_Test__2707307071__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(&quot;Calcs&quot;.&quot;num2&quot; AS FLOAT)
+      SELECT CAST(&quot;testv1_calcs&quot;.&quot;num2&quot; AS DOUBLE) AS &quot;temp_test__2707307&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
     </sql>
+    <query-time>
+      379.000
+    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.sybaseiq].[TEMP(Test)(2707307071)(0)]</column>
+        <column>[presto_148_default].[TEMP(Test)(2707307071)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -98,16 +110,16 @@
         <value>6.46</value>
       </tuple>
       <tuple>
-        <value>6.8000002</value>
+        <value>6.8</value>
       </tuple>
       <tuple>
-        <value>7.8699999</value>
+        <value>7.87</value>
       </tuple>
       <tuple>
-        <value>8.5100002</value>
+        <value>8.51</value>
       </tuple>
       <tuple>
-        <value>8.9799995</value>
+        <value>8.98</value>
       </tuple>
       <tuple>
         <value>10.98</value>
@@ -128,15 +140,8 @@
         <value>17.25</value>
       </tuple>
       <tuple>
-        <value>17.860001</value>
+        <value>17.86</value>
       </tuple>
-    </table>
-  </test>
-  <test name='FLOAT([str2])'>
-    <sql>
-      [Sybase][ODBC Driver][Sybase IQ]Data exception - data type conversion is not possible. &#10;-- (dflib/dfe_Cast.cxx 934) &#10;
-    </sql>
-    <table>
     </table>
   </test>
 </results>

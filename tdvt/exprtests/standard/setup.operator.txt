@@ -34,7 +34,6 @@ num0 < num1
 num0 - num1
 num0 <> abs(num0)
 num0 != abs(num0)
-num4 + date0
 num0 + num1
 num0 ^ num1
 num0 * num1

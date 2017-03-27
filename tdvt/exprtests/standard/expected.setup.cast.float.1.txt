@@ -1,11 +1,11 @@
 <results>
   <test name='FLOAT([int1])'>
     <sql>
-      SELECT CAST([Calcs].[int1] as float) AS [TEMP(Test)(1533389080)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY CAST([Calcs].[int1] as float)
+      SELECT CAST(&quot;Calcs&quot;.&quot;int1&quot; AS FLOAT) AS &quot;TEMP_Test__1533389080__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(&quot;Calcs&quot;.&quot;int1&quot; AS FLOAT)
     </sql>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1533389080)(0)]</column>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(1533389080)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -35,11 +35,11 @@
   </test>
   <test name='FLOAT([bool0])'>
     <sql>
-      SELECT (CASE&#10;&#9;WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1.0&#10;&#9;WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0.0&#10;&#9;ELSE NULL END) AS [TEMP(Test)(2538631291)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1.0&#10;&#9;WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0.0&#10;&#9;ELSE NULL END)
+      SELECT (CASE&#10;&#9;WHEN (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 1.0&#10;&#9;WHEN NOT (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 0.0&#10;&#9;ELSE NULL END) AS &quot;TEMP_Test__2538631291__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE&#10;&#9;WHEN (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 1.0&#10;&#9;WHEN NOT (&quot;Calcs&quot;.&quot;bool0_&quot; &lt;&gt; 0) THEN 0.0&#10;&#9;ELSE NULL END)
     </sql>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2538631291)(0)]</column>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(2538631291)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -54,11 +54,11 @@
   </test>
   <test name='FLOAT([date0])'>
     <sql>
-      SELECT CAST(CAST([Calcs].[date0] as datetime) as float) AS [TEMP(Test)(64617177)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY CAST(CAST([Calcs].[date0] as datetime) as float)
+      SELECT DATEDIFF(DAY, {d &apos;1900-01-01&apos;}, &quot;Calcs&quot;.&quot;date0&quot;) AS &quot;TEMP_Test__64617177__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY DATEDIFF(DAY, {d &apos;1900-01-01&apos;}, &quot;Calcs&quot;.&quot;date0&quot;)
     </sql>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(64617177)(0)]</column>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(64617177)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -82,11 +82,11 @@
   </test>
   <test name='FLOAT([num2])'>
     <sql>
-      SELECT CAST([Calcs].[num2] as float) AS [TEMP(Test)(2707307071)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY CAST([Calcs].[num2] as float)
+      SELECT CAST(&quot;Calcs&quot;.&quot;num2&quot; AS FLOAT) AS &quot;TEMP_Test__2707307071__0_&quot;&#10;FROM &quot;test&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(&quot;Calcs&quot;.&quot;num2&quot; AS FLOAT)
     </sql>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2707307071)(0)]</column>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(2707307071)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -98,16 +98,16 @@
         <value>6.46</value>
       </tuple>
       <tuple>
-        <value>6.8</value>
+        <value>6.8000002</value>
       </tuple>
       <tuple>
-        <value>7.87</value>
+        <value>7.8699999</value>
       </tuple>
       <tuple>
-        <value>8.51</value>
+        <value>8.5100002</value>
       </tuple>
       <tuple>
-        <value>8.98</value>
+        <value>8.9799995</value>
       </tuple>
       <tuple>
         <value>10.98</value>
@@ -128,20 +128,7 @@
         <value>17.25</value>
       </tuple>
       <tuple>
-        <value>17.86</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FLOAT([str2])'>
-    <sql>
-      SELECT (CASE&#10;&#9;WHEN 0 = ISNUMERIC(CAST([Calcs].[str2] AS VARCHAR)) THEN NULL&#10;&#9;ELSE CAST(CAST([Calcs].[str2] AS VARCHAR) as float) END) AS [TEMP(Test)(1394352864)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN 0 = ISNUMERIC(CAST([Calcs].[str2] AS VARCHAR)) THEN NULL&#10;&#9;ELSE CAST(CAST([Calcs].[str2] AS VARCHAR) as float) END)
-    </sql>
-    <table>
-      <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1394352864)(0)]</column>
-      </schema>
-      <tuple>
-        <value>%null%</value>
+        <value>17.860001</value>
       </tuple>
     </table>
   </test>

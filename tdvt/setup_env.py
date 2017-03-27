@@ -67,7 +67,7 @@ def update_tds_files(name):
 def mangle_tds(file_path):
     print ('Modifying ' + file_path)
     try:
-        r1 = re.compile('(^.*<named-connection name=\').*?(\'>)') 
+        r1 = re.compile('(^.*<named-connection .*? name=\').*?(\'>)') 
         r2 = re.compile('(^.*<relation connection=\').*?(\' .*>)') 
 
         f =  open(file_path, 'r')
