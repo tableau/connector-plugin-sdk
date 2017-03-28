@@ -40,7 +40,9 @@ def create_ds_ini_file(name, logical_config):
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
-            return
+            overwrite = input("Overwrite existing ini file?(y/n)")
+            if overwrite.lower() == 'n':
+                return
         ini = open(ini_path, 'w')
 
         ini.write('[Datasource]\n')
@@ -88,7 +90,7 @@ def mangle_tds(file_path, password):
                 new_line = m2.group(1) + 'leaf' + m2.group(2)
 
             m3 = r3.match(line)
-            if m3:
+            if m3 and not 'password=\'' in line.lower():
                 new_line = m3.group(1) + ' password=\'' + password + '\' ' + m3.group(2)
 
             new_tds += new_line + '\n'
