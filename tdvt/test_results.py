@@ -215,6 +215,17 @@ class TestResult(object):
             test_result = TestCaseResult(test_child.get('name'), str(i), test_child.find('sql'), query_time, error_msg, error_type, test_child.find('table'), self.test_config)
             self.test_case_map.append(test_result)
 
+    def get_failure_message_or_all_exceptions(self):
+        msg = ''
+        for case in self.test_case_map:
+            if case.get_error_message():
+                msg += case.get_error_message() + '\n'
+
+        if msg:
+            return msg
+        
+        return self.get_failure_message()
+
     def get_failure_message(self):
         if self.error_status:
             return self.error_status.get_error()
@@ -297,11 +308,12 @@ class TestOutputJSONEncoder(json.JSONEncoder):
             return "failed" + str(obj) 
 
         suite_name = '' if not obj.test_config.suite_name else obj.test_config.suite_name
-        case_name = '' if not obj.get_name() else obj.get_name()
+        test_name = '' if not obj.get_name() else obj.get_name()
         test_type = '-q' if obj.test_config.logical else '-e' 
+
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
-                'case' : suite_name + '.' + case_name, 
+                'test_name' : suite_name + '.' + test_name, 
                 'test_file' : obj.test_file, 
                 'test_type' : test_type, 
                 'test_config' : obj.test_config.__json__(),
@@ -313,7 +325,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
 
         failtype = ','.join(obj.get_exceptions())
         json_output['failtype'] = failtype if failtype else 'test_failure'
-        json_output['message'] = obj.get_failure_message()
+        json_output['message'] = obj.get_failure_message_or_all_exceptions()
         json_output['actual'] = obj.path_to_actual
         return json_output
 
