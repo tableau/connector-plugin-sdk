@@ -165,6 +165,14 @@ attributes = {
                      'fieldnameLower': True,
                      },
 
+    'dbadmin_underscore' : { 
+                     'tablename' : '$dsName',
+                     'tablePrefix' : '[dbadmin].',
+                     'tablenameLower' : True,
+                     'fieldnameLower': True,
+                     'bool_underscore' : True
+                     },
+
     #dbo.Calcs
     'dbo' : { 
                          'tablename' : '$dsName',
@@ -191,6 +199,13 @@ attributes = {
                          'tablename' : '$dsName',
                          'fieldnameNoSpace' : True,
                          'tablePrefix' : '[tactile-pulsar-824.TestV1].'
+                         },
+
+    'bigquery_sql_datetime' : { 
+                         'tablename' : '$dsName',
+                         'fieldnameNoSpace' : True,
+                         'tablePrefix' : '[tactile-pulsar-824.TestV1].',
+                         'tablenamePostfix' : 'DateTime',
                          },
 						 
     #[hive.default].
