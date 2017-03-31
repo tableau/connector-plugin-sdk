@@ -31,6 +31,10 @@ def LoadTest(config):
 
     [UnionTest]
 
+    [MedianTests]
+
+    [PercentileTests]
+
     [NewExpressionTest1]
     Name = expression_test_dates.
     TDS = cast_calcs.bigquery_sql_dates.tds
@@ -49,6 +53,8 @@ def LoadTest(config):
     union_test = 'UnionTest'
     datasource_section = 'Datasource'
     regex_test = 'RegexTest'
+    median_test = 'MedianTests'
+    percentile_test = 'PercentileTests'
 
     KEY_EXCLUSIONS = 'Exclusions'
 
@@ -110,6 +116,26 @@ def LoadTest(config):
             regex = config[regex_test]
             all_ini_sections.remove(regex_test)
             test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''), 'exprtests/regexcalcs')
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
+    #Add the optional Median test.
+    if median_test in config.sections():
+        try:
+            median = config[median_test]
+            all_ini_sections.remove(median_test)
+            test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''), 'exprtests/median')
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
+    #Add the optional Median test.
+    if percentile_test in config.sections():
+        try:
+            percentile = config[percentile_test]
+            all_ini_sections.remove(percentile_test)
+            test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''), 'exprtests/percentile')
         except KeyError as e:
             logging.debug(e)
             pass

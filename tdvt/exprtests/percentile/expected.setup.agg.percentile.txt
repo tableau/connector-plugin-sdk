@@ -1,0 +1,82 @@
+<results>
+  <test name='PERCENTILE([num2],0.5)'>
+    <sql>
+      SELECT PERCENTILE_CONT(&apos;0.5&apos;::double precision) WITHIN GROUP (ORDER BY &quot;Calcs&quot;.&quot;num2&quot; ASC) AS &quot;TEMP(Test)(1005283190)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      205.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1005283190)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10.98</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='PERCENTILE([num4],0.75)'>
+    <sql>
+      SELECT PERCENTILE_CONT(&apos;0.75&apos;::double precision) WITHIN GROUP (ORDER BY &quot;Calcs&quot;.&quot;num4&quot; ASC) AS &quot;TEMP(Test)(3070691569)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3070691569)(0)]</column>
+      </schema>
+      <tuple>
+        <value>8.9175</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='PERCENTILE([int1],0)'>
+    <sql>
+      SELECT PERCENTILE_CONT(0) WITHIN GROUP (ORDER BY CAST(&quot;Calcs&quot;.&quot;int1&quot; AS BIGINT OR NULL) ASC) AS &quot;TEMP(Test)(1236390098)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      208.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1236390098)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-9.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='PERCENTILE([int1],1)'>
+    <sql>
+      SELECT PERCENTILE_CONT(1) WITHIN GROUP (ORDER BY CAST(&quot;Calcs&quot;.&quot;int1&quot; AS BIGINT OR NULL) ASC) AS &quot;TEMP(Test)(1981734878)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      208.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1981734878)(0)]</column>
+      </schema>
+      <tuple>
+        <value>3.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='PERCENTILE(DATEPART(&apos;year&apos;,[date2]),0.5)'>
+    <sql>
+      SELECT PERCENTILE_CONT(&apos;0.5&apos;::double precision) WITHIN GROUP (ORDER BY CAST(TRUNC(EXTRACT(YEAR FROM &quot;Calcs&quot;.&quot;date2&quot;)) AS BIGINT OR NULL) ASC) AS &quot;TEMP(Test)(1162356411)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1162356411)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1988.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>
