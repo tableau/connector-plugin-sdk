@@ -1,0 +1,18 @@
+<results>
+  <test name='SPACE(int(2))'>
+    <sql>
+      SELECT N&apos;  &apos; AS &quot;TEMP(Test)(1595235754)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      19.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(1595235754)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

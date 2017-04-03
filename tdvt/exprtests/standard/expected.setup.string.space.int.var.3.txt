@@ -1,0 +1,21 @@
+<results>
+  <test name='SPACE(int2)'>
+    <sql>
+      SELECT SPACE([Calcs].[int2]) AS [TEMP_Test__3089742405__0_]&#10;FROM [Calcs]&#10;GROUP BY SPACE([Calcs].[int2])
+    </sql>
+    <query-time>
+      17.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(3089742405)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot; &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

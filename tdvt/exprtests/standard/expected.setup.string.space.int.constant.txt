@@ -1,0 +1,18 @@
+<results>
+  <test name='SPACE(int(2))'>
+    <sql>
+      SELECT (&apos;  &apos;::text) AS &quot;TEMP(Test)(1595235754)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      57.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1595235754)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;  &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
