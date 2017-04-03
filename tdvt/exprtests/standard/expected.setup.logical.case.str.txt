@@ -1,0 +1,24 @@
+<results>
+  <test name='case [str0] when &apos;TECHNOLOGY&apos; then &apos;*Anonymous*&apos;  else [str0] end'>
+    <sql>
+      SELECT (CASE &quot;Calcs&quot;.&quot;str0&quot; WHEN &apos;TECHNOLOGY&apos; THEN &apos;*Anonymous*&apos; ELSE &quot;Calcs&quot;.&quot;str0&quot; END) AS &quot;TEMP(Test)(1797172313)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      36.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1797172313)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;*Anonymous*&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

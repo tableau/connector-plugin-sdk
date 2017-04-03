@@ -1,0 +1,54 @@
+<results>
+  <test name='case datepart(&apos;weekday&apos;,date1) when 7 then null when 1 then null else date1 end'>
+    <sql>
+      SELECT (CASE WHEN ((1 + CAST(EXTRACT(DOW FROM &quot;Calcs&quot;.&quot;date1&quot;) AS INTEGER)) IN (1, 7)) THEN NULL ELSE &quot;Calcs&quot;.&quot;date1&quot; END) AS &quot;TEMP(Test)(4257957843)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      37.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4257957843)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-01#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-06#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-07#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-09#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-13#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-14#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

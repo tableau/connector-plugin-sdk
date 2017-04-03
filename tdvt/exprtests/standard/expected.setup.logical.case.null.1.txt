@@ -1,0 +1,54 @@
+<results>
+  <test name='case datepart(&apos;weekday&apos;,date1) when 7 then null when 1 then null else date1 end'>
+    <sql>
+      SELECT (CASE WHEN ((1 + MOD(TO_NUMBER(TO_CHAR(&quot;Calcs&quot;.&quot;date1&quot;, &apos;J&apos;)) + 1, 7)) IN (1, 7)) THEN NULL ELSE &quot;Calcs&quot;.&quot;date1&quot; END) AS &quot;TEMP(Test)(4257957843)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN ((1 + MOD(TO_NUMBER(TO_CHAR(&quot;Calcs&quot;.&quot;date1&quot;, &apos;J&apos;)) + 1, 7)) IN (1, 7)) THEN NULL ELSE &quot;Calcs&quot;.&quot;date1&quot; END)
+    </sql>
+    <query-time>
+      29.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(4257957843)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
