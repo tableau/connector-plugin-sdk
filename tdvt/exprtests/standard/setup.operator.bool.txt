@@ -1,0 +1,9 @@
+not bool0
+NULL
+TRUE
+FALSE
+bool0 AND bool1
+bool0 == bool1
+bool0 != bool1
+bool0 or bool1
+

@@ -1,0 +1,187 @@
+<results>
+  <test name='str2 == iif(num3&gt;0,str2,str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; = (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; = (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1635792874)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; = (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; = (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      49.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(1635792874)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &gt;= iif(num3&gt;0,lower(str0),str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &gt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &gt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1555382477)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &gt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &gt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      48.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(1555382477)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &gt; iif(num3&gt;0,str0,str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str0&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str0&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3821822049)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str0&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str0&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      70.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(3821822049)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &lt;= iif(num3&gt;0,lower(str0),str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &lt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &lt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(2776534421)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &lt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &lt;= (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      60.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(2776534421)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &lt; iif(num3&gt;0,lower(str0),str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &lt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &lt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(398649381)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &lt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &lt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN LOWER(&quot;Calcs&quot;.&quot;str0&quot;) WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      60.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(398649381)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 != iif(num3&gt;0,str2,str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &lt;&gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &lt;&gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(119026413)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (CASE WHEN (&quot;Calcs&quot;.&quot;str2&quot; &lt;&gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;str2&quot; &lt;&gt; (CASE WHEN (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str2&quot; WHEN NOT (&quot;Calcs&quot;.&quot;num3&quot; &gt; 0) THEN &quot;Calcs&quot;.&quot;str3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      52.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(119026413)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 + str3'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;str2&quot; || &quot;Calcs&quot;.&quot;str3&quot;) AS &quot;TEMP(Test)(724155660)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (&quot;Calcs&quot;.&quot;str2&quot; || &quot;Calcs&quot;.&quot;str3&quot;)
+    </sql>
+    <query-time>
+      73.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(724155660)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eighte&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;elevene&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteene&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;onee&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteene&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;tene&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;threee&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;twoe&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='&quot;Pat O&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&quot;'>
+    <sql>
+      SELECT &apos;Pat O&apos;&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&apos;&apos; AS &quot;TEMP(Test)(627207302)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (CAST(COUNT(1) AS BIGINT) &gt; 0)
+    </sql>
+    <query-time>
+      51.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(627207302)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Pat O&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

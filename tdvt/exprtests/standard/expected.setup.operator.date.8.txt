@@ -1,0 +1,285 @@
+<results>
+  <test name='date0 == #7/4/1972#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;CALCS&quot;.&quot;date0&quot; = &apos;1972-07-04&apos;::DATE) THEN 1 WHEN NOT (&quot;CALCS&quot;.&quot;date0&quot; = &apos;1972-07-04&apos;::DATE) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(397499995)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      229.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(397499995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &gt;= #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;CALCS&quot;.&quot;date0&quot; &gt;= &apos;1975-11-12&apos;::DATE) THEN 1 WHEN NOT (&quot;CALCS&quot;.&quot;date0&quot; &gt;= &apos;1975-11-12&apos;::DATE) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1366787273)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      194.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1366787273)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &gt; #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;CALCS&quot;.&quot;date0&quot; &gt; &apos;1975-11-12&apos;::DATE) THEN 1 WHEN NOT (&quot;CALCS&quot;.&quot;date0&quot; &gt; &apos;1975-11-12&apos;::DATE) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3193322782)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      205.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(3193322782)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &lt;= #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;CALCS&quot;.&quot;date0&quot; &lt;= &apos;1975-11-12&apos;::DATE) THEN 1 WHEN NOT (&quot;CALCS&quot;.&quot;date0&quot; &lt;= &apos;1975-11-12&apos;::DATE) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(822657216)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      190.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(822657216)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &lt; #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;CALCS&quot;.&quot;date0&quot; &lt; &apos;1975-11-12&apos;::DATE) THEN 1 WHEN NOT (&quot;CALCS&quot;.&quot;date0&quot; &lt; &apos;1975-11-12&apos;::DATE) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3764753091)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      207.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(3764753091)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 - datetime0'>
+    <sql>
+      SELECT ((EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;date0&quot;)-EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;datetime0&quot;))/(60*60*24)) AS &quot;TEMP(Test)(937166222)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      225.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(937166222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-11710.521</value>
+      </tuple>
+      <tuple>
+        <value>-10491.332</value>
+      </tuple>
+      <tuple>
+        <value>-85.428</value>
+      </tuple>
+      <tuple>
+        <value>-39.979</value>
+      </tuple>
+      <tuple>
+        <value>-31.551</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='datetime0 - #1/1/2004#'>
+    <sql>
+      SELECT ((EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;datetime0&quot;)-EXTRACT(EPOCH FROM &apos;2004-01-01&apos;::DATE))/(60*60*24)) AS &quot;TEMP(Test)(100938644)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      190.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(100938644)(0)]</column>
+      </schema>
+      <tuple>
+        <value>185.951</value>
+      </tuple>
+      <tuple>
+        <value>186.551</value>
+      </tuple>
+      <tuple>
+        <value>190.428</value>
+      </tuple>
+      <tuple>
+        <value>193.729</value>
+      </tuple>
+      <tuple>
+        <value>195.321</value>
+      </tuple>
+      <tuple>
+        <value>195.344</value>
+      </tuple>
+      <tuple>
+        <value>198.584</value>
+      </tuple>
+      <tuple>
+        <value>200.931</value>
+      </tuple>
+      <tuple>
+        <value>203.021</value>
+      </tuple>
+      <tuple>
+        <value>204.884</value>
+      </tuple>
+      <tuple>
+        <value>206.64</value>
+      </tuple>
+      <tuple>
+        <value>207.521</value>
+      </tuple>
+      <tuple>
+        <value>209.288</value>
+      </tuple>
+      <tuple>
+        <value>209.523</value>
+      </tuple>
+      <tuple>
+        <value>209.979</value>
+      </tuple>
+      <tuple>
+        <value>212.498</value>
+      </tuple>
+      <tuple>
+        <value>214.332</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 - num4'>
+    <sql>
+      SELECT TO_TIMESTAMP_NTZ(EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;date0&quot;)-(CAST(&quot;CALCS&quot;.&quot;num4&quot; AS NUMBER(38,18))*60*60*24)) AS &quot;TEMP(Test)(2923065813)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      204.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(2923065813)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-06-23 03:36:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-25 11:16:48#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 01:12:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 16:19:12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 != #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;CALCS&quot;.&quot;date0&quot; &lt;&gt; &apos;1975-11-12&apos;::DATE) THEN 1 WHEN NOT (&quot;CALCS&quot;.&quot;date0&quot; &lt;&gt; &apos;1975-11-12&apos;::DATE) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(798936259)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      183.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(798936259)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 + num4'>
+    <sql>
+      SELECT TO_TIMESTAMP_NTZ(EXTRACT(EPOCH FROM &quot;CALCS&quot;.&quot;date0&quot;)+(CAST(&quot;CALCS&quot;.&quot;num4&quot; AS NUMBER(38,18))*60*60*24)) AS &quot;TEMP(Test)(2067341949)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      202.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(2067341949)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-14 20:24:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-10-29 12:43:12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-05-28 22:48:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-27 07:40:48#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

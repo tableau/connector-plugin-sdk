@@ -1,0 +1,285 @@
+<results>
+  <test name='date0 == #7/4/1972#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date0&quot; = CAST(CAST(&apos;1972-07-04&apos; AS DATE) AS TIMESTAMP)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date0&quot; = CAST(CAST(&apos;1972-07-04&apos; AS DATE) AS TIMESTAMP)) THEN 0 ELSE NULL END) AS &quot;TEMP_Test__397499995__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      68.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(397499995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &gt;= #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date0&quot; &gt;= CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date0&quot; &gt;= CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 0 ELSE NULL END) AS &quot;TEMP_Test__1366787273__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      71.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(1366787273)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &gt; #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date0&quot; &gt; CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date0&quot; &gt; CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 0 ELSE NULL END) AS &quot;TEMP_Test__3193322782__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      75.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(3193322782)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &lt;= #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date0&quot; &lt;= CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date0&quot; &lt;= CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 0 ELSE NULL END) AS &quot;TEMP_Test__822657216__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      78.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(822657216)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &lt; #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date0&quot; &lt; CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date0&quot; &lt; CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 0 ELSE NULL END) AS &quot;TEMP_Test__3764753091__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      72.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(3764753091)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 - datetime0'>
+    <sql>
+      SELECT (DAY(&quot;Calcs&quot;.&quot;date0&quot; - &quot;Calcs&quot;.&quot;datetime0&quot;) + (NVL(HOUR(&quot;Calcs&quot;.&quot;date0&quot;),0) - NVL(HOUR(&quot;Calcs&quot;.&quot;datetime0&quot;),0) + (NVL(MINUTE(&quot;Calcs&quot;.&quot;date0&quot;),0) - NVL(MINUTE(&quot;Calcs&quot;.&quot;datetime0&quot;),0) + (NVL(SECOND(&quot;Calcs&quot;.&quot;date0&quot;),0) - NVL(SECOND(&quot;Calcs&quot;.&quot;datetime0&quot;),0)) / 60.0) / 60.0) / 24.0) AS &quot;TEMP_Test__937166222__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      76.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(937166222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-11710.521</value>
+      </tuple>
+      <tuple>
+        <value>-10491.333</value>
+      </tuple>
+      <tuple>
+        <value>-85.428888</value>
+      </tuple>
+      <tuple>
+        <value>-39.979446</value>
+      </tuple>
+      <tuple>
+        <value>-31.551596</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='datetime0 - #1/1/2004#'>
+    <sql>
+      SELECT (DAY(&quot;Calcs&quot;.&quot;datetime0&quot; - CAST(&apos;2004-01-01&apos; AS DATE)) + (NVL(HOUR(&quot;Calcs&quot;.&quot;datetime0&quot;),0) - NVL(HOUR(CAST(&apos;2004-01-01&apos; AS DATE)),0) + (NVL(MINUTE(&quot;Calcs&quot;.&quot;datetime0&quot;),0) - NVL(MINUTE(CAST(&apos;2004-01-01&apos; AS DATE)),0) + (NVL(SECOND(&quot;Calcs&quot;.&quot;datetime0&quot;),0) - NVL(SECOND(CAST(&apos;2004-01-01&apos; AS DATE)),0)) / 60.0) / 60.0) / 24.0) AS &quot;TEMP_Test__100938644__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      67.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(100938644)(0)]</column>
+      </schema>
+      <tuple>
+        <value>185.95104</value>
+      </tuple>
+      <tuple>
+        <value>186.5516</value>
+      </tuple>
+      <tuple>
+        <value>190.42889</value>
+      </tuple>
+      <tuple>
+        <value>193.72938</value>
+      </tuple>
+      <tuple>
+        <value>195.32153</value>
+      </tuple>
+      <tuple>
+        <value>195.34493</value>
+      </tuple>
+      <tuple>
+        <value>198.58465</value>
+      </tuple>
+      <tuple>
+        <value>200.9316</value>
+      </tuple>
+      <tuple>
+        <value>203.02111</value>
+      </tuple>
+      <tuple>
+        <value>204.88445</value>
+      </tuple>
+      <tuple>
+        <value>206.64055</value>
+      </tuple>
+      <tuple>
+        <value>207.52125</value>
+      </tuple>
+      <tuple>
+        <value>209.28805</value>
+      </tuple>
+      <tuple>
+        <value>209.52396</value>
+      </tuple>
+      <tuple>
+        <value>209.97945</value>
+      </tuple>
+      <tuple>
+        <value>212.49854</value>
+      </tuple>
+      <tuple>
+        <value>214.33292</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 - num4'>
+    <sql>
+      SELECT (CASE WHEN CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60,0)} AS INTEGER)) * -60,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;s&apos;, CAST(CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60,0)} AS INTEGER)) * -60,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24,0)} AS INTEGER)) * -60,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;mi&apos;, CAST(CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24,0)} AS INTEGER)) * -60,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER)) * -24,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;hh&apos;, CAST(CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER)) * -24,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE(-&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;d&apos;, CAST(CAST({fn TRUNCATE(-&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER) AS BIGINT), &quot;Calcs&quot;.&quot;date0&quot;) END) AS TIMESTAMP)) END) AS TIMESTAMP)) END) AS TIMESTAMP)) END) AS &quot;TEMP_Test__2923065813__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      65.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(2923065813)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-06-23 03:36:01#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-25 11:16:48#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 01:11:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 16:19:12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 != #11/12/1975#'>
+    <sql>
+      SELECT (CASE WHEN (&quot;Calcs&quot;.&quot;date0&quot; &lt;&gt; CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 1 WHEN NOT (&quot;Calcs&quot;.&quot;date0&quot; &lt;&gt; CAST(CAST(&apos;1975-11-12&apos; AS DATE) AS TIMESTAMP)) THEN 0 ELSE NULL END) AS &quot;TEMP_Test__798936259__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      50.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(798936259)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 + num4'>
+    <sql>
+      SELECT (CASE WHEN CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60,0)} AS INTEGER)) * 60,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;s&apos;, CAST(CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60,0)} AS INTEGER)) * 60,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24,0)} AS INTEGER)) * 60,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;mi&apos;, CAST(CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; * 24 - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot; * 24,0)} AS INTEGER)) * 60,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER)) * 24,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;hh&apos;, CAST(CAST({fn TRUNCATE((&quot;Calcs&quot;.&quot;num4&quot; - CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER)) * 24,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;d&apos;, CAST(CAST({fn TRUNCATE(&quot;Calcs&quot;.&quot;num4&quot;,0)} AS INTEGER) AS BIGINT), &quot;Calcs&quot;.&quot;date0&quot;) END) AS TIMESTAMP)) END) AS TIMESTAMP)) END) AS TIMESTAMP)) END) AS &quot;TEMP_Test__2067341949__0_&quot;&#10;FROM &quot;dbo&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      57.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(2067341949)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-14 20:23:59#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-10-29 12:43:12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-05-28 22:49:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-27 07:40:48#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

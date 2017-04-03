@@ -1,0 +1,160 @@
+<results>
+  <test name='not bool0'>
+    <sql>
+      SELECT (NOT &quot;Calcs&quot;.&quot;bool0&quot;) AS &quot;TEMP(Test)(1413132553)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      93.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1413132553)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='NULL'>
+    <sql>
+      SELECT NULL AS &quot;TEMP(Test)(496893948)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      78.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(496893948)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRUE'>
+    <sql>
+      SELECT TRUE AS &quot;TEMP(Test)(1507734681)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      55.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1507734681)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FALSE'>
+    <sql>
+      SELECT FALSE AS &quot;TEMP(Test)(1303362598)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      77.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1303362598)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 AND bool1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;bool0&quot; AND &quot;Calcs&quot;.&quot;bool1&quot;) AS &quot;TEMP(Test)(3618731173)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      58.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3618731173)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 == bool1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;bool0&quot; AND &quot;Calcs&quot;.&quot;bool1&quot; OR NOT &quot;Calcs&quot;.&quot;bool0&quot; AND NOT &quot;Calcs&quot;.&quot;bool1&quot;) AS &quot;TEMP(Test)(830571724)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      67.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(830571724)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 != bool1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;bool0&quot; AND NOT &quot;Calcs&quot;.&quot;bool1&quot; OR NOT &quot;Calcs&quot;.&quot;bool0&quot; AND &quot;Calcs&quot;.&quot;bool1&quot;) AS &quot;TEMP(Test)(3090944671)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      69.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3090944671)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 or bool1'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;bool0&quot; OR &quot;Calcs&quot;.&quot;bool1&quot;) AS &quot;TEMP(Test)(4182992858)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      59.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4182992858)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,163 @@
+<results>
+  <test name='str2 == iif(num3&gt;0,str2,str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; = (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; = (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1635792874)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; = (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; = (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      2847.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(1635792874)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &gt;= iif(num3&gt;0,lower(str0),str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(1555382477)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      416.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(1555382477)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &gt; iif(num3&gt;0,str0,str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR0&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR0&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(3821822049)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR0&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR0&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      384.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(3821822049)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &lt;= iif(num3&gt;0,lower(str0),str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(2776534421)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;= (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      349.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(2776534421)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &lt; iif(num3&gt;0,lower(str0),str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(398649381)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN LOWER(&quot;TESTV1_CALCS&quot;.&quot;STR0&quot;) WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      348.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(398649381)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 != iif(num3&gt;0,str2,str3)'>
+    <sql>
+      SELECT (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;&gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;&gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END) AS &quot;TEMP(Test)(119026413)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;&gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 1 WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; &lt;&gt; (CASE WHEN (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR2&quot; WHEN NOT (&quot;TESTV1_CALCS&quot;.&quot;NUM3&quot; &gt; 0) THEN &quot;TESTV1_CALCS&quot;.&quot;STR3&quot; ELSE NULL END)) THEN 0 ELSE NULL END)
+    </sql>
+    <query-time>
+      387.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(119026413)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 + str3'>
+    <sql>
+      SELECT (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; || &quot;TESTV1_CALCS&quot;.&quot;STR3&quot;) AS &quot;TEMP(Test)(724155660)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;GROUP BY (&quot;TESTV1_CALCS&quot;.&quot;STR2&quot; || &quot;TESTV1_CALCS&quot;.&quot;STR3&quot;)
+    </sql>
+    <query-time>
+      36.000
+    </query-time>
+    <error>
+      [IBM][CLI Driver][DB2/LINUXX8664] SQL0134N  Improper use of a string column, host variable, constant, or function &quot;Group by column 1&quot;.  SQLSTATE=42907&#13;&#10;
+    </error>
+    <error-type>
+      Unknown
+    </error-type>
+    <table>
+    </table>
+  </test>
+  <test name='&quot;Pat O&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&quot;'>
+    <sql>
+      SELECT &apos;Pat O&apos;&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&apos;&apos; AS &quot;TEMP(Test)(627207302)(0)&quot;&#10;FROM &quot;TESTV1&quot;.&quot;TESTV1_CALCS&quot; &quot;TESTV1_CALCS&quot;&#10;HAVING (CAST(COUNT(1) AS BIGINT) &gt; 0)
+    </sql>
+    <query-time>
+      365.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(627207302)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Pat O&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

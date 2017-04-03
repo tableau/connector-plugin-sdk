@@ -1,0 +1,301 @@
+<results>
+  <test name='date0 == #7/4/1972#'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date0&quot; = {d &apos;1972-07-04&apos;}) AS &quot;TEMP_Test__397499995__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      196.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(397499995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &gt;= #11/12/1975#'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date0&quot; &gt;= {d &apos;1975-11-12&apos;}) AS &quot;TEMP_Test__1366787273__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      316.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(1366787273)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &gt; #11/12/1975#'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date0&quot; &gt; {d &apos;1975-11-12&apos;}) AS &quot;TEMP_Test__3193322782__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      177.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(3193322782)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &lt;= #11/12/1975#'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date0&quot; &lt;= {d &apos;1975-11-12&apos;}) AS &quot;TEMP_Test__822657216__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      258.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(822657216)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 &lt; #11/12/1975#'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date0&quot; &lt; {d &apos;1975-11-12&apos;}) AS &quot;TEMP_Test__3764753091__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      227.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(3764753091)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 - datetime0'>
+    <sql>
+      SELECT (CAST((CAST(&quot;Calcs&quot;.&quot;date0&quot; AS DATE) - CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS DATE)) AS INTEGER) + (EXTRACT(HOUR FROM &quot;Calcs&quot;.&quot;date0&quot;) - EXTRACT(HOUR FROM &quot;Calcs&quot;.&quot;datetime0&quot;) + (EXTRACT(MINUTE FROM &quot;Calcs&quot;.&quot;date0&quot;) - EXTRACT(MINUTE FROM &quot;Calcs&quot;.&quot;datetime0&quot;) + (EXTRACT(SECOND FROM &quot;Calcs&quot;.&quot;date0&quot;) - EXTRACT(SECOND FROM &quot;Calcs&quot;.&quot;datetime0&quot;)) / 60.0) / 60.0) / 24.0) AS &quot;TEMP_Test__937166222__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      202.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(937166222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-11710.521</value>
+      </tuple>
+      <tuple>
+        <value>-10491.333</value>
+      </tuple>
+      <tuple>
+        <value>-85.428877</value>
+      </tuple>
+      <tuple>
+        <value>-39.979421</value>
+      </tuple>
+      <tuple>
+        <value>-31.55162</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='datetime0 - #1/1/2004#'>
+    <sql>
+      SELECT (CAST((CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS DATE) - CAST({d &apos;2004-01-01&apos;} AS DATE)) AS INTEGER) + (EXTRACT(HOUR FROM &quot;Calcs&quot;.&quot;datetime0&quot;) - EXTRACT(HOUR FROM {d &apos;2004-01-01&apos;}) + (EXTRACT(MINUTE FROM &quot;Calcs&quot;.&quot;datetime0&quot;) - EXTRACT(MINUTE FROM {d &apos;2004-01-01&apos;}) + (EXTRACT(SECOND FROM &quot;Calcs&quot;.&quot;datetime0&quot;) - EXTRACT(SECOND FROM {d &apos;2004-01-01&apos;})) / 60.0) / 60.0) / 24.0) AS &quot;TEMP_Test__100938644__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      227.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(100938644)(0)]</column>
+      </schema>
+      <tuple>
+        <value>185.95102</value>
+      </tuple>
+      <tuple>
+        <value>186.55162</value>
+      </tuple>
+      <tuple>
+        <value>190.42888</value>
+      </tuple>
+      <tuple>
+        <value>193.72935</value>
+      </tuple>
+      <tuple>
+        <value>195.32153</value>
+      </tuple>
+      <tuple>
+        <value>195.34495</value>
+      </tuple>
+      <tuple>
+        <value>198.58468</value>
+      </tuple>
+      <tuple>
+        <value>200.93161</value>
+      </tuple>
+      <tuple>
+        <value>203.0211</value>
+      </tuple>
+      <tuple>
+        <value>204.88446</value>
+      </tuple>
+      <tuple>
+        <value>206.64058</value>
+      </tuple>
+      <tuple>
+        <value>207.52123</value>
+      </tuple>
+      <tuple>
+        <value>209.28808</value>
+      </tuple>
+      <tuple>
+        <value>209.52394</value>
+      </tuple>
+      <tuple>
+        <value>209.97942</value>
+      </tuple>
+      <tuple>
+        <value>212.49852</value>
+      </tuple>
+      <tuple>
+        <value>214.33291</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 - num4'>
+    <sql>
+      SELECT ((((CAST(&quot;Calcs&quot;.&quot;date0&quot; AS TIMESTAMP) + CAST(TRUNC(-&quot;Calcs&quot;.&quot;num4&quot;) AS INTEGER) * INTERVAL &apos;1 DAY&apos;) + CAST(TRUNC((&quot;Calcs&quot;.&quot;num4&quot; - TRUNC(&quot;Calcs&quot;.&quot;num4&quot;)) * -24) AS INTEGER) * INTERVAL &apos;1 HOUR&apos;) + CAST(TRUNC((&quot;Calcs&quot;.&quot;num4&quot; * 24 - TRUNC(&quot;Calcs&quot;.&quot;num4&quot; * 24)) * -60) AS INTEGER) * INTERVAL &apos;1 MINUTE&apos;) + CAST(TRUNC((&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60 - TRUNC(&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60)) * -60) AS INTEGER) * INTERVAL &apos;1 SECOND&apos;) AS &quot;TEMP_Test__2923065813__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      136.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(2923065813)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-06-23 03:36:01#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-25 11:16:48#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 01:11:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 16:19:12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 != #11/12/1975#'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;date0&quot; &lt;&gt; {d &apos;1975-11-12&apos;}) AS &quot;TEMP_Test__798936259__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      220.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(798936259)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date0 + num4'>
+    <sql>
+      SELECT ((((CAST(&quot;Calcs&quot;.&quot;date0&quot; AS TIMESTAMP) + CAST(TRUNC(&quot;Calcs&quot;.&quot;num4&quot;) AS INTEGER) * INTERVAL &apos;1 DAY&apos;) + CAST(TRUNC((&quot;Calcs&quot;.&quot;num4&quot; - TRUNC(&quot;Calcs&quot;.&quot;num4&quot;)) * 24) AS INTEGER) * INTERVAL &apos;1 HOUR&apos;) + CAST(TRUNC((&quot;Calcs&quot;.&quot;num4&quot; * 24 - TRUNC(&quot;Calcs&quot;.&quot;num4&quot; * 24)) * 60) AS INTEGER) * INTERVAL &apos;1 MINUTE&apos;) + CAST(TRUNC((&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60 - TRUNC(&quot;Calcs&quot;.&quot;num4&quot; * 24 * 60)) * 60) AS INTEGER) * INTERVAL &apos;1 SECOND&apos;) AS &quot;TEMP_Test__2067341949__0_&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      206.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(2067341949)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-14 20:23:59#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-10-29 12:43:12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-05-28 22:49:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-27 07:40:48#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
+     </tuple>
+      <tuple>
+        <value>#1972-07-14 20:23:59#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-10-29 12:43:12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-05-28 22:49:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-27 07:40:48#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
