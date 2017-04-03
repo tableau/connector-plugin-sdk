@@ -1,0 +1,48 @@
+<results>
+  <test name='DATE([num4])'>
+    <sql>
+      SELECT (DATE(&apos;1900-01-01&apos;) + FLOOR(&quot;Calcs&quot;.&quot;num4&quot;) DAYS) AS &quot;TEMP(Test)(158994214)(0)&quot;&#10;FROM &quot;TEST&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (DATE(&apos;1900-01-01&apos;) + FLOOR(&quot;Calcs&quot;.&quot;num4&quot;) DAYS)
+    </sql>
+    <query-time>
+      35.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(158994214)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-17#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-21#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-25#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-04#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-05#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-09#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-11#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-20#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

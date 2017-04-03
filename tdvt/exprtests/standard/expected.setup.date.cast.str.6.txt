@@ -1,0 +1,66 @@
+<results>
+  <test name='TRIM(STR([date2]))'>
+    <sql>
+      SELECT TRIM(CAST(&quot;testv1_calcs&quot;.&quot;date2&quot; AS VARCHAR)) AS &quot;temp_test__3929621&quot;&#10;FROM &quot;default&quot;.&quot;testv1_calcs&quot; &quot;testv1_calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      66.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.presto].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972-07-12 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-03-17 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974-05-03 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976-09-09 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-02-08 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977-04-20 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-07-26 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980-11-07 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988-01-05 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994-04-20 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-06-04 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995-09-03 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-05-30 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997-09-19 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998-08-12 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001-02-04 00:00:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002-04-27 00:00:00.000&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

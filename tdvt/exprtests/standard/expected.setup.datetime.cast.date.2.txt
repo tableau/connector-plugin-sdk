@@ -1,0 +1,57 @@
+<results>
+  <test name='DATE([datetime0])'>
+    <sql>
+      SELECT TIMESTAMP(DATE([datetime0])) AS [TEMP_Test__1739373434__0_]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      986.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(1739373434)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

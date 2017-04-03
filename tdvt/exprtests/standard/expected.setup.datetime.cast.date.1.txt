@@ -1,0 +1,57 @@
+<results>
+  <test name='DATE([datetime0])'>
+    <sql>
+      SELECT DATE(`Calcs`.`datetime0`) AS `TEMP(Test)(1739373434)(0)`&#10;FROM `Calcs`&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      47.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1739373434)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

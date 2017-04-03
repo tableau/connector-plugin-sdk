@@ -1,0 +1,51 @@
+<results>
+  <test name='DATE([num4])'>
+    <sql>
+      SELECT CAST(DATE_ADD(DATE(&apos;1900-01-01&apos;), INTERVAL CAST(`num4` AS INT64) DAY) AS TIMESTAMP) AS `TEMP_Test__158994214__0_`&#10;FROM `tactile-pulsar-824.TestV1`.`Calcs` `Calcs`&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      2803.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery_sql].[TEMP(Test)(158994214)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+      <tuple>
+        <value>%error%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

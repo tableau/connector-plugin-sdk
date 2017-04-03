@@ -1,0 +1,18 @@
+<results>
+  <test name='DATE([num4])'>
+    <sql>
+      SELECT CAST(FLOOR([Calcs].[num4]) as datetime) AS [TEMP_Test__158994214__0_]&#10;FROM [Calcs]&#10;GROUP BY CAST(FLOOR([Calcs].[num4]) as datetime)
+    </sql>
+    <query-time>
+      29.000
+    </query-time>
+    <error>
+      [SAP][ASE ODBC Driver][Adaptive Server Enterprise]Explicit conversion from datatype &apos;FLOAT&apos; to &apos;DATETIME&apos; is not allowed.&#10;[SAP][ASE ODBC Driver][Adaptive Server Enterprise]Command has been aborted.&#10;
+    </error>
+    <error-type>
+      Unknown
+    </error-type>
+    <table>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,60 @@
+<results>
+  <test name='DATE([datetime0])'>
+    <sql>
+      SELECT CAST(&quot;Calcs&quot;.&quot;datetime0&quot; AS DATE) AS &quot;TEMP_Test__1739373434__0_&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      197.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.ncluster].[TEMP(Test)(1739373434)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
+le>
+  </test>
+</results>

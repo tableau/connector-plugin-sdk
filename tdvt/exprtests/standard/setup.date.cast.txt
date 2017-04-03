@@ -1,7 +1,0 @@
-//Some casts.
-DATETIME([date2])
-FLOAT([date2])
-TRIM(STR([date2]))
-ROUND(FLOAT([datetime0]), 2)
-TRIM(STR([datetime0]))
-
