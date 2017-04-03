@@ -270,7 +270,7 @@ def compare_results(test_name, test_file, full_test_file, test_config):
     """
     base_test_file = get_base_test(test_file)
     test_file_root = os.path.split(test_file)[0]
-    actual_file, actual_diff_file, setup, expected_files = get_test_file_paths(test_file_root, base_test_file, test_config.expected_dir, test_config.output_dir)
+    actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root, base_test_file, test_config.expected_dir, test_config.output_dir)
     result = TestResult(test_name, test_config, full_test_file)
     #There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
@@ -287,15 +287,19 @@ def compare_results(test_name, test_file, full_test_file, test_config):
     expected_file_version = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
-            #logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
-            #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
-            #Commenting this out for now since it can make tests pass when they should really fail. Might be a good command line option though.
-            #try_move(actual_file, expected_file)
+            if ALWAYS_GENERATE_EXPECTED:
+                #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
+                #This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+                logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
+                try_move(actual_file, expected_file)
             return result
         #Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(threading.current_thread().name + " Comparing " + actual_file + " to " + expected_file)
         expected_output = TestResult(test_config=test_config)
-        expected_output.add_test_results(xml.etree.ElementTree.parse(expected_file).getroot(), '')
+        try:
+            expected_output.add_test_results(xml.etree.ElementTree.parse(expected_file).getroot(), '')
+        except xml.etree.ElementTree.ParseError as e:
+            logging.debug("Exception parsing expected file: " + expected_file + " exception: " + str(e))
         
         diff_counts, diff_string = diff_test_results(result, expected_output)
         result.set_best_matching_expected_output(expected_output, expected_file, expected_file_version, diff_counts)
@@ -314,6 +318,11 @@ def compare_results(test_name, test_file, full_test_file, test_config):
         expected_file_version = expected_file_version + 1
 
     #Exhausted all expected files. The test failed.
+    if ALWAYS_GENERATE_EXPECTED:
+        #This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+        actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root, base_test_file, test_config.expected_dir, test_config.output_dir)
+        logging.debug("Copying actual [{}] to expected [{}]".format(actual_file, next_path))
+        try_move(actual_file, next_path)
     #This will re-diff the results against the best expected file to ensure the test pass indicator and diff count is correct.
     diff_count, diff_string = diff_test_results(result, result.best_matching_expected_results)
     save_results_diff(actual_file, actual_diff_file, result.path_to_expected, diff_string) 
@@ -602,7 +611,7 @@ def run_diff(test_config, diff):
     test_path_base = os.path.split(allowed_test_path)[0]
     test_name = os.path.split(allowed_test_path)[1]
 
-    actual, actual_diff, setup, expected_files = get_test_file_paths(test_path_base, test_name, test_config.expected_dir, test_config.output_dir)
+    actual, actual_diff, setup, expected_files, next_path = get_test_file_paths(test_path_base, test_name, test_config.expected_dir, test_config.output_dir)
 
     logging.debug('actual_path: ' + actual)
     diff_count_map = {}
@@ -611,8 +620,19 @@ def run_diff(test_config, diff):
         logging.debug('expected_path: ' + f)
         if os.path.isfile(f) and os.path.isfile(actual):
             logging.debug("Diffing " + actual + " and " + f)
-            actual_xml = xml.etree.ElementTree.parse(actual).getroot()
-            expected_xml = xml.etree.ElementTree.parse(f).getroot()
+            actual_xml = None
+            expected_xml = None
+            try:
+                actual_xml = xml.etree.ElementTree.parse(actual).getroot()
+            except xml.etree.ElementTree.ParseError as e:
+                logging.debug("Exception parsing actual file: " + actual + " exception: " + str(e))
+                continue
+            try:
+                expected_xml = xml.etree.ElementTree.parse(f).getroot()
+            except xml.etree.ElementTree.ParseError as e:
+                logging.debug("Exception parsing expected file: " + f + " exception: " + str(e))
+                continue
+
             result = TestResult(test_config=test_config)
             result.add_test_results(actual_xml, actual)
             expected_output = TestResult(test_config=test_config)

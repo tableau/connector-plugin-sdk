@@ -109,7 +109,7 @@ def get_test_file_paths(root_directory, test_name, expected_sub_dir, output_dir)
         expected_file_path = os.path.join(expected_file_path, expected_sub_dir)
 
     expected_file_path = os.path.join(expected_file_path, expected_filename)
-
+    next_expected_file_path = ''
     expected_file_list = []
     while os.path.isfile(expected_file_path):
         expected_file_list.append(expected_file_path)
@@ -124,6 +124,7 @@ def get_test_file_paths(root_directory, test_name, expected_sub_dir, output_dir)
         expected_file = ".".join(expected_file_parts)
 
         expected_file_path = os.path.join(test_path_base, expected_file)
+        next_expected_file_path = expected_file_path
 
     if not expected_file_list:
         #Always add the base expected file even if it doesn't exist. The callers will use this to copy the actual.
@@ -131,7 +132,7 @@ def get_test_file_paths(root_directory, test_name, expected_sub_dir, output_dir)
 
     for filepath in expected_file_list:
         logging.debug("Found expected filepath " + filepath)
-    return (actualfile_path, diff_file_path, setupfile_path, expected_file_list)
+    return (actualfile_path, diff_file_path, setupfile_path, expected_file_list, next_expected_file_path)
 
 def find_file_path(root_directory, base_file, default_dir):
     """Return the full path to base_file using either the root_directory and base_file, or a default directory and base_file from there."""
