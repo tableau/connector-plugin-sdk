@@ -1,23 +1,47 @@
 <results>
   <test name='DATE([num4])'>
     <sql>
-      SELECT TO_DATE(FROM_UNIXTIME(CAST((`testv1_Calcs`.`num4`) AS BIGINT))) AS `temp_test__158994214__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY 1
+      SELECT STRFTIME(&apos;%Y-%m-%d&apos;, &apos;2415018.50&apos;, (&quot;calcs_view&quot;.&quot;num4&quot;)||&apos; DAYS&apos;) AS &quot;TEMP(Test)(158994214)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;calcs_view&quot; &quot;calcs_view&quot;&#10;GROUP BY 1
     </sql>
     <query-time>
-      53.000
+      55.000
     </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.hadoophive_impala].[TEMP(Test)(158994214)(0)]</column>
+        <column>[cast_calcs.marklogic].[TEMP(Test)(158994214)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>#1969-12-31#</value>
+        <value>#1899-12-15#</value>
       </tuple>
       <tuple>
-        <value>#1970-01-01#</value>
+        <value>#1899-12-16#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-19#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-23#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-02#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-03#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-05#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-09#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-18#</value>
       </tuple>
     </table>
   </test>
