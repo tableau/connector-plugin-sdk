@@ -32,10 +32,35 @@ from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistr
 from .config_gen.test_config import TestSet
 
 class TestOutputFiles(object):
-        output_actuals = 'tdvt_actuals_combined.zip'
-        output_csv ="test_results_combined.csv"
-        output_json = "tdvt_output_combined.json"
-        all_output_files = [output_actuals, output_csv, output_json]
+    output_actuals = 'tdvt_actuals_combined.zip'
+    output_csv ="test_results_combined.csv"
+    output_json = "tdvt_output_combined.json"
+    all_output_files = [output_actuals, output_csv, output_json]
+
+    @staticmethod
+    def copy_output_file(src_name, src_dir, dst, trim_header, append=True):
+        src = os.path.join(src_dir, src_name)
+        dst = os.path.join(os.getcwd(), dst)
+        logging.debug("Copying {0} to {1}".format(src, dst))
+        try:
+            dst_exists = os.path.isfile(dst)
+            src_file = open(src, 'r', encoding='utf8')
+            mode = 'w' if not dst_exists or not append else 'a'
+            dst_file = open(dst, mode, encoding='utf8')
+
+            line_count = 0
+            for line in src_file:
+                line_count += 1
+                if line_count == 1 and trim_header and dst_exists:
+                    continue
+                dst_file.write(line)
+
+            src_file.close()
+            dst_file.close()
+        except IOError as e:
+            logging.debug("Exception while copying files: " + str(e))
+            return
+
 
 class TestRunner(threading.Thread):
     def __init__(self, test_set, test_config, lock, verbose):
@@ -72,28 +97,7 @@ class TestRunner(threading.Thread):
     
 
     def copy_output_files(self):
-        self.copy_output_file("test_results.csv", TestOutputFiles.output_csv, True)
-
-    def copy_output_file(self, src, dst, trim_header):
-        src = os.path.join(self.temp_dir, src)
-        dst = os.path.join(os.getcwd(), dst)
-        try:
-            dst_exists = os.path.isfile(dst)
-            src_file = open(src, 'r', encoding='utf8')
-            mode = 'w' if not dst_exists else 'a'
-            dst_file = open(dst, mode, encoding='utf8')
-
-            line_count = 0
-            for line in src_file:
-                line_count += 1
-                if line_count == 1 and trim_header and dst_exists:
-                    continue
-                dst_file.write(line)
-
-            src_file.close()
-            dst_file.close()
-        except IOError:
-            return
+        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir, TestOutputFiles.output_csv, True)
 
     def copy_test_result_file(self):
         src = os.path.join(self.temp_dir, "tdvt_output.json")
@@ -383,6 +387,13 @@ def active_thread_count(threads):
             active += 1
     return active
 
+def run_file(run_file, output_dir):
+
+    result_code = run_failed_tests(run_file, output_dir)
+    TestOutputFiles.copy_output_file("test_results.csv", '', TestOutputFiles.output_csv, False, False)
+    TestOutputFiles.copy_output_file("tdvt_output.json", '', TestOutputFiles.output_json, False, False)
+    return result_code
+
 def run_desired_tests(args, ds_registry):
     generate_files(ds_registry, False)
     lock = threading.Lock()
@@ -518,7 +529,7 @@ def main():
         sys.exit(0)
     elif args.run_file:
         output_dir = os.getcwd()
-        sys.exit(run_failed_tests(args.run_file, output_dir))
+        sys.exit(run_file(args.run_file, output_dir))
     elif args.list_logical_configs:
         print_logical_configurations()
         sys.exit(0)
