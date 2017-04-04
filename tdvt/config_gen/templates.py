@@ -3,7 +3,7 @@ This defines a mapping to the table and columns in the datasource. It is used to
 
 You can run [tdvt --list_logical_configs] to see the resulting values.
 
-The value on the left is the key that is used in your datasource ini file.
+The value on the left is the key that is used in your datasource ini file. THESE VALUES ARE CASE INSENSITIVE!
 Keys you can set to control the generation are:
 
 This should always be present. $dsName will be replaced with Calcs or Staples. You can put a string before the $dsName token to append something to your table name but if you want to set something on the end you need to use tablenamePostfix.
@@ -81,7 +81,7 @@ attributes = {
                  },
 
     #admin.calcs
-    'admin' : {
+    'admin_lower' : {
                 'tablename' : '$dsName',
                 'calcsnameLower' : True,
                 'tablePrefix' : '[admin].'
