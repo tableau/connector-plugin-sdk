@@ -1,0 +1,21 @@
+<results>
+  <test name='SPACE(int2)'>
+    <sql>
+      SELECT (CASE WHEN &quot;Calcs&quot;.&quot;int2&quot; &gt;= 0 THEN {fn REPEAT(&apos; &apos;, &quot;Calcs&quot;.&quot;int2&quot;)} ELSE NULL END) AS &quot;temp_test__3089742405__0_&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      44.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.paraccel].[TEMP(Test)(3089742405)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;   &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
