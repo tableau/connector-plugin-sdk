@@ -1,0 +1,40 @@
+<results>
+  <test name='DATE(DATETRUNC(&apos;day&apos;,[time1]))'>
+    <sql>
+      SELECT CAST(DATE_TRUNC(&apos;DAY&apos;, TABLEAU.NORMALIZE_DATETIME(&quot;Calcs&quot;.&quot;time1&quot;)) AS DATE OR NULL) AS &quot;TEMP(Test)(2860184158)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(DATE_TRUNC(&apos;DAY&apos;, TABLEAU.NORMALIZE_DATETIME(&quot;Calcs&quot;.&quot;time1&quot;)) AS DATE OR NULL)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2860184158)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-30#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(DATETRUNC(&apos;hour&apos;, [time1]))'>
+    <sql>
+      SELECT CAST(DATE_TRUNC(&apos;HOUR&apos;, TABLEAU.NORMALIZE_DATETIME(&quot;Calcs&quot;.&quot;time1&quot;)) AS DATE OR NULL) AS &quot;TEMP(Test)(738483962)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(DATE_TRUNC(&apos;HOUR&apos;, TABLEAU.NORMALIZE_DATETIME(&quot;Calcs&quot;.&quot;time1&quot;)) AS DATE OR NULL)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(738483962)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-30#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

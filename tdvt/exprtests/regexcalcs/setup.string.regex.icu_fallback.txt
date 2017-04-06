@@ -42,7 +42,4 @@ REGEXP_MATCH('monday','(?i)monDAY')
 REGEXP_MATCH('?','\N{QUESTION MARK}') 
 REGEXP_MATCH('$','\N{DOLLAR SIGN}')
 REGEXP_MATCH('BCD','[\X41-\X45]{3}')
-//Following tests are blocked by defect 636361
-//REGEXP_MATCH('I have two lines\r\nCan you read both?','(?m)I have two lines$')
-//REGEXP_REPLACE('jkl\r\nxyzabc\r\n123','(?m)abc$','bbb')
-//REGEXP_MATCH('a\r\nb','(?s)a.b')
+
