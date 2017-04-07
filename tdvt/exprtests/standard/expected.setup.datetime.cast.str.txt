@@ -64,8 +64,3 @@
     </table>
   </test>
 </results>
-e>&quot;2004-08-02 07:59:23&quot;</value>
-      </tuple>
-    </table>
-  </test>
-</results>

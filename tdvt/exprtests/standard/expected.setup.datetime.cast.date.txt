@@ -55,6 +55,3 @@
     </table>
   </test>
 </results>
-le>
-  </test>
-</results>
