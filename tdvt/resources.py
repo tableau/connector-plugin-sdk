@@ -53,6 +53,36 @@ def get_path(base_dir, file_name=None, module_name='tdvt'):
 def get_root_dir():
     return get_path('')
 
+def split_to_list(path):
+    everything = []
+    while True:
+        parts = os.path.split(path)
+        if parts[0] == path:
+            everything.insert(0, parts[0])
+            break
+        elif parts[1] == path:
+            everything.insert(0, parts[1])
+            break
+        else:
+            path = parts[0]
+            everything.insert(0, parts[1])
+    return everything
+
+def get_relative_test_path(full_path):
+    """ Given D:\test\something\tdvt\exprtests\standard\setup.test.txt, return exprtests\standard\setup.test.txt.  """
+    parts = split_to_list(full_path)
+    new_parts = []
+    found = False
+    for p in parts:
+        if p == 'exprtests' or p == 'logicaltests':
+            found = True
+        if found:
+            new_parts.append(p)
+    if not new_parts:
+        return ''
+    new_path = os.path.join(new_parts[0], *new_parts[1:])
+    return new_path
+
 def get_logical_test_file_paths(test_file, output_dir):
     """ Given the full path to logical test file, return all the paths to the expected output and gold result files.
         This depends on the logical tests main directory having 2 levels of subdirectories

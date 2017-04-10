@@ -454,6 +454,34 @@ def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     failed_test_count = write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
     return failed_test_count
 
+def run_tests_parallel_list(test_data, thread_count):
+    all_test_results = {}
+    test_queue = queue.Queue()
+    all_work = []
+
+    #Create the worker threads.
+    logging.debug("Running " + str(thread_count) + " worker threads.")
+    for i in range(0, thread_count):
+        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
+        worker.setDaemon(True)
+        worker.start()
+
+    #Build the queue of work.
+    for tds, test_file, test_config in test_data:
+        #for test_file in test_files:
+        work = QueueWork(test_config, test_file)
+        test_queue.put(work)
+        all_work.append(work)
+
+    #Do the work.
+    test_queue.join()
+    
+    #Analyze the results of the work.
+    for work in all_work:
+        all_test_results.update(work.results)
+
+    return all_test_results
+
 def run_tests_parallel(test_names, test_config):
     all_test_results = {}
     tds_file = test_config.tds
@@ -657,41 +685,43 @@ def run_failed_tests_impl(run_file, root_directory):
     expr_tests = {}
     log_tests = {}
 
+    all_test_pairs = []
     failed_tests = tests['failed_tests']
     for f in failed_tests:
-        logging.debug("Found failed test: " + f['test_file'] + " and tds " + f['tds'])
-        tt = f['test_type']
+        relative_test_file = f['test_file']
+        if not os.path.isfile(relative_test_file):
+            relative_test_file = get_relative_test_path(f['test_file'])
+            relative_test_file = os.path.join(root_directory, relative_test_file)
+
         tds = f['tds']
+        tds = get_tds_full_path(root_directory, os.path.split(tds)[1])
+        logging.debug("Found failed test: " + relative_test_file + " and tds " + tds)
+        tt = f['test_type']
         if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
             if tds not in expr_tests:
                 expr_tests[tds] = []
             test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+            test_config.thread_count = 1
             test_config.logical = False
-            expr_tests[tds].append( [f['test_file'], test_config] )
+            all_test_pairs.append([tds, relative_test_file, test_config])
+            expr_tests[tds].append( [relative_test_file, test_config] )
 
         if tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
             if tds not in log_tests:
                 log_tests[tds] = []
             test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+            test_config.thread_count = 1
             test_config.logical = True
-            log_tests[tds].append( [f['test_file'], test_config] )
+            all_test_pairs.append([tds, relative_test_file, test_config])
+            log_tests[tds].append( [relative_test_file, test_config] )
 
     all_test_results = {}
-    for tds in expr_tests:
-        for test_pair in expr_tests[tds]:
-            if len(test_pair) == 2:
-                test_files = test_pair[0]
-                test_config = test_pair[1]
-                results = run_tests_parallel([test_files], test_config)
-                all_test_results.update(results)
-    
-    for tds in log_tests:
-        for test_pair in log_tests[tds]:
-            if len(test_pair) == 2:
-                test_files = test_pair[0]
-                test_config = test_pair[1]
-                results = run_tests_parallel([test_files], test_config)
-                all_test_results.update(results)
+
+
+
+    results = run_tests_parallel_list(all_test_pairs, 4)
+    all_test_results.update(results)
+
     return all_test_results
 
 def run_failed_tests(run_file, output_dir):

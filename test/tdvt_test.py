@@ -144,15 +144,15 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), TEST_DIRECTORY)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), TEST_DIRECTORY)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), get_path(ROOT_DIRECTORY, module_name=__name__))
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), TEST_DIRECTORY)
         self.check_results(all_test_results, 3)
 
     def test_logical_rerun_fail(self):
