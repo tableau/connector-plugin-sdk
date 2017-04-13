@@ -314,6 +314,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name, 
+                'case' : test_name, 
                 'test_file' : obj.test_file, 
                 'test_type' : test_type, 
                 'test_config' : obj.test_config.__json__(),
