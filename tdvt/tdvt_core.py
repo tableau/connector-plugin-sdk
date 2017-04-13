@@ -488,27 +488,11 @@ def run_tests_parallel(test_names, test_config):
     test_queue = queue.Queue()
     all_work = []
 
-    #Create the worker threads.
-    logging.debug("Running " + str(test_config.thread_count) + " worker threads.")
-    for i in range(0, test_config.thread_count):
-        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
-        worker.setDaemon(True)
-        worker.start()
-
-    #Build the queue of work.
+    test_data = []
     for test_file in test_names:
-        work = QueueWork(test_config, test_file)
-        test_queue.put(work)
-        all_work.append(work)
+        test_data.append([tds_file, test_file, test_config])
 
-    #Do the work.
-    test_queue.join()
-    
-    #Analyze the results of the work.
-    for work in all_work:
-        all_test_results.update(work.results)
-
-    return all_test_results
+    return run_tests_parallel_list(test_data, test_config.thread_count)
 
 def generate_test_file_list_from_file(root_directory, config_file):
     """Read the config file and generate a list of tests."""
@@ -682,9 +666,6 @@ def run_failed_tests_impl(run_file, root_directory):
         logging.debug("Error opening " + run_file)
         return
 
-    expr_tests = {}
-    log_tests = {}
-
     all_test_pairs = []
     failed_tests = tests['failed_tests']
     for f in failed_tests:
@@ -697,23 +678,14 @@ def run_failed_tests_impl(run_file, root_directory):
         tds = get_tds_full_path(root_directory, os.path.split(tds)[1])
         logging.debug("Found failed test: " + relative_test_file + " and tds " + tds)
         tt = f['test_type']
+        test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
         if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
-            if tds not in expr_tests:
-                expr_tests[tds] = []
-            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
-            test_config.thread_count = 1
             test_config.logical = False
-            all_test_pairs.append([tds, relative_test_file, test_config])
-            expr_tests[tds].append( [relative_test_file, test_config] )
-
-        if tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
-            if tds not in log_tests:
-                log_tests[tds] = []
-            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
-            test_config.thread_count = 1
+        elif tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
             test_config.logical = True
-            all_test_pairs.append([tds, relative_test_file, test_config])
-            log_tests[tds].append( [relative_test_file, test_config] )
+
+        all_test_pairs.append([tds, relative_test_file, test_config])
+
 
     all_test_results = {}
 
