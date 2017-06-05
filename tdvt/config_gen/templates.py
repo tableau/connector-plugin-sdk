@@ -142,6 +142,12 @@ attributes = {
                      'tablename' : '$dsName',
                      'tablePrefix' : '[TestV1].'
                       },
+    #testv1.Calcs
+    'prefix_bool_lower' : { 
+                     'tablename' : '$dsName',
+                     'tablePrefix' : '[testv1].',
+                     'bool_underscore' : True
+                      },
     #Calcs
     'simple' : { 
                      'tablename' : '$dsName',
