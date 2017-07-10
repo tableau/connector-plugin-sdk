@@ -405,7 +405,7 @@ def run_desired_tests(args, ds_registry):
         delete_output_files(os.getcwd())
 
     if not tabquerycli_exists():
-        print ("Could not find Tabquerycli.exe.")
+        print ("Could not find Tabquerycli.")
         sys.exit(0)
 
     temporary_test_configs = []

@@ -529,6 +529,7 @@ def generate_test_file_list_from_file(root_directory, config_file):
     #Allowed/exclude can be filenames or directory fragments.
     tests_to_run = []
     for a in allowed_tests:
+        added_test = len(tests_to_run)
         allowed_path = os.path.join(root_directory, a)
         if os.path.isfile(allowed_path):
             logging.debug("Adding file " + allowed_path)
@@ -546,6 +547,9 @@ def generate_test_file_list_from_file(root_directory, config_file):
                 if os.path.isfile(full_filename):
                     logging.debug("Adding globbed file " + full_filename)
                     tests_to_run.append(full_filename)
+
+        if added_test == len(tests_to_run):
+            logging.debug("Could not find a test for " + allowed_path  + ". Check the path.")
 
     logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 
