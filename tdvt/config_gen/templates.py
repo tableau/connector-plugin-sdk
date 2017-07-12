@@ -51,6 +51,11 @@ attributes = {
                  'tablename' : '$dsName',
                  'tablePrefix' : '[TESTV1].',
                  },
+	#[Extract].[Extract]
+    'Extract' : { 
+                 'tablename' : 'Extract',
+                 'tablePrefix' : '[Extract].',
+                 },
 
     'TESTV1_TESTV1' : { 
                  'tablename' : '$dsName',
