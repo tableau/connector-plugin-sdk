@@ -268,8 +268,9 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_queu
         test_config.config_file = test_set.config_file_name
 
         runner = TestRunner(test_set, test_config, lock, VERBOSE, test_run)
+        print ("Queing up tests: " + str(test_config))
         #if ini file has subthread setting, set it now.
-        if ds_info.maxsubthread > 0:
+        if ds_info.maxsubthread > 0 and ds_info.maxsubthread < max_threads:
             runner.set_thread_count(ds_info.maxsubthread);
         else:
             runner.set_thread_count(max_threads)
@@ -279,7 +280,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_queu
 
 
         test_run += 1
-        return test_run
+    return test_run
 
 def get_level_of_parallelization(args):
     #This indicates how many database/test suite combinations to run at once
@@ -472,6 +473,7 @@ def run_desired_tests(args, ds_registry):
         print ("No tests found. Check arguments.")
         sys.exit()
 
+    print ("Creating " + str(max_threads) + " worker threads.")
     for i in range(0, max_threads):
         worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
         worker.setDaemon(True)
