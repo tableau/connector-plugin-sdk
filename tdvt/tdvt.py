@@ -268,7 +268,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_queu
         test_config.config_file = test_set.config_file_name
 
         runner = TestRunner(test_set, test_config, lock, VERBOSE, test_run)
-        print ("Queing up tests: " + str(test_config))
+        logging.debug("Queing up tests: " + str(test_config))
         #if ini file has subthread setting, set it now.
         if ds_info.maxsubthread > 0 and ds_info.maxsubthread < max_threads:
             runner.set_thread_count(ds_info.maxsubthread);
