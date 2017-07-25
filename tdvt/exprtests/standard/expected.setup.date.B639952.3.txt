@@ -1,0 +1,165 @@
+<results>
+  <test name='SUM([date0]-1-[date1])'>
+    <sql>
+      SELECT SUM((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date0` AS DATE), CAST(-(1) AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date1` AS DATE))) / 86400.0) AS `temp_test__852777247__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      17445.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(852777247)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-21820.125</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([date0]+300-[date1])'>
+    <sql>
+      SELECT SUM((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date0` AS DATE), CAST(300 AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date1` AS DATE))) / 86400.0) AS `temp_test__3920605433__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      15925.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(3920605433)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-20315.083</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date0]-([date1]-1-[date2])'>
+    <sql>
+      SELECT CAST(FROM_UNIXTIME(CAST(CAST(CAST (`testv1_Calcs`.`date0` AS DATE) AS TIMESTAMP) AS BIGINT) - CAST(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date1` AS DATE), CAST(-(1) AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0) * 86400 AS INT)) AS TIMESTAMP) AS `temp_test__750868662__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(FROM_UNIXTIME(CAST(CAST(CAST (`testv1_Calcs`.`date0` AS DATE) AS TIMESTAMP) AS BIGINT) - CAST(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date1` AS DATE), CAST(-(1) AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0) * 86400 AS INT)) AS TIMESTAMP)
+    </sql>
+    <query-time>
+      17041.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(750868662)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1963-12-05 22:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1969-04-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-05-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-09-25 23:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-08-13 23:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date1]-([date3]+500-[date2])'>
+    <sql>
+      SELECT CAST(FROM_UNIXTIME(CAST(CAST(CAST (`testv1_Calcs`.`date1` AS DATE) AS TIMESTAMP) AS BIGINT) - CAST(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(500 AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0) * 86400 AS INT)) AS TIMESTAMP) AS `temp_test__2315954727__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(FROM_UNIXTIME(CAST(CAST(CAST (`testv1_Calcs`.`date1` AS DATE) AS TIMESTAMP) AS BIGINT) - CAST(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(500 AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0) * 86400 AS INT)) AS TIMESTAMP)
+    </sql>
+    <query-time>
+      17429.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(2315954727)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1977-06-24 23:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-08-04 23:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1993-12-19 01:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-07-25 01:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-15 23:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2003-07-07 01:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-02-13 23:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-01 01:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2013-03-13 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date1]-([date3]+500-[date2])+([date3]-[date0])'>
+    <sql>
+      SELECT CAST(FROM_UNIXTIME(CAST(CAST(CAST(FROM_UNIXTIME(CAST(CAST(CAST (`testv1_Calcs`.`date1` AS DATE) AS TIMESTAMP) AS BIGINT) - CAST(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(500 AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0) * 86400 AS INT)) AS TIMESTAMP) AS BIGINT) + ((UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date3` AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date0` AS DATE))) / 86400.0 * 86400) AS BIGINT)) AS TIMESTAMP) AS `temp_test__268214076__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(FROM_UNIXTIME(CAST(CAST(CAST(FROM_UNIXTIME(CAST(CAST(CAST (`testv1_Calcs`.`date1` AS DATE) AS TIMESTAMP) AS BIGINT) - CAST(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(500 AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0) * 86400 AS INT)) AS TIMESTAMP) AS BIGINT) + ((UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date3` AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date0` AS DATE))) / 86400.0 * 86400) AS BIGINT)) AS TIMESTAMP)
+    </sql>
+    <query-time>
+      15969.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(268214076)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-23 02:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-11-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2024-09-27 01:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM(([date3]-400-[date0])+([date3]+500-[date2]))'>
+    <sql>
+      SELECT SUM(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(-(400) AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date0` AS DATE))) / 86400.0 + (UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(500 AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST (`testv1_Calcs`.`date2` AS DATE))) / 86400.0)) AS `temp_test__2422363430__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      16075.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(2422363430)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1004.0417</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([date3]-1-(date(dateadd(&apos;month&apos;, 3, #2004-04-15# )))+1)'>
+    <sql>
+      SELECT SUM(((UNIX_TIMESTAMP(CAST(DATE_ADD(CAST (`testv1_Calcs`.`date3` AS DATE), CAST(-(1) AS INT)) AS DATE)) - UNIX_TIMESTAMP(CAST(&apos;2004-07-15&apos; AS DATE))) / 86400.0 + 1)) AS `temp_test__3637530074__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      16393.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(3637530074)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-45222.75</value>
+      </tuple>
+    </table>
+  </test>
+</results>
