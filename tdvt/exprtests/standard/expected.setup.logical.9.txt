@@ -78,28 +78,28 @@
         <column>[cast_calcs.postgres].[TEMP(Test)(404394451)(0)]</column>
       </schema>
       <tuple>
-        <value>0</value>
+        <value>0.0</value>
       </tuple>
       <tuple>
-        <value>1</value>
+        <value>1.0</value>
       </tuple>
       <tuple>
-        <value>3</value>
+        <value>3.0</value>
       </tuple>
       <tuple>
-        <value>4</value>
+        <value>4.0</value>
       </tuple>
       <tuple>
-        <value>7</value>
+        <value>7.0</value>
       </tuple>
       <tuple>
-        <value>8</value>
+        <value>8.0</value>
       </tuple>
       <tuple>
-        <value>10</value>
+        <value>10.0</value>
       </tuple>
       <tuple>
-        <value>11</value>
+        <value>11.0</value>
       </tuple>
     </table>
   </test>
