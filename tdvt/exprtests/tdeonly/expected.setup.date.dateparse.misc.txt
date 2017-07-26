@@ -239,20 +239,20 @@
       </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(yyyy.MM hh:mm:ss&apos;,&apos;1899.05 11:30:30&apos;)'>
+  <test name='DATEPARSE(&apos;yyyy.MM hh:mm:ss&apos;,&apos;1899.05 11:30:30&apos;)'>
     <sql>
-      
+      SELECT TABLEAU.DATEPARSE(&apos;yyyy.MM hh:mm:ss&apos;, &apos;1899.05 11:30:30&apos;) AS &quot;TEMP(Test)(2188559627)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      0.000
+      10.000
     </query-time>
-    <error>
-      Unterminated string&#10;
-    </error>
-    <error-type>
-      Invalid Expression
-    </error-type>
     <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2188559627)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-05-01 11:30:30#</value>
+      </tuple>
     </table>
   </test>
   <test name='DATEPARSE(&apos;yyyy.dd hh:mm:ss&apos;, &apos;1899.12 6:10:10&apos;)'>
