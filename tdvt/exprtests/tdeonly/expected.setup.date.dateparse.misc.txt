@@ -1,10 +1,10 @@
 <results>
   <test name='DATEPARSE(&apos;yyyyMMdd&apos;, &apos;12340601&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yyyyMMdd&apos;, &apos;12340601&apos;) AS &quot;TEMP(Test)(1300712953)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yyyyMMdd&apos;, &apos;12340601&apos;) AS &quot;TEMP(Test)(1300712953)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      203.000
+      9.000
     </query-time>
     <table>
       <schema>
@@ -17,42 +17,42 @@
   </test>
   <test name='DATEPARSE(&apos;yyyyMMdd&apos;, &apos;18991232&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yyyyMMdd&apos;, &apos;18991232&apos;) AS &quot;TEMP(Test)(3510989626)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yyyyMMdd&apos;, &apos;18991232&apos;) AS &quot;TEMP(Test)(3510989626)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      8.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3510989626)(0)]</column>
       </schema>
       <tuple>
-        <value>#1900-01-01 00:00:00#</value>
+        <value>%null%</value>
       </tuple>
     </table>
   </test>
   <test name='DATEPARSE(&apos;yyyyMMdd&apos;, &apos;123406011&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yyyyMMdd&apos;, &apos;123406011&apos;) AS &quot;TEMP(Test)(3907347233)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yyyyMMdd&apos;, &apos;123406011&apos;) AS &quot;TEMP(Test)(3907347233)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      209.000
+      8.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3907347233)(0)]</column>
       </schema>
       <tuple>
-        <value>#1234-06-01 00:00:00#</value>
+        <value>%null%</value>
       </tuple>
     </table>
   </test>
   <test name='DATEPARSE(&apos;MM yyyy hh:mm:ss dd&apos;, &apos;12 1995 13:05:05 31&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;MM yyyy hh:mm:ss dd&apos;, &apos;12 1995 13:05:05 31&apos;) AS &quot;TEMP(Test)(416861272)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;MM yyyy hh:mm:ss dd&apos;, &apos;12 1995 13:05:05 31&apos;) AS &quot;TEMP(Test)(416861272)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      8.000
     </query-time>
     <table>
       <schema>
@@ -65,10 +65,10 @@
   </test>
   <test name='DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1899-12-31&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1899-12-31&apos;) AS &quot;TEMP(Test)(1324758347)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1899-12-31&apos;) AS &quot;TEMP(Test)(1324758347)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      8.000
     </query-time>
     <table>
       <schema>
@@ -81,10 +81,10 @@
   </test>
   <test name='DATEPARSE(&apos;y-MM-dd&apos;, &apos;2005-09-27&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;y-MM-dd&apos;, &apos;2005-09-27&apos;) AS &quot;TEMP(Test)(1201568007)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;y-MM-dd&apos;, &apos;2005-09-27&apos;) AS &quot;TEMP(Test)(1201568007)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      206.000
+      8.000
     </query-time>
     <table>
       <schema>
@@ -97,10 +97,10 @@
   </test>
   <test name='DATEPARSE(&apos;yy.MM&apos;, &apos;16.12&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yy.MM&apos;, &apos;16.12&apos;) AS &quot;TEMP(Test)(1539888862)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yy.MM&apos;, &apos;16.12&apos;) AS &quot;TEMP(Test)(1539888862)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      8.000
     </query-time>
     <table>
       <schema>
@@ -113,53 +113,53 @@
   </test>
   <test name='DATEPARSE(&apos;h:mm&apos;, &apos;12:60&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;h:mm&apos;, &apos;12:60&apos;) AS &quot;TEMP(Test)(977148910)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;h:mm&apos;, &apos;12:60&apos;) AS &quot;TEMP(Test)(977148910)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      207.000
+      8.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(977148910)(0)]</column>
       </schema>
       <tuple>
-        <value>#01:00:00#</value>
+        <value>%null%</value>
       </tuple>
     </table>
   </test>
   <test name='DATEPARSE(&apos;&apos;, &apos;12:60&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;&apos;, &apos;12:60&apos;) AS &quot;TEMP(Test)(2739373652)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;&apos;, &apos;12:60&apos;) AS &quot;TEMP(Test)(2739373652)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      8.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2739373652)(0)]</column>
       </schema>
       <tuple>
-        <value>#00:00:00#</value>
+        <value>%null%</value>
       </tuple>
     </table>
   </test>
   <test name='DATEPARSE(&apos;yymmdd&apos;, &apos;&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yymmdd&apos;, &apos;&apos;) AS &quot;TEMP(Test)(2686724780)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yymmdd&apos;, &apos;&apos;) AS &quot;TEMP(Test)(2686724780)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      8.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2686724780)(0)]</column>
       </schema>
       <tuple>
-        <value>#2000-01-01 00:00:00#</value>
+        <value>%null%</value>
       </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(&apos;&apos;, &apos;&apos;)'>
+ <test name='DATEPARSE(&apos;&apos;, &apos;&apos;)'>
     <sql>
       SELECT TABLEAU.DATEPARSE(&apos;&apos;, &apos;&apos;) AS &quot;TEMP(Test)(2901716872)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
@@ -177,10 +177,10 @@
   </test>
   <test name='DATEPARSE(&apos;yy&apos;, &apos;15&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yy&apos;, &apos;15&apos;) AS &quot;TEMP(Test)(1043529533)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yy&apos;, &apos;15&apos;) AS &quot;TEMP(Test)(1043529533)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      209.000
+      9.000
     </query-time>
     <table>
       <schema>
@@ -191,7 +191,7 @@
       </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(&apos;mm&apos;, &apos;12&apos;)'>
+ <test name='DATEPARSE(&apos;mm&apos;, &apos;12&apos;)'>
     <sql>
       SELECT TABLEAU.DATEPARSE(&apos;mm&apos;, &apos;12&apos;) AS &quot;TEMP(Test)(1389922838)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
@@ -209,26 +209,26 @@
   </test>
   <test name='DATEPARSE(&apos;hh:ss&apos;, &apos;13:60&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;hh:ss&apos;, &apos;13:60&apos;) AS &quot;TEMP(Test)(2311272219)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;hh:ss&apos;, &apos;13:60&apos;) AS &quot;TEMP(Test)(2311272219)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      208.000
+      9.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2311272219)(0)]</column>
       </schema>
       <tuple>
-        <value>#13:01:00#</value>
+        <value>%null%</value>
       </tuple>
     </table>
   </test>
   <test name='DATEPARSE(&apos;dd MM yy&apos;, &apos;01 01&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;dd MM yy&apos;, &apos;01 01&apos;) AS &quot;TEMP(Test)(2229272001)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;dd MM yy&apos;, &apos;01 01&apos;) AS &quot;TEMP(Test)(2229272001)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      206.000
+      9.000
     </query-time>
     <table>
       <schema>
@@ -239,35 +239,35 @@
       </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(&apos;yyyy.ddd hh:mm:ss&apos;, &apos;2000.60 13:30:30&apos;)'>
+  <test name='DATEPARSE(yyyy.MM hh:mm:ss&apos;,&apos;1899.05 11:30:30&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yyyy.ddd hh:mm:ss&apos;, &apos;2000.60 13:30:30&apos;) AS &quot;TEMP(Test)(1130042086)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      
     </sql>
     <query-time>
-      208.000
+      0.000
     </query-time>
+    <error>
+      Unterminated string&#10;
+    </error>
+    <error-type>
+      Invalid Expression
+    </error-type>
     <table>
-      <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(1130042086)(0)]</column>
-      </schema>
-      <tuple>
-        <value>#2000-02-29 13:30:30#</value>
-      </tuple>
     </table>
   </test>
-  <test name='DATEPARSE(&apos;yyyy.ddd hh:mm:ss&apos;, &apos;1899.120 26:60:60&apos;)'>
+  <test name='DATEPARSE(&apos;yyyy.dd hh:mm:ss&apos;, &apos;1899.12 6:10:10&apos;)'>
     <sql>
-      SELECT TABLEAU.DATEPARSE(&apos;yyyy.ddd hh:mm:ss&apos;, &apos;1899.120 26:60:60&apos;) AS &quot;TEMP(Test)(1236151313)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.DATEPARSE(&apos;yyyy.dd hh:mm:ss&apos;, &apos;1899.12 6:10:10&apos;) AS &quot;TEMP(Test)(1709941701)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      209.000
+      15.000
     </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(1236151313)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1709941701)(0)]</column>
       </schema>
       <tuple>
-        <value>#1899-05-01 03:01:00#</value>
+        <value>#1899-01-12 06:10:10#</value>
       </tuple>
     </table>
   </test>
