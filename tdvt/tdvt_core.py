@@ -11,6 +11,7 @@ import argparse
 import subprocess
 import shutil
 import threading
+import time
 import queue
 import time
 import xml.etree.ElementTree
@@ -35,7 +36,6 @@ VERBOSE = False
 abort_test_run = False
 
 
-    
 class QueueWork(object):
     def __init__(self, test_config, test_file):
         self.test_config = test_config
@@ -43,14 +43,17 @@ class QueueWork(object):
         self.results = {}
         self.timeout_seconds = 1200
         self.cmd_output = None
+        self.saved_error_message = None
+        self.timeout = False
 
     def handle_test_failure(self, result=None, error_msg=None):
         if result == None:
             result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
             result.cmd_output = self.cmd_output
 
-        if error_msg:
-            result.overall_error_message = error_msg
+        err = error_msg if error_msg else self.saved_error_message
+        if err:
+            result.overall_error_message = err
 
         self.results[self.test_file] = result
            
@@ -58,11 +61,39 @@ class QueueWork(object):
         result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
         result.error_status = TestErrorTimeout()
         self.handle_test_failure(result)
+        self.timeout = True
 
     def handle_abort_test_failure(self):
         result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
         result.error_status = TestErrorAbort()
         self.handle_test_failure(result)
+
+    def has_error(self):
+        return self.saved_error_message is not None
+
+    def is_timeout(self):
+        return self.timeout
+
+    def run(self):
+        cmdline = build_tabquery_command_line(self)
+        logging.debug(" calling " + ' '.join(cmdline))
+
+        try:
+            self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=self.timeout_seconds))
+        except subprocess.CalledProcessError as e:
+            logging.debug("CalledProcessError for " + self.test_file + ". Error: "  + e.output)
+            #Let processing continue so it can try and find any output file which will contain database error messages.
+            #Save the error message in case there is no result file to get it from.
+            self.saved_error_message = e.output
+            self.cmd_output = e.output
+        except subprocess.TimeoutExpired as e:
+            logging.debug("Test timed out: " + self.test_file)
+            if not VERBOSE: sys.stdout.write('T')
+            self.handle_timeout_test_failure()
+        except RuntimeError as e:
+            logging.debug("RuntimeError " + str(e) + " for " + work.test_file + " dsname " + work.test_config.dsnmae)
+
+        logging.debug("Command line output for " + self.test_file + ". " + str(self.cmd_output))
 
 
 def do_test_queue_work(i, q):
@@ -81,7 +112,6 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
-        cmdline = build_tabquery_command_line(work)
 
         if abort_test_run:
             #Do this here so we have the repro information from above.
@@ -91,28 +121,12 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
-        logging.debug(" calling " + ' '.join(cmdline))
+        work.run()
 
-        saved_error_message = None
-        cmd_output = None
-        try:
-            cmd_output = subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=work.timeout_seconds)
-        except subprocess.CalledProcessError as e:
-            logging.debug("CalledProcessError for " + work.test_file + ". Error: "  + e.output)
-            #Let processing continue so it can try and find any output file which will contain database error messages.
-            #Save the error message in case there is no result file to get it from.
-            saved_error_message = e.output
-            work.cmd_output = e.output
-        except subprocess.TimeoutExpired as e:
-            logging.debug("Test timed out: " + work.test_file)
-            if not VERBOSE: sys.stdout.write('T')
-            work.handle_timeout_test_failure()
+        #Exit early if it is a timeout.
+        if work.is_timeout():
             q.task_done()
             continue
-
-        if cmd_output:
-            work.cmd_output = str(cmd_output)
-            logging.debug("Command line output for " + work.test_file + ". " + str(cmd_output))
 
         test_name = get_base_test(work.test_file)
         new_test_file = work.test_file
@@ -121,7 +135,7 @@ def do_test_queue_work(i, q):
             if not os.path.isfile( existing_output_filepath ):
                 logging.debug("Error: could not find test output file:" + existing_output_filepath)
                 if not VERBOSE: sys.stdout.write('?')
-                work.handle_test_failure(error_msg = saved_error_message)
+                work.handle_test_failure()
                 q.task_done()
                 continue
 
@@ -402,6 +416,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
 
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
+        error_msg = test_result.overall_error_message if test_result.overall_error_message else error_msg
         error_type= case.error_type if case else None
 
     return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
@@ -462,7 +477,8 @@ def run_tests_parallel_list(test_data, thread_count):
     #Create the worker threads.
     logging.debug("Running " + str(thread_count) + " worker threads.")
     for i in range(0, thread_count):
-        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
+        thread_name = "tdvt_core_thread-" + str(i)
+        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue), name=thread_name)
         worker.setDaemon(True)
         worker.start()
 

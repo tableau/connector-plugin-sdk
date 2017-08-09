@@ -227,15 +227,13 @@ class TestResult(object):
         return self.get_failure_message()
 
     def get_failure_message(self):
+        if self.overall_error_message:
+            return self.overall_error_message
+
         if self.error_status:
             return self.error_status.get_error()
 
-        if self.overall_error_message:
-            return self.overall_error_message
-        else:
-            return "No results found."
-
-        return "Unknown failure."
+        return "No results found."
 
     def get_exceptions(self):
         if self.error_status:
