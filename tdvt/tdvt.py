@@ -403,9 +403,9 @@ def active_thread_count(threads):
             active += 1
     return active
 
-def run_file(run_file, output_dir):
+def run_file(run_file, output_dir, sub_threads):
 
-    result_code = run_failed_tests(run_file, output_dir)
+    result_code = run_failed_tests(run_file, output_dir, sub_threads)
     TestOutputFiles.copy_output_file("test_results.csv", '', TestOutputFiles.output_csv, False, False)
     TestOutputFiles.copy_output_file("tdvt_output.json", '', TestOutputFiles.output_json, False, False)
     return result_code
@@ -541,7 +541,8 @@ def main():
         sys.exit(0)
     elif args.run_file:
         output_dir = os.getcwd()
-        sys.exit(run_file(args.run_file, output_dir))
+        max_threads, max_subthreads = get_level_of_parallelization(args)
+        sys.exit(run_file(args.run_file, output_dir, max_subthreads))
     elif args.list_logical_configs:
         print_logical_configurations()
         sys.exit(0)

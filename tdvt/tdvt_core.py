@@ -677,8 +677,9 @@ def run_diff(test_config, diff):
         logging.debug(t + ' Number of differences: ' + str(diff_count_map[t]))
     return 0
 
-def run_failed_tests_impl(run_file, root_directory):
+def run_failed_tests_impl(run_file, root_directory, sub_threads):
     """Run the failed tests from the json output file."""
+    logging.debug("Running failed tests from : " + run_file)
     tests = {}
     try:
         tests = json.load(open(run_file, 'r', encoding='utf8'))
@@ -708,19 +709,16 @@ def run_failed_tests_impl(run_file, root_directory):
 
 
     all_test_results = {}
-
-
-
-    results = run_tests_parallel_list(all_test_pairs, 4)
+    results = run_tests_parallel_list(all_test_pairs, sub_threads)
     all_test_results.update(results)
 
     return all_test_results
 
-def run_failed_tests(run_file, output_dir):
+def run_failed_tests(run_file, output_dir, sub_threads):
     """Run the failed tests from the json output file."""
     #See if we need to generate test setup files.
     root_directory = get_root_dir()
-    all_test_results = run_failed_tests_impl(run_file, root_directory)
+    all_test_results = run_failed_tests_impl(run_file, root_directory, sub_threads)
     return process_test_results(all_test_results, '', False, output_dir)
 
 def run_tests(test_config):
