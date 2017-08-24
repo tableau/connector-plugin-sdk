@@ -241,4 +241,22 @@ attributes = {
                  'fieldnameLower_underscore' : True,
                  'bool_underscore' : True
                  },
+
+    'redshift_spectrum_partitioned' : {
+                'tablename' : '$dsName',
+                'tablenamePostfix' : '_partition',
+                'tablenameLower' : True,
+                'tablePrefix' : '[testv1spectrum].',
+                'fieldnameDate_underscore' : True,
+                'fieldnameLower_underscore' : True
+                },
+
+    'redshift_spectrum_unpartitioned' : {
+                'tablename' : '$dsName',
+                'tablenamePrefix' : 'testv1_',
+                'tablenameLower' : True,
+                'tablePrefix' : '[testv1spectrum].',
+                'fieldnameDate_underscore' : True,
+                'fieldnameLower_underscore' : True
+                },
 }
