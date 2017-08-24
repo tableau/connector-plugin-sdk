@@ -11,6 +11,7 @@ import argparse
 import subprocess
 import shutil
 import threading
+import time
 import queue
 import time
 import xml.etree.ElementTree
@@ -35,7 +36,6 @@ VERBOSE = False
 abort_test_run = False
 
 
-    
 class QueueWork(object):
     def __init__(self, test_config, test_file):
         self.test_config = test_config
@@ -43,14 +43,17 @@ class QueueWork(object):
         self.results = {}
         self.timeout_seconds = 1200
         self.cmd_output = None
+        self.saved_error_message = None
+        self.timeout = False
 
     def handle_test_failure(self, result=None, error_msg=None):
         if result == None:
             result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
             result.cmd_output = self.cmd_output
 
-        if error_msg:
-            result.overall_error_message = error_msg
+        err = error_msg if error_msg else self.saved_error_message
+        if err:
+            result.overall_error_message = err
 
         self.results[self.test_file] = result
            
@@ -58,11 +61,39 @@ class QueueWork(object):
         result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
         result.error_status = TestErrorTimeout()
         self.handle_test_failure(result)
+        self.timeout = True
 
     def handle_abort_test_failure(self):
         result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
         result.error_status = TestErrorAbort()
         self.handle_test_failure(result)
+
+    def has_error(self):
+        return self.saved_error_message is not None
+
+    def is_timeout(self):
+        return self.timeout
+
+    def run(self):
+        cmdline = build_tabquery_command_line(self)
+        logging.debug(" calling " + ' '.join(cmdline))
+
+        try:
+            self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=self.timeout_seconds))
+        except subprocess.CalledProcessError as e:
+            logging.debug("CalledProcessError for " + self.test_file + ". Error: "  + e.output)
+            #Let processing continue so it can try and find any output file which will contain database error messages.
+            #Save the error message in case there is no result file to get it from.
+            self.saved_error_message = e.output
+            self.cmd_output = e.output
+        except subprocess.TimeoutExpired as e:
+            logging.debug("Test timed out: " + self.test_file)
+            if not VERBOSE: sys.stdout.write('T')
+            self.handle_timeout_test_failure()
+        except RuntimeError as e:
+            logging.debug("RuntimeError " + str(e) + " for " + work.test_file + " dsname " + work.test_config.dsnmae)
+
+        logging.debug("Command line output for " + self.test_file + ". " + str(self.cmd_output))
 
 
 def do_test_queue_work(i, q):
@@ -81,7 +112,6 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
-        cmdline = build_tabquery_command_line(work)
 
         if abort_test_run:
             #Do this here so we have the repro information from above.
@@ -91,28 +121,12 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
-        logging.debug(" calling " + ' '.join(cmdline))
+        work.run()
 
-        saved_error_message = None
-        cmd_output = None
-        try:
-            cmd_output = subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=work.timeout_seconds)
-        except subprocess.CalledProcessError as e:
-            logging.debug("CalledProcessError for " + work.test_file + ". Error: "  + e.output)
-            #Let processing continue so it can try and find any output file which will contain database error messages.
-            #Save the error message in case there is no result file to get it from.
-            saved_error_message = e.output
-            work.cmd_output = e.output
-        except subprocess.TimeoutExpired as e:
-            logging.debug("Test timed out: " + work.test_file)
-            if not VERBOSE: sys.stdout.write('T')
-            work.handle_timeout_test_failure()
+        #Exit early if it is a timeout.
+        if work.is_timeout():
             q.task_done()
             continue
-
-        if cmd_output:
-            work.cmd_output = str(cmd_output)
-            logging.debug("Command line output for " + work.test_file + ". " + str(cmd_output))
 
         test_name = get_base_test(work.test_file)
         new_test_file = work.test_file
@@ -121,7 +135,7 @@ def do_test_queue_work(i, q):
             if not os.path.isfile( existing_output_filepath ):
                 logging.debug("Error: could not find test output file:" + existing_output_filepath)
                 if not VERBOSE: sys.stdout.write('?')
-                work.handle_test_failure(error_msg = saved_error_message)
+                work.handle_test_failure()
                 q.task_done()
                 continue
 
@@ -402,6 +416,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
 
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
+        error_msg = test_result.overall_error_message if test_result.overall_error_message else error_msg
         error_type= case.error_type if case else None
 
     return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
@@ -454,21 +469,22 @@ def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     failed_test_count = write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
     return failed_test_count
 
-def run_tests_parallel(test_names, test_config):
+def run_tests_parallel_list(test_data, thread_count):
     all_test_results = {}
-    tds_file = test_config.tds
     test_queue = queue.Queue()
     all_work = []
 
     #Create the worker threads.
-    logging.debug("Running " + str(test_config.thread_count) + " worker threads.")
-    for i in range(0, test_config.thread_count):
-        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
+    logging.debug("Running " + str(thread_count) + " worker threads.")
+    for i in range(0, thread_count):
+        thread_name = "tdvt_core_thread-" + str(i)
+        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue), name=thread_name)
         worker.setDaemon(True)
         worker.start()
 
     #Build the queue of work.
-    for test_file in test_names:
+    for tds, test_file, test_config in test_data:
+        #for test_file in test_files:
         work = QueueWork(test_config, test_file)
         test_queue.put(work)
         all_work.append(work)
@@ -481,6 +497,18 @@ def run_tests_parallel(test_names, test_config):
         all_test_results.update(work.results)
 
     return all_test_results
+
+def run_tests_parallel(test_names, test_config):
+    all_test_results = {}
+    tds_file = test_config.tds
+    test_queue = queue.Queue()
+    all_work = []
+
+    test_data = []
+    for test_file in test_names:
+        test_data.append([tds_file, test_file, test_config])
+
+    return run_tests_parallel_list(test_data, test_config.thread_count)
 
 def generate_test_file_list_from_file(root_directory, config_file):
     """Read the config file and generate a list of tests."""
@@ -517,6 +545,7 @@ def generate_test_file_list_from_file(root_directory, config_file):
     #Allowed/exclude can be filenames or directory fragments.
     tests_to_run = []
     for a in allowed_tests:
+        added_test = len(tests_to_run)
         allowed_path = os.path.join(root_directory, a)
         if os.path.isfile(allowed_path):
             logging.debug("Adding file " + allowed_path)
@@ -534,6 +563,9 @@ def generate_test_file_list_from_file(root_directory, config_file):
                 if os.path.isfile(full_filename):
                     logging.debug("Adding globbed file " + full_filename)
                     tests_to_run.append(full_filename)
+
+        if added_test == len(tests_to_run):
+            logging.debug("Could not find a test for " + allowed_path  + ". Check the path.")
 
     logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 
@@ -645,8 +677,9 @@ def run_diff(test_config, diff):
         logging.debug(t + ' Number of differences: ' + str(diff_count_map[t]))
     return 0
 
-def run_failed_tests_impl(run_file, root_directory):
+def run_failed_tests_impl(run_file, root_directory, sub_threads):
     """Run the failed tests from the json output file."""
+    logging.debug("Running failed tests from : " + run_file)
     tests = {}
     try:
         tests = json.load(open(run_file, 'r', encoding='utf8'))
@@ -654,51 +687,38 @@ def run_failed_tests_impl(run_file, root_directory):
         logging.debug("Error opening " + run_file)
         return
 
-    expr_tests = {}
-    log_tests = {}
-
+    all_test_pairs = []
     failed_tests = tests['failed_tests']
     for f in failed_tests:
-        logging.debug("Found failed test: " + f['test_file'] + " and tds " + f['tds'])
-        tt = f['test_type']
-        tds = f['tds']
-        if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
-            if tds not in expr_tests:
-                expr_tests[tds] = []
-            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
-            test_config.logical = False
-            expr_tests[tds].append( [f['test_file'], test_config] )
+        relative_test_file = f['test_file']
+        if not os.path.isfile(relative_test_file):
+            relative_test_file = get_relative_test_path(f['test_file'])
+            relative_test_file = os.path.join(root_directory, relative_test_file)
 
-        if tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
-            if tds not in log_tests:
-                log_tests[tds] = []
-            test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+        tds = f['tds']
+        tds = get_tds_full_path(root_directory, os.path.split(tds)[1])
+        logging.debug("Found failed test: " + relative_test_file + " and tds " + tds)
+        tt = f['test_type']
+        test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+        if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
+            test_config.logical = False
+        elif tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
             test_config.logical = True
-            log_tests[tds].append( [f['test_file'], test_config] )
+
+        all_test_pairs.append([tds, relative_test_file, test_config])
+
 
     all_test_results = {}
-    for tds in expr_tests:
-        for test_pair in expr_tests[tds]:
-            if len(test_pair) == 2:
-                test_files = test_pair[0]
-                test_config = test_pair[1]
-                results = run_tests_parallel([test_files], test_config)
-                all_test_results.update(results)
-    
-    for tds in log_tests:
-        for test_pair in log_tests[tds]:
-            if len(test_pair) == 2:
-                test_files = test_pair[0]
-                test_config = test_pair[1]
-                results = run_tests_parallel([test_files], test_config)
-                all_test_results.update(results)
+    results = run_tests_parallel_list(all_test_pairs, sub_threads)
+    all_test_results.update(results)
+
     return all_test_results
 
-def run_failed_tests(run_file, output_dir):
+def run_failed_tests(run_file, output_dir, sub_threads):
     """Run the failed tests from the json output file."""
     #See if we need to generate test setup files.
     root_directory = get_root_dir()
-    all_test_results = run_failed_tests_impl(run_file, root_directory)
+    all_test_results = run_failed_tests_impl(run_file, root_directory, sub_threads)
     return process_test_results(all_test_results, '', False, output_dir)
 
 def run_tests(test_config):

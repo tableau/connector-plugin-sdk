@@ -227,15 +227,13 @@ class TestResult(object):
         return self.get_failure_message()
 
     def get_failure_message(self):
+        if self.overall_error_message:
+            return self.overall_error_message
+
         if self.error_status:
             return self.error_status.get_error()
 
-        if self.overall_error_message:
-            return self.overall_error_message
-        else:
-            return "No results found."
-
-        return "Unknown failure."
+        return "No results found."
 
     def get_exceptions(self):
         if self.error_status:
@@ -314,6 +312,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name, 
+                'case' : test_name, 
                 'test_file' : obj.test_file, 
                 'test_type' : test_type, 
                 'test_config' : obj.test_config.__json__(),

@@ -102,7 +102,6 @@ class ExpressionTest(BaseTDVTTest):
     def test_expression_tests(self):
         all_test_results = {}
         all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, '', self.config_file, ''), self.test_config)
-
         self.check_results(all_test_results, 2)
 
 class LogicalTest(BaseTDVTTest):
@@ -139,24 +138,24 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 1, False)
 
         #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY, 1)
 
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), TEST_DIRECTORY, 1)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), TEST_DIRECTORY, 1)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), get_path(ROOT_DIRECTORY, module_name=__name__))
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), TEST_DIRECTORY, 1)
         self.check_results(all_test_results, 3)
 
     def test_logical_rerun_fail(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY, 1)
         self.check_results(all_test_results, 1, False)
 
 class PathTest(unittest.TestCase):

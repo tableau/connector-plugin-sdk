@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-__version__ = '1.1.28'
+__version__ = '1.1.42'
 
 import os
 import argparse
@@ -18,6 +18,7 @@ import tempfile
 import threading
 import time
 import json
+import queue
 import logging
 from zipfile import ZipFile
 import glob
@@ -61,12 +62,28 @@ class TestOutputFiles(object):
             logging.debug("Exception while copying files: " + str(e))
             return
 
+def do_test_queue_work(i, q):
+    """This will be called in a queue.join() context, so make sure to mark all work items as done and
+    continue through the loop. Don't try and exit or return from here if there are still work items in the queue.
+    See the python queue documentation."""
 
-class TestRunner(threading.Thread):
-    def __init__(self, test_set, test_config, lock, verbose):
+    abort_test_run = False
+    while True:
+        #This blocks if the queue is empty.
+        work = q.get()
+
+        work.run()
+
+        q.task_done()
+
+
+
+class TestRunner():
+    def __init__(self, test_set, test_config, lock, verbose, thread_id):
         threading.Thread.__init__(self)
         self.test_config = test_config
         self.error_code = 0
+        self.thread_id = thread_id
         self.verbose = verbose
         self.thread_lock = lock
         self.temp_dir = tempfile.mkdtemp(prefix=self.test_config.suite_name)
@@ -124,19 +141,7 @@ class TestRunner(threading.Thread):
         except IOError:
             return
 
-    def run(self):
-        #Send output to null.
-        DEVNULL = open(os.devnull, 'wb')
-        output = DEVNULL if not self.verbose else None
-        self.thread_lock.acquire()
-        logging.debug( "\nRunning " + str(self.test_config) + "\n")
-        print ("\nRunning {0} {1}\n".format( self.test_config.suite_name, self.test_config.config_file) )
-        self.thread_lock.release()
-
-        start_time = time.time()
-        error_code = run_tests(self.test_config)
-        self.thread_lock.acquire()
-        run_type = 'logical' if self.test_config.logical else 'expression'
+    def copy_files_and_cleanup(self):
         try:
             self.copy_actual_files()
             self.copy_output_files()
@@ -144,18 +149,27 @@ class TestRunner(threading.Thread):
         except Exception as e:
             print (e)
             pass
-        logging.debug( "\nFinished " + str(self.test_config) + "\n")
-        print ("\nFinished {0} {1}\n".format( self.test_config.suite_name, self.test_config.config_file) )
-        self.thread_lock.release()
-        
-        self.error_code = error_code
 
-    def __del__(self):
         try:
             if not self.test_config.leave_temp_dir:
                 shutil.rmtree(self.temp_dir)
         except:
             pass
+
+    def run(self):
+        #Send output to null.
+        DEVNULL = open(os.devnull, 'wb')
+        output = DEVNULL if not self.verbose else None
+        logging.debug( "\nRunning tdvt " + str(self.test_config) + " tdvt thread id: " + str(self.thread_id) + "\n")
+        print ("\nRunning {0} {1} {2}\n".format( self.test_config.suite_name, self.test_config.config_file, str(self.thread_id)) )
+
+        start_time = time.time()
+        error_code = run_tests(self.test_config)
+        logging.debug( "\nFinished tdvt " + str(self.test_config) + "\n")
+        print ("\nFinished {0} {1} {2}\n".format( self.test_config.suite_name, self.test_config.config_file, str(self.thread_id)) )
+        
+        self.error_code = error_code
+
 
 def delete_output_files(root_dir):
     for f in TestOutputFiles.all_output_files:
@@ -233,7 +247,7 @@ def get_test_sets_to_run(function_call, test_pattern, single_test):
 
         return test_sets_to_run
 
-def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_threads, test_run):
+def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_queue, all_work, test_run, max_threads):
 
     tests = None
     if is_logical:
@@ -242,6 +256,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_thre
         tests = get_test_sets_to_run(ds_info.get_expression_tests, args.expression_only, single_test)
 
     if not tests:
+        print ("Did not find any tests for " + suite)
         return
 
     for test_set in tests:
@@ -252,27 +267,28 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_thre
         test_config.tds = test_set.tds_name
         test_config.config_file = test_set.config_file_name
 
-        runner = TestRunner(test_set, test_config, lock, VERBOSE)
-
+        runner = TestRunner(test_set, test_config, lock, VERBOSE, test_run)
+        logging.debug("Queing up tests: " + str(test_config))
         #if ini file has subthread setting, set it now.
-        if ds_info.maxsubthread > 0:
+        if ds_info.maxsubthread > 0 and ds_info.maxsubthread < max_threads:
             runner.set_thread_count(ds_info.maxsubthread);
+        else:
+            runner.set_thread_count(max_threads)
 
-        test_threads.append(runner)
+        all_work.append(runner)
+        test_queue.put(runner)
+
+
         test_run += 1
+    return test_run
 
-def get_level_of_parallelization(args, total_threads, max_thread_p_d, max_subthread_p_d):
+def get_level_of_parallelization(args):
     #This indicates how many database/test suite combinations to run at once
     max_threads = 6
     #This indicates how many tests in each test suite thread to run at once. Each test is a database connection.
     max_sub_threads = 4
 
     #arg thread setting has first priority.
-    #thread setting on ini file has second priority
-    if max_thread_p_d > 0:
-        max_threads = max_thread_p_d
-    if max_subthread_p_d > 0:
-        max_sub_threads = max_subthread_p_d
 
     if args.thread_count or args.thread_count_tdvt:
         if args.thread_count:
@@ -387,9 +403,9 @@ def active_thread_count(threads):
             active += 1
     return active
 
-def run_file(run_file, output_dir):
+def run_file(run_file, output_dir, sub_threads):
 
-    result_code = run_failed_tests(run_file, output_dir)
+    result_code = run_failed_tests(run_file, output_dir, sub_threads)
     TestOutputFiles.copy_output_file("test_results.csv", '', TestOutputFiles.output_csv, False, False)
     TestOutputFiles.copy_output_file("tdvt_output.json", '', TestOutputFiles.output_json, False, False)
     return result_code
@@ -405,16 +421,17 @@ def run_desired_tests(args, ds_registry):
         delete_output_files(os.getcwd())
 
     if not tabquerycli_exists():
-        print ("Could not find Tabquerycli.exe.")
+        print ("Could not find Tabquerycli.")
         sys.exit(0)
 
     temporary_test_configs = []
-    test_threads = []
     error_code = 0
     test_run = 0
     start_time = time.time()
-    max_threads_per_datasource = 0
-    max_sub_threads_per_datasource = 0
+    test_queue = queue.Queue()
+    all_work = []
+
+    max_threads, max_sub_threads = get_level_of_parallelization(args)
 
     for ds in ds_to_run:
         ds_info = ds_registry.get_datasource_info(ds)
@@ -424,8 +441,13 @@ def run_desired_tests(args, ds_registry):
         print ("Testing " + ds)
         max_threads_per_datasource = ds_info.maxthread;
         max_sub_threads_per_datasource = ds_info.maxsubthread;
+        #if has multi datasource to run, then max_threads_per_datasource can not apply.
         if max_threads_per_datasource > 0:
             print ("thread setting in " + ds +".ini = " + str(max_threads_per_datasource))
+            if len(ds_to_run) == 1:
+                max_threads = max_threads_per_datasource
+            else:
+                print ("Setting cannot apply since you are running multiple datasources.")
         if max_sub_threads_per_datasource > 0:
             print ("subthread setting in " + ds + ".ini = " + str(max_sub_threads_per_datasource))
 
@@ -440,42 +462,32 @@ def run_desired_tests(args, ds_registry):
         if run_logical_tests:
             #Check if the user wants to run a single test file. If so then create a temporary cfg file to hold that config.
             single_test = get_temporary_logical_test_config(temporary_test_configs, args.logical_pattern, args.tds_pattern, args.test_pattern_exclude, ds_info)
-            enqueue_tests(True, ds_info, args, single_test, suite, lock, test_threads, test_run)
+            test_run = enqueue_tests(True, ds_info, args, single_test, suite, lock, test_queue, all_work, test_run, max_sub_threads)
 
         if run_expr_tests:
             #Check if the user wants to run a single test file. If so then create a temporary cfg file to hold that config.
             single_test = get_temporary_expression_test_config(temporary_test_configs, args.expression_pattern, args.tds_pattern, args.test_pattern_exclude, ds_info)
-            enqueue_tests(False, ds_info, args, single_test, suite, lock, test_threads, test_run)
+            test_run = enqueue_tests(False, ds_info, args, single_test, suite, lock, test_queue, all_work, test_run, max_sub_threads)
 
-    if not test_threads:
+    if not all_work:
         print ("No tests found. Check arguments.")
         sys.exit()
 
-    #if has multi datasource to run, then max_threads_per_datasource can not apply.
-    if len(ds_to_run) > 1:
-        max_threads_per_datasource = 0
-        max_sub_threads_per_datasource = 0
+    print ("Creating " + str(max_threads) + " worker threads.")
+    for i in range(0, max_threads):
+        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
+        worker.setDaemon(True)
+        worker.start()
 
-    max_threads, max_sub_threads = get_level_of_parallelization(args, len(test_threads), max_threads_per_datasource, max_sub_threads_per_datasource)
+    test_queue.join()
 
-    for test_thread in test_threads:
-        #if this test_thread has already set subthread_count, ignore it.
-        if test_thread.has_set_thread_count() == False:
-            test_thread.set_thread_count(max_sub_threads)
 
-    for test_thread in test_threads:
-        while active_thread_count(test_threads) >= max_threads:
-            time.sleep(0.5)
-        test_thread.daemon = True
-        test_thread.start()
 
-    for test_thread in test_threads:
-        test_thread.join()
-
-    for test_thread in test_threads:
+    for work in all_work:
+        work.copy_files_and_cleanup()
         if args.noclean:
-            print ("Left temp dir: " + test_thread.temp_dir)
-        error_code += test_thread.error_code if test_thread.error_code else 0
+            print ("Left temp dir: " + work.temp_dir)
+        error_code += work.error_code if work.error_code else 0
 
     print ('\n')
     print ("Total time: " + str(time.time() - start_time))
@@ -529,7 +541,8 @@ def main():
         sys.exit(0)
     elif args.run_file:
         output_dir = os.getcwd()
-        sys.exit(run_file(args.run_file, output_dir))
+        max_threads, max_subthreads = get_level_of_parallelization(args)
+        sys.exit(run_file(args.run_file, output_dir, max_subthreads))
     elif args.list_logical_configs:
         print_logical_configurations()
         sys.exit(0)
@@ -539,7 +552,7 @@ def main():
 
     error_code = run_desired_tests(args, ds_registry)
 
-    sys.exit(error_code)
+    sys.exit()
 
 if __name__ == '__main__':
     main()

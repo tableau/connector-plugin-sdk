@@ -51,6 +51,11 @@ attributes = {
                  'tablename' : '$dsName',
                  'tablePrefix' : '[TESTV1].',
                  },
+	#[Extract].[Extract]
+    'Extract' : { 
+                 'tablename' : 'Extract',
+                 'tablePrefix' : '[Extract].',
+                 },
 
     'TESTV1_TESTV1' : { 
                  'tablename' : '$dsName',
@@ -141,6 +146,12 @@ attributes = {
     'prefix' : { 
                      'tablename' : '$dsName',
                      'tablePrefix' : '[TestV1].'
+                      },
+    #testv1.Calcs
+    'prefix_bool_lower' : { 
+                     'tablename' : '$dsName',
+                     'tablePrefix' : '[testv1].',
+                     'bool_underscore' : True
                       },
     #Calcs
     'simple' : { 

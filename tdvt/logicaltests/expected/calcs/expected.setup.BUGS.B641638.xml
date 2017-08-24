@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='d:\dev\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B641638.Extract.xml'>
+    <sql>
+      SELECT &quot;Calcs&quot;.&quot;str1&quot; AS &quot;str1&quot;,&#10;  SUM(&quot;Calcs&quot;.&quot;num1&quot;) AS &quot;sum:num1:ok&quot;,&#10;  &quot;Calcs&quot;.&quot;time0&quot; AS &quot;time0&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Calcs&quot;&#10;WHERE (TABLEAU.NORMALIZE_DATETIME(&quot;Calcs&quot;.&quot;time0&quot;) IN (&apos;1899-12-30 21:07:32.000&apos;::timestamp, &apos;1899-12-30 22:42:43.000&apos;::timestamp, &apos;1900-01-01 04:57:51.000&apos;::timestamp, &apos;1900-01-01 18:51:48.000&apos;::timestamp))&#10;GROUP BY &quot;Calcs&quot;.&quot;str1&quot;,&#10;  &quot;Calcs&quot;.&quot;time0&quot;
+    </sql>
+    <query-time>
+      140.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[str1]</column>
+        <column>[cast_calcs.hyper_native].[sum:num1:ok]</column>
+        <column>[cast_calcs.hyper_native].[time0]</column>
+      </schema>
+      <tuple>
+        <value>&quot;BINDER ACCESSORIES&quot;</value>
+        <value>7.43</value>
+        <value>#1900-01-01 18:51:48#</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CLAMP ON LAMPS&quot;</value>
+        <value>8.42</value>
+        <value>#21:07:32#</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORDLESS KEYBOARDS&quot;</value>
+        <value>10.37</value>
+        <value>#1900-01-01 04:57:51#</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DOT MATRIX PRINTERS&quot;</value>
+        <value>7.1</value>
+        <value>#22:42:43#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
