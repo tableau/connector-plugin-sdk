@@ -43,8 +43,8 @@ Uppercase field names:
 """
 
 
-global attributes
-attributes = {
+global template_attributes
+template_attributes = {
 
     #TESTV1.Calcs
     'TESTV1' : { 

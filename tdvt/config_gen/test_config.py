@@ -47,6 +47,7 @@ class TestConfig(object):
         self.expression_test_set = []
         self.d_override = d_override
         self.maxthread = 0
+        self.logical_config = {}
         if int(maxthread) > 0:
             self.maxthread = int(maxthread)
         self.maxsubthread = 0
@@ -90,6 +91,9 @@ class TestConfig(object):
             if not os.path.exists(os.path.join(root_dir, f)):
                 return False
         return True
+
+    def add_logical_config(self, cfg):
+        self.logical_config = cfg.copy()
 
     def write_config_files(self, root_dir):
         for test in self.logical_test_set + self.expression_test_set:

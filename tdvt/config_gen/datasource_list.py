@@ -41,6 +41,10 @@ def LoadTest(config):
     Exclusions = string.ascii
     TestPath = exprtests/standard/ 
     
+    [LogicalConfig]
+    Name = mydb_config
+    key = value
+
     """
     CALCS_TDS = 'cast_calcs.'
     STAPLES_TDS = 'Staples.'
@@ -55,6 +59,7 @@ def LoadTest(config):
     regex_test = 'RegexTest'
     median_test = 'MedianTests'
     percentile_test = 'PercentileTests'
+    logical_config = 'LogicalConfig'
 
     KEY_EXCLUSIONS = 'Exclusions'
 
@@ -130,12 +135,30 @@ def LoadTest(config):
             logging.debug(e)
             pass
 
-    #Add the optional Median test.
+    #Add the optional Percentile test.
     if percentile_test in config.sections():
         try:
             percentile = config[percentile_test]
             all_ini_sections.remove(percentile_test)
             test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''), 'exprtests/percentile')
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
+    #Optional logical config settings.
+    if logical_config in config.sections():
+        try:
+            cfg = config[logical_config]
+            all_ini_sections.remove(logical_config)
+            cfg_data = {}
+            name = cfg.get('Name', '')
+            cfg_data[name] = {}
+            for k in cfg:
+                if k == 'Name':
+                    continue
+                else:
+                    cfg_data[name][k] = cfg[k]
+            test_config.add_logical_config(cfg_data)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -161,6 +184,7 @@ def LoadTest(config):
             except KeyError as e:
                 logging.debug(e)
                 pass
+
     if all_ini_sections:
         logging.debug("Found unparsed sections in the ini file.")
         for section in all_ini_sections:
@@ -180,6 +204,8 @@ class TestRegistry(object):
         for f in ini_files:
             logging.debug("Reading ini file [{}]".format(f))
             config = configparser.ConfigParser()
+            #Preserve the case of elements.
+            config.optionxform = str
             try:
                 config.read(f)
             except configparser.ParsingError as e:

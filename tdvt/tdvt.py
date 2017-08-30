@@ -24,7 +24,7 @@ from zipfile import ZipFile
 import glob
 from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig
 from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
-from .config_gen.gentests import list_configs
+from .config_gen.gentests import list_configs, list_config
 from .tabquery import *
 from .setup_env import create_test_environment, add_datasource
 
@@ -192,10 +192,14 @@ def get_datasource_registry(platform):
 
     return reg
 
-def print_logical_configurations():
-    print ("Available logical query configurations: \n")
-    for config in list_configs():
-        print (config)
+def print_logical_configurations(ds_registry, config_name=None):
+    if config_name:
+        for config in list_config(ds_registry, config_name):
+            print(config)
+    else:
+        print ("Available logical query configurations: \n")
+        for config in list_configs(ds_registry):
+            print (config)
 
 
 def print_configurations(ds_reg, dsname):
@@ -354,7 +358,7 @@ def usage_text():
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT Driver.', usage=usage_text())
     parser.add_argument('--list', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
-    parser.add_argument('--list_logical_configs', dest='list_logical_configs', action='store_true', help='List available logical configs.', required=False, default=None)
+    parser.add_argument('--list_logical_configs', dest='list_logical_configs', help='List available logical configs.', required=False, default=None, const='', nargs='?')
     parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
     parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     parser.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
@@ -512,7 +516,7 @@ def main():
         while not picked:
             logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")
             if logical == 'list':
-                print_logical_configurations()
+                print_logical_configurations(ds_registry)
             else:
                 logical = logical.replace("\"", "")
                 logical = logical.replace("\'", "")
@@ -543,8 +547,8 @@ def main():
         output_dir = os.getcwd()
         max_threads, max_subthreads = get_level_of_parallelization(args)
         sys.exit(run_file(args.run_file, output_dir, max_subthreads))
-    elif args.list_logical_configs:
-        print_logical_configurations()
+    elif args.list_logical_configs is not None:
+        print_logical_configurations(ds_registry, args.list_logical_configs)
         sys.exit(0)
     elif args.list_ds is not None:
         print_configurations(ds_registry, args.list_ds)

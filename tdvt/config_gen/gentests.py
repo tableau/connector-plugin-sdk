@@ -14,6 +14,20 @@ from ..resources import *
 
 debug = False
 
+def get_logical_config_templates(ds_registry):
+    all_templates = template_attributes.copy()
+    
+    for ds in ds_registry.dsnames:
+        info = ds_registry.get_datasource_info(ds)
+        if not info:
+            continue
+        all_templates.update(info.logical_config)
+
+    return all_templates
+
+def get_logical_config_template(ds_registry, config_name):
+    return get_logical_config_templates(ds_registry)[config_name]
+
 def get_customized_table_name(attributes, base_table):
     table_prefix = ""
     if 'tablePrefix' in attributes:
@@ -86,9 +100,11 @@ def get_modified_line(line, attrs, fields):
     new_line = new_line.replace('$Staples$', staples_table_name)
     return new_line
 
-def process_test_file( filename, output_dir, staples_fields, calcs_fields ):
+def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_registry ):
     if debug: print ("Processing " + filename )
-    for ds in attributes:
+
+    #Go through all the configurations in templates.py and generate logical configs for them.
+    for ds in get_logical_config_templates(ds_registry):
         input_file = open(filename, 'r', encoding='utf-8')
         base_name = os.path.basename(filename)
         if debug: print("base_name " + base_name)
@@ -104,11 +120,14 @@ def process_test_file( filename, output_dir, staples_fields, calcs_fields ):
 
         fields = staples_fields + calcs_fields
         for line in input_file:
-            new_line = get_modified_line(line, attributes[ds], fields)
+            new_line = get_modified_line(line, get_logical_config_template(ds_registry, ds), fields)
             setup_file.write( new_line )
 
         setup_file.close()
         input_file.close()
+
+    #Go through all the ini files and see if any of them define a logical config. Generate test files for those.
+
 
 def process_text(ds, text, attributes, fields):
     new_text = ''
@@ -118,14 +137,29 @@ def process_text(ds, text, attributes, fields):
         new_text += new_line + '\n'
     return new_text
 
-def list_configs():
+def get_config_text(cfgs, config_name):
     configs = []
     fields = ['[Camel Case]', '[bool0]', '[Date]']
     sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', 'Camel Case = ' + fields[0], 'bool0 = ' + fields[1], 'Date = ' + fields[2] ]
 
-    for ds in sorted(attributes.keys(), key=str.lower):
-        cfg = process_text(ds, sample_text, attributes[ds], fields)
+    if config_name in cfgs:
+        cfg = process_text(config_name, sample_text, cfgs[config_name], fields)
         configs.append(cfg)
+    return configs
+
+def list_config(ds_registry, config_name):
+    configs = []
+    cfgs = get_logical_config_templates(ds_registry)
+    configs += get_config_text(cfgs, config_name)
+
+    return configs
+
+def list_configs(ds_registry):
+    configs = []
+
+    cfgs = get_logical_config_templates(ds_registry)
+    for ds in sorted(cfgs.keys(), key=str.lower):
+        configs += get_config_text(cfgs, ds)
     return configs
 
 def clean_create_dir(new_dir):
@@ -142,7 +176,7 @@ def create_dir(new_dir):
     except OSError:
         return
 
-def generate_logical_files(input_dir, output_dir, force=False):
+def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
     base_output_dir = output_dir
     create_dir(base_output_dir)
 
@@ -243,5 +277,5 @@ def generate_logical_files(input_dir, output_dir, force=False):
                 clean_create_dir(output_dir)
                 for input_root, input_dirs, input_files in os.walk(input_dir):
                     for input_filename in input_files:
-                        process_test_file( os.path.join(input_root, input_filename), output_dir, staples_fields, calcs_fields )
+                        process_test_file( os.path.join(input_root, input_filename), output_dir, staples_fields, calcs_fields, ds_registry )
 

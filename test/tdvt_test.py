@@ -289,6 +289,20 @@ class ConfigTest(unittest.TestCase):
             found = [y for y in x if y == test] 
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
+    def test_load_ini_logical_config(self):
+        config = configparser.ConfigParser()
+        #Preserve the case of elements.
+        config.optionxform = str
+        config.read(get_path('tool_test/ini', 'logical_config.ini', __name__))
+        test_config = datasource_list.LoadTest(config)
+
+        cfg = test_config.logical_config['my_logical_query']
+        self.assertTrue(test_config.logical_config_name == 'my_logical_query')
+        self.assertTrue(cfg['tablename'] == 'CRAZYTABLE_$dsName')
+        self.assertTrue(cfg['tablePrefix'] == '[LOCO].')
+        self.assertTrue(cfg['tablenameUpper'] == 'True')
+
+
     def test_load_windows_override(self):
         ini_file = get_path('tool_test/ini', 'windows_override.ini', __name__)
         reg = datasource_list.TestRegistry('')

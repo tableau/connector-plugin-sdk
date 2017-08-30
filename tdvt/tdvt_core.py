@@ -632,7 +632,7 @@ def generate_files(ds_registry, force=False):
     logical_input = get_path('logicaltests/generate/input/')
     logical_output = get_path('logicaltests/setup')
     logging.debug("Checking generated logical setup files...")
-    generate_logical_files(logical_input, logical_output, force)
+    generate_logical_files(logical_input, logical_output, ds_registry, force)
     logging.debug("Checking generated config files...")
     generate_config_files(os.path.join(root_directory, os.path.join("config", "gen")), ds_registry, force)
     return 0
