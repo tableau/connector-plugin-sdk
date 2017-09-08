@@ -556,7 +556,7 @@ def main():
 
     error_code = run_desired_tests(args, ds_registry)
 
-    sys.exit()
+    sys.exit(error_code)
 
 if __name__ == '__main__':
     main()
