@@ -412,7 +412,9 @@ def run_file(run_file, output_dir, sub_threads):
     result_code = run_failed_tests(run_file, output_dir, sub_threads)
     TestOutputFiles.copy_output_file("test_results.csv", '', TestOutputFiles.output_csv, False, False)
     TestOutputFiles.copy_output_file("tdvt_output.json", '', TestOutputFiles.output_json, False, False)
-    return result_code
+    
+    #This can be a retry-step.
+    return 0
 
 def run_desired_tests(args, ds_registry):
     generate_files(ds_registry, False)
