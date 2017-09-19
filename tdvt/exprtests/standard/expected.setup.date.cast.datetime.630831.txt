@@ -1,0 +1,18 @@
+<results>
+  <test name='Date(&apos;2017-01-01 12:12:12.0&apos;)'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN 0 = ISDATE(CAST(&apos;2017-01-01 12:12:12.0&apos; AS VARCHAR)) THEN NULL&#10;&#9;ELSE DATEADD(day, DATEDIFF(day, 0, CAST(CAST(&apos;2017-01-01 12:12:12.0&apos; AS VARCHAR) as datetime)), 0) END) AS [TEMP(Test)(1641592311)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      25.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(1641592311)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2017-01-01#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
