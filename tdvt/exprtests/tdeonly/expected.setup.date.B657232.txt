@@ -4,7 +4,7 @@
       SELECT TABLEAU.DATE(&apos;1999-12-31&apos;) AS &quot;TEMP(Test)(3011947049)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      11.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -20,7 +20,7 @@
       SELECT TABLEAU.DATE(&apos;1999-31-12&apos;) AS &quot;TEMP(Test)(3086829891)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      12.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -36,7 +36,7 @@
       SELECT TABLEAU.DATE(&apos;2000/12/12&apos;) AS &quot;TEMP(Test)(1823751624)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -52,7 +52,7 @@
       SELECT TABLEAU.DATE(&apos;0.0.2000&apos;) AS &quot;TEMP(Test)(1833904149)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -68,7 +68,7 @@
       SELECT TABLEAU.DATE(&apos;0.0.0&apos;) AS &quot;TEMP(Test)(3175387485)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -84,7 +84,7 @@
       SELECT TABLEAU.DATE(&apos;1899.12.31&apos;) AS &quot;TEMP(Test)(1431456240)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      6.000
     </query-time>
     <table>
       <schema>
@@ -100,7 +100,7 @@
       SELECT TABLEAU.DATE(&apos;19991230&apos;) AS &quot;TEMP(Test)(2696183362)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      29.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -116,7 +116,7 @@
       SELECT TABLEAU.DATE(&apos;04112011&apos;) AS &quot;TEMP(Test)(2776612572)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      10.000
     </query-time>
     <table>
       <schema>
@@ -132,7 +132,7 @@
       SELECT TABLEAU.DATE(&apos;04-11-2011&apos;) AS &quot;TEMP(Test)(3256771213)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -148,7 +148,7 @@
       SELECT TABLEAU.DATE(&apos;15-11-2011&apos;) AS &quot;TEMP(Test)(2814663250)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -180,7 +180,7 @@
       SELECT TABLEAU.DATE(&apos;31/12/2011&apos;) AS &quot;TEMP(Test)(2274407507)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      6.000
+      8.000
     </query-time>
     <table>
       <schema>
@@ -196,7 +196,7 @@
       SELECT TABLEAU.DATE(&apos;12/31/2011&apos;) AS &quot;TEMP(Test)(800006224)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      6.000
+      9.000
     </query-time>
     <table>
       <schema>
@@ -228,7 +228,7 @@
       SELECT TABLEAU.DATE(&apos;3/12/12&apos;) AS &quot;TEMP(Test)(1625252730)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -260,7 +260,7 @@
       SELECT TABLEAU.DATE(&apos;10/11/12&apos;) AS &quot;TEMP(Test)(3444287764)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      7.000
+      6.000
     </query-time>
     <table>
       <schema>
@@ -276,7 +276,7 @@
       SELECT TABLEAU.DATE(&apos;Jan 12, 2000&apos;) AS &quot;TEMP(Test)(3335373608)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      34.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -308,7 +308,7 @@
       SELECT TABLEAU.DATE(&apos;Mar 12, 2000&apos;) AS &quot;TEMP(Test)(361066345)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      6.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -356,7 +356,7 @@
       SELECT TABLEAU.DATE(&apos;Feb 29, 2000&apos;) AS &quot;TEMP(Test)(1364792614)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      7.000
+      6.000
     </query-time>
     <table>
       <schema>
@@ -388,43 +388,11 @@
       SELECT TABLEAU.DATE(&apos;28 Feb, 2001&apos;) AS &quot;TEMP(Test)(3684234582)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      7.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper_native].[TEMP(Test)(3684234582)(0)]</column>
-      </schema>
-      <tuple>
-        <value>#2001-02-28#</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='DATE(&apos;28th Feb, 2001&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATE(&apos;28th Feb, 2001&apos;) AS &quot;TEMP(Test)(3735664758)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
-    </sql>
-    <query-time>
-      8.000
-    </query-time>
-    <table>
-      <schema>
-        <column>[cast_calcs.hyper_native].[TEMP(Test)(3735664758)(0)]</column>
-      </schema>
-      <tuple>
-        <value>#2001-02-28#</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='DATE(&apos;2001, 28th Feb&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATE(&apos;2001, 28th Feb&apos;) AS &quot;TEMP(Test)(265544670)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
-    </sql>
-    <query-time>
-      8.000
-    </query-time>
-    <table>
-      <schema>
-        <column>[cast_calcs.hyper_native].[TEMP(Test)(265544670)(0)]</column>
       </schema>
       <tuple>
         <value>#2001-02-28#</value>
@@ -484,7 +452,7 @@
       SELECT TABLEAU.DATE(&apos;04 06 Jan&apos;) AS &quot;TEMP(Test)(3920511541)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      8.000
     </query-time>
     <table>
       <schema>
@@ -500,7 +468,7 @@
       SELECT TABLEAU.DATE(&apos;06 04 Jan&apos;) AS &quot;TEMP(Test)(377910837)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -516,7 +484,7 @@
       SELECT TABLEAU.DATE(&apos;Jan 06 04&apos;) AS &quot;TEMP(Test)(3328753303)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -532,7 +500,7 @@
       SELECT TABLEAU.DATE(&apos;Jan/06/04&apos;) AS &quot;TEMP(Test)(3683044402)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -548,7 +516,7 @@
       SELECT TABLEAU.DATE(&apos;27,4/Apr/10&apos;) AS &quot;TEMP(Test)(1534221468)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      14.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -564,7 +532,7 @@
       SELECT TABLEAU.DATE(&apos;2000,11,12&apos;) AS &quot;TEMP(Test)(1704023369)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      14.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -580,7 +548,7 @@
       SELECT TABLEAU.DATE(&apos;2000/12.11&apos;) AS &quot;TEMP(Test)(336987025)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      13.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -596,7 +564,7 @@
       SELECT TABLEAU.DATE(&apos;2000/12-11&apos;) AS &quot;TEMP(Test)(2681735257)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      12.000
+      7.000
     </query-time>
     <table>
       <schema>
@@ -612,7 +580,7 @@
       SELECT TABLEAU.DATE(&apos;2000/12,11&apos;) AS &quot;TEMP(Test)(2074945887)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      10.000
+      7.000
     </query-time>
     <table>
       <schema>
