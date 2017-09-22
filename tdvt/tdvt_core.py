@@ -39,16 +39,24 @@ abort_test_run = False
 class QueueWork(object):
     def __init__(self, test_config, test_file):
         self.test_config = test_config
-        self.test_file = test_file
         self.results = {}
         self.timeout_seconds = 1200
         self.cmd_output = None
         self.saved_error_message = None
         self.timeout = False
+        self.set_base_test_names(test_file)
 
+    def set_base_test_names(self, test_file):
+        self.test_name = get_base_test(test_file)
+        self.test_file = test_file
+        if self.test_config.logical:
+            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(self.test_file, self.test_config.output_dir)
+            #Make sure to set the generic (ie non-templatized) test name.
+            self.test_name = base_test_name
+        
     def handle_test_failure(self, result=None, error_msg=None):
         if result == None:
-            result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
+            result = TestResult(self.test_name, self.test_config, self.test_file)
             result.cmd_output = self.cmd_output
 
         err = error_msg if error_msg else self.saved_error_message
@@ -58,13 +66,13 @@ class QueueWork(object):
         self.results[self.test_file] = result
            
     def handle_timeout_test_failure(self):
-        result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
+        result = TestResult(self.test_name, self.test_config, self.test_file)
         result.error_status = TestErrorTimeout()
         self.handle_test_failure(result)
         self.timeout = True
 
     def handle_abort_test_failure(self):
-        result = TestResult(get_base_test(self.test_file), self.test_config, self.test_file)
+        result = TestResult(self.test_name, self.test_config, self.test_file)
         result.error_status = TestErrorAbort()
         self.handle_test_failure(result)
 
@@ -128,7 +136,6 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
-        test_name = get_base_test(work.test_file)
         new_test_file = work.test_file
         if work.test_config.logical:
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
@@ -143,11 +150,9 @@ def do_test_queue_work(i, q):
             logging.debug("Copying {0} to {1}".format(existing_output_filepath, actual_output_filepath))
             try_move(existing_output_filepath, actual_output_filepath)
 
-            #Make sure to set the generic (ie non-templatized) test name.
-            test_name = get_base_test(base_filepath)
             new_test_file = base_filepath
 
-        result = compare_results(test_name, new_test_file, work.test_file, work.test_config)
+        result = compare_results(work.test_name, new_test_file, work.test_file, work.test_config)
         result.test_config = work.test_config
         result.cmd_output = work.cmd_output
 
