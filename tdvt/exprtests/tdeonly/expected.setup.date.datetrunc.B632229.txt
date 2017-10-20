@@ -14,7 +14,7 @@
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>#1899-12-30#</value>
+        <value>#1900-01-01#</value>
       </tuple>
     </table>
   </test>
@@ -33,7 +33,7 @@
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>#1899-12-30#</value>
+        <value>#1900-01-01#</value>
       </tuple>
     </table>
   </test>
