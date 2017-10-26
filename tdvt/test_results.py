@@ -173,6 +173,7 @@ class TestResult(object):
         self.overall_error_message = ''
         self.test_case_map = []
         self.cmd_output = ''
+        self.run_time_ms = 0
 
     def __json__(self):
         return {'all_passed' : self.all_passed(), 'name' : self.name, 
@@ -272,6 +273,10 @@ class TestResult(object):
                 return False
         return True
 
+    def get_total_execution_time(self):
+        """Time to run all test cases."""
+        return self.run_time_ms
+
     def get_failure_count(self):
         failures = 0
         for test_case in self.test_case_map:
@@ -312,6 +317,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name, 
+                'duration' : obj.get_total_execution_time(),
                 'case' : test_name, 
                 'test_file' : obj.test_file, 
                 'test_type' : test_type, 

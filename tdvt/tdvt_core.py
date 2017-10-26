@@ -13,7 +13,6 @@ import shutil
 import threading
 import time
 import queue
-import time
 import xml.etree.ElementTree
 import glob
 import json
@@ -129,7 +128,9 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
+        start_time = time.perf_counter()
         work.run()
+        total_time_ms = (time.perf_counter() - start_time) * 1000
 
         #Exit early if it is a timeout.
         if work.is_timeout():
@@ -153,6 +154,7 @@ def do_test_queue_work(i, q):
             new_test_file = base_filepath
 
         result = compare_results(work.test_name, new_test_file, work.test_file, work.test_config)
+        result.run_time_ms = total_time_ms
         result.test_config = work.test_config
         result.cmd_output = work.cmd_output
 
