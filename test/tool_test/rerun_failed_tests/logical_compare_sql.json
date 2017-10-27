@@ -2,7 +2,7 @@
     "actual_exp_paths_relative_to": "this", 
     "failed_tests": [
         {
-            "actual": "test\\tool_test\\logical\\expected\\calcs\\actual.setup.xml", 
+            "actual": "test\\tool_test\\logicaltests\\expected\\calcs\\actual.setup.xml", 
             "case": ".setup.xml", 
             "class": "TDVT", 
             "expected": "", 
@@ -23,10 +23,10 @@
                 "thread_count": 12, 
                 "verbose": false
                 }, 
-            "repro": "tdvt.py -q test\\tool_test\\logical\\setup\\calcs\\setup.sum.tde.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "repro": "tdvt.py -q test\\tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
             "suite": "", 
             "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
-            "test_file": "test\\tool_test\\logical\\setup\\calcs\\setup.sum.tde.xml", 
+            "test_file": "test\\tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml", 
             "test_type": "-q"
         }
     ], 

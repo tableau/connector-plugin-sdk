@@ -78,7 +78,7 @@
                 "verbose": false
                 }, 
             "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
-            "test_file": "test\\tool_test\\logical\\setup\\calcs\\setup.sum.tde.xml", 
+            "test_file": "test\\tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml", 
             "test_type": "-q"
         }
     ]

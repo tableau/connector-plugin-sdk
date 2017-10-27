@@ -2,13 +2,14 @@
     Tableau Datasource Verification Tool Tester - TDVTT
     Test the TDVT.
 
+    Run from the 'test' directory. The path to tabquerycli is configured in test/config/tdvt.
     You can run these like:
     All tests:
-        py -3 test_tdvt_core.py
+        py -3 -m tdvt_test
     A Class:
-        py -3 test_tdvt_core.py ReRunFailedTestsTest
+        py -3 -m tdvt_test ReRunFailedTestsTest
     One specific test:
-        py -3 test_tdvt_core.py ReRunFailedTestsTest.test_logical_rerun_fail
+        py -3 -m tdvt_test ReRunFailedTestsTest.test_logical_rerun_fail
 """
 
 import configparser
@@ -138,7 +139,7 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 1, False)
 
         #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), ROOT_DIRECTORY, 1)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, 1)
 
         self.check_results(all_test_results, 1, False)
 
@@ -155,7 +156,7 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 3)
 
     def test_logical_rerun_fail(self):
-        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), ROOT_DIRECTORY, 1)
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), TEST_DIRECTORY, 1)
         self.check_results(all_test_results, 1, False)
 
 class PathTest(unittest.TestCase):
