@@ -69,7 +69,8 @@ def LoadTest(config):
     #This is required.
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
-    test_config = TestConfig(dsconfig['Name'], dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'), dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''))
+    config_name = dsconfig['Name']
+    test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'), dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''))
 
     #Add the standard test suites.
     if standard_tests in config.sections():
@@ -90,6 +91,7 @@ def LoadTest(config):
             lod = config[lod_tests]
             all_ini_sections.remove(lod_tests)
             test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'))
+            test_config.add_logical_test('logical.lod.calcs.', CALCS_TDS, lod.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/lod_calcs/setup.*.'))
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''), 'exprtests/lodcalcs/setup.*.txt')
         except KeyError as e:
             logging.debug(e)
@@ -165,22 +167,22 @@ def LoadTest(config):
 
     #Add any extra expression tests.
     for section in config.sections():
-        if new_expression_test in section:
+        sect = config[section]
+        #Allow wildcard substitution .
+        tds_name = sect.get('TDS', '').replace('*', config_name)
+        if new_expression_test in section or sect.get('Type', '') == 'expression':
             try:
-                sect = config[section]
                 all_ini_sections.remove(section)
-                test_config.add_expression_test(sect.get('Name',''), sect.get('TDS',''), sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''))
+                test_config.add_expression_test(sect.get('Name',''), tds_name, sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''))
             except KeyError as e:
                 logging.debug(e)
                 pass
 
-    #Add any extra logical tests.
-    for section in config.sections():
-        if new_logical_test in section:
+        #Add any extra logical tests.
+        elif new_logical_test in section or sect.get('Type', '') == 'logical':
             try:
-                sect = config[section]
                 all_ini_sections.remove(section)
-                test_config.add_logical_test(sect.get('Name',''), sect.get('TDS',''), sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''))
+                test_config.add_logical_test(sect.get('Name',''), tds_name, sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''))
             except KeyError as e:
                 logging.debug(e)
                 pass

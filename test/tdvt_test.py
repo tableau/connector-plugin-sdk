@@ -290,6 +290,27 @@ class ConfigTest(unittest.TestCase):
             found = [y for y in x if y == test] 
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
+    def test_load_ini_new_tests(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'new_tests.ini', __name__))
+        test_config = datasource_list.LoadTest(config)
+        x = test_config.get_logical_tests() + test_config.get_expression_tests()
+
+        for a in x:
+            print(a)
+
+        test1 = TestSet('logical_test1.bigquery_sql_test.cfg', 'Staples.bigquery.tds', '', 'logicaltests/setup.*.bigquery.xml')
+        test2 = TestSet('logical_test2.bigquery_sql_test.cfg', 'Staples.bigquery_sql_test.tds', '', 'logicaltests/setup.*.bigquery.xml')
+
+        test3 = TestSet('expression_test1.bigquery_sql_test.cfg', 'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii', 'exprtests/standard/')
+        test4 = TestSet('expression_test2.bigquery_sql_test.cfg', 'cast_calcs.bigquery_sql_test.tds', 'string.char', 'exprtests/standard/')
+
+        tests = [test1, test2, test3, test4]
+        
+        for test in tests:
+            found = [y for y in x if y == test] 
+            self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
+
     def test_load_ini_logical_config(self):
         config = configparser.ConfigParser()
         #Preserve the case of elements.
