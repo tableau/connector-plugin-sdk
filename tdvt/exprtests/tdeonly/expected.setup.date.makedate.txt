@@ -1,10 +1,10 @@
 <results>
   <test name='MAKEDATE(2014,4,17)'>
     <sql>
-      SELECT (DATE &apos;2014-04-17&apos;) AS &quot;TEMP(Test)(2231772716)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.MAKE_DATE(CAST(2014 AS INTEGER OR NULL),CAST(4 AS INTEGER OR NULL),CAST(17 AS INTEGER OR NULL)) AS &quot;TEMP(Test)(2231772716)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      15.000
+      11.000
     </query-time>
     <table>
       <schema>
@@ -17,26 +17,26 @@
   </test>
   <test name='MAKEDATE(2005,13,17)'>
     <sql>
-      SELECT null::date AS &quot;TEMP(Test)(300724777)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.MAKE_DATE(CAST(2005 AS INTEGER OR NULL),CAST(13 AS INTEGER OR NULL),CAST(17 AS INTEGER OR NULL)) AS &quot;TEMP(Test)(300724777)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      14.000
+      10.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(300724777)(0)]</column>
       </schema>
       <tuple>
-        <value>%null%</value>
+        <value>#2006-01-17#</value>
       </tuple>
     </table>
   </test>
   <test name='MAKEDATE(1800,12,15)'>
     <sql>
-      SELECT (DATE &apos;1800-12-15&apos;) AS &quot;TEMP(Test)(3028832228)(0)&quot;&#10;FROM &quot;public&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT TABLEAU.MAKE_DATE(CAST(1800 AS INTEGER OR NULL),CAST(12 AS INTEGER OR NULL),CAST(15 AS INTEGER OR NULL)) AS &quot;TEMP(Test)(3028832228)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      15.000
+      11.000
     </query-time>
     <table>
       <schema>

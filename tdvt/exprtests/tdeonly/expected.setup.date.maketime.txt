@@ -1,10 +1,10 @@
 <results>
   <test name='MAKETIME(7,4,60)'>
     <sql>
-      SELECT &apos;1899-12-30 07:05:00.000&apos;::timestamp AS &quot;TEMP(Test)(987836511)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(7 AS INTEGER OR NULL),CAST(4 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(987836511)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      11.000
+      14.000
     </query-time>
     <table>
       <schema>
@@ -17,10 +17,10 @@
   </test>
   <test name='MAKETIME(7,60,60)'>
     <sql>
-      SELECT &apos;1899-12-30 08:01:00.000&apos;::timestamp AS &quot;TEMP(Test)(464692403)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(7 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(464692403)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      14.000
     </query-time>
     <table>
       <schema>
@@ -33,10 +33,10 @@
   </test>
   <test name='MAKETIME(7,59,60)'>
     <sql>
-      SELECT &apos;1899-12-30 08:00:00.000&apos;::timestamp AS &quot;TEMP(Test)(1372325843)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(7 AS INTEGER OR NULL),CAST(59 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(1372325843)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      15.000
     </query-time>
     <table>
       <schema>
@@ -49,10 +49,10 @@
   </test>
   <test name='MAKETIME(7,120,65)'>
     <sql>
-      SELECT &apos;1899-12-30 09:01:05.000&apos;::timestamp AS &quot;TEMP(Test)(4236861232)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(7 AS INTEGER OR NULL),CAST(120 AS INTEGER OR NULL),CAST(65 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(4236861232)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      15.000
     </query-time>
     <table>
       <schema>
@@ -65,10 +65,10 @@
   </test>
   <test name='MAKETIME(11,45,30)'>
     <sql>
-      SELECT &apos;1899-12-30 11:45:30.000&apos;::timestamp AS &quot;TEMP(Test)(2707000699)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(11 AS INTEGER OR NULL),CAST(45 AS INTEGER OR NULL),CAST(30 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(2707000699)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      15.000
     </query-time>
     <table>
       <schema>
@@ -81,74 +81,74 @@
   </test>
   <test name='MAKETIME(23,59,60)'>
     <sql>
-      SELECT (DATE &apos;1899-12-31&apos;) AS &quot;TEMP(Test)(3762143655)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(23 AS INTEGER OR NULL),CAST(59 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(3762143655)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      14.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3762143655)(0)]</column>
       </schema>
       <tuple>
-        <value>#1899-12-31 00:00:00#</value>
+        <value>#00:00:00#</value>
       </tuple>
     </table>
   </test>
   <test name='MAKETIME(24,41,47)'>
     <sql>
-      SELECT &apos;1899-12-31 00:41:47.000&apos;::timestamp AS &quot;TEMP(Test)(2046978312)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(24 AS INTEGER OR NULL),CAST(41 AS INTEGER OR NULL),CAST(47 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(2046978312)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      11.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2046978312)(0)]</column>
       </schema>
       <tuple>
-        <value>#1899-12-31 00:41:47#</value>
+        <value>#00:41:47#</value>
       </tuple>
     </table>
   </test>
   <test name='MAKETIME(27,50,50)'>
     <sql>
-      SELECT &apos;1899-12-31 03:50:50.000&apos;::timestamp AS &quot;TEMP(Test)(52440932)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(27 AS INTEGER OR NULL),CAST(50 AS INTEGER OR NULL),CAST(50 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(52440932)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      12.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(52440932)(0)]</column>
       </schema>
       <tuple>
-        <value>#1899-12-31 03:50:50#</value>
+        <value>#03:50:50#</value>
       </tuple>
     </table>
   </test>
   <test name='MAKETIME(24,60,60)'>
     <sql>
-      SELECT &apos;1899-12-31 01:01:00.000&apos;::timestamp AS &quot;TEMP(Test)(3751394242)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(24 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL),CAST(60 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(3751394242)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      11.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3751394242)(0)]</column>
       </schema>
       <tuple>
-        <value>#1899-12-31 01:01:00#</value>
+        <value>#01:01:00#</value>
       </tuple>
     </table>
   </test>
   <test name='MAKETIME(0,0,0)'>
     <sql>
-      SELECT &apos;1899-12-30 00:00:00.000&apos;::timestamp AS &quot;TEMP(Test)(585174199)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(0 AS INTEGER OR NULL),CAST(0 AS INTEGER OR NULL),CAST(0 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(585174199)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      17.000
     </query-time>
     <table>
       <schema>
@@ -161,10 +161,10 @@
   </test>
   <test name='MAKETIME(0,0,1)'>
     <sql>
-      SELECT &apos;1899-12-30 00:00:01.000&apos;::timestamp AS &quot;TEMP(Test)(1558112192)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(0 AS INTEGER OR NULL),CAST(0 AS INTEGER OR NULL),CAST(1 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(1558112192)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      9.000
+      11.000
     </query-time>
     <table>
       <schema>
@@ -177,10 +177,10 @@
   </test>
   <test name='MAKETIME(1,1,0)'>
     <sql>
-      SELECT &apos;1899-12-30 01:01:00.000&apos;::timestamp AS &quot;TEMP(Test)(457599811)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(1 AS INTEGER OR NULL),CAST(1 AS INTEGER OR NULL),CAST(0 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(457599811)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      11.000
     </query-time>
     <table>
       <schema>
@@ -193,10 +193,10 @@
   </test>
   <test name='MAKETIME(-1,0,0)'>
     <sql>
-      SELECT null::timestamp AS &quot;TEMP(Test)(1287742516)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST(-1 AS INTEGER OR NULL),CAST(0 AS INTEGER OR NULL),CAST(0 AS INTEGER OR NULL))) AS &quot;TEMP(Test)(1287742516)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      8.000
+      10.000
     </query-time>
     <table>
       <schema>
@@ -209,10 +209,10 @@
   </test>
   <test name='MAKETIME([int3]+[int3], [int3], [int3])'>
     <sql>
-      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL))) AS &quot;TEMP(Test)(2023874562)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL)))
+      SELECT (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL))) AS &quot;TEMP(Test)(2023874562)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
     </sql>
     <query-time>
-      9.000
+      12.000
     </query-time>
     <table>
       <schema>
@@ -255,10 +255,10 @@
   </test>
   <test name='DATEPART(&apos;hour&apos;,MAKETIME([int3]+[int3], [int3], [int3]))'>
     <sql>
-      SELECT CAST(TRUNC(EXTRACT(HOUR FROM (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL))))) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1279254292)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY CAST(TRUNC(EXTRACT(HOUR FROM (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL))))) AS BIGINT OR NULL)
+      SELECT CAST(EXTRACT(HOUR FROM (&apos;1899-12-30&apos;::date + TABLEAU.MAKE_TIME(CAST((CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) + CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL)) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL),CAST(CAST(&quot;Calcs&quot;.&quot;int3&quot; AS BIGINT OR NULL) AS INTEGER OR NULL)))) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1279254292)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
     </sql>
     <query-time>
-      9.000
+      13.000
     </query-time>
     <table>
       <schema>
