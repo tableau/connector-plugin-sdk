@@ -1,0 +1,146 @@
+<results>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2013-12-29#) // Sunday,    2013-W52'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2013-12-29&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(3778094175)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      104.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3778094175)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2013-12-30#) // Monday,    2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2013-12-30&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(2631936683)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      104.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2631936683)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2013-12-31#) // Tuesday,   2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2013-12-31&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(3212581553)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      105.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3212581553)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2014-01-01#) // Wednesday, 2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2014-01-01&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(244011539)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      107.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(244011539)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;3&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2014-01-02#) // Thursday,  2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2014-01-02&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(3018310488)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3018310488)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2014-01-03#) // Friday,    2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2014-01-03&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(1813148539)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      125.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1813148539)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;5&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2014-01-04#) // Saturday,  2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2014-01-04&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(3257178641)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      114.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3257178641)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2014-01-05#) // Sunday,    2014-W01'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2014-01-05&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(2683812357)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      112.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2683812357)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;iso-weekday&apos;, #2014-01-06#) // Monday,    2014-W02'>
+    <sql>
+      SELECT TO_CHAR((DATE &apos;2014-01-06&apos;), &apos;ID&apos;) AS &quot;TEMP(Test)(2605464014)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2605464014)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

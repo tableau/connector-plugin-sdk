@@ -1,0 +1,98 @@
+<results>
+  <test name='DATEPART(&apos;iso-quarter&apos;, #2014-12-29#) // Monday, 2015-W01'>
+    <sql>
+      SELECT CAST((LEAST((EXTRACT(WEEK FROM (DATE &apos;2014-12-29&apos;)) - 1) / 13, 3) + 1) AS BIGINT OR NULL) AS &quot;TEMP(Test)(4239792633)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      114.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4239792633)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-quarter&apos;, #2015-03-29#) // Sunday, 2015-W13'>
+    <sql>
+      SELECT CAST((LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-29&apos;)) - 1) / 13, 3) + 1) AS BIGINT OR NULL) AS &quot;TEMP(Test)(3292556667)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      115.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3292556667)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-quarter&apos;, #2015-03-30#) // Monday, 2015-W14'>
+    <sql>
+      SELECT CAST((LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-30&apos;)) - 1) / 13, 3) + 1) AS BIGINT OR NULL) AS &quot;TEMP(Test)(809690639)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      116.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(809690639)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-quarter&apos;, #2016-01-03#) // Sunday, 2015-W53'>
+    <sql>
+      SELECT CAST((LEAST((EXTRACT(WEEK FROM (DATE &apos;2016-01-03&apos;)) - 1) / 13, 3) + 1) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2613138745)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      118.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2613138745)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-quarter&apos;, #2015-12-21#) // Monday, 2015-W52'>
+    <sql>
+      SELECT CAST((LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-12-21&apos;)) - 1) / 13, 3) + 1) AS BIGINT OR NULL) AS &quot;TEMP(Test)(3096720315)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      114.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3096720315)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-quarter&apos;, #2015-12-28#) // Monday, 2015-W53'>
+    <sql>
+      SELECT CAST((LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-12-28&apos;)) - 1) / 13, 3) + 1) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1432519727)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      120.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1432519727)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,34 @@
+<results>
+  <test name='DATETRUNC(&apos;iso-weekday&apos;, #2014-01-03 00:00:00#)'>
+    <sql>
+      SELECT TABLEAU.TO_DATETIME(DATE_TRUNC(&apos;DAY&apos;, TABLEAU.NORMALIZE_DATETIME((DATE &apos;2014-01-03&apos;))), (DATE &apos;2014-01-03&apos;)) AS &quot;TEMP(Test)(2441111340)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      116.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2441111340)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-weekday&apos;, #2014-01-03 23:59:59#)'>
+    <sql>
+      SELECT TABLEAU.TO_DATETIME(DATE_TRUNC(&apos;DAY&apos;, TABLEAU.NORMALIZE_DATETIME(&apos;2014-01-03 23:59:59.000&apos;::timestamp)), &apos;2014-01-03 23:59:59.000&apos;::timestamp) AS &quot;TEMP(Test)(962293379)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      114.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(962293379)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

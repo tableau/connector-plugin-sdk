@@ -1,0 +1,226 @@
+<results>
+  <test name='DATEPART(&apos;iso-week&apos;, #1900-01-01#) // Monday, 1900-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;1900-01-01&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(3568834756)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      100.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3568834756)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #1900-12-30#) // Sunday, 1900-W52'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;1900-12-30&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2823191643)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      99.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2823191643)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #1900-12-31#) // Monday, 1901-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;1900-12-31&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(916763137)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      99.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(916763137)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #1901-12-29#) // Sunday, 1901-W52'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;1901-12-29&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2740381718)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      102.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2740381718)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2000-01-03#) // Monday, 2000-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2000-01-03&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2977415894)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      102.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2977415894)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2000-12-31#) // Sunday, 2000-W52'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2000-12-31&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(3127417102)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      104.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3127417102)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2001-01-01#) // Monday, 2001-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2001-01-01&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2359558824)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      105.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2359558824)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2001-12-30#) // Sunday, 2001-W52'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2001-12-30&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1629527924)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      107.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1629527924)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2014-12-29#) // Monday, 2015-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2014-12-29&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(158149112)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      116.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(158149112)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2016-01-03#) // Sunday, 2015-W53'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2016-01-03&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2165788957)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2165788957)(0)]</column>
+      </schema>
+      <tuple>
+        <value>53</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2016-01-04#) // Monday, 2016-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2016-01-04&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(3182847651)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3182847651)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2017-01-01#) // Sunday, 2016-W52'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2017-01-01&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1165973772)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      121.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1165973772)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2018-01-01#) // Monday, 2018-W01'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2018-01-01&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2432350940)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2432350940)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-week&apos;, #2018-12-29#) // Sunday, 2018-W52'>
+    <sql>
+      SELECT CAST(EXTRACT(WEEK FROM (DATE &apos;2018-12-29&apos;)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(2749904709)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2749904709)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+</results>

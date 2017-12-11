@@ -1,0 +1,17 @@
+// 53-week ISO year first day
+DATETRUNC('iso-quarter', #2014-12-29#) // Monday, 2015-W01
+
+// 53-week ISO year last day of Q1
+DATETRUNC('iso-quarter', #2015-03-29#) // Sunday, 2015-W13
+
+// 53-week ISO year first day of Q2
+DATETRUNC('iso-quarter', #2015-03-30#) // Monday, 2015-W14
+
+// 53-week ISO year last day of Q4
+DATETRUNC('iso-quarter', #2016-01-03#) // Sunday, 2015-W53
+
+// 53-week ISO year Monday of W52
+DATETRUNC('iso-quarter', #2015-12-21#) // Monday, 2015-W52
+
+// 53-week ISO year Monday of W53
+DATETRUNC('iso-quarter', #2015-12-28#) // Monday, 2015-W53
