@@ -1,0 +1,82 @@
+<results>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 0, #2014-12-29#) // #2014-12-29#'>
+    <sql>
+      SELECT ((DATE &apos;2014-12-29&apos;) + 0 * INTERVAL &apos;1 DAY&apos;) AS &quot;TEMP(Test)(4016677078)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      99.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4016677078)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 6, #2014-12-29#) // #2015-01-04#'>
+    <sql>
+      SELECT ((DATE &apos;2014-12-29&apos;) + 6 * INTERVAL &apos;1 DAY&apos;) AS &quot;TEMP(Test)(3901732021)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      101.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3901732021)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-01-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 8, #2013-12-30#) // #2014-01-07#'>
+    <sql>
+      SELECT ((DATE &apos;2013-12-30&apos;) + 8 * INTERVAL &apos;1 DAY&apos;) AS &quot;TEMP(Test)(3476947242)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      100.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3476947242)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-07 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, -8, #2014-01-07#) // #2013-12-30#'>
+    <sql>
+      SELECT ((DATE &apos;2014-01-07&apos;) + -8 * INTERVAL &apos;1 DAY&apos;) AS &quot;TEMP(Test)(2476179258)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      104.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2476179258)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-30 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 365, #2014-12-28#) // #2015-12-28#'>
+    <sql>
+      SELECT ((DATE &apos;2014-12-28&apos;) + 365 * INTERVAL &apos;1 DAY&apos;) AS &quot;TEMP(Test)(3419784675)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      116.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3419784675)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-12-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

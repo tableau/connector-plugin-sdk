@@ -1,0 +1,18 @@
+// 4th day of ISO 2009, 3rd-from-last day of ISO 2009
+DATEDIFF('iso-year', #2009-01-01#, #2010-01-01#) // 0
+
+// Last day of ISO 2011, 2nd day of ISO 2013
+DATEDIFF('iso-year', #2012-01-01#, #2013-01-01#) // 2
+DATEDIFF('iso-year', #2013-01-01#, #2012-01-01#) // -2
+
+// Last day of ISO 2011, 3rd-from-last day of ISO 2015
+DATEDIFF('iso-year', #2012-01-01#, #2016-01-01#) // 4
+
+// Last day of ISO 2009, first day of ISO 2010
+DATEDIFF('iso-year', #2010-01-03#, #2010-01-04#) // 1
+
+// Gregorian year boundary that is also an ISO year boundary
+DATEDIFF('iso-year', #2017-12-31#, #2018-01-01#) // 1
+
+// Gregorian year boundary that is not an ISO year boundary
+DATEDIFF('iso-year', #2012-12-31#, #2013-01-01#) // 0

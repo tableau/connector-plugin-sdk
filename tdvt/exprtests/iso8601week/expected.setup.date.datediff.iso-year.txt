@@ -1,0 +1,114 @@
+<results>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2009-01-01#, #2010-01-01#) // 0'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2010-01-01&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2009-01-01&apos;)) AS BIGINT) AS &quot;TEMP(Test)(3209939599)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      123.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3209939599)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2012-01-01#, #2013-01-01#) // 2'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2013-01-01&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2012-01-01&apos;)) AS BIGINT) AS &quot;TEMP(Test)(1639762792)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      114.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1639762792)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2013-01-01#, #2012-01-01#) // -2'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2012-01-01&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2013-01-01&apos;)) AS BIGINT) AS &quot;TEMP(Test)(633444466)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      106.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(633444466)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2012-01-01#, #2016-01-01#) // 4'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2016-01-01&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2012-01-01&apos;)) AS BIGINT) AS &quot;TEMP(Test)(483855220)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      105.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(483855220)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2010-01-03#, #2010-01-04#) // 1'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2010-01-04&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2010-01-03&apos;)) AS BIGINT) AS &quot;TEMP(Test)(4133966236)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      110.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4133966236)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2017-12-31#, #2018-01-01#) // 1'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2018-01-01&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2017-12-31&apos;)) AS BIGINT) AS &quot;TEMP(Test)(222715044)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      110.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(222715044)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2012-12-31#, #2013-01-01#) // 0'>
+    <sql>
+      SELECT CAST(EXTRACT(ISOYEAR FROM (DATE &apos;2013-01-01&apos;)) - EXTRACT(ISOYEAR FROM (DATE &apos;2012-12-31&apos;)) AS BIGINT) AS &quot;TEMP(Test)(937121222)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      109.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(937121222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

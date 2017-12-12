@@ -1,0 +1,66 @@
+<results>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2013-12-30#, #2014-01-05#) // 0'>
+    <sql>
+      SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2014-01-05&apos;), (DATE &apos;2013-12-30&apos;)) AS &quot;TEMP(Test)(1770107342)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      109.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1770107342)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-04-06#, #2014-04-07#) // 1'>
+    <sql>
+      SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2014-04-07&apos;), (DATE &apos;2014-04-06&apos;)) AS &quot;TEMP(Test)(646842125)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      106.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(646842125)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-04-07#, #2014-04-06#) // -1'>
+    <sql>
+      SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2014-04-06&apos;), (DATE &apos;2014-04-07&apos;)) AS &quot;TEMP(Test)(2353847414)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      103.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2353847414)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-12-28#, #2015-01-05#) // 2'>
+    <sql>
+      SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2015-01-05&apos;), (DATE &apos;2014-12-28&apos;)) AS &quot;TEMP(Test)(1886889459)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      110.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1886889459)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+</results>

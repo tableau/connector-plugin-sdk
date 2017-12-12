@@ -1,0 +1,66 @@
+<results>
+  <test name='DATEADD(&apos;iso-week&apos;, 0, #2013-12-30#) // #2013-12-30#'>
+    <sql>
+      SELECT ((DATE &apos;2013-12-30&apos;) + 0 * INTERVAL &apos;1 WEEK&apos;) AS &quot;TEMP(Test)(1174617229)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      109.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1174617229)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-30 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-week&apos;, 1, #2013-12-30#) // #2014-01-06#'>
+    <sql>
+      SELECT ((DATE &apos;2013-12-30&apos;) + 1 * INTERVAL &apos;1 WEEK&apos;) AS &quot;TEMP(Test)(183748825)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      103.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(183748825)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-06 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-week&apos;, -1, #2014-01-06#) // #2013-12-30#'>
+    <sql>
+      SELECT ((DATE &apos;2014-01-06&apos;) + -1 * INTERVAL &apos;1 WEEK&apos;) AS &quot;TEMP(Test)(3881990827)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      110.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3881990827)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-30 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-week&apos;, 2, #2014-12-23#) // #2015-01-06#'>
+    <sql>
+      SELECT ((DATE &apos;2014-12-23&apos;) + 2 * INTERVAL &apos;1 WEEK&apos;) AS &quot;TEMP(Test)(3307660145)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      111.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3307660145)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-01-06 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
