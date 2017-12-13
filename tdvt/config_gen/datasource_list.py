@@ -260,8 +260,10 @@ class TestRegistry(object):
                 ds_to_run.extend(self.get_datasources(','.join(self.suite_map[ds])))
             elif ds:
                 ds_to_run.append(ds)
-        
-        return ds_to_run
+
+        #Unique list that preserves order.
+        seen_ds = set()
+        return [x for x in ds_to_run if not (x in seen_ds or seen_ds.add(x))]
 
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""

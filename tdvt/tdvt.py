@@ -201,22 +201,29 @@ def print_logical_configurations(ds_registry, config_name=None):
         for config in list_configs(ds_registry):
             print (config)
 
+def print_ds(ds, ds_reg):
+    print ("\n\t" + ds)
+    test_config = ds_reg.get_datasource_info(ds)
+    if not test_config:
+        return
+    print ("\tLogical tests:")
+    for x in test_config.get_logical_tests():
+        print ("\t"*2 + str(x))
+    print ("\tExpression tests:")
+    for x in test_config.get_expression_tests():
+        print ("\t"*2 + str(x))
 
 def print_configurations(ds_reg, dsname):
     if dsname:
         ds_to_run = ds_reg.get_datasources(dsname)
-        print ("\nDatasource set: " + dsname)
-        for ds in ds_to_run:
-            print ("\n\t" + ds)
-            test_config = ds_reg.get_datasource_info(ds)
-            if not test_config:
-                continue
-            print ("\tLogical tests:")
-            for x in test_config.get_logical_tests():
-                print ("\t"*2 + str(x))
-            print ("\tExpression tests:")
-            for x in test_config.get_expression_tests():
-                print ("\t"*2 + str(x))
+        if len(ds_to_run) == 1:
+            print_ds(ds_to_run)
+        else:
+            print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run)) 
+            if VERBOSE:
+                for ds in ds_to_run:
+                    print_ds(ds, ds_reg)
+                    
     else:
         print ("\nAvailable datasources")
         ds_all = ds_reg.get_datasources('all')

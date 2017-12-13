@@ -183,7 +183,7 @@ class CommandLineTest(unittest.TestCase):
         work = tdvt_core.QueueWork(test_config, test_file)
         cmd_line = tdvt_core.build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined --output-dir my/output/dir -DLogLevel=Debug'
+        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined --output-dir my/output/dir -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_command_line_no_expected(self):
@@ -195,7 +195,7 @@ class CommandLineTest(unittest.TestCase):
         work = tdvt_core.QueueWork(test_config, test_file)
         cmd_line = tdvt_core.build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined'
+        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_command_line_multiple_override(self):
@@ -208,7 +208,7 @@ class CommandLineTest(unittest.TestCase):
         work = tdvt_core.QueueWork(test_config, test_file)
         cmd_line = tdvt_core.build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
+        expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
 class ConfigTest(unittest.TestCase):
@@ -330,10 +330,11 @@ class ConfigTest(unittest.TestCase):
         reg = datasource_list.TestRegistry('')
         reg.load_registry(ini_file)
        
+        #Duplicates should be removed and the order preserved.
         standard = ['teradata', 'netezza']
         all_passing = ['teradata', 'netezza', 'bigquery', 'exasolution']
-        all_test = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'teradata', 'netezza', 'bigquery', 'exasolution']
-        all_test2 = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'teradata', 'netezza', 'bigquery', 'exasolution', 'teradata', 'netezza', 'bigquery', 'exasolution']
+        all_test = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'bigquery', 'exasolution']
+        all_test2 = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'bigquery', 'exasolution']
 
         self.assertTrue(standard == reg.get_datasources('standard'))
         self.assertTrue(all_passing == reg.get_datasources('all_passing'))
