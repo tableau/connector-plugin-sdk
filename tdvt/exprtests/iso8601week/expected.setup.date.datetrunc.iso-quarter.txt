@@ -1,10 +1,10 @@
 <results>
   <test name='DATETRUNC(&apos;iso-quarter&apos;, #2014-12-29#) // Monday, 2015-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2014-12-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2014-12-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(276136894)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2014-12-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2014-12-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(276136894)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      115.000
+      106.000
     </query-time>
     <table>
       <schema>
@@ -17,10 +17,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-03-29#) // Sunday, 2015-W13'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3255691099)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3255691099)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      117.000
+      105.000
     </query-time>
     <table>
       <schema>
@@ -33,10 +33,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-03-30#) // Monday, 2015-W14'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-30&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-30&apos;)) - 1) / 13, 3) * 13 + 1), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(2860509441)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-30&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-30&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(2860509441)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      120.000
+      106.000
     </query-time>
     <table>
       <schema>
@@ -49,10 +49,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-quarter&apos;, #2016-01-03#) // Sunday, 2015-W53'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2016-01-03&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2016-01-03&apos;)) - 1) / 13, 3) * 13 + 1), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3644886455)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2016-01-03&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2016-01-03&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3644886455)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      121.000
+      109.000
     </query-time>
     <table>
       <schema>
@@ -65,10 +65,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-12-21#) // Monday, 2015-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-12-21&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-12-21&apos;)) - 1) / 13, 3) * 13 + 1), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(1905340232)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-12-21&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-12-21&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(1905340232)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      116.000
+      108.000
     </query-time>
     <table>
       <schema>
@@ -81,10 +81,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-12-28#) // Monday, 2015-W53'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-12-28&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-12-28&apos;)) - 1) / 13, 3) * 13 + 1), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3293283481)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-12-28&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-12-28&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3293283481)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      116.000
+      113.000
     </query-time>
     <table>
       <schema>
@@ -92,6 +92,38 @@
       </schema>
       <tuple>
         <value>#2015-09-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;quarter&apos;, DATETRUNC(&apos;iso-quarter&apos;, #2015-03-29#))'>
+    <sql>
+      SELECT CAST(EXTRACT(QUARTER FROM CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(168227120)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      126.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(168227120)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, DATETRUNC(&apos;iso-quarter&apos;, #2015-03-29#))'>
+    <sql>
+      SELECT TABLEAU.TO_DATETIME(DATE_TRUNC(&apos;QUARTER&apos;, CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL)), CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2015-03-29&apos;), &apos;IYYY-&apos;) || (LEAST((EXTRACT(WEEK FROM (DATE &apos;2015-03-29&apos;)) - 1) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL)) AS &quot;TEMP(Test)(273798999)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      124.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(273798999)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-10-01 00:00:00#</value>
       </tuple>
     </table>
   </test>

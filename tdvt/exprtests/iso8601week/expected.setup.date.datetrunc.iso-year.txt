@@ -1,10 +1,10 @@
 <results>
   <test name='DATETRUNC(&apos;iso-year&apos;, #1900-01-01#) // Monday, 1900-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;1900-01-01&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(2812280547)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;1900-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(2812280547)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      116.000
+      99.000
     </query-time>
     <table>
       <schema>
@@ -17,10 +17,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #1900-12-30#) // Sunday, 1900-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;1900-12-30&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(2254105947)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;1900-12-30&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(2254105947)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      114.000
+      100.000
     </query-time>
     <table>
       <schema>
@@ -33,10 +33,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #1900-12-31#) // Monday, 1901-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;1900-12-31&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(1873159524)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;1900-12-31&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(1873159524)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      128.000
+      100.000
     </query-time>
     <table>
       <schema>
@@ -49,10 +49,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #1901-12-29#) // Sunday, 1901-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;1901-12-29&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3210650717)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;1901-12-29&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3210650717)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      118.000
+      101.000
     </query-time>
     <table>
       <schema>
@@ -65,10 +65,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2000-01-03#) // Monday, 2000-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2000-01-03&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(645471865)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2000-01-03&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(645471865)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      115.000
+      103.000
     </query-time>
     <table>
       <schema>
@@ -81,10 +81,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2000-12-31#) // Sunday, 2000-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2000-12-31&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(842657465)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2000-12-31&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(842657465)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      118.000
+      103.000
     </query-time>
     <table>
       <schema>
@@ -97,10 +97,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2001-01-01#) // Monday, 2001-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2001-01-01&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3366047967)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2001-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3366047967)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      117.000
+      104.000
     </query-time>
     <table>
       <schema>
@@ -113,10 +113,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2001-12-30#) // Sunday, 2001-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2001-12-30&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(1136988789)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2001-12-30&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(1136988789)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      119.000
+      106.000
     </query-time>
     <table>
       <schema>
@@ -129,10 +129,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2014-12-29#) // Monday, 2015-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2014-12-29&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(2607630951)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2014-12-29&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(2607630951)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      113.000
+      106.000
     </query-time>
     <table>
       <schema>
@@ -145,10 +145,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2016-01-03#) // Sunday, 2015-W53'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2016-01-03&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(1335095621)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2016-01-03&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(1335095621)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      114.000
+      108.000
     </query-time>
     <table>
       <schema>
@@ -161,10 +161,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2016-01-04#) // Monday, 2016-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2016-01-04&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3091979362)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2016-01-04&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3091979362)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      126.000
+      117.000
     </query-time>
     <table>
       <schema>
@@ -177,10 +177,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2017-01-01#) // Sunday, 2016-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2017-01-01&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(2611349649)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2017-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(2611349649)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      122.000
+      110.000
     </query-time>
     <table>
       <schema>
@@ -193,10 +193,10 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2018-01-01#) // Monday, 2018-W01'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-01-01&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(1197964418)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(1197964418)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      118.000
+      111.000
     </query-time>
     <table>
       <schema>
@@ -209,14 +209,46 @@
   </test>
   <test name='DATETRUNC(&apos;iso-year&apos;, #2018-12-29#) // Sunday, 2018-W52'>
     <sql>
-      SELECT TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-12-29&apos;), &apos;IYYY-01&apos;), &apos;iyyy-iw&apos;) AS &quot;TEMP(Test)(3037307714)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-12-29&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL) AS &quot;TEMP(Test)(3037307714)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      126.000
+      112.000
     </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3037307714)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2018-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;year&apos;, DATETRUNC(&apos;iso-year&apos;, #2018-01-01#))'>
+    <sql>
+      SELECT CAST(EXTRACT(YEAR FROM CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL)) AS BIGINT OR NULL) AS &quot;TEMP(Test)(1578065485)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      117.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1578065485)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2018</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, DATETRUNC(&apos;iso-year&apos;, #2018-01-01#))'>
+    <sql>
+      SELECT TABLEAU.TO_DATETIME(DATE_TRUNC(&apos;YEAR&apos;, CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL)), CAST(TO_TIMESTAMP(TO_CHAR((DATE &apos;2018-01-01&apos;), &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;) AS TIMESTAMP OR NULL)) AS &quot;TEMP(Test)(1176158379)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      118.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1176158379)(0)]</column>
       </schema>
       <tuple>
         <value>#2018-01-01 00:00:00#</value>

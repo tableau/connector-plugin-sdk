@@ -7,3 +7,9 @@ DATEDIFF('iso-week', #2014-04-07#, #2014-04-06#) // -1
 
 // 2014-W52 through 2015-W02 (weeks in different ISO years)
 DATEDIFF('iso-week', #2014-12-28#, #2015-01-05#) // 2
+
+// 2015-W53-07 through 2017-W01-01 (weeks spanning a 52-week year)
+DATEDIFF('iso-week', #2016-01-03#, #2017-01-02#) // 53
+
+// 2014-W52-07 through 2016-W01-01 (weeks spanning a 53-week year)
+DATEDIFF('iso-week', #2014-12-28#, #2016-01-04#) // 54

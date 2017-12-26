@@ -4,7 +4,7 @@
       SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2014-01-05&apos;), (DATE &apos;2013-12-30&apos;)) AS &quot;TEMP(Test)(1770107342)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      109.000
+      102.000
     </query-time>
     <table>
       <schema>
@@ -20,7 +20,7 @@
       SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2014-04-07&apos;), (DATE &apos;2014-04-06&apos;)) AS &quot;TEMP(Test)(646842125)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      106.000
+      101.000
     </query-time>
     <table>
       <schema>
@@ -36,7 +36,7 @@
       SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2014-04-06&apos;), (DATE &apos;2014-04-07&apos;)) AS &quot;TEMP(Test)(2353847414)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      103.000
+      101.000
     </query-time>
     <table>
       <schema>
@@ -52,7 +52,7 @@
       SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2015-01-05&apos;), (DATE &apos;2014-12-28&apos;)) AS &quot;TEMP(Test)(1886889459)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      110.000
+      106.000
     </query-time>
     <table>
       <schema>
@@ -60,6 +60,38 @@
       </schema>
       <tuple>
         <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2016-01-03#, #2017-01-02#) // 53'>
+    <sql>
+      SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2017-01-02&apos;), (DATE &apos;2016-01-03&apos;)) AS &quot;TEMP(Test)(2772917571)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      103.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2772917571)(0)]</column>
+      </schema>
+      <tuple>
+        <value>53</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-12-28#, #2016-01-04#) // 54'>
+    <sql>
+      SELECT TABLEAU.DATE_DIFF(&apos;WEEK:1&apos;, (DATE &apos;2016-01-04&apos;), (DATE &apos;2014-12-28&apos;)) AS &quot;TEMP(Test)(846774858)(0)&quot;&#10;FROM &quot;testv1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      107.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(846774858)(0)]</column>
+      </schema>
+      <tuple>
+        <value>54</value>
       </tuple>
     </table>
   </test>
