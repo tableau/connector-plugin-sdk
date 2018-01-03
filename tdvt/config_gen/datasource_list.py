@@ -91,7 +91,6 @@ def LoadTest(config):
             lod = config[lod_tests]
             all_ini_sections.remove(lod_tests)
             test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'))
-            test_config.add_logical_test('logical.lod.calcs.', CALCS_TDS, lod.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/lod_calcs/setup.*.'))
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''), 'exprtests/lodcalcs/setup.*.txt')
         except KeyError as e:
             logging.debug(e)

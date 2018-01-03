@@ -11,14 +11,17 @@ class TestSet(object):
     """
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
-    def __init__(self, config_file_name, tds_name, exclusions, allow_pattern):
-        self.config_file_name = config_file_name
+    def __init__(self, config_name, tds_name, exclusions, allow_pattern):
+        self.config_name = config_name
         self.tds_name = tds_name
         self.exclusions = exclusions
         self.allow_pattern = allow_pattern
 
+    def get_exclusions(self):
+        return [] if not self.exclusions else self.exclusions.split(',')
+
     def __str__(self):
-        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}]".format(self.config_file_name, self.tds_name, self.exclusions, self.allow_pattern)
+        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}]".format(self.config_name, self.tds_name, self.exclusions, self.allow_pattern)
     
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -55,7 +58,7 @@ class TestConfig(object):
             self.maxsubthread = int(maxsubthread)
 
     def get_config_name(self, prefix):
-        return prefix + self.dsname + '.cfg'
+        return prefix + self.dsname
 
     def get_logical_test_path(self, prefix):
         return prefix + self.logical_config_name + '.xml'
@@ -80,35 +83,13 @@ class TestConfig(object):
         self.expression_test_set.append(new_test)
 
     def get_logical_tests(self, config_filter=None):
-        return self.logical_test_set if not config_filter else [ ts for ts in self.logical_test_set if config_filter in ts.config_file_name ]
+        return self.logical_test_set if not config_filter else [ ts for ts in self.logical_test_set if config_filter in ts.config_name ]
     
     def get_expression_tests(self, config_filter=None):
-        return self.expression_test_set if not config_filter else [ ts for ts in self.expression_test_set if config_filter in ts.config_file_name ]
-
-    def config_files_exist(self, root_dir):
-        all_cfg = [x.config_file_name for x in (self.logical_test_set + self.expression_test_set)]
-        for f in all_cfg:
-            if not os.path.exists(os.path.join(root_dir, f)):
-                return False
-        return True
+        return self.expression_test_set if not config_filter else [ ts for ts in self.expression_test_set if config_filter in ts.config_name ]
 
     def add_logical_config(self, cfg):
         self.logical_config = cfg.copy()
-
-    def write_config_files(self, root_dir):
-        for test in self.logical_test_set + self.expression_test_set:
-            self.write_config_file(test.config_file_name, root_dir, test.allow_pattern, test.exclusions)
-
-    def write_config_file(self, name, dir, allow, exclude):
-        filename = os.path.join(dir, name)
-        f = open(get_path('config/gen/', name), 'w')
-        f.write('allow:\n')
-        f.write(allow + '\n')
-        if len(exclude) > 0:
-            f.write('\nexclude:\n')
-            for exclude_pattern in exclude.split(','):
-                f.write(exclude_pattern + '\n')
-        f.close()
 
     def __str__(self):
         msg = ''
@@ -116,53 +97,15 @@ class TestConfig(object):
             msg += str(test) + "\n"
         return msg
 
-class SingleTestConfig(object):
-    """Maintain information about running a single test. This is different that running a test suite which has a premade config file."""
-    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_name):
-        self.valid = False
-        self.ds_name = ds_name
-        self.test_pattern = test_pattern
-        self.tds_pattern = tds_pattern
-        self.tds_name = self.tds_pattern.replace('*', ds_name)
-        self.exclude_pattern = exclude_pattern
 
-    def write_cfg(self):
-        if self.test_pattern and self.tds_pattern:
-            try:
-                fd, tmppath = tempfile.mkstemp(suffix='.cfg')
-                tmpcfg = open(tmppath, 'w')
-                tmpcfg.write("allow:\n")
-                tmpcfg.write(self.test_pattern)
-                tmpcfg.write("\n")
-                if self.exclude_pattern:
-                    tmpcfg.write("exclude:\n")
-                    tmpcfg.write(self.exclude_pattern)
-                    tmpcfg.write("\n")
-                tmpcfg.close()
-                os.close(fd)
-            except IOError:
-                return
-
-            self.temp_cfg_path = tmppath
-            self.valid = True
-
-    def __del__(self):
-        if not self.valid:
-            return
-        try:
-            os.remove(self.temp_cfg_path)
-        except OSError:
-            pass
-
-class SingleLogicalTestConfig(SingleTestConfig):
+class SingleLogicalTestConfig(TestSet):
     def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleLogicalTestConfig, self).__init__(test_pattern, tds_pattern, exclude_pattern, ds_info.dsname)
-        self.test_pattern = self.test_pattern.replace('?', ds_info.logical_config_name)
-        super(SingleLogicalTestConfig, self).write_cfg()
+        super(SingleLogicalTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        self.allow_pattern = self.allow_pattern.replace('?', ds_info.logical_config_name)
+        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
-class SingleExpressionTestConfig(SingleTestConfig):
+class SingleExpressionTestConfig(TestSet):
     def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleExpressionTestConfig, self).__init__(test_pattern, tds_pattern, exclude_pattern, ds_info.dsname)
-        super(SingleExpressionTestConfig, self).write_cfg()
-    pass
+        super(SingleExpressionTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 

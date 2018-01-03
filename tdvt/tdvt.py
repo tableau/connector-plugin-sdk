@@ -23,7 +23,7 @@ import logging
 from zipfile import ZipFile
 import glob
 from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig
-from .config_gen.test_config import SingleTestConfig, SingleLogicalTestConfig, SingleExpressionTestConfig
+from .config_gen.test_config import SingleLogicalTestConfig, SingleExpressionTestConfig
 from .config_gen.gentests import list_configs, list_config
 from .tabquery import *
 from .setup_env import create_test_environment, add_datasource
@@ -81,6 +81,7 @@ def do_test_queue_work(i, q):
 class TestRunner():
     def __init__(self, test_set, test_config, lock, verbose, thread_id):
         threading.Thread.__init__(self)
+        self.test_set = test_set
         self.test_config = test_config
         self.error_code = 0
         self.thread_id = thread_id
@@ -164,7 +165,7 @@ class TestRunner():
         print ("\nRunning {0} {1} {2}\n".format( self.test_config.suite_name, self.test_config.config_file, str(self.thread_id)) )
 
         start_time = time.time()
-        error_code = run_tests(self.test_config)
+        error_code = run_tests(self.test_config, self.test_set)
         logging.debug( "\nFinished tdvt " + str(self.test_config) + "\n")
         print ("\nFinished {0} {1} {2}\n".format( self.test_config.suite_name, self.test_config.config_file, str(self.thread_id)) )
         
@@ -217,7 +218,7 @@ def print_configurations(ds_reg, dsname):
     if dsname:
         ds_to_run = ds_reg.get_datasources(dsname)
         if len(ds_to_run) == 1:
-            print_ds(ds_to_run)
+            print_ds(ds_to_run[0], ds_reg)
         else:
             print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run)) 
             if VERBOSE:
@@ -235,24 +236,20 @@ def print_configurations(ds_reg, dsname):
             print ("\t" + ','.join(ds_reg.suite_map[suite]))
             print ('\n')
 
-def get_temporary_logical_test_config(temp_configs, test_pattern, tds_pattern, exclude_pattern, ds_info):
+def get_single_test_config(is_logical, test_pattern, tds_pattern, exclude_pattern, ds_info):
         if not test_pattern or not tds_pattern:
             return None
-        single_test = SingleLogicalTestConfig(test_pattern, tds_pattern, exclude_pattern, ds_info)
-        temp_configs.append(single_test)
-        return single_test
-
-def get_temporary_expression_test_config(temp_configs, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        if not test_pattern or not tds_pattern:
-            return None
-        single_test = SingleExpressionTestConfig(test_pattern, tds_pattern, exclude_pattern, ds_info)
-        temp_configs.append(single_test)
+        single_test = None
+        if is_logical:
+            single_test = SingleLogicalTestConfig(test_pattern, tds_pattern, exclude_pattern, ds_info)
+        else:
+            single_test = SingleExpressionTestConfig(test_pattern, tds_pattern, exclude_pattern, ds_info)
         return single_test
 
 def get_test_sets_to_run(function_call, test_pattern, single_test):
         test_sets_to_run = [] 
-        if single_test and single_test.valid:
-            test_sets_to_run.append(TestSet(single_test.temp_cfg_path, single_test.tds_name, '', ''))
+        if single_test:
+            test_sets_to_run.append(single_test)
         else:
             test_sets_to_run = function_call(test_pattern)
 
@@ -276,7 +273,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_queu
         test_config.logical = is_logical
         test_config.d_override = ds_info.d_override
         test_config.tds = test_set.tds_name
-        test_config.config_file = test_set.config_file_name
+        test_config.config_file = test_set.config_name
 
         runner = TestRunner(test_set, test_config, lock, VERBOSE, test_run)
         logging.debug("Queing up tests: " + str(test_config))
@@ -437,7 +434,6 @@ def run_desired_tests(args, ds_registry):
         print ("Could not find Tabquerycli.")
         sys.exit(0)
 
-    temporary_test_configs = []
     error_code = 0
     test_run = 0
     start_time = time.time()
@@ -473,13 +469,11 @@ def run_desired_tests(args, ds_registry):
 
             
         if run_logical_tests:
-            #Check if the user wants to run a single test file. If so then create a temporary cfg file to hold that config.
-            single_test = get_temporary_logical_test_config(temporary_test_configs, args.logical_pattern, args.tds_pattern, args.test_pattern_exclude, ds_info)
+            single_test = get_single_test_config(True, args.logical_pattern, args.tds_pattern, args.test_pattern_exclude, ds_info)
             test_run = enqueue_tests(True, ds_info, args, single_test, suite, lock, test_queue, all_work, test_run, max_sub_threads)
 
         if run_expr_tests:
-            #Check if the user wants to run a single test file. If so then create a temporary cfg file to hold that config.
-            single_test = get_temporary_expression_test_config(temporary_test_configs, args.expression_pattern, args.tds_pattern, args.test_pattern_exclude, ds_info)
+            single_test = get_single_test_config(False, args.expression_pattern, args.tds_pattern, args.test_pattern_exclude, ds_info)
             test_run = enqueue_tests(False, ds_info, args, single_test, suite, lock, test_queue, all_work, test_run, max_sub_threads)
 
     if not all_work:

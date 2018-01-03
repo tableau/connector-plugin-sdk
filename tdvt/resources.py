@@ -174,14 +174,6 @@ def find_file_path(root_directory, base_file, default_dir):
     path_inferred = os.path.join(path_inferred, base_file)
     return path_inferred
 
-def get_config_file_full_path(root_directory, combined_config):
-    """Return the full path to the config file to use for this test run."""
-    config_file = combined_config
-    
-    if config_file[-4:] != '.cfg':
-        return ''
-    return find_file_path(root_directory, config_file, os.path.join("config", "gen"))
-
 def get_tds_full_path(root_directory, tds):
     """Return the full path to the tds file to use for this test run."""
     #First look for a local tds file (in the place you ran this module, not in the module installation dir).

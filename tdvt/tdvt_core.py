@@ -517,62 +517,37 @@ def run_tests_parallel(test_names, test_config):
 
     return run_tests_parallel_list(test_data, test_config.thread_count)
 
-def generate_test_file_list_from_file(root_directory, config_file):
+#LR-TODO method on test_config?
+def generate_test_file_list_from_config(root_directory, test_config_set):
     """Read the config file and generate a list of tests."""
     allowed_tests = []
-    exclude_tests = []
+    exclude_tests = test_config_set.get_exclusions()
     exclude_tests.append('expected.')
     exclude_tests.append('actual.')
 
-    reading_allowed = False
-    reading_exclude = False
-
-    for line in open(config_file, 'r', encoding='utf8'):
-        if line[0] == '#':
-            continue
-        #Get rid of newline.
-        line = line.strip()
-        if line == '':
-            continue
-        elif line == 'allow:':
-            reading_allowed = True
-            reading_exclude = False
-        elif line == 'exclude:':
-            reading_allowed = False
-            reading_exclude = True
-        else:
-            if reading_allowed:
-                logging.debug("Allowing " + line)
-                allowed_tests.append(line)
-            elif reading_exclude:
-                logging.debug("Excluding " + line)
-                exclude_tests.append(line)
-        
-
     #Allowed/exclude can be filenames or directory fragments.
     tests_to_run = []
-    for a in allowed_tests:
-        added_test = len(tests_to_run)
-        allowed_path = os.path.join(root_directory, a)
-        if os.path.isfile(allowed_path):
-            logging.debug("Adding file " + allowed_path)
-            tests_to_run.append(allowed_path)
-        elif os.path.isdir(allowed_path):
-            logging.debug("Iterating directory " + allowed_path)
-            for f in os.listdir(allowed_path):
-                full_filename = os.path.join(allowed_path, f)
-                if os.path.isfile(full_filename):
-                    logging.debug("Adding file " + full_filename)
-                    tests_to_run.append(full_filename)
-        else:
-            for f in glob.glob(allowed_path):
-                full_filename = os.path.join(allowed_path, f)
-                if os.path.isfile(full_filename):
-                    logging.debug("Adding globbed file " + full_filename)
-                    tests_to_run.append(full_filename)
+    added_test = len(tests_to_run)
+    allowed_path = os.path.join(root_directory, test_config_set.allow_pattern)
+    if os.path.isfile(allowed_path):
+        logging.debug("Adding file " + allowed_path)
+        tests_to_run.append(allowed_path)
+    elif os.path.isdir(allowed_path):
+        logging.debug("Iterating directory " + allowed_path)
+        for f in os.listdir(allowed_path):
+            full_filename = os.path.join(allowed_path, f)
+            if os.path.isfile(full_filename):
+                logging.debug("Adding file " + full_filename)
+                tests_to_run.append(full_filename)
+    else:
+        for f in glob.glob(allowed_path):
+            full_filename = os.path.join(allowed_path, f)
+            if os.path.isfile(full_filename):
+                logging.debug("Adding globbed file " + full_filename)
+                tests_to_run.append(full_filename)
 
-        if added_test == len(tests_to_run):
-            logging.debug("Could not find a test for " + allowed_path  + ". Check the path.")
+    if added_test == len(tests_to_run):
+        logging.debug("Could not find a test for " + allowed_path  + ". Check the path.")
 
     logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 
@@ -590,29 +565,17 @@ def generate_test_file_list_from_file(root_directory, config_file):
     final_test_list = map(lambda x: os.path.normpath(x), final_test_list)
     return sorted(final_test_list)
 
-def generate_test_file_list(root_directory, logical_query_config, combined_config, expected_dir):
-    """The config can be either a file (*.cfg) or a path to a test. Take the config and expand it into the list of tests cases to run. These are fully qualified paths to test files.
+def generate_test_file_list(root_directory, test_set, expected_sub_dir):
+    """Take the config and expand it into the list of tests cases to run. These are fully qualified paths to test files.
        Return the sorted list of tests.
 
     """
-    config_file = get_config_file_full_path(root_directory, combined_config)
-    final_test_list = []
-    if config_file == '':
-        #Treat it as a path to one test file.
-        if os.path.isfile(combined_config):
-            final_test_list.append(combined_config)
-        else:
-            abs_path = os.path.join(root_directory, combined_config)
-            if os.path.isfile( abs_path ):
-                final_test_list.append(abs_path)
-    else:
-        final_test_list = generate_test_file_list_from_file(root_directory, config_file)
+    final_test_list = generate_test_file_list_from_config(root_directory, test_set)
 
-    expected_sub_dir = expected_dir
     #Make sure the expected output directories exist.
     if expected_sub_dir:
         dir_list = set([os.path.dirname(x) for x in final_test_list])
-        if logical_query_config:
+        if test_config.logical:
             dir_list = set()
             for x in final_test_list:
                 t1, t2, t3, t4, expected_dir = get_logical_test_file_paths(x, expected_sub_dir)
@@ -640,8 +603,6 @@ def generate_files(ds_registry, force=False):
     logical_output = get_path('logicaltests/setup')
     logging.debug("Checking generated logical setup files...")
     generate_logical_files(logical_input, logical_output, ds_registry, force)
-    logging.debug("Checking generated config files...")
-    generate_config_files(os.path.join(root_directory, os.path.join("config", "gen")), ds_registry, force)
     return 0
 
 def run_diff(test_config, diff):
@@ -728,15 +689,15 @@ def run_failed_tests(run_file, output_dir, sub_threads):
     all_test_results = run_failed_tests_impl(run_file, root_directory, sub_threads)
     return process_test_results(all_test_results, '', False, output_dir)
 
-def run_tests(test_config):
+def run_tests(tdvt_test_config, test_set):
     #See if we need to generate test setup files.
     root_directory = get_root_dir()
-    output_dir = test_config.output_dir if test_config.output_dir else root_directory
+    output_dir = tdvt_test_config.output_dir if tdvt_test_config.output_dir else root_directory
 
-    tds_file = get_tds_full_path(root_directory, test_config.tds)
-    test_config.tds = tds_file
+    tds_file = get_tds_full_path(root_directory, tdvt_test_config.tds)
+    tdvt_test_config.tds = tds_file
     all_test_results = {}
 
-    all_test_results = run_tests_parallel(generate_test_file_list(root_directory, test_config.logical, test_config.config_file, test_config.expected_dir), test_config)
-    return process_test_results(all_test_results, tds_file, test_config.noheader, output_dir)
+    all_test_results = run_tests_parallel(generate_test_file_list(root_directory, test_set, tdvt_test_config.expected_dir), tdvt_test_config)
+    return process_test_results(all_test_results, tds_file, tdvt_test_config.noheader, output_dir)
 
