@@ -28,6 +28,7 @@ DATETRUNC('iso-year', #2017-01-01#) // Sunday, 2016-W52
 DATETRUNC('iso-year', #2018-01-01#) // Monday, 2018-W01
 DATETRUNC('iso-year', #2018-12-29#) // Sunday, 2018-W52
 
-// Wrap with other date functions
+// Wrap with other date functions. We aren't testing the result,
+// only that it doesn't error out with an invalid query.
 DATEPART('year', DATETRUNC('iso-year', #2018-01-01#))
 DATETRUNC('year', DATETRUNC('iso-year', #2018-01-01#))
