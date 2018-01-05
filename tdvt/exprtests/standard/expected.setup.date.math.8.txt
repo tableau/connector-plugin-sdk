@@ -31,22 +31,6 @@
       </tuple>
     </table>
   </test>
-  <test name='[date2] - [date2]'>
-    <sql>
-      SELECT (UNIX_TIMESTAMP(CAST(CONCAT(TO_DATE(`testv1_Calcs`.`date2`),&apos; 00:00:00&apos;) AS TIMESTAMP)) - UNIX_TIMESTAMP(CAST(CONCAT(TO_DATE(`testv1_Calcs`.`date2`),&apos; 00:00:00&apos;) AS TIMESTAMP))) / 86400.0 AS `temp_test__1152843842__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY (UNIX_TIMESTAMP(CAST(CONCAT(TO_DATE(`testv1_Calcs`.`date2`),&apos; 00:00:00&apos;) AS TIMESTAMP)) - UNIX_TIMESTAMP(CAST(CONCAT(TO_DATE(`testv1_Calcs`.`date2`),&apos; 00:00:00&apos;) AS TIMESTAMP))) / 86400.0
-    </sql>
-    <query-time>
-      16782.000
-    </query-time>
-    <table>
-      <schema>
-        <column>[cast_calcs.hadoophive_cloudera].[TEMP(Test)(1152843842)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0.0</value>
-      </tuple>
-    </table>
-  </test>
   <test name='[date2] + 1'>
     <sql>
       SELECT CAST(CONCAT(DATE_ADD(CAST(CONCAT(TO_DATE(`testv1_Calcs`.`date2`),&apos; 00:00:00&apos;) AS TIMESTAMP), CAST(1 AS INT)),&apos; 00:00:00&apos;) AS TIMESTAMP) AS `temp_test__715809068__0_`&#10;FROM `testv1_Calcs` `testv1_Calcs`&#10;GROUP BY CAST(CONCAT(DATE_ADD(CAST(CONCAT(TO_DATE(`testv1_Calcs`.`date2`),&apos; 00:00:00&apos;) AS TIMESTAMP), CAST(1 AS INT)),&apos; 00:00:00&apos;) AS TIMESTAMP)

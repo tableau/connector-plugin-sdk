@@ -25,13 +25,6 @@
       </tuple>
     </table>
   </test>
-  <test name='[date2] - [date2]'>
-    <sql>
-      Can&apos;t subtract date value from date value&#10;
-    </sql>
-    <table>
-    </table>
-  </test>
   <test name='[date2] + 1'>
     <sql>
       SELECT (&quot;Calcs&quot;.&quot;date2&quot; + 1 * INTERVAL &apos;1&apos; DAY) AS &quot;temp(test)(715809068)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1

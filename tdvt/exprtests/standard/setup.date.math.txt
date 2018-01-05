@@ -1,9 +1,6 @@
 DATEDIFF('day', NOW(), NOW())
 DATEDIFF('day', TODAY(), TODAY())
 
-
-[date2] - [date2]
-
 [date2] + 1
 [date2] + 1.5
 

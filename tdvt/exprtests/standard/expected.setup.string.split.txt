@@ -1,17 +1,4 @@
 <results>
-  <test name='SPLIT(&quot;a-b-c&quot;, &quot;-&quot;, -2) //c'>
-    <sql>
-      SELECT REVERSE(SPLIT_PART(REVERSE(&apos;a-b-c&apos;), REVERSE(&apos;-&apos;), -2*-1)) AS &quot;TEMP(Test)(154794726)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
-    </sql>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(154794726)(0)]</column>
-      </schema>
-      <tuple>
-        <value>&quot;b&quot;</value>
-      </tuple>
-    </table>
-  </test>
   <test name='SPLIT(&quot;a-b-c&quot;, &quot;-&quot;, 2) //b'>
     <sql>
       SELECT SPLIT_PART(&apos;a-b-c&apos;, &apos;-&apos;, 2) AS &quot;TEMP(Test)(1221977364)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)

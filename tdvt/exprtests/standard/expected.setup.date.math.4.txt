@@ -25,19 +25,6 @@
       </tuple>
     </table>
   </test>
-  <test name='[date2] - [date2]'>
-    <sql>
-      SELECT CAST((DATEDIFF(ss, CAST([Calcs].[date2] AS DATETIME), CAST([Calcs].[date2] AS DATETIME))) AS DOUBLE PRECISION) / CAST((60 * 60 * 24) AS DOUBLE PRECISION) AS [TEMP_Test__1152843842__0_]&#10;FROM [Calcs]&#10;GROUP BY CAST((DATEDIFF(ss, CAST([Calcs].[date2] AS DATETIME), CAST([Calcs].[date2] AS DATETIME))) AS DOUBLE PRECISION) / CAST((60 * 60 * 24) AS DOUBLE PRECISION)
-    </sql>
-    <table>
-      <schema>
-        <column>[cast_calcs.sybase_ase].[TEMP(Test)(1152843842)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0.0</value>
-      </tuple>
-    </table>
-  </test>
   <test name='[date2] + 1'>
     <sql>
       SELECT (DATEADD(ss, (1 * 60 * 60 * 24), CAST([Calcs].[date2] AS DATETIME) )) AS [TEMP_Test__715809068__0_]&#10;FROM [Calcs]&#10;GROUP BY (DATEADD(ss, (1 * 60 * 60 * 24), CAST([Calcs].[date2] AS DATETIME) ))

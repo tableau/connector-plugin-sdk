@@ -25,19 +25,6 @@
       </tuple>
     </table>
   </test>
-  <test name='[date2] - [date2]'>
-    <sql>
-      SELECT cast((cast([Calcs].[date2] as datetime) - cast([Calcs].[date2] as datetime)) as float) AS [TEMP(Test)(1152843842)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY cast((cast([Calcs].[date2] as datetime) - cast([Calcs].[date2] as datetime)) as float)
-    </sql>
-    <table>
-      <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1152843842)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0.0</value>
-      </tuple>
-    </table>
-  </test>
   <test name='[date2] + 1'>
     <sql>
       SELECT (cast([Calcs].[date2] as datetime) + 1) AS [TEMP(Test)(715809068)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (cast([Calcs].[date2] as datetime) + 1)

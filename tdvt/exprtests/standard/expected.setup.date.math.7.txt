@@ -31,22 +31,6 @@
       </tuple>
     </table>
   </test>
-  <test name='[date2] - [date2]'>
-    <sql>
-      SELECT (&quot;Calcs&quot;.&quot;date2&quot; - &quot;Calcs&quot;.&quot;date2&quot;) / 86400.00 AS &quot;TEMP(Test)(1152843842)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
-    </sql>
-    <query-time>
-      70.000
-    </query-time>
-    <table>
-      <schema>
-        <column>[cast_calcs.kognitio].[TEMP(Test)(1152843842)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0.0</value>
-      </tuple>
-    </table>
-  </test>
   <test name='[date2] + 1'>
     <sql>
       SELECT (&quot;Calcs&quot;.&quot;date2&quot; + CAST(1 AS INTEGER) * INTERVAL &apos;1&apos; DAY) AS &quot;TEMP(Test)(715809068)(0)&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
