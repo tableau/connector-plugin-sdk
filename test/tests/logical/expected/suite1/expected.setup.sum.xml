@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\TDVT\TDVT\test\tool_test\logical\setup\calcs\setup.sum.tde.xml'>
+    <sql>
+        SELECT 1 from Test
+    </sql>
+    <query-time>
+      20.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.tde].[sum:int1:ok]</column>
+      </schema>
+      <tuple>
+        <value>-22</value>
+      </tuple>
+    </table>
+  </test>
+</results>

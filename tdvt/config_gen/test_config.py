@@ -7,6 +7,17 @@ import os
 import tempfile
 from ..resources import *
 
+class TestFile(object):
+    """
+        Information about the location of a test file.
+    """
+    def __init__(self, root_dir, full_test_path):
+        self.root_dir = root_dir
+        self.test_path = full_test_path
+        self.relative_test_path = self.test_path.replace(self.root_dir,'')
+        if self.relative_test_path and (self.relative_test_path[0] == '\\' or self.relative_test_path[0] == '/'):
+            self.relative_test_path = self.relative_test_path[1:]
+
 class TestSet(object):
     """
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.

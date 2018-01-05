@@ -25,6 +25,9 @@ def get_ini_path(base_ini_dir, base_ini_name):
     
     return pkg_resources.resource_filename(__name__, base_ini_dir + '/' + config_file)
 
+def get_local_test_dir():
+    return os.path.join(os.getcwd(), "tests")
+
 def get_all_ini_files_local_first(base_ini_dir):
     file_names = []
     local_dir_to_check = os.path.join(os.getcwd(), base_ini_dir)
@@ -67,21 +70,6 @@ def split_to_list(path):
             path = parts[0]
             everything.insert(0, parts[1])
     return everything
-
-def get_relative_test_path(full_path):
-    """ Given D:\test\something\tdvt\exprtests\standard\setup.test.txt, return exprtests\standard\setup.test.txt.  """
-    parts = split_to_list(full_path)
-    new_parts = []
-    found = False
-    for p in parts:
-        if p == 'exprtests' or p == 'logicaltests':
-            found = True
-        if found:
-            new_parts.append(p)
-    if not new_parts:
-        return ''
-    new_path = os.path.join(new_parts[0], *new_parts[1:])
-    return new_path
 
 def get_logical_test_file_paths(test_file, output_dir):
     """ Given the full path to logical test file, return all the paths to the expected output and gold result files.

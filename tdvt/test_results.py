@@ -123,6 +123,9 @@ class TestCaseResult(object):
         if self.tested_config.tested_tuples and not self.passed_tuples:
             passed = False
 
+        if self.error_type:
+            passed = False
+
         return passed
 
     def table_to_json(self):
@@ -160,7 +163,7 @@ class TestErrorTimeout(object):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = ''):
+    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = ''):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -174,6 +177,7 @@ class TestResult(object):
         self.test_case_map = []
         self.cmd_output = ''
         self.run_time_ms = 0
+        self.relative_test_file = relative_test_file
 
     def __json__(self):
         return {'all_passed' : self.all_passed(), 'name' : self.name, 
@@ -319,7 +323,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
                 'test_name' : suite_name + '.' + test_name, 
                 'duration' : obj.get_total_execution_time(),
                 'case' : test_name, 
-                'test_file' : obj.test_file, 
+                'test_file' : obj.relative_test_file, 
                 'test_type' : test_type, 
                 'test_config' : obj.test_config.__json__(),
                 'tds' : obj.test_config.tds, 

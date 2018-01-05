@@ -26,7 +26,7 @@
             "repro": "tdvt.py -q test\\tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
             "suite": "", 
             "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
-            "test_file": "test\\tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml", 
+            "test_file": "tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml", 
             "test_type": "-q"
         }
     ], 

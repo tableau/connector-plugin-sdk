@@ -24,8 +24,8 @@
                 "thread_count": 12, 
                 "verbose": false
                 }, 
-            "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
-            "test_file": "test\\tool_test\\exprtests\\setup.sum.txt", 
+            "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "tool_test\\exprtests\\setup.sum.txt", 
             "test_type": "-e"
         }, 
         {
@@ -49,8 +49,8 @@
                 "thread_count": 12, 
                 "verbose": false
                 }, 
-            "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
-            "test_file": "test\\tool_test\\exprtests\\setup.max.txt", 
+            "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "tool_test\\exprtests\\setup.max.txt", 
             "test_type": "-e"
         }
     ]

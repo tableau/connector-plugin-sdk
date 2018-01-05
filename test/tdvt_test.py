@@ -20,7 +20,7 @@ import pkg_resources
 import logging
 from tdvt import tdvt_core
 from tdvt.config_gen import datasource_list
-from tdvt.config_gen.test_config import TestSet
+from tdvt.config_gen.test_config import TestSet, TestFile
 from tdvt.resources import get_path
 from tdvt.test_results import *
 from tdvt.tabquery import *
@@ -96,7 +96,6 @@ class BaseTDVTTest(unittest.TestCase):
 
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
-        self.config_file = 'tool_test/config/expression.tde.cfg'
         self.test_config = tdvt_core.TdvtTestConfig()
         self.config_set = TestSet('expression.tde', 'cast_calcs.tde.tds', '', 'tool_test\exprtests\setup.*.txt')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
@@ -106,10 +105,34 @@ class ExpressionTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, self.config_set, ''), self.test_config)
         self.check_results(all_test_results, 2)
 
+class LocalExpressionTest(BaseTDVTTest):
+    def setUp(self):
+        self.test_config = tdvt_core.TdvtTestConfig()
+        #Tests picking a local test suite.
+        self.config_set = TestSet('expression.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/')
+        self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
+
+    def test_expression_tests(self):
+        all_test_results = {}
+        all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, self.config_set, ''), self.test_config)
+        self.check_results(all_test_results, 2)
+
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
-        self.config_file = 'tool_test/config/logical.tde.cfg'
         self.config_set = TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'tool_test\logicaltests\setup\calcs\setup.*.xml')
+        self.test_config = tdvt_core.TdvtTestConfig()
+        self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
+        self.test_config.logical = True
+
+    def test_logical_tests(self):
+        all_test_results = {}
+        all_test_results = tdvt_core.run_tests_parallel(tdvt_core.generate_test_file_list(ROOT_DIRECTORY, self.config_set, ''), self.test_config)
+
+        self.check_results(all_test_results, 1)
+
+class LocalLogicalTest(BaseTDVTTest):
+    def setUp(self):
+        self.config_set = TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml')
         self.test_config = tdvt_core.TdvtTestConfig()
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
@@ -158,6 +181,10 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), TEST_DIRECTORY, 1)
         self.check_results(all_test_results, 3)
 
+    def test_combined_rerun_local_tests(self):
+        all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'combined_local.json', __name__), TEST_DIRECTORY, 1)
+        self.check_results(all_test_results, 5)
+
     def test_logical_rerun_fail(self):
         all_test_results = tdvt_core.run_failed_tests_impl(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), TEST_DIRECTORY, 1)
         self.check_results(all_test_results, 1, False)
@@ -172,10 +199,11 @@ class CommandLineTest(unittest.TestCase):
         test_config.d_override = 'LogLevel=Debug'
 
         test_file = 'some/test/file.txt'
-        work = tdvt_core.QueueWork(test_config, test_file)
+        work = tdvt_core.QueueWork(test_config, TestFile('', test_file))
         cmd_line = tdvt_core.build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined --output-dir my/output/dir -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+        os.removedirs(test_config.output_dir)
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_command_line_no_expected(self):
@@ -184,7 +212,7 @@ class CommandLineTest(unittest.TestCase):
         test_config.tds = 'mytds.tds'
 
         test_file = 'some/test/file.txt'
-        work = tdvt_core.QueueWork(test_config, test_file)
+        work = tdvt_core.QueueWork(test_config, TestFile('', test_file))
         cmd_line = tdvt_core.build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
@@ -197,11 +225,41 @@ class CommandLineTest(unittest.TestCase):
         test_config.d_override = 'LogLevel=Debug UseJDBC Override=MongoDBConnector:on,SomethingElse:off'
 
         test_file = 'some/test/file.txt'
-        work = tdvt_core.QueueWork(test_config, test_file)
+        work = tdvt_core.QueueWork(test_config, TestFile('', test_file))
         cmd_line = tdvt_core.build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         expected = 'tabquerycli.exe -e some/test/file.txt -d mytds.tds --combined -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
+class TestPathTest(unittest.TestCase):
+    def assert_number_of_tests(self, config_set, test_size):
+        all_tests = tdvt_core.generate_test_file_list(ROOT_DIRECTORY, config_set, '')
+        self.assertTrue(len(all_tests) == test_size)
+
+    def test_dir(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/'), 1)
+
+    def test_file(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.sum.tde.xml'), 1)
+
+    def test_glob(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml'), 1)
+
+    def test_exclude(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', 'sum', 'logical/setup/suite1/setup.*.xml'), 0)
+
+    def test_local_dir(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/'), 3)
+
+    def test_local_file(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'e\suite1\setup.mytest.txt'), 1)
+
+    def test_local_glob(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.*.txt'), 3)
+
+    def test_local_exclude(self):
+        self.assert_number_of_tests(TestSet('logical.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/setup.*.txt'), 2)
+
 
 class ConfigTest(unittest.TestCase):
     def test_load_ini(self):

@@ -20,6 +20,7 @@ import csv
 import logging
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
+from .config_gen.test_config import TestFile
 from .resources import *
 from .test_results import *
 from .tabquery import *
@@ -43,7 +44,8 @@ class QueueWork(object):
         self.cmd_output = None
         self.saved_error_message = None
         self.timeout = False
-        self.set_base_test_names(test_file)
+        self.relative_test_file = test_file.relative_test_path
+        self.set_base_test_names(test_file.test_path)
 
     def set_base_test_names(self, test_file):
         self.test_name = get_base_test(test_file)
@@ -55,7 +57,7 @@ class QueueWork(object):
         
     def handle_test_failure(self, result=None, error_msg=None):
         if result == None:
-            result = TestResult(self.test_name, self.test_config, self.test_file)
+            result = TestResult(self.test_name, self.test_config, self.test_file, self.relative_test_file)
             result.cmd_output = self.cmd_output
 
         err = error_msg if error_msg else self.saved_error_message
@@ -65,13 +67,13 @@ class QueueWork(object):
         self.results[self.test_file] = result
            
     def handle_timeout_test_failure(self):
-        result = TestResult(self.test_name, self.test_config, self.test_file)
+        result = TestResult(self.test_name, self.test_config, self.test_file, self.relative_test_file)
         result.error_status = TestErrorTimeout()
         self.handle_test_failure(result)
         self.timeout = True
 
     def handle_abort_test_failure(self):
-        result = TestResult(self.test_name, self.test_config, self.test_file)
+        result = TestResult(self.test_name, self.test_config, self.test_file, self.relative_test_file)
         result.error_status = TestErrorAbort()
         self.handle_test_failure(result)
 
@@ -148,18 +150,19 @@ def do_test_queue_work(i, q):
                 continue
 
             #Copy the test process filename to the actual. filename.
-            logging.debug("Copying {0} to {1}".format(existing_output_filepath, actual_output_filepath))
+            logging.debug("Copying test process output {0} to actual file {1}".format(existing_output_filepath, actual_output_filepath))
             try_move(existing_output_filepath, actual_output_filepath)
 
             new_test_file = base_filepath
 
         result = compare_results(work.test_name, new_test_file, work.test_file, work.test_config)
+        result.relative_test_file = work.relative_test_file
         result.run_time_ms = total_time_ms
         result.test_config = work.test_config
         result.cmd_output = work.cmd_output
 
         if result == None:
-            result = TestResult(test_file = work.test_file)
+            result = TestResult(test_file = work.test_file, relative_test_file = work.relative_test_file)
             result.error_case = TestErrorStartup()
 
         if not VERBOSE:
@@ -424,7 +427,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_msg = test_result.overall_error_message if test_result.overall_error_message else error_msg
-        error_type= case.error_type if case else None
+        error_type = case.error_type if case else None
 
     return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
 
@@ -505,19 +508,18 @@ def run_tests_parallel_list(test_data, thread_count):
 
     return all_test_results
 
-def run_tests_parallel(test_names, test_config):
+def run_tests_parallel(test_files, test_config):
     all_test_results = {}
     tds_file = test_config.tds
     test_queue = queue.Queue()
     all_work = []
 
     test_data = []
-    for test_file in test_names:
+    for test_file in test_files:
         test_data.append([tds_file, test_file, test_config])
 
     return run_tests_parallel_list(test_data, test_config.thread_count)
 
-#LR-TODO method on test_config?
 def generate_test_file_list_from_config(root_directory, test_config_set):
     """Read the config file and generate a list of tests."""
     allowed_tests = []
@@ -528,26 +530,33 @@ def generate_test_file_list_from_config(root_directory, test_config_set):
     #Allowed/exclude can be filenames or directory fragments.
     tests_to_run = []
     added_test = len(tests_to_run)
-    allowed_path = os.path.join(root_directory, test_config_set.allow_pattern)
-    if os.path.isfile(allowed_path):
-        logging.debug("Adding file " + allowed_path)
-        tests_to_run.append(allowed_path)
-    elif os.path.isdir(allowed_path):
-        logging.debug("Iterating directory " + allowed_path)
-        for f in os.listdir(allowed_path):
-            full_filename = os.path.join(allowed_path, f)
-            if os.path.isfile(full_filename):
-                logging.debug("Adding file " + full_filename)
-                tests_to_run.append(full_filename)
-    else:
-        for f in glob.glob(allowed_path):
-            full_filename = os.path.join(allowed_path, f)
-            if os.path.isfile(full_filename):
-                logging.debug("Adding globbed file " + full_filename)
-                tests_to_run.append(full_filename)
+    allowed_path = ''
+
+    #Check local dir first then the root package directory.
+    test_dirs = (root_directory, get_local_test_dir())
+    for test_dir in test_dirs:
+        allowed_path = os.path.join(test_dir, test_config_set.allow_pattern)
+        if os.path.isfile(allowed_path):
+            logging.debug("Adding file " + allowed_path)
+            tests_to_run.append(TestFile(test_dir, allowed_path))
+        elif os.path.isdir(allowed_path):
+            logging.debug("Iterating directory " + allowed_path)
+            for f in os.listdir(allowed_path):
+                full_filename = os.path.join(allowed_path, f)
+                if os.path.isfile(full_filename):
+                    logging.debug("Adding file " + full_filename)
+                    tests_to_run.append(TestFile(test_dir, full_filename))
+        else:
+            for f in glob.glob(allowed_path):
+                full_filename = os.path.join(allowed_path, f)
+                if os.path.isfile(full_filename):
+                    logging.debug("Adding globbed file " + full_filename)
+                    tests_to_run.append(TestFile(test_dir, full_filename))
+        if tests_to_run:
+            break
 
     if added_test == len(tests_to_run):
-        logging.debug("Could not find a test for " + allowed_path  + ". Check the path.")
+        logging.debug("Could not find any tests for " + allowed_path  + ". Check the path.")
 
     logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 
@@ -556,14 +565,13 @@ def generate_test_file_list_from_config(root_directory, test_config_set):
         for ex in exclude_tests:
             try:
                 regex = re.compile(ex)
-                if re.search(regex, test) and test in final_test_list:
+                if re.search(regex, test.test_path) and test in final_test_list:
                     if VERBOSE: logging.debug("Removing test that matched: " + ex)
                     final_test_list.remove(test)
             except:
                 print ("Error compiling regular expression for test file exclusions.")
 
-    final_test_list = map(lambda x: os.path.normpath(x), final_test_list)
-    return sorted(final_test_list)
+    return sorted(final_test_list, key = lambda x: x.test_path)
 
 def generate_test_file_list(root_directory, test_set, expected_sub_dir):
     """Take the config and expand it into the list of tests cases to run. These are fully qualified paths to test files.
@@ -574,11 +582,11 @@ def generate_test_file_list(root_directory, test_set, expected_sub_dir):
 
     #Make sure the expected output directories exist.
     if expected_sub_dir:
-        dir_list = set([os.path.dirname(x) for x in final_test_list])
+        dir_list = set([os.path.dirname(x.test_path) for x in final_test_list])
         if test_config.logical:
             dir_list = set()
             for x in final_test_list:
-                t1, t2, t3, t4, expected_dir = get_logical_test_file_paths(x, expected_sub_dir)
+                t1, t2, t3, t4, expected_dir = get_logical_test_file_paths(x.test_path, expected_sub_dir)
                 dir_list.add(expected_dir)
         for d in dir_list:
             d = os.path.join(d, expected_sub_dir)
@@ -592,7 +600,7 @@ def generate_test_file_list(root_directory, test_set, expected_sub_dir):
         print("Did not find any tests to run.")
 
     for x in final_test_list:
-        logging.debug("test " + x)
+        logging.debug("final test path " + x.test_path)
 
     return final_test_list
 
@@ -658,14 +666,17 @@ def run_failed_tests_impl(run_file, root_directory, sub_threads):
     all_test_pairs = []
     failed_tests = tests['failed_tests']
     for f in failed_tests:
-        relative_test_file = f['test_file']
-        if not os.path.isfile(relative_test_file):
-            relative_test_file = get_relative_test_path(f['test_file'])
-            relative_test_file = os.path.join(root_directory, relative_test_file)
+        test_file_path = f['test_file']
+        test_root_dir = root_directory
+        if os.path.isfile(os.path.join(get_local_test_dir(), test_file_path)):
+            test_file_path = os.path.join(get_local_test_dir(), test_file_path)
+            test_root_dir = get_local_test_dir()
+        if os.path.isfile(os.path.join(root_directory, test_file_path)):
+            test_file_path = os.path.join(root_directory, test_file_path)
 
         tds = f['tds']
         tds = get_tds_full_path(root_directory, os.path.split(tds)[1])
-        logging.debug("Found failed test: " + relative_test_file + " and tds " + tds)
+        logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
         tt = f['test_type']
         test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
         if tt in (EXPR_CONFIG_ARG, EXPR_CONFIG_ARG_SHORT):
@@ -673,7 +684,7 @@ def run_failed_tests_impl(run_file, root_directory, sub_threads):
         elif tt in (LOGICAL_CONFIG_ARG, LOGICAL_CONFIG_ARG_SHORT):
             test_config.logical = True
 
-        all_test_pairs.append([tds, relative_test_file, test_config])
+        all_test_pairs.append([tds, TestFile(test_root_dir, test_file_path), test_config])
 
 
     all_test_results = {}

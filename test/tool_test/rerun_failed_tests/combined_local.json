@@ -29,6 +29,31 @@
             "test_type": "-e"
         }, 
         {
+            "case": ".mytest2", 
+            "class": "TDVT", 
+            "expected": "e\\suite1\\expected.setup.mytest2.txt", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -e blah  --verbose", 
+            "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": false, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
+            "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "e\\suite1\\setup.mytest2.txt", 
+            "test_type": "-e"
+        }, 
+        {
             "case": ".max", 
             "class": "TDVT", 
             "expected": "test\\tool_test\\exprtests\\expected.setup.max.txt", 
@@ -52,6 +77,34 @@
             "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
             "test_file": "tool_test\\exprtests\\setup.max.txt", 
             "test_type": "-e"
+        },
+        {
+            "actual": "logical\\expected\\actual.setup.xml", 
+            "case": ".setup.local.xml", 
+            "class": "TDVT", 
+            "expected": "", 
+            "failtype": "test_failure", 
+            "message": "Expected does not match any actual file.", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -q blah  --verbose", 
+            "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": true, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
+            "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "logical\\setup\\suite1\\setup.sum.tde.xml", 
+            "test_type": "-q"
         },
         {
             "actual": "test\\tool_test\\logical\\expected\\calcs\\actual.setup.xml", 
