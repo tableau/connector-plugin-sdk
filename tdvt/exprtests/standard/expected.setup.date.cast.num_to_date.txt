@@ -46,11 +46,3 @@
     </table>
   </test>
 </results>
--01-11#</value>
-      </tuple>
-      <tuple>
-        <value>#1900-01-20#</value>
-      </tuple>
-    </table>
-  </test>
-</results>
