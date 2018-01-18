@@ -22,7 +22,7 @@ import queue
 import logging
 from zipfile import ZipFile
 import glob
-from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig
+from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig, generate_test_file_list_from_config
 from .config_gen.test_config import SingleLogicalTestConfig, SingleExpressionTestConfig
 from .config_gen.gentests import list_configs, list_config
 from .tabquery import *
@@ -210,15 +210,26 @@ def print_ds(ds, ds_reg):
     print ("\tLogical tests:")
     for x in test_config.get_logical_tests():
         print ("\t"*2 + str(x))
+        root_directory = get_root_dir()
+        tests = generate_test_file_list_from_config(root_directory, x)
+        for test in tests:
+            print ("\t"*3 + test.test_path)
+
     print ("\tExpression tests:")
     for x in test_config.get_expression_tests():
         print ("\t"*2 + str(x))
+        root_directory = get_root_dir()
+        tests = generate_test_file_list_from_config(root_directory, x)
+        for test in tests:
+            print ("\t"*3 + test.test_path)
 
 def print_configurations(ds_reg, dsname):
     if dsname:
         ds_to_run = ds_reg.get_datasources(dsname)
         if len(ds_to_run) == 1:
             print_ds(ds_to_run[0], ds_reg)
+        elif len(ds_to_run) == 0:
+            pass
         else:
             print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run)) 
             if VERBOSE:
