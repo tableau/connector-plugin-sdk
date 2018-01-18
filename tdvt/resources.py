@@ -28,6 +28,9 @@ def get_ini_path(base_ini_dir, base_ini_name):
 def get_local_test_dir():
     return os.path.join(os.getcwd(), "tests")
 
+def get_local_logical_test_dir():
+    return os.path.join(get_local_test_dir(), "logical")
+
 def get_all_ini_files_local_first(base_ini_dir):
     file_names = []
     local_dir_to_check = os.path.join(os.getcwd(), base_ini_dir)

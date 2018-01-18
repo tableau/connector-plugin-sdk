@@ -606,9 +606,14 @@ def generate_test_file_list(root_directory, test_set, expected_sub_dir):
 
 def generate_files(ds_registry, force=False):
     """Generate the config files and logical query test permutations."""
-    root_directory = get_root_dir()
     logical_input = get_path('logicaltests/generate/input/')
     logical_output = get_path('logicaltests/setup')
+    logging.debug("Checking generated logical setup files...")
+    generate_logical_files(logical_input, logical_output, ds_registry, force)
+
+    root_directory = get_local_logical_test_dir()
+    logical_input = os.path.join(root_directory, 'generate/input/')
+    logical_output = os.path.join(root_directory, 'setup/')
     logging.debug("Checking generated logical setup files...")
     generate_logical_files(logical_input, logical_output, ds_registry, force)
     return 0
