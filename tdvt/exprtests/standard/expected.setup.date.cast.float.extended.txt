@@ -1,0 +1,18 @@
+<results>
+  <test name='float(#2050-01-01#)'>
+    <sql>
+      SELECT CAST(CAST({d &apos;2050-01-01&apos;} as datetime) as float) AS [TEMP(Test)(3947742720)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      15.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3947742720)(0)]</column>
+      </schema>
+      <tuple>
+        <value>54787.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>
