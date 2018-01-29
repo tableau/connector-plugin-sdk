@@ -317,12 +317,13 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         suite_name = '' if not obj.test_config.suite_name else obj.test_config.suite_name
         test_name = '' if not obj.get_name() else obj.get_name()
         test_type = '-q' if obj.test_config.logical else '-e' 
+        test_cases = test_name if not obj.test_case_map else ",".join([x.name for x in obj.test_case_map if not x.all_passed()])
 
         json_output = {'suite' : suite_name, 
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name, 
                 'duration' : obj.get_total_execution_time(),
-                'case' : test_name, 
+                'case' : test_cases, 
                 'test_file' : obj.relative_test_file, 
                 'test_type' : test_type, 
                 'test_config' : obj.test_config.__json__(),
