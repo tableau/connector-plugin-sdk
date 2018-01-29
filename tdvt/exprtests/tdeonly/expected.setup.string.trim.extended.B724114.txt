@@ -1,0 +1,601 @@
+<results>
+  <test name='TRIM(&quot; BIONDI, BOB &quot;)'>
+    <sql>
+      SELECT BTRIM(&apos; BIONDI, BOB &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3844536719)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3844536719)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;BIONDI, BOB&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(&quot; AirBnB &quot;)'>
+    <sql>
+      SELECT BTRIM(&apos; AirBnB &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1884332596)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1884332596)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;AirBnB&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(&quot; California &quot;)'>
+    <sql>
+      SELECT BTRIM(&apos; California &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1294652857)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1294652857)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;California&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(&quot; Dallas &quot;)'>
+    <sql>
+      SELECT BTRIM(&apos; Dallas &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1221272253)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      5.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1221272253)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Dallas&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(&quot; Improv &quot;)'>
+    <sql>
+      SELECT BTRIM(&apos; Improv &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1835159811)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1835159811)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Improv&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(&quot; 912 202 8919 &quot;)'>
+    <sql>
+      SELECT BTRIM(&apos; 912 202 8919 &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1421920701)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1421920701)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;912 202 8919&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(CHAR(9)+&quot;Tab&quot;+CHAR(9))'>
+    <sql>
+      SELECT BTRIM(((TABLEAU.CHAR(9) || &apos;Tab&apos;) || TABLEAU.CHAR(9)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2682608485)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2682608485)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Tab&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(CHAR(10)+&quot;LF&quot;+CHAR(10))'>
+    <sql>
+      SELECT BTRIM(((TABLEAU.CHAR(10) || &apos;LF&apos;) || TABLEAU.CHAR(10)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3293523022)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3293523022)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;LF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(CHAR(11)+&quot;VT&quot;+CHAR(11))'>
+    <sql>
+      SELECT BTRIM(((TABLEAU.CHAR(11) || &apos;VT&apos;) || TABLEAU.CHAR(11)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3876157966)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3876157966)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;VT&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(CHAR(12)+&quot;FF&quot;+CHAR(12))'>
+    <sql>
+      SELECT BTRIM(((TABLEAU.CHAR(12) || &apos;FF&apos;) || TABLEAU.CHAR(12)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2811127748)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2811127748)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(CHAR(13)+&quot;CR&quot;+CHAR(13))'>
+    <sql>
+      SELECT BTRIM(((TABLEAU.CHAR(13) || &apos;CR&apos;) || TABLEAU.CHAR(13)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(724231245)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(724231245)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CR&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(CHAR(9)+CHAR(10)+CHAR(11)+CHAR(12)+CHAR(13))'>
+    <sql>
+      SELECT BTRIM(((((TABLEAU.CHAR(9) || TABLEAU.CHAR(10)) || TABLEAU.CHAR(11)) || TABLEAU.CHAR(12)) || TABLEAU.CHAR(13)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1993838367)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1993838367)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRIM(&quot; &quot;+str2+&quot; &quot;+str1+&quot; &quot;)'>
+    <sql>
+      SELECT BTRIM(((((&apos; &apos; || &quot;Extract&quot;.&quot;str2&quot;) || &apos; &apos;) || &quot;Extract&quot;.&quot;str1&quot;) || &apos; &apos;),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2431438012)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      9.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2431438012)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eight BUSINESS ENVELOPES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven CD-R MEDIA&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen DOT MATRIX PRINTERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;five BINDER CLIPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fourteen CORDLESS KEYBOARDS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;nine ANSWERING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one CLAMP ON LAMPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six BINDING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteen DVD&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ten BUSINESS COPIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;three AIR PURIFIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;twelve CONFERENCE PHONES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two CLOCKS&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(&quot; BIONDI, Matt&quot;)'>
+    <sql>
+      SELECT LTRIM(&apos; BIONDI, Matt&apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(4271330201)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(4271330201)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;BIONDI, Matt&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(&quot; Austin&quot;)'>
+    <sql>
+      SELECT LTRIM(&apos; Austin&apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3938360065)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3938360065)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Austin&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(&quot; California&quot;)'>
+    <sql>
+      SELECT LTRIM(&apos; California&apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3335136203)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3335136203)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;California&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(&quot; Dallas&quot;)'>
+    <sql>
+      SELECT LTRIM(&apos; Dallas&apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3507711538)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3507711538)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Dallas&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(&quot; 912 202 8919 &quot;)'>
+    <sql>
+      SELECT LTRIM(&apos; 912 202 8919 &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1039488390)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1039488390)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;912 202 8919 &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(CHAR(9)+&quot;Tab&quot;)'>
+    <sql>
+      SELECT LTRIM((TABLEAU.CHAR(9) || &apos;Tab&apos;),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2238929863)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2238929863)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Tab&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(CHAR(10)+&quot;LF&quot;)'>
+    <sql>
+      SELECT LTRIM((TABLEAU.CHAR(10) || &apos;LF&apos;),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(157392675)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(157392675)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;LF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(CHAR(11)+&quot;VT&quot;)'>
+    <sql>
+      SELECT LTRIM((TABLEAU.CHAR(11) || &apos;VT&apos;),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2530787015)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2530787015)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;VT&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(CHAR(12)+&quot;FF&quot;)'>
+    <sql>
+      SELECT LTRIM((TABLEAU.CHAR(12) || &apos;FF&apos;),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1227482337)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1227482337)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(CHAR(13)+&quot;CR&quot;)'>
+    <sql>
+      SELECT LTRIM((TABLEAU.CHAR(13) || &apos;CR&apos;),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1546769579)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      9.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1546769579)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CR&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='LTRIM(CHAR(9)+CHAR(10)+CHAR(11)+CHAR(12)+CHAR(13))'>
+    <sql>
+      SELECT LTRIM(((((TABLEAU.CHAR(9) || TABLEAU.CHAR(10)) || TABLEAU.CHAR(11)) || TABLEAU.CHAR(12)) || TABLEAU.CHAR(13)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(149170732)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(149170732)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;BIONDI, BOB &quot;)'>
+    <sql>
+      SELECT RTRIM(&apos;BIONDI, BOB &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2155159950)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      6.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2155159950)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;BIONDI, BOB&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;AirBnB &quot;)'>
+    <sql>
+      SELECT RTRIM(&apos;AirBnB &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1141862788)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1141862788)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;AirBnB&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;California &quot;)'>
+    <sql>
+      SELECT RTRIM(&apos;California &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2336694753)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2336694753)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;California&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;Mustard &quot;)'>
+    <sql>
+      SELECT RTRIM(&apos;Mustard &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3735260354)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3735260354)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Mustard&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;912 202 8919 &quot;)'>
+    <sql>
+      SELECT RTRIM(&apos;912 202 8919 &apos;,E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2007761602)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2007761602)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;912 202 8919&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;Tab&quot;+CHAR(9))'>
+    <sql>
+      SELECT RTRIM((&apos;Tab&apos; || TABLEAU.CHAR(9)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3007568586)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3007568586)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Tab&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;LF&quot;+CHAR(10))'>
+    <sql>
+      SELECT RTRIM((&apos;LF&apos; || TABLEAU.CHAR(10)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(973026348)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(973026348)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;LF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;VT&quot;+CHAR(11))'>
+    <sql>
+      SELECT RTRIM((&apos;VT&apos; || TABLEAU.CHAR(11)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(3407971521)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      8.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3407971521)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;VT&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;FF&quot;+CHAR(12))'>
+    <sql>
+      SELECT RTRIM((&apos;FF&apos; || TABLEAU.CHAR(12)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2354532092)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2354532092)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(&quot;CR&quot;+CHAR(13))'>
+    <sql>
+      SELECT RTRIM((&apos;CR&apos; || TABLEAU.CHAR(13)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(1992098877)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1992098877)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CR&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='RTRIM(CHAR(9)+CHAR(10)+CHAR(11)+CHAR(12)+CHAR(13))'>
+    <sql>
+      SELECT RTRIM(((((TABLEAU.CHAR(9) || TABLEAU.CHAR(10)) || TABLEAU.CHAR(11)) || TABLEAU.CHAR(12)) || TABLEAU.CHAR(13)),E&apos; \t\n\x0b\f\r&apos;) AS &quot;TEMP(Test)(2810400609)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      7.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2810400609)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
