@@ -237,7 +237,7 @@ def print_configurations(ds_reg, dsname):
                     print_ds(ds, ds_reg)
                     
     else:
-        print ("\nAvailable datasources")
+        print ("\nAvailable datasources:")
         ds_all = ds_reg.get_datasources('all')
         for ds in sorted(ds_all):
             print (ds)
