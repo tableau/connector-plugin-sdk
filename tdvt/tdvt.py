@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-__version__ = '1.1.56'
+__version__ = '1.1.57'
 
 import os
 import argparse
@@ -237,7 +237,7 @@ def print_configurations(ds_reg, dsname):
                     print_ds(ds, ds_reg)
                     
     else:
-        print ("\nAvailable datasources")
+        print ("\nAvailable datasources:")
         ds_all = ds_reg.get_datasources('all')
         for ds in sorted(ds_all):
             print (ds)
