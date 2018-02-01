@@ -320,7 +320,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         if obj.test_config.logical:
             test_cases = test_name
         else:
-            test_cases = test_name if not obj.test_case_map else test_name + ":" + ",".join([x.name for x in obj.test_case_map if not x.all_passed()])
+            test_cases = test_name if not obj.test_case_map else test_name + ":" + ",".join(sorted([x.name for x in obj.test_case_map if not x.all_passed()]))
             if not test_cases:
                 test_cases = test_name
 
