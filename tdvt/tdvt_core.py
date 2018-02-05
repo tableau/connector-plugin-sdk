@@ -612,10 +612,11 @@ def generate_files(ds_registry, force=False):
     generate_logical_files(logical_input, logical_output, ds_registry, force)
 
     root_directory = get_local_logical_test_dir()
-    logical_input = os.path.join(root_directory, 'generate/input/')
-    logical_output = os.path.join(root_directory, 'setup/')
-    logging.debug("Checking generated logical setup files...")
-    generate_logical_files(logical_input, logical_output, ds_registry, force)
+    if os.path.isdir(root_directory):
+        logical_input = os.path.join(root_directory, 'generate/input/')
+        logical_output = os.path.join(root_directory, 'setup/')
+        logging.debug("Checking generated logical setup files...")
+        generate_logical_files(logical_input, logical_output, ds_registry, force)
     return 0
 
 def run_diff(test_config, diff):
