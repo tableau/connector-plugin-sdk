@@ -5,7 +5,6 @@ TDVT - Tableau Datasource Verification Tool
 1. Python 3.
 2. An ODBC driver for your database.
 3. The 'Calcs' and 'Staples' table loaded in your database.
-4. Optional: The TPCH 1GB dataset loaded in your database.
     
 
 How it works
@@ -23,15 +22,19 @@ Installation
 ---------------
 
 1. Install TDVT Python module
-    * Install from an archive file: `pip install tdvt-1.1.13.tar.gz`
-    * TODO pip install
+    * Install from an archive file: `pip install tdvt-1.1.59.zip` or `py -3 -m pip install tdvt-1.1.59.zip`.
+    * Verify it is installed by running `pip list` or `py -3 -m pip list`.
 2. Run this from your working directory to create the necessary setup directories.
-    `tdvt.py --setup`
+    `py -3 -m tdvt.tdvt --setup`
 3. Edit config/tdvt/tdvt_override.ini and set the path to tabquerycli.exe.
-    * For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 10.1\bin\tabquerycli.exe` 
+    * For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 10.5\bin\tabquerycli.exe` 
 
 Notes on invoking TDVT
 ---------------
+When TDVT is installed as a Python module it can be invoked as follows:
+`python -m tdvt.tdvt`. If you have Python 2 and Python 3 installed run it like `py -3 -m tdvt.tdvt`. This will ensure Python 3 is used. In th examples below `tdvt` is used, but one of the above would be used in actual practice.
+
+
 TDVT will look for the necessary config and setup files relative to the current working directory. Always run TDVT commands from the top level directory of your generated folder structure.
 Use double quotes to wrap arguments that contain spaces.
 
@@ -45,7 +48,7 @@ Secondly you will need two Tableau Data Source files (.tds). These represent sav
 1. Start Tableau desktop and connect to the 'Calcs' table using 'Other Database (ODBC)'. Once connected, right click on the datasource in the top left 'Data' tab and pick 'Add to Saved Datasources'. Save this in the tdvt/tds directory. Name this file 'cast_calcs.\*.tds' or 'Staples.\*.tds' where * represents your TDVT config name. For example 'cast_calcs.mydb.tds'.
 2. Open the tds file in a text editor and embed the password in the <connection> tag of the tds file next to the existing 'username' value. Save the file.
 3. Repeat this for the 'Staples' table.
-4. Run `tdvt.py --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two tds files to rename the connection.
+4. Run `tdvt --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two tds files to rename the connection.
 5. Update the generated ini file (ie mydb.ini) and choose a logical query config that matches what your database supports. See the section below titled 'Choosing a logical query config'.
 6. Run: `-m tdvt.tdvt --generate`
 7. Verify your new test suite by running: `-m tdvt.tdvt --list your_datasource_name`. It should show you a list of test suites associated with this datasource.
