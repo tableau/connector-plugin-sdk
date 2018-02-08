@@ -580,28 +580,16 @@ def generate_test_file_list(root_directory, test_set, expected_sub_dir):
     """
     final_test_list = generate_test_file_list_from_config(root_directory, test_set)
 
-    #Make sure the expected output directories exist.
-    if expected_sub_dir:
-        dir_list = set([os.path.dirname(x.test_path) for x in final_test_list])
-        if test_config.logical:
-            dir_list = set()
-            for x in final_test_list:
-                t1, t2, t3, t4, expected_dir = get_logical_test_file_paths(x.test_path, expected_sub_dir)
-                dir_list.add(expected_dir)
-        for d in dir_list:
-            d = os.path.join(d, expected_sub_dir)
-            if not os.path.isdir(d):
-                logging.debug("Making dir: {}".format(d))
-                os.makedirs(d)
-
     logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
     if len(final_test_list) == 0:
         logging.warn("Did not find any tests to run.")
         print("Did not find any tests to run.")
+        return final_test_list
 
     for x in final_test_list:
         logging.debug("final test path " + x.test_path)
 
+    create_expected_directories(test_set, expected_sub_dir, final_test_list)
     return final_test_list
 
 def generate_files(ds_registry, force=False):
@@ -658,6 +646,21 @@ def run_diff(test_config, diff):
     for t in diff_count_map:
         logging.debug(t + ' Number of differences: ' + str(diff_count_map[t]))
     return 0
+
+def create_expected_directories(test_set, expected_sub_dir, final_test_list):
+    #Make sure the expected output directories exist.
+    if expected_sub_dir:
+        dir_list = set([os.path.dirname(x.test_path) for x in final_test_list])
+        if test_set.is_logical:
+            dir_list = set()
+            for x in final_test_list:
+                t1, t2, t3, t4, expected_dir = get_logical_test_file_paths(x.test_path, expected_sub_dir)
+                dir_list.add(expected_dir)
+        for d in dir_list:
+            d = os.path.join(d, expected_sub_dir)
+            if not os.path.isdir(d):
+                logging.debug("Making dir: {}".format(d))
+                os.makedirs(d)
 
 def run_failed_tests_impl(run_file, root_directory, sub_threads):
     """Run the failed tests from the json output file."""

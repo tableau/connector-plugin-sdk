@@ -22,11 +22,12 @@ class TestSet(object):
     """
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
-    def __init__(self, config_name, tds_name, exclusions, allow_pattern):
+    def __init__(self, config_name, tds_name, exclusions, allow_pattern, is_logical):
         self.config_name = config_name
         self.tds_name = tds_name
         self.exclusions = exclusions
         self.allow_pattern = allow_pattern
+        self.is_logical = is_logical
 
     def get_exclusions(self):
         return [] if not self.exclusions else self.exclusions.split(',')
@@ -41,6 +42,26 @@ class TestSet(object):
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+
+class LogicalTestSet(TestSet):
+    def __init__(self, config_name, tds_name, exclusions, allow_pattern):
+        super(LogicalTestSet, self).__init__(config_name, tds_name, exclusions, allow_pattern, True)
+        
+class ExpressionTestSet(TestSet):
+    def __init__(self, config_name, tds_name, exclusions, allow_pattern):
+        super(ExpressionTestSet, self).__init__(config_name, tds_name, exclusions, allow_pattern, False)
+
+class SingleLogicalTestSet(LogicalTestSet):
+    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
+        super(SingleLogicalTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        self.allow_pattern = self.allow_pattern.replace('?', ds_info.logical_config_name)
+        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
+
+class SingleExpressionTestSet(ExpressionTestSet):
+    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
+        super(SingleExpressionTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 def build_config_name(prefix, dsname):
     return prefix + dsname + '.cfg'
@@ -80,14 +101,14 @@ class TestConfig(object):
         return prefix + self.dsname + '.tds'
 
     def add_logical_test(self, base_config_name, tds_name, exclusions, test_path):
-        new_test = TestSet(self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
+        new_test = LogicalTestSet(self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
         self.add_logical_testset(new_test)
 
     def add_logical_testset(self, new_test):
         self.logical_test_set.append(new_test)
 
     def add_expression_test(self, base_config_name, tds_name, exclusions, test_path):
-        new_test = TestSet(self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
+        new_test = ExpressionTestSet(self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
         self.add_expression_testset(new_test)
 
     def add_expression_testset(self, new_test):
@@ -107,16 +128,4 @@ class TestConfig(object):
         for test in self.get_logical_tests() + self.get_expression_tests():
             msg += str(test) + "\n"
         return msg
-
-
-class SingleLogicalTestConfig(TestSet):
-    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleLogicalTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
-        self.allow_pattern = self.allow_pattern.replace('?', ds_info.logical_config_name)
-        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
-
-class SingleExpressionTestConfig(TestSet):
-    def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleExpressionTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
-        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 

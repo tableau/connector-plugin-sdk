@@ -23,7 +23,7 @@ import logging
 from zipfile import ZipFile
 import glob
 from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig, generate_test_file_list_from_config
-from .config_gen.test_config import SingleLogicalTestConfig, SingleExpressionTestConfig
+from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSet
 from .config_gen.gentests import list_configs, list_config
 from .tabquery import *
 from .setup_env import create_test_environment, add_datasource
@@ -252,9 +252,9 @@ def get_single_test_config(is_logical, test_pattern, tds_pattern, exclude_patter
             return None
         single_test = None
         if is_logical:
-            single_test = SingleLogicalTestConfig(test_pattern, tds_pattern, exclude_pattern, ds_info)
+            single_test = SingleLogicalTestSet(test_pattern, tds_pattern, exclude_pattern, ds_info)
         else:
-            single_test = SingleExpressionTestConfig(test_pattern, tds_pattern, exclude_pattern, ds_info)
+            single_test = SingleExpressionTestSet(test_pattern, tds_pattern, exclude_pattern, ds_info)
         return single_test
 
 def get_test_sets_to_run(function_call, test_pattern, single_test):
