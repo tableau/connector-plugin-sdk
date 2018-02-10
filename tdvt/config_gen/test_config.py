@@ -54,13 +54,13 @@ class ExpressionTestSet(TestSet):
 
 class SingleLogicalTestSet(LogicalTestSet):
     def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleLogicalTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        super(SingleLogicalTestSet, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
         self.allow_pattern = self.allow_pattern.replace('?', ds_info.logical_config_name)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 class SingleExpressionTestSet(ExpressionTestSet):
     def __init__(self, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleExpressionTestConfig, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        super(SingleExpressionTestSet, self).__init__('temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 def build_config_name(prefix, dsname):
