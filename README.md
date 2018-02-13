@@ -138,7 +138,7 @@ fieldnameNoSpace = True
 fieldnameLower_underscore = True
 fieldnameUnderscoreNotSpace = True
 
-CommandLineOverride = LogLevel=Debug #Space separated list of arguments that are passed through to tabquerycli.exe. Each is prepended with -D.
+CommandLineOverride = LogLevel=Debug #Space separated list of arguments that are passed through unchanged to tabquerycli.exe. Most Tableau arguments require a prepended '-D'.
 
 MaxThread = 6   #You can add this to control Max Thread number when you use TDVT to run single datasource, it cannot apply with multi datasource
 
