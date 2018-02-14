@@ -393,7 +393,9 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     error_msg = None
     error_type = None
     time=None
+    expected_time = None
     generated_sql=None
+    expected_sql = None
     actual_tuples=None
     expected_tuples=None
     suite = test_result.test_config.suite_name if test_result else ''
@@ -405,7 +407,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
-        return [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        columns = [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        if test_result.test_config.tested_sql:
+            columns.extend([expected_sql, expected_time])
+        return columns
 
     case = test_result.get_test_case(test_case_index)
     matched_expected = test_result.matched_expected_version
@@ -419,17 +424,23 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     actual_tuples = "\n".join(case.get_tuples()[0:get_tuple_display_limit()])
     if not test_result.best_matching_expected_results:
         expected_tuples = ''
+        expected_sql = ''
     else:
         expected_case = test_result.best_matching_expected_results.get_test_case(test_case_index)
         expected_tuples = expected_case.get_tuples() if expected_case else ""
         expected_tuples = "\n".join(expected_tuples[0:get_tuple_display_limit()])
+        expected_sql = expected_case.get_sql_text()
+        expected_time = expected_case.execution_time
 
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_msg = test_result.overall_error_message if test_result.overall_error_message else error_msg
         error_type = case.error_type if case else None
 
-    return [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    columns = [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    if test_result.test_config.tested_sql:
+        columns.extend([expected_sql, float(expected_time)])
+    return columns
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -449,6 +460,9 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
     csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Test Type','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    results_values = list(all_test_results.values())
+    if results_values and results_values[0].test_config.tested_sql:
+        csvheader.extend(['Expected SQL', 'Expected Query Time (ms)']) 
     if not skip_header:
         csv_out.writerow(csvheader)
 
