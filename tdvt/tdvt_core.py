@@ -399,6 +399,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     actual_tuples=None
     expected_tuples=None
     suite = test_result.test_config.suite_name if test_result else ''
+    test_set_name = test_result.test_config.config_file if test_result else ''
     cmd_output = test_result.cmd_output if test_result else ''
     test_type = 'unknown'
     if test_result and test_result.test_config:
@@ -407,7 +408,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
-        columns = [suite, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
         if test_result.test_config.tested_sql:
             columns.extend([expected_sql, expected_time])
         return columns
@@ -437,7 +438,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         error_msg = test_result.overall_error_message if test_result.overall_error_message else error_msg
         error_type = case.error_type if case else None
 
-    columns = [suite, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
     if test_result.test_config.tested_sql:
         columns.extend([expected_sql, float(expected_time)])
     return columns
@@ -459,7 +460,9 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    csvheader = ['Suite','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Test Type','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    #Suite is the datasource name (ie mydb).
+    #Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
+    csvheader = ['Suite','Test Set','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Test Type','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     results_values = list(all_test_results.values())
     if results_values and results_values[0].test_config.tested_sql:
         csvheader.extend(['Expected SQL', 'Expected Query Time (ms)']) 
