@@ -33,7 +33,7 @@ class TestSet(object):
         return [] if not self.exclusions else self.exclusions.split(',')
 
     def __str__(self):
-        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}]".format(self.config_name, self.tds_name, self.exclusions, self.allow_pattern)
+        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}] [is_logical={4}]".format(self.config_name, self.tds_name, self.exclusions, self.allow_pattern, self.is_logical)
     
     def __eq__(self, other):
         if isinstance(other, self.__class__):

@@ -21,14 +21,18 @@ def configure_tabquery_path():
         tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
     logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
 
-def build_tabquery_command_line_local(work):
-    """To facilitate testing. Just get the executable name and not the full path to the executable which depends on where the test is run."""
-    tb = TabqueryCommandLine()
-    cmd = tb.build_tabquery_command_line(work)
-    new_cmd = []
-    new_cmd.append(os.path.split(cmd[0])[1])
-    new_cmd += cmd[1:]
-    return new_cmd
+def build_tabquery_command_line(work):
+    try:
+        sys.path.insert(0, get_extensions_dir())
+        from extend_tabquery import TabqueryCommandLineExtension
+        sys.path.pop(0)
+        tb = TabqueryCommandLineExtension()
+        logging.debug("Imported extension extend_tabquery")
+    except:
+        tb = TabqueryCommandLine()
+
+    cmdline = tb.build_tabquery_command_line(work)
+    return cmdline
 
 class TabqueryCommandLine(object):
     def extend_command_line(self, cmdline, work):
@@ -68,7 +72,7 @@ class TabqueryCommandLine(object):
         #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
         #that tests what you would expect.
         cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
-        
+
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
         return cmdline
