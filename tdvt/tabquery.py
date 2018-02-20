@@ -23,49 +23,55 @@ def configure_tabquery_path():
 
 def build_tabquery_command_line_local(work):
     """To facilitate testing. Just get the executable name and not the full path to the executable which depends on where the test is run."""
-    cmd = build_tabquery_command_line(work)
+    tb = TabqueryCommandLine()
+    cmd = tb.build_tabquery_command_line(work)
     new_cmd = []
     new_cmd.append(os.path.split(cmd[0])[1])
     new_cmd += cmd[1:]
     return new_cmd
 
-def build_tabquery_command_line(work):
-    """Build the command line string for calling tabquerycli."""
-    global tab_cli_exe
-    cli_arg = "-q" if work.test_config.logical else "-e"
+class TabqueryCommandLine(object):
+    def extend_command_line(self, cmdline, work):
+        pass
 
-    cmdline = [tab_cli_exe]
-    cmdline_base = [cli_arg, work.test_file]
-    cmdline.extend(cmdline_base)
-    tds_arg = ["-d", work.test_config.tds]
-    cmdline.extend(tds_arg)
-    cmdline.extend(["--combined"])
+    def build_tabquery_command_line(self, work):
+        """Build the command line string for calling tabquerycli."""
+        global tab_cli_exe
+        cli_arg = "-q" if work.test_config.logical else "-e"
 
-    expected_output_dir = work.test_config.output_dir
+        cmdline = [tab_cli_exe]
+        cmdline_base = [cli_arg, work.test_file]
+        cmdline.extend(cmdline_base)
+        tds_arg = ["-d", work.test_config.tds]
+        cmdline.extend(tds_arg)
+        cmdline.extend(["--combined"])
 
-    if work.test_config.logical:
-        existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
-        expected_output_dir = expected_output_dir if expected_output_dir else expected_dir
+        expected_output_dir = work.test_config.output_dir
 
-    if expected_output_dir:
-        if not os.path.isdir(expected_output_dir):
-            logging.debug("Making dir: {}".format(expected_output_dir))
-            try:
-                os.makedirs(expected_output_dir)
-            except FileExistsError:
-                pass
-        cmdline.extend(["--output-dir", expected_output_dir])
+        if work.test_config.logical:
+            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
+            expected_output_dir = expected_output_dir if expected_output_dir else expected_dir
 
-    if work.test_config.d_override:
-        for override in work.test_config.d_override.split(' '):
-            cmdline.extend([override])
+        if expected_output_dir:
+            if not os.path.isdir(expected_output_dir):
+                logging.debug("Making dir: {}".format(expected_output_dir))
+                try:
+                    os.makedirs(expected_output_dir)
+                except FileExistsError:
+                    pass
+            cmdline.extend(["--output-dir", expected_output_dir])
 
-    #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-    #that tests what you would expect.
-    cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
-    
-    work.test_config.command_line = cmdline
-    return cmdline
+        if work.test_config.d_override:
+            for override in work.test_config.d_override.split(' '):
+                cmdline.extend([override])
+
+        #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
+        #that tests what you would expect.
+        cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
+        
+        self.extend_command_line(cmdline, work)
+        work.test_config.command_line = cmdline
+        return cmdline
 
 def tabquerycli_exists():
     global tab_cli_exe

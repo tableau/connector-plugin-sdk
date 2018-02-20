@@ -84,7 +84,17 @@ class QueueWork(object):
         return self.timeout
 
     def run(self):
-        cmdline = build_tabquery_command_line(self)
+        tb = TabqueryCommandLine()
+        try:
+            sys.path.insert(0, get_extensions_dir())
+            import extend_tabquery
+            sys.path.pop(0)
+            tb = extend_tabquery.TabqueryCommandLineExtension()
+            logging.debug("Imported extension extend_tabquery")
+        except:
+            pass
+
+        cmdline = tb.build_tabquery_command_line(self)
         logging.debug(" calling " + ' '.join(cmdline))
 
         try:
