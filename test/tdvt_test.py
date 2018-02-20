@@ -343,8 +343,6 @@ class ConfigTest(unittest.TestCase):
 
         tests = [test1, test2, test3]
         
-        for t in x:
-            print ("did find " + str(t))
         for test in tests:
             found = [y for y in x if y == test] 
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
