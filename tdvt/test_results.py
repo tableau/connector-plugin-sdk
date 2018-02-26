@@ -325,7 +325,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
             if obj.test_case_map:
                 joined_cases = ",".join(sorted([x.name for x in obj.test_case_map if not x.all_passed()]))
                 if joined_cases:
-                    test_cases = test_name + ":" + ",".join(sorted([x.name for x in obj.test_case_map if not x.all_passed()]))
+                    test_cases = test_name + ":" + joined_cases
 
             if not test_cases:
                 test_cases = test_name
