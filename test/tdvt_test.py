@@ -487,6 +487,27 @@ class ConfigTest(unittest.TestCase):
 
         self.assertTrue(not x)
 
+    def test_load_run_as_perf_not_set(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'perf_notset.ini', __name__))
+        test_config = datasource_list.LoadTest(config)
+        self.assertFalse(test_config.run_as_perf,'run_as_perf did not match: ' + str(test_config.run_as_perf))
+
+
+    def test_load_run_as_perf_true(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'perf_true.ini', __name__))
+        test_config = datasource_list.LoadTest(config)
+        self.assertTrue(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
+
+
+    def test_load_run_as_perf_false(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'perf_false.ini', __name__))
+        test_config = datasource_list.LoadTest(config)
+        self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
+
+
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '') 
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))

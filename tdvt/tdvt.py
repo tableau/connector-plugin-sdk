@@ -283,6 +283,7 @@ def enqueue_tests(is_logical, ds_info, args, single_test, suite, lock, test_queu
         test_config.suite_name = suite
         test_config.logical = is_logical
         test_config.d_override = ds_info.d_override
+        test_config.run_as_perf = ds_info.run_as_perf
         test_config.tds = test_set.tds_name
         test_config.config_file = test_set.config_name
 

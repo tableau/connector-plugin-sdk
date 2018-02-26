@@ -70,7 +70,7 @@ def LoadTest(config):
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
-    test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'), dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''))
+    test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'), dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
 
     #Add the standard test suites.
     if standard_tests in config.sections():

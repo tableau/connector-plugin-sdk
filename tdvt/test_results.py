@@ -5,7 +5,7 @@ import re
 
 class TdvtTestConfig(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6, from_json = None):
+    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', expected_dir = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6, from_json = None, run_as_perf = False):
         self.tested_sql = tested_sql
         self.tested_tuples = tested_tuples
         self.expected_dir = expected_dir
@@ -19,6 +19,7 @@ class TdvtTestConfig(object):
         self.noheader = False
         self.thread_count = thread_count
         self.leave_temp_dir = False
+        self.run_as_perf = run_as_perf
         if from_args:
             self.init_from_args(from_args)
         if from_json:

@@ -73,7 +73,7 @@ class TestConfig(object):
     """
         Defines all the tests that can be run for a single data source. An organized collection of TestSet objects.
     """
-    def __init__(self, dsname, logical_config_name, maxthread, maxsubthread, d_override=''):
+    def __init__(self, dsname, logical_config_name, maxthread, maxsubthread, d_override='', run_as_perf=False):
         self.dsname = dsname
         self.logical_config_name = logical_config_name
         self.calcs_tds = self.get_tds_name('cast_calcs.')
@@ -83,6 +83,7 @@ class TestConfig(object):
         self.d_override = d_override
         self.maxthread = 0
         self.logical_config = {}
+        self.run_as_perf = run_as_perf
         if int(maxthread) > 0:
             self.maxthread = int(maxthread)
         self.maxsubthread = 0
