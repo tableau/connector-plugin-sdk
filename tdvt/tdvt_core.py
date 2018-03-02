@@ -311,6 +311,7 @@ def compare_results(test_name, test_file, full_test_file, test_config):
     expected_file_version = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
+            logging.debug("Did not find expected file " + expected_file)
             if ALWAYS_GENERATE_EXPECTED:
                 #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
                 #This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
@@ -551,8 +552,10 @@ def generate_test_file_list_from_config(root_directory, test_config_set):
 
     #Check local dir first then the root package directory.
     test_dirs = (root_directory, get_local_test_dir())
+    checked_paths = []
     for test_dir in test_dirs:
         allowed_path = os.path.join(test_dir, test_config_set.allow_pattern)
+        checked_paths.append(allowed_path)
         if os.path.isfile(allowed_path):
             logging.debug("Adding file " + allowed_path)
             tests_to_run.append(TestFile(test_dir, allowed_path))
@@ -573,7 +576,7 @@ def generate_test_file_list_from_config(root_directory, test_config_set):
             break
 
     if added_test == len(tests_to_run):
-        logging.debug("Could not find any tests for " + allowed_path  + ". Check the path.")
+        logging.debug("Could not find any tests for [" + "] or [".join(checked_paths)  + "]. Check the path.")
 
     logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 

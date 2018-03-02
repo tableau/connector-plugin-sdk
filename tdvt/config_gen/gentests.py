@@ -272,8 +272,8 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
             output_dir = os.path.join(base_output_dir, name)
             any_test_files = glob.glob(os.path.join(output_dir, 'setup*xml'))
             if not any_test_files or force:
-                print (input_dir)
-                print (output_dir)
+                print ("Generating test files from: " + str(input_dir))
+                print ("Writing test files to: " + str(output_dir))
                 clean_create_dir(output_dir)
                 for input_root, input_dirs, input_files in os.walk(input_dir):
                     for input_filename in input_files:

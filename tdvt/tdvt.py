@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-__version__ = '1.1.62'
+__version__ = '1.1.6333'
 
 import os
 import argparse
@@ -541,11 +541,9 @@ def main():
                 logical = None
 
         add_datasource(args.add_ds, password, logical)
-        print ("Generating config files...")
         generate_files(ds_registry, True)
         sys.exit(0)
     elif args.generate:
-        print ("Generating config files...")
         start_time = time.time()
         generate_files(ds_registry, True)
         end_time = time.time() - start_time
