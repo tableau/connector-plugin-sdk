@@ -10,6 +10,7 @@
         py -3 -m tdvt_test ReRunFailedTestsTest
     One specific test:
         py -3 -m tdvt_test ReRunFailedTestsTest.test_logical_rerun_fail
+
 """
 
 import configparser
