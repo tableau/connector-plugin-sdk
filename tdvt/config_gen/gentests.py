@@ -81,7 +81,13 @@ def get_new_field_name(field, attrs):
 
     return new_field
 
-def get_modified_line(line, attrs, fields):
+def get_field_name_map(fields, attrs):
+    m = {}
+    for f in fields:
+        m[f] = get_new_field_name(f, attrs)
+    return m
+
+def get_modified_line(line, attrs, fields, field_name_map):
     new_line = line
     if 'test name' in line:
          return new_line
@@ -91,8 +97,7 @@ def get_modified_line(line, attrs, fields):
         return new_line
 
     for field in fields:
-        new_field = get_new_field_name(field, attrs)
-        new_line = new_line.replace(field, new_field)
+        new_line = new_line.replace(field, field_name_map[field])
 
     calcs_table_name = get_customized_table_name(attrs, 'Calcs')
     staples_table_name = get_customized_table_name(attrs, 'Staples')
@@ -103,28 +108,36 @@ def get_modified_line(line, attrs, fields):
 def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_registry ):
     if debug: print ("Processing " + filename )
 
-    #Go through all the configurations in templates.py and generate logical configs for them.
+    input_file = open(filename, 'r', encoding='utf-8')
+    base_name = os.path.basename(filename)
+    if debug: print("base_name " + base_name)
+    match = re.search('setup\.(.*)\.xml', base_name)
+    if match:
+        test_name = match.group(1)
+    else:
+        test_name = os.path.splitext(base_name)[0]
+
+    if debug: print ("Test " + test_name)
+
+
+    fields = staples_fields + calcs_fields
+
+    ds_file_map = {}
     for ds in get_logical_config_templates(ds_registry):
-        input_file = open(filename, 'r', encoding='utf-8')
-        base_name = os.path.basename(filename)
-        if debug: print("base_name " + base_name)
-        match = re.search('setup\.(.*)\.xml', base_name)
-        if match:
-            test_name = match.group(1)
-        else:
-            test_name = os.path.splitext(base_name)[0]
-
-        if debug: print ("Test " + test_name)
-
         setup_file = open( os.path.join( output_dir, 'setup.' + test_name + '.' + ds + '.xml'), 'w', encoding='utf-8' )
+        field_name_map = get_field_name_map(fields,  get_logical_config_template(ds_registry, ds))
+        ds_file_map[ds] = (setup_file, field_name_map)
 
-        fields = staples_fields + calcs_fields
-        for line in input_file:
-            new_line = get_modified_line(line, get_logical_config_template(ds_registry, ds), fields)
-            setup_file.write( new_line )
+    #Go through all the configurations in templates.py and generate logical configs for them.
+    for line in input_file:
+        for ds in ds_file_map:
+            new_line = get_modified_line(line, get_logical_config_template(ds_registry, ds), fields, ds_file_map[ds][1])
+            ds_file_map[ds][0].write( new_line )
 
-        setup_file.close()
-        input_file.close()
+    for ds in ds_file_map:
+        ds_file_map[ds][0].close()
+
+    input_file.close()
 
     #Go through all the ini files and see if any of them define a logical config. Generate test files for those.
 

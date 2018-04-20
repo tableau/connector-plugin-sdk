@@ -8,25 +8,27 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-__version__ = '1.1.65'
+__version__ = '1.4.0'
 
-import os
+from zipfile import ZipFile
 import argparse
-import subprocess
+import glob
+import hashlib
+import json
+import logging
+import os
+import queue
 import shutil
+import subprocess
 import tempfile
 import threading
 import time
-import json
-import queue
-import logging
-from zipfile import ZipFile
-import glob
-from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig, generate_test_file_list_from_config
-from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSet
+
 from .config_gen.gentests import list_configs, list_config
-from .tabquery import *
+from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSet
 from .setup_env import create_test_environment, add_datasource
+from .tabquery import *
+from .tdvt_core import generate_files, run_diff, run_failed_tests, run_tests, TdvtTestConfig, generate_test_file_list_from_config
 
 #This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistry
@@ -34,9 +36,11 @@ from .config_gen.test_config import TestSet
 
 class TestOutputFiles(object):
     output_actuals = 'tdvt_actuals_combined.zip'
+    output_tabquery_log = 'combined_tableau_log.txt'
+    output_tabquery_tabproto_log = 'combined_tabprotosrv.txt'
     output_csv ="test_results_combined.csv"
     output_json = "tdvt_output_combined.json"
-    all_output_files = [output_actuals, output_csv, output_json]
+    all_output_files = [output_actuals, output_csv, output_json, output_tabquery_log, output_tabquery_tabproto_log]
 
     @staticmethod
     def copy_output_file(src_name, src_dir, dst, trim_header, append=True):
@@ -87,7 +91,7 @@ class TestRunner():
         self.thread_id = thread_id
         self.verbose = verbose
         self.thread_lock = lock
-        self.temp_dir = tempfile.mkdtemp(prefix=self.test_config.suite_name)
+        self.temp_dir = tempfile.mkdtemp(prefix=hashlib.sha224(str(self.test_config.suite_name + str(thread_id)).encode()).hexdigest())
         self.test_config.output_dir = self.temp_dir
         self.sub_thread_count = 1
         self.sub_thread_count_set = False
@@ -100,6 +104,16 @@ class TestRunner():
         with ZipFile(dst, mode) as myzip:
             for actual in actual_files:
                 myzip.write( actual )
+
+    def copy_log_files(self):
+        src_dst_map = {}
+        src_dst_map['log_*.txt'] = TestOutputFiles.output_tabquery_log
+        src_dst_map['tabprotosrv*.txt'] = TestOutputFiles.output_tabquery_tabproto_log
+
+        for k in src_dst_map:
+            log_files = glob.glob(os.path.join(self.temp_dir, k))
+            for f in log_files:
+                TestOutputFiles.copy_output_file(f, self.temp_dir, src_dst_map[k], True)
 
     def set_thread_count(self, threads):
         logging.debug("test suite " + self.test_config.suite_name + " subthread set to: " + str(threads))
@@ -146,6 +160,7 @@ class TestRunner():
         try:
             self.copy_actual_files()
             self.copy_output_files()
+            self.copy_log_files()
             self.copy_test_result_file()
         except Exception as e:
             print (e)
@@ -175,12 +190,14 @@ class TestRunner():
 def delete_output_files(root_dir):
     for f in TestOutputFiles.all_output_files:
         out_file = os.path.join(root_dir, f)
-        if os.path.exists(out_file):
-            try:
-                os.unlink(out_file)
-            except Exception as e:
-                print (e)
-                continue
+        for f in glob.glob(out_file):
+            if os.path.exists(out_file):
+                try:
+                    os.unlink(out_file)
+                except Exception as e:
+                    print (e)
+                    continue
+
 
 def get_datasource_registry(platform):
     """Get the datasources to run based on the suite parameter."""

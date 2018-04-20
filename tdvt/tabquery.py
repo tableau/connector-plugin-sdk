@@ -65,6 +65,11 @@ class TabqueryCommandLine(object):
                     pass
             cmdline.extend(["--output-dir", expected_output_dir])
 
+            #Save all the log files from the core Tableau process.
+            cmdline.extend(["-DLogDir=" + expected_output_dir])
+            cmdline.extend(["-DLogName=" + "log_" + work.test_name.replace('.', '_') + ".txt"])
+            cmdline.extend(["-DOverride=ProtocolServerNewLog"])
+
         if work.test_config.d_override:
             for override in work.test_config.d_override.split(' '):
                 cmdline.extend([override])
