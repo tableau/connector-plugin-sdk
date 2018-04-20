@@ -37,7 +37,7 @@ from .config_gen.test_config import TestSet
 class TestOutputFiles(object):
     output_actuals = 'tdvt_actuals_combined.zip'
     output_tabquery_log = 'combined_tableau_log.txt'
-    output_tabquery_tabproto_log = 'combined_tabprotosrv.txt'
+    output_tabquery_tabproto_log = 'combined_tabprotosrv_log.txt'
     output_csv ="test_results_combined.csv"
     output_json = "tdvt_output_combined.json"
     all_output_files = [output_actuals, output_csv, output_json, output_tabquery_log, output_tabquery_tabproto_log]
