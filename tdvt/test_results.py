@@ -9,6 +9,7 @@ class TdvtTestConfig(object):
         self.tested_sql = tested_sql
         self.tested_tuples = tested_tuples
         self.expected_dir = expected_dir
+        self.log_dir = ''
         self.output_dir = output_dir
         self.logical = logical
         self.config_file = config

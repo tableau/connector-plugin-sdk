@@ -51,6 +51,7 @@ class TabqueryCommandLine(object):
         cmdline.extend(["--combined"])
 
         expected_output_dir = work.test_config.output_dir
+        log_dir = work.test_config.log_dir
 
         if work.test_config.logical:
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
@@ -65,10 +66,9 @@ class TabqueryCommandLine(object):
                     pass
             cmdline.extend(["--output-dir", expected_output_dir])
 
-            #Save all the log files from the core Tableau process.
-            cmdline.extend(["-DLogDir=" + expected_output_dir])
-            cmdline.extend(["-DLogName=" + "log_" + work.test_name.replace('.', '_') + ".txt"])
-            cmdline.extend(["-DOverride=ProtocolServerNewLog"])
+        #Save all the log files from the core Tableau process.
+        cmdline.extend(["-DLogDir=" + log_dir])
+        cmdline.extend(["-DOverride=ProtocolServerNewLog"])
 
         if work.test_config.d_override:
             for override in work.test_config.d_override.split(' '):

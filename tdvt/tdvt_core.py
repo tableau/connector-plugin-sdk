@@ -4,20 +4,22 @@
 
 """
 
-import os
-import sys
-import re
 import argparse
-import subprocess
-import shutil
-import threading
-import time
-import queue
-import xml.etree.ElementTree
+import copy
+import csv
 import glob
 import json
-import csv
 import logging
+import os
+import queue
+import re
+import shutil
+import subprocess
+import sys
+import threading
+import time
+import xml.etree.ElementTree
+import zipfile
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestFile
@@ -40,6 +42,7 @@ class QueueWork(object):
     def __init__(self, test_config, test_file):
         self.test_config = test_config
         self.results = {}
+        self.thread_id = -1
         self.timeout_seconds = 1200
         self.cmd_output = None
         self.saved_error_message = None
@@ -83,26 +86,31 @@ class QueueWork(object):
     def is_timeout(self):
         return self.timeout
 
-    def run(self):
+    def run(self, thread_id):
+        self.thread_id = thread_id
+        thread_msg = "Thread-[{0}] ".format(self.thread_id)
+
+        self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
+        os.makedirs(self.test_config.log_dir, exist_ok=True)
         cmdline = build_tabquery_command_line(self)
-        logging.debug(" calling " + ' '.join(cmdline))
+        logging.debug(thread_msg + " calling " + ' '.join(cmdline))
 
         try:
             self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=self.timeout_seconds))
         except subprocess.CalledProcessError as e:
-            logging.debug("CalledProcessError for " + self.test_file + ". Error: "  + e.output)
+            logging.debug(thread_msg + "CalledProcessError for " + self.test_file + ". Error: "  + e.output)
             #Let processing continue so it can try and find any output file which will contain database error messages.
             #Save the error message in case there is no result file to get it from.
             self.saved_error_message = e.output
             self.cmd_output = e.output
         except subprocess.TimeoutExpired as e:
-            logging.debug("Test timed out: " + self.test_file)
+            logging.debug(thread_msg + "Test timed out: " + self.test_file)
             if not VERBOSE: sys.stdout.write('T')
             self.handle_timeout_test_failure()
         except RuntimeError as e:
-            logging.debug("RuntimeError " + str(e) + " for " + work.test_file + " dsname " + work.test_config.dsnmae)
+            logging.debug(thread_msg + "RuntimeError " + str(e) + " for " + work.test_file + " dsname " + work.test_config.dsnmae)
 
-        logging.debug("Command line output for " + self.test_file + ". " + str(self.cmd_output))
+        logging.debug(thread_msg + "Command line output for " + self.test_file + ". " + str(self.cmd_output))
 
 
 def do_test_queue_work(i, q):
@@ -115,24 +123,35 @@ def do_test_queue_work(i, q):
         #This blocks if the queue is empty.
         work = q.get()
 
-        logging.debug("\nRunning test:" + work.test_file)
+        thread_msg = "Thread-[{0}] ".format(i)
+        logging.debug(thread_msg + "Running test:" + work.test_file)
         if not os.path.isfile(work.test_file):
-            logging.debug("Error opening file:" + work.test_file)
+            logging.debug(thread_msg + "Error opening file:" + work.test_file)
             q.task_done()
             continue
 
 
         if abort_test_run:
             #Do this here so we have the repro information from above.
-            logging.debug("\nAborting test:" + work.test_file)
+            logging.debug(thread_msg + "Aborting test:" + work.test_file)
             if not VERBOSE: sys.stdout.write('A')
             work.handle_abort_test_failure()
             q.task_done()
             continue
 
         start_time = time.perf_counter()
-        work.run()
+        work.run(i)
         total_time_ms = (time.perf_counter() - start_time) * 1000
+
+        #Copy log files.
+        log_zip_file = os.path.join(work.test_config.log_dir, 'all_logs.zip')
+        logging.debug(thread_msg + "Creating log zip file {0}".format(log_zip_file))
+        mode = 'w' if not os.path.isfile(log_zip_file) else 'a'
+        with zipfile.ZipFile(log_zip_file, mode, zipfile.ZIP_DEFLATED) as myzip:
+            log_files = glob.glob(os.path.join(work.test_config.log_dir, 'log*.txt'))
+            log_files.extend(glob.glob(os.path.join(work.test_config.log_dir, 'tabprotosrv*.txt')))
+            for log in log_files:
+                myzip.write(log, os.path.basename(log))
 
         #Exit early if it is a timeout.
         if work.is_timeout():
@@ -143,14 +162,14 @@ def do_test_queue_work(i, q):
         if work.test_config.logical:
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
             if not os.path.isfile( existing_output_filepath ):
-                logging.debug("Error: could not find test output file:" + existing_output_filepath)
+                logging.debug(thread_msg + "Error: could not find test output file:" + existing_output_filepath)
                 if not VERBOSE: sys.stdout.write('?')
                 work.handle_test_failure()
                 q.task_done()
                 continue
 
             #Copy the test process filename to the actual. filename.
-            logging.debug("Copying test process output {0} to actual file {1}".format(existing_output_filepath, actual_output_filepath))
+            logging.debug(thread_msg + "Copying test process output {0} to actual file {1}".format(existing_output_filepath, actual_output_filepath))
             try_move(existing_output_filepath, actual_output_filepath)
 
             new_test_file = base_filepath
@@ -168,6 +187,14 @@ def do_test_queue_work(i, q):
         if not VERBOSE:
             sys.stdout.write('.' if result.all_passed() else 'F')
             sys.stdout.flush()
+
+        #If everything passed delete the log files so we don't collect a bunch of useless logs.
+        if result.all_passed():
+            try:
+                os.remove(log_zip_file)
+            except Exception as e:
+                logging.debug(thread_msg + "got exception deleting zipped log file: " + str(e))
+                pass
 
         work.results[work.test_file] = result
         #If this failed with a password, connection error or similar then abort this entire test run (which uses the same tds file). This will prevent running hundreds of tests that have to wait for a timeout before failing.
@@ -513,7 +540,7 @@ def run_tests_parallel_list(test_data, thread_count):
     #Build the queue of work.
     for tds, test_file, test_config in test_data:
         #for test_file in test_files:
-        work = QueueWork(test_config, test_file)
+        work = QueueWork(copy.deepcopy(test_config), test_file)
         test_queue.put(work)
         all_work.append(work)
 

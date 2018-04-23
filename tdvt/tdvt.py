@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-__version__ = '1.4.1'
+__version__ = '1.4.2'
 
 from zipfile import ZipFile
 import argparse
@@ -36,11 +36,10 @@ from .config_gen.test_config import TestSet
 
 class TestOutputFiles(object):
     output_actuals = 'tdvt_actuals_combined.zip'
-    output_tabquery_log = 'combined_tableau_log.txt'
-    output_tabquery_tabproto_log = 'combined_tabprotosrv_log.txt'
+    output_tabquery_log = 'tabquery_logs.zip'
     output_csv ="test_results_combined.csv"
     output_json = "tdvt_output_combined.json"
-    all_output_files = [output_actuals, output_csv, output_json, output_tabquery_log, output_tabquery_tabproto_log]
+    all_output_files = [output_actuals, output_csv, output_json, output_tabquery_log]
 
     @staticmethod
     def copy_output_file(src_name, src_dir, dst, trim_header, append=True):
@@ -96,24 +95,14 @@ class TestRunner():
         self.sub_thread_count = 1
         self.sub_thread_count_set = False
 
-    def copy_actual_files(self):
-        dst = os.path.join(os.getcwd(), TestOutputFiles.output_actuals)
+    def copy_files_to_zip(self, dst_file_name, src_dir, src_pattern):
+        dst = os.path.join(os.getcwd(), dst_file_name)
         mode = 'w' if not os.path.isfile(dst) else 'a'
-        glob_path = os.path.join(self.temp_dir, 'actual.*')
+        glob_path = os.path.join(src_dir, src_pattern)
         actual_files = glob.glob( glob_path )
         with ZipFile(dst, mode) as myzip:
             for actual in actual_files:
                 myzip.write( actual )
-
-    def copy_log_files(self):
-        src_dst_map = {}
-        src_dst_map['log_*.txt'] = TestOutputFiles.output_tabquery_log
-        src_dst_map['tabprotosrv*.txt'] = TestOutputFiles.output_tabquery_tabproto_log
-
-        for k in src_dst_map:
-            log_files = glob.glob(os.path.join(self.temp_dir, k))
-            for f in log_files:
-                TestOutputFiles.copy_output_file(f, self.temp_dir, src_dst_map[k], True)
 
     def set_thread_count(self, threads):
         logging.debug("test suite " + self.test_config.suite_name + " subthread set to: " + str(threads))
@@ -158,9 +147,9 @@ class TestRunner():
 
     def copy_files_and_cleanup(self):
         try:
-            self.copy_actual_files()
+            self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, 'actual.*')
+            self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, '*/all_logs.zip')
             self.copy_output_files()
-            self.copy_log_files()
             self.copy_test_result_file()
         except Exception as e:
             print (e)
