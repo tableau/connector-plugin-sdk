@@ -49,6 +49,7 @@ class QueueWork(object):
         self.timeout = False
         self.relative_test_file = test_file.relative_test_path
         self.set_base_test_names(test_file.test_path)
+        self.log_zip_file = ''
 
     def set_base_test_names(self, test_file):
         self.test_name = get_base_test(test_file)
@@ -90,11 +91,13 @@ class QueueWork(object):
         self.thread_id = thread_id
         thread_msg = "Thread-[{0}] ".format(self.thread_id)
 
+        #Setup a subdirectory for the log files.
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
-        os.makedirs(self.test_config.log_dir, exist_ok=True)
+        os.makedirs(self.test_config.log_dir)
         cmdline = build_tabquery_command_line(self)
         logging.debug(thread_msg + " calling " + ' '.join(cmdline))
 
+        start_time = time.perf_counter()
         try:
             self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=self.timeout_seconds))
         except subprocess.CalledProcessError as e:
@@ -110,7 +113,21 @@ class QueueWork(object):
         except RuntimeError as e:
             logging.debug(thread_msg + "RuntimeError " + str(e) + " for " + work.test_file + " dsname " + work.test_config.dsnmae)
 
+        total_time_ms = (time.perf_counter() - start_time) * 1000
+
+        #Copy log files to a zip file for later optional use.
+        self.log_zip_file = os.path.join(self.test_config.log_dir, 'all_logs.zip')
+        logging.debug(thread_msg + "Creating log zip file {0}".format(self.log_zip_file))
+        mode = 'w' if not os.path.isfile(self.log_zip_file) else 'a'
+        with zipfile.ZipFile(self.log_zip_file, mode, zipfile.ZIP_DEFLATED) as myzip:
+            log_files = glob.glob(os.path.join(self.test_config.log_dir, 'log*.txt'))
+            log_files.extend(glob.glob(os.path.join(self.test_config.log_dir, 'tabprotosrv*.txt')))
+            log_files.extend(glob.glob(os.path.join(self.test_config.log_dir, 'crashdumps/*')))
+            for log in log_files:
+                myzip.write(log, os.path.basename(log))
+
         logging.debug(thread_msg + "Command line output for " + self.test_file + ". " + str(self.cmd_output))
+        return total_time_ms
 
 
 def do_test_queue_work(i, q):
@@ -139,19 +156,7 @@ def do_test_queue_work(i, q):
             q.task_done()
             continue
 
-        start_time = time.perf_counter()
-        work.run(i)
-        total_time_ms = (time.perf_counter() - start_time) * 1000
-
-        #Copy log files.
-        log_zip_file = os.path.join(work.test_config.log_dir, 'all_logs.zip')
-        logging.debug(thread_msg + "Creating log zip file {0}".format(log_zip_file))
-        mode = 'w' if not os.path.isfile(log_zip_file) else 'a'
-        with zipfile.ZipFile(log_zip_file, mode, zipfile.ZIP_DEFLATED) as myzip:
-            log_files = glob.glob(os.path.join(work.test_config.log_dir, 'log*.txt'))
-            log_files.extend(glob.glob(os.path.join(work.test_config.log_dir, 'tabprotosrv*.txt')))
-            for log in log_files:
-                myzip.write(log, os.path.basename(log))
+        total_time_ms = work.run(i)
 
         #Exit early if it is a timeout.
         if work.is_timeout():
@@ -191,7 +196,7 @@ def do_test_queue_work(i, q):
         #If everything passed delete the log files so we don't collect a bunch of useless logs.
         if result.all_passed():
             try:
-                os.remove(log_zip_file)
+                os.remove(work.log_zip_file)
             except Exception as e:
                 logging.debug(thread_msg + "got exception deleting zipped log file: " + str(e))
                 pass
