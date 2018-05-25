@@ -142,37 +142,36 @@ def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_re
     #Go through all the ini files and see if any of them define a logical config. Generate test files for those.
 
 
-def process_text(ds, text, attributes, fields):
+def process_text(ds, text, attributes, fields, field_map):
     new_text = ''
     for line in text:
-        new_line = get_modified_line(line, attributes, fields)
+        new_line = get_modified_line(line, attributes, fields, field_map)
         new_line = new_line.replace('$Name$', ds)
         new_text += new_line + '\n'
     return new_text
 
-def get_config_text(cfgs, config_name):
+def get_config_text(config_name, config_attributes, fields, config_field_map):
     configs = []
-    fields = ['[Camel Case]', '[bool0]', '[Date]']
     sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', 'Camel Case = ' + fields[0], 'bool0 = ' + fields[1], 'Date = ' + fields[2] ]
 
-    if config_name in cfgs:
-        cfg = process_text(config_name, sample_text, cfgs[config_name], fields)
-        configs.append(cfg)
+    cfg = process_text(config_name, sample_text, config_attributes, fields, config_field_map)
+    configs.append(cfg)
     return configs
 
 def list_config(ds_registry, config_name):
-    configs = []
-    cfgs = get_logical_config_templates(ds_registry)
-    configs += get_config_text(cfgs, config_name)
+    return list_configs(ds_registry, config_name)
 
-    return configs
-
-def list_configs(ds_registry):
+def list_configs(ds_registry, target_config_name=None):
     configs = []
 
+    fields = ['[Camel Case]', '[bool0]', '[Date]']
     cfgs = get_logical_config_templates(ds_registry)
-    for ds in sorted(cfgs.keys(), key=str.lower):
-        configs += get_config_text(cfgs, ds)
+    for config_name in sorted(cfgs.keys(), key=str.lower):
+        if target_config_name and config_name != target_config_name:
+            continue
+        cfg_template = get_logical_config_template(ds_registry, config_name)
+        field_name_map = get_field_name_map(fields,  cfg_template)
+        configs += get_config_text(config_name, cfg_template, fields, field_name_map)
     return configs
 
 def clean_create_dir(new_dir):
