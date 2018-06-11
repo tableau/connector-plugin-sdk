@@ -463,8 +463,8 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         expected_case = test_result.best_matching_expected_results.get_test_case(test_case_index)
         expected_tuples = expected_case.get_tuples() if expected_case else ""
         expected_tuples = "\n".join(expected_tuples[0:get_tuple_display_limit()])
-        expected_sql = expected_case.get_sql_text()
-        expected_time = expected_case.execution_time
+        expected_sql = expected_case.get_sql_text() if expected_case else ""
+        expected_time = expected_case.execution_time if expected_case else ""
 
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
