@@ -34,7 +34,6 @@ LOGICAL_CONFIG_ARG_SHORT = '-q'
 TDS_CONFIG_ARG = '--tds'
 TDS_CONFIG_ARG_SHORT = '-d'
 ALWAYS_GENERATE_EXPECTED = False
-VERBOSE = False
 abort_test_run = False
 
 
@@ -50,6 +49,7 @@ class QueueWork(object):
         self.relative_test_file = test_file.relative_test_path
         self.set_base_test_names(test_file.test_path)
         self.log_zip_file = ''
+        self.verbose = test_config.verbose
 
     def set_base_test_names(self, test_file):
         self.test_name = get_base_test(test_file)
@@ -108,7 +108,7 @@ class QueueWork(object):
             self.cmd_output = e.output
         except subprocess.TimeoutExpired as e:
             logging.debug(thread_msg + "Test timed out: " + self.test_file)
-            if not VERBOSE: sys.stdout.write('T')
+            sys.stdout.write('T')
             self.handle_timeout_test_failure()
         except RuntimeError as e:
             logging.debug(thread_msg + "RuntimeError " + str(e) + " for " + work.test_file + " dsname " + work.test_config.dsnmae)
@@ -117,7 +117,7 @@ class QueueWork(object):
 
         #Copy log files to a zip file for later optional use.
         self.log_zip_file = os.path.join(self.test_config.log_dir, 'all_logs.zip')
-        logging.debug(thread_msg + "Creating log zip file {0}".format(self.log_zip_file))
+        logging.debug(thread_msg + "Creating log zip file: {0}".format(self.log_zip_file))
         mode = 'w' if not os.path.isfile(self.log_zip_file) else 'a'
         with zipfile.ZipFile(self.log_zip_file, mode, zipfile.ZIP_DEFLATED) as myzip:
             log_files = glob.glob(os.path.join(self.test_config.log_dir, 'log*.txt'))
@@ -151,7 +151,7 @@ def do_test_queue_work(i, q):
         if abort_test_run:
             #Do this here so we have the repro information from above.
             logging.debug(thread_msg + "Aborting test:" + work.test_file)
-            if not VERBOSE: sys.stdout.write('A')
+            sys.stdout.write('A')
             work.handle_abort_test_failure()
             q.task_done()
             continue
@@ -168,7 +168,7 @@ def do_test_queue_work(i, q):
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(work.test_file, work.test_config.output_dir)
             if not os.path.isfile( existing_output_filepath ):
                 logging.debug(thread_msg + "Error: could not find test output file:" + existing_output_filepath)
-                if not VERBOSE: sys.stdout.write('?')
+                sys.stdout.write('?')
                 work.handle_test_failure()
                 q.task_done()
                 continue
@@ -189,12 +189,11 @@ def do_test_queue_work(i, q):
             result = TestResult(test_file = work.test_file, relative_test_file = work.relative_test_file)
             result.error_case = TestErrorStartup()
 
-        if not VERBOSE:
-            sys.stdout.write('.' if result.all_passed() else 'F')
-            sys.stdout.flush()
+        sys.stdout.write('.' if result.all_passed() else 'F')
+        sys.stdout.flush()
 
         #If everything passed delete the log files so we don't collect a bunch of useless logs.
-        if result.all_passed():
+        if result.all_passed() and not work.verbose:
             try:
                 os.remove(work.log_zip_file)
             except Exception as e:

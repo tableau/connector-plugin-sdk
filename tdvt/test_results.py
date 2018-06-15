@@ -39,6 +39,8 @@ class TdvtTestConfig(object):
             self.leave_temp_dir = True
         if args.thread_count_tdvt:
             self.thread_count = args.thread_count_tdvt
+        if args.verbose:
+            self.verbose = args.verbose
 
     def init_from_json(self, json):
         self.tested_sql = json['tested_sql']
