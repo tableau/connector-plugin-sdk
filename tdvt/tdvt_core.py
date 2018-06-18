@@ -617,7 +617,7 @@ def generate_test_file_list_from_config(root_directory, test_config_set):
             try:
                 regex = re.compile(ex)
                 if re.search(regex, test.test_path) and test in final_test_list:
-                    if VERBOSE: logging.debug("Removing test that matched: " + ex)
+                    logging.debug("Removing test that matched: " + ex)
                     final_test_list.remove(test)
             except:
                 print ("Error compiling regular expression for test file exclusions.")
