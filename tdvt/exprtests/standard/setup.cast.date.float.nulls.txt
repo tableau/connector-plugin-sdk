@@ -1,0 +1,3 @@
+FLOAT("not a float")
+DATE('not a date') 
+DATETIME('not a datetime') 
