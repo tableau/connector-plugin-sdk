@@ -274,6 +274,12 @@ class TestPathTest(unittest.TestCase):
     def test_exclude(self):
         self.assert_number_of_tests(LogicalTestSet('logical.tde', 'cast_calcs.tde.tds', 'sum', 'logical/setup/suite1/setup.*.xml'), 0)
 
+    def test_exclude_comma(self):
+        self.assert_number_of_tests(LogicalTestSet('logical.tde', 'cast_calcs.tde.tds', ',', 'logical/setup/suite1/setup.*.xml'), 1)
+
+    def test_exclude_space(self):
+        self.assert_number_of_tests(LogicalTestSet('logical.tde', 'cast_calcs.tde.tds', ' sum', 'logical/setup/suite1/setup.*.xml'), 0)
+
     def test_local_dir(self):
         self.assert_number_of_tests(ExpressionTestSet('logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/'), 3)
 

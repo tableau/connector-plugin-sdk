@@ -615,8 +615,9 @@ def generate_test_file_list_from_config(root_directory, test_config_set):
     for test in tests_to_run:
         for ex in exclude_tests:
             try:
+                ex = ex.strip()
                 regex = re.compile(ex)
-                if re.search(regex, test.test_path) and test in final_test_list:
+                if re.search(regex, test.test_path) and test in final_test_list and ex:
                     logging.debug("Removing test that matched: " + ex)
                     final_test_list.remove(test)
             except:
