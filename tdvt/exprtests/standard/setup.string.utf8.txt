@@ -1,0 +1,2 @@
+REPLACE("This is ® replace test.", "®", "RegisterSymbol")
+FIND("This is ™ find test.", "™")
