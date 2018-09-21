@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-__version__ = '1.4.10'
+__version__ = '1.4.11'
 
 from zipfile import ZipFile
 import argparse
