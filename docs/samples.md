@@ -1,5 +1,0 @@
----
-title: Samples
----
-
-Coming soon.
