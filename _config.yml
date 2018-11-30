@@ -1,0 +1,16 @@
+# Site settings
+title: Tableau Connector Plugin SDK (Prerelease)
+email: github@tableau.com
+description: Create plugins to connect to ODBC and JDBC data sources in Tableau.
+repository: "tableau/connector-plugin-sdk"
+baseurl: "/connector-plugin-sdk"
+permalinks: pretty
+defaults:
+  - scope:
+      path: "" # Apply to all files
+    values:
+      layout: "default"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
