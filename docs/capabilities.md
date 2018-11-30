@@ -5,6 +5,7 @@ title: Capabilities
 When a value (yes, no, ?) in the Recommended column is bold, verify that the value you use is correct for your database.
 
 ## Metadata
+
 Capability | Description | Default | Recommended 
 -|-|-|-
 CAP_FAST_METADATA | Set to 'yes' if you have small to moderate size schemas. This capability controls whether Tableau should enumerate all of the objects immediately when you connect. Set the value to “yes” to enable this capability for better performance when creating new connections. Disable this capability to allow search for specific schemas or tables instead of retrieving all objects. You can search for all objects by using an empty string. This capability is available in 9.0 and later. | yes | yes 
@@ -12,6 +13,7 @@ CAP_QUERY_TOP_0_METADATA | Set to 'yes' if the datasource can handle a "TOP 0" r
 CAP_QUERY_WHERE_FALSE_METADATA | Set to 'yes' if the datasource can handle a "WHERE \<false\>" predicate for retrieving metadata | &ndash; | **?** 
 
 ## Temporary Tables
+
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_CREATE_TEMP_TABLES | Set to 'yes' if Tableau can create temporary tables needed for certain complex or optimized queries. Set to 'no' if creating temporary tables is not supported.  See also: CAP_SELECT_INTO. | &ndash; | **?** 
@@ -24,12 +26,14 @@ CAP_ODBC_METADATA_FORCE_UTF8_TEMP_TABLE_COLUMN_SIZE | Set to 'yes' if when creat
 CAP_TEMP_TABLES_NOT_SESSION_SCOPED | Set to 'yes' if this datasource uses regular tables to simulate temp tables. Temporary table creation is still controlled by CAP_CREATE_TEMP_TABLE or CAP_SELECT_INTO | &ndash; | &ndash; 
 
 ## String Splits 
+
 Capability | Description | Default | Recommended 
 -|-|-|-
 CAP_SUPPORTS_SPLIT_FROM_LEFT | Set to 'yes' if data source supports splitting a string from the left | &ndash; | **yes** 
 CAP_SUPPORTS_SPLIT_FROM_RIGHT | Set to 'yes' if data source supports splitting a string from the right | &ndash; | **?** 
 
 ## Query
+
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_QUERY_ALLOW_JOIN_REORDER | Set to 'yes' to use query optimization to reduce database work with some inner and equality joins. | yes | yes 
@@ -75,6 +79,7 @@ CAP_QUERY_USE_QUERY_FUSION | Set to ‘no’ to prevent Tableau from combining m
 CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subquery wrapped with only a TOP clause | no | no 
 
 ## JDBC 
+
 Capability | Description | Default | Recommended 
 -|-|-|-
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
@@ -93,6 +98,7 @@ CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash; 
 
 ## ODBC 
+
 Capability | Description | Default | Recommended 
 -|-|-|-
 CAP_ODBC_BIND_BOOL_AS_WCHAR_01LITERAL | Set to 'yes' to bind a Boolean data type as a WCHAR containing values '0' or '1'. | &ndash; | &ndash; 
@@ -200,6 +206,7 @@ CAP_ODBC_UNBIND_EACH | Set to 'yes' to force the Tableau native ODBC protocol to
 CAP_ODBC_UNBIND_PARAMETERS_BATCH | Set to ‘yes’ to unbind all parameters in a single batch operation. | yes | yes 
 
 ## Stored Procedures
+
 Capability | Description | Default | Recommended 
 -|-|-|-
 CAP_CONNECT_STORED_PROCEDURE | Set to 'yes' to allow support for connecting to a stored procedure. | &ndash; | &ndash;
@@ -213,6 +220,7 @@ CAP_STORED_PROCEDURE_TEMP_TABLE_FROM_BUFFER | Set to 'yes' to populate the tempo
 CAP_STORED_PROCEDURE_TEMP_TABLE_FROM_NEW_PROTOCOL | Set to ‘yes’ to populate the temporary table from a separate protocol created for just this operation. | &ndash; | &ndash;
 
 ## Isolation Level
+
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_ISOLATION_LEVEL_READ_COMMITTED | Set to 'yes' to force the transaction isolation level to Read Committed if the data source supports it. Only one of the four transaction isolation levels should be set to 'yes'. See also: CAP_SET_ISOLATION_LEVEL_VIA_SQL, CAP_SET_ISOLATION_LEVEL_VIA_ODBC_API. | &ndash; | &ndash; 
@@ -223,6 +231,7 @@ CAP_SET_ISOLATION_LEVEL_VIA_ODBC_API | Set to 'yes' to force Tableau to set the 
 CAP_SET_ISOLATION_LEVEL_VIA_SQL | Set to 'yes' to force Tableau to set the transaction isolation level for the data source using a SQL query. CAP_SET_ISOLATION_LEVEL_VIA_SQL must be set to 'yes' when any one of the four CAP_ISOLATION_LEVEL capabilities has been set to 'yes'. | &ndash; | &ndash; 
 
 ## Uncommon
+
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_CONNECT_NO_CUSTOM_SQL | Set to 'yes' to disable the custom sql option. | &ndash; | &ndash; 
