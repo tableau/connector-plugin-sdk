@@ -28,8 +28,7 @@ If your connection is very similar to an existing database such as PostgreSQL or
 
 - odbc
 - jdbc
-- postgres
-- mysql
+- mysql_odbc
 
 You might find other super class values in the workbook XML from an existing Tableau connection, but we don't recommend using them; they haven't been tested.
 
@@ -39,14 +38,11 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 
 - If you choose 'postgres' or 'mysql' as the parent, you can skip configuring a dialect, and your plugin will use the parent’s dialect.
 - If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point.
-- If you're not sure what to pick, the plain dialect SQL92Dialect might be a good choice to start.
 
 ### Dialect base classes
 
 - BigQuerySQLDialect
-- DB2Cobra97Dialect
 - DB2Dialect
-- DB2ZOSDialect
 - DenodoDialect
 - DrillDialect
 - EXASolution5Dialect
@@ -61,8 +57,6 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - PrestoDialect
 - ProgressOpenEdgeDialect
 - RedShiftDialect
-- SQL92Dialect
-- SQLServer10Dialect
 - SQLServer10Dialect_Datetime2
 - SnowflakeDialect
 - SybaseASEDialect
