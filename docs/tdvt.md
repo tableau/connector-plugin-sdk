@@ -101,9 +101,9 @@ TDVT uses the 'Calcs' and 'Staples' tables.
    Name this file 'cast_calcs.\*.tds' or 'Staples.\*.tds' where \* represents your TDVT config name.
    For example 'cast_calcs.mydb.tds'.
 
-   ![Alt text]({{ site.baseurl }}/assets/tdvt_connection_1.png)
+   ![]({{ site.baseurl }}/assets/tdvt_connection_1.png)
 
-   ![Alt text]({{ site.baseurl }}/assets/tdvt_connection_2.png)
+   ![]({{ site.baseurl }}/assets/tdvt_connection_2.png)
 
 1. Open the tds file in a text editor and embed the password in the <connection> tag of the tds file next to the existing 'username' value.
    Save the file.
@@ -267,14 +267,14 @@ You can use these steps as a guide to develop your own workbook.
 1. Open the file called “Example Postgres Calc Test Result.twbx”, or start Tableau and connect to 'Text File'.
 1. Navigate to the “Data Source” tab.
 1. Click on the “test_results” connection on the left, and click “Edit Connection”.
-   ![Alt text]({{ site.baseurl }}/assets/tdvt_edit_results.png)
+   ![]({{ site.baseurl }}/assets/tdvt_edit_results.png)
 1. In the file navigator that comes up, choose the “test_results_combined” spreadsheet that is in your “tdvt” folder.
 1. Drag the new “test_results_combined.csv” file out to replace the old file in the data pre canvas.
 1. Right click on the new table, and click “Text File Properties…”.
-   ![Alt text]({{ site.baseurl }}/assets/tdvt_edit_results2.png)
+   ![]({{ site.baseurl }}/assets/tdvt_edit_results2.png)
 1. Change the “text qualifier” to use a double quote.
 1. View the Viz by clicking on “Functional Test Pass” which should like the information below. The Viz shows the test pass rate by Test Category. Click on the bars to see the relevant failed tests in the “Test Details” section.
-   ![Alt text]({{ site.baseurl }}/assets/tdvt_edit_results3.png)
+   ![]({{ site.baseurl }}/assets/tdvt_edit_results3.png)
 
 ## File structure
 
@@ -361,7 +361,7 @@ You can re-map these in the tds by adding a column definition like this:
   </column>
 ```
 
-![Alt text]({{ site.baseurl }}/assets/tdvt_edit_tds_columns.png)
+![]({{ site.baseurl }}/assets/tdvt_edit_tds_columns.png)
 
 ### Troubleshooting test failures
 
