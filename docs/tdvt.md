@@ -37,7 +37,7 @@ Test Scope
 
 - PC or VM running Windows.
 - Python 3.3. Pip is required as well but should come by default with the Python installation. Ensure that you check "install environmental variables".
-- An ODBC driver for your database.
+- An ODBC or JDBC driver for your database.
 - The 'Calcs' and 'Staples' table loaded in your database.
 
 ## How it works
@@ -58,17 +58,19 @@ Multiple expected files are supported.
 ## Installation
 
 1. Install TDVT Python module
-   - Install from an archive file: `pip install tdvt-1.1.59.zip` or `py -3 -m pip install tdvt-1.1.59.zip`.
-   - Verify it is installed by running `pip list` or `py -3 -m pip list`.
-1. Run this from your working directory to create the necessary setup directories.
-   `py -3 -m tdvt.tdvt --setup`
-1. Extract and then load the TestV1 minimal dataset into your database.
-1. Install Tableau Desktop which includes the tabquery tool needed to run the tests.
-1. Edit config/tdvt/tdvt_override.ini and set the path to tabquery.
+   - Create an archive package. `py -3 setup.py sdist --formats gztar`
+   - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
+   - Verify it is installed by running `py -3 -m pip list`.
+2. Extract and then load the TestV1 minimal dataset into your database.
+3. Install Tableau Desktop which includes the tabquery tool needed to run the tests.
+4. Setup your TDVT workspace. You will run TDVT from this directory which contains test setup files. You can copy tdvt/samples to get started. This directory is preconfigured for the JDBC and ODBC Postgres examples.
+   Or run this command to create empty directories: `py -3 -m tdvt.tdvt --setup`
+5. Edit config/tdvt/tdvt_override.ini and set the path to tabquery.
    - For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 1234.1\bin\tabquerytool.exe`
 
 ## Notes on loading TestV1
 
+See [Postgres Example](tests/datasets/TestV1/postgres/README.md) for instructions on loading TestV1 to a local Postgres database.
 See the section below about troubleshooting boolean values if your database does not have a native boolean type.
 
 There is a 'StaplesData' test and a 'calcs_data' test that retrive every value from the table and compare it to an expected value.
@@ -257,6 +259,10 @@ To run logical query tests:
 Test results are available in a csv file called test_results_combined.
 sv. Try loading them in Tableau to visualize the results.
 
+## Testing the sample plugins
+1. Copy the samples/plugins folder to your working directory.
+2. Make sure the ini files under /config are updated to re
+
 ## Review Results
 
 After the tests have run, you will see a “test_results_combined.csv” spreadsheet.
@@ -279,11 +285,11 @@ You can use these steps as a guide to develop your own workbook.
 ## File structure
 
 Your working directory will look like this.
-tdvt/config - Ini files that configure test suites.
-tdvt/config/registry - You can create more elaborate groups of test suite here.
-tdvt/config/tdvt/tdvt_override.ini - You can specift the path to tabquery here.
-tdvt/tds - Tds files.
-tdvt/ - TDVT log file, output csv and json files, a zip file containing any test results that did not match the expected results.
+/config - Ini files that configure test suites.
+/config/registry - You can create more elaborate groups of test suite here.
+/config/tdvt/tdvt_override.ini - You can specift the path to tabquery here.
+/tds - Tds files.
+/ - TDVT log file, output csv and json files, a zip file containing any test results that did not match the expected results.
 
 ## TDC Files and Logging
 
@@ -374,7 +380,7 @@ This test works like the 'calcs_data' test but since Staples contains several UT
 Some of the logical tests filter one these UTF-8 characters but you can get 100% pass rate even if the StaplesDataTest does not pass.
 Still it can be useful for tracking down data issues.
 
-It can be insightful to load the Calcs and Staples tables on a PostGre or MySQL server and run the tests in order to compare working SQL against what TDVT is generating for your database.
+It can be insightful to load the Calcs and Staples tables on a Postgres or MySQL server and run the tests in order to compare working SQL against what TDVT is generating for your database.
 Just add a new datasource to TDVT that uses the native connector for that database.
 Do not use Other ODBC in this case.
 These tests should pass completely for these datasources.
