@@ -260,8 +260,8 @@ Test results are available in a csv file called test_results_combined.
 sv. Try loading them in Tableau to visualize the results.
 
 ## Testing the sample plugins
-1. Copy the samples/plugins folder to your working directory.
-2. Make sure the ini files under /config are updated to re
+1. Copy the samples/plugins folder to your working directory, so that they exist under /plugins. ie /plugins/postgres_odbc/manifest.xml exists.
+2. Check that everything is setup correctly and a list of tests are displayed: `tdvt --list postgres_odbc`
 
 ## Review Results
 
