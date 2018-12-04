@@ -2,14 +2,17 @@
 title: Test Your Connector Plugin
 ---
 
-## TDVT - Tableau Datasource Verification Tool
+## Use Tableau Datasource Verification Tool (TDVT) to test
 
-TDVT is an automated testing tool for testing Tableau connectivity with a database.
+TDVT is an automated testing tool for testing Tableau connectivity with a database. 
 Tests span from simple expressions to complex SQL.
-When evaluating the connection to your database, please use a named connector if one exists.
+When evaluating the connection to your database, use a named connector if one exists. 
 Named connectors are optimized connections and provide a faster, cleaner experience for customers.
-If a named connector does not exist, you can connect through the Other Databases (ODBC) options.
-For more information on ODBC, check out this guide.
+
+If a named connector doesn't exist, you can connect through the Other Databases (ODBC) connector. 
+For information on the Other Databases (ODBC), check out the [online Help](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_otherdatabases.htm). 
+
+Or you can create a connector plugin, as described in this Developer Guide.
 
 We recommend running TDVT for:
 
@@ -18,11 +21,10 @@ We recommend running TDVT for:
 - Database Releases
 - Connector Plugins
 
-## What’s in this guide?
+## What’s in this section?
 
-This guide will walk through setting up the TDVT and using it.
-The guide will show you have to set up and configure the TDVT, how to add configurations for your own Data source, and how to run tests.
-This guide uses Postgres as an example, but you can use your own data source to follow along with this guide.
+This section shows you how to set up and configure TDVT, add configurations for your own data source, and run tests.
+We use Postgres as an example in this section, but you can use your own data source to follow along.
 
 Test Scope
 
@@ -35,70 +37,79 @@ Test Scope
 
 ### Requirements
 
-- PC or VM running Windows.
+- PC or VM running Windows or macOS.
 - Python 3.3. Pip is required as well but should come by default with the Python installation. Ensure that you check "install environmental variables".
 - An ODBC or JDBC driver for your database.
 - The 'Calcs' and 'Staples' table loaded in your database.
 
 ## How it works
 
-The TDVT consists of Python scripts that create a test framework around TabQueryCLI.exe.
-The inputs are an expression test file or a logical query and a TDS.
+TDVT consists of Python scripts that create a test framework around TabQueryCLI.exe.
+The inputs are an expression test file or a logical query and a TDS file.
 The outputs are rows of data returned from the database after executing the query.
 
-Expression tests are text files that contain Tableau calculation language expressions (ie anything you could type into an edit calculation dialog).
+Expression tests are text files that contain Tableau calculation language expressions (in other words, anything you can type into an Edit Calculation dialog).
 These expressions are parsed and compiled as individual queries.
 
 Logical query tests are intermediate, abstract query representations.
 These are parsed and run like the expression tests.
 
-For each input file the tdvt script calls TabQueryCLI.exe to run the query and then compares the results to an expected file.
+For each input file the TDVT script calls TabQueryCLI.exe to run the query and then compares the results to an expected file.
 Multiple expected files are supported.
 
 ## Installation
 
 1. Install TDVT Python module
-   - Create an archive package. `py -3 setup.py sdist --formats gztar`
-   - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
-   - Verify it is installed by running `py -3 -m pip list`.
-2. Extract and then load the TestV1 minimal dataset into your database.
-3. Install Tableau Desktop which includes the tabquery tool needed to run the tests.
-4. Setup your TDVT workspace. You will run TDVT from this directory which contains test setup files. You can copy tdvt/samples to get started. This directory is preconfigured for the JDBC and ODBC Postgres examples.
+   - Create an archive package: `py -3 setup.py sdist --formats gztar`
+   - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`
+   - Verify it is installed: `py -3 -m pip list`
+   
+1. Extract and then load the TestV1 minimal dataset into your database.
+
+1. If it's not already installed, install Tableau Desktop, which includes the tabquery tool needed to run the tests.
+
+1. Set up your TDVT workspace. You run TDVT from this directory, which contains test setup files. You can copy tdvt/samples to get started. This directory is preconfigured for the JDBC and ODBC Postgres examples.
+
    Or run this command to create empty directories: `py -3 -m tdvt.tdvt --setup`
-5. Edit config/tdvt/tdvt_override.ini and set the path to tabquery.
+   
+1. Edit config/tdvt/tdvt_override.ini and set the path to tabquery.
+
    - For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 1234.1\bin\tabquerytool.exe`
 
 ## Notes on loading TestV1
 
-See [Postgres Example](tests/datasets/TestV1/postgres/README.md) for instructions on loading TestV1 to a local Postgres database.
-See the section below about troubleshooting boolean values if your database does not have a native boolean type.
+See [Postgres Example]({{ site.baseurl }}tests/datasets/TestV1/postgres/README.md) for instructions on loading TestV1 to a local Postgres database.
+See the section below about troubleshooting Boolean values if your database does not have a native Boolean type.
 
-There is a 'StaplesData' test and a 'calcs_data' test that retrive every value from the table and compare it to an expected value.
+There is a 'StaplesData' test and a 'calcs_data' test that retrieve every value from the table and compare it to an expected value.
 This can help ensure the data is loaded correctly with the right data types.
 
 ## Notes on invoking TDVT
 
 When TDVT is installed as a Python module it can be invoked as follows:
-`python -m tdvt.tdvt`. If you have Python 2 and Python 3 installed run it like `py -3 -m tdvt.tdvt`. This will ensure Python 3 is used. In th examples below `tdvt` is used, but one of the above would be used in actual practice.
+`python -m tdvt.tdvt`. 
 
-TDVT will look for the necessary config and setup files relative to the current working directory.
+If you have Python 2 and Python 3 installed, run `py -3 -m tdvt.tdvt`. This ensures Python 3 is used. In the examples below `tdvt` is used, but one of the above would be used in actual practice.
+
+TDVT looks for the necessary config and setup files relative to the current working directory.
 Always run TDVT commands from the top level directory of your generated folder structure.
 Use double quotes to wrap arguments that contain spaces.
 
 `tdvt --generate` is used to update some config files.
 You need to run it if you add a new datasource or change your mydb.ini file.
 
-## Adding a new datasource
+## Add a new datasource
 
-First decide on a name for your new datasource.
+First, decide on a name for your new datasource.
 This TDVT config name will be used to name configuration files and will be the argument you use to invoke TDVT.
-This documentation will use 'mydb' as an example.
-Secondly you will need two Tableau Data Source files (.tds).
+We'll use 'mydb' as an example.
+
+Next, you need two Tableau Data Source files (.tds).
 These represent saved connection information to a particular table in your database.
 TDVT uses the 'Calcs' and 'Staples' tables.
 
-1. Start Tableau desktop and connect to the 'Calcs' table using 'Other Database (ODBC)'.
-   Once connected, right click on the datasource in the top left 'Data' tab and pick 'Add to Saved Datasources'.
+1. Start Tableau Desktop and connect to the 'Calcs' table using 'Other Database (ODBC)'.
+   After you connect, right-click the datasource in the top left 'Data' tab and select 'Add to Saved Datasources'.
    Save this in the 'tdvt/tds' directory.
    Name this file 'cast_calcs.\*.tds' or 'Staples.\*.tds' where \* represents your TDVT config name.
    For example 'cast_calcs.mydb.tds'.
@@ -107,34 +118,42 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 
    ![]({{ site.baseurl }}/assets/tdvt_connection_2.png)
 
-1. Open the tds file in a text editor and embed the password in the <connection> tag of the tds file next to the existing 'username' value.
+1. Open the TDS file in a text editor and embed the password in the <connection> tag of the TDS file next to the existing 'username' value.
    Save the file.
 
 1. Repeat this for the 'Staples' table.
-1. Run `tdvt --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two tds files to rename the connection.
-1. Update the generated ini file (ie mydb.ini) and choose a logical query config that matches what your database supports.
-   See the section below titled 'Choosing a logical query config'.
+
+1. Run `tdvt --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two TDS files to rename the connection.
+
+1. Update the generated ini file (mydb.ini) and choose a logical query config that matches what your database supports. 
+   See the section below titled 'Choose a logical query config'.
+   
 1. Run: `tdvt --generate`
+
 1. Verify your new test suite by running: `tdvt --list your_datasource_name`. It should show you a list of test suites associated with this datasource.
 
-The `add_ds` command will rename the connection names to 'leaf'.
-See one of the tds files in '/tds' for an example.
+The `add_ds` command renames the connection names to 'leaf'.
+See one of the TDS files in '/tds' for an example.
 This occurs in two places, `<named-connection name='leaf'> and <relation connection='leaf' >`.
-If this is not done the logical query tests may cause tabquery crashes or application exceptions.
+If this is not done, the logical query tests might cause tabquery crashes or application exceptions.
+
 The mydb.ini file names the test suite and specifies which tests to run.
-The `Name` section of the ini file is used to find your TDS files.
+The `Name` section of the .ini file is used to find your TDS files.
 For example, if you set `Name = mydb` then your TDS files should be named `cast_calcs.mydb.tds` and `Staples.mydb.tds`.
 
 Now you can run the tests using `tdvt --run mydb`
 
 TDC files are also supported through the Tableau Repository.
 
-## Choosing a logical query config
+## Choose a logical query config
 
-1. Open the Staples tds file in a text editor and look for the relation xml tag. For example: `<relation connection='leaf' name='Calcs' table='[dbo].[Calcs]'>`
+1. Open the Staples TDS file in a text editor and look for the relation XML tag. For example: `<relation connection='leaf' name='Calcs' table='[dbo].[Calcs]'>`
+
 1. Note the value for 'table', in this case '[dbo].[Calcs]'.
-1. Run `tdvt --list_logical_configs`.
-   This will print out all the logical query versions and some information about how they map things.
+
+1. Run: `tdvt --list_logical_configs`
+
+   This prints all the logical query versions and some information about how they map things.
    Search the output of the command for something that matches '[dbo].[Calcs]'.
 
    A selection of the output:
@@ -149,14 +168,16 @@ TDC files are also supported through the Tableau Repository.
    ```
 
 The Calcs value should match what you found in step 3.
-There are also mappings for some column names in case your database does not support the names as provided in the Calcs and Staples data files.
+There are also mappings for some column names in case your database doesn't support the names as provided in the Calcs and Staples data files.
 For example, some databases may not support spaces in identifiers, in which case you can look for a logical configuration that replaces them with underscores and name the columns in your table accordingly.
 
 1. In this case the logical configuration named 'dbo' matches.
-1. Note the Name of the logical configuration and add this line to your ini file under the [Datasource] heading: LogicalQueryFormat = dbo
-1. run: `tdvt --generate`
 
-If none of the logical configurations work for your datasource then you can create your own in the ini file. See the next section below.
+1. Note the Name of the logical configuration and add this line to your INI file under the [Datasource] heading: LogicalQueryFormat = dbo
+
+1. Run: `tdvt --generate`
+
+If none of the logical configurations work for your datasource, then you can create your own in the .ini file. See the following section.
 
 ## INI file structure
 
@@ -172,7 +193,7 @@ MaxThread = 6   #You can add this to control Max Thread number when you use TDVT
 
 LogicalQueryFormat = dbo
 
-#You can add a new logical config here and use it above. These are example attributes, you wouldn't set them all since some are mutually exclusive.
+#You can add a new logical config here and use it above. These are example attributes; you wouldn't set them all since some are mutually exclusive.
 
 [LogicalConfig]
 Name = my_logical_query
@@ -192,7 +213,7 @@ fieldnameUnderscoreNotSpace = True
 
 [StandardTests]
 
-#You can put in comma separated string values that match part or all of a test name to exclude them. The asterix works as a wildcard.
+#You can put in comma-separated string values that match part or all of a test name to exclude them. The asterisk works as a wildcard.
 
 LogicalExclusions_Calcs = string.right
 
@@ -200,11 +221,11 @@ LogicalExclusions_Staples = Filter.Trademark
 
 ExpressionExclusions_Standard = string.ascii,string.char,logical
 
-#If you remove this section the your test sute will not include the Level of Detail tests.
+#If you remove this section then your test sute will not include the Level of Detail tests.
 
 [LODTests]
 
-#You don't need to specify anything to add this test suite, but you can exclude tests here too:
+#You don't need to specify anything to add this test suite, but you can exclude tests here, too:
 
 LogicalExclusions_Staples =
 
@@ -214,7 +235,7 @@ ExpressionExclusions_Calcs =
 
 [StaplesDataTest]
 
-#Recommended ini file for full test coverage:
+#Recommended INI file for full test coverage:
 
 [StandardTests]
 
@@ -237,72 +258,95 @@ TDS = cast_calcs.bigquery_sql_dates2.tds
 
 Exclusions = string.ascii
 
-TestPath = tests/mytests/ #This could point to a local directory relative to your tdvt working directory named 'tests'. Or for a logicaltest it would be 'tests/logical/setup/mytests/setup.\.xml
+TestPath = tests/mytests/ #This could point to a local directory relative to your TDVT working directory named 'tests'. Or for a logicaltest it would be 'tests/logical/setup/mytests/setup.\.xml
 
 ```
 
-## Running tests
+## Run tests
 
 Try `tdvt -h` for the latest usage information.
 
-Run tdvt from your working directory since it will need the tds and ini files you created when adding your datasource.
+Run TDVT from your working directory since it will need the TDS and INI files you created when adding your datasource.
 
-To show the registered datasources and suites run: `tdvt --list`
+To show the registered datasources and suites, run: `tdvt --list`
 
-Run a test:
+To run a test:
 `tdvt --run postgres_generic_example`
+
 To run expression tests:
 `tdvt --run postgres_generic_example -e`
+
 To run logical query tests:
 `tdvt --run postgres_generic_example -q`
 
-Test results are available in a csv file called test_results_combined.
-sv. Try loading them in Tableau to visualize the results.
+Test results are available in a CSV file called test_results_combined.
+Try loading them in Tableau Desktop to visualize the results.
 
-## Testing the sample plugins
-1. Copy the samples/plugins folder to your working directory, so that they exist under /plugins. ie /plugins/postgres_odbc/manifest.xml exists.
-2. Check that everything is setup correctly and a list of tests are displayed: `tdvt --list postgres_odbc`
+## Test the sample plugins
 
-## Review Results
+1. Copy the samples/plugins folder to your working directory so that they exist under /plugins. Like this: /plugins/postgres_odbc/manifest.xml 
 
-After the tests have run, you will see a “test_results_combined.csv” spreadsheet.
+2. Check that everything is set up correctly and a list of tests displays: `tdvt --list postgres_odbc`
+
+## Review results
+
+After the tests have run, you see a “test_results_combined.csv” spreadsheet.
 This contains the data about the test passes and failure from the previous run.
-The TDVT includes a sample Tableau Workbook, available from your friendly Tableau contact, that will help you analyze the results of this file file.
+TDVT includes a sample Tableau workbook that will help you analyze the results of this file.
+
 You can use these steps as a guide to develop your own workbook.
 
-1. Open the file called “Example Postgres Calc Test Result.twbx”, or start Tableau and connect to 'Text File'.
-1. Navigate to the “Data Source” tab.
-1. Click on the “test_results” connection on the left, and click “Edit Connection”.
+1. Open the file called "Example Postgres Calc Test Result.twbx", or start Tableau and connect to 'Text File'.
+
+1. Navigate to the "Data Source" tab.
+
+1. Click the "test_results" connection on the left, and click "Edit Connection".
+
    ![]({{ site.baseurl }}/assets/tdvt_edit_results.png)
-1. In the file navigator that comes up, choose the “test_results_combined” spreadsheet that is in your “tdvt” folder.
-1. Drag the new “test_results_combined.csv” file out to replace the old file in the data pre canvas.
-1. Right click on the new table, and click “Text File Properties…”.
+   
+1. In the file navigator that opens, choose the "test_results_combined" spreadsheet that is in your "tdvt" folder.
+
+1. Drag  the new "test_results_combined.csv" file to replace the old file in the data canvas.
+
+1. Right-click the new table, and click "Text File Properties…".
+
    ![]({{ site.baseurl }}/assets/tdvt_edit_results2.png)
-1. Change the “text qualifier” to use a double quote.
-1. View the Viz by clicking on “Functional Test Pass” which should like the information below. The Viz shows the test pass rate by Test Category. Click on the bars to see the relevant failed tests in the “Test Details” section.
+   
+1. Change the "text qualifier" to use a double quote.
+
+1. View the viz by clicking "Functional Test Pass," which should look like the information below. The viz shows the test pass rate by Test Category. Click the bars to see the relevant failed tests in the "Test Details" section.
+
    ![]({{ site.baseurl }}/assets/tdvt_edit_results3.png)
 
 ## File structure
 
-Your working directory will look like this.
-/config - Ini files that configure test suites.
-/config/registry - You can create more elaborate groups of test suite here.
-/config/tdvt/tdvt_override.ini - You can specift the path to tabquery here.
-/tds - Tds files.
-/ - TDVT log file, output csv and json files, a zip file containing any test results that did not match the expected results.
+Your working directory looks like this:
 
-## TDC Files and Logging
+**/config** - INI files that configure test suites.
+
+**/config/registry** - You can create more elaborate groups of test suite here.
+
+**/config/tdvt/tdvt_override.ini** - You can specify the path to tabquery here.
+
+**/tds** - TDS files.
+
+**/** - TDVT log file, output CSV and JSON files, a zip file containing any test results that don't match the expected results.
+
+## TDC files and logging
 
 TDC files are supported either in the My Tableau Repository, or embedded in the TDS file.
-Tableau desktop style logs will be found in your My Tableau Repository.
-TDVT logs will be found in the main TDVT directory.
+Tableau Desktop style logs are found in your My Tableau Repository.
+TDVT logs are found in the main TDVT directory.
 
 ## Output
 
-tdvt_actuals.zip - Zipped actual files from a test run. These are test results that did not match any expected files.
-tdvt_log.txt - Verbose logging from tdvt.
-tdvt_output.json - JSON output of test results. Suitable for re-running failed tests. See tdvt --help.
-tdvt_results.csv - Tableau friendly result file. Load with a double quote text qualifier.
+**tdvt_actuals.zip** - Zipped actual files from a test run. These are test results that did not match any expected files.
+
+**tdvt_log.txt** - Verbose logging from TDVT.
+
+**tdvt_output.json** - JSON output of test results. Suitable for re-running failed tests. See tdvt --help.
+
+**tdvt_results.csv** - Tableau-friendly result file. Load with a double quote text qualifier.
 
 The above files have versions named _\_combined._, such as tdvt_log_combined.txt. This indicates the file contains combined results from several test suites.
 
@@ -310,47 +354,54 @@ The above files have versions named _\_combined._, such as tdvt_log_combined.txt
 
 Each datasource has an associated collection of test suites defined in the mydb.ini file.
 You can see these by running `tdvt --list mydb`.
+
 When you invoke `tdvt --run mydb` each test suite runs on it's own thread.
 Each test suite can consist of one or more tests, and each test can consist of one of more test cases.
+
 The test suite spawns a number of worker threads to run these tests in parallel.
 Each worker thread invokes 'tabquery' to run the entire suite of tests.
-The tabquery process compiles the test into SQL, runs it against your database and saves a result file.
+
+The tabquery process compiles the test into SQL, runs it against your database, and saves a result file.
 TDVT then compares these result files to the expected result file.
-Once all test suites have finished TDVT will compile the results into a csv file.
-The csv file contains information such as the test name, a 'passed' indicator, the generated SQL and the data (tuples) that came back from the database.
+
+After all test suites have finished, TDVT compiles the results into a CSV file.
+The CSV file contains information such as the test name, a 'passed' indicator, the generated SQL and the data (tuples) that came back from the database.
 It also indicates which expected file most closely matched the actual results from the query.
 
-### Expected Files
+### Expected files
 
 The expected files are located in the TDVT Python package location.
 You can find this by running `python -m pip show tdvt`.
-Expresion tests have a name like 'setup.agg.avg.txt' and a corresponding expected file like 'expected.setup.agg.avg.txt'.
+
+Expression tests have a name like 'setup.agg.avg.txt' and a corresponding expected file like 'expected.setup.agg.avg.txt'.
 There may be optional alternative expecteds like 'expected.setup.agg.avg.1.txt' and so on.
 The expected files are located in 'exprtests/' in the TDVT package directory.
+
 Logical tests have names like 'setup.Filter.slicing_Q_date_month_instance_filter.prefix_bool\_.xml'.
 The last section of the name 'prefix_bool\_' corresponds to the name of the logical query config from your mydb.ini file.
-These various permutations do not affect the test results so the expected file has a base name like 'expected.setup.Filter.slicing_Q_date_month_instance_filter.xml'.
-The expected files are located in 'logicaltests/expected' in the TDVT package directory.
+These various permutations do not affect the test results so the expected file has a base name like 'expected.setup.Filter.slicing_Q_date_month_instance_filter.xml'. The expected files are located in 'logicaltests/expected' in the TDVT package directory.
 
-## Frequently Found Issues and Troubleshooting
+## Frequently found issues and troubleshooting
 
-### All my tests are failing?!@?#\$!?
+### All my tests are failing!
 
-1. Check the TDS File: Open the TDS file in Tableau.
-   If Tableau shows any error messages, prompts for a username/password, or asks for any additional information fix that in the TDS file.
+1. Check the TDS file: Open the TDS file in Tableau.
+   Check to see if Tableau shows any error messages, prompts for a username and password, or asks for any additional information fix that's in the TDS file.
    You should be able to open the TDS and create a viz without any prompts.
-1. Check the ini file for the following line: CommandLineOverride = -DLogLevel=Debug -DConnectPluginsPath=[PathToPluginsFolder].
+   
+1. Check the INI file for the following line: CommandLineOverride = -DLogLevel=Debug -DConnectPluginsPath=[PathToPluginsFolder].
    Make sure that the DConnectPluginsPath attribute is present and correct.
-1. Check Python Version: If you are using both Python 2.x and Python 3, then run TDVT using the following command
-   py -3 tdvt.py …
-1. Check tabquerytool.exe: This file should be placed in you Tableau bin directory and tdvt/config/tdvt_override.ini should be updated to point at that executable.
+   
+1. Check Python Version: If you are using both Python 2.x and Python 3, then run TDVT using the command: py -3 tdvt.py …
+   
+1. Check tabquerytool.exe: This file should be placed in your Tableau bin directory and tdvt/config/tdvt_override.ini should be updated to point at that executable.
 
-### Boolean Datatypes are not recognized or your database doesn't support them
+### Boolean data types are not recognized or your database doesn't support them
 
-Sometimes you may need to rename a column in the tds.
-For example the database may integer columns instead of booleans for the **bool0**, **bool1**, **bool2**, and **bool3** columns.
-In this case you would want to load the table into your data base using integer columns named **bool0\_** (a trailing underscore) etc.
-You can re-map these in the tds by adding a column definition like this:
+Sometimes you may need to rename a column in the TDS file.
+For example the database may integer columns instead of Booleans for the **bool0**, **bool1**, **bool2**, and **bool3** columns.
+In this case you would want to load the table into your database using integer columns named **bool0\_** (a trailing underscore) etc.
+You can re-map these in the TDS file by adding a column definition like this:
 
 ```xml
   <column datatype='boolean' name='[bool0]' role='dimension' type='nominal'>
@@ -369,25 +420,27 @@ You can re-map these in the tds by adding a column definition like this:
 
 ![]({{ site.baseurl }}/assets/tdvt_edit_tds_columns.png)
 
-### Troubleshooting test failures
+### Troubleshoot test failures
 
 First ensure that the data is loaded correctly.
 Incorrect data can cause many test failures.
+
 The standard test suite include a test named 'calcs_data' that contains several test cases, one for each column in the table.
 This test and all test cases must pass first before further troubleshooting.
-There is a similar test for the Staples table but you must add it manually to your mydb.ni file by adding '[StaplesDataTest]'.
-This test works like the 'calcs_data' test but since Staples contains several UTF-8 characters it is difficult to get it passing completely.
+
+There is a similar test for the Staples table but you must add it manually to your mydb.ini file by adding '[StaplesDataTest]'.
+This test works like the 'calcs_data' test but since Staples contains several UTF-8 characters it is difficult to get it to pass completely.
 Some of the logical tests filter one these UTF-8 characters but you can get 100% pass rate even if the StaplesDataTest does not pass.
 Still it can be useful for tracking down data issues.
 
 It can be insightful to load the Calcs and Staples tables on a Postgres or MySQL server and run the tests in order to compare working SQL against what TDVT is generating for your database.
 Just add a new datasource to TDVT that uses the native connector for that database.
-Do not use Other ODBC in this case.
+Do not use the Other Databases (ODBC) connector in this case.
 These tests should pass completely for these datasources.
 
 ### Check your setup
 
-Make sure the tds files include the 'password' element and that you have renamed the relations to 'leaf' as indicated in the setup instructions.
+Make sure the TDS files include the 'password' element and that you have renamed the relations to 'leaf' as indicated in the setup instructions.
 
 ### Log Files
 
@@ -401,6 +454,7 @@ These can be useful if it isn't clear what is causing a test to fail.
 This means that your database returned results that do not match any expected files for that test.
 One common problem is precision errors for floating point values, although the test framework imposes some rounding to standardize results.
 If the error is not significant then you can either skip the test or add a new expected file.
+
 Another problem invloves various date functions that might be off by a day.
 These can be caused by start of week errors (Sunday should be 1 and Saturday is 7).
 Other causes might include discrepancies around some start of week calculations or quarter boundaries.
@@ -410,21 +464,20 @@ Other causes might include discrepancies around some start of week calculations 
 This kind of error indicates that Tableau was unable to generate SQL for the test case.
 Usually it means that Tableau queried the driver to see what ODBC functions are supported but a necessary function or cast/convert was not found.
 Tuning the TDC file can sometimes fix these although it is a difficult process.
-A future version of TDVT will support an easy method of adding these functions.
 
 ### An ODBC error from your database
 
-If Tableau generates SQL that does not work against your database the easiest fix is to note what will work.
+If Tableau generates SQL that doesn't work against your database, the easiest fix is to note what will work.
 These custom functions can be added during development work for a new connector.
-In the future there will be a way to add or change how the SQL is generated. TDC files can sometimes help as well.
+TDC files can sometimes help, too.
 
 ### No generated SQL
 
 This can mean that Tableau was unable to find the functions necessary (see above).
-Sometimes Tableau was able to run some SQL but it wasn't reported to the TDVT.
+Sometimes Tableau was able to run some SQL but it wasn't reported to TDVT.
 In that case you can inspect the Tableau log files for that test.
-It is helpful to clear the log files and then run just the single failing test. See the 'tdvt --help' for more details.
+It's helpful to clear the log files and then run just the single failing test. See 'tdvt --help' for more details.
 
 ### Logical Query Tests
 
-If all the logical queries fail it can mean that you do not have the right logical query config associated in your mydb.ini file.
+If all the logical queries fail it can mean that you don't have the right logical query config associated in your mydb.ini file.
