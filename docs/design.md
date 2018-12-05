@@ -36,7 +36,7 @@ You might find other super class values in the workbook XML from an existing Tab
 
 The dialect determines what SQL is generated for various Tableau actions. Choosing the right dialect is a critical part of writing a connector plugin.
 
-- If you choose 'postgres' or 'mysql' as the parent, you can skip configuring a dialect, and your plugin will use the parent’s dialect.
+- If you choose 'mysql_odbc' as the parent, you can skip configuring a dialect, and your plugin will use the parent’s dialect.
 - If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point.
 
 ### Dialect base classes
