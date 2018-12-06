@@ -44,7 +44,7 @@ Test Scope
 
 ## How it works
 
-TDVT consists of Python scripts that create a test framework around TabQueryCLI.exe.
+TDVT consists of Python scripts that create a test framework around tabquerytool.exe, a command line tool that leverages Tableau's data connectivity layer.
 The inputs are an expression test file or a logical query and a TDS file.
 The outputs are rows of data returned from the database after executing the query.
 
@@ -54,26 +54,27 @@ These expressions are parsed and compiled as individual queries.
 Logical query tests are intermediate, abstract query representations.
 These are parsed and run like the expression tests.
 
-For each input file the TDVT script calls TabQueryCLI.exe to run the query and then compares the results to an expected file.
+For each test suite the TDVT script calls tabquerytool.exe to run the queries and then compares the results to expected files.
 Multiple expected files are supported.
 
 ## Installation
 
 1. Install TDVT Python module
-   - Create an archive package: `py -3 setup.py sdist --formats gztar`
-   - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`
-   - Verify it is installed: `py -3 -m pip list`
-   
+   - Create an archive package. `py -3 setup.py sdist --formats gztar`
+   - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
+   - Verify it is installed by running `py -3 -m pip list`.
+
 1. Extract and then load the TestV1 minimal dataset into your database.
 
-1. If it's not already installed, install Tableau Desktop, which includes the tabquery tool needed to run the tests.
+1. If it's not already installed, install Tableau Desktop which includes the tabquerytool needed to run the tests.
 
-1. Set up your TDVT workspace. You run TDVT from this directory, which contains test setup files. You can copy tdvt/samples to get started. This directory is preconfigured for the JDBC and ODBC Postgres examples.
+1. Setup your TDVT workspace. When you run TDVT it looks in the current working directory for the test configuration files which setup test suites for your datasource. Follow these steps to setup TDVT for the included sample datasources, or you can run `py -3 -m tdvt.tdvt --setup` to create an empty environment.
+    - create a new directory, for example 'tdvt_workspace'.
+    - copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
+    - copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.
+    - tdvt_workspace should contain the following subdirectories: config, plugins, tds.
 
-   Or run this command to create empty directories: `py -3 -m tdvt.tdvt --setup`
-   
-1. Edit config/tdvt/tdvt_override.ini and set the path to tabquery.
-
+1. Edit config/tdvt/tdvt_override.ini and set the path to tabquerytool.
    - For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 1234.1\bin\tabquerytool.exe`
 
 ## Notes on loading TestV1
@@ -186,7 +187,7 @@ If none of the logical configurations work for your datasource, then you can cre
 
 Name = your_datasource_name  #i.e. mydb
 
-CommandLineOverride = -DLogLevel=Debug #Space separated list of arguments that are passed through unchanged to tabquery. Most Tableau arguments require a prepended '-D'.
+CommandLineOverride = -DLogLevel=Debug #Space separated list of arguments that are passed through unchanged to tabquerytool. Most Tableau arguments require a prepended '-D'.
 #If you are testing a connector plugin, be sure to add the command line argument -DConnectPluginsPath and have it pointed at the folder where your plugin is located
 
 MaxThread = 6   #You can add this to control Max Thread number when you use TDVT to run single datasource, it cannot apply with multi datasource
@@ -326,7 +327,7 @@ Your working directory looks like this:
 
 **/config/registry** - You can create more elaborate groups of test suite here.
 
-**/config/tdvt/tdvt_override.ini** - You can specify the path to tabquery here.
+**/config/tdvt/tdvt_override.ini** - You can specify the path to tabquerytool here.
 
 **/tds** - TDS files.
 
@@ -359,7 +360,7 @@ When you invoke `tdvt --run mydb` each test suite runs on it's own thread.
 Each test suite can consist of one or more tests, and each test can consist of one of more test cases.
 
 The test suite spawns a number of worker threads to run these tests in parallel.
-Each worker thread invokes 'tabquery' to run the entire suite of tests.
+Each worker thread invokes 'tabquerytool' to run the entire suite of tests.
 
 The tabquery process compiles the test into SQL, runs it against your database, and saves a result file.
 TDVT then compares these result files to the expected result file.
@@ -446,7 +447,7 @@ Make sure the TDS files include the 'password' element and that you have renamed
 
 tdvt_log\*.txt contains '--verbose' level logging.
 It can help to either run a single test or to run things in serial with '-t 1 -tt 1' otherwise the log file will be interleaved by different sub threads.
-tabquery writes log files to your 'My Tableau Repository'.
+tabquerytool writes log files to your 'My Tableau Repository'.
 These can be useful if it isn't clear what is causing a test to fail.
 
 ### Actual does not match expected
