@@ -42,7 +42,7 @@ Test Scope
 
 ## How it works
 
-The TDVT consists of Python scripts that create a test framework around TabQueryCLI.exe.
+The TDVT consists of Python scripts that create a test framework around tabquerytool.exe, a command line tool that leverages Tableau's data connectivity layer.
 The inputs are an expression test file or a logical query and a TDS.
 The outputs are rows of data returned from the database after executing the query.
 
@@ -52,7 +52,7 @@ These expressions are parsed and compiled as individual queries.
 Logical query tests are intermediate, abstract query representations.
 These are parsed and run like the expression tests.
 
-For each input file the tdvt script calls TabQueryCLI.exe to run the query and then compares the results to an expected file.
+For each test suite the tdvt script calls tabquerytool.exe to run the queries and then compares the results to expected files.
 Multiple expected files are supported.
 
 ## Installation
@@ -62,10 +62,13 @@ Multiple expected files are supported.
    - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
    - Verify it is installed by running `py -3 -m pip list`.
 2. Extract and then load the TestV1 minimal dataset into your database.
-3. Install Tableau Desktop which includes the tabquery tool needed to run the tests.
-4. Setup your TDVT workspace. You will run TDVT from this directory which contains test setup files. You can copy tdvt/samples to get started. This directory is preconfigured for the JDBC and ODBC Postgres examples.
-   Or run this command to create empty directories: `py -3 -m tdvt.tdvt --setup`
-5. Edit config/tdvt/tdvt_override.ini and set the path to tabquery.
+3. Install Tableau Desktop which includes the tabquerytool needed to run the tests.
+4. Setup your TDVT workspace. When you run TDVT it looks in the current working directory for the test configuration files which setup test suites for your datasource. Follow these steps to setup TDVT for the included sample datasources, or you can run `py -3 -m tdvt.tdvt --setup` to create an empty environment.
+    * create a new directory, for example 'tdvt_workspace'.
+    * copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
+    * copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.
+    * tdvt_workspace should contain the following subdirectories: config, plugins, tds.
+5. Edit config/tdvt/tdvt_override.ini and set the path to tabquerytool.
    - For example: `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 1234.1\bin\tabquerytool.exe`
 
 ## Notes on loading TestV1
@@ -120,7 +123,7 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 The `add_ds` command will rename the connection names to 'leaf'.
 See one of the tds files in '/tds' for an example.
 This occurs in two places, `<named-connection name='leaf'> and <relation connection='leaf' >`.
-If this is not done the logical query tests may cause tabquery crashes or application exceptions.
+If this is not done the logical query tests may cause tabquerytool crashes or application exceptions.
 The mydb.ini file names the test suite and specifies which tests to run.
 The `Name` section of the ini file is used to find your TDS files.
 For example, if you set `Name = mydb` then your TDS files should be named `cast_calcs.mydb.tds` and `Staples.mydb.tds`.
@@ -165,7 +168,7 @@ If none of the logical configurations work for your datasource then you can crea
 
 Name = your_datasource_name  #i.e. mydb
 
-CommandLineOverride = -DLogLevel=Debug #Space separated list of arguments that are passed through unchanged to tabquery. Most Tableau arguments require a prepended '-D'.
+CommandLineOverride = -DLogLevel=Debug #Space separated list of arguments that are passed through unchanged to tabquerytool. Most Tableau arguments require a prepended '-D'.
 #If you are testing a connector plugin, be sure to add the command line argument -DConnectPluginsPath and have it pointed at the folder where your plugin is located
 
 MaxThread = 6   #You can add this to control Max Thread number when you use TDVT to run single datasource, it cannot apply with multi datasource
@@ -287,7 +290,7 @@ You can use these steps as a guide to develop your own workbook.
 Your working directory will look like this.
 /config - Ini files that configure test suites.
 /config/registry - You can create more elaborate groups of test suite here.
-/config/tdvt/tdvt_override.ini - You can specift the path to tabquery here.
+/config/tdvt/tdvt_override.ini - You can specift the path to tabquerytool here.
 /tds - Tds files.
 / - TDVT log file, output csv and json files, a zip file containing any test results that did not match the expected results.
 
@@ -313,8 +316,8 @@ You can see these by running `tdvt --list mydb`.
 When you invoke `tdvt --run mydb` each test suite runs on it's own thread.
 Each test suite can consist of one or more tests, and each test can consist of one of more test cases.
 The test suite spawns a number of worker threads to run these tests in parallel.
-Each worker thread invokes 'tabquery' to run the entire suite of tests.
-The tabquery process compiles the test into SQL, runs it against your database and saves a result file.
+Each worker thread invokes 'tabquerytool' to run the entire suite of tests.
+The tabquerytool process compiles the test into SQL, runs it against your database and saves a result file.
 TDVT then compares these result files to the expected result file.
 Once all test suites have finished TDVT will compile the results into a csv file.
 The csv file contains information such as the test name, a 'passed' indicator, the generated SQL and the data (tuples) that came back from the database.
@@ -393,7 +396,7 @@ Make sure the tds files include the 'password' element and that you have renamed
 
 tdvt_log\*.txt contains '--verbose' level logging.
 It can help to either run a single test or to run things in serial with '-t 1 -tt 1' otherwise the log file will be interleaved by different sub threads.
-tabquery writes log files to your 'My Tableau Repository'.
+tabquerytool writes log files to your 'My Tableau Repository'.
 These can be useful if it isn't clear what is causing a test to fail.
 
 ### Actual does not match expected
