@@ -8,6 +8,7 @@ This project consists of a set of documentation, example files, and a Python bas
 * [Get started](#get-started)
 * [Samples](#samples)
 * [Prerequisites](#prerequisites)
+* [Get Help](#get-help)
 * [FAQ](#faq)
 * [Contributions](#contributions)
 
@@ -29,10 +30,18 @@ We have created two standalone Postgres example connectors using ODBC and JDBC t
 
 To work with Connector Plugins, you need the following:
 
-* Windows Mac or Linux
-* Tableau Desktop or Server V. 2019.1 Beta 2 or higher
-* Python [Version??]
+* Windows or Mac
+* Tableau Desktop or Server 2019.1 Beta 2 or higher
+* Python 3.5 or higher
 * An ODBC or JDBC data source and driver
+* The provided test data loaded in your data source
+
+# Get Help
+
+This SDK is supported, so if you have problems getting the test harness set up, find defects or have questions related to the configuration or testing of your plugin: 
+* Start by submitting a GitHub Issue here in this project
+* or you can reach us on the Developer Forums here: https://community.tableau.com/community/developers/content.  
+
 
 # FAQ
 **If I build a plugin, will Tableau include it?**  
