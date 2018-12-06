@@ -66,7 +66,7 @@ Multiple expected files are supported.
 
 1. Extract and then load the TestV1 minimal dataset into your database.
 
-1. Install Tableau Desktop which includes the tabquerytool needed to run the tests.
+1. If it's not already installed, install Tableau Desktop which includes the tabquerytool needed to run the tests.
 
 1. Setup your TDVT workspace. When you run TDVT it looks in the current working directory for the test configuration files which setup test suites for your datasource. Follow these steps to setup TDVT for the included sample datasources, or you can run `py -3 -m tdvt.tdvt --setup` to create an empty environment.
     - create a new directory, for example 'tdvt_workspace'.
