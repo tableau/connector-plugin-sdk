@@ -136,7 +136,7 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 The `add_ds` command renames the connection names to 'leaf'.
 See one of the TDS files in '/tds' for an example.
 This occurs in two places, `<named-connection name='leaf'> and <relation connection='leaf' >`.
-If this is not done the logical query tests might cause tabquery crashes or application exceptions.
+If this is not done, the logical query tests might cause tabquery crashes or application exceptions.
 
 The mydb.ini file names the test suite and specifies which tests to run.
 The `Name` section of the .ini file is used to find your TDS files.
