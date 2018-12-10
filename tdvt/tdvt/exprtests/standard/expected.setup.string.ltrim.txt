@@ -1,0 +1,51 @@
+<results>
+  <test name='LTRIM(&quot; &quot; + str2 + &quot; &quot;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1106979036)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eight &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;five &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fourteen &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;nine &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteen &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ten &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;three &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;twelve &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

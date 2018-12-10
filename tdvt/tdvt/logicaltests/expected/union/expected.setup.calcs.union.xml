@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\cpp2\tableau-tests\tdvt\logicaltests\setup\union\setup.calcs.union.simple.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[Number of Records]</column>
+        <column>[cast_calcs.postgres].[table_name]</column>
+        <column>[cast_calcs.postgres].[int0]</column>
+        <column>[cast_calcs.postgres].[int1]</column>
+        <column>[cast_calcs.postgres].[int2]</column>
+        <column>[cast_calcs.postgres].[int3]</column>
+        <column>[cast_calcs.postgres].[key]</column>
+        <column>[cast_calcs.postgres].[str0]</column>
+        <column>[cast_calcs.postgres].[str1]</column>
+        <column>[cast_calcs.postgres].[str2]</column>
+        <column>[cast_calcs.postgres].[str3]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>0</value>
+        <value>11</value>
+        <value>&quot;key12&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CORDED KEYBOARDS&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>5</value>
+        <value>2</value>
+        <value>&quot;key02&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;AIR PURIFIERS&quot;</value>
+        <value>&quot;three&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>%null%</value>
+        <value>-6</value>
+        <value>-4</value>
+        <value>13</value>
+        <value>&quot;key01&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;CLOCKS&quot;</value>
+        <value>&quot;two&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>%null%</value>
+        <value>-4</value>
+        <value>-5</value>
+        <value>5</value>
+        <value>&quot;key03&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDER ACCESSORIES&quot;</value>
+        <value>%null%</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>%null%</value>
+        <value>2</value>
+        <value>0</value>
+        <value>3</value>
+        <value>&quot;key07&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BUSINESS ENVELOPES&quot;</value>
+        <value>&quot;eight&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>%null%</value>
+        <value>3</value>
+        <value>-6</value>
+        <value>17</value>
+        <value>&quot;key08&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;ANSWERING MACHINES&quot;</value>
+        <value>&quot;nine&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>1</value>
+        <value>-3</value>
+        <value>5</value>
+        <value>8</value>
+        <value>&quot;key00&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;CLAMP ON LAMPS&quot;</value>
+        <value>&quot;one&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>3</value>
+        <value>%null%</value>
+        <value>2</value>
+        <value>7</value>
+        <value>&quot;key05&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDING MACHINES&quot;</value>
+        <value>&quot;six&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>4</value>
+        <value>%null%</value>
+        <value>-9</value>
+        <value>11</value>
+        <value>&quot;key15&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DVD&quot;</value>
+        <value>&quot;sixteen&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>4</value>
+        <value>%null%</value>
+        <value>-3</value>
+        <value>11</value>
+        <value>&quot;key10&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CD-R MEDIA&quot;</value>
+        <value>&quot;eleven&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>4</value>
+        <value>%null%</value>
+        <value>4</value>
+        <value>18</value>
+        <value>&quot;key13&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CORDLESS KEYBOARDS&quot;</value>
+        <value>&quot;fourteen&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>7</value>
+        <value>%null%</value>
+        <value>3</value>
+        <value>9</value>
+        <value>&quot;key04&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDER CLIPS&quot;</value>
+        <value>&quot;five&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>8</value>
+        <value>%null%</value>
+        <value>9</value>
+        <value>18</value>
+        <value>&quot;key06&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDING SUPPLIES&quot;</value>
+        <value>%null%</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>8</value>
+        <value>-9</value>
+        <value>6</value>
+        <value>0</value>
+        <value>&quot;key16&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;ERICSSON&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>8</value>
+        <value>3</value>
+        <value>-9</value>
+        <value>2</value>
+        <value>&quot;key09&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;BUSINESS COPIERS&quot;</value>
+        <value>&quot;ten&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>10</value>
+        <value>-8</value>
+        <value>-4</value>
+        <value>2</value>
+        <value>&quot;key11&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CONFERENCE PHONES&quot;</value>
+        <value>&quot;twelve&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs&quot;</value>
+        <value>11</value>
+        <value>%null%</value>
+        <value>-8</value>
+        <value>18</value>
+        <value>&quot;key14&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DOT MATRIX PRINTERS&quot;</value>
+        <value>&quot;fifteen&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>0</value>
+        <value>11</value>
+        <value>&quot;key12&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CORDED KEYBOARDS&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>5</value>
+        <value>2</value>
+        <value>&quot;key02&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;AIR PURIFIERS&quot;</value>
+        <value>&quot;three&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>%null%</value>
+        <value>-6</value>
+        <value>-4</value>
+        <value>13</value>
+        <value>&quot;key01&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;CLOCKS&quot;</value>
+        <value>&quot;two&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>%null%</value>
+        <value>-4</value>
+        <value>-5</value>
+        <value>5</value>
+        <value>&quot;key03&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDER ACCESSORIES&quot;</value>
+        <value>%null%</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>%null%</value>
+        <value>2</value>
+        <value>0</value>
+        <value>3</value>
+        <value>&quot;key07&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BUSINESS ENVELOPES&quot;</value>
+        <value>&quot;eight&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>%null%</value>
+        <value>3</value>
+        <value>-6</value>
+        <value>17</value>
+        <value>&quot;key08&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;ANSWERING MACHINES&quot;</value>
+        <value>&quot;nine&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>1</value>
+        <value>-3</value>
+        <value>5</value>
+        <value>8</value>
+        <value>&quot;key00&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;CLAMP ON LAMPS&quot;</value>
+        <value>&quot;one&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>3</value>
+        <value>%null%</value>
+        <value>2</value>
+        <value>7</value>
+        <value>&quot;key05&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDING MACHINES&quot;</value>
+        <value>&quot;six&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>4</value>
+        <value>%null%</value>
+        <value>-9</value>
+        <value>11</value>
+        <value>&quot;key15&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DVD&quot;</value>
+        <value>&quot;sixteen&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>4</value>
+        <value>%null%</value>
+        <value>-3</value>
+        <value>11</value>
+        <value>&quot;key10&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CD-R MEDIA&quot;</value>
+        <value>&quot;eleven&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>4</value>
+        <value>%null%</value>
+        <value>4</value>
+        <value>18</value>
+        <value>&quot;key13&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CORDLESS KEYBOARDS&quot;</value>
+        <value>&quot;fourteen&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>7</value>
+        <value>%null%</value>
+        <value>3</value>
+        <value>9</value>
+        <value>&quot;key04&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDER CLIPS&quot;</value>
+        <value>&quot;five&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>8</value>
+        <value>%null%</value>
+        <value>9</value>
+        <value>18</value>
+        <value>&quot;key06&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDING SUPPLIES&quot;</value>
+        <value>%null%</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>8</value>
+        <value>-9</value>
+        <value>6</value>
+        <value>0</value>
+        <value>&quot;key16&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;ERICSSON&quot;</value>
+        <value>%null%</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>8</value>
+        <value>3</value>
+        <value>-9</value>
+        <value>2</value>
+        <value>&quot;key09&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;BUSINESS COPIERS&quot;</value>
+        <value>&quot;ten&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>10</value>
+        <value>-8</value>
+        <value>-4</value>
+        <value>2</value>
+        <value>&quot;key11&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;CONFERENCE PHONES&quot;</value>
+        <value>&quot;twelve&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>&quot;Calcs1&quot;</value>
+        <value>11</value>
+        <value>%null%</value>
+        <value>-8</value>
+        <value>18</value>
+        <value>&quot;key14&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DOT MATRIX PRINTERS&quot;</value>
+        <value>&quot;fifteen&quot;</value>
+        <value>&quot;e&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

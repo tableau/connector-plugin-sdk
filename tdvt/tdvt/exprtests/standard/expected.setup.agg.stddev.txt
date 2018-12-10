@@ -1,0 +1,22 @@
+<results>
+  <test name='STDEV([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(2430775290)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10.654484</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='STDEVP([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(3542464170)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10.200892</value>
+      </tuple>
+    </table>
+  </test>
+</results>

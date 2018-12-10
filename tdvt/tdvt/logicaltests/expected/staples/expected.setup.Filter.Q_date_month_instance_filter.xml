@@ -1,0 +1,693 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Filter.Q_date_month_instance_filter.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Prod Type2]</column>
+        <column>[Staples.postgres91].[mn:Order Date:ok]</column>
+        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>1</value>
+        <value>144516.48</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>2</value>
+        <value>97704.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>3</value>
+        <value>87915.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>4</value>
+        <value>93331.91</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>5</value>
+        <value>121033.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>6</value>
+        <value>133035.52</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>7</value>
+        <value>76649.05</value>
+      </tuple>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>8</value>
+        <value>107705.75</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>1</value>
+        <value>160118.47</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>2</value>
+        <value>138169.61</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>3</value>
+        <value>183170.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>4</value>
+        <value>210630.59</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>5</value>
+        <value>249295.04</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>6</value>
+        <value>227231.73</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>7</value>
+        <value>224064.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>8</value>
+        <value>213825.26</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>1</value>
+        <value>30730.97</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>2</value>
+        <value>4622.05</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>3</value>
+        <value>28829.21</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>4</value>
+        <value>-2331.62</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>5</value>
+        <value>9870.95</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>6</value>
+        <value>26657.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>7</value>
+        <value>7681.92</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>8</value>
+        <value>27868.12</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>1</value>
+        <value>128133.36</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>2</value>
+        <value>105074.06</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>3</value>
+        <value>102070.23</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>4</value>
+        <value>162000.01</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>5</value>
+        <value>128434.92</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>6</value>
+        <value>110570.63</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>7</value>
+        <value>94758.41</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>8</value>
+        <value>123841.71</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>1</value>
+        <value>142522.94</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>2</value>
+        <value>109062.21</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>3</value>
+        <value>126075.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>4</value>
+        <value>140233.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>5</value>
+        <value>105981.61</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>6</value>
+        <value>120480.54</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>7</value>
+        <value>121271.57</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>8</value>
+        <value>116098.61</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>1</value>
+        <value>320953.44</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>2</value>
+        <value>302083.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>3</value>
+        <value>308866.86</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>4</value>
+        <value>185799.28</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>5</value>
+        <value>351988.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>6</value>
+        <value>188396.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>7</value>
+        <value>318360.22</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>8</value>
+        <value>314049.89</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>1</value>
+        <value>33517.81</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>2</value>
+        <value>24841.39</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>3</value>
+        <value>19106.38</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>4</value>
+        <value>21243.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>5</value>
+        <value>22050.46</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>6</value>
+        <value>31866.39</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>7</value>
+        <value>20266.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>8</value>
+        <value>28652.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>1</value>
+        <value>15456.53</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>2</value>
+        <value>16603.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>3</value>
+        <value>12673.45</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>4</value>
+        <value>9192.12</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>5</value>
+        <value>11237.74</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>6</value>
+        <value>14790.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>7</value>
+        <value>15251.86</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>8</value>
+        <value>16098.57</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>1</value>
+        <value>19124.13</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>2</value>
+        <value>29125.46</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>3</value>
+        <value>19242.07</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>4</value>
+        <value>15910.38</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>5</value>
+        <value>34233.54</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>6</value>
+        <value>23559.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>7</value>
+        <value>15584.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>8</value>
+        <value>23125.71</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>1</value>
+        <value>737525.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>2</value>
+        <value>463256.83</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>3</value>
+        <value>606387.63</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>4</value>
+        <value>557232.52</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>5</value>
+        <value>480202.11</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>6</value>
+        <value>458585.51</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>7</value>
+        <value>501852.54</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>8</value>
+        <value>596247.41</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>1</value>
+        <value>54680.04</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>2</value>
+        <value>47379.59</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>3</value>
+        <value>50879.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>4</value>
+        <value>64976.84</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>5</value>
+        <value>45890.44</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>6</value>
+        <value>46446.29</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>7</value>
+        <value>53972.2</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>8</value>
+        <value>62472.48</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>1</value>
+        <value>15222.26</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>2</value>
+        <value>16503.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>3</value>
+        <value>14773.82</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>4</value>
+        <value>9552.09</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>5</value>
+        <value>15564.86</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>6</value>
+        <value>15836.9</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>7</value>
+        <value>15583.86</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>8</value>
+        <value>14372.37</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>1</value>
+        <value>1151.21</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>2</value>
+        <value>1170.1</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>3</value>
+        <value>878.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>4</value>
+        <value>773.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>5</value>
+        <value>798.45</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>6</value>
+        <value>902.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>7</value>
+        <value>1176.57</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>8</value>
+        <value>1111.05</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>1</value>
+        <value>589.91</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>2</value>
+        <value>12914.66</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>3</value>
+        <value>17086.2</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>4</value>
+        <value>5798.94</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>5</value>
+        <value>590.58</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>6</value>
+        <value>6024.91</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>7</value>
+        <value>4298.84</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>8</value>
+        <value>6284.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>1</value>
+        <value>10539.14</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>2</value>
+        <value>25823.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>3</value>
+        <value>17494.89</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>4</value>
+        <value>62857.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>5</value>
+        <value>-8895.94</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>6</value>
+        <value>23669.15</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>7</value>
+        <value>28699.31</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>8</value>
+        <value>30391.28</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>1</value>
+        <value>81748.66</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>2</value>
+        <value>22772.43</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>3</value>
+        <value>66257.86</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>4</value>
+        <value>32208.53</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>5</value>
+        <value>80483.61</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>6</value>
+        <value>59373.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>7</value>
+        <value>51801.41</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>8</value>
+        <value>59327.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>1</value>
+        <value>366135.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>2</value>
+        <value>354862.05</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>3</value>
+        <value>414217.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>4</value>
+        <value>382031.36</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>5</value>
+        <value>414673.31</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>6</value>
+        <value>419417.73</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>7</value>
+        <value>408417.81</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>8</value>
+        <value>445079.19</value>
+      </tuple>
+    </table>
+  </test>
+</results>

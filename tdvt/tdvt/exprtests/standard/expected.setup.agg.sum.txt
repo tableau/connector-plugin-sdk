@@ -1,0 +1,22 @@
+<results>
+  <test name='SUM([int0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(645427419)(0)]</column>
+      </schema>
+      <tuple>
+        <value>68</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1450575838)(0)]</column>
+      </schema>
+      <tuple>
+        <value>24.02</value>
+      </tuple>
+    </table>
+  </test>
+</results>

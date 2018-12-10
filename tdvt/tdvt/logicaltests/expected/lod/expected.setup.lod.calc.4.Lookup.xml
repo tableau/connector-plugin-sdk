@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='logicaltests/setup/lod/setup.lod.calc.4.Lookup.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Market Segment]</column>
+        <column>[Staples.lod.sqlserver].[Prod Type1]</column>
+        <column>[Staples.lod.sqlserver].[TEMP(Calculation_8290203111048369)(2626528331)(0)]</column>
+        <column>[Staples.lod.sqlserver].[TEMP(Calculation_8290203111048369)(357447720)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>19889172.0</value>
+        <value>6987300.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>19889172.0</value>
+        <value>4599668.9</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>19889172.0</value>
+        <value>8302202.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>35593890.0</value>
+        <value>12325807.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>35593890.0</value>
+        <value>8644838.2</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>35593890.0</value>
+        <value>14623245.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>24513651.0</value>
+        <value>8354019.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>24513651.0</value>
+        <value>6116307.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>24513651.0</value>
+        <value>10043325.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>18691224.0</value>
+        <value>6341959.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>18691224.0</value>
+        <value>4653925.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>18691224.0</value>
+        <value>7695338.8</value>
+      </tuple>
+    </table>
+  </test>
+</results>

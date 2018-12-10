@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Query.Filter.IsNULL.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str2]</column>
+        <column>[cast_calcs.postgres91].[sum:num3:ok]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+        <value>-5.54</value>
+      </tuple>
+    </table>
+  </test>
+</results>

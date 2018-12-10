@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.MultipleFilters.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Call Center Region]</column>
+        <column>[Staples.postgres91].[Order ID]</column>
+        <column>[Staples.postgres91].[Product Container]</column>
+        <column>[Staples.postgres91].[avg:Gross Profit:ok]</column>
+        <column>[Staples.postgres91].[mn:Order Date:ok]</column>
+        <column>[Staples.postgres91].[sum:Price:ok]</column>
+        <column>[Staples.postgres91].[yr:Order Date:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;23143&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>-93.18</value>
+        <value>10</value>
+        <value>11.33</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;30086&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>4660.61</value>
+        <value>7</value>
+        <value>500.98</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;47653&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>-38.72</value>
+        <value>7</value>
+        <value>21.78</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;7266&quot;</value>
+        <value>&quot;MEDIUM BOX&quot;</value>
+        <value>-21.82</value>
+        <value>7</value>
+        <value>9.77</value>
+        <value>2002</value>
+      </tuple>
+    </table>
+  </test>
+</results>

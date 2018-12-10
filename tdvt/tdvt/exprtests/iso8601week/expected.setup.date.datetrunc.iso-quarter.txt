@@ -1,0 +1,82 @@
+<results>
+  <test name='DATETRUNC(&apos;iso-quarter&apos;, #2014-12-29#) // Monday, 2015-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(276136894)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-03-29#) // Sunday, 2015-W13'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3255691099)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-03-30#) // Monday, 2015-W14'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2860509441)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-03-30 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-quarter&apos;, #2016-01-03#) // Sunday, 2015-W53'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3644886455)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-09-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-12-21#) // Monday, 2015-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1905340232)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-09-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-quarter&apos;, #2015-12-28#) // Monday, 2015-W53'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3293283481)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-09-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;quarter&apos;, DATETRUNC(&apos;iso-quarter&apos;, #2015-03-29#))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(168227120)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, DATETRUNC(&apos;iso-quarter&apos;, #2015-03-29#))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(273798999)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-10-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

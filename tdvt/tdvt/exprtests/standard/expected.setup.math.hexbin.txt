@@ -1,0 +1,55 @@
+<results>
+  <test name='HEXBINX([int2],2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2503102272)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-9.0</value>
+      </tuple>
+      <tuple>
+        <value>-7.5</value>
+      </tuple>
+      <tuple>
+        <value>-6.0</value>
+      </tuple>
+      <tuple>
+        <value>-4.5</value>
+      </tuple>
+      <tuple>
+        <value>-3.0</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>1.5</value>
+      </tuple>
+      <tuple>
+        <value>3.0</value>
+      </tuple>
+      <tuple>
+        <value>4.5</value>
+      </tuple>
+      <tuple>
+        <value>6.0</value>
+      </tuple>
+      <tuple>
+        <value>9.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='HEXBINY([int2],2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2977666156)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1.732</value>
+      </tuple>
+      <tuple>
+        <value>2.598</value>
+      </tuple>
+    </table>
+  </test>
+</results>

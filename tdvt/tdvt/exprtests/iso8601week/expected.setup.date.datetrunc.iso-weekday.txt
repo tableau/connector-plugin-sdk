@@ -1,0 +1,22 @@
+<results>
+  <test name='DATETRUNC(&apos;iso-weekday&apos;, #2014-01-03 00:00:00#)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2441111340)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-weekday&apos;, #2014-01-03 23:59:59#)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(962293379)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

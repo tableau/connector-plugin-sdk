@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.FilterBy_DateTime_Slices.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[sum:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Barbara Fisher&quot;</value>
+        <value>810852.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>665294.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dave Hallsten&quot;</value>
+        <value>464823.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;David Flashing&quot;</value>
+        <value>784989.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;David Wiener&quot;</value>
+        <value>1112437.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Deanra Eno&quot;</value>
+        <value>831445.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>800564.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Elizabeth Moffitt&quot;</value>
+        <value>919596.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ellis Ballard&quot;</value>
+        <value>900220.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Frank Olsen&quot;</value>
+        <value>646440.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Grace Kelly&quot;</value>
+        <value>1094864.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hallie Redmond&quot;</value>
+        <value>986910.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>923244.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>680507.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Henia Zydlo&quot;</value>
+        <value>722652.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Herbert Flentye&quot;</value>
+        <value>700813.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>1176665.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>702633.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jane Waco&quot;</value>
+        <value>650527.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>567067.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jason Gross&quot;</value>
+        <value>1047955.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>1213588.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jennifer Patt&quot;</value>
+        <value>750007.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jesus Ocampo&quot;</value>
+        <value>1059996.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jim Sink&quot;</value>
+        <value>1137689.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>292587.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>1270616.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>830032.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Lela Donovan&quot;</value>
+        <value>1003977.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Lena Cacioppo&quot;</value>
+        <value>1339421.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>1315451.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mary O&apos;Rourke&quot;</value>
+        <value>804203.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>825312.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MaryBeth Skach&quot;</value>
+        <value>1235557.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>508608.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Maurice Satty&quot;</value>
+        <value>1003324.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>725218.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>492716.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Meg Tillman-Sachs&quot;</value>
+        <value>1241470.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Michael Moore&quot;</value>
+        <value>789461.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Michael Oakman&quot;</value>
+        <value>921162.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>1039748.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nathan Mautz&quot;</value>
+        <value>1363244.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>980430.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nona Balk&quot;</value>
+        <value>995128.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Olvera Toch&quot;</value>
+        <value>1251383.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Patrick O&apos;Brill&quot;</value>
+        <value>769898.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Paul Prost&quot;</value>
+        <value>680254.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>789660.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Pierre Wener&quot;</value>
+        <value>1078418.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Quincy Jones&quot;</value>
+        <value>1220592.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>968604.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Robert Marley&quot;</value>
+        <value>779991.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>773046.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>1221609.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sandra Glassco&quot;</value>
+        <value>877773.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sarah Jordon-Smith&quot;</value>
+        <value>992550.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Seth Vernon&quot;</value>
+        <value>1047288.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sharelle Roach-McGee&quot;</value>
+        <value>1115274.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>617007.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Shui Tom&quot;</value>
+        <value>951477.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Skye Norling-Christen&quot;</value>
+        <value>777764.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Speros Goranitis&quot;</value>
+        <value>668089.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Stephanie Ulpright&quot;</value>
+        <value>702831.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>323764.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>407431.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>955615.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>788399.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thomas Boland&quot;</value>
+        <value>776421.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>1221342.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>556533.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>608717.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Victor Price&quot;</value>
+        <value>917435.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;William Brown&quot;</value>
+        <value>805221.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>923797.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>1449172.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

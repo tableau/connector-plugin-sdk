@@ -1,0 +1,12 @@
+<results>
+  <test name='IFNULL(COUNTD(num2), 0)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(957319405)(0)]</column>
+      </schema>
+      <tuple>
+        <value>13.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

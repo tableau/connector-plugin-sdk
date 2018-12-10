@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='e:\dev\near\tableau-tests\tdvt\tests\logical/setup/bigquery\setup.join.null.datetime.bigquery_sql.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery_sql].[Calculation_3278620569574133760]</column>
+        <column>[cast_calcs.bigquery_sql].[Calculation_845269395859349504]</column>
+        <column>[cast_calcs.bigquery_sql].[sum:num1:ok]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+        <value>2.47</value>
+        <value>2.47</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>7.1</value>
+        <value>7.1</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>7.12</value>
+        <value>7.12</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>9.38</value>
+        <value>9.38</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>9.47</value>
+        <value>9.47</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>10.32</value>
+        <value>10.32</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>10.37</value>
+        <value>10.37</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>11.38</value>
+        <value>11.38</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>12.05</value>
+        <value>12.05</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>12.4</value>
+        <value>12.4</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>16.42</value>
+        <value>16.42</value>
+      </tuple>
+      <tuple>
+        <value>%null%</value>
+        <value>16.81</value>
+        <value>16.81</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-04 00:00:00#</value>
+        <value>6.71</value>
+        <value>6.71</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-12 00:00:00#</value>
+        <value>9.78</value>
+        <value>9.78</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+        <value>8.42</value>
+        <value>8.42</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-04 00:00:00#</value>
+        <value>7.43</value>
+        <value>7.43</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-19 00:00:00#</value>
+        <value>9.05</value>
+        <value>9.05</value>
+      </tuple>
+    </table>
+  </test>
+</results>

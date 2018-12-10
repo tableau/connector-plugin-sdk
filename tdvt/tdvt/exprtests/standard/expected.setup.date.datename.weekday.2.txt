@@ -1,0 +1,52 @@
+<results>
+  <test name='DATENAME(&apos;weekday&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hana].[TEMP(Test)(4107590482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;5&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hana].[TEMP(Test)(766794695)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;5&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

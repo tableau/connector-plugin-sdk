@@ -1,0 +1,12 @@
+<results>
+  <test name='TLD(&apos;http://www.tableau.com/support/drivers&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(68278391)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;com&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

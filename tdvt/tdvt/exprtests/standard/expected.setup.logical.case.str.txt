@@ -1,0 +1,18 @@
+<results>
+  <test name='case [str0] when &apos;TECHNOLOGY&apos; then &apos;*Anonymous*&apos;  else [str0] end'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1797172313)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;*Anonymous*&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

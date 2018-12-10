@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Filter.slicing_Q_date_instance_filter.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Prod Type2]</column>
+        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
+        <column>[Staples.postgres91].[sum:Price:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>89646.98</value>
+        <value>14618.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>195798.95</value>
+        <value>23852.13</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>10347.42</value>
+        <value>12060.54</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>89616.57</value>
+        <value>22611.61</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>87496.97</value>
+        <value>12823.76</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>260062.25</value>
+        <value>21699.58</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>12829.57</value>
+        <value>1900.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>7387.64</value>
+        <value>845.04</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>27257.91</value>
+        <value>10577.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>515148.07</value>
+        <value>72578.74</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>32705.85</value>
+        <value>7338.51</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>11466.15</value>
+        <value>2755.51</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>391.42</value>
+        <value>221.37</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>5224.7</value>
+        <value>5373.83</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>30037.19</value>
+        <value>17851.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>48328.06</value>
+        <value>37087.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>319945.65</value>
+        <value>35566.43</value>
+      </tuple>
+    </table>
+  </test>
+</results>

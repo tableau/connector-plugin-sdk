@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.BUGS.B340.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Call Center Region]</column>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[sum:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>1093948.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>1229581.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>1132594.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>2049341.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jesus Ocampo&quot;</value>
+        <value>3078497.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>3098324.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lena Cacioppo&quot;</value>
+        <value>3028281.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>2415802.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>1892464.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>2805333.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>2848296.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>3186975.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>2274940.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>1707447.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>1534576.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>2431303.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

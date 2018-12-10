@@ -1,0 +1,102 @@
+<results>
+  <test name='DATENAME(&apos;month&apos;, [date2], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(1660803953)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;April    &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;August   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;February &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;January  &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;July     &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;June     &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;March    &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May      &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;November &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;September&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [date2], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(872696424)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;April    &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;August   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;February &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;January  &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;July     &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;June     &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;March    &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May      &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;November &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;September&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(732183378)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;August   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;July     &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(3816689092)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;August   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;July     &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

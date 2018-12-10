@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.17_Nesting.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[Prod Type1]</column>
+        <column>[Staples.sqlserver].[Ship Mode]</column>
+        <column>[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(1075333431)(0)]</column>
+        <column>[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(260755027)(0)]</column>
+        <column>[Staples.sqlserver].[avg:Calculation_8601225013155991:ok]</column>
+        <column>[Staples.sqlserver].[sum:Calculation_9271225012544475:ok]</column>
+        <column>[Staples.sqlserver].[sum:LOD - Nesting - 2 (copy):ok]</column>
+        <column>[Staples.sqlserver].[sum:LOD - Nesting - 3 (copy):ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>4002620.2</value>
+        <value>4002620.2</value>
+        <value>4271.0757</value>
+        <value>1.9612839e+08</value>
+        <value>2.380636e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>76460.766</value>
+        <value>76460.766</value>
+        <value>443.56198</value>
+        <value>9251752.7</value>
+        <value>3.7409995e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>468152.41</value>
+        <value>468152.41</value>
+        <value>1046.4216</value>
+        <value>56646441.0</value>
+        <value>3.7409995e+08</value>
+        <value>2267272.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>819224.44</value>
+        <value>819224.44</value>
+        <value>435.20844</value>
+        <value>7373020.0</value>
+        <value>72044220.0</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>83280.028</value>
+        <value>83280.028</value>
+        <value>501.43046</value>
+        <value>1.0201803e+08</value>
+        <value>8.405159e+08</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>532636.16</value>
+        <value>532636.16</value>
+        <value>2729.3706</value>
+        <value>6.524793e+08</value>
+        <value>8.405159e+08</value>
+        <value>649047.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;DELIVERY TRUCK&quot;</value>
+        <value>6038779.5</value>
+        <value>6038779.5</value>
+        <value>2386.7716</value>
+        <value>24155118.0</value>
+        <value>81328223.0</value>
+        <value>4518234.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;EXPRESS AIR&quot;</value>
+        <value>445944.71</value>
+        <value>445944.71</value>
+        <value>1143.9339</value>
+        <value>28540462.0</value>
+        <value>3.2531289e+08</value>
+        <value>4518234.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;REGULAR AIR&quot;</value>
+        <value>3127374.3</value>
+        <value>3127374.3</value>
+        <value>4182.9544</value>
+        <value>2.0015196e+08</value>
+        <value>3.2531289e+08</value>
+        <value>4518234.6</value>
+      </tuple>
+    </table>
+  </test>
+</results>

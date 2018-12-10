@@ -1,0 +1,60 @@
+<results>
+  <test name='TRIM(STR([date2]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Apr 20 1977 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Apr 20 1994 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Apr 27 2002 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Aug 12 1998 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb  4 2001 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb  8 1977 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jan  5 1988 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 12 1972 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 26 1980 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jun  4 1995 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mar 17 1974 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May  3 1974 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May 30 1997 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nov  7 1980 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep  3 1995 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep  9 1976 12:00AM&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 19 1997 12:00AM&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

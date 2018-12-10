@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.12_As in-out Set.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[LOD - Fixed - 1 (copy 2)]</column>
+      </schema>
+      <tuple>
+        <value>#1997-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-11 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-21 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-23 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-24 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-28 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-10 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

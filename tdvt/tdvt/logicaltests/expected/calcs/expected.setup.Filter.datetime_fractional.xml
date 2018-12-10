@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\calcs\setup.Filter.datetime_fractional.dbo.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[Calculation_958703807427547136]</column>
+      </schema>
+      <tuple>
+        <value>#2016-07-15 10:11:12.123#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

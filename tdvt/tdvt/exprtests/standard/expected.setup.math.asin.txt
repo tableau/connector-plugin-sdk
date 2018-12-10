@@ -1,0 +1,36 @@
+<results>
+  <test name='asin(num0/20)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1317198372)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-0.90269613</value>
+      </tuple>
+      <tuple>
+        <value>-0.66238597</value>
+      </tuple>
+      <tuple>
+        <value>-0.17590577</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>0.17590577</value>
+      </tuple>
+      <tuple>
+        <value>0.52359878</value>
+      </tuple>
+      <tuple>
+        <value>0.66238597</value>
+      </tuple>
+      <tuple>
+        <value>0.90269613</value>
+      </tuple>
+    </table>
+  </test>
+</results>

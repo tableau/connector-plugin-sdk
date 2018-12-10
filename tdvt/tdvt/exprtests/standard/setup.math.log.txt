@@ -1,0 +1,4 @@
+LOG([int2])
+LOG([int2],2)
+log(num0)
+log(num0,2)

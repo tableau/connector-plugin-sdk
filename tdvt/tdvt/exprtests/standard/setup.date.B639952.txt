@@ -1,0 +1,7 @@
+SUM([date0]-1-[date1])
+SUM([date0]+300-[date1])
+[date0]-([date1]-1-[date2])
+[date1]-([date3]+500-[date2])
+[date1]-([date3]+500-[date2])+([date3]-[date0])
+SUM(([date3]-400-[date0])+([date3]+500-[date2]))
+SUM([date3]-1-(date(dateadd('month', 3, #2004-04-15# )))+1)

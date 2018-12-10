@@ -1,0 +1,592 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Filter.Q_date_instance_filter.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Order Date]</column>
+        <column>[Staples.postgres91].[cnt:Number of Records:ok]</column>
+      </schema>
+      <tuple>
+        <value>#1998-02-09 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-10 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-11 00:00:00#</value>
+        <value>35</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-12 00:00:00#</value>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-13 00:00:00#</value>
+        <value>41</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-14 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-15 00:00:00#</value>
+        <value>15</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-16 00:00:00#</value>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-17 00:00:00#</value>
+        <value>15</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-18 00:00:00#</value>
+        <value>19</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-19 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-20 00:00:00#</value>
+        <value>25</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-21 00:00:00#</value>
+        <value>49</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-22 00:00:00#</value>
+        <value>23</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-23 00:00:00#</value>
+        <value>41</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-24 00:00:00#</value>
+        <value>11</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-25 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-26 00:00:00#</value>
+        <value>24</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-27 00:00:00#</value>
+        <value>41</value>
+      </tuple>
+      <tuple>
+        <value>#1998-02-28 00:00:00#</value>
+        <value>46</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-01 00:00:00#</value>
+        <value>18</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-02 00:00:00#</value>
+        <value>15</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-03 00:00:00#</value>
+        <value>39</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-04 00:00:00#</value>
+        <value>36</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-05 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-06 00:00:00#</value>
+        <value>24</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-07 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-08 00:00:00#</value>
+        <value>47</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-09 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-10 00:00:00#</value>
+        <value>46</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-11 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-12 00:00:00#</value>
+        <value>19</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-13 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-14 00:00:00#</value>
+        <value>30</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-15 00:00:00#</value>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-16 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-17 00:00:00#</value>
+        <value>20</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-18 00:00:00#</value>
+        <value>26</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-19 00:00:00#</value>
+        <value>9</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-20 00:00:00#</value>
+        <value>12</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-21 00:00:00#</value>
+        <value>18</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-22 00:00:00#</value>
+        <value>26</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-23 00:00:00#</value>
+        <value>12</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-24 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-25 00:00:00#</value>
+        <value>26</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-26 00:00:00#</value>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-27 00:00:00#</value>
+        <value>12</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-28 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-29 00:00:00#</value>
+        <value>24</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-30 00:00:00#</value>
+        <value>23</value>
+      </tuple>
+      <tuple>
+        <value>#1998-03-31 00:00:00#</value>
+        <value>26</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-01 00:00:00#</value>
+        <value>30</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-02 00:00:00#</value>
+        <value>26</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-03 00:00:00#</value>
+        <value>15</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-04 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-05 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-06 00:00:00#</value>
+        <value>9</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-07 00:00:00#</value>
+        <value>10</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-08 00:00:00#</value>
+        <value>35</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-09 00:00:00#</value>
+        <value>14</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-10 00:00:00#</value>
+        <value>25</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-11 00:00:00#</value>
+        <value>34</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-12 00:00:00#</value>
+        <value>25</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-13 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-14 00:00:00#</value>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-15 00:00:00#</value>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-16 00:00:00#</value>
+        <value>54</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-17 00:00:00#</value>
+        <value>33</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-18 00:00:00#</value>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-19 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-20 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-21 00:00:00#</value>
+        <value>65</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-22 00:00:00#</value>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-23 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-24 00:00:00#</value>
+        <value>11</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-25 00:00:00#</value>
+        <value>24</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-26 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-27 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-28 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-29 00:00:00#</value>
+        <value>20</value>
+      </tuple>
+      <tuple>
+        <value>#1998-04-30 00:00:00#</value>
+        <value>40</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-01 00:00:00#</value>
+        <value>25</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-02 00:00:00#</value>
+        <value>20</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-03 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-04 00:00:00#</value>
+        <value>15</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-05 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-06 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-07 00:00:00#</value>
+        <value>38</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-08 00:00:00#</value>
+        <value>42</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-09 00:00:00#</value>
+        <value>10</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-10 00:00:00#</value>
+        <value>25</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-11 00:00:00#</value>
+        <value>33</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-12 00:00:00#</value>
+        <value>36</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-13 00:00:00#</value>
+        <value>37</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-14 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-15 00:00:00#</value>
+        <value>32</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-16 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-17 00:00:00#</value>
+        <value>10</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-18 00:00:00#</value>
+        <value>29</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-19 00:00:00#</value>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-20 00:00:00#</value>
+        <value>25</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-21 00:00:00#</value>
+        <value>39</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-22 00:00:00#</value>
+        <value>32</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-23 00:00:00#</value>
+        <value>16</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-24 00:00:00#</value>
+        <value>19</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-25 00:00:00#</value>
+        <value>32</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-26 00:00:00#</value>
+        <value>43</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-27 00:00:00#</value>
+        <value>36</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-28 00:00:00#</value>
+        <value>29</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-29 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-30 00:00:00#</value>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>#1998-05-31 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-01 00:00:00#</value>
+        <value>16</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-02 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-03 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-04 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-05 00:00:00#</value>
+        <value>30</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-06 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-07 00:00:00#</value>
+        <value>19</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-08 00:00:00#</value>
+        <value>36</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-09 00:00:00#</value>
+        <value>26</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-10 00:00:00#</value>
+        <value>36</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-11 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-12 00:00:00#</value>
+        <value>14</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-13 00:00:00#</value>
+        <value>20</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-14 00:00:00#</value>
+        <value>32</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-15 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-16 00:00:00#</value>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-17 00:00:00#</value>
+        <value>30</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-18 00:00:00#</value>
+        <value>43</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-19 00:00:00#</value>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-20 00:00:00#</value>
+        <value>44</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-21 00:00:00#</value>
+        <value>12</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-22 00:00:00#</value>
+        <value>36</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-23 00:00:00#</value>
+        <value>19</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-24 00:00:00#</value>
+        <value>23</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-25 00:00:00#</value>
+        <value>13</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-26 00:00:00#</value>
+        <value>53</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-27 00:00:00#</value>
+        <value>14</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-28 00:00:00#</value>
+        <value>21</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-29 00:00:00#</value>
+        <value>24</value>
+      </tuple>
+      <tuple>
+        <value>#1998-06-30 00:00:00#</value>
+        <value>27</value>
+      </tuple>
+      <tuple>
+        <value>#1998-07-01 00:00:00#</value>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>#1998-07-02 00:00:00#</value>
+        <value>10</value>
+      </tuple>
+      <tuple>
+        <value>#1998-07-03 00:00:00#</value>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

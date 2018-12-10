@@ -1,0 +1,9 @@
+// No change
+DATEADD('iso-week', 0, #2013-12-30#) // #2013-12-30#
+
+// Same ISO year, different Gregorian years
+DATEADD('iso-week', 1, #2013-12-30#) // #2014-01-06#
+DATEADD('iso-week', -1, #2014-01-06#) // #2013-12-30#
+
+// Add multiple weeks
+DATEADD('iso-week', 2, #2014-12-23#) // #2015-01-06#

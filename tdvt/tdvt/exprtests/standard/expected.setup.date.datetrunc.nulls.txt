@@ -1,0 +1,172 @@
+<results>
+  <test name='DATETRUNC(&apos;year&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1773778045)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(382789366)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;month&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(444902156)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;month&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(581676997)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1831450015)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;quarter&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(360201683)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;week&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(872678106)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;week&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3905701997)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;weekday&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3359079369)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;weekday&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1326289938)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;day&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2763829899)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;day&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(717997108)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;dayofyear&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2963633898)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;dayofyear&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3202209617)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;hour&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4266496460)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;second&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4131996060)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;minute&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2935754523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

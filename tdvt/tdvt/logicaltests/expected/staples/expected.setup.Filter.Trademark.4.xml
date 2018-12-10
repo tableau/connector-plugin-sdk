@@ -1,0 +1,598 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='logicaltests\setup\staples\setup.Filter.Trademark.simple.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres].[Product Name]</column>
+        <column>[Staples.postgres].[sum:Gross Profit:ok]</column>
+        <column>[Staples.postgres].[sum:Sales Total:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Acco Clips to Go™ Binder Clips, 24 Clips in Two Sizes&quot;</value>
+        <value>573.02</value>
+        <value>2568.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Acco Smartsocket™ Table Surge Protector, 6 Color-Coded Adapter Outlets&quot;</value>
+        <value>12958.36</value>
+        <value>35295.15</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Acco® Hot Clips™ Clips to Go&quot;</value>
+        <value>449.03</value>
+        <value>2320.55</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Acme® Tagit™ Stainless Steel Antibacterial Scissors&quot;</value>
+        <value>-1288.35</value>
+        <value>7270.21</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Advantus SlideClip™ Paper Clips&quot;</value>
+        <value>746.66</value>
+        <value>1776.55</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Avery Binding System Hidden Tab™ Executive Style Index Sets&quot;</value>
+        <value>-533.76</value>
+        <value>3170.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Avery Heavy-Duty EZD ™ Binder With Locking Rings&quot;</value>
+        <value>355.32</value>
+        <value>3317.31</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Avery Heavy-Duty EZD™ View Binder with Locking Rings&quot;</value>
+        <value>703.52</value>
+        <value>4412.24</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Avery Hi-Liter® EverBold™ Pen Style Fluorescent Highlighters, 4/Pack&quot;</value>
+        <value>1122.9</value>
+        <value>6766.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Avery Personal Creations™ Heavyweight Cards&quot;</value>
+        <value>1474.28</value>
+        <value>8741.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Avery® Hidden Tab™ Dividers for Binding Systems&quot;</value>
+        <value>-2068.91</value>
+        <value>2223.14</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Belkin 5 Outlet SurgeMaster™ Power Centers&quot;</value>
+        <value>14947.36</value>
+        <value>37057.45</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Belkin ErgoBoard™ Keyboard&quot;</value>
+        <value>6081.04</value>
+        <value>51480.61</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BIC® Brite Liner Grip™ Highlighters&quot;</value>
+        <value>-98.59</value>
+        <value>664.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BIC® Brite Liner Grip™ Highlighters, Assorted, 5/Pack&quot;</value>
+        <value>794.28</value>
+        <value>3874.11</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Binney &amp; Smith inkTank™ Desk Highlighter, Chisel Tip, Yellow, 12/Box&quot;</value>
+        <value>-4774.92</value>
+        <value>1542.83</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Binney &amp; Smith inkTank™ Erasable Desk Highlighter, Chisel Tip, Yellow, 12/Box&quot;</value>
+        <value>-2335.9</value>
+        <value>2303.85</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Binney &amp; Smith inkTank™ Erasable Pocket Highlighter, Chisel Tip, Yellow&quot;</value>
+        <value>-2092.5</value>
+        <value>1447.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Boston 16801 Nautilus™ Battery Pencil Sharpener&quot;</value>
+        <value>2431.72</value>
+        <value>15800.19</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Boston 1799 Powerhouse™ Electric Pencil Sharpener&quot;</value>
+        <value>5853.87</value>
+        <value>22532.51</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Bravo II™ Megaboss® 12-Amp Hard Body Upright, Replacement Belts, 2 Belts per Pack&quot;</value>
+        <value>-21322.6</value>
+        <value>2461.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Clear Mylar™ Reinforcing Strips&quot;</value>
+        <value>1404.71</value>
+        <value>11252.05</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Commercial WindTunnel™ Clean Air Upright Vacuum, Replacement Belts, Filtration Bags&quot;</value>
+        <value>-3480.79</value>
+        <value>3593.99</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Conquest™ 14 Commercial Heavy-Duty Upright Vacuum, Collection System, Accessory Kit&quot;</value>
+        <value>11955.04</value>
+        <value>54230.21</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Crate-A-Files™&quot;</value>
+        <value>-1426.68</value>
+        <value>5338.24</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Deflect-o SuperTray™ Unbreakable Stackable Tray, Letter, Black&quot;</value>
+        <value>4702.49</value>
+        <value>16977.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Deflect-O® Glasstique™ Clear Desk Accessories&quot;</value>
+        <value>-8.71</value>
+        <value>5308.62</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DXL™ Angle-View Binders with Locking Rings by Samsill&quot;</value>
+        <value>-607.39</value>
+        <value>4266.51</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DXL™ Angle-View Binders with Locking Rings, Black&quot;</value>
+        <value>-576.05</value>
+        <value>3144.35</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Cleatmat Plus™ Chair Mats for High Pile Carpets&quot;</value>
+        <value>-16709.9</value>
+        <value>50407.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Expressions Mahogany Wood Desk Collection&quot;</value>
+        <value>-2046.74</value>
+        <value>4703.15</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Expressions Punched Metal &amp; Wood Desk Accessories, Black &amp; Cherry&quot;</value>
+        <value>-900.59</value>
+        <value>5768.9</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Expressions Punched Metal &amp; Wood Desk Accessories, Pewter &amp; Cherry&quot;</value>
+        <value>-849.06</value>
+        <value>10566.56</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Expressions™ Desk Accessory, Wood Pencil Holder, Oak&quot;</value>
+        <value>-1632.6</value>
+        <value>9987.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Expressions™ Desk Accessory, Wood Photo Frame, Mahogany&quot;</value>
+        <value>733.42</value>
+        <value>10123.78</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Expressions™ Wood and Plastic Desk Accessories, Cherry Wood&quot;</value>
+        <value>-2699.76</value>
+        <value>5223.68</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon File Chest™ Portable File&quot;</value>
+        <value>1696.39</value>
+        <value>11981.11</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Jumbo ProFile™ Portable File Boxes Graphite/Black&quot;</value>
+        <value>-1959.64</value>
+        <value>12816.01</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Pizzaz™ Desk Accessories&quot;</value>
+        <value>-2600.17</value>
+        <value>1957.31</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon ProFile™ File &apos;N Store™ Portable File Tub Letter/Legal Size Black&quot;</value>
+        <value>2034.02</value>
+        <value>10844.77</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon Shelf Savers™ Cubes and Bins&quot;</value>
+        <value>-6046.38</value>
+        <value>5256.5</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 100 Class™ Desk Accessories&quot;</value>
+        <value>216.63</value>
+        <value>2507.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 200 Class™ Desk Accessories&quot;</value>
+        <value>-1154.26</value>
+        <value>3686.82</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 200 Class™ Desk Accessories, Black&quot;</value>
+        <value>-1592.19</value>
+        <value>3644.58</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 200 Class™ Desk Accessories, Burgundy&quot;</value>
+        <value>-965.65</value>
+        <value>4020.35</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 200 Class™ Desk Accessories, Smoke&quot;</value>
+        <value>-843.3</value>
+        <value>4021.98</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 300 Class™ Desk Accessories, Black&quot;</value>
+        <value>-2075.46</value>
+        <value>4664.06</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 400 Class™ Desk Accessories, Black Carbon&quot;</value>
+        <value>-2742.52</value>
+        <value>7124.15</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® 500 Class™ Desk Accessories&quot;</value>
+        <value>-322.52</value>
+        <value>8847.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® Expressions™ Wood and Plastic Desk Accessories, Oak&quot;</value>
+        <value>-4954.7</value>
+        <value>6280.01</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eldon® Expressions™ Wood Desk Accessories, Oak&quot;</value>
+        <value>-1465.14</value>
+        <value>5784.88</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Fellowes Bankers Box™ Recycled Super Stor/Drawer®&quot;</value>
+        <value>-4572.39</value>
+        <value>35295.28</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Fellowes Bankers Box™ Staxonsteel® Drawer File/Stacking System&quot;</value>
+        <value>7670.15</value>
+        <value>49492.98</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Fellowes Bankers Box™ Stor/Drawer® Steel Plus™&quot;</value>
+        <value>588.5</value>
+        <value>15603.22</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Fellowes Officeware™ Wire Shelving&quot;</value>
+        <value>-14159.39</value>
+        <value>64832.58</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Fellowes Stor/Drawer® Steel Plus™ Storage Drawers&quot;</value>
+        <value>-1099.91</value>
+        <value>63758.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;GBC Instant Index™ System for Binding Systems&quot;</value>
+        <value>-171.21</value>
+        <value>5283.22</value>
+      </tuple>
+      <tuple>
+        <value>&quot;GBC ProClick™ 150 Presentation Binding System&quot;</value>
+        <value>68977.57</value>
+        <value>130745.08</value>
+      </tuple>
+      <tuple>
+        <value>&quot;GBC Twin Loop™ Wire Binding Elements&quot;</value>
+        <value>1147.97</value>
+        <value>19624.56</value>
+      </tuple>
+      <tuple>
+        <value>&quot;GBC Twin Loop™ Wire Binding Elements, 9/16\&quot; Spine, Black&quot;</value>
+        <value>291.86</value>
+        <value>9447.81</value>
+      </tuple>
+      <tuple>
+        <value>&quot;GBC VeloBinder™ Manual Binding System&quot;</value>
+        <value>9414.88</value>
+        <value>26714.04</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Adaptabilities™ Conference Tables&quot;</value>
+        <value>35084.56</value>
+        <value>374345.23</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Comet™ Stacking Arm Chair&quot;</value>
+        <value>83090.19</value>
+        <value>369406.39</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Comet™ Stacking Armless Chair&quot;</value>
+        <value>30752.16</value>
+        <value>206603.13</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Commerce™ Series High-Back Swivel/Tilt Chairs&quot;</value>
+        <value>30393.59</value>
+        <value>188908.15</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Commerce™ Series Low-Back Swivel/Tilt Chairs&quot;</value>
+        <value>49985.35</value>
+        <value>211249.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Enterprise™ Series Seating Low-Back Swivel/Tilt Chairs&quot;</value>
+        <value>35461.23</value>
+        <value>150165.9</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Global Troy™ Executive Leather Low-Back Tilter&quot;</value>
+        <value>129483.2</value>
+        <value>376710.33</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon 2111 Invitation™ Series Corner Table&quot;</value>
+        <value>-23039.72</value>
+        <value>180421.47</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon 2111 Invitation™ Series Straight Table&quot;</value>
+        <value>-18397.8</value>
+        <value>137676.26</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon 4070 Series Pagoda™ Armless Upholstered Stacking Chairs&quot;</value>
+        <value>71999.41</value>
+        <value>272286.76</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon 4070 Series Pagoda™ Round Back Stacking Chairs&quot;</value>
+        <value>43253.28</value>
+        <value>182592.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon 4700 Series Mobuis™ Mid-Back Task Chairs with Adjustable Arms&quot;</value>
+        <value>51272.0</value>
+        <value>276368.56</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon iLevel™ Computer Training Table&quot;</value>
+        <value>-34451.52</value>
+        <value>33951.72</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon Mobius™ Operator&apos;s Chair&quot;</value>
+        <value>-5237.19</value>
+        <value>109854.39</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon Pagoda™ Stacking Chairs&quot;</value>
+        <value>58496.24</value>
+        <value>164237.48</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hon Valutask™ Swivel Chairs&quot;</value>
+        <value>-8234.93</value>
+        <value>64699.14</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hoover Commercial Lightweight Upright Vacuum with E-Z Empty™ Dirt Cup&quot;</value>
+        <value>52749.05</value>
+        <value>163269.23</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hoover Portapower™ Portable Vacuum&quot;</value>
+        <value>-53461.94</value>
+        <value>7323.14</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hoover Replacement Belts For Soft Guard™ &amp; Commercial Ltweight Upright Vacs, 2/Pk&quot;</value>
+        <value>-1923.08</value>
+        <value>2366.71</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hoover Shoulder Vac™ Commercial Portable Vacuum&quot;</value>
+        <value>85575.26</value>
+        <value>263933.58</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hoover WindTunnel™ Plus Canister Vacuum&quot;</value>
+        <value>97819.02</value>
+        <value>268781.99</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Howard Miller 12-3/4 Diameter Accuwave DS ™ Wall Clock&quot;</value>
+        <value>14750.22</value>
+        <value>49037.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hunt PowerHouse™ Electric Pencil Sharpener, Blue&quot;</value>
+        <value>11783.72</value>
+        <value>33577.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jiffy™ Padded Mailers with Self-Seal Closure&quot;</value>
+        <value>4603.77</value>
+        <value>13996.19</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Lifetime Advantage™ Folding Chairs, 4/Carton&quot;</value>
+        <value>47454.73</value>
+        <value>140988.93</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Manco Dry-Lighter™ Erasable Highlighter&quot;</value>
+        <value>-722.26</value>
+        <value>2354.59</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Park Ridge™ Embossed Executive Business Envelopes&quot;</value>
+        <value>6399.35</value>
+        <value>12178.87</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Perma STOR-ALL™ Hanging File Box, 13 1/8\&quot;W x 12 1/4\&quot;D x 10 1/2\&quot;H&quot;</value>
+        <value>-1776.21</value>
+        <value>3845.37</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Personal Creations™ Ink Jet Cards and Labels&quot;</value>
+        <value>980.91</value>
+        <value>5523.25</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Pizazz® Global Quick File™&quot;</value>
+        <value>-745.26</value>
+        <value>9281.55</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Polycom ViaVideo™ Desktop Video Communications Unit&quot;</value>
+        <value>211200.53</value>
+        <value>368901.17</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Polycom ViewStation™ Adapter H323 Videoconferencing Unit&quot;</value>
+        <value>224902.27</value>
+        <value>375740.26</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Polycom ViewStation™ ISDN Videoconferencing Unit&quot;</value>
+        <value>692479.7</value>
+        <value>1149027.1</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Redi-Strip™ \#10 Envelopes, 4 1/8 x 9 1/2&quot;</value>
+        <value>483.62</value>
+        <value>2791.41</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SANFORD Liquid Accent™ Tank-Style Highlighters&quot;</value>
+        <value>329.38</value>
+        <value>2290.38</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SANFORD Major Accent™ Highlighters&quot;</value>
+        <value>1230.71</value>
+        <value>6136.15</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sanford Uni-Blazer™ View Highlighters, Chisel Tip, Yellow&quot;</value>
+        <value>55.22</value>
+        <value>935.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SimpliFile™ Personal File, Black Granite, 15w x 6-15/16d x 11-1/4h&quot;</value>
+        <value>-2629.04</value>
+        <value>8492.26</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sortfiler™ Multipurpose Personal File Organizer, Black&quot;</value>
+        <value>2354.15</value>
+        <value>10744.66</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Southworth Structures Collection™&quot;</value>
+        <value>-344.77</value>
+        <value>3584.07</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Space Solutions™ HD Industrial Steel Shelving.&quot;</value>
+        <value>-13968.08</value>
+        <value>106516.58</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Space Solutions™ Industrial Galvanized Steel Shelving.&quot;</value>
+        <value>-19653.75</value>
+        <value>67998.93</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Standard Line™ “While You Were Out” Hardbound Telephone Message Book&quot;</value>
+        <value>3066.95</value>
+        <value>13016.44</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Storex Dura Pro™ Binders&quot;</value>
+        <value>-3713.0</value>
+        <value>8743.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Surelock™ Post Binders&quot;</value>
+        <value>13052.96</value>
+        <value>23728.01</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Trimflex™ Flexible Post Binders&quot;</value>
+        <value>7116.59</value>
+        <value>14430.88</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tuf-Vin™ Binders&quot;</value>
+        <value>7022.21</value>
+        <value>13363.17</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tuff Stuff™ Recycled Round Ring Binders&quot;</value>
+        <value>1127.85</value>
+        <value>3204.87</value>
+      </tuple>
+      <tuple>
+        <value>&quot;U.S. Robotics V.90 56K Internal ISA Fax Modem with x2™ Technology, Fits Inside CPU&quot;</value>
+        <value>48880.2</value>
+        <value>111026.47</value>
+      </tuple>
+      <tuple>
+        <value>&quot;UniKeep™ View Case Binders&quot;</value>
+        <value>-1240.1</value>
+        <value>2357.6</value>
+      </tuple>
+      <tuple>
+        <value>&quot;VariCap6™ Expandable Binder&quot;</value>
+        <value>5428.05</value>
+        <value>12323.71</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wilson Jones data.warehouse™ D-Ring Binders with DublLock®&quot;</value>
+        <value>2110.68</value>
+        <value>7783.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wilson Jones Easy Flow II™ Sheet Lifters&quot;</value>
+        <value>-2457.79</value>
+        <value>1415.97</value>
+      </tuple>
+      <tuple>
+        <value>&quot;X-Rack™ File for Hanging Folders&quot;</value>
+        <value>-400.81</value>
+        <value>8285.66</value>
+      </tuple>
+      <tuple>
+        <value>&quot;XtraLife® ClearVue™ Slant-D Ring Binder, White, 3\&quot;&quot;</value>
+        <value>1160.86</value>
+        <value>6993.18</value>
+      </tuple>
+      <tuple>
+        <value>&quot;XtraLife® ClearVue™ Slant-D® Ring Binders by Cardinal&quot;</value>
+        <value>312.87</value>
+        <value>5023.81</value>
+      </tuple>
+    </table>
+  </test>
+</results>

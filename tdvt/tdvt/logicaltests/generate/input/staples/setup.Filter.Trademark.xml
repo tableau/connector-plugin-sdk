@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logical-query>
+  <selects>
+    <field>[Product Name]</field>
+    <field>[sum:Gross Profit:ok]</field>
+    <field>[sum:Sales Total:ok]</field>
+  </selects>
+  <aggregateOp class="logical-operator">
+    <measures>
+      <binding name="[sum:Gross Profit:ok]">
+        <funcallExp class="logical-expression" function="SUM" shape="aggregate">
+          <identifierExp class="logical-expression" identifier="[Gross Profit]" />
+        </funcallExp>
+      </binding>
+      <binding name="[sum:Sales Total:ok]">
+        <funcallExp class="logical-expression" function="SUM" shape="aggregate">
+          <identifierExp class="logical-expression" identifier="[Sales Total]" />
+        </funcallExp>
+      </binding>
+    </measures>
+    <groupbys>
+      <binding name="[Product Name]">
+        <identifierExp class="logical-expression" identifier="[Product Name]" />
+      </binding>
+    </groupbys>
+    <selectOp class="logical-operator">
+      <predicate>
+        <funcallExp class="logical-expression" function="$SYS_NARY_OR$" shape="scalar">
+          <funcallExp class="logical-expression" function="$IN_SET$" shape="scalar">
+            <identifierExp class="logical-expression" identifier="[Product Name]" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Acco Clips to Go™ Binder Clips, 24 Clips in Two Sizes&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Acco Smartsocket™ Table Surge Protector, 6 Color-Coded Adapter Outlets&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Acco® Hot Clips™ Clips to Go&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Acme® Tagit™ Stainless Steel Antibacterial Scissors&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Advantus SlideClip™ Paper Clips&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Avery Binding System Hidden Tab™ Executive Style Index Sets&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Avery Heavy-Duty EZD ™ Binder With Locking Rings&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Avery Heavy-Duty EZD™ View Binder with Locking Rings&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Avery Hi-Liter® EverBold™ Pen Style Fluorescent Highlighters, 4/Pack&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Avery Personal Creations™ Heavyweight Cards&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Avery® Hidden Tab™ Dividers for Binding Systems&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Belkin 5 Outlet SurgeMaster™ Power Centers&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Belkin ErgoBoard™ Keyboard&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;BIC® Brite Liner Grip™ Highlighters&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;BIC® Brite Liner Grip™ Highlighters, Assorted, 5/Pack&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Boston 16801 Nautilus™ Battery Pencil Sharpener&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Boston 1799 Powerhouse™ Electric Pencil Sharpener&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Bravo II™ Megaboss® 12-Amp Hard Body Upright, Replacement Belts, 2 Belts per Pack&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Clear Mylar™ Reinforcing Strips&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Commercial WindTunnel™ Clean Air Upright Vacuum, Replacement Belts, Filtration Bags&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Conquest™ 14 Commercial Heavy-Duty Upright Vacuum, Collection System, Accessory Kit&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Crate-A-Files™&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Deflect-o SuperTray™ Unbreakable Stackable Tray, Letter, Black&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Deflect-O® Glasstique™ Clear Desk Accessories&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;DXL™ Angle-View Binders with Locking Rings by Samsill&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;DXL™ Angle-View Binders with Locking Rings, Black&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon Cleatmat Plus™ Chair Mats for High Pile Carpets&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon Jumbo ProFile™ Portable File Boxes Graphite/Black&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon Pizzaz™ Desk Accessories&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon ProFile™ File 'N Store™ Portable File Tub Letter/Legal Size Black&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon Shelf Savers™ Cubes and Bins&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon® Expressions™ Wood and Plastic Desk Accessories, Oak&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon® Expressions™ Wood Desk Accessories, Oak&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Fellowes Officeware™ Wire Shelving&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Fellowes Stor/Drawer® Steel Plus™ Storage Drawers&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;GBC Instant Index™ System for Binding Systems&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;GBC ProClick™ 150 Presentation Binding System&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;GBC Twin Loop™ Wire Binding Elements&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;GBC Twin Loop™ Wire Binding Elements, 9/16\&quot; Spine, Black&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;GBC VeloBinder™ Manual Binding System&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Global Adaptabilities™ Conference Tables&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Global Enterprise™ Series Seating Low-Back Swivel/Tilt Chairs&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Global Troy™ Executive Leather Low-Back Tilter&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon 2111 Invitation™ Series Corner Table&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon 2111 Invitation™ Series Straight Table&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon iLevel™ Computer Training Table&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon Mobius™ Operator's Chair&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon Pagoda™ Stacking Chairs&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon Valutask™ Swivel Chairs&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hoover Commercial Lightweight Upright Vacuum with E-Z Empty™ Dirt Cup&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hoover Portapower™ Portable Vacuum&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hoover Replacement Belts For Soft Guard™ &amp; Commercial Ltweight Upright Vacs, 2/Pk&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hoover Shoulder Vac™ Commercial Portable Vacuum&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hoover WindTunnel™ Plus Canister Vacuum&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Howard Miller 12-3/4 Diameter Accuwave DS ™ Wall Clock&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hunt PowerHouse™ Electric Pencil Sharpener, Blue&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Jiffy™ Padded Mailers with Self-Seal Closure&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Lifetime Advantage™ Folding Chairs, 4/Carton&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Manco Dry-Lighter™ Erasable Highlighter&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Park Ridge™ Embossed Executive Business Envelopes&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Perma STOR-ALL™ Hanging File Box, 13 1/8\&quot;W x 12 1/4\&quot;D x 10 1/2\&quot;H&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Personal Creations™ Ink Jet Cards and Labels&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Pizazz® Global Quick File™&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Redi-Strip™ \#10 Envelopes, 4 1/8 x 9 1/2&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;SANFORD Liquid Accent™ Tank-Style Highlighters&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;SANFORD Major Accent™ Highlighters&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Sanford Uni-Blazer™ View Highlighters, Chisel Tip, Yellow&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;SimpliFile™ Personal File, Black Granite, 15w x 6-15/16d x 11-1/4h&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Sortfiler™ Multipurpose Personal File Organizer, Black&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Southworth Structures Collection™&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Space Solutions™ HD Industrial Steel Shelving.&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Space Solutions™ Industrial Galvanized Steel Shelving.&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Standard Line™ “While You Were Out” Hardbound Telephone Message Book&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Storex Dura Pro™ Binders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Surelock™ Post Binders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Trimflex™ Flexible Post Binders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Tuf-Vin™ Binders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Tuff Stuff™ Recycled Round Ring Binders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;U.S. Robotics V.90 56K Internal ISA Fax Modem with x2™ Technology, Fits Inside CPU&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;UniKeep™ View Case Binders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;VariCap6™ Expandable Binder&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Wilson Jones data.warehouse™ D-Ring Binders with DublLock®&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Wilson Jones Easy Flow II™ Sheet Lifters&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;X-Rack™ File for Hanging Folders&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;XtraLife® ClearVue™ Slant-D Ring Binder, White, 3\&quot;&quot;" />
+            <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;XtraLife® ClearVue™ Slant-D® Ring Binders by Cardinal&quot;" />
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Binney &amp; Smith inkTank™ Desk Highlighter, Chisel Tip, Yellow, 12/Box&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Binney &amp; Smith inkTank™ Erasable Pocket Highlighter, Chisel Tip, Yellow&quot;" />
+            </funcallExp>
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon Expressions™ Desk Accessory, Wood Pencil Holder, Oak&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon File Chest™ Portable File&quot;" />
+            </funcallExp>
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon® 100 Class™ Desk Accessories&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Eldon® 500 Class™ Desk Accessories&quot;" />
+            </funcallExp>
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Fellowes Bankers Box™ Recycled Super Stor/Drawer®&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Fellowes Bankers Box™ Stor/Drawer® Steel Plus™&quot;" />
+            </funcallExp>
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Global Comet™ Stacking Arm Chair&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Global Commerce™ Series Low-Back Swivel/Tilt Chairs&quot;" />
+            </funcallExp>
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon 4070 Series Pagoda™ Armless Upholstered Stacking Chairs&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Hon 4700 Series Mobuis™ Mid-Back Task Chairs with Adjustable Arms&quot;" />
+            </funcallExp>
+          </funcallExp>
+          <funcallExp class="logical-expression" function="$SYS_NARY_AND$" shape="scalar">
+            <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Polycom ViaVideo™ Desktop Video Communications Unit&quot;" />
+            </funcallExp>
+            <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+              <identifierExp class="logical-expression" identifier="[Product Name]" />
+              <literalExp charset="0" class="logical-expression" collation="LEN_RUS_S2_VWIN" datatype="string" value="&quot;Polycom ViewStation™ ISDN Videoconferencing Unit&quot;" />
+            </funcallExp>
+          </funcallExp>
+        </funcallExp>
+      </predicate>
+      <projectOp class="logical-operator">
+        <expressions>
+          <binding name="[Product Name]">
+            <identifierExp class="logical-expression" identifier="[Product Name]" />
+          </binding>
+        </expressions>
+        <relationOp class="logical-operator" connection="leaf" name="$Staples$">
+          <relation name="Staples" table="$Staples$" type="table" />
+          <cols>
+          </cols>
+          <type>
+            <schema>
+              <field name="[Call Center Region]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer Balance]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer Segment]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer State]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Discount]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Dept]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Salary]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Yrs Exp]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Fill Time]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Gross Profit]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Item Count]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Manager Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Market Segment]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Date]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Day]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order ID]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Month]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Priority]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Quantity]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Quarter]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Status]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Year]">
+                <type name="nonnull" />
+              </field>
+              <field name="[PID]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Price]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type1]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type2]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type3]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type4]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product Base Margin]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product Container]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product ID]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product In Stock]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Receive Time]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Received Date]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Sales Total]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Charge]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Date]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Handle Cost]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Mode]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Priority]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Promo]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier Balance]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier Region]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier State]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Tax Rate]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Total Cycle Time]">
+                <type name="nonnull" />
+              </field>
+            </schema>
+            <schema>
+            </schema>
+          </type>
+        </relationOp>
+      </projectOp>
+    </selectOp>
+  </aggregateOp>
+</logical-query>

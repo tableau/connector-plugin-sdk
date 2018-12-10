@@ -1,0 +1,22 @@
+<results>
+  <test name='datepart(&apos;year&apos;, today()) = datepart(&apos;year&apos;, today())'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(307093745)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='datepart(&apos;day&apos;, today()) = datepart(&apos;day&apos;, today())'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3426973691)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='d:\dev\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B641638.Extract.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[str1]</column>
+        <column>[cast_calcs.hyper_native].[sum:num1:ok]</column>
+        <column>[cast_calcs.hyper_native].[time0]</column>
+      </schema>
+      <tuple>
+        <value>&quot;BINDER ACCESSORIES&quot;</value>
+        <value>7.43</value>
+        <value>#1900-01-01 18:51:48#</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CLAMP ON LAMPS&quot;</value>
+        <value>8.42</value>
+        <value>#21:07:32#</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORDLESS KEYBOARDS&quot;</value>
+        <value>10.37</value>
+        <value>#1900-01-01 04:57:51#</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DOT MATRIX PRINTERS&quot;</value>
+        <value>7.1</value>
+        <value>#22:42:43#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

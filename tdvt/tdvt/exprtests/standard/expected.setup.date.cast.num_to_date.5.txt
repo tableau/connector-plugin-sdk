@@ -1,0 +1,18 @@
+<results>
+  <test name='DATE([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_impala].[TEMP(Test)(158994214)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1969-12-31#</value>
+      </tuple>
+      <tuple>
+        <value>#1970-01-01#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

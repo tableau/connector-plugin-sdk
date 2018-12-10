@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Nest_FilterO1O2_SliceOQ_SortByO1.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Prod Type1]</column>
+        <column>[Staples.postgres91].[Prod Type2]</column>
+        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>224628.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>128811.9</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>515438.67</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>135086.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>9112.59</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>62884.71</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>219465.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>1173533.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>5254647.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>3873400.3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

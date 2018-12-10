@@ -1,0 +1,2101 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Filter_SliceAggQUnaggQ_AxisQOYear.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Call Center Region]</column>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[sum:Customer Balance:ok]</column>
+        <column>[Staples.postgres91].[sum:Order Quantity:ok]</column>
+        <column>[Staples.postgres91].[yr:Order Date:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Barbara Fisher&quot;</value>
+        <value>214098.0</value>
+        <value>1527.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Barbara Fisher&quot;</value>
+        <value>257629.0</value>
+        <value>1135.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>108758.0</value>
+        <value>1755.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>207436.0</value>
+        <value>2564.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Dave Hallsten&quot;</value>
+        <value>216261.0</value>
+        <value>1239.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Dave Hallsten&quot;</value>
+        <value>274830.0</value>
+        <value>1055.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;David Flashing&quot;</value>
+        <value>234870.0</value>
+        <value>1578.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;David Flashing&quot;</value>
+        <value>290536.0</value>
+        <value>1991.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;David Wiener&quot;</value>
+        <value>329515.0</value>
+        <value>1557.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;David Wiener&quot;</value>
+        <value>466789.0</value>
+        <value>2453.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Deanra Eno&quot;</value>
+        <value>309042.0</value>
+        <value>2019.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Deanra Eno&quot;</value>
+        <value>565297.0</value>
+        <value>2173.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>132032.0</value>
+        <value>1719.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>248659.0</value>
+        <value>1576.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Elizabeth Moffitt&quot;</value>
+        <value>260630.0</value>
+        <value>1437.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Elizabeth Moffitt&quot;</value>
+        <value>315255.0</value>
+        <value>2303.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Ellis Ballard&quot;</value>
+        <value>389843.0</value>
+        <value>2186.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Ellis Ballard&quot;</value>
+        <value>402917.0</value>
+        <value>1744.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Frank Olsen&quot;</value>
+        <value>347670.0</value>
+        <value>1408.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Frank Olsen&quot;</value>
+        <value>647661.0</value>
+        <value>2062.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Grace Kelly&quot;</value>
+        <value>365049.0</value>
+        <value>2094.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Grace Kelly&quot;</value>
+        <value>394043.0</value>
+        <value>2521.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Hallie Redmond&quot;</value>
+        <value>362710.0</value>
+        <value>1604.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Hallie Redmond&quot;</value>
+        <value>428818.0</value>
+        <value>2436.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>85270.0</value>
+        <value>1198.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>151678.0</value>
+        <value>1622.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>131028.0</value>
+        <value>776.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>352810.0</value>
+        <value>1636.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Henia Zydlo&quot;</value>
+        <value>111599.0</value>
+        <value>670.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Henia Zydlo&quot;</value>
+        <value>202102.0</value>
+        <value>1017.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Herbert Flentye&quot;</value>
+        <value>149241.0</value>
+        <value>721.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Herbert Flentye&quot;</value>
+        <value>271818.0</value>
+        <value>1489.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>154840.0</value>
+        <value>1304.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>191944.0</value>
+        <value>1380.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>6315.0</value>
+        <value>330.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>25046.0</value>
+        <value>231.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jane Waco&quot;</value>
+        <value>425940.0</value>
+        <value>1607.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jane Waco&quot;</value>
+        <value>454045.0</value>
+        <value>2173.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>161701.0</value>
+        <value>1496.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>321547.0</value>
+        <value>2374.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jason Gross&quot;</value>
+        <value>265019.0</value>
+        <value>967.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jason Gross&quot;</value>
+        <value>328524.0</value>
+        <value>1395.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>287325.0</value>
+        <value>1503.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>402790.0</value>
+        <value>1881.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jennifer Patt&quot;</value>
+        <value>240881.0</value>
+        <value>1393.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jennifer Patt&quot;</value>
+        <value>344880.0</value>
+        <value>2251.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jesus Ocampo&quot;</value>
+        <value>468814.0</value>
+        <value>2231.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jesus Ocampo&quot;</value>
+        <value>531152.0</value>
+        <value>1901.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jim Sink&quot;</value>
+        <value>263833.0</value>
+        <value>1273.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Jim Sink&quot;</value>
+        <value>287584.0</value>
+        <value>1170.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>145827.0</value>
+        <value>832.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>150648.0</value>
+        <value>1334.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>236792.0</value>
+        <value>915.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>848447.0</value>
+        <value>2947.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>168739.0</value>
+        <value>1513.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>333915.0</value>
+        <value>1962.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lela Donovan&quot;</value>
+        <value>24212.0</value>
+        <value>593.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lela Donovan&quot;</value>
+        <value>201059.0</value>
+        <value>941.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lena Cacioppo&quot;</value>
+        <value>437844.0</value>
+        <value>1805.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lena Cacioppo&quot;</value>
+        <value>539200.0</value>
+        <value>1952.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>365183.0</value>
+        <value>1771.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>399885.0</value>
+        <value>1978.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Mary O&apos;Rourke&quot;</value>
+        <value>66135.0</value>
+        <value>377.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Mary O&apos;Rourke&quot;</value>
+        <value>183340.0</value>
+        <value>830.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>271884.0</value>
+        <value>3294.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>280294.0</value>
+        <value>2870.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;MaryBeth Skach&quot;</value>
+        <value>70713.0</value>
+        <value>859.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;MaryBeth Skach&quot;</value>
+        <value>132908.0</value>
+        <value>1382.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>233755.0</value>
+        <value>2105.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>245853.0</value>
+        <value>1891.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Maurice Satty&quot;</value>
+        <value>270851.0</value>
+        <value>1359.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Maurice Satty&quot;</value>
+        <value>350594.0</value>
+        <value>1516.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>235754.0</value>
+        <value>1947.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>388523.0</value>
+        <value>2548.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>137653.0</value>
+        <value>1226.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>174616.0</value>
+        <value>1480.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Meg Tillman-Sachs&quot;</value>
+        <value>109424.0</value>
+        <value>529.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Meg Tillman-Sachs&quot;</value>
+        <value>466592.0</value>
+        <value>2008.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Michael Moore&quot;</value>
+        <value>188300.0</value>
+        <value>1765.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Michael Moore&quot;</value>
+        <value>211411.0</value>
+        <value>2386.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Michael Oakman&quot;</value>
+        <value>153343.0</value>
+        <value>1192.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Michael Oakman&quot;</value>
+        <value>309543.0</value>
+        <value>1769.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>263006.0</value>
+        <value>1362.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>416080.0</value>
+        <value>2059.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Nathan Mautz&quot;</value>
+        <value>442078.0</value>
+        <value>2161.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Nathan Mautz&quot;</value>
+        <value>484925.0</value>
+        <value>3232.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>194942.0</value>
+        <value>1407.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>212085.0</value>
+        <value>1844.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Nona Balk&quot;</value>
+        <value>52486.0</value>
+        <value>241.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Nona Balk&quot;</value>
+        <value>100398.0</value>
+        <value>397.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Olvera Toch&quot;</value>
+        <value>256734.0</value>
+        <value>734.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Olvera Toch&quot;</value>
+        <value>296919.0</value>
+        <value>1161.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Patrick O&apos;Brill&quot;</value>
+        <value>229278.0</value>
+        <value>1756.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Patrick O&apos;Brill&quot;</value>
+        <value>421629.0</value>
+        <value>2305.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Paul Prost&quot;</value>
+        <value>243349.0</value>
+        <value>675.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Paul Prost&quot;</value>
+        <value>482054.0</value>
+        <value>1776.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>183521.0</value>
+        <value>1664.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>191219.0</value>
+        <value>1791.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Pierre Wener&quot;</value>
+        <value>265164.0</value>
+        <value>1205.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Pierre Wener&quot;</value>
+        <value>290766.0</value>
+        <value>1574.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Quincy Jones&quot;</value>
+        <value>153777.0</value>
+        <value>915.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Quincy Jones&quot;</value>
+        <value>236610.0</value>
+        <value>1071.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>276731.0</value>
+        <value>1030.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>442996.0</value>
+        <value>1705.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Robert Marley&quot;</value>
+        <value>200570.0</value>
+        <value>1115.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Robert Marley&quot;</value>
+        <value>240876.0</value>
+        <value>1263.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>13912.0</value>
+        <value>627.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>47058.0</value>
+        <value>1041.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>410997.0</value>
+        <value>2387.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>715786.0</value>
+        <value>2560.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sandra Glassco&quot;</value>
+        <value>222980.0</value>
+        <value>1742.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sandra Glassco&quot;</value>
+        <value>267238.0</value>
+        <value>1609.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sarah Jordon-Smith&quot;</value>
+        <value>199111.0</value>
+        <value>1637.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sarah Jordon-Smith&quot;</value>
+        <value>201107.0</value>
+        <value>1199.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Seth Vernon&quot;</value>
+        <value>305864.0</value>
+        <value>1469.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Seth Vernon&quot;</value>
+        <value>311597.0</value>
+        <value>1183.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sharelle Roach-McGee&quot;</value>
+        <value>304695.0</value>
+        <value>1000.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sharelle Roach-McGee&quot;</value>
+        <value>375738.0</value>
+        <value>1256.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>51986.0</value>
+        <value>582.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>72114.0</value>
+        <value>823.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Shui Tom&quot;</value>
+        <value>83112.0</value>
+        <value>487.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Shui Tom&quot;</value>
+        <value>84709.0</value>
+        <value>1176.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Skye Norling-Christen&quot;</value>
+        <value>132551.0</value>
+        <value>1183.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Skye Norling-Christen&quot;</value>
+        <value>178606.0</value>
+        <value>1330.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Speros Goranitis&quot;</value>
+        <value>229505.0</value>
+        <value>936.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Speros Goranitis&quot;</value>
+        <value>364938.0</value>
+        <value>1616.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Stephanie Ulpright&quot;</value>
+        <value>387006.0</value>
+        <value>1708.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Stephanie Ulpright&quot;</value>
+        <value>601207.0</value>
+        <value>2282.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>80280.0</value>
+        <value>1142.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>130045.0</value>
+        <value>1346.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>32191.0</value>
+        <value>645.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>51391.0</value>
+        <value>1767.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>394042.0</value>
+        <value>1739.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>483828.0</value>
+        <value>2519.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>455043.0</value>
+        <value>2058.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>467600.0</value>
+        <value>3218.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Thomas Boland&quot;</value>
+        <value>148567.0</value>
+        <value>2253.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Thomas Boland&quot;</value>
+        <value>187146.0</value>
+        <value>2706.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>393377.0</value>
+        <value>1407.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>476861.0</value>
+        <value>2144.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>220014.0</value>
+        <value>1354.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>232727.0</value>
+        <value>1633.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>194594.0</value>
+        <value>1270.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>226043.0</value>
+        <value>1116.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Victor Price&quot;</value>
+        <value>240196.0</value>
+        <value>1065.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Victor Price&quot;</value>
+        <value>591413.0</value>
+        <value>2771.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;William Brown&quot;</value>
+        <value>25114.0</value>
+        <value>194.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;William Brown&quot;</value>
+        <value>69186.0</value>
+        <value>554.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>134169.0</value>
+        <value>1078.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>370383.0</value>
+        <value>1779.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>196172.0</value>
+        <value>1277.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>484102.0</value>
+        <value>2098.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Barbara Fisher&quot;</value>
+        <value>88830.0</value>
+        <value>610.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Barbara Fisher&quot;</value>
+        <value>196539.0</value>
+        <value>940.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>92000.0</value>
+        <value>701.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>111118.0</value>
+        <value>781.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;David Flashing&quot;</value>
+        <value>377026.0</value>
+        <value>1743.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;David Flashing&quot;</value>
+        <value>378562.0</value>
+        <value>1794.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;David Wiener&quot;</value>
+        <value>139299.0</value>
+        <value>831.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;David Wiener&quot;</value>
+        <value>238945.0</value>
+        <value>1504.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Deanra Eno&quot;</value>
+        <value>2035.0</value>
+        <value>351.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Deanra Eno&quot;</value>
+        <value>30885.0</value>
+        <value>562.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>59949.0</value>
+        <value>641.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>283141.0</value>
+        <value>1198.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Elizabeth Moffitt&quot;</value>
+        <value>65901.0</value>
+        <value>302.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Elizabeth Moffitt&quot;</value>
+        <value>137903.0</value>
+        <value>727.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Ellis Ballard&quot;</value>
+        <value>124533.0</value>
+        <value>1378.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Ellis Ballard&quot;</value>
+        <value>294543.0</value>
+        <value>1571.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Grace Kelly&quot;</value>
+        <value>16552.0</value>
+        <value>52.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Grace Kelly&quot;</value>
+        <value>115864.0</value>
+        <value>408.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Hallie Redmond&quot;</value>
+        <value>102737.0</value>
+        <value>1032.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Hallie Redmond&quot;</value>
+        <value>207633.0</value>
+        <value>1093.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>88549.0</value>
+        <value>776.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>239819.0</value>
+        <value>1459.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>117240.0</value>
+        <value>1473.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>126962.0</value>
+        <value>950.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Henia Zydlo&quot;</value>
+        <value>146790.0</value>
+        <value>390.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Henia Zydlo&quot;</value>
+        <value>215292.0</value>
+        <value>640.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Herbert Flentye&quot;</value>
+        <value>80592.0</value>
+        <value>309.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Herbert Flentye&quot;</value>
+        <value>136873.0</value>
+        <value>558.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>336298.0</value>
+        <value>1653.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>369593.0</value>
+        <value>1460.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>38107.0</value>
+        <value>583.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>65992.0</value>
+        <value>948.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jane Waco&quot;</value>
+        <value>45554.0</value>
+        <value>468.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jane Waco&quot;</value>
+        <value>64703.0</value>
+        <value>750.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>5092.0</value>
+        <value>265.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>17370.0</value>
+        <value>849.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jason Gross&quot;</value>
+        <value>117656.0</value>
+        <value>403.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jason Gross&quot;</value>
+        <value>170132.0</value>
+        <value>594.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>66109.0</value>
+        <value>498.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>77689.0</value>
+        <value>297.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jennifer Patt&quot;</value>
+        <value>92964.0</value>
+        <value>351.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jennifer Patt&quot;</value>
+        <value>139446.0</value>
+        <value>435.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jesus Ocampo&quot;</value>
+        <value>15980.0</value>
+        <value>249.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jesus Ocampo&quot;</value>
+        <value>130584.0</value>
+        <value>822.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jim Sink&quot;</value>
+        <value>13811.0</value>
+        <value>409.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Jim Sink&quot;</value>
+        <value>28820.0</value>
+        <value>207.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>19512.0</value>
+        <value>169.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>24390.0</value>
+        <value>134.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>213869.0</value>
+        <value>851.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Karen Seio&quot;</value>
+        <value>223222.0</value>
+        <value>1085.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>8361.0</value>
+        <value>431.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>156408.0</value>
+        <value>1164.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lela Donovan&quot;</value>
+        <value>269556.0</value>
+        <value>1325.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lela Donovan&quot;</value>
+        <value>286208.0</value>
+        <value>1034.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lena Cacioppo&quot;</value>
+        <value>29264.0</value>
+        <value>95.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lena Cacioppo&quot;</value>
+        <value>131741.0</value>
+        <value>652.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>77570.0</value>
+        <value>321.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Lynn Smith-Reed&quot;</value>
+        <value>533258.0</value>
+        <value>2143.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Mary O&apos;Rourke&quot;</value>
+        <value>193235.0</value>
+        <value>1543.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Mary O&apos;Rourke&quot;</value>
+        <value>268243.0</value>
+        <value>1883.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>90560.0</value>
+        <value>399.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>117182.0</value>
+        <value>585.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;MaryBeth Skach&quot;</value>
+        <value>259667.0</value>
+        <value>1800.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;MaryBeth Skach&quot;</value>
+        <value>382966.0</value>
+        <value>1518.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>119252.0</value>
+        <value>1431.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>150686.0</value>
+        <value>817.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Maurice Satty&quot;</value>
+        <value>136339.0</value>
+        <value>516.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Maurice Satty&quot;</value>
+        <value>180856.0</value>
+        <value>457.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>41528.0</value>
+        <value>667.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>52736.0</value>
+        <value>809.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>173227.0</value>
+        <value>926.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>260798.0</value>
+        <value>1298.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Meg Tillman-Sachs&quot;</value>
+        <value>242640.0</value>
+        <value>1113.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Meg Tillman-Sachs&quot;</value>
+        <value>274854.0</value>
+        <value>1305.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Michael Moore&quot;</value>
+        <value>64280.0</value>
+        <value>237.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Michael Moore&quot;</value>
+        <value>70708.0</value>
+        <value>218.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Michael Oakman&quot;</value>
+        <value>97511.0</value>
+        <value>792.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Michael Oakman&quot;</value>
+        <value>151562.0</value>
+        <value>861.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>400929.0</value>
+        <value>2457.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Naresj Patel&quot;</value>
+        <value>435220.0</value>
+        <value>2211.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Nathan Mautz&quot;</value>
+        <value>2087.0</value>
+        <value>39.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Nathan Mautz&quot;</value>
+        <value>26906.0</value>
+        <value>561.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>100818.0</value>
+        <value>1211.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>111516.0</value>
+        <value>758.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Nona Balk&quot;</value>
+        <value>83416.0</value>
+        <value>272.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Nona Balk&quot;</value>
+        <value>209388.0</value>
+        <value>756.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Olvera Toch&quot;</value>
+        <value>220250.0</value>
+        <value>671.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Olvera Toch&quot;</value>
+        <value>255887.0</value>
+        <value>932.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Patrick O&apos;Brill&quot;</value>
+        <value>153561.0</value>
+        <value>660.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Patrick O&apos;Brill&quot;</value>
+        <value>349573.0</value>
+        <value>946.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Paul Prost&quot;</value>
+        <value>52109.0</value>
+        <value>364.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Paul Prost&quot;</value>
+        <value>123665.0</value>
+        <value>1101.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>3385.0</value>
+        <value>224.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>109173.0</value>
+        <value>831.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Pierre Wener&quot;</value>
+        <value>87001.0</value>
+        <value>335.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Pierre Wener&quot;</value>
+        <value>117516.0</value>
+        <value>482.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Quincy Jones&quot;</value>
+        <value>132306.0</value>
+        <value>609.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Quincy Jones&quot;</value>
+        <value>409121.0</value>
+        <value>1732.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>27300.0</value>
+        <value>833.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>34537.0</value>
+        <value>737.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Robert Marley&quot;</value>
+        <value>156229.0</value>
+        <value>627.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Robert Marley&quot;</value>
+        <value>164016.0</value>
+        <value>944.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>87755.0</value>
+        <value>859.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>170278.0</value>
+        <value>1665.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>5610.0</value>
+        <value>347.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>36872.0</value>
+        <value>829.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sandra Glassco&quot;</value>
+        <value>106361.0</value>
+        <value>477.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sandra Glassco&quot;</value>
+        <value>244882.0</value>
+        <value>663.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sarah Jordon-Smith&quot;</value>
+        <value>162168.0</value>
+        <value>750.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sarah Jordon-Smith&quot;</value>
+        <value>200050.0</value>
+        <value>987.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Seth Vernon&quot;</value>
+        <value>53930.0</value>
+        <value>287.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Seth Vernon&quot;</value>
+        <value>80310.0</value>
+        <value>251.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sharelle Roach-McGee&quot;</value>
+        <value>33595.0</value>
+        <value>268.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sharelle Roach-McGee&quot;</value>
+        <value>113950.0</value>
+        <value>832.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>38646.0</value>
+        <value>413.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>58872.0</value>
+        <value>500.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Shui Tom&quot;</value>
+        <value>124916.0</value>
+        <value>764.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Shui Tom&quot;</value>
+        <value>166258.0</value>
+        <value>943.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Skye Norling-Christen&quot;</value>
+        <value>100798.0</value>
+        <value>730.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Skye Norling-Christen&quot;</value>
+        <value>123777.0</value>
+        <value>862.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Speros Goranitis&quot;</value>
+        <value>53112.0</value>
+        <value>986.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Speros Goranitis&quot;</value>
+        <value>90598.0</value>
+        <value>719.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Stephanie Ulpright&quot;</value>
+        <value>72985.0</value>
+        <value>617.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Stephanie Ulpright&quot;</value>
+        <value>136185.0</value>
+        <value>516.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>40314.0</value>
+        <value>606.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>182513.0</value>
+        <value>1187.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>205397.0</value>
+        <value>1079.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>285051.0</value>
+        <value>831.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>286098.0</value>
+        <value>1637.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>349158.0</value>
+        <value>1661.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>4085.0</value>
+        <value>511.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>10881.0</value>
+        <value>404.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>93177.0</value>
+        <value>433.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>120564.0</value>
+        <value>486.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>63513.0</value>
+        <value>1445.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>98696.0</value>
+        <value>360.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>94204.0</value>
+        <value>453.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>139276.0</value>
+        <value>728.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Victor Price&quot;</value>
+        <value>59302.0</value>
+        <value>847.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Victor Price&quot;</value>
+        <value>90548.0</value>
+        <value>922.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;William Brown&quot;</value>
+        <value>252186.0</value>
+        <value>1094.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;William Brown&quot;</value>
+        <value>417834.0</value>
+        <value>1448.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>345548.0</value>
+        <value>2376.0</value>
+        <value>2002</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>419242.0</value>
+        <value>2199.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>146560.0</value>
+        <value>749.0</value>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>147050.0</value>
+        <value>761.0</value>
+        <value>2002</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.13_As in-out Set.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[LOD - Fixed - 1 (copy 2)]</column>
+      </schema>
+    </table>
+  </test>
+</results>

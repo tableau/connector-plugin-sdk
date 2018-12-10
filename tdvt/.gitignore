@@ -1,0 +1,32 @@
+#Output files.
+tdvt_output*.json
+test_results*.csv
+tdvt_log*.txt
+tdvt_test_log*.txt
+tdvt_actuals*.zip
+
+#Test actual files.
+actual.setup*.xml
+actual.setup*.txt
+
+#Bogus Tableau repository.
+_Repository
+
+#Locally built packages.
+tdvt-1.*/
+
+#Generate logical query files.
+tdvt/logicaltests/setup/*
+#Generated config files.
+tdvt/config/gen/*
+
+#Compiled Python.
+__pycache__/
+*.py[cod]
+*$py.class
+
+#Package building stuff.
+dist
+tdvt.egg-info
+
+.reviewboardrc

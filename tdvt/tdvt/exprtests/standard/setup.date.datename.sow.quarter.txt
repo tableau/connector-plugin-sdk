@@ -1,0 +1,6 @@
+DATENAME('quarter', [date2], 'monday')
+DATENAME('quarter', [date2], 'sunday')
+
+DATENAME('quarter', [datetime0], 'monday')
+DATENAME('quarter', [datetime0], 'sunday')
+

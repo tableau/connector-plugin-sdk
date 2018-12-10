@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.16_As Group.prefix.xml'>
+    <table>
+      <schema>
+        <column>[Staples.paraccel].[LOD - Fixed - 4 (group)]</column>
+        <column>[Staples.paraccel].[avg:Calculation_4821225012418421:ok]</column>
+        <column>[Staples.paraccel].[avg:Price:ok]</column>
+        <column>[Staples.paraccel].[sum:Calculation_4621225004123988:ok]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+        <value>1390980.0</value>
+        <value>83.3768</value>
+        <value>9334296.5</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+        <value>1390980.0</value>
+        <value>90.5006</value>
+        <value>12192129.0</value>
+      </tuple>
+      <tuple>
+        <value>16</value>
+        <value>1390980.0</value>
+        <value>85.6796</value>
+        <value>67941185.0</value>
+      </tuple>
+      <tuple>
+        <value>71</value>
+        <value>1390980.0</value>
+        <value>82.7646</value>
+        <value>9220327.3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

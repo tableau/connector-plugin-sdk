@@ -1,0 +1,62 @@
+<results>
+  <test name='ASCII(&quot;a&quot;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(415603459)(0)]</column>
+      </schema>
+      <tuple>
+        <value>97</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ascii(str2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(526259814)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>101</value>
+      </tuple>
+      <tuple>
+        <value>102</value>
+      </tuple>
+      <tuple>
+        <value>110</value>
+      </tuple>
+      <tuple>
+        <value>111</value>
+      </tuple>
+      <tuple>
+        <value>115</value>
+      </tuple>
+      <tuple>
+        <value>116</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ascii(str1)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4258651616)(0)]</column>
+      </schema>
+      <tuple>
+        <value>65</value>
+      </tuple>
+      <tuple>
+        <value>66</value>
+      </tuple>
+      <tuple>
+        <value>67</value>
+      </tuple>
+      <tuple>
+        <value>68</value>
+      </tuple>
+      <tuple>
+        <value>69</value>
+      </tuple>
+    </table>
+  </test>
+</results>

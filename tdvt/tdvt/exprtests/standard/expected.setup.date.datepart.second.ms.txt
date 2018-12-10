@@ -1,0 +1,12 @@
+<results>
+  <test name='DATEPART(&apos;second&apos;, DATETIME(&apos;2010-10-10 10:10:10.8&apos;))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(1642901024)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+</results>

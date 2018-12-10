@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Filter_AVG.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[avg:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>2340.3473</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dave Hallsten&quot;</value>
+        <value>3448.7029</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>3483.4738</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>3308.0576</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>3623.3701</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>3452.3402</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>3256.1752</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>3095.5355</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>3516.454</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>3626.8416</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>2990.1244</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>2819.7262</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>3421.601</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Michael Moore&quot;</value>
+        <value>3160.3367</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>3150.2892</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>2619.296</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>3533.5667</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>3402.6851</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>3340.444</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Skye Norling-Christen&quot;</value>
+        <value>3681.3615</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>2838.6091</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>3296.0575</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thomas Boland&quot;</value>
+        <value>3117.3761</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>3569.099</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tdr class="my_example">
+  <connection-resolver>
+    <connection-normalizer>
+      <required-attributes>
+        <attribute-list>
+          <attr>server</attr>
+          <attr>username</attr>
+          <attr>password</attr>
+        </attribute-list>
+      </required-attributes>
+    </connection-normalizer>
+
+    <connection-builder>
+      <script file="connectionBuilder.js"/>
+    </connection-builder>
+  </connection-resolver>
+
+  <driver-resolver>
+    <driver-match>
+      <driver-name type='regex'>teradata.*</driver-name>
+    </driver-match>
+  </driver-resolver>
+</tdr>

@@ -1,0 +1,27 @@
+<results>
+  <test name='mid(str2,(num0+5)*.3,num1)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1934432200)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ive&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;wo&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

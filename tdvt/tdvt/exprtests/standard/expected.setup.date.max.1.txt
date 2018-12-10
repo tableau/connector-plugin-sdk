@@ -1,0 +1,59 @@
+<results>
+  <test name='MAX([date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3325074545)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([date2], [date3])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1996265231)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1983-05-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1986-03-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1986-11-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-05-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1999-08-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(4035984656)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-08-02 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

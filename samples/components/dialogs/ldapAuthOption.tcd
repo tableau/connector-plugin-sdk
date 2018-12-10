@@ -1,0 +1,15 @@
+<connection-dialog class='example'>
+ <connection-config>
+    <authentication-mode value='Radio' />
+    <authentication-options>
+      <option name="Explicit" default="false" value="database_auth" />
+      <option name="LDAP" default="true" value="some_other_kind" />
+    <!-- This will be passed in the authentication attribute to the connection builder. For example:
+         if (attr[connectionHelper.attributeAuthentication] != undefined && attr[connectionHelper.attributeAuthentication] == "some_other_kind") -->
+    </authentication-options>
+
+    <db-name-prompt enabled="true" optional="true" value="@string/database_prompt/" />
+    <show-ssl-checkbox value="true" />
+  </connection-config>
+</connection-dialog>
+

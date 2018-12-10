@@ -1,0 +1,34 @@
+<results>
+  <test name='REGEXP_REPLACE([str0], &apos;OFFICE&apos;, &apos;ZZZ&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3716627254)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ZZZ SUPPLIES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE([str0], &apos;Z&apos;, &apos;o&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(2192623610)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

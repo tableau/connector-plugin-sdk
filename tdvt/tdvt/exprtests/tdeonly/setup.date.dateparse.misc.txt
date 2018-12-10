@@ -1,0 +1,20 @@
+DATEPARSE('yyyyMMdd', '12340601')
+DATEPARSE('yyyyMMdd', '18991232')
+DATEPARSE('yyyyMMdd', '123406011')
+DATEPARSE('MM yyyy hh:mm:ss dd', '12 1995 13:05:05 31')
+DATEPARSE('yyyy-MM-dd', '1899-12-31')
+DATEPARSE('y-MM-dd', '2005-09-27')
+DATEPARSE('yy.MM', '16.12')
+DATEPARSE('h:mm', '12:60')
+DATEPARSE('', '12:60')
+DATEPARSE('yymmdd', '')
+DATEPARSE('', '')
+DATEPARSE('yy', '15')
+DATEPARSE('mm', '12')
+DATEPARSE('hh:ss', '13:60')
+DATEPARSE('dd MM yy', '01 01')
+DATEPARSE('yyyy.MM hh:mm:ss','1899.05 11:30:30')
+DATEPARSE('yyyy.dd hh:mm:ss', '1899.12 6:10:10')
+
+
+

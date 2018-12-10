@@ -1,0 +1,22 @@
+<results>
+  <test name='REPLACE(&quot;This is ® replace test.&quot;, &quot;®&quot;, &quot;RegisterSymbol&quot;)'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[TEMP(Test)(4256708872)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;This is RegisterSymbol replace test.&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FIND(&quot;This is ™ find test.&quot;, &quot;™&quot;)'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[TEMP(Test)(1040567396)(0)]</column>
+      </schema>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+</results>

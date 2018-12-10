@@ -1,0 +1,172 @@
+<results>
+  <test name='DATENAME(&apos;year&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(2699142763)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;year&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1634134069)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1949844743)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3376136658)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3672267408)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;December&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(2406708804)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;December&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;week&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1073594909)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;week&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(4016689999)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3405047399)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Saturday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(55506858)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Saturday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3460070750)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1494289478)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;day&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3227046355)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;day&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1233941598)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;hour&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3874232094)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;minute&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1546814749)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;second&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3692431276)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

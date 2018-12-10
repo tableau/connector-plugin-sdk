@@ -1,0 +1,12 @@
+<results>
+  <test name='SPLIT(&quot;a-b-c&quot;, &quot;-&quot;, -2) //b'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(154794726)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;b&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

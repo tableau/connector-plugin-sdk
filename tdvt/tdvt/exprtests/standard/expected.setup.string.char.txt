@@ -1,0 +1,12 @@
+<results>
+  <test name='CHAR(65)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3578809945)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;A&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

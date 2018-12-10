@@ -1,0 +1,2 @@
+DATEADD('hour', 1, [datetime0])
+

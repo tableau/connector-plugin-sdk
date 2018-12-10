@@ -1,0 +1,52 @@
+<results>
+  <test name='DATENAME(&apos;weekday&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4107590482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Friday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Saturday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sunday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thursday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tuesday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wednesday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(766794695)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Friday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Monday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Saturday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sunday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thursday&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wednesday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

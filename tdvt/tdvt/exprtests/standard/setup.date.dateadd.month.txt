@@ -1,0 +1,4 @@
+DATEADD('month', 1, [date2])
+
+DATEADD('month', 1, [datetime0])
+

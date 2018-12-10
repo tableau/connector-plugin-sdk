@@ -1,0 +1,34 @@
+<results>
+  <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 0)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(24557538)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 1)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3541328736)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

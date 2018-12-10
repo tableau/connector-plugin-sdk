@@ -1,0 +1,3 @@
+REGEXP_EXTRACT('','office+\s+(\w+)')
+REGEXP_EXTRACT('office supplies','office+\s+(\w+)')
+REGEXP_EXTRACT('office supplies','')

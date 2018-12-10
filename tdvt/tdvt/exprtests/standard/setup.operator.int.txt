@@ -1,0 +1,4 @@
+int0 % int1
+int0 / int1
+int3 / int2
+int0 ^ num1

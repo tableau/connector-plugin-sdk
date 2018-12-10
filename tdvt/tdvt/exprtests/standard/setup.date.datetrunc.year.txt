@@ -1,0 +1,2 @@
+DATETRUNC('year', [date2])
+DATETRUNC('year', [datetime0])

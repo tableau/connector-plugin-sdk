@@ -1,0 +1,52 @@
+<results>
+  <test name='DATENAME(&apos;weekday&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(4107590482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Fri&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sat&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sun&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thu&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tue&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wed&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(766794695)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Fri&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mon&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sat&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sun&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thu&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wed&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

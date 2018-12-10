@@ -1,0 +1,122 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="connection-dialog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="connection-config" type="ConnectionConfig-CT"/>
+      </xs:sequence>
+      <xs:attribute name="class" type="xs:token" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ConnectionConfig-CT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="authentication-mode" type="AuthMode-CT"/>
+      <xs:element minOccurs="0" name="authentication-options" type="AuthOptions-CT"/>
+      <xs:element minOccurs="0" name="connection-options" type="ConnectionOptions-CT"/>
+      <xs:element minOccurs="0" name="db-name-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="default-ssl-mode" type="StringProperty-CT"/>
+      <xs:element minOccurs="0" name="extended-properties" type="ExtendedProperties-CT"/>
+      <xs:element minOccurs="0" name="has-databases" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="has-pre-connect-database" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="has-schemas" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="port-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="server-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="service-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="show-connection-prompt" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-db-browse-button" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-encryption-checkbox" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-import-ssl-cert-label" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-service-prompt" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-ssl-checkbox" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-uncommitted-data-checkbox" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="ssl-requires-certificate" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="warehouse-prompt" type="TextField-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuthMode-CT">
+    <xs:attribute name="value" type="AuthModeEnum-ST" use="required"/>
+  </xs:complexType>
+  <xs:simpleType name="AuthModeEnum-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Basic"/>
+      <xs:enumeration value="BasicNoValidateFields"/>
+      <xs:enumeration value="BasicUserNameOnly"/>
+      <xs:enumeration value="BasicAWS"/>
+      <xs:enumeration value="Radio"/>
+      <xs:enumeration value="RadioUnindented"/>
+      <xs:enumeration value="ComboBox"/>
+      <xs:enumeration value="ComboBoxIntegrated"/>
+      <xs:enumeration value="Hive"/>
+      <xs:enumeration value="SharePoint"/>
+      <xs:enumeration value="SAPBW"/>
+      <xs:enumeration value="SwitchModal"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AuthOptions-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="option" type="AuthOption-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuthOption-CT">
+    <xs:attribute name="name" type="AuthOptionEnum-ST" use="required"/>
+    <xs:attribute name="default" type="xs:boolean"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+  <xs:simpleType name="AuthOptionEnum-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Explicit"/>
+      <xs:enumeration value="ExplicitUnindented"/>
+      <xs:enumeration value="UseWindows"/>
+      <xs:enumeration value="UseWindowsPreferred"/>
+      <xs:enumeration value="Teradata"/>
+      <xs:enumeration value="LDAP"/>
+      <xs:enumeration value="VirtualNode"/>
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="Kerberos"/>
+      <xs:enumeration value="Integrated"/>
+      <xs:enumeration value="Username"/>
+      <xs:enumeration value="UsernameAndPassword"/>
+      <xs:enumeration value="HDIService"/>
+      <xs:enumeration value="AccessNoSecurity"/>
+      <xs:enumeration value="AccessYesSecurity"/>
+      <xs:enumeration value="OAuth"/>
+      <xs:enumeration value="Forms"/>
+      <xs:enumeration value="ThirdPartySSO"/>
+      <xs:enumeration value="Invalid"/>
+      <xs:enumeration value="SAMLIdP"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ExtendedProperties-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="property" type="ExtendedProperty-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExtendedProperty-CT">
+    <xs:attribute name="name" type="xs:token" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ConnectionOptions-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="option" type="ConnectionOption-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConnectionOption-CT">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="connection-type" type="xs:string" use="required"/>
+    <xs:attribute name="server-prompt" type="xs:string" use="required"/>
+    <xs:attribute name="show-port-prompt" type="xs:boolean" use="required"/>
+    <xs:attribute name="show-service-prompt" type="xs:boolean" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="StringProperty-CT">
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="BooleanProperty-CT">
+    <xs:attribute name="value" type="xs:boolean" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="TextField-CT">
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="enabled" type="xs:boolean"/>
+    <xs:attribute name="optional" type="xs:boolean"/>
+    <xs:attribute name="default" type="xs:string"/>
+  </xs:complexType>
+</xs:schema>

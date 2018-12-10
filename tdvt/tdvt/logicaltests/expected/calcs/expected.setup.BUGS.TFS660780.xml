@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='e:\tdvt\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.TFS660780.bigquery_sql.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery_sql].[sum:Number of Records:ok]</column>
+      </schema>
+      <tuple>
+        <value>17</value>
+      </tuple>
+    </table>
+  </test>
+</results>

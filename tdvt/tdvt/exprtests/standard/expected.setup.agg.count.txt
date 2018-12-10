@@ -1,0 +1,52 @@
+<results>
+  <test name='COUNT([int0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3910975586)(0)]</column>
+      </schema>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([bool0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1133866179)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([date3])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3590771088)(0)]</column>
+      </schema>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1804085677)(0)]</column>
+      </schema>
+      <tuple>
+        <value>12</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([str2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2760211945)(0)]</column>
+      </schema>
+      <tuple>
+        <value>13</value>
+      </tuple>
+    </table>
+  </test>
+</results>

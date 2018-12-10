@@ -1,0 +1,6 @@
+DATEPART('quarter', [date2], 'monday')
+DATEPART('quarter', [date2], 'sunday')
+
+DATEPART('quarter', [datetime0], 'monday')
+DATEPART('quarter', [datetime0], 'sunday')
+

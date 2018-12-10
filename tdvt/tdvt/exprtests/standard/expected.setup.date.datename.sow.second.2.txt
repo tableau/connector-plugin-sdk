@@ -1,0 +1,106 @@
+<results>
+  <test name='DATENAME(&apos;second&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(2740605400)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;16         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;20         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;22         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;23         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;26         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;28         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;31         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;34         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;35         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;37         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;44         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;50         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;52         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;56         &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;second&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(356589430)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;16         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;20         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;22         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;23         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;26         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;28         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;31         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;34         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;35         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;37         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;44         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;50         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;52         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;56         &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

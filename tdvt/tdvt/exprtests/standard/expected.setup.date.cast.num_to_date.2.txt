@@ -1,0 +1,42 @@
+<results>
+  <test name='DATE([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.paraccel].[TEMP(Test)(158994214)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-19#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-22#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-26#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-04#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-05#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-09#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-11#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-20#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

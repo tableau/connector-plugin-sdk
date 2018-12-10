@@ -1,0 +1,142 @@
+<results>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #1900-01-01#) // Monday, 1900-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3507029589)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #1900-12-30#) // Sunday, 1900-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(586563344)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-12-24 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #1900-12-31#) // Monday, 1901-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2303416801)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-12-31 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #1901-12-29#) // Sunday, 1901-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(699141156)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1901-12-23 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2000-01-03#) // Monday, 2000-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1722395683)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2000-12-31#) // Sunday, 2000-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3678770392)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-12-25 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2001-01-01#) // Monday, 2001-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1821777949)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2001-12-30#) // Sunday, 2001-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1691635699)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-12-24 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2014-12-29#) // Monday, 2015-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(328769054)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2016-01-03#) // Sunday, 2015-W53'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3951994130)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-12-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2016-01-04#) // Monday, 2016-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4146130845)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2016-01-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2017-01-01#) // Sunday, 2016-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2320591904)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2016-12-26 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2018-01-01#) // Monday, 2018-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2115916863)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2018-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-week&apos;, #2018-12-29#) // Sunday, 2018-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1779198952)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2018-12-24 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

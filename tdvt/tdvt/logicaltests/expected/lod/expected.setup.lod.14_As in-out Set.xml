@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.14_As in-out Set.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[avg:Calculation_4621225004123988:ok]</column>
+        <column>[Staples.sqlserver].[io:Set 1:nk]</column>
+        <column>[Staples.sqlserver].[sum:Sales Total:ok]</column>
+      </schema>
+      <tuple>
+        <value>4330452.9</value>
+        <value>false</value>
+        <value>12991359.0</value>
+      </tuple>
+      <tuple>
+        <value>28565526.0</value>
+        <value>true</value>
+        <value>85696579.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

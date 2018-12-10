@@ -1,0 +1,52 @@
+<results>
+  <test name='DATENAME(&apos;weekday&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(4107590482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FRIDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SATURDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SUNDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;THURSDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TUESDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEDNESDAY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(766794695)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FRIDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MONDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SATURDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SUNDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;THURSDAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEDNESDAY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

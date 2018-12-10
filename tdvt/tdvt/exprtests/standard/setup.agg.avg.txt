@@ -1,0 +1,2 @@
+AVG([int0])
+AVG([num4])

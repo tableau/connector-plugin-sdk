@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Query.Filter.IsNOTNULL.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str2]</column>
+        <column>[cast_calcs.postgres91].[sum:num3:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+        <value>3.64</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+        <value>-4.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen&quot;</value>
+        <value>6.84</value>
+      </tuple>
+      <tuple>
+        <value>&quot;five&quot;</value>
+        <value>12.93</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fourteen&quot;</value>
+        <value>-18.43</value>
+      </tuple>
+      <tuple>
+        <value>&quot;nine&quot;</value>
+        <value>-13.38</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one&quot;</value>
+        <value>-11.52</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+        <value>-19.96</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteen&quot;</value>
+        <value>-10.98</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ten&quot;</value>
+        <value>-10.56</value>
+      </tuple>
+      <tuple>
+        <value>&quot;three&quot;</value>
+        <value>-12.17</value>
+      </tuple>
+      <tuple>
+        <value>&quot;twelve&quot;</value>
+        <value>-10.81</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two&quot;</value>
+        <value>-9.31</value>
+      </tuple>
+    </table>
+  </test>
+</results>

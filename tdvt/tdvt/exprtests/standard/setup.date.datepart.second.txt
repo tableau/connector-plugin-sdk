@@ -1,0 +1,1 @@
+DATEPART('second', [datetime0])

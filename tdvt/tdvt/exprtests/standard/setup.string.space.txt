@@ -1,0 +1,7 @@
+'>'+SPACE(2)+'<'
+
+//These tests are of questionable value and generate a lot of expecteds.
+//SPACE(int(2))
+//SPACE(int2)
+//'$'+space(num0)+'$'
+//'>'+space(int0)+'<'

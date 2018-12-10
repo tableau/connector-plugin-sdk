@@ -1,0 +1,172 @@
+<results>
+  <test name='DATEPART(&apos;year&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(513464674)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;year&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3512378422)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;quarter&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3084524178)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;quarter&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4202902840)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;month&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2836269094)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;month&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3924648662)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;week&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1538264184)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;week&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4042104093)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4271712345)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;weekday&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(963247111)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;dayofyear&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(738426766)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;dayofyear&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1202522493)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;day&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1255819744)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;day&apos;, DATE(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1639804515)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;hour&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(299943486)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;minute&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4177149407)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;second&apos;, DATETIME(null), &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1457324017)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

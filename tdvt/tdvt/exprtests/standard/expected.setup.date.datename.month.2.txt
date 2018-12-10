@@ -1,0 +1,52 @@
+<results>
+  <test name='DATENAME(&apos;month&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hana].[TEMP(Test)(477986140)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;APRIL&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;AUGUST&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FEBRUARY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;JANUARY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;JULY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;JUNE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MARCH&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MAY&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;NOVEMBER&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SEPTEMBER&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hana].[TEMP(Test)(2224240773)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;AUGUST&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;JULY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

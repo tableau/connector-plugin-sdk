@@ -1,0 +1,52 @@
+<results>
+  <test name='DATENAME(&apos;month&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(477986140)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Apr&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Aug&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jan&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jun&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mar&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nov&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(2224240773)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Aug&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

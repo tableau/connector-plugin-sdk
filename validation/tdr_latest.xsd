@@ -1,0 +1,191 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:complexType name="ScriptElement-CT">
+    <xs:simpleContent>
+      <xs:annotation>
+        <xs:documentation>Either an embedded script or the name of a file in the local directory.</xs:documentation>
+      </xs:annotation>
+      <xs:extension base="xs:string">
+        <xs:attribute name="file"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="OSShortName-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="win"/>
+      <xs:enumeration value="mac"/>
+      <xs:enumeration value="linux"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Double-ST">
+    <xs:union memberTypes="xs:double XML-RealSpecial-ST"/>
+  </xs:simpleType>
+  <xs:simpleType name="Float-ST">
+    <xs:union memberTypes="xs:float XML-RealSpecial-ST"/>
+  </xs:simpleType>
+  <xs:simpleType name="XML-RealSpecial-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="nan"/>
+      <xs:enumeration value="inf"/>
+      <xs:enumeration value="-inf"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VersionNumber-ST">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d+)((\.)(\d+))*((-)(\d+))*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BitnessType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="64"/>
+      <xs:enumeration value="32"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NameMatchType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="regex"/>
+      <xs:enumeration value="exact"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DriverNameType-CT">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="NameMatchType-ST" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="ConditionalOperator-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="eq"/>
+      <xs:enumeration value="ne"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AttributeList-CT">
+    <xs:sequence>
+      <xs:element name="attr" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DefaultAttribute-CT">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="name" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DefaultAttributes-CT">
+    <xs:sequence>
+      <xs:element name="default-attribute" maxOccurs="unbounded" type="DefaultAttribute-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuthenticationConditional-CT">
+    <xs:sequence>
+      <xs:element name="attribute-list" minOccurs="0" type="AttributeList-CT"/>
+    </xs:sequence>
+    <xs:attribute name="operator" type="ConditionalOperator-ST"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="RequiredAttributes-CT">
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>Attributes required for protocol matching.</xs:documentation>
+      </xs:annotation>
+      <xs:element name="setImpersonateAttributes" minOccurs="0"/>
+      <xs:element name="authentication-conditional" minOccurs="0" type="AuthenticationConditional-CT"/>
+      <xs:element name="default-attributes" minOccurs="0" type="DefaultAttributes-CT"/>
+      <xs:element name="attribute-list" minOccurs="0" type="AttributeList-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConnectionBuilder-CT">
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>Builds a connection string.</xs:documentation>
+      </xs:annotation>
+      <xs:element name="script" minOccurs="0" type="ScriptElement-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConnectionMatcher-CT">
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>Matches two sets of protocol attributes. This is used to establish when a connection can be shared.</xs:documentation>
+      </xs:annotation>
+      <xs:element name="script" minOccurs="0" type="ScriptElement-CT"/>
+    </xs:sequence>
+    <xs:attribute name="cacheSize" type="xs:integer"/>
+  </xs:complexType>
+  <xs:complexType name="ConnectionNormalizer-CT">
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>Normalize attributes required for protocol matching. This is used to establish when a connection can be shared.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+        <xs:element name="required-attributes" minOccurs="0" type="RequiredAttributes-CT"/>
+        <xs:element name="script" minOccurs="0" type="ScriptElement-CT"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="cacheSize" type="xs:integer"/>
+  </xs:complexType>
+  <xs:complexType name="ConnectionProperties-CT">
+    <xs:sequence>
+      <xs:annotation>
+        <xs:documentation>Creates a list of connection properties for JDBC protocols</xs:documentation>
+      </xs:annotation>
+      <xs:element name="script" minOccurs="0" type="ScriptElement-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ConnectionResolver-CT">
+    <xs:annotation>
+      <xs:documentation>Define methods used to establish a connection to the database.</xs:documentation>
+    </xs:annotation>
+    <xs:all>
+      <xs:element name="connection-normalizer" type="ConnectionNormalizer-CT" minOccurs="0"/>
+      <xs:element name="connection-builder" type="ConnectionBuilder-CT" minOccurs="0"/>
+      <xs:element name="connection-matcher" type="ConnectionMatcher-CT" minOccurs="0"/>
+      <xs:element name="connection-properties" type="ConnectionProperties-CT" minOccurs="0"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DriverResolver-CT">
+    <xs:annotation>
+      <xs:documentation>Define valid drivers for this data connection.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="driver-match" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Each driver match is evaluated in order against the list of installed drivers. The first match is used to determine the ODBC driver when connecting.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="driver-name" type="DriverNameType-CT"/>
+            <xs:element name="driver-version" minOccurs="0">
+              <xs:complexType>
+                <xs:attribute name="exact" type="VersionNumber-ST"/>
+                <xs:attribute name="max" type="VersionNumber-ST"/>
+                <xs:attribute name="min" type="VersionNumber-ST"/>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="incompatible-driver-version" minOccurs="0">
+              <xs:complexType>
+                <xs:attribute name="exact" type="VersionNumber-ST"/>
+                <xs:attribute name="max" type="VersionNumber-ST"/>
+                <xs:attribute name="min" type="VersionNumber-ST"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+          <xs:attribute name="platform" type="OSShortName-ST"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="bitness" type="BitnessType-ST">
+      <xs:annotation>
+        <xs:documentation>Use to restrict the driver search to the specified bitness. The default is unrestricted which means that Tableau will try to find a 64bit driver first and then try to find a 32bit driver.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="tdr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="connection-resolver" minOccurs="0" type="ConnectionResolver-CT"/>
+        <xs:element name="driver-resolver" minOccurs="0" type="DriverResolver-CT"/>
+      </xs:sequence>
+      <xs:attribute name="class" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

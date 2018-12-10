@@ -1,0 +1,51 @@
+<results>
+  <test name='DATE([datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(1739373434)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

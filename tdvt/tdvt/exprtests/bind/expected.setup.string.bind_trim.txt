@@ -1,0 +1,12 @@
+<results>
+  <test name='&apos; &apos; + &apos;tail trimmed&apos; + &apos;     &apos;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1321171487)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot; tail trimmed     &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

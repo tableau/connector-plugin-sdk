@@ -1,0 +1,32 @@
+<results>
+  <test name='REGEXP_MATCH(&apos;Hello 1234 World&apos;,&apos;(\w+)\s+(\d+)\s+(\w+)&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4132828061)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;&apos;,&apos;(\w+)\s+(\d+)\s+(\w+)&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2473026489)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;Hello 1234 World&apos;,&apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(400627863)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

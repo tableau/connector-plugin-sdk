@@ -1,0 +1,2 @@
+DATETRUNC('weekday', [date2])
+DATETRUNC('weekday', [datetime0])

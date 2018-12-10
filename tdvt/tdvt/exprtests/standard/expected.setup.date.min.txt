@@ -1,0 +1,59 @@
+<results>
+  <test name='MIN([date2], [date3])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3951339438)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-12#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20#</value>
+      </tuple>
+      <tuple>
+        <value>#1979-04-01#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05#</value>
+      </tuple>
+      <tuple>
+        <value>#1992-01-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-02#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1465246653)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2572329321)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:28#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

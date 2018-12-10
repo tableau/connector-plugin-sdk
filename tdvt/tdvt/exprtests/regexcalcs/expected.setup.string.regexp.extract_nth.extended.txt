@@ -1,0 +1,42 @@
+<results>
+  <test name='REGEXP_EXTRACT_NTH(&quot;&quot;,&apos;([a-z]+)\s+(\w+)&apos;,2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2389407215)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcc @#$%^^ abcd abce &quot;,&apos;([a-z]+)\s+(\w+)&apos;,2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3284414667)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abce&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcc @#$%^^ abcd abce &quot;,&apos;([a-z]+)\s+(\w+)&apos;,0)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3474476659)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abcd abce&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcc @#$%^^ abcd abce &quot;,&apos;&apos;,2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2805951702)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

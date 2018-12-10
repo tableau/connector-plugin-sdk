@@ -1,0 +1,4 @@
+DATENAME('year', [date2])
+
+DATENAME('year', [datetime0])
+

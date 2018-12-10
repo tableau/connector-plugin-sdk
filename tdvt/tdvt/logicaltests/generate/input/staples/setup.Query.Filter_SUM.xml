@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<logical-query>
+  <selects>
+    <field>[Customer Name]</field>
+    <field>[sum:Customer Balance:ok]</field>
+  </selects>
+  <selectOp class="logical-operator">
+    <predicate>
+      <funcallExp class="logical-expression" function="&amp;&amp;" shape="scalar">
+        <funcallExp class="logical-expression" function="&gt;=" shape="scalar">
+          <identifierExp class="logical-expression" identifier="[__measure__0]" />
+          <literalExp class="logical-expression" datatype="real" value="-746.0000000000075" />
+        </funcallExp>
+        <funcallExp class="logical-expression" function="&lt;=" shape="scalar">
+          <identifierExp class="logical-expression" identifier="[__measure__1]" />
+          <literalExp class="logical-expression" datatype="real" value="2384363.5474140239" />
+        </funcallExp>
+      </funcallExp>
+    </predicate>
+    <aggregateOp class="logical-operator">
+      <measures>
+        <binding name="[__measure__0]">
+          <funcallExp class="logical-expression" function="SUM" shape="aggregate">
+            <identifierExp class="logical-expression" identifier="[Customer Balance]" />
+          </funcallExp>
+        </binding>
+        <binding name="[__measure__1]">
+          <funcallExp class="logical-expression" function="SUM" shape="aggregate">
+            <identifierExp class="logical-expression" identifier="[Customer Balance]" />
+          </funcallExp>
+        </binding>
+        <binding name="[sum:Customer Balance:ok]">
+          <funcallExp class="logical-expression" function="SUM" shape="aggregate">
+            <identifierExp class="logical-expression" identifier="[Customer Balance]" />
+          </funcallExp>
+        </binding>
+      </measures>
+      <groupbys>
+        <binding name="[Customer Name]">
+          <identifierExp class="logical-expression" identifier="[Customer Name]" />
+        </binding>
+      </groupbys>
+      <projectOp class="logical-operator">
+        <expressions>
+          <binding name="[Customer Name]">
+            <identifierExp class="logical-expression" identifier="[Customer Name]" />
+          </binding>
+        </expressions>
+        <relationOp class="logical-operator" connection="leaf" name="$Staples$">
+          <relation name="Staples" table="$Staples$" type="table" />
+          <cols>
+          </cols>
+          <type>
+            <schema>
+              <field name="[Call Center Region]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer Balance]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer Segment]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Customer State]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Discount]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Dept]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Salary]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Employee Yrs Exp]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Fill Time]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Gross Profit]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Item Count]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Manager Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Market Segment]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Date]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Day]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order ID]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Month]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Priority]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Quantity]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Quarter]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Status]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Order Year]">
+                <type name="nonnull" />
+              </field>
+              <field name="[PID]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Price]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type1]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type2]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type3]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Prod Type4]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product Base Margin]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product Container]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product ID]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product In Stock]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Product Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Receive Time]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Received Date]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Sales Total]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Charge]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Date]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Handle Cost]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Mode]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Priority]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Ship Promo]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier Balance]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier Name]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier Region]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Supplier State]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Tax Rate]">
+                <type name="nonnull" />
+              </field>
+              <field name="[Total Cycle Time]">
+                <type name="nonnull" />
+              </field>
+            </schema>
+            <schema>
+            </schema>
+          </type>
+        </relationOp>
+      </projectOp>
+    </aggregateOp>
+  </selectOp>
+</logical-query>

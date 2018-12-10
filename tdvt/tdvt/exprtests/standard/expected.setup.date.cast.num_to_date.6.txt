@@ -1,0 +1,15 @@
+<results>
+  <test name='DATE([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.presto].[TEMP(Test)(158994214)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1969-12-31#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

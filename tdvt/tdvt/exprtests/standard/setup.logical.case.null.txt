@@ -1,0 +1,2 @@
+case datepart('weekday',date1) when 7 then null when 1 then null else date1 end
+

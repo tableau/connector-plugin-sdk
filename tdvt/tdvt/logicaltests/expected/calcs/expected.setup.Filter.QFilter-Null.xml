@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Filter.QFilter-Null.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[key]</column>
+        <column>[cast_calcs.postgres91].[sum:int1:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;key02&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key04&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key05&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key06&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key10&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key12&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key13&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key14&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key15&quot;</value>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

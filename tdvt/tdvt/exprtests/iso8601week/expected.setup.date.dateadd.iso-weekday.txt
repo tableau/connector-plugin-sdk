@@ -1,0 +1,52 @@
+<results>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 0, #2014-12-29#) // #2014-12-29#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4016677078)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 6, #2014-12-29#) // #2015-01-04#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3901732021)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-01-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 8, #2013-12-30#) // #2014-01-07#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3476947242)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-01-07 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, -8, #2014-01-07#) // #2013-12-30#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2476179258)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-30 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-weekday&apos;, 365, #2014-12-28#) // #2015-12-28#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3419784675)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-12-28 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

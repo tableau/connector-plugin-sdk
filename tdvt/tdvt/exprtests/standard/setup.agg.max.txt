@@ -1,0 +1,5 @@
+MAX([int0])
+MAX([date3])
+MAX([num4])
+MAX([str2])
+MAX([int0], [int1])

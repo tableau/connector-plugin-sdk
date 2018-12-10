@@ -1,0 +1,12 @@
+<results>
+  <test name='[date2] - [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1152843842)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

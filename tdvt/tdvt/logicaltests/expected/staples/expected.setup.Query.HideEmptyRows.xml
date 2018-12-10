@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.HideEmptyRows.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Employee Name]</column>
+        <column>[Staples.postgres91].[avg:Employee Salary:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Adam Haberlach&quot;</value>
+        <value>104406.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Alok Kapoor&quot;</value>
+        <value>102923.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Baton Rouge Alumnae&quot;</value>
+        <value>102540.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Bob Pennefather&quot;</value>
+        <value>103617.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Carpenter, Jill&quot;</value>
+        <value>104224.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Charles A.W. Adams&quot;</value>
+        <value>102605.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Clayton, Nancy&quot;</value>
+        <value>103864.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Colleen Hurwitz&quot;</value>
+        <value>103907.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Collins, Babs&quot;</value>
+        <value>102752.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Daniel Champ&quot;</value>
+        <value>104913.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ellis, Elaine&quot;</value>
+        <value>104452.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eric Jones&quot;</value>
+        <value>103790.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eric Landry&quot;</value>
+        <value>102914.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Faris, Marilyn&quot;</value>
+        <value>103882.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;G.P Pandey&quot;</value>
+        <value>102542.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Galen Kountz&quot;</value>
+        <value>103561.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Gerardo Colmenar&quot;</value>
+        <value>104186.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jones, Melody&quot;</value>
+        <value>104832.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Kathryn Blackmer-Reyes&quot;</value>
+        <value>104591.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Linda Arce&quot;</value>
+        <value>102623.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MacCallum, Joan&quot;</value>
+        <value>103324.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Matthew Ruzicka&quot;</value>
+        <value>104509.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Michael J. Jacobs&quot;</value>
+        <value>103600.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Peacock, Margaret&quot;</value>
+        <value>102973.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Philippe Sauvageau&quot;</value>
+        <value>102835.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Pradeep S Mehta&quot;</value>
+        <value>104569.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Purkey, Jan&quot;</value>
+        <value>104677.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ransbury, Wendy&quot;</value>
+        <value>104897.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rosenzweig, Loren&quot;</value>
+        <value>104362.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rudisill, Martha&quot;</value>
+        <value>103619.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sharp, Mary Jane&quot;</value>
+        <value>103281.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Stevenson, Carol&quot;</value>
+        <value>104287.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Suzanne Lafrenière&quot;</value>
+        <value>103442.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

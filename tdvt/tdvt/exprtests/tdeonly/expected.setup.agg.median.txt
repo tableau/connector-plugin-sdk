@@ -1,0 +1,42 @@
+<results>
+  <test name='MEDIAN([int2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(925086242)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MEDIAN([num2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3622506995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10.98</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MEDIAN([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1798641580)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4.295</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MEDIAN(DATEPART(&apos;year&apos;,[date2]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1667576385)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1988.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

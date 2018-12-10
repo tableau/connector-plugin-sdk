@@ -1,0 +1,4 @@
+DATENAME('day', [date2])
+
+DATENAME('day', [datetime0])
+

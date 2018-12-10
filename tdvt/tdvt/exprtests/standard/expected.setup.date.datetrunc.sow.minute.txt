@@ -1,0 +1,118 @@
+<results>
+  <test name='DATETRUNC(&apos;minute&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1349416314)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 13:14:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 10:17:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 17:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 08:16:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 14:01:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 22:21:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 21:13:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 15:22:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 12:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 06:54:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 12:34:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 23:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 11:57:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 07:59:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;minute&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3032747293)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 13:14:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 10:17:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 17:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 08:16:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 14:01:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 22:21:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 21:13:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 15:22:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 12:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 06:54:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 12:34:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 23:30:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 11:57:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 07:59:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

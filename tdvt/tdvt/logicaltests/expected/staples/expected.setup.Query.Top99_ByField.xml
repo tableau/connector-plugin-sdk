@@ -1,0 +1,408 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Top99_ByField.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Employee Name]</column>
+        <column>[Staples.postgres91].[avg:Employee Salary:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Adalin Torres-Zayas&quot;</value>
+        <value>102081.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Adam Haberlach&quot;</value>
+        <value>104406.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Alok Kapoor&quot;</value>
+        <value>102923.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Baton Rouge Alumnae&quot;</value>
+        <value>102540.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Beatriz Pascual&quot;</value>
+        <value>100648.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ben Booth&quot;</value>
+        <value>102211.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Blomquist, Laura&quot;</value>
+        <value>98221.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Bob Pennefather&quot;</value>
+        <value>103617.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Bonnie McCune&quot;</value>
+        <value>100059.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Brue, Jill&quot;</value>
+        <value>99223.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Bruner, Virginia&quot;</value>
+        <value>100346.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Cale, Harriett&quot;</value>
+        <value>99616.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Carey Beckstead&quot;</value>
+        <value>102021.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Carpenter, Jan&quot;</value>
+        <value>101170.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Carpenter, Jill&quot;</value>
+        <value>104224.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Charles A.W. Adams&quot;</value>
+        <value>102605.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Clark, Carol&quot;</value>
+        <value>99486.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Clayton, Nancy&quot;</value>
+        <value>103864.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Colleen Hurwitz&quot;</value>
+        <value>103907.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Collins, Babs&quot;</value>
+        <value>102752.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Craig A. Edwards&quot;</value>
+        <value>101970.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dallas Alumnae&quot;</value>
+        <value>101112.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Daniel Champ&quot;</value>
+        <value>104913.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Davis, Nancy&quot;</value>
+        <value>97952.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Deepak D. Raj&quot;</value>
+        <value>100233.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dhruv Gupta&quot;</value>
+        <value>98729.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dodds, Christina&quot;</value>
+        <value>100405.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ellis, Elaine&quot;</value>
+        <value>104452.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eric Jones&quot;</value>
+        <value>103790.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Eric Landry&quot;</value>
+        <value>102914.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Familo, Amy&quot;</value>
+        <value>100570.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Faris, Marilyn&quot;</value>
+        <value>103882.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;G.P Pandey&quot;</value>
+        <value>102542.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Gail Anderson-Dargatz&quot;</value>
+        <value>99993.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Galehan, Karen&quot;</value>
+        <value>100999.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Galen Kountz&quot;</value>
+        <value>103561.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Gary Ledbetter&quot;</value>
+        <value>98767.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;George Mattok&quot;</value>
+        <value>97971.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Gerardo Colmenar&quot;</value>
+        <value>104186.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Harish Kumar&quot;</value>
+        <value>102068.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Harsh Manglik&quot;</value>
+        <value>102235.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hastrich, Mary Frances&quot;</value>
+        <value>102182.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hougaard, Patricia&quot;</value>
+        <value>98324.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hudgins, Carolyn&quot;</value>
+        <value>98565.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;J. L. Rastogi&quot;</value>
+        <value>100819.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jack Juni&quot;</value>
+        <value>101132.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jeet Bindra&quot;</value>
+        <value>99583.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Joe Schmidt&quot;</value>
+        <value>99143.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jones, Melody&quot;</value>
+        <value>104832.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;K.K Dave&quot;</value>
+        <value>101589.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Karanvir Sachdeva&quot;</value>
+        <value>99476.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Kathryn Blackmer-Reyes&quot;</value>
+        <value>104591.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Kington, Ann&quot;</value>
+        <value>99532.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Kinman, Dorothy&quot;</value>
+        <value>101129.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Kobida, Charlene&quot;</value>
+        <value>100077.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Len Blum&quot;</value>
+        <value>100044.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Linda Arce&quot;</value>
+        <value>102623.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Lisa Fischler&quot;</value>
+        <value>99372.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MacCallum, Joan&quot;</value>
+        <value>103324.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Matthew Mariska&quot;</value>
+        <value>100919.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Matthew Ruzicka&quot;</value>
+        <value>104509.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Michael J. Jacobs&quot;</value>
+        <value>103600.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Oestrike, Irene&quot;</value>
+        <value>99197.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Orlando Alumnae&quot;</value>
+        <value>100656.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Paul Crookston&quot;</value>
+        <value>98329.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Peacock, Margaret&quot;</value>
+        <value>102973.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Philippe Sauvageau&quot;</value>
+        <value>102835.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Pond, Nancy&quot;</value>
+        <value>101927.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Pradeep Munde&quot;</value>
+        <value>99773.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Pradeep S Mehta&quot;</value>
+        <value>104569.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Purkey, Jan&quot;</value>
+        <value>104677.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ransbury, Wendy&quot;</value>
+        <value>104897.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ray, Lynda&quot;</value>
+        <value>98343.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rho Delta&quot;</value>
+        <value>98315.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Richard Mortensen&quot;</value>
+        <value>98131.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Richard Olsen&quot;</value>
+        <value>100716.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rick Nelson&quot;</value>
+        <value>100876.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ronald Montoya&quot;</value>
+        <value>98197.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rosenzweig, Loren&quot;</value>
+        <value>104362.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rudisill, Martha&quot;</value>
+        <value>103619.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sam Habash&quot;</value>
+        <value>99107.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sandra Davis&quot;</value>
+        <value>101242.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sasseen, Mariellen&quot;</value>
+        <value>99955.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Seth Vernon&quot;</value>
+        <value>99304.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sharp, Mary Jane&quot;</value>
+        <value>103281.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Stevenson, Carol&quot;</value>
+        <value>104287.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Suzanne Lafrenière&quot;</value>
+        <value>103442.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Taylor, Jane&quot;</value>
+        <value>100419.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tiemann, Maryann&quot;</value>
+        <value>101862.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tina Cornwell&quot;</value>
+        <value>102100.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Toomey, Nancy&quot;</value>
+        <value>100302.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Vera Durdic Gavanski&quot;</value>
+        <value>98491.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Vinay Khanna&quot;</value>
+        <value>101866.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Violet E. Fader&quot;</value>
+        <value>100065.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Volkmer, Dian&quot;</value>
+        <value>101684.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wait Griswold&quot;</value>
+        <value>98957.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Y.C Garg&quot;</value>
+        <value>99940.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Yvette García&quot;</value>
+        <value>98956.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Zingarella, Rosie&quot;</value>
+        <value>101565.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

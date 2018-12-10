@@ -1,0 +1,60 @@
+<results>
+  <test name='DATETRUNC(&apos;hour&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2456153780)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 13:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 10:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 17:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 07:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 08:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 14:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 22:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 21:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 15:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 06:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 23:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 11:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 07:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,4 @@
+DATEADD('weekday', 1, [date2])
+
+DATEADD('weekday', 1, [datetime0])
+

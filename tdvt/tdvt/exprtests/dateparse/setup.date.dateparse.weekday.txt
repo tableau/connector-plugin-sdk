@@ -1,0 +1,2 @@
+DATEPARSE('eee,MMMM dd,yyyy HH:mm:ss','Fri,December 13,2013 17:18:35')
+DATEPARSE('eeee,MMMM dd,yyyy','Friday,November 15,2013')

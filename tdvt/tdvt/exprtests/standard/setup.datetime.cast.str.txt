@@ -1,0 +1,2 @@
+TRIM(STR([datetime0]))
+

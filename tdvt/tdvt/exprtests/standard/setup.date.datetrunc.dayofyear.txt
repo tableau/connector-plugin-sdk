@@ -1,0 +1,4 @@
+DATETRUNC('dayofyear', [date2])
+
+DATETRUNC('dayofyear', [datetime0])
+

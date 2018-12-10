@@ -1,0 +1,12 @@
+// Same day
+DATEADD('iso-weekday', 0, #2014-12-29#) // #2014-12-29#
+
+// Same ISO week
+DATEADD('iso-weekday', 6, #2014-12-29#) // #2015-01-04#
+
+// Different ISO weeks, same ISO year
+DATEADD('iso-weekday', 8, #2013-12-30#) // #2014-01-07#
+DATEADD('iso-weekday', -8, #2014-01-07#) // #2013-12-30#
+
+// Weeks in different ISO years
+DATEADD('iso-weekday', 365, #2014-12-28#) // #2015-12-28#

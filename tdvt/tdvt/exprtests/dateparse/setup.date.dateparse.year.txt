@@ -1,0 +1,8 @@
+DATEPARSE('y-MM-dd', '1234-06-01')
+DATEPARSE('yy-MM-dd', '12-06-01')
+DATEPARSE('MM/dd/yy','12/15/73')
+DATEPARSE('yyyy-MM-dd', '1234-06-01')
+DATEPARSE('dd-MMM-yyyy','15-Dec-1973')
+DATEPARSE('dd.MM.yyyy','8.2.1997' )
+DATEPARSE('dd/MM/yyyy','8/02/1997' )
+DATEPARSE('yyyyMMdd','20120123')

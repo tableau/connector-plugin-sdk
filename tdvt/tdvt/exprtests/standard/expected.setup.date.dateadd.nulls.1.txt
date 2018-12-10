@@ -1,0 +1,160 @@
+<results>
+  <test name='DATEADD(&apos;year&apos;, 1, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1053114602)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;year&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(955333125)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;quarter&apos;, 1, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2396988690)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;quarter&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2232502461)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;month&apos;, 1, DATE(null))'>
+    <table>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;month&apos;, 1, DATETIME(null))'>
+    <table>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;week&apos;, 1, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(359186020)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;week&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3060670302)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;weekday&apos;, 1, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(592740370)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;weekday&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4169571243)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;dayofyear&apos;, 1, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2477057371)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;dayofyear&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3817976182)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;day&apos;, 1, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2329360898)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;day&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1469842605)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;hour&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4189387493)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;minute&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3720439076)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;second&apos;, 1, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2985757783)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

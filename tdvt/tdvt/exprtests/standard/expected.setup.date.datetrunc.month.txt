@@ -1,0 +1,73 @@
+<results>
+  <test name='DATETRUNC(&apos;month&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(296025979)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;month&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(595744937)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.2.Two-level Agg.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Call Center Region]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_4560203111140559:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>21059849.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>50720765.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>26907323.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

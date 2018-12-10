@@ -1,0 +1,15 @@
+<results>
+  <test name='SPACE(int2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.redshift_singlenode].[TEMP(Test)(3089742405)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;     &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

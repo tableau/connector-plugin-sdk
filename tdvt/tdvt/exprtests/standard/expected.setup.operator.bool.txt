@@ -1,0 +1,112 @@
+<results>
+  <test name='not bool0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1413132553)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='NULL'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(496893948)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='TRUE'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1507734681)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FALSE'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1303362598)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 AND bool1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3618731173)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 == bool1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(830571724)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 != bool1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3090944671)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='bool0 or bool1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4182992858)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

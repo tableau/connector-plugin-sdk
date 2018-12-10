@@ -1,0 +1,11 @@
+
+date0 == #7/4/1972#
+date0 >= #11/12/1975#
+date0 > #11/12/1975#
+date0 <= #11/12/1975#
+date0 < #11/12/1975#
+date0 - datetime0
+datetime0 - #1/1/2004#
+date0 - num4
+date0 != #11/12/1975#
+date0 + num4

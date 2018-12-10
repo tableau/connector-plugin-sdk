@@ -1,0 +1,2 @@
+CONTAINS(str2, "e")
+CONTAINS(str1, "IND")

@@ -1,0 +1,12 @@
+// Same day
+DATEDIFF('iso-weekday', #2014-12-29#, #2014-12-29#) // 0
+
+// Same ISO week
+DATEDIFF('iso-weekday', #2014-12-29#, #2015-01-04#) // 6
+
+// Different ISO weeks, same ISO year
+DATEDIFF('iso-weekday', #2013-12-30#, #2014-01-07#) // 8
+DATEDIFF('iso-weekday', #2014-01-07#, #2013-12-30#) // -8
+
+// Weeks in different ISO years
+DATEDIFF('iso-weekday', #2014-12-28#, #2015-12-28#) // 365

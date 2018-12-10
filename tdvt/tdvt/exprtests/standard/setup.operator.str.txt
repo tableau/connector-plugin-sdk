@@ -1,0 +1,8 @@
+str2 == iif(num3>0,str2,str3)
+str2 >= iif(num3>0,lower(str0),str3)
+str2 > iif(num3>0,str0,str3)
+str2 <= iif(num3>0,lower(str0),str3)
+str2 < iif(num3>0,lower(str0),str3)
+str2 != iif(num3>0,str2,str3)
+str2 + str3
+"Pat O'Hanrahan & <Matthew Eldridge]'"

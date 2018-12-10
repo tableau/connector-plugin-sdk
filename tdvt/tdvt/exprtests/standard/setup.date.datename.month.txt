@@ -1,0 +1,4 @@
+DATENAME('month', [date2])
+
+DATENAME('month', [datetime0])
+

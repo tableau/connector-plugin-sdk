@@ -1,0 +1,3 @@
+DATE(DATETRUNC('day',[time1]))
+DATE(DATETRUNC('hour', [time1]))
+

@@ -1,0 +1,3 @@
+REGEXP_MATCH('Hello 1234 World','(\w+)\s+(\d+)\s+(\w+)')
+REGEXP_MATCH('','(\w+)\s+(\d+)\s+(\w+)')
+REGEXP_MATCH('Hello 1234 World','')

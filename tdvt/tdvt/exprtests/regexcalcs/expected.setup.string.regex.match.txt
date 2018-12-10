@@ -1,0 +1,25 @@
+<results>
+  <test name='REGEXP_MATCH([str0], &apos;OFFICE&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(252242495)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH([str0], &apos;Z&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(253222878)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

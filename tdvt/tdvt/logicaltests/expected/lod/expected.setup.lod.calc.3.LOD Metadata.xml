@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.3.LOD Metadata.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Prod Type1]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_0140203111132437:ok]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_8060203111105400:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>34009086.0</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>24014740.0</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>40664111.0</value>
+        <value>28278.32</value>
+      </tuple>
+    </table>
+  </test>
+</results>

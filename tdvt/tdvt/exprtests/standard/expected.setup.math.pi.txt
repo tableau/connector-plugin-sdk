@@ -1,0 +1,46 @@
+<results>
+  <test name='PI()'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(356598120)(0)]</column>
+      </schema>
+      <tuple>
+        <value>3.1415927</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='pi()*num0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1299212312)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-49.323005</value>
+      </tuple>
+      <tuple>
+        <value>-38.64159</value>
+      </tuple>
+      <tuple>
+        <value>-10.995574</value>
+      </tuple>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+      <tuple>
+        <value>10.995574</value>
+      </tuple>
+      <tuple>
+        <value>31.415927</value>
+      </tuple>
+      <tuple>
+        <value>38.64159</value>
+      </tuple>
+      <tuple>
+        <value>49.323005</value>
+      </tuple>
+    </table>
+  </test>
+</results>

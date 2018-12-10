@@ -1,0 +1,100 @@
+<results>
+  <test name='DATENAME(&apos;hour&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(2997515538)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;10         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;11         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;12         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;13         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;14         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;15         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;17         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;21         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;22         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;23         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;8          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;hour&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(4264664103)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;10         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;11         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;12         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;13         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;14         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;15         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;17         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;21         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;22         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;23         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;7          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;8          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

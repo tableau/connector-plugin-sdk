@@ -1,0 +1,6 @@
+DATEPART('year', [date2])
+DATEPART('year', [date2])
+
+DATEPART('year', [datetime0])
+DATEPART('year', [datetime0])
+

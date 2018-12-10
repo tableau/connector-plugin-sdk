@@ -1,0 +1,4 @@
+DATENAME('week', [date2])
+
+DATENAME('week', [datetime0])
+

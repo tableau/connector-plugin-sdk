@@ -1,0 +1,2 @@
+LEN("data")
+len(str2)
