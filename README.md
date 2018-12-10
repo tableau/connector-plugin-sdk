@@ -22,7 +22,7 @@ Review the [Tableau Connector Plugin SDK developer guide](https://tableau.github
 
 # Samples
 
-There are two [standalone Postgres example connectors](SAMPLES_LINK) that use ODBC and JDBC.  
+There are two [standalone Postgres example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.  
 
 # Prerequisites
 
@@ -38,7 +38,7 @@ To work with Connector Plugins, you need the following:
 
 This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your plugin: 
 * Start by submitting a GitHub Issue here in this project
-* or you can reach us on the Developer Forums here: https://community.tableau.com/community/developers/content.  
+* or you can reach us on the [Developer Forums] (https://community.tableau.com/community/developers/content) in Tableau Community.  
 
 
 # FAQ
