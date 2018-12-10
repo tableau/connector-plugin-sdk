@@ -25,7 +25,7 @@
     - Example: update ```<root_directory>``` to ```D:\```
 
 ## Load TestV1 dataset
-- Verify the csv files have comma separated values.  To retrieve TestV1 files correctly [Git Large File Storage (git lfs)](https://git-lfs.github.com/) extension must be installed.
+- Verify the csv files have comma separated values.
 - Run each script from an elevated command line. 
 
 ```
