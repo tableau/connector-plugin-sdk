@@ -2,7 +2,17 @@
 title: Capabilities
 ---
 
-When a value (yes, no, ?) in the Recommended column is bold, verify that the value you use is correct for your database.
+* [Metadata](#metadata)
+* [Temporary Tables](#temporary-tables)
+* [String Splits](#string-splits)
+* [Query](#query)
+* [JDBC](#jdbc)
+* [ODBC](#odbc)
+* [Stored Procedures](#stored-procedures)
+* [Isolation Level](#isolation-level)
+* [Uncommon](#uncommon)
+
+**Note:** When a value (yes, no, ?) in the Recommended column is bold, verify that the value you use is correct for your database.
 
 ## Metadata
 
@@ -235,6 +245,6 @@ CAP_SET_ISOLATION_LEVEL_VIA_SQL | Set to 'yes' to force Tableau to set the trans
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_CONNECT_NO_CUSTOM_SQL | Set to 'yes' to disable the custom sql option. | &ndash; | &ndash; 
-CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only | &ndash; | &ndash;  
-CAP_SUPPRESS_GET_SERVER_TIME | Some datasources, such as Hive, are very slow at retrieving the server time  | &ndash; | &ndash; 
-CAP_SUPPORTS_UNION | Controls allowing UNIONs. It cannot be customized in a TDC for an existing connector but it does work for plugins. | yes | yes 
+CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only. | &ndash; | &ndash;  
+CAP_SUPPRESS_GET_SERVER_TIME | Some datasources, such as Hive, are very slow at retrieving the server time.  | &ndash; | &ndash; 
+CAP_SUPPORTS_UNION | Set to 'no' if data source doesn't support UNION functionality. | yes | yes 
