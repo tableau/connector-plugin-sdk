@@ -60,9 +60,9 @@ Multiple expected files are supported.
 ## Installation
 
 1. Install TDVT Python module
-   - Create an archive package. `py -3 setup.py sdist --formats gztar`
-   - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
-   - Verify it is installed by running `py -3 -m pip list`.
+    - Create an archive package. `py -3 setup.py sdist --formats gztar`
+    - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
+    - Verify it is installed by running `py -3 -m pip list`.
 
 1. Extract and then load the TestV1 minimal dataset into your database.
 
