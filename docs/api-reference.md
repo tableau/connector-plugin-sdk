@@ -1,5 +1,5 @@
 ---
-title: Connector Plugin API Reference
+title: Connector API Reference
 ---
 
 ## Connection Resolver \*.tdr
@@ -8,7 +8,7 @@ Defines the connection to your data source.
 
 **File extension:** .tdr
 
-See connector-plugins\component_examples\resolvers for examples.
+See [resolvers](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/components/resolvers) for examples.
 
 The Connection Resolver is made up of several components:
 
@@ -106,7 +106,7 @@ Determines the driver name to use when connecting. This is mainly used for ODBC 
 
 **Type:** XML
 
-See connector-plugins\component_examples\resolvers for examples.
+See [resolvers](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/components/resolvers) for examples.
 
 ---
 
@@ -124,7 +124,7 @@ Use care when logging so that you don’t expose sensitive information like pass
 
 ### Connection Helper
 
-#### Attribute names
+_Attribute names_
 
 | Function                | Description                                      |
 | ----------------------- | ------------------------------------------------ |
