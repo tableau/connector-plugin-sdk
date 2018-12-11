@@ -1,20 +1,20 @@
 ---
-title: Connector Plugin Example
+title: Connector Example
 ---
 
-A connector plugin is a set of files that describe the UI elements needed to collect user input for creating a connection to a data source, any dialect or customizations needed, a connection string builder, driver resolver, and the ODBC- or JDBC-based driver.
-Starting with the set of base connector files, you can add customizations to each file, while using the connectivity test harness to validate the plugin behavior along the way.
+A connector is a set of files that describe the UI elements needed to collect user input for creating a connection to a data source, any dialect or customizations needed, a connection string builder, driver resolver, and the ODBC- or JDBC-based driver.
+Starting with the set of base connector files, you can add customizations to each file, while using the connectivity test harness to validate the connector behavior along the way.
 The base connector files are described below.
 
 ![]({{ site.baseurl }}/assets/files-sequence.png)
 
 ## ![1]({{ site.baseurl }}/assets/pce-1.png) manifest.xml
 
-The manifest.xml file informs Tableau about your connector plugin and displays the connector plugin name in the Tableau Connect pane.
-It's a required file that defines the plugin class and description.
-The <span style="color:red">class</span> value is a unique key for your plugin and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+The manifest.xml file informs Tableau about your connector and displays the connector name in the Tableau Connect pane.
+It's a required file that defines the connector class and description.
+The <span style="color:red">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
 
-Each connector plugin is typically based on a "class" such as ODBC or JDBC, and provides additional customizations beyond the class.
+Each connector is typically based on a "class" such as ODBC or JDBC, and provides additional customizations beyond the class.
 The <span style="color:blue; font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
 
 ![]({{ site.baseurl }}/assets/manifest-xml.png)
@@ -23,7 +23,7 @@ The <span style="color:blue; font-family: courier new">name</span> value display
 
 ## ![2]({{ site.baseurl }}/assets/pce-2.png) \*.tcd
 
-(Optional) You can use the Tableau Custom Dialog (.tcd) file to customize the connection dialog, or your plugin can inherit a dialog from its parent.
+(Optional) You can use the Tableau Custom Dialog (.tcd) file to customize the connection dialog, or your connector can inherit a dialog from its parent.
 For example, if you include <span style="color:red">show-ssl-check box</span> and set the value to "true", the **Require SSL** check box will display on the sign-in dialog.
 
 ```
@@ -154,7 +154,7 @@ JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&pa
 ## ![9]({{ site.baseurl }}/assets/pce-9.png) \*.tdd
 
 After connection, Tableau uses your _.tdd dialect file to determine which SQL to generate when retrieving information from your database.
-You can define your own dialect in the _.tdd file, or your plugin can inherit a dialect from its parent.
+You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent.
 
 ### Example dialect.tdd
 
