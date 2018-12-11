@@ -6,7 +6,7 @@ With the Tableau Connector SDK, you can add a new connector that you can use to 
 When you create a connector, you can add customizations to the connector, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
 This document describes the files that make up a connector.
 
-## What is a connector plugin?
+## What is a connector?
 
 A connector is a set of files that describe:
 
@@ -28,5 +28,5 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 
 You need to do these things before you start:
 
-- Install the ODBC or JDBC driver that you’ll use with the plugin connector you’ll create.
+- Install the ODBC or JDBC driver that you’ll use with the connector you’ll create.
 - Install Tableau Desktop on a Windows or Mac computer.
