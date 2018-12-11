@@ -1,0 +1,36 @@
+<results>
+  <test name='acos(num0/20)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4196263986)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>0.6681002</value>
+      </tuple>
+      <tuple>
+        <value>0.90841036</value>
+      </tuple>
+      <tuple>
+        <value>1.0471976</value>
+      </tuple>
+      <tuple>
+        <value>1.3948906</value>
+      </tuple>
+      <tuple>
+        <value>1.5707963</value>
+      </tuple>
+      <tuple>
+        <value>1.7467021</value>
+      </tuple>
+      <tuple>
+        <value>2.2331823</value>
+      </tuple>
+      <tuple>
+        <value>2.4734925</value>
+      </tuple>
+    </table>
+  </test>
+</results>

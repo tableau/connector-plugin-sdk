@@ -1,0 +1,28 @@
+<results>
+  <test name='DATE(DATETRUNC(&apos;day&apos;,[time1]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2860184158)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-30#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(DATETRUNC(&apos;hour&apos;, [time1]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(738483962)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-30#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

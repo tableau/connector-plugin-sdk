@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Filter_CNT.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[cnt:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Dave Hallsten&quot;</value>
+        <value>478</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Frank Olsen&quot;</value>
+        <value>535</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Herbert Flentye&quot;</value>
+        <value>573</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>532</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>422</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Paul Prost&quot;</value>
+        <value>546</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>518</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Stephanie Ulpright&quot;</value>
+        <value>474</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>574</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>575</value>
+      </tuple>
+      <tuple>
+        <value>&quot;William Brown&quot;</value>
+        <value>555</value>
+      </tuple>
+    </table>
+  </test>
+</results>

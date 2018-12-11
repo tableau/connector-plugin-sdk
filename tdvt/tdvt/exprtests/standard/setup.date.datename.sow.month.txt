@@ -1,0 +1,6 @@
+DATENAME('month', [date2], 'monday')
+DATENAME('month', [date2], 'sunday')
+
+DATENAME('month', [datetime0], 'monday')
+DATENAME('month', [datetime0], 'sunday')
+

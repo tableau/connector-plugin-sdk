@@ -1,0 +1,61 @@
+<results>
+  <test name='MAX([int0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(56370746)(0)]</column>
+      </schema>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([date3])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(277748206)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1999-08-20#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4154938655)(0)]</column>
+      </schema>
+      <tuple>
+        <value>19.39</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([str2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1812249092)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([int0], [int1])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1523549003)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,16 @@
+//From the if_calcs datasource.
+iif(bool0,date0,date1) 
+iif(bool0,str2,str3,str0) 
+iif(bool0,num0,num1,num2) 
+iif(bool0,date0,date1,date2) 
+iif(bool0,num0,num1) 
+iif(bool0,bool1,bool2) 
+isnull(bool0) 
+iif(bool0,str2,str3) 
+
+//From ifcase_calcs.
+ (if bool0 then int(bool1) else int(bool2) end) == int(true)
+ if bool0 then num0 else num1 end
+ if bool0 then date0 else date1 end
+ if bool0 then str2 else str3 end
+

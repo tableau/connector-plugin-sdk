@@ -1,0 +1,2 @@
+REGEXP_EXTRACT_NTH([str0], '(E.)', 0)
+REGEXP_EXTRACT_NTH([str0], '(E.)', 1)

@@ -1,0 +1,57 @@
+{
+    "actual_exp_paths_relative_to": "this", 
+    "successful_tests": [], 
+    "harness_name": "TDVT", 
+    "failed_tests": [
+        {
+            "case": ".sum", 
+            "class": "TDVT", 
+            "expected": "test\\tool_test\\exprtests\\expected.setup.sum.txt", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -e test\\tool_test\\exprtests\\setup.sum.txt-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": false, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
+            "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "exprtests\\setup.sum.txt", 
+            "test_type": "-e"
+        }, 
+        {
+            "case": ".max", 
+            "class": "TDVT", 
+            "expected": "test\\tool_test\\exprtests\\expected.setup.max.txt", 
+            "other_args": " --verbose", 
+            "repro": "tdvt.py -e test\\tool_test\\exprtests\\setup.max.txt-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": false, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "test\\tool_test\\tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+                }, 
+            "tds": "tool_test\\tds\\cast_calcs.tde.tds", 
+            "test_file": "exprtests\\setup.max.txt", 
+            "test_type": "-e"
+        }
+    ]
+}

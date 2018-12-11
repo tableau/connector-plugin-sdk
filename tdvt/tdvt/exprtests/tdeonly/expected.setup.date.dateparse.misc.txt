@@ -1,0 +1,172 @@
+<results>
+  <test name='DATEPARSE(&apos;yyyyMMdd&apos;, &apos;12340601&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1300712953)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1234-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyyMMdd&apos;, &apos;18991232&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3510989626)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyyMMdd&apos;, &apos;123406011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3907347233)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;MM yyyy hh:mm:ss dd&apos;, &apos;12 1995 13:05:05 31&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(416861272)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1995-12-31 13:05:05#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1899-12-31&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1324758347)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-12-31 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;y-MM-dd&apos;, &apos;2005-09-27&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1201568007)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2005-09-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yy.MM&apos;, &apos;16.12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1539888862)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2016-12-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;h:mm&apos;, &apos;12:60&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(977148910)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;&apos;, &apos;12:60&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2739373652)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yymmdd&apos;, &apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2686724780)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;&apos;, &apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2901716872)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yy&apos;, &apos;15&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1043529533)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;mm&apos;, &apos;12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1389922838)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-01-01 00:12:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;hh:ss&apos;, &apos;13:60&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2311272219)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;dd MM yy&apos;, &apos;01 01&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2229272001)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyy.MM hh:mm:ss&apos;,&apos;1899.05 11:30:30&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2188559627)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-05-01 11:30:30#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyy.dd hh:mm:ss&apos;, &apos;1899.12 6:10:10&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1709941701)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-01-12 06:10:10#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Filter_MIN.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[min:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Barbara Fisher&quot;</value>
+        <value>-396.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dario Medina&quot;</value>
+        <value>-574.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Dave Hallsten&quot;</value>
+        <value>-902.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;David Flashing&quot;</value>
+        <value>-234.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Deanra Eno&quot;</value>
+        <value>-875.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Debra Catini-Entman&quot;</value>
+        <value>-377.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Elizabeth Moffitt&quot;</value>
+        <value>-982.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Ellis Ballard&quot;</value>
+        <value>-611.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Frank Olsen&quot;</value>
+        <value>-949.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Grace Kelly&quot;</value>
+        <value>-308.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hallie Redmond&quot;</value>
+        <value>-112.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Harold Pawlan&quot;</value>
+        <value>-932.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Heather Jas-Hannaway&quot;</value>
+        <value>-859.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Henia Zydlo&quot;</value>
+        <value>-920.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Hilary Holden&quot;</value>
+        <value>-556.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jack O&apos;Briant&quot;</value>
+        <value>-614.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jane Waco&quot;</value>
+        <value>-526.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jas O&apos;Carroll&quot;</value>
+        <value>-982.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jasper Cacioppo&quot;</value>
+        <value>-271.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jennifer Patt&quot;</value>
+        <value>-259.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jim Sink&quot;</value>
+        <value>-647.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Joseph Airdo&quot;</value>
+        <value>-849.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Laura Armstrong&quot;</value>
+        <value>-808.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Lela Donovan&quot;</value>
+        <value>-110.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mary O&apos;Rourke&quot;</value>
+        <value>-716.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mary Zewe&quot;</value>
+        <value>-550.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;MaryBeth Skach&quot;</value>
+        <value>-952.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mathew Reese&quot;</value>
+        <value>-987.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Maxwell Schwartz&quot;</value>
+        <value>-655.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Meg O&apos;Connel&quot;</value>
+        <value>-545.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Meg Tillman-Sachs&quot;</value>
+        <value>-567.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Noel Staavos&quot;</value>
+        <value>-304.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nona Balk&quot;</value>
+        <value>-425.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Peter McVee&quot;</value>
+        <value>-842.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rick Reed&quot;</value>
+        <value>-943.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Robert Marley&quot;</value>
+        <value>-729.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Rose O&apos;Brian-Murray&quot;</value>
+        <value>-652.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Roy Skaria&quot;</value>
+        <value>-302.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sandra Glassco&quot;</value>
+        <value>-588.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sarah Jordon-Smith&quot;</value>
+        <value>-868.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sharelle Roach-McGee&quot;</value>
+        <value>-326.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sheri Gordon&quot;</value>
+        <value>-501.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Shui Tom&quot;</value>
+        <value>-920.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Speros Goranitis&quot;</value>
+        <value>-762.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Steven Roelle&quot;</value>
+        <value>-933.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sue Ann Reed-Freeman&quot;</value>
+        <value>-565.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>-593.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>-488.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thomas Boland&quot;</value>
+        <value>-897.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>-923.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Victor Price&quot;</value>
+        <value>-331.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>-711.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>-774.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

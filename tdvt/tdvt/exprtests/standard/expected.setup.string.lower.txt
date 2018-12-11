@@ -1,0 +1,109 @@
+<results>
+  <test name='LOWER(str2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1011144549)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;eleven&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fifteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;five&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;fourteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;nine&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;one&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;six&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;sixteen&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ten&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;three&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;twelve&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='lower(str1)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2419238545)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;air purifiers&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;answering machines&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;binder accessories&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;binder clips&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;binding machines&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;binding supplies&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;business copiers&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;business envelopes&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;cd-r media&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;clamp on lamps&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;clocks&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;conference phones&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;corded keyboards&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;cordless keyboards&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;dot matrix printers&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;dvd&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ericsson&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

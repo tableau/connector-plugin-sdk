@@ -1,0 +1,382 @@
+<results>
+  <test name='ATTR([int0])'>
+    <sql>
+      Unknown function ATTR called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='AVG([int0])'>
+    <sql>
+      SELECT AVG(cast(([Calcs].[int0]) as float)) AS [TEMP(Test)(3952218057)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3952218057)(0)]</column>
+      </schema>
+      <tuple>
+        <value>6.1818181818181817</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([int0])'>
+    <sql>
+      SELECT COUNT_BIG([Calcs].[int0]) AS [TEMP(Test)(3910975586)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3910975586)(0)]</column>
+      </schema>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([bool0])'>
+    <sql>
+      SELECT COUNT_BIG(CASE WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1 WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0 ELSE NULL END) AS [TEMP(Test)(1133866179)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1133866179)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([date3])'>
+    <sql>
+      SELECT COUNT_BIG([Calcs].[date3]) AS [TEMP(Test)(3590771088)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3590771088)(0)]</column>
+      </schema>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([num0])'>
+    <sql>
+      SELECT COUNT_BIG([Calcs].[num0]) AS [TEMP(Test)(2730138885)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2730138885)(0)]</column>
+      </schema>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNT([str2])'>
+    <sql>
+      SELECT COUNT_BIG([Calcs].[str2]) AS [TEMP(Test)(2760211945)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2760211945)(0)]</column>
+      </schema>
+      <tuple>
+        <value>13</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([int0])'>
+    <sql>
+      SELECT COUNT_BIG(DISTINCT [Calcs].[int0]) AS [TEMP(Test)(1467453495)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1467453495)(0)]</column>
+      </schema>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([bool0])'>
+    <sql>
+      SELECT COUNT_BIG(DISTINCT (CASE WHEN ([Calcs].[bool0] &lt;&gt; 0) THEN 1 WHEN NOT ([Calcs].[bool0] &lt;&gt; 0) THEN 0 ELSE NULL END)) AS [TEMP(Test)(1408008556)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1408008556)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([date3])'>
+    <sql>
+      SELECT COUNT_BIG(DISTINCT [Calcs].[date3]) AS [TEMP(Test)(175600811)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(175600811)(0)]</column>
+      </schema>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([num0])'>
+    <sql>
+      SELECT COUNT_BIG(DISTINCT [Calcs].[num0]) AS [TEMP(Test)(3059818382)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3059818382)(0)]</column>
+      </schema>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='COUNTD([str2])'>
+    <sql>
+      SELECT COUNT_BIG(DISTINCT [Calcs].[str2]) AS [TEMP(Test)(2954817995)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2954817995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>13</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([int0])'>
+    <sql>
+      SELECT (MAX([Calcs].[int0])) AS [TEMP(Test)(56370746)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(56370746)(0)]</column>
+      </schema>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([date3])'>
+    <sql>
+      SELECT MAX([Calcs].[date3]) AS [TEMP(Test)(277748206)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(277748206)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1999-08-20 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([num0])'>
+    <sql>
+      SELECT MAX([Calcs].[num0]) AS [TEMP(Test)(619107448)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(619107448)(0)]</column>
+      </schema>
+      <tuple>
+        <value>15.700000000000001</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([str2])'>
+    <sql>
+      SELECT MAX([Calcs].[str2]) AS [TEMP(Test)(1812249092)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1812249092)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;two&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAX([int0], [int1])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN [Calcs].[int0] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int1] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int0] &lt; [Calcs].[int1] THEN [Calcs].[int1]&#10;&#9;ELSE [Calcs].[int0] END) AS [TEMP(Test)(1523549003)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN [Calcs].[int0] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int1] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int0] &lt; [Calcs].[int1] THEN [Calcs].[int1]&#10;&#9;ELSE [Calcs].[int0] END)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1523549003)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>10</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([int0])'>
+    <sql>
+      SELECT (MIN([Calcs].[int0])) AS [TEMP(Test)(4016644369)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(4016644369)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([date3])'>
+    <sql>
+      SELECT MIN([Calcs].[date3]) AS [TEMP(Test)(3378300904)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3378300904)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1979-04-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([num0])'>
+    <sql>
+      SELECT MIN([Calcs].[num0]) AS [TEMP(Test)(1167632626)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1167632626)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-15.700000000000001</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([str2])'>
+    <sql>
+      SELECT MIN([Calcs].[str2]) AS [TEMP(Test)(3910790823)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3910790823)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([int0], [int1])'>
+    <sql>
+      SELECT (CASE&#10;&#9;WHEN [Calcs].[int0] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int1] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int0] &gt; [Calcs].[int1] THEN [Calcs].[int1]&#10;&#9;ELSE [Calcs].[int0] END) AS [TEMP(Test)(3683900016)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (CASE&#10;&#9;WHEN [Calcs].[int0] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int1] IS NULL THEN NULL&#10;&#9;WHEN [Calcs].[int0] &gt; [Calcs].[int1] THEN [Calcs].[int1]&#10;&#9;ELSE [Calcs].[int0] END)
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(3683900016)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='STDDEV([num0])'>
+    <sql>
+      Unknown function STDDEV called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='STDDEVP([num0])'>
+    <sql>
+      Unknown function STDDEVP called.&#10;
+    </sql>
+    <table>
+    </table>
+  </test>
+  <test name='SUM([int0])'>
+    <sql>
+      SELECT SUM(CAST(([Calcs].[int0]) as BIGINT)) AS [TEMP(Test)(645427419)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(645427419)(0)]</column>
+      </schema>
+      <tuple>
+        <value>68</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([num0])'>
+    <sql>
+      SELECT SUM([Calcs].[num0]) AS [TEMP(Test)(1723718801)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(1723718801)(0)]</column>
+      </schema>
+      <tuple>
+        <value>10.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM( INT(POWER(2,31)-1) * 10 )'>
+    <sql>
+      SELECT SUM(CAST(21474836470 as BIGINT)) AS [TEMP(Test)(234190818)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(234190818)(0)]</column>
+      </schema>
+      <tuple>
+        <value>365072219990</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='VAR([num0])'>
+    <sql>
+      SELECT VAR([Calcs].[num0]) AS [TEMP(Test)(2502693559)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2502693559)(0)]</column>
+      </schema>
+      <tuple>
+        <value>129.65142857142857</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='VARP([num0])'>
+    <sql>
+      SELECT VARP([Calcs].[num0]) AS [TEMP(Test)(2232402039)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(2232402039)(0)]</column>
+      </schema>
+      <tuple>
+        <value>113.44500000000001</value>
+      </tuple>
+    </table>
+  </test>
+</results>

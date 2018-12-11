@@ -1,0 +1,64 @@
+<results>
+  <test name='MIN([int0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4016644369)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([date3])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3378300904)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1979-04-01#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(512350875)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-14.21</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([str2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3910790823)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;eight&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN([int0], [int1])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3683900016)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

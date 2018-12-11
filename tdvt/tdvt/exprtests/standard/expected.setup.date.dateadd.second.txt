@@ -1,0 +1,60 @@
+<results>
+  <test name='DATEADD(&apos;second&apos;, 1, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(621896091)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:29#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 13:14:21#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 10:17:36#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 17:30:17#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 07:43:01#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 08:16:45#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 14:01:57#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 22:21:32#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:30:24#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 21:13:38#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 15:22:27#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 12:30:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 06:54:51#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 12:34:29#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 23:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 11:57:53#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 07:59:24#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

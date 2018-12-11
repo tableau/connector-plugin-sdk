@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Sort_Alphabetic_DESC_Top10.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[sum:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Suzanne McNair&quot;</value>
+        <value>3947695.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tanja Norvell&quot;</value>
+        <value>3095019.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thomas Boland&quot;</value>
+        <value>2503253.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thomas Seio&quot;</value>
+        <value>3990114.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tonja Turnell&quot;</value>
+        <value>2380589.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tracy Zic&quot;</value>
+        <value>2143477.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Victor Price&quot;</value>
+        <value>2748451.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;William Brown&quot;</value>
+        <value>2981310.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Yoseph Carroll-Englig&quot;</value>
+        <value>3231972.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>5052539.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

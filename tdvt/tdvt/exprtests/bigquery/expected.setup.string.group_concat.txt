@@ -1,0 +1,12 @@
+<results>
+  <test name='group_concat([str0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(110050038)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE,FURNITURE,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

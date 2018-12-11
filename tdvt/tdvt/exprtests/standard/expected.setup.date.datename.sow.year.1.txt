@@ -1,0 +1,108 @@
+<results>
+  <test name='DATENAME(&apos;year&apos;, [date2], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(1876737518)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002       &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;year&apos;, [date2], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(1437280163)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001       &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002       &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;year&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(3178513645)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2004       &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;year&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(3727444777)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2004       &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,216 @@
+<results>
+  <test name='DATETRUNC(&apos;weekday&apos;, [date2], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2526477208)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;weekday&apos;, [date2], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2007354609)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;weekday&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3928745396)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;weekday&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(746880020)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

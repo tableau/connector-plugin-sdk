@@ -1,0 +1,4 @@
+DATETRUNC('quarter', [date2])
+
+DATETRUNC('quarter', [datetime0])
+

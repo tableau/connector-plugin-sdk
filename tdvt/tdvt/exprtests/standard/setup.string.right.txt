@@ -1,0 +1,3 @@
+RIGHT("Data", 2)
+right(str2,3)
+right(str2,int0)

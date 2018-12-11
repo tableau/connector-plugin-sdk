@@ -1,0 +1,2 @@
+STDEV([num4])
+STDEVP([num4])

@@ -1,0 +1,74 @@
+<results>
+  <test name='MIN(&quot;Data&quot;, &quot;Tableau&quot;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(535453017)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Data&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN(str1, str2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(497224717)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;AIR PURIFIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ANSWERING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDER CLIPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDING MACHINES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BUSINESS COPIERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BUSINESS ENVELOPES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CD-R MEDIA&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CLAMP ON LAMPS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CLOCKS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CONFERENCE PHONES&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORDLESS KEYBOARDS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DOT MATRIX PRINTERS&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;DVD&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MIN(str2, str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1239505702)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

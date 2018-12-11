@@ -1,0 +1,10 @@
+{fixed [str1] : SUM([num1])}
+{exclude [str1] : SUM([num1])}
+{fixed [str1] : SUM([num1])}
+{include [str1] : SUM([num1])}
+{fixed [str1] : SUM([num1])}
+{fixed [str1] : SUM([num1])}
+SUM([num1]) / AVG({fixed [str1] : SUM([num1])})
+{fixed [str1] : AVG({include [str2] : SUM([num1])})}
+
+

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.7. LOD Bins.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Staples (TestV1) - LOD Bins (bin)]</column>
+        <column>[Staples.lod.sqlserver].[cnt:Calculation_8910203110915053:ok]</column>
+      </schema>
+      <tuple>
+        <value>10</value>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>13</value>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>19</value>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+</results>

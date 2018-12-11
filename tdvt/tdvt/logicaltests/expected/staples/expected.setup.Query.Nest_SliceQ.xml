@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Nest_SliceQ.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Prod Type1]</column>
+        <column>[Staples.postgres91].[Prod Type2]</column>
+        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>206121.02</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>1475917.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>298279.65</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>163803.11</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>653940.66</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>169273.34</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>11577.16</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>83934.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>283818.12</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>3472108.1</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>4830099.3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

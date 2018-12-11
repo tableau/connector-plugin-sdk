@@ -1,0 +1,6 @@
+DATEDIFF('week', [date3], [date2], 'monday')
+DATEDIFF('week', [date3], [date2], 'sunday')
+
+DATEDIFF('week', DATETIME([date2]), [datetime0], 'monday')
+DATEDIFF('week', DATETIME([date2]), [datetime0], 'sunday')
+

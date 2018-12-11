@@ -1,0 +1,12 @@
+<results>
+  <test name='SPACE(int(2))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(1595235754)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

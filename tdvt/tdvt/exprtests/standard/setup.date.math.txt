@@ -1,0 +1,43 @@
+DATEDIFF('day', NOW(), NOW())
+DATEDIFF('day', TODAY(), TODAY())
+
+[date2] + 1
+[date2] + 1.5
+
+[date2] - 1
+[date2] - 1.5
+
+[datetime0] - [datetime0]
+[datetime0] - 1
+[datetime0] + 1
+[datetime0] - 1.5
+[datetime0] + 1.5
+
+
+[datetime0] = [datetime0]
+[datetime0] > [datetime0]
+[datetime0] >= [datetime0]
+[datetime0] < [datetime0]
+[datetime0] <= [datetime0]
+[datetime0] <> [datetime0]
+
+[date2] = [datetime0]
+[date2] > [datetime0]
+[date2] >= [datetime0]
+[date2] < [datetime0]
+[date2] <= [datetime0]
+[date2] <> [datetime0]
+
+[date2] =  [date2]
+[date2] >  [date2]
+[date2] >= [date2]
+[date2] <  [date2]
+[date2] <= [date2]
+[date2] <> [date2]
+
+//Daylight savings test.
+//These are problematic since Oracle doesn't like YYYY-MM-DD for example.
+//DATE('1997-04-01') + 15
+//DATE('1997-10-15') + 15
+//DATETIME('1997-04-01 00:00:42') + 15
+//DATETIME('1997-10-15 00:00:42') + 15

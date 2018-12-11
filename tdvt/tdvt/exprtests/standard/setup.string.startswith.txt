@@ -1,0 +1,3 @@
+STARTSWITH("Data", "D")
+STARTSWITH([str1], "BI" )
+STARTSWITH([str1], [str2])

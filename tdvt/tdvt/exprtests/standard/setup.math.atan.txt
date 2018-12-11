@@ -1,0 +1,4 @@
+ATAN([int2])
+atan(num0)
+ATAN2([int2],1)
+atan2(num0,num1)

@@ -1,0 +1,6 @@
+DATEPART('week', [date2], 'monday')
+DATEPART('week', [date2], 'sunday')
+
+DATEPART('week', [datetime0], 'monday')
+DATEPART('week', [datetime0], 'sunday')
+

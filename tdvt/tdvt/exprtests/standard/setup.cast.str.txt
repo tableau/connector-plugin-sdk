@@ -1,0 +1,4 @@
+STR([int1])
+STR([bool0])
+STR([num2])
+STR([str2])

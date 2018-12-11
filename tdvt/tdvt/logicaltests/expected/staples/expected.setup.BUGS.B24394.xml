@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.BUGS.B24394.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[DATEPART(&apos;week&apos;,Ship Date)]</column>
+        <column>[Staples.postgres91].[DATETRUNC(&apos;week&apos;,Ship Date)]</column>
+        <column>[Staples.postgres91].[Ship Date]</column>
+        <column>[Staples.postgres91].[wd:Ship Date:ok]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+        <value>#1996-12-29 00:00:00#</value>
+        <value>#1997-01-01 00:00:00#</value>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>#1996-12-29 00:00:00#</value>
+        <value>#1997-01-02 00:00:00#</value>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>#1996-12-29 00:00:00#</value>
+        <value>#1997-01-03 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+        <value>#1996-12-29 00:00:00#</value>
+        <value>#1997-01-04 00:00:00#</value>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-06 00:00:00#</value>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-07 00:00:00#</value>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-08 00:00:00#</value>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-09 00:00:00#</value>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-10 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+        <value>#1997-01-05 00:00:00#</value>
+        <value>#1997-01-11 00:00:00#</value>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-13 00:00:00#</value>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-14 00:00:00#</value>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-15 00:00:00#</value>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-16 00:00:00#</value>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-17 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+        <value>#1997-01-12 00:00:00#</value>
+        <value>#1997-01-18 00:00:00#</value>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-20 00:00:00#</value>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-21 00:00:00#</value>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-22 00:00:00#</value>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-23 00:00:00#</value>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-24 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+        <value>#1997-01-19 00:00:00#</value>
+        <value>#1997-01-25 00:00:00#</value>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-01-27 00:00:00#</value>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-01-28 00:00:00#</value>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-01-29 00:00:00#</value>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-01-30 00:00:00#</value>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-01-31 00:00:00#</value>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+        <value>#1997-01-26 00:00:00#</value>
+        <value>#1997-02-01 00:00:00#</value>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+</results>

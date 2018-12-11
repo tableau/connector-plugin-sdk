@@ -1,0 +1,60 @@
+<results>
+  <test name='TRIM(STR([date2]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle].[TEMP(Test)(3929621149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Apr 20 1977 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Apr 20 1994 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Apr 27 2002 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Aug 12 1998 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb 4 2001 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Feb 8 1977 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jan 5 1988 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 12 1972 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 26 1980 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jun 4 1995 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Mar 17 1974 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May 3 1974 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;May 30 1997 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Nov 7 1980 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 19 1997 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 3 1995 0:00:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sep 9 1976 0:00:00&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,10 @@
+// One week at the turn of the year, with one day before and after
+DATENAME('iso-weekday', #2013-12-29#) // Sunday,    2013-W52
+DATENAME('iso-weekday', #2013-12-30#) // Monday,    2014-W01
+DATENAME('iso-weekday', #2013-12-31#) // Tuesday,   2014-W01
+DATENAME('iso-weekday', #2014-01-01#) // Wednesday, 2014-W01
+DATENAME('iso-weekday', #2014-01-02#) // Thursday,  2014-W01
+DATENAME('iso-weekday', #2014-01-03#) // Friday,    2014-W01
+DATENAME('iso-weekday', #2014-01-04#) // Saturday,  2014-W01
+DATENAME('iso-weekday', #2014-01-05#) // Sunday,    2014-W01
+DATENAME('iso-weekday', #2014-01-06#) // Monday,    2014-W02

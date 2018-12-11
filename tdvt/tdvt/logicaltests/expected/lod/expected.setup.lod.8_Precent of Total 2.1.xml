@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.8_Precent of Total 2.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.sqlserver].[Prod Type1]</column>
+        <column>[Staples.sqlserver].[Prod Type2]</column>
+        <column>[Staples.sqlserver].[TEMP(LOD - Percent of Total (copy))(342855174)(0)]</column>
+        <column>[Staples.sqlserver].[TEMP(LOD - Percent of Total (copy))(3499937668)(0)]</column>
+        <column>[Staples.sqlserver].[TEMP(LOD - Percent of Total (copy))(357447720)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>34009086.0</value>
+        <value>34009086.0</value>
+        <value>5257672.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>34009086.0</value>
+        <value>34009086.0</value>
+        <value>10497117.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>34009086.0</value>
+        <value>34009086.0</value>
+        <value>3999749.9</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+        <value>&quot;TABLES&quot;</value>
+        <value>34009086.0</value>
+        <value>34009086.0</value>
+        <value>14254546.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>5247729.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>5545569.2</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>858634.48</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;LABELS&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>400169.21</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;PAPER&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>3098545.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>1209942.5</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>95324.04</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>1072184.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>24014740.0</value>
+        <value>24014740.0</value>
+        <value>6486641.5</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>40664111.0</value>
+        <value>40664111.0</value>
+        <value>5278781.7</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>40664111.0</value>
+        <value>40664111.0</value>
+        <value>6776923.2</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>40664111.0</value>
+        <value>40664111.0</value>
+        <value>15099693.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>40664111.0</value>
+        <value>40664111.0</value>
+        <value>13508713.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

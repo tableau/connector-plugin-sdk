@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.BUGS.B14080.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Call Center Region]</column>
+        <column>[Staples.postgres91].[Customer State]</column>
+        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;ILLINOIS&quot;</value>
+        <value>15114.3</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;MICHIGAN&quot;</value>
+        <value>5994.94</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;OHIO&quot;</value>
+        <value>28344.05</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;TEXAS&quot;</value>
+        <value>7215.68</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CENTRAL&quot;</value>
+        <value>&quot;WISCONSIN&quot;</value>
+        <value>-528.76</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;ALABAMA&quot;</value>
+        <value>1979.59</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;CONNECTICUT&quot;</value>
+        <value>7841.78</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;DELAWARE&quot;</value>
+        <value>18332.2</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;FLORIDA&quot;</value>
+        <value>6839.97</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;MARYLAND&quot;</value>
+        <value>12582.29</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;MASS&quot;</value>
+        <value>19463.75</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;NEBRASKA&quot;</value>
+        <value>2271.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;NEW JERSEY&quot;</value>
+        <value>11730.03</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;NEW YORK&quot;</value>
+        <value>14019.43</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;NORTH CAROLINA&quot;</value>
+        <value>20345.13</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;SOUTH CAROLINA&quot;</value>
+        <value>2535.34</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;VIRGINIA&quot;</value>
+        <value>8583.95</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EAST&quot;</value>
+        <value>&quot;WASH D.C.&quot;</value>
+        <value>13302.4</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;ARIZONA&quot;</value>
+        <value>33135.29</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;CALIFORNIA&quot;</value>
+        <value>13652.95</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;COLORADO&quot;</value>
+        <value>3286.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;IDAHO&quot;</value>
+        <value>6873.27</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;NEW MEXICO&quot;</value>
+        <value>3132.38</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;UTAH&quot;</value>
+        <value>16972.86</value>
+      </tuple>
+      <tuple>
+        <value>&quot;WEST&quot;</value>
+        <value>&quot;WASHINGTON&quot;</value>
+        <value>17160.4</value>
+      </tuple>
+    </table>
+  </test>
+</results>

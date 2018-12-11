@@ -1,0 +1,42 @@
+<results>
+  <test name='DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1234-06-01&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(2040050501)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1234-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;d.M.yy&apos;,&apos;16.8.97&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(2214730030)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1997-08-16 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;d/M/yy&apos;,&apos;7/12/97&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1828934517)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1997-12-07 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;dd-MMM-yy&apos;,&apos;15-Dec-73&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(999782064)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1973-12-15 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

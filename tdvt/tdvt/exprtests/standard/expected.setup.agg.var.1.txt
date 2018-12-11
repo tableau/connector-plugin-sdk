@@ -1,0 +1,22 @@
+<results>
+  <test name='VAR([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mongo].[TEMP(Test)(1358865)(0)]</column>
+      </schema>
+      <tuple>
+        <value>113.51709</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='VARP([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mongo].[TEMP(Test)(2532468070)(0)]</column>
+      </schema>
+      <tuple>
+        <value>104.0582</value>
+      </tuple>
+    </table>
+  </test>
+</results>

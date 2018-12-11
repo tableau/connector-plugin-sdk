@@ -1,0 +1,40 @@
+<results>
+  <test name='LEN(&quot;data&quot;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(5037157)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='len(str2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(382448263)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+</results>

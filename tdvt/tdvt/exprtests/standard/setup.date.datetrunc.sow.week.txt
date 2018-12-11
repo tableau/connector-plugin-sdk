@@ -1,0 +1,6 @@
+DATETRUNC('week', [date2], 'monday')
+DATETRUNC('week', [date2], 'sunday')
+
+DATETRUNC('week', [datetime0], 'monday')
+DATETRUNC('week', [datetime0], 'sunday')
+

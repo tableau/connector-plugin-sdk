@@ -1,0 +1,118 @@
+<results>
+  <test name='DATEADD(&apos;quarter&apos;, 1, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(893348878)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-10-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-06-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-08-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-12-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-05-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-07-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-10-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1981-02-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-07-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-12-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-08-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-12-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-11-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-05-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-07-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;quarter&apos;, 1, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(454013980)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-10-04 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-05 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-09 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-12 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-14 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-14 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-17 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-19 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-22 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-23 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-25 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-26 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-28 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-28 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-28 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-10-31 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-11-02 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

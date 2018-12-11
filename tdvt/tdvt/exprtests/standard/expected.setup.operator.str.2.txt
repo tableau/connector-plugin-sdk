@@ -1,0 +1,115 @@
+<results>
+  <test name='str2 == iif(num3&gt;0,str2,str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(1635792874)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &gt;= iif(num3&gt;0,lower(str0),str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(1555382477)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &gt; iif(num3&gt;0,str0,str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(3821822049)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &lt;= iif(num3&gt;0,lower(str0),str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(2776534421)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 &lt; iif(num3&gt;0,lower(str0),str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(398649381)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 != iif(num3&gt;0,str2,str3)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(119026413)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='str2 + str3'>
+    <error>
+      [IBM][CLI Driver][DB2/LINUXX8664] SQL0134N  Improper use of a string column, host variable, constant, or function &quot;Group by column 1&quot;.  SQLSTATE=42907&#13;&#10;
+    </error>
+    <error-type>
+      Unknown
+    </error-type>
+    <table>
+    </table>
+  </test>
+  <test name='&quot;Pat O&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.biginsights].[TEMP(Test)(627207302)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Pat O&apos;Hanrahan &amp; &lt;Matthew Eldridge]&apos;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,29 @@
+// First and last days of ISO-8601 week-numbering years
+
+// Century that is not a leap year
+DATETRUNC('iso-week', #1900-01-01#) // Monday, 1900-W01
+DATETRUNC('iso-week', #1900-12-30#) // Sunday, 1900-W52
+
+// Year after century that is not a leap year
+DATETRUNC('iso-week', #1900-12-31#) // Monday, 1901-W01
+DATETRUNC('iso-week', #1901-12-29#) // Sunday, 1901-W52
+
+// Century that is a leap year
+DATETRUNC('iso-week', #2000-01-03#) // Monday, 2000-W01
+DATETRUNC('iso-week', #2000-12-31#) // Sunday, 2000-W52
+
+// Year after century that is a leap year
+DATETRUNC('iso-week', #2001-01-01#) // Monday, 2001-W01
+DATETRUNC('iso-week', #2001-12-30#) // Sunday, 2001-W52
+
+// Year with Jan 1 on Thurs
+DATETRUNC('iso-week', #2014-12-29#) // Monday, 2015-W01
+DATETRUNC('iso-week', #2016-01-03#) // Sunday, 2015-W53
+
+// Year with Jan 1 on Fri
+DATETRUNC('iso-week', #2016-01-04#) // Monday, 2016-W01
+DATETRUNC('iso-week', #2017-01-01#) // Sunday, 2016-W52
+
+// Year with Jan 1 on Mon
+DATETRUNC('iso-week', #2018-01-01#) // Monday, 2018-W01
+DATETRUNC('iso-week', #2018-12-29#) // Sunday, 2018-W52

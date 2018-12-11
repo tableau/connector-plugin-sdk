@@ -1,0 +1,6 @@
+DATEPARSE('yyyy-MM-dd hh:mm:ss','2012-7-11 5:17:23')
+DATEPARSE('yyyyMMddhhmm','201202030812')
+DATEPARSE('yy-MM-dd h:m:s','97-8-14 3:2:1')
+DATEPARSE('yy/dd/MMM hh:mm:ss','10/11/Jul 06:17:23')
+DATEPARSE('MM/dd/yyyy HH:mm','12/15/1973 5:56')
+DATEPARSE('MM/dd/yyyy hh:mm:ss a','12/15/1973 5:56:59 PM')

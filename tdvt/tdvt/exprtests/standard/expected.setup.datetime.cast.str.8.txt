@@ -1,0 +1,60 @@
+<results>
+  <test name='TRIM(STR([datetime0]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.presto].[TEMP(Test)(1103404331)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;2004-07-04 22:49:28.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-05 13:14:20.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-09 10:17:35.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-12 17:30:16.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 07:43:00.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-14 08:16:44.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-17 14:01:56.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-19 22:21:31.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-22 00:30:23.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-23 21:13:37.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-25 15:22:26.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-26 12:30:34.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 06:54:50.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 12:34:28.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-28 23:30:22.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-07-31 11:57:52.000&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2004-08-02 07:59:23.000&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

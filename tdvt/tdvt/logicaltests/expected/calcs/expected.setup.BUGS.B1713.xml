@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B1713.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str0]</column>
+      </schema>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

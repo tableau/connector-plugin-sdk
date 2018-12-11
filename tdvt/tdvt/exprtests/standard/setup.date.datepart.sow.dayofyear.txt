@@ -1,0 +1,6 @@
+DATEPART('dayofyear', [date2], 'monday')
+DATEPART('dayofyear', [date2], 'sunday')
+
+DATEPART('dayofyear', [datetime0], 'monday')
+DATEPART('dayofyear', [datetime0], 'sunday')
+

@@ -1,0 +1,372 @@
+<results>
+  <test name='DATE(&apos;1999-12-31&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3011947049)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1999-12-31#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;1999-31-12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3086829891)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;2000/12/12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1823751624)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-12-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;0.0.2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1833904149)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;0.0.0&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3175387485)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;1899.12.31&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1431456240)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-12-31#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;19991230&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2696183362)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;04112011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2776612572)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2011-04-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;04-11-2011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3256771213)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2011-04-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;15-11-2011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2814663250)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;12-11-2011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2353631865)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2011-12-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;31/12/2011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2274407507)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;12/31/2011&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(800006224)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2011-12-31#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;03/12/2012&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2290563298)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-03-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;3/12/12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1625252730)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-03-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;12/11/10&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(76533046)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2010-12-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;10/11/12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3444287764)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-10-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Jan 12, 2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3335373608)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-01-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Januar 12, 2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(758399615)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Mar 12, 2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(361066345)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-03-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;March 12, 2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1937293882)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-03-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;March12, 2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2874598106)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-03-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Feb 29, 2000&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1364792614)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-02-29#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Feb 29, 2001&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2116066945)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;28 Feb, 2001&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3684234582)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-02-28#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;1899, Aug 30&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1595082519)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-08-30#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;1899, Aug 30 10:12:12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3077785329)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1899-08-30#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;2006-06-15 14:52&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3540542790)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2006-06-15#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;04 06 Jan&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3920511541)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2006-01-04#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;06 04 Jan&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(377910837)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-01-06#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Jan 06 04&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3328753303)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-01-06#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;Jan/06/04&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3683044402)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-01-06#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;27,4/Apr/10&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1534221468)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-04-27#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;2000,11,12&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(1704023369)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-11-12#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;2000/12.11&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(336987025)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-12-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;2000/12-11&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2681735257)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-12-11#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATE(&apos;2000/12,11&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2074945887)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-12-11#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

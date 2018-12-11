@@ -1,0 +1,2 @@
+SQRT([int2])
+sqrt(num0)

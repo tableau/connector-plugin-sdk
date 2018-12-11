@@ -1,0 +1,1 @@
+DATEADD('second', 1, [datetime0])

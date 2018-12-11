@@ -1,0 +1,604 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:simpleType name="Double-ST">
+    <xs:union memberTypes="xs:double XML-RealSpecial-ST"/>
+  </xs:simpleType>
+  <xs:simpleType name="Float-ST">
+    <xs:union memberTypes="xs:float XML-RealSpecial-ST"/>
+  </xs:simpleType>
+  <xs:simpleType name="XML-RealSpecial-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="nan"/>
+      <xs:enumeration value="inf"/>
+      <xs:enumeration value="-inf"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VersionNumber-ST">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d+)((\.)(\d+))*((-)(\d+))*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- Function Map -->
+  <xs:simpleType name="AggType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AGG_SUM"/>
+      <xs:enumeration value="AGG_AVG"/>
+      <xs:enumeration value="AGG_MIN"/>
+      <xs:enumeration value="AGG_MAX"/>
+      <xs:enumeration value="AGG_STDEV"/>
+      <xs:enumeration value="AGG_STDEVP"/>
+      <xs:enumeration value="AGG_VAR"/>
+      <xs:enumeration value="AGG_VARP"/>
+      <xs:enumeration value="AGG_COUNT"/>
+      <xs:enumeration value="AGG_COUNTD"/>
+      <xs:enumeration value="AGG_MEDIAN"/>
+      <xs:enumeration value="AGG_ATTR"/>
+      <xs:enumeration value="AGG_NONE"/>
+      <xs:enumeration value="AGG_PERCENTILE"/>
+      <xs:enumeration value="AGG_YEAR"/>
+      <xs:enumeration value="AGG_QTR"/>
+      <xs:enumeration value="AGG_MONTH"/>
+      <xs:enumeration value="AGG_DAY"/>
+      <xs:enumeration value="AGG_HOUR"/>
+      <xs:enumeration value="AGG_MINUTE"/>
+      <xs:enumeration value="AGG_SECOND"/>
+      <xs:enumeration value="AGG_WEEK"/>
+      <xs:enumeration value="AGG_WEEKDAY"/>
+      <xs:enumeration value="AGG_MONTHYEAR"/>
+      <xs:enumeration value="AGG_MDY"/>
+      <xs:enumeration value="AGG_END"/>
+      <xs:enumeration value="TRUNC_YEAR"/>
+      <xs:enumeration value="TRUNC_QTR"/>
+      <xs:enumeration value="TRUNC_MONTH"/>
+      <xs:enumeration value="TRUNC_WEEK"/>
+      <xs:enumeration value="TRUNC_DAY"/>
+      <xs:enumeration value="TRUNC_HOUR"/>
+      <xs:enumeration value="TRUNC_MINUTE"/>
+      <xs:enumeration value="TRUNC_SECOND"/>
+      <xs:enumeration value="AGG_QUART1"/>
+      <xs:enumeration value="AGG_QUART3"/>
+      <xs:enumeration value="AGG_SKEWNESS"/>
+      <xs:enumeration value="AGG_KURTOSIS"/>
+      <xs:enumeration value="AGG_INOUT"/>
+      <xs:enumeration value="AGG_SUM_XSQR"/>
+      <xs:enumeration value="AGG_USER"/>
+      <xs:enumeration value="AGG_COLLECT"/>
+      <xs:enumeration value="AGG_COVAR"/>
+      <xs:enumeration value="AGG_COVARP"/>
+      <xs:enumeration value="AGG_CORR"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ArgumentType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="bool"/>
+      <xs:enumeration value="date"/>
+      <xs:enumeration value="datetime"/>
+      <xs:enumeration value="localint"/>
+      <xs:enumeration value="localreal"/>
+      <xs:enumeration value="localstr"/>
+      <xs:enumeration value="int"/>
+      <xs:enumeration value="real"/>
+      <xs:enumeration value="spatial"/>
+      <xs:enumeration value="str"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Formula-CT">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="part" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="Argument-CT">
+    <xs:attribute name="type" type="ArgumentType-ST" use="required"/>
+  </xs:complexType>
+  <xs:group name="Function-G">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="unagg-formula" type="Formula-CT"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="argument" type="Argument-CT"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:complexType name="Function-CT">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="formula" type="Formula-CT"/>
+      <xs:group ref="Function-G"/>
+    </xs:sequence>
+    <xs:attribute name="group" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="return-type" type="ArgumentType-ST" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DateFunction-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="formula" type="Formula-CT"/>
+      <xs:group ref="Function-G"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="return-type" type="ArgumentType-ST" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="NativeSplitFunction-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="2" minOccurs="0" name="formula" type="Formula-CT"/>
+      <xs:element minOccurs="0" name="properties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="subtract-one-from-token-num" type="ValueBool-CT"/>
+            <xs:element minOccurs="0" name="convert-null-to-empty-string" type="ValueBool-CT"/>
+            <xs:element minOccurs="0" name="perform-null-check-on-query-string" type="ValueBool-CT"/>
+            <xs:element minOccurs="0" name="split-limit" type="ValueUInt-CT"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RecursiveSplitFunction-CT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="formula" type="Formula-CT"/>
+      <xs:element minOccurs="0" name="properties">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="use-null-for-empty-result" type="ValueBool-CT"/>
+            <xs:element minOccurs="0" name="split-limit" type="ValueUInt-CT"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FunctionMap-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="function" type="Function-CT"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="date-function" type="DateFunction-CT"/>
+      <xs:element minOccurs="0" name="native-split-function" type="NativeSplitFunction-CT"/>
+      <xs:element minOccurs="0" name="recursive-split-function" type="RecursiveSplitFunction-CT"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="remove-function">
+        <xs:complexType>
+          <xs:group ref="Function-G"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupportedAgg-CT">
+    <xs:attribute name="value" type="AggType-ST" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="SupportedAggs-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="aggregation" type="SupportedAgg-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- SQL Formatting -->
+  <xs:simpleType name="SimpleCaseApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Case"/>
+      <xs:enumeration value="BalancedIIF"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IfThenElseApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Case"/>
+      <xs:enumeration value="IIF"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BoolAsValueApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TrueFirst"/>
+      <xs:enumeration value="FalseFirst"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IsDistinctApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Formula"/>
+      <xs:enumeration value="NoNullCheck"/>
+      <xs:enumeration value="Keyword"/>
+      <xs:enumeration value="Operator"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderByApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DirectionOnly"/>
+      <xs:enumeration value="Nulls"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StringLiteralApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard"/>
+      <xs:enumeration value="Extended"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IdentifierCase-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Upper"/>
+      <xs:enumeration value="Lower"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IndexApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FullyQualified"/>
+      <xs:enumeration value="ColumnNameOnly"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="InsertApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Individual"/>
+      <xs:enumeration value="Bulk"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SelectComponent-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Select"/>
+      <xs:enumeration value="Into"/>
+      <xs:enumeration value="From"/>
+      <xs:enumeration value="Where"/>
+      <xs:enumeration value="Group"/>
+      <xs:enumeration value="Having"/>
+      <xs:enumeration value="OrderBy"/>
+      <xs:enumeration value="Top"/>
+      <xs:enumeration value="TopPercent"/>
+      <xs:enumeration value="TopSamplePercent"/>
+      <xs:enumeration value="TopSampleRecords"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TablePredicate-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None"/>
+      <xs:enumeration value="GlobalTemp"/>
+      <xs:enumeration value="LocalTemp"/>
+      <xs:enumeration value="AnyTemp"/>
+      <xs:enumeration value="NoTemp"/>
+      <xs:enumeration value="WithData"/>
+      <xs:enumeration value="NoData"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DatePart-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="year"/>
+      <xs:enumeration value="quarter"/>
+      <xs:enumeration value="month"/>
+      <xs:enumeration value="week"/>
+      <xs:enumeration value="weekday"/>
+      <xs:enumeration value="dayofyear"/>
+      <xs:enumeration value="day"/>
+      <xs:enumeration value="hour"/>
+      <xs:enumeration value="minute"/>
+      <xs:enumeration value="second"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateFunction-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DATEADD"/>
+      <xs:enumeration value="DATEDIFF"/>
+      <xs:enumeration value="DATEFORMAT"/>
+      <xs:enumeration value="DATENAME"/>
+      <xs:enumeration value="DATEPARSE"/>
+      <xs:enumeration value="DATEPART"/>
+      <xs:enumeration value="DATETRUNC"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="JoinType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Inner"/>
+      <xs:enumeration value="Left"/>
+      <xs:enumeration value="Right"/>
+      <xs:enumeration value="Full"/>
+      <xs:enumeration value="Cross"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RemoteType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="default"/>
+      <xs:enumeration value="I2"/>
+      <xs:enumeration value="I4"/>
+      <xs:enumeration value="R4"/>
+      <xs:enumeration value="R8"/>
+      <xs:enumeration value="CY"/>
+      <xs:enumeration value="DATE"/>
+      <xs:enumeration value="BOOL"/>
+      <xs:enumeration value="DECIMAL"/>
+      <xs:enumeration value="UI1"/>
+      <xs:enumeration value="I1"/>
+      <xs:enumeration value="UI2"/>
+      <xs:enumeration value="UI4"/>
+      <xs:enumeration value="I8"/>
+      <xs:enumeration value="UI8"/>
+      <xs:enumeration value="BYTES"/>
+      <xs:enumeration value="STR"/>
+      <xs:enumeration value="WSTR"/>
+      <xs:enumeration value="NUMERIC"/>
+      <xs:enumeration value="UDT"/>
+      <xs:enumeration value="DATE"/>
+      <xs:enumeration value="TIME"/>
+      <xs:enumeration value="TIMESTAMP"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DateLiteralEscapeApproach-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard"/>
+      <xs:enumeration value="PostgresStyle"/>
+      <xs:enumeration value="OracleStyle"/>
+      <xs:enumeration value="MySQLStyle"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ICUDateTokens-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="G"/>
+      <xs:enumeration value="yy"/>
+      <xs:enumeration value="yyyy"/>
+      <xs:enumeration value="y"/>
+      <xs:enumeration value="Y"/>
+      <xs:enumeration value="YY"/>
+      <xs:enumeration value="YYYY"/>
+      <xs:enumeration value="u"/>
+      <xs:enumeration value="U"/>
+      <xs:enumeration value="Q"/>
+      <xs:enumeration value="QQ"/>
+      <xs:enumeration value="QQQ"/>
+      <xs:enumeration value="QQQQ"/>
+      <xs:enumeration value="q"/>
+      <xs:enumeration value="qq"/>
+      <xs:enumeration value="qqq"/>
+      <xs:enumeration value="qqqq"/>
+      <xs:enumeration value="M"/>
+      <xs:enumeration value="MM"/>
+      <xs:enumeration value="MMM"/>
+      <xs:enumeration value="MMMM"/>
+      <xs:enumeration value="MMMMM"/>
+      <xs:enumeration value="L"/>
+      <xs:enumeration value="LL"/>
+      <xs:enumeration value="LLL"/>
+      <xs:enumeration value="LLLL"/>
+      <xs:enumeration value="LLLLL"/>
+      <xs:enumeration value="w"/>
+      <xs:enumeration value="ww"/>
+      <xs:enumeration value="W"/>
+      <xs:enumeration value="d"/>
+      <xs:enumeration value="dd"/>
+      <xs:enumeration value="D"/>
+      <xs:enumeration value="F"/>
+      <xs:enumeration value="g"/>
+      <xs:enumeration value="E"/>
+      <xs:enumeration value="EE"/>
+      <xs:enumeration value="EEE"/>
+      <xs:enumeration value="EEEE"/>
+      <xs:enumeration value="EEEEE"/>
+      <xs:enumeration value="e"/>
+      <xs:enumeration value="ee"/>
+      <xs:enumeration value="eee"/>
+      <xs:enumeration value="eeee"/>
+      <xs:enumeration value="eeeee"/>
+      <xs:enumeration value="c"/>
+      <xs:enumeration value="cc"/>
+      <xs:enumeration value="ccc"/>
+      <xs:enumeration value="cccc"/>
+      <xs:enumeration value="ccccc"/>
+      <xs:enumeration value="a"/>
+      <xs:enumeration value="h"/>
+      <xs:enumeration value="hh"/>
+      <xs:enumeration value="H"/>
+      <xs:enumeration value="HH"/>
+      <xs:enumeration value="k"/>
+      <xs:enumeration value="kk"/>
+      <xs:enumeration value="K"/>
+      <xs:enumeration value="KK"/>
+      <xs:enumeration value="m"/>
+      <xs:enumeration value="mm"/>
+      <xs:enumeration value="s"/>
+      <xs:enumeration value="ss"/>
+      <xs:enumeration value="S"/>
+      <xs:enumeration value="SS"/>
+      <xs:enumeration value="SSS"/>
+      <xs:enumeration value="SSSS"/>
+      <xs:enumeration value="SSSSS"/>
+      <xs:enumeration value="SSSSSS"/>
+      <xs:enumeration value="A"/>
+      <xs:enumeration value="z"/>
+      <xs:enumeration value="zz"/>
+      <xs:enumeration value="zzz"/>
+      <xs:enumeration value="zzzz"/>
+      <xs:enumeration value="Z"/>
+      <xs:enumeration value="ZZ"/>
+      <xs:enumeration value="ZZZ"/>
+      <xs:enumeration value="ZZZZ"/>
+      <xs:enumeration value="ZZZZZ"/>
+      <xs:enumeration value="v"/>
+      <xs:enumeration value="vvvv"/>
+      <xs:enumeration value="V"/>
+      <xs:enumeration value="VVVV"/>
+      <xs:enumeration value="W"/>
+      <xs:enumeration value="X"/>
+      <xs:enumeration value="XX"/>
+      <xs:enumeration value="XXX"/>
+      <xs:enumeration value="XXXX"/>
+      <xs:enumeration value="XXXXX"/>
+      <xs:enumeration value="x"/>
+      <xs:enumeration value="xx"/>
+      <xs:enumeration value="xxx"/>
+      <xs:enumeration value="xxxx"/>
+      <xs:enumeration value="xxxxx"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SimpleCase-CT">
+    <xs:attribute name="value" type="SimpleCaseApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="IfThenElse-CT">
+    <xs:attribute name="value" type="IfThenElseApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="BoolAsValue-CT">
+    <xs:attribute name="value" type="BoolAsValueApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="IsDistinct-CT">
+    <xs:attribute name="value" type="IsDistinctApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="OrderBy-CT">
+    <xs:attribute name="value" type="OrderByApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="DateLiteral-CT">
+    <xs:attribute name="formula" type="xs:string"/>
+    <xs:attribute name="format" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="DateTimeLiteral-CT">
+    <xs:attribute name="formula" type="xs:string"/>
+    <xs:attribute name="format" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="StringLiteral-CT">
+    <xs:attribute name="value" type="StringLiteralApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="IdentifierCase-CT">
+    <xs:attribute name="value" type="IdentifierCase-ST"/>
+  </xs:complexType>
+  <xs:complexType name="Index-CT">
+    <xs:attribute name="value" type="IndexApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="Insert-CT">
+    <xs:attribute name="value" type="InsertApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="TypeStringMap-CT">
+    <xs:attribute name="name" type="ArgumentType-ST" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="Null-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="local-type" type="TypeStringMap-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BaseType-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="local-type" type="TypeStringMap-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatePartStringMap-CT">
+    <xs:attribute name="name" type="DatePart-ST" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ApplicableDateFunction-CT">
+    <xs:attribute name="name" type="DateFunction-ST" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="DatePartGroup-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="date-function" type="ApplicableDateFunction-CT"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="part" type="DatePartStringMap-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DatePart-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="date-part-group" type="DatePartGroup-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DateLiteralEscape-CT">
+    <xs:attribute name="value" type="DateLiteralEscapeApproach-ST"/>
+  </xs:complexType>
+  <xs:complexType name="ICUDateTokenMap-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="token">
+        <xs:complexType>
+          <xs:attribute name="key" type="ICUDateTokens-ST" use="required"/>
+          <xs:attribute name="value" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StoredProc-CT">
+    <xs:attribute name="value" type="xs:string" use="required"/>
+    <xs:attribute name="use-name-value-format" type="xs:boolean"/>
+  </xs:complexType>
+  <xs:complexType name="SupportedJoins-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="part">
+        <xs:complexType>
+          <xs:attribute name="name" type="JoinType-ST" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FormatSelect-CT">
+    <xs:sequence>
+      <xs:element name="part" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" type="SelectComponent-ST" use="required"/>
+          <xs:attribute name="value" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreateTableFormula-CT">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="predicate" type="TablePredicate-ST"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CreateTable-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="formula" type="CreateTableFormula-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RemoteTypeStringMap-CT">
+    <xs:attribute name="name" type="RemoteType-ST" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ColumnDefinitionLocalType-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="remote-type" type="RemoteTypeStringMap-CT"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="ArgumentType-ST" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ColumnDefinition-CT">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="local-type" type="ColumnDefinitionLocalType-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValueBool-CT">
+    <xs:attribute name="value" type="xs:boolean" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ValueString-CT">
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="ValueUInt-CT">
+    <xs:attribute name="value" type="xs:unsignedInt" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="SQLFormat-CT">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="base-types" type="BaseType-CT"/>
+      <xs:element minOccurs="0" name="date-literal-escape" type="DateLiteralEscape-CT"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="date-parts" type="DatePart-CT"/>
+      <xs:element minOccurs="0" name="format-bool-as-value" type="BoolAsValue-CT"/>
+      <xs:element minOccurs="0" name="format-column-definition" type="ColumnDefinition-CT"/>
+      <xs:element minOccurs="0" name="format-create-table" type="CreateTable-CT"/>
+      <xs:element minOccurs="0" name="format-date-literal" type="DateLiteral-CT"/>
+      <xs:element minOccurs="0" name="format-datetime-literal" type="DateTimeLiteral-CT"/>
+      <xs:element minOccurs="0" name="format-drop-table" type="CreateTable-CT"/>
+      <xs:element minOccurs="0" name="format-false" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="format-if-then-else" type="IfThenElse-CT"/>
+      <xs:element minOccurs="0" name="format-index" type="Index-CT"/>
+      <xs:element minOccurs="0" name="format-insert" type="Insert-CT"/>
+      <xs:element minOccurs="0" name="format-is-distinct" type="IsDistinct-CT"/>
+      <xs:element minOccurs="0" name="format-null" type="Null-CT"/>
+      <xs:element minOccurs="0" name="format-order-by" type="OrderBy-CT"/>
+      <xs:element minOccurs="0" name="format-select" type="FormatSelect-CT"/>
+      <xs:element minOccurs="0" name="format-set-isolation-level" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="format-simple-case" type="SimpleCase-CT"/>
+      <xs:element minOccurs="0" name="format-stored-proc-call" type="StoredProc-CT"/>
+      <xs:element minOccurs="0" name="format-string-literal" type="StringLiteral-CT"/>
+      <xs:element minOccurs="0" name="format-true" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="icu-date-token-map" type="ICUDateTokenMap-CT"/>
+      <xs:element minOccurs="0" name="id-allowed-characters" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="id-case" type="IdentifierCase-CT"/>
+      <xs:element minOccurs="0" name="id-max-length" type="ValueUInt-CT"/>
+      <xs:element minOccurs="0" name="id-quotes" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="start-of-week-offset" type="ValueUInt-CT"/>
+      <xs:element minOccurs="0" name="supported-joins" type="SupportedJoins-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dialect">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="function-map" type="FunctionMap-CT"/>
+        <xs:element minOccurs="0" name="supported-aggregations" type="SupportedAggs-CT"/>
+        <xs:element minOccurs="0" name="sql-format" type="SQLFormat-CT"/>
+      </xs:sequence>
+      <xs:attribute name="base" type="xs:string"/>
+      <xs:attribute name="class" type="xs:string" use="required"/>
+      <xs:attribute name="dialect-version" type="VersionNumber-ST"/>
+      <xs:attribute name="flavor" type="xs:string"/>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="version" type="VersionNumber-ST" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,55 @@
+<results>
+  <test name='DATETRUNC(&apos;year&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3907469988)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(1153873435)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

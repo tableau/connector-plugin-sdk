@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<logical-query>
+  <selects>
+    <field>[sum:int1:ok]</field>
+  </selects>
+  <aggregateOp class='logical-operator'>
+    <measures>
+      <binding name='[sum:int1:ok]'>
+        <funcallExp class='logical-expression' function='SUM' shape='aggregate'>
+          <identifierExp class='logical-expression' identifier='[int1]' />
+        </funcallExp>
+      </binding>
+    </measures>
+    <groupbys>
+    </groupbys>
+    <relationOp class='logical-operator' connection='' name='[Extract].[Extract]'>
+      <relation name='Extract' type='table' />
+      <cols>
+      </cols>
+      <type>
+        <schema>
+          <field name='[Number of Records]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[bool0]'>
+            <type name='top' />
+          </field>
+          <field name='[bool1]'>
+            <type name='top' />
+          </field>
+          <field name='[bool2]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[bool3]'>
+            <type name='top' />
+          </field>
+          <field name='[date0]'>
+            <type name='top' />
+          </field>
+          <field name='[date1]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[date2]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[date3]'>
+            <type name='top' />
+          </field>
+          <field name='[datetime0]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[datetime1]'>
+            <type name='top' />
+          </field>
+          <field name='[int0]'>
+            <type name='top' />
+          </field>
+          <field name='[int1]'>
+            <type name='top' />
+          </field>
+          <field name='[int2]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[int3]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[key]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[num0]'>
+            <type name='top' />
+          </field>
+          <field name='[num1]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[num2]'>
+            <type name='top' />
+          </field>
+          <field name='[num3]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[num4]'>
+            <type name='top' />
+          </field>
+          <field name='[str0]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[str1]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[str2]'>
+            <type name='top' />
+          </field>
+          <field name='[str3]'>
+            <type name='top' />
+          </field>
+          <field name='[time0]'>
+            <type name='nonnull' />
+          </field>
+          <field name='[time1]'>
+            <type name='top' />
+          </field>
+          <field name='[zzz]'>
+            <type name='nonnull' />
+          </field>
+        </schema>
+      </type>
+    </relationOp>
+  </aggregateOp>
+</logical-query>

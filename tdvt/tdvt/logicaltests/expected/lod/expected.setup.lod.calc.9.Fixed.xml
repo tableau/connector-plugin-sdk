@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.9.Fixed.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Prod Type2]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_8940203110829613:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>28278.32</value>
+      </tuple>
+    </table>
+  </test>
+</results>

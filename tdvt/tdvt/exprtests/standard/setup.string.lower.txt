@@ -1,0 +1,2 @@
+LOWER(str2)
+lower(str1)

@@ -1,0 +1,4 @@
+FLOAT([int0]) % FLOAT([int1])
+int0 % int1
+int0 % INT([num1])
+FLOAT([int0]) % INT([num1])

@@ -1,0 +1,12 @@
+<results>
+  <test name='LEFT([str0],-2)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(765040119)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

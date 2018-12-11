@@ -1,0 +1,31 @@
+<results>
+  <test name='DATENAME(&apos;quarter&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(653088523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(3134852500)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;3          &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

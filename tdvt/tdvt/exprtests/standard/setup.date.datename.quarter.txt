@@ -1,0 +1,4 @@
+DATENAME('quarter', [date2])
+
+DATENAME('quarter', [datetime0])
+

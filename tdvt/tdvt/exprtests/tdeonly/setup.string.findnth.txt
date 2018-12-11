@@ -1,0 +1,7 @@
+findnth(str0,'S',2)
+findnth(str1,'IN',1)
+findnth(str2,'e',2)
+findnth([str2],'e',0)
+findnth('','e',2)
+findnth([str2],'',2)
+

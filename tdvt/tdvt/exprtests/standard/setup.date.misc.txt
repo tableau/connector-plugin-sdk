@@ -1,0 +1,8 @@
+DAY(DATE([date2]))
+DAY(DATETIME([datetime0]))
+
+MONTH(DATE([date2]))
+MONTH(DATETIME([datetime0]))
+
+YEAR(DATE([date2]))
+YEAR(DATETIME([datetime0]))

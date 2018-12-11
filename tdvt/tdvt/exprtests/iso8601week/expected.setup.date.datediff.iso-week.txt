@@ -1,0 +1,62 @@
+<results>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2013-12-30#, #2014-01-05#) // 0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1770107342)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-04-06#, #2014-04-07#) // 1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(646842125)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-04-07#, #2014-04-06#) // -1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2353847414)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-12-28#, #2015-01-05#) // 2'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1886889459)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2016-01-03#, #2017-01-02#) // 53'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2772917571)(0)]</column>
+      </schema>
+      <tuple>
+        <value>53</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, #2014-12-28#, #2016-01-04#) // 54'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(846774858)(0)]</column>
+      </schema>
+      <tuple>
+        <value>54</value>
+      </tuple>
+    </table>
+  </test>
+</results>

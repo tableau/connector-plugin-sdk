@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.11.Exclude.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Market Segment]</column>
+        <column>[Staples.lod.sqlserver].[sum:Calculation_0040203110812011:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;CONSUMER&quot;</value>
+        <value>98687937.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CORPORATE&quot;</value>
+        <value>98687937.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;HOME OFFICE&quot;</value>
+        <value>98687937.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SMALL BUSINESS&quot;</value>
+        <value>98687937.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

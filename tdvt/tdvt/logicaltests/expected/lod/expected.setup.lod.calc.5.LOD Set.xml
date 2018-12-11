@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.5.LOD Set.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Calculation_4190203111004094]</column>
+        <column>[Staples.lod.sqlserver].[io:Set 1:nk]</column>
+      </schema>
+      <tuple>
+        <value>10547</value>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>10807</value>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>13674</value>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>19832</value>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

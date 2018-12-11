@@ -1,0 +1,172 @@
+<results>
+  <test name='DATENAME(&apos;year&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3057229987)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;year&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4063654893)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2102858309)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;quarter&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3270121971)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2692233594)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1772891037)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;week&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3926284460)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;week&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1415178918)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3608467423)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2920782836)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;day&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3132873078)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;day&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2450943592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3530921297)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(304383277)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;hour&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3871589708)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;minute&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2462406212)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;second&apos;, DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3443263072)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

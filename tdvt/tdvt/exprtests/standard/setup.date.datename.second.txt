@@ -1,0 +1,1 @@
+DATENAME('second', [datetime0])

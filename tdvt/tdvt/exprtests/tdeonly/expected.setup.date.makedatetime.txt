@@ -1,0 +1,22 @@
+<results>
+  <test name='MAKEDATETIME(#2012-11-12#,#07:59:00#)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2033062086)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-11-12 07:59:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKEDATETIME(#1800-01-01#,#11:59:59#)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1067420588)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1800-01-01 11:59:59#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

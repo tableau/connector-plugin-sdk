@@ -1,0 +1,4 @@
+DATENAME('dayofyear', [date2])
+
+DATENAME('dayofyear', [datetime0])
+

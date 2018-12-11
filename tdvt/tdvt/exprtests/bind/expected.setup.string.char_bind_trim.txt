@@ -1,0 +1,15 @@
+<results>
+  <test name='[Product In Stock]'>
+    <table>
+      <schema>
+        <column>[Staples.postgres].[TEMP(Test)(137914982)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;NO&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;YES&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

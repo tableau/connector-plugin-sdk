@@ -1,0 +1,123 @@
+<results>
+  <test name='SUM([date0]-1-[date1])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(852777247)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-21820.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([date0]+300-[date1])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3920605433)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-20315.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date0]-([date1]-1-[date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(750868662)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1963-12-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1969-04-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-05-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-09-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-08-14 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date1]-([date3]+500-[date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2315954727)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1977-06-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-08-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1993-12-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-07-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2003-07-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-02-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2013-03-13 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date1]-([date3]+500-[date2])+([date3]-[date0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(268214076)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-23 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-11-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2024-09-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM(([date3]-400-[date0])+([date3]+500-[date2]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2422363430)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1004.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='SUM([date3]-1-(date(dateadd(&apos;month&apos;, 3, #2004-04-15# )))+1)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3637530074)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-45223.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

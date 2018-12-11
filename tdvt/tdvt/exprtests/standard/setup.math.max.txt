@@ -1,0 +1,2 @@
+MAX([int0])
+MAX([int1],[int2] )

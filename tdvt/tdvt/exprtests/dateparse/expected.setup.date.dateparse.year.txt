@@ -1,0 +1,82 @@
+<results>
+  <test name='DATEPARSE(&apos;y-MM-dd&apos;, &apos;1234-06-01&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1408155083)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1234-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yy-MM-dd&apos;, &apos;12-06-01&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(54082523)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;MM/dd/yy&apos;,&apos;12/15/73&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(3578817588)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1973-12-15 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyy-MM-dd&apos;, &apos;1234-06-01&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(2040050501)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1234-06-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;dd-MMM-yyyy&apos;,&apos;15-Dec-1973&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(155093803)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1973-12-15 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;dd.MM.yyyy&apos;,&apos;8.2.1997&apos; )'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1051504832)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1997-02-08 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;dd/MM/yyyy&apos;,&apos;8/02/1997&apos; )'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(3526397479)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1997-02-08 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;yyyyMMdd&apos;,&apos;20120123&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql].[TEMP(Test)(1680405592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2012-01-23 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

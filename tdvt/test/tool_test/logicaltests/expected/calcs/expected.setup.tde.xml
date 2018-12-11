@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\dev\data-dev\tableau-tests\tdvt\tool_test\logical\setup\calcs\setup.sum.xml'>
+    <sql>
+      This SQL is purposefully commented to make it different for test cases: (restrict&#10;  (aggregate&#10;    (table [Extract].[Extract])&#10;    ()&#10;    (&#10;      ([sum:int1:ok]&#10;        (sum [int1])&#10;        )&#10;      )&#10;    )&#10;  ([sum:int1:ok])&#10;  )&#10;
+    </sql>
+    <query-time>
+      20.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.tde].[sum:int1:ok]</column>
+      </schema>
+      <tuple>
+        <value>-22</value>
+      </tuple>
+    </table>
+  </test>
+</results>

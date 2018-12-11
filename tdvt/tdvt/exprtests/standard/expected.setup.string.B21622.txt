@@ -1,0 +1,42 @@
+<results>
+  <test name='str(int([num4]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1425036653)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-10&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-13&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-14&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;-6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;10&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;19&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;3&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;4&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;6&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;8&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

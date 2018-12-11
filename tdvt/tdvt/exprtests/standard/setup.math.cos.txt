@@ -1,0 +1,2 @@
+COS([int2])
+cos(num0)

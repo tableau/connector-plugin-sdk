@@ -1,0 +1,162 @@
+<results>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #1900-01-01#) // Monday, 1900-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2812280547)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #1900-12-30#) // Sunday, 1900-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2254105947)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #1900-12-31#) // Monday, 1901-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1873159524)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-12-31 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #1901-12-29#) // Sunday, 1901-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3210650717)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1900-12-31 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2000-01-03#) // Monday, 2000-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(645471865)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2000-12-31#) // Sunday, 2000-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(842657465)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2000-01-03 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2001-01-01#) // Monday, 2001-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3366047967)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2001-12-30#) // Sunday, 2001-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1136988789)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2014-12-29#) // Monday, 2015-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2607630951)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2016-01-03#) // Sunday, 2015-W53'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1335095621)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-12-29 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2016-01-04#) // Monday, 2016-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3091979362)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2016-01-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2017-01-01#) // Sunday, 2016-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2611349649)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2016-01-04 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2018-01-01#) // Monday, 2018-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1197964418)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2018-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;iso-year&apos;, #2018-12-29#) // Sunday, 2018-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3037307714)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2018-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;year&apos;, DATETRUNC(&apos;iso-year&apos;, #2018-01-01#))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1578065485)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2018</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATETRUNC(&apos;year&apos;, DATETRUNC(&apos;iso-year&apos;, #2018-01-01#))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1176158379)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2018-01-01 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

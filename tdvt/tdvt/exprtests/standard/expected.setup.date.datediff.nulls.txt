@@ -1,0 +1,172 @@
+<results>
+  <test name='DATEDIFF(&apos;year&apos;,  DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1128710711)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;year&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3816818712)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;quarter&apos;, DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1220694026)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;quarter&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1878304808)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;month&apos;, DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3201398499)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;month&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2380792894)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;week&apos;, DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1799303116)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;week&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3424623419)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;weekday&apos;, DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(496128354)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;weekday&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(260207547)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;day&apos;, DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4282303505)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;day&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2339877044)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;dayofyear&apos;, DATE(null), DATE(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3465754358)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;dayofyear&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2205674587)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;hour&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4062119106)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;minute&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2509274079)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;second&apos;, DATETIME(null), DATETIME(null))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(508245917)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

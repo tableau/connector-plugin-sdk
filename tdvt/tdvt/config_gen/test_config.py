@@ -1,0 +1,282 @@
+"""
+    TestConfig defines how to run tests with TDVT runner.
+
+"""
+
+import glob
+import os
+import tempfile
+import re
+from ..resources import *
+
+class TestFile(object):
+    """
+        Information about the location of a test file.
+    """
+    def __init__(self, root_dir, full_test_path):
+        self.root_dir = root_dir
+        self.test_path = full_test_path
+        self.relative_test_path = self.test_path.replace(self.root_dir,'')
+        if self.relative_test_path and (self.relative_test_path[0] == '\\' or self.relative_test_path[0] == '/'):
+            self.relative_test_path = self.relative_test_path[1:]
+
+    def __str__(self):
+        return self.test_path
+
+class TestSet(object):
+    """
+        Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
+    """
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical):
+        self.config_name = config_name
+        self.tds_name = tds_name
+        self.exclusions = exclusions
+        self.test_pattern = test_pattern
+        self.is_logical = is_logical
+        self.root_dir = root_dir
+        
+    def is_logical_test(self):
+        return self.is_logical
+
+    def get_expected_output_file_path(self, test_file, output_dir):
+        return ''
+
+    def get_actual_and_base_file_path(self, test_file, output_dir):
+        return '', ''
+
+    def generate_test_file_list(self):
+        """Take the config and expand it into the list of tests cases to run. These are fully qualified paths to test files.
+           Return the sorted list of tests.
+
+        """
+        final_test_list = self.generate_test_file_list_from_config()
+
+        logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
+        if len(final_test_list) == 0:
+            logging.warn("Did not find any tests to run.")
+            print("Did not find any tests to run.")
+            return final_test_list
+
+        for x in final_test_list:
+            logging.debug("final test path " + x.test_path)
+
+        return final_test_list
+
+    def get_test_dirs(self):
+        return (self.root_dir, get_local_test_dir())
+
+    def generate_test_file_list_from_config(self):
+        """Read the config file and generate a list of tests."""
+        allowed_tests = []
+        exclude_tests = self.get_exclusions()
+        exclude_tests.append('expected.')
+        exclude_tests.append('actual.')
+
+        #Allowed/exclude can be filenames or directory fragments.
+        tests_to_run = []
+        added_test = len(tests_to_run)
+        allowed_path = ''
+
+        #Check local dir first then the root package directory.
+        checked_paths = []
+        for test_dir in self.get_test_dirs():
+            allowed_path = os.path.join(test_dir, self.test_pattern)
+            checked_paths.append(allowed_path)
+            if os.path.isfile(allowed_path):
+                logging.debug("Adding file " + allowed_path)
+                tests_to_run.append(TestFile(test_dir, allowed_path))
+            elif os.path.isdir(allowed_path):
+                logging.debug("Iterating directory " + allowed_path)
+                for f in os.listdir(allowed_path):
+                    full_filename = os.path.join(allowed_path, f)
+                    if os.path.isfile(full_filename):
+                        logging.debug("Adding file " + full_filename)
+                        tests_to_run.append(TestFile(test_dir, full_filename))
+            else:
+                for f in glob.glob(allowed_path):
+                    full_filename = os.path.join(allowed_path, f)
+                    if os.path.isfile(full_filename):
+                        logging.debug("Adding globbed file " + full_filename)
+                        tests_to_run.append(TestFile(test_dir, full_filename))
+            if tests_to_run:
+                break
+
+        if added_test == len(tests_to_run):
+            logging.debug("Could not find any tests for [" + "] or [".join(checked_paths)  + "]. Check the path.")
+
+        logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
+
+        regexes = []
+        for ex in exclude_tests:
+            try:
+                ex = ex.strip()
+                if not ex:
+                    continue
+                regex = re.compile(ex)
+                regexes.append(regex)
+            except BaseException as e:
+                print ("Error compiling regular expression for test file exclusions: '" + str(ex) + "' exception: " + str(e))
+
+        final_test_list = list(tests_to_run)
+        for test in tests_to_run:
+            for regex in regexes:
+                if re.search(regex, test.test_path) and test in final_test_list:
+                    logging.debug("Removing test that matched: " + ex)
+                    final_test_list.remove(test)
+
+        return sorted(final_test_list, key = lambda x: x.test_path)
+
+        
+
+    def get_exclusions(self):
+        return [] if not self.exclusions else self.exclusions.split(',')
+
+    def __str__(self):
+        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}] [is_logical={4}] [root_dir={5}]".format(self.config_name, self.tds_name, self.exclusions, self.test_pattern, self.is_logical, self.root_dir)
+    
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        return False
+
+class FileTestSet(TestSet):
+    """Used to run previously failed tests. Supports appending test files rather than using a search pattern like the other test sets."""
+    def __init__(self, root_dir, config_name, tds_name, logical):
+        self.test_paths = []
+        self.logical = logical
+        if logical:
+            self.delegator = LogicalTestSet(root_dir, config_name, tds_name, '', '')
+        else:
+            self.delegator = ExpressionTestSet(root_dir, config_name, tds_name, '', '')
+        super(FileTestSet, self).__init__(root_dir, config_name, tds_name, '', '', logical)
+
+    def get_expected_output_file_path(self, test_file, output_dir):
+        return self.delegator.get_expected_output_file_path(test_file, output_dir)
+
+    def get_actual_and_base_file_path(self, test_file, output_dir):
+        if self.logical:
+            return self.delegator.get_actual_and_base_file_path(test_file, output_dir)
+        else:
+            return ("", "")
+
+    def append_test_file(self, file_path):
+        self.test_paths.append(file_path)
+
+    def generate_test_file_list_from_config(self):
+        tests_to_run = []
+        for test_file in self.test_paths:
+            added_test = False
+            for test_dir in self.get_test_dirs():
+                if added_test:
+                    continue
+                allowed_path = os.path.join(test_dir, test_file)
+                logging.debug("Looking for file " + allowed_path)
+                if os.path.isfile(allowed_path):
+                    logging.debug("Adding file " + allowed_path)
+                    tests_to_run.append(TestFile(test_dir, allowed_path))
+                    added_test = True
+        return sorted(tests_to_run, key = lambda x: x.test_path)
+
+class LogicalTestSet(TestSet):
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern):
+        super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, True)
+
+    def get_expected_output_file_path(self, test_file, output_dir):
+        existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(test_file, output_dir)
+        return existing_output_filepath
+
+    def get_actual_and_base_file_path(self, test_file, output_dir):
+        existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(test_file, output_dir)
+        return actual_output_filepath, base_filepath
+        
+class ExpressionTestSet(TestSet):
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern):
+        super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, False)
+
+    def get_expected_output_file_path(self, test_file, output_dir):
+        base_test_file = get_base_test(test_file)
+        test_file_root = os.path.split(test_file)[0]
+        existing_output_filepath, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root, base_test_file, output_dir)
+        return existing_output_filepath
+
+class SingleLogicalTestSet(LogicalTestSet):
+    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info):
+        super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        self.test_pattern = self.test_pattern.replace('?', ds_info.logical_config_name)
+        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
+
+class SingleExpressionTestSet(ExpressionTestSet):
+    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info):
+        super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        self.tds_name = tds_pattern.replace('*', ds_info.dsname)
+
+def build_config_name(prefix, dsname):
+    return prefix + dsname + '.cfg'
+
+def build_tds_name(prefix, dsname):
+    return prefix + dsname + '.tds'
+
+class TestConfig(object):
+    """
+        Defines all the tests that can be run for a single data source. An organized collection of TestSet objects.
+    """
+    def __init__(self, dsname, logical_config_name, maxthread, maxsubthread, d_override='', run_as_perf=False):
+        self.dsname = dsname
+        self.logical_config_name = logical_config_name
+        self.calcs_tds = self.get_tds_name('cast_calcs.')
+        self.staples_tds = self.get_tds_name('Staples.')
+        self.logical_test_set = []
+        self.expression_test_set = []
+        self.d_override = d_override
+        self.maxthread = 0
+        self.logical_config = {}
+        self.run_as_perf = run_as_perf
+        if int(maxthread) > 0:
+            self.maxthread = int(maxthread)
+        self.maxsubthread = 0
+        if int(maxsubthread) > 0:
+            self.maxsubthread = int(maxsubthread)
+
+    def get_config_name(self, prefix):
+        return prefix + self.dsname
+
+    def get_logical_test_path(self, prefix):
+        return prefix + self.logical_config_name + '.xml'
+
+    def get_tds_name(self, prefix):
+        if prefix[-4:] == '.tds':
+            return prefix
+        return prefix + self.dsname + '.tds'
+
+    def get_pasword_file_name(self):
+        return self.dsname + ".password"
+
+    def add_logical_test(self, base_config_name, tds_name, exclusions, test_path, test_dir):
+        new_test = LogicalTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
+        self.add_logical_testset(new_test)
+
+    def add_logical_testset(self, new_test):
+        self.logical_test_set.append(new_test)
+
+    def add_expression_test(self, base_config_name, tds_name, exclusions, test_path, test_dir):
+        new_test = ExpressionTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
+        self.add_expression_testset(new_test)
+
+    def add_expression_testset(self, new_test):
+        self.expression_test_set.append(new_test)
+
+    def get_logical_tests(self, config_filter=None):
+        return self.logical_test_set if not config_filter else [ ts for ts in self.logical_test_set if config_filter in ts.config_name ]
+    
+    def get_expression_tests(self, config_filter=None):
+        return self.expression_test_set if not config_filter else [ ts for ts in self.expression_test_set if config_filter in ts.config_name ]
+
+    def add_logical_config(self, cfg):
+        self.logical_config = cfg.copy()
+
+    def __str__(self):
+        msg = ''
+        for test in self.get_logical_tests() + self.get_expression_tests():
+            msg += str(test) + "\n"
+        return msg
+

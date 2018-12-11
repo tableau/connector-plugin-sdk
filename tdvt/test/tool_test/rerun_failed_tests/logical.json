@@ -1,0 +1,35 @@
+{
+    "actual_exp_paths_relative_to": "this", 
+    "failed_tests": [
+        {
+            "actual": "test\\tool_test\\logicaltests\\expected\\calcs\\actual.setup.xml", 
+            "case": ".setup.xml", 
+            "class": "TDVT", 
+            "expected": "", 
+            "failtype": "test_failure", 
+            "message": "Expected does not match any actual file.", 
+            "other_args": " --verbose", 
+            "test_config": {
+                "d_override": "", 
+                "expected_dir": "", 
+                "logical": true, 
+                "noheader": false, 
+                "suite_name": "postgres", 
+                "output_dir": "",
+                "config_file": "",
+                "tds": "tds\\cast_calcs.tde.tds", 
+                "tested_sql": false, 
+                "tested_tuples": true, 
+                "thread_count": 12, 
+                "verbose": false
+            }, 
+            "repro": "tdvt.py -q test\\tool_test\\logicaltests\\setup\\calcs\\setup.sum.tde.xml-d test\\tool_test\\tds\\cast_calcs.tde.tds  --verbose", 
+            "suite": "", 
+            "tds": "tds\\cast_calcs.tde.tds", 
+            "test_file": "logicaltests\\setup\\calcs\\setup.sum.tde.xml", 
+            "test_type": "-q"
+        }
+    ], 
+    "harness_name": "TDVT", 
+    "successful_tests": []
+}

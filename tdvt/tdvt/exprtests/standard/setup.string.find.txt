@@ -1,0 +1,5 @@
+FIND(str2, "ee")
+find(str1,'E')
+find(str1,'E',6)
+find(str2,str3)
+find(str2,str3,num4*.2)

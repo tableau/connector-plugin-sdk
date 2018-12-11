@@ -1,0 +1,1 @@
+left(str0,num4)

@@ -1,0 +1,3 @@
+DATENAME('hour', [datetime0], 'monday')
+DATENAME('hour', [datetime0], 'sunday')
+

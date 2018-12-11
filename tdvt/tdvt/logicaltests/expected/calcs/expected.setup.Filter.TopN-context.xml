@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Filter.TopN-context.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str0]</column>
+        <column>[cast_calcs.postgres91].[sum:int2:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;OFFICE SUPPLIES&quot;</value>
+        <value>14</value>
+      </tuple>
+    </table>
+  </test>
+</results>

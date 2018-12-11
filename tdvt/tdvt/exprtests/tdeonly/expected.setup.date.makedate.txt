@@ -1,0 +1,32 @@
+<results>
+  <test name='MAKEDATE(2014,4,17)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2231772716)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-04-17#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKEDATE(2005,13,17)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(300724777)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2006-01-17#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='MAKEDATE(1800,12,15)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3028832228)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1800-12-15#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

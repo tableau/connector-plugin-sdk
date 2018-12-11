@@ -1,0 +1,21 @@
+<results>
+  <test name='DATEPART(&apos;year&apos;,DATEADD(&apos;day&apos;,-DATEPART(&apos;weekday&apos;,[date0])+1,[date0]))'>
+    <table>
+      <schema>
+        <column>[TEMP(Test)(2180476514)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1972</value>
+      </tuple>
+      <tuple>
+        <value>1975</value>
+      </tuple>
+      <tuple>
+        <value>2004</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,92 @@
+<results>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2013-12-29#) // Sunday,    2013-W52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4029110745)(0)]</column>
+      </schema>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2013-12-30#) // Monday,    2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1890257322)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2013-12-31#) // Tuesday,   2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(945502655)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2014-01-01#) // Wednesday, 2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3016303)(0)]</column>
+      </schema>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2014-01-02#) // Thursday,  2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(317515581)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2014-01-03#) // Friday,    2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(95367285)(0)]</column>
+      </schema>
+      <tuple>
+        <value>5</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2014-01-04#) // Saturday,  2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1391761827)(0)]</column>
+      </schema>
+      <tuple>
+        <value>6</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2014-01-05#) // Sunday,    2014-W01'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2779517458)(0)]</column>
+      </schema>
+      <tuple>
+        <value>7</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;iso-weekday&apos;, #2014-01-06#) // Monday,    2014-W02'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3446201645)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+</results>

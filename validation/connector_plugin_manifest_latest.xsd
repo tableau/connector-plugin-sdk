@@ -1,0 +1,127 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:group name="DataConnectionCustomization-G">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="connection-customization">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:group ref="Vendor-G"/>
+            <xs:group ref="Driver-G"/>
+            <xs:group ref="Customizations-G"/>
+          </xs:sequence>
+          <xs:attribute name="version" type="VersionNumber-ST" use="required"/>
+          <xs:attribute name="class" type="xs:string" use="required"/>
+          <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Vendor-G">
+    <xs:sequence>
+      <xs:element name="vendor">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Driver-G">
+    <xs:sequence>
+      <xs:element name="driver">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Customizations-G">
+    <xs:sequence>
+      <xs:element name="customizations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:group ref="DataConnectionCust-Customizations-G"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="DataConnectionCust-Customizations-G">
+    <xs:sequence>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="DataConnectionCust-Customization-G"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="DataConnectionCust-Customization-G">
+    <xs:sequence>
+      <xs:element name="customization">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string"/>
+          <xs:attribute name="value" type="xs:string"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:simpleType name="OSShortName-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="win"/>
+      <xs:enumeration value="mac"/>
+      <xs:enumeration value="linux"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ScriptElement-CT">
+    <xs:simpleContent>
+      <xs:annotation>
+        <xs:documentation>Either an embedded script or the name of a file in the local directory.</xs:documentation>
+      </xs:annotation>
+      <xs:extension base="xs:string">
+        <xs:attribute name="file"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="Double-ST">
+    <xs:union memberTypes="xs:double XML-RealSpecial-ST"/>
+  </xs:simpleType>
+  <xs:simpleType name="Float-ST">
+    <xs:union memberTypes="xs:float XML-RealSpecial-ST"/>
+  </xs:simpleType>
+  <xs:simpleType name="XML-RealSpecial-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="nan"/>
+      <xs:enumeration value="inf"/>
+      <xs:enumeration value="-inf"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VersionNumber-ST">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d+)((\.)(\d+))*((-)(\d+))*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="connector-plugin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="platforms" type="Platforms-CT"/>
+        <xs:group ref="DataConnectionCustomization-G"/>
+        <xs:element minOccurs="0" name="connection-dialog" type="ScriptElement-CT"/>
+        <xs:element minOccurs="0" name="connection-resolver" type="ScriptElement-CT"/>
+        <xs:element minOccurs="0" name="dialect" type="ScriptElement-CT"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="license-key" type="LicenseKey-ST"/>
+      </xs:sequence>
+      <xs:attribute name="class" type="xs:token" use="required"/>
+      <xs:attribute name="name" type="xs:string" use="required"/>
+      <xs:attribute name="plugin-version" type="VersionNumber-ST" use="required"/>
+      <xs:attribute name="superclass" type="xs:token" use="required"/>
+      <xs:attribute name="version" type="VersionNumber-ST" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="LicenseKey-ST">
+    <xs:restriction base="xs:token">
+      <xs:pattern value="[A-Z][A-Z0-9]*"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Platforms-CT">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="platform" type="Platform-ST"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="Platform-ST">
+    <xs:attribute name="name" type="OSShortName-ST" use="required"/>
+  </xs:complexType>
+</xs:schema>

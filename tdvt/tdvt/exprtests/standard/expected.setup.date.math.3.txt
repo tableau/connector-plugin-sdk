@@ -1,0 +1,676 @@
+<results>
+  <test name='DATEDIFF(&apos;day&apos;, NOW(), NOW())'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3926981592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;day&apos;, TODAY(), TODAY())'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1915846221)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] + 1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(715809068)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-13#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-04#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-10#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-09#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-21#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-27#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-08#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-06#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-21#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-05#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-04#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-31#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-20#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-13#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-05#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-28#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] + 1.5'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(299505631)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-13 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-18 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-04 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-10 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-09 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-21 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-27 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-08 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-06 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-21 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-05 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-04 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-31 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-20 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-13 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-05 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-28 12:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] - 1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(709470143)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-11#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-16#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-02#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-08#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-19#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-25#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-06#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-04#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-19#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-03#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-02#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-29#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-11#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-03#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-26#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] - 1.5'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1620718980)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-10 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-15 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-01 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-07 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-06 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-18 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-24 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-05 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-03 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-18 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-02 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-01 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-28 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-17 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-10 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-02 12:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-25 12:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] - [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2141740056)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0.0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] - 1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1797652325)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-03 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-04 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-08 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-11 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-16 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-18 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-21 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-30 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] + 1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2686481578)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-05 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-06 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-10 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-13 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-18 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-20 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-03 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] - 1.5'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2341796372)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-03 10:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-04 01:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-07 22:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-11 05:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 19:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 20:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-16 02:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-18 10:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-20 12:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 09:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-24 03:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 00:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 18:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 00:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 11:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 23:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 19:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] + 1.5'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4017290474)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-06 10:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-07 01:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-10 22:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 05:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 19:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-15 20:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 02:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-21 10:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 12:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 09:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-27 03:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 00:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-29 18:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-30 00:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-30 11:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-01 23:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-03 19:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] = [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3033382267)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &gt; [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4196472080)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &gt;= [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1829388090)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &lt; [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2087345109)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &lt;= [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3187080314)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[datetime0] &lt;&gt; [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(436529008)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] = [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1122166960)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt; [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2476649334)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt;= [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1267352367)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt; [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(668774393)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;= [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(2801366337)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;&gt; [datetime0]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(6065346)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] =  [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4213376628)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt;  [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(284925583)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &gt;= [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(1365124261)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;  [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(4277161941)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;= [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(932571096)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='[date2] &lt;&gt; [date2]'>
+    <table>
+      <schema>
+        <column>[cast_calcs.teradata].[TEMP(Test)(3666462064)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>

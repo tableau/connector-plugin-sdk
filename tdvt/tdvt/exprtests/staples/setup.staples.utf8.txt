@@ -1,0 +1,5 @@
+REPLACE([Product Name], "®", "RegisterSymbol")
+REPLACE("This is ™ replace test.", "™", "TradeMark")
+REPLACE("This is 3M replacement test.", "3M", "®")
+FIND("This is ™ find test.", "™")
+FIND("This is ® find test.", "®")

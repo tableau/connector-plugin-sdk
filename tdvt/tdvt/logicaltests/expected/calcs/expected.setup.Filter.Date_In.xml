@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='C:\Users\lriggs\.tabvenvs\cpp-cpp_lriggs\tdvt\lib\site-packages\tdvt\logicaltests\setup\calcs\setup.Filter.Date_In.simple.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[key]</column>
+      </schema>
+      <tuple>
+        <value>&quot;key01&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key02&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key04&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

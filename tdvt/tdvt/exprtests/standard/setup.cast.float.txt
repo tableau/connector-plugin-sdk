@@ -1,0 +1,4 @@
+FLOAT([int1])
+FLOAT([bool0])
+FLOAT([date0])
+FLOAT([num2])

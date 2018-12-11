@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Sort_Alphabetic_DESC_Top1.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[Staples.postgres91].[Customer Name]</column>
+        <column>[Staples.postgres91].[sum:Customer Balance:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Zyzzy Zzuyzyzyk&quot;</value>
+        <value>5052539.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

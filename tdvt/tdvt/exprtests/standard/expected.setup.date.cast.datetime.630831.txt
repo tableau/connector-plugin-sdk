@@ -1,0 +1,12 @@
+<results>
+  <test name='Date(&apos;2017-01-01 12:12:12.0&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(1641592311)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2017-01-01#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

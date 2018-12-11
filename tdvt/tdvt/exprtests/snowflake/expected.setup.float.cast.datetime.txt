@@ -1,0 +1,48 @@
+<results>
+  <test name='DATETIME([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1573932322)(0)]</column>
+      </schema>
+	  <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-17 18:57:36#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-18 12:43:12#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-21 18:14:24#</value>
+      </tuple>
+      <tuple>
+        <value>#1899-12-25 22:48:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-04 09:07:12#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-04 19:40:48#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-05 18:28:48#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-07 18:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-09 07:40:48#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-11 17:02:24#</value>
+      </tuple>
+      <tuple>
+	<value>#1900-01-11 20:24:00#</value>
+      </tuple>
+      <tuple>
+	<value>#1900-01-20 09:21:36#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

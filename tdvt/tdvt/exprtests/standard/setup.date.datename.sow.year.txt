@@ -1,0 +1,5 @@
+DATENAME('year', [date2], 'monday')
+DATENAME('year', [date2], 'sunday')
+
+DATENAME('year', [datetime0], 'monday')
+DATENAME('year', [datetime0], 'sunday')

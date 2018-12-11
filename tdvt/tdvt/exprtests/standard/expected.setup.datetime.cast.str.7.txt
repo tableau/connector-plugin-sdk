@@ -1,0 +1,60 @@
+<results>
+  <test name='TRIM(STR([datetime0]))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(1103404331)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Aug 02 2004 07:59:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 04 2004 22:49:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 05 2004 13:14:20&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 09 2004 10:17:35&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 12 2004 17:30:16&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 14 2004 07:43:00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 14 2004 08:16:44&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 17 2004 14:01:56&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 19 2004 22:21:31&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 22 2004 00:30:23&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 23 2004 21:13:37&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 25 2004 15:22:26&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 26 2004 12:30:34&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 28 2004 06:54:50&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 28 2004 12:34:28&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 28 2004 23:30:22&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Jul 31 2004 11:57:52&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B27875-asc-nulls-first.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[key]</column>
+        <column>[cast_calcs.postgres91].[sum:num2:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;key02&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key03&quot;</value>
+        <value>8.51</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key04&quot;</value>
+        <value>6.46</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key05&quot;</value>
+        <value>8.98</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key08&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key10&quot;</value>
+        <value>6.8</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key11&quot;</value>
+        <value>3.79</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key12&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key14&quot;</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key16&quot;</value>
+        <value>7.87</value>
+      </tuple>
+    </table>
+  </test>
+</results>

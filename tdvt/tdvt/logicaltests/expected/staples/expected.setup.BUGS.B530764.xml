@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='E:\P4\data-dev_wsu_wsu_readCode\tableau-tests\tdvt\logicaltests\setup\staples\setup.BUGS.B530764.kognitio.xml'>
+    <table>
+      <schema>
+        <column>[Staples.kognitio].[sum:Calculation_555068687593533440:ok]</column>
+      </schema>
+      <tuple>
+        <value>4275856.2</value>
+      </tuple>
+    </table>
+  </test>
+</results>

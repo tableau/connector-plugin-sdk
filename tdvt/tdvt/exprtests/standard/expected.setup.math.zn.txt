@@ -1,0 +1,33 @@
+<results>
+  <test name='ZN([int1])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3976315675)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-9</value>
+      </tuple>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-6</value>
+      </tuple>
+      <tuple>
+        <value>-4</value>
+      </tuple>
+      <tuple>
+        <value>-3</value>
+      </tuple>
+      <tuple>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+    </table>
+  </test>
+</results>

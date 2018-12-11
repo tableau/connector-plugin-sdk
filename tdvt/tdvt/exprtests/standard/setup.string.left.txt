@@ -1,0 +1,3 @@
+LEFT(str1, 2)
+left(str2,3)
+left(str2,int0)

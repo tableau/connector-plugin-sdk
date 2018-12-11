@@ -1,0 +1,52 @@
+<results>
+  <test name='DATEPART(&apos;month&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2634030884)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>2</value>
+      </tuple>
+      <tuple>
+        <value>3</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+      <tuple>
+        <value>9</value>
+      </tuple>
+      <tuple>
+        <value>11</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPART(&apos;month&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(4000895377)(0)]</column>
+      </schema>
+      <tuple>
+        <value>7</value>
+      </tuple>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,102 @@
+<results>
+  <test name='DATENAME(&apos;weekday&apos;, [date2], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.ncluster].[TEMP(Test)(1706489238)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Friday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Saturday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sunday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thursday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tuesday  &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wednesday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [date2], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.ncluster].[TEMP(Test)(3326454598)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Friday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Saturday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sunday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thursday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Tuesday  &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wednesday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0], &apos;monday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.ncluster].[TEMP(Test)(1346443059)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Friday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Monday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Saturday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sunday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thursday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wednesday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;weekday&apos;, [datetime0], &apos;sunday&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.ncluster].[TEMP(Test)(2366796649)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Friday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Monday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Saturday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Sunday   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Thursday &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;Wednesday&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

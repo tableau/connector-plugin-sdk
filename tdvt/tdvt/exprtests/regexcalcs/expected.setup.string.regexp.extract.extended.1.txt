@@ -1,0 +1,32 @@
+<results>
+  <test name='REGEXP_EXTRACT(&apos;&apos;,&apos;office+\s+(\w+)&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2768823478)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&apos;office supplies&apos;,&apos;office+\s+(\w+)&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3671376512)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;supplies&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&apos;office supplies&apos;,&apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1946532558)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

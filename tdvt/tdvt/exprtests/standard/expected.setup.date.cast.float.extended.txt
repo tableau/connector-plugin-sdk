@@ -1,0 +1,12 @@
+<results>
+  <test name='float(#2050-01-01#)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3947742720)(0)]</column>
+      </schema>
+      <tuple>
+        <value>54787.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

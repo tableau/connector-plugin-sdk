@@ -1,0 +1,225 @@
+<logical-query>
+  <selects>
+    <field>[Number of Records]</field>
+    <field>[table_name]</field>
+    <field>[int0]</field>
+    <field>[int1]</field>
+    <field>[int2]</field>
+    <field>[int3]</field>
+    <field>[key]</field>
+    <field>[str0]</field>
+    <field>[str1]</field>
+    <field>[str2]</field>
+    <field>[str3]</field>
+  </selects>
+  <topnOp class='logical-operator'>
+    <top count='1000' units='records' />
+    <orderbys>
+    </orderbys>
+    <domainOp class='logical-operator' type='snowflake'>
+      <projectOp class='logical-operator'>
+        <expressions>
+          <binding name='[Number of Records]'>
+            <literalExp class='logical-expression' datatype='integer' value='1'>
+            </literalExp>
+          </binding>
+        </expressions>
+        <unionOp class='logical-operator'>
+          <columns>
+            <field>[table_name]</field>
+            <field>[int0]</field>
+            <field>[int1]</field>
+            <field>[int2]</field>
+            <field>[int3]</field>
+            <field>[key]</field>
+            <field>[str0]</field>
+            <field>[str1]</field>
+            <field>[str2]</field>
+            <field>[str3]</field>
+          </columns>
+          <projectOp class='logical-operator'>
+            <expressions>
+              <binding name='[table_name]'>
+                <literalExp charset='0' class='logical-expression' collation='LEN_RUS_S2_VWIN' datatype='string' value='&quot;Calcs&quot;'>
+                </literalExp>
+              </binding>
+              <binding name='[key]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[key]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str0]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str0]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str1]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str1]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str2]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str2]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str3]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str3]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+            </expressions>
+            <relationOp class='logical-operator' connection='leaf' name='$Calcs$'>
+              <relation name='Calcs' type='table' />
+              <cols>
+              </cols>
+              <type>
+                <schema>
+                  <field name='[int0]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[int1]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[int2]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[int3]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[key]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str0]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str1]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str2]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str3]'>
+                    <type name='top' />
+                  </field>
+                </schema>
+              </type>
+            </relationOp>
+          </projectOp>
+          <projectOp class='logical-operator'>
+            <expressions>
+              <binding name='[table_name]'>
+                <literalExp charset='0' class='logical-expression' collation='LEN_RUS_S2_VWIN' datatype='string' value='&quot;Calcs1&quot;'>
+                </literalExp>
+              </binding>
+              <binding name='[key]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[key]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str0]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str0]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str1]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str1]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str2]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str2]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+              <binding name='[str3]'>
+                <funcallExp class='logical-expression' function='$COLLATE_REMOTE$' shape='scalar'>
+                  <identifierExp class='logical-expression' identifier='[str3]'>
+                  </identifierExp>
+                  <literalExp charset='0' class='logical-expression' collation='LROOT' datatype='string' value='&quot;LEN_RUS_S2_VWIN&quot;'>
+                  </literalExp>
+                </funcallExp>
+              </binding>
+            </expressions>
+            <relationOp class='logical-operator' connection='leaf' name='$Calcs$'>
+              <relation name='Calcs1' type='table' />
+              <cols>
+              </cols>
+              <type>
+                <schema>
+                  <field name='[int0]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[int1]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[int2]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[int3]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[key]'>
+                    <type name='nonnull' />
+                  </field>
+                  <field name='[str0]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str1]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str2]'>
+                    <type name='top' />
+                  </field>
+                  <field name='[str3]'>
+                    <type name='top' />
+                  </field>
+                </schema>
+                <functional-dependency>
+                  <schema>
+                    <field name='[key]'>
+                      <type name='nonnull' />
+                    </field>
+                  </schema>
+                  <determinant>
+                    <field>[key]</field>
+                  </determinant>
+                  <dependent>
+                    <field></field>
+                  </dependent>
+                </functional-dependency>
+              </type>
+            </relationOp>
+          </projectOp>
+        </unionOp>
+      </projectOp>
+    </domainOp>
+  </topnOp>
+</logical-query>

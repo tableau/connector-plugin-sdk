@@ -1,0 +1,22 @@
+<results>
+  <test name='AVG([int0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql56].[TEMP(Test)(3952218057)(0)]</column>
+      </schema>
+      <tuple>
+        <value>6.1818</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='AVG([num4])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql56].[TEMP(Test)(1371989636)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2.0016667</value>
+      </tuple>
+    </table>
+  </test>
+</results>

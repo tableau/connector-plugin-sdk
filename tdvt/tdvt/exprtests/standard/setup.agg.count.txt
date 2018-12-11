@@ -1,0 +1,6 @@
+COUNT([int0])
+COUNT([bool0])
+COUNT([date3])
+COUNT([num4])
+COUNT([str2])
+

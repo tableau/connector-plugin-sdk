@@ -1,0 +1,106 @@
+<results>
+  <test name='DATENAME(&apos;dayofyear&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(1667583030)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;110        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;117        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;123        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;150        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;155        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;194        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;208        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;224        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;246        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;253        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;262        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;312        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;35         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;39         &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;5          &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;76         &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;dayofyear&apos;, [datetime0])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.db2].[TEMP(Test)(2537119552)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;186        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;187        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;191        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;194        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;196        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;199        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;201        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;204        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;205        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;207        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;208        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;210        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;213        &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;215        &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

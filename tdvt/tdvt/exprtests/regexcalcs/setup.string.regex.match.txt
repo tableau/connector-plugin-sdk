@@ -1,0 +1,2 @@
+REGEXP_MATCH([str0], 'OFFICE')
+REGEXP_MATCH([str0], 'Z')

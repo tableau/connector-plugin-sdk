@@ -1,0 +1,12 @@
+<results>
+  <test name='&apos;&gt;&apos;+SPACE(2)+&apos;&lt;&apos;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3167158121)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&gt;  &lt;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

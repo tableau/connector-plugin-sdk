@@ -1,0 +1,2 @@
+exp(0.1*num0)
+EXP([int2])

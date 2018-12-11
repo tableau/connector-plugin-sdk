@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Filter.FilterBy-to-no-results.postgres91.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres91].[str2]</column>
+      </schema>
+    </table>
+  </test>
+</results>

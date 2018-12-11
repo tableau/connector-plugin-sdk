@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1'>
+  <connection-customization class="postgres_odbc" enabled="true" version="10.0">
+    <vendor name="vendor"/>
+    <driver name="driver"/>
+    <customizations>
+      <customization name="CAP_SELECT_INTO" value="yes"/>
+      <customization name="CAP_SELECT_TOP_INTO" value="yes"/>
+      <customization name="CAP_CREATE_TEMP_TABLES" value="no"/>
+      <customization name="CAP_QUERY_BOOLEXPR_TO_INTEXPR" value="no"/>
+      <customization name="CAP_QUERY_GROUP_BY_BOOL" value="yes"/>
+      <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="yes"/>
+      <customization name="CAP_QUERY_SORT_BY" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERIES" value="yes"/>
+      <customization name="CAP_QUERY_TOP_N" value="yes"/>
+      <customization name="CAP_QUERY_TOP_SAMPLE" value="yes"/>
+      <customization name="CAP_QUERY_TOP_SAMPLE_PERCENT" value="yes"/>
+      <customization name="CAP_QUERY_WHERE_FALSE_METADATA" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERIES_WITH_TOP" value="yes"/>
+      <customization name="CAP_SUPPORTS_SPLIT_FROM_LEFT" value="yes"/>
+      <customization name="CAP_SUPPORTS_SPLIT_FROM_RIGHT" value="yes"/>
+      <customization name="CAP_QUERY_ALLOW_PARTIAL_AGGREGATION" value="no"/>
+      <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
+      <customization name="CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10" value="yes"/>
+      <customization name="CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION" value="yes"/>
+      <customization name="CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES" value="yes"/>
+      <customization name="CAP_ODBC_SUPPRESS_PG_TEMP_SCHEMA_TABLES" value="yes"/>
+      <customization name="CAP_ODBC_METADATA_SUPPRESS_SQLSTATISTICS_API" value="yes"/>
+    </customizations>
+  </connection-customization>
+  <connection-dialog file='connection-dialog.tcd'/>
+  <connection-resolver file="connectionResolver.tdr"/>
+  <dialect file='dialect.tdd'/>
+</connector-plugin>

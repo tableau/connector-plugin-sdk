@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <logical-query>
+    <selects>
+      <field>[str2]</field>
+      <field>[sum:num3:ok]</field>
+    </selects>
+    <aggregateOp class="logical-operator">
+      <measures>
+        <binding name="[sum:num3:ok]">
+          <funcallExp class="logical-expression" function="SUM" shape="aggregate">
+            <identifierExp class="logical-expression" identifier="[num3]" />
+          </funcallExp>
+        </binding>
+      </measures>
+      <groupbys>
+        <binding name="[str2]">
+          <identifierExp class="logical-expression" identifier="[str2]" />
+        </binding>
+      </groupbys>
+      <selectOp class="logical-operator">
+        <predicate>
+          <funcallExp class="logical-expression" function="isnull" shape="scalar">
+            <identifierExp class="logical-expression" identifier="[str2]" />
+          </funcallExp>
+        </predicate>
+        <relationOp class="logical-operator" connection="leaf" name="$Calcs$">
+          <relation name="Calcs" table="$Calcs$" type="table" />
+          <cols>
+          </cols>
+          <type>
+            <schema>
+              <field name="[bool0]">
+                <type name="top" />
+              </field>
+              <field name="[bool1]">
+                <type name="top" />
+              </field>
+              <field name="[bool2]">
+                <type name="top" />
+              </field>
+              <field name="[bool3]">
+                <type name="top" />
+              </field>
+              <field name="[date0]">
+                <type name="top" />
+              </field>
+              <field name="[date1]">
+                <type name="top" />
+              </field>
+              <field name="[date2]">
+                <type name="top" />
+              </field>
+              <field name="[date3]">
+                <type name="top" />
+              </field>
+              <field name="[datetime0]">
+                <type name="top" />
+              </field>
+              <field name="[datetime1]">
+                <type name="top" />
+              </field>
+              <field name="[int0]">
+                <type name="top" />
+              </field>
+              <field name="[int1]">
+                <type name="top" />
+              </field>
+              <field name="[int2]">
+                <type name="top" />
+              </field>
+              <field name="[int3]">
+                <type name="top" />
+              </field>
+              <field name="[key]">
+                <type name="top" />
+              </field>
+              <field name="[num0]">
+                <type name="top" />
+              </field>
+              <field name="[num1]">
+                <type name="top" />
+              </field>
+              <field name="[num2]">
+                <type name="top" />
+              </field>
+              <field name="[num3]">
+                <type name="top" />
+              </field>
+              <field name="[num4]">
+                <type name="top" />
+              </field>
+              <field name="[str0]">
+                <type name="top" />
+              </field>
+              <field name="[str1]">
+                <type name="top" />
+              </field>
+              <field name="[str2]">
+                <type name="top" />
+              </field>
+              <field name="[str3]">
+                <type name="top" />
+              </field>
+              <field name="[time0]">
+                <type name="top" />
+              </field>
+              <field name="[time1]">
+                <type name="top" />
+              </field>
+              <field name="[zzz]">
+                <type name="top" />
+              </field>
+            </schema>
+            <schema>
+              <field name="">
+                <type name="top" />
+              </field>
+              <field name="[num3]">
+                <type name="top" />
+              </field>
+              <field name="[str2]">
+                <type name="top" />
+              </field>
+            </schema>
+          </type>
+        </relationOp>
+      </selectOp>
+    </aggregateOp>
+  </logical-query>

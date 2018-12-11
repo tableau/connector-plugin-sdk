@@ -1,0 +1,36 @@
+<results>
+  <test name='left(str0,num4)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.mysql56].[TEMP(Test)(1907571572)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FURNITURE&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE S&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE SUPP&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TEC&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECH&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHN&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOL&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TECHNOLOGY&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

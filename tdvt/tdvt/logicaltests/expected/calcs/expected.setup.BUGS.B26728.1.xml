@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B26728.oracle_12c.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[DayDiffs1 (bin)]</column>
+        <column>[cast_calcs.oracle_12c].[DayDiffs2 (bin)]</column>
+        <column>[cast_calcs.oracle_12c].[DayDiffs3 (bin)]</column>
+        <column>[cast_calcs.oracle_12c].[YearDiffs1 (bin)]</column>
+        <column>[cast_calcs.oracle_12c].[YearDiffs2 (bin)]</column>
+        <column>[cast_calcs.oracle_12c].[YearDiffs3 (bin)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>%null%</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-5855</value>
+        <value>3903</value>
+        <value>-2899</value>
+        <value>-16</value>
+        <value>10</value>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-5246</value>
+        <value>3497</value>
+        <value>-2593</value>
+        <value>-15</value>
+        <value>9</value>
+        <value>-8</value>
+      </tuple>
+      <tuple>
+        <value>-43</value>
+        <value>28</value>
+        <value>3</value>
+        <value>0</value>
+        <value>0</value>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>-20</value>
+        <value>13</value>
+        <value>18</value>
+        <value>0</value>
+        <value>0</value>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>-16</value>
+        <value>10</value>
+        <value>15</value>
+        <value>0</value>
+        <value>0</value>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+</results>
