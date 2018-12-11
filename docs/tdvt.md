@@ -79,7 +79,7 @@ Multiple expected files are supported.
 
 ## Notes on loading TestV1
 
-See [Postgres Example]({{ site.baseurl }}tests/datasets/TestV1/postgres/README.md) for instructions on loading TestV1 to a local Postgres database.
+See [Postgres Example]({{ site.baseurl }}/tests/datasets/TestV1/postgres/README.md) for instructions on loading TestV1 to a local Postgres database.
 See the section below about troubleshooting Boolean values if your database does not have a native Boolean type.
 
 There is a 'StaplesData' test and a 'calcs_data' test that retrieve every value from the table and compare it to an expected value.
