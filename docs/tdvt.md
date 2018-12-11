@@ -1,5 +1,5 @@
 ---
-title: Test Your Connector Plugin
+title: Test Your Connector
 ---
 
 ## Use Tableau Datasource Verification Tool (TDVT) to test
@@ -12,14 +12,14 @@ Named connectors are optimized connections and provide a faster, cleaner experie
 If a named connector doesn't exist, you can connect through the Other Databases (ODBC) connector. 
 For information on the Other Databases (ODBC), check out the [online Help](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_otherdatabases.htm). 
 
-Or you can create a connector plugin, as described in this Developer Guide.
+Or you can create a connector, as described in this Developer Guide.
 
 We recommend running TDVT for:
 
 - New Driver Releases
 - Database Patches
 - Database Releases
-- Connector Plugins
+- Connectors
 
 ## What’s in this section?
 
@@ -81,7 +81,7 @@ Multiple expected files are supported.
 ## Notes on loading TestV1
 
 See [Postgres Example](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1/postgres/README.md) for instructions on loading TestV1 to a local Postgres database.
-See the section below about troubleshooting Boolean values if your database does not have a native Boolean type.
+See the section below about troubleshooting Boolean values if your database doesn't have a native Boolean type.
 
 There is a 'StaplesData' test and a 'calcs_data' test that retrieve every value from the table and compare it to an expected value.
 This can help ensure the data is loaded correctly with the right data types.
@@ -189,7 +189,7 @@ If none of the logical configurations work for your datasource, then you can cre
 Name = your_datasource_name  #i.e. mydb
 
 CommandLineOverride = -DLogLevel=Debug #Space separated list of arguments that are passed through unchanged to tabquerytool. Most Tableau arguments require a prepended '-D'.
-#If you are testing a connector plugin, be sure to add the command line argument -DConnectPluginsPath and have it pointed at the folder where your plugin is located
+#If you are testing a connector, be sure to add the command line argument -DConnectPluginsPath and have it pointed at the folder where your connector is located
 
 MaxThread = 6   #You can add this to control Max Thread number when you use TDVT to run single datasource, it cannot apply with multi datasource
 
@@ -284,7 +284,9 @@ To run logical query tests:
 Test results are available in a CSV file called test_results_combined.
 Try loading them in Tableau Desktop to visualize the results.
 
-## Test the sample plugins
+## Test the sample connectors
+
+Sample connectors are located in the samples/plugins folder.
 
 1. Copy the samples/plugins folder to your working directory so that they exist under /plugins. Like this: /plugins/postgres_odbc/manifest.xml 
 
