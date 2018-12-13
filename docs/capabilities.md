@@ -14,7 +14,8 @@ Use Tableau capabilities to customize and tune your connector behavior.
 * [Isolation Level](#isolation-level)
 * [Uncommon](#uncommon)
 
-**Read the table** 
+**Read the table**
+
 Entry | Description 
 -|- 
 &ndash; | There is no default or recommended value for this capability. If you use this capability, you need to verify that the value you use is correct for your database.
