@@ -16,7 +16,7 @@ Or, if you prefer to have your users test the connector, you can place the conne
 Place the files into a subdirectory you create, and then use the -DConnectPluginsPath command line argument.  For example, place your plugin files in `C:\tableau_connectors\myconnector` and then start Tableau:
 
 ```
-tableau.exe -DConnectPluginsPath =C:\tableau_connectors
+tableau.exe -DConnectPluginsPath=C:\tableau_connectors
 ```
 
 **Tableau Server:** Follow the same instructions as Tableau Desktop for each server node.
