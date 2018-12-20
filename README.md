@@ -4,7 +4,7 @@
 
 This project consists of documentation, example files, and a Python-based test harness that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
-* [Why Connectors?]()
+* [Why Connectors?](#why-connectors)
 * [Get started](#get-started)
 * [Samples](#samples)
 * [Prerequisites](#prerequisites)
