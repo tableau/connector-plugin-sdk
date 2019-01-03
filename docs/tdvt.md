@@ -300,7 +300,7 @@ TDVT includes a sample Tableau workbook that will help you analyze the results o
 
 You can use these steps as a guide to develop your own workbook.
 
-1. Open the file called "Example Postgres Calc Test Result.twbx", or start Tableau and connect to 'Text File'.
+1. Open the file called [Example Postgres Calc Test Result.twbx](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/results/Example%20Postgres%20Calc%20Test%20Results.twbx), or start Tableau and connect to 'Text File'.
 
 1. Navigate to the "Data Source" tab.
 
