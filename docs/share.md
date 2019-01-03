@@ -36,4 +36,4 @@ For example:
 tsm configuration set -k native_api.connect_plugins_path -v C:/tableau_connectors 
 ```
 
-If you get a configuration error, try adding the `--force-keys` parameter to the command.
+If you get a configuration error, try adding the `--force-keys` option to the end of the command.
