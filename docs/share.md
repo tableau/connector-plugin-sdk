@@ -31,9 +31,9 @@ Or, if you prefer to have your users test the connector, you can place the conne
     tsm configuration set -k native_api.connect_plugins_path -v C:/tableau_connectors 
     ```
   
-1. Restart Tableau Server to see the new connector.
-
 If you get a configuration error when you set the option in step 2, try adding the `--force-keys` option to the end of the command.
 
 For information about using TSM to set the option, see [tsm configuration set Options](https://onlinehelp.tableau.com/current/server-linux/en-us/cli_configuration-set_tsm.htm) in the Tableau Server help.
+
+Note that whenever you add, remove, or update a connector, you need to restart the server to see the changes.
     
