@@ -14,26 +14,26 @@ Or, if you prefer to have your users test the connector, you can place the conne
 
 **Tableau Desktop:** 
 
-1. Place the files into a subdirectory you create.
-1. Use the `-DConnectPluginsPath` command line argument.  
+1. Create a directory for Tableau connectors. For example: `C:\tableau_connectors`
+1. Put the the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `C:\tableau_connectors\my_connector`
+1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
 
-For example, place your connector files in `C:\tableau_connectors\myconnector` and then start Tableau:
-
-```
-tableau.exe -DConnectPluginsPath=C:\tableau_connectors
-```
+    ```
+    tableau.exe -DConnectPluginsPath=C:\tableau_connectors
+    ```
 
 **Tableau Server:** 
 
-1. Follow the same instructions as Tableau Desktop for each server node.
-1. Set this option: `native_api.connect_plugins_path: C:/tableau_connectors`
+1. For each server node, follow Tableau Desktop's steps 1 and 2 above.
+1. Set the `native_api.connect_plugins_path` option. For example:
+
+    ```
+    tsm configuration set -k native_api.connect_plugins_path -v C:/tableau_connectors 
+    ```
+  
+1. Restart Tableau Server to see the new connector.
+
+If you get a configuration error when you set the option in step 2, try adding the `--force-keys` option to the end of the command.
 
 For information about using TSM to set the option, see [tsm configuration set Options](https://onlinehelp.tableau.com/current/server-linux/en-us/cli_configuration-set_tsm.htm) in the Tableau Server help.
-
-For example:
-
-```
-tsm configuration set -k native_api.connect_plugins_path -v C:/tableau_connectors 
-```
-
-If you get a configuration error, try adding the `--force-keys` option to the end of the command.
+    
