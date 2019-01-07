@@ -34,7 +34,7 @@ You might find other super class values in the workbook XML from an existing Tab
 
 ### Features based on superclass
 
-Web Editing (ie creating a new connection from the web) is not available for all plugin superclasses. If your plugin is based on 'odbc' or 'jdbc' then you can publish your workbook or datasource from desktop to server but you can't create a new connection directly on server. Plugins based on 'mysql_obc' do support web editing since this ability is inherited from the mysql code they are based on. In the future we will support web editing for all plugins.
+Web Authoring (ie creating a new connection from the web) is not available for all plugin superclasses. If your plugin is based on 'odbc' or 'jdbc' then you can publish your workbook or datasource from desktop to server but you can't create a new connection directly on server. Plugins based on 'mysql_obc' do support web authoring since this ability is inherited from the mysql code they are based on. In the future we will support web authoring for all plugins.
 
 ## Choosing a dialect
 
