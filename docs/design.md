@@ -32,6 +32,10 @@ If your connection is very similar to an existing database such as PostgreSQL or
 
 You might find other super class values in the workbook XML from an existing Tableau connection, but we don't recommend using them; they haven't been tested.
 
+### Features based on superclass
+
+Web Editing (ie creating a new connection from the web) is not available for all plugin superclasses. If your plugin is based on 'odbc' or 'jdbc' then you can publish your workbook or datasource from desktop to server but you can't create a new connection directly on server. Plugins based on 'mysql_obc' do support web editing since this ability is inherited from the mysql code they are based on. In the future we will support web editing for all plugins.
+
 ## Choosing a dialect
 
 The dialect determines what SQL is generated for various Tableau actions. Choosing the right dialect is a critical part of writing a connector.
