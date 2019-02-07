@@ -61,7 +61,7 @@ def print_configurations(ds_reg, dsname, verbose):
         print("\nAvailable suites:")
         for suite in ds_reg.suite_map:
             print(suite)
-            print("\t" + ','.join(ds_reg.suite_map[suite]))
+            print("\t" + ', '.join(ds_reg.suite_map[suite]))
             print('\n')
 
 
