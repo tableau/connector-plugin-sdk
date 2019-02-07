@@ -14,25 +14,25 @@ from .test_config import TestConfig,TestSet,build_config_name,build_tds_name
 
 
 def print_ds(ds, ds_reg):
-    print ("\n\t" + ds)
+    print("\n\t" + ds)
     test_config = ds_reg.get_datasource_info(ds)
     if not test_config:
         return
-    print ("\tLogical tests:")
+    print("\tLogical tests:")
     for x in test_config.get_logical_tests():
-        print ("\t"*2 + str(x))
+        print("\t"*2 + str(x))
         root_directory = get_root_dir()
         tests = x.generate_test_file_list_from_config()
         for test in tests:
-            print ("\t"*3 + test.test_path)
+            print("\t"*3 + test.test_path)
 
-    print ("\tExpression tests:")
+    print("\tExpression tests:")
     for x in test_config.get_expression_tests():
-        print ("\t"*2 + str(x))
+        print("\t"*2 + str(x))
         root_directory = get_root_dir()
         tests = x.generate_test_file_list_from_config()
         for test in tests:
-            print ("\t"*3 + test.test_path)
+            print("\t"*3 + test.test_path)
 
 
 def print_configurations(ds_reg, dsname, verbose):
@@ -43,21 +43,21 @@ def print_configurations(ds_reg, dsname, verbose):
         elif len(ds_to_run) == 0:
             pass
         else:
-            print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run)) 
+            print("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run))
             if verbose:
                 for ds in ds_to_run:
                     print_ds(ds, ds_reg)
                     
     else:
-        print ("\nAvailable datasources:")
+        print("\nAvailable datasources:")
         ds_all = ds_reg.get_datasources('all')
         for ds in sorted(ds_all):
-            print (ds)
-        print ("\nAvailable suites:")
+            print(ds)
+        print("\nAvailable suites:")
         for suite in ds_reg.suite_map:
-            print (suite)
-            print ("\t" + ','.join(ds_reg.suite_map[suite]))
-            print ('\n')
+            print(suite)
+            print("\t" + ','.join(ds_reg.suite_map[suite]))
+            print('\n')
 
 
 def print_logical_configurations(ds_registry, config_name=None):
@@ -65,9 +65,9 @@ def print_logical_configurations(ds_registry, config_name=None):
         for config in list_config(ds_registry, config_name):
             print(config)
     else:
-        print ("Available logical query configurations: \n")
+        print("Available logical query configurations: \n")
         for config in list_configs(ds_registry):
-            print (config)
+            print(config)
 
 
 def LoadTest(config, test_dir=get_root_dir()):
