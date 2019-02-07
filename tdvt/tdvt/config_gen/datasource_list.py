@@ -12,6 +12,7 @@ from .gentests import list_configs, list_config
 from ..resources import *
 from .test_config import TestConfig,TestSet,build_config_name,build_tds_name
 
+
 def print_ds(ds, ds_reg):
     print ("\n\t" + ds)
     test_config = ds_reg.get_datasource_info(ds)
@@ -32,6 +33,7 @@ def print_ds(ds, ds_reg):
         tests = x.generate_test_file_list_from_config()
         for test in tests:
             print ("\t"*3 + test.test_path)
+
 
 def print_configurations(ds_reg, dsname, verbose):
     if dsname:
@@ -57,6 +59,7 @@ def print_configurations(ds_reg, dsname, verbose):
             print ("\t" + ','.join(ds_reg.suite_map[suite]))
             print ('\n')
 
+
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
         for config in list_config(ds_registry, config_name):
@@ -65,6 +68,7 @@ def print_logical_configurations(ds_registry, config_name=None):
         print ("Available logical query configurations: \n")
         for config in list_configs(ds_registry):
             print (config)
+
 
 def LoadTest(config, test_dir=get_root_dir()):
     """ Parse a datasource test suite config into a TestConfig object.
@@ -248,7 +252,8 @@ def LoadTest(config, test_dir=get_root_dir()):
 
     logging.debug(test_config)
     return test_config
-        
+
+
 class TestRegistry(object):
     """Add a new datasource here and then add it to the appropriate registries below."""
     def __init__(self, ini_file):
@@ -319,6 +324,7 @@ class TestRegistry(object):
         seen_ds = set()
         return [x for x in ds_to_run if not (x in seen_ds or seen_ds.add(x))]
 
+
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""
     def __init__(self):
@@ -329,6 +335,7 @@ class MacRegistry(TestRegistry):
     """Mac specific test suites."""
     def __init__(self):
         super(MacRegistry, self).__init__('mac')
+
 
 class LinuxRegistry(TestRegistry):
     """Linux specific test suites."""
