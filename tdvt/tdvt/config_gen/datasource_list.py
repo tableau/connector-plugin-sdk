@@ -49,8 +49,13 @@ def print_configurations(ds_reg, dsname, verbose):
                     print_ds(ds, ds_reg)
                     
     else:
+        try:
+            ds_all = ds_reg.get_datasources('all')
+        except TypeError:
+            print("""\nNo data sources found in this directory. 
+                     TDVT must be run from a directory that contains data sources.""")
+            return
         print("\nAvailable datasources:")
-        ds_all = ds_reg.get_datasources('all')
         for ds in sorted(ds_all):
             print(ds)
         print("\nAvailable suites:")
