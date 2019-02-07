@@ -13,6 +13,8 @@ from ..resources import *
 from .test_config import TestConfig,TestSet,build_config_name,build_tds_name
 
 
+RUN_IN_INCORRECT_DIRECTORY_MSG = "No data sources found in this directory. To run tests, the base directory must contain a valid test configuration."
+
 def print_ds(ds, ds_reg):
     print("\n\t" + ds)
     test_config = ds_reg.get_datasource_info(ds)
@@ -52,7 +54,7 @@ def print_configurations(ds_reg, dsname, verbose):
         try:
             ds_all = ds_reg.get_datasources('all')
         except TypeError:
-            print("\nNo data sources found in this directory. TDVT must be run from a directory that contains data sources.")
+            print(RUN_IN_INCORRECT_DIRECTORY_MSG)
             return
         print("\nAvailable datasources:")
         for ds in sorted(ds_all):

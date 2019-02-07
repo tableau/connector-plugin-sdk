@@ -13,13 +13,19 @@
 
 """
 
+
 import configparser
-from defusedxml.ElementTree import parse,ParseError
+import io
 import logging
 import os
 import pkg_resources
 import shutil
+import sys
 import unittest
+
+from unittest import mock
+
+from defusedxml.ElementTree import parse,ParseError
 
 from tdvt import tdvt_core
 from tdvt.tdvt import enqueue_failed_tests
@@ -29,6 +35,7 @@ from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, TestF
 from tdvt.resources import get_path, make_temp_dir
 from tdvt.test_results import *
 from tdvt.tabquery import *
+
 
 class DiffTest(unittest.TestCase):
     def test_diff(self):
@@ -535,12 +542,29 @@ class ConfigTest(unittest.TestCase):
         self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
 
 
+class PrintConfigurationsTest(unittest.TestCase):
+    def test_print_configuration_with_no_dsname_and_no_ds_all_returns_explanation(self):
+        with mock.patch('tdvt.config_gen.datasource_list.TestRegistry.get_datasources', side_effect=TypeError):
+            captured_output = io.StringIO()
+            sys.stdout = captured_output  # redirect stdout to a StringIO obj to catch the print statement.
+            datasource_list.print_configurations(datasource_list.TestRegistry('test'), None, None)
+            self.assertIn(datasource_list.RUN_IN_INCORRECT_DIRECTORY_MSG, captured_output.getvalue())
+
+    def test_print_configuration_with_no_dsname(self):
+        with mock.patch('tdvt.config_gen.datasource_list.TestRegistry.get_datasources', return_value=['postgres_odbc', 'postgres_jdbc']):
+            correct_out = "\nAvailable datasources:\npostgres_jdbc\npostgres_odbc\n\nAvailable suites:\nall\n\t\n\n\n"
+            captured_output = io.StringIO()
+            sys.stdout = captured_output
+            datasource_list.print_configurations(datasource_list.TestRegistry('test'), None, None)
+            self.assertEqual(correct_out, captured_output.getvalue())
+
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '') 
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))
 logging.basicConfig(filename='tdvt_test_log.txt',level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
 configure_tabquery_path()
+
 if __name__ == '__main__':
 
     logging.debug("Starting TDVT tests\n")
