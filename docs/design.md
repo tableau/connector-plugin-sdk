@@ -70,6 +70,9 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - TeradataDialect
 - VerticaDialect
 
+### Should I create a dialect definition file?
+You don’t need a dialect definition file if your connector uses the same SQL dialect as the connector it’s based on, such as mysql_odbc. However, to make changes to an existing Tableau dialect or define a new dialect, you’ll need a new dialect definition file. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect). 
+
 ## Setting connection capabilities
 
 Tableau capabilities are Boolean settings you can use to tune many aspects of your connector behavior.
