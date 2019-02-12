@@ -263,7 +263,7 @@ def diff_sql_node(actual_sql, expected_sql, diff_string):
 
     return (0, diff_string)
 
-def diff_table_node(actual_table, expected_table, diff_string):
+def diff_table_node(actual_table, expected_table, diff_string, test_name):
     actual_tuples = actual_table.findall('tuple')
     expected_tuples = expected_table.findall('tuple')
 
@@ -280,9 +280,10 @@ def diff_table_node(actual_table, expected_table, diff_string):
         diff_string += "\tDifferent number of tuples.\n"
 
     if not len(actual_tuples):
-        diff_string +=  "\tNo 'actual' file tuples.\n"
+        diff_string += "No 'actual' file tuples.\n"
 
     diff_count = 0
+    diff_string += "Tuples - " + test_name + "\n"
 
     expected_tuple_list = []
     for j in expected_tuples:
@@ -300,7 +301,7 @@ def diff_table_node(actual_table, expected_table, diff_string):
     for a, b in zip(actual_tuple_list, expected_tuple_list):
         if a != b:
             diff_string += "\t <<<< >>>> \n"
-            diff_string += "\tactual: " + a + "\n"
+            diff_string += "\tactual: " a + "\n"
             diff_string += "\texpected: " + b + "\n"
 
     return (diff_count , diff_string)
@@ -332,7 +333,7 @@ def diff_test_results(result, expected_output):
 
         #Compare the tuples.
         if config.tested_tuples:
-            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table, diff_string)
+            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table, diff_string, expected_testcase_result.name)
             actual_testcase_result.passed_tuples = diff == 0
             diff_counts[test_case] = diff
 
