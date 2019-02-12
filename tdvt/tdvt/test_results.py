@@ -4,6 +4,7 @@ import json
 import re
 
 from .config_gen.tdvtconfig import TdvtTestConfig
+from .constants import VALID_TDS_NAME, EXPECTED_ERROR_MSG
 
 class TestCaseResult(object):
     """The actual or expected results of a test run.
@@ -221,6 +222,9 @@ class TestResult(object):
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
+        wrong_passwd_test = EXPECTED_ERROR_MSG in self.test_config.tds and VALID_TDS_NAME in self.cmd_output.lower()
+        if wrong_passwd_test:
+            return True
         if self.error_status or not self.test_case_map:
             return False
         for test_case in self.test_case_map:

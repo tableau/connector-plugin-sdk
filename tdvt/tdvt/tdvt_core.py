@@ -23,6 +23,7 @@ from .config_gen.gentests import generate_logical_files
 from .resources import *
 from .tabquery import build_tabquery_command_line
 from .test_results import *
+from .constants import VALID_TDS_NAME, EXPECTED_ERROR_MSG
 
 ALWAYS_GENERATE_EXPECTED = False
 
@@ -180,7 +181,8 @@ def do_work(work):
         actual_filepath = t.test_file
         base_test_filepath = t.test_file
         existing_output_filepath = work.test_set.get_expected_output_file_path(t.test_file, work.test_config.output_dir)
-
+        is_wrong_passwd_test = (EXPECTED_ERROR_MSG in work.cmd_output.lower()) and (
+                VALID_TDS_NAME in work.test_set.tds_name.lower())
         #First check for systemic errors.
         if not os.path.isfile(existing_output_filepath):
             if work.is_timeout():
@@ -191,7 +193,7 @@ def do_work(work):
                 work.handle_aborted_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('A')
                 continue
-            elif work.is_error():
+            elif work.is_error() and not is_wrong_passwd_test:
                 work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('E')
                 continue
@@ -539,11 +541,13 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     total_failed_tests = 0
     total_tests = 0
     for path, test_result in all_test_results.items():
+        wrong_passwd_test = VALID_TDS_NAME in tdsname and EXPECTED_ERROR_MSG in test_result.cmd_output.lower()
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
         if not test_result or not test_result.get_test_case_count():
             csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
-            total_failed_tests += 1
+            if not wrong_passwd_test:
+                total_failed_tests += 1
             total_tests += 1
         else:
             test_case_index = 0
