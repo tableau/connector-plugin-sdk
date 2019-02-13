@@ -12,6 +12,7 @@ from .gentests import list_configs, list_config
 from ..resources import *
 from .test_config import TestConfig,build_config_name,build_tds_name
 
+
 def print_ds(ds, ds_reg):
     print ("\n\t" + ds)
     test_config = ds_reg.get_datasource_info(ds)
@@ -33,6 +34,7 @@ def print_ds(ds, ds_reg):
         for test in tests:
             print ("\t"*3 + test.test_path)
 
+
 def print_configurations(ds_reg, dsname, verbose):
     if dsname:
         ds_to_run = ds_reg.get_datasources(dsname)
@@ -41,11 +43,11 @@ def print_configurations(ds_reg, dsname, verbose):
         elif len(ds_to_run) == 0:
             pass
         else:
-            print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run)) 
+            print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run))
             if verbose:
                 for ds in ds_to_run:
                     print_ds(ds, ds_reg)
-                    
+
     else:
         print ("\nAvailable datasources:")
         ds_all = ds_reg.get_datasources('all')
@@ -57,8 +59,10 @@ def print_configurations(ds_reg, dsname, verbose):
             print ("\t" + ','.join(ds_reg.suite_map[suite]))
             print ('\n')
 
+
 def get_password_file(config):
     return config.get('PasswordFile', '')
+
 
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
@@ -69,6 +73,7 @@ def print_logical_configurations(ds_registry, config_name=None):
         for config in list_configs(ds_registry):
             print (config)
 
+
 def LoadTest(config, test_dir=get_root_dir()):
     """ Parse a datasource test suite config into a TestConfig object.
     [Datasource]
@@ -77,13 +82,13 @@ def LoadTest(config, test_dir=get_root_dir()):
     CommandLineOverride =
 
     [StandardTests]
-    LogicalExclusions_Calcs = 
+    LogicalExclusions_Calcs =
     LogicalExclusions_Staples = Filter.Trademark
     ExpressionExclusions_Standard = string.char,dateparse
 
     [LODTests]
-    LogicalExclusions_Staples = 
-    ExpressionExclusions_Calcs = 
+    LogicalExclusions_Staples =
+    ExpressionExclusions_Calcs =
 
     [StaplesDataTest]
 
@@ -97,8 +102,8 @@ def LoadTest(config, test_dir=get_root_dir()):
     Name = expression_test_dates.
     TDS = cast_calcs.bigquery_sql_dates.tds
     Exclusions = string.ascii
-    TestPath = exprtests/standard/ 
-    
+    TestPath = exprtests/standard/
+
     [LogicalConfig]
     Name = mydb_config
     key = value
@@ -251,7 +256,8 @@ def LoadTest(config, test_dir=get_root_dir()):
 
     logging.debug(test_config)
     return test_config
-        
+
+
 class TestRegistry(object):
     """Add a new datasource here and then add it to the appropriate registries below."""
     def __init__(self, ini_file):
@@ -322,6 +328,7 @@ class TestRegistry(object):
         seen_ds = set()
         return [x for x in ds_to_run if not (x in seen_ds or seen_ds.add(x))]
 
+
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""
     def __init__(self):
@@ -332,6 +339,7 @@ class MacRegistry(TestRegistry):
     """Mac specific test suites."""
     def __init__(self):
         super(MacRegistry, self).__init__('mac')
+
 
 class LinuxRegistry(TestRegistry):
     """Linux specific test suites."""
