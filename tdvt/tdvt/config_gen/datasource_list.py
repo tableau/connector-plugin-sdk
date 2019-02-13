@@ -13,6 +13,9 @@ from ..resources import *
 from .test_config import TestConfig,build_config_name,build_tds_name
 
 
+RUN_IN_INCORRECT_DIRECTORY_MSG = "\nNo data sources found in this directory. To run tests, the base directory must contain a valid test configuration."
+
+
 def print_ds(ds, ds_reg):
     print("\n\t" + ds)
     test_config = ds_reg.get_datasource_info(ds)
@@ -49,14 +52,18 @@ def print_configurations(ds_reg, dsname, verbose):
                     print_ds(ds, ds_reg)
 
     else:
+        try:
+            ds_all = ds_reg.get_datasources('all')
+        except TypeError:
+            print(RUN_IN_INCORRECT_DIRECTORY_MSG)
+            return
         print("\nAvailable datasources:")
-        ds_all = ds_reg.get_datasources('all')
         for ds in sorted(ds_all):
             print(ds)
         print("\nAvailable suites:")
         for suite in ds_reg.suite_map:
             print(suite)
-            print("\t" + ','.join(ds_reg.suite_map[suite]))
+            print("\t" + ', '.join(ds_reg.suite_map[suite]))
             print('\n')
 
 
