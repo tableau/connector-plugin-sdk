@@ -301,9 +301,9 @@ def diff_table_node(actual_table, expected_table, diff_string):
 
     for a, b in zip(actual_tuple_list, expected_tuple_list):
         if a != b:
-            diff_string += " <<<< >>>> \n"
-            diff_string += a + "\n"
-            diff_string += b + "\n"
+            diff_string += "\t <<<< >>>> \n"
+            diff_string += "\tactual: " + a + "\n"
+            diff_string += "\texpected: " + b + "\n"
 
     return (diff_count , diff_string)
 
