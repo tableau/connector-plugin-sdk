@@ -32,7 +32,6 @@ from .config_gen.tdvtconfig import TdvtTestConfig
 
 #This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry,MacRegistry,LinuxRegistry
-from .config_gen.test_config import TestSet
 
 class TestOutputFiles(object):
     output_actuals = 'tdvt_actuals_combined.zip'
@@ -261,7 +260,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
 
 
         if not current_test_set:
-            current_test_set = FileTestSet(test_root_dir, test_set_unique_id, tds, test_config.logical)
+            current_test_set = FileTestSet(test_root_dir, test_set_unique_id, tds, test_config.logical, suite_name)
             if test_config.logical:
                 test_set_config.add_logical_testset(current_test_set)
             else:

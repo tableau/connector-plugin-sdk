@@ -27,7 +27,8 @@ class TestSet(object):
     """
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical):
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name):
+        self.suite_name = suite_name
         self.config_name = config_name
         self.tds_name = tds_name
         self.exclusions = exclusions
@@ -37,6 +38,9 @@ class TestSet(object):
         
     def is_logical_test(self):
         return self.is_logical
+
+    def get_password_file_name(self):
+        return get_resource_full_path(self.root_dir, self.suite_name + ".password", "tds")
 
     def get_expected_output_file_path(self, test_file, output_dir):
         return ''
@@ -126,8 +130,6 @@ class TestSet(object):
 
         return sorted(final_test_list, key = lambda x: x.test_path)
 
-        
-
     def get_exclusions(self):
         return [] if not self.exclusions else self.exclusions.split(',')
 
@@ -141,7 +143,7 @@ class TestSet(object):
 
 class FileTestSet(TestSet):
     """Used to run previously failed tests. Supports appending test files rather than using a search pattern like the other test sets."""
-    def __init__(self, root_dir, config_name, tds_name, logical):
+    def __init__(self, root_dir, config_name, tds_name, logical, suite):
         self.test_paths = []
         self.logical = logical
         if logical:
@@ -178,8 +180,8 @@ class FileTestSet(TestSet):
         return sorted(tests_to_run, key = lambda x: x.test_path)
 
 class LogicalTestSet(TestSet):
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern):
-        super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, True)
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite):
+        super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, True, suite)
 
     def get_expected_output_file_path(self, test_file, output_dir):
         existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(test_file, output_dir)
@@ -190,8 +192,8 @@ class LogicalTestSet(TestSet):
         return actual_output_filepath, base_filepath
         
 class ExpressionTestSet(TestSet):
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern):
-        super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, False)
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite):
+        super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, False, suite)
 
     def get_expected_output_file_path(self, test_file, output_dir):
         base_test_file = get_base_test(test_file)
@@ -201,13 +203,13 @@ class ExpressionTestSet(TestSet):
 
 class SingleLogicalTestSet(LogicalTestSet):
     def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern, ds_info.dsname)
         self.test_pattern = self.test_pattern.replace('?', ds_info.logical_config_name)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 class SingleExpressionTestSet(ExpressionTestSet):
     def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info):
-        super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern)
+        super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern, ds_info.dsname)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 def build_config_name(prefix, dsname):
@@ -252,14 +254,14 @@ class TestConfig(object):
         return self.dsname + ".password"
 
     def add_logical_test(self, base_config_name, tds_name, exclusions, test_path, test_dir):
-        new_test = LogicalTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
+        new_test = LogicalTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path, self.dsname)
         self.add_logical_testset(new_test)
 
     def add_logical_testset(self, new_test):
         self.logical_test_set.append(new_test)
 
     def add_expression_test(self, base_config_name, tds_name, exclusions, test_path, test_dir):
-        new_test = ExpressionTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path)
+        new_test = ExpressionTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path, self.dsname)
         self.add_expression_testset(new_test)
 
     def add_expression_testset(self, new_test):

@@ -10,7 +10,7 @@ import logging
 
 from .gentests import list_configs, list_config
 from ..resources import *
-from .test_config import TestConfig,TestSet,build_config_name,build_tds_name
+from .test_config import TestConfig,build_config_name,build_tds_name
 
 def print_ds(ds, ds_reg):
     print ("\n\t" + ds)
