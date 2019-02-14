@@ -280,10 +280,9 @@ def diff_table_node(actual_table, expected_table, diff_string, test_name):
         diff_string += "\tDifferent number of tuples.\n"
 
     if not len(actual_tuples):
-        diff_string += "No 'actual' file tuples.\n"
+        diff_string +=  "\tNo 'actual' file tuples.\n"
 
     diff_count = 0
-    diff_string += "Tuples - " + test_name + "\n"
 
     expected_tuple_list = []
     for j in expected_tuples:
