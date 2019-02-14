@@ -268,23 +268,20 @@ def diff_table_node(actual_table, expected_table, diff_string):
 
     if actual_tuples == None and expected_tuples == None:
         return (0, diff_string)
+
+    diff_string += "\nTuples - " + test_name + "\n"
     if actual_tuples == None or expected_tuples == None:
-        if actual_tuples:
-            diff_string += "Expected tuples do not exist.\n"
-            return len(actual_tuples)
-        if expected_tuples:
-            diff_string += "Actual tuples do not exist.\n"
-            return len(expected_tuples)
+        diff_string += "\tTuples do not exist for one side.\n"
+        return math.abs(len(actual_tuples) - len(expected_tuples))
 
     #Compare all the values for the tuples.
     if len(actual_tuples) != len(expected_tuples):
-        diff_string += "Different number of tuples.\n"
+        diff_string += "\tDifferent number of tuples.\n"
 
     if not len(actual_tuples):
-        diff_string += "No 'actual' file tuples.\n"
+        diff_string +=  "\tNo 'actual' file tuples.\n"
 
     diff_count = 0
-    diff_string += "Tuples\n"
 
     expected_tuple_list = []
     for j in expected_tuples:
