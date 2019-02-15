@@ -233,6 +233,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
         test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
         test_config.leave_temp_dir = args.noclean if args else False
         suite_name = f['test_config']['suite_name']
+        password_file = f['password_file'] if 'password_file' in f else ''
         #Use a hash of the test file path to distinguish unique test runs (since the config only supports one test path).
         #other wise two tests with the same name could show up and the first result file would overwrite the second.
         tt = "L" if test_config.logical else "E"
@@ -260,7 +261,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
 
 
         if not current_test_set:
-            current_test_set = FileTestSet(test_root_dir, test_set_unique_id, tds, test_config.logical, suite_name)
+            current_test_set = FileTestSet(test_root_dir, test_set_unique_id, tds, test_config.logical, suite_name, password_file)
             if test_config.logical:
                 test_set_config.add_logical_testset(current_test_set)
             else:

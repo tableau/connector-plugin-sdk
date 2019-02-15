@@ -79,23 +79,23 @@ class BatchQueueWork(object):
         self.add_test_result(test_file, result)
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorTimeout()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
         self.timeout = True
 
     def handle_aborted_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorAbort()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_other_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorOther()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_missing_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorMissingActual()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
@@ -212,6 +212,7 @@ def do_work(work):
 
 
         result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
+        result.test_set = work.test_set
         result.relative_test_file = t.relative_test_file
         result.run_time_ms = total_time_ms
         result.test_config = work.test_config
