@@ -233,6 +233,20 @@ class CommandLineTest(unittest.TestCase):
         expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
+    def test_password_file(self):
+        test_config = TdvtTestConfig()
+        test_config.logical = False
+        test_config.tds = 'mytds.tds'
+        test_config.output_dir = 'my/output/dir'
+        suite = 'password_test'
+
+        test_file = 'some/test/file.txt'
+        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, suite)
+        work = tdvt_core.BatchQueueWork(test_config, test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
+
     def test_command_line_full_extension(self):
         test_config = TdvtTestConfig()
         test_config.logical = False
@@ -398,9 +412,6 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        for a in x:
-            print(a)
-
         test1 = LogicalTestSet(TEST_DIRECTORY, 'logical_test1.bigquery_sql_test', 'Staples.bigquery.tds', '', 'logicaltests/setup.*.bigquery.xml', test_config.dsname)
         test2 = LogicalTestSet(TEST_DIRECTORY, 'logical_test2.bigquery_sql_test', 'Staples.bigquery_sql_test.tds', '', 'logicaltests/setup.*.bigquery.xml', test_config.dsname)
 
@@ -412,6 +423,18 @@ class ConfigTest(unittest.TestCase):
         for test in tests:
             found = [y for y in x if y == test] 
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
+
+    def test_load_ini_password_file(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'password_file.ini', __name__))
+        test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
+        x = test_config.get_logical_tests() + test_config.get_expression_tests()
+
+        expected_password_file = "a_wrong.password"
+        self.assertTrue(len(x) == 10, "[Did not find expected number of tests. Found [{0}]".format(len(x)))
+        for test in x:
+            actual_file = os.path.split(test.get_password_file_name())[1]
+            self.assertTrue(actual_file == expected_password_file, "[Did not find expected value of [{0}, found {1} instead.]".format(expected_password_file, actual_file))
 
     def test_load_ini_logical_config(self):
         config = configparser.ConfigParser()
