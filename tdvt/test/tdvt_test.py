@@ -557,7 +557,26 @@ class ConfigTest(unittest.TestCase):
         self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
 
 
-ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '') 
+class PrintConfigurationsTest(unittest.TestCase):
+    def test_print_configuration_with_no_dsname_and_no_ds_all_returns_explanation(self):
+        with mock.patch('tdvt.config_gen.datasource_list.TestRegistry.get_datasources', side_effect=TypeError):
+            captured_output = io.StringIO()
+            sys.stdout = captured_output  # redirect stdout to a StringIO obj to catch the print statement.
+            datasource_list.print_configurations(datasource_list.TestRegistry('test'), None, None)
+            self.assertIn(datasource_list.RUN_IN_INCORRECT_DIRECTORY_MSG, captured_output.getvalue())
+
+    def test_print_configuration_with_no_dsname(self):
+        with mock.patch('tdvt.config_gen.datasource_list.TestRegistry') as MockTestRegistry:
+            MockTestRegistry.suite_map = {'all': ['postgres_jdbc', 'postgres_odbc']}
+            MockTestRegistry.get_datasources.return_value=['postgres_jdbc', 'postgres_odbc']
+            correct_out = "\nAvailable datasources:\npostgres_jdbc\npostgres_odbc\n\nAvailable suites:\nall\n\tpostgres_jdbc, postgres_odbc"
+            captured_output = io.StringIO()
+            sys.stdout = captured_output
+            datasource_list.print_configurations(MockTestRegistry, None, None)
+            self.assertIn(correct_out, captured_output.getvalue())
+
+
+ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))
