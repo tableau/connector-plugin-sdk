@@ -139,4 +139,56 @@
       </tuple>
     </table>
   </test>
+    <test name='DATEPART(&apos;iso-week&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3017458812)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+      <tuple>
+        <value>5</value>
+      </tuple>
+      <tuple>
+        <value>6</value>
+      </tuple>
+      <tuple>
+        <value>11</value>
+      </tuple>
+      <tuple>
+        <value>16</value>
+      </tuple>
+      <tuple>
+        <value>17</value>
+      </tuple>
+      <tuple>
+        <value>18</value>
+      </tuple>
+      <tuple>
+        <value>22</value>
+      </tuple>
+      <tuple>
+        <value>28</value>
+      </tuple>
+      <tuple>
+        <value>30</value>
+      </tuple>
+      <tuple>
+        <value>33</value>
+      </tuple>
+      <tuple>
+        <value>35</value>
+      </tuple>
+      <tuple>
+        <value>37</value>
+      </tuple>
+      <tuple>
+        <value>38</value>
+      </tuple>
+      <tuple>
+        <value>45</value>
+      </tuple>
+    </table>
+  </test>
 </results>
