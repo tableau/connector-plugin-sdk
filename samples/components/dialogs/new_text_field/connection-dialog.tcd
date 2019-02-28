@@ -1,0 +1,19 @@
+<connection-dialog class='new_text_field_sample'>
+  <connection-config>
+    <authentication-mode value='Basic' />
+    <authentication-options>
+      <option name="UsernameAndPassword" />
+    </authentication-options>
+    <db-name-prompt value="Database: " />
+    <has-pre-connect-database value="true" />
+    <has-schemas value="true" />
+    <port-prompt value="Port: " default="8081" />
+    <server-prompt value="Server: " />
+    <!-- You can resuse the service field as an arbitrary text box. -->
+    <service-prompt value="A new service text field" />
+	<show-service-prompt value="true" />
+	<show-ssl-checkbox value="true" />
+    <!-- You can resuse the warehouse field as an arbitrary text box. -->
+    <warehouse-prompt value="Another new warehouse text field" />
+  </connection-config>
+</connection-dialog>

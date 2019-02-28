@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<tdr class='new_text_field_sample'>
+	<connection-resolver>
+    <connection-builder>
+      <script file='connectionBuilder.js'/>
+    </connection-builder>
+    <connection-normalizer>
+      <script file='connectionRequired.js'/>
+    </connection-normalizer>
+	</connection-resolver>
+	<driver-resolver>
+    <driver-match >
+      <driver-name type='regex'>PostgreSQL Unicode*</driver-name>
+    </driver-match>
+  </driver-resolver>
+</tdr>
