@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<tdr class='postgres_odbc2'>
+<tdr class='new_text_field_sample'>
 	<connection-resolver>
     <connection-builder>
       <script file='connectionBuilder.js'/>

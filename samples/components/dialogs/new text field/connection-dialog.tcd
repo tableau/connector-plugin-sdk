@@ -1,4 +1,4 @@
-<connection-dialog class='kyvos'>
+<connection-dialog class='new_text_field_sample'>
   <connection-config>
     <authentication-mode value='Basic' />
     <authentication-options>
