@@ -128,13 +128,17 @@ _Attribute names_
 
 | Function                | Description                                      |
 | ----------------------- | ------------------------------------------------ |
-| attributeServer         | Connection attribute for the server              |
+| attributeAuthentication | Connection attribute for the authentication type |
 | attributeClass          | Connection attribute for the connection type     |
 | attributeDatabase       | Connection attribute for the database            |
 | attributeInitialSQL     | Connection attribute for initial SQL             |
-| attributeAuthentication | Connection attribute for the authentication type |
-| attributeUsername       | Connection attribute for the user name           |
 | attributePassword       | Connection attribute for the password            |
+| attributePort           | Connection attribute for the port                |
+| attributeServer         | Connection attribute for the server              |
+| attributeSSLCert        | Connection attribute for the SSL Certfile        |
+| attributeSSLMode        | Connection attribute for the SSL Mode            |
+| attributeUsername       | Connection attribute for the user name           |
+| attributeWarehouse      | Connection attribute for the Warehouse           |
 | keywordODBCUsername     | ODBC Username keyword                            |
 | keywordODBCPassword     | ODBC Password keyword                            |
 
