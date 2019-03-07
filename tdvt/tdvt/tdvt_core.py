@@ -270,7 +270,6 @@ def diff_table_node(actual_table, expected_table, diff_string):
         return (0, diff_string)
     if actual_tuples == None or expected_tuples == None:
         diff_string += "Tuples do not exist for one side.\n"
-        return math.abs(len(actual_tuples) - len(expected_tuples))
 
     #Compare all the values for the tuples.
     if len(actual_tuples) != len(expected_tuples):
