@@ -267,15 +267,14 @@ def diff_table_node(actual_table, expected_table, diff_string):
     expected_tuples = expected_table.findall('tuple')
 
     if actual_tuples == None and expected_tuples == None:
-        diff_string += "Tuples do not exist for either side.\n"
         return (0, diff_string)
     if actual_tuples == None or expected_tuples == None:
         if actual_tuples:
             diff_string += "Expected tuples do not exist.\n"
-            return (len(actual_tuples), diff_string)
+            return len(actual_tuples)
         if expected_tuples:
             diff_string += "Actual tuples do not exist.\n"
-            return (len(expected_tuples), diff_string)
+            return len(expected_tuples)
 
     #Compare all the values for the tuples.
     if len(actual_tuples) != len(expected_tuples):
