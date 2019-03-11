@@ -40,7 +40,7 @@ class TestResultWork(object):
             existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(self.test_file, self.output_dir)
             #Make sure to set the generic (ie non-templatized) test name.
             self.test_name = base_test_name
-            
+
 class BatchQueueWork(object):
     def __init__(self, test_config, test_set):
         self.test_config = test_config
@@ -65,19 +65,19 @@ class BatchQueueWork(object):
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, log_dir)
         self.test_list_path = os.path.join(self.test_config.log_dir, 'tests.txt')
 
-        
+
     def add_test_result(self, test_file, result):
         self.results[test_file] = result
-           
+
     def add_test_result_error(self, test_file, result, output_exists):
         if self.saved_error_message and not output_exists:
             result.saved_error_message = self.saved_error_message
             #Remove the saved error message so it only shows up once. Tests are run in batch and you can't
-            #tell which test this error really corresponds to (ie timeout, or no driver or something) so 
+            #tell which test this error really corresponds to (ie timeout, or no driver or something) so
             #just associate it with the first failure.
             self.saved_error_message = None
         self.add_test_result(test_file, result)
-           
+
     def handle_timeout_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
         result.error_status = TestErrorTimeout()
@@ -253,7 +253,7 @@ def try_move(srcfile, destfile):
 def diff_sql_node(actual_sql, expected_sql, diff_string):
     if actual_sql == None and expected_sql == None:
         return (0, diff_string)
-    
+
     diff_string += "SQL\n"
     if actual_sql == None or expected_sql == None or (actual_sql != expected_sql):
         diff_string += "<<<<\n" + actual_sql + "\n"
@@ -269,8 +269,12 @@ def diff_table_node(actual_table, expected_table, diff_string):
     if actual_tuples == None and expected_tuples == None:
         return (0, diff_string)
     if actual_tuples == None or expected_tuples == None:
-        diff_string += "Tuples do not exist for one side.\n"
-        return math.abs(len(actual_tuples) - len(expected_tuples))
+        if actual_tuples:
+            diff_string += "Expected tuples do not exist.\n"
+            return len(actual_tuples)
+        if expected_tuples:
+            diff_string += "Actual tuples do not exist.\n"
+            return len(expected_tuples)
 
     #Compare all the values for the tuples.
     if len(actual_tuples) != len(expected_tuples):
@@ -278,7 +282,7 @@ def diff_table_node(actual_table, expected_table, diff_string):
 
     if not len(actual_tuples):
         diff_string += "No 'actual' file tuples.\n"
-    
+
     diff_count = 0
     diff_string += "Tuples\n"
 
@@ -388,7 +392,7 @@ def compare_results(test_name, test_file, full_test_file, work):
             expected_output.add_test_results(parse(expected_file).getroot(), '')
         except ParseError as e:
             logging.debug(work.get_thread_msg() + "Exception parsing expected file: " + expected_file + " exception: " + str(e))
-        
+
         diff_counts, diff_string = diff_test_results(result, expected_output)
         result.set_best_matching_expected_output(expected_output, expected_file, expected_file_version, diff_counts)
 
@@ -414,7 +418,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         try_move(actual_file, next_path)
     #This will re-diff the results against the best expected file to ensure the test pass indicator and diff count is correct.
     diff_count, diff_string = diff_test_results(result, result.best_matching_expected_results)
-    save_results_diff(actual_file, actual_diff_file, result.path_to_expected, diff_string) 
+    save_results_diff(actual_file, actual_diff_file, result.path_to_expected, diff_string)
 
     return result
 
@@ -515,7 +519,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     except IOError:
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
-   
+
     custom_dialect = csv.excel
     custom_dialect.lineterminator = '\n'
     custom_dialect.delimiter = ','
@@ -530,7 +534,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csvheader = ['Suite','Test Set','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Test Type','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     results_values = list(all_test_results.values())
     if results_values and results_values[0].test_config.tested_sql:
-        csvheader.extend(['Expected SQL', 'Expected Query Time (ms)']) 
+        csvheader.extend(['Expected SQL', 'Expected Query Time (ms)'])
     if not skip_header:
         csv_out.writerow(csvheader)
 
@@ -627,7 +631,7 @@ def run_tests_impl(test_set, test_config):
 
     #Do the work.
     do_work(work)
-    
+
     #Analyze the results of the work.
     all_test_results.update(work.results)
 
@@ -655,4 +659,3 @@ def run_tests(tdvt_test_config, test_set):
 
 
     return process_test_results(all_test_results, tds_file, tdvt_test_config.noheader, output_dir)
-
