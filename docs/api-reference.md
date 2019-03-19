@@ -118,7 +118,7 @@ You can write to the Tableau log file (tabprotosrv.txt). Writing to the log file
 
 Use care when logging so that you don’t expose sensitive information like passwords and other authentication information.
 
-    logging.log("Hi")
+    logging.Log("Hi")
 
 ---
 
@@ -144,7 +144,7 @@ _Attribute names_
 
 _Functions_
 
-    String formatKeyValuePair(String key, String value);
+    String FormatKeyValuePair(String key, String value);
 
 Format the attributes as 'key=value'. By default, some values are escaped or wrapped in curly braces to follow the ODBC standard, but you can also do it here if needed.
 
@@ -154,7 +154,7 @@ Invokes attribute matching code.
 
 Example:
 
-    formattedParams.push(connectionHelper.formatKeyValuePair(key, params[key]));
+    formattedParams.push(connectionHelper.FormatKeyValuePair(key, params[key]));
 
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
 
@@ -164,8 +164,8 @@ Example:
 
 _Functions_
 
-    String locateDriver (Object attr);
+    String LocateDriver (Object attr);
 
 Get the name of your chosen driver that was matched using the rules in your TDR file.
 
-    formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
+    formattedParams.push(connectionHelper.FormatKeyValuePair(driverLocator.keywordDriver, driverLocator.LocateDriver(attr)));
