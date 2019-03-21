@@ -165,7 +165,7 @@ Example:
 
 _Throw Tableau Exception_
 
-Normally, throwing an exception in in a javascript componant will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
+Normally, throwing an exception in in a javascript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
 
     return connectionHelper.ThrowTableauException("Custom Error Message");
 
