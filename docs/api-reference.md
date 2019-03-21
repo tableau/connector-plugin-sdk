@@ -135,6 +135,7 @@ _Attribute names_
 | attributePassword       | Connection attribute for the password            |
 | attributePort           | Connection attribute for the port                |
 | attributeServer         | Connection attribute for the server              |
+| attributeService        | Connection attribute for the service             |
 | attributeSSLCert        | Connection attribute for the SSL Certfile        |
 | attributeSSLMode        | Connection attribute for the SSL Mode            |
 | attributeUsername       | Connection attribute for the user name           |
@@ -152,11 +153,23 @@ Format the attributes as 'key=value'. By default, some values are escaped or wra
 
 Invokes attribute matching code.
 
+    String GetPlatform();
+
+Returns the platform information as a string.
+
 Example:
 
     formattedParams.push(connectionHelper.FormatKeyValuePair(key, params[key]));
 
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
+
+_Throw Tableau Exception_
+
+Normally, throwing an exception in in a javascript componant will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
+
+    return connectionHelper.ThrowTableauException("Custom Error Message");
+
+The full error is always logged.
 
 ---
 
@@ -168,4 +181,11 @@ _Functions_
 
 Get the name of your chosen driver that was matched using the rules in your TDR file.
 
+    String LocateDriverVersion(Object attr);
+
+Get the version number of the chosen driver as a string.
+
+Example:
+
     formattedParams.push(connectionHelper.FormatKeyValuePair(driverLocator.keywordDriver, driverLocator.LocateDriver(attr)));
+
