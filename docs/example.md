@@ -17,7 +17,7 @@ The <span style="color:red">class</span> value is a unique key for your connecto
 Each connector is typically based on a "class" such as ODBC or JDBC, and provides additional customizations beyond the class.
 The <span style="color:blue; font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
 
-The vendor information must also be specified. The <span style="color:blue; font-family: courier new">company name</span> value displays the name of the creator of the connector in the Tableau **Connect** pane, and the <span style="color:blue; font-family: courier new">support link</span> value is the url of a website that users of the connector can go to to get support.
+You must also specify the vendor information. The <span style="font-family: courier new">company name</span> value displays the name of the creator of the connector in the Tableau **Connect** pane, and the <span style="font-family: courier new">support link</span> value is the URL of a website where users of the connector can get support.
 
 ![]({{ site.baseurl }}/assets/manifest-xml.png)
 
