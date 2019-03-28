@@ -147,7 +147,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             standard = config[standard_tests]
             all_ini_sections.remove(standard_tests)
-            
+
             test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'), test_dir, get_password_file(standard))
             test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'), test_dir, get_password_file(standard))
             test_config.add_expression_test('expression.standard.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/setup.*.txt', test_dir, get_password_file(standard))
