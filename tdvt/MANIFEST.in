@@ -1,5 +1,6 @@
 include README.md
 recursive-include tdvt/config *.ini
 recursive-include tdvt/exprtests *.txt
-recursive-include tdvt/logicaltests *.xml
+recursive-include tdvt/logicaltests/expected *.xml
+recursive-include tdvt/logicaltests/generate *.xml
 include tdvt/tds *.tds
