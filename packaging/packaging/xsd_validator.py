@@ -62,8 +62,6 @@ def validate_xsd(files_list, folder_path):
             all_files_valid = False
             xml_violations_buffer += "File: " + str(path_to_file) + "\n" + str(saved_error)
             print("Validation failed.")
-        except:
-            raise error
 
     if all_files_valid:
         print("No XSD violations found")

@@ -1,6 +1,8 @@
 import sys
+from pathlib import Path
 
 from xsd_validator import validate_xsd
+from connector_file import ConnectorFile
 
 if sys.version_info[0] < 3:
     raise EnvironmentError("package requires Python 3 or greater.")
@@ -16,18 +18,15 @@ def create_package_output(path):
 
 
 def main():
-    path_from_args = "D:/dev/tableau/connector-plugin-sdk/samples/plugins/postgres_odbc"
+    path_from_args = Path("D:/dev/tableau/connector-plugin-sdk/samples/plugins/postgres_odbc")
     files_to_package = [
-        "manifest.xml",
-        "connectionBuilder.js",
-        "connection-dialog.tcd",
-        "connectionResolver.tdr",
-        "dialect.tdd"]
+        ConnectorFile("manifest.xml", "manifest"),
+        ConnectorFile("connection-dialog.tcd", "connection-dialog"),
+        ConnectorFile("connectionBuilder.js", "script"),
+        ConnectorFile("dialect.tdd", "dialect"),
+        ConnectorFile("connection-resolver.tdr", "connection-resolver")]
 
-    validate_xsd(files_to_package, folder_path=path_from_args)
-    create_package_output(path_from_args)
-
-    xsd_validator.validate_xsd(files_to_package, folder_path=path_from_args)
+    validate_xsd(files_to_package, path_from_args)
     create_package_output(path_from_args)
 
 if __name__ == '__main__':
