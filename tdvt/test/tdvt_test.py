@@ -13,13 +13,19 @@
 
 """
 
+
 import configparser
-from defusedxml.ElementTree import parse,ParseError
+import io
 import logging
 import os
 import pkg_resources
 import shutil
+import sys
 import unittest
+
+from unittest import mock
+
+from defusedxml.ElementTree import parse,ParseError
 
 from tdvt import tdvt_core
 from tdvt.tdvt import enqueue_failed_tests
@@ -29,6 +35,7 @@ from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, TestF
 from tdvt.resources import get_path, make_temp_dir
 from tdvt.test_results import *
 from tdvt.tabquery import *
+
 
 class DiffTest(unittest.TestCase):
     def test_diff(self):
@@ -43,7 +50,7 @@ class DiffTest(unittest.TestCase):
         failed_tests = []
         for test in test_files:
             actual_file = test.replace('expected', 'actual')
-            
+
             actual_file = os.path.join(os.path.join(TEST_DIRECTORY, subdir), actual_file)
             expected_file = os.path.join(os.path.join(TEST_DIRECTORY, subdir), test)
 
@@ -92,7 +99,7 @@ class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
         self.test_config = TdvtTestConfig()
         self.test_config.output_dir = make_temp_dir([self.test_config.suite_name])
-        
+
     def tearDown(self):
         shutil.rmtree(self.test_config.output_dir)
 
@@ -109,7 +116,7 @@ class BaseTDVTTest(unittest.TestCase):
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
-        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', '', 'tool_test\exprtests\setup.*.txt')
+        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', '', 'tool_test\exprtests\setup.*.txt', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
     def test_expression_tests(self):
@@ -121,7 +128,7 @@ class LocalExpressionTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
         #Tests picking a local test suite.
-        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/')
+        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
     def test_expression_tests(self):
@@ -132,7 +139,7 @@ class LocalExpressionTest(BaseTDVTTest):
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
-        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'tool_test\logicaltests\setup\calcs\setup.*.xml')
+        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'tool_test\logicaltests\setup\calcs\setup.*.xml', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
 
@@ -145,7 +152,7 @@ class LogicalTest(BaseTDVTTest):
 class LocalLogicalTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
-        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml')
+        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
 
@@ -160,7 +167,7 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         super(type(self), self).setUp()
         self.test_dir = TEST_DIRECTORY
         self.config_file = 'config/logical.tde.cfg'
-        self.config_set = LogicalTestSet(TEST_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logicaltests\setup\calcs\setup.*.xml')
+        self.config_set = LogicalTestSet(TEST_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logicaltests\setup\calcs\setup.*.xml', '')
         self.tds_file = tdvt_core.get_tds_full_path(TEST_DIRECTORY, 'tds/cast_calcs.tde.tds')
         self.test_config.logical = True
         self.test_config.config_file = self.config_file
@@ -177,7 +184,7 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 1, False)
 
         #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
-        
+
         tests = enqueue_failed_tests(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
 
@@ -226,12 +233,26 @@ class CommandLineTest(unittest.TestCase):
         test_config.d_override = '-DLogLevel=Debug'
 
         test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file)
+        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
         work = tdvt_core.BatchQueueWork(test_config, test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
+    def test_password_file(self):
+        test_config = TdvtTestConfig()
+        test_config.logical = False
+        test_config.tds = 'mytds.tds'
+        test_config.output_dir = 'my/output/dir'
+        suite = 'password_test'
+
+        test_file = 'some/test/file.txt'
+        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, suite)
+        work = tdvt_core.BatchQueueWork(test_config, test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
 
     def test_command_line_full_extension(self):
         test_config = TdvtTestConfig()
@@ -242,7 +263,7 @@ class CommandLineTest(unittest.TestCase):
         test_config.d_override = '-DLogLevel=Debug'
 
         test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file)
+        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
         work = tdvt_core.BatchQueueWork(test_config, test_set)
         work.test_extension = True
         cmd_line = build_tabquery_command_line_local(work)
@@ -256,7 +277,7 @@ class CommandLineTest(unittest.TestCase):
         test_config.tds = 'mytds.tds'
 
         test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file)
+        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
         work = tdvt_core.BatchQueueWork(test_config, test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
@@ -270,7 +291,7 @@ class CommandLineTest(unittest.TestCase):
         test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
 
         test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file)
+        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
         work = tdvt_core.BatchQueueWork(test_config, test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
@@ -283,34 +304,34 @@ class TestPathTest(unittest.TestCase):
         self.assertTrue(len(all_tests) == test_size)
 
     def test_dir(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/'), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/', ''), 1)
 
     def test_file(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.sum.tde.xml'), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.sum.tde.xml', ''), 1)
 
     def test_glob(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml'), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml', ''), 1)
 
     def test_exclude(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'sum', 'logical/setup/suite1/setup.*.xml'), 0)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'sum', 'logical/setup/suite1/setup.*.xml', ''), 0)
 
     def test_exclude_comma(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ',', 'logical/setup/suite1/setup.*.xml'), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ',', 'logical/setup/suite1/setup.*.xml', ''), 1)
 
     def test_exclude_space(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ' sum', 'logical/setup/suite1/setup.*.xml'), 0)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ' sum', 'logical/setup/suite1/setup.*.xml', ''), 0)
 
     def test_local_dir(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/'), 3)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/', ''), 3)
 
     def test_local_file(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e\suite1\setup.mytest.txt'), 1)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e\suite1\setup.mytest.txt', ''), 1)
 
     def test_local_glob(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.*.txt'), 3)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.*.txt', ''), 3)
 
     def test_local_exclude(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/setup.*.txt'), 2)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/setup.*.txt', ''), 2)
 
 
 class ConfigTest(unittest.TestCase):
@@ -320,20 +341,20 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml')
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml')
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.aurora', 'Staples.aurora.tds', '', 'logicaltests/setup/lod/setup.*.bool_.xml')
+        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.aurora', 'Staples.aurora.tds', '', 'logicaltests/setup/lod/setup.*.bool_.xml', test_config.dsname)
 
-        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt')
+        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
-        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/lodcalcs/setup.*.txt')
+        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/lodcalcs/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3, test4, test5]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             msg = "[Did not find expected value of [{0}]".format(test)
             self.assertTrue(found, msg)
 
@@ -344,34 +365,34 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml')
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml')
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt')
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
-        
+
     def test_load_ini_missing2(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'aurora_missing2.ini', __name__))
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml')
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', '', 'logicaltests/setup/staples/setup.*.bool_.xml')
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', '', 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/standard/setup.*.txt')
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_bigquery(self):
@@ -380,16 +401,16 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery.xml')
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml')
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse', 'exprtests/standard/setup.*.txt')
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_new_tests(self):
@@ -398,20 +419,29 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        for a in x:
-            print(a)
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical_test1.bigquery_sql_test', 'Staples.bigquery.tds', '', 'logicaltests/setup.*.bigquery.xml', test_config.dsname)
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical_test2.bigquery_sql_test', 'Staples.bigquery_sql_test.tds', '', 'logicaltests/setup.*.bigquery.xml', test_config.dsname)
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical_test1.bigquery_sql_test', 'Staples.bigquery.tds', '', 'logicaltests/setup.*.bigquery.xml')
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical_test2.bigquery_sql_test', 'Staples.bigquery_sql_test.tds', '', 'logicaltests/setup.*.bigquery.xml')
-
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test1.bigquery_sql_test', 'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii', 'exprtests/standard/')
-        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test2.bigquery_sql_test', 'cast_calcs.bigquery_sql_test.tds', 'string.char', 'exprtests/standard/')
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test1.bigquery_sql_test', 'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii', 'exprtests/standard/', test_config.dsname)
+        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test2.bigquery_sql_test', 'cast_calcs.bigquery_sql_test.tds', 'string.char', 'exprtests/standard/', test_config.dsname)
 
         tests = [test1, test2, test3, test4]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
+
+    def test_load_ini_password_file(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'password_file.ini', __name__))
+        test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
+        x = test_config.get_logical_tests() + test_config.get_expression_tests()
+
+        expected_password_file = "a_wrong.password"
+        self.assertTrue(len(x) == 10, "[Did not find expected number of tests. Found [{0}]".format(len(x)))
+        for test in x:
+            actual_file = os.path.split(test.get_password_file_name())[1]
+            self.assertTrue(actual_file == expected_password_file, "[Did not find expected value of [{0}, found {1} instead.]".format(expected_password_file, actual_file))
 
     def test_load_ini_logical_config(self):
         config = configparser.ConfigParser()
@@ -431,7 +461,7 @@ class ConfigTest(unittest.TestCase):
         ini_file = get_path('tool_test/ini', 'windows_override.ini', __name__)
         reg = datasource_list.TestRegistry('')
         reg.load_registry(ini_file)
-       
+
         #Duplicates should be removed and the order preserved.
         standard = ['teradata', 'netezza']
         all_passing = ['teradata', 'netezza', 'bigquery', 'exasolution']
@@ -442,7 +472,7 @@ class ConfigTest(unittest.TestCase):
         self.assertTrue(all_passing == reg.get_datasources('all_passing'))
         self.assertTrue(all_test == reg.get_datasources('all_test'))
         self.assertTrue(all_test2 == reg.get_datasources('all_test2'))
- 
+
 
     def test_load_command_line_override(self):
         config = configparser.ConfigParser()
@@ -450,18 +480,18 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery.xml')
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml')
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', '', 'exprtests/standard/setup.*.txt')
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', '', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
-        
+
         self.assertTrue(test_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.d_override)
 
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_bigquery_sql(self):
@@ -470,26 +500,26 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery_sql', 'cast_calcs.bigquery_sql.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery_sql.xml')
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery_sql', 'cast_calcs.bigquery_sql.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery_sql.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery_sql', 'Staples.bigquery_sql.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bigquery_sql.xml')
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery_sql', 'Staples.bigquery_sql.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bigquery_sql.xml', test_config.dsname)
 
-        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.bigquery_sql', 'Staples.bigquery_sql.tds', '', 'logicaltests/setup/lod/setup.*.bigquery_sql.xml')
+        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.bigquery_sql', 'Staples.bigquery_sql.tds', '', 'logicaltests/setup/lod/setup.*.bigquery_sql.xml', test_config.dsname)
 
-        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery_sql', 'cast_calcs.bigquery_sql.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls,logical', 'exprtests/standard/setup.*.txt')
+        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery_sql', 'cast_calcs.bigquery_sql.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls,logical', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
-        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test_dates.bigquery_sql', 'cast_calcs.bigquery_sql_dates.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls', 'exprtests/standard/')
+        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test_dates.bigquery_sql', 'cast_calcs.bigquery_sql_dates.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls', 'exprtests/standard/', test_config.dsname)
 
-        test6 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test_dates2.bigquery_sql', 'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls', 'exprtests/standard/')
+        test6 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test_dates2.bigquery_sql', 'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse,math.degree,math.radians,cast.str,cast.int.nulls', 'exprtests/standard/', test_config.dsname)
 
-        test7 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.bigquery_sql', 'cast_calcs.bigquery_sql.tds', '', 'exprtests/lodcalcs/setup.*.txt')
+        test7 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.bigquery_sql', 'cast_calcs.bigquery_sql.tds', '', 'exprtests/lodcalcs/setup.*.txt', test_config.dsname)
 
-        test8 = LogicalTestSet(TEST_DIRECTORY, 'logical_test_dates.bigquery_sql', 'cast_calcs.bigquery_sql.tds', '', 'exprtests/standard/setup.*.bigquery_dates.xml')
+        test8 = LogicalTestSet(TEST_DIRECTORY, 'logical_test_dates.bigquery_sql', 'cast_calcs.bigquery_sql.tds', '', 'exprtests/standard/setup.*.bigquery_dates.xml', test_config.dsname)
 
         tests = [test1, test2, test3, test4, test5, test6, test7, test8]
 
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_staplesdata_on(self):
@@ -498,12 +528,11 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = ExpressionTestSet(TEST_DIRECTORY, 'expression.staples.bigquery', 'Staples.bigquery.tds', '', 'exprtests/staples/setup.*.txt')
+        test1 = ExpressionTestSet(TEST_DIRECTORY, 'expression.staples.bigquery', 'Staples.bigquery.tds', '', 'exprtests/staples/setup.*.txt', test_config.dsname)
 
         tests = [test1]
-        
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_staplesdata_off(self):
@@ -535,7 +564,26 @@ class ConfigTest(unittest.TestCase):
         self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
 
 
-ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '') 
+class PrintConfigurationsTest(unittest.TestCase):
+    def test_print_configuration_with_no_dsname_and_no_ds_all_returns_explanation(self):
+        with mock.patch('tdvt.config_gen.datasource_list.TestRegistry.get_datasources', side_effect=TypeError):
+            captured_output = io.StringIO()
+            sys.stdout = captured_output  # redirect stdout to a StringIO obj to catch the print statement.
+            datasource_list.print_configurations(datasource_list.TestRegistry('test'), None, None)
+            self.assertIn(datasource_list.RUN_IN_INCORRECT_DIRECTORY_MSG, captured_output.getvalue())
+
+    def test_print_configuration_with_no_dsname(self):
+        with mock.patch('tdvt.config_gen.datasource_list.TestRegistry') as MockTestRegistry:
+            MockTestRegistry.suite_map = {'all': ['postgres_jdbc', 'postgres_odbc']}
+            MockTestRegistry.get_datasources.return_value=['postgres_jdbc', 'postgres_odbc']
+            correct_out = "\nAvailable datasources:\npostgres_jdbc\npostgres_odbc\n\nAvailable suites:\nall\n\tpostgres_jdbc, postgres_odbc"
+            captured_output = io.StringIO()
+            sys.stdout = captured_output
+            datasource_list.print_configurations(MockTestRegistry, None, None)
+            self.assertIn(correct_out, captured_output.getvalue())
+
+
+ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))

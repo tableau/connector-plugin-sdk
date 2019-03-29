@@ -64,7 +64,7 @@ class TestCaseResult(object):
         return passed
 
     def table_to_json(self):
-        json_str = 'tuple' 
+        json_str = 'tuple'
         tuple_list = []
         tuples = self.table.findall('tuple')
         for t in tuples:
@@ -72,7 +72,7 @@ class TestCaseResult(object):
                 tuple_list.append(v.text)
 
         return {'tuples' : tuple_list}
-    
+
     def __json__(self):
         return {'tested_sql' : self.tested_sql, 'tested_tuples' : self.tested_tuples, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
 
@@ -87,7 +87,7 @@ class TestErrorState(object):
 class TestErrorAbort(TestErrorState):
     def get_error(self):
         return "Test was aborted."
-    
+
 class TestErrorStartup(TestErrorState):
     def get_error(self):
         return "Test did not start."
@@ -106,7 +106,7 @@ class TestErrorMissingActual(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = ''):
+    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -122,16 +122,17 @@ class TestResult(object):
         self.cmd_output = ''
         self.run_time_ms = 0
         self.relative_test_file = relative_test_file
+        self.test_set = test_set
 
     def __json__(self):
-        return {'all_passed' : self.all_passed(), 'name' : self.name, 
+        return {'all_passed' : self.all_passed(), 'name' : self.name,
                 'matched_expected' : self.matched_expected_version, 'expected_diffs' : self.diff_count,
                 'test_cases' : self.test_case_map, 'expected_results' : self.best_matching_expected_results}
 
     def add_test_results(self, test_xml, actual_path):
         """
             <results>
-            <test name='blah'
+            <test name='blah'>
             <sql>text</sql>
             <query-time> 2.96439e-323 </query-time>
             <error> Any query errors </error> --Optional
@@ -143,6 +144,7 @@ class TestResult(object):
             <value></value>
             </tuple>
             </table>
+            </test>
             </results>
 
         """
@@ -175,7 +177,7 @@ class TestResult(object):
 
         if msg:
             return msg
-        
+
         return self.get_failure_message()
 
     def get_failure_message(self):
@@ -263,11 +265,11 @@ class TestOutputJSONEncoder(json.JSONEncoder):
     """Simple wrapper to output expected JSON format."""
     def default(self, obj):
         if type(obj) is not TestResult:
-            return "failed" + str(obj) 
+            return "failed" + str(obj)
 
         suite_name = '' if not obj.test_config.suite_name else obj.test_config.suite_name
         test_name = '' if not obj.get_name() else obj.get_name()
-        test_type = '-q' if obj.test_config.logical else '-e' 
+        test_type = '-q' if obj.test_config.logical else '-e'
         if obj.test_config.logical:
             test_cases = test_name
         else:
@@ -280,15 +282,16 @@ class TestOutputJSONEncoder(json.JSONEncoder):
             if not test_cases:
                 test_cases = test_name
 
-        json_output = {'suite' : suite_name, 
+        json_output = {'suite' : suite_name,
                 'class' : 'TDVT',
-                'test_name' : suite_name + '.' + test_name, 
+                'test_name' : suite_name + '.' + test_name,
                 'duration' : obj.get_total_execution_time(),
-                'case' : test_cases, 
-                'test_file' : obj.relative_test_file, 
-                'test_type' : test_type, 
+                'case' : test_cases,
+                'test_file' : obj.relative_test_file,
+                'test_type' : test_type,
                 'test_config' : obj.test_config.__json__(),
-                'tds' : obj.test_config.tds, 
+                'tds' : obj.test_config.tds,
+                'password_file' : obj.test_set.password_file,
                 'expected' : obj.path_to_expected,
                }
         if obj.all_passed():
@@ -299,4 +302,3 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         json_output['message'] = obj.get_failure_message_or_all_exceptions()
         json_output['actual'] = obj.path_to_actual
         return json_output
-
