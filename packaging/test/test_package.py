@@ -10,4 +10,5 @@ class TestPackage(unittest.TestCase):
         self.assertTrue(True)
 
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
