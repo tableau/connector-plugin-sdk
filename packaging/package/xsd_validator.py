@@ -21,7 +21,7 @@ XSD_DICT = {
 
 
 def validate_xsd(files_list, folder_path):
-    """"[summary]"
+    """"[summary]
 
     Arguments:
         files_list {list} -- List of files to validate
@@ -30,7 +30,7 @@ def validate_xsd(files_list, folder_path):
     Returns:
         bool -- True if all xml files pass validation,false if they do not or there is an error
 
-        Assumes the file_list and folder_path are correct, and do not point to files that don't exist or directories
+    Assumes the file_list and folder_path are correct, and do not point to files that don't exist or directories
     """
 
     print("Starting XSD validation...")
