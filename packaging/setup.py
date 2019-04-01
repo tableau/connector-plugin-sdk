@@ -15,6 +15,6 @@ setup(
     license='MIT',
     description='A Python module for packaging a Tableau connector.',
     test_suite='test',
-    install_requires=[],
+    install_requires=['xmlschema'],
     include_package_data=True
 )
