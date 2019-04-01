@@ -68,7 +68,7 @@ def validate_xsd(files_list, folder_path):
 
         # If the file is too big, we shouldn't try and parse it, just log the violation and move on
         if path_to_file.stat().st_size > MAX_FILE_SIZE:
-            xml_violations_found+=1
+            xml_violations_found += 1
             xml_violations_buffer += file_to_test.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + " KB"
             continue
 
