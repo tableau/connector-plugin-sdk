@@ -24,7 +24,7 @@ def main():
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
         ConnectorFile("connectionBuilder.js", "script"),
         ConnectorFile("dialect.tdd", "dialect"),
-        ConnectorFile("connection-resolver.tdr", "connection-resolver")]
+        ConnectorFile("connectionResolver.tdr", "connection-resolver")]
 
     validate_xsd(files_to_package, path_from_args)
     create_package_output(path_from_args)
