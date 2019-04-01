@@ -25,7 +25,7 @@ def validate_xsd(files_list, folder_path):
 
     Arguments:
         files_list {list} -- List of files to validate
-        folder_path {[type]} -- path to folder that contains the files
+        folder_path {str} -- path to folder that contains the files
 
     Returns:
         bool -- True if all xml files pass validation,false if they do not or there is an error
