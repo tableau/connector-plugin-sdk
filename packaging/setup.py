@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from packaging.version import __version__
+from package.version import __version__
 
 setup(
     name='package',
@@ -11,7 +11,7 @@ setup(
     author='Tableau',
     author_email='github@tableau.com',
     url='https://github.com/tableau/connector-plugin-sdk',
-    packages=['packaging'],
+    packages=['package'],
     license='MIT',
     description='A Python module for packaging a Tableau connector.',
     test_suite='test',
