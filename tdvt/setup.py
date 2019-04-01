@@ -16,6 +16,6 @@ setup(
     description='A Python module for testing datasource compatability with Tableau.',
     test_suite='test',
     scripts=['tdvt.py'],
-    install_requires=[ 'defusedxml' ],
-    include_package_data = True
+    install_requires=['defusedxml'],
+    include_package_data=True
 )
