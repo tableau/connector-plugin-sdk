@@ -19,7 +19,7 @@ def create_package_output(path):
 
 
 def main():
-    path_from_args = Path("..\..\samples\plugins\postgres_odbc")
+    path_from_args = Path("..\..\samples\plugins\postgres_odbc"). # TODO: replace when ready
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
