@@ -37,7 +37,7 @@ if __name__ == "__main__":
         ConnectorFile("dialect.tdd", "dialect"),
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
 
-    jar_name = "postgres_odbc.jar"
+    jar_name = "postgres_odbc.jar"  # TODO: Replace when ready
     create_jar(jar_name, path_from_args, files_to_package)
 
 
