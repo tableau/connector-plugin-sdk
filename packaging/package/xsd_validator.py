@@ -21,8 +21,7 @@ XSD_DICT = {
 
 
 def validate_xsd(files_list, folder_path):
-    """"[summary]
-
+    """"
     Arguments:
         files_list {list[ConnectorFile]} -- List of files to validate
         folder_path {Path} -- path to folder that contains the files
@@ -72,8 +71,7 @@ def validate_xsd(files_list, folder_path):
     return xml_violations_found <= 0
 
 def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
-    """[summary]
-
+    """
     Arguments:
         file_to_test {ConnectorFile} -- path to a single file to test
         path_to_file {Path} -- path to the file
