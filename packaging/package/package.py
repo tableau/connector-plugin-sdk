@@ -3,6 +3,7 @@ from pathlib import Path
 
 from xsd_validator import validate_xsd
 from connector_file import ConnectorFile
+from jar_packager import create_jar
 
 if sys.version_info[0] < 3:
     raise EnvironmentError("package requires Python 3 or greater.")
@@ -18,7 +19,7 @@ def create_package_output(path):
 
 
 def main():
-    path_from_args = Path("D:/dev/tableau/connector-plugin-sdk/samples/plugins/postgres_odbc")
+    path_from_args = Path("..\..\samples\plugins\postgres_odbc")
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
@@ -27,7 +28,10 @@ def main():
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
 
     validate_xsd(files_to_package, path_from_args)
-    create_package_output(path_from_args)
+
+    jar_name = "postgres_odbc.jar"
+    create_jar(jar_name, path_from_args, files_to_package)
+
 
 if __name__ == '__main__':
     main()
