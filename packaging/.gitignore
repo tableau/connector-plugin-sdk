@@ -5,3 +5,8 @@ __pycache__/
 
 # Mac
 .DS_Store
+
+build
+dist
+package.egg-info
+.venv
