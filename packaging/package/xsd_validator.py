@@ -3,11 +3,11 @@ from pathlib import Path
 from xmlschema import XMLSchema
 from xmlschema.validators.exceptions import XMLSchemaValidationError
 
-from connector_file import ConnectorFile
+from .connector_file import ConnectorFile
 
 
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
-PATH_TO_XSD_FILES = Path("validation").absolute()
+PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
 
 # Holds the mapping between file type and XSD file name
