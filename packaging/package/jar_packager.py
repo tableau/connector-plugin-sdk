@@ -29,7 +29,7 @@ def create_jar(jar_file, root, files):
 
 
 if __name__ == "__main__":
-    path_from_args = Path("..\..\samples\plugins\postgres_odbc")
+    path_from_args = Path("..\..\samples\plugins\postgres_odbc")  # TODO: Replace when ready.
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
