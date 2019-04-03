@@ -13,3 +13,6 @@ test:linux:
     - branches
   script:
     - which python
+    - which python3
+    - pip list
+    - pip3 list
