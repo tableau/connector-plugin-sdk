@@ -28,6 +28,10 @@ def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
     abs_source_path = os.path.abspath(source_dir)
     print("Start packaging", jar_filename, "from", abs_source_path)
 
+    # if dest dir doesn't exist, then create it
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
     with ZipFile(os.path.join(dest_dir, Path(jar_filename)), "w") as jar:
         jar.writestr("META-INF/", "")
         jar.writestr("META-INF/MANIFEST.MF", Manifest().get_data())

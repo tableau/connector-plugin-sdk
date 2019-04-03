@@ -5,17 +5,9 @@ from xsd_validator import validate_xsd
 from connector_file import ConnectorFile
 from jar_packager import create_jar
 
-if sys.version_info[0] < 3:
-    raise EnvironmentError("package requires Python 3 or greater.")
-
-
-def validate_package_contents(path):
-    print("generate file list from: " + path)
-    print("ensure files comply with XSDs in: connector-plugin-sdk/validation")
-
 
 def create_package_output(path):
-    print("create jar package from: " + path)
+    print("create jar package from: " + str(path))
 
 
 def main():
