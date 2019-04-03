@@ -26,7 +26,7 @@ def main():
         #Log to console also.
         ch.setLevel(logging.DEBUG)
     else:
-        ch.setLevel(logging.WARNING)
+        ch.setLevel(logging.INFO)
     logger.addHandler(ch)
 
     logger.debug("Starting Tableau Connector Packaging Version " + __version__)
@@ -46,7 +46,7 @@ def main():
         jar_name = "postgres_odbc.jar"
         create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
     else:
-        logger.warning("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
+        logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
 
 
 if __name__ == '__main__':

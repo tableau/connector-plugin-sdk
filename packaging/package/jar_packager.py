@@ -42,7 +42,7 @@ def create_jar(source_dir, files, jar_filename, dest_dir="jar/"):
         for file in files:
             jar.write(os.path.join(abs_source_path, file.file_name), file.file_name)
 
-    logging.warning(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
+    logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
 
 
 if __name__ == "__main__":
