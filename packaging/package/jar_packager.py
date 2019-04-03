@@ -1,9 +1,10 @@
 import os
 
-from .connector_file import ConnectorFile
-from zipfile import ZipFile
-from .manifest import Manifest
 from pathlib import Path
+from zipfile import ZipFile
+
+from .connector_file import ConnectorFile
+from .manifest import Manifest
 
 
 def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
@@ -54,4 +55,3 @@ if __name__ == "__main__":
     jar_dest_path = Path("..\jar")
     jar_name = "postgres_odbc.jar"
     create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
-

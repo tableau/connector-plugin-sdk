@@ -2,10 +2,10 @@ import sys
 import logging
 from pathlib import Path
 
-from .xsd_validator import validate_xsd
 from .connector_file import ConnectorFile
 from .jar_packager import create_jar
 from .version import __version__
+from .xsd_validator import validate_xsd
 
 
 LOG_FILE = 'packaging_log.txt'
