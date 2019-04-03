@@ -1,9 +1,8 @@
-import sys
 from pathlib import Path
 
-from .xsd_validator import validate_xsd
 from .connector_file import ConnectorFile
 from .jar_packager import create_jar
+from .xsd_validator import validate_xsd
 
 
 def create_package_output(path):
