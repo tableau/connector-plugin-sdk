@@ -1,8 +1,8 @@
 import os
 
-from connector_file import ConnectorFile
+from .connector_file import ConnectorFile
 from zipfile import ZipFile
-from manifest import Manifest
+from .manifest import Manifest
 from pathlib import Path
 
 
