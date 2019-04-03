@@ -1,10 +1,13 @@
 import os
+import logging
 
 from pathlib import Path
 from zipfile import ZipFile
 
 from .connector_file import ConnectorFile
 from .manifest import Manifest
+
+logger = logging.getLogger(__name__)
 
 
 def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
@@ -27,7 +30,7 @@ def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
     """
 
     abs_source_path = os.path.abspath(source_dir)
-    print("Start packaging", jar_filename, "from", abs_source_path)
+    logging.debug("Start packaging " + jar_filename + " from " + str(abs_source_path))
 
     # if dest dir doesn't exist, then create it
     if not os.path.exists(dest_dir):
@@ -39,7 +42,7 @@ def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
         for file in files:
             jar.write(os.path.join(abs_source_path, file.file_name), file.file_name)
 
-    print(jar_filename, "was created in", os.path.abspath(dest_dir))
+    logging.warning(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
 
 
 if __name__ == "__main__":
