@@ -45,7 +45,7 @@ def validate_xsd(files_list, folder_path):
         return False
 
     xml_violations_found = 0
-    xml_violations_buffer = ["XML violations found.\n\n"]
+    xml_violations_buffer = ["XML violations found."]
     # If xml violations are found, we save them here and logger.debug at end of method
 
     for file_to_test in files_list:
@@ -66,7 +66,7 @@ def validate_xsd(files_list, folder_path):
         for line in xml_violations_buffer:
             logger.debug(line)
 
-        logger.debug("XML validation failed!\n" + str(xml_violations_found) + " violations found.")
+        logger.debug("XML validation failed. " + str(xml_violations_found) + " violations found.")
 
     logger.debug(str(len(files_list)) + " xml files parsed.")
 
