@@ -14,8 +14,8 @@ LOG_FILE = 'packaging_log.txt'
 def create_parser():
     parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool", usage="Package files into a single Tableau Connector file.")
     parser.add_argument('--verbose', '-v', dest='verbose', action='store_true', help='Verbose output.', required=False)
-    parser.add_argument('--package', dest='package', help='Path to folder containing files to package', required=False)
-    parser.add_argument('--validate', dest='validate', help='Path to folder containing files to validate', required=False)
+    parser.add_argument('--package', dest='package', help='Packages files in the folder path provided', required=False)
+    parser.add_argument('--validate', dest='validate', help='Validates xml files in the folder path provided', required=False)
 
     return parser
 
