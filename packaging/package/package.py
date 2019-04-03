@@ -42,10 +42,9 @@ def main():
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
 
     if validate_xsd(files_to_package, path_from_args):
-        jar_dest_path = Path("../jar")
+        jar_dest_path = Path("jar/")
         jar_name = "postgres_odbc.jar"
         create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
-
     else:
         logger.warning("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
 
