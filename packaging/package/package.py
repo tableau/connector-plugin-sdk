@@ -33,8 +33,7 @@ def main():
 
 
     # TODO: Replace all hard coded below input when ready.
-    #path_from_args = Path("..\samples\plugins\postgres_odbc")
-    path_from_args = Path("C:/Users/pvanderknyff/Documents/connector-plugins/postgres_odbc")
+    path_from_args = Path("..\samples\plugins\postgres_odbc")
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),

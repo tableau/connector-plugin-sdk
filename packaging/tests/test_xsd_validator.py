@@ -4,7 +4,7 @@ from pathlib import Path
 from package.xsd_validator import validate_xsd, validate_single_file, get_xsd_file
 from package.connector_file import ConnectorFile
 
-XSD_TEST_FOLDER = Path("tests/test_xsd_validator")
+XSD_TEST_FOLDER = Path("tests/test_resources")
 
 class TestXSDValidator(unittest.TestCase):
     
