@@ -7,7 +7,7 @@ from .connector_file import ConnectorFile
 from .manifest import Manifest
 
 
-def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
+def create_jar(source_dir, files, jar_filename, dest_dir="jar/"):
     """
     Package JAR file from given files.
 
