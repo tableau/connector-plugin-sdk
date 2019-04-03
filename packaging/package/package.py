@@ -19,11 +19,12 @@ def main():
         ConnectorFile("dialect.tdd", "dialect"),
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
 
-    validate_xsd(files_to_package, path_from_args)
-
-    jar_dest_path = Path("../jar")
-    jar_name = "postgres_odbc.jar"
-    create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
+    if validate_xsd(files_to_package, path_from_args):
+        jar_dest_path = Path("../jar")
+        jar_name = "postgres_odbc.jar"
+        create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
+    else:
+        print("XML Validation failed")
 
 
 if __name__ == '__main__':
