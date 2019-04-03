@@ -3,8 +3,8 @@ import os
 from pathlib import Path
 from zipfile import ZipFile
 
-from package.connector_file import ConnectorFile
-from package.manifest import Manifest
+from .connector_file import ConnectorFile
+from .manifest import Manifest
 
 
 def create_jar(source_dir, files, jar_filename, dest_dir="..\jar"):
