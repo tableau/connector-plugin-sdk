@@ -2,7 +2,7 @@ import logging
 
 LOG_FILE = 'packager_tests_logs.txt'
 
-print("Printing test results to " + LOG_FILE)
+print("Printing test logs to " + LOG_FILE)
 
 #Create logger.
 logging.basicConfig(filename=LOG_FILE,level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
