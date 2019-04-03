@@ -1,9 +1,9 @@
 import sys
 from pathlib import Path
 
-from xsd_validator import validate_xsd
-from connector_file import ConnectorFile
-from jar_packager import create_jar
+from .xsd_validator import validate_xsd
+from .connector_file import ConnectorFile
+from .jar_packager import create_jar
 
 
 def create_package_output(path):
@@ -12,7 +12,7 @@ def create_package_output(path):
 
 def main():
     # TODO: Replace all hard coded below input when ready.
-    path_from_args = Path("..\..\samples\plugins\postgres_odbc")
+    path_from_args = Path("..\samples\plugins\postgres_odbc")
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
