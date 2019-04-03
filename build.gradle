@@ -1,0 +1,7 @@
+plugins {
+    id 'com.tableau.nerv-python-module-plugin' version '6.2.0'
+}
+
+nervPython {
+    pythonVersion = '3.6.5'
+}
