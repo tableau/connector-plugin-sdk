@@ -1,92 +1,15 @@
-# This file is a template, and might need editing before it works on your project.
-#
-# This is the Gradle build system for JVM applications
-# https://gradle.org/
-# https://github.com/gradle/gradle
-
 stages:
   - test
-  - release
 
 variables:
   GIT_STRATEGY: "clone"
   GRADLE_LOG_OPT: "-Dorg.gradle.logging.level=info"
 
-# common config for platforms
-.windows: &windows
-  tags:
-    - nerv-aws-powershell-windows
-  variables:
-    GRADLE_OPTS: "${GRADLE_LOG_OPT}"
-
-.macos: &macos
-  tags:
-    - nerv-tuk-bash-macos
-  variables:
-    GRADLE_USER_HOME: "/cache/.gradle"
-    GRADLE_OPTS: "${GRADLE_LOG_OPT}"
-
-.linux: &linux
-  image: artifactory.prod.tableautools.com:6555/nerv/python-build:v1.0.7
-  tags:
-    - nerv-aws-docker-linux
-  variables:
-    GRADLE_OPTS: "${GRADLE_LOG_OPT}"
-
-
-.test: &test
-    stage: test
-    only:
-      - branches
-    script:
-        - ./gradlew test
-
-# Builds and tests on Linux/macOS/Windows
-linux build:
-  <<: *linux
-  <<: *build
-
-macos build:
-  <<: *macos
-  <<: *build
-
-windows build:
-  <<: *windows
-  <<: *build
-
-# Creates a release tag from each commit to master
-tag for release:
-  <<: *linux
-  stage: release
-  dependencies:
-    - linux build
-  only:
-    - master
-#    - /^release-[0-9]+\.[0-9]+$/
-  script:
-    - ./gradlew tagForRelease
-
-# Publishes release tags to artifactory
-publish to artifactory:
-  <<: *linux
-  stage: release
-  only:
-    - /^v[0-9]+\.[0-9]+\.[0-9]+$/
-  script:
-    - ./gradlew publish
-  artifacts:
-    paths:
-      - dist/
-
-# Deploy Python artifact to artifactory PyPi
-deploy-to-pypi:
-  stage: deploy
-  image: artifactory.prod.tableautools.com:6555/nerv/nerv-ci-tools-image:0.0.21
+test:linux:
+  stage: test
   tags:
     - nerv-aws-docker-linux
   only:
-    - /^v[0-9]+\.[0-9]+\.[0-9]+$/
-  dependencies:
-    - publish to artifactory
+    - branches
   script:
-     - deploy-to-pypi
+    - ./gradlew -i clean build test
