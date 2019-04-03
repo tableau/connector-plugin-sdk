@@ -1,5 +1,6 @@
 import sys
 import logging
+import argparse
 from pathlib import Path
 
 from .connector_file import ConnectorFile
@@ -10,19 +11,23 @@ from .xsd_validator import validate_xsd
 
 LOG_FILE = 'packaging_log.txt'
 
-def create_package_output(path):
-    print("create jar package from: " + str(path))
+def create_parser():
+    parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool", usage="Package files into a single Tableau Connector file.")
+    parser.add_argument('--verbose', '-v', dest='verbose', action='store_true', help='Verbose output.', required=False)
+    parser.add_argument('--package', dest='package', help='Path to folder containing files to package', required=False)
+    parser.add_argument('--validate', dest='validate', help='Path to folder containing files to validate', required=False)
 
+    return parser
 
-def main():
-    # TODO: Handle logger creation in init() function that also handles args like TDVT does
-    verbose = False #TODO: Get from args
+def init():
+    parser = create_parser()
+    args = parser.parse_args()
 
     #Create logger.
     logging.basicConfig(filename=LOG_FILE,level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
     logger = logging.getLogger()
     ch = logging.StreamHandler()
-    if verbose:
+    if args.verbose:
         #Log to console also.
         ch.setLevel(logging.DEBUG)
     else:
@@ -31,23 +36,49 @@ def main():
 
     logger.debug("Starting Tableau Connector Packaging Version " + __version__)
 
+    return parser, args, logger
 
-    # TODO: Replace all hard coded below input when ready.
-    path_from_args = Path("..\samples\plugins\postgres_odbc")
+
+
+def main():
+    parser, args, logger = init()
+
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
         ConnectorFile("connectionBuilder.js", "script"),
         ConnectorFile("dialect.tdd", "dialect"),
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
+    
+    if args.package:
+        path_from_args = Path(args.package)
 
-    if validate_xsd(files_to_package, path_from_args):
-        jar_dest_path = Path("jar/")
-        jar_name = "postgres_odbc.jar"
-        create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
+        if not path_from_args.is_dir():
+            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
+            return  
+
+        if validate_xsd(files_to_package, path_from_args):
+            jar_dest_path = Path("jar/")
+            jar_name = "postgres_odbc.jar"
+            create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
+        else:
+            logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
+
+    elif args.validate:
+        path_from_args = Path(args.validate)  
+        
+        if not path_from_args.is_dir():
+            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
+            return  
+
+        if validate_xsd(files_to_package, path_from_args):
+            logger.info("XML Validation succeeded.")
+        else:
+            logger.info("XML Validation failed. Check " + LOG_FILE + " for more information.")
+
+    # if we reach here we didn't get an arg to do stuff, so print help before exiting
     else:
-        logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
-
+        parser.print_help()
 
 if __name__ == '__main__':
     main()
