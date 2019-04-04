@@ -11,7 +11,7 @@ from .file_list_generator import generate_file_list
 
 
 LOG_FILE = 'packaging_log.txt'
-PACKAGED_EXTENSION = ".tcnx"
+PACKAGED_EXTENSION = ".taco"
 
 def create_parser():
     parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool", usage="Package files into a single Tableau Connector file.")
