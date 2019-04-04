@@ -10,7 +10,7 @@ from .xsd_validator import validate_xsd
 
 
 LOG_FILE = 'packaging_log.txt'
-PACKAGED_EXTENSION = ".tcnx"
+PACKAGED_EXTENSION = ".taco"
 
 def create_parser():
     parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool", usage="Package files into a single Tableau Connector file.")
