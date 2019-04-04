@@ -7,6 +7,7 @@ from .connector_file import ConnectorFile
 from .jar_packager import create_jar
 from .version import __version__
 from .xsd_validator import validate_xsd
+from .file_list_generator import generate_file_list
 
 
 LOG_FILE = 'packaging_log.txt'
@@ -55,17 +56,15 @@ def main():
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
     
     if args.package:
-        path_from_args = Path(args.package)
-
-        if not path_from_args.is_dir():
-            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
-            return  
-
         if not args.name:
             logger.warning("Error: no name specified for packaged connector. Use --name or -n command line arguments.")   
             return
+        
+        path_from_args = Path(args.package)
 
-        if validate_xsd(files_to_package, path_from_args):
+        files_to_package = generate_file_list(path_from_args)
+
+        if files_to_package and validate_xsd(files_to_package, path_from_args):
             
             jar_dest_path = Path("jar/")
             jar_name = args.name + PACKAGED_EXTENSION
@@ -75,16 +74,14 @@ def main():
 
             create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
         else:
-            logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
+            logger.info("Packaging failed. Check " + LOG_FILE + " for more information.")
 
     elif args.validate:
         path_from_args = Path(args.validate)  
-        
-        if not path_from_args.is_dir():
-            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
-            return  
 
-        if validate_xsd(files_to_package, path_from_args):
+        files_to_package = generate_file_list(path_from_args)
+        
+        if files_to_package and validate_xsd(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
         else:
             logger.info("XML Validation failed. Check " + LOG_FILE + " for more information.")
