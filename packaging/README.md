@@ -11,8 +11,24 @@ The recommendation is to install package within a Python virtual environment. Se
 
 ### Run package Module
 
+To package the connector:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package --package [path_to_folder]
+```
+
+To validate that the xml files are valid:
+```
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package --validate [path_to_folder]
+```
+
+All command line arguments:
+```
+  -h, --help            show help message
+  --verbose, -v         Verbose output.
+  --package             Packages files in the folder path provided
+  --validate            Validates xml files in the folder path provided
+  --dest DEST, -d       Destination folder for packaged connector
+  --name NAME, -n       Name of the packaged connector
 ```
 
 ## Development
