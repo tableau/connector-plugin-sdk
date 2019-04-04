@@ -3,7 +3,7 @@
 ## Usage
 
 ### Install package Module
-The recommendation is to install package within a Python virtual environment. See section Setup Virtual Environment below to create and activate a vitural environment.
+The recommendation is to install package within a Python virtual environment. See section Setup Virtual Environment below to create and activate a virtual environment.
 
 ```
 (.venv) PS connector-plugin-sdk\packaging> python setup.py install
