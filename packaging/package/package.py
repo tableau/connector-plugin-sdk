@@ -10,12 +10,15 @@ from .xsd_validator import validate_xsd
 
 
 LOG_FILE = 'packaging_log.txt'
+PACKAGED_EXTENSION = ".tcnx"
 
 def create_parser():
     parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool", usage="Package files into a single Tableau Connector file.")
     parser.add_argument('--verbose', '-v', dest='verbose', action='store_true', help='Verbose output.', required=False)
     parser.add_argument('--package', dest='package', help='Packages files in the folder path provided', required=False)
     parser.add_argument('--validate', dest='validate', help='Validates xml files in the folder path provided', required=False)
+    parser.add_argument('--dest', '-d', dest='dest', help='Destination folder for packaged connector', required=False)
+    parser.add_argument('--name', '-n', dest='name', help='Name of the packaged connector', required=False)
 
     return parser
 
@@ -43,6 +46,7 @@ def init():
 def main():
     parser, args, logger = init()
 
+    # TODO: Actually generate these
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
@@ -57,9 +61,18 @@ def main():
             logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
             return  
 
+        if not args.name:
+            logger.warning("Error: no name specified for packaged connector. Use --name or -n command line arguments.")   
+            return
+
         if validate_xsd(files_to_package, path_from_args):
+            
             jar_dest_path = Path("jar/")
-            jar_name = "postgres_odbc.jar"
+            jar_name = args.name + PACKAGED_EXTENSION
+
+            if args.dest:
+                jar_dest_path = args.dest
+
             create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
         else:
             logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
