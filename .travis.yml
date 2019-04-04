@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+install:
+  - cd tdvt && pip install .
+
+script:
+  - python test/tdvt_test.py
