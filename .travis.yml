@@ -5,7 +5,7 @@ python:
   - "3.6"
 
 install:
-  - cd tdvt && pip install .
+  - pip install tdvt/
 
 script:
-  - python test/tdvt_test.py
+  - python test/tdvt_test.py ConfigTest DiffTest PrintConfigurationsTest
