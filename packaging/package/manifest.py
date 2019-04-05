@@ -11,7 +11,7 @@ from .version import __version__
 manifest_line_length = 70
 MANIFEST_VERSION = "Manifest-Version"
 VENDOR_KEY = "Created-By"
-SDK_NAME = "Tableau Connector SDK "
+PACKAGING_TOOL_NAME = "Tableau Connector Packaging Tool "
 
 
 class ManifestKeyException(Exception):
@@ -51,7 +51,7 @@ class Manifest:
     def __init__(self, version="1.0", linesep=None):
         self.sections = []
         self.sections.append(ManifestSection(MANIFEST_VERSION, version))
-        self.sections.append(ManifestSection(VENDOR_KEY, SDK_NAME + __version__))
+        self.sections.append(ManifestSection(VENDOR_KEY, PACKAGING_TOOL_NAME + __version__))
         self.linesep = linesep
 
     def store(self, stream, linesep=None):
