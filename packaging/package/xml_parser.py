@@ -9,14 +9,33 @@ from .xsd_validator import validate_single_file, get_xsd_file, PATH_TO_XSD_FILES
 logger = logging.getLogger(__name__)
 
 class XMLParser:
+    """
+        Handles parsing the xml connector files
+
+        Arguments:
+            path_to_folder {Path} -- path to the folder that contains the files to parse
+
+        Methods:
+            generate_file_list: generates a list of files to package by parsing the xml files
+    """
+
     def __init__(self, path_to_folder):
         self.path_to_folder = path_to_folder
-        self.package_name = None # Get this from the class name in the manifest file
-        self.file_list = []
+        self.class_name = None # Get this from the class name in the manifest file
+        self.file_list = [] # list of files to package
         self.loc_strings = [] #list of loc strings so we can make sure they are covered in the resource files.
 
 
     def generate_file_list(self):
+        """
+        Arguments:
+            None
+
+        Returns:
+            list[ConnectorFile] -- list of files to package
+            class_name -- name of the connector class extracted from the files
+            -- Returns none for both if any of the files are invalid, or the files do not agree on the name
+        """
         
         logging.debug("Generating list of files to package...")
         
@@ -49,11 +68,11 @@ class XMLParser:
         for f in self.file_list:
             logger.debug("-- " + f.file_name)
 
-        if not self.package_name:
+        if not self.class_name:
             logger.debug("Class name not found in files.")
             return None, None
 
-        return self.file_list, self.package_name
+        return self.file_list, self.class_name
 
     def parse_file(self, file_to_parse):
         """"
@@ -108,14 +127,14 @@ class XMLParser:
             if 'class' in child.attrib:
                 
                 # Name not yet found
-                if not self.package_name:
+                if not self.class_name:
                     logging.debug("Found class name: " + child.attrib['class'])
-                    self.package_name = child.attrib['class']
+                    self.class_name = child.attrib['class']
 
                 # Make sure the name is the same
-                elif child.attrib['class'] != self.package_name:
+                elif child.attrib['class'] != self.class_name:
                     logging.debug("Error: class attribute in file " + file_to_parse.file_name + " does not equal class attribute in manifest.")
-                    logging.debug(self.package_name +  " in manifest, " + child.attrib['class'] + " in " + file_to_parse.file_name)
+                    logging.debug(self.class_name +  " in manifest, " + child.attrib['class'] + " in " + file_to_parse.file_name)
                     return False
 
         # If we've reached here, all the children are valid
