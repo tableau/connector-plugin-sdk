@@ -5,7 +5,7 @@ from pathlib import Path
 from package.jar_packager import create_jar
 from package.connector_file import ConnectorFile
 
-TEST_FOLDER = Path("tests/test_resources/jar_packager_test")
+TEST_FOLDER = Path("tests/test_resources")
 
 
 class TestJarPackager(unittest.TestCase):
