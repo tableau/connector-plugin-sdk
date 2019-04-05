@@ -1,4 +1,3 @@
-import sys
 import logging
 import argparse
 from pathlib import Path
@@ -12,26 +11,30 @@ from .xsd_validator import validate_xsd
 LOG_FILE = 'packaging_log.txt'
 PACKAGED_EXTENSION = ".taco"
 
+
 def create_parser():
-    parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool", usage="Package files into a single Tableau Connector file.")
+    parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool",
+                                     usage="Package files into a single Tableau Connector file.")
     parser.add_argument('--verbose', '-v', dest='verbose', action='store_true', help='Verbose output.', required=False)
     parser.add_argument('--package', dest='package', help='Packages files in the folder path provided', required=False)
-    parser.add_argument('--validate', dest='validate', help='Validates xml files in the folder path provided', required=False)
+    parser.add_argument('--validate', dest='validate', help='Validates xml files in the folder path provided',
+                        required=False)
     parser.add_argument('--dest', '-d', dest='dest', help='Destination folder for packaged connector', required=False)
     parser.add_argument('--name', '-n', dest='name', help='Name of the packaged connector', required=False)
 
     return parser
 
+
 def init():
     parser = create_parser()
     args = parser.parse_args()
 
-    #Create logger.
-    logging.basicConfig(filename=LOG_FILE,level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
+    # Create logger.
+    logging.basicConfig(filename=LOG_FILE, level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
     logger = logging.getLogger()
     ch = logging.StreamHandler()
     if args.verbose:
-        #Log to console also.
+        # Log to console also.
         ch.setLevel(logging.DEBUG)
     else:
         ch.setLevel(logging.INFO)
@@ -40,7 +43,6 @@ def init():
     logger.debug("Starting Tableau Connector Packaging Version " + __version__)
 
     return parser, args, logger
-
 
 
 def main():
@@ -53,20 +55,20 @@ def main():
         ConnectorFile("connectionBuilder.js", "script"),
         ConnectorFile("dialect.tdd", "dialect"),
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
-    
+
     if args.package:
         path_from_args = Path(args.package)
 
         if not path_from_args.is_dir():
-            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
-            return  
+            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")
+            return
 
         if not args.name:
-            logger.warning("Error: no name specified for packaged connector. Use --name or -n command line arguments.")   
+            logger.warning("Error: no name specified for packaged connector. Use --name or -n command line arguments.")
             return
 
         if validate_xsd(files_to_package, path_from_args):
-            
+
             jar_dest_path = Path("jar/")
             jar_name = args.name + PACKAGED_EXTENSION
 
@@ -78,11 +80,11 @@ def main():
             logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
 
     elif args.validate:
-        path_from_args = Path(args.validate)  
-        
+        path_from_args = Path(args.validate)
+
         if not path_from_args.is_dir():
-            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
-            return  
+            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")
+            return
 
         if validate_xsd(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
@@ -92,6 +94,7 @@ def main():
     # if we reach here we didn't get an arg to do stuff, so print help before exiting
     else:
         parser.print_help()
+
 
 if __name__ == '__main__':
     main()

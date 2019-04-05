@@ -58,11 +58,11 @@ def validate_xsd(files_list, folder_path):
         if validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
             logger.debug("XML validation successful")
         else:
-            xml_violations_found+=1
+            xml_violations_found += 1
 
     if xml_violations_found <= 0:
         logger.debug("No XML violations found")
-    else:        
+    else:
         for line in xml_violations_buffer:
             logger.debug(line)
 
@@ -83,7 +83,7 @@ def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
         bool -- True if the xml file passes validation, false if it does not or there is an error
         Any xml violation messages will be appended to xml_violations_buffer
     """
-    
+
     logger.debug("Validating " + str(path_to_file))
 
     xsd_file = get_xsd_file(file_to_test)
@@ -97,7 +97,8 @@ def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
 
     # If the file is too big, we shouldn't try and parse it, just log the violation and move on
     if path_to_file.stat().st_size > MAX_FILE_SIZE:
-        xml_violations_buffer.append(file_to_test.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + " KB")
+        xml_violations_buffer.append(file_to_test.file_name + " exceeds maximum size of " +
+                                     str(int(MAX_FILE_SIZE / 1024)) + " KB")
         return False
 
     # Try to validate the xml. If the xml validation error is thrown, save the violation information to the buffer
