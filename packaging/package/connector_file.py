@@ -1,3 +1,4 @@
+import os.path
 
 class ConnectorFile:
     
@@ -6,5 +7,7 @@ class ConnectorFile:
         self.file_type = file_type
 
     def extension(self):
-        return self.file_name.split(".")[-1]
+        ext = os.path.splitext(self.file_name)[-1]
+        #Remove the leading period.
+        return ext if not ext else ext[1:]
     
