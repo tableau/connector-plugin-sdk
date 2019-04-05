@@ -33,21 +33,20 @@ class XMLParser:
 
         Returns:
             list[ConnectorFile] -- list of files to package
-            class_name -- name of the connector class extracted from the files
-            -- Returns none for both if any of the files are invalid, or the files do not agree on the name
+            -- Returns none if any of the files are invalid, or the files do not agree on the name
         """
         
         logging.debug("Generating list of files to package...")
         
         if not self.path_to_folder.is_dir():
             logger.warning("Error: " + str(self.path_to_folder) + " does not exist or is not a directory.")   
-            return None, None 
+            return None
         
         # Make sure manifest exists
         path_to_manifest = self.path_to_folder / Path("manifest.xml")
         if not path_to_manifest.is_file():
             logger.warning("Error: " + str(self.path_to_folder) + " does contain a file called manifest.xml.")   
-            return None, None 
+            return None
         
         self.file_list.append(ConnectorFile("manifest.xml", "manifest"))   
 
@@ -55,7 +54,7 @@ class XMLParser:
         files_valid = self.parse_file(self.file_list[0])
 
         if not files_valid:
-            return None, None
+            return None
 
         # if we have loc_files, bring them in too
         #TODO: implement finding translatable strings. Not making that a priority right now.
@@ -70,9 +69,9 @@ class XMLParser:
 
         if not self.class_name:
             logger.debug("Class name not found in files.")
-            return None, None
+            return None
 
-        return self.file_list, self.class_name
+        return self.file_list
 
     def parse_file(self, file_to_parse):
         """"

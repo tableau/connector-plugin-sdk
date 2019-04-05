@@ -53,7 +53,8 @@ def main():
 
         parser = XMLParser(path_from_args)
 
-        files_to_package, package_name = parser.generate_file_list() # validates XSD's as well
+        files_to_package = parser.generate_file_list() # validates XSD's as well
+        package_name = parser.class_name
 
         if files_to_package:
             
