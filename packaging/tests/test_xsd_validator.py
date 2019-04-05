@@ -1,14 +1,14 @@
 import unittest
 from pathlib import Path
 
-from package.xsd_validator import validate_xsd, validate_single_file, get_xsd_file
+from package.xsd_validator import validate_all_xml, validate_single_file, get_xsd_file
 from package.connector_file import ConnectorFile
 
 XSD_TEST_FOLDER = Path("tests/test_resources")
 
 class TestXSDValidator(unittest.TestCase):
     
-    def test_validate_xsd(self):
+    def test_validate_all_xml(self):
         
         test_folder = XSD_TEST_FOLDER / Path("valid_connector")
         
@@ -20,13 +20,13 @@ class TestXSDValidator(unittest.TestCase):
             ConnectorFile("connectionResolver.tdr", "connection-resolver"),
             ConnectorFile("resources-en_US.xml", "resource")]
         
-        self.assertTrue(validate_xsd(files_list, test_folder), "Valid connector not marked as valid")
+        self.assertTrue(validate_all_xml(files_list, test_folder), "Valid connector not marked as valid")
 
         test_folder = XSD_TEST_FOLDER / Path("bad_manifest")
 
         files_list = [ConnectorFile("manifest.xml", "manifest")]
 
-        self.assertFalse(validate_xsd(files_list, test_folder), "Invalid connector was marked as valid")
+        self.assertFalse(validate_all_xml(files_list, test_folder), "Invalid connector was marked as valid")
 
 
     def test_validate_single_file(self):

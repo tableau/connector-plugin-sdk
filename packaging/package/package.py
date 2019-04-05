@@ -6,7 +6,7 @@ from pathlib import Path
 from .connector_file import ConnectorFile
 from .jar_packager import create_jar
 from .version import __version__
-from .xsd_validator import validate_xsd
+from .xsd_validator import validate_all_xml
 from .file_list_generator import generate_file_list
 
 
@@ -62,9 +62,9 @@ def main():
         
         path_from_args = Path(args.package)
 
-        files_to_package = generate_file_list(path_from_args)
+        files_to_package = generate_file_list(path_from_args) # validates XSD's as well
 
-        if files_to_package and validate_xsd(files_to_package, path_from_args):
+        if files_to_package:
             
             jar_dest_path = Path("jar/")
             jar_name = args.name + PACKAGED_EXTENSION
@@ -81,7 +81,7 @@ def main():
 
         files_to_package = generate_file_list(path_from_args)
         
-        if files_to_package and validate_xsd(files_to_package, path_from_args):
+        if files_to_package and validate_all_xml(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
         else:
             logger.info("XML Validation failed. Check " + LOG_FILE + " for more information.")
