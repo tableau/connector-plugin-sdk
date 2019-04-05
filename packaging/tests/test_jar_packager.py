@@ -5,7 +5,7 @@ from pathlib import Path
 from package.jar_packager import create_jar
 from package.connector_file import ConnectorFile
 
-XSD_TEST_FOLDER = Path("tests/test_resources")
+TEST_FOLDER = Path("tests/test_resources/jar_packager_test")
 
 
 class TestJarPackager(unittest.TestCase):
@@ -18,9 +18,9 @@ class TestJarPackager(unittest.TestCase):
             ConnectorFile("dialect.tdd", "dialect"),
             ConnectorFile("connectionResolver.tdr", "connection-resolver"),
             ConnectorFile("resources-en_US.xml", "resource")]
-        source_dir = XSD_TEST_FOLDER / Path("valid_connector")
-        dest_dir = XSD_TEST_FOLDER / Path("jars/")
-        
+        source_dir = TEST_FOLDER / Path("valid_connector")
+        dest_dir = TEST_FOLDER / Path("jars/")
+
         create_jar(source_dir, files_list, "test.taco", dest_dir)
         self.assertTrue(os.path.isfile(dest_dir/Path("test.taco")), "taco file doesn't exist")
 
