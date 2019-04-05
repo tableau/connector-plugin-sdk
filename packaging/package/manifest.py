@@ -6,8 +6,12 @@ import os
 
 from collections import OrderedDict
 from six import BytesIO
+from .version import __version__
 
 manifest_line_length = 70
+MANIFEST_VERSION = "Manifest-Version"
+VENDOR_KEY = "Created-By"
+SDK_NAME = "Tableau Connector SDK "
 
 
 class ManifestKeyException(Exception):
@@ -17,18 +21,14 @@ class ManifestKeyException(Exception):
 
 class ManifestSection:
 
-    primary_key = "Manifest-Version"
-
-    def __init__(self, name=None):
+    def __init__(self, name, value):
         self.dict = OrderedDict([])
-        self.dict[self.primary_key] = name
+        self.dict[name] = value
 
     def store(self, stream, linesep=os.linesep):
 
         for k, v in self.dict.items():
             write_key_val(stream, k, v, linesep)
-
-        stream.write(linesep.encode('utf-8'))
 
     def get_data(self, linesep=os.linesep):
 
@@ -49,8 +49,9 @@ class Manifest:
     """
 
     def __init__(self, version="1.0", linesep=None):
-        self.mf_section = ManifestSection(version)
-        self.sub_sections = OrderedDict([])
+        self.sections = []
+        self.sections.append(ManifestSection(MANIFEST_VERSION, version))
+        self.sections.append(ManifestSection(VENDOR_KEY, SDK_NAME + __version__))
         self.linesep = linesep
 
     def store(self, stream, linesep=None):
@@ -60,9 +61,10 @@ class Manifest:
 
         linesep = linesep or self.linesep or os.linesep
 
-        self.mf_section.store(stream, linesep)
-        for sect in sorted(self.sub_sections.values()):
+        for sect in self.sections:
             sect.store(stream, linesep)
+
+        stream.write(linesep.encode('utf-8'))
 
     def get_data(self, linesep=None):
         """
@@ -82,12 +84,7 @@ class Manifest:
         removes all items from this manifest, and clears and removes all
         sub-sections
         """
-
-        for sub in self.sub_sections.values():
-            sub.clear()
-        self.sub_sections.clear()
-
-        self.mf_section.clear()
+        self.sections.clear()
 
     def __del__(self):
         self.clear()
@@ -132,6 +129,5 @@ def write_key_val(stream, key, val, linesep=os.linesep):
         stream.write(val)
 
     stream.write(linesep)
-
 #
 # The end.
