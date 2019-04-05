@@ -45,16 +45,16 @@ def init():
 
 
 def main():
-    parser, args, logger = init()
+    argparser, args, logger = init()
     
     if args.package:
                
         path_from_args = Path(args.package)
 
-        parser = XMLParser(path_from_args)
+        xmlparser = XMLParser(path_from_args)
 
-        files_to_package = parser.generate_file_list() # validates XSD's as well
-        package_name = parser.class_name
+        files_to_package = xmlparser.generate_file_list() # validates XSD's as well
+        package_name = xmlparser.class_name
 
         if files_to_package:
             
@@ -74,9 +74,9 @@ def main():
     elif args.validate:
         path_from_args = Path(args.validate)  
 
-        parser = XMLParser(path_from_args)
+        xmlparser = XMLParser(path_from_args)
 
-        files_to_package, package_name = parser.generate_file_list()
+        files_to_package, package_name = xmlparser.generate_file_list()
         
         if files_to_package and validate_all_xml(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
@@ -85,7 +85,7 @@ def main():
 
     # if we reach here we didn't get an arg to do stuff, so print help before exiting
     else:
-        parser.print_help()
+        argparser.print_help()
 
 if __name__ == '__main__':
     main()
