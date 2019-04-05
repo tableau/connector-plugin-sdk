@@ -7,7 +7,7 @@ from .connector_file import ConnectorFile
 from .jar_packager import create_jar
 from .version import __version__
 from .xsd_validator import validate_all_xml
-from .file_list_generator import generate_file_list
+from .xml_parser import XMLParser
 
 
 LOG_FILE = 'packaging_log.txt'
@@ -46,28 +46,22 @@ def init():
 
 def main():
     parser, args, logger = init()
-
-    # TODO: Actually generate these
-    files_to_package = [
-        ConnectorFile("manifest.xml", "manifest"),
-        ConnectorFile("connection-dialog.tcd", "connection-dialog"),
-        ConnectorFile("connectionBuilder.js", "script"),
-        ConnectorFile("dialect.tdd", "dialect"),
-        ConnectorFile("connectionResolver.tdr", "connection-resolver")]
     
     if args.package:
-        if not args.name:
-            logger.warning("Error: no name specified for packaged connector. Use --name or -n command line arguments.")   
-            return
-        
+               
         path_from_args = Path(args.package)
 
-        files_to_package = generate_file_list(path_from_args) # validates XSD's as well
+        parser = XMLParser(path_from_args)
+
+        files_to_package, package_name = parser.generate_file_list() # validates XSD's as well
 
         if files_to_package:
             
-            jar_dest_path = Path("jar/")
-            jar_name = args.name + PACKAGED_EXTENSION
+            if args.name:
+                package_name = args.name
+
+            jar_dest_path = Path("packaged-connector/")
+            jar_name = package_name + PACKAGED_EXTENSION
 
             if args.dest:
                 jar_dest_path = args.dest
@@ -79,7 +73,9 @@ def main():
     elif args.validate:
         path_from_args = Path(args.validate)  
 
-        files_to_package = generate_file_list(path_from_args)
+        parser = XMLParser(path_from_args)
+
+        files_to_package, package_name = parser.generate_file_list()
         
         if files_to_package and validate_all_xml(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
