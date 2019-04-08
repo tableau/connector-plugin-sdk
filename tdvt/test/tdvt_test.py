@@ -244,7 +244,7 @@ class CommandLineTest(unittest.TestCase):
             self.skipTest(reason="Not running on Windows.")
 
     def test_command_line_full_mac(self):
-        if sys.platform in ('darwin'):
+        if sys.platform in ('darwin') or 'linux' in sys.platform:
             test_config = TdvtTestConfig()
             test_config.logical = False
             test_config.tds = 'mytds.tds'
@@ -299,7 +299,7 @@ class CommandLineTest(unittest.TestCase):
             self.skipTest(reason="Not running on Windows.")
 
         def test_command_line_full_extension_mac(self):
-            if sys.platform in ('darwin'):
+            if sys.platform in ('darwin') or 'linux' in sys.platform:
                 test_config = TdvtTestConfig()
                 test_config.logical = False
                 test_config.tds = 'mytds.tds'
@@ -335,7 +335,7 @@ class CommandLineTest(unittest.TestCase):
             self.skipTest(reason="Not running on Windows.")
 
     def test_command_line_no_expected_mac(self):
-        if sys.platform in ('darwin'):
+        if sys.platform in ('darwin') or 'linux' in sys.platform:
             test_config = TdvtTestConfig()
             test_config.logical = False
             test_config.tds = 'mytds.tds'
@@ -368,7 +368,7 @@ class CommandLineTest(unittest.TestCase):
             self.skipTest(reason="Not running on Windows.")
 
     def test_command_line_multiple_override_mac(self):
-        if sys.platform in ('darwin'):
+        if sys.platform in ('darwin') or 'linux' in sys.platform:
             test_config = TdvtTestConfig()
             test_config.logical = False
             test_config.tds = 'mytds.tds'
