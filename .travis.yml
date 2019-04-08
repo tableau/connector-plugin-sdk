@@ -8,4 +8,4 @@ install:
   - pip install tdvt/
 
 script:
-  - cd tdvt/test && python tdvt_test.py -v
+  - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest

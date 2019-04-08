@@ -411,7 +411,7 @@ class TestPathTest(unittest.TestCase):
         self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/', ''), 3)
 
     def test_local_file(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e\suite1\setup.mytest.txt', ''), 1)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.mytest.txt', ''), 1)
 
     def test_local_glob(self):
         self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.*.txt', ''), 3)
