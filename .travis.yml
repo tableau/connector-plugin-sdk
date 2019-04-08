@@ -5,7 +5,9 @@ python:
   - "3.6"
 
 install:
-  - pip install -e tdvt/
+  # - pip install -e tdvt/
+  - pip install coveralls
 
 script:
-  - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+  - cd tdvt/test && coverage run -m tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+  - coveralls
