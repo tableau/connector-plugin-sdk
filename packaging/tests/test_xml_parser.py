@@ -1,13 +1,10 @@
 import unittest
-import logging
 from pathlib import Path
 
 from package.xml_parser import XMLParser
 from package.connector_file import ConnectorFile
 
 TEST_FOLDER = Path("tests/test_resources")
-
-logger = logging.getLogger(__name__)
 
 class TestXMLParser(unittest.TestCase):
 
@@ -35,11 +32,6 @@ class TestXMLParser(unittest.TestCase):
         # Test connector with class name mismatch
         actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("wrong_class"), expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Connector with class name mismatch returned a file list when it should not have")
-
-
-        
-
-
 
     def parser_test_case(self, test_folder, expected_file_list, expected_class_name):
 
