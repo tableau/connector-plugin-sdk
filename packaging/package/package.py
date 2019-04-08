@@ -15,7 +15,7 @@ PACKAGED_EXTENSION = ".taco"
 
 def create_arg_parser():
     parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool: package connector files into a singe Tableau Connector (" + PACKAGED_EXTENSION + ") file.")
-    parser.add_argument('input_dir', help='path to directory of connector files to package')
+    parser.add_argument('--input_dir', help='path to directory of connector files to package')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='verbose output', required=False)
     parser.add_argument('-l', '--log', dest='log_path', help='path of logging output', default='packaging_log.txt')
     parser.add_argument('--validate_only', dest='validate_only', action='store_true', help='runs package validation steps only', required=False)
