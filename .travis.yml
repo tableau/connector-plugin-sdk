@@ -5,7 +5,14 @@ python:
   - "3.6"
 
 install:
+  - pip install coveralls
   - pip install tdvt/
+  # - curl -fL https://getcli.jfrog.io | sh
 
 script:
-  - python tdvt/test/tdvt_test.py CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+  - coverage run tdvt/test/tdvt_test.py CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+  - coveralls
+  # - jfrog --version
+  # the logic will go like this:
+    # if git tag exists, parse it. cd into the directory that corresponds to its first word. (if it's numbers, pass)
+    # build the package and upload to pypi
