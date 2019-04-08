@@ -6,7 +6,8 @@ from pathlib import Path
 from .connector_file import ConnectorFile
 from .jar_packager import create_jar
 from .version import __version__
-from .xsd_validator import validate_xsd
+from .xsd_validator import validate_all_xml
+from .xml_parser import XMLParser
 
 
 LOG_FILE = 'packaging_log.txt'
@@ -44,54 +45,47 @@ def init():
 
 
 def main():
-    parser, args, logger = init()
-
-    # TODO: Actually generate these
-    files_to_package = [
-        ConnectorFile("manifest.xml", "manifest"),
-        ConnectorFile("connection-dialog.tcd", "connection-dialog"),
-        ConnectorFile("connectionBuilder.js", "script"),
-        ConnectorFile("dialect.tdd", "dialect"),
-        ConnectorFile("connectionResolver.tdr", "connection-resolver")]
+    argparser, args, logger = init()
     
     if args.package:
+               
         path_from_args = Path(args.package)
 
-        if not path_from_args.is_dir():
-            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
-            return  
+        xmlparser = XMLParser(path_from_args)
 
-        if not args.name:
-            logger.warning("Error: no name specified for packaged connector. Use --name or -n command line arguments.")   
-            return
+        files_to_package = xmlparser.generate_file_list() # validates XSD's as well
+        package_name = xmlparser.class_name
 
-        if validate_xsd(files_to_package, path_from_args):
+        if files_to_package:
             
-            jar_dest_path = Path("jar/")
-            jar_name = args.name + PACKAGED_EXTENSION
+            if args.name:
+                package_name = args.name
+
+            jar_dest_path = Path("packaged-connector/")
+            jar_name = package_name + PACKAGED_EXTENSION
 
             if args.dest:
                 jar_dest_path = args.dest
 
             create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
         else:
-            logger.info("XML Validation failed, connector not packaged. Check " + LOG_FILE + " for more information.")
+            logger.info("Packaging failed. Check " + LOG_FILE + " for more information.")
 
     elif args.validate:
         path_from_args = Path(args.validate)  
-        
-        if not path_from_args.is_dir():
-            logger.warning("Error: " + str(path_from_args) + " does not exist or is not a directory.")   
-            return  
 
-        if validate_xsd(files_to_package, path_from_args):
+        xmlparser = XMLParser(path_from_args)
+
+        files_to_package, package_name = xmlparser.generate_file_list()
+        
+        if files_to_package and validate_all_xml(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
         else:
             logger.info("XML Validation failed. Check " + LOG_FILE + " for more information.")
 
     # if we reach here we didn't get an arg to do stuff, so print help before exiting
     else:
-        parser.print_help()
+        argparser.print_help()
 
 if __name__ == '__main__':
     main()
