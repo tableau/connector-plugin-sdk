@@ -225,20 +225,23 @@ def build_tabquery_command_line_local(work):
 
 class CommandLineTest(unittest.TestCase):
     def test_command_line_full(self):
-        test_config = TdvtTestConfig()
-        test_config.logical = False
-        test_config.tds = 'mytds.tds'
-        #Optional.
-        test_config.output_dir = 'my/output/dir'
-        test_config.d_override = '-DLogLevel=Debug'
+        if sys.platform in ('win32', 'cygwin'):
+            test_config = TdvtTestConfig()
+            test_config.logical = False
+            test_config.tds = 'mytds.tds'
+            #Optional.
+            test_config.output_dir = 'my/output/dir'
+            test_config.d_override = '-DLogLevel=Debug'
 
-        test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
-        work = tdvt_core.BatchQueueWork(test_config, test_set)
-        cmd_line = build_tabquery_command_line_local(work)
-        cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
-        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+            test_file = 'some/test/file.txt'
+            test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
+            work = tdvt_core.BatchQueueWork(test_config, test_set)
+            cmd_line = build_tabquery_command_line_local(work)
+            cmd_line_str = ' '.join(cmd_line)
+            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+        else:
+            pass
 
     def test_password_file(self):
         test_config = TdvtTestConfig()
@@ -255,48 +258,57 @@ class CommandLineTest(unittest.TestCase):
         self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
 
     def test_command_line_full_extension(self):
-        test_config = TdvtTestConfig()
-        test_config.logical = False
-        test_config.tds = 'mytds.tds'
-        #Optional.
-        test_config.output_dir = 'my/output/dir'
-        test_config.d_override = '-DLogLevel=Debug'
+        if sys.platform in ('win32', 'cygwin'):
+            test_config = TdvtTestConfig()
+            test_config.logical = False
+            test_config.tds = 'mytds.tds'
+            #Optional.
+            test_config.output_dir = 'my/output/dir'
+            test_config.d_override = '-DLogLevel=Debug'
 
-        test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
-        work = tdvt_core.BatchQueueWork(test_config, test_set)
-        work.test_extension = True
-        cmd_line = build_tabquery_command_line_local(work)
-        cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'
-        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+            test_file = 'some/test/file.txt'
+            test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
+            work = tdvt_core.BatchQueueWork(test_config, test_set)
+            work.test_extension = True
+            cmd_line = build_tabquery_command_line_local(work)
+            cmd_line_str = ' '.join(cmd_line)
+            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'
+            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+        else:
+            pass
 
     def test_command_line_no_expected(self):
-        test_config = TdvtTestConfig()
-        test_config.logical = False
-        test_config.tds = 'mytds.tds'
+        if sys.platform in ('win32', 'cygwin'):
+            test_config = TdvtTestConfig()
+            test_config.logical = False
+            test_config.tds = 'mytds.tds'
 
-        test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
-        work = tdvt_core.BatchQueueWork(test_config, test_set)
-        cmd_line = build_tabquery_command_line_local(work)
-        cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
-        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+            test_file = 'some/test/file.txt'
+            test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
+            work = tdvt_core.BatchQueueWork(test_config, test_set)
+            cmd_line = build_tabquery_command_line_local(work)
+            cmd_line_str = ' '.join(cmd_line)
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+        else:
+            pass
 
     def test_command_line_multiple_override(self):
-        test_config = TdvtTestConfig()
-        test_config.logical = False
-        test_config.tds = 'mytds.tds'
-        test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
+        if sys.platform in ('win32', 'cygwin'):
+            test_config = TdvtTestConfig()
+            test_config.logical = False
+            test_config.tds = 'mytds.tds'
+            test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
 
-        test_file = 'some/test/file.txt'
-        test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
-        work = tdvt_core.BatchQueueWork(test_config, test_set)
-        cmd_line = build_tabquery_command_line_local(work)
-        cmd_line_str = ' '.join(cmd_line)
-        expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
-        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+            test_file = 'some/test/file.txt'
+            test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
+            work = tdvt_core.BatchQueueWork(test_config, test_set)
+            cmd_line = build_tabquery_command_line_local(work)
+            cmd_line_str = ' '.join(cmd_line)
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+        else:
+            pass
 
 class TestPathTest(unittest.TestCase):
     def assert_number_of_tests(self, config_set, test_size):
