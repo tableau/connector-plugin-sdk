@@ -243,7 +243,7 @@ class CommandLineTest(unittest.TestCase):
         else:
             self.skipTest(reason="Not running on Windows.")
 
-    def test_command_line_full_mac(self):
+    def test_command_line_full_mac_linux(self):
         if sys.platform in ('darwin') or 'linux' in sys.platform:
             test_config = TdvtTestConfig()
             test_config.logical = False
@@ -260,7 +260,7 @@ class CommandLineTest(unittest.TestCase):
             expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            self.skipTest(reason="Not running on Mac.")
+            self.skipTest(reason="Not running on Mac/Linux.")
 
         # TODO: Add command_list test for Linux once it's added to config.ini.
 
@@ -298,7 +298,7 @@ class CommandLineTest(unittest.TestCase):
         else:
             self.skipTest(reason="Not running on Windows.")
 
-        def test_command_line_full_extension_mac(self):
+        def test_command_line_full_extension_mac_linux(self):
             if sys.platform in ('darwin') or 'linux' in sys.platform:
                 test_config = TdvtTestConfig()
                 test_config.logical = False
@@ -316,7 +316,7 @@ class CommandLineTest(unittest.TestCase):
                 expected = 'tabquerytool --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'
                 self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
             else:
-                self.skipTest(reason="Not running on Mac.")
+                self.skipTest(reason="Not running on Mac/Linux.")
 
     def test_command_line_no_expected_windows(self):
         if sys.platform in ('win32', 'cygwin'):
@@ -334,7 +334,7 @@ class CommandLineTest(unittest.TestCase):
         else:
             self.skipTest(reason="Not running on Windows.")
 
-    def test_command_line_no_expected_mac(self):
+    def test_command_line_no_expected_mac_linux(self):
         if sys.platform in ('darwin') or 'linux' in sys.platform:
             test_config = TdvtTestConfig()
             test_config.logical = False
@@ -348,7 +348,7 @@ class CommandLineTest(unittest.TestCase):
             expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            self.skipTest(reason="Not running on Mac.")
+            self.skipTest(reason="Not running on Mac/Linux.")
 
     def test_command_line_multiple_override_windows(self):
         if sys.platform in ('win32', 'cygwin'):
@@ -367,7 +367,7 @@ class CommandLineTest(unittest.TestCase):
         else:
             self.skipTest(reason="Not running on Windows.")
 
-    def test_command_line_multiple_override_mac(self):
+    def test_command_line_multiple_override_mac_linux(self):
         if sys.platform in ('darwin') or 'linux' in sys.platform:
             test_config = TdvtTestConfig()
             test_config.logical = False
@@ -382,7 +382,7 @@ class CommandLineTest(unittest.TestCase):
             expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            self.skipTest(reason="Not running on Mac.")
+            self.skipTest(reason="Not running on Mac/Linux.")
 
 class TestPathTest(unittest.TestCase):
     def assert_number_of_tests(self, config_set, test_size):
