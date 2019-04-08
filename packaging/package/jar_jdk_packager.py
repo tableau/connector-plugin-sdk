@@ -37,7 +37,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     args = ["jar", "cf", jar_filename]
     for file in files:
         args.append(file.file_name)
-    p = subprocess.Popen(args, stdout=subprocess.PIPE, cwd=abs_source_path, shell=True)
+    p = subprocess.Popen(args, cwd=abs_source_path)
     p.wait()
 
     shutil.move(abs_source_path/Path(jar_filename), dest_dir/jar_filename)
