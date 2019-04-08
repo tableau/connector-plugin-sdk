@@ -224,7 +224,7 @@ def build_tabquery_command_line_local(work):
     return new_cmd
 
 class CommandLineTest(unittest.TestCase):
-    def test_command_line_full(self):
+    def test_command_line_full_windows(self):
         if sys.platform in ('win32', 'cygwin'):
             test_config = TdvtTestConfig()
             test_config.logical = False
@@ -241,7 +241,28 @@ class CommandLineTest(unittest.TestCase):
             expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            pass
+            self.skipTest(reason="Not running on Windows.")
+
+        def test_command_line_full_mac(self):
+            if sys.platform in ('darwin'):
+                test_config = TdvtTestConfig()
+                test_config.logical = False
+                test_config.tds = 'mytds.tds'
+                #Optional.
+                test_config.output_dir = 'my/output/dir'
+                test_config.d_override = '-DLogLevel=Debug'
+
+                test_file = 'some/test/file.txt'
+                test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
+                work = tdvt_core.BatchQueueWork(test_config, test_set)
+                cmd_line = build_tabquery_command_line_local(work)
+                cmd_line_str = ' '.join(cmd_line)
+                expected = 'tabquerytool --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+                self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+            else:
+                self.skipTest(reason="Not running on Mac.")
+
+        # TODO: Add command_list test for Linux once it's added to config.ini.
 
     def test_password_file(self):
         test_config = TdvtTestConfig()
