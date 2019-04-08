@@ -76,7 +76,7 @@ def main():
 
         xmlparser = XMLParser(path_from_args)
 
-        files_to_package, package_name = xmlparser.generate_file_list()
+        files_to_package = xmlparser.generate_file_list()
         
         if files_to_package and validate_all_xml(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
