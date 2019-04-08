@@ -10,4 +10,10 @@ class ConnectorFile:
         ext = os.path.splitext(self.file_name)[-1]
         #Remove the leading period.
         return ext if not ext else ext[1:]
+
+    def __lt__(self, other):
+        return self.file_name < other.file_name
+
+    def __eq__(self, other):
+        return self.file_name == other.file_name and self.file_type == other.file_type
     
