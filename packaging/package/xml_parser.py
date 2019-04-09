@@ -9,6 +9,7 @@ from .xsd_validator import validate_single_file, get_xsd_file, PATH_TO_XSD_FILES
 logger = logging.getLogger(__name__)
 
 TRANSLATABLE_STRING_PREFIX = "@string/"
+TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "ja_JP", "ko_KR", "pt_BR", "zh_CN", "zh_TW"]
 
 class XMLParser:
     """
@@ -62,13 +63,31 @@ class XMLParser:
             logger.debug("Class name not found in files.")
             return None
 
-        # if we have loc_files, bring them in too
-        #TODO: implement finding translatable strings. Not making that a priority right now.
+        # If we found localized strings, bring in the resource files as well
         if len(self.loc_strings) > 0:
             logger.debug("Found translatable strings, looking for resource files...")
             logger.debug('Strings found:')
             for s in self.loc_strings:
                 logger.debug("-- " + s)
+
+            # Check for files for each of the languages we suport
+            for language in TABLEAU_SUPPORTED_LANGUAGES:
+                resource_file_name = "resources-" + language + ".xml"
+                path_to_resource = self.path_to_folder / Path(resource_file_name)
+                if path_to_resource.is_file():
+                    # Validate that the resource file is valid.
+                    new_file = ConnectorFile(resource_file_name, "resource")
+                    xml_violations_buffer = []
+
+                    if not validate_single_file(new_file, path_to_resource, xml_violations_buffer):
+                        for error in xml_violations_buffer:
+                            logging.debug(error)
+                        return None
+                    
+                    self.file_list.append(ConnectorFile(resource_file_name, "resource"))
+                    logging.debug("Adding file to list (name = " + resource_file_name + ", type = resource)")
+
+            
 
         else:
             logger.debug("No loc files.")
