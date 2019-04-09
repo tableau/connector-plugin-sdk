@@ -13,22 +13,34 @@ The recommendation is to install package within a Python virtual environment. Se
 
 To package the connector:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package --package [path_to_folder]
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder]
 ```
 
 To validate that the xml files are valid:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package --validate [path_to_folder]
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package --validate_only [path_to_folder]
 ```
 
-All command line arguments:
+All command line usage details:
 ```
-  -h, --help            show help message
-  --verbose, -v         Verbose output.
-  --package             Packages files in the folder path provided
-  --validate            Validates xml files in the folder path provided
-  --dest DEST, -d       Destination folder for packaged connector
-  --name NAME, -n       Name of the packaged connector
+usage: package.py [-h] [-v] [-l LOG_PATH] [--validate_only] [-d DEST]
+                  [-n NAME]
+                  input_dir
+
+Tableau Connector Packaging Tool: package connector files into a single Tableau
+Connector (.taco) file.
+
+positional arguments:
+  input_dir             path to directory of connector files to package
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         verbose output
+  -l LOG_PATH, --log LOG_PATH
+                        path of logging output
+  --validate_only       runs package validation steps only
+  -d DEST, --dest DEST  destination folder for packaged connector
+  -n NAME, --name NAME  name of the packaged connector
 ```
 
 ## Development
