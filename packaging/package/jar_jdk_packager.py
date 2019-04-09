@@ -2,12 +2,12 @@ import os
 import logging
 import subprocess
 import shutil
-import re
 
 from pathlib import Path
 from .connector_file import ConnectorFile
 
-JDK_ENVIRON_VARIABLE_PATTERN = "(jdk\d+\.\d+\.\d+\_\d+)(\\\\)bin"
+JAR_EXECUTABLE_NAME = "jar.exe"
+PATH_ENVIRON = "PATH"
 logger = logging.getLogger(__name__)
 
 
@@ -15,9 +15,9 @@ def check_jdk_environ_variable():
     """
     Check if jdk is set up in PATH
     """
-    path_list = os.environ['PATH'].split(';')
+    path_list = os.environ[PATH_ENVIRON].split(';')
     for path in path_list:
-        if re.search(JDK_ENVIRON_VARIABLE_PATTERN, path):
+        if os.path.isfile(Path(path)/JAR_EXECUTABLE_NAME):
             return True
 
     return False
