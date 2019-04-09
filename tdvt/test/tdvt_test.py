@@ -14,12 +14,13 @@
 """
 
 import configparser
-from defusedxml.ElementTree import parse,ParseError
 import logging
 import os
 import pkg_resources
 import shutil
 import unittest
+
+from defusedxml.ElementTree import parse,ParseError
 
 from tdvt import tdvt_core
 from tdvt.tdvt import enqueue_failed_tests
@@ -43,7 +44,7 @@ class DiffTest(unittest.TestCase):
         failed_tests = []
         for test in test_files:
             actual_file = test.replace('expected', 'actual')
-            
+
             actual_file = os.path.join(os.path.join(TEST_DIRECTORY, subdir), actual_file)
             expected_file = os.path.join(os.path.join(TEST_DIRECTORY, subdir), test)
 
@@ -92,7 +93,7 @@ class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
         self.test_config = TdvtTestConfig()
         self.test_config.output_dir = make_temp_dir([self.test_config.suite_name])
-        
+
     def tearDown(self):
         shutil.rmtree(self.test_config.output_dir)
 
@@ -177,7 +178,7 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 1, False)
 
         #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
-        
+
         tests = enqueue_failed_tests(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
 
@@ -331,9 +332,9 @@ class ConfigTest(unittest.TestCase):
         test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/lodcalcs/setup.*.txt')
 
         tests = [test1, test2, test3, test4, test5]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             msg = "[Did not find expected value of [{0}]".format(test)
             self.assertTrue(found, msg)
 
@@ -351,11 +352,11 @@ class ConfigTest(unittest.TestCase):
         test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt')
 
         tests = [test1, test2, test3]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
-        
+
     def test_load_ini_missing2(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'aurora_missing2.ini', __name__))
@@ -369,9 +370,9 @@ class ConfigTest(unittest.TestCase):
         test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/standard/setup.*.txt')
 
         tests = [test1, test2, test3]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_bigquery(self):
@@ -387,9 +388,9 @@ class ConfigTest(unittest.TestCase):
         test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse', 'exprtests/standard/setup.*.txt')
 
         tests = [test1, test2, test3]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_new_tests(self):
@@ -408,9 +409,9 @@ class ConfigTest(unittest.TestCase):
         test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test2.bigquery_sql_test', 'cast_calcs.bigquery_sql_test.tds', 'string.char', 'exprtests/standard/')
 
         tests = [test1, test2, test3, test4]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_logical_config(self):
@@ -431,7 +432,7 @@ class ConfigTest(unittest.TestCase):
         ini_file = get_path('tool_test/ini', 'windows_override.ini', __name__)
         reg = datasource_list.TestRegistry('')
         reg.load_registry(ini_file)
-       
+
         #Duplicates should be removed and the order preserved.
         standard = ['teradata', 'netezza']
         all_passing = ['teradata', 'netezza', 'bigquery', 'exasolution']
@@ -442,7 +443,7 @@ class ConfigTest(unittest.TestCase):
         self.assertTrue(all_passing == reg.get_datasources('all_passing'))
         self.assertTrue(all_test == reg.get_datasources('all_test'))
         self.assertTrue(all_test2 == reg.get_datasources('all_test2'))
- 
+
 
     def test_load_command_line_override(self):
         config = configparser.ConfigParser()
@@ -457,11 +458,11 @@ class ConfigTest(unittest.TestCase):
         test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', '', 'exprtests/standard/setup.*.txt')
 
         tests = [test1, test2, test3]
-        
+
         self.assertTrue(test_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.d_override)
 
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_bigquery_sql(self):
@@ -489,7 +490,7 @@ class ConfigTest(unittest.TestCase):
         tests = [test1, test2, test3, test4, test5, test6, test7, test8]
 
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_staplesdata_on(self):
@@ -501,9 +502,9 @@ class ConfigTest(unittest.TestCase):
         test1 = ExpressionTestSet(TEST_DIRECTORY, 'expression.staples.bigquery', 'Staples.bigquery.tds', '', 'exprtests/staples/setup.*.txt')
 
         tests = [test1]
-        
+
         for test in tests:
-            found = [y for y in x if y == test] 
+            found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
     def test_load_ini_staplesdata_off(self):
@@ -535,7 +536,7 @@ class ConfigTest(unittest.TestCase):
         self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
 
 
-ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '') 
+ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
 print ("Using test dir " + str(TEST_DIRECTORY))
