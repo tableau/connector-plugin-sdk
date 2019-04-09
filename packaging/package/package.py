@@ -70,6 +70,5 @@ def main():
     jdk_create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
 
 
-
 if __name__ == '__main__':
     main()
