@@ -37,11 +37,11 @@ def validate_all_xml(files_list, folder_path):
     logger.debug("Starting XSD validation...")
 
     if type(files_list) != list:
-        logger.debug("Error: validate_all_xml: input is not a list")
+        logger.error("Error: validate_all_xml: input is not a list")
         return False
 
     if len(files_list) < 1:
-        logger.debug("Error: validate_all_xml: input list is empty")
+        logger.error("Error: validate_all_xml: input list is empty")
         return False
 
     xml_violations_found = 0
@@ -66,7 +66,7 @@ def validate_all_xml(files_list, folder_path):
         for line in xml_violations_buffer:
             logger.debug(line)
 
-        logger.debug("XML validation failed. " + str(xml_violations_found) + " violations found.")
+        logger.error("XML validation failed. " + str(xml_violations_found) + " violations found.")
 
     logger.debug(str(len(files_list)) + " xml files parsed.")
 
@@ -107,7 +107,7 @@ def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
         saved_error_type = sys.exc_info()[0]
         saved_error = sys.exc_info()[1]
         xml_violations_buffer.append("File: " + file_to_test.file_name + " Error Type: " + str(saved_error_type) + "\n" + str(saved_error))
-        logger.debug("Validation failed.")
+        logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
     return True

@@ -39,13 +39,13 @@ class XMLParser:
         logging.debug("Generating list of files to package...")
         
         if not self.path_to_folder.is_dir():
-            logger.warning("Error: " + str(self.path_to_folder) + " does not exist or is not a directory.")   
+            logger.error("Error: " + str(self.path_to_folder) + " does not exist or is not a directory.")   
             return None
         
         # Make sure manifest exists
         path_to_manifest = self.path_to_folder / Path("manifest.xml")
         if not path_to_manifest.is_file():
-            logger.warning("Error: " + str(self.path_to_folder) + " does contain a file called manifest.xml.")   
+            logger.error("Error: " + str(self.path_to_folder) + " does contain a file called manifest.xml.")   
             return None
         
         self.file_list.append(ConnectorFile("manifest.xml", "manifest"))   
@@ -132,7 +132,7 @@ class XMLParser:
 
                 # Make sure the name is the same
                 elif child.attrib['class'] != self.class_name:
-                    logging.debug("Error: class attribute in file " + file_to_parse.file_name + " does not equal class attribute in manifest.")
+                    logging.error("Error: class attribute in file " + file_to_parse.file_name + " does not equal class attribute in manifest.")
                     logging.debug(self.class_name +  " in manifest, " + child.attrib['class'] + " in " + file_to_parse.file_name)
                     return False
 

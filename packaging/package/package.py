@@ -27,7 +27,7 @@ def create_arg_parser():
 
 def init_logging(log_path, verbose):
     # Create logger.
-    logging.basicConfig(filename=log_path, level=logging.DEBUG, filemode='w', format='%(asctime)s %(message)s')
+    logging.basicConfig(filename=log_path, level=logging.DEBUG, filemode='w', format='%(asctime)s | %(message)s')
     logger = logging.getLogger()
     ch = logging.StreamHandler()
     if verbose:
