@@ -23,7 +23,10 @@ class TestPackage(unittest.TestCase):
             path_to_test_file.unlink()
 
 
-        os.system("py -3 -m package.package " + str(files_directory) + " --name " + expected_package_name \
+        os.system("python -m package.package " + str(files_directory) + " --name " + expected_package_name \
                 + " --dest " + str(expected_dest_directory))
 
         self.assertTrue(path_to_test_file.exists(), "Packaged connector not found in expected directory")
+
+        if path_to_test_file.exists():
+            path_to_test_file.unlink()
