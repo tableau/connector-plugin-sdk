@@ -1,10 +1,8 @@
-import sys
 import logging
 import argparse
 from pathlib import Path
 
-from .connector_file import ConnectorFile
-from .jar_packager import create_jar
+from .jar_jdk_packager import jdk_create_jar
 from .version import __version__
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
@@ -70,7 +68,7 @@ def main():
     jar_dest_path = Path(args.dest)
     jar_name = package_name + PACKAGED_EXTENSION
 
-    create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
+    jdk_create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
 
 
 if __name__ == '__main__':
