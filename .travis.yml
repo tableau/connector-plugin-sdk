@@ -5,7 +5,24 @@ python:
   - "3.6"
 
 install:
+  - pip install twine
   - pip install -e tdvt/
 
 script:
   - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+
+after_success:
+  - echo "Test Success - Branch($TRAVIS_BRANCH) Pull Request($TRAVIS_PULL_REQUEST) Tag($TRAVIS_TAG)"
+
+# deploy:
+#   if: tag =~ tdvt AND branch = master
+#   script:
+#     - cd tdvt && python setup.py sdist
+#     - twine upload --repository-url DEV_PYPI tdvt/dist/*
+#     - twine upload --repository-url PRD_PYPI tdvt/dist/*
+
+#   if: tag =~ packaging AND branch = master
+#     script:
+#     - cd packaging && python setup.py sdist
+#     - twine upload --repository-url DEV_PYPI packaging/dist/*
+#     - twine upload --repository-url PRD_PYPI packaging/dist/*
