@@ -39,6 +39,7 @@ def init_logging(log_path, verbose):
 
     return logger
 
+
 def main():
     parser = create_arg_parser()
     args = parser.parse_args()
