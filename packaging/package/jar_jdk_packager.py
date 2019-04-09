@@ -43,7 +43,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     """
 
     if not check_jdk_environ_variable():
-        logger.debug("Error: jdk_create_jar: no jdk set up in PATH environment variable, "
+        logger.error("Error: jdk_create_jar: no jdk set up in PATH environment variable, "
                      "please download JAVA JDK and add it to PATH")
         return False
 
@@ -64,6 +64,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
 
     logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
     return True
+
 
 
 
