@@ -2,11 +2,25 @@ import os
 import logging
 import subprocess
 import shutil
+import re
 
 from pathlib import Path
 from .connector_file import ConnectorFile
 
+JDK_ENVIRON_VARIABLE_PATTERN = "(jdk\d+\.\d+\.\d+\_\d+)(\\\\)bin"
 logger = logging.getLogger(__name__)
+
+
+def check_jdk_environ_variable():
+    """
+    Check if jdk is set up in PATH
+    """
+    path_list = os.environ['PATH'].split(';')
+    for path in path_list:
+        if re.search(JDK_ENVIRON_VARIABLE_PATTERN, path):
+            return True
+
+    return False
 
 
 def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
@@ -25,8 +39,14 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     :param dest_dir: destination dir to create jar file
     :type dest_dir: str
 
-    :return: None
+    :return: Boolean
     """
+
+    if not check_jdk_environ_variable():
+        logger.debug("Error: jdk_create_jar: no jdk set up in PATH environment variable, "
+                     "please download JAVA JDK and add it to PATH")
+        return False
+
     abs_source_path = os.path.abspath(source_dir)
     logging.debug("Start packaging " + jar_filename + " from " + str(abs_source_path) + " using JDK")
 
@@ -43,9 +63,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     shutil.move(abs_source_path/Path(jar_filename), dest_dir/jar_filename)
 
     logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
-
-
-
+    return True
 
 
 
