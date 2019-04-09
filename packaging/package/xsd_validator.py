@@ -97,7 +97,8 @@ def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
 
     # If the file is too big, we shouldn't try and parse it, just log the violation and move on
     if path_to_file.stat().st_size > MAX_FILE_SIZE:
-        xml_violations_buffer.append(file_to_test.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + " KB")
+        xml_violations_buffer.append(file_to_test.file_name + " exceeds maximum size of " +
+                                     str(int(MAX_FILE_SIZE / 1024)) + " KB")
         return False
 
     # Try to validate the xml. If the xml validation error is thrown, save the violation information to the buffer

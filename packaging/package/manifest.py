@@ -8,7 +8,8 @@ from collections import OrderedDict
 from six import BytesIO
 from .version import __version__
 
-manifest_line_length = 70
+
+MANIFEST_LINE_LENGTH = 70
 MANIFEST_VERSION = "Manifest-Version"
 VENDOR_KEY = "Created-By"
 PACKAGING_TOOL_NAME = "Tableau Connector Packaging Tool "
@@ -105,22 +106,22 @@ def write_key_val(stream, key, val, linesep=os.linesep):
     linesep = linesep.encode('utf-8')
 
     # check key's length
-    if not (0 < len(key) < manifest_line_length - 1):
+    if not (0 < len(key) < MANIFEST_LINE_LENGTH - 1):
         raise ManifestKeyException("bad key length", key)
 
-    if len(key) + len(val) > manifest_line_length - 2:
+    if len(key) + len(val) > MANIFEST_LINE_LENGTH - 2:
         kv_buffer = BytesIO(b": ".join((key, val)))
 
         # first grab 70 (which is 72 after the trailing newline)
-        stream.write(kv_buffer.read(manifest_line_length))
+        stream.write(kv_buffer.read(MANIFEST_LINE_LENGTH))
 
         # now only 69 at a time, because we need a leading space and a
         # trailing \n
-        part = kv_buffer.read(manifest_line_length - 1)
+        part = kv_buffer.read(MANIFEST_LINE_LENGTH - 1)
         while part:
             stream.write(linesep + b" ")
             stream.write(part)
-            part = kv_buffer.read(manifest_line_length - 1)
+            part = kv_buffer.read(MANIFEST_LINE_LENGTH - 1)
         kv_buffer.close()
 
     else:
@@ -129,5 +130,3 @@ def write_key_val(stream, key, val, linesep=os.linesep):
         stream.write(val)
 
     stream.write(linesep)
-#
-# The end.
