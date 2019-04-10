@@ -8,6 +8,9 @@ from .xsd_validator import validate_single_file, get_xsd_file, PATH_TO_XSD_FILES
 
 logger = logging.getLogger(__name__)
 
+TRANSLATABLE_STRING_PREFIX = "@string/"
+TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "ja_JP", "ko_KR", "pt_BR", "zh_CN", "zh_TW"]
+
 class XMLParser:
     """
         Handles parsing the xml connector files
@@ -56,20 +59,43 @@ class XMLParser:
         if not files_valid:
             return None
 
-        # if we have loc_files, bring them in too
-        #TODO: implement finding translatable strings. Not making that a priority right now.
-        if len(self.loc_strings) > 0:
-            logger.debug("We have localization files.")
-        else:
-            logger.debug("No loc files.")
-
-        logger.debug("Generated file list:")
-        for f in self.file_list:
-            logger.debug("-- " + f.file_name)
-
         if not self.class_name:
             logger.debug("Class name not found in files.")
             return None
+
+        # If we found localized strings, bring in the resource files as well
+        if len(self.loc_strings) > 0:
+            logger.debug("Found translatable strings, looking for resource files...")
+            logger.debug('Strings found:')
+            for s in self.loc_strings:
+                logger.debug("-- " + s)
+
+            # Check for files for each of the languages we suport
+            for language in TABLEAU_SUPPORTED_LANGUAGES:
+                resource_file_name = "resources-" + language + ".xml"
+                path_to_resource = self.path_to_folder / Path(resource_file_name)
+                if path_to_resource.is_file():
+                    # Validate that the resource file is valid.
+                    new_file = ConnectorFile(resource_file_name, "resource")
+                    xml_violations_buffer = []
+
+                    if not validate_single_file(new_file, path_to_resource, xml_violations_buffer):
+                        for error in xml_violations_buffer:
+                            logging.debug(error)
+                        return None
+                    
+                    self.file_list.append(ConnectorFile(resource_file_name, "resource"))
+                    logging.debug("Adding file to list (name = " + resource_file_name + ", type = resource)")
+
+            
+
+        else:
+            logger.debug("No loc files.")
+
+        # Print generated files to log for debugging        
+        logger.debug("Generated file list:")
+        for f in self.file_list:
+            logger.debug("-- " + f.file_name)        
 
         return self.file_list
 
@@ -105,6 +131,7 @@ class XMLParser:
         for child in root.iter():
 
             # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
+            
             if 'file' in child.attrib:
 
                 # Make new connector file object
@@ -118,11 +145,12 @@ class XMLParser:
                 self.file_list.append(new_file)
 
                 # If not a script and not in list, parse the file for more files to include
-                if child.tag != 'script':
+                if child.tag != 'script' and not already_in_list:
                     children_valid = self.parse_file(new_file)
                     if not children_valid:
                         return False
 
+            # If an element has the 'class' attribute, and the class name is not set, set the class name. If it is set, make sure it is the same name
             if 'class' in child.attrib:
                 
                 # Name not yet found
@@ -135,6 +163,11 @@ class XMLParser:
                     logging.error("Error: class attribute in file " + file_to_parse.file_name + " does not equal class attribute in manifest.")
                     logging.debug(self.class_name +  " in manifest, " + child.attrib['class'] + " in " + file_to_parse.file_name)
                     return False
+
+            # If an attribute has @string, then add that string to the loc_strings list.
+            for key, value in child.attrib.items():
+                if value.startswith(TRANSLATABLE_STRING_PREFIX):
+                    self.loc_strings.append(value)
 
         # If we've reached here, all the children are valid
         return True
