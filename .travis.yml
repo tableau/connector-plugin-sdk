@@ -14,34 +14,34 @@ script:
 
 jobs:
   include:
-   - python: 3.4
-   - python: 3.5
-   - python: 3.6
-   - python: 3.7
+    - python: 3.4
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
 
-   - stage: deploy
-     python: 3.4
-     script: cd $(bash before_deploy.sh)
-     deploy:
-     - provider: pypi
-    user:
-      secure: "Cl0P8yEF+GzM2saBVrCXOLqdBvf05UemsrJB/lW5yDtVRKYHc3OeFwHWRRpCRT7R57NQrrjeLYamhARM4TBG6/qzA1+wyIekarkyvhu16ZwLArng6/3397kgcRiu7FgTZY9G3glpKawAnh4xhjKC3If/O+WlHKFXDC2GdqLRWgdOyrQrL3QECOthXNzvO0ffLvBXzrazSHBQUfY6W4Rb065VjnZaVmwBWJJ7cu14tk7F0Xde2voOXpNryr/U0C7XbwGZ37qnBtw80fxPlpesJYtEj55FhPgELUx+lyl7YGVtifpbR5tp28jp73Pxh+yOBuEAl5gcCDY3npNeIH0RpO8amM9Txpx0uUr2TFkprRva5y1hE3gwkhWjFHPlfETHveWjQKMO+10m1NqtyyDi21j5q/7clfU/rJJm18fp5wf6PP7nSUuX6xA2doxh3z+3JvKJPEovaqlmRtokcr0htgOeYARE5erTg8XXGszQaJZEx52/G6CX60S33XPTXz6I2adpFqLLPNzpcvF99AsQSdbi9mc1xv+EMe+nLwu6m6xSeMpiONF2rhWWr0QdDloZhDVAVvdv9kj6jaC3tcjM5fReb95y/Q9k0PDMSHEQksfgqZP2tDu6un0ukxwtI0RMnXiPlqGBSHdpBJifw9thLQyIO6BjgskdltQq3DPE6Rk="
-    password:
-      secure: "YyHIDbT2KFF7Anlh7FilFyXMCAWbJBZJBafx+GrpmFiqRajHIDBu5DthzTooF/HuNpAQMqqjz1/7r5ASDwJEK9/a3yzwM7b+HTq6BIBia998ziUJTvmTCvVUibXx+Cs9YR1yBKf5TE0ct/TbJf73AT2BitK3tloMkbYMB4WLxhQD4du5GhdSfPTu23uw3WmUe7mswhcHJvjozj09UQkuBc5iWUkCKYQeL49fsYrBjMnf1MRIUe4wvLeA2lXwiiRva62t0j+5tyCPC521HGgolNMH2zsS/HjMojYN9jSZbNQK5OBtySC4d7AUfOQlRV0rSvD9vtpKdlMpsHzyeogN7yZp7/+5bX2tVUYkAS3Sj3vNJnlGIDHnbH7f276N8gIa1lobqZCZjFyBzw1CHGl31lZyuD5Hcjb9N+EknvuRZBPSPqdSbqzVxFcpGtZOim+vYusEbq2xZP+ox2q+BUWBJKWPClsFZzV82CmPaYGrtmmnT1tKh7Cd+6xnEVgz9lGLGsl1SSDISsuZhqeyIKHFftVCjbQ6OhWFL14jI3ww5pJFG4MM5o4q7PA/SmDkdZ8GbefQgcaj3/5G+BjVCklS0uljTgibcrbrN1bSq9G4DoYtYG76qIvHs+Y+dhPHGBA/3eYt+PB1RwBK95iSEhHL2TvjoMwNMoPa8TeHN+tXQBc="
-    server:
-      secure: dev
-    skip_existing: true
-    on:
-      tags: true
-      all_branches: true
-  - provider: pypi
-    user:
-      secure: "Cl0P8yEF+GzM2saBVrCXOLqdBvf05UemsrJB/lW5yDtVRKYHc3OeFwHWRRpCRT7R57NQrrjeLYamhARM4TBG6/qzA1+wyIekarkyvhu16ZwLArng6/3397kgcRiu7FgTZY9G3glpKawAnh4xhjKC3If/O+WlHKFXDC2GdqLRWgdOyrQrL3QECOthXNzvO0ffLvBXzrazSHBQUfY6W4Rb065VjnZaVmwBWJJ7cu14tk7F0Xde2voOXpNryr/U0C7XbwGZ37qnBtw80fxPlpesJYtEj55FhPgELUx+lyl7YGVtifpbR5tp28jp73Pxh+yOBuEAl5gcCDY3npNeIH0RpO8amM9Txpx0uUr2TFkprRva5y1hE3gwkhWjFHPlfETHveWjQKMO+10m1NqtyyDi21j5q/7clfU/rJJm18fp5wf6PP7nSUuX6xA2doxh3z+3JvKJPEovaqlmRtokcr0htgOeYARE5erTg8XXGszQaJZEx52/G6CX60S33XPTXz6I2adpFqLLPNzpcvF99AsQSdbi9mc1xv+EMe+nLwu6m6xSeMpiONF2rhWWr0QdDloZhDVAVvdv9kj6jaC3tcjM5fReb95y/Q9k0PDMSHEQksfgqZP2tDu6un0ukxwtI0RMnXiPlqGBSHdpBJifw9thLQyIO6BjgskdltQq3DPE6Rk="
-    password:
-      secure: "ry8BAYxVmIm4TuJRUB69TaZO4v2w1A7XFAYfygtvhewF1uNKrh9ui+T2nR81pPyQUOd8dz97jcY7ErskBoX7fxNMvh0nJdZw5Gs4HNNFpxC7g9OyN6ffRvGOVwcR6LLIfjSdB1R//IlO8qeNnkoQPu2gi4RzOPtzvlczdFL0tZ3VTXYA//v1LunK+OXPADgBDKlTn/k4RAjCtx9jFBSNvb4r+1/EN2wUMKHhjn7gdoLN8UPtaNRqTG76bL6Nf/cbErdAogBed0ArNGtYaG8lc+Gqa9g17d20hwDjWK+5zybeY89E3AKZK7DEzQpCX+3lyaxKtXtxnAu5wc6HrgvwNd0eWsYtiRu0p38cCniDxXTnrQzwC+kSkaxoWfL/mDMvntQ0j4ybNhaSSjs/N367f1l9pTeVFj56NeZn4bhznR30rT5E8YV4VpHEymVgJs6HDNWYzBLxcQgh2M3+LSYmj4HsWXCUrgHRxNQBUPj2rnwTngOFJzEx2QCM5ypcsYoC5zEeHrsGQOcrC8b5PiJ1VspZSb/TYqmFrCF+EaFeppyRbuNA7BMZSX5nKTLxS436X169EjpKq95D6f5nF7SnwHy6pEEgNW/RkBz8haTz2q5/EiGKYW9D60290dGjnreekAk1OVQugXjSjlxUmSibgIzBjVwrKML2I+HzBdGhApU="
-    server: prod
-    skip_existing: true
-    skip_cleanup: true
-    on:
-      tags: true
-      all_branches: true
+  - stage: deploy
+    python: 3.4
+    script: cd $(bash before_deploy.sh)
+    deploy:
+    - provider: pypi
+      user:
+        secure: "Cl0P8yEF+GzM2saBVrCXOLqdBvf05UemsrJB/lW5yDtVRKYHc3OeFwHWRRpCRT7R57NQrrjeLYamhARM4TBG6/qzA1+wyIekarkyvhu16ZwLArng6/3397kgcRiu7FgTZY9G3glpKawAnh4xhjKC3If/O+WlHKFXDC2GdqLRWgdOyrQrL3QECOthXNzvO0ffLvBXzrazSHBQUfY6W4Rb065VjnZaVmwBWJJ7cu14tk7F0Xde2voOXpNryr/U0C7XbwGZ37qnBtw80fxPlpesJYtEj55FhPgELUx+lyl7YGVtifpbR5tp28jp73Pxh+yOBuEAl5gcCDY3npNeIH0RpO8amM9Txpx0uUr2TFkprRva5y1hE3gwkhWjFHPlfETHveWjQKMO+10m1NqtyyDi21j5q/7clfU/rJJm18fp5wf6PP7nSUuX6xA2doxh3z+3JvKJPEovaqlmRtokcr0htgOeYARE5erTg8XXGszQaJZEx52/G6CX60S33XPTXz6I2adpFqLLPNzpcvF99AsQSdbi9mc1xv+EMe+nLwu6m6xSeMpiONF2rhWWr0QdDloZhDVAVvdv9kj6jaC3tcjM5fReb95y/Q9k0PDMSHEQksfgqZP2tDu6un0ukxwtI0RMnXiPlqGBSHdpBJifw9thLQyIO6BjgskdltQq3DPE6Rk="
+      password:
+        secure: "YyHIDbT2KFF7Anlh7FilFyXMCAWbJBZJBafx+GrpmFiqRajHIDBu5DthzTooF/HuNpAQMqqjz1/7r5ASDwJEK9/a3yzwM7b+HTq6BIBia998ziUJTvmTCvVUibXx+Cs9YR1yBKf5TE0ct/TbJf73AT2BitK3tloMkbYMB4WLxhQD4du5GhdSfPTu23uw3WmUe7mswhcHJvjozj09UQkuBc5iWUkCKYQeL49fsYrBjMnf1MRIUe4wvLeA2lXwiiRva62t0j+5tyCPC521HGgolNMH2zsS/HjMojYN9jSZbNQK5OBtySC4d7AUfOQlRV0rSvD9vtpKdlMpsHzyeogN7yZp7/+5bX2tVUYkAS3Sj3vNJnlGIDHnbH7f276N8gIa1lobqZCZjFyBzw1CHGl31lZyuD5Hcjb9N+EknvuRZBPSPqdSbqzVxFcpGtZOim+vYusEbq2xZP+ox2q+BUWBJKWPClsFZzV82CmPaYGrtmmnT1tKh7Cd+6xnEVgz9lGLGsl1SSDISsuZhqeyIKHFftVCjbQ6OhWFL14jI3ww5pJFG4MM5o4q7PA/SmDkdZ8GbefQgcaj3/5G+BjVCklS0uljTgibcrbrN1bSq9G4DoYtYG76qIvHs+Y+dhPHGBA/3eYt+PB1RwBK95iSEhHL2TvjoMwNMoPa8TeHN+tXQBc="
+      server:
+        secure: dev
+      skip_existing: true
+      on:
+        tags: true
+        all_branches: true
+    - provider: pypi
+      user:
+        secure: "Cl0P8yEF+GzM2saBVrCXOLqdBvf05UemsrJB/lW5yDtVRKYHc3OeFwHWRRpCRT7R57NQrrjeLYamhARM4TBG6/qzA1+wyIekarkyvhu16ZwLArng6/3397kgcRiu7FgTZY9G3glpKawAnh4xhjKC3If/O+WlHKFXDC2GdqLRWgdOyrQrL3QECOthXNzvO0ffLvBXzrazSHBQUfY6W4Rb065VjnZaVmwBWJJ7cu14tk7F0Xde2voOXpNryr/U0C7XbwGZ37qnBtw80fxPlpesJYtEj55FhPgELUx+lyl7YGVtifpbR5tp28jp73Pxh+yOBuEAl5gcCDY3npNeIH0RpO8amM9Txpx0uUr2TFkprRva5y1hE3gwkhWjFHPlfETHveWjQKMO+10m1NqtyyDi21j5q/7clfU/rJJm18fp5wf6PP7nSUuX6xA2doxh3z+3JvKJPEovaqlmRtokcr0htgOeYARE5erTg8XXGszQaJZEx52/G6CX60S33XPTXz6I2adpFqLLPNzpcvF99AsQSdbi9mc1xv+EMe+nLwu6m6xSeMpiONF2rhWWr0QdDloZhDVAVvdv9kj6jaC3tcjM5fReb95y/Q9k0PDMSHEQksfgqZP2tDu6un0ukxwtI0RMnXiPlqGBSHdpBJifw9thLQyIO6BjgskdltQq3DPE6Rk="
+      password:
+        secure: "ry8BAYxVmIm4TuJRUB69TaZO4v2w1A7XFAYfygtvhewF1uNKrh9ui+T2nR81pPyQUOd8dz97jcY7ErskBoX7fxNMvh0nJdZw5Gs4HNNFpxC7g9OyN6ffRvGOVwcR6LLIfjSdB1R//IlO8qeNnkoQPu2gi4RzOPtzvlczdFL0tZ3VTXYA//v1LunK+OXPADgBDKlTn/k4RAjCtx9jFBSNvb4r+1/EN2wUMKHhjn7gdoLN8UPtaNRqTG76bL6Nf/cbErdAogBed0ArNGtYaG8lc+Gqa9g17d20hwDjWK+5zybeY89E3AKZK7DEzQpCX+3lyaxKtXtxnAu5wc6HrgvwNd0eWsYtiRu0p38cCniDxXTnrQzwC+kSkaxoWfL/mDMvntQ0j4ybNhaSSjs/N367f1l9pTeVFj56NeZn4bhznR30rT5E8YV4VpHEymVgJs6HDNWYzBLxcQgh2M3+LSYmj4HsWXCUrgHRxNQBUPj2rnwTngOFJzEx2QCM5ypcsYoC5zEeHrsGQOcrC8b5PiJ1VspZSb/TYqmFrCF+EaFeppyRbuNA7BMZSX5nKTLxS436X169EjpKq95D6f5nF7SnwHy6pEEgNW/RkBz8haTz2q5/EiGKYW9D60290dGjnreekAk1OVQugXjSjlxUmSibgIzBjVwrKML2I+HzBdGhApU="
+      server: prod
+      skip_existing: true
+      skip_cleanup: true
+      on:
+        tags: true
+        all_branches: true
