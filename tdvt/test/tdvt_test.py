@@ -245,31 +245,20 @@ class CommandLineTest(unittest.TestCase):
         self.test_file = 'some/test/file.txt'
         self.test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', self.test_config.tds, '', self.test_file, '')
 
-    def test_command_line_full_windows(self):
+    def test_command_line_full(self):
+        self.test_config.output_dir = 'my/output/dir'
+        self.test_config.d_override = '-DLogLevel=Debug'
+
+        work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            self.test_config.output_dir = 'my/output/dir'
-            self.test_config.d_override = '-DLogLevel=Debug'
-
-            work = tdvt_core.BatchQueueWork(test_config, self.test_set)
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+        elif sys.platform in ('darwin', 'linux'):
+            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
         else:
-            self.skipTest(reason="Not running on Windows.")
-
-    def test_command_line_full_mac_linux(self):
-        if sys.platform in ('darwin', 'linux'):
-            self.test_config.output_dir = 'my/output/dir'
-            self.test_config.d_override = '-DLogLevel=Debug'
-
-            work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
-        else:
-            self.skipTest(reason="Not running on Mac/Linux.")
+            self.skipTest("Unsupported test OS")
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_password_file(self):
         self.test_config.output_dir = 'my/output/dir'
@@ -281,77 +270,49 @@ class CommandLineTest(unittest.TestCase):
         cmd_line_str = ' '.join(cmd_line)
         self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
 
-    def test_command_line_full_extension_windows(self):
-        if sys.platform in ('win32', 'cygwin'):
-            self.test_config.output_dir = 'my/output/dir'
-            self.test_config.d_override = '-DLogLevel=Debug'
+    def test_command_line_full_extension(self):
 
-            work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-            work.test_extension = True
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
+        self.test_config.output_dir = 'my/output/dir'
+        self.test_config.d_override = '-DLogLevel=Debug'
+
+        work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
+        work.test_extension = True
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        if sys.platform in ('win32', 'cygwin'):
             expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'  # noqa: E501
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
-        else:
-            self.skipTest(reason="Not running on Windows.")
-
-    def test_command_line_full_extension_mac_linux(self):
-        if sys.platform in ('darwin', 'linux'):
-            self.test_config.output_dir = 'my/output/dir'
-            self.test_config.d_override = '-DLogLevel=Debug'
-
-            work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-            work.test_extension = True
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
+        elif sys.platform in ('darwin', 'linux'):
             expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'  # noqa: E501
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            self.skipTest(reason="Not running on Mac/Linux.")
+            self.skipTest("Unsupported test OS")
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
-    def test_command_line_no_expected_windows(self):
+    def test_command_line_no_expected(self):
+        work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            work = tdvt_core.BatchQueueWork(test_config, test_set)
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
             expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
-        else:
-            self.skipTest(reason="Not running on Windows.")
-
-    def test_command_line_no_expected_mac_linux(self):
-        if sys.platform in ('darwin', 'linux'):
-            work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
+        elif sys.platform in ('darwin', 'linux'):
             expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            self.skipTest(reason="Not running on Mac/Linux.")
+            self.skipTest("Unsupported test OS")
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_command_line_multiple_override_windows(self):
+        self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
+
+        work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
-
-            work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
             expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
-        else:
-            self.skipTest(reason="Not running on Windows.")
-
-    def test_command_line_multiple_override_mac_linux(self):
         if sys.platform in ('darwin', 'linux'):
-            self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
-
-            work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-            cmd_line = build_tabquery_command_line_local(work)
-            cmd_line_str = ' '.join(cmd_line)
             expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
-            self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
-            self.skipTest(reason="Not running on Mac/Linux.")
+            self.skipTest(reason="Unsupported test OS")
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
 
 class TestPathTest(unittest.TestCase):
     def assert_number_of_tests(self, config_set, test_size):
