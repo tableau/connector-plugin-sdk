@@ -2,20 +2,24 @@ dist: xenial   # required for Python >= 3.7
 language: python
 
 stages:
+- install
 - test
 - name: deploy
   if: tag IS present
 
-script:
+install:
   - pip install -e tdvt/
+
+script:
   - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
 
 jobs:
   include:
-    - python: 3.4
-    - python: 3.5
-    - python: 3.6
-    - python: 3.7
-  - stage: deploy
-    python: 3.4
-    script: cd $(bash before_deploy.sh
+   - python: 3.4
+   - python: 3.5
+   - python: 3.6
+   - python: 3.7
+
+   - stage: deploy
+     python: 3.4
+     script: cd $(bash before_deploy.sh)
