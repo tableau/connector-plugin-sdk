@@ -1,6 +1,6 @@
 # Tableau Connector SDK - BETA
 
-![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg)
+![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg) [![Build Status](https://travis-ci.org/tableau/connector-plugin-sdk.svg?branch=master)](https://travis-ci.org/tableau/connector-plugin-sdk) [![Build Status](https://travis-ci.org/tableau/connector-plugin-sdk.svg?branch=dev)](https://travis-ci.org/tableau/connector-plugin-sdk)
 
 This project consists of documentation, example files, and a Python-based test harness that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
@@ -14,15 +14,15 @@ This project consists of documentation, example files, and a Python-based test h
 
 # Why Connectors?
 
-At Tableau, we pride ourselves in helping people see and understand their data... wherever it may be. A key investment for us has been creating a way to enable both partners and customers help us in this mission. Thank you for expressing your interest in joining us on that mission. On behalf of the Connectivity team at Tableau, I’d like to announce the early release of our Connector SDK! 
+At Tableau, we pride ourselves in helping people see and understand their data... wherever it may be. A key investment for us has been creating a way to enable both partners and customers help us in this mission. Thank you for expressing your interest in joining us on that mission. On behalf of the Connectivity team at Tableau, I’d like to announce the early release of our Connector SDK!
 
 # Get started
 
-Review the [Tableau Connector SDK developer guide](https://tableau.github.io/connector-plugin-sdk/) to help you design, build, and test your connector. 
+Review the [Tableau Connector SDK developer guide](https://tableau.github.io/connector-plugin-sdk/) to help you design, build, and test your connector.
 
 # Samples
 
-There are two [standalone Postgres example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.  
+There are two [standalone Postgres example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.
 
 # Prerequisites
 
@@ -36,25 +36,25 @@ To work with connectors, you need the following:
 
 # Get Help
 
-This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your connector: 
+This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your connector:
 * Start by submitting a GitHub Issue here in this project
-* or you can reach us on the [Developer Forums](https://community.tableau.com/community/developers/content) in Tableau Community.  
+* or you can reach us on the [Developer Forums](https://community.tableau.com/community/developers/content) in Tableau Community.
 
 
 # FAQ
-**If I build a connector, will Tableau include it?**  
+**If I build a connector, will Tableau include it?**
 
 Not necessarily. We plan to include connectors on a case by case basis. The work needed to include connectors with a shipping Tableau product extends well beyond the code itself and into continuous integration and supportability concerns. We are looking at providing a way to include third-party connectors in the future through some exciting new features, as well as a more formal certification program.
 
 **Why would I build a connector instead of just telling users to use the Other Databases (ODBC/JDBC) connector?**
-   
-Connectors allow for a much more extensive level of customization than using the generic Other Databases (ODBC/JDBC) connector does. When you build a connector, it's possible to apply many of the optimizations that current "named" connectors in Tableau use.  
- 
+
+Connectors allow for a much more extensive level of customization than using the generic Other Databases (ODBC/JDBC) connector does. When you build a connector, it's possible to apply many of the optimizations that current "named" connectors in Tableau use.
+
 **Can I make a connector for OLAP Cubes, file-based, or REST API-based connections?**
-We intend for the Connector SDK to eventually support additional connector types, but we're starting with ODBC and JDBC.  
+We intend for the Connector SDK to eventually support additional connector types, but we're starting with ODBC and JDBC.
 
 **How do I distribute a connector to my customers?**
-Until v1.0 is officially released, we do NOT recommend distributing connectors to customers. Based on your feedback, we expect to iterate for the next two quarters with breaking changes to a number of connector aspects.  
+Until v1.0 is officially released, we do NOT recommend distributing connectors to customers. Based on your feedback, we expect to iterate for the next two quarters with breaking changes to a number of connector aspects.
 
 After v1.0, we expect to work with partners to review test results and discuss customer support processes.
 
