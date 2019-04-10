@@ -111,12 +111,14 @@ class BaseTDVTTest(unittest.TestCase):
             passed = test_result is not None
             passed = passed and test_result.all_passed()
             test_status = "passed" if passed else "failed"
-            self.assertTrue(passed == should_pass, "Test [{0}] {1} but should have {2}.".format(path, test_status, test_status_expected))
+            self.assertTrue(passed == should_pass,
+                            "Test [{0}] {1} but should have {2}.".format(path, test_status, test_status_expected))
 
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
-        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', '', 'tool_test\exprtests\setup.*.txt', '')
+        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', '',
+                                            'tool_test\exprtests\setup.*.txt', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
     def test_expression_tests(self):
@@ -128,7 +130,8 @@ class LocalExpressionTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
         #Tests picking a local test suite.
-        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/', '')
+        self.config_set = ExpressionTestSet(ROOT_DIRECTORY, 'expression.tde', 'cast_calcs.tde.tds', 'mytest3',
+                                            'e/suite1/', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
 
     def test_expression_tests(self):
@@ -139,7 +142,8 @@ class LocalExpressionTest(BaseTDVTTest):
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
-        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'tool_test\logicaltests\setup\calcs\setup.*.xml', '')
+        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                         'tool_test\logicaltests\setup\calcs\setup.*.xml', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
 
@@ -152,7 +156,8 @@ class LogicalTest(BaseTDVTTest):
 class LocalLogicalTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
-        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml', '')
+        self.config_set = LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                         'logical/setup/suite1/setup.*.xml', '')
         self.test_config.tds = tdvt_core.get_tds_full_path(ROOT_DIRECTORY, 'tool_test/tds/cast_calcs.tde.tds')
         self.test_config.logical = True
 
@@ -167,7 +172,8 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         super(type(self), self).setUp()
         self.test_dir = TEST_DIRECTORY
         self.config_file = 'config/logical.tde.cfg'
-        self.config_set = LogicalTestSet(TEST_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logicaltests\setup\calcs\setup.*.xml', '')
+        self.config_set = LogicalTestSet(TEST_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                         'logicaltests\setup\calcs\setup.*.xml', '')
         self.tds_file = tdvt_core.get_tds_full_path(TEST_DIRECTORY, 'tds/cast_calcs.tde.tds')
         self.test_config.logical = True
         self.test_config.config_file = self.config_file
@@ -183,7 +189,8 @@ class ReRunFailedTestsTest(BaseTDVTTest):
 
         self.check_results(all_test_results, 1, False)
 
-        #Now rerun the failed tests which should fail again, indicating that the 'tested_sql' option was persisted correctly.
+        # Now rerun the failed tests which should fail again,
+        # indicating that the 'tested_sql' option was persisted correctly.
 
         tests = enqueue_failed_tests(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
@@ -191,32 +198,38 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__), TEST_DIRECTORY, None)
+        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__),
+                                              TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__), TEST_DIRECTORY, None)
+        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__),
+                                     TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__), TEST_DIRECTORY, None)
+        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__),
+                                     TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 3)
 
     def test_combined_rerun_local_tests(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined_local.json', __name__), TEST_DIRECTORY, None)
+        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined_local.json', __name__),
+                                     TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 5)
 
     def test_logical_rerun_fail(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__), TEST_DIRECTORY, None)
+        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__),
+                                     TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1, False)
 
 def build_tabquery_command_line_local(work):
-    """To facilitate testing. Just get the executable name and not the full path to the executable which depends on where the test is run."""
+    """To facilitate testing. Just get the executable name and not the full path to the executable which depends on
+    where the test is run."""
     cmd = build_tabquery_command_line(work)
     new_cmd = []
     new_cmd.append(os.path.split(cmd[0])[1])
@@ -323,7 +336,7 @@ class CommandLineTest(unittest.TestCase):
             work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
             cmd_line = build_tabquery_command_line_local(work)
             cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
             self.skipTest(reason="Not running on Windows.")
@@ -335,7 +348,7 @@ class CommandLineTest(unittest.TestCase):
             work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
             cmd_line = build_tabquery_command_line_local(work)
             cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
             self.skipTest(reason="Not running on Mac/Linux.")
@@ -461,11 +474,15 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '', 'logicaltests/setup/calcs/setup.*.bigquery.xml', test_config.dsname)
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '',
+                               'logicaltests/setup/calcs/setup.*.bigquery.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '', 'logicaltests/setup/staples/setup.*.bigquery.xml', test_config.dsname)
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '',
+                               'logicaltests/setup/staples/setup.*.bigquery.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds', 'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds',
+                                  'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse',    # noqa: E50
+                                  'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
 
@@ -479,11 +496,17 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical_test1.bigquery_sql_test', 'Staples.bigquery.tds', '', 'logicaltests/setup.*.bigquery.xml', test_config.dsname)
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical_test2.bigquery_sql_test', 'Staples.bigquery_sql_test.tds', '', 'logicaltests/setup.*.bigquery.xml', test_config.dsname)
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical_test1.bigquery_sql_test', 'Staples.bigquery.tds', '',
+                               'logicaltests/setup.*.bigquery.xml', test_config.dsname)
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical_test2.bigquery_sql_test', 'Staples.bigquery_sql_test.tds', '',
+                               'logicaltests/setup.*.bigquery.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test1.bigquery_sql_test', 'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii', 'exprtests/standard/', test_config.dsname)
-        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test2.bigquery_sql_test', 'cast_calcs.bigquery_sql_test.tds', 'string.char', 'exprtests/standard/', test_config.dsname)
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test1.bigquery_sql_test',
+                                  'cast_calcs.bigquery_sql_dates2.tds', 'string.ascii', 'exprtests/standard/',
+                                  test_config.dsname)
+        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression_test2.bigquery_sql_test',
+                                  'cast_calcs.bigquery_sql_test.tds', 'string.char', 'exprtests/standard/',
+                                  test_config.dsname)
 
         tests = [test1, test2, test3, test4]
 
@@ -501,7 +524,8 @@ class ConfigTest(unittest.TestCase):
         self.assertTrue(len(x) == 10, "[Did not find expected number of tests. Found [{0}]".format(len(x)))
         for test in x:
             actual_file = os.path.split(test.get_password_file_name())[1]
-            self.assertTrue(actual_file == expected_password_file, "[Did not find expected value of [{0}, found {1} instead.]".format(expected_password_file, actual_file))
+            self.assertTrue(actual_file == expected_password_file,
+                            "[Did not find expected value of [{0}, found {1} instead.]".format(expected_password_file, actual_file))  # noqa: E50
 
     def test_load_ini_logical_config(self):
         config = configparser.ConfigParser()
