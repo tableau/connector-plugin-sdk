@@ -224,13 +224,14 @@ def build_tabquery_command_line_local(work):
     return new_cmd
 
 class CommandLineTest(unittest.TestCase):
-    def setup(self):
-        self.test_config = TdvtTestConfig()
-        self.test_cofig.logical = False
-        self.test_config.tds = 'mytds.tds'
+    @classmethod
+    def setUpClass(cls):
+        cls.test_config = TdvtTestConfig()
+        cls.test_config.logical = False
+        cls.test_config.tds = 'mytds.tds'
 
-        self.test_file = 'some/test/file.txt'
-        self.test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', test_config.tds, '', test_file, '')
+        cls.test_file = 'some/test/file.txt'
+        cls.test_set = ExpressionTestSet(TEST_DIRECTORY, 'mytest', cls.test_config.tds, '', cls.test_file, '')
 
     def test_command_line_full_windows(self):
         if sys.platform in ('win32', 'cygwin'):
@@ -287,7 +288,7 @@ class CommandLineTest(unittest.TestCase):
             work.test_extension = True
             cmd_line = build_tabquery_command_line_local(work)
             cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'
+            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'  # noqa: E501
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
             self.skipTest(reason="Not running on Windows.")
@@ -307,7 +308,7 @@ class CommandLineTest(unittest.TestCase):
             work.test_extension = True
             cmd_line = build_tabquery_command_line_local(work)
             cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'
+            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'  # noqa: E501
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
             self.skipTest(reason="Not running on Mac/Linux.")
@@ -323,7 +324,7 @@ class CommandLineTest(unittest.TestCase):
             work = tdvt_core.BatchQueueWork(test_config, test_set)
             cmd_line = build_tabquery_command_line_local(work)
             cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
             self.skipTest(reason="Not running on Windows.")
@@ -339,7 +340,7 @@ class CommandLineTest(unittest.TestCase):
             work = tdvt_core.BatchQueueWork(test_config, test_set)
             cmd_line = build_tabquery_command_line_local(work)
             cmd_line_str = ' '.join(cmd_line)
-            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
+            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
             self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
         else:
             self.skipTest(reason="Not running on Mac/Linux.")
@@ -384,34 +385,44 @@ class TestPathTest(unittest.TestCase):
         self.assertTrue(len(all_tests) == test_size)
 
     def test_dir(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/', ''), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                                   'logical/setup/suite1/', ''), 1)
 
     def test_file(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.sum.tde.xml', ''), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                                   'logical/setup/suite1/setup.sum.tde.xml', ''), 1)
 
     def test_glob(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'logical/setup/suite1/setup.*.xml', ''), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                                   'logical/setup/suite1/setup.*.xml', ''), 1)
 
     def test_exclude(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'sum', 'logical/setup/suite1/setup.*.xml', ''), 0)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'sum',
+                                                   'logical/setup/suite1/setup.*.xml', ''), 0)
 
     def test_exclude_comma(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ',', 'logical/setup/suite1/setup.*.xml', ''), 1)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ',',
+                                                   'logical/setup/suite1/setup.*.xml', ''), 1)
 
     def test_exclude_space(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ' sum', 'logical/setup/suite1/setup.*.xml', ''), 0)
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ' sum',
+                                                   'logical/setup/suite1/setup.*.xml', ''), 0)
 
     def test_local_dir(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/', ''), 3)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                                      'e/suite1/', ''), 3)
 
     def test_local_file(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.mytest.txt', ''), 1)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                                      'e/suite1/setup.mytest.txt', ''), 1)
 
     def test_local_glob(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', 'e/suite1/setup.*.txt', ''), 3)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+                                                      'e/suite1/setup.*.txt', ''), 3)
 
     def test_local_exclude(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'mytest3', 'e/suite1/setup.*.txt', ''), 2)
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'mytest3',
+                                                      'e/suite1/setup.*.txt', ''), 2)
 
 
 class ConfigTest(unittest.TestCase):
@@ -421,15 +432,20 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '',
+                               'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark',
+                               'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.aurora', 'Staples.aurora.tds', '', 'logicaltests/setup/lod/setup.*.bool_.xml', test_config.dsname)
+        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.aurora', 'Staples.aurora.tds', '',
+                               'logicaltests/setup/lod/setup.*.bool_.xml', test_config.dsname)
 
-        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
+        test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds',
+                                  'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
-        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/lodcalcs/setup.*.txt', test_config.dsname)
+        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '',
+                                  'exprtests/lodcalcs/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3, test4, test5]
 
@@ -445,11 +461,14 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '',
+                               'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark',
+                               'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', 'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds',
+                                  'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
 
