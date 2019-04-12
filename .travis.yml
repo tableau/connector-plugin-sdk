@@ -5,7 +5,7 @@ stages:
 - install
 - test
 - name: deploy
-  if: tag IS present
+  if: tag =~ tdvt  # only tags with tdvt will allow deploy
 
 install:
   - pip install -e tdvt/
