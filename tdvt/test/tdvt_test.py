@@ -199,12 +199,12 @@ class ReRunFailedTestsTest(BaseTDVTTest):
 
     def test_logical_rerun(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__),
-                                              TEST_DIRECTORY, None)
+                                     TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests','exprtests.json', __name__),
+        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'exprtests.json', __name__),
                                      TEST_DIRECTORY, None)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 2)
