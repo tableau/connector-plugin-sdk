@@ -48,6 +48,7 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - BigQuerySQLDialect
 - DB2Dialect
 - DenodoDialect
+- DefaultSQLDialect (SQL 92 Implementation)
 - DrillDialect
 - EXASolution5Dialect
 - Firebird21Dialect
