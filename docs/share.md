@@ -31,7 +31,7 @@ Replace [user name] with your name, for example /Users/kgarcia/tableau_connector
 1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
 
     ```
-    /Applications/Tableau\ Desktop\ [Tableau version].app/Contents/macOS/Tableau -DConnectPluginsPath=/Users/[user name]/tableau_connectors
+    /Applications/Tableau\ Desktop\ [Tableau version].app/Contents/MacOS/Tableau -DConnectPluginsPath=/Users/[user name]/tableau_connectors
     ```
 
 **Tableau Server:** 
