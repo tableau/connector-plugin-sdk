@@ -51,6 +51,14 @@ class TestCaseResult(object):
 
         return ''
 
+    def test_error_expected(self):
+        if isinstance(self.error_type, TestErrorExpected):
+            return True
+
+    def test_error_other(self):
+        if isinstance(self.error_type, TestErrorOther):
+            return True
+
     def all_passed(self):
         """Return true if all aspects of the test passed."""
         passed = True
@@ -58,8 +66,7 @@ class TestCaseResult(object):
             passed = False
         if self.tested_config.tested_tuples and not self.passed_tuples:
             passed = False
-
-        if not isinstance(self.error_type, TestErrorExpected) and self.error_type:
+        if not self.test_error_expected() and self.error_type:
             passed = False
 
         return passed
@@ -234,11 +241,19 @@ class TestResult(object):
             return self.name
         return match.group(1)
 
-    def all_passed(self):
-        """Return true if all aspects of the test passed."""
+    def test_error_expected(self):
         if isinstance(self.error_status, TestErrorExpected):
             return True
-        elif isinstance(self.error_status, TestErrorOther) or not self.test_case_map:
+
+    def test_error_other(self):
+        if isinstance(self.error_status, TestErrorOther):
+            return True
+
+    def all_passed(self):
+        """Return true if all aspects of the test passed."""
+        if self.test_error_expected():
+            return True
+        elif self.test_error_other() or not self.test_case_map:
             return False
         for test_case in self.test_case_map:
             if test_case.all_passed() == False:
