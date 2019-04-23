@@ -54,10 +54,14 @@ class TestCaseResult(object):
     def test_error_expected(self):
         if isinstance(self.error_type, TestErrorExpected):
             return True
+        else:
+            return False
 
     def test_error_other(self):
         if isinstance(self.error_type, TestErrorOther):
             return True
+        else:
+            return False
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
@@ -244,10 +248,14 @@ class TestResult(object):
     def test_error_expected(self):
         if isinstance(self.error_status, TestErrorExpected):
             return True
+        else:
+            return False
 
     def test_error_other(self):
         if isinstance(self.error_status, TestErrorOther):
             return True
+        else:
+            return False
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
