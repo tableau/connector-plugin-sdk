@@ -24,7 +24,6 @@ To validate that the xml files are valid:
 All command line usage details:
 ```
 usage: package.py [-h] [-v] [-l LOG_PATH] [--validate_only] [-d DEST]
-                  [-n NAME]
                   input_dir
 
 Tableau Connector Packaging Tool: package connector files into a single Tableau
@@ -40,7 +39,6 @@ optional arguments:
                         path of logging output
   --validate_only       runs package validation steps only
   -d DEST, --dest DEST  destination folder for packaged connector
-  -n NAME, --name NAME  name of the packaged connector
 ```
 
 ## Development
