@@ -94,6 +94,11 @@ class BatchQueueWork(object):
         result.error_status = TestErrorOther()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
+    def handle_expected_test_failure(self, test_result_file, output_exists):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorExpected()
+        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+
     def handle_missing_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorMissingActual()
@@ -104,6 +109,9 @@ class BatchQueueWork(object):
 
     def is_error(self):
         return isinstance(self.error_state, TestErrorState)
+
+    def is_expected_error(self):
+        return isinstance(self.error_state, TestErrorExpected)
 
     def is_aborted(self):
         return isinstance(self.error_state, TestErrorAbort)
@@ -135,7 +143,10 @@ class BatchQueueWork(object):
             #Save the error message in case there is no result file to get it from.
             self.saved_error_message = e.output
             self.cmd_output = e.output
-            self.error_state = TestErrorOther()
+            if self.test_config.expected_message in self.saved_error_message:
+                self.error_state = TestErrorExpected()
+            else:
+                self.error_state = TestErrorOther()
             if e.returncode == 18:
                 logging.debug(self.get_thread_msg() + "Tests aborted")
                 sys.stdout.write('A')
@@ -190,6 +201,10 @@ def do_work(work):
             elif work.is_aborted():
                 work.handle_aborted_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('A')
+                continue
+            elif work.is_expected_error():
+                work.handle_expected_test_failure(t, os.path.isfile(existing_output_filepath))
+                sys.stdout.write('.')
                 continue
             elif work.is_error():
                 work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))
@@ -475,6 +490,8 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
         error_msg= test_result.get_failure_message() if test_result else None
         error_type= test_result.get_failure_message() if test_result else None
+        if isinstance(test_result.error_status, TestErrorExpected):
+            passed = True
         columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
         if test_result.test_config.tested_sql:
             columns.extend([expected_sql, expected_time])
@@ -545,7 +562,8 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         test_name = test_result.get_name() if test_result.get_name() else path
         if not test_result or not test_result.get_test_case_count():
             csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
-            total_failed_tests += 1
+            if not isinstance(test_result.error_status, TestErrorExpected):
+                total_failed_tests += 1
             total_tests += 1
         else:
             test_case_index = 0
