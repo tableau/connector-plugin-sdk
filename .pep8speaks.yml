@@ -1,5 +1,5 @@
 scanner:
-    linter: flake8
+    linter: pycodestyle
 
 flake8:
     hang-closing: True  # hang closing bracket instead of matching indentation of
