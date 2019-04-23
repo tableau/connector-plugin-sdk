@@ -32,6 +32,7 @@ Replace [user name] with your name, for example /Users/kgarcia/tableau_connector
 
     ```
     /Applications/Tableau\ Desktop\ [Tableau version].app/Contents/MacOS/Tableau -DConnectPluginsPath=/Users/[user name]/tableau_connectors
+        
     ```
 
 **Tableau Server:** 
