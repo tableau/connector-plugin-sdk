@@ -14,12 +14,24 @@ Or, if you prefer to have your users test the connector, you can place the conne
 
 **Tableau Desktop:** 
 
+For Windows:
 1. Create a directory for Tableau connectors. For example: `C:\tableau_connectors`
-1. Put the the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `C:\tableau_connectors\my_connector`
+1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `C:\tableau_connectors\my_connector`
 1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
 
     ```
     tableau.exe -DConnectPluginsPath=C:\tableau_connectors
+    ```
+
+For macOS:
+
+Replace [user name] with your name, for example /Users/kgarcia/tableau_connectors, and [Tableau version] with the version of Tableau that you’re running, for example, 2019.1.app.
+1. Create a directory for Tableau connectors. For example: `/Users/[user name]/tableau_connectors`
+1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `/Users/[user name]/tableau_connector/my connector`
+1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
+
+    ```
+    /Applications/Tableau\ Desktop\ [Tableau version].app/Contents/MacOS/Tableau -DConnectPluginsPath=/Users/[user name]/tableau_connectors
     ```
 
 **Tableau Server:** 
