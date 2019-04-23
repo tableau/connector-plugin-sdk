@@ -63,7 +63,7 @@ PS connector-plugin-sdk\packaging> py -3 -m venv .venv
 
 Activate the virtual environment.
 ```
-PS connector-plugin-sdk\packaging> .\.venv\Scripts\Activate.ps1
+PS connector-plugin-sdk\packaging> .\.venv\Scripts\activate
 ```
 
 Verify python version is greater than 3.7.
