@@ -18,7 +18,6 @@ def create_arg_parser():
     parser.add_argument('-l', '--log', dest='log_path', help='path of logging output', default='packaging_log.txt')
     parser.add_argument('--validate_only', dest='validate_only', action='store_true', help='runs package validation steps only', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector', default='packaged-connector')
-    parser.add_argument('-n', '--name', dest='name', help='name of the packaged connector', required=False)
 
     return parser
 
@@ -61,14 +60,10 @@ def main():
         logger.info("Packaging failed. Check " + args.log_path + " for more information.")
         return
 
-    package_name = xmlparser.class_name
-    if args.name:
-        package_name = args.name
+    package_dest_path = Path(args.dest)
+    package_name = xmlparser.class_name + PACKAGED_EXTENSION
 
-    jar_dest_path = Path(args.dest)
-    jar_name = package_name + PACKAGED_EXTENSION
-
-    jdk_create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)
+    jdk_create_jar(path_from_args, files_to_package, package_name, package_dest_path)
 
 
 if __name__ == '__main__':
