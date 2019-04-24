@@ -16,6 +16,7 @@ setup(
     description='A Python module for packaging a Tableau connector.',
     test_suite='tests',
     python_requires='>3.7.0',
-    install_requires=['xmlschema', 'six', 'defusedxml'],
+    install_requires=['xmlschema', 'defusedxml'],
+    tests_require=['six'],
     include_package_data=True
 )

@@ -10,3 +10,4 @@ build
 dist
 package.egg-info
 .venv
+.eggs
