@@ -7,7 +7,7 @@
 import argparse
 import copy
 import csv
-from defusedxml.ElementTree import parse,ParseError
+from defusedxml.ElementTree import parse, ParseError
 import glob
 import json
 import logging
@@ -26,6 +26,7 @@ from .test_results import *
 
 ALWAYS_GENERATE_EXPECTED = False
 
+
 class TestResultWork(object):
     def __init__(self, test_file, output_dir, logical):
         self.relative_test_file = test_file.relative_test_path
@@ -37,9 +38,11 @@ class TestResultWork(object):
         self.test_name = get_base_test(test_file)
         self.test_file = test_file
         if self.logical:
-            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(self.test_file, self.output_dir)
-            #Make sure to set the generic (ie non-templatized) test name.
+            existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(
+                self.test_file, self.output_dir)
+            # Make sure to set the generic (ie non-templatized) test name.
             self.test_name = base_test_name
+
 
 class BatchQueueWork(object):
     def __init__(self, test_config, test_set):
@@ -65,37 +68,46 @@ class BatchQueueWork(object):
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, log_dir)
         self.test_list_path = os.path.join(self.test_config.log_dir, 'tests.txt')
 
-
     def add_test_result(self, test_file, result):
         self.results[test_file] = result
 
     def add_test_result_error(self, test_file, result, output_exists):
         if self.saved_error_message and not output_exists:
             result.saved_error_message = self.saved_error_message
-            #Remove the saved error message so it only shows up once. Tests are run in batch and you can't
-            #tell which test this error really corresponds to (ie timeout, or no driver or something) so
-            #just associate it with the first failure.
+            # Remove the saved error message so it only shows up once. Tests are run in batch and you can't
+            # tell which test this error really corresponds to (ie timeout, or no driver or something) so
+            # just associate it with the first failure.
             self.saved_error_message = None
         self.add_test_result(test_file, result)
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorTimeout()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
         self.timeout = True
 
     def handle_aborted_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorAbort()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_other_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorOther()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
+    def handle_expected_test_failure(self, test_result_file, output_exists):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorExpected()
+        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+
     def handle_missing_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorMissingActual()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
@@ -105,16 +117,19 @@ class BatchQueueWork(object):
     def is_error(self):
         return isinstance(self.error_state, TestErrorState)
 
+    def is_expected_error(self):
+        return isinstance(self.error_state, TestErrorExpected)
+
     def is_aborted(self):
         return isinstance(self.error_state, TestErrorAbort)
 
     def run(self, test_list):
 
-        #Setup a subdirectory for the log files.
+        # Setup a subdirectory for the log files.
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
         try:
             os.makedirs(self.test_config.log_dir)
-            #Write the file that contains the tests to run.
+            # Write the file that contains the tests to run.
             self.test_list_path = os.path.join(self.test_config.log_dir, 'tests.txt')
             with open(self.test_list_path, 'w') as test_list_file:
                 for t in test_list:
@@ -128,14 +143,19 @@ class BatchQueueWork(object):
 
         start_time = time.perf_counter()
         try:
-            self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True, timeout=self.timeout_seconds))
+            self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
+                                                          timeout=self.timeout_seconds))
         except subprocess.CalledProcessError as e:
-            logging.debug(self.get_thread_msg() + "CalledProcessError: Return code: " + str(e.returncode) + " " + e.output)
-            #Let processing continue so it can try and find any output file which will contain database error messages.
-            #Save the error message in case there is no result file to get it from.
+            logging.debug(
+                self.get_thread_msg() + "CalledProcessError: Return code: " + str(e.returncode) + " " + e.output)
+            # Let processing continue so it can try and find any output file which will contain database error messages.
+            # Save the error message in case there is no result file to get it from.
             self.saved_error_message = e.output
             self.cmd_output = e.output
-            self.error_state = TestErrorOther()
+            if self.test_config.expected_message in self.saved_error_message:
+                self.error_state = TestErrorExpected()
+            else:
+                self.error_state = TestErrorOther()
             if e.returncode == 18:
                 logging.debug(self.get_thread_msg() + "Tests aborted")
                 sys.stdout.write('A')
@@ -151,7 +171,7 @@ class BatchQueueWork(object):
 
         total_time_ms = (time.perf_counter() - start_time) * 1000
 
-        #Copy log files to a zip file for later optional use.
+        # Copy log files to a zip file for later optional use.
         self.log_zip_file = os.path.join(self.test_config.log_dir, 'all_logs.zip')
         logging.debug(self.get_thread_msg() + "Creating log zip file: {0}".format(self.log_zip_file))
         mode = 'w' if not os.path.isfile(self.log_zip_file) else 'a'
@@ -167,13 +187,11 @@ class BatchQueueWork(object):
 
 
 def do_work(work):
-
     logging.debug(work.get_thread_msg() + "Running test:" + work.test_name)
     final_test_list = work.test_set.generate_test_file_list_from_config()
     total_time_ms = work.run(final_test_list)
 
-
-    #Check the output files.
+    # Check the output files.
     for f in final_test_list:
         t = TestResultWork(f, work.test_config.output_dir, work.test_config.logical)
 
@@ -181,7 +199,7 @@ def do_work(work):
         base_test_filepath = t.test_file
         existing_output_filepath = work.test_set.get_expected_output_file_path(t.test_file, work.test_config.output_dir)
 
-        #First check for systemic errors.
+        # First check for systemic errors.
         if not os.path.isfile(existing_output_filepath):
             if work.is_timeout():
                 work.handle_timeout_test_failure(t, os.path.isfile(existing_output_filepath))
@@ -191,15 +209,21 @@ def do_work(work):
                 work.handle_aborted_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('A')
                 continue
+            elif work.is_expected_error():
+                work.handle_expected_test_failure(t, os.path.isfile(existing_output_filepath))
+                sys.stdout.write('.')
+                continue
             elif work.is_error():
                 work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('E')
                 continue
 
         if work.test_config.logical and os.path.isfile(existing_output_filepath):
-            #Copy the test process filename to the actual. filename.
-            actual_output_filepath, base_filepath = work.test_set.get_actual_and_base_file_path(t.test_file, work.test_config.output_dir)
-            logging.debug(work.get_thread_msg() + "Copying test process output {0} to actual file {1}".format(existing_output_filepath, actual_output_filepath))
+            # Copy the test process filename to the actual. filename.
+            actual_output_filepath, base_filepath = work.test_set.get_actual_and_base_file_path(t.test_file,
+                                                                                                work.test_config.output_dir)
+            logging.debug(work.get_thread_msg() + "Copying test process output {0} to actual file {1}".format(
+                existing_output_filepath, actual_output_filepath))
             try_move(existing_output_filepath, actual_output_filepath)
             base_test_filepath = base_filepath
             actual_filepath = actual_output_filepath
@@ -210,7 +234,6 @@ def do_work(work):
             work.handle_missing_test_failure(t)
             continue
 
-
         result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
         result.test_set = work.test_set
         result.relative_test_file = t.relative_test_file
@@ -219,7 +242,7 @@ def do_work(work):
         result.cmd_output = work.cmd_output
 
         if result == None:
-            result = TestResult(test_file = t.test_file, relative_test_file = t.relative_test_file)
+            result = TestResult(test_file=t.test_file, relative_test_file=t.relative_test_file)
             result.error_case = TestErrorStartup()
 
         sys.stdout.write('.' if result.all_passed() else 'F')
@@ -227,7 +250,7 @@ def do_work(work):
 
         work.add_test_result(t.test_file, result)
 
-    #If everything passed delete the log files so we don't collect a bunch of useless logs.
+    # If everything passed delete the log files so we don't collect a bunch of useless logs.
     passed = True
     for v in work.results:
         if work.results[v].all_passed() == False:
@@ -241,6 +264,7 @@ def do_work(work):
             logging.debug(work.get_thread_msg() + "got exception deleting zipped log file: " + str(e))
             pass
 
+
 def try_move(srcfile, destfile):
     move_attempt = 0
     while move_attempt < 3:
@@ -250,6 +274,7 @@ def try_move(srcfile, destfile):
             return
         except:
             time.sleep(0.05)
+
 
 def diff_sql_node(actual_sql, expected_sql, diff_string):
     if actual_sql == None and expected_sql == None:
@@ -263,6 +288,7 @@ def diff_sql_node(actual_sql, expected_sql, diff_string):
 
     return (0, diff_string)
 
+
 def diff_table_node(actual_table, expected_table, diff_string, test_name):
     actual_tuples = actual_table.findall('tuple')
     expected_tuples = expected_table.findall('tuple')
@@ -275,12 +301,12 @@ def diff_table_node(actual_table, expected_table, diff_string, test_name):
         diff_string += "\tTuples do not exist for one side.\n"
         return math.abs(len(actual_tuples) - len(expected_tuples))
 
-    #Compare all the values for the tuples.
+    # Compare all the values for the tuples.
     if len(actual_tuples) != len(expected_tuples):
         diff_string += "\tDifferent number of tuples.\n"
 
     if not len(actual_tuples):
-        diff_string +=  "\tNo 'actual' file tuples.\n"
+        diff_string += "\tNo 'actual' file tuples.\n"
 
     diff_count = 0
 
@@ -303,7 +329,7 @@ def diff_table_node(actual_table, expected_table, diff_string, test_name):
             diff_string += "\tactual: " + a + "\n"
             diff_string += "\texpected: " + b + "\n"
 
-    return (diff_count , diff_string)
+    return (diff_count, diff_string)
 
 
 def diff_test_results(result, expected_output):
@@ -312,7 +338,7 @@ def diff_test_results(result, expected_output):
     test_case_count = result.get_test_case_count()
     diff_counts = [0] * test_case_count
     diff_string = ''
-    #Go through all test cases.
+    # Go through all test cases.
     for test_case in range(0, test_case_count):
         expected_testcase_result = expected_output.get_test_case(test_case)
         actual_testcase_result = result.get_test_case(test_case)
@@ -324,23 +350,25 @@ def diff_test_results(result, expected_output):
             continue
 
         config = result.test_config
-        #Compare the SQL.
+        # Compare the SQL.
         if config.tested_sql:
             diff, diff_string = diff_sql_node(actual_testcase_result.sql, expected_testcase_result.sql, diff_string)
             actual_testcase_result.passed_sql = diff == 0
             diff_counts[test_case] = diff
 
-        #Compare the tuples.
+        # Compare the tuples.
         if config.tested_tuples:
-            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table, diff_string, expected_testcase_result.name)
+            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table,
+                                                diff_string, expected_testcase_result.name)
             actual_testcase_result.passed_tuples = diff == 0
             diff_counts[test_case] = diff
 
     result.diff_string = diff_string
     return diff_counts, diff_string
 
+
 def save_results_diff(actual_file, diff_file, expected_file, diff_string):
-    #Save a diff against the best matching file.
+    # Save a diff against the best matching file.
     logging.debug("Saving diff of actual and expected as [{}]".format(diff_file))
     try:
         f = open(diff_file, 'w')
@@ -349,6 +377,7 @@ def save_results_diff(actual_file, diff_file, expected_file, diff_string):
         f.close()
     except:
         pass
+
 
 def compare_results(test_name, test_file, full_test_file, work):
     """Return a TestResult object that specifies what was tested and whether it passed.
@@ -359,9 +388,11 @@ def compare_results(test_name, test_file, full_test_file, work):
     test_config = work.test_config
     base_test_file = get_base_test(test_file)
     test_file_root = os.path.split(test_file)[0]
-    actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root, base_test_file, test_config.output_dir)
+    actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
+                                                                                          base_test_file,
+                                                                                          test_config.output_dir)
     result = TestResult(test_name, test_config, full_test_file)
-    #There should be an actual file at this point. eg actual.setup.math.txt.
+    # There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
         logging.debug(work.get_thread_msg() + "Did not find actual file: " + actual_file)
         return result
@@ -378,18 +409,20 @@ def compare_results(test_name, test_file, full_test_file, work):
         if not os.path.isfile(expected_file):
             logging.debug(work.get_thread_msg() + "Did not find expected file " + expected_file)
             if ALWAYS_GENERATE_EXPECTED:
-                #There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
-                #This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
-                logging.debug(work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
+                # There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
+                # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+                logging.debug(
+                    work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
                 try_move(actual_file, expected_file)
             return result
-        #Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
+        # Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(work.get_thread_msg() + " Comparing " + actual_file + " to " + expected_file)
         expected_output = TestResult(test_config=test_config)
         try:
             expected_output.add_test_results(parse(expected_file).getroot(), '')
         except ParseError as e:
-            logging.debug(work.get_thread_msg() + "Exception parsing expected file: " + expected_file + " exception: " + str(e))
+            logging.debug(
+                work.get_thread_msg() + "Exception parsing expected file: " + expected_file + " exception: " + str(e))
 
         diff_counts, diff_string = diff_test_results(result, expected_output)
         result.set_best_matching_expected_output(expected_output, expected_file, expected_file_version, diff_counts)
@@ -402,23 +435,26 @@ def compare_results(test_name, test_file, full_test_file, work):
                     os.remove(actual_file)
                     os.remove(actual_diff_file)
             except:
-                pass # Mysterious problem deleting the file. Don't worry about it. It won't impact final results.
+                pass  # Mysterious problem deleting the file. Don't worry about it. It won't impact final results.
             return result
 
-        #Try another possible expected file.
+        # Try another possible expected file.
         expected_file_version = expected_file_version + 1
 
-    #Exhausted all expected files. The test failed.
+    # Exhausted all expected files. The test failed.
     if ALWAYS_GENERATE_EXPECTED:
-        #This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
-        actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root, base_test_file, test_config.output_dir)
+        # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+        actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
+                                                                                              base_test_file,
+                                                                                              test_config.output_dir)
         logging.debug(work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, next_path))
         try_move(actual_file, next_path)
-    #This will re-diff the results against the best expected file to ensure the test pass indicator and diff count is correct.
+    # This will re-diff the results against the best expected file to ensure the test pass indicator and diff count is correct.
     diff_count, diff_string = diff_test_results(result, result.best_matching_expected_results)
     save_results_diff(actual_file, actual_diff_file, result.path_to_expected, diff_string)
 
     return result
+
 
 def write_json_results(all_test_results):
     """Write all the test result information to a json file."""
@@ -430,15 +466,16 @@ def write_json_results(all_test_results):
     json_file.write(json_str)
     json_file.close()
 
+
 def write_standard_test_output(all_test_results, output_dir):
     """Write the standard output. """
-    passed = [ x for x in all_test_results.values() if x.all_passed() == True ]
-    failed = [ x for x in all_test_results.values() if x.all_passed() == False ]
-    output = {  'harness_name' : 'TDVT',
-                'actual_exp_paths_relative_to' : 'this',
-                'successful_tests' : passed,
-                'failed_tests' : failed
-             }
+    passed = [x for x in all_test_results.values() if x.all_passed() == True]
+    failed = [x for x in all_test_results.values() if x.all_passed() == False]
+    output = {'harness_name': 'TDVT',
+              'actual_exp_paths_relative_to': 'this',
+              'successful_tests': passed,
+              'failed_tests': failed
+              }
     json_str = json.dumps(output, cls=TestOutputJSONEncoder)
     json_file_path = os.path.join(output_dir, 'tdvt_output.json')
     try:
@@ -448,23 +485,25 @@ def write_standard_test_output(all_test_results, output_dir):
     except Exception:
         logging.debug("Error writing ouput file [{0}].".format(json_file_path))
 
+
 def get_tuple_display_limit():
     return 100
 
+
 def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0):
-    #A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
+    # A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
     passed = False
-    matched_expected=None
-    diff_count=None
-    test_case_name=None
+    matched_expected = None
+    diff_count = None
+    test_case_name = None
     error_msg = None
     error_type = None
-    time=None
+    time = None
     expected_time = None
-    generated_sql=None
+    generated_sql = None
     expected_sql = None
-    actual_tuples=None
-    expected_tuples=None
+    actual_tuples = None
+    expected_tuples = None
     suite = test_result.test_config.suite_name if test_result else ''
     test_set_name = test_result.test_config.config_file if test_result else ''
     cmd_output = test_result.cmd_output if test_result else ''
@@ -473,9 +512,13 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         test_type = 'logical' if test_result.test_config.logical else 'expression'
 
     if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
-        error_msg= test_result.get_failure_message() if test_result else None
-        error_type= test_result.get_failure_message() if test_result else None
-        columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count, test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples, expected_tuples]
+        error_msg = test_result.get_failure_message() if test_result else None
+        error_type = test_result.get_failure_message() if test_result else None
+        if test_result.all_passed():
+            passed = True
+        columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
+                   test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples,
+                   expected_tuples]
         if test_result.test_config.tested_sql:
             columns.extend([expected_sql, expected_time])
         return columns
@@ -505,10 +548,13 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         error_msg = test_result.saved_error_message if test_result.saved_error_message else error_msg
         error_type = case.error_type if case else None
 
-    columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected), str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type), float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+    columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected),
+               str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type),
+               float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
     if test_result.test_config.tested_sql:
         columns.extend([expected_sql, float(expected_time)])
     return columns
+
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -527,9 +573,11 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    #Suite is the datasource name (ie mydb).
-    #Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
-    csvheader = ['Suite','Test Set','TDSName','TestName','TestPath','Passed','Closest Expected','Diff count','Test Case','Test Type','Process Output','Error Msg','Error Type','Query Time (ms)','Generated SQL', actualTuplesHeader, expectedTuplesHeader]
+    # Suite is the datasource name (ie mydb).
+    # Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
+    csvheader = ['Suite', 'Test Set', 'TDSName', 'TestName', 'TestPath', 'Passed', 'Closest Expected', 'Diff count',
+                 'Test Case', 'Test Type', 'Process Output', 'Error Msg', 'Error Type', 'Query Time (ms)',
+                 'Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     results_values = list(all_test_results.values())
     if results_values and results_values[0].test_config.tested_sql:
         csvheader.extend(['Expected SQL', 'Expected Query Time (ms)'])
@@ -537,7 +585,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         csv_out.writerow(csvheader)
 
     tdsname = os.path.splitext(os.path.split(tds_file)[1])[0]
-    #Write the csv file.
+    # Write the csv file.
     total_failed_tests = 0
     total_tests = 0
     for path, test_result in all_test_results.items():
@@ -545,7 +593,8 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         test_name = test_result.get_name() if test_result.get_name() else path
         if not test_result or not test_result.get_test_case_count():
             csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
-            total_failed_tests += 1
+            if not test_result.all_passed():
+                total_failed_tests += 1
             total_tests += 1
         else:
             test_case_index = 0
@@ -558,11 +607,13 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
 
     return total_failed_tests, total_tests
 
+
 def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     if not all_test_results:
-        return 0,0
+        return 0, 0
     write_standard_test_output(all_test_results, output_dir)
     return write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
+
 
 def generate_files(ds_registry, force=False):
     """Generate the config files and logical query test permutations."""
@@ -579,13 +630,15 @@ def generate_files(ds_registry, force=False):
         generate_logical_files(logical_input, logical_output, ds_registry, force)
     return 0
 
+
 def run_diff(test_config, diff):
     root_directory = get_root_dir()
     allowed_test_path = os.path.join(root_directory, diff)
     test_path_base = os.path.split(allowed_test_path)[0]
     test_name = os.path.split(allowed_test_path)[1]
 
-    actual, actual_diff, setup, expected_files, next_path = get_test_file_paths(test_path_base, test_name, test_config.output_dir)
+    actual, actual_diff, setup, expected_files, next_path = get_test_file_paths(test_path_base, test_name,
+                                                                                test_config.output_dir)
 
     logging.debug('actual_path: ' + actual)
     diff_count_map = {}
@@ -619,21 +672,23 @@ def run_diff(test_config, diff):
         logging.debug(t + ' Number of differences: ' + str(diff_count_map[t]))
     return 0
 
+
 def run_tests_impl(test_set, test_config):
     all_test_results = {}
     all_work = []
 
-    #Build the queue of work.
+    # Build the queue of work.
     work = BatchQueueWork(copy.deepcopy(test_config), test_set)
     work.thread_id = test_config.thread_id
 
-    #Do the work.
+    # Do the work.
     do_work(work)
 
-    #Analyze the results of the work.
+    # Analyze the results of the work.
     all_test_results.update(work.results)
 
     return all_test_results
+
 
 def run_tests_serial(tests):
     all_test_results = {}
@@ -643,8 +698,9 @@ def run_tests_serial(tests):
 
     return all_test_results
 
+
 def run_tests(tdvt_test_config, test_set):
-    #See if we need to generate test setup files.
+    # See if we need to generate test setup files.
     root_directory = get_root_dir()
     output_dir = tdvt_test_config.output_dir if tdvt_test_config.output_dir else root_directory
 
@@ -654,6 +710,5 @@ def run_tests(tdvt_test_config, test_set):
     tds_file = tdvt_test_config.tds
 
     all_test_results = run_tests_impl(test_set, tdvt_test_config)
-
 
     return process_test_results(all_test_results, tds_file, tdvt_test_config.noheader, output_dir)
