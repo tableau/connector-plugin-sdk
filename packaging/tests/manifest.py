@@ -6,7 +6,7 @@ import os
 
 from collections import OrderedDict
 from six import BytesIO
-from .version import __version__
+from package.version import __version__
 
 
 MANIFEST_LINE_LENGTH = 70

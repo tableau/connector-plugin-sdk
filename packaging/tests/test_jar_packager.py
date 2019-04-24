@@ -2,7 +2,7 @@ import unittest
 import os.path
 from pathlib import Path
 
-from package.jar_packager import create_jar
+from .jar_packager import create_jar
 from package.jar_jdk_packager import jdk_create_jar
 from package.connector_file import ConnectorFile
 
