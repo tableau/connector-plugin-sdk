@@ -10,28 +10,33 @@ import logging
 
 from .gentests import list_configs, list_config
 from ..resources import *
-from .test_config import TestConfig,TestSet,build_config_name,build_tds_name
+from .test_config import TestConfig,build_config_name,build_tds_name
+
+
+RUN_IN_INCORRECT_DIRECTORY_MSG = "\nNo data sources found in this directory. To run tests, the base directory must contain a valid test configuration."
+
 
 def print_ds(ds, ds_reg):
-    print ("\n\t" + ds)
+    print("\n\t" + ds)
     test_config = ds_reg.get_datasource_info(ds)
     if not test_config:
         return
-    print ("\tLogical tests:")
+    print("\tLogical tests:")
     for x in test_config.get_logical_tests():
-        print ("\t"*2 + str(x))
+        print("\t"*2 + str(x))
         root_directory = get_root_dir()
         tests = x.generate_test_file_list_from_config()
         for test in tests:
-            print ("\t"*3 + test.test_path)
+            print("\t"*3 + test.test_path)
 
-    print ("\tExpression tests:")
+    print("\tExpression tests:")
     for x in test_config.get_expression_tests():
-        print ("\t"*2 + str(x))
+        print("\t"*2 + str(x))
         root_directory = get_root_dir()
         tests = x.generate_test_file_list_from_config()
         for test in tests:
-            print ("\t"*3 + test.test_path)
+            print("\t"*3 + test.test_path)
+
 
 def print_configurations(ds_reg, dsname, verbose):
     if dsname:
@@ -41,30 +46,40 @@ def print_configurations(ds_reg, dsname, verbose):
         elif len(ds_to_run) == 0:
             pass
         else:
-            print ("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run)) 
+            print("\nDatasource suite " + dsname + " is "  + ",".join(ds_to_run))
             if verbose:
                 for ds in ds_to_run:
                     print_ds(ds, ds_reg)
-                    
+
     else:
-        print ("\nAvailable datasources:")
-        ds_all = ds_reg.get_datasources('all')
+        try:
+            ds_all = ds_reg.get_datasources('all')
+        except TypeError:
+            print(RUN_IN_INCORRECT_DIRECTORY_MSG)
+            return
+        print("\nAvailable datasources:")
         for ds in sorted(ds_all):
-            print (ds)
-        print ("\nAvailable suites:")
+            print(ds)
+        print("\nAvailable suites:")
         for suite in ds_reg.suite_map:
-            print (suite)
-            print ("\t" + ','.join(ds_reg.suite_map[suite]))
-            print ('\n')
+            print(suite)
+            print("\t" + ', '.join(ds_reg.suite_map[suite]))
+            print('\n')
+
+
+def get_password_file(config):
+    return config.get('PasswordFile', '')
+
 
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
         for config in list_config(ds_registry, config_name):
             print(config)
     else:
-        print ("Available logical query configurations: \n")
+        print("Available logical query configurations: \n")
         for config in list_configs(ds_registry):
-            print (config)
+            print(config)
+
 
 def LoadTest(config, test_dir=get_root_dir()):
     """ Parse a datasource test suite config into a TestConfig object.
@@ -74,13 +89,13 @@ def LoadTest(config, test_dir=get_root_dir()):
     CommandLineOverride =
 
     [StandardTests]
-    LogicalExclusions_Calcs = 
+    LogicalExclusions_Calcs =
     LogicalExclusions_Staples = Filter.Trademark
     ExpressionExclusions_Standard = string.char,dateparse
 
     [LODTests]
-    LogicalExclusions_Staples = 
-    ExpressionExclusions_Calcs = 
+    LogicalExclusions_Staples =
+    ExpressionExclusions_Calcs =
 
     [StaplesDataTest]
 
@@ -94,8 +109,8 @@ def LoadTest(config, test_dir=get_root_dir()):
     Name = expression_test_dates.
     TDS = cast_calcs.bigquery_sql_dates.tds
     Exclusions = string.ascii
-    TestPath = exprtests/standard/ 
-    
+    TestPath = exprtests/standard/
+
     [LogicalConfig]
     Name = mydb_config
     key = value
@@ -132,10 +147,10 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             standard = config[standard_tests]
             all_ini_sections.remove(standard_tests)
-            
-            test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'), test_dir)
-            test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'), test_dir)
-            test_config.add_expression_test('expression.standard.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/setup.*.txt', test_dir)
+
+            test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''), test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'), test_dir, get_password_file(standard))
+            test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'), test_dir, get_password_file(standard))
+            test_config.add_expression_test('expression.standard.', CALCS_TDS, standard.get('ExpressionExclusions_Standard', ''), 'exprtests/standard/setup.*.txt', test_dir, get_password_file(standard))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -145,8 +160,8 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             lod = config[lod_tests]
             all_ini_sections.remove(lod_tests)
-            test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'), test_dir)
-            test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''), 'exprtests/lodcalcs/setup.*.txt', test_dir)
+            test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''), test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'), test_dir, get_password_file(lod))
+            test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''), 'exprtests/lodcalcs/setup.*.txt', test_dir, get_password_file(lod))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -156,7 +171,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             staples_data = config[staples_data_test]
             all_ini_sections.remove(staples_data_test)
-            test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt', test_dir)
+            test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt', test_dir, get_password_file(staples_data))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -166,7 +181,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             union = config[union_test]
             all_ini_sections.remove(union_test)
-            test_config.add_logical_test('logical.union.', CALCS_TDS, '', test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'), test_dir)
+            test_config.add_logical_test('logical.union.', CALCS_TDS, '', test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'), test_dir, get_password_file(union))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -176,7 +191,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             regex = config[regex_test]
             all_ini_sections.remove(regex_test)
-            test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''), 'exprtests/regexcalcs', test_dir)
+            test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''), 'exprtests/regexcalcs', test_dir, get_password_file(regex))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -186,7 +201,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             median = config[median_test]
             all_ini_sections.remove(median_test)
-            test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''), 'exprtests/median', test_dir)
+            test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''), 'exprtests/median', test_dir, get_password_file(median))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -196,7 +211,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         try:
             percentile = config[percentile_test]
             all_ini_sections.remove(percentile_test)
-            test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''), 'exprtests/percentile', test_dir)
+            test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''), 'exprtests/percentile', test_dir, get_password_file(percentile))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -227,7 +242,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         if new_expression_test in section or sect.get('Type', '') == 'expression':
             try:
                 all_ini_sections.remove(section)
-                test_config.add_expression_test(sect.get('Name',''), tds_name, sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''), test_dir)
+                test_config.add_expression_test(sect.get('Name',''), tds_name, sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''), test_dir, get_password_file(sect))
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -236,7 +251,7 @@ def LoadTest(config, test_dir=get_root_dir()):
         elif new_logical_test in section or sect.get('Type', '') == 'logical':
             try:
                 all_ini_sections.remove(section)
-                test_config.add_logical_test(sect.get('Name',''), tds_name, sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''), test_dir)
+                test_config.add_logical_test(sect.get('Name',''), tds_name, sect.get(KEY_EXCLUSIONS,''), sect.get('TestPath',''), test_dir, get_password_file(sect))
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -248,7 +263,8 @@ def LoadTest(config, test_dir=get_root_dir()):
 
     logging.debug(test_config)
     return test_config
-        
+
+
 class TestRegistry(object):
     """Add a new datasource here and then add it to the appropriate registries below."""
     def __init__(self, ini_file):
@@ -319,6 +335,7 @@ class TestRegistry(object):
         seen_ds = set()
         return [x for x in ds_to_run if not (x in seen_ds or seen_ds.add(x))]
 
+
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""
     def __init__(self):
@@ -329,6 +346,7 @@ class MacRegistry(TestRegistry):
     """Mac specific test suites."""
     def __init__(self):
         super(MacRegistry, self).__init__('mac')
+
 
 class LinuxRegistry(TestRegistry):
     """Linux specific test suites."""

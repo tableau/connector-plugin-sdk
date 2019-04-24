@@ -79,23 +79,23 @@ class BatchQueueWork(object):
         self.add_test_result(test_file, result)
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorTimeout()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
         self.timeout = True
 
     def handle_aborted_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorAbort()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_other_test_failure(self, test_result_file, output_exists):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorOther()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_missing_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file)
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file, test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorMissingActual()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
@@ -212,6 +212,7 @@ def do_work(work):
 
 
         result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
+        result.test_set = work.test_set
         result.relative_test_file = t.relative_test_file
         result.run_time_ms = total_time_ms
         result.test_config = work.test_config
@@ -262,29 +263,26 @@ def diff_sql_node(actual_sql, expected_sql, diff_string):
 
     return (0, diff_string)
 
-def diff_table_node(actual_table, expected_table, diff_string):
+def diff_table_node(actual_table, expected_table, diff_string, test_name):
     actual_tuples = actual_table.findall('tuple')
     expected_tuples = expected_table.findall('tuple')
 
     if actual_tuples == None and expected_tuples == None:
         return (0, diff_string)
+
+    diff_string += "\nTuples - " + test_name + "\n"
     if actual_tuples == None or expected_tuples == None:
-        if actual_tuples:
-            diff_string += "Expected tuples do not exist.\n"
-            return len(actual_tuples)
-        if expected_tuples:
-            diff_string += "Actual tuples do not exist.\n"
-            return len(expected_tuples)
+        diff_string += "\tTuples do not exist for one side.\n"
+        return math.abs(len(actual_tuples) - len(expected_tuples))
 
     #Compare all the values for the tuples.
     if len(actual_tuples) != len(expected_tuples):
-        diff_string += "Different number of tuples.\n"
+        diff_string += "\tDifferent number of tuples.\n"
 
     if not len(actual_tuples):
-        diff_string += "No 'actual' file tuples.\n"
+        diff_string +=  "\tNo 'actual' file tuples.\n"
 
     diff_count = 0
-    diff_string += "Tuples\n"
 
     expected_tuple_list = []
     for j in expected_tuples:
@@ -301,9 +299,9 @@ def diff_table_node(actual_table, expected_table, diff_string):
 
     for a, b in zip(actual_tuple_list, expected_tuple_list):
         if a != b:
-            diff_string += " <<<< >>>> \n"
-            diff_string += a + "\n"
-            diff_string += b + "\n"
+            diff_string += "\t <<<< >>>> \n"
+            diff_string += "\tactual: " + a + "\n"
+            diff_string += "\texpected: " + b + "\n"
 
     return (diff_count , diff_string)
 
@@ -334,7 +332,7 @@ def diff_test_results(result, expected_output):
 
         #Compare the tuples.
         if config.tested_tuples:
-            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table, diff_string)
+            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table, diff_string, expected_testcase_result.name)
             actual_testcase_result.passed_tuples = diff == 0
             diff_counts[test_case] = diff
 

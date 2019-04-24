@@ -27,3 +27,6 @@ DATEPART('iso-year', #2017-01-01#) // Sunday, 2016-W52
 // Year with Jan 1 on Mon
 DATEPART('iso-year', #2018-01-01#) // Monday, 2018-W01
 DATEPART('iso-year', #2018-12-29#) // Sunday, 2018-W52
+
+// Test without literal to test non-empty groupby clause
+DATEPART('iso-year', [date2])

@@ -27,3 +27,6 @@ DATENAME('iso-week', #2017-01-01#) // Sunday, 2016-W52
 // Year with Jan 1 on Mon
 DATENAME('iso-week', #2018-01-01#) // Monday, 2018-W01
 DATENAME('iso-week', #2018-12-29#) // Sunday, 2018-W52
+
+// Test without literal to test non-empty groupby clause
+DATENAME('iso-week', [date2])

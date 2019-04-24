@@ -139,4 +139,47 @@
       </tuple>
     </table>
   </test>
+  <test name='DATEPART(&apos;iso-year&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(1401383642)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1972</value>
+      </tuple>
+      <tuple>
+        <value>1974</value>
+      </tuple>
+      <tuple>
+        <value>1976</value>
+      </tuple>
+      <tuple>
+        <value>1977</value>
+      </tuple>
+      <tuple>
+        <value>1980</value>
+      </tuple>
+      <tuple>
+        <value>1988</value>
+      </tuple>
+      <tuple>
+        <value>1994</value>
+      </tuple>
+      <tuple>
+        <value>1995</value>
+      </tuple>
+      <tuple>
+        <value>1997</value>
+      </tuple>
+      <tuple>
+        <value>1998</value>
+      </tuple>
+      <tuple>
+        <value>2001</value>
+      </tuple>
+      <tuple>
+        <value>2002</value>
+      </tuple>
+    </table>
+  </test>
 </results>

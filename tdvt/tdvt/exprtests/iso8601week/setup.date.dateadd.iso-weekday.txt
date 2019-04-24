@@ -10,3 +10,6 @@ DATEADD('iso-weekday', -8, #2014-01-07#) // #2013-12-30#
 
 // Weeks in different ISO years
 DATEADD('iso-weekday', 365, #2014-12-28#) // #2015-12-28#
+
+// Test without literal to test non-empty groupby clause
+DATEADD('iso-weekday', 0, [date2])
