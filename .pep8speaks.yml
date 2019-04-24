@@ -1,9 +1,7 @@
 scanner:
-    linter: pycodestyle
+    linter: flake8
 
 flake8:
-    hang-closing: True  # hang closing bracket instead of matching indentation of
-                       # opening bracket's line
     max-line-length: 120  # Default is 79
 
 no_blank_comment: False
