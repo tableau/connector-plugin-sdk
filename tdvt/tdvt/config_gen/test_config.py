@@ -39,7 +39,7 @@ class TestSet(object):
         self.password_file = password_file
         self.expected_message = expected_message
 
-        
+
     def is_logical_test(self):
         return self.is_logical
 
@@ -64,7 +64,7 @@ class TestSet(object):
 
         logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
         if len(final_test_list) == 0:
-            logging.warn("Did not find any tests to run.")
+            logging.warning("Did not find any tests to run.")
             print("Did not find any tests to run.")
             return final_test_list
 
@@ -142,7 +142,7 @@ class TestSet(object):
 
     def __str__(self):
         return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}] [is_logical={4}] [root_dir={5}]".format(self.config_name, self.tds_name, self.exclusions, self.test_pattern, self.is_logical, self.root_dir)
-    
+
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self.__dict__ == other.__dict__
@@ -197,7 +197,7 @@ class LogicalTestSet(TestSet):
     def get_actual_and_base_file_path(self, test_file, output_dir):
         existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(test_file, output_dir)
         return actual_output_filepath, base_filepath
-        
+
 class ExpressionTestSet(TestSet):
     def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file = '', expected_message=''):
         super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, False, suite, password_file, expected_message)
@@ -276,7 +276,7 @@ class TestConfig(object):
 
     def get_logical_tests(self, config_filter=None):
         return self.logical_test_set if not config_filter else [ ts for ts in self.logical_test_set if config_filter in ts.config_name ]
-    
+
     def get_expression_tests(self, config_filter=None):
         return self.expression_test_set if not config_filter else [ ts for ts in self.expression_test_set if config_filter in ts.config_name ]
 
@@ -288,4 +288,3 @@ class TestConfig(object):
         for test in self.get_logical_tests() + self.get_expression_tests():
             msg += str(test) + "\n"
         return msg
-
