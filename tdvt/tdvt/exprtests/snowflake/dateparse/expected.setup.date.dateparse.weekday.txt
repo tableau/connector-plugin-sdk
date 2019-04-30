@@ -1,0 +1,22 @@
+<results>
+  <test name='DATEPARSE(&apos;eee,MMM dd,yyyy HH:mm:ss&apos;,&apos;Fri,December 13,2013 17:18:35&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(2793689406)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-13 17:18:35#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEPARSE(&apos;EEE,MM dd,yyyy&apos;,&apos;Friday,November 15,2013&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1539912136)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-11-15 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
