@@ -122,7 +122,7 @@ class TestRunner():
                 existing_results['failed_tests'].extend(results['failed_tests'])
 
                 existing_results['successful_tests'].extend(results['successful_tests'])
-                
+
                 dst_file = open(dst, 'w', encoding='utf8')
                 json.dump(existing_results, dst_file)
                 dst_file.close()
@@ -162,7 +162,7 @@ class TestRunner():
         failed_tests, total_tests = run_tests(self.test_config, self.test_set)
         logging.debug( "\nFinished tdvt " + str(self.test_config) + "\n")
         print ("\nFinished {0} {1} {2}\n".format( self.test_config.suite_name, self.test_config.config_file, str(self.thread_id)) )
-        
+
         self.failed_tests = failed_tests
         self.total_tests = total_tests
 
@@ -214,7 +214,8 @@ def enqueue_single_test(args, ds_info, suite):
 
 def enqueue_failed_tests(run_file, root_directory, args):
     try:
-        tests = json.load(open(run_file, 'r', encoding='utf8'))
+        with open(run_file, 'r', encoding='utf8') as file:
+            tests = json.load(file)
     except:
         logging.debug("Error opening " + run_file)
         return
@@ -288,7 +289,7 @@ def enqueue_tests(ds_info, args, suite):
             tests.extend(ds_info.get_logical_tests(args.logical_only))
         if args.expression_only:
             tests.extend(ds_info.get_expression_tests(args.expression_only))
-    else:        
+    else:
             tests.extend(ds_info.get_logical_tests(args.logical_only))
             tests.extend(ds_info.get_expression_tests(args.expression_only))
 
@@ -304,7 +305,7 @@ def enqueue_tests(ds_info, args, suite):
             logging.error("No tests found for config " + str(x))
             return test_set_configs
 
-    for test_set in tests: 
+    for test_set in tests:
             test_config = TdvtTestConfig(from_args=args)
             test_config.suite_name = suite
             test_config.logical = test_set.is_logical_test()
@@ -416,7 +417,7 @@ def init():
     else:
         ch.setLevel(logging.WARNING)
     logger.addHandler(ch)
-    
+
     logging.debug('TDVT version: ' + str(__version__))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
@@ -465,7 +466,7 @@ def run_tests_impl(tests, max_threads, args):
     print ("Total time: " + str(time.time() - start_time))
     print ("Total failed tests " + str(failed_tests))
     print ("Total tests ran " + str(total_tests))
-    
+
     return failed_tests, total_tests
 
 def run_desired_tests(args, ds_registry):
@@ -482,7 +483,7 @@ def run_desired_tests(args, ds_registry):
         sys.exit(0)
 
     max_threads = get_level_of_parallelization(args)
-    test_sets = []    
+    test_sets = []
 
     for ds in ds_to_run:
         ds_info = ds_registry.get_datasource_info(ds)
@@ -505,19 +506,19 @@ def run_desired_tests(args, ds_registry):
             test_sets.extend([(single_test, single_test_config)])
         else:
             test_sets.extend(enqueue_tests(ds_info, args, suite))
-    
+
     failed_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
     return failed_tests
 
 def run_file(run_file, output_dir, threads, args):
     """Rerun all the failed tests listed in the json file."""
-        
+
     logging.debug("Running failed tests from : " + run_file)
     #See if we need to generate test setup files.
     root_directory = get_root_dir()
-    
+
     failed_tests, total_tests = run_tests_impl(enqueue_failed_tests(run_file, root_directory, args), threads, args)
-    
+
 
     #This can be a retry-step.
     return 0
@@ -539,7 +540,7 @@ def main():
         generate_files(ds_registry, True)
         end_time = time.time() - start_time
         print ("Done: " + str(end_time))
-        
+
         #It's ok to call generate and then run some tests, so don't exit here.
     elif args.diff:
         test_config = TdvtTestConfig(from_args=args)
