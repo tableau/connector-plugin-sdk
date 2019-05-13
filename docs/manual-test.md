@@ -1,5 +1,5 @@
 ---
-title: Manual Tests for Your Connector
+title: Test Your Connector Using Manual Tests
 layout: docs
 ---
 After you create your connector and validate it using TDVT (Tableau Datasource Verification Tool), Tableau's automated testing tool for testing Tableau connnectivity to a database, you should confirm that your connector works as expected by completing a series of manual tests for quality assurance. This article outlines the manual tests to perform.
