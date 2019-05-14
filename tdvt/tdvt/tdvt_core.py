@@ -152,7 +152,7 @@ class BatchQueueWork(object):
             # Save the error message in case there is no result file to get it from.
             self.saved_error_message = e.output
             self.cmd_output = e.output
-            if self.test_config.expected_message and self.test_config.expected_message in self.saved_error_message:
+            if self.test_set.expected_message and self.test_set.expected_message in self.saved_error_message:
                 self.error_state = TestErrorExpected()
             else:
                 self.error_state = TestErrorOther()
