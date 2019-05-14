@@ -213,7 +213,7 @@ Verify that an error message appears:
 
    The workbook should open without errors.
 
-### [Optional] Test driver versions
+### [Optional] Test driver version
 
 If you defined a minimum driver version in your connector, test connecting to the correct database with the correct credentials, but with an old driver version installed. 
 
