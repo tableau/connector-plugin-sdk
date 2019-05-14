@@ -1,5 +1,5 @@
 ---
-title: Test Your Connector
+title: Test Your Connector Using TDVT
 ---
 
 ## Use Tableau Datasource Verification Tool (TDVT) to test
