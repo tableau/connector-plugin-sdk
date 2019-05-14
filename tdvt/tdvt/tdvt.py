@@ -313,8 +313,8 @@ def enqueue_tests(ds_info, args, suite):
             test_config.run_as_perf = ds_info.run_as_perf
             test_config.tds = test_set.tds_name
             test_config.config_file = test_set.config_name
+
             test_set_configs.append((test_set, test_config))
-            test_config.expected_message = test_set.expected_message
 
     return test_set_configs
 
