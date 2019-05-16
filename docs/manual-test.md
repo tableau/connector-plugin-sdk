@@ -177,13 +177,14 @@ Change the language to any language but English (United States).
 1. Connect to your data source again.
  
 
-### Connect to the correct database with valid credentials, but without the driver installed
+### Connect to the correct database with valid credentials, but without the driver installed.
 
 Verify that the "Download and install the drivers" link appears in the Sign In dialog box:
 
 ![]({{ site.baseurl }}/assets/mt-download-driver.png) 
  
-### Connect to the correct database with the wrong credentials
+
+### Connect to the correct database with the wrong credentials.
 
 Verify that an error message appears: 
 
@@ -196,6 +197,7 @@ Verify that an error message appears:
    You should be able to connect to the data source with an extract without errors.
 
 * Access a published *data source without an extract* from Tableau Desktop *without the connector* installed.
+
 
    Verify that an error message appears:
 
@@ -240,6 +242,7 @@ Perform the publishing tests listed below. For more information about publishing
 
     
 * Publish a *workbook without an extract* to Tableau Server *with the connector* installed on the server.
+
 
     The workbook should publish without errors.
 
