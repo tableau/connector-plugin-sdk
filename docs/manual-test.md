@@ -35,7 +35,7 @@ Be sure that you complete all the following steps before you begin the manual te
 
 ### On Tableau Server
 
-6.	For each server node, follow step 4 above.
+6.	For each server node, follow step 4 above under **Before you begin**.
 7.	Set the native_api.connect_plugins_path option. For example:
 
     ```
@@ -382,7 +382,7 @@ Verify that an error message appears:
 
 Launch tsm with the connector installed, then remove the connector and re-launch tsm.
 
-1. If you haven't already, do steps 6 and 7 in **Before you begin** under the **On Tableau Server** section to launch tsm with your connector. 
+1. If you haven't already, do steps 1 and 2 in **Before you begin** under the **On Tableau Server** section to launch tsm with your connector. 
 1. Then delete the directory that contains your connector. 
 1. Run the following command to re-launch tsm.
 
