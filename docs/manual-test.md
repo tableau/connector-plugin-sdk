@@ -177,13 +177,13 @@ Change the language to any language but English (United States).
 1. Connect to your data source again.
  
 
-### Connect to the correct database with valid credentials, but without the driver installed.
+### Connect to the correct database with valid credentials, but without the driver installed
 
 Verify that the "Download and install the drivers" link appears in the Sign In dialog box:
 
 ![]({{ site.baseurl }}/assets/mt-download-driver.png) 
  
-### Connect to the correct database with the wrong credentials.
+### Connect to the correct database with the wrong credentials
 
 Verify that an error message appears: 
 
@@ -191,11 +191,11 @@ Verify that an error message appears:
 
 ### Test without the connector installed 
 
-* Access a published data source *with an extract* from Tableau Desktop *without the connector* installed.
+* Access a published *data source with an extract* from Tableau Desktop *without the connector* installed.
 
    You should be able to connect to the data source with an extract without errors.
 
-* Access a published data source *without an extract* from Tableau Desktop *without the connector* installed.
+* Access a published *data source without an extract* from Tableau Desktop *without the connector* installed.
 
    Verify that an error message appears:
 
@@ -239,7 +239,7 @@ Perform the publishing tests listed below. For more information about publishing
     Like the preceding test, you should see a publish failure error message.
 
     
-* Publish a workbook *without* an extract to Tableau Server *with* the connector installed on the server.
+* Publish a *workbook without an extract* to Tableau Server *with the connector* installed on the server.
 
     The workbook should publish without errors.
 
@@ -305,7 +305,7 @@ For information about publishing a workbook, see [Comprehensive Steps to Publish
 
 ### Test extract refreshes
 
-Refresh the extract on Tableau Server with the connector installed on the server
+Refresh the extract on Tableau Server with the connector installed on the server.
 
 * Open the workbook with an extract on Tableau Server and refresh the extract.
 
@@ -379,9 +379,9 @@ Verify that an error message appears:
 
 Launch tsm with the connector installed, then remove the connector and re-launch tsm.
 
-1. If you haven't already, do steps 6 and 7 in Before you begin under Server section to launch tsm with your connector. 
+1. If you haven't already, do steps 6 and 7 in **Before you begin** under the **On Tableau Server** section to launch tsm with your connector. 
 1. Then delete the directory that contains your connector. 
-1. Run the following command to re-launch TSM.
+1. Run the following command to re-launch tsm.
 
     ```
     tsm restart 
