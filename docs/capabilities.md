@@ -63,7 +63,7 @@ CAP_QUERY_CASE_PROMOTES_CHAR | Set to 'no' if CASE cannot promote character type
 CAP_QUERY_FROM_REQUIRES_ALIAS | Set to 'yes' if the FROM clause must provide an alias for the given table. | &ndash; | &ndash;
 CAP_QUERY_GROUP_ALLOW_DUPLICATES | Set to 'no' if SQL queries cannot contain duplicate expressions in the GROUP BY clause (this is uncommon). | yes | yes
 CAP_QUERY_GROUP_BY_ALIAS | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by their corresponding alias in the SELECT list, e.g. GROUP BY "none_ShipCountry_nk". | no | no 
-CAP_QUERY_GROUP_BY_BOOL | Set to 'yes' if the database can group by a raw boolean. Set to 'no' if boolean should be casted to an INT. | &ndash; | **<span style="color:red">yes</span>** 
+CAP_QUERY_GROUP_BY_BOOL | Set to 'yes' if the database can group by a raw boolean. Set to 'no' if booleans should be cast to an INT. Can also influence booleans in the SELECT clause. | no | **<span style="color:red">yes</span>** 
 CAP_QUERY_GROUP_BY_DEGREE | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by the ordinal position of each column, e.g. GROUP BY 2, 5. See also: CAP_QUERY_SORT_BY_DEGREE | no | **<span style="color:red">yes</span>**  
 CAP_QUERY_HAVING_REQUIRES_GROUP_BY | Set to 'yes' if Tableau must use an artificial grouping field for any query which has a HAVING clause but no grouping columns. | &ndash; | **<span style="color:red">?</span>** 
 CAP_QUERY_HAVING_UNSUPPORTED | Set to 'yes' if the SQL syntax for HAVING is unsupported. Tableau may be able to work around this using subqueries. See also: CAP_QUERY_SUBQUERIES. | &ndash; | &ndash; 
