@@ -1,8 +1,8 @@
 <results>
-  <test name='ATAN([int2])'>
+  <test name='ATAN2([int2],1)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3655856496)(0)]</column>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(2745915023)(0)]</column>
       </schema>
       <tuple>
         <value>-1.4601391</value>
@@ -45,37 +45,37 @@
       </tuple>
     </table>
   </test>
-  <test name='atan(num0)'>
+  <test name='atan2(num0,num1)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(4053915117)(0)]</column>
+        <column>[cast_calcs.postgres91].[TEMP(Test)(3341395046)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>-1.507188</value>
+        <value>-1.1287781</value>
       </tuple>
       <tuple>
-        <value>-1.4896739</value>
+        <value>-1.0713926</value>
       </tuple>
       <tuple>
-        <value>-1.2924967</value>
+        <value>-0.35713401</value>
       </tuple>
       <tuple>
         <value>0.0</value>
       </tuple>
       <tuple>
-        <value>1.2924967</value>
+        <value>0.36902363</value>
       </tuple>
       <tuple>
-        <value>1.4711277</value>
+        <value>0.81261281</value>
       </tuple>
       <tuple>
-        <value>1.4896739</value>
+        <value>0.97051299</value>
       </tuple>
       <tuple>
-        <value>1.507188</value>
+        <value>1.013687</value>
       </tuple>
     </table>
   </test>
