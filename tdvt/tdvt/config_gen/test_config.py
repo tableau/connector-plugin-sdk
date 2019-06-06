@@ -275,10 +275,10 @@ class TestConfig(object):
         self.expression_test_set.append(new_test)
 
     def get_logical_tests(self, config_filter=None):
-        return self.logical_test_set if not config_filter else [ ts for ts in self.logical_test_set if config_filter in ts.config_name ]
+        return self.logical_test_set if not config_filter  or config_filter == '*' else [ ts for ts in self.logical_test_set if config_filter in ts.config_name ]
 
     def get_expression_tests(self, config_filter=None):
-        return self.expression_test_set if not config_filter else [ ts for ts in self.expression_test_set if config_filter in ts.config_name ]
+        return self.expression_test_set if not config_filter or config_filter == '*' else [ ts for ts in self.expression_test_set if config_filter in ts.config_name ]
 
     def add_logical_config(self, cfg):
         self.logical_config = cfg.copy()

@@ -389,8 +389,8 @@ def create_parser():
     parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     parser.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
     parser.add_argument('--run', '-r', dest='ds', help='Comma separated list of Datasource names to test or \'all\'.', required=False)
-    parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='', nargs='?')
-    parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
+    parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
     parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
     parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
@@ -419,6 +419,7 @@ def init():
     logger.addHandler(ch)
 
     logging.debug('TDVT version: ' + str(__version__))
+    logging.debug('TDVT Arguments: ' + str(args))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
 
