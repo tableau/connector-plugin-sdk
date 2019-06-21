@@ -65,6 +65,7 @@ The ODBC connection string and the JDBC connection URL are created by calling th
 Some values come from the connection dialog and are entered by the user (like username, password, and database name).
 They are mapped to ODBC connection string values that the PostgreSQL driver understands.
 Other attributes (like BOOLSASCHAR and LFCONVERSION) have values set to useful defaults.
+You may also set any other connection string options that you would like to pass to the driver.
 
 ### Example ODBC Connection Builder
 
