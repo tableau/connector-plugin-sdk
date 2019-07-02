@@ -126,7 +126,8 @@ class TestSet(object):
                 regex = re.compile(ex)
                 regexes.append(regex)
             except BaseException as e:
-                print ("Error compiling regular expression for test file exclusions: '" + str(ex) + "' exception: " + str(e))
+                print ("Error compiling regular expression for test file exclusions: '" + str(ex) + "' exception: " +
+                       str(e))
 
         final_test_list = list(tests_to_run)
         for test in tests_to_run:
@@ -149,7 +150,8 @@ class TestSet(object):
         return False
 
 class FileTestSet(TestSet):
-    """Used to run previously failed tests. Supports appending test files rather than using a search pattern like the other test sets."""
+    """Used to run previously failed tests. Supports appending test files rather than using a search pattern like the
+       other test sets."""
     def __init__(self, root_dir, config_name, tds_name, logical, suite, password_file = '', expected_message=''):
         self.test_paths = []
         self.logical = logical
@@ -261,14 +263,16 @@ class TestConfig(object):
         return self.dsname + ".password"
 
     def add_logical_test(self, base_config_name, tds_name, exclusions, test_path, test_dir, password_file, expected_message):
-        new_test = LogicalTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path, self.dsname, password_file, expected_message)
+        new_test = LogicalTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name),
+                                  exclusions, test_path, self.dsname, password_file, expected_message)
         self.add_logical_testset(new_test)
 
     def add_logical_testset(self, new_test):
         self.logical_test_set.append(new_test)
 
     def add_expression_test(self, base_config_name, tds_name, exclusions, test_path, test_dir, password_file, expected_message):
-        new_test = ExpressionTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name), exclusions, test_path, self.dsname, password_file, expected_message)
+        new_test = ExpressionTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name),
+                                     exclusions, test_path, self.dsname, password_file, expected_message)
         self.add_expression_testset(new_test)
 
     def add_expression_testset(self, new_test):
