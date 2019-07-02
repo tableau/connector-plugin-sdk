@@ -8,7 +8,7 @@ import tempfile
 
 def make_temp_dir(components):
     component_string = reduce(lambda x, y: str(x) + y, components)
-    return tempfile.mkdtemp(component_string)
+    return tempfile.mkdtemp(prefix=hashlib.sha224(component_string.encode()).hexdigest())
 
 
 def get_ini_file_names(base_ini_name):
