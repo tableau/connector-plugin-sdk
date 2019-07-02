@@ -29,6 +29,7 @@ def get_max_process_level_of_parallelization(desired_threads):
         return 1
     return desired_threads
 
+
 def build_tabquery_command_line(work):
     try:
         """This is run only as part of unit tests. Regular TDVT runs continue in the except block."""
@@ -76,8 +77,8 @@ class TabqueryCommandLine(object):
             for override in work.test_config.d_override.split(' '):
                 cmdline.extend([override])
 
-        # Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-        # that tests what you would expect.
+        # Disable constant expression folding. This will bypass the VizEngine for certain simple calculations.
+        # This way we run a full database query that tests what you would expect.
         cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
         self.extend_command_line(cmdline, work)
