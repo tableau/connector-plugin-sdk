@@ -7,7 +7,9 @@ from ..resources import *
 
 class TdvtTestConfig(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6, from_json = None, run_as_perf = False):
+    def __init__(self, tested_sql = False, tested_tuples = True, tds = '', config = '', output_dir = '',
+                 logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6,
+                 from_json = None, run_as_perf = False):
         self.tested_sql = tested_sql
         self.tested_tuples = tested_tuples
         self.log_dir = ''
@@ -32,8 +34,8 @@ class TdvtTestConfig(object):
             self.tds = tds
 
     def init_from_args(self, args):
-        if args.compare_sql: 
-            self.tested_sql = args.compare_sql 
+        if args.compare_sql:
+            self.tested_sql = args.compare_sql
         if args.nocompare_tuples:
             self.tested_tuples = False
         if args.noclean:
@@ -59,20 +61,19 @@ class TdvtTestConfig(object):
 
     def __json__(self):
         return {
-        'tested_sql' : self.tested_sql, 
-        'tested_tuples' : self.tested_tuples, 
-        'output_dir' : self.output_dir, 
-        'logical' : self.logical, 
-        'config_file' : self.config_file, 
-        'suite_name' : self.suite_name, 
-        'd_override' : self.d_override, 
-        'verbose' : self.verbose, 
-        'tds' : self.tds, 
-        'noheader' : self.noheader, 
+        'tested_sql' : self.tested_sql,
+        'tested_tuples' : self.tested_tuples,
+        'output_dir' : self.output_dir,
+        'logical' : self.logical,
+        'config_file' : self.config_file,
+        'suite_name' : self.suite_name,
+        'd_override' : self.d_override,
+        'verbose' : self.verbose,
+        'tds' : self.tds,
+        'noheader' : self.noheader,
         'thread_count' : self.thread_count }
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self.__dict__ == other.__dict__
         return False
-
