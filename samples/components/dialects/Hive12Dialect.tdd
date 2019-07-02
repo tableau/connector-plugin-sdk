@@ -1,4 +1,4 @@
-<dialect name='OdbcSimplePostgresSQL92'
+<dialect name='HiveDialectSDK'
          base='HiveDialect'
          class='hive_clone'
          version='18.1'>
