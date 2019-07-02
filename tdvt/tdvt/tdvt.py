@@ -355,6 +355,9 @@ def usage_text():
         tdvt_runner --run sqlserver,vertica
         tdvt_runner --run standard
 
+    The 'run' argument can also take the --verify flag to run a connection test against const_calcs.
+        tdvt_runner --run postgres --verify
+
     Both logical and expression tests are run by default.
     Run all sqlserver expression tests
         tdvt_runner -e --run sqlserver
