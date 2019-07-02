@@ -4,13 +4,13 @@ title: Test Your Connector Using TDVT
 
 ## Use Tableau Datasource Verification Tool (TDVT) to test
 
-TDVT is an automated testing tool for testing Tableau connectivity with a database. 
+TDVT is an automated testing tool for testing Tableau connectivity with a database.
 Tests span from simple expressions to complex SQL.
-When evaluating the connection to your database, use a named connector if one exists. 
+When evaluating the connection to your database, use a named connector if one exists.
 Named connectors are optimized connections and provide a faster, cleaner experience for customers.
 
-If a named connector doesn't exist, you can connect through the Other Databases (ODBC) connector. 
-For information on the Other Databases (ODBC), check out the [online Help](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_otherdatabases.htm). 
+If a named connector doesn't exist, you can connect through the Other Databases (ODBC) connector.
+For information on the Other Databases (ODBC), check out the [online Help](https://onlinehelp.tableau.com/current/pro/desktop/en-us/examples_otherdatabases.htm).
 
 Or you can create a connector, as described in this Developer Guide.
 
@@ -89,7 +89,7 @@ This can help ensure the data is loaded correctly with the right data types.
 ## Notes on invoking TDVT
 
 When TDVT is installed as a Python module it can be invoked as follows:
-`python -m tdvt.tdvt`. 
+`python -m tdvt.tdvt`.
 
 If you have Python 2 and Python 3 installed, run `py -3 -m tdvt.tdvt`. This ensures Python 3 is used. In the examples below `tdvt` is used, but one of the above would be used in actual practice.
 
@@ -127,9 +127,9 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 
 1. Run `tdvt --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two TDS files to rename the connection.
 
-1. Update the generated ini file (mydb.ini) and choose a logical query config that matches what your database supports. 
+1. Update the generated ini file (mydb.ini) and choose a logical query config that matches what your database supports.
    See the section below titled 'Choose a logical query config'.
-   
+
 1. Run: `tdvt --generate`
 
 1. Verify your new test suite by running: `tdvt --list your_datasource_name`. It should show you a list of test suites associated with this datasource.
@@ -247,6 +247,15 @@ ExpressionExclusions_Calcs =
 
 [UnionTest]
 
+[ConnectionTest]
+
+# This section heading is auto-created by TDVT. It is used to verify your connection against cast_calcs using the --verify flag.
+
+Type = expression
+Name = ConnectionTest.
+TDS = cast_calcs.*.tds
+TestPath = exprtests/pretest/
+
 #Advanced:
 #You can add a new arbitrary test suite like this.
 
@@ -288,7 +297,7 @@ Try loading them in Tableau Desktop to visualize the results.
 
 Sample connectors are located in the samples/plugins folder.
 
-1. Copy the samples/plugins folder to your working directory so that they exist under /plugins. Like this: /plugins/postgres_odbc/manifest.xml 
+1. Copy the samples/plugins folder to your working directory so that they exist under /plugins. Like this: /plugins/postgres_odbc/manifest.xml
 
 2. Check that everything is set up correctly and a list of tests displays: `tdvt --list postgres_odbc`
 
@@ -307,7 +316,7 @@ You can use these steps as a guide to develop your own workbook.
 1. Click the "test_results" connection on the left, and click "Edit Connection".
 
    ![]({{ site.baseurl }}/assets/tdvt_edit_results.png)
-   
+
 1. In the file navigator that opens, choose the "test_results_combined" spreadsheet that is in your "tdvt" folder.
 
 1. Drag  the new "test_results_combined.csv" file to replace the old file in the data canvas.
@@ -315,7 +324,7 @@ You can use these steps as a guide to develop your own workbook.
 1. Right-click the new table, and click "Text File Properties…".
 
    ![]({{ site.baseurl }}/assets/tdvt_edit_results2.png)
-   
+
 1. Change the "text qualifier" to use a double quote.
 
 1. View the viz by clicking "Functional Test Pass," which should look like the information below. The viz shows the test pass rate by Test Category. Click the bars to see the relevant failed tests in the "Test Details" section.
@@ -392,12 +401,12 @@ These various permutations do not affect the test results so the expected file h
 1. Check the TDS file: Open the TDS file in Tableau.
    Check to see if Tableau shows any error messages, prompts for a username and password, or asks for any additional information fix that's in the TDS file.
    You should be able to open the TDS and create a viz without any prompts.
-   
+
 1. Check the INI file for the following line: CommandLineOverride = -DLogLevel=Debug -DConnectPluginsPath=[PathToPluginsFolder].
    Make sure that the DConnectPluginsPath attribute is present and correct.
-   
+
 1. Check Python Version: If you are using both Python 2.x and Python 3, then run TDVT using the command: py -3 tdvt.py …
-   
+
 1. Check tabquerytool.exe: This file should be placed in your Tableau bin directory and tdvt/config/tdvt_override.ini should be updated to point at that executable.
 
 ### Boolean data types are not recognized or your database doesn't support them
