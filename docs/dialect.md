@@ -82,4 +82,3 @@ Allowable types: none, bool, real, int, str, datetime, date, localstr, null, e
 
 Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second 
 
- 
