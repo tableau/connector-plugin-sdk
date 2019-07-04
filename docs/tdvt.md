@@ -485,3 +485,7 @@ It's helpful to clear the log files and then run just the single failing test. S
 ### Logical Query Tests
 
 If all the logical queries fail it can mean that you don't have the right logical query config associated in your mydb.ini file.
+
+### Logic Assert in DatepartFunction.cpp
+
+Check that any *date-format* elements in your TDD file have a valid *name*. See [Creating a TDD File](https://tableau.github.io/connector-plugin-sdk/docs/dialect)
