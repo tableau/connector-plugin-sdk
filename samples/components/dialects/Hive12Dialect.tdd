@@ -1100,6 +1100,44 @@
       <argument type='bool' />
       <argument type='bool' />
     </function>
+    <function group='date' name='DAY' return-type='int'>
+      <formula>DAY(%1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='DAY' return-type='int'>
+      <formula>DAY(%1)</formula>
+      <argument type='date' />
+    </function>
+    <function group='date' name='MONTH' return-type='int'>
+      <formula>MONTH(%1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='MONTH' return-type='int'>
+      <formula>MONTH(%1)</formula>
+      <argument type='date' />
+    </function>
+    <function group='date' name='NOW' return-type='datetime'>
+      <formula>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
+    </function>
+    <function group='date' name='QUARTER' return-type='int'>
+      <formula>CAST((MONTH(%1) - 1) / 3 + 1 AS BIGINT)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='TODAY' return-type='date'>
+      <formula>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
+    </function>
+    <function group='date' name='WEEK' return-type='int'>
+      <formula>FLOOR((14 + DATEDIFF(%1, TRUNC(%1,&apos;YY&apos;)) + DATEDIFF(TRUNC(%1,&apos;YY&apos;),NEXT_DAY(TRUNC(%1,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='YEAR' return-type='int'>
+      <formula>YEAR(%1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='YEAR' return-type='int'>
+      <formula>YEAR(%1)</formula>
+      <argument type='date' />
+    </function>
     <date-function name='DATEADD' return-type='datetime'>
       <formula part='year'>CAST(CONCAT(YEAR(%3)+%2, SUBSTR(CAST(%3 AS TIMESTAMP), 5)) AS TIMESTAMP)</formula>
       <formula part='quarter'>CAST(CONCAT(ADD_MONTHS(%3,(%2 * 3)),SUBSTR(CAST(%3 AS TIMESTAMP),11)) AS TIMESTAMP)</formula>
@@ -1189,144 +1227,6 @@
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
-    </date-function>
-    <date-function name='DAY' return-type='int'>
-      <formula>DAY(%1)</formula>
-      <formula part='year'>DAY(year)</formula>
-      <formula part='quarter'>DAY(quarter)</formula>
-      <formula part='month'>DAY(month)</formula>
-      <formula part='dayofyear'>DAY(dayofyear)</formula>
-      <formula part='day'>DAY(day)</formula>
-      <formula part='weekday'>DAY(weekday)</formula>
-      <formula part='week'>DAY(sunday)</formula>
-      <formula part='hour'>DAY(hour)</formula>
-      <formula part='minute'>DAY(minute)</formula>
-      <formula part='second'>DAY(second)</formula>
-      <argument type='datetime' />
-    </date-function>
-    <date-function name='DAY' return-type='int'>
-      <formula>DAY(%1)</formula>
-      <formula part='year'>DAY(year)</formula>
-      <formula part='quarter'>DAY(quarter)</formula>
-      <formula part='month'>DAY(month)</formula>
-      <formula part='dayofyear'>DAY(dayofyear)</formula>
-      <formula part='day'>DAY(day)</formula>
-      <formula part='weekday'>DAY(weekday)</formula>
-      <formula part='week'>DAY(sunday)</formula>
-      <formula part='hour'>DAY(hour)</formula>
-      <formula part='minute'>DAY(minute)</formula>
-      <formula part='second'>DAY(second)</formula>
-      <argument type='date' />
-    </date-function>
-    <date-function name='MONTH' return-type='int'>
-      <formula>MONTH(%1)</formula>
-      <formula part='year'>MONTH(year)</formula>
-      <formula part='quarter'>MONTH(quarter)</formula>
-      <formula part='month'>MONTH(month)</formula>
-      <formula part='dayofyear'>MONTH(dayofyear)</formula>
-      <formula part='day'>MONTH(day)</formula>
-      <formula part='weekday'>MONTH(weekday)</formula>
-      <formula part='week'>MONTH(sunday)</formula>
-      <formula part='hour'>MONTH(hour)</formula>
-      <formula part='minute'>MONTH(minute)</formula>
-      <formula part='second'>MONTH(second)</formula>
-      <argument type='datetime' />
-    </date-function>
-    <date-function name='MONTH' return-type='int'>
-      <formula>MONTH(%1)</formula>
-      <formula part='year'>MONTH(year)</formula>
-      <formula part='quarter'>MONTH(quarter)</formula>
-      <formula part='month'>MONTH(month)</formula>
-      <formula part='dayofyear'>MONTH(dayofyear)</formula>
-      <formula part='day'>MONTH(day)</formula>
-      <formula part='weekday'>MONTH(weekday)</formula>
-      <formula part='week'>MONTH(sunday)</formula>
-      <formula part='hour'>MONTH(hour)</formula>
-      <formula part='minute'>MONTH(minute)</formula>
-      <formula part='second'>MONTH(second)</formula>
-      <argument type='date' />
-    </date-function>
-    <date-function name='NOW' return-type='datetime'>
-      <formula>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='year'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='quarter'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='month'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='dayofyear'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='day'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='weekday'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='week'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='hour'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='minute'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-      <formula part='second'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP()) AS TIMESTAMP)</formula>
-    </date-function>
-    <date-function name='QUARTER' return-type='int'>
-      <formula>CAST((MONTH(%1) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='year'>CAST((MONTH(year) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='quarter'>CAST((MONTH(quarter) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='month'>CAST((MONTH(month) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='dayofyear'>CAST((MONTH(dayofyear) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='day'>CAST((MONTH(day) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='weekday'>CAST((MONTH(weekday) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='week'>CAST((MONTH(sunday) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='hour'>CAST((MONTH(hour) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='minute'>CAST((MONTH(minute) - 1) / 3 + 1 AS BIGINT)</formula>
-      <formula part='second'>CAST((MONTH(second) - 1) / 3 + 1 AS BIGINT)</formula>
-      <argument type='datetime' />
-    </date-function>
-    <date-function name='TODAY' return-type='date'>
-      <formula>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='year'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='quarter'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='month'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='dayofyear'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='day'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='weekday'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='week'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='hour'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='minute'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-      <formula part='second'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(), &apos;yyyy-MM-dd 00:00:00&apos;) AS TIMESTAMP)</formula>
-    </date-function>
-    <date-function name='WEEK' return-type='int'>
-      <formula>FLOOR((14 + DATEDIFF(%1, TRUNC(%1,&apos;YY&apos;)) + DATEDIFF(TRUNC(%1,&apos;YY&apos;),NEXT_DAY(TRUNC(%1,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='year'>FLOOR((14 + DATEDIFF(year, TRUNC(year,&apos;YY&apos;)) + DATEDIFF(TRUNC(year,&apos;YY&apos;),NEXT_DAY(TRUNC(year,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='quarter'>FLOOR((14 + DATEDIFF(quarter, TRUNC(quarter,&apos;YY&apos;)) + DATEDIFF(TRUNC(quarter,&apos;YY&apos;),NEXT_DAY(TRUNC(quarter,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='month'>FLOOR((14 + DATEDIFF(month, TRUNC(month,&apos;YY&apos;)) + DATEDIFF(TRUNC(month,&apos;YY&apos;),NEXT_DAY(TRUNC(month,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='dayofyear'>FLOOR((14 + DATEDIFF(dayofyear, TRUNC(dayofyear,&apos;YY&apos;)) + DATEDIFF(TRUNC(dayofyear,&apos;YY&apos;),NEXT_DAY(TRUNC(dayofyear,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='day'>FLOOR((14 + DATEDIFF(day, TRUNC(day,&apos;YY&apos;)) + DATEDIFF(TRUNC(day,&apos;YY&apos;),NEXT_DAY(TRUNC(day,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='weekday'>FLOOR((14 + DATEDIFF(weekday, TRUNC(weekday,&apos;YY&apos;)) + DATEDIFF(TRUNC(weekday,&apos;YY&apos;),NEXT_DAY(TRUNC(weekday,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='week'>FLOOR((14 + DATEDIFF(sunday, TRUNC(sunday,&apos;YY&apos;)) + DATEDIFF(TRUNC(sunday,&apos;YY&apos;),NEXT_DAY(TRUNC(sunday,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='hour'>FLOOR((14 + DATEDIFF(hour, TRUNC(hour,&apos;YY&apos;)) + DATEDIFF(TRUNC(hour,&apos;YY&apos;),NEXT_DAY(TRUNC(hour,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='minute'>FLOOR((14 + DATEDIFF(minute, TRUNC(minute,&apos;YY&apos;)) + DATEDIFF(TRUNC(minute,&apos;YY&apos;),NEXT_DAY(TRUNC(minute,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <formula part='second'>FLOOR((14 + DATEDIFF(second, TRUNC(second,&apos;YY&apos;)) + DATEDIFF(TRUNC(second,&apos;YY&apos;),NEXT_DAY(TRUNC(second,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-      <argument type='datetime' />
-    </date-function>
-    <date-function name='YEAR' return-type='int'>
-      <formula>YEAR(%1)</formula>
-      <formula part='year'>YEAR(year)</formula>
-      <formula part='quarter'>YEAR(quarter)</formula>
-      <formula part='month'>YEAR(month)</formula>
-      <formula part='dayofyear'>YEAR(dayofyear)</formula>
-      <formula part='day'>YEAR(day)</formula>
-      <formula part='weekday'>YEAR(weekday)</formula>
-      <formula part='week'>YEAR(sunday)</formula>
-      <formula part='hour'>YEAR(hour)</formula>
-      <formula part='minute'>YEAR(minute)</formula>
-      <formula part='second'>YEAR(second)</formula>
-      <argument type='datetime' />
-    </date-function>
-    <date-function name='YEAR' return-type='int'>
-      <formula>YEAR(%1)</formula>
-      <formula part='year'>YEAR(year)</formula>
-      <formula part='quarter'>YEAR(quarter)</formula>
-      <formula part='month'>YEAR(month)</formula>
-      <formula part='dayofyear'>YEAR(dayofyear)</formula>
-      <formula part='day'>YEAR(day)</formula>
-      <formula part='weekday'>YEAR(weekday)</formula>
-      <formula part='week'>YEAR(sunday)</formula>
-      <formula part='hour'>YEAR(hour)</formula>
-      <formula part='minute'>YEAR(minute)</formula>
-      <formula part='second'>YEAR(second)</formula>
-      <argument type='date' />
     </date-function>
   </function-map>
 </dialect>
