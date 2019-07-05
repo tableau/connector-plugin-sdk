@@ -58,6 +58,7 @@ return-type | Y | Indicates the return type of the function. Allowable types: se
 ### Date Function 
 
 *date-function* elements are a specialized variant of function. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available. 
+The function *name* must be one of DATEADD, DATEDIFF, DATEFORMAT, DATENAME, DATEPARSE, DATEPART, DATETRUNC.
 
 Like *function*, *date-function* requires name and return-type, but unlike *function*, group is not required. 
 
@@ -81,4 +82,3 @@ Allowable types: none, bool, real, int, str, datetime, date, localstr, null, e
 
 Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second 
 
- 
