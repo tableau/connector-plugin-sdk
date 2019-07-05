@@ -76,6 +76,10 @@ def get_expected_message(config):
     return config.get('ExpectedMessage', '')
 
 
+def get_is_smoke_test(config):
+    return config.get('SmokeTest', False)
+
+
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
         for config in list_config(ds_registry, config_name):
@@ -129,6 +133,7 @@ def load_test(config, test_dir=get_root_dir()):
     standard_tests = 'StandardTests'
     lod_tests = 'LODTests'
     staples_data_test = 'StaplesDataTest'
+    calcs_data_test = 'CalcsDataTest'
     new_expression_test = 'NewExpressionTest'
     new_logical_test = 'NewLogicalTest'
     union_test = 'UnionTest'
@@ -194,7 +199,18 @@ def load_test(config, test_dir=get_root_dir()):
             all_ini_sections.remove(staples_data_test)
             test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt',
                                             test_dir, get_password_file(staples_data),
-                                            get_expected_message(staples_data))
+                                            get_expected_message(staples_data), True)
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
+    if calcs_data_test in config.sections():
+        try:
+            calcs_data = config[calcs_data_test]
+            all_ini_sections.remove(calcs_data_test)
+            test_config.add_expression_test('expression.calcs.', CALCS_TDS, '', 'exprtests/calcs/setup.*.txt',
+                                            test_dir, get_password_file(calcs),
+                                            get_expected_message(calcs_data), True)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -275,7 +291,7 @@ def load_test(config, test_dir=get_root_dir()):
                 all_ini_sections.remove(section)
                 test_config.add_expression_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                                 sect.get('TestPath', ''), test_dir, get_password_file(sect),
-                                                get_expected_message(sect))
+                                                get_expected_message(sect), get_is_smoke_test(standard))
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -286,7 +302,7 @@ def load_test(config, test_dir=get_root_dir()):
                 all_ini_sections.remove(section)
                 test_config.add_logical_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                              sect.get('TestPath', ''), test_dir, get_password_file(sect),
-                                             get_expected_message(sect))
+                                             get_expected_message(sect), get_is_smoke_test(standard))
             except KeyError as e:
                 logging.debug(e)
                 pass

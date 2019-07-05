@@ -59,8 +59,8 @@ class TestSet(object):
         return '', ''
 
     def generate_test_file_list(self):
-        """Take the config and expand it into the list of tests cases to run. These are fully qualified paths to test files.
-           Return the sorted list of tests.
+        """Take the config and expand it into the list of tests cases to run. These are fully qualified paths to test
+           files. Return the sorted list of tests.
 
         """
         final_test_list = self.generate_test_file_list_from_config()
@@ -148,7 +148,8 @@ class TestSet(object):
         return [] if not self.exclusions else self.exclusions.split(',')
 
     def __str__(self):
-        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}] [is_logical={4}] [root_dir={5}]".format(self.config_name, self.tds_name, self.exclusions, self.test_pattern, self.is_logical, self.root_dir)
+        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}] [is_logical={4}] [root_dir={5}]".format(
+                self.config_name, self.tds_name, self.exclusions, self.test_pattern, self.is_logical, self.root_dir)
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -201,9 +202,10 @@ class FileTestSet(TestSet):
 
 
 class LogicalTestSet(TestSet):
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='', expected_message=''):
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
+                 expected_message='', smoke_test=False):
         super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name,
-                                             exclusions, test_pattern, True, suite, password_file, expected_message)
+                                             exclusions, test_pattern, True, suite, password_file, expected_message,)
 
     def get_expected_output_file_path(self, test_file, output_dir):
         existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(
@@ -217,7 +219,8 @@ class LogicalTestSet(TestSet):
 
 
 class ExpressionTestSet(TestSet):
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='', expected_message=''):
+    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
+                 expected_message='', smoke_test=False):
         super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name,
                                                 exclusions, test_pattern, False, suite, password_file, expected_message)
 
@@ -230,18 +233,22 @@ class ExpressionTestSet(TestSet):
 
 
 class SingleLogicalTestSet(LogicalTestSet):
-    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='', expected_message=''):
+    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
+                 expected_message=''):
         super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
-                                                   exclude_pattern, test_pattern, ds_info.dsname, password_file, expected_message)
+                                                   exclude_pattern, test_pattern, ds_info.dsname, password_file,
+                                                   expected_message)
         self.test_pattern = self.test_pattern.replace(
             '?', ds_info.logical_config_name)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 
 class SingleExpressionTestSet(ExpressionTestSet):
-    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='', expected_message=''):
+    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
+                 expected_message=''):
         super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
-                                                      exclude_pattern, test_pattern, ds_info.dsname, password_file, expected_message)
+                                                      exclude_pattern, test_pattern, ds_info.dsname, password_file,
+                                                      expected_message)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 
@@ -265,6 +272,7 @@ class TestConfig(object):
         self.staples_tds = self.get_tds_name('Staples.')
         self.logical_test_set = []
         self.expression_test_set = []
+        self.smoke_test_set = []
         self.d_override = d_override
         self.maxthread = 0
         self.logical_config = {}
