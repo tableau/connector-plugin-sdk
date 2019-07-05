@@ -86,7 +86,7 @@ def print_logical_configurations(ds_registry, config_name=None):
             print(config)
 
 
-def LoadTest(config, test_dir=get_root_dir()):
+def load_test(config, test_dir=get_root_dir()):
     """ Parse a datasource test suite config into a TestConfig object.
     [Datasource]
     Name = bigquery
@@ -320,7 +320,7 @@ class TestRegistry(object):
                 logging.debug(e)
                 continue
 
-            self.add_test(LoadTest(config))
+            self.add_test(load_test(config))
 
         self.load_ini_file(ini_file)
 
