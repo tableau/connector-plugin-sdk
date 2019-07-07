@@ -205,7 +205,8 @@ class LogicalTestSet(TestSet):
     def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
                  expected_message='', smoke_test=False):
         super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name,
-                                             exclusions, test_pattern, True, suite, password_file, expected_message, smoke_test=False)
+                                             exclusions, test_pattern, suite, password_file, expected_message,
+                                             smoke_test)
 
     def get_expected_output_file_path(self, test_file, output_dir):
         existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(
@@ -222,7 +223,7 @@ class ExpressionTestSet(TestSet):
     def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
                  expected_message='', smoke_test=False):
         super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name,
-                                                exclusions, test_pattern, False, suite, password_file, expected_message,
+                                                exclusions, test_pattern, suite, password_file, expected_message,
                                                 smoke_test)
 
     def get_expected_output_file_path(self, test_file, output_dir):
