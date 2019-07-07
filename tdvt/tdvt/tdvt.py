@@ -479,20 +479,43 @@ def active_thread_count(threads):
 
 
 def run_tests_impl(tests, max_threads, args):
+    smoke_test_queue = queue.Queue()
+    smoke_tests = []
     test_queue = queue.Queue()
     all_work = []
     lock = threading.Lock()
+
     logging.debug("test queue size is " + str(len(tests)))
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        all_work.append(runner)
-        test_queue.put(runner)
+        if test_set.smoke_test == True:
+            smoke_tests.append(runner)
+            smoke_test_queue.put(runner)
+        else:
+            all_work.append(runner)
+            test_queue.put(runner)
+
+    # logging.debug("smoke test queue size is:", str(len(smoke_tests)))
+    # logging.debug("test queue size is:", str(len(all_work)))
+
+    if not smoke_tests:
+        logging.warning('No smoke tests detected.')
+        print("""No smoke tests detected. Tests will attempt to run without first verifying data source connection(s).
+              This may result in unreliable test results.""")
 
     if not all_work:
         print("No tests found. Check arguments.")
         sys.exit()
 
-    print("Creating " + str(max_threads) + " worker threads.")
+    if smoke_tests:
+        print("Starting smoke tests. Creating", str(max_threads), "worker threads.")
+        start_time = time.time()
+        for i in range(0, max_threads):
+            worker = threading.Thread(target=do_test_queue_work, args=(1, smoke_test_queue))
+            worker.setDaemon(True)
+            worker.start()
+
+    print("Starting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
     for i in range(0, max_threads):
         worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
@@ -554,6 +577,16 @@ def run_desired_tests(args, ds_registry):
             test_sets.extend([(single_test, single_test_config)])
         else:
             test_sets.extend(enqueue_tests(ds_info, args, suite))
+
+    # smoke_test_names = ['ConnectionTest', 'CalcsDataTest', 'StaplesDataTest', 'TestBadPassword']
+    # sorted_test_sets = []
+    #
+    # for item in test_sets:
+    #     if any(i in item[0].config_name for i in smoke_test_names):
+    #         sorted_test_sets.insert(0, item)
+    #         test_sets.pop(test_sets.index(item))
+    #
+    # sorted_test_sets.extend(test_sets)
 
     failed_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
     return failed_tests
