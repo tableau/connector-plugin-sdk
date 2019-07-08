@@ -207,6 +207,7 @@ class LogicalTestSet(TestSet):
         super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name,
                                              exclusions, test_pattern, suite, password_file, expected_message,
                                              smoke_test)
+        self.smoke_test = smoke_test
 
     def get_expected_output_file_path(self, test_file, output_dir):
         existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(
@@ -225,6 +226,7 @@ class ExpressionTestSet(TestSet):
         super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name,
                                                 exclusions, test_pattern, suite, password_file, expected_message,
                                                 smoke_test)
+        self.smoke_test = smoke_test
 
     def get_expected_output_file_path(self, test_file, output_dir):
         base_test_file = get_base_test(test_file)
@@ -240,6 +242,7 @@ class SingleLogicalTestSet(LogicalTestSet):
         super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
                                                    exclude_pattern, test_pattern, ds_info.dsname, password_file,
                                                    expected_message, smoke_test)
+        self.smoke_test = smoke_test
         self.test_pattern = self.test_pattern.replace(
             '?', ds_info.logical_config_name)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
@@ -251,6 +254,7 @@ class SingleExpressionTestSet(ExpressionTestSet):
         super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
                                                       exclude_pattern, test_pattern, ds_info.dsname, password_file,
                                                       expected_message, smoke_test)
+        self.smoke_test = smoke_test
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 
