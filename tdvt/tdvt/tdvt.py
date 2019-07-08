@@ -498,9 +498,7 @@ def run_tests_impl(tests, max_threads, args):
     logging.debug("test queue size is: " + str(len(all_work)))
 
     if not smoke_tests:
-        logging.warning('No smoke tests detected. Tests will attempt to run without first verifying the data source \
-                        connection. This may result in tests failing because of connection, rather than plugin, \
-                        issues.')
+        logging.warning("""No smoke tests detected. Tests will attempt to run without first verifying the data source connection. This may result in tests failing because of connection, rather than plugin, issues.""")
 
     if not all_work:
         print("No tests found. Check arguments.")

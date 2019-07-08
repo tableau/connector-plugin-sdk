@@ -296,7 +296,7 @@ def load_test(config, test_dir=get_root_dir()):
                 test_config.add_expression_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                                 sect.get('TestPath', ''), test_dir, get_is_smoke_test(sect),
                                                 get_password_file(sect), get_expected_message(sect))
-            except KeyError as e:
+            except Exception as e:
                 logging.debug(e)
                 pass
 

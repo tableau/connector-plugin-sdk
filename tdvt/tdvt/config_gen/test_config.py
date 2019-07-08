@@ -161,17 +161,19 @@ class FileTestSet(TestSet):
     """Used to run previously failed tests. Supports appending test files rather than using a search pattern like the
        other test sets."""
 
-    def __init__(self, root_dir, config_name, tds_name, logical, suite, password_file='', expected_message=''):
+    def __init__(self, root_dir, config_name, tds_name, logical, suite, smoke_test, password_file='',
+                 expected_message=''):
         self.test_paths = []
         self.logical = logical
+        self.smoke_test = smoke_test
         if logical:
             self.delegator = LogicalTestSet(
-                root_dir, config_name, tds_name, '', '', suite, password_file, expected_message)
+                root_dir, config_name, tds_name, '', '', suite, smoke_test, password_file, expected_message)
         else:
             self.delegator = ExpressionTestSet(
-                root_dir, config_name, tds_name, '', '', suite, password_file, expected_message)
+                root_dir, config_name, tds_name, '', '', suite, smoke_test, password_file, expected_message)
         super(FileTestSet, self).__init__(root_dir, config_name, tds_name,
-                                          '', '', logical, suite, password_file, expected_message)
+                                          '', '', logical, suite, smoke_test, password_file, expected_message)
 
     def get_expected_output_file_path(self, test_file, output_dir):
         return self.delegator.get_expected_output_file_path(test_file, output_dir)
@@ -237,10 +239,10 @@ class ExpressionTestSet(TestSet):
 
 
 class SingleLogicalTestSet(LogicalTestSet):
-    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, smoke_test, password_file='',
+    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
                  expected_message=''):
         super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
-                                                   exclude_pattern, test_pattern, ds_info.dsname, smoke_test,
+                                                   exclude_pattern, test_pattern, ds_info.dsname,
                                                    password_file, expected_message)
         self.smoke_test = smoke_test
         self.test_pattern = self.test_pattern.replace(
@@ -249,10 +251,10 @@ class SingleLogicalTestSet(LogicalTestSet):
 
 
 class SingleExpressionTestSet(ExpressionTestSet):
-    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, smoke_test, password_file='',
+    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
                  expected_message=''):
         super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
-                                                      exclude_pattern, test_pattern, ds_info.dsname, smoke_test,
+                                                      exclude_pattern, test_pattern, ds_info.dsname,
                                                       password_file, expected_message)
         self.smoke_test = smoke_test
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
