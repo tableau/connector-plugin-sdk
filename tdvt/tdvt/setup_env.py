@@ -87,7 +87,11 @@ def create_ds_ini_file(name, logical_config):
         ini.write('\n')
         ini.write('[UnionTest]\n')
         ini.write('\n')
-        ini.write('[ConnectionTest]\n')
+        ini.write('[StaplesDataTest]\n')
+        ini.write('SmokeTest = True\n')
+        ini.write('\n')
+        ini.write('[CalcsDataTest]\n')
+        ini.write('SmokeTest = True\n')
         ini.write('\n')
 
         print("Created ini file: " + ini_path)
