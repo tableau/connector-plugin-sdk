@@ -242,19 +242,22 @@ ExpressionExclusions_Calcs =
 [StandardTests]
 
 [StaplesDataTest]
+# An auto-generated section head that is used to verify your connection to Staples
+# Tests with SmokeTest = True are run before any other test run, and can be run as a group using
+# the --verify flag after a data source (e.g. --run postgres --verify).
+# Your StaplesDataTest and CalcsDataTest do _not_ require a `Type` attribute; this is handled
+# automatically by TDVT.
+SmokeTest = True
+
+[CalcsDataTest]
+# The second smoke test section, verifying the connection to Calcs.
+# In this case the test is intentionally disabled.
+SmokeTest = True
+Enabled = False
 
 [LODTests]
 
 [UnionTest]
-
-[ConnectionTest]
-
-# This section heading is auto-created by TDVT. It is used to verify your connection against cast_calcs using the --verify flag.
-
-Type = expression
-Name = ConnectionTest.
-TDS = cast_calcs.*.tds
-TestPath = exprtests/pretest/
 
 #Advanced:
 #You can add a new arbitrary test suite like this.
