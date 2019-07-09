@@ -187,7 +187,7 @@ def load_test(config, test_dir=get_root_dir()):
             all_ini_sections.remove(lod_tests)
             test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''),
                                          test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'), test_dir,
-                                         get_is_smoke_test(standard), get_password_file(lod), get_expected_message(lod))
+                                         get_password_file(lod), get_expected_message(lod), get_is_smoke_test(standard))
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''),
                                             'exprtests/lodcalcs/setup.*.txt', test_dir,
                                             get_password_file(lod), get_expected_message(lod), get_is_smoke_test(standard))
@@ -296,7 +296,7 @@ def load_test(config, test_dir=get_root_dir()):
                 test_config.add_expression_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                                 sect.get('TestPath', ''), test_dir,
                                                 get_password_file(sect), get_expected_message(sect), get_is_smoke_test(sect))
-            except Exception as e:
+            except KeyError as e:
                 logging.debug(e)
                 pass
 
