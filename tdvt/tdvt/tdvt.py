@@ -156,8 +156,8 @@ class TestRunner():
         DEVNULL = open(os.devnull, 'wb')
         output = DEVNULL if not self.verbose else None
         logging.debug("\nRunning tdvt " + str(self.test_config) + " tdvt thread id: " + str(self.thread_id) + "\n")
-        print("\nRunning {0} {1} {2}\n".format(self.test_config.suite_name, self.test_config.config_file,
-                                               str(self.thread_id)))
+        print("Running {0} {1} {2}\n".format(self.test_config.suite_name, self.test_config.config_file,
+                                             str(self.thread_id)))
 
         start_time = time.time()
         self.test_config.thread_id = self.thread_id
@@ -476,6 +476,22 @@ def active_thread_count(threads):
     return active
 
 
+def test_runner(all_tests, test_queue, max_threads):
+    for i in range(0, max_threads):
+        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
+        worker.setDaemon(True)
+        worker.start()
+    test_queue.join()
+    failed_tests = 0
+    total_tests = 0
+    for work in all_tests:
+        if work.copy_files_and_cleanup():
+            print("Left temp dir: " + work.temp_dir)
+        failed_tests += work.failed_tests if work.failed_tests else 0
+        total_tests += work.total_tests if work.total_tests else 0
+    return failed_tests, total_tests
+
+
 def run_tests_impl(tests, max_threads, args):
     smoke_test_queue = queue.Queue()
     smoke_tests = []
@@ -497,7 +513,7 @@ def run_tests_impl(tests, max_threads, args):
 
     if not smoke_tests:
         logging.warning("""No smoke tests detected. Tests will attempt to run without first verifying the data source connection. This may result in tests failing because of connection, rather than plugin, issues.""")
-        if args.smoke:
+        if args.smoke_test:
             sys.exit(1)
 
     if not all_work:
@@ -506,40 +522,20 @@ def run_tests_impl(tests, max_threads, args):
 
     if smoke_tests:
         print("Starting smoke tests. Creating", str(len(smoke_tests)), "worker threads.")
-        start_time = time.time()
-        for i in range(0, len(smoke_tests)):
-            smoke_worker = threading.Thread(target=do_test_queue_work, args=(1, smoke_test_queue))
-            smoke_worker.setDaemon(True)
-            smoke_worker.start()
 
-        smoke_test_queue.join()
+        failed_smoke_tests, total_smoke_tests = test_runner(smoke_tests, smoke_test_queue, len(smoke_tests))
 
-        failed_smoke_tests = 0
-        for test in smoke_tests:
-            failed_smoke_tests += test.failed_tests if test.failed_tests else 0
         if failed_smoke_tests > 0:
-            print("Test run aborted due to smoke test errors. Please check logs for information.")
+            print("Test run aborted due to smoke test errors. {} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
             sys.exit(1)
-        if args.smoke:
-            print("{} smoke test(s) passed.".format(str(len(smoke_tests))))
+
+        print("{} smoke test(s) passed.".format(total_smoke_tests))
+        if args.smoke_test is not None:
             sys.exit(0)
 
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
-    for i in range(0, max_threads):
-        worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
-        worker.setDaemon(True)
-        worker.start()
-
-    test_queue.join()
-
-    failed_tests = 0
-    total_tests = 0
-    for work in all_work:
-        if work.copy_files_and_cleanup():
-            print("Left temp dir: " + work.temp_dir)
-        failed_tests += work.failed_tests if work.failed_tests else 0
-        total_tests += work.total_tests if work.total_tests else 0
+    failed_tests, total_tests = test_runner(all_work, test_queue, max_threads)
 
     print('\n')
     print("Total time: " + str(time.time() - start_time))
