@@ -320,43 +320,43 @@ class TestPathTest(unittest.TestCase):
         self.assertTrue(len(all_tests) == test_size)
 
     def test_dir(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', False,
                                                    'logical/setup/suite1/', ''), 1)
 
     def test_file(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', False,
                                                    'logical/setup/suite1/setup.sum.tde.xml', ''), 1)
 
     def test_glob(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', False,
                                                    'logical/setup/suite1/setup.*.xml', ''), 1)
 
     def test_exclude(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'sum',
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'sum', False,
                                                    'logical/setup/suite1/setup.*.xml', ''), 0)
 
     def test_exclude_comma(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ',',
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ',', False,
                                                    'logical/setup/suite1/setup.*.xml', ''), 1)
 
     def test_exclude_space(self):
-        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ' sum',
+        self.assert_number_of_tests(LogicalTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', ' sum', False,
                                                    'logical/setup/suite1/setup.*.xml', ''), 0)
 
     def test_local_dir(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', False,
                                                       'e/suite1/', ''), 3)
 
     def test_local_file(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', False,
                                                       'e/suite1/setup.mytest.txt', ''), 1)
 
     def test_local_glob(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '',
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', '', False,
                                                       'e/suite1/setup.*.txt', ''), 3)
 
     def test_local_exclude(self):
-        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'mytest3',
+        self.assert_number_of_tests(ExpressionTestSet(ROOT_DIRECTORY, 'logical.tde', 'cast_calcs.tde.tds', 'mytest3', False,
                                                       'e/suite1/setup.*.txt', ''), 2)
 
 
@@ -367,19 +367,19 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '',
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', False,
                                'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark',
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', False,
                                'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.aurora', 'Staples.aurora.tds', '',
+        test3 = LogicalTestSet(TEST_DIRECTORY, 'logical.lod.aurora', 'Staples.aurora.tds', '', False,
                                'logicaltests/setup/lod/setup.*.bool_.xml', test_config.dsname)
 
         test4 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds',
-                                  'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
+                                  'string.char,dateparse', False, 'exprtests/standard/setup.*.txt', test_config.dsname)
 
-        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '',
+        test5 = ExpressionTestSet(TEST_DIRECTORY, 'expression.lod.aurora', 'cast_calcs.aurora.tds', '', False,
                                   'exprtests/lodcalcs/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3, test4, test5]
@@ -396,13 +396,13 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '',
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', False
                                'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark',
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', 'Filter.Trademark', False
                                'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds',
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', False
                                   'string.char,dateparse', 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
@@ -417,11 +417,11 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.aurora', 'cast_calcs.aurora.tds', '', False, 'logicaltests/setup/calcs/setup.*.bool_.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', '', 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.aurora', 'Staples.aurora.tds', '', False, 'logicaltests/setup/staples/setup.*.bool_.xml', test_config.dsname)
 
-        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', '', 'exprtests/standard/setup.*.txt', test_config.dsname)
+        test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.aurora', 'cast_calcs.aurora.tds', '', False, 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
 
@@ -435,15 +435,15 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.LoadTest(config, TEST_DIRECTORY)
         x = test_config.get_logical_tests() + test_config.get_expression_tests()
 
-        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '',
+        test1 = LogicalTestSet(TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds', '', False,
                                'logicaltests/setup/calcs/setup.*.bigquery.xml', test_config.dsname)
 
-        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '',
+        test2 = LogicalTestSet(TEST_DIRECTORY, 'logical.staples.bigquery', 'Staples.bigquery.tds', '', False,
                                'logicaltests/setup/staples/setup.*.bigquery.xml', test_config.dsname)
 
         test3 = ExpressionTestSet(TEST_DIRECTORY, 'expression.standard.bigquery', 'cast_calcs.bigquery.tds',
-                                  'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse',    # noqa: E50
-                                  'exprtests/standard/setup.*.txt', test_config.dsname)
+                                  'string.ascii,string.char,string.bind_trim,string.left.real,string.right.real,dateparse',    # noqa: E501
+                                  False, 'exprtests/standard/setup.*.txt', test_config.dsname)
 
         tests = [test1, test2, test3]
 

@@ -487,12 +487,12 @@ def run_tests_impl(tests, max_threads, args):
 
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        if test_set.smoke_test == True:
-            smoke_tests.append(runner)
-            smoke_test_queue.put(runner)
-        else:
-            all_work.append(runner)
-            test_queue.put(runner)
+    if test_set.smoke_test == True:
+        smoke_tests.append(runner)
+        smoke_test_queue.put(runner)
+    else:
+        all_work.append(runner)
+        test_queue.put(runner)
 
     logging.debug("smoke test queue size is: " + str(len(smoke_tests)))
     logging.debug("test queue size is: " + str(len(all_work)))
@@ -504,24 +504,24 @@ def run_tests_impl(tests, max_threads, args):
         print("No tests found. Check arguments.")
         sys.exit()
 
-    if smoke_tests:
-        print("Starting smoke tests. Creating", str(len(smoke_tests)), "worker threads.")
-        start_time = time.time()
-        for i in range(0, len(smoke_tests)):
-            smoke_worker = threading.Thread(target=do_test_queue_work, args=(1, smoke_test_queue))
-            smoke_worker.setDaemon(True)
-            smoke_worker.start()
+    # if smoke_tests:
+    #     print("Starting smoke tests. Creating", str(len(smoke_tests)), "worker threads.")
+    #     start_time = time.time()
+    #     for i in range(0, len(smoke_tests)):
+    #         smoke_worker = threading.Thread(target=do_test_queue_work, args=(1, smoke_test_queue))
+    #         smoke_worker.setDaemon(True)
+    #         smoke_worker.start()
 
-        smoke_test_queue.join()
+    #     smoke_test_queue.join()
 
-        failed_smoke_tests = 0
-        for test in smoke_tests:
-            failed_smoke_tests += test.failed_tests if test.failed_tests else 0
-        if failed_smoke_tests > 0:
-            print("Test run aborted due to smoke test errors.")
-            sys.exit(1)
+    #     failed_smoke_tests = 0
+    #     for test in smoke_tests:
+    #         failed_smoke_tests += test.failed_tests if test.failed_tests else 0
+    #     if failed_smoke_tests > 0:
+    #         print("Test run aborted due to smoke test errors. Please check tdvt_log_combined.txt for information.")
+    #         sys.exit(1)
 
-    print("Starting tests. Creating " + str(max_threads) + " worker threads.")
+    print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
     for i in range(0, max_threads):
         worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
