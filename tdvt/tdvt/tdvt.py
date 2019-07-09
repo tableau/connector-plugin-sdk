@@ -448,8 +448,6 @@ def create_parser():
 def init():
     parser = create_parser()
     args = parser.parse_args()
-    if (args.smoke_test is not None) and (args.ds is not None):
-        args.expression_only = 'ConnectionTest'
     # Create logger.
     logging.basicConfig(filename='tdvt_log_combined.txt', level=logging.DEBUG, filemode='w',
                         format='%(asctime)s %(message)s')
