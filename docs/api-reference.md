@@ -155,7 +155,10 @@ Invokes attribute matching code.
 
     String GetPlatform();
 
-Returns the platform information as a string.
+Returns the name of the os Tableau is running on. Possible values are:
+- win
+- mac
+- linux
 
 Example:
 
