@@ -118,7 +118,7 @@ You can write to the Tableau log file (tabprotosrv.txt). Writing to the log file
 
 Use care when logging so that you don’t expose sensitive information like passwords and other authentication information.
 
-    logging.log("Hi")
+    logging.Log("Hi")
 
 ---
 
@@ -135,6 +135,7 @@ _Attribute names_
 | attributePassword       | Connection attribute for the password            |
 | attributePort           | Connection attribute for the port                |
 | attributeServer         | Connection attribute for the server              |
+| attributeService        | Connection attribute for the service             |
 | attributeSSLCert        | Connection attribute for the SSL Certfile        |
 | attributeSSLMode        | Connection attribute for the SSL Mode            |
 | attributeUsername       | Connection attribute for the user name           |
@@ -144,7 +145,7 @@ _Attribute names_
 
 _Functions_
 
-    String formatKeyValuePair(String key, String value);
+    String FormatKeyValuePair(String key, String value);
 
 Format the attributes as 'key=value'. By default, some values are escaped or wrapped in curly braces to follow the ODBC standard, but you can also do it here if needed.
 
@@ -152,11 +153,23 @@ Format the attributes as 'key=value'. By default, some values are escaped or wra
 
 Invokes attribute matching code.
 
+    String GetPlatform();
+
+Returns the platform information as a string.
+
 Example:
 
-    formattedParams.push(connectionHelper.formatKeyValuePair(key, params[key]));
+    formattedParams.push(connectionHelper.FormatKeyValuePair(key, params[key]));
 
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
+
+_Throw Tableau Exception_
+
+Normally, throwing an exception in a JavaScript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
+
+    return connectionHelper.ThrowTableauException("Custom Error Message");
+
+The full error is always logged.
 
 ---
 
@@ -164,8 +177,15 @@ Example:
 
 _Functions_
 
-    String locateDriver (Object attr);
+    String LocateDriver (Object attr);
 
 Get the name of your chosen driver that was matched using the rules in your TDR file.
 
-    formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
+    String LocateDriverVersion(Object attr);
+
+Get the version number of the chosen driver as a string.
+
+Example:
+
+    formattedParams.push(connectionHelper.FormatKeyValuePair(driverLocator.keywordDriver, driverLocator.LocateDriver(attr)));
+
