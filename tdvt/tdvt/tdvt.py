@@ -440,7 +440,7 @@ def create_parser():
                         required=False)
     parser.add_argument('-f', dest='run_file', help='Json file containing failed tests to run.', required=False)
     parser.add_argument('--verify', dest='smoke_test',
-                        help='Verifies the connection to a data source against your cast_calcs.*.tds, as specified in the ConnectionTest section of your .ini file.',  # noqa: E501
+                        help='Verifies the connection to a data source against test in your .ini file with SmokeTest = True.',  # noqa: E501
                         required=False, default=None, const='', nargs='?')
     return parser
 
@@ -501,7 +501,7 @@ def run_tests_impl(tests, max_threads, args):
 
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        if test_set.smoke_test:
+        if test_set.smoke_test and test_set.test_is_enabled:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
         else:
