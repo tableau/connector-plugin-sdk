@@ -399,49 +399,26 @@ def usage_text():
 
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT Driver.', usage=usage_text())
-    parser.add_argument('--list', dest='list_ds', help='List datasource config.', required=False, default=None,
-                        const='', nargs='?')
-    parser.add_argument('--list_logical_configs', dest='list_logical_configs', help='List available logical configs.',
-                        required=False, default=None, const='', nargs='?')
-    parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.',
-                        required=False)
-    parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.',
-                        required=False)
+    parser.add_argument('--list', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--list_logical_configs', dest='list_logical_configs', help='List available logical configs.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
+    parser.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     parser.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
-    parser.add_argument('--run', '-r', dest='ds', help='Comma separated list of Datasource names to test or \'all\'.',
-                        required=False)
-    parser.add_argument('--logical', '-q', dest='logical_only',
-                        help='Only run logical tests whose config file name matches the supplied string, or all if blank.',  # noqa: E501
-                        required=False, default=None, const='*', nargs='?')
-    parser.add_argument('--expression', '-e', dest='expression_only',
-                        help='Only run expression tests whose config file name matches the suppled string, or all if blank.',  # noqa: E501
-                        required=False, default=None, const='*', nargs='?')
-    parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.',
-                        required=False)
+    parser.add_argument('--run', '-r', dest='ds', help='Comma separated list of Datasource names to test or \'all\'.', required=False)
+    parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
+    parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
+    parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
     parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
-    parser.add_argument('--exp', dest='expression_pattern',
-                        help='Only run expression tests whose name and path matches the supplied string. This is a glob pattern. Also set the tds-pattern to use when running the test.',  # noqa: E501
-                        required=False, default=None, const='', nargs='?')
-    parser.add_argument('--logp', dest='logical_pattern',
-                        help='Only run logical tests whose name and path matches the supplied string. this is a glob pattern. Also set the tds-pattern to use when running the test. Use a ? to replace the logical query config component of the test name.',  # noqa: E501
-                        required=False, default=None, const='', nargs='?')
-    parser.add_argument('--tdp', dest='tds_pattern',
-                        help='The datasource tds pattern to use when running the test. See exp and logp arguments.',
-                        required=False, default=None, const='', nargs='?')
-    parser.add_argument('--test-ex', dest='test_pattern_exclude',
-                        help='Exclude tests whose name matches the supplied string. This is a regular expression pattern. Can be used with exp and logp arguments. Also set the tds-pattern to use when running the test.',  # noqa: E501
-                        required=False, default=None, const='', nargs='?')
+    parser.add_argument('--exp', dest='expression_pattern', help='Only run expression tests whose name and path matches the supplied string. This is a glob pattern. Also set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--logp', dest='logical_pattern', help='Only run logical tests whose name and path matches the supplied string. this is a glob pattern. Also set the tds-pattern to use when running the test. Use a ? to replace the logical query config component of the test name.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--tdp', dest='tds_pattern', help='The datasource tds pattern to use when running the test. See exp and logp arguments.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--test-ex', dest='test_pattern_exclude', help='Exclude tests whose name matches the supplied string. This is a regular expression pattern. Can be used with exp and logp arguments. Also set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
     parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
-    parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true',
-                        help='Do not compare Tuples.', required=False)
-    parser.add_argument('--diff-test', '-dd', dest='diff',
-                        help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.',  # noqa: E501
-                        required=False)
+    parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
+    parser.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
     parser.add_argument('-f', dest='run_file', help='Json file containing failed tests to run.', required=False)
-    parser.add_argument('--verify', dest='smoke_test',
-                        help='Verifies the connection to a data source against test in your .ini file with SmokeTest = True.',  # noqa: E501
-                        required=False, default=None, const='', nargs='?')
+    parser.add_argument('--verify', dest='smoke_test', help='Verifies the connection to a data source against test in your .ini file with SmokeTest = True.', required=False, default=None, const='', nargs='?')
     return parser
 
 
