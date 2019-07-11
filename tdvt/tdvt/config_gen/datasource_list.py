@@ -148,8 +148,7 @@ def load_test(config, test_dir=get_root_dir()):
 
     KEY_EXCLUSIONS = 'Exclusions'
 
-    # Check the ini sections to make sure there is nothing that is unrecognized.
-    # This should be empty by the time we are done.
+    # Check the ini sections to make sure there is nothing that is unrecognized. This should be empty by the time we are done.
     all_ini_sections = config.sections()
 
     # This is required.
@@ -168,20 +167,17 @@ def load_test(config, test_dir=get_root_dir()):
 
             test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''),
                                          test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'),
-                                         test_dir, get_password_file(standard),
-                                         get_expected_message(standard), get_is_smoke_test(standard),
-                                         get_is_test_enabled(standard))
+                                         test_dir, get_password_file(standard), get_expected_message(standard),
+                                         get_is_smoke_test(standard), get_is_test_enabled(standard))
             test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''),
                                          test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'),
-                                         test_dir, get_password_file(standard),
-                                         get_expected_message(standard), get_is_smoke_test(standard),
-                                         get_is_test_enabled(standard))
+                                         test_dir, get_password_file(standard), get_expected_message(standard),
+                                         get_is_smoke_test(standard), get_is_test_enabled(standard))
             test_config.add_expression_test('expression.standard.', CALCS_TDS,
                                             standard.get('ExpressionExclusions_Standard', ''),
                                             'exprtests/standard/setup.*.txt',
-                                            test_dir, get_password_file(standard),
-                                            get_expected_message(standard), get_is_smoke_test(standard),
-                                            get_is_test_enabled(standard))
+                                            test_dir, get_password_file(standard), get_expected_message(standard),
+                                            get_is_smoke_test(standard), get_is_test_enabled(standard))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -249,8 +245,8 @@ def load_test(config, test_dir=get_root_dir()):
             median = config[median_test]
             all_ini_sections.remove(median_test)
             test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''),
-                                            'exprtests/median', test_dir,
-                                            get_password_file(median), get_expected_message(median), get_is_smoke_test(median),
+                                            'exprtests/median', test_dir, get_password_file(median),
+                                            get_expected_message(median), get_is_smoke_test(median),
                                             get_is_test_enabled(median))
         except KeyError as e:
             logging.debug(e)
@@ -263,8 +259,8 @@ def load_test(config, test_dir=get_root_dir()):
             all_ini_sections.remove(percentile_test)
             test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''),
                                             'exprtests/percentile', test_dir,
-                                            get_password_file(percentile), get_expected_message(percentile), get_is_smoke_test(percentile),
-                                            get_is_test_enabled(percentile))
+                                            get_password_file(percentile), get_expected_message(percentile),
+                                            get_is_smoke_test(percentile), get_is_test_enabled(percentile))
         except KeyError as e:
             logging.debug(e)
             pass
@@ -297,8 +293,8 @@ def load_test(config, test_dir=get_root_dir()):
                 all_ini_sections.remove(section)
                 test_config.add_expression_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                                 sect.get('TestPath', ''), test_dir,
-                                                get_password_file(sect), get_expected_message(sect), get_is_smoke_test(sect),
-                                                get_is_test_enabled(sect))
+                                                get_password_file(sect), get_expected_message(sect),
+                                                get_is_smoke_test(sect), get_is_test_enabled(sect))
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -309,8 +305,8 @@ def load_test(config, test_dir=get_root_dir()):
                 all_ini_sections.remove(section)
                 test_config.add_logical_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                              sect.get('TestPath', ''), test_dir,
-                                             get_password_file(sect), get_expected_message(sect), get_is_smoke_test(sect),
-                                             get_is_test_enabled(sect))
+                                             get_password_file(sect), get_expected_message(sect),
+                                             get_is_smoke_test(sect), get_is_test_enabled(sect))
             except KeyError as e:
                 logging.debug(e)
                 pass
