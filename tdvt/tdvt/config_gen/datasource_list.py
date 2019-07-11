@@ -12,9 +12,7 @@ from .gentests import list_configs, list_config
 from ..resources import *
 from .test_config import TestConfig, build_config_name, build_tds_name
 
-RUN_IN_INCORRECT_DIRECTORY_MSG = """
-    \nNo data sources found in this directory. To run tests, the base directory must contain a valid test configuration.
-    """
+RUN_IN_INCORRECT_DIRECTORY_MSG = "\nNo data sources found in this directory. To run tests, the base directory must contain a valid test configuration."
 
 
 def print_ds(ds, ds_reg):
