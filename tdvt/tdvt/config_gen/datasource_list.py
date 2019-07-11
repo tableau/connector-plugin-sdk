@@ -109,10 +109,6 @@ def load_test(config, test_dir=get_root_dir()):
     ExpressionExclusions_Calcs =
 
     [StaplesDataTest]
-    SmokeTest = True
-
-    [CalcsDataTest]
-    SmokeTest = True
 
     [UnionTest]
 
@@ -126,6 +122,10 @@ def load_test(config, test_dir=get_root_dir()):
     Exclusions = string.ascii
     TestPath = exprtests/standard/
 
+    [NewExpressionTest2]
+    SmokeTest = True
+    Enabled = False
+
     [LogicalConfig]
     Name = mydb_config
     key = value
@@ -137,7 +137,6 @@ def load_test(config, test_dir=get_root_dir()):
     standard_tests = 'StandardTests'
     lod_tests = 'LODTests'
     staples_data_test = 'StaplesDataTest'
-    calcs_data_test = 'CalcsDataTest'
     new_expression_test = 'NewExpressionTest'
     new_logical_test = 'NewLogicalTest'
     union_test = 'UnionTest'
@@ -213,18 +212,6 @@ def load_test(config, test_dir=get_root_dir()):
                                             test_dir, get_password_file(staples_data),
                                             get_expected_message(staples_data), get_is_smoke_test(staples_data),
                                             get_is_test_enabled(staples_data))
-        except KeyError as e:
-            logging.debug(e)
-            pass
-
-    if calcs_data_test in config.sections():
-        try:
-            calcs_data = config[calcs_data_test]
-            all_ini_sections.remove(calcs_data_test)
-            test_config.add_expression_test('expression.calcs.', CALCS_TDS, '', 'exprtests/calcs/setup.*.txt',
-                                            test_dir, get_password_file(calcs_data),
-                                            get_expected_message(calcs_data), get_is_smoke_test(calcs_data),
-                                            get_is_test_enabled(calcs_data))
         except KeyError as e:
             logging.debug(e)
             pass
