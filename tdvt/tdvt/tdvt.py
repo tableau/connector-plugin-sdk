@@ -481,9 +481,10 @@ def run_tests_impl(tests, max_threads, args):
         if test_set.smoke_test and test_set.test_is_enabled:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
-        else:
+        elif test_set.test_is_enabled:
             all_work.append(runner)
-            test_queue.put(runner)
+        else:
+            pass
 
     logging.debug("smoke test queue size is: " + str(len(smoke_tests)))
     logging.debug("test queue size is: " + str(len(all_work)))
@@ -497,12 +498,16 @@ def run_tests_impl(tests, max_threads, args):
         print("No tests found. Check arguments.")
         sys.exit()
 
-    if smoke_tests:
-        print("Starting smoke tests. Creating", str(len(smoke_tests)), "worker threads.")
+    failing_ds = set()
 
-        failed_smoke_tests, total_smoke_tests = test_runner(smoke_tests, smoke_test_queue, len(smoke_tests))
+    if smoke_tests:
+        smoke_test_threads = min(len(smoke_tests), max_threads)
+        print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.")
+
+        failed_smoke_tests, total_smoke_tests = test_runner(smoke_tests, smoke_test_queue, smoke_test_threads)
 
         if failed_smoke_tests > 0:
+            failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
             if args.smoke_test is not None:
                 sys.exit(1)
@@ -510,9 +515,18 @@ def run_tests_impl(tests, max_threads, args):
         if args.smoke_test is not None:
             sys.exit(0)
 
+    final_work = []
+
+    for item in all_work:
+        if item.test_set.ds_name in failing_ds:
+            pass
+        else:
+            final_work.append(item)
+            test_queue.put(item)
+
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
-    failed_tests, total_tests = test_runner(all_work, test_queue, max_threads)
+    failed_tests, total_tests = test_runner(final_work, test_queue, max_threads)
 
     print('\n')
     print("Total time: " + str(time.time() - start_time))

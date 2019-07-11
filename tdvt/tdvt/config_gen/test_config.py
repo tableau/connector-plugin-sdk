@@ -27,8 +27,9 @@ class TestSet(object):
     """
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
+    def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
                  expected_message, smoke_test=False, test_is_enabled=True):
+        self.ds_name = ds_name
         self.suite_name = suite_name
         self.config_name = config_name
         self.tds_name = tds_name
@@ -155,18 +156,18 @@ class FileTestSet(TestSet):
     """Used to run previously failed tests. Supports appending test files rather than using a search pattern like the
        other test sets."""
 
-    def __init__(self, root_dir, config_name, tds_name, logical, suite, password_file='',
+    def __init__(self, ds_name, root_dir, config_name, tds_name, logical, suite, password_file='',
                  expected_message='', smoke_test=False, test_is_enabled=True):
         self.test_paths = []
         self.logical = logical
         if logical:
-            self.delegator = LogicalTestSet(root_dir, config_name, tds_name, '', '', suite, password_file,
+            self.delegator = LogicalTestSet(ds_name, root_dir, config_name, tds_name, '', '', suite, password_file,
                                             expected_message, smoke_test, test_is_enabled)
         else:
-            self.delegator = ExpressionTestSet(root_dir, config_name, tds_name, '', '', suite, password_file,
+            self.delegator = ExpressionTestSet(ds_name, root_dir, config_name, tds_name, '', '', suite, password_file,
                                                expected_message, smoke_test, test_is_enabled)
-        super(FileTestSet, self).__init__(root_dir, config_name, tds_name, '', '', logical, suite, password_file,
-                                          expected_message, smoke_test, test_is_enabled)
+        super(FileTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, '', '', logical, suite,
+                                          password_file, expected_message, smoke_test, test_is_enabled)
 
     def get_expected_output_file_path(self, test_file, output_dir):
         return self.delegator.get_expected_output_file_path(test_file, output_dir)
@@ -196,9 +197,9 @@ class FileTestSet(TestSet):
         return sorted(tests_to_run, key = lambda x: x.test_path)
 
 class LogicalTestSet(TestSet):
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
+    def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
                  expected_message='', smoke_test=False, test_is_enabled=True):
-        super(LogicalTestSet, self).__init__(root_dir, config_name, tds_name, exclusions, test_pattern, True, suite,
+        super(LogicalTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, True, suite,
                                              password_file, expected_message, smoke_test, test_is_enabled)
 
     def get_expected_output_file_path(self, test_file, output_dir):
@@ -210,9 +211,9 @@ class LogicalTestSet(TestSet):
         return actual_output_filepath, base_filepath
 
 class ExpressionTestSet(TestSet):
-    def __init__(self, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
+    def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
                  expected_message='', smoke_test=False, test_is_enabled=True):
-        super(ExpressionTestSet, self).__init__(root_dir, config_name, tds_name,
+        super(ExpressionTestSet, self).__init__(ds_name, root_dir, config_name, tds_name,
                                                 exclusions, test_pattern, False, suite, password_file, expected_message,
                                                 smoke_test, test_is_enabled)
 
@@ -223,18 +224,18 @@ class ExpressionTestSet(TestSet):
         return existing_output_filepath
 
 class SingleLogicalTestSet(LogicalTestSet):
-    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
+    def __init__(self, ds_name, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
                  expected_message='', smoke_test=False, test_is_enabled=True):
-        super(SingleLogicalTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
+        super(SingleLogicalTestSet, self).__init__(ds_name, root_dir, 'temp' + ds_info.dsname, tds_pattern,
                                                    exclude_pattern, test_pattern, ds_info.dsname,
                                                    password_file, expected_message, smoke_test, test_is_enabled)
         self.test_pattern = self.test_pattern.replace('?', ds_info.logical_config_name)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
 class SingleExpressionTestSet(ExpressionTestSet):
-    def __init__(self, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
+    def __init__(self, ds_name, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
                  expected_message='', smoke_test=False, test_is_enabled=True):
-        super(SingleExpressionTestSet, self).__init__(root_dir, 'temp' + ds_info.dsname, tds_pattern,
+        super(SingleExpressionTestSet, self).__init__(ds_name, root_dir, 'temp' + ds_info.dsname, tds_pattern,
                                                       exclude_pattern, test_pattern, ds_info.dsname,
                                                       password_file, expected_message, smoke_test, test_is_enabled)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
@@ -283,7 +284,7 @@ class TestConfig(object):
 
     def add_logical_test(self, base_config_name, tds_name, exclusions, test_path, test_dir, password_file,
                          expected_message, smoke_test, test_is_enabled):
-        new_test = LogicalTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name),
+        new_test = LogicalTestSet(self.dsname, test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name),
                                   exclusions, test_path, self.dsname, password_file, expected_message, smoke_test,
                                   test_is_enabled)
         self.add_logical_testset(new_test)
@@ -293,7 +294,7 @@ class TestConfig(object):
 
     def add_expression_test(self, base_config_name, tds_name, exclusions, test_path, test_dir, password_file,
                             expected_message, smoke_test, test_is_enabled):
-        new_test = ExpressionTestSet(test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name),
+        new_test = ExpressionTestSet(self.dsname, test_dir, self.get_config_name(base_config_name), self.get_tds_name(tds_name),
                                      exclusions, test_path, self.dsname, password_file, expected_message, smoke_test,
                                      test_is_enabled)
         self.add_expression_testset(new_test)
