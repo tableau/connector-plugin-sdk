@@ -526,10 +526,10 @@ def run_tests_impl(tests, max_threads, args):
         failed_smoke_tests, total_smoke_tests = test_runner(smoke_tests, smoke_test_queue, len(smoke_tests))
 
         if failed_smoke_tests > 0:
-            print("Test run aborted due to smoke test errors. {} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
-            sys.exit(1)
+            print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
+            if args.smoke_test is not None:
+                sys.exit(1)
 
-        print("{} smoke test(s) passed.".format(total_smoke_tests))
         if args.smoke_test is not None:
             sys.exit(0)
 
