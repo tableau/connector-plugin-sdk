@@ -2,15 +2,13 @@ import configparser
 import sys
 
 from .resources import *
-
 tab_cli_exe = ''
-
 
 def configure_tabquery_path():
     """Setup the tabquery path from ini settings."""
     global tab_cli_exe
     config = configparser.ConfigParser()
-
+    
     tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
     logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
     config.read(tdvt_cfg)
@@ -23,7 +21,6 @@ def configure_tabquery_path():
         tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
     logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
 
-
 def get_max_process_level_of_parallelization(desired_threads):
     if sys.platform.startswith("darwin") and 'tabquerytool' in tab_cli_exe:
         return 1
@@ -32,7 +29,6 @@ def get_max_process_level_of_parallelization(desired_threads):
 
 def build_tabquery_command_line(work):
     try:
-        """This is run only as part of unit tests. Regular TDVT runs continue in the except block."""
         sys.path.insert(0, get_extensions_dir())
         from extend_tabquery import TabqueryCommandLineExtension
         sys.path.pop(0)
@@ -43,7 +39,6 @@ def build_tabquery_command_line(work):
 
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
-
 
 class TabqueryCommandLine(object):
     def extend_command_line(self, cmdline, work):
@@ -69,7 +64,7 @@ class TabqueryCommandLine(object):
         if work.test_config.output_dir:
             cmdline.extend(["--output-dir", work.test_config.output_dir])
 
-        # Save all the log files from the core Tableau process.
+        #Save all the log files from the core Tableau process.
         cmdline.extend(["-DLogDir=" + work.test_config.log_dir])
         cmdline.extend(["-DOverride=ProtocolServerNewLog"])
 
@@ -77,14 +72,13 @@ class TabqueryCommandLine(object):
             for override in work.test_config.d_override.split(' '):
                 cmdline.extend([override])
 
-        # Disable constant expression folding. This will bypass the VizEngine for certain simple calculations.
-        # This way we run a full database query that tests what you would expect.
+        #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
+        #that tests what you would expect.
         cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
         return cmdline
-
 
 def tabquerycli_exists():
     global tab_cli_exe
@@ -94,3 +88,5 @@ def tabquerycli_exists():
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
+
+
