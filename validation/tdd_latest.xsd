@@ -1,10 +1,37 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!--
+  This file defines types for the Format*Attribute methods in XMLFormatter, but only if those
+  types have meaningful differences from XSD's built-in types. For example, there is no
+  Boolean-ST in this file, because xs:boolean validates the same encodings we use. So if you see
+  XMLFormatter::FormatBooleanAttribute, validate its output with xs:boolean.
+
+  In many places we pass non-int64 variables to FormatInt64Attribute. In these cases, validate
+  based on the type of the variable, don't just blindly use xs:long. For example, if we pass an
+  unsigned 32-bit integer to FormatInt64Attribute, validate the output with xs:unsignedInt.
+  -->
+  <!--
+  The call tree starting at FormatDouble concludes with the following code:
+
+  `````
+  char fmt[32];
+  snprintf(fmt, sizeof(fmt), "%%.%d%c", precision, format);
+
+  char buf[1024];
+  const int len = snprintf(buf, sizeof(buf), fmt, n);
+  `````
+
+  Where buf is the output, precision is 17, and format is 'g'. This code can return the strings
+  "nan", "inf", and "-inf" in addition to numeric formats. See
+  http://en.cppreference.com/w/c/io/fprintf for details on snprintf.
+  -->
   <xs:simpleType name="Double-ST">
     <xs:union memberTypes="xs:double XML-RealSpecial-ST"/>
   </xs:simpleType>
+  <!-- Same as FormatDoubleAttribute, but with precision=6 -->
   <xs:simpleType name="Float-ST">
     <xs:union memberTypes="xs:float XML-RealSpecial-ST"/>
   </xs:simpleType>
+  <!-- Local utility type -->
   <xs:simpleType name="XML-RealSpecial-ST">
     <xs:restriction base="xs:string">
       <xs:enumeration value="nan"/>
@@ -12,6 +39,11 @@
       <xs:enumeration value="-inf"/>
     </xs:restriction>
   </xs:simpleType>
+  <!--
+This is output by VersionNumber::GetAsString(). The code allows for different seperator
+charcaters to be used beyond the . and -, but at present, those characters are hard-coded
+as passed-in parameters.
+-->
   <xs:simpleType name="VersionNumber-ST">
     <xs:restriction base="xs:string">
       <xs:pattern value="(\d+)((\.)(\d+))*((-)(\d+))*"/>
@@ -111,7 +143,7 @@
       <xs:element maxOccurs="unbounded" name="formula" type="Formula-CT"/>
       <xs:group ref="Function-G"/>
     </xs:sequence>
-    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="DateFunction-ST" use="required"/>
     <xs:attribute name="return-type" type="ArgumentType-ST" use="required"/>
   </xs:complexType>
   <xs:complexType name="NativeSplitFunction-CT">
