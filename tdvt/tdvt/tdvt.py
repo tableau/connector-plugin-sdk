@@ -472,8 +472,10 @@ def test_runner(all_tests, test_queue, max_threads):
 def run_tests_impl(tests, max_threads, args):
     smoke_test_queue = queue.Queue()
     smoke_tests = []
+    disabled_smoke_tests = []
     test_queue = queue.Queue()
     all_work = []
+    disabled_tests = []
     lock = threading.Lock()
 
     for test_set, test_config in tests:
@@ -481,10 +483,10 @@ def run_tests_impl(tests, max_threads, args):
         if test_set.smoke_test and test_set.test_is_enabled:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
-        elif test_set.test_is_enabled:
+        elif test_set.test_is_enabled and not test_set.smoke_test:
             all_work.append(runner)
         else:
-            pass
+            disabled_smoke_tests.append(runner)
 
     logging.debug("smoke test queue size is: " + str(len(smoke_tests)))
     logging.debug("test queue size is: " + str(len(all_work)))
