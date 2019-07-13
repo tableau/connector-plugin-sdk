@@ -14,6 +14,7 @@ import glob
 import json
 import logging
 import os
+import pathlib
 import queue
 import shutil
 import subprocess
@@ -99,7 +100,11 @@ class TestRunner():
         actual_files = glob.glob( glob_path )
         with ZipFile(dst, mode) as myzip:
             for actual in actual_files:
-                myzip.write( actual )
+                path = pathlib.PurePath(actual)
+                parent_folder = path.parent.name
+                file_to_be_zipped = path.name
+                inner_output = os.path.join(parent_folder, file_to_be_zipped)
+                myzip.write(actual, inner_output)
 
     def copy_output_files(self):
         TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir, TestOutputFiles.output_csv, True)
