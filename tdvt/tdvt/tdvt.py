@@ -140,7 +140,8 @@ class TestRunner():
     def copy_files_and_cleanup(self):
         left_temp_dir = False
         try:
-            self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, 'actual.*', self.test_config.config_file)
+            self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, 'actual.*',
+                                   self.test_config.config_file)
             self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, '*/all_logs.zip')
             self.copy_output_files()
             self.copy_test_result_file()
