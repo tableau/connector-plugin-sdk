@@ -171,17 +171,6 @@ class BatchQueueWork(object):
 
         total_time_ms = (time.perf_counter() - start_time) * 1000
 
-        # Copy log files to a zip file for later optional use.
-        self.log_zip_file = os.path.join(self.test_config.log_dir, 'all_logs.zip')
-        logging.debug(self.get_thread_msg() + "Creating log zip file: {0}".format(self.log_zip_file))
-        mode = 'w' if not os.path.isfile(self.log_zip_file) else 'a'
-        with zipfile.ZipFile(self.log_zip_file, mode, zipfile.ZIP_DEFLATED) as myzip:
-            log_files = glob.glob(os.path.join(self.test_config.log_dir, 'log*.txt'))
-            log_files.extend(glob.glob(os.path.join(self.test_config.log_dir, 'tabprotosrv*.txt')))
-            log_files.extend(glob.glob(os.path.join(self.test_config.log_dir, 'crashdumps/*')))
-            for log in log_files:
-                myzip.write(log, os.path.basename(log))
-
         logging.debug(self.get_thread_msg() + "Command line output:" + str(self.cmd_output))
         return total_time_ms
 

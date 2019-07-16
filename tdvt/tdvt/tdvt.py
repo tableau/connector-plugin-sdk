@@ -14,6 +14,7 @@ import glob
 import json
 import logging
 import os
+import pathlib
 import queue
 import shutil
 import subprocess
@@ -92,14 +93,23 @@ class TestRunner():
         self.temp_dir = make_temp_dir([self.test_config.suite_name, str(thread_id)])
         self.test_config.output_dir = self.temp_dir
 
-    def copy_files_to_zip(self, dst_file_name, src_dir, src_pattern):
+    def copy_files_to_zip(self, dst_file_name, src_dir, is_logs):
         dst = os.path.join(os.getcwd(), dst_file_name)
         mode = 'w' if not os.path.isfile(dst) else 'a'
-        glob_path = os.path.join(src_dir, src_pattern)
-        actual_files = glob.glob( glob_path )
+        optional_dir_name = self.test_config.config_file.replace('.', '_')
+        if is_logs is True:
+            log_dir = os.path.join(src_dir, optional_dir_name)
+            glob_path = glob.glob(os.path.join(log_dir, 'log*.txt'))
+            glob_path.extend(glob.glob(os.path.join(log_dir, 'tabprotosrv*.txt')))
+            glob_path.extend(glob.glob(os.path.join(log_dir, 'crashdumps/*')))
+        else:
+            glob_path = glob.glob(os.path.join(src_dir, 'actual.*'))
         with ZipFile(dst, mode) as myzip:
-            for actual in actual_files:
-                myzip.write( actual )
+            for actual in glob_path:
+                path = pathlib.PurePath(actual)
+                file_to_be_zipped = path.name
+                inner_output = os.path.join(optional_dir_name, file_to_be_zipped)
+                myzip.write(actual, inner_output)
 
     def copy_output_files(self):
         TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir, TestOutputFiles.output_csv, True)
@@ -132,8 +142,8 @@ class TestRunner():
     def copy_files_and_cleanup(self):
         left_temp_dir = False
         try:
-            self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, 'actual.*')
-            self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, '*/all_logs.zip')
+            self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, is_logs=False)
+            self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, is_logs=True)
             self.copy_output_files()
             self.copy_test_result_file()
         except Exception as e:
