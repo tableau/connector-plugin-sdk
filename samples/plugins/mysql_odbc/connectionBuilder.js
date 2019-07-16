@@ -17,12 +17,6 @@
 
     params["OPTION"] = "1048576"
 
-    if (parseFloat(driverLocator.LocateDriverVersion(attr)) >= 8.0)
-    {
-        params["default_auth"] = "mysql_native_password";
-    }
-
-
     var formattedParams = [];
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
