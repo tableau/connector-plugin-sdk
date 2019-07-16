@@ -1,0 +1,10 @@
+<connection-dialog class='mysql_odbc'>
+  <connection-config>
+    <authentication-mode value='Basic' />
+    <authentication-options>
+      <option name="UsernameAndPassword" default="true" />
+    </authentication-options>
+    <port-prompt value="Port: " default="3306" />
+    <show-ssl-checkbox value="true" />
+  </connection-config>
+</connection-dialog>

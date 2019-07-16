@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <connector-plugin class='mysql_odbc' superclass='odbc' plugin-version='0.0.0' name='MySQL ODBC' version='18.1'>
-  <connection-customization class="mysql_odbc" enabled="true" version="10.0">
+  <connection-customization class="mysql2" enabled="true" version="10.0">
     <vendor name="vendor"/>
     <driver name="driver"/>
     <customizations>
+      <customization name="CAP_QUERY_HAVING_REQUIRES_GROUP_BY" value="yes"/>
     </customizations>
   </connection-customization>
   <connection-dialog file='connection-dialog.tcd'/>
