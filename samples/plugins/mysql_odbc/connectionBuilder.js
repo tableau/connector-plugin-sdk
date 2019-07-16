@@ -3,7 +3,7 @@
     var params = {};
 
     params["SERVER"] = attr[connectionHelper.attributeServer];
-    params["PORT"] = attr["port"];
+    params["PORT"] = attr[connectionHelper.attributePort];
     params["UID"] = attr[connectionHelper.attributeUsername];
     params["PWD"] = attr[connectionHelper.attributePassword];
     params["DATABASE"] = attr[connectionHelper.attributeDatabase];
