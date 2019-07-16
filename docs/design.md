@@ -81,6 +81,8 @@ Common capabilities and how they are used are described in [Capabilities]({{ sit
 ## Database Capability Considerations
 ### Subqueries and Temp Tables
 
+**Your database should support temporary tables and subqueries for the best user experience, but at least one of those is required to support complete integration with Tableau.**
+
 If your database supports temp tables it is recommended that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities). The connector will perform a simple check at connection time if the temp table capabilities are set in order to confirm that the user has the ability to create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries will need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries then Tableau will throw an error and will be unable to proceed.
 
 A common example is filtering the top 3 regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to Rows, then drag it again to Filters. Click the ‘top’ tab and pick [Sales Total] aggregated by sum.
