@@ -7,15 +7,12 @@
     <connection-normalizer>
       <required-attributes>
         <attribute-list>
-          <attr>class</attr>
           <attr>server</attr>
           <attr>dbname</attr>
           <attr>username</attr>
           <attr>password</attr>
           <attr>port</attr>
-          <attr>expected-driver-version</attr>
           <attr>odbc-connect-string-extras</attr>
-          <attr>:protocol-customizations</attr>
           <attr>source-charset</attr>
           <attr>sslmode</attr>
           <attr>sslcert</attr>
