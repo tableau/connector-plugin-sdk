@@ -9,12 +9,6 @@
     params["DATABASE"] = attr[connectionHelper.attributeDatabase];
     params["INITSTMT"] = attr[connectionHelper.attributeInitialSQL];
 
-    if (attr["sslmode"] == "require" && attr["sslfile"] != undefined && attr["sslfile"] != "")
-    {
-        params["SSLCA"] = attr["sslfile"];
-        params["SSLMODE"] = "required";
-    }
-
     params["OPTION"] = "1048576"
 
     var formattedParams = [];

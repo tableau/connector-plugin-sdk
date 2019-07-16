@@ -2,8 +2,5 @@
   <connection-config>
     <authentication-mode value='BasicNoValidateFields' />
     <port-prompt value="Port: " default="3306" />
-    <show-import-ssl-cert-label value="true" />
-    <show-ssl-checkbox value="true" />
-    <ssl-requires-certificate value="true" />
   </connection-config>
 </connection-dialog>
