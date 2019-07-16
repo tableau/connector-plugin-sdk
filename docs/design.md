@@ -66,9 +66,7 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - SnowflakeDialect
 - SybaseASEDialect
 - SybaseIQ151Dialect
-- SybaseIQDialect
 - Teradata1410Dialect
-- TeradataDialect
 - VerticaDialect
 
 ### Should I create a dialect definition file?
@@ -79,3 +77,11 @@ You don’t need a dialect definition file if your connector uses the same SQL d
 Tableau capabilities are Boolean settings you can use to tune many aspects of your connector behavior.
 Capabilities can influence the types of queries that Tableau generates, how metadata is read, how Tableau binds to the drivers result set, and many other aspects.
 Common capabilities and how they are used are described in [Capabilities]({{ site.baseurl }}/docs/capabilities).
+
+## Database Capability Considerations
+### Subqueries and Temp Tables
+
+If your database supports temp tables it is recommended that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities). The connector will perform a simple check at connection time if the temp table capabilities are set in order to confirm that the user has the ability to create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries will need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries then Tableau will throw an error and will be unable to proceed.
+
+A common example is filtering the top 3 regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to Rows, then drag it again to Filters. Click the ‘top’ tab and pick [Sales Total] aggregated by sum.
+
