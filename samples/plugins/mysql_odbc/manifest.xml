@@ -12,6 +12,6 @@
       <customization name="CAP_QUERY_HAVING_REQUIRES_GROUP_BY" value="yes"/>
     </customizations>
   </connection-customization>
-  <connection-dialog file='connection-dialog.tcd'/>
+  <connection-dialog file='connectionDialog.tcd'/>
   <connection-resolver file="connectionResolver.tdr"/>
 </connector-plugin>
