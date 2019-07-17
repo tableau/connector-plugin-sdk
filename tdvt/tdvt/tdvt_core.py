@@ -402,7 +402,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     try:
         actual_xml = parse(actual_file).getroot()
         result.add_test_results(actual_xml, actual_file)
-    except ElementTree.ParseError as e:
+    except ParseError as e:
         logging.debug(work.get_thread_msg() + "Exception parsing actual file: " + actual_file + " exception: " + str(e))
         return result
 
