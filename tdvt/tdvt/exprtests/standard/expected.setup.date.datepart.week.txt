@@ -91,28 +91,6 @@
   <test name='DATEPART(&apos;week&apos;, [datetime0])'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3904538922)(0)]</column>
-      </schema>
-      <tuple>
-        <value>28</value>
-      </tuple>
-      <tuple>
-        <value>29</value>
-      </tuple>
-      <tuple>
-        <value>30</value>
-      </tuple>
-      <tuple>
-        <value>31</value>
-      </tuple>
-      <tuple>
-        <value>32</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='DATEPART(&apos;week&apos;, [datetime0])'>
-    <table>
-      <schema>
         <column>[cast_calcs.postgres91].[TEMP(Test)(3904538922)(1)]</column>
       </schema>
       <tuple>
