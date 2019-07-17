@@ -111,6 +111,19 @@ class BatchQueueWork(object):
         result.error_status = TestErrorMissingActual()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
+    def handle_skipped_test_failure(self, test_result_file):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorSkippedTest()
+        self.add_test_result_error(test_result_file.test_file, result, False)
+
+    def handle_disabled_test_failue(self, test_result_file):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorDisabledTest()
+        self.add_test_result_error(test_result_file.test_file, result, False)
+
+
     def is_timeout(self):
         return isinstance(self.error_state, TestErrorTimeout)
 
