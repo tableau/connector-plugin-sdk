@@ -1,0 +1,6 @@
+<connection-dialog class='mysql_odbc_sample'>
+  <connection-config>
+    <authentication-mode value='BasicNoValidateFields' />
+    <port-prompt value="Port: " default="3306" />
+  </connection-config>
+</connection-dialog>
