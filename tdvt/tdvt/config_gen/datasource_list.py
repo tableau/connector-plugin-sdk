@@ -168,16 +168,16 @@ def load_test(config, test_dir=get_root_dir()):
             test_config.add_logical_test('logical.calcs.', CALCS_TDS, standard.get('LogicalExclusions_Calcs', ''),
                                          test_config.get_logical_test_path('logicaltests/setup/calcs/setup.*.'),
                                          test_dir, get_password_file(standard), get_expected_message(standard),
-                                         get_is_smoke_test(standard), get_is_test_enabled(standard))
+                                         get_is_smoke_test(standard), get_is_test_enabled(standard), False)
             test_config.add_logical_test('logical.staples.', STAPLES_TDS, standard.get('LogicalExclusions_Staples', ''),
                                          test_config.get_logical_test_path('logicaltests/setup/staples/setup.*.'),
                                          test_dir, get_password_file(standard), get_expected_message(standard),
-                                         get_is_smoke_test(standard), get_is_test_enabled(standard))
+                                         get_is_smoke_test(standard), get_is_test_enabled(standard), False)
             test_config.add_expression_test('expression.standard.', CALCS_TDS,
                                             standard.get('ExpressionExclusions_Standard', ''),
                                             'exprtests/standard/setup.*.txt',
                                             test_dir, get_password_file(standard), get_expected_message(standard),
-                                            get_is_smoke_test(standard), get_is_test_enabled(standard))
+                                            get_is_smoke_test(standard), get_is_test_enabled(standard), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -190,11 +190,11 @@ def load_test(config, test_dir=get_root_dir()):
             test_config.add_logical_test('logical.lod.', STAPLES_TDS, lod.get('LogicalExclusions_Staples', ''),
                                          test_config.get_logical_test_path('logicaltests/setup/lod/setup.*.'), test_dir,
                                          get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
-                                         get_is_test_enabled(lod))
+                                         get_is_test_enabled(lod), False)
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''),
                                             'exprtests/lodcalcs/setup.*.txt', test_dir,
                                             get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
-                                            get_is_test_enabled(lod))
+                                            get_is_test_enabled(lod), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -207,7 +207,7 @@ def load_test(config, test_dir=get_root_dir()):
             test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt',
                                             test_dir, get_password_file(staples_data),
                                             get_expected_message(staples_data), get_is_smoke_test(staples_data),
-                                            get_is_test_enabled(staples_data))
+                                            get_is_test_enabled(staples_data), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -221,7 +221,7 @@ def load_test(config, test_dir=get_root_dir()):
                                          test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'),
                                          test_dir, get_password_file(union),
                                          get_expected_message(union), get_is_smoke_test(union),
-                                         get_is_test_enabled(union))
+                                         get_is_test_enabled(union), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -234,7 +234,7 @@ def load_test(config, test_dir=get_root_dir()):
             test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''),
                                             'exprtests/regexcalcs', test_dir, get_password_file(regex),
                                             get_expected_message(regex), get_is_smoke_test(regex),
-                                            get_is_test_enabled(regex))
+                                            get_is_test_enabled(regex), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -247,7 +247,7 @@ def load_test(config, test_dir=get_root_dir()):
             test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''),
                                             'exprtests/median', test_dir, get_password_file(median),
                                             get_expected_message(median), get_is_smoke_test(median),
-                                            get_is_test_enabled(median))
+                                            get_is_test_enabled(median), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -260,7 +260,7 @@ def load_test(config, test_dir=get_root_dir()):
             test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''),
                                             'exprtests/percentile', test_dir,
                                             get_password_file(percentile), get_expected_message(percentile),
-                                            get_is_smoke_test(percentile), get_is_test_enabled(percentile))
+                                            get_is_smoke_test(percentile), get_is_test_enabled(percentile), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -294,7 +294,7 @@ def load_test(config, test_dir=get_root_dir()):
                 test_config.add_expression_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                                 sect.get('TestPath', ''), test_dir,
                                                 get_password_file(sect), get_expected_message(sect),
-                                                get_is_smoke_test(sect), get_is_test_enabled(sect))
+                                                get_is_smoke_test(sect), get_is_test_enabled(sect), False)
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -306,7 +306,7 @@ def load_test(config, test_dir=get_root_dir()):
                 test_config.add_logical_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
                                              sect.get('TestPath', ''), test_dir,
                                              get_password_file(sect), get_expected_message(sect),
-                                             get_is_smoke_test(sect), get_is_test_enabled(sect))
+                                             get_is_smoke_test(sect), get_is_test_enabled(sect), False)
             except KeyError as e:
                 logging.debug(e)
                 pass

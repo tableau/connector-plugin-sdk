@@ -484,18 +484,15 @@ def run_tests_impl(tests, max_threads, args):
     smoke_tests = []
     test_queue = queue.Queue()
     all_work = []
-    disabled_tests = []
     lock = threading.Lock()
 
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        if test_set.smoke_test and test_set.test_is_enabled:
+        if test_set.smoke_test:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
-        elif test_set.test_is_enabled and not test_set.smoke_test:
-            all_work.append(runner)
         else:
-            disabled_tests.append(runner)
+            all_work.append(runner)
 
     logging.debug("smoke test queue size is: " + str(len(smoke_tests)))
     logging.debug("test queue size is: " + str(len(all_work)))
@@ -510,6 +507,8 @@ def run_tests_impl(tests, max_threads, args):
         sys.exit()
 
     failing_ds = set()
+    failed_smoke_tests = 0
+    total_smoke_tests = 0
 
     if smoke_tests:
         smoke_test_threads = min(len(smoke_tests), max_threads)
@@ -529,25 +528,22 @@ def run_tests_impl(tests, max_threads, args):
             sys.exit(0)
 
     if failing_ds:
-        print("Tests for the following data source(s) will not be run: {}".format(failing_ds))
+        print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
 
     final_work = []
 
     for item in all_work:
         if item.test_set.ds_name in failing_ds:
-            disabled_tests.append(item)
-        else:
-            final_work.append(item)
-            test_queue.put(item)
+            item.test_set.test_is_skipped = True
+        final_work.append(item)
+        test_queue.put(item)
 
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
     failed_tests, total_tests = test_runner(final_work, test_queue, max_threads)
 
-    if failed_smoke_tests:
-        failed_tests += failed_smoke_tests
-    if total_smoke_tests:
-        total_tests += total_smoke_tests
+    failed_tests += failed_smoke_tests
+    total_tests += total_smoke_tests
 
     print('\n')
     print("Total time: " + str(time.time() - start_time))

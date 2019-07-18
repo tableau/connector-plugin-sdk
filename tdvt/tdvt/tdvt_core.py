@@ -144,6 +144,10 @@ class BatchQueueWork(object):
 
     def run(self, test_list):
 
+        if self.test_set.test_is_enabled is False:
+            return 0
+        if self.test_set.test_is_skipped is True:
+            return 0
         # Setup a subdirectory for the log files.
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
         try:
@@ -196,6 +200,12 @@ class BatchQueueWork(object):
 
 def do_work(work):
     logging.debug(work.get_thread_msg() + "Running test:" + work.test_name)
+    if work.test_set.test_is_enabled is False:
+        work.error_state = TestErrorDisabledTest()
+
+    if work.test_set.test_is_skipped is True:
+        work.error_state = TestErrorSkippedTest()
+
     final_test_list = work.test_set.generate_test_file_list_from_config()
     total_time_ms = work.run(final_test_list)
 
@@ -206,6 +216,18 @@ def do_work(work):
         actual_filepath = t.test_file
         base_test_filepath = t.test_file
         existing_output_filepath = work.test_set.get_expected_output_file_path(t.test_file, work.test_config.output_dir)
+
+        if work.is_disabled():
+            work.handle_disabled_test_failure(t)
+            sys.stdout.write('D')
+            sys.stdout.flush()
+            continue
+
+        if work.is_skipped():
+            work.handle_skipped_test_failure(t)
+            sys.stdout.write('S')
+            sys.stdout.flush()
+            continue
 
         # First check for systemic errors.
         if not os.path.isfile(existing_output_filepath):
@@ -220,14 +242,6 @@ def do_work(work):
             elif work.is_expected_error():
                 work.handle_expected_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('.')
-                continue
-            elif work.is_disabled():
-                work.handle_disabled_test_failure(t, os.path.isfile(existing_output_filepath))
-                sys.stdout.write('D')
-                continue
-            elif work.is_skipped():
-                work.handle_skipped_test_failure(t, os.path.isfile(existing_output_filepath))
-                sys.stdout.write('S')
                 continue
             elif work.is_error():
                 work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))
