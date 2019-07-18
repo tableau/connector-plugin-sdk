@@ -117,7 +117,7 @@ class BatchQueueWork(object):
         result.error_status = TestErrorSkippedTest()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
-    def handle_disabled_test_failue(self, test_result_file):
+    def handle_disabled_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorDisabledTest()
@@ -135,6 +135,12 @@ class BatchQueueWork(object):
 
     def is_aborted(self):
         return isinstance(self.error_state, TestErrorAbort)
+
+    def is_skipped(self):
+        return isinstance(self.error_state, TestErrorSkippedTest)
+
+    def is_disabled(self):
+        return isinstance(self.error_state, TestErrorDisabledTest)
 
     def run(self, test_list):
 
@@ -214,6 +220,14 @@ def do_work(work):
             elif work.is_expected_error():
                 work.handle_expected_test_failure(t, os.path.isfile(existing_output_filepath))
                 sys.stdout.write('.')
+                continue
+            elif work.is_disabled():
+                work.handle_disabled_test_failure(t, os.path.isfile(existing_output_filepath))
+                sys.stdout.write('D')
+                continue
+            elif work.is_skipped():
+                work.handle_skipped_test_failure(t, os.path.isfile(existing_output_filepath))
+                sys.stdout.write('S')
                 continue
             elif work.is_error():
                 work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))

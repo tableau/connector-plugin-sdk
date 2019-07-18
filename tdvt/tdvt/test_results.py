@@ -138,7 +138,6 @@ class TestErrorSkippedTest(TestErrorState):
         return "Test not run because smoke tests failed."
 
 
-
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
     def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None):
