@@ -52,13 +52,15 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
                      "please download JAVA JDK and add it to PATH")
         return False
 
-    logging.debug("Start signing " + taco_name + " from " + str(os.path.abspath(input_dir)) + " using JDK jarsigner")
+    logger.debug("Start signing " + taco_name + " from " + str(os.path.abspath(input_dir)) + " using JDK jarsigner")
 
     args = ["jarsigner", "-keystore", keystore, "-signedjar", str(input_dir/("signed_" + taco_name)), str(input_dir/taco_name), alias]
     p = subprocess.Popen(args)
     p.wait()
 
-    logging.info(taco_name + " was signed as " + "signed_" + taco_name + " at " + str(os.path.abspath(input_dir)))
-
-    return True
+    if p.returncode == 0:
+        logger.info(taco_name + " was signed as " + "signed_" + taco_name + " at " + str(os.path.abspath(input_dir)))
+        return True
+    else:
+        return False
 

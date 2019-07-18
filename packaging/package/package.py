@@ -20,7 +20,7 @@ def create_arg_parser():
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector', default='packaged-connector')
     parser.add_argument('--package-only', dest='package_only', action='store_true',  help='package a taco only, skip signing', required=False)
     parser.add_argument('-a', '--alias', dest='alias', help='alias identifying the private key to be used to sign taco file', required=False)
-    parser.add_argument('-ks', '--keystore', dest='keystore', help='keystore location, default is the jks file in user home directory' , required=False)
+    parser.add_argument('-ks', '--keystore', dest='keystore', help='keystore location, default is the jks file in user home directory', required=False)
     return parser
 
 
@@ -42,7 +42,7 @@ def main():
         return
 
     if not files_to_package:
-        logger.info("Packaging failed due to Connector Files not valid. Check " + args.log_path + " for more information.")
+        logger.info("Packaging failed. Check " + args.log_path + " for more information.")
         return
 
     package_dest_path = Path(args.dest)
@@ -64,7 +64,7 @@ def main():
         return
 
     if not jdk_sign_jar(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.debug("Signing failed. check " + args.log_path + + " for more information.")
+        logger.info("Signing failed. check console output and " + args.log_path + " for more information.")
         return
 
 
