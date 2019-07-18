@@ -71,13 +71,14 @@ class BatchQueueWork(object):
     def add_test_result(self, test_file, result):
         self.results[test_file] = result
 
-    def add_test_result_error(self, test_file, result, output_exists):
+    def add_test_result_error(self, test_file, result, output_exists, is_first=True):
         if self.saved_error_message and not output_exists:
             result.saved_error_message = self.saved_error_message
             # Remove the saved error message so it only shows up once. Tests are run in batch and you can't
             # tell which test this error really corresponds to (ie timeout, or no driver or something) so
             # just associate it with the first failure.
-            self.saved_error_message = None
+            if not is_first:
+                result.saved_error_message = "Error. Previous error message is: " + self.saved_error_message
         self.add_test_result(test_file, result)
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
@@ -93,11 +94,11 @@ class BatchQueueWork(object):
         result.error_status = TestErrorAbort()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
-    def handle_other_test_failure(self, test_result_file, output_exists):
+    def handle_other_test_failure(self, test_result_file, output_exists, test_count):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorOther()
-        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+        self.add_test_result_error(test_result_file.test_file, result, output_exists, test_count == 0)
 
     def handle_expected_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
@@ -167,6 +168,7 @@ class BatchQueueWork(object):
             self.timeout = True
         except RuntimeError as e:
             logging.debug(self.get_thread_msg() + "RuntimeError: " + str(e))
+            self.saved_error_message = e.output
             self.error_state = TestError()
 
         total_time_ms = (time.perf_counter() - start_time) * 1000
@@ -181,7 +183,9 @@ def do_work(work):
     total_time_ms = work.run(final_test_list)
 
     # Check the output files.
+    test_count = -1
     for f in final_test_list:
+        test_count += 1
         t = TestResultWork(f, work.test_config.output_dir, work.test_config.logical)
 
         actual_filepath = t.test_file
@@ -203,7 +207,7 @@ def do_work(work):
                 sys.stdout.write('.')
                 continue
             elif work.is_error():
-                work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))
+                work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath), test_count)
                 sys.stdout.write('E')
                 continue
 
