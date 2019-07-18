@@ -75,11 +75,11 @@ def get_expected_message(config):
 
 
 def get_is_smoke_test(config):
-    return bool(config.get('SmokeTest', False))
+    return config.get('SmokeTest', 'False') == 'True'
 
 
 def get_is_test_enabled(config):
-    return bool(config.get('Enabled', True))
+    return config.get('Enabled', 'True') == 'True'
 
 
 def print_logical_configurations(ds_registry, config_name=None):
@@ -292,9 +292,9 @@ def load_test(config, test_dir=get_root_dir()):
             try:
                 all_ini_sections.remove(section)
                 test_config.add_expression_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
-                                                sect.get('TestPath', ''), test_dir,
-                                                get_password_file(sect), get_expected_message(sect),
-                                                get_is_smoke_test(sect), get_is_test_enabled(sect), False)
+                                                sect.get('TestPath', ''), test_dir, get_password_file(sect),
+                                                get_expected_message(sect), get_is_smoke_test(sect),
+                                                get_is_test_enabled(sect), False)
             except KeyError as e:
                 logging.debug(e)
                 pass
@@ -304,9 +304,9 @@ def load_test(config, test_dir=get_root_dir()):
             try:
                 all_ini_sections.remove(section)
                 test_config.add_logical_test(sect.get('Name', ''), tds_name, sect.get(KEY_EXCLUSIONS, ''),
-                                             sect.get('TestPath', ''), test_dir,
-                                             get_password_file(sect), get_expected_message(sect),
-                                             get_is_smoke_test(sect), get_is_test_enabled(sect), False)
+                                             sect.get('TestPath', ''), test_dir, get_password_file(sect),
+                                             get_expected_message(sect), get_is_smoke_test(sect),
+                                             get_is_test_enabled(sect), False)
             except KeyError as e:
                 logging.debug(e)
                 pass

@@ -488,7 +488,7 @@ def run_tests_impl(tests, max_threads, args):
 
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        if test_set.smoke_test:
+        if test_set.smoke_test and not test_set.test_is_enabled is False:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
         else:
