@@ -71,13 +71,14 @@ class BatchQueueWork(object):
     def add_test_result(self, test_file, result):
         self.results[test_file] = result
 
-    def add_test_result_error(self, test_file, result, output_exists):
+    def add_test_result_error(self, test_file, result, output_exists, is_first=True):
         if self.saved_error_message and not output_exists:
             result.saved_error_message = self.saved_error_message
             # Remove the saved error message so it only shows up once. Tests are run in batch and you can't
             # tell which test this error really corresponds to (ie timeout, or no driver or something) so
             # just associate it with the first failure.
-            self.saved_error_message = None
+            if not is_first:
+                result.saved_error_message = "Error. Previous error message is: " + self.saved_error_message
         self.add_test_result(test_file, result)
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
@@ -93,11 +94,11 @@ class BatchQueueWork(object):
         result.error_status = TestErrorAbort()
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
-    def handle_other_test_failure(self, test_result_file, output_exists):
+    def handle_other_test_failure(self, test_result_file, output_exists, test_count):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set)
         result.error_status = TestErrorOther()
-        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+        self.add_test_result_error(test_result_file.test_file, result, output_exists, test_count == 0)
 
     def handle_expected_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
@@ -190,6 +191,7 @@ class BatchQueueWork(object):
             self.timeout = True
         except RuntimeError as e:
             logging.debug(self.get_thread_msg() + "RuntimeError: " + str(e))
+            self.saved_error_message = e.output
             self.error_state = TestError()
 
         total_time_ms = (time.perf_counter() - start_time) * 1000
@@ -210,7 +212,9 @@ def do_work(work):
     total_time_ms = work.run(final_test_list)
 
     # Check the output files.
+    test_count = -1
     for f in final_test_list:
+        test_count += 1
         t = TestResultWork(f, work.test_config.output_dir, work.test_config.logical)
 
         actual_filepath = t.test_file
@@ -244,7 +248,7 @@ def do_work(work):
                 sys.stdout.write('.')
                 continue
             elif work.is_error():
-                work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath))
+                work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath), test_count)
                 sys.stdout.write('E')
                 continue
 
@@ -265,14 +269,12 @@ def do_work(work):
             continue
 
         result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
-        result.test_set = work.test_set
         result.relative_test_file = t.relative_test_file
         result.run_time_ms = total_time_ms
-        result.test_config = work.test_config
         result.cmd_output = work.cmd_output
 
         if result == None:
-            result = TestResult(test_file=t.test_file, relative_test_file=t.relative_test_file)
+            result = TestResult(test_file=t.test_file, relative_test_file=t.relative_test_file, test_set=work.test_set)
             result.error_case = TestErrorStartup()
 
         sys.stdout.write('.' if result.all_passed() else 'F')
@@ -320,6 +322,9 @@ def diff_sql_node(actual_sql, expected_sql, diff_string):
 
 
 def diff_table_node(actual_table, expected_table, diff_string, test_name):
+    if actual_table == None or expected_table == None:
+        return (-1, diff_string)
+
     actual_tuples = actual_table.findall('tuple')
     expected_tuples = expected_table.findall('tuple')
 
@@ -421,7 +426,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
                                                                                           base_test_file,
                                                                                           test_config.output_dir)
-    result = TestResult(test_name, test_config, full_test_file)
+    result = TestResult(test_name, test_config, full_test_file, '', work.test_set)
     # There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
         logging.debug(work.get_thread_msg() + "Did not find actual file: " + actual_file)
