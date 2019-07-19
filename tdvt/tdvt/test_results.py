@@ -1,5 +1,6 @@
 """ Test result and configuration related classes. """
 
+import math
 import json
 import re
 
@@ -328,6 +329,97 @@ class TestResult(object):
             pass
 
         return case
+
+    def diff_test_results(self, expected_output: 'TestResult'):
+        """Compare the actual results to the expected test output based on the given rules."""
+
+        test_case_count = self.get_test_case_count()
+        diff_counts = [0] * test_case_count
+        diff_string = ''
+        # Go through all test cases.
+        for test_case in range(0, test_case_count):
+            expected_testcase_self = expected_output.get_test_case(test_case)
+            actual_testcase_self = self.get_test_case(test_case)
+            if not actual_testcase_self:
+                continue
+            if expected_testcase_self is None:
+                actual_testcase_self.passed_sql = False
+                actual_testcase_self.passed_tuples = False
+                continue
+
+            config = self.test_config
+            # Compare the SQL.
+            if config.tested_sql:
+                diff, diff_string = self.diff_sql_node(actual_testcase_self.sql, expected_testcase_self.sql, diff_string)
+                actual_testcase_self.passed_sql = diff == 0
+                diff_counts[test_case] = diff
+
+            # Compare the tuples.
+            if config.tested_tuples:
+                diff, diff_string = self.diff_table_node(actual_testcase_self.table, expected_testcase_self.table,
+                                                    diff_string, expected_testcase_self.name)
+                actual_testcase_self.passed_tuples = diff == 0
+                diff_counts[test_case] = diff
+
+        self.diff_string = diff_string
+        return diff_counts, diff_string
+
+    def diff_table_node(self, actual_table, expected_table, diff_string, test_name):
+        if actual_table == None or expected_table == None:
+            return (-1, diff_string)
+
+        actual_tuples = actual_table.findall('tuple')
+        expected_tuples = expected_table.findall('tuple')
+
+        if actual_tuples == None and expected_tuples == None:
+            return (0, diff_string)
+
+        diff_string += "\nTuples - " + test_name + "\n"
+        if actual_tuples == None or expected_tuples == None:
+            diff_string += "\tTuples do not exist for one side.\n"
+            return (math.fabs(len(actual_tuples) - len(expected_tuples)), diff_string)
+
+        # Compare all the values for the tuples.
+        if len(actual_tuples) != len(expected_tuples):
+            diff_string += "\tDifferent number of tuples.\n"
+
+        if not len(actual_tuples):
+            diff_string += "\tNo 'actual' file tuples.\n"
+
+        diff_count = 0
+
+        expected_tuple_list = []
+        for j in expected_tuples:
+            for k in j.findall('value'):
+                expected_tuple_list.append(k.text)
+
+        actual_tuple_list = []
+        for j in actual_tuples:
+            for k in j.findall('value'):
+                actual_tuple_list.append(k.text)
+
+        diff_count = sum(a != b for a, b in zip(actual_tuple_list, expected_tuple_list))
+        diff_count += abs(len(actual_tuple_list) - len(expected_tuple_list))
+
+        for a, b in zip(actual_tuple_list, expected_tuple_list):
+            if a != b:
+                diff_string += "\t <<<< >>>> \n"
+                diff_string += "\tactual: " + a + "\n"
+                diff_string += "\texpected: " + b + "\n"
+
+        return (diff_count, diff_string)
+
+    def diff_sql_node(self, actual_sql, expected_sql, diff_string):
+        if actual_sql == None and expected_sql == None:
+            return (0, diff_string)
+
+        diff_string += "SQL\n"
+        if actual_sql == None or expected_sql == None or (actual_sql != expected_sql):
+            diff_string += "<<<<\n" + actual_sql + "\n"
+            diff_string += ">>>>\n" + expected_sql + "\n"
+            return (1, diff_string)
+
+        return (0, diff_string)
 
 class TestResultEncoder(json.JSONEncoder):
     """For writing JSON output."""

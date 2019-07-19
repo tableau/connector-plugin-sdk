@@ -72,7 +72,7 @@ class DiffTest(unittest.TestCase):
             expected_output = tdvt_core.TestResult(test_config=test_config)
             expected_output.add_test_results(expected_xml, '')
 
-            num_diffs, diff_string = tdvt_core.diff_test_results(results, expected_output)
+            num_diffs, diff_string = results.diff_test_results(expected_output)
             results.set_best_matching_expected_output(expected_output, expected_file, 0, [0])
 
             if results.all_passed() and 'shouldfail' not in test:

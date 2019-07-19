@@ -262,98 +262,7 @@ def try_move(srcfile, destfile):
             time.sleep(0.05)
 
 
-def diff_sql_node(actual_sql, expected_sql, diff_string):
-    if actual_sql == None and expected_sql == None:
-        return (0, diff_string)
 
-    diff_string += "SQL\n"
-    if actual_sql == None or expected_sql == None or (actual_sql != expected_sql):
-        diff_string += "<<<<\n" + actual_sql + "\n"
-        diff_string += ">>>>\n" + expected_sql + "\n"
-        return (1, diff_string)
-
-    return (0, diff_string)
-
-
-def diff_table_node(actual_table, expected_table, diff_string, test_name):
-    if actual_table == None or expected_table == None:
-        return (-1, diff_string)
-
-    actual_tuples = actual_table.findall('tuple')
-    expected_tuples = expected_table.findall('tuple')
-
-    if actual_tuples == None and expected_tuples == None:
-        return (0, diff_string)
-
-    diff_string += "\nTuples - " + test_name + "\n"
-    if actual_tuples == None or expected_tuples == None:
-        diff_string += "\tTuples do not exist for one side.\n"
-        return math.abs(len(actual_tuples) - len(expected_tuples))
-
-    # Compare all the values for the tuples.
-    if len(actual_tuples) != len(expected_tuples):
-        diff_string += "\tDifferent number of tuples.\n"
-
-    if not len(actual_tuples):
-        diff_string += "\tNo 'actual' file tuples.\n"
-
-    diff_count = 0
-
-    expected_tuple_list = []
-    for j in expected_tuples:
-        for k in j.findall('value'):
-            expected_tuple_list.append(k.text)
-
-    actual_tuple_list = []
-    for j in actual_tuples:
-        for k in j.findall('value'):
-            actual_tuple_list.append(k.text)
-
-    diff_count = sum(a != b for a, b in zip(actual_tuple_list, expected_tuple_list))
-    diff_count += abs(len(actual_tuple_list) - len(expected_tuple_list))
-
-    for a, b in zip(actual_tuple_list, expected_tuple_list):
-        if a != b:
-            diff_string += "\t <<<< >>>> \n"
-            diff_string += "\tactual: " + a + "\n"
-            diff_string += "\texpected: " + b + "\n"
-
-    return (diff_count, diff_string)
-
-
-def diff_test_results(result, expected_output):
-    """Compare the actual results to the expected test output based on the given rules."""
-
-    test_case_count = result.get_test_case_count()
-    diff_counts = [0] * test_case_count
-    diff_string = ''
-    # Go through all test cases.
-    for test_case in range(0, test_case_count):
-        expected_testcase_result = expected_output.get_test_case(test_case)
-        actual_testcase_result = result.get_test_case(test_case)
-        if not actual_testcase_result:
-            continue
-        if expected_testcase_result is None:
-            actual_testcase_result.passed_sql = False
-            actual_testcase_result.passed_tuples = False
-            continue
-
-        config = result.test_config
-        # Compare the SQL.
-        if config.tested_sql:
-            diff, diff_string = diff_sql_node(actual_testcase_result.sql, expected_testcase_result.sql, diff_string)
-            actual_testcase_result.passed_sql = diff == 0
-            diff_counts[test_case] = diff
-
-        # Compare the tuples.
-        if config.tested_tuples:
-            diff, diff_string = diff_table_node(actual_testcase_result.table, expected_testcase_result.table,
-                                                diff_string, expected_testcase_result.name)
-            actual_testcase_result.passed_tuples = diff == 0
-            diff_counts[test_case] = diff
-
-    result.diff_string = diff_string
-    return diff_counts, diff_string
 
 
 def save_results_diff(actual_file, diff_file, expected_file, diff_string):
@@ -413,7 +322,7 @@ def compare_results(test_name, test_file, full_test_file, work):
             logging.debug(
                 work.get_thread_msg() + "Exception parsing expected file: " + expected_file + " exception: " + str(e))
 
-        diff_counts, diff_string = diff_test_results(result, expected_output)
+        diff_counts, diff_string = result.diff_test_results(expected_output)
         result.set_best_matching_expected_output(expected_output, expected_file, expected_file_version, diff_counts)
 
         if result.all_passed():
@@ -439,7 +348,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         logging.debug(work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, next_path))
         try_move(actual_file, next_path)
     # This will re-diff the results against the best expected file to ensure the test pass indicator and diff count is correct.
-    diff_count, diff_string = diff_test_results(result, result.best_matching_expected_results)
+    diff_count, diff_string = result.diff_test_results(result.best_matching_expected_results)
     save_results_diff(actual_file, actual_diff_file, result.path_to_expected, diff_string)
 
     return result
@@ -653,7 +562,7 @@ def run_diff(test_config, diff):
             result.add_test_results(actual_xml, actual)
             expected_output = TestResult(test_config=test_config)
             expected_output.add_test_results(expected_xml, '')
-            num_diffs, diff_string = diff_test_results(result, expected_output)
+            num_diffs, diff_string = result.diff_test_results(expected_output)
             logging.debug(diff_string)
             diff_count_map[f] = sum(num_diffs)
 
