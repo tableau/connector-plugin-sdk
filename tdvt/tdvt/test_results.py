@@ -67,12 +67,13 @@ class TestCaseResult(object):
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
+        if self.test_error_expected() and self.error_type:
+            return True
+
         passed = True
         if self.tested_config.tested_sql and not self.passed_sql:
             passed = False
         if self.tested_config.tested_tuples and not self.passed_tuples:
-            passed = False
-        if not self.test_error_expected() and self.error_type:
             passed = False
 
         return passed
@@ -143,11 +144,11 @@ class TestErrorSkippedTest(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None):
+    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None, error_status=None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
-        self.error_status = None
+        self.error_status = error_status
         self.saved_error_message = None
         self.diff_count = 0
         self.best_matching_expected_results = None
@@ -168,7 +169,7 @@ class TestResult(object):
         #Parse the setup file to get the count.
         if not self.test_case_map and self.test_set:
             if self.test_set.is_logical:
-                test_result = TestCaseResult("Not run", 0, "", 0, "Not run", "", None, self.test_config)
+                test_result = TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None, self.test_config)
                 self.test_case_map.append(test_result)
             else:
                 reg_blank = re.compile('^\s*$')
@@ -178,7 +179,7 @@ class TestResult(object):
                         test_case_count = 0
                         for line in test_file.readlines():
                             if not re.match(reg_blank, line) and not re.match(reg_comment, line):
-                                test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", "", None, self.test_config)
+                                test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", self.error_status, None, self.test_config)
                                 self.test_case_map.append(test_result)
                                 test_case_count += 1
                 except IOError:

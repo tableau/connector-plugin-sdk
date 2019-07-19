@@ -83,33 +83,28 @@ class BatchQueueWork(object):
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorTimeout()
+                            test_result_file.relative_test_file, self.test_set, TestErrorTimeout())
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
         self.timeout = True
 
     def handle_aborted_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorAbort()
+                            test_result_file.relative_test_file, self.test_set, TestErrorAbort())
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_other_test_failure(self, test_result_file, output_exists, test_count):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorOther()
+                            test_result_file.relative_test_file, self.test_set, TestErrorOther())
         self.add_test_result_error(test_result_file.test_file, result, output_exists, test_count == 0)
 
     def handle_expected_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorExpected()
+                            test_result_file.relative_test_file, self.test_set, TestErrorExpected())
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_missing_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorMissingActual()
+                            test_result_file.relative_test_file, self.test_set, TestErrorMissingActual())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
     def handle_skipped_test_failure(self, test_result_file):
