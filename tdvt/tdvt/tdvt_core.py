@@ -71,8 +71,8 @@ class BatchQueueWork(object):
     def add_test_result(self, test_file, result):
         self.results[test_file] = result
 
-    def add_test_result_error(self, test_file, result, output_exists, is_first=True):
-        if self.saved_error_message and not output_exists:
+    def add_test_result_error(self, test_file, result, is_first=True):
+        if self.saved_error_message:
             result.saved_error_message = self.saved_error_message
             # Remove the saved error message so it only shows up once. Tests are run in batch and you can't
             # tell which test this error really corresponds to (ie timeout, or no driver or something) so
@@ -81,28 +81,28 @@ class BatchQueueWork(object):
                 result.saved_error_message = "Error. Previous error message is: " + self.saved_error_message
         self.add_test_result(test_file, result)
 
-    def handle_timeout_test_failure(self, test_result_file, output_exists):
+    def add_timeout_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set, TestErrorTimeout())
-        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+        self.add_test_result_error(test_result_file.test_file, result)
         self.timeout = True
 
-    def handle_aborted_test_failure(self, test_result_file, output_exists):
+    def add_aborted_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set, TestErrorAbort())
-        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+        self.add_test_result_error(test_result_file.test_file, result)
 
-    def handle_other_test_failure(self, test_result_file, output_exists, test_count):
+    def add_other_test_failure(self, test_result_file, test_count):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set, TestErrorOther())
-        self.add_test_result_error(test_result_file.test_file, result, output_exists, test_count == 0)
+        self.add_test_result_error(test_result_file.test_file, result, test_count == 0)
 
-    def handle_expected_test_failure(self, test_result_file, output_exists):
+    def add_expected_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set, TestErrorExpected())
-        self.add_test_result_error(test_result_file.test_file, result, output_exists)
+        self.add_test_result_error(test_result_file.test_file, result)
 
-    def handle_missing_test_failure(self, test_result_file):
+    def add_missing_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                             test_result_file.relative_test_file, self.test_set, TestErrorMissingActual())
         self.add_test_result_error(test_result_file.test_file, result, False)
@@ -187,22 +187,22 @@ def do_work(work):
         base_test_filepath = t.test_file
         existing_output_filepath = work.test_set.get_expected_output_file_path(t.test_file, work.test_config.output_dir)
 
-        # First check for systemic errors.
+        # First check for systemic errors and set all the test results to that error.
         if not os.path.isfile(existing_output_filepath):
             if work.is_timeout():
-                work.handle_timeout_test_failure(t, os.path.isfile(existing_output_filepath))
+                work.add_timeout_test_failure(t)
                 sys.stdout.write('T')
                 continue
             elif work.is_aborted():
-                work.handle_aborted_test_failure(t, os.path.isfile(existing_output_filepath))
+                work.add_aborted_test_failure(t)
                 sys.stdout.write('A')
                 continue
             elif work.is_expected_error():
-                work.handle_expected_test_failure(t, os.path.isfile(existing_output_filepath))
+                work.add_expected_test_failure(t)
                 sys.stdout.write('.')
                 continue
             elif work.is_error():
-                work.handle_other_test_failure(t, os.path.isfile(existing_output_filepath), test_count)
+                work.add_other_test_failure(t)
                 sys.stdout.write('E')
                 continue
 
@@ -219,7 +219,7 @@ def do_work(work):
         if not os.path.isfile(actual_filepath):
             logging.debug(work.get_thread_msg() + "Error: could not find test output file:" + actual_filepath)
             sys.stdout.write('?')
-            work.handle_missing_test_failure(t)
+            work.add_missing_test_failure(t)
             continue
 
         result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
