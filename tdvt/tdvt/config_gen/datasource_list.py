@@ -78,8 +78,11 @@ def get_is_smoke_test(config):
     return config.get('SmokeTest', 'False') == 'True'
 
 
-def get_is_test_enabled(config):
-    return config.get('Enabled', 'True') == 'True'
+def get_is_test_enabled(config, key_name=None):
+    if key_name:
+        return config.get(key_name, 'True') == 'True'
+    else:
+        return config.get('Enabled', 'True') == 'True'
 
 
 def print_logical_configurations(ds_registry, config_name=None):
@@ -130,6 +133,10 @@ def load_test(config, test_dir=get_root_dir()):
     Name = mydb_config
     key = value
 
+    [ConnectionTest]
+    CastCalcsTestEnabled = True
+    StaplesTestEnabled = True
+
     """
     CALCS_TDS = 'cast_calcs.'
     STAPLES_TDS = 'Staples.'
@@ -145,6 +152,7 @@ def load_test(config, test_dir=get_root_dir()):
     median_test = 'MedianTests'
     percentile_test = 'PercentileTests'
     logical_config = 'LogicalConfig'
+    connection_test = 'ConnectionTest'
 
     KEY_EXCLUSIONS = 'Exclusions'
 
@@ -307,6 +315,25 @@ def load_test(config, test_dir=get_root_dir()):
                                              sect.get('TestPath', ''), test_dir, get_password_file(sect),
                                              get_expected_message(sect), get_is_smoke_test(sect),
                                              get_is_test_enabled(sect), False)
+            except KeyError as e:
+                logging.debug(e)
+                pass
+        # Add smoke tests
+        elif connection_test in section:
+            staples_tds_name = 'Staples.*.tds'.replace('*', config_name)
+            cast_calcs_tds_name = 'cast_calcs.*.tds'.replace('*', config_name)
+            test_path = 'exprtests/pretest/'
+
+            try:
+                all_ini_sections.remove(section)
+                test_config.add_expression_test('StaplesConnectionTest', staples_tds_name, sect.get(KEY_EXCLUSIONS, ''),
+                                                test_path, test_dir, get_password_file(sect),
+                                                get_expected_message(sect),  True,
+                                                get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
+                test_config.add_expression_test('CastCalcsConnectionTest', cast_calcs_tds_name,
+                                                sect.get(KEY_EXCLUSIONS, ''), test_path, test_dir,
+                                                get_password_file(sect), get_expected_message(sect), True,
+                                                get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
                 pass
