@@ -81,6 +81,10 @@ def create_ds_ini_file(name, logical_config):
         ini.write('\n')
         ini.write('[UnionTest]\n')
         ini.write('\n')
+        ini.write('[ConnectionTest]\n')
+        ini.write('StaplesTestEnabled = True\n')
+        ini.write('CastCalcsTestEnabled = True\n')
+        ini.write('\n')
 
         print ("Created ini file: " + ini_path)
         if not logical_config:
