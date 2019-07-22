@@ -35,7 +35,9 @@ class TestCaseResult(object):
 
     def get_tuples(self):
         tuple_list = []
-        tuples = self.table.findall('tuple')
+        tuples = self.table.findall('tuple') if self.table else None
+        if not tuples:
+            return tuple_list
         for t in tuples:
             for v in t.findall('value'):
                 tuple_list.append(v.text)
@@ -65,12 +67,13 @@ class TestCaseResult(object):
 
     def all_passed(self):
         """Return true if all aspects of the test passed."""
+        if self.test_error_expected() and self.error_type:
+            return True
+
         passed = True
         if self.tested_config.tested_sql and not self.passed_sql:
             passed = False
         if self.tested_config.tested_tuples and not self.passed_tuples:
-            passed = False
-        if not self.test_error_expected() and self.error_type:
             passed = False
 
         return passed
@@ -78,10 +81,11 @@ class TestCaseResult(object):
     def table_to_json(self):
         json_str = 'tuple'
         tuple_list = []
-        tuples = self.table.findall('tuple')
-        for t in tuples:
-            for v in t.findall('value'):
-                tuple_list.append(v.text)
+        tuples = self.table.findall('tuple') if self.table else None
+        if tuples:
+            for t in tuples:
+                for v in t.findall('value'):
+                    tuple_list.append(v.text)
 
         return {'tuples' : tuple_list}
 
@@ -130,11 +134,11 @@ class TestErrorMissingActual(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None):
+    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None, error_status=None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
-        self.error_status = None
+        self.error_status = error_status
         self.saved_error_message = None
         self.diff_count = 0
         self.best_matching_expected_results = None
@@ -147,6 +151,29 @@ class TestResult(object):
         self.run_time_ms = 0
         self.relative_test_file = relative_test_file
         self.test_set = test_set
+
+        self.parse_default_test_cases()
+
+    def parse_default_test_cases(self):
+        #If it is an expression test with no results, it probably means the test failed and the individual test cases weren't run. Count them here.
+        #Parse the setup file to get the count.
+        if not self.test_case_map and self.test_set:
+            if self.test_set.is_logical:
+                test_result = TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None, self.test_config)
+                self.test_case_map.append(test_result)
+            else:
+                reg_blank = re.compile('^\s*$')
+                reg_comment = re.compile('^\s*//.*')
+                try:
+                    with open(self.test_file, 'r') as test_file:
+                        test_case_count = 0
+                        for line in test_file.readlines():
+                            if not re.match(reg_blank, line) and not re.match(reg_comment, line):
+                                test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", self.error_status, None, self.test_config)
+                                self.test_case_map.append(test_result)
+                                test_case_count += 1
+                except IOError:
+                    pass
 
     def __json__(self):
         return {'all_passed' : self.all_passed(), 'name' : self.name,
@@ -172,9 +199,12 @@ class TestResult(object):
             </results>
 
         """
-        self.test_case_map = []
         self.path_to_actual = actual_path
         #Go through all the test nodes under 'results'.
+        if not test_xml:
+            return
+
+        temp_test_cases = []
         for i in range(0, len(list(test_xml))):
             test_child = test_xml[i]
 
@@ -190,8 +220,15 @@ class TestResult(object):
             node = test_child.find('sql')
             sq = node.text if node is not None else ''
 
-            test_result = TestCaseResult(test_child.get('name'), str(i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config)
-            self.test_case_map.append(test_result)
+            test_child_name = test_child.get('name')
+            if not test_child_name:
+                continue
+            test_result = TestCaseResult(test_child_name, str(i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config)
+            temp_test_cases.append(test_result)
+
+        if temp_test_cases:
+            #Clear any dummy place holders.
+            self.test_case_map = temp_test_cases
 
     def get_failure_message_or_all_exceptions(self):
         msg = ''

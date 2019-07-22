@@ -83,33 +83,28 @@ class BatchQueueWork(object):
 
     def handle_timeout_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorTimeout()
+                            test_result_file.relative_test_file, self.test_set, TestErrorTimeout())
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
         self.timeout = True
 
     def handle_aborted_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorAbort()
+                            test_result_file.relative_test_file, self.test_set, TestErrorAbort())
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_other_test_failure(self, test_result_file, output_exists, test_count):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorOther()
+                            test_result_file.relative_test_file, self.test_set, TestErrorOther())
         self.add_test_result_error(test_result_file.test_file, result, output_exists, test_count == 0)
 
     def handle_expected_test_failure(self, test_result_file, output_exists):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorExpected()
+                            test_result_file.relative_test_file, self.test_set, TestErrorExpected())
         self.add_test_result_error(test_result_file.test_file, result, output_exists)
 
     def handle_missing_test_failure(self, test_result_file):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorMissingActual()
+                            test_result_file.relative_test_file, self.test_set, TestErrorMissingActual())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
     def is_timeout(self):
@@ -228,14 +223,12 @@ def do_work(work):
             continue
 
         result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
-        result.test_set = work.test_set
         result.relative_test_file = t.relative_test_file
         result.run_time_ms = total_time_ms
-        result.test_config = work.test_config
         result.cmd_output = work.cmd_output
 
         if result == None:
-            result = TestResult(test_file=t.test_file, relative_test_file=t.relative_test_file)
+            result = TestResult(test_file=t.test_file, relative_test_file=t.relative_test_file, test_set=work.test_set)
             result.error_case = TestErrorStartup()
 
         sys.stdout.write('.' if result.all_passed() else 'F')
@@ -283,6 +276,9 @@ def diff_sql_node(actual_sql, expected_sql, diff_string):
 
 
 def diff_table_node(actual_table, expected_table, diff_string, test_name):
+    if actual_table == None or expected_table == None:
+        return (-1, diff_string)
+
     actual_tuples = actual_table.findall('tuple')
     expected_tuples = expected_table.findall('tuple')
 
@@ -384,7 +380,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
                                                                                           base_test_file,
                                                                                           test_config.output_dir)
-    result = TestResult(test_name, test_config, full_test_file)
+    result = TestResult(test_name, test_config, full_test_file, '', work.test_set)
     # There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
         logging.debug(work.get_thread_msg() + "Did not find actual file: " + actual_file)
@@ -393,7 +389,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     try:
         actual_xml = parse(actual_file).getroot()
         result.add_test_results(actual_xml, actual_file)
-    except ElementTree.ParseError as e:
+    except ParseError as e:
         logging.debug(work.get_thread_msg() + "Exception parsing actual file: " + actual_file + " exception: " + str(e))
         return result
 
