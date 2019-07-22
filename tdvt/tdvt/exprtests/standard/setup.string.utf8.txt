@@ -1,2 +1,2 @@
-REPLACE("This is ï¿½ replace test.", "ï¿½", "RegisterSymbol")
-FIND("This is ï¿½ find test.", "ï¿½")
+REPLACE("This is ® replace test.", "®", "RegisterSymbol")
+FIND("This is ™ find test.", "™")
