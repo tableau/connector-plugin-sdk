@@ -327,12 +327,12 @@ def load_test(config, test_dir=get_root_dir()):
             try:
                 all_ini_sections.remove(section)
                 test_config.add_expression_test('StaplesConnectionTest', staples_tds_name, sect.get(KEY_EXCLUSIONS, ''),
-                                                test_path, test_dir, get_password_file(sect),
-                                                get_expected_message(sect),  True,
+                                                test_path + 'staples/setup.staples_connection.txt', test_dir,
+                                                get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', cast_calcs_tds_name,
-                                                sect.get(KEY_EXCLUSIONS, ''), test_path, test_dir,
-                                                get_password_file(sect), get_expected_message(sect), True,
+                                                sect.get(KEY_EXCLUSIONS, ''), test_path + 'setup.calcs_key.txt',
+                                                test_dir, get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
