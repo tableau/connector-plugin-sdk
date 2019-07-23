@@ -164,21 +164,37 @@ class TestResult(object):
 
         self.parse_default_test_cases()
 
+    def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
+        if self.test_set.test_is_enabled is False:
+            if self.test_set.is_logical:
+                return TestCaseResult("Test disabled in .ini file.", 0, "", 0, "Test disabled in .ini file.",
+                                      self.error_status, None, self.test_config)
+            else:
+                return TestCaseResult("Test disabled in .ini file.", str(test_case_count), "", test_case_count,
+                                      "Test disabled in .ini file.", "Test disabled in .ini file.", None,
+                                      self.test_config)
+        elif self.test_set.test_is_skipped is True:
+            if self.test_set.is_logical:
+                return TestCaseResult("Test not run because smoke tests failed.", 0, "", 0,
+                                      "Test not run because smoke tests failed.", self.error_status, None,
+                                      self.test_config)
+            else:
+                return TestCaseResult("Test not run because smoke tests failed.", str(test_case_count), "",
+                                      test_case_count, "Test not run because smoke tests failed.",
+                                      "Test not run because smoke tests failed.", None, self.test_config)
+        else:
+            if self.test_set.is_logical:
+                return TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None, self.test_config)
+            else:
+                return TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run",
+                                      self.error_status, None, self.test_config)
+
     def parse_default_test_cases(self):
-        #If it is an expression test with no results, it probably means the test failed and the individual test cases weren't run. Count them here.
-        #Parse the setup file to get the count.
+        # If it is an expression test with no results, it probably means the test failed and the individual test cases
+        # weren't run. Count them here. Parse the setup file to get the count.
         if not self.test_case_map and self.test_set:
             if self.test_set.is_logical:
-                if self.test_set.test_is_enabled is False:
-                    test_result = TestCaseResult("Test disabled in .ini file.", 0, "", 0, "Test disabled in .ini file.",
-                                                 self.error_status, None, self.test_config)
-                elif self.test_set.test_is_skipped is True:
-                    test_result = TestCaseResult("Test not run because smoke tests failed.", 0, "", 0,
-                                                 "Test not run because smoke tests failed.", self.error_status,
-                                                 None, self.test_config)
-                else:
-                    test_result = TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None,
-                                                 self.test_config)
+                test_result = self.return_testcaseresult_for_not_run_tests()
                 self.test_case_map.append(test_result)
             else:
                 reg_blank = re.compile('^\s*$')
@@ -188,20 +204,7 @@ class TestResult(object):
                         test_case_count = 0
                         for line in test_file.readlines():
                             if not re.match(reg_blank, line) and not re.match(reg_comment, line):
-                                if self.test_set.test_is_enabled is False:
-                                    test_result = TestCaseResult("Test disabled in .ini file.",
-                                                                 str(test_case_count), "", test_case_count,
-                                                                 "Test disabled in .ini file.",
-                                                                 "Test disabled in .ini file.", None,
-                                                                 self.test_config)
-                                elif self.test_set.test_is_skipped is True:
-                                    test_result = TestCaseResult("Test not run because smoke tests failed.",
-                                                                 str(test_case_count), "", test_case_count,
-                                                                 "Test not run because smoke tests failed.",
-                                                                 "Test not run because smoke tests failed.", None,
-                                                                 self.test_config)
-                                else:
-                                    test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", self.error_status, None, self.test_config)
+                                test_result = self.return_testcaseresult_for_not_run_tests(test_case_count)
                                 self.test_case_map.append(test_result)
                                 test_case_count += 1
                 except IOError:
