@@ -8,8 +8,8 @@ import getpass
 JARSIGNER_EXECUTABLE_NAME = "jarsigner.exe"
 logger = logging.getLogger(__name__)
 
-KEYSTORE_PWD_PROMPT_LENGTH = 31
-ALIAS_PWD_PROMPT_LENGTH = 33
+KEYSTORE_PWD_PROMPT_LENGTH = len("Enter Passphrase for keystore: ")
+ALIAS_PWD_PROMPT_LENGTH = len("Enter key password for : ")
 
 def validate_signing_input(input_dir, taco_name, alias, keystore):
     """
@@ -88,7 +88,7 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
     if alias_pwd_bytes:
         p.stdin.write(alias_pwd_bytes)
         p.stdin.flush()
-        p.stdout.read(ALIAS_PWD_PROMPT_LENGTH)
+        p.stdout.read(ALIAS_PWD_PROMPT_LENGTH + len(alias))
 
     # log jarsigner output
     while True:
