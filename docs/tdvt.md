@@ -283,11 +283,11 @@ Run TDVT from your working directory since it will need the TDS and INI files yo
 
 To show the registered datasources and suites, run: `tdvt --list`
 
-To run smoke tests, which verify TDVT can successfully connect to tables in your data source:
-`tdvt --run postgres_generic_example --verify`
-
 To run a data source's tests:
 `tdvt --run postgres_generic_example`
+
+To run smoke tests, which verify TDVT can successfully connect to tables in your data source:
+`tdvt --run postgres_generic_example --verify`
 
 To run expression tests:
 `tdvt --run postgres_generic_example -e`
