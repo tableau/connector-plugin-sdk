@@ -243,8 +243,8 @@ ExpressionExclusions_Calcs =
 
 [ConnectionTests]
 # An auto-generated section that is used to run tests to verify TDVT can connect to the Staples & cast_calcs tables.
-# The Connection Tests and any other tests with the attribute `SmokeTest = True` are run before the other tests run,
-# and can be run by themselves using the --verify flag (e.g. tdvt --run postgres --verify).
+# The Connection Tests, and any other tests with the attribute `SmokeTest = True`, are run before the other tests.
+# They can be run by themselves using the --verify flag (e.g. tdvt --run postgres --verify).
 CastCalcsTestEnabled = True
 StaplesTestEnabled = True
 
@@ -283,7 +283,7 @@ Run TDVT from your working directory since it will need the TDS and INI files yo
 
 To show the registered datasources and suites, run: `tdvt --list`
 
-To run smoke tests, verifying TDVT can connect successfully to tables in your data source:
+To run smoke tests, which verify TDVT can successfully connect to tables in your data source:
 `tdvt --run postgres_generic_example --verify`
 
 To run a test:
