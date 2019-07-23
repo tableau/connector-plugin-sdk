@@ -107,6 +107,19 @@ class BatchQueueWork(object):
                             test_result_file.relative_test_file, self.test_set, TestErrorMissingActual())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
+    def handle_skipped_test_failure(self, test_result_file):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorSkippedTest()
+        self.add_test_result_error(test_result_file.test_file, result, False)
+
+    def handle_disabled_test_failure(self, test_result_file):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorDisabledTest()
+        self.add_test_result_error(test_result_file.test_file, result, False)
+
+
     def is_timeout(self):
         return isinstance(self.error_state, TestErrorTimeout)
 
@@ -119,8 +132,18 @@ class BatchQueueWork(object):
     def is_aborted(self):
         return isinstance(self.error_state, TestErrorAbort)
 
+    def is_skipped(self):
+        return isinstance(self.error_state, TestErrorSkippedTest)
+
+    def is_disabled(self):
+        return isinstance(self.error_state, TestErrorDisabledTest)
+
     def run(self, test_list):
 
+        if self.test_set.test_is_enabled is False:
+            return 0
+        if self.test_set.test_is_skipped is True:
+            return 0
         # Setup a subdirectory for the log files.
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
         try:
@@ -174,6 +197,12 @@ class BatchQueueWork(object):
 
 def do_work(work):
     logging.debug(work.get_thread_msg() + "Running test:" + work.test_name)
+    if work.test_set.test_is_enabled is False:
+        work.error_state = TestErrorDisabledTest()
+
+    if work.test_set.test_is_skipped is True:
+        work.error_state = TestErrorSkippedTest()
+
     final_test_list = work.test_set.generate_test_file_list_from_config()
     total_time_ms = work.run(final_test_list)
 
@@ -186,6 +215,18 @@ def do_work(work):
         actual_filepath = t.test_file
         base_test_filepath = t.test_file
         existing_output_filepath = work.test_set.get_expected_output_file_path(t.test_file, work.test_config.output_dir)
+
+        if work.is_disabled():
+            work.handle_disabled_test_failure(t)
+            sys.stdout.write('D')
+            sys.stdout.flush()
+            continue
+
+        if work.is_skipped():
+            work.handle_skipped_test_failure(t)
+            sys.stdout.write('S')
+            sys.stdout.flush()
+            continue
 
         # First check for systemic errors.
         if not os.path.isfile(existing_output_filepath):
