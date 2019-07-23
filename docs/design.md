@@ -87,3 +87,6 @@ If your database supports temp tables it is recommended that you enable them thr
 
 A common example is filtering the top 3 regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to Rows, then drag it again to Filters. Click the ‘top’ tab and pick [Sales Total] aggregated by sum.
 
+### NULL column metadata
+
+Tableau relies on accurate column metadata from the ODBC or JDBC result set in order to make certain query optimizations. Tableau may generate inefficient or incorrect queries if information about whether a column contains Null values is inaccurate. If your database does not support Null column information then it is safer to indicate that all columns contain Null values. This will ensure that Tableau does not generate an optimized query that actually returns incorrect results.
