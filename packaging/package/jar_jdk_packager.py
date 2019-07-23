@@ -8,7 +8,6 @@ from .connector_file import ConnectorFile
 from .helper import check_jdk_environ_variable
 
 JAR_EXECUTABLE_NAME = "jar.exe"
-PATH_ENVIRON = "PATH"
 logger = logging.getLogger(__name__)
 
 
@@ -32,8 +31,6 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     """
 
     if not check_jdk_environ_variable(JAR_EXECUTABLE_NAME):
-        logger.error("Error: jdk_create_jar: no jdk set up in PATH environment variable, "
-                     "please download JAVA JDK and add it to PATH")
         return False
 
     abs_source_path = os.path.abspath(source_dir)
