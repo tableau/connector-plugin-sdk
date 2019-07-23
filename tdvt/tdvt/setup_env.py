@@ -39,13 +39,13 @@ def add_datasource(name, ds_registry):
 
     connection_password_name = name + "_connection"
     password = None
-    if input("Would you like to setup a password file? (y/n) This is suitable for a single connection per tds (standard).").lower() == 'y':
+    if input("Would you like to setup a password file? (y/n) This is suitable for a single connection per tds (standard).").lower() == 'y':  #noqa: E501
         password = input("Enter the datasource password:")
         create_password_file(name, connection_password_name, password)
     picked = False
     logical = None
     while not picked:
-        logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")
+        logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  #naqa: E501
         if logical == 'list':
             print_logical_configurations(ds_registry)
         else:
@@ -81,6 +81,10 @@ def create_ds_ini_file(name, logical_config):
         ini.write('\n')
         ini.write('[UnionTest]\n')
         ini.write('\n')
+        ini.write('[ConnectionTests]\n')
+        ini.write('StaplesTestEnabled = True\n')
+        ini.write('CastCalcsTestEnabled = True\n')
+        ini.write('\n')
 
         print ("Created ini file: " + ini_path)
         if not logical_config:
@@ -88,7 +92,7 @@ def create_ds_ini_file(name, logical_config):
 
     except:
         pass
-   
+
 def create_password_file(name, connection_name, password):
     try:
         file_path = 'tds/' + name + '.password'
@@ -112,9 +116,9 @@ def update_tds_files(name, connection_password_name):
 def mangle_tds(file_path, connection_password_name):
     print ('Modifying ' + file_path)
     try:
-        r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)') 
-        r2 = re.compile('(^\s*<relation connection=\').*?(\' .*>)') 
-        r3 = re.compile('(^\s*<connection .*?)(\s*/>)') 
+        r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
+        r2 = re.compile('(^\s*<relation connection=\').*?(\' .*>)')
+        r3 = re.compile('(^\s*<connection .*?)(\s*/>)')
 
         f =  open(file_path, 'r')
         new_tds = ''
