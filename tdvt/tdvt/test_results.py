@@ -6,6 +6,10 @@ import re
 from .config_gen.tdvtconfig import TdvtTestConfig
 
 
+TEST_DISABLED = "Test disabled in .ini file."
+TEST_SKIPPED = "Test not run because smoke tests failed."
+TEST_NOT_RUN = "Not run"
+
 class TestCaseResult(object):
     """The actual or expected results of a test run.
 
@@ -167,26 +171,21 @@ class TestResult(object):
     def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
         if self.test_set.test_is_enabled is False:
             if self.test_set.is_logical:
-                return TestCaseResult("Test disabled in .ini file.", 0, "", 0, "Test disabled in .ini file.",
-                                      self.error_status, None, self.test_config)
+                return TestCaseResult(TEST_DISABLED, 0, "", 0, TEST_DISABLED, self.error_status, None, self.test_config)
             else:
-                return TestCaseResult("Test disabled in .ini file.", str(test_case_count), "", test_case_count,
-                                      "Test disabled in .ini file.", "Test disabled in .ini file.", None,
-                                      self.test_config)
+                return TestCaseResult(TEST_DISABLED, str(test_case_count), "", test_case_count, TEST_DISABLED,
+                                      TEST_DISABLED, None, self.test_config)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
-                return TestCaseResult("Test not run because smoke tests failed.", 0, "", 0,
-                                      "Test not run because smoke tests failed.", self.error_status, None,
-                                      self.test_config)
+                return TestCaseResult(TEST_SKIPPED, 0, "", 0, TEST_SKIPPED, self.error_status, None, self.test_config)
             else:
-                return TestCaseResult("Test not run because smoke tests failed.", str(test_case_count), "",
-                                      test_case_count, "Test not run because smoke tests failed.",
-                                      "Test not run because smoke tests failed.", None, self.test_config)
+                return TestCaseResult(TEST_SKIPPED, str(test_case_count), "", test_case_count, TEST_SKIPPED,
+                                      TEST_SKIPPED, None, self.test_config)
         else:
             if self.test_set.is_logical:
-                return TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None, self.test_config)
+                return TestCaseResult(TEST_NOT_RUN, 0, "", 0, TEST_NOT_RUN, self.error_status, None, self.test_config)
             else:
-                return TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run",
+                return TestCaseResult(TEST_NOT_RUN, str(test_case_count), "", test_case_count, TEST_NOT_RUN,
                                       self.error_status, None, self.test_config)
 
     def parse_default_test_cases(self):
