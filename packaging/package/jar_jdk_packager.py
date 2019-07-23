@@ -5,22 +5,10 @@ import shutil
 
 from pathlib import Path
 from .connector_file import ConnectorFile
+from .helper import check_jdk_environ_variable
 
 JAR_EXECUTABLE_NAME = "jar.exe"
-PATH_ENVIRON = "PATH"
 logger = logging.getLogger(__name__)
-
-
-def check_jdk_environ_variable():
-    """
-    Check if jdk is set up in PATH
-    """
-    path_list = os.environ[PATH_ENVIRON].split(';')
-    for path in path_list:
-        if os.path.isfile(Path(path)/JAR_EXECUTABLE_NAME):
-            return True
-
-    return False
 
 
 def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
@@ -42,9 +30,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     :return: Boolean
     """
 
-    if not check_jdk_environ_variable():
-        logger.error("Error: jdk_create_jar: no jdk set up in PATH environment variable, "
-                     "please download JAVA JDK and add it to PATH")
+    if not check_jdk_environ_variable(JAR_EXECUTABLE_NAME):
         return False
 
     abs_source_path = os.path.abspath(source_dir)
