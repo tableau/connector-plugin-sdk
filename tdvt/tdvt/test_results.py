@@ -172,7 +172,7 @@ class TestResult(object):
                 if self.test_set.test_is_enabled is False:
                     test_result = TestCaseResult("Test disabled in .ini file.", 0, "", 0, "Test disabled in .ini file.",
                                                  self.error_status, None, self.test_config)
-                elif self.test_set.test_is_skipped is False:
+                elif self.test_set.test_is_skipped is True:
                     test_result = TestCaseResult("Test not run because smoke tests failed.", 0, "", 0,
                                                  "Test not run because smoke tests failed.", self.error_status,
                                                  None, self.test_config)
