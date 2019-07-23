@@ -169,7 +169,16 @@ class TestResult(object):
         #Parse the setup file to get the count.
         if not self.test_case_map and self.test_set:
             if self.test_set.is_logical:
-                test_result = TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None, self.test_config)
+                if self.test_set.test_is_enabled is False:
+                    test_result = TestCaseResult("Test disabled in .ini file.", 0, "", 0, "Test disabled in .ini file.",
+                                                 self.error_status, None, self.test_config)
+                elif self.test_set.test_is_skipped is False:
+                    test_result = TestCaseResult("Test not run because smoke tests failed.", 0, "", 0,
+                                                 "Test not run because smoke tests failed.", self.error_status,
+                                                 None, self.test_config)
+                else:
+                    test_result = TestCaseResult("Not run", 0, "", 0, "Not run", self.error_status, None,
+                                                 self.test_config)
                 self.test_case_map.append(test_result)
             else:
                 reg_blank = re.compile('^\s*$')
@@ -179,7 +188,20 @@ class TestResult(object):
                         test_case_count = 0
                         for line in test_file.readlines():
                             if not re.match(reg_blank, line) and not re.match(reg_comment, line):
-                                test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", self.error_status, None, self.test_config)
+                                if self.test_set.test_is_enabled is False:
+                                    test_result = TestCaseResult("Test disabled in .ini file.",
+                                                                 str(test_case_count), "", test_case_count,
+                                                                 "Test disabled in .ini file.",
+                                                                 "Test disabled in .ini file.", None,
+                                                                 self.test_config)
+                                elif self.test_set.test_is_skipped is True:
+                                    test_result = TestCaseResult("Test not run because smoke tests failed.",
+                                                                 str(test_case_count), "", test_case_count,
+                                                                 "Test not run because smoke tests failed.",
+                                                                 "Test not run because smoke tests failed.", None,
+                                                                 self.test_config)
+                                else:
+                                    test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", self.error_status, None, self.test_config)
                                 self.test_case_map.append(test_result)
                                 test_case_count += 1
                 except IOError:
