@@ -133,9 +133,9 @@ def load_test(config, test_dir=get_root_dir()):
     Name = mydb_config
     key = value
 
-    [ConnectionTest]
-    CastCalcsTestEnabled = True
-    StaplesTestEnabled = True
+    [ConnectionTests]
+    CastCalcsTestEnabled = False  # by default these two values are True; they only need be set if disabling a test.
+    StaplesTestEnabled = False
 
     """
     CALCS_TDS = 'cast_calcs.'
@@ -152,7 +152,7 @@ def load_test(config, test_dir=get_root_dir()):
     median_test = 'MedianTests'
     percentile_test = 'PercentileTests'
     logical_config = 'LogicalConfig'
-    connection_test = 'ConnectionTest'
+    connection_test = 'ConnectionTests'
 
     KEY_EXCLUSIONS = 'Exclusions'
 
