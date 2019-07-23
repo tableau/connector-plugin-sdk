@@ -241,19 +241,12 @@ ExpressionExclusions_Calcs =
 
 [StandardTests]
 
-[StaplesDataTest]
-# An auto-generated section head that is used to verify your connection to Staples
-# Tests with SmokeTest = True are run before any other test run, and can be run as a group using
-# the --verify flag after a data source (e.g. --run postgres --verify).
-# Your StaplesDataTest and CalcsDataTest do _not_ require a `Type` attribute; this is handled
-# automatically by TDVT.
-SmokeTest = True
-
-[CalcsDataTest]
-# The second smoke test section, verifying the connection to Calcs.
-# In this case the test is intentionally disabled.
-SmokeTest = True
-Enabled = False
+[ConnectionTests]
+# An auto-generated section head that is used to run tests to verify your connection to Staples & cast_calcs.
+# Enabled Connection Tests and any other tests with the attribute SmokeTest = True are run before any other test run,
+# and can be run by themselves as a group using the --verify flag after a data source (e.g. --run postgres --verify).
+CastCalcsTestEnabled = True
+StaplesTestEnabled = True
 
 [LODTests]
 
@@ -274,6 +267,12 @@ Exclusions = string.ascii
 
 TestPath = tests/mytests/ #This could point to a local directory relative to your TDVT working directory named 'tests'. Or for a logicaltest it would be 'tests/logical/setup/mytests/setup.\.xml
 
+SmokeTest = True # Setting this attribute will cause the test to be run with the Connection Tests and any other
+                 # Smoke Tests at the beginning of the test run or with the --verify flag.
+
+Enabled = False # Optional. The default is True; setting this to false will cause the test to count as a fail
+                # without being run.
+
 ```
 
 ## Run tests
@@ -283,6 +282,9 @@ Try `tdvt -h` for the latest usage information.
 Run TDVT from your working directory since it will need the TDS and INI files you created when adding your datasource.
 
 To show the registered datasources and suites, run: `tdvt --list`
+
+To run smoke tests for a data source:
+`tdvt --run postgres_generic_example --verify`
 
 To run a test:
 `tdvt --run postgres_generic_example`
