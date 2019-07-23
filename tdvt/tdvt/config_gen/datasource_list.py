@@ -320,17 +320,15 @@ def load_test(config, test_dir=get_root_dir()):
                 pass
         # Add smoke tests
         elif connection_test in section:
-            staples_tds_name = 'Staples.*.tds'.replace('*', config_name)
-            cast_calcs_tds_name = 'cast_calcs.*.tds'.replace('*', config_name)
             test_path = 'exprtests/pretest/'
 
             try:
                 all_ini_sections.remove(section)
-                test_config.add_expression_test('StaplesConnectionTest', staples_tds_name, sect.get(KEY_EXCLUSIONS, ''),
+                test_config.add_expression_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
                                                 test_path + 'staples/setup.staples_connection.txt', test_dir,
                                                 get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
-                test_config.add_expression_test('CastCalcsConnectionTest', cast_calcs_tds_name,
+                test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS,
                                                 sect.get(KEY_EXCLUSIONS, ''), test_path + 'setup.calcs_key.txt',
                                                 test_dir, get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
