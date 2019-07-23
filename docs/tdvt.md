@@ -286,7 +286,7 @@ To show the registered datasources and suites, run: `tdvt --list`
 To run smoke tests, which verify TDVT can successfully connect to tables in your data source:
 `tdvt --run postgres_generic_example --verify`
 
-To run a test:
+To run a data source's tests:
 `tdvt --run postgres_generic_example`
 
 To run expression tests:
