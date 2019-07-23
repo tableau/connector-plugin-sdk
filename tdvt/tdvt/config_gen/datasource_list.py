@@ -126,15 +126,15 @@ def load_test(config, test_dir=get_root_dir()):
     TestPath = exprtests/standard/
 
     [NewExpressionTest2]
-    SmokeTest = True
-    Enabled = False
+    SmokeTest = True  # tests are treated as smoke tests if SmokeTest = True
+    Enabled = False # If set to False, the test is marked `D`, not run, and counted as a fail.
 
     [LogicalConfig]
     Name = mydb_config
     key = value
 
     [ConnectionTests]
-    CastCalcsTestEnabled = False  # by default these two values are True; they only need be set if disabling a test.
+    CastCalcsTestEnabled = True  # by default these two values are True; set `False` if disabling a test.
     StaplesTestEnabled = False
 
     """
@@ -200,9 +200,9 @@ def load_test(config, test_dir=get_root_dir()):
                                          get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
                                          get_is_test_enabled(lod), False)
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''),
-                                            'exprtests/lodcalcs/setup.*.txt', test_dir,
-                                            get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
-                                            get_is_test_enabled(lod), False)
+                                            'exprtests/lodcalcs/setup.*.txt', test_dir, get_password_file(lod),
+                                            get_expected_message(lod), get_is_smoke_test(lod), get_is_test_enabled(lod),
+                                            False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -227,9 +227,8 @@ def load_test(config, test_dir=get_root_dir()):
             all_ini_sections.remove(union_test)
             test_config.add_logical_test('logical.union.', CALCS_TDS, '',
                                          test_config.get_logical_test_path('logicaltests/setup/union/setup.*.'),
-                                         test_dir, get_password_file(union),
-                                         get_expected_message(union), get_is_smoke_test(union),
-                                         get_is_test_enabled(union), False)
+                                         test_dir, get_password_file(union), get_expected_message(union),
+                                         get_is_smoke_test(union), get_is_test_enabled(union), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -266,9 +265,9 @@ def load_test(config, test_dir=get_root_dir()):
             percentile = config[percentile_test]
             all_ini_sections.remove(percentile_test)
             test_config.add_expression_test('expression.percentile.', CALCS_TDS, percentile.get(KEY_EXCLUSIONS, ''),
-                                            'exprtests/percentile', test_dir,
-                                            get_password_file(percentile), get_expected_message(percentile),
-                                            get_is_smoke_test(percentile), get_is_test_enabled(percentile), False)
+                                            'exprtests/percentile', test_dir, get_password_file(percentile),
+                                            get_expected_message(percentile), get_is_smoke_test(percentile),
+                                            get_is_test_enabled(percentile), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -328,10 +327,9 @@ def load_test(config, test_dir=get_root_dir()):
                                                 test_path + 'staples/setup.staples_connection.txt', test_dir,
                                                 get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
-                test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS,
-                                                sect.get(KEY_EXCLUSIONS, ''), test_path + 'setup.calcs_key.txt',
-                                                test_dir, get_password_file(sect), get_expected_message(sect), True,
-                                                get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
+                test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
+                                                test_path + 'setup.calcs_key.txt', test_dir, get_password_file(sect),
+                                                get_expected_message(sect), True, (sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
                 pass
