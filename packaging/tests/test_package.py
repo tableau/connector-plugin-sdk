@@ -17,8 +17,7 @@ class TestPackage(unittest.TestCase):
         expected_dest_directory = Path("tests/test_resources/jars")
         files_directory = Path("tests/test_resources/valid_connector")
 
-        path_to_test_file = expected_dest_directory / \
-            Path(expected_package_name + PACKAGED_EXTENSION)
+        path_to_test_file = expected_dest_directory / Path(expected_package_name + PACKAGED_EXTENSION)
 
         if path_to_test_file.exists():
             logging.debug("Removing old test file " + str(Path))
