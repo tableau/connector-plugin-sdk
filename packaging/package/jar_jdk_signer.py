@@ -80,7 +80,7 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
     # Start jarsigner subprocess
     args = ["jarsigner", "-keystore", keystore, str(input_dir/taco_name), alias]
     p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-
+    
     # Pass keystore and alias password to jarsigner subprocess
     p.stdin.write(ks_pwd_bytes)
     p.stdin.flush()
@@ -99,6 +99,7 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
         if str_to_log:
             logger.info(str_to_log)
 
+    p.stdout.close()
     p.stdin.close()
     p.terminate()
     p.wait()
