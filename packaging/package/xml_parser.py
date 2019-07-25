@@ -48,7 +48,7 @@ class XMLParser:
         # Make sure manifest exists
         path_to_manifest = self.path_to_folder / Path("manifest.xml")
         if not path_to_manifest.is_file():
-            logger.error("Error: " + str(self.path_to_folder) + " does contain a file called manifest.xml.")   
+            logger.error("Error: " + str(self.path_to_folder) + " does not contain a file called manifest.xml.")   
             return None
         
         self.file_list.append(ConnectorFile("manifest.xml", "manifest"))   
