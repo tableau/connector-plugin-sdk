@@ -51,8 +51,3 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
     return True
 
-
-
-
-
-
