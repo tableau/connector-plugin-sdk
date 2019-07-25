@@ -16,7 +16,7 @@ def create_arg_parser():
     parser.add_argument('input_dir', help='path to directory of connector files to package and sign')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='verbose output', required=False)
     parser.add_argument('-l', '--log', dest='log_path', help='path of logging output', default='packaging_log.txt')
-    parser.add_argument('--validate_only', dest='validate_only', action='store_true', help='runs package validation steps only', required=False)
+    parser.add_argument('--validate-only', dest='validate_only', action='store_true', help='runs package validation steps only', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector', default='packaged-connector')
     parser.add_argument('--package-only', dest='package_only', action='store_true',  help='package a taco only, skip signing', required=False)
     parser.add_argument('-a', '--alias', dest='alias', help='alias identifying the private key to be used to sign taco file', required=False)
