@@ -30,7 +30,7 @@ CREATE TABLE "Calcs"
     datetime1 VARCHAR(255),
     zzz VARCHAR(255)
 );
-CREATE TABLE Calcs_temp
+CREATE TABLE calcs_temp
 (
     key VARCHAR(255),
     num0 DOUBLE PRECISION,
@@ -93,7 +93,7 @@ copy calcs_temp(
         )
 from '../Calcs.csv';
 
-INSERT INTO "calcs" select * from calcs_temp;
+INSERT INTO "Calcs" select * from calcs_temp;
 drop table calcs_temp;
 \p\g
 

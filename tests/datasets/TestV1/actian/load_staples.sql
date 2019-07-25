@@ -54,7 +54,7 @@ CREATE TABLE "Staples"
     "Market Segment" VARCHAR(25) NOT NULL
 );
 
-copy staples(
+copy "Staples"(
         "item count"= text(0)csv,
         "ship priority"= text(0)csv,
         "order priority"= text(0)csv,

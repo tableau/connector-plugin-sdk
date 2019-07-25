@@ -27,7 +27,7 @@ CREATE TABLE "Batters"
 \p\g
 
 
-copy batters(
+copy "Batters"(
         player= text(0)csv with null('NULL'),
         team= text(0)csv with null('NULL'),
         league= text(0)csv with null('NULL'),
