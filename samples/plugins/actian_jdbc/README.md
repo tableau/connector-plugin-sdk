@@ -4,7 +4,7 @@ Actian JDBC Connector for Tableau
 This is a Connector for Tableau created with the [connector-plugin-sdk](https://github.com/tableau/connector-plugin-sdk)
 Recommended version of Tableau Desktop is 2019.2.2.
 
-Latest version of the Connector can be obtained from [GitHub](https://github.com/clach04/connector-plugin-sdk/tree/actian)
+Latest version of the Connector can be obtained from [GitHub](https://github.com/clach04/connector-plugin-sdk/tree/actian/samples/plugins/actian_jdbc)
 
 Usage
 -----
