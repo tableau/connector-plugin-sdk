@@ -7,6 +7,15 @@ Recommended version of Tableau Desktop is 2019.2.2.
 
 Latest version of the Connector can be obtained from [GitHub](https://github.com/clach04/connector-plugin-sdk/tree/actian/samples/plugins/actian_jdbc)
 
+Table of contents
+-----------------
+
+  * [Usage](#usage)
+    + [Install JDBC driver jar file](#install-jdbc-driver-jar-file)
+    + [Obtain Connector/install](#obtain-connector-install)
+    + [Launch Tableau with new flags](#launch-tableau-with-new-flags)
+
+
 Usage
 -----
 
