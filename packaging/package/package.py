@@ -20,7 +20,7 @@ def create_arg_parser():
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector', default='packaged-connector')
     parser.add_argument('--package-only', dest='package_only', action='store_true',  help='package a taco only, skip signing', required=False)
     parser.add_argument('-a', '--alias', dest='alias', help='alias identifying the private key to be used to sign taco file', required=False)
-    parser.add_argument('-ks', '--keystore', dest='keystore', help='keystore location, default is the jks file in user home directory', required=False)
+    parser.add_argument('-ks', '--keystore', dest='keystore', help='location of keystore file where key is stored', required=False)
     return parser
 
 

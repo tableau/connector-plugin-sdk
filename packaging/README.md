@@ -11,9 +11,14 @@ The recommendation is to install package within a Python virtual environment. Se
 
 ### Run package Module
 
-To package the connector:
+To package the connector and sign it:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder]
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
+```
+
+To package the connector without signing:
+```
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] --package-only
 ```
 
 To validate that the xml files are valid:
@@ -23,11 +28,12 @@ To validate that the xml files are valid:
 
 All command line usage details:
 ```
-usage: package.py [-h] [-v] [-l LOG_PATH] [--validate_only] [-d DEST]
+usage: package.py [-h] [-v] [-l LOG_PATH] [--validate-only] [-d DEST]
+                  [--package-only] [-a ALIAS] [-ks KEYSTORE]
                   input_dir
 
 Tableau Connector Packaging Tool: package connector files into a single Tableau
-Connector (.taco) file.
+Connector (.taco) file, and sign it.
 
 positional arguments:
   input_dir             path to directory of connector files to package
@@ -37,8 +43,14 @@ optional arguments:
   -v, --verbose         verbose output
   -l LOG_PATH, --log LOG_PATH
                         path of logging output
-  --validate_only       runs package validation steps only
+  --validate-only       runs package validation steps only
   -d DEST, --dest DEST  destination folder for packaged connector
+  --package-only        package a taco only, skip signing
+  -a ALIAS, --alias ALIAS
+                        alias identifying the private key to be used to sign
+                        taco file
+  -ks KEYSTORE, --keystore KEYSTORE
+                        location of keystore file where key is stored
 ```
 
 ## Development
