@@ -29,9 +29,8 @@
       <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION" value="yes"/>
-      <customization name="CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES" value="yes"/>
-      <customization name="CAP_ODBC_SUPPRESS_PG_TEMP_SCHEMA_TABLES" value="yes"/>
-      <customization name="CAP_ODBC_METADATA_SUPPRESS_SQLSTATISTICS_API" value="yes"/>
+      <customization name="CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES" value="yes"/>  <!-- May be present - not installed by default -->
+      <customization name="CAP_ODBC_METADATA_SUPPRESS_SQLSTATISTICS_API" value="yes"/>  <!-- as of 2019-07-29 undocumented in https://tableau.github.io/connector-plugin-sdk/docs/capabilities -->
     </customizations>
   </connection-customization>
   <connection-dialog file='connection-dialog.tcd'/>
