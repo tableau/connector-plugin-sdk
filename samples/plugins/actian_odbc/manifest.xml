@@ -13,9 +13,13 @@
       <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="yes"/>
       <customization name="CAP_QUERY_SORT_BY" value="yes"/>
       <customization name="CAP_QUERY_SUBQUERIES" value="yes"/>
-      <customization name="CAP_QUERY_TOP_N" value="no"/><!-- TODO Ingres does have support for this, via the FIRST keyword, same syntax/semantics -->
+      <customization name="CAP_QUERY_TOP_N" value="yes"/><!--Support for datasource preview via the FIRST keyword, same syntax/semantics as TOP -->
       <customization name="CAP_QUERY_TOP_SAMPLE" value="yes"/>
       <customization name="CAP_QUERY_TOP_SAMPLE_PERCENT" value="yes"/>
+      <customization name='CAP_QUERY_TOPSTYLE_LIMIT' value='no' />
+      <customization name='CAP_QUERY_TOPSTYLE_ROWNUM' value='no' />
+      <customization name='CAP_QUERY_TOPSTYLE_TOP' value='no' />
+      <customization name='CAP_QUERY_TOP_0_METADATA' value='no' />
       <customization name="CAP_QUERY_WHERE_FALSE_METADATA" value="yes"/>
       <customization name="CAP_QUERY_SUBQUERIES_WITH_TOP" value="yes"/>
       <customization name="CAP_SUPPORTS_SPLIT_FROM_LEFT" value="yes"/>
