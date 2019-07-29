@@ -16,7 +16,7 @@ To package the connector and sign it:
 (.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
 ```
 
-To package the connector only:
+To package the connector without signing:
 ```
 (.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] --package-only
 ```
