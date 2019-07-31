@@ -73,7 +73,7 @@ class TabqueryCommandLine(object):
 
         #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
         #that tests what you would expect.
-        cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
+        cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall,Aggregate:MoveGroupBysToMeasures"])
 
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
