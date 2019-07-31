@@ -23,7 +23,7 @@ To package the connector without signing:
 
 To validate that the xml files are valid:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package --validate_only [path_to_folder]
+(.venv) PS connector-plugin-sdk\packaging> python -m package.package --validate-only [path_to_folder]
 ```
 
 All command line usage details:
