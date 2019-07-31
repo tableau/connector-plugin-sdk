@@ -7,30 +7,32 @@
     <customizations>
       <customization name="CAP_SELECT_INTO" value="yes"/>
       <customization name="CAP_SELECT_TOP_INTO" value="yes"/>
-      <customization name="CAP_CREATE_TEMP_TABLES" value="no"/>
-      <customization name="CAP_QUERY_BOOLEXPR_TO_INTEXPR" value="no"/>
-      <customization name="CAP_QUERY_GROUP_BY_BOOL" value="yes"/>
-      <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="yes"/>
-      <customization name="CAP_QUERY_SORT_BY" value="yes"/>
+      <customization name="CAP_CREATE_TEMP_TABLES" value="yes"/>
+      <customization name="CAP_INDEX_TEMP_TABLES" value="yes"/>  <!-- yes we suport, but usually not needed does setting this to yes hurt us? -->
+      <customization name="CAP_QUERY_BOOLEXPR_TO_INTEXPR" value="no"/>  <!-- TODO Review -->
+      <customization name="CAP_QUERY_GROUP_BY_BOOL" value="yes"/>   <!-- supported, undergone prelim testing -->
+      <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="yes"/>   <!-- supported, undergone prelim testing -->
+      <customization name="CAP_QUERY_SORT_BY" value="yes"/>   <!-- supported, undergone prelim testing -->
       <customization name="CAP_QUERY_SUBQUERIES" value="yes"/>
       <customization name="CAP_QUERY_TOP_N" value="yes"/>  <!--Support for datasource preview via the FIRST keyword, same syntax/semantics as TOP -->
-      <customization name="CAP_QUERY_TOP_SAMPLE" value="yes"/>
-      <customization name="CAP_QUERY_TOP_SAMPLE_PERCENT" value="yes"/>
+      <customization name="CAP_QUERY_TOP_SAMPLE" value="no"/>
+      <customization name="CAP_QUERY_TOP_SAMPLE_PERCENT" value="no"/>
       <customization name='CAP_QUERY_TOPSTYLE_LIMIT' value='no' />
       <customization name='CAP_QUERY_TOPSTYLE_ROWNUM' value='no' />
-      <customization name='CAP_QUERY_TOPSTYLE_TOP' value='no' />
+      <customization name='CAP_QUERY_TOPSTYLE_TOP' value='yes' />
       <customization name='CAP_QUERY_TOP_0_METADATA' value='no' />
       <customization name="CAP_QUERY_WHERE_FALSE_METADATA" value="yes"/>
       <customization name="CAP_QUERY_SUBQUERIES_WITH_TOP" value="no"/>  <!-- enhancement https://alm.actian.com/jira/browse/II-541 -->
       <customization name="CAP_SUPPORTS_SPLIT_FROM_LEFT" value="yes"/>
       <customization name="CAP_SUPPORTS_SPLIT_FROM_RIGHT" value="yes"/>
       <customization name="CAP_SUPPORTS_UNION" value="yes"/>
-      <customization name="CAP_QUERY_ALLOW_PARTIAL_AGGREGATION" value="no"/>
+      <customization name="CAP_QUERY_ALLOW_PARTIAL_AGGREGATION" value="yes"/>  <!-- default setting is yes -->
       <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION" value="yes"/>
       <customization name="CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES" value="yes"/>  <!-- May be present - not installed by default -->
       <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' /> <!-- Added to support LOD in Desktop dashboards- not clear from docs why this impacts LoD, no change to test suite results -->
+      <customization name='CAP_QUERY_SORT_BY_DEGREE' value='yes' />
     </customizations>
   </connection-customization>
   <connection-dialog file='connection-dialog.tcd'/>
