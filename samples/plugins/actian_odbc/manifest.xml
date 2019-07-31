@@ -21,7 +21,7 @@
       <customization name='CAP_QUERY_TOPSTYLE_TOP' value='no' />
       <customization name='CAP_QUERY_TOP_0_METADATA' value='no' />
       <customization name="CAP_QUERY_WHERE_FALSE_METADATA" value="yes"/>
-      <customization name="CAP_QUERY_SUBQUERIES_WITH_TOP" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERIES_WITH_TOP" value="no"/>  <!-- enhancement https://alm.actian.com/jira/browse/II-541 -->
       <customization name="CAP_SUPPORTS_SPLIT_FROM_LEFT" value="yes"/>
       <customization name="CAP_SUPPORTS_SPLIT_FROM_RIGHT" value="yes"/>
       <customization name="CAP_SUPPORTS_UNION" value="yes"/>
