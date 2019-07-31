@@ -27,6 +27,7 @@
       <customization name="CAP_SUPPORTS_UNION" value="yes"/>
       <customization name="CAP_QUERY_ALLOW_PARTIAL_AGGREGATION" value="no"/>
       <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
+      <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' /> <!-- Added to support LOD in Desktop dashboards- not clear from docs why this impacts LoD, no change to test suite results -->
     </customizations>
   </connection-customization>
   <connection-dialog file='connection-dialog.tcd'/>

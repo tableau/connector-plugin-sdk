@@ -30,7 +30,7 @@
       <customization name="CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION" value="yes"/>
       <customization name="CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES" value="yes"/>  <!-- May be present - not installed by default -->
-	    <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' /> <!-- Added to support LOD -->
+      <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' /> <!-- Added to support LOD in Desktop dashboards- not clear from docs why this impacts LoD, no change to test suite results -->
     </customizations>
   </connection-customization>
   <connection-dialog file='connection-dialog.tcd'/>
