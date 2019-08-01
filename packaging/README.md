@@ -37,7 +37,7 @@ optional arguments:
   -v, --verbose         verbose output
   -l LOG_PATH, --log LOG_PATH
                         path of logging output
-  --validate_only       runs package validation steps only
+  --validate-only       runs package validation steps only
   -d DEST, --dest DEST  destination folder for packaged connector
 ```
 
@@ -91,6 +91,3 @@ For reference, to deactivate the virtual environment in the future.
 ```
 (.venv) PS connector-plugin-sdk\packaging> python -m package.package
 ```
-
-#### Notes
-- https://stackoverflow.com/a/47559925
