@@ -64,7 +64,7 @@ Activate the virtual environment.
 PS connector-plugin-sdk\packaging> .\.venv\Scripts\activate
 ```
 
-Verify python version is greater than 3.7.
+Verify Python version is 3.7.3 or higher.
 ```
 (.venv) PS connector-plugin-sdk\packaging> python --version
 Python 3.7.3
