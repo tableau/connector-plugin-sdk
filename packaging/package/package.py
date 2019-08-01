@@ -34,7 +34,8 @@ def create_arg_parser():
 def main():
     parser = create_arg_parser()
     args = parser.parse_args()
-    logger = init_logging(args.log_path, args.verbose)
+    log_file = args.log_path + 'packaging_log.txt'
+    logger = init_logging(log_file, args.verbose)
 
     path_from_args = Path(args.input_dir)
 
