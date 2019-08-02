@@ -5,7 +5,8 @@ This is a Connector for Tableau created with the [connector-plugin-sdk](https://
 
 Recommended version of Tableau Desktop is 2019.2.2.
 
-Latest version of the Connector can be obtained from [GitHub](https://github.com/clach04/connector-plugin-sdk/tree/actian/samples/plugins/actian_odbc)
+Latest version of the Connector can be obtained from
+[GitHub](https://github.com/clach04/connector-plugin-sdk/tree/actian/samples/plugins/actian_odbc)
 
 Table of contents
 -----------------
