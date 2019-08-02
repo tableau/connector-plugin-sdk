@@ -82,7 +82,7 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
         alias_pwd_bytes = pwd_input[1]
 
     # Start jarsigner subprocess
-    args = ["jarsigner", "-keystore", keystore, str(input_dir/taco_name), alias]
+    args = ["jarsigner", "-keystore", keystore, str(input_dir/taco_name), alias]  # noqa: E226
     p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     # Pass keystore and alias password to jarsigner subprocess
