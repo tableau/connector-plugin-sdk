@@ -11,6 +11,8 @@ The recommendation is to install `package` within a Python virtual environment. 
 
 ### Run package Module
 
+The `package` tool must be run from the `connector-plugin-sdk/packaging/` directory or it will throw an error message.
+
 To package the connector and sign it:
 ```
 (.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
