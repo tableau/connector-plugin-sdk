@@ -70,3 +70,14 @@ Create database with mixed case object name support:
     createdb mixedcase
     # optionally restore:
     iisetres ii.`iipmhost`.createdb.delim_id_case lower
+
+### Function YEAR() Behavior
+
+The `YEAR()` function shows an inconsistent behavior with a custom connector. When dragging a date field to the Rows section, and error may be returned say
+
+    Bad Connection: Tableau could not connect to the data source.
+    [Actian][Ingres ODBC Driver][Ingres]line 3, Function 'trunc' does not take an argument of type 'integer'. Explicitly convert the argument to the desired type.
+
+To avoid getting this error, use a calculated field instead.
+
+E.g. `YEAR([Your Date Field])`
