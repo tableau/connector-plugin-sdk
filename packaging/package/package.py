@@ -34,7 +34,7 @@ def create_arg_parser():
 def main():
     parser = create_arg_parser()
     args = parser.parse_args()
-    log_file = args.log_path + 'packaging_log.txt'
+    log_file = args.log_path + '/packaging_log.txt'
     logger = init_logging(log_file, args.verbose)
 
     path_from_args = Path(args.input_dir)
@@ -43,21 +43,23 @@ def main():
     files_to_package = xmlparser.generate_file_list()  # validates XSD's as well
 
     if args.validate_only:
+        if args.package_only:
+            logger.warning("Because the validate-only flag was used, files will not be packaged.")
         if files_to_package and validate_all_xml(files_to_package, path_from_args):
             logger.info("XML Validation succeeded.")
         else:
-            logger.info("XML Validation failed. Check " + args.log_path + " for more information.")
+            logger.info("XML Validation failed. Check " + log_file + " for more information.")
         return
 
     if not files_to_package:
-        logger.info("Packaging failed. Check " + args.log_path + " for more information.")
+        logger.info("Packaging failed. Check " + log_file + " for more information.")
         return
 
     package_dest_path = Path(args.dest)
     package_name = xmlparser.class_name + PACKAGED_EXTENSION
 
     if not jdk_create_jar(path_from_args, files_to_package, package_name, package_dest_path):
-        logger.info("Taco packaging failed. Check " + args.log_path + " for more information.")
+        logger.info("Taco packaging failed. Check " + log_file + " for more information.")
         return
 
     if args.package_only:
@@ -68,11 +70,11 @@ def main():
     keystore_from_args = args.keystore
 
     if not validate_signing_input(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.debug("Signing input validation failed. check " + args.log_path + " for more information.")
+        logger.debug("Signing input validation failed. check " + log_file + " for more information.")
         return
 
     if not jdk_sign_jar(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.info("Signing failed. check console output and " + args.log_path + " for more information.")
+        logger.info("Signing failed. check console output and " + log_file + " for more information.")
         return
 
 
