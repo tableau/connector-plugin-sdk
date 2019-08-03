@@ -39,7 +39,7 @@ class XMLParser:
             -- Returns none if any of the files are invalid, or the files do not agree on the name
         """
 
-        logging.debug("Generating list of for validation and/or packaging...")
+        logging.debug("Generating list of files for validation and/or packaging...")
 
         if not self.path_to_folder.is_dir():
             logger.error("Error: " + str(self.path_to_folder) + " does not exist or is not a directory.")
