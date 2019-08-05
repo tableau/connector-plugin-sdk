@@ -101,6 +101,7 @@
           <xs:sequence>
             <xs:group ref="Company-G"/>
             <xs:group ref="SupportLink-G"/>
+            <xs:group ref="DriverDownloadLink-G" minOccurs="0"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -118,6 +119,15 @@
   <xs:group name="SupportLink-G">
     <xs:sequence>
       <xs:element name="support-link">
+        <xs:complexType>
+          <xs:attribute name="url" type="xs:anyURI" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="DriverDownloadLink-G">
+    <xs:sequence>
+      <xs:element name="driver-download-link">
         <xs:complexType>
           <xs:attribute name="url" type="xs:anyURI" use="required"/>
         </xs:complexType>
