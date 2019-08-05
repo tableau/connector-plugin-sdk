@@ -11,9 +11,9 @@ install:
   - pip install -e tdvt/
 
 script:
-  - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
-  - pwd
-  - cd ../../packaging && python setup.py test
+  - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest  # some tdvt tests
+  - $PATH
+  - cd ../../packaging && python setup.py test  # run packaging tests
 
 jobs:
   include:
