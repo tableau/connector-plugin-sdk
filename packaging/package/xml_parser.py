@@ -38,20 +38,20 @@ class XMLParser:
             list[ConnectorFile] -- list of files to package
             -- Returns none if any of the files are invalid, or the files do not agree on the name
         """
-        
-        logging.debug("Generating list of files to package...")
-        
+
+        logging.debug("Generating list of files for validation and/or packaging...")
+
         if not self.path_to_folder.is_dir():
-            logger.error("Error: " + str(self.path_to_folder) + " does not exist or is not a directory.")   
+            logger.error("Error: " + str(self.path_to_folder) + " does not exist or is not a directory.")
             return None
-        
+
         # Make sure manifest exists
         path_to_manifest = self.path_to_folder / Path("manifest.xml")
         if not path_to_manifest.is_file():
-            logger.error("Error: " + str(self.path_to_folder) + " does not contain a file called manifest.xml.")   
+            logger.error("Error: " + str(self.path_to_folder) + " does not contain a file called manifest.xml.")
             return None
-        
-        self.file_list.append(ConnectorFile("manifest.xml", "manifest"))   
+
+        self.file_list.append(ConnectorFile("manifest.xml", "manifest"))
 
         # Call parse_file on manifest, when it finds links to other files it will recursiveley call it again
         files_valid = self.parse_file(self.file_list[0])
@@ -83,19 +83,19 @@ class XMLParser:
                         for error in xml_violations_buffer:
                             logging.debug(error)
                         return None
-                    
+
                     self.file_list.append(ConnectorFile(resource_file_name, "resource"))
                     logging.debug("Adding file to list (name = " + resource_file_name + ", type = resource)")
 
-            
+
 
         else:
             logger.debug("No loc files.")
 
-        # Print generated files to log for debugging        
+        # Print generated files to log for debugging
         logger.debug("Generated file list:")
         for f in self.file_list:
-            logger.debug("-- " + f.file_name)        
+            logger.debug("-- " + f.file_name)
 
         return self.file_list
 
@@ -111,7 +111,7 @@ class XMLParser:
         """
         path_to_file = self.path_to_folder / str(file_to_parse.file_name)
         xml_violation_buffer = []
-        
+
         # if the file is not valid, return false
         if not validate_single_file(file_to_parse, path_to_file, xml_violation_buffer):
             for v in xml_violation_buffer:
@@ -131,7 +131,7 @@ class XMLParser:
         for child in root.iter():
 
             # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
-            
+
             if 'file' in child.attrib:
 
                 # Make new connector file object
@@ -152,7 +152,7 @@ class XMLParser:
 
             # If an element has the 'class' attribute, and the class name is not set, set the class name. If it is set, make sure it is the same name
             if 'class' in child.attrib:
-                
+
                 # Name not yet found
                 if not self.class_name:
                     logging.debug("Found class name: " + child.attrib['class'])
@@ -171,4 +171,3 @@ class XMLParser:
 
         # If we've reached here, all the children are valid
         return True
-        
