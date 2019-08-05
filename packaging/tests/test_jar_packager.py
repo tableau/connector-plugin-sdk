@@ -2,7 +2,6 @@ import unittest
 import os.path
 from pathlib import Path
 
-from .jar_packager import create_jar
 from package.jar_jdk_packager import jdk_create_jar
 from package.connector_file import ConnectorFile
 
@@ -23,7 +22,7 @@ class TestJarPackager(unittest.TestCase):
         dest_dir = TEST_FOLDER / Path("packaged-connector/")
         package_name = "test.taco"
 
-        create_jar(source_dir, files_list, package_name, dest_dir)
+        jdk_create_jar(source_dir, files_list, package_name, dest_dir)
 
         path_to_test_file = dest_dir / Path(package_name)
         self.assertTrue(os.path.isfile(path_to_test_file), "taco file doesn't exist")
