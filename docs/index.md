@@ -29,4 +29,4 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 You need to do these things before you start:
 
 - Install the ODBC or JDBC driver that you’ll use with the connector you’ll create.
-- Install Tableau Desktop 2019.2 on a Windows or Mac computer.
+- Install Tableau Desktop 2019.2 or later on a Windows or Mac computer.
