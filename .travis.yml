@@ -12,6 +12,7 @@ install:
 
 script:
   - cd tdvt/test && python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+  - cd packaging && python setup.py test
 
 jobs:
   include:
