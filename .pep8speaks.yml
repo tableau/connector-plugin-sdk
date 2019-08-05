@@ -1,0 +1,19 @@
+scanner:
+    linter: flake8
+
+flake8:
+    max-line-length: 120  # Default is 79 in PEP 8
+
+no_blank_comment: False
+descending_issues_order: True
+
+message:  # Customize the comment made by the bot
+    opened:  # Messages when a new PR is submitted
+        header: "Hi, @{name}! Thanks for opening this PR! "
+                # The keyword {name} is converted into the author's username
+        footer: "For reference: [Error Code Reference](https://pycodestyle.readthedocs.io/en/latest/intro.html#error-codes), [PEP8](https://pep8.org/), [Python code style](https://docs.python-guide.org/writing/style/)"
+                # The messages can be written as they would over GitHub
+    updated:  # Messages when new commits are added to the PR
+        header: "Thanks for updating the PR. "
+        footer: ""  # Why to comment the link to the style guide everytime? :)
+    no_errors: "No PEP 8 issues detected in this PR! Nice job! "

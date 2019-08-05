@@ -2,14 +2,16 @@
 
 ## Usage
 
-### Install package Module
-The recommendation is to install package within a Python virtual environment. See section Setup Virtual Environment below to create and activate a virtual environment.
+### Install `package` Module
+The recommendation is to install `package` within a Python virtual environment. See section Setup Virtual Environment below to create and activate a virtual environment.
 
 ```
 (.venv) PS connector-plugin-sdk\packaging> python setup.py install
 ```
 
 ### Run package Module
+
+The `package` tool must be run from the `connector-plugin-sdk/packaging/` directory or it will throw an error message.
 
 To package the connector and sign it:
 ```
@@ -56,7 +58,7 @@ optional arguments:
 ## Development
 
 ### Select Python Installation
-If not installed, download and install Python 3.7 or greater: https://www.python.org/downloads/  Add to PATH or in IDE console.
+The `package` tool is developed against Python 3.7.3, which can be downloaded at https://www.python.org/downloads/. After installation, add Python to your PATH or in IDE console.
 
 Example: .vscode\settings.json
 ```javascript
@@ -66,7 +68,7 @@ Example: .vscode\settings.json
 }
 ```
 ### Setup Virtual Environment
-[Create]((https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments)) a virtual environment using Python [venv](https://docs.python.org/3/library/venv.html) command. Note: example commands are Windows specific.
+[Create](https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments) a virtual environment using Python's [venv](https://docs.python.org/3/library/venv.html) command. Note: example commands are Windows specific.
 ```
 PS connector-plugin-sdk\packaging> py -3 -m venv .venv
 ```
@@ -76,7 +78,7 @@ Activate the virtual environment.
 PS connector-plugin-sdk\packaging> .\.venv\Scripts\activate
 ```
 
-Verify python version is greater than 3.7.
+Verify Python version is 3.7.3 or higher.
 ```
 (.venv) PS connector-plugin-sdk\packaging> python --version
 Python 3.7.3
@@ -103,6 +105,3 @@ For reference, to deactivate the virtual environment in the future.
 ```
 (.venv) PS connector-plugin-sdk\packaging> python -m package.package
 ```
-
-#### Notes
-- https://stackoverflow.com/a/47559925

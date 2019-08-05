@@ -15,6 +15,8 @@ ALIAS_PWD_PROMPT_LENGTH = len("Enter key password for : ")
 def validate_signing_input(input_dir, taco_name, alias, keystore):
     """
     Validate signing input
+
+    :return: Boolean
     """
 
     if not alias:
@@ -26,8 +28,7 @@ def validate_signing_input(input_dir, taco_name, alias, keystore):
         return False
 
     if not os.path.isfile(input_dir/taco_name):
-        logger.error(
-            "Signing Error: Taco file to be signed has been deleted or doesn't exist")
+        logger.error("Signing Error: Taco file to be signed has been deleted or doesn't exist")
         return False
 
     return True
@@ -81,10 +82,8 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
         alias_pwd_bytes = pwd_input[1]
 
     # Start jarsigner subprocess
-    args = ["jarsigner", "-keystore", keystore,
-            str(input_dir/taco_name), alias]
-    p = subprocess.Popen(args, stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    args = ["jarsigner", "-keystore", keystore, str(input_dir/taco_name), alias]  # noqa: E226
+    p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
     # Pass keystore and alias password to jarsigner subprocess
     p.stdin.write(ks_pwd_bytes)
@@ -110,8 +109,7 @@ def jdk_sign_jar(input_dir, taco_name, alias, keystore):
     p.wait()
 
     if p.returncode == 0:
-        logger.info("taco was signed as " + taco_name +
-                    " at " + str(os.path.abspath(input_dir)))
+        logger.info("taco was signed as " + taco_name + " at " + str(os.path.abspath(input_dir)))
         return True
     else:
         return False
