@@ -41,9 +41,6 @@ class TdvtTestConfig(object):
         if args.verbose:
             self.verbose = args.verbose
 
-    def get_password_file_name(self):
-        return get_resource_full_path(get_root_dir(), self.suite_name + ".password", "tds")
-
     def init_from_json(self, json):
         self.tested_sql = json['tested_sql']
         self.tested_tuples = json['tested_tuples']

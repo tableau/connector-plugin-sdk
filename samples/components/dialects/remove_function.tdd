@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dialect name='SampleMysql'
+         class='mysql_odbc_sample'
+         base='MySQL41UnicodeDriverDialect'
+         version='18.1'>
+   <function-map>
+    <!-- Since the base dialect defines FIND with a real argument, you need to remove that version and define the integer version. This need may vary based on how the base dialect defines the function.-->
+    <function group='string' name='FIND' return-type='int'>
+      <formula>IF(ISNULL(%3), NULL, LOCATE(%2, %1, %3))</formula>
+      <argument type='str' />
+      <argument type='str' />
+      <argument type='int' />
+    </function>
+    <remove-function name='FIND'>
+      <argument type='str' />
+      <argument type='str' />
+      <argument type='real' />
+    </remove-function>
+   </function-map>
+ </dialect>
+

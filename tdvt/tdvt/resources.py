@@ -8,7 +8,7 @@ import tempfile
 def make_temp_dir(components):
     component_string = reduce(lambda x,y : str(x) + y, components)
     return tempfile.mkdtemp(prefix=hashlib.sha224(component_string.encode()).hexdigest())
-    
+
 def get_ini_file_names(base_ini_name):
     return (base_ini_name + '.ini', base_ini_name + '_override.ini')
 
@@ -29,7 +29,7 @@ def get_ini_path(base_ini_dir, base_ini_name):
     config_file, config_file_override = get_ini_file_names(base_ini_name)
     if config_file_override in ini_files:
         config_file = config_file_override
-    
+
     return pkg_resources.resource_filename(__name__, base_ini_dir + '/' + config_file)
 
 def get_local_test_dir():
@@ -106,7 +106,7 @@ def get_logical_test_file_paths(test_file, output_dir):
     new_base_filename = ".".join(expected_base_filename.split(".")[:-2]) + ".xml"
     #eg setup.bugs.b1713.dbo-combined.xml
     expected_output_filename = expected_base_filename.replace('.xml', '-combined.xml')
-    
+
     temp_output_dir = output_dir if output_dir else expected_base_dir
     #eg full path to above file.
     existing_output_filepath = os.path.join(temp_output_dir, expected_output_filename)
@@ -116,12 +116,12 @@ def get_logical_test_file_paths(test_file, output_dir):
     new_output_filepath = os.path.join(temp_output_dir, new_output_filename)
     #Full path the expected file.
     new_base_filepath = os.path.join(expected_base_dir, new_base_filename)
-    
+
     return existing_output_filepath, new_output_filepath, new_base_filename, new_base_filepath, expected_output_dir
 
 def get_test_file_paths(root_directory, test_name, output_dir):
     """Given a test name like 'exprtests/setup.calcs_data.txt', return full paths to the setup file its self, any actual file, and a list of any existing expected files (can be numbered)."""
-    
+
     #d:\...\tdvt\exprtests
     test_path_base = os.path.join(root_directory, os.path.split(test_name)[0])
     test_name = os.path.split(test_name)[1]
@@ -172,7 +172,7 @@ def find_file_path(root_directory, base_file, default_dir):
     path_inferred = os.path.join(path_inferred, base_file)
     return path_inferred
 
-def get_resource_full_path(root_directory, base_name, default_dir): 
+def get_resource_full_path(root_directory, base_name, default_dir):
     #First look for a local file (in the place you ran this module, not in the module installation dir).
     local_file = find_file_path(os.getcwd(), base_name, default_dir)
     if os.path.isfile(local_file):
@@ -184,5 +184,5 @@ def get_base_test(test_file):
 
 def get_tds_full_path(root_directory, tds):
     """Return the full path to the tds file to use for this test run."""
-    return get_resource_full_path(root_directory, tds, "tds") 
+    return get_resource_full_path(root_directory, tds, "tds")
 

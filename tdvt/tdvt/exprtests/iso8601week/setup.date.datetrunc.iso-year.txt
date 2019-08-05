@@ -32,3 +32,6 @@ DATETRUNC('iso-year', #2018-12-29#) // Sunday, 2018-W52
 // only that it doesn't error out with an invalid query.
 DATEPART('year', DATETRUNC('iso-year', #2018-01-01#))
 DATETRUNC('year', DATETRUNC('iso-year', #2018-01-01#))
+
+// Test without literal to test non-empty groupby clause
+DATETRUNC('iso-year', [date2])

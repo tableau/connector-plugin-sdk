@@ -1,0 +1,42 @@
+<results>
+    <test name='DATEPARSE(&apos;yyyy/MMM/dd HH:mm:ss Z&apos;,&apos;2001/JAN/03 10:13:18 -0800&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1680405592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-03 10:13:18#</value>
+      </tuple>
+    </table>
+  </test>
+      <test name='DATEPARSE(&apos;yyyy/MMM/dd HH:mm:ss ZZ&apos;,&apos;2001/JAN/03 10:13:18 -0800&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1680405592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-03 10:13:18#</value>
+      </tuple>
+    </table>
+  </test>
+      <test name='DATEPARSE(&apos;yyyy/MMM/dd HH:mm:ss ZZZ&apos;,&apos;2001/JAN/03 10:13:18 -0800&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1680405592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-03 10:13:18#</value>
+      </tuple>
+    </table>
+  </test>
+      <test name='DATEPARSE(&apos;yyyy/MMM/dd HH:mm:ss ZZZZZ&apos;,&apos;2001/JAN/03 10:13:18 -8:00&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1680405592)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2001-01-03 10:13:18#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

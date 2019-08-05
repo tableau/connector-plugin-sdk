@@ -139,4 +139,47 @@
       </tuple>
     </table>
   </test>
+  <test name='DATENAME(&apos;iso-year&apos;, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3143865780)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1972&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1974&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1976&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1977&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1980&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1988&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1994&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1995&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1997&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;1998&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2001&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;2002&quot;</value>
+      </tuple>
+    </table>
+  </test>
 </results>

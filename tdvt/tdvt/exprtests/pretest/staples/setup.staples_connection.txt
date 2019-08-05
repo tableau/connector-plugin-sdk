@@ -1,0 +1,2 @@
+//smoke test for staples
+Discount

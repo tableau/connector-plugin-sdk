@@ -8,3 +8,6 @@ DATEPART('iso-weekday', #2014-01-03#) // Friday,    2014-W01
 DATEPART('iso-weekday', #2014-01-04#) // Saturday,  2014-W01
 DATEPART('iso-weekday', #2014-01-05#) // Sunday,    2014-W01
 DATEPART('iso-weekday', #2014-01-06#) // Monday,    2014-W02
+
+// Test without literal to test non-empty groupby clause
+DATEPART('iso-weekday', [date2])
