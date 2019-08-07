@@ -6,6 +6,6 @@
     </authentication-options>
     <db-name-prompt value="Database: " />
     <has-pre-connect-database value="true" />
-    <port-prompt value="Port: " default="VW" />
+    <port-prompt value="Port: " default="27832" />  <!-- 27832===VW FIXME port appears to be numeric ONLY mask in Tableau, defaulting to "VW" does work but then can not update to anything different -->
   </connection-config>
 </connection-dialog>
