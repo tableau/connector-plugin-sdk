@@ -2,10 +2,18 @@
 {
     var params = {};
 
-    params["SERVER"] = '@' + attr["server"] + ',' + attr["port"]; // NOTE implicit tcp_ip protocol
+    if (attr["server"].toLowerCase() == "(local)")  // TODO localhost, etc. check
+    {
+        params["SERVER"] = "(local)";
+        // local connection, no auth specified
+    }
+    else
+    {
+        params["SERVER"] = '@' + attr["server"] + ',' + attr["port"]; // NOTE implicit tcp_ip protocol
+        params["UID"] = attr["username"];
+        params["PWD"] = attr["password"];
+    }
     params["DATABASE"] = attr["dbname"];
-    params["UID"] = attr["username"];
-    params["PWD"] = attr["password"];
 
     var formattedParams = [];
 
