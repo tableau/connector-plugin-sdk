@@ -15,17 +15,17 @@ The `connector-packager` tool must be run from the `connector-plugin-sdk/connect
 
 To package the connector and sign it:
 ```
-(.venv) PS connector-plugin-sdk\connector-packager> python -m package.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
 ```
 
 To package the connector without signing:
 ```
-(.venv) PS connector-plugin-sdk\connector-packager> python -m package.package [path_to_folder] --package-only
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package [path_to_folder] --package-only
 ```
 
 To validate that the xml files are valid:
 ```
-(.venv) PS connector-plugin-sdk\connector-packager> python -m package.package --validate-only [path_to_folder]
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package --validate-only [path_to_folder]
 ```
 
 All command line usage details:
@@ -58,7 +58,7 @@ optional arguments:
 ## Development
 
 ### Select Python Installation
-The `connector-packager` tool is developed against Python 3.7.3, which can be downloaded at https://www.python.org/downloads/. After installation, add Python to your PATH or in IDE console.
+The `connector-packager` tool is developed against Python 3.7, which can be downloaded at https://www.python.org/downloads/. After installation, add Python to your PATH or in IDE console.
 
 Example: .vscode\settings.json
 ```javascript
@@ -78,7 +78,7 @@ Activate the virtual environment.
 PS connector-plugin-sdk\connector-packager> .\.venv\Scripts\activate
 ```
 
-Verify Python version is 3.7.3 or higher.
+Verify Python version is 3.7 or higher.
 ```
 (.venv) PS connector-plugin-sdk\connector-packager> python --version
 Python 3.7.3
@@ -103,5 +103,5 @@ For reference, to deactivate the virtual environment in the future.
 ### Run package Module
 
 ```
-(.venv) PS connector-plugin-sdk\connector-packager> python -m connector-packager.package
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package
 ```

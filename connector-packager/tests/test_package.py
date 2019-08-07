@@ -23,11 +23,10 @@ class TestPackage(unittest.TestCase):
             logging.debug("Removing old test file " + str(Path))
             path_to_test_file.unlink()
 
-        os.system("python connector_packager.package " + str(files_directory) +
+        os.system("python -m connector_packager.package " + str(files_directory) +
                   " --package-only " + " --dest " + str(expected_dest_directory))
 
-        self.assertTrue(path_to_test_file.exists(),
-                        "Packaged connector not found in expected directory")
+        self.assertTrue(path_to_test_file.exists(), "Packaged connector not found in expected directory")
 
         if path_to_test_file.exists():
             path_to_test_file.unlink()
