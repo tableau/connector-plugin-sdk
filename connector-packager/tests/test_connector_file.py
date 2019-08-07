@@ -1,5 +1,5 @@
 import unittest
-from package.connector_file import ConnectorFile
+from connector_packager.connector_file import ConnectorFile
 
 class TestConnectorFile(unittest.TestCase):
 

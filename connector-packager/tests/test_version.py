@@ -1,5 +1,5 @@
 import unittest
-from package import version
+from connector_packager import version
 
 
 class TestPackage(unittest.TestCase):

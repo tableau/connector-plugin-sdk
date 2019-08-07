@@ -3,8 +3,8 @@ import os.path
 from pathlib import Path
 
 from .jar_packager import create_jar
-from package.jar_jdk_packager import jdk_create_jar
-from package.connector_file import ConnectorFile
+from connector_packager.jar_jdk_packager import jdk_create_jar
+from connector_packager.connector_file import ConnectorFile
 
 TEST_FOLDER = Path("tests/test_resources")
 

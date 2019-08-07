@@ -1,8 +1,8 @@
 import unittest
 from pathlib import Path
 
-from package.xml_parser import XMLParser
-from package.connector_file import ConnectorFile
+from connector_packager.xml_parser import XMLParser
+from connector_packager.connector_file import ConnectorFile
 
 TEST_FOLDER = Path("tests/test_resources")
 
