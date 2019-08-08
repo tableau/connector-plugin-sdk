@@ -6,7 +6,7 @@ from .version import __version__
 PATH_ENVIRON = "PATH"
 logger = logging.getLogger(__name__)
 
-def check_jdk_environ_variable(exe_name):
+def check_jdk_environ_variable(exe_name: str) -> bool:
     """
     Check if executable needed in jdk is available
     """
@@ -20,7 +20,7 @@ def check_jdk_environ_variable(exe_name):
     return False
 
 
-def init_logging(log_path, verbose):
+def init_logging(log_path: str, verbose: Optional[bool]) -> logging.Logger:
     # Create logger.
     logging.basicConfig(filename=log_path, level=logging.DEBUG, filemode='w', format='%(asctime)s | %(message)s')
     logger = logging.getLogger()
