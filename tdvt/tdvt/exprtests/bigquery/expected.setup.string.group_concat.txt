@@ -1,11 +1,17 @@
 <results>
   <test name='group_concat([str0])'>
+    <sql>
+      SELECT GROUP_CONCAT([str0]) AS [TEMP_Test__110050038__0_],&#10;  1.1000000000000001 AS [X__alias__0]&#10;FROM [tactile-pulsar-824:TestV1.Calcs] [Calcs]&#10;GROUP BY 2
+    </sql>
+    <query-time>
+      371.000
+    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.bigquery].[TEMP(Test)(110050038)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;FURNITURE,FURNITURE,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,OFFICE SUPPLIES,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY&quot;</value>
+        <value>&quot;OFFICE SUPPLIES,OFFICE SUPPLIES,TECHNOLOGY,TECHNOLOGY,OFFICE SUPPLIES,OFFICE SUPPLIES,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,OFFICE SUPPLIES,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,TECHNOLOGY,FURNITURE,OFFICE SUPPLIES,FURNITURE&quot;</value>
       </tuple>
     </table>
   </test>
