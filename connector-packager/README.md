@@ -2,30 +2,30 @@
 
 ## Usage
 
-### Install `package` Module
-The recommendation is to install `package` within a Python virtual environment. See section Setup Virtual Environment below to create and activate a virtual environment.
+### Install the `connector-packager` Module
+The recommendation is to install `connector-packager` within a Python virtual environment. See section Setup Virtual Environment below to create and activate a virtual environment.
 
 ```
-(.venv) PS connector-plugin-sdk\packaging> python setup.py install
+(.venv) PS connector-plugin-sdk\connector-packager> python setup.py install
 ```
 
 ### Run package Module
 
-The `package` tool must be run from the `connector-plugin-sdk/packaging/` directory or it will throw an error message.
+The `connector-packager` tool must be run from the `connector-plugin-sdk/connector-packager/` directory or it will throw an error message.
 
 To package the connector and sign it:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package [path_to_folder] -a [alias_name] -ks [keystore_file_path]
 ```
 
 To package the connector without signing:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package [path_to_folder] --package-only
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package [path_to_folder] --package-only
 ```
 
 To validate that the xml files are valid:
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package --validate-only [path_to_folder]
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package --validate-only [path_to_folder]
 ```
 
 All command line usage details:
@@ -58,7 +58,7 @@ optional arguments:
 ## Development
 
 ### Select Python Installation
-The `package` tool is developed against Python 3.7.3, which can be downloaded at https://www.python.org/downloads/. After installation, add Python to your PATH or in IDE console.
+The `connector-packager` tool is developed against Python 3.7, which can be downloaded at https://www.python.org/downloads/. After installation, add Python to your PATH or in IDE console.
 
 Example: .vscode\settings.json
 ```javascript
@@ -70,38 +70,38 @@ Example: .vscode\settings.json
 ### Setup Virtual Environment
 [Create](https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments) a virtual environment using Python's [venv](https://docs.python.org/3/library/venv.html) command. Note: example commands are Windows specific.
 ```
-PS connector-plugin-sdk\packaging> py -3 -m venv .venv
+PS connector-plugin-sdk\connector-packager> py -3 -m venv .venv
 ```
 
 Activate the virtual environment.
 ```
-PS connector-plugin-sdk\packaging> .\.venv\Scripts\activate
+PS connector-plugin-sdk\connector-packager> .\.venv\Scripts\activate
 ```
 
-Verify Python version is 3.7.3 or higher.
+Verify Python version is 3.7 or higher.
 ```
-(.venv) PS connector-plugin-sdk\packaging> python --version
+(.venv) PS connector-plugin-sdk\connector-packager> python --version
 Python 3.7.3
 ```
 
 For reference, to deactivate the virtual environment in the future.
 ```
-(.venv) PS connector-plugin-sdk\packaging> deactivate
+(.venv) PS connector-plugin-sdk\connector-packager> deactivate
 ```
 
 ### Install package Module For Development
 ```
-(.venv) PS connector-plugin-sdk\packaging> python setup.py develop
+(.venv) PS connector-plugin-sdk\connector-packager> python setup.py develop
 ```
 
 ### Test package Module
 
 ```
-(.venv) PS connector-plugin-sdk\packaging> python setup.py test
+(.venv) PS connector-plugin-sdk\connector-packager> python setup.py test
 ```
 
 ### Run package Module
 
 ```
-(.venv) PS connector-plugin-sdk\packaging> python -m package.package
+(.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package
 ```

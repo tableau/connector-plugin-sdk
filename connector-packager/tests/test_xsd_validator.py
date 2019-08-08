@@ -2,8 +2,8 @@ import unittest
 import logging
 from pathlib import Path
 
-from package.xsd_validator import validate_all_xml, validate_single_file, get_xsd_file
-from package.connector_file import ConnectorFile
+from connector_packager.xsd_validator import validate_all_xml, validate_single_file, get_xsd_file
+from connector_packager.connector_file import ConnectorFile
 
 logger = logging.getLogger(__name__)
 

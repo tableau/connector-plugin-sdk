@@ -4,7 +4,7 @@ import logging
 from pathlib import Path
 from zipfile import ZipFile
 
-from package.connector_file import ConnectorFile
+from connector_packager.connector_file import ConnectorFile
 from .manifest import Manifest
 
 logger = logging.getLogger(__name__)
