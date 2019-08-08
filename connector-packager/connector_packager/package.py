@@ -12,7 +12,7 @@ from .xml_parser import XMLParser
 PACKAGED_EXTENSION = ".taco"
 
 
-def create_arg_parser():
+def create_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool: package and sign connector files into a single Tableau Connector (" + PACKAGED_EXTENSION + ") file.")  # noqa: E501
     parser.add_argument('input_dir', help='path to directory of connector files to package and sign')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='verbose output', required=False)
