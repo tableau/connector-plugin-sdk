@@ -186,7 +186,7 @@ Verify that the "Download and install the drivers" link appears in the Sign In d
 
 ### Connect to the correct database with the wrong credentials.
 
-Verify that an error message appears: 
+Verify that an error message appears and that it says 'Invalid username or password'. Some features may not work if Tableau cannot correctly interpret a bad password error. In this case you will see a generic error message instead of 'Invalid username or password': 
 
 ![]({{ site.baseurl }}/assets/mt-wrong-cred.png) 
 
