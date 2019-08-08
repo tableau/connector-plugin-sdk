@@ -2,6 +2,7 @@ import os
 import logging
 
 from pathlib import Path
+from typing import List
 from zipfile import ZipFile
 
 from connector_packager.connector_file import ConnectorFile
@@ -10,7 +11,7 @@ from .manifest import Manifest
 logger = logging.getLogger(__name__)
 
 
-def create_jar(source_dir, files, jar_filename, dest_dir):
+def create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: str, dest_dir: str):
     """
     Package JAR file from given files.
 
