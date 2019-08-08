@@ -67,7 +67,7 @@ class Manifest:
 
         stream.write(linesep.encode('utf-8'))
 
-    def get_data(self, linesep=None):
+    def get_data(self, linesep=None) -> bytes:
         """
         Serialize the entire manifest and return it as bytes
         :return bytes
@@ -91,7 +91,7 @@ class Manifest:
         self.clear()
 
 
-def write_key_val(stream, key, val, linesep=os.linesep):
+def write_key_val(stream, key: str, val: str, linesep=os.linesep):
     """
     The MANIFEST specification limits the width of individual lines to
     72 bytes (including the terminating newlines). Any key and value
