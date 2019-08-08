@@ -119,6 +119,61 @@ class BatchQueueWork(object):
     def is_aborted(self):
         return isinstance(self.error_state, TestErrorAbort)
 
+    def process_test_results(self, test_list):
+        # Check the output files.
+        test_count = -1
+        for f in test_list:
+            test_count += 1
+            t = TestResultWork(f, self.test_config.output_dir, self.test_config.logical)
+
+            actual_filepath = t.test_file
+            base_test_filepath = t.test_file
+            existing_output_filepath = self.test_set.get_expected_output_file_path(t.test_file, self.test_config.output_dir)
+
+            # First check for systemic errors and set all the test results to that error.
+            if not os.path.isfile(existing_output_filepath):
+                if self.is_timeout():
+                    self.add_timeout_test_failure(t)
+                    sys.stdout.write('T')
+                    continue
+                elif self.is_aborted():
+                    self.add_aborted_test_failure(t)
+                    sys.stdout.write('A')
+                    continue
+                elif self.is_expected_error():
+                    self.add_expected_test_failure(t)
+                    sys.stdout.write('.')
+                    continue
+                elif self.is_error():
+                    self.add_other_test_failure(t, test_count)
+                    sys.stdout.write('E')
+                    continue
+
+            if self.test_config.logical and os.path.isfile(existing_output_filepath):
+                # Copy the test process filename to the actual. filename.
+                actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(t.test_file,
+                                                                                                    self.test_config.output_dir)
+                logging.debug(self.get_thread_msg() + "Copying test process output {0} to actual file {1}".format(
+                    existing_output_filepath, actual_output_filepath))
+                try_move(existing_output_filepath, actual_output_filepath)
+                base_test_filepath = base_filepath
+                actual_filepath = actual_output_filepath
+
+            if not os.path.isfile(actual_filepath):
+                logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + actual_filepath)
+                sys.stdout.write('?')
+                self.add_missing_test_failure(t)
+                continue
+
+            result = compare_results(t.test_name, base_test_filepath, t.test_file, self)
+            result.relative_test_file = t.relative_test_file
+            result.cmd_output = self.cmd_output
+
+            sys.stdout.write('.' if result.all_passed() else 'F')
+            sys.stdout.flush()
+
+            self.add_test_result(t.test_file, result)
+
     def run(self, test_list):
 
         # Setup a subdirectory for the log files.
@@ -174,67 +229,10 @@ class BatchQueueWork(object):
 
 def do_work(work):
     logging.debug(work.get_thread_msg() + "Running test:" + work.test_name)
+
     final_test_list = work.test_set.generate_test_file_list_from_config()
-    total_time_ms = work.run(final_test_list)
-
-    # Check the output files.
-    test_count = -1
-    for f in final_test_list:
-        test_count += 1
-        t = TestResultWork(f, work.test_config.output_dir, work.test_config.logical)
-
-        actual_filepath = t.test_file
-        base_test_filepath = t.test_file
-        existing_output_filepath = work.test_set.get_expected_output_file_path(t.test_file, work.test_config.output_dir)
-
-        # First check for systemic errors and set all the test results to that error.
-        if not os.path.isfile(existing_output_filepath):
-            if work.is_timeout():
-                work.add_timeout_test_failure(t)
-                sys.stdout.write('T')
-                continue
-            elif work.is_aborted():
-                work.add_aborted_test_failure(t)
-                sys.stdout.write('A')
-                continue
-            elif work.is_expected_error():
-                work.add_expected_test_failure(t)
-                sys.stdout.write('.')
-                continue
-            elif work.is_error():
-                work.add_other_test_failure(t)
-                sys.stdout.write('E')
-                continue
-
-        if work.test_config.logical and os.path.isfile(existing_output_filepath):
-            # Copy the test process filename to the actual. filename.
-            actual_output_filepath, base_filepath = work.test_set.get_actual_and_base_file_path(t.test_file,
-                                                                                                work.test_config.output_dir)
-            logging.debug(work.get_thread_msg() + "Copying test process output {0} to actual file {1}".format(
-                existing_output_filepath, actual_output_filepath))
-            try_move(existing_output_filepath, actual_output_filepath)
-            base_test_filepath = base_filepath
-            actual_filepath = actual_output_filepath
-
-        if not os.path.isfile(actual_filepath):
-            logging.debug(work.get_thread_msg() + "Error: could not find test output file:" + actual_filepath)
-            sys.stdout.write('?')
-            work.add_missing_test_failure(t)
-            continue
-
-        result = compare_results(t.test_name, base_test_filepath, t.test_file, work)
-        result.relative_test_file = t.relative_test_file
-        result.run_time_ms = total_time_ms
-        result.cmd_output = work.cmd_output
-
-        if result == None:
-            result = TestResult(test_file=t.test_file, relative_test_file=t.relative_test_file, test_set=work.test_set)
-            result.error_case = TestErrorStartup()
-
-        sys.stdout.write('.' if result.all_passed() else 'F')
-        sys.stdout.flush()
-
-        work.add_test_result(t.test_file, result)
+    work.run(final_test_list)
+    work.process_test_results(final_test_list)
 
     # If everything passed delete the log files so we don't collect a bunch of useless logs.
     passed = True

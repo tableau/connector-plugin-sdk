@@ -149,7 +149,6 @@ class TestResult(object):
         self.overall_error_message = ''
         self.test_case_map = []
         self.cmd_output = ''
-        self.run_time_ms = 0
         self.relative_test_file = relative_test_file
         self.test_set = test_set
 
@@ -170,7 +169,7 @@ class TestResult(object):
                         test_case_count = 0
                         for line in test_file.readlines():
                             if not re.match(reg_blank, line) and not re.match(reg_comment, line):
-                                test_result = TestCaseResult("Not run", str(test_case_count), "", test_case_count, "Not run", self.error_status, None, self.test_config)
+                                test_result = TestCaseResult("Not run", test_case_count, "", 0, "Not run", self.error_status, None, self.test_config)
                                 self.test_case_map.append(test_result)
                                 test_case_count += 1
                 except IOError:
@@ -216,7 +215,11 @@ class TestResult(object):
             error_type = node.text.strip() if node is not None else ''
 
             node = test_child.find('query-time')
-            query_time = node.text if node is not None else '0'
+            query_time = 0
+            try:
+                query_time = float(node.text if node is not None else '0')
+            except ValueError:
+                pass
 
             node = test_child.find('sql')
             sq = node.text if node is not None else ''
@@ -308,7 +311,10 @@ class TestResult(object):
 
     def get_total_execution_time(self):
         """Time to run all test cases."""
-        return self.run_time_ms
+        total_query_time = 0
+        for tc in self.test_case_map:
+            total_query_time += tc.execution_time
+        return total_query_time
 
     def get_failure_count(self):
         failures = 0
