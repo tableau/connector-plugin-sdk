@@ -11,7 +11,7 @@ from .manifest import Manifest
 logger = logging.getLogger(__name__)
 
 
-def create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: str, dest_dir: str):
+def create_jar(source_dir: Path, files: List[ConnectorFile], jar_filename: str, dest_dir: Path) -> None:
     """
     Package JAR file from given files.
 
@@ -34,11 +34,11 @@ def create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: str, d
     logging.debug("Start packaging " + jar_filename + " from " + str(abs_source_path) + "...")
 
     # if dest dir doesn't exist, then create it
-    if not os.path.exists(dest_dir):
-        os.makedirs(dest_dir)
+    if not dest_dir.exists():
+        dest_dir.mkdir()
         logging.debug("Creating destination directory " + str(dest_dir))
 
-    with ZipFile(os.path.join(dest_dir, Path(jar_filename)), "w") as jar:
+    with ZipFile(dest_dir / jar_filename, "w") as jar:
         jar.writestr("META-INF/", "")
         jar.writestr("META-INF/MANIFEST.MF", Manifest().get_data())
         for file in files:

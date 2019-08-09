@@ -31,7 +31,6 @@ class TestJarPackager(unittest.TestCase):
         if path_to_test_file.exists():
             path_to_test_file.unlink()
 
-
     def test_jdk_create_jar(self):
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
