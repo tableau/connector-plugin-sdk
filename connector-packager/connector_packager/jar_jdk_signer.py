@@ -1,9 +1,13 @@
-import os
-import logging
-import subprocess
-from pathlib import Path
-from .helper import check_jdk_environ_variable
 import getpass
+import logging
+import os
+import subprocess
+
+from pathlib import Path
+from typing import Optional, Tuple
+
+from .helper import check_jdk_environ_variable
+
 
 JARSIGNER_EXECUTABLE_NAME = "jarsigner.exe"
 logger = logging.getLogger(__name__)
@@ -12,7 +16,7 @@ KEYSTORE_PWD_PROMPT_LENGTH = len("Enter Passphrase for keystore: ")
 ALIAS_PWD_PROMPT_LENGTH = len("Enter key password for : ")
 
 
-def validate_signing_input(input_dir, taco_name, alias, keystore):
+def validate_signing_input(input_dir: Path, taco_name: str, alias: Optional[str], keystore: Optional[str]) -> bool:
     """
     Validate signing input
 
@@ -34,7 +38,7 @@ def validate_signing_input(input_dir, taco_name, alias, keystore):
     return True
 
 
-def get_user_pwd(alias):
+def get_user_pwd(alias: str) -> Tuple[bytes, bytes]:
     """
     Let user input password for keystore and alias, which will be used as jarsigner subprocess input
     """
@@ -49,7 +53,7 @@ def get_user_pwd(alias):
         return str.encode(ks_pwd + "\n"), str.encode(alias_pwd + "\n")
 
 
-def jdk_sign_jar(input_dir, taco_name, alias, keystore):
+def jdk_sign_jar(input_dir: str, taco_name: str, alias: str, keystore: str) -> bool:
     """
     Sign a taco using JAVA JDK
 
