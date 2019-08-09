@@ -1,10 +1,15 @@
 import os
 import logging
+
 from pathlib import Path
+from typing import Optional
+
 from .version import __version__
+
 
 PATH_ENVIRON = "PATH"
 logger = logging.getLogger(__name__)
+
 
 def check_jdk_environ_variable(exe_name: str) -> bool:
     """
@@ -16,7 +21,7 @@ def check_jdk_environ_variable(exe_name: str) -> bool:
             return True
 
     logger.error("Java Error: jdk_create_jar: no jdk set up in PATH environment variable, "
-                     "please download JAVA JDK and add it to PATH")
+                 "please download JAVA JDK and add it to PATH")
     return False
 
 
