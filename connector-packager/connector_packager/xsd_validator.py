@@ -1,6 +1,9 @@
 import sys
 import logging
+
 from pathlib import Path
+from typing import List
+
 from xmlschema import XMLSchema
 from xmlschema.validators.exceptions import XMLSchemaException
 
@@ -22,7 +25,7 @@ XSD_DICT = {
 }
 
 
-def validate_all_xml(files_list, folder_path):
+def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool:
     """"
     Arguments:
         files_list {list[ConnectorFile]} -- List of files to validate
@@ -72,7 +75,8 @@ def validate_all_xml(files_list, folder_path):
 
     return xml_violations_found <= 0
 
-def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
+
+def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
     """
     Arguments:
         file_to_test {ConnectorFile} -- path to a single file to test
@@ -115,7 +119,7 @@ def validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
 
 
 # Return the XSD file to test against
-def get_xsd_file(file_to_test):
+def get_xsd_file(file_to_test: ConnectorFile) -> str:
     """
     Arguments:
         file_to_test {ConnectorFile} -- the file we want to find an XSD file for
