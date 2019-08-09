@@ -4,6 +4,8 @@ import subprocess
 import shutil
 
 from pathlib import Path
+from typing import List
+
 from .connector_file import ConnectorFile
 from .helper import check_jdk_environ_variable
 
@@ -11,7 +13,7 @@ JAR_EXECUTABLE_NAME = "jar.exe"
 logger = logging.getLogger(__name__)
 
 
-def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
+def jdk_create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: str, dest_dir: str) -> bool:
     """
     Package JAR file from given files using JAVA JDK
 
