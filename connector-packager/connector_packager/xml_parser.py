@@ -1,6 +1,10 @@
 import logging
-from pathlib import Path
+from typing import List, Optional
+
 import xmlschema
+
+from pathlib import Path
+
 from defusedxml.ElementTree import parse,ParseError
 
 from .connector_file import ConnectorFile
@@ -24,12 +28,11 @@ class XMLParser:
 
     def __init__(self, path_to_folder):
         self.path_to_folder = path_to_folder
-        self.class_name = None # Get this from the class name in the manifest file
-        self.file_list = [] # list of files to package
-        self.loc_strings = [] #list of loc strings so we can make sure they are covered in the resource files.
+        self.class_name = None  # Get this from the class name in the manifest file
+        self.file_list = []  # list of files to package
+        self.loc_strings = []  # list of loc strings so we can make sure they are covered in the resource files.
 
-
-    def generate_file_list(self):
+    def generate_file_list(self) -> Optional[List[ConnectorFile]]:
         """
         Arguments:
             None
@@ -99,7 +102,7 @@ class XMLParser:
 
         return self.file_list
 
-    def parse_file(self, file_to_parse):
+    def parse_file(self, file_to_parse: ConnectorFile) -> bool:
         """"
         Arguments:
             file_to_parse {ConnectorFile} -- file to parse
