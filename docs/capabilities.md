@@ -100,6 +100,7 @@ CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subqu
 
 Capability | Description | Default | Recommended 
 -|-|-|-
+CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING | Set to 'yes' to allow Tableau to detect and recover from a JDBC data source that reports the field names in a result set using only upper-case or lower-case characters, instead of the expected field names.  | no | &ndash; 
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
 CAP_JDBC_EXPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable use of parallel loops to translate Tableau DataValues to wire buffers on exports | yes | yes 
 CAP_JDBC_JNI_FETCH_SIZE_SMALL | Set to ‘yes’ to Fetch 10 rows per JNI call | &ndash; | &ndash;  
