@@ -53,12 +53,12 @@ def get_user_pwd(alias: str) -> Tuple[bytes, bytes]:
         return str.encode(ks_pwd + "\n"), str.encode(alias_pwd + "\n")
 
 
-def jdk_sign_jar(input_dir: str, taco_name: str, alias: str, keystore: str) -> bool:
+def jdk_sign_jar(input_dir: Path, taco_name: str, alias: str, keystore: str) -> bool:
     """
     Sign a taco using JAVA JDK
 
     :param input_dir: source dir of taco file to be signed
-    :type input_dir: str
+    :type input_dir: Path
 
     :param taco_name: taco file name
     :type taco_name: str
