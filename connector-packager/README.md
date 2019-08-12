@@ -89,18 +89,21 @@ For reference, to deactivate the virtual environment in the future.
 (.venv) PS connector-plugin-sdk\connector-packager> deactivate
 ```
 
-### Install package Module For Development
+### Install `connector-packager` Module For Development
 ```
 (.venv) PS connector-plugin-sdk\connector-packager> python setup.py develop
 ```
 
-### Test package Module
+### Enable type hint checking in your editor
+The [Pyright](https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyright) VS Code extension is recommended; PyCharm should be able to check type hints without installing any extensions.
+
+### Test `connector-packager` Module
 
 ```
 (.venv) PS connector-plugin-sdk\connector-packager> python setup.py test
 ```
 
-### Run package Module
+### Run the `connector-packager` Module
 
 ```
 (.venv) PS connector-plugin-sdk\connector-packager> python -m connector_packager.package
