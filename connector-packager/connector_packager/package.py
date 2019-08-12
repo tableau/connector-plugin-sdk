@@ -6,8 +6,7 @@ from pathlib import Path
 
 from .helper import init_logging
 from .jar_jdk_packager import jdk_create_jar
-from .jar_jdk_signer import validate_signing_input
-from .jar_jdk_signer import jdk_sign_jar
+from .jar_jdk_signer import jdk_sign_jar, validate_signing_input
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
 
