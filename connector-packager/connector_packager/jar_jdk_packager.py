@@ -13,7 +13,7 @@ JAR_EXECUTABLE_NAME = "jar.exe"
 logger = logging.getLogger(__name__)
 
 
-def jdk_create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: str, dest_dir: str) -> bool:
+def jdk_create_jar(source_dir: Path, files: List[ConnectorFile], jar_filename: str, dest_dir: Path) -> bool:
     """
     Package JAR file from given files using JAVA JDK
 
@@ -35,7 +35,7 @@ def jdk_create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: st
     if not check_jdk_environ_variable(JAR_EXECUTABLE_NAME):
         return False
 
-    abs_source_path = os.path.abspath(source_dir)
+    abs_source_path = source_dir.resolve()
     logging.debug("Start packaging " + jar_filename + " from " + str(abs_source_path) + " using JDK")
 
     if not os.path.exists(dest_dir):
@@ -48,8 +48,7 @@ def jdk_create_jar(source_dir: str, files: List[ConnectorFile], jar_filename: st
     p = subprocess.Popen(args, cwd=abs_source_path)
     p.wait()
 
-    shutil.move(abs_source_path/Path(jar_filename), dest_dir/jar_filename)
+    shutil.move(abs_source_path/jar_filename, dest_dir/jar_filename)
 
     logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
     return True
-
