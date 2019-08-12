@@ -7,7 +7,6 @@ import xml.etree.ElementTree as ET
 
 from .jar_packager import create_jar
 from connector_packager.jar_jdk_packager import jdk_create_jar
-from connector_packager.jar_jdk_packager import stamp_min_support_version
 from connector_packager.connector_file import ConnectorFile
 from connector_packager.version import __min_version_tableau__
 
@@ -63,7 +62,7 @@ class TestJarPackager(unittest.TestCase):
 
         manifest = ET.parse(path_to_extracted_manifest)
         self.assertEqual(manifest.getroot().get("min-version-tableau"),
-                         __min_version_tableau__,  "wrong min-version-tableau attr or doesn't exist")
+                         __min_version_tableau__, "wrong min-version-tableau attr or doesn't exist")
 
         if dest_dir.exists():
             shutil.rmtree(dest_dir)
