@@ -1,12 +1,17 @@
 import unittest
 import os.path
 from pathlib import Path
+import subprocess
+import shutil
+import xml.etree.ElementTree as ET
 
 from .jar_packager import create_jar
 from connector_packager.jar_jdk_packager import jdk_create_jar
 from connector_packager.connector_file import ConnectorFile
+from connector_packager.version import __min_version_tableau__
 
 TEST_FOLDER = Path("tests/test_resources")
+MANIFEST_FILE_NAME = "manifest.xml"
 
 
 class TestJarPackager(unittest.TestCase):
@@ -28,9 +33,8 @@ class TestJarPackager(unittest.TestCase):
         path_to_test_file = dest_dir / Path(package_name)
         self.assertTrue(os.path.isfile(path_to_test_file), "taco file doesn't exist")
 
-        if path_to_test_file.exists():
-            path_to_test_file.unlink()
-
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
 
     def test_jdk_create_jar(self):
         files_list = [
@@ -49,5 +53,16 @@ class TestJarPackager(unittest.TestCase):
         path_to_test_file = dest_dir / Path(package_name)
         self.assertTrue(os.path.isfile(path_to_test_file), "taco file doesn't exist")
 
-        if path_to_test_file.exists():
-            path_to_test_file.unlink()
+        # test min support tableau version is stamped
+        args = ["jar", "xf", package_name, MANIFEST_FILE_NAME]
+        p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
+        self.assertEqual(p.wait(), 0, "can not extract manfifest file from taco")
+        path_to_extracted_manifest = dest_dir / MANIFEST_FILE_NAME
+        self.assertTrue(os.path.isfile(path_to_extracted_manifest), "extracted manifest file doesn't exist")
+
+        manifest = ET.parse(path_to_extracted_manifest)
+        self.assertEqual(manifest.getroot().get("min-version-tableau"),
+                         __min_version_tableau__, "wrong min-version-tableau attr or doesn't exist")
+
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
