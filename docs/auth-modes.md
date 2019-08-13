@@ -228,15 +228,16 @@ Note: the ```value``` attribute value for all options is customizable by connect
 
 When using 'hadoophive' or 'spark' as a base class there are additional constraints and requirements in the Connection Dialog and Connection Resolver.
 
-The Connection Dialog authentication options ```option``` element's ```value``` attribute's value must match below.
+In the Connection Dialog, any authentication ```option``` elements used must match the definition below.
 
 ```xml
 <!-- Connection Dialog -->
-<authentication-options>
-    <option name="None" value="0" />
-    <option name="Username" value="2" />
-    <option name="UsernameAndPassword" value="3" />
-</authentication-options>
+
+<!-- <authentication-options> -->
+<option name="None" value="0" />
+<option name="Username" value="2" />
+<option name="UsernameAndPassword" value="3" />
+<!-- </authentication-options> -->
 ```
 
 The Connection Resolver needs to include the additional required attribute ```authentication-type```.
