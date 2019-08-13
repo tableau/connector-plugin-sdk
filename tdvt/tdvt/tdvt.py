@@ -368,6 +368,9 @@ def usage_text():
     The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
         py -3 -m tdvt.tdvt --run postgres --verify
 
+    The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
+        tdvt_runner --run postgres --verify
+
     Both logical and expression tests are run by default.
     Run all sqlserver expression tests
         py -3 -m tdvt.tdvt -e --run sqlserver
