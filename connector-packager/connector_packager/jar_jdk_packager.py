@@ -12,8 +12,8 @@ from .version import __min_version_tableau__
 JAR_EXECUTABLE_NAME = "jar.exe"
 logger = logging.getLogger(__name__)
 MANIFEST_FILE_TYPE = "manifest"
-MANIFEST_FILE_NAME = "manifest.xml"
-MANIFEST_FILE_COPY_NAME = "manifest_copy.xml"
+MANIFEST_FILE_NAME = MANIFEST_FILE_TYPE + ".xml"
+MANIFEST_FILE_COPY_NAME = MANIFEST_FILE_TYPE + "_copy.xml"
 MANIFEST_ROOT_ELEM = "connector-plugin"
 MIN_TABLEAU_VERSION_ATTR = "min-version-tableau"
 
