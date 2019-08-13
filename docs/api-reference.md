@@ -91,8 +91,10 @@ _Attribute names_
 
 | Attribute                  | Description                                                        |
 | -------------------------- | ------------------------------------------------------------------ |
-| authentication             | Connection attribute for the authentication type                   |
+| authentication             | Connection attribute for the authentication mode                   |
+| authentication-type        | Connection attribute for the authentication type                   |
 | dbname                     | Connection attribute for the database                              |
+| odbc-connect-string-extras | Connection attribute for extra connection string options           |
 | password                   | Connection attribute for the password                              |
 | port                       | Connection attribute for the port                                  |
 | server                     | Connection attribute for the server                                |
@@ -101,7 +103,6 @@ _Attribute names_
 | sslmode                    | Connection attribute for the SSL Mode                              |
 | username                   | Connection attribute for the user name                             |
 | warehouse                  | Connection attribute for the Warehouse                             |
-| odbc-connect-string-extras | Connection attribute for extra connection string options           |
 
 #### JavaScript function call signature:
 
