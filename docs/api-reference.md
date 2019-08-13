@@ -80,9 +80,29 @@ Determines if two sets of required connection attributes match. This is optional
 
 ### connection-normalizer
 
-Defines the unique set of connection attributes. This is used to generate a connection "key".
+Defines the unique set of connection attributes which is used to generate a connection "key" and has important security considerations. Connections can be reused and shared within Tableau processes based on this key, so it must contain attributes whose values will be unique in a given security context. Username is a commonly used attribute that will make a unique connection for each user, for example.
 
 **Type:** JavaScript or XML
+
+XML is prefered since it is more performant and normalization is done many times per connection.
+The following table shows the most commonly used attributes. Custom attributes may also be added in the XML.
+
+_Attribute names_
+
+| Attribute                  | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------ |
+| authentication             | Connection attribute for the authentication mode                   |
+| authentication-type        | Connection attribute for the authentication type                   |
+| dbname                     | Connection attribute for the database                              |
+| odbc-connect-string-extras | Connection attribute for extra connection string options           |
+| password                   | Connection attribute for the password                              |
+| port                       | Connection attribute for the port                                  |
+| server                     | Connection attribute for the server                                |
+| service                    | Connection attribute for the service                               |
+| sslcert                    | Connection attribute for the SSL Certfile                          |
+| sslmode                    | Connection attribute for the SSL Mode                              |
+| username                   | Connection attribute for the user name                             |
+| warehouse                  | Connection attribute for the Warehouse                             |
 
 #### JavaScript function call signature:
 
@@ -92,10 +112,10 @@ Defines the unique set of connection attributes. This is used to generate a conn
 {"server" : "myserver.somewhere.net", "username" : "myusername"}
 ```
 
-**Return:** vector of attribute names. The following default values are recommended for most cases.
+**Return:** vector of attribute names. The following example values are common for username and password authentication.
 
 ```javascript
-["class", "server", "port", "dbname", "username", "password"];
+["server", "port", "dbname", "username", "password"];
 ```
 
 ---
