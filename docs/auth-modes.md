@@ -157,7 +157,7 @@ User is prompted for username and password during initial connection creation, a
 
 User is prompted for which authentication option to use, then a set of fields appear, conditional on that option.  Depending on the option selected the user may or may not be prompted for credentials when reconnecting to the data source.
 
-Support authention options are: 
+Supported authentication options are: 
 ```
 None
 Username
@@ -181,7 +181,7 @@ LDAP
 </connection-dialog>
 ```
 
-Note: the ```value``` attribute value for all options are customizable by connector author, except None, which is required to be ```auth-none```.  These option values are the persisted value of the authentication attribute in a Tableau Workbook (twb) or Tableau Data Source (tds) file. 
+Note: the ```value``` attribute value for all options is customizable by connector author, except None, which is required to be ```auth-none```.  These option values are the persisted value of the authentication attribute in a Tableau workbook (twb) or Tableau data source (tds) file. 
 
 ```xml
 <!-- Connection Resolver -->
