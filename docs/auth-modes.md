@@ -88,6 +88,8 @@ User is prompted for username during initial connection creation.
 
 ### Password only 
 
+##### Tableau 2019.4 or newer
+
 User is prompted for password during initial connection creation and reconnecting to the data source.
 
 ```xml
@@ -118,6 +120,7 @@ User is prompted for password during initial connection creation and reconnectin
     ...
 </tdr>
 ```
+
 
 ### Username and Password
 
@@ -157,7 +160,8 @@ User is prompted for username and password during initial connection creation, a
 
 User is prompted for which authentication option to use, then a set of fields appear, conditional on that option.  Depending on the option selected the user may or may not be prompted for credentials when reconnecting to the data source.
 
-Supported authentication options are: 
+Supported authentication options are below.  ```Password``` option is supported in 2019.4 or newer.
+ 
 ```
 None
 Username
