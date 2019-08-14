@@ -506,4 +506,4 @@ Check that any *date-format* elements in your TDD file have a valid *name*. See 
 
 ### The agg.countd expression test and the join.null.int logical tests are failing
 
-Check that your database is correctly retuning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
+Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
