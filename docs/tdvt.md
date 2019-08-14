@@ -503,3 +503,7 @@ If all the logical queries fail it can mean that you don't have the right logica
 ### Logic Assert in DatepartFunction.cpp
 
 Check that any *date-format* elements in your TDD file have a valid *name*. See [Creating a TDD File](https://tableau.github.io/connector-plugin-sdk/docs/dialect)
+
+### The agg.countd expression test and the join.null.int logical tests are failing
+
+Check that your database is correctly retuning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.

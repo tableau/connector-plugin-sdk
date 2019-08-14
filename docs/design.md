@@ -90,3 +90,4 @@ A common example is filtering the top 3 regions by sum of sales. You can try thi
 ### NULL column metadata
 
 Tableau relies on accurate column metadata from the ODBC or JDBC result set in order to make certain query optimizations. Tableau may generate inefficient or incorrect queries if information about whether a column contains Null values is inaccurate. If your database does not support Null column information then it is safer to indicate that all columns contain Null values. This will ensure that Tableau does not generate an optimized query that actually returns incorrect results.
+Tableau uses 'SQLColAttribute' with 'SQL_DESC_NULLABLE' on the result set metadata for ODBC connections and the 'isNullable' method on the 'ResultSetMetaData' object for JDBC.
