@@ -17,10 +17,7 @@ Here is an example of a Tableau Custom Dialog (.tcd) file with localized strings
 <!-- Connection Dialog -->
 <connection-dialog class='sample'>
   <connection-config>
-    <authentication-mode value='Basic' />
-    <authentication-options>
-      <option name="UsernameAndPassword" default="true" />
-    </authentication-options>
+    ...
     <db-name-prompt value="@string/database_prompt/" />
     <port-prompt value="@string/port_prompt/" default="5432" />
   </connection-config>
