@@ -5,6 +5,14 @@
     <vendor name="vendor"/>
     <driver name="driver"/>
     <customizations>
+
+      <!--
+      look at odbc connector and review CAP_ODBC_* for corresponding jdbc entries
+      these are now documented as of mid Aug 2019 at
+      https://tableau.github.io/connector-plugin-sdk/docs/capabilities.html#jdbc
+      -->
+      <customization name="CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING" value="yes"/>
+
       <customization name="CAP_SELECT_INTO" value="yes"/>
       <customization name="CAP_SELECT_TOP_INTO" value="yes"/>
       <customization name="CAP_CREATE_TEMP_TABLES" value="yes"/>
@@ -30,7 +38,6 @@
       <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
       <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' /> <!-- Added to support LOD in Desktop dashboards- not clear from docs why this impacts LoD, no change to test suite results -->
       <customization name='CAP_QUERY_SORT_BY_DEGREE' value='yes' />
-	    <customization name='CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING' value='yes' />
 
     </customizations>
   </connection-customization>

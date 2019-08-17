@@ -6,6 +6,13 @@
     <driver name="driver"/>
     <customizations>
 
+      <!-- See https://tableau.github.io/connector-plugin-sdk/docs/capabilities.html for capabilities names and explanations -->
+      <!--
+      consider CAP_ODBC_METADATA_SKIP_DESC_TYPE_NAME
+      consider CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY / CAP_ODBC_METADATA_SUPPRESS_PREPARED_QUERY ?
+      consider CAP_ODBC_METADATA_SUPPRESS_SELECT_STAR?
+      -->
+      <customization name="CAP_ODBC_BIND_DETECT_ALIAS_CASE_FOLDING" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10" value="yes"/>
       <customization name="CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION" value="yes"/>
       <customization name="CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES" value="yes"/>  <!-- May be present - not installed by default -->
