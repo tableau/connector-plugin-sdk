@@ -30,6 +30,7 @@
       <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
       <customization name='CAP_QUERY_SELECT_ALIASES_SORTED' value='yes' /> <!-- Added to support LOD in Desktop dashboards- not clear from docs why this impacts LoD, no change to test suite results -->
       <customization name='CAP_QUERY_SORT_BY_DEGREE' value='yes' />
+	    <customization name='CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING' value='yes' />
 
     </customizations>
   </connection-customization>
