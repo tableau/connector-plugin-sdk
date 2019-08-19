@@ -254,8 +254,9 @@ class TestConfig(object):
     """
         Defines all the tests that can be run for a single data source. An organized collection of TestSet objects.
     """
-    def __init__(self, dsname, logical_config_name, maxthread, maxsubthread, d_override='', run_as_perf=False):
+    def __init__(self,dsname, timeout_seconds, logical_config_name, maxthread, maxsubthread, d_override='', run_as_perf=False):
         self.dsname = dsname
+        self.timeout_seconds = timeout_seconds
         self.logical_config_name = logical_config_name
         self.calcs_tds = self.get_tds_name('cast_calcs.')
         self.staples_tds = self.get_tds_name('Staples.')
@@ -274,6 +275,9 @@ class TestConfig(object):
 
     def get_config_name(self, prefix):
         return prefix + self.dsname
+
+    def get_time_out_seconds(self):
+        return self.timeout_seconds
 
     def get_logical_test_path(self, prefix):
         return prefix + self.logical_config_name + '.xml'
