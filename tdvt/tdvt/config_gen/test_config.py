@@ -276,9 +276,6 @@ class TestConfig(object):
     def get_config_name(self, prefix):
         return prefix + self.dsname
 
-    def get_time_out_seconds(self):
-        return self.timeout_seconds
-
     def get_logical_test_path(self, prefix):
         return prefix + self.logical_config_name + '.xml'
 
