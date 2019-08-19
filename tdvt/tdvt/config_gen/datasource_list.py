@@ -163,9 +163,8 @@ def load_test(config, test_dir=get_root_dir()):
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
-    test_config = TestConfig(config_name, dsconfig.getint('TimeoutSeconds', 60 * 60) , dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'),
-                             dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''),
-                             dsconfig.getboolean('RunAsPerf', False))
+    test_config = TestConfig(config_name, dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'),
+                             dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
 
     # Add the standard test suites.
     if standard_tests in config.sections():
@@ -435,3 +434,4 @@ class LinuxRegistry(TestRegistry):
 
     def __init__(self):
         super(LinuxRegistry, self).__init__('linux')
+        
