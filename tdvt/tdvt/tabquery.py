@@ -3,7 +3,6 @@ import sys
 
 from .resources import *
 tab_cli_exe = ''
-logical_rewrite_appoption = ''
 
 def configure_tabquery_path():
     """Setup the tabquery path from ini settings."""
@@ -72,14 +71,9 @@ class TabqueryCommandLine(object):
             for override in work.test_config.d_override.split(' '):
                 cmdline.extend([override])
 
-        logical_rewrite_iter = next((i for i in cmdline if i.find("-DLogicalQueryRewriteDisable")), None)
-        if logical_rewrite_iter == None:
-            #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-            #that tests what you would expect.
-            cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
-            logical_rewrite_appoption = '-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'
-        else:
-            logical_rewrite_appoption = str(logical_rewrite_iter)
+        #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
+        #that tests what you would expect.
+        cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall,Aggregate:MoveGroupBysToMeasures"])
 
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
