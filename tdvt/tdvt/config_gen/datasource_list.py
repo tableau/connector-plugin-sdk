@@ -128,7 +128,7 @@ def load_test(config, test_dir=get_root_dir()):
     [NewExpressionTest2]
     SmokeTest = True  # tests are treated as smoke tests if SmokeTest = True
     Enabled = False # If set to False, the test is marked `D`, not run, and counted as a fail.
-    
+
     [LogicalConfig]
     Name = mydb_config
     key = value
@@ -136,6 +136,7 @@ def load_test(config, test_dir=get_root_dir()):
     [ConnectionTests]
     CastCalcsTestEnabled = True  # by default these two values are True; set `False` if disabling a test.
     StaplesTestEnabled = False
+
     """
     CALCS_TDS = 'cast_calcs.'
     STAPLES_TDS = 'Staples.'
