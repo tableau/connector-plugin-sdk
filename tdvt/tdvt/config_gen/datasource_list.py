@@ -1,5 +1,6 @@
 """
     Register datasources for use with TDVT runner.
+
 """
 
 import configparser
@@ -100,28 +101,38 @@ def load_test(config, test_dir=get_root_dir()):
     Name = bigquery
     LogicalQueryFormat = bool_
     CommandLineOverride =
+
     [StandardTests]
     LogicalExclusions_Calcs =
     LogicalExclusions_Staples = Filter.Trademark
     ExpressionExclusions_Standard = string.char,dateparse
+
     [LODTests]
     LogicalExclusions_Staples =
     ExpressionExclusions_Calcs =
+
     [StaplesDataTest]
+
     [UnionTest]
+
     [MedianTests]
+
     [PercentileTests]
+
     [NewExpressionTest1]
     Name = expression_test_dates.
     TDS = cast_calcs.bigquery_sql_dates.tds
     Exclusions = string.ascii
     TestPath = exprtests/standard/
+
     [NewExpressionTest2]
     SmokeTest = True  # tests are treated as smoke tests if SmokeTest = True
     Enabled = False # If set to False, the test is marked `D`, not run, and counted as a fail.
+    
     [LogicalConfig]
     Name = mydb_config
     key = value
+
     [ConnectionTests]
     CastCalcsTestEnabled = True  # by default these two values are True; set `False` if disabling a test.
     StaplesTestEnabled = False
