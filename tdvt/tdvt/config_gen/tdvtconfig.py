@@ -7,7 +7,7 @@ from ..resources import *
 
 class TdvtTestConfig(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, tested_sql = False, timeout_seconds = 60 * 60,tested_tuples = True, tds = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6, from_json = None, run_as_perf = False):
+    def __init__(self, tested_sql = False,tested_tuples = True, tds = '', config = '', output_dir = '', logical = False, verbose = False, override = '', suite_name = '', from_args = None, thread_count = 6, from_json = None, run_as_perf = False, timeout_seconds = 60 * 60):
         self.tested_sql = tested_sql
         self.tested_tuples = tested_tuples
         self.log_dir = ''
