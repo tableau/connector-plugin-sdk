@@ -434,4 +434,3 @@ class LinuxRegistry(TestRegistry):
 
     def __init__(self):
         super(LinuxRegistry, self).__init__('linux')
-        
