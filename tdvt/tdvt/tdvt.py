@@ -354,38 +354,41 @@ def usage_text():
     TDVT Driver. Run groups of logical and expression tests against one or more datasources.
 
     Show all test suites
-        tdvt_runner --list
+        py -3 -m tdvt.tdvt --list
 
     See what a test suite consists of
-        tdvt_runner --list sqlserver
-        tdvt_runner --list standard
+        py -3 -m tdvt.tdvt --list sqlserver
+        py -3 -m tdvt.tdvt --list standard
 
     The 'run' argument can take a single datasource, a list of data sources, or a test suite name. in any combination.
-        tdvt_runner --run vertica
-        tdvt_runner --run sqlserver,vertica
-        tdvt_runner --run standard
+        py -3 -m tdvt.tdvt --run vertica
+        py -3 -m tdvt.tdvt --run sqlserver,vertica
+        py -3 -m tdvt.tdvt --run standard
+
+    The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
+        py -3 -m tdvt.tdvt --run postgres --verify
 
     The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
         tdvt_runner --run postgres --verify
 
     Both logical and expression tests are run by default.
     Run all sqlserver expression tests
-        tdvt_runner -e --run sqlserver
+        py -3 -m tdvt.tdvt -e --run sqlserver
 
     Run all vertica logical tests
-        tdvt_runner -q --run vertica
+        py -3 -m tdvt.tdvt -q --run vertica
 
     There are two groups of expression tests, standard and LOD (level of detail). The config files that drive the tests
     are named expression_test.sqlserver.cfg and expression.lod.sqlserver.cfg.
     To run just one of those try entering part of the config name as an argument:
-        tdvt_runner -e lod --run sqlserver
+        py -3 -m tdvt.tdvt -e lod --run sqlserver
     This will run all the LOD tests against sqlserver.
 
     And you can run all the LOD tests against the standard datasources like
-        tdvt_runner -e lod --run standard
+        py -3 -m tdvt.tdvt -e lod --run standard
 
     Run one test against many datasources
-        tdvt_runner --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds --run sqlserver,vertica
+        py -3 -m tdvt.tdvt --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds --run sqlserver,vertica
 
     The 'exp' argument is a glob pattern that is used to find the test file. It is the same style as what you will find
     in the existing *.cfg files.
@@ -394,15 +397,15 @@ def usage_text():
     ie cast_calcs.*.tds for cast_calcs.sqlserver.tds etc.
 
     Run one logical query test against many datasources
-        tdvt_runner --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds --run postgres
+        py -3 -m tdvt.tdvt --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds --run postgres
 
     This can be combined with * to run an arbitrary set of 'correct' logical query tests against a datasources
-        tdvt_runner --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds --run postgres
+        py -3 -m tdvt.tdvt --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds --run postgres
     Alternatively
-        tdvt_runner --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --run sqlserver
+        py -3 -m tdvt.tdvt --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --run sqlserver
 
     But skip 59740?
-        tdvt_runner --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740 --run sqlserver
+        py -3 -m tdvt.tdvt --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740 --run sqlserver
 
     '''
 

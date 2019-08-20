@@ -94,9 +94,50 @@
       <xs:pattern value="(\d+)((\.)(\d+))*((-)(\d+))*"/>
     </xs:restriction>
   </xs:simpleType>
+  <xs:group name="VendorInformation-G">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="vendor-information">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:group ref="Company-G"/>
+            <xs:group ref="SupportLink-G"/>
+            <xs:group ref="DriverDownloadLink-G" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Company-G">
+    <xs:sequence>
+      <xs:element name="company">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="SupportLink-G">
+    <xs:sequence>
+      <xs:element name="support-link">
+        <xs:complexType>
+          <xs:attribute name="url" type="xs:anyURI" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="DriverDownloadLink-G">
+    <xs:sequence>
+      <xs:element name="driver-download-link">
+        <xs:complexType>
+          <xs:attribute name="url" type="xs:anyURI" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
   <xs:element name="connector-plugin">
     <xs:complexType>
       <xs:sequence>
+        <xs:group ref="VendorInformation-G"/>
         <xs:element minOccurs="0" name="platforms" type="Platforms-CT"/>
         <xs:group ref="DataConnectionCustomization-G"/>
         <xs:element minOccurs="0" name="connection-dialog" type="ScriptElement-CT"/>
@@ -109,6 +150,7 @@
       <xs:attribute name="plugin-version" type="VersionNumber-ST" use="required"/>
       <xs:attribute name="superclass" type="xs:token" use="required"/>
       <xs:attribute name="version" type="VersionNumber-ST" use="required"/>
+      <xs:attribute name="min-version-tableau" type="VersionNumber-ST" use="optional"/>
     </xs:complexType>
   </xs:element>
   <xs:simpleType name="LicenseKey-ST">
