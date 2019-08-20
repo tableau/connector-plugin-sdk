@@ -50,7 +50,7 @@ class BatchQueueWork(object):
         self.test_set = test_set
         self.results = {}
         self.thread_id = -1
-        self.timeout_seconds = 60 * 60
+        self.timeout_seconds = test_config.timeout_seconds
         self.cmd_output = None
         self.saved_error_message = None
         self.log_zip_file = ''
