@@ -7,7 +7,7 @@ Tableau products are localized in English (United States), English (United Kingd
 Connector SDK supports localizing connectors in these languages. You can localize the strings that display in the Tableau user interface, such as the connector name and the prompts in the connection dialog.
 
 For the best user experience with Tableau, we recommended that you include translation support in your connector.
-## Specify localized Strings
+## Specify localized strings
 Localized strings are specified using tag `@string/<string_id>/`, for example, `@string/database_prompt/`. You can use the tag anywhere a string is defined in the `manifest.xml` file or the Tableau Custom Dialog (.tcd) file.
 
 
@@ -24,7 +24,7 @@ Here is an example of a Tableau Custom Dialog (.tcd) file with localized strings
 ```
 
 
-## Add String Translations
+## Add string translations
 String translations are added using resource files. Each language has its own resource file. The resource files must follow the naming convention `resources-<language>-<region>.xml`, where `<language>` is a lowercase two letter language code and `<region>` is an uppercase two letter region code. The resource file names for the currently supported languages are listed below.
 
 
