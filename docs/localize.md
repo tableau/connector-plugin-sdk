@@ -55,7 +55,15 @@ resources-en_US.xml
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="port_prompt">Port:</string>
-<string name="database_prompt">Database:</string>
+  <string name="port_prompt">Port:</string>
+  <string name="database_prompt">Database:</string>
+</resources>
+```
+resources-es_ES.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="port_prompt">Puerto:</string>
+  <string name="database_prompt">Base de datos:</string>
 </resources>
 ```
