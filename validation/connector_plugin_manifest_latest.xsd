@@ -79,9 +79,11 @@
   <xs:simpleType name="Double-ST">
     <xs:union memberTypes="xs:double XML-RealSpecial-ST"/>
   </xs:simpleType>
+  <!-- Same as FormatDoubleAttribute, but with precision=6 -->
   <xs:simpleType name="Float-ST">
     <xs:union memberTypes="xs:float XML-RealSpecial-ST"/>
   </xs:simpleType>
+  <!-- Local utility type -->
   <xs:simpleType name="XML-RealSpecial-ST">
     <xs:restriction base="xs:string">
       <xs:enumeration value="nan"/>
@@ -96,11 +98,12 @@
   </xs:simpleType>
   <xs:group name="VendorInformation-G">
     <xs:sequence>
-      <xs:element minOccurs="0" name="vendor-information">
+      <xs:element name="vendor-information">
         <xs:complexType>
           <xs:sequence>
             <xs:group ref="Company-G"/>
             <xs:group ref="SupportLink-G"/>
+            <xs:group ref="DriverDownloadLink-G" minOccurs="0"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -118,6 +121,15 @@
   <xs:group name="SupportLink-G">
     <xs:sequence>
       <xs:element name="support-link">
+        <xs:complexType>
+          <xs:attribute name="url" type="xs:anyURI" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="DriverDownloadLink-G">
+    <xs:sequence>
+      <xs:element name="driver-download-link">
         <xs:complexType>
           <xs:attribute name="url" type="xs:anyURI" use="required"/>
         </xs:complexType>
