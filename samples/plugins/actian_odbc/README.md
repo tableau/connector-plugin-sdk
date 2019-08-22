@@ -46,11 +46,18 @@ Full path is:
 
 ### Launch Tableau with new flags
 
+#### MacOS
+
+See https://tableau.github.io/connector-plugin-sdk/docs/share
+
+#### Windows
+
 Launch Tableau via command line (or create/update shortcut) to:
 
     "C:\Program Files\Tableau\Tableau 2019.2\bin\tableau.exe" -DConnectPluginsPath=C:\connector-plugin-sdk\samples\plugins\
 
 Where `C:\Program Files\Tableau\Tableau 2019.2` is the location where Tableau was installed.
+
 
 Notes
 -----
