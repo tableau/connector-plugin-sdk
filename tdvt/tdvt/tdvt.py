@@ -210,10 +210,10 @@ def enqueue_single_test(args, ds_info, suite):
 
     test_set = None
     if args.logical_pattern:
-        test_set = SingleLogicalTestSet(get_root_dir(), args.logical_pattern, args.tds_pattern,
+        test_set = SingleLogicalTestSet(suite, get_root_dir(), args.logical_pattern, args.tds_pattern,
                                         args.test_pattern_exclude, ds_info)
     else:
-        test_set = SingleExpressionTestSet(get_root_dir(), args.expression_pattern, args.tds_pattern,
+        test_set = SingleExpressionTestSet(suite, get_root_dir(), args.expression_pattern, args.tds_pattern,
                                            args.test_pattern_exclude, ds_info)
 
     test_config = TdvtTestConfig(from_args=args)
@@ -263,7 +263,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
         if not test_set_unique_id in all_test_configs[suite_name]:
             test_config.output_dir = make_temp_dir([test_set_unique_id])
             all_tdvt_test_configs[test_set_unique_id] = test_config
-            test_set_config = TestConfig(suite_name, '', 1, 1)
+            test_set_config = TestConfig(suite_name, 0, '', 1, 1)
             all_test_configs[suite_name][test_set_unique_id] = test_set_config
         else:
             test_set_config = all_test_configs[suite_name][test_set_unique_id]
@@ -277,7 +277,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
             current_test_set = current_test_set[0]
 
         if not current_test_set:
-            current_test_set = FileTestSet(test_root_dir, test_set_unique_id, tds, test_config.logical, suite_name,
+            current_test_set = FileTestSet(suite_name, test_root_dir, test_set_unique_id, tds, test_config.logical, suite_name,
                                            password_file)
             if test_config.logical:
                 test_set_config.add_logical_testset(current_test_set)
