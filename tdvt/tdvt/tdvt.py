@@ -263,7 +263,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
         if not test_set_unique_id in all_test_configs[suite_name]:
             test_config.output_dir = make_temp_dir([test_set_unique_id])
             all_tdvt_test_configs[test_set_unique_id] = test_config
-            test_set_config = TestConfig(suite_name, 0, '', 1, 1)
+            test_set_config = TestConfig(suite_name, 60*60, '', 1, 1)
             all_test_configs[suite_name][test_set_unique_id] = test_set_config
         else:
             test_set_config = all_test_configs[suite_name][test_set_unique_id]
