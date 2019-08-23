@@ -218,6 +218,7 @@ def enqueue_single_test(args, ds_info, suite):
 
     test_config = TdvtTestConfig(from_args=args)
     test_config.suite_name = suite
+    test_config.timeout_seconds = ds_info.timeout_seconds
     test_config.logical = test_set.is_logical_test()
     test_config.d_override = ds_info.d_override
     test_config.run_as_perf = ds_info.run_as_perf
@@ -324,6 +325,7 @@ def enqueue_tests(ds_info, args, suite):
 
     for test_set in tests:
         test_config = TdvtTestConfig(from_args=args)
+        test_config.timeout_seconds = ds_info.timeout_seconds
         test_config.suite_name = suite
         test_config.logical = test_set.is_logical_test()
         test_config.d_override = ds_info.d_override
