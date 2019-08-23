@@ -4,6 +4,7 @@
   <vendor-information>
     <company name='TestCompany' />
     <support-link url='http://example.com' />
+    <driver-download-link url="http://drivers.example.com"/>
   </vendor-information>
   <connection-customization class="mysql_odbc_sample" enabled="true" version="10.0">
     <vendor name="vendor"/>

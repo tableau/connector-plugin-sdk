@@ -3,7 +3,8 @@
 <connector-plugin class='postgres_jdbc' superclass='jdbc' plugin-version='0.0.0' name='PostgreSQL JDBC' version='18.1'>
   <vendor-information>
       <company name="Company Name"/>
-      <support-link url = "http://example.com"/>
+      <support-link url="http://example.com"/>
+      <driver-download-link url="http://drivers.example.com"/>
   </vendor-information>
   <connection-customization class="postgres_jdbc" enabled="true" version="10.0">
     <vendor name="vendor"/>
