@@ -78,7 +78,9 @@ For running the test suite, Tableau expects the non-default mixed case. This wil
 
 If your object name case is all lower case (which is the default for Actian Avalanche/Vector/ActianX/Ingres) mixed case option is **not** required.
 
-I.e. only set mixed case if running Tableau Connector SDK tests suite.
+I.e. mixed case is required if running Tableau Connector SDK tests suite.
+
+See https://github.com/clach04/connector-plugin-sdk/tree/actian/tests/datasets/TestV1/actian for scripts to create and load database for testing.
 
 Create database with mixed case object name support:
 
