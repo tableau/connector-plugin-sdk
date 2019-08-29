@@ -6,6 +6,7 @@
     {
         attr["server"] = "localhost";
         // local connection, no auth specified
+        // port is required
     }
     else
     {

@@ -6,6 +6,7 @@
     {
         params["SERVER"] = "(local)";
         // local connection, no auth specified
+        // port is ignored
     }
     else
     {
