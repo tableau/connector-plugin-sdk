@@ -1,9 +1,19 @@
-(function dsbuilder(attr) {
-    var urlBuilder = "jdbc:ingres://" + attr["server"] + ":" + attr["port"] + "/" + attr["dbname"] + ";";
-
+(function dsbuilder(attr)
+{
     var params = [];
-    params["UID"] = attr["username"];
-    params["PWD"] = attr["password"];
+
+    if (attr["server"].toLowerCase() == "(local)")  // match ODBC implementation, even though JDBC driver does not understand (local)
+    {
+        attr["server"] = "localhost";
+        // local connection, no auth specified
+    }
+    else
+    {
+        params["UID"] = attr["username"];
+        params["PWD"] = attr["password"];
+    }
+
+    var urlBuilder = "jdbc:ingres://" + attr["server"] + ":" + attr["port"] + "/" + attr["dbname"] + ";";
 
     var formattedParams = [];
 
