@@ -15,7 +15,7 @@ setup(
     license='MIT',
     description='A Python module for testing datasource compatability with Tableau.',
     test_suite='test',
-    scripts=['tdvt.py'],
-    install_requires=[ 'defusedxml' ],
-    include_package_data = True
+    scripts=['tdvt_launcher.py'],
+    install_requires=['defusedxml'],
+    include_package_data=True
 )
