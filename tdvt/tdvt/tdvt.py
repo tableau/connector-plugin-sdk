@@ -82,7 +82,7 @@ def do_test_queue_work(i, q):
         q.task_done()
 
 
-class TestRunner:
+class TestRunner():
     def __init__(self, test_set, test_config, lock, verbose, thread_id):
         threading.Thread.__init__(self)
         self.test_set = test_set
