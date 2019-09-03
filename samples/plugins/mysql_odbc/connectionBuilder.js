@@ -14,10 +14,10 @@
     var formattedParams = [];
     
     var odbcConnectStringExtrasMap = {};
-    const attributeODBCConnectionStringExtras = "odbc-connect-string-extras";
-    if (attributeODBCConnectionStringExtras in attr) 
+    const attributeODBCConnectStringExtras = "odbc-connect-string-extras";
+    if (attributeODBCConnectStringExtras in attr) 
     {
-        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectionStringExtras]);
+        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectStringExtras]);
     }
     for (var key in odbcConnectStringExtrasMap)
     {
