@@ -12,17 +12,23 @@
     params["OPTION"] = "1048576"
 
     var formattedParams = [];
+    
+    var odbcConnectStringExtrasMap = {};
+    const attributeODBCConnectStringExtras = "odbc-connect-string-extras";
+    if (attributeODBCConnectStringExtras in attr) 
+    {
+        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectStringExtras]);
+    }
+    for (var key in odbcConnectStringExtrasMap)
+    {
+        params[key] = odbcConnectStringExtrasMap[key];
+    }
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
 
     for (var key in params)
     {
         formattedParams.push(connectionHelper.formatKeyValuePair(key, params[key]));
-    }
-
-    if (attr["odbc-connect-string-extra"] != "")
-    {
-        formattedParams.push(attr["odbc-connect-string-extras"])
     }
 
     return formattedParams;
