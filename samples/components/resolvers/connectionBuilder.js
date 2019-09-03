@@ -21,11 +21,11 @@
     //then the below code snippet will insert the key1 , value1 pair in the params map , params["key1"] = "value1"
     //Finally the line ';key1=value1' will be appended to the ConnectString.
     var odbcConnectStringExtrasMap = {};
-    const attributeODBCConnectionStringExtras = "odbc-connect-string-extras";
+    const attributeODBCConnectStringExtras = "odbc-connect-string-extras";
     
-    if (attributeODBCConnectionStringExtras in attr) 
+    if (attributeODBCConnectStringExtras in attr) 
     {
-        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectionStringExtras]);
+        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectStringExtras]);
     }
     for (var key in odbcConnectStringExtrasMap)
     {
