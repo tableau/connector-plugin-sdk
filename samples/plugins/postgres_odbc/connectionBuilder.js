@@ -12,6 +12,16 @@
     params["UseDeclareFetch"] = "1";
     params["Fetch"] = "2048";
 
+    var odbcConnectStringExtrasMap = {};
+    if ("odbc-connect-string-extras" in attr) 
+    {
+        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
+    }
+    for (var key in odbcConnectStringExtrasMap)
+    {
+        params[key] = odbcConnectStringExtrasMap[key];
+    }
+    
     var formattedParams = [];
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
