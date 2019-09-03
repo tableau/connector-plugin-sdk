@@ -41,7 +41,7 @@
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
 
     //The result will look like (search for ConnectString in tabprotosrv.log):
-    //ConnectString: Host=teradata.mydomain.com;UID=test;PWD=********;DATETIMEFORMAT=ABC;DRIVER={Teradata Database ODBC Driver 16.20}"}};
+    //ConnectString: Host=teradata.mydomain.com;UID=test;PWD=********;DATETIMEFORMAT=ABC;DRIVER={Teradata Database ODBC Driver 16.20}"}}
     return formattedParams;
 })
 
