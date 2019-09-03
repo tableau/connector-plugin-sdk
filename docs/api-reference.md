@@ -173,6 +173,10 @@ Format the attributes as 'key=value'. By default, some values are escaped or wra
 
 Invokes attribute matching code.
 
+    Map ParseODBCConnectString(String odbcConnectString);
+
+Returns a map of the key value pairs defined in the ```odbc-connect-string-extras``` string.
+
     String GetPlatform();
 
 Returns the name of the os Tableau is running on. Possible values are:
@@ -186,6 +190,8 @@ Example:
 
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
 
+    odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
+    
 _Throw Tableau Exception_
 
 Normally, throwing an exception in a JavaScript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
