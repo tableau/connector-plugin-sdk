@@ -13,9 +13,10 @@
     params["Fetch"] = "2048";
 
     var odbcConnectStringExtrasMap = {};
-    if ("odbc-connect-string-extras" in attr) 
+    const attributeODBCConnectionStringExtras = "odbc-connect-string-extras";
+    if (attributeODBCConnectionStringExtras in attr) 
     {
-        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
+        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectionStringExtras]);
     }
     for (var key in odbcConnectStringExtrasMap)
     {
