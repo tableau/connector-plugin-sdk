@@ -15,9 +15,9 @@
     //You can write to the Tableau log file (tabprotosrv.txt). This requires Debug level logging to see (-DLogLevel=Debug).
     logging.log("Hi")
     
-    //If odbc-connect-string-extras is set in the manifest.xml file then the key value pairs can be extracted and 
+    //If odbc-connect-string-extras is defined then the key value pairs can be extracted and 
     //inserted in the params Map. 
-    //For Example : If we have the line : <customization name="odbc-connect-string-extras" value="key1=value1"/> in manifest.xml
+    //For Example : If we have "odbc-connect-string-extras" set to  "key1=value1"
     //then the below code snippet will insert the key1 , value1 pair in the params map , params["key1"] = "value1"
     //Finally the line ';key1=value1' will be appended to the ConnectString.
     var odbcConnectStringExtrasMap = {};
