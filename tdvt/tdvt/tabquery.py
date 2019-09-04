@@ -71,9 +71,11 @@ class TabqueryCommandLine(object):
             for override in work.test_config.d_override.split(' '):
                 cmdline.extend([override])
 
-        #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-        #that tests what you would expect.
-        cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
+        logical_rewrite_iter = next((i for i in cmdline if i.find('-DLogicalQueryRewriteDisable') != -1), None)
+        if logical_rewrite_iter == None:
+            #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
+            #that tests what you would expect.
+            cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline

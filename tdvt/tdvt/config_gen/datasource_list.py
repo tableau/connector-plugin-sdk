@@ -163,9 +163,8 @@ def load_test(config, test_dir=get_root_dir()):
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
-    test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'),
-                             dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''),
-                             dsconfig.getboolean('RunAsPerf', False))
+    test_config = TestConfig(config_name, dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'),
+                             dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
 
     # Add the standard test suites.
     if standard_tests in config.sections():
@@ -329,7 +328,8 @@ def load_test(config, test_dir=get_root_dir()):
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
                                                 test_path + 'setup.calcs_key.txt', test_dir, get_password_file(sect),
-                                                get_expected_message(sect), True, (sect, 'CastCalcsTestEnabled'), False)
+                                                get_expected_message(sect), True,
+                                                get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
                 pass

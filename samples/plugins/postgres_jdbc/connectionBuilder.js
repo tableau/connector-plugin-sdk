@@ -1,9 +1,9 @@
 (function dsbuilder(attr) {
-    var urlBuilder = "jdbc:postgresql://" + attr["server"] + ":" + attr["port"] + "/" + attr["dbname"] + "?";
+    var urlBuilder = "jdbc:postgresql://" + attr[connectionHelper.attributeServer] + ":" + attr[connectionHelper.attributePort] + "/" + attr[connectionHelper.attributeDatabase] + "?";
 
     var params = [];
-    params["user"] = attr["username"];
-    params["password"] = attr["password"];
+    params["user"] = attr[connectionHelper.attributeUsername];
+    params["password"] = attr[connectionHelper.attributePassword];
 
     var formattedParams = [];
 

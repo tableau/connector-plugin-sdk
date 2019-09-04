@@ -7,7 +7,6 @@
     <connection-normalizer>
       <required-attributes>
         <attribute-list>
-          <attr>class</attr>
           <attr>server</attr>
           <attr>port</attr>
           <attr>dbname</attr>
