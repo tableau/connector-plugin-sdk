@@ -55,4 +55,7 @@ copy "Staples"(
         "Market Segment"=text(0)csv
         )
 from '../Staples_utf8.csv';
+/*
+from '../Staples_cp1252.csv';
+*/
 \p\g
