@@ -32,24 +32,24 @@
       <formula part='hour'>HOUR(%2)</formula>
       <formula part='minute'>MINUTE(%2)</formula>
       <formula part='second'>SECOND(%2)</formula>
-	    <argument type='localstr' />
-	    <argument type='datetime' />
+      <argument type='localstr' />
+      <argument type='datetime' />
     </date-function>
 
     <date-function name='DATEPART' return-type='int'>
-  	  <formula part='year'>YEAR(%2)</formula>
-  	  <formula part='quarter'>CAST((MONTH(%2) - 1) / 3 + 1 AS BIGINT)</formula>
-	    <formula part='month'>MONTH(%2)</formula>
-	    <formula part='dayofyear'>DATEDIFF(TO_DATE(%2), TO_DATE(CAST(TRUNC(%2,&apos;YY&apos;) AS DATE))) + 1</formula>
-  	  <formula part='day'>DAY(%2)</formula>
-	    <formula part='weekday'>(8 + DATEDIFF(%2,NEXT_DAY(CAST(%2 AS DATE),&apos;SU&apos;)))</formula>
-  	  <formula part='week'>FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
-  	  <formula part='hour'>HOUR(%2)</formula>
-	    <formula part='minute'>MINUTE(%2)</formula>
-	    <formula part='second'>SECOND(%2)</formula>
-	    <argument type='localstr' />
-	    <argument type='datetime' />
-	    <argument type='localstr' />
+      <formula part='year'>YEAR(%2)</formula>
+      <formula part='quarter'>CAST((MONTH(%2) - 1) / 3 + 1 AS BIGINT)</formula>
+      <formula part='month'>MONTH(%2)</formula>
+      <formula part='dayofyear'>DATEDIFF(TO_DATE(%2), TO_DATE(CAST(TRUNC(%2,&apos;YY&apos;) AS DATE))) + 1</formula>
+      <formula part='day'>DAY(%2)</formula>
+      <formula part='weekday'>(8 + DATEDIFF(%2,NEXT_DAY(CAST(%2 AS DATE),&apos;SU&apos;)))</formula>
+      <formula part='week'>FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
+      <formula part='hour'>HOUR(%2)</formula>
+      <formula part='minute'>MINUTE(%2)</formula>
+      <formula part='second'>SECOND(%2)</formula>
+      <argument type='localstr' />
+      <argument type='datetime' />
+      <argument type='localstr' />
     </date-function>
   </function-map>
 </dialect>

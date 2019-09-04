@@ -3,9 +3,8 @@
          class='actian_odbc'
          base='DefaultSQLDialect'
          version='18.1'>
-         <!-- TODO NOTE DB2 may be viable https://tableau.github.io/connector-plugin-sdk/docs/design#dialect-base-classes -  SQLSErver -->
-   <function-map>
-   
+        <!-- TODO NOTE DB2 may be viable https://tableau.github.io/connector-plugin-sdk/docs/design#dialect-base-classes -  SQLSErver -->
+  <function-map>
     <!-- TODO FIXME bad -->
     <function name='FLOAT' group='cast' return-type='real'>
       <formula>CAST(((EXTRACT(EPOCH FROM %1) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS BIGINT)</formula>
@@ -52,6 +51,5 @@
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
-   </function-map>
- </dialect>
-
+  </function-map>
+</dialect>
