@@ -134,6 +134,13 @@ class TestRunner():
 
                 existing_results['successful_tests'].extend(results['successful_tests'])
 
+                # Check the newly succeeding tests, and if they are in the existing failed
+                # test list, remove them from the failed test list since they now succeed
+                for element in results['successful_tests']:
+                    for failed in existing_results['failed_tests']:
+                        if element['test_name'] == failed['test_name']:
+                            existing_results['failed_tests'].remove(failed)
+
                 dst_file = open(dst, 'w', encoding='utf8')
                 json.dump(existing_results, dst_file)
                 dst_file.close()
