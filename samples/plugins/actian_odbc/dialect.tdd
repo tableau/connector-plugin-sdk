@@ -11,6 +11,7 @@
       <argument type='date' />
     </function>
 
+    <!-- TODO review test suite results and https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/full_dialect.tdd -->
     <function group='string' name='LOWER' return-type='str'>
       <formula>LOWERCASE(%1)</formula>
         <argument type='str' />
