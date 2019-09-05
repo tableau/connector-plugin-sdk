@@ -27,6 +27,10 @@
         <argument type='str' />
     </function>
 
+    <function group='date' name='TODAY' return-type='date'>
+      <formula>ANSIDATE('today')</formula>
+    </function>
+
     <date-function name='DATEPART' return-type='int'>
       <formula part='year'>YEAR(%2)</formula>
       <formula part='quarter'>CAST((MONTH(%2) - 1) / 3 + 1 AS BIGINT)</formula>
