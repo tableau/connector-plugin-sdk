@@ -62,4 +62,32 @@
       <argument type='localstr' />
     </date-function>
   </function-map>
+
+  <sql-format>
+    <!--
+      format-create-table
+      Piece-by-piece formula for creating a table.
+      Predicates can be used with tokens that only correspond
+      to a certain type of table.
+      Predicates:
+        GlobalTemp
+        LocalTemp
+        AnyTemp
+        NoTemp
+      String substitution tokens:
+        %n - table name
+        %f - formatted column list
+      -->
+    <format-create-table>
+      <formula>DECLARE</formula>
+      <formula predicate='GlobalTemp'>GLOBAL</formula>
+      <formula predicate='LocalTemp'>GLOBAL</formula>
+      <formula predicate='AnyTemp'>TEMPORARY</formula>
+      <formula>TABLE %n (</formula>
+      <formula>%f</formula>
+      <formula>)</formula>
+      <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
+    </format-create-table>
+  </sql-format>
+
 </dialect>
