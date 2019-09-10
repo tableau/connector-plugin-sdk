@@ -25,4 +25,14 @@
       </tuple>
     </table>
   </test>
+  <test name='CONTAINS(str2, LEFT(str2, 0))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(1364536471)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
 </results>
