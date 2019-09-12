@@ -77,6 +77,10 @@ class TabqueryCommandLine(object):
             #that tests what you would expect.
             cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
+        # LogicalQuery cache can cache results across multiple expressions, and prevent
+        # issuance of queries to the underlying database, so disable it.
+        cmdline.extend(["-DInMemoryLogicalCacheDisable"])
+
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
         return cmdline
