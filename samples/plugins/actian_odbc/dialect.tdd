@@ -27,6 +27,15 @@
         <argument type='str' />
     </function>
 
+    <function group='date' name='YEAR' return-type='int'>
+      <formula>YEAR(%1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='YEAR' return-type='int'>
+      <formula>YEAR(%1)</formula>
+      <argument type='date' />
+    </function>
+
     <function group='date' name='TODAY' return-type='date'>
       <formula>ANSIDATE('today')</formula>
     </function>
