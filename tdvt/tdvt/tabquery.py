@@ -1,4 +1,4 @@
-Bimport configparser
+import configparser
 import sys
 
 from .resources import *
