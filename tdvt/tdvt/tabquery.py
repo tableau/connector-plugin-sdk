@@ -1,4 +1,4 @@
-import configparser
+Bimport configparser
 import sys
 
 from .resources import *
@@ -77,8 +77,8 @@ class TabqueryCommandLine(object):
             #that tests what you would expect.
             cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
-        #LogicalQuery cache can cache results across multiple expressions and prevent the issuance of queries to the underlying database,
-        #so disable it.
+        # LogicalQuery cache can cache results across multiple expressions, and prevent 
+        # issuance of queries to the underlying database, so disable it.
         cmdline.extend(["-DInMemoryLogicalCacheDisable"])
 
         self.extend_command_line(cmdline, work)
