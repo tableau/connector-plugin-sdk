@@ -10,6 +10,43 @@
       <formula>CAST(((EXTRACT(EPOCH FROM %1) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS BIGINT)</formula>
       <argument type='date' />
     </function>
+	<function group='cast' name='STR' return-type='str'>
+      <formula>(CASE&#10;&#9;WHEN %1 IS TRUE THEN &apos;1&apos;&#10;&#9;WHEN %1 IS NOT TRUE THEN &apos;0&apos;&#10;&#9;ELSE CAST(NULL AS VARCHAR) END)</formula>
+      <argument type='bool' />
+    </function>
+	<function group='cast' name='INT' return-type='int'>
+      <formula>(CASE&#10;&#9;WHEN %1 !=0 THEN 1&#10;&#9;WHEN %1 =0 THEN 0&#10;&#9;ELSE CAST(NULL AS integer) END)</formula>
+      <argument type='int' />
+    </function>
+	<!--478 full TDD-->
+	<function group='string' name='SPACE' return-type='str'>
+      <formula>(REPEAT(&apos; &apos;,int(%1)))</formula>
+      <argument type='real' />
+    </function>
+	<function group='string' name='SPACE' return-type='str'>
+      <formula>(REPEAT(&apos; &apos;,%1))</formula>
+      <argument type='int' />
+    </function>
+	<function group='cast' name='FLOAT' return-type='real'>
+      <formula>(CASE&#10;&#9;WHEN %1 IS TRUE THEN 1&#10;&#9;WHEN %1 IS NOT TRUE THEN 0&#10;&#9;ELSE CAST(NULL AS float) END)</formula>
+      <argument type='real' />
+    </function>
+	<function group='aggregate' name='CORR' return-type='real'>
+      <formula>CORR_PEARSON(%1, %2)</formula>
+      <unagg-formula>CAST(NULL AS DOUBLE PRECISION)</unagg-formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
+	<function group='aggregate' name='COUNT' return-type='int'>
+      <formula>COUNT(CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 0 ELSE NULL END)</formula>
+      <unagg-formula>(CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 1 ELSE 0 END)</unagg-formula>
+      <argument type='bool' />
+    </function>
+	<function group='operator' name='+' return-type='datetime'>
+      <formula>(TIMESTAMP(TO_CHAR(%1,'YYYY-MM-DD')||' '||'TO_CHAR(%2,'HH24:MI:SS'),0))</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
 
     <!-- TODO review test suite results and https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/full_dialect.tdd -->
     <function group='string' name='LEN' return-type='int'>
@@ -37,7 +74,7 @@
     </function>
 
     <function group='date' name='TODAY' return-type='date'>
-      <formula>ANSIDATE('today')</formula>
+      <formula>ANSIDATE(current_date)</formula>
     </function>
 
     <date-function name='DATEPART' return-type='int'>
@@ -74,6 +111,71 @@
 
   <sql-format>
     <!--
+      date-parts
+      Used with generic (non-part-specific) date function formulas.
+      A date-part-group can apply to one or more date functions, denoted
+      by date-function child elements. If none are specified, the group
+      acts as the default.
+
+      The name attribute specifies a Tableau date part, while the
+      value attribute contains the date part string literal to use in
+      corresponding date functions.
+    -->
+    <date-parts>
+      <date-part-group>
+        <!-- Default: DATEADD and DATEDIFF -->
+        <part name='year' value='YEAR' />
+        <part name='quarter' value='QUARTER' />
+        <part name='month' value='MONTH' />
+        <part name='week' value='WEEK' />
+        <part name='weekday' value='DAY' />
+        <part name='dayofyear' value='DAY' />
+        <part name='day' value='DAY' />
+        <part name='hour' value='HOUR' />
+        <part name='minute' value='MINUTE' />
+        <part name='second' value='SECOND' />
+      </date-part-group>
+      <date-part-group>
+        <date-function name='DATENAME' />
+        <part name='year' value='YYYY' />
+        <part name='quarter' value='Q' />
+        <part name='month' value='Month' />
+        <part name='dayofyear' value='FMDDD' />
+        <part name='day' value='FMDD' />
+        <part name='weekday' value='FMDay' />
+        <part name='week' value='WW' />
+        <part name='hour' value='HH24' />
+        <part name='minute' value='FMMI' />
+        <part name='second' value='FMSS' />
+      </date-part-group>
+      <date-part-group>
+        <date-function name='DATEPART' />
+        <part name='year' value='YYYY' />
+        <part name='quarter' value='Q' />
+        <part name='month' value='MM' />
+        <part name='dayofyear' value='DDD' />
+        <part name='day' value='DD' />
+        <part name='weekday' value='D' />
+        <part name='week' value='WW' />
+        <part name='hour' value='HH24' />
+        <part name='minute' value='MI' />
+        <part name='second' value='SS' />
+      </date-part-group>
+      <date-part-group>
+        <date-function name='DATETRUNC' />
+        <part name='year' value='YEAR' />
+        <part name='quarter' value='Q' />
+        <part name='month' value='MONTH' />
+        <part name='dayofyear' value='DD' />
+        <part name='day' value='DD' />
+        <part name='weekday' value='DD' />
+        <part name='week' value='IW' />
+        <part name='hour' value='HH24' />
+        <part name='minute' value='MI' />
+        <part name='second' value='YYYY-MM-DD HH24:MI:SS' />
+      </date-part-group>
+    </date-parts>
+    <!--
       format-create-table
       Piece-by-piece formula for creating a table.
       Predicates can be used with tokens that only correspond
@@ -97,6 +199,52 @@
       <formula>)</formula>
       <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
     </format-create-table>
+	<!--
+      format-drop-table
+      Format for dropping a table. %1 is the table name.
+      Each formula is executed as a separate statement.
+    -->
+    <format-drop-table>
+      <formula>DROP TABLE IF EXISTS %1</formula>
+    </format-drop-table>
+	<!--
+      format-insert
+      Strategy for formatting an INSERT statement
+      [Default]Individual: Separate INSERT query for each row
+      Bulk: Single INSERT query can insert multiple rows at once
+    -->
+    <format-insert value='Bulk' />
+	<!--
+      format-null
+      Allows a type-specific expression for NULL. Tableau defaults to 'NULL'
+      where no type-specific formula is given.
+    -->
+    <format-null>
+      <local-type name='date' value='CAST(NULL AS ANSIDATE)' />
+      <local-type name='datetime' value='CAST(NULL AS TIMESTAMP)' />
+	  <local-type name='int' value='CAST(NULL AS integer)' />
+	  <local-type name='real' value='CAST(NULL AS float)' />
+	  <local-type name='str' value='CAST(NULL AS varchar(1))' />
+	</format-null>
+	<!--
+      format-select
+      Piece-by-piece formula for defining a SELECT statement
+    -->
+    <format-select>
+      <part name='Into' value='CREATE GLOBAL TEMPORARY TABLE %1 ON COMMIT PRESERVE ROWS AS' />
+      <part name='Top' value='SELECT * FROM (' />
+      <part name='Select' value='SELECT %1' />
+      <part name='From' value='FROM %1' />
+      <part name='Where' value='WHERE %1' />
+      <part name='Group' value='GROUP BY %1' />
+      <part name='Having' value='HAVING %1' />
+      <part name='OrderBy' value='ORDER BY %1' />
+      <!--<part name='Top' value=') WHERE ROWNUM &lt;= %1' />-->
+      <part name='TopPercent' value='TABLESAMPLE BERNOULLI(%1)' />
+      <part name='TopSamplePercent' value='TABLESAMPLE BERNOULLI(%1)' />
+      <part name='TopSampleRecords' value='ORDER BY rand()' />
+      <part name='TopSampleRecords' value='%1' />
+    </format-select>
   </sql-format>
 
 </dialect>
