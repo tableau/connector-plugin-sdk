@@ -32,7 +32,7 @@ You need to do these things before you start:
 - Install Tableau Desktop 2019.2 or later on a Windows or Mac computer.
 
 ## Using a Connector
-You must start Tableau Desktop or Server with a special command line argument which tells Tableau where to find your Connector. See [Share Your Connector]({{ site.baseurl }}/docs/share) for more information.
+You must start Tableau Desktop or Tableau Server with a special command line argument that tells Tableau where to find your Connector. See [Share Your Connector]({{ site.baseurl }}/docs/share) for more information.
 
 **Tableau Desktop:** 
 
@@ -47,7 +47,7 @@ For Windows:
 
 For macOS:
 
-Replace [user name] with your name, for example /Users/kgarcia/tableau_connectors, and [Tableau version] with the version of Tableau that you’re running, for example, 2019.1.app.
+In the following examples, replace [user name] with your name (for example /Users/agarcia/tableau_connectors) and [Tableau version] with the version of Tableau that you’re running (for example, 2019.3.app).
 1. Create a directory for Tableau connectors. For example: `/Users/[user name]/tableau_connectors`
 1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `/Users/[user name]/tableau_connector/my connector`
 1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
