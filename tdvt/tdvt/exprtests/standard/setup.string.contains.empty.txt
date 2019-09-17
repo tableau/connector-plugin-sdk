@@ -1,0 +1,1 @@
+CONTAINS(str2, LEFT(str2, 0))

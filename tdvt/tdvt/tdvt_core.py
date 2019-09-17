@@ -50,7 +50,7 @@ class BatchQueueWork(object):
         self.test_set = test_set
         self.results = {}
         self.thread_id = -1
-        self.timeout_seconds = 60 * 60
+        self.timeout_seconds = test_config.timeout_seconds
         self.cmd_output = None
         self.saved_error_message = None
         self.log_zip_file = ''
@@ -107,6 +107,19 @@ class BatchQueueWork(object):
                             test_result_file.relative_test_file, self.test_set, TestErrorMissingActual())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
+    def handle_skipped_test_failure(self, test_result_file):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorSkippedTest()
+        self.add_test_result_error(test_result_file.test_file, result, False)
+
+    def handle_disabled_test_failure(self, test_result_file):
+        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
+                            test_result_file.relative_test_file, self.test_set)
+        result.error_status = TestErrorDisabledTest()
+        self.add_test_result_error(test_result_file.test_file, result, False)
+
+
     def is_timeout(self):
         return isinstance(self.error_state, TestErrorTimeout)
 
@@ -118,6 +131,12 @@ class BatchQueueWork(object):
 
     def is_aborted(self):
         return isinstance(self.error_state, TestErrorAbort)
+
+    def is_skipped(self):
+        return isinstance(self.error_state, TestErrorSkippedTest)
+
+    def is_disabled(self):
+        return isinstance(self.error_state, TestErrorDisabledTest)
 
     def process_test_results(self, test_list):
         # Check the output files.
@@ -176,6 +195,10 @@ class BatchQueueWork(object):
 
     def run(self, test_list):
 
+        if self.test_set.test_is_enabled is False:
+            return 0
+        if self.test_set.test_is_skipped is True:
+            return 0
         # Setup a subdirectory for the log files.
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
         try:
@@ -219,7 +242,7 @@ class BatchQueueWork(object):
         except RuntimeError as e:
             logging.debug(self.get_thread_msg() + "RuntimeError: " + str(e))
             self.saved_error_message = e.output
-            self.error_state = TestError()
+            self.error_state = TestErrorOther()
 
         total_time_ms = (time.perf_counter() - start_time) * 1000
 
@@ -229,6 +252,11 @@ class BatchQueueWork(object):
 
 def do_work(work):
     logging.debug(work.get_thread_msg() + "Running test:" + work.test_name)
+    if work.test_set.test_is_enabled is False:
+        work.error_state = TestErrorDisabledTest()
+
+    if work.test_set.test_is_skipped is True:
+        work.error_state = TestErrorSkippedTest()
 
     final_test_list = work.test_set.generate_test_file_list_from_config()
     work.run(final_test_list)
