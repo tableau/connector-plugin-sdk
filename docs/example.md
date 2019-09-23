@@ -131,8 +131,7 @@ In most cases, the default behavior works, so you don't have to include the <spa
 
 ## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
 
-The component defines what makes up a unique connection. This can be implemented in javascript or directly in the xml. Writing the required attributes list in the xml is more performant,
-and is recommended for most connectors.
+The component defines what makes up a unique connection. This can be implemented in javascript or directly in the xml. Writing the required attributes list in the xml is more performant, and is recommended for most connectors.
 
 ```
 <required-attributes>
