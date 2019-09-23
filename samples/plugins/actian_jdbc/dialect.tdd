@@ -5,8 +5,15 @@
          version='18.1'>
         <!-- TODO NOTE DB2 may be viable https://tableau.github.io/connector-plugin-sdk/docs/design#dialect-base-classes -  SQLSErver -->
   <function-map>
-    <!-- TODO FIXME bad -->
-    <function name='FLOAT' group='cast' return-type='real'>
+    <function group='numeric' name='COT' return-type='real'>
+      <formula>CASE WHEN TAN(%1) = 0 THEN NULL ELSE 1.0/TAN(%1) END</formula>
+      <argument type='real' />
+    </function>
+    <function group='numeric' name='DEGREES' return-type='real'>
+      <formula>(%1 * 180 / PI())</formula>
+      <argument type='real' />
+    </function>    <!-- TODO FIXME bad -->
+    <function group='cast' name='FLOAT' return-type='real'>
       <formula>CAST(((EXTRACT(EPOCH FROM %1) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS BIGINT)</formula>
       <argument type='date' />
     </function>
@@ -19,16 +26,39 @@
       <argument type='int' />
     </function>
 	<!--478 full TDD-->
-	<function group='string' name='SPACE' return-type='str'>
-      <formula>(REPEAT(&apos; &apos;,int(%1)))</formula>
+    <function group='cast' name='FLOAT' return-type='real'>
+      <formula>CAST(CASE WHEN %1 IS TRUE THEN 1.0 WHEN %1 IS FALSE THEN 0.0 ELSE NULL END AS DOUBLE PRECISION)</formula>
+      <argument type='bool' />
+    </function>
+    <function group='cast' name='INT' return-type='int'>
+      <formula>CAST(%1 AS INTEGER)</formula>
+      <argument type='bool' />
+    </function>
+     <function group='cast' name='INT' return-type='int'>
+      <formula>CAST(TRUNC(%1,0) AS BIGINT)</formula>
       <argument type='real' />
     </function>
 	<function group='string' name='SPACE' return-type='str'>
-      <formula>(REPEAT(&apos; &apos;,%1))</formula>
+      <formula>(LEFT(&apos;                                                                              &apos;,int(%1)))</formula>
+      <argument type='real' />
+    </function>
+	<function group='string' name='SPACE' return-type='str'>
+      <formula>(LEFT(&apos;                                                                              &apos;,%1))</formula>
       <argument type='int' />
     </function>
+    <function group='string' name='MID' return-type='str'>
+      <formula>&#10;(CASE WHEN (%2 IS NULL) OR %2 &lt; 1 THEN NULL&#10;      ELSE SUBSTRING(%1,CAST(TRUNC(%2) AS INTEGER), CHARACTER_LENGTH(%1) - (CAST(TRUNC(%2) AS INTEGER)) + 1) END)</formula>
+      <argument type='str' />
+      <argument type='real' />
+    </function>
+    <function group='string' name='MID' return-type='str'>
+      <formula>(CASE WHEN %2 IS NULL OR %3 IS NULL THEN NULL&#10;      WHEN CAST(FLOOR(%3) AS INTEGER) &lt; 1 THEN &apos;&apos;&#10;      WHEN CAST(FLOOR(%2) AS INTEGER) &lt; 1 THEN SUBSTR(%1,1,CAST(FLOOR(%3) AS INTEGER))&#10;      ELSE SUBSTR(%1, CAST(FLOOR(%2) AS INTEGER), CAST(FLOOR(%3) AS INTEGER)) END)</formula>
+      <argument type='str' />
+      <argument type='real' />
+      <argument type='real' />
+    </function>
 	<function group='cast' name='FLOAT' return-type='real'>
-      <formula>(CASE&#10;&#9;WHEN %1 IS TRUE THEN 1&#10;&#9;WHEN %1 IS NOT TRUE THEN 0&#10;&#9;ELSE CAST(NULL AS float) END)</formula>
+      <formula>(CASE&#10;&#9;WHEN %1 != 0 THEN 1.0&#10;&#9;WHEN %1 = 0.0 THEN 0&#10;&#9;ELSE CAST(NULL AS float) END)</formula>
       <argument type='real' />
     </function>
 	<function group='aggregate' name='CORR' return-type='real'>
@@ -42,10 +72,94 @@
       <unagg-formula>(CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 1 ELSE 0 END)</unagg-formula>
       <argument type='bool' />
     </function>
+    <function group='aggregate' name='COUNTD' return-type='int'>
+      <formula>COUNT(DISTINCT (CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 0 ELSE NULL END))</formula>
+      <unagg-formula>(CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 1 ELSE 0 END)</unagg-formula>
+      <argument type='bool' />
+    </function>
 	<function group='operator' name='+' return-type='datetime'>
+      <formula>(TIMESTAMP(TO_CHAR(%1,'YYYY-MM-DD')||' '||'TO_CHAR(%2,'HH24:MI:SS'),0))</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+    <function group='operator' name='+' return-type='datetime'>
       <formula>(TIMESTAMP(TO_CHAR(%1,'YYYY-MM-DD')||' '||'TO_CHAR(%2,'HH24:MI:SS'),0))</formula>
       <argument type='datetime' />
       <argument type='datetime' />
+    </function>
+<!--    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 AND NOT %2 OR NOT %1 AND %2)</formula>
+      <argument type='bool' />
+      <argument type='bool' />
+    </function>-->
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 AND %2 = 0 OR NOT %1 AND %2 != 0)</formula>
+      <argument type='bool' />
+      <argument type='int' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 != %2)</formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 = 0 AND %2 OR %1 != 0 AND NOT %2)</formula>
+      <argument type='int' />
+      <argument type='bool' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 != %2)</formula>
+      <argument type='str' />
+      <argument type='str' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(TIMESTAMP(%1) != %2)</formula>
+      <argument type='str' />
+      <argument type='datetime' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 != TIMESTAMP(%2))</formula>
+      <argument type='datetime' />
+      <argument type='str' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 != %2)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(ANSIDATE(%1) != %2)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 != ANSIDATE(%2)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+    <function group='operator' name='!=' return-type='bool'>
+      <formula>(%1 != %2)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+    <function group='operator' name='/' return-type='real'>
+      <formula>(CASE WHEN %2 != 0 THEN %1 / %2 END)</formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
+    <function group='operator' name='==' return-type='bool'>
+      <formula>(%1 AND %2 != 0 OR NOT %1 AND %2 = 0)</formula>
+      <argument type='bool' />
+      <argument type='int' />
+    </function>    <function group='operator' name='==' return-type='bool'>
+      <formula>(%1 != 0 AND %2 OR %1 = 0 AND NOT %2)</formula>
+      <argument type='int' />
+      <argument type='bool' />
+    </function>
+    <function group='operator' name='^^' return-type='real'>
+      <formula>(CASE WHEN %1 &lt; 0 AND FLOOR(%2) != %2 THEN NULL ELSE POWER(%1,%2) END)</formula>
+      <argument type='real' />
+      <argument type='int' />
     </function>
 
     <!-- TODO review test suite results and https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/full_dialect.tdd -->
@@ -63,6 +177,15 @@
       <formula>UPPERCASE(%1)</formula>
         <argument type='str' />
     </function>
+    <function group='string' name='LEN' return-type='int'>
+      <formula>CHARACTER_LENGTH(%1)</formula>
+      <argument type='str' />
+    </function>
+    <function group='string' name='ENDSWITH' return-type='bool'>
+      <formula>((CASE WHEN CHARACTER_LENGTH(%2) &gt;= 0 THEN RIGHT(TRIM(TRAILING FROM %1),CHARACTER_LENGTH(%2)) ELSE NULL END) = %2)</formula>
+      <argument type='str' />
+      <argument type='str' />
+    </function>
 
     <function group='date' name='YEAR' return-type='int'>
       <formula>YEAR(%1)</formula>
@@ -76,6 +199,73 @@
     <function group='date' name='TODAY' return-type='date'>
       <formula>ANSIDATE(current_date)</formula>
     </function>
+    <function group='date' name='ISDATE' return-type='bool'>
+      <formula>(CAST(%1 AS ANSIDATE) IS NOT NULL)</formula>
+      <argument type='str' />
+    </function>
+    <date-function name='DATENAME' return-type='str'>
+      <formula>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;%1&apos;)</formula>
+      <formula part='year'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;YYYY&apos;)</formula>
+      <formula part='quarter'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;Q&apos;)</formula>
+      <formula part='month'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMMonth&apos;)</formula>
+      <formula part='dayofyear'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMDDD&apos;)</formula>
+      <formula part='day'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMDD&apos;)</formula>
+      <formula part='weekday'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMDay&apos;)</formula>
+      <formula part='week'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;W&apos;)</formula>
+      <formula part='hour'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMHH24&apos;)</formula>
+      <formula part='minute'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMMI&apos;)</formula>
+      <formula part='second'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMSS&apos;)</formula>
+      <argument type='localstr' />
+      <argument type='date' />
+    </date-function>
+    <date-function name='DATENAME' return-type='str'>
+      <formula>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;%1&apos;)</formula>
+      <formula part='year'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;YYYY&apos;)</formula>
+      <formula part='quarter'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;Q&apos;)</formula>
+      <formula part='month'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMMonth&apos;)</formula>
+      <formula part='dayofyear'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMDDD&apos;)</formula>
+      <formula part='day'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMDD&apos;)</formula>
+      <formula part='weekday'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMDay&apos;)</formula>
+      <formula part='week'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;W&apos;)</formula>
+      <formula part='hour'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMHH24&apos;)</formula>
+      <formula part='minute'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMMI&apos;)</formula>
+      <formula part='second'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMSS&apos;)</formula>
+      <argument type='localstr' />
+      <argument type='datetime' />
+    </date-function>
+    <date-function name='DATENAME' return-type='str'>
+      <formula>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;%1&apos;)</formula>
+      <formula part='year'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;YYYY&apos;)</formula>
+      <formula part='quarter'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;Q&apos;)</formula>
+      <formula part='month'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMMonth&apos;)</formula>
+      <formula part='dayofyear'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMDDD&apos;)</formula>
+      <formula part='day'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMDD&apos;)</formula>
+      <formula part='weekday'>TO_CHAR(CAST(%2 AS ANSIDATE), &apos;FMDay&apos;)</formula>
+      <formula part='week'>(5 + CAST(TO_CHAR(sunday, &apos;DDD&apos;) AS INT) + CAST(TO_CHAR(DATE_TRUNC(&apos;year&apos;, sunday), &apos;D&apos;) AS INT)) / 7</formula>
+      <formula part='hour'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMHH24&apos;)</formula>
+      <formula part='minute'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMMI&apos;)</formula>
+      <formula part='second'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMSS&apos;)</formula>
+      <argument type='localstr' />
+      <argument type='datetime' />
+      <argument type='localstr' />
+    </date-function>
+    <date-function name='DATEADD' return-type='datetime'>
+      <formula>(%3 + %2 * INTERVAL &apos;1&apos; %1)</formula>
+      <formula part='year'>ADD_MONTHS(%3, (12 * %2))</formula>
+      <formula part='quarter'>ADD_MONTHS(%3, (3 * %2))</formula>
+      <formula part='month'>ADD_MONTHS(%3, %2)</formula>
+      <formula part='dayofyear'>(%3 + %2 * INTERVAL &apos;1&apos; DAY)</formula>
+      <formula part='day'>(%3 + %2 * INTERVAL &apos;1&apos; DAY)</formula>
+      <formula part='weekday'>(%3 + %2 * INTERVAL &apos;1&apos; DAY)</formula>
+      <formula part='week'>(%3 + (7 * %2))</formula>
+      <formula part='hour'>(%3 + %2 * INTERVAL &apos;1&apos; HOUR)</formula>
+      <formula part='minute'>(%3 + %2 * INTERVAL &apos;1&apos; MINUTE)</formula>
+      <formula part='second'>(%3 + %2 * INTERVAL &apos;1&apos; SECOND)</formula>
+      <argument type='localstr' />
+      <argument type='int' />
+      <argument type='datetime' />
+    </date-function>
+
 
     <date-function name='DATEPART' return-type='int'>
       <formula part='year'>YEAR(%2)</formula>
@@ -94,6 +284,21 @@
 
     <date-function name='DATEPART' return-type='int'>
       <formula part='year'>YEAR(%2)</formula>
+      <formula part='quarter'>QUARTER(%2)</formula>
+      <formula part='month'>MONTH(%2)</formula>
+      <formula part='dayofyear'>DOY(%2)</formula>
+      <formula part='day'>DAY(%2)</formula>
+      <formula part='weekday'>DAYOFWEEK(%2)</formula>
+      <formula part='week'>WEEK(%2)</formula>
+      <formula part='hour'>HOUR(%2)</formula>
+      <formula part='minute'>MINUTE(%2)</formula>
+      <formula part='second'>SECOND(%2)</formula>
+      <argument type='localstr' />
+      <argument type='datetime' />
+    </date-function>
+
+    <!--<date-function name='DATEPART' return-type='int'>
+      <formula part='year'>YEAR(%2)</formula>
       <formula part='quarter'>CAST((MONTH(%2) - 1) / 3 + 1 AS BIGINT)</formula>
       <formula part='month'>MONTH(%2)</formula>
       <formula part='dayofyear'>DATEDIFF(TO_DATE(%2), TO_DATE(CAST(TRUNC(%2,&apos;YY&apos;) AS DATE))) + 1</formula>
@@ -106,7 +311,7 @@
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
-    </date-function>
+    </date-function> -->
   </function-map>
 
   <sql-format>
@@ -128,8 +333,8 @@
         <part name='quarter' value='QUARTER' />
         <part name='month' value='MONTH' />
         <part name='week' value='WEEK' />
-        <part name='weekday' value='DAY' />
-        <part name='dayofyear' value='DAY' />
+        <part name='weekday' value='DAYOFWEEK' />
+        <part name='dayofyear' value='DOY' />
         <part name='day' value='DAY' />
         <part name='hour' value='HOUR' />
         <part name='minute' value='MINUTE' />
@@ -229,10 +434,11 @@
 	<!--
       format-select
       Piece-by-piece formula for defining a SELECT statement
+      ON COMMIT PRESERVE ROWS IS NOT REQUIRED FOR Avalanche/Ingres/ActianX
     -->
     <format-select>
-      <part name='Into' value='CREATE GLOBAL TEMPORARY TABLE %1 ON COMMIT PRESERVE ROWS AS' />
-      <part name='Top' value='SELECT * FROM (' />
+      <part name='Into' value='DECLARE GLOBAL TEMPORARY TABLE %1 AS' />
+      <!--<part name='Top' value='SELECT * FROM (' /> -->
       <part name='Select' value='SELECT %1' />
       <part name='From' value='FROM %1' />
       <part name='Where' value='WHERE %1' />
@@ -240,11 +446,17 @@
       <part name='Having' value='HAVING %1' />
       <part name='OrderBy' value='ORDER BY %1' />
       <!--<part name='Top' value=') WHERE ROWNUM &lt;= %1' />-->
+      <!--<part name='Top' value=' AS xrt) '  /> -->
       <part name='TopPercent' value='TABLESAMPLE BERNOULLI(%1)' />
       <part name='TopSamplePercent' value='TABLESAMPLE BERNOULLI(%1)' />
       <part name='TopSampleRecords' value='ORDER BY rand()' />
       <part name='TopSampleRecords' value='%1' />
     </format-select>
+    <!--
+      id-allowed-characters
+      Comprehensive list of characters which can be used in identifiers
+    -->
+    <id-allowed-characters value='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_' />
   </sql-format>
 
 </dialect>
