@@ -62,7 +62,7 @@ The Connection Resolver knows how to use these attributes to format an ODBC or J
 
 ![]({{ site.baseurl }}/assets/pce-tdr.png)
 
-## ![4]({{ site.baseurl }}/assets/pce-4.png) connectionBuilder.js
+## ![4]({{ site.baseurl }}/assets/pce-4.png) Connection Builder
 
 The ODBC connection string and the JDBC connection URL are created by calling the Connection Builder script and passing in a map of attributes that define how the connection is configured.
 Some values come from the connection dialog and are entered by the user (like username, password, and database name).
@@ -91,7 +91,7 @@ You may also set any other connection string options that you would like to pass
 })
 ```
 
-## ![5]({{ site.baseurl }}/assets/pce-5.png) connectionProperties.js
+## ![5]({{ site.baseurl }}/assets/pce-5.png) Connection Properties
 
 This script is needed only if you're using a JDBC driver.
 
@@ -124,24 +124,34 @@ This script is needed only if you're using a JDBC driver.
 })
 ```
 
-## ![6]({{ site.baseurl }}/assets/pce-6.png) connectionMatcher.js
+## ![6]({{ site.baseurl }}/assets/pce-6.png) Connection Matcher
 
 This script defines how connections are matched.
 In most cases, the default behavior works, so you don't have to include the <span style= "font-family: courier new">connection-matcher</span> section in your \*.tdr file.
 
-## ![7]({{ site.baseurl }}/assets/pce-7.png) connectionRequired.js
+## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
 
-This script defines what makes up a unique connection. The following values work for most cases.
+The component defines what makes up a unique connection. This can be implemented in javascript or directly in the xml. Writing the required attributes list in the xml is more performant,
+and is recommended for most connectors.
 
 ```
-(function requiredAttrs(attr) {
-    return ["class", "server", "port", "dbname", "username", "password"];
-})
+<required-attributes>
+        <setImpersonateAttributes/>
+        <attribute-list>
+          <attr>server</attr>
+          <attr>port</attr>
+          <attr>dbname</attr>
+          <attr>username</attr>
+          <attr>password</attr>
+          <attr>one-time-sql</attr>
+        </attribute-list>
+</required-attributes>
 ```
+`<setImpersonateAttributes/>` and `<attr>one-time-sql</attr>` add support for impersonate attributes and initial sql respectively, and should be in every connector.
 
 ## ![8]({{ site.baseurl }}/assets/pce-8.png) Example connection
 
-The Tableau Connection Resolver file (\*.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosvr.txt.
+The Tableau Connection Resolver file (\*.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosrv.txt.
 
 For ODBC, search for <span style= "font-family: courier new">ConnectString</span> to find something like this example:
 
@@ -158,7 +168,8 @@ JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&pa
 ## ![9]({{ site.baseurl }}/assets/pce-9.png) \*.tdd
 
 After connection, Tableau uses your _.tdd dialect file to determine which SQL to generate when retrieving information from your database.
-You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent.
+You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent. If you are using the 'odbc' or 'jdbc' superclasses you must 
+define a dialect, since those superclasses do not have dialects.
 
 ### Example dialect.tdd
 

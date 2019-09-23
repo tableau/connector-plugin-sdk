@@ -32,10 +32,6 @@ If your connection is very similar to an existing database such as PostgreSQL or
 
 You might find other super class values in the workbook XML from an existing Tableau connection, but we don't recommend using them; they haven't been tested.
 
-### Features based on superclass
-
-Web Authoring (creating a new connection from the web) is not currently available for all connector superclasses. If your connector is based on 'odbc' or 'jdbc,' then you can publish your workbook or datasource from desktop to server, but you can't create a new connection directly on server. Connectors based on 'mysql_odbc' do support web authoring because this ability is inherited from the mysql code they are based on. 
-
 ## Choosing a dialect
 
 The dialect determines what SQL is generated for various Tableau actions. Choosing the right dialect is a critical part of writing a connector.
@@ -70,7 +66,8 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - VerticaDialect
 
 ### Should I create a dialect definition file?
-You don’t need a dialect definition file if your connector uses the same SQL dialect as the connector it’s based on, such as mysql_odbc. However, to make changes to an existing Tableau dialect or define a new dialect, you’ll need a new dialect definition file. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect). 
+You don’t need a dialect definition file if your connector uses the same SQL dialect as the connector it’s based on, such as mysql_odbc. However, to make changes to an existing Tableau dialect or define a new dialect, you’ll need a new dialect definition file. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
+**If your connector inherits from 'odbc' or 'jdbc', you must create a dialect definition file.**
 
 ## Setting connection capabilities
 

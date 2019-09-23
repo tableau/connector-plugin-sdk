@@ -32,7 +32,7 @@ You need to do these things before you start:
 - Install Tableau Desktop 2019.2 or later on a Windows or Mac computer.
 
 ## Using a Connector
-You must start Tableau Desktop or Tableau Server with a special command line argument that tells Tableau where to find your Connector. See [Share Your Connector]({{ site.baseurl }}/docs/share) for more information.
+You must start Tableau Desktop or Tableau Server with a special command line argument that tells Tableau where to find your Connector. See [Run Your Connector]({{ site.baseurl }}/docs/share) for more information.
 
 **Tableau Desktop:** 
 

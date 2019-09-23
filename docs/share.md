@@ -1,16 +1,9 @@
 ---
-title: Share Your Connector
+title: Run Your Connector
 ---
-
-You've created and tested your connector.
-Now you'd like to get the connector, or at least the data that your connector can access, to your users.
 
 **IMPORTANT:** This is beta software and should be used in a test environment.
 Do not deploy the connector to a production environment.
-
-You can share the data your connector accesses by connecting to the data, creating an extract, and publishing the extract to Tableau Server or Tableau Online.
-
-Or, if you prefer to have your users test the connector, you can place the connector files in the directories and then run the commands as follows:
 
 **Tableau Desktop:** 
 
