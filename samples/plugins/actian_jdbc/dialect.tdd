@@ -55,8 +55,12 @@
       <argument type='real' />
     </function>
     <function group='cast' name='STR' return-type='str'>
-      <formula>(CASE&#10;&#9;WHEN %1 IS TRUE THEN &apos;1&apos;&#10;&#9;WHEN %1 IS NOT TRUE THEN &apos;0&apos;&#10;&#9;ELSE CAST(NULL AS/ VARCHAR) END)</formula>
+      <formula>(CASE&#10;&#9;WHEN %1 IS TRUE THEN &apos;1&apos;&#10;&#9;WHEN %1 IS NOT TRUE THEN &apos;0&apos;&#10;&#9;ELSE CAST(NULL AS VARCHAR) END)</formula>
       <argument type='bool' />
+    </function>
+	<function group='cast' name='CHAR' return-type='str'>
+      <formula>CHR (%1)</formula>
+      <argument type='int' />
     </function>
     <function group='logical' name='IIF' return-type='int'>
       <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS NOT TRUE THEN %3 ELSE %4 END)</formula>
@@ -111,8 +115,22 @@
       <formula>(CASE WHEN %1 IS TRUE THEN FALSE WHEN %1 IS NOT TRUE THEN FALSE ELSE TRUE END)</formula>
       <argument type='bool' />
     </function>   
+    <function group='string' name='ASCII' return-type='int'>
+      <formula>IIHEXINT(HEX('%1'))</formula>
+      <argument type='str' />
+    </function>
+    <function group='string' name='CHAR' return-type='int'>
+      <formula>CHR(%1)</formula>
+      <argument type='str' />
+    </function>	
     <function group='string' name='FIND' return-type='int'>
       <formula>POSITION(%1, %2)</formula>
+      <argument type='str' />
+      <argument type='str' />
+    </function>
+	<!-- trial to int to string for testing -->
+	<function group='string' name='FIND' return-type='str'>
+      <formula>CHAR (POSITION(%1, %2))</formula>
       <argument type='str' />
       <argument type='str' />
     </function>
@@ -364,7 +382,7 @@
       <argument type='date' />
     </function>
 	<function group='operator' name='&gt;' return-type='bool'>
-      <formula>(CASE WHEN %1 &gt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <formula>(CASE WHEN %1 &gt; %2 THEN TRUE ELSE FALS' END)</formula>
       <argument type='datetime' />
       <argument type='datetime' />
     </function>
@@ -503,6 +521,12 @@
     <function group='string' name='UPPER' return-type='str'>
       <formula>UPPERCASE(%1)</formula>
         <argument type='str' />
+    </function>
+	<function group='string' name='CONTAINS' return-type='bool'>
+      <!--<formula>%1 RLIKE CONCAT(&apos;.*&apos;, %2, &apos;.*&apos;)</formula> -->
+	  <formula>(CASE WHEN POSITION(%1 in %2) &gt; 0 AND POSITION(%1 in %2)&lt; LENGTH (%2) THEN TRUE ELSE FALSE END)</formula>
+      <argument type='str' />
+      <argument type='str' />
     </function>
     <function group='string' name='LEN' return-type='int'>
       <formula>CHARACTER_LENGTH(%1)</formula>
