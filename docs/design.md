@@ -66,8 +66,7 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - VerticaDialect
 
 ### Should I create a dialect definition file?
-You don’t need a dialect definition file if your connector uses the same SQL dialect as the connector it’s based on, such as mysql_odbc. However, to make changes to an existing Tableau dialect or define a new dialect, you’ll need a new dialect definition file. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
-**If your connector inherits from 'odbc' or 'jdbc', you must create a dialect definition file.**
+If you want to customize the generated SQL, or your connector inherits from 'odbc' or 'jdbc', then you need a dialect file. Without a file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
 
 ## Setting connection capabilities
 
