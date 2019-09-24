@@ -21,6 +21,7 @@
       <customization name="CAP_SELECT_TOP_INTO" value="yes"/>
       <customization name="CAP_CREATE_TEMP_TABLES" value="yes"/>
       <customization name="CAP_INDEX_TEMP_TABLES" value="yes"/>  <!-- yes we suport, but usually not needed does setting this to yes hurt us? -->
+	  <customization name="CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL" value="no"/>
       <customization name="CAP_QUERY_BOOLEXPR_TO_INTEXPR" value="no"/>  <!-- TODO Review -->
       <customization name="CAP_QUERY_GROUP_BY_BOOL" value="yes"/>   <!-- supported, undergone prelim testing -->
       <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="yes"/>   <!-- supported, undergone prelim testing -->

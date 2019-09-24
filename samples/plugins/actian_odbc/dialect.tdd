@@ -51,6 +51,11 @@
       <argument type='str' />
       <argument type='real' />
     </function>
+	<function group='string' name='MID' return-type='str'>
+      <formula>&#10;(CASE WHEN (%2 IS NULL) OR %2 &lt; 1 THEN NULL&#10;      ELSE SUBSTRING(%1,CAST(TRUNC(%2) AS INTEGER), CHARACTER_LENGTH(%1) - (CAST(TRUNC(%2) AS INTEGER)) + 1) END)</formula>
+      <argument type='str' />
+      <argument type='int' />
+    </function>
     <function group='string' name='MID' return-type='str'>
       <formula>(CASE WHEN %2 IS NULL OR %3 IS NULL THEN NULL&#10;      WHEN CAST(FLOOR(%3) AS INTEGER) &lt; 1 THEN &apos;&apos;&#10;      WHEN CAST(FLOOR(%2) AS INTEGER) &lt; 1 THEN SUBSTR(%1,1,CAST(FLOOR(%3) AS INTEGER))&#10;      ELSE SUBSTR(%1, CAST(FLOOR(%2) AS INTEGER), CAST(FLOOR(%3) AS INTEGER)) END)</formula>
       <argument type='str' />
@@ -72,11 +77,20 @@
       <unagg-formula>(CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 1 ELSE 0 END)</unagg-formula>
       <argument type='bool' />
     </function>
-    <function group='aggregate' name='COUNTD' return-type='int'>
+	   <function group='aggregate' name='COUNTD' return-type='int'>
       <formula>COUNT(DISTINCT (CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 0 ELSE NULL END))</formula>
       <unagg-formula>(CASE WHEN %1 IS TRUE THEN 1 WHEN %1 IS NOT TRUE THEN 1 ELSE 0 END)</unagg-formula>
       <argument type='bool' />
     </function>
+	<!-- This was tried to remove the failing NOT query for -q lod..
+	<function group='operator' name='!' return-type='bool'>
+      <formula>(NVL2(%1,0,1))</formula>
+      <argument type='bool' />
+    </function>
+	<function group='operator' name='!' return-type='bool'>
+      <formula>(NVL2(%1,-1,2))</formula>
+      <argument type='int' />
+    </function> -->
     <function group='operator' name='+' return-type='datetime'>
       <formula>(TIMESTAMP(TO_CHAR(%1,'YYYY-MM-DD')||' '||'TO_CHAR(%2,'HH24:MI:SS'),0))</formula>
       <argument type='date' />
@@ -161,6 +175,127 @@
       <argument type='real' />
       <argument type='int' />
     </function>
+	<!-- This could be 1=true 0=false -->
+	<function group='operator' name='==' return-type='bool'>
+      <formula>(CASE WHEN %1 = %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='==' return-type='bool'>
+      <formula>(CASE WHEN %1 = %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&gt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&gt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&lt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&lt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&lt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&lt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&lt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&lt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+		<function group='operator' name='&lt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&lt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &lt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&gt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&gt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&gt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&gt;=' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt;= %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='!=' return-type='bool'>
+      <formula>(CASE WHEN %1 != %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='!=' return-type='bool'>
+      <formula>(CASE WHEN %1 != %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='!=' return-type='bool'>
+      <formula>(CASE WHEN %1 != %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='!=' return-type='bool'>
+      <formula>(CASE WHEN %1 != %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='==' return-type='bool'>
+      <formula>(CASE WHEN %1 = %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='==' return-type='bool'>
+      <formula>(CASE WHEN %1 = %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
+	<function group='operator' name='&gt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
+      <argument type='datetime' />
+    </function>
+	<function group='operator' name='&gt;' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt; %2 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='datetime' />
+      <argument type='date' />
+    </function>
 
     <!-- TODO review test suite results and https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/full_dialect.tdd -->
     <function group='string' name='LEN' return-type='int'>
@@ -186,7 +321,11 @@
       <argument type='str' />
       <argument type='str' />
     </function>
-
+	 <function group='string' name='ENDSWITH' return-type='str'>
+      <formula>((CASE WHEN CHARACTER_LENGTH(%2) &gt;= 0 THEN RIGHT(TRIM(TRAILING FROM %1),CHARACTER_LENGTH(%2)) ELSE NULL END) = %2)</formula>
+      <argument type='str' />
+      <argument type='str' />
+    </function>
     <function group='date' name='YEAR' return-type='int'>
       <formula>YEAR(%1)</formula>
       <argument type='datetime' />
