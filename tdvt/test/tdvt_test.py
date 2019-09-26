@@ -66,7 +66,7 @@ class DiffTest(unittest.TestCase):
             if 'expected.both' in test:
                 compare_tuples = True
                 compare_sql = True
-            test_config = TdvtTestConfig(compare_sql, compare_tuples)
+            test_config = TdvtInvocation(compare_sql, compare_tuples)
             results = tdvt_core.TestResult(test_config=test_config)
             results.add_test_results(actual_xml, actual_file)
             expected_output = tdvt_core.TestResult(test_config=test_config)
@@ -97,7 +97,7 @@ class DiffTest(unittest.TestCase):
 
 class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
-        self.test_config = TdvtTestConfig()
+        self.test_config = TdvtInvocation()
         self.test_config.output_dir = make_temp_dir([self.test_config.suite_name])
 
     def tearDown(self):
@@ -238,7 +238,7 @@ def build_tabquery_command_line_local(work):
 
 class CommandLineTest(unittest.TestCase):
     def setUp(self):
-        self.test_config = TdvtTestConfig()
+        self.test_config = TdvtInvocation()
         self.test_config.logical = False
         self.test_config.tds = 'mytds.tds'
 

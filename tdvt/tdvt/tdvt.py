@@ -28,8 +28,8 @@ from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSe
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .resources import make_temp_dir
-from .tdvt_core import generate_files, run_diff, run_tests, TdvtTestConfig
-from .config_gen.tdvtconfig import TdvtTestConfig
+from .tdvt_core import generate_files, run_diff, run_tests
+from .config_gen.tdvtconfig import TdvtInvocation
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
@@ -223,7 +223,7 @@ def enqueue_single_test(args, ds_info, suite):
         test_set = SingleExpressionTestSet(suite, get_root_dir(), args.expression_pattern, args.tds_pattern,
                                            args.test_pattern_exclude, ds_info)
 
-    test_config = TdvtTestConfig(from_args=args)
+    test_config = TdvtInvocation(from_args=args)
     test_config.suite_name = suite
     test_config.timeout_seconds = ds_info.timeout_seconds
     test_config.logical = test_set.is_logical_test()
@@ -254,7 +254,7 @@ def enqueue_failed_tests(run_file, root_directory, args):
         tds_base = os.path.split(f['tds'])[1]
         tds = get_tds_full_path(root_directory, tds_base)
         logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
-        test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
+        test_config = TdvtInvocation(from_json=f['test_config'], tds=tds)
         test_config.leave_temp_dir = args.noclean if args else False
         suite_name = f['test_config']['suite_name']
         password_file = f['password_file'] if 'password_file' in f else ''
@@ -326,12 +326,12 @@ def enqueue_tests(ds_info, args, suite):
     for x in tests:
         if not x.generate_test_file_list_from_config():
             foundTests = False
-            test_config = TdvtTestConfig(from_args=args)
+            test_config = TdvtInvocation(from_args=args)
             logging.error("No tests found for config " + str(x))
             return test_set_configs
 
     for test_set in tests:
-        test_config = TdvtTestConfig(from_args=args)
+        test_config = TdvtInvocation(from_args=args)
         test_config.timeout_seconds = ds_info.timeout_seconds
         test_config.suite_name = suite
         test_config.logical = test_set.is_logical_test()
@@ -639,7 +639,7 @@ def main():
 
         # It's ok to call generate and then run some tests, so don't exit here.
     elif args.diff:
-        test_config = TdvtTestConfig(from_args=args)
+        test_config = TdvtInvocation(from_args=args)
         run_diff(test_config, args.diff)
         sys.exit(0)
     elif args.run_file:
