@@ -4,6 +4,10 @@ title: Connector Design Considerations
 
 The choices you make when creating a connector can include which superclass and dialect to use, and how you want to tune your connection using Tableau capabilities.
 
+## Choosing a Connection Class
+
+The class attribute is a unique key for your connector. When Tableau loads the connectors at startup, if the class has already been registered the connector will not be loaded. The class is also stamped in Tableau Workbook (.twb or .twbx) files and Tableau Datasource (.tds) files to identify what connector that particular connection was using.
+
 ## Choosing a superclass
 
 Connectors work using an inheritance pattern.
