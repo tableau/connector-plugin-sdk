@@ -66,7 +66,9 @@ class DiffTest(unittest.TestCase):
             if 'expected.both' in test:
                 compare_tuples = True
                 compare_sql = True
-            test_config = TdvtInvocation(compare_sql, compare_tuples)
+            test_config = TdvtInvocation()
+            test_config.tested_sql = compare_sql
+            test_config.tested_tuples = compare_tuples
             results = tdvt_core.TestResult(test_config=test_config)
             results.add_test_results(actual_xml, actual_file)
             expected_output = tdvt_core.TestResult(test_config=test_config)

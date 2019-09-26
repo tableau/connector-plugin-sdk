@@ -254,7 +254,8 @@ def enqueue_failed_tests(run_file, root_directory, args):
         tds_base = os.path.split(f['tds'])[1]
         tds = get_tds_full_path(root_directory, tds_base)
         logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
-        test_config = TdvtInvocation(from_json=f['test_config'], tds=tds)
+        test_config = TdvtInvocation(from_json=f['test_config'])
+        test_config.tds = tds
         test_config.leave_temp_dir = args.noclean if args else False
         suite_name = f['test_config']['suite_name']
         password_file = f['password_file'] if 'password_file' in f else ''
