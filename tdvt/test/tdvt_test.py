@@ -249,7 +249,7 @@ class CommandLineTest(unittest.TestCase):
 
     def test_command_line_full(self):
         self.test_config.output_dir = 'my/output/dir'
-        self.test_config.d_override = '-DLogLevel=Debug'
+        self.test_config.run_time_config.d_override = '-DLogLevel=Debug'
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -275,7 +275,7 @@ class CommandLineTest(unittest.TestCase):
     def test_command_line_full_extension(self):
 
         self.test_config.output_dir = 'my/output/dir'
-        self.test_config.d_override = '-DLogLevel=Debug'
+        self.test_config.run_time_config.d_override = '-DLogLevel=Debug'
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         work.test_extension = True
@@ -302,7 +302,7 @@ class CommandLineTest(unittest.TestCase):
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_command_line_multiple_override(self):
-        self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
+        self.test_config.run_time_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -535,7 +535,7 @@ class ConfigTest(unittest.TestCase):
 
         tests = [test1, test2, test3]
 
-        self.assertTrue(test_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.d_override)
+        self.assertTrue(test_config.run_time_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.run_time_config.d_override)
 
         for test in tests:
             found = [y for y in x if y == test]
@@ -594,21 +594,21 @@ class ConfigTest(unittest.TestCase):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'perf_notset.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        self.assertFalse(test_config.run_as_perf,'run_as_perf did not match: ' + str(test_config.run_as_perf))
+        self.assertFalse(test_config.run_time_config.run_as_perf,'run_as_perf did not match: ' + str(test_config.run_time_config.run_as_perf))
 
 
     def test_load_run_as_perf_true(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'perf_true.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        self.assertTrue(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
+        self.assertTrue(test_config.run_time_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_time_config.run_as_perf))
 
 
     def test_load_run_as_perf_false(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'perf_false.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
+        self.assertFalse(test_config.run_time_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_time_config.run_as_perf))
 
 
 class PrintConfigurationsTest(unittest.TestCase):

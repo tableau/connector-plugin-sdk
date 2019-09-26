@@ -4,6 +4,7 @@ import json
 import re
 
 from ..resources import *
+from .test_config import RunTimeTestConfig
 
 class TdvtInvocation(object):
     """Track how items were tested. This captures how tdvt was invoked."""
@@ -25,6 +26,8 @@ class TdvtInvocation(object):
         self.run_as_perf = False
         self.thread_id = -1
         self.tds = ''
+        self.tested_test_config : RunTimeTestConfig = None
+
         if from_args:
             self.init_from_args(from_args)
         if from_json:

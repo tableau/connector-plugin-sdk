@@ -250,29 +250,30 @@ def build_config_name(prefix, dsname):
 def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
 
+class RunTimeTestConfig(object):
+    """
+        Tracks specifics about how a group of tests were run.
+    """
+    def __init__(self, timeout_seconds, maxthread=0, d_override='', run_as_perf=False):
+        self.timeout_seconds = timeout_seconds
+        self.d_override = d_override
+        self.run_as_perf = run_as_perf
+        self.maxthread = int(maxthread)
+
 class TestConfig(object):
     """
         Defines all the tests that can be run for a single data source. An organized collection of TestSet objects.
     """
-    def __init__(self, dsname, timeout_seconds, logical_config_name, maxthread, maxsubthread, d_override='', 
-                 run_as_perf=False):
+    def __init__(self, dsname, logical_config_name, run_time_config=None):
         self.dsname = dsname
-        self.timeout_seconds = timeout_seconds
         self.logical_config_name = logical_config_name
         self.calcs_tds = self.get_tds_name('cast_calcs.')
         self.staples_tds = self.get_tds_name('Staples.')
         self.logical_test_set = []
         self.expression_test_set = []
         self.smoke_test_set = []
-        self.d_override = d_override
-        self.maxthread = 0
         self.logical_config = {}
-        self.run_as_perf = run_as_perf
-        if int(maxthread) > 0:
-            self.maxthread = int(maxthread)
-        self.maxsubthread = 0
-        if int(maxsubthread) > 0:
-            self.maxsubthread = int(maxsubthread)
+        self.run_time_config = run_time_config
 
     def get_config_name(self, prefix):
         return prefix + self.dsname
