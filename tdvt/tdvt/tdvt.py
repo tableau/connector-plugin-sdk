@@ -440,7 +440,7 @@ def create_parser():
     parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     parser.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
     parser.add_argument('-f', dest='run_file', help='Json file containing failed tests to run.', required=False)
-    parser.add_argument('--verify', dest='smoke_test', help='Verifies the connection to a data source against test in your .ini file with SmokeTest = True.', required=False, default=None, const='', nargs='?')
+    parser.add_argument('--verify', dest='smoke_test', help='Verifies the connection to a data source against test in your .ini file with SmokeTest = True.', action='store_true')
     return parser
 
 
@@ -510,9 +510,11 @@ def run_tests_impl(tests, max_threads, args):
     logging.debug("test queue size is: " + str(len(all_work)))
 
     if not smoke_tests:
-        logging.warning("""No smoke tests detected. Tests will attempt to run without first verifying the data source connection. This may result in tests failing because of connection, rather than plugin, issues.""")
+        logging.warning("No smoke tests detected.")
         if args.smoke_test:
             sys.exit(1)
+        else:
+            logging.warning("Tests will run without verifying the data source connection.")
 
     if not all_work:
         print("No tests found. Check arguments.")
