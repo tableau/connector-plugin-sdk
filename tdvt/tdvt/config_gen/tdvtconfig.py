@@ -4,11 +4,11 @@ import json
 import re
 
 from ..resources import *
-from .test_config import RunTimeTestConfig
+from .test_config import TestConfig, RunTimeTestConfig
 
 class TdvtInvocation(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, from_args=None, from_json=None):
+    def __init__(self, from_args=None, from_json=None, test_config : TestConfig = None):
         self.tested_sql = False
         self.tested_tuples = True
         self.log_dir = ''
@@ -26,12 +26,21 @@ class TdvtInvocation(object):
         self.run_as_perf = False
         self.thread_id = -1
         self.tds = ''
-        self.tested_test_config : RunTimeTestConfig = None
+        self.tested_run_time_config : RunTimeTestConfig = None
 
         if from_args:
             self.init_from_args(from_args)
         if from_json:
             self.init_from_json(from_json)
+        if test_config:
+            self.set_run_time_test_config(test_config.run_time_config)
+            self.suite_name = test_config.dsname
+
+    def set_run_time_test_config(self, rtt):
+            self.timeout_seconds = rtt.timeout_seconds
+            self.d_override = rtt.d_override
+            self.run_as_perf = rtt.run_as_perf
+            self.tested_run_time_config = rtt
 
     def init_from_args(self, args):
         if args.compare_sql: 

@@ -597,7 +597,7 @@ def run_diff(test_config, diff):
     return 0
 
 
-def run_tests_impl(test_set, test_config):
+def run_tests_impl(test_set, test_config: TdvtInvocation):
     all_test_results = {}
     all_work = []
 

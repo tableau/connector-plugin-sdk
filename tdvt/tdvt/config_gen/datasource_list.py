@@ -101,6 +101,7 @@ def load_test(config, test_dir=get_root_dir()):
     Name = bigquery
     LogicalQueryFormat = bool_
     CommandLineOverride =
+    TabQueryPath = [optional path to override tabquery locally.]
 
     [StandardTests]
     LogicalExclusions_Calcs =
@@ -164,7 +165,9 @@ def load_test(config, test_dir=get_root_dir()):
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
     run_time_config = RunTimeTestConfig(dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig.get('MaxThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
+    run_time_config.set_tabquery_paths(dsconfig.get('TabQueryPathLinux', ''), dsconfig.get('TabQueryPathMac', ''), dsconfig.get('TabQueryPathx64', ''))
     test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], run_time_config)
+
 
     # Add the standard test suites.
     if standard_tests in config.sections():

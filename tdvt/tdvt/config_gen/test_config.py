@@ -254,11 +254,31 @@ class RunTimeTestConfig(object):
     """
         Tracks specifics about how a group of tests were run.
     """
-    def __init__(self, timeout_seconds, maxthread=0, d_override='', run_as_perf=False):
+    def __init__(self, timeout_seconds=60*60, maxthread=0, d_override='', run_as_perf=False):
         self.timeout_seconds = timeout_seconds
         self.d_override = d_override
         self.run_as_perf = run_as_perf
         self.maxthread = int(maxthread)
+        self.linux_path = ''
+        self.mac_path = ''
+        self.windows_path = ''
+
+    def set_tabquery_paths(self, linux_path, mac_path, windows_path):
+        self.linux_path = linux_path
+        self.mac_path = mac_path
+        self.windows_path = windows_path
+
+    def has_customized_tabquery_path(self):
+        return self.linux_path is not '' or self.mac_path is not '' or self.windows_path is not ''
+
+    def get_tabquery_path(self, os):
+        if os.startswith("darwin"):
+            return self.mac_path
+        elif os.startswith("linux"):
+            return self.linux_path
+        else:
+            return self.windows_path
+
 
 class TestConfig(object):
     """

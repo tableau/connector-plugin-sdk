@@ -333,12 +333,8 @@ def enqueue_tests(ds_info, args, suite):
             return test_set_configs
 
     for test_set in tests:
-        tdvt_invocation = TdvtInvocation(from_args=args)
-        tdvt_invocation.timeout_seconds = ds_info.run_time_config.timeout_seconds
-        tdvt_invocation.suite_name = suite
+        tdvt_invocation = TdvtInvocation(from_args=args, test_config = ds_info)
         tdvt_invocation.logical = test_set.is_logical_test()
-        tdvt_invocation.d_override = ds_info.run_time_config.d_override
-        tdvt_invocation.run_as_perf = ds_info.run_time_config.run_as_perf
         tdvt_invocation.tds = test_set.tds_name
         tdvt_invocation.config_file = test_set.config_name
 
