@@ -12,6 +12,12 @@
     params["UseDeclareFetch"] = "1";
     params["Fetch"] = "2048";
 
+    if (attr[connectionHelper.attributeSSLMode] == "require")
+    {        
+        params["sslmode"] = "require";
+    }
+
+
     var formattedParams = [];
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
