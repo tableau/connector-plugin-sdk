@@ -26,7 +26,7 @@ class TdvtInvocation(object):
         self.run_as_perf = False
         self.thread_id = -1
         self.tds = ''
-        self.tested_run_time_config : RunTimeTestConfig = None
+        self.tested_run_time_config = None
 
         if from_args:
             self.init_from_args(from_args)
