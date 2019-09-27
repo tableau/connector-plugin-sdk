@@ -10,7 +10,7 @@ import logging
 
 from .gentests import list_configs, list_config
 from ..resources import *
-from .test_config import TestConfig, build_config_name, build_tds_name
+from .test_config import TestConfig, RunTimeTestConfig
 
 RUN_IN_INCORRECT_DIRECTORY_MSG = "\nNo data sources found in this directory. To run tests, the base directory must contain a valid test configuration."
 
@@ -101,6 +101,7 @@ def load_test(config, test_dir=get_root_dir()):
     Name = bigquery
     LogicalQueryFormat = bool_
     CommandLineOverride =
+    TabQueryPath = [optional path to override tabquery locally.]
 
     [StandardTests]
     LogicalExclusions_Calcs =
@@ -163,8 +164,10 @@ def load_test(config, test_dir=get_root_dir()):
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
-    test_config = TestConfig(config_name, dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'),
-                             dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
+    run_time_config = RunTimeTestConfig(dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig.get('MaxThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
+    run_time_config.set_tabquery_paths(dsconfig.get('TabQueryPathLinux', ''), dsconfig.get('TabQueryPathMac', ''), dsconfig.get('TabQueryPathx64', ''))
+    test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], run_time_config)
+
 
     # Add the standard test suites.
     if standard_tests in config.sections():

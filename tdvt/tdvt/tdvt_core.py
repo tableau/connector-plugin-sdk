@@ -470,10 +470,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_msg = test_result.saved_error_message if test_result.saved_error_message else error_msg
-        error_type = case.error_type if case else None
+        error_type = test_result.get_error_type()
 
     columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected),
-               str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(case.error_type),
+               str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(error_type),
                float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
     if test_result.test_config.tested_sql:
         columns.extend([expected_sql, float(expected_time)])
@@ -597,7 +597,7 @@ def run_diff(test_config, diff):
     return 0
 
 
-def run_tests_impl(test_set, test_config):
+def run_tests_impl(test_set, test_config: TdvtInvocation):
     all_test_results = {}
     all_work = []
 

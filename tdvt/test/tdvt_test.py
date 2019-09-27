@@ -25,14 +25,12 @@ import unittest
 
 from unittest import mock
 
-from defusedxml.ElementTree import parse,ParseError
+from defusedxml.ElementTree import parse
 
 from tdvt import tdvt_core
 from tdvt.tdvt import enqueue_failed_tests
-from tdvt.config_gen import tdvtconfig
 from tdvt.config_gen import datasource_list
-from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, TestFile
-from tdvt.resources import get_path, make_temp_dir
+from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTimeTestConfig
 from tdvt.test_results import *
 from tdvt.tabquery import *
 
@@ -66,7 +64,9 @@ class DiffTest(unittest.TestCase):
             if 'expected.both' in test:
                 compare_tuples = True
                 compare_sql = True
-            test_config = TdvtTestConfig(compare_sql, compare_tuples)
+            test_config = TdvtInvocation()
+            test_config.tested_sql = compare_sql
+            test_config.tested_tuples = compare_tuples
             results = tdvt_core.TestResult(test_config=test_config)
             results.add_test_results(actual_xml, actual_file)
             expected_output = tdvt_core.TestResult(test_config=test_config)
@@ -97,7 +97,7 @@ class DiffTest(unittest.TestCase):
 
 class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
-        self.test_config = TdvtTestConfig()
+        self.test_config = TdvtInvocation()
         self.test_config.output_dir = make_temp_dir([self.test_config.suite_name])
 
     def tearDown(self):
@@ -238,16 +238,36 @@ def build_tabquery_command_line_local(work):
 
 class CommandLineTest(unittest.TestCase):
     def setUp(self):
-        self.test_config = TdvtTestConfig()
+        self.test_config = TdvtInvocation()
         self.test_config.logical = False
         self.test_config.tds = 'mytds.tds'
+        self.test_config.tested_run_time_config = RunTimeTestConfig()
 
         self.test_file = 'some/test/file.txt'
         self.test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', self.test_config.tds, '', self.test_file, '')
 
+    def test_command_line_override_full(self):
+        linux_path = 'some_other_linux'
+        mac_path = 'another_mac'
+        win_path = 'something_windows.exe'
+        self.test_config.tested_run_time_config.set_tabquery_paths(linux_path, mac_path, win_path)
+
+        work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        if sys.platform in ('win32', 'cygwin'):
+            expected = win_path
+        elif sys.platform == 'darwin':
+            expected = mac_path
+        elif sys.platform == 'linux':
+            expected = linux_path
+        else:
+            self.skipTest("Unsupported test OS: {}".format(sys.platform))
+        self.assertTrue(cmd_line[0] == expected, 'Actual: ' + cmd_line[0] + ': Expected: ' + expected)
+
     def test_command_line_full(self):
         self.test_config.output_dir = 'my/output/dir'
         self.test_config.d_override = '-DLogLevel=Debug'
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -262,6 +282,7 @@ class CommandLineTest(unittest.TestCase):
 
     def test_password_file(self):
         self.test_config.output_dir = 'my/output/dir'
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
         suite = 'password_test'
 
         self.test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', self.test_config.tds, '', self.test_file, suite)
@@ -274,6 +295,7 @@ class CommandLineTest(unittest.TestCase):
 
         self.test_config.output_dir = 'my/output/dir'
         self.test_config.d_override = '-DLogLevel=Debug'
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         work.test_extension = True
@@ -288,6 +310,7 @@ class CommandLineTest(unittest.TestCase):
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
 
     def test_command_line_no_expected(self):
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
@@ -301,8 +324,31 @@ class CommandLineTest(unittest.TestCase):
 
     def test_command_line_multiple_override(self):
         self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
+        cmd_line = build_tabquery_command_line_local(work)
+        cmd_line_str = ' '.join(cmd_line)
+        if sys.platform in ('win32', 'cygwin'):
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
+        elif sys.platform in ('darwin', 'linux'):
+            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
+        else:
+            self.skipTest(reason="Unsupported test OS: {}".format(sys.platform))
+        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+
+    def test_command_line_multiple_override_from_invocation(self):
+        rtt = RunTimeTestConfig(60*60, 1, '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off')
+        test_config = TdvtInvocation()
+        test_config.set_run_time_test_config(rtt)
+        test_config.logical = False
+        test_config.tds = 'mytds.tds'
+
+        test_file = 'some/test/file.txt'
+        test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', test_config.tds, '', self.test_file, '')
+        test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
+
+        work = tdvt_core.BatchQueueWork(test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
@@ -533,11 +579,21 @@ class ConfigTest(unittest.TestCase):
 
         tests = [test1, test2, test3]
 
-        self.assertTrue(test_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.d_override)
+        self.assertTrue(test_config.run_time_config.d_override == 'WorkFaster=True Override=TurnOff:yes,TurnOn:no', 'Override did not match: ' + test_config.run_time_config.d_override)
 
         for test in tests:
             found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
+
+    def test_load_tabquery_override(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'postgres_jdbc_tabquerytool.ini', __name__))
+        test_config = datasource_list.load_test(config, TEST_DIRECTORY)
+
+        self.assertTrue(test_config.run_time_config.get_tabquery_path("darwin")  == 'tabquerytool_mac')
+        self.assertTrue(test_config.run_time_config.get_tabquery_path("linux")  == 'tabquerytool_linux')
+        self.assertTrue(test_config.run_time_config.get_tabquery_path("win32")  == 'tabquerytool_windows.exe')
+
 
     def test_load_ini_bigquery_sql(self):
         config = configparser.ConfigParser()
@@ -592,21 +648,21 @@ class ConfigTest(unittest.TestCase):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'perf_notset.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        self.assertFalse(test_config.run_as_perf,'run_as_perf did not match: ' + str(test_config.run_as_perf))
+        self.assertFalse(test_config.run_time_config.run_as_perf,'run_as_perf did not match: ' + str(test_config.run_time_config.run_as_perf))
 
 
     def test_load_run_as_perf_true(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'perf_true.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        self.assertTrue(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
+        self.assertTrue(test_config.run_time_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_time_config.run_as_perf))
 
 
     def test_load_run_as_perf_false(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'perf_false.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
+        self.assertFalse(test_config.run_time_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_time_config.run_as_perf))
 
 
 class PrintConfigurationsTest(unittest.TestCase):

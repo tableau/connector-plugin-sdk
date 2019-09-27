@@ -4,7 +4,7 @@ import math
 import json
 import re
 
-from .config_gen.tdvtconfig import TdvtTestConfig
+from .config_gen.tdvtconfig import TdvtInvocation
 
 
 TEST_DISABLED = "Test disabled in .ini file."
@@ -149,7 +149,7 @@ class TestErrorSkippedTest(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None, error_status=None):
+    def __init__(self, base_name = '', test_config = TdvtInvocation(), test_file = '', relative_test_file = '', test_set = None, error_status=None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -278,6 +278,11 @@ class TestResult(object):
             return msg
 
         return self.get_failure_message()
+
+    def get_error_type(self):
+        if self.error_status:
+            return self.error_status.get_error()
+        return "None"
 
     def get_failure_message(self):
         if self.saved_error_message:

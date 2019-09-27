@@ -24,12 +24,12 @@ from .version import __version__
 
 from .config_gen.gentests import list_configs, list_config
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
-from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig
+from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .resources import make_temp_dir
-from .tdvt_core import generate_files, run_diff, run_tests, TdvtTestConfig
-from .config_gen.tdvtconfig import TdvtTestConfig
+from .tdvt_core import generate_files, run_diff, run_tests
+from .config_gen.tdvtconfig import TdvtInvocation
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
@@ -211,7 +211,7 @@ def get_datasource_registry(platform):
     return reg
 
 
-def enqueue_single_test(args, ds_info, suite):
+def enqueue_single_test(args, ds_info: TestConfig, suite):
     if not args.tds_pattern or (args.logical_pattern and args.expression_pattern):
         return None, None
 
@@ -223,16 +223,12 @@ def enqueue_single_test(args, ds_info, suite):
         test_set = SingleExpressionTestSet(suite, get_root_dir(), args.expression_pattern, args.tds_pattern,
                                            args.test_pattern_exclude, ds_info)
 
-    test_config = TdvtTestConfig(from_args=args)
-    test_config.suite_name = suite
-    test_config.timeout_seconds = ds_info.timeout_seconds
-    test_config.logical = test_set.is_logical_test()
-    test_config.d_override = ds_info.d_override
-    test_config.run_as_perf = ds_info.run_as_perf
-    test_config.tds = test_set.tds_name
-    test_config.config_file = test_set.config_name
+    tdvt_invocation = TdvtInvocation(from_args=args, test_config=ds_info)
+    tdvt_invocation.tds = test_set.tds_name
+    tdvt_invocation.logical = test_set.is_logical
+    tdvt_invocation.config_file = test_set.config_name
 
-    return test_set, test_config
+    return test_set, tdvt_invocation
 
 
 def enqueue_failed_tests(run_file, root_directory, args):
@@ -243,10 +239,12 @@ def enqueue_failed_tests(run_file, root_directory, args):
         logging.debug("Error opening " + run_file)
         return
 
+    delete_output_files(os.getcwd())
     all_test_configs = {}
     all_tdvt_test_configs = {}
     all_test_pairs = []
     failed_tests = tests['failed_tests']
+    # Go through the failed tests and group the ones that can be run together in a FileTestSet.
     for f in failed_tests:
         test_file_path = f['test_file']
         test_root_dir = root_directory
@@ -254,13 +252,14 @@ def enqueue_failed_tests(run_file, root_directory, args):
         tds_base = os.path.split(f['tds'])[1]
         tds = get_tds_full_path(root_directory, tds_base)
         logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
-        test_config = TdvtTestConfig(from_json=f['test_config'], tds=tds)
-        test_config.leave_temp_dir = args.noclean if args else False
+        tdvt_invocation = TdvtInvocation(from_json=f['test_config'])
+        tdvt_invocation.tds = tds
+        tdvt_invocation.leave_temp_dir = args.noclean if args else False
         suite_name = f['test_config']['suite_name']
         password_file = f['password_file'] if 'password_file' in f else ''
         # Use a hash of the test file path to distinguish unique test runs (since the config only supports one test path).
         # other wise two tests with the same name could show up and the first result file would overwrite the second.
-        tt = "L" if test_config.logical else "E"
+        tt = "L" if tdvt_invocation.logical else "E"
         test_set_unique_id = hashlib.sha224(
             (os.path.split(test_file_path)[0] + "_" + tds_base + "_" + tt).replace("-", "_").encode())
         test_set_unique_id = test_set_unique_id.hexdigest()
@@ -269,15 +268,16 @@ def enqueue_failed_tests(run_file, root_directory, args):
             all_test_configs[suite_name] = {}
 
         if not test_set_unique_id in all_test_configs[suite_name]:
-            test_config.output_dir = make_temp_dir([test_set_unique_id])
-            all_tdvt_test_configs[test_set_unique_id] = test_config
-            test_set_config = TestConfig(suite_name, 60*60, '', 1, 1)
+            tdvt_invocation.output_dir = make_temp_dir([test_set_unique_id])
+            all_tdvt_test_configs[test_set_unique_id] = tdvt_invocation
+            run_time_config = RunTimeTestConfig(60*60, 1)
+            test_set_config = TestConfig(suite_name, '', run_time_config)
             all_test_configs[suite_name][test_set_unique_id] = test_set_config
         else:
             test_set_config = all_test_configs[suite_name][test_set_unique_id]
 
         current_test_set = None
-        if test_config.logical:
+        if tdvt_invocation.logical:
             current_test_set = test_set_config.get_logical_tests(test_set_unique_id)
         else:
             current_test_set = test_set_config.get_expression_tests(test_set_unique_id)
@@ -285,9 +285,9 @@ def enqueue_failed_tests(run_file, root_directory, args):
             current_test_set = current_test_set[0]
 
         if not current_test_set:
-            current_test_set = FileTestSet(suite_name, test_root_dir, test_set_unique_id, tds, test_config.logical, suite_name,
+            current_test_set = FileTestSet(suite_name, test_root_dir, test_set_unique_id, tds, tdvt_invocation.logical, suite_name,
                                            password_file)
-            if test_config.logical:
+            if tdvt_invocation.logical:
                 test_set_config.add_logical_testset(current_test_set)
             else:
                 test_set_config.add_expression_testset(current_test_set)
@@ -298,9 +298,9 @@ def enqueue_failed_tests(run_file, root_directory, args):
         for test_set_id in all_test_configs[suite_names]:
             test_set_config = all_test_configs[suite_names][test_set_id]
             for each_test_set in test_set_config.get_logical_tests() + test_set_config.get_expression_tests():
-                test_config = all_tdvt_test_configs[test_set_id]
-                all_test_pairs.append((each_test_set, test_config))
-                logging.debug("Queing up tests: " + str(test_config))
+                tdvt_invocation = all_tdvt_test_configs[test_set_id]
+                all_test_pairs.append((each_test_set, tdvt_invocation))
+                logging.debug("Queing up tests: " + str(tdvt_invocation))
 
     return all_test_pairs
 
@@ -325,22 +325,16 @@ def enqueue_tests(ds_info, args, suite):
 
     for x in tests:
         if not x.generate_test_file_list_from_config():
-            foundTests = False
-            test_config = TdvtTestConfig(from_args=args)
             logging.error("No tests found for config " + str(x))
             return test_set_configs
 
     for test_set in tests:
-        test_config = TdvtTestConfig(from_args=args)
-        test_config.timeout_seconds = ds_info.timeout_seconds
-        test_config.suite_name = suite
-        test_config.logical = test_set.is_logical_test()
-        test_config.d_override = ds_info.d_override
-        test_config.run_as_perf = ds_info.run_as_perf
-        test_config.tds = test_set.tds_name
-        test_config.config_file = test_set.config_name
+        tdvt_invocation = TdvtInvocation(from_args=args, test_config = ds_info)
+        tdvt_invocation.logical = test_set.is_logical_test()
+        tdvt_invocation.tds = test_set.tds_name
+        tdvt_invocation.config_file = test_set.config_name
 
-        test_set_configs.append((test_set, test_config))
+        test_set_configs.append((test_set, tdvt_invocation))
 
     return test_set_configs
 
@@ -516,7 +510,7 @@ def run_tests_impl(tests, max_threads, args):
         else:
             logging.warning("Tests will run without verifying the data source connection.")
 
-    if not all_work:
+    if not all_work and not smoke_tests:
         print("No tests found. Check arguments.")
         sys.exit()
 
@@ -589,7 +583,7 @@ def run_desired_tests(args, ds_registry):
             continue
 
         print("Testing " + ds)
-        max_threads_per_datasource = ds_info.maxthread;
+        max_threads_per_datasource = ds_info.run_time_config.maxthread;
         # if has multi datasource to run, then max_threads_per_datasource can not apply.
         if max_threads_per_datasource > 0:
             print("thread setting in " + ds + ".ini = " + str(max_threads_per_datasource))
@@ -641,8 +635,8 @@ def main():
 
         # It's ok to call generate and then run some tests, so don't exit here.
     elif args.diff:
-        test_config = TdvtTestConfig(from_args=args)
-        run_diff(test_config, args.diff)
+        tdvt_invocation = TdvtInvocation(from_args=args)
+        run_diff(tdvt_invocation, args.diff)
         sys.exit(0)
     elif args.run_file:
         output_dir = os.getcwd()
