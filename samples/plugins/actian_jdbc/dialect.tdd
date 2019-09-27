@@ -5,6 +5,19 @@
          version='18.1'>
         <!-- TODO NOTE DB2 may be viable https://tableau.github.io/connector-plugin-sdk/docs/design#dialect-base-classes -  SQLSErver -->
   <function-map>
+	<function group='numeric' name='ABS' return-type='real'>
+      <formula>ABS(%1)</formula>
+      <argument type='real' />
+    </function>
+	<function group='numeric' name='SQUARE' return-type='real'>
+      <formula>(%1 * %1)</formula>
+      <argument type='real' />
+    </function>
+	<function group='numeric' name='ABS' return-type='bool'>
+      <formula>(CASE WHEN %1 is NULL THEN NULL WHEN %1 = ABS(%1)THEN TRUE ELSE FALSE END)</formula>
+      <argument type='real' />
+	  <argument type='real' />
+    </function>
     <function group='numeric' name='COT' return-type='real'>
       <formula>CASE WHEN TAN(%1) = 0 THEN NULL ELSE 1.0/TAN(%1) END</formula>
       <argument type='real' />
@@ -25,6 +38,19 @@
     <function group='numeric' name='SIGN' return-type='int'>
       <formula>SIGN(%1)</formula>
       <argument type='real' />
+    </function>
+	<function group='numeric' name='SIGN' return-type='int'>
+      <formula>SIGN(%1)</formula>
+      <argument type='int' />
+    </function>
+	<function group='numeric' name='LOG' return-type='real'>
+      <formula>(CASE WHEN %1 &lt; 0 THEN NULL ELSE LOG (%1) END)</formula>
+      <argument type='real' />
+	</function>
+	<function group='numeric' name='LOG' return-type='real'>
+      <formula>(CASE WHEN %1 > 0 THEN LOG(%1) / LOG(%2) ELSE NULL END)</formula>
+      <argument type='real' />
+      <argument type='int' />
     </function>
     <function group='cast' name='FLOAT' return-type='real'>
       <formula>CAST(((EXTRACT(EPOCH FROM %1) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS BIGINT)</formula>
@@ -47,7 +73,6 @@
       <argument type='bool' />
     </function>
     <function group='cast' name='INT' return-type='int'>
-	
       <formula>(CASE&#10;&#9;WHEN %1 IS NULL THEN NULL&#10;&#9;WHEN %1 IS NOT TRUE THEN 0&#10;&#9;ELSE 1 END)</formula>
       <argument type='bool' />
     </function>
@@ -71,7 +96,7 @@
       <argument type='int' />
     </function>
     <function group='logical' name='IIF' return-type='bool'>
-      <formula>(CASE WHEN %1 IS TRUE AND %2 IS TRUE THEN TRUE WHEN %1 IS NOT TRUE AND %3 IS TRUE THEN TRUE ELSE NULL END)</formula>
+      <formula>(CASE WHEN %1 IS TRUE AND %2 IS TRUE THEN TRUE WHEN %1 IS NOT TRUE AND %3 IS TRUE THEN FALSE ELSE NULL END)</formula>
       <argument type='bool' />
       <argument type='bool' />
       <argument type='bool' />
@@ -106,15 +131,31 @@
       <argument type='str' />
       <argument type='str' />
     </function> 
-    <function group='logical' name='IIF' return-type='real'>
-      <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS NOT TRUE THEN %3 ELSE NULL END)</formula>
+	<function group='logical' name='IIF' return-type='str'>
+      <formula>(CASE WHEN (%1 &gt; 3) THEN %2 WHEN (%1 &lt;= 3) THEN %3 ELSE NULL END)</formula>
+      <argument type='int' />
+      <argument type='str' />
+      <argument type='str' />
+    </function>	
+    <function group='logical' name='ISNULL' return-type='bool'>
+      <formula>(CASE WHEN %1 IS TRUE THEN TRUE WHEN %1 IS NOT TRUE THEN FALSE ELSE TRUE END)</formula>
       <argument type='bool' />
-      <argument type='real' />
+    </function> 
+	<function group='logical' name='ISNULL' return-type='bool'>
+      <formula>(CASE WHEN %1 &gt; 0 THEN TRUE ELSE FALSE END)</formula>
       <argument type='real' />
     </function> 
     <function group='logical' name='ISNULL' return-type='bool'>
-      <formula>(CASE WHEN %1 IS TRUE THEN FALSE WHEN %1 IS NOT TRUE THEN FALSE ELSE TRUE END)</formula>
-      <argument type='bool' />
+      <formula>(CASE WHEN %1 &gt; 0 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='str' />
+    </function> 
+	<function group='logical' name='ISNULL' return-type='bool'>
+      <formula>(CASE WHEN CHARACTER_LENGTH(%1) &gt; 0 THEN TRUE ELSE FALSE END)</formula>
+      <argument type='int' />
+    </function>
+	<function group='logical' name='ISNULL' return-type='bool'>
+      <formula>(CASE WHEN %1 IS NOT NULL THEN TRUE ELSE FALSE END)</formula>
+      <argument type='date' />
     </function>   
     <function group='string' name='ASCII' return-type='int'>
       <formula>IIHEXINT(HEX('%1'))</formula>
@@ -130,8 +171,8 @@
       <argument type='str' />
     </function>
 	<!-- trial to int to string for testing -->
-	<function group='string' name='FIND' return-type='str'>
-      <formula>CHAR (POSITION(%1, %2))</formula>
+	<function group='string' name='FIND' return-type='int'>
+      <formula>POSITION(%2, %1)</formula>
       <argument type='str' />
       <argument type='str' />
     </function>
@@ -167,7 +208,7 @@
       <argument type='str' />
     </function>
      <function group='logical' name='IIF' return-type='date'>
-      <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS NOT TRUE THEN %3 ELSE %4 END)</formula>
+      <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS NOT TRUE THEN %4 ELSE %3 END)</formula>
       <argument type='bool' />
       <argument type='date' />
       <argument type='date' />
@@ -181,13 +222,13 @@
       <argument type='datetime' />
     </function>
     <function group='logical' name='IIF' return-type='real'>
-      <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS NOT TRUE THEN %3 ELSE NULL END)</formula>
+      <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS FALSE THEN %3 ELSE NULL END)</formula>
       <argument type='bool' />
       <argument type='real' />
       <argument type='real' />
     </function>
     <function group='logical' name='IIF' return-type='real'>
-      <formula>(CASE WHEN %1 IS TRUE THEN %2 WHEN %1 IS NOT TRUE THEN %3 ELSE %4 END)</formula>
+      <formula>(CASE WHEN %1 IS TRUE THEN %2&#10; WHEN %1 IS NOT TRUE THEN %3&#10; ELSE %4 END)</formula>
       <argument type='bool' />
       <argument type='real' />
       <argument type='real' />
@@ -297,6 +338,26 @@
       <argument type='str' />
       <argument type='date' />
     </function>
+	<function group='operator' name='-' return-type='datetime'>
+      <formula>TIMESTAMPADD(SQL_TSI_DAY,-%2,%1)</formula>
+      <argument type='datetime' />
+      <argument type='int' />
+    </function>
+	<function group='operator' name='+' return-type='datetime'>
+      <formula>TIMESTAMPADD(SQL_TSI_DAY,%2,%1)</formula>
+      <argument type='datetime' />
+      <argument type='int' />
+    </function>
+	<function group='operator' name='-' return-type='date'>
+      <formula>TIMESTAMPADD(SQL_TSI_DAY,-%2,%1)</formula>
+      <argument type='date' />
+      <argument type='int' />
+    </function>
+	<function group='operator' name='+' return-type='date'>
+      <formula>TIMESTAMPADD(SQL_TSI_DAY,%2,%1)</formula>
+      <argument type='date' />
+      <argument type='int' />
+    </function>
 <!--    <function group='operator' name='!=' return-type='bool'>
       <formula>(%1 AND NOT %2 OR NOT %1 AND %2)</formula>
       <argument type='bool' />
@@ -384,7 +445,7 @@
       <argument type='date' />
     </function>
 	<function group='operator' name='&gt;' return-type='bool'>
-      <formula>(CASE WHEN %1 IS NULL THEN NULL WHEN %1 &gt; %2 THEN TRUE ELSE FALS' END)</formula>
+      <formula>(CASE WHEN %1 IS NULL THEN NULL WHEN %1 &gt; %2 THEN TRUE ELSE FALSE END)</formula>
       <argument type='datetime' />
       <argument type='datetime' />
     </function>
@@ -656,7 +717,6 @@
       <argument type='localstr' />
       <argument type='datetime' />
     </date-function>
-
     <!--<date-function name='DATEPART' return-type='int'>
       <formula part='year'>YEAR(%2)</formula>
       <formula part='quarter'>CAST((MONTH(%2) - 1) / 3 + 1 AS BIGINT)</formula>
