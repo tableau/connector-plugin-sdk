@@ -512,7 +512,7 @@ def run_tests_impl(tests, max_threads, args):
         if args.smoke_test:
             sys.exit(1)
 
-    if not all_work:
+    if not all_work and not smoke_tests:
         print("No tests found. Check arguments.")
         sys.exit()
 
