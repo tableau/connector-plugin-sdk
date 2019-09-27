@@ -585,6 +585,16 @@ class ConfigTest(unittest.TestCase):
             found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
 
+    def test_load_tabquery_override(self):
+        config = configparser.ConfigParser()
+        config.read(get_path('tool_test/ini', 'postgres_jdbc_tabquerytool.ini', __name__))
+        test_config = datasource_list.load_test(config, TEST_DIRECTORY)
+
+        self.assertTrue(test_config.run_time_config.get_tabquery_path("darwin")  == 'tabquerytool_mac')
+        self.assertTrue(test_config.run_time_config.get_tabquery_path("linux")  == 'tabquerytool_linux')
+        self.assertTrue(test_config.run_time_config.get_tabquery_path("win32")  == 'tabquerytool_windows.exe')
+
+
     def test_load_ini_bigquery_sql(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'bigquery_sql.ini', __name__))
