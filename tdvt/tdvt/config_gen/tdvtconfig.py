@@ -8,7 +8,7 @@ from .test_config import TestConfig, RunTimeTestConfig
 
 class TdvtInvocation(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, from_args=None, from_json=None, test_config : TestConfig = None):
+    def __init__(self, from_args=None, from_json=None, test_config: TestConfig=None):
         self.tested_sql = False
         self.tested_tuples = True
         self.log_dir = ''
@@ -36,7 +36,7 @@ class TdvtInvocation(object):
             self.set_run_time_test_config(test_config.run_time_config)
             self.suite_name = test_config.dsname
 
-    def set_run_time_test_config(self, rtt):
+    def set_run_time_test_config(self, rtt: RunTimeTestConfig):
             self.timeout_seconds = rtt.timeout_seconds
             self.d_override = rtt.d_override
             self.run_as_perf = rtt.run_as_perf
