@@ -158,7 +158,7 @@
       <argument type='date' />
     </function>      	
     <function group='string' name='ASCII' return-type='int'>
-      <formula>IIHEXINT(HEX('%1'))</formula>
+      <formula>CHAREXTRACT(HEX(%1),1)*16 + CHAREXTRACT(HEX(%1),2)</formula>
       <argument type='str' />
     </function>
     <function group='string' name='CHAR' return-type='int'>
