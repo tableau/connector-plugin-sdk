@@ -279,6 +279,11 @@ class TestResult(object):
 
         return self.get_failure_message()
 
+    def get_error_type(self):
+        if self.error_status:
+            return self.error_status.get_error()
+        return "None"
+
     def get_failure_message(self):
         if self.saved_error_message:
             return self.saved_error_message
