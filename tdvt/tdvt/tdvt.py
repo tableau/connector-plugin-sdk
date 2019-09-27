@@ -440,7 +440,7 @@ def create_parser():
     parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     parser.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
     parser.add_argument('-f', dest='run_file', help='Json file containing failed tests to run.', required=False)
-    parser.add_argument('--verify', dest='smoke_test', help='Verifies the connection to a data source against test in your .ini file with SmokeTest = True.', action='store_true')  # noqa: E501
+    parser.add_argument('--verify', dest='smoke_test', action='store_true', help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.', required=False)  # noqa: E501
     return parser
 
 
