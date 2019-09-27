@@ -7,5 +7,6 @@
     <db-name-prompt value="Database: " />
     <has-pre-connect-database value="true" />
     <port-prompt value="Port: " default="5432" />
+    <show-ssl-checkbox value="true" />
   </connection-config>
 </connection-dialog>
