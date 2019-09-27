@@ -25,7 +25,7 @@ def check_jdk_environ_variable(exe_name: str) -> bool:
     return False
 
 
-def init_logging(log_path: str, verbose: Optional[bool]) -> logging.Logger:
+def init_logging(log_path: str, verbose: bool = False) -> logging.Logger:
     # Create logger.
     logging.basicConfig(filename=log_path, level=logging.DEBUG, filemode='w', format='%(asctime)s | %(message)s')
     logger = logging.getLogger()
