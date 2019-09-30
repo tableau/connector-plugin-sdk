@@ -529,10 +529,12 @@ def run_tests_impl(tests, max_threads, args):
         if failed_smoke_tests > 0:
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
-            if args.smoke_test is not None:
+            if args.smoke_test is True:
+                print("Smoke tests failed, exiting.")
                 sys.exit(1)
 
-        if args.smoke_test is not None:
+        if args.smoke_test is True:
+            print("Smoke tests failed, exiting.")
             sys.exit(0)
 
     if failing_ds:
