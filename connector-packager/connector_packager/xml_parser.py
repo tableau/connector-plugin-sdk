@@ -26,7 +26,7 @@ class XMLParser:
             generate_file_list: generates a list of files to package by parsing the xml files
     """
 
-    def __init__(self, path_to_folder):
+    def __init__(self, path_to_folder: Path):
         self.path_to_folder = path_to_folder
         self.class_name = None  # Get this from the class name in the manifest file
         self.file_list = []  # list of files to package
@@ -49,7 +49,7 @@ class XMLParser:
             return None
 
         # Make sure manifest exists
-        path_to_manifest = self.path_to_folder / Path("manifest.xml")
+        path_to_manifest = self.path_to_folder / "manifest.xml"
         if not path_to_manifest.is_file():
             logger.error("Error: " + str(self.path_to_folder) + " does not contain a file called manifest.xml.")
             return None

@@ -20,7 +20,7 @@ MANIFEST_ROOT_ELEM = "connector-plugin"
 MIN_TABLEAU_VERSION_ATTR = "min-version-tableau"
 
 
-def stamp_min_support_version(input_dir, file_list, jar_filename):
+def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], jar_filename: str) -> bool:
     """
     Stamp of minimum support version to the connector manifest in packaged jar file
 

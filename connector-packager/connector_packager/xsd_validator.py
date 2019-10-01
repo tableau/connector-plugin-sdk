@@ -39,7 +39,7 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
 
     logger.debug("Starting XSD validation...")
 
-    if type(files_list) != list:
+    if type(files_list) is not list:
         logger.error("Error: validate_all_xml: input is not a list")
         return False
 

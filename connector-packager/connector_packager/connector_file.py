@@ -4,8 +4,8 @@ import os.path
 class ConnectorFile:
 
     def __init__(self, file_name: str, file_type: str):
-        self.file_name = file_name
-        self.file_type = file_type
+        self.file_name: str = file_name
+        self.file_type: str = file_type
 
     def extension(self) -> str:
         ext = os.path.splitext(self.file_name)[-1]
