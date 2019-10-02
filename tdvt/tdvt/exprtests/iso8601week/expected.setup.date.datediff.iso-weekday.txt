@@ -49,4 +49,14 @@
       </tuple>
     </table>
   </test>
+  <test name='DATEDIFF(&apos;iso-weekday&apos;, [date2], [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3333552507)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
 </results>

@@ -59,4 +59,20 @@
       </tuple>
     </table>
   </test>
+  <test name='DATEDIFF(&apos;iso-week&apos;, [date2], [date2])'>
+    <sql>
+      SELECT (DATEDIFF(day, DATEADD(day, 0, DATEDIFF(day, 0, DATEADD(day, 1 - (CASE WHEN DATEPART(weekday, [Calcs].[date2]) = 1 THEN 6 ELSE -1 END + DATEPART(weekday, [Calcs].[date2])), [Calcs].[date2]))), DATEADD(day, 0, DATEDIFF(day, 0, DATEADD(day, 1 - (CASE WHEN DATEPART(weekday, [Calcs].[date2]) = 1 THEN 6 ELSE -1 END + DATEPART(weekday, [Calcs].[date2])), [Calcs].[date2])))) / 7) AS [TEMP(Test)(1941130424)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY (DATEDIFF(day, DATEADD(day, 0, DATEDIFF(day, 0, DATEADD(day, 1 - (CASE WHEN DATEPART(weekday, [Calcs].[date2]) = 1 THEN 6 ELSE -1 END + DATEPART(weekday, [Calcs].[date2])), [Calcs].[date2]))), DATEADD(day, 0, DATEDIFF(day, 0, DATEADD(day, 1 - (CASE WHEN DATEPART(weekday, [Calcs].[date2]) = 1 THEN 6 ELSE -1 END + DATEPART(weekday, [Calcs].[date2])), [Calcs].[date2])))) / 7)
+    </sql>
+    <query-time>
+      25.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(1941130424)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
 </results>

@@ -2,15 +2,21 @@
 {
     var params = {};
 
-    params["SERVER"] = attr["server"];
-    params["PORT"] = attr["port"];
-    params["DATABASE"] = attr["dbname"];
-    params["UID"] = attr["username"];
-    params["PWD"] = attr["password"];
+    params["SERVER"] = attr[connectionHelper.attributeServer];
+    params["PORT"] = attr[connectionHelper.attributePort];
+    params["DATABASE"] = attr[connectionHelper.attributeDatabase];
+    params["UID"] = attr[connectionHelper.attributeUsername];
+    params["PWD"] = attr[connectionHelper.attributePassword];
     params["BOOLSASCHAR"] = "0";
     params["LFCONVERSION"] = "0";
     params["UseDeclareFetch"] = "1";
     params["Fetch"] = "2048";
+
+    if (attr[connectionHelper.attributeSSLMode] == "require")
+    {        
+        params["sslmode"] = "require";
+    }
+
 
     var formattedParams = [];
 

@@ -13,3 +13,6 @@ DATEDIFF('iso-week', #2016-01-03#, #2017-01-02#) // 53
 
 // 2014-W52-07 through 2016-W01-01 (weeks spanning a 53-week year)
 DATEDIFF('iso-week', #2014-12-28#, #2016-01-04#) // 54
+
+// Test without literal to test non-empty groupby clause
+DATEDIFF('iso-week', [date2], [date2])

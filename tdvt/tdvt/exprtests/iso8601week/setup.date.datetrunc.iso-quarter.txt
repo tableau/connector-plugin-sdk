@@ -20,3 +20,6 @@ DATETRUNC('iso-quarter', #2015-12-28#) // Monday, 2015-W53
 // only that it doesn't error out with an invalid query.
 DATEPART('quarter', DATETRUNC('iso-quarter', #2015-03-29#))
 DATETRUNC('quarter', DATETRUNC('iso-quarter', #2015-03-29#))
+
+// Test without literal to test non-empty groupby clause
+DATENAME('iso-quarter', [date2])

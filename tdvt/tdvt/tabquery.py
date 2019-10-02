@@ -55,7 +55,7 @@ class TabqueryCommandLine(object):
         cmdline.extend(tds_arg)
         cmdline.extend(["--combined"])
 
-        password_file = work.test_config.get_password_file_name()
+        password_file = work.test_set.get_password_file_name()
         if os.path.isfile(password_file):
             password_arg = ["--password-file", password_file]
             cmdline.extend(password_arg)
@@ -71,9 +71,15 @@ class TabqueryCommandLine(object):
             for override in work.test_config.d_override.split(' '):
                 cmdline.extend([override])
 
-        #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-        #that tests what you would expect.
-        cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
+        logical_rewrite_iter = next((i for i in cmdline if i.find('-DLogicalQueryRewriteDisable') != -1), None)
+        if logical_rewrite_iter == None:
+            #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
+            #that tests what you would expect.
+            cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
+
+        # LogicalQuery cache can cache results across multiple expressions, and prevent
+        # issuance of queries to the underlying database, so disable it.
+        cmdline.extend(["-DInMemoryLogicalCacheDisable"])
 
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
