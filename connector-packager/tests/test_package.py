@@ -1,10 +1,10 @@
 import os
 import unittest
 import logging
-import argparse
 from pathlib import Path
 
-from connector_packager.package import main, PACKAGED_EXTENSION
+from connector_packager.package import PACKAGED_EXTENSION
+
 
 logger = logging.getLogger(__name__)
 

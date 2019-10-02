@@ -1,6 +1,10 @@
 import logging
-from pathlib import Path
+from typing import List, Optional
+
 import xmlschema
+
+from pathlib import Path
+
 from defusedxml.ElementTree import parse,ParseError
 
 from .connector_file import ConnectorFile
@@ -22,14 +26,13 @@ class XMLParser:
             generate_file_list: generates a list of files to package by parsing the xml files
     """
 
-    def __init__(self, path_to_folder):
+    def __init__(self, path_to_folder: Path):
         self.path_to_folder = path_to_folder
-        self.class_name = None # Get this from the class name in the manifest file
-        self.file_list = [] # list of files to package
-        self.loc_strings = [] #list of loc strings so we can make sure they are covered in the resource files.
+        self.class_name = None  # Get this from the class name in the manifest file
+        self.file_list = []  # list of files to package
+        self.loc_strings = []  # list of loc strings so we can make sure they are covered in the resource files.
 
-
-    def generate_file_list(self):
+    def generate_file_list(self) -> Optional[List[ConnectorFile]]:
         """
         Arguments:
             None
@@ -46,7 +49,7 @@ class XMLParser:
             return None
 
         # Make sure manifest exists
-        path_to_manifest = self.path_to_folder / Path("manifest.xml")
+        path_to_manifest = self.path_to_folder / "manifest.xml"
         if not path_to_manifest.is_file():
             logger.error("Error: " + str(self.path_to_folder) + " does not contain a file called manifest.xml.")
             return None
@@ -99,7 +102,7 @@ class XMLParser:
 
         return self.file_list
 
-    def parse_file(self, file_to_parse):
+    def parse_file(self, file_to_parse: ConnectorFile) -> bool:
         """"
         Arguments:
             file_to_parse {ConnectorFile} -- file to parse

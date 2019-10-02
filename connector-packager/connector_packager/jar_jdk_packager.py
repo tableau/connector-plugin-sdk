@@ -5,6 +5,8 @@ import shutil
 import xml.etree.ElementTree as ET
 
 from pathlib import Path
+from typing import List
+
 from .connector_file import ConnectorFile
 from .helper import check_jdk_environ_variable
 from .version import __min_version_tableau__
@@ -18,7 +20,7 @@ MANIFEST_ROOT_ELEM = "connector-plugin"
 MIN_TABLEAU_VERSION_ATTR = "min-version-tableau"
 
 
-def stamp_min_support_version(input_dir, file_list, jar_filename):
+def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], jar_filename: str) -> bool:
     """
     Stamp of minimum support version to the connector manifest in packaged jar file
 
@@ -72,7 +74,7 @@ def stamp_min_support_version(input_dir, file_list, jar_filename):
     return True
 
 
-def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
+def jdk_create_jar(source_dir: Path, files: List[ConnectorFile], jar_filename: str, dest_dir: Path) -> bool:
     """
     Package JAR file from given files using JAVA JDK
 
@@ -94,7 +96,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     if not check_jdk_environ_variable(JAR_EXECUTABLE_NAME):
         return False
 
-    abs_source_path = os.path.abspath(source_dir)
+    abs_source_path = source_dir.resolve()
     logging.debug("Start packaging " + jar_filename + " from " + str(abs_source_path) + " using JDK")
 
     if not os.path.exists(dest_dir):
@@ -110,7 +112,7 @@ def jdk_create_jar(source_dir, files, jar_filename, dest_dir):
     if not stamp_min_support_version(source_dir, files, jar_filename):
         return False
 
-    shutil.move(abs_source_path/Path(jar_filename), dest_dir/jar_filename)
+    shutil.move(abs_source_path/jar_filename, dest_dir/jar_filename)
 
     logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
     return True

@@ -1,19 +1,20 @@
-import argparse
 import os
+
+from argparse import ArgumentParser
+
 from pathlib import Path
 
 from .helper import init_logging
 from .jar_jdk_packager import jdk_create_jar
-from .jar_jdk_signer import validate_signing_input
-from .jar_jdk_signer import jdk_sign_jar
+from .jar_jdk_signer import jdk_sign_jar, validate_signing_input
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
 
 PACKAGED_EXTENSION = ".taco"
 
 
-def create_arg_parser():
-    parser = argparse.ArgumentParser(description="Tableau Connector Packaging Tool: package and sign connector files into a single Tableau Connector (" + PACKAGED_EXTENSION + ") file.")  # noqa: E501
+def create_arg_parser() -> ArgumentParser:
+    parser = ArgumentParser(description="Tableau Connector Packaging Tool: package and sign connector files into a single Tableau Connector (" + PACKAGED_EXTENSION + ") file.")  # noqa: E501
     parser.add_argument('input_dir', help='path to directory of connector files to package and sign')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='verbose output', required=False)
     parser.add_argument('-l', '--log', dest='log_path', help='path to directory for logging output',
