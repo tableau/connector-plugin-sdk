@@ -112,7 +112,7 @@ def jdk_create_jar(source_dir: Path, files: List[ConnectorFile], jar_filename: s
     if not stamp_min_support_version(source_dir, files, jar_filename):
         return False
 
-    shutil.move(abs_source_path/jar_filename, dest_dir/jar_filename)
+    shutil.move(abs_source_path / jar_filename, dest_dir / jar_filename)
 
     logging.info(jar_filename + " was created in " + str(os.path.abspath(dest_dir)))
     return True

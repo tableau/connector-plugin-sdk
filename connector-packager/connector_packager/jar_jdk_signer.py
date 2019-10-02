@@ -31,7 +31,7 @@ def validate_signing_input(input_dir: Path, taco_name: str, alias: Optional[str]
         logger.error("Signing Error: Keystore path is missing or invalid")
         return False
 
-    if not os.path.isfile(input_dir/taco_name):
+    if not os.path.isfile(input_dir / taco_name):
         logger.error("Signing Error: Taco file to be signed has been deleted or doesn't exist")
         return False
 

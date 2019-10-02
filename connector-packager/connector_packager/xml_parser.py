@@ -5,7 +5,7 @@ import xmlschema
 
 from pathlib import Path
 
-from defusedxml.ElementTree import parse,ParseError
+from defusedxml.ElementTree import parse
 
 from .connector_file import ConnectorFile
 from .xsd_validator import validate_single_file, get_xsd_file, PATH_TO_XSD_FILES
@@ -13,7 +13,9 @@ from .xsd_validator import validate_single_file, get_xsd_file, PATH_TO_XSD_FILES
 logger = logging.getLogger(__name__)
 
 TRANSLATABLE_STRING_PREFIX = "@string/"
-TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "ja_JP", "ko_KR", "pt_BR", "zh_CN", "zh_TW"]
+TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "ja_JP", "ko_KR", "pt_BR", "zh_CN",
+                               "zh_TW"]
+
 
 class XMLParser:
     """
@@ -90,8 +92,6 @@ class XMLParser:
                     self.file_list.append(ConnectorFile(resource_file_name, "resource"))
                     logging.debug("Adding file to list (name = " + resource_file_name + ", type = resource)")
 
-
-
         else:
             logger.debug("No loc files.")
 
@@ -153,7 +153,8 @@ class XMLParser:
                     if not children_valid:
                         return False
 
-            # If an element has the 'class' attribute, and the class name is not set, set the class name. If it is set, make sure it is the same name
+            # If an element has the 'class' attribute, and the class name is not set, set the class name. If it is set,
+            #  make sure it is the same name
             if 'class' in child.attrib:
 
                 # Name not yet found
@@ -163,8 +164,10 @@ class XMLParser:
 
                 # Make sure the name is the same
                 elif child.attrib['class'] != self.class_name:
-                    logging.error("Error: class attribute in file " + file_to_parse.file_name + " does not equal class attribute in manifest.")
-                    logging.debug(self.class_name +  " in manifest, " + child.attrib['class'] + " in " + file_to_parse.file_name)
+                    logging.error("Error: class attribute in file " + file_to_parse.file_name +
+                                  " does not equal class attribute in manifest.")
+                    logging.debug(self.class_name + " in manifest, " + child.attrib['class'] + " in " +
+                                  file_to_parse.file_name)
                     return False
 
             # If an attribute has @string, then add that string to the loc_strings list.

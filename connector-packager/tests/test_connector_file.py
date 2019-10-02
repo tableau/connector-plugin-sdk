@@ -1,6 +1,7 @@
 import unittest
 from connector_packager.connector_file import ConnectorFile
 
+
 class TestConnectorFile(unittest.TestCase):
 
     def test_extension(self):
@@ -12,4 +13,3 @@ class TestConnectorFile(unittest.TestCase):
 
         c = ConnectorFile(".test", "empty")
         self.assertTrue(c.extension() == "")
-

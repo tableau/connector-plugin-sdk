@@ -50,7 +50,7 @@ def create_jar(source_dir: Path, files: List[ConnectorFile], jar_filename: str, 
 
 if __name__ == "__main__":
     # TODO: Replace all hard coded below input when ready.
-    path_from_args = Path("..\..\samples\plugins\postgres_odbc")
+    path_from_args = Path("../../samples/plugins/postgres_odbc")
     files_to_package = [
         ConnectorFile("manifest.xml", "manifest"),
         ConnectorFile("connection-dialog.tcd", "connection-dialog"),
@@ -58,6 +58,6 @@ if __name__ == "__main__":
         ConnectorFile("dialect.tdd", "dialect"),
         ConnectorFile("connectionResolver.tdr", "connection-resolver")]
 
-    jar_dest_path = Path("..\jar")
+    jar_dest_path = Path("../jar")
     jar_name = "postgres_odbc.jar"
     create_jar(path_from_args, files_to_package, jar_name, jar_dest_path)

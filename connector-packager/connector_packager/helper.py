@@ -16,7 +16,7 @@ def check_jdk_environ_variable(exe_name: str) -> bool:
     """
     path_list = os.environ[PATH_ENVIRON].split(';')
     for path in path_list:
-        if os.path.isfile(Path(path)/exe_name):
+        if os.path.isfile(Path(path) / exe_name):
             return True
 
     logger.error("Java Error: jdk_create_jar: no jdk set up in PATH environment variable, "

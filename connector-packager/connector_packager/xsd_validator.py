@@ -111,7 +111,8 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
     except:
         saved_error_type = sys.exc_info()[0]
         saved_error = sys.exc_info()[1]
-        xml_violations_buffer.append("File: " + file_to_test.file_name + " Error Type: " + str(saved_error_type) + "\n" + str(saved_error))
+        xml_violations_buffer.append("File: " + file_to_test.file_name + " Error Type: " + str(saved_error_type) +
+                                     "\n" + str(saved_error))
         logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
