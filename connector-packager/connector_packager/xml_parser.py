@@ -126,7 +126,6 @@ class XMLParser:
         logger.debug("Parsing " + str(path_to_file))
 
         # Get XML file ready for parsing
-        schema = xmlschema.XMLSchema(str(xsd_path))
         xml_tree = parse(str(path_to_file))
         root = xml_tree.getroot()
 

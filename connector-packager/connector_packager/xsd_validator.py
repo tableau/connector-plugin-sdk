@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import List
 
 from xmlschema import XMLSchema
-from xmlschema.validators.exceptions import XMLSchemaException
 
 from .connector_file import ConnectorFile
 
@@ -108,7 +107,7 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
     # Try to validate the xml. If the xml validation error is thrown, save the violation information to the buffer
     try:
         manifest_schema.validate(str(path_to_file))
-    except:
+    except Exception:
         saved_error_type = sys.exc_info()[0]
         saved_error = sys.exc_info()[1]
         xml_violations_buffer.append("File: " + file_to_test.file_name + " Error Type: " + str(saved_error_type) +
