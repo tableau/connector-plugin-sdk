@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-
-<connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1' min-version-tableau='2019.4'>
-  <vendor-information>
-      <company name="Company Name"/>
-      <support-link url = "http://example.com"/>
-  </vendor-information>
+<connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1'>
   <connection-customization class="postgres_odbc" enabled="true" version="10.0">
     <vendor name="vendor"/>
     <driver name="driver"/>

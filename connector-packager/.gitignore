@@ -1,0 +1,13 @@
+# Compiled Python.
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Mac
+.DS_Store
+
+build
+dist
+package.egg-info
+.venv
+.eggs
