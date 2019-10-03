@@ -12,9 +12,14 @@
     params["UseDeclareFetch"] = "1";
     params["Fetch"] = "2048";
 
+    if (attr[connectionHelper.attributeSSLMode] == "require")
+    {
+        params["sslmode"] = "require";
+    }
+
     var odbcConnectStringExtrasMap = {};
     const attributeODBCConnectStringExtras = "odbc-connect-string-extras";
-    if (attributeODBCConnectStringExtras in attr) 
+    if (attributeODBCConnectStringExtras in attr)
     {
         odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectStringExtras]);
     }
@@ -22,7 +27,7 @@
     {
         params[key] = odbcConnectStringExtrasMap[key];
     }
-    
+
     var formattedParams = [];
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
