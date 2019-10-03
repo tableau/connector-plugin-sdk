@@ -6,7 +6,7 @@ from pathlib import Path
 from defusedxml.ElementTree import parse
 
 from .connector_file import ConnectorFile
-from .xsd_validator import validate_single_file, get_xsd_file, PATH_TO_XSD_FILES
+from .xsd_validator import validate_single_file
 
 logger = logging.getLogger(__name__)
 
