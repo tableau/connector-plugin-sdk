@@ -576,6 +576,7 @@ class ConfigTest(unittest.TestCase):
         test1 = ExpressionTestSet(test_config.dsname, TEST_DIRECTORY, 'expression.staples.bigquery', 'Staples.bigquery.tds', '', 'exprtests/staples/setup.*.txt', test_config.dsname)
 
         tests = [test1]
+        
         for test in tests:
             found = [y for y in x if y == test]
             self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
@@ -608,7 +609,6 @@ class ConfigTest(unittest.TestCase):
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
         self.assertFalse(test_config.run_as_perf, 'run_as_perf did not match: ' + str(test_config.run_as_perf))
 
-
 class PrintConfigurationsTest(unittest.TestCase):
     def test_print_configuration_with_no_dsname_and_no_ds_all_returns_explanation(self):
         with mock.patch('tdvt.config_gen.datasource_list.TestRegistry.get_datasources', side_effect=TypeError):
@@ -626,8 +626,7 @@ class PrintConfigurationsTest(unittest.TestCase):
             sys.stdout = captured_output
             datasource_list.print_configurations(MockTestRegistry, None, None)
             self.assertIn(correct_out, captured_output.getvalue())
-
-
+            
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print ("Using root dir " + str(ROOT_DIRECTORY))
