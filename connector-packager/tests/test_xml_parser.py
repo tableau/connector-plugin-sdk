@@ -13,7 +13,7 @@ class TestXMLParser(unittest.TestCase):
 
         # Test valid connector
         expected_class_name = "postgres_odbc"
-        expected_file_list = files_list = [
+        expected_file_list = [
             ConnectorFile("manifest.xml", "manifest"),
             ConnectorFile("connection-dialog.tcd", "connection-dialog"),
             ConnectorFile("connectionBuilder.js", "script"),

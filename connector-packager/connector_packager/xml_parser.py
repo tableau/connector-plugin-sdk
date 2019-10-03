@@ -1,8 +1,6 @@
 import logging
 from typing import List, Optional
 
-import xmlschema
-
 from pathlib import Path
 
 from defusedxml.ElementTree import parse
@@ -120,8 +118,6 @@ class XMLParser:
             for v in xml_violation_buffer:
                 logger.debug(v)
             return False
-
-        xsd_path = PATH_TO_XSD_FILES / get_xsd_file(file_to_parse)
 
         logger.debug("Parsing " + str(path_to_file))
 
