@@ -15,6 +15,7 @@
           <attr>dbname</attr>
           <attr>username</attr>
           <attr>password</attr>
+          <attr>service</attr>
         </attribute-list>
       </required-attributes>
     </connection-normalizer>
