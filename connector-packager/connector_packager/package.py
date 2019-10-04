@@ -43,17 +43,27 @@ def main():
     xmlparser = XMLParser(path_from_args)
     files_to_package = xmlparser.generate_file_list()  # validates XSD's as well
 
-    if args.validate_only:
-        if args.package_only:
-            logger.warning("Because the validate-only flag was used, files will not be packaged.")
-        if files_to_package and validate_all_xml(files_to_package, path_from_args):
-            logger.info("XML Validation succeeded.")
-        else:
-            logger.info("XML Validation failed. Check " + log_file + " for more information.")
+    # Print warning if --package-only and --validate-only are used together
+    if args.package_only and args.validate_only:
+        logger.warning("Because the validate-only flag was used, files will not be packaged.")
+
+    # Validate xml. If not valid, return.
+    if files_to_package and validate_all_xml(files_to_package, path_from_args):
+        logger.info("Validation succeeded.")
+    else:
+        logger.info("Validation failed. Check " + log_file + " for more information.")
         return
 
-    if not files_to_package:
-        logger.info("Packaging failed. Check " + log_file + " for more information.")
+    # Double check that all files exist
+    for f in files_to_package:
+        f_full_path = str(Path(path_from_args / f.file_name))
+
+        if not os.path.isfile(f_full_path):
+            logger.error("Error: " + f_full_path + "does not exist or is not a file.")
+            return
+
+    # Validation is done, so if --validate-only we return before we start packaging
+    if args.validate_only:
         return
 
     package_dest_path = Path(args.dest)

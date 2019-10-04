@@ -1,5 +1,6 @@
 import logging
 from typing import List, Optional
+import os
 
 from pathlib import Path
 
@@ -131,6 +132,14 @@ class XMLParser:
             # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
 
             if 'file' in child.attrib:
+
+                # Check to make sure the file actually exists
+                new_file_path = str(self.path_to_folder / child.attrib['file'])
+
+                if not os.path.isfile(new_file_path):
+                    logger.debug("Error: " + new_file_path + " does not exist but is referenced in " +
+                                 str(file_to_parse.file_name))
+                    return False
 
                 # Make new connector file object
                 logging.debug("Adding file to list (name = " + child.attrib['file'] + ", type = " + child.tag + ")")
