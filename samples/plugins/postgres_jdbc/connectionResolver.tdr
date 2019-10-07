@@ -9,6 +9,9 @@
         <setImpersonateAttributes/>
         <attribute-list>
           <attr>server</attr>
+          <attr>vendor1</attr>
+          <attr>vendor2</attr>
+          <attr>vendor3</attr>
           <attr>port</attr>
           <attr>dbname</attr>
           <attr>username</attr>
