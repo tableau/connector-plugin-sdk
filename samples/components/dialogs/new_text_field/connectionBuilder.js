@@ -13,8 +13,7 @@
     params["Fetch"] = "2526";
 
     //Pull out the attributes from the connection dialog.
-    //You can preserve these attributes by adding service, vendor attributes and attributeWarehouse to the required attribute list.
-    params["WH_TEST"] = attr2[connectionHelper.attributeWarehouse];
+    //You can preserve these attributes by adding service and vendor attributes to the required attribute list.
     params["SERVICE_TEST"] = attr2[connectionHelper.attributeService];
     params["VENDOR1_TEST"] = attr2[connectionHelper.attributeVendor1];
     params["VENDOR2_TEST"] = attr2[connectionHelper.attributeVendor2];
