@@ -406,12 +406,12 @@ run_pattern_usage_text = '''
         run-pattern --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds postgres
 
     This can be combined with * to run an arbitrary set of 'correct' logical query tests against a datasources
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds  postgres
+        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds postgres
     Alternatively
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds  sqlserver
+        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds sqlserver
 
     But skip 59740?
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740  sqlserver
+        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740 sqlserver
 
     '''
 
