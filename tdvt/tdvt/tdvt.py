@@ -436,7 +436,7 @@ def create_parser():
 
     #Get information.
     list_parser = subparsers.add_parser('list', help='list information', usage=list_usage_text)
-    list_group = list_parser.add_mutually_exclusive_group()
+    list_group = list_parser.add_mutually_exclusive_group(required=True)
     list_group.add_argument('--ds', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
     list_group.add_argument('--logical_config', dest='list_logical_configs', help='List available logical configs.', required=False, default=None, const='', nargs='?')
 
