@@ -425,7 +425,7 @@ def create_parser():
     #Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
 
-    run_test_common_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='*')
+    run_test_common_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
     run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
