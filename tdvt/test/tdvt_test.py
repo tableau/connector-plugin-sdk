@@ -15,6 +15,7 @@
 
 
 import configparser
+import argparse
 import io
 import logging
 import os
@@ -28,7 +29,7 @@ from unittest import mock
 from defusedxml.ElementTree import parse
 
 from tdvt import tdvt_core
-from tdvt.tdvt import enqueue_failed_tests
+from tdvt.tdvt import enqueue_failed_tests, create_parser, get_ds_list
 from tdvt.config_gen import datasource_list
 from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTimeTestConfig
 from tdvt.test_results import *
@@ -235,6 +236,45 @@ def build_tabquery_command_line_local(work):
     new_cmd.append(os.path.split(cmd[0])[1])
     new_cmd += cmd[1:]
     return new_cmd
+
+class ArgumentTest(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def test_list(self):
+        parser = create_parser()
+        args = parser.parse_args(['list', '--ds'])
+        self.assertTrue(args.list_ds == '')
+
+        args = parser.parse_args(['list', '--ds', 'mydb'])
+        self.assertTrue(args.list_ds == 'mydb')
+
+        args = parser.parse_args(['list', '--logical_config'])
+        self.assertTrue(args.list_logical_configs == '')
+
+        args = parser.parse_args(['list', '--logical_config', 'mydb'])
+        self.assertTrue(args.list_logical_configs == 'mydb')
+
+        #self.assertRaises(argparse.ArgumentError, parser.parse_args(['list', '--logical_config', 'mydb', '--ds']))
+
+    def test_run(self):
+        parser = create_parser()
+        args = parser.parse_args(['run', 'sqldb'])
+        self.assertTrue(args.command == 'run')
+        ds = get_ds_list(args.ds)
+        self.assertTrue('sqldb' in ds)
+
+        args = parser.parse_args(['run', 'sqldb,mysqldb'])
+        ds = get_ds_list(args.ds)
+        self.assertTrue('sqldb' in ds)
+        self.assertTrue('mysqldb' in ds)
+
+        args = parser.parse_args(['run', 'sqldb, mysqldb'])
+        ds = get_ds_list(args.ds)
+        self.assertTrue('sqldb' in ds)
+        self.assertTrue('mysqldb' in ds)
+
+        
 
 class CommandLineTest(unittest.TestCase):
     def setUp(self):
@@ -559,10 +599,10 @@ class ConfigTest(unittest.TestCase):
         all_test = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'bigquery', 'exasolution']
         all_test2 = ['hadoophive2_hortonworks', 'teradata', 'netezza', 'bigquery', 'exasolution']
 
-        self.assertTrue(standard == reg.get_datasources('standard'))
-        self.assertTrue(all_passing == reg.get_datasources('all_passing'))
-        self.assertTrue(all_test == reg.get_datasources('all_test'))
-        self.assertTrue(all_test2 == reg.get_datasources('all_test2'))
+        self.assertTrue(standard == reg.get_datasources(['standard']))
+        self.assertTrue(all_passing == reg.get_datasources(['all_passing']))
+        self.assertTrue(all_test == reg.get_datasources(['all_test']))
+        self.assertTrue(all_test2 == reg.get_datasources(['all_test2']))
 
 
     def test_load_command_line_override(self):
