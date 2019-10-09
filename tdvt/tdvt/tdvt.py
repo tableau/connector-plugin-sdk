@@ -695,6 +695,7 @@ def main():
         sys.exit(error_code)
     
     logging.error("Could not interpert arguments. Nothing done.")
+    parser.print_help()
     sys.exit(-1)
 
 if __name__ == '__main__':

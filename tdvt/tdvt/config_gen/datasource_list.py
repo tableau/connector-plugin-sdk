@@ -44,6 +44,9 @@ def print_configurations(ds_reg, dsname, verbose):
         except TypeError as e:
             print(RUN_IN_INCORRECT_DIRECTORY_MSG)
             return
+        if not ds_all:
+            print(RUN_IN_INCORRECT_DIRECTORY_MSG)
+            return
         print("\nAvailable datasources:")
         for ds in sorted(ds_all):
             print(ds)
@@ -386,7 +389,8 @@ class TestRegistry(object):
 
         except KeyError:
             # Create a simple default.
-            self.suite_map['all'] = self.dsnames
+            if self.dsname:
+                self.suite_map['all'] = self.dsnames
 
     def interpret_ds_list(self, ds_list, built_list=None):
         if ds_list == '*':
