@@ -389,7 +389,7 @@ class TestRegistry(object):
 
         except KeyError:
             # Create a simple default.
-            if self.dsname:
+            if self.dsnames:
                 self.suite_map['all'] = self.dsnames
 
     def interpret_ds_list(self, ds_list, built_list=None):
