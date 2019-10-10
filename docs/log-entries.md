@@ -27,7 +27,7 @@ This displays information about the connector.taco developer:
 Unexpected Error: Error Code 14D18B1F. Package signature verification failed during connection creation.
 If this error dialog opens when you try to connect, it means that the connector couldn't be verified. Look at the logs for more information on the reason for the failure.
 
-
+![]({{ site.baseurl }}/assets/log-entries-error.png) 
 
 ### Log entry examples
  
