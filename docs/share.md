@@ -1,5 +1,5 @@
 ---
-title: Share Your Connector
+title: How to Run Your "Under Development" Connector
 ---
 
 You've created and tested your connector.
