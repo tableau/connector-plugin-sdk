@@ -456,7 +456,7 @@ def create_parser():
     
 
     #Run test pattern.
-    run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run single tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
+    run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
     run_test_pattern_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_group = run_test_pattern_parser.add_mutually_exclusive_group(required=True)
     
@@ -497,7 +497,7 @@ def init():
     return parser, ds_reg, args
 
 def is_test(args):
-    return args.command == 'run' or args.command == 'run-pattern' or args.command == 'run-file'
+    return args.command in ['run', 'run-pattern', 'run-file']
 
 def active_thread_count(threads):
     active = 0
