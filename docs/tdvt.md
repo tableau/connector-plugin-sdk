@@ -38,7 +38,7 @@ Test Scope
 ### Requirements
 
 - PC or VM running Windows or macOS.
-- Python 3.3. Pip is required as well but should come by default with the Python installation. Ensure that you check "install environmental variables".
+- Python 3.7. Pip is required as well but should come by default with the Python installation. Ensure that you check "install environmental variables".
 - An ODBC or JDBC driver for your database.
 - The 'Calcs' and 'Staples' table loaded in your database.
 

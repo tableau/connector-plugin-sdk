@@ -2,15 +2,8 @@
 title: How to Run Your "Under Development" Connector
 ---
 
-You've created and tested your connector.
-Now you'd like to get the connector, or at least the data that your connector can access, to your users.
-
 **IMPORTANT:** This is beta software and should be used in a test environment.
 Do not deploy the connector to a production environment.
-
-You can share the data your connector accesses by connecting to the data, creating an extract, and publishing the extract to Tableau Server or Tableau Online.
-
-Or, if you prefer to have your users test the connector, you can place the connector files in the directories and then run the commands as follows:
 
 **Tableau Desktop:** 
 
@@ -25,7 +18,7 @@ For Windows:
 
 For macOS:
 
-Replace [user name] with your name, for example /Users/kgarcia/tableau_connectors, and [Tableau version] with the version of Tableau that you’re running, for example, 2019.1.app.
+In the following examples, replace [user name] with your name (for example /Users/agarcia/tableau_connectors) and [Tableau version] with the version of Tableau that you’re running (for example, 2019.3.app).
 1. Create a directory for Tableau connectors. For example: `/Users/[user name]/tableau_connectors`
 1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `/Users/[user name]/tableau_connector/my connector`
 1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 

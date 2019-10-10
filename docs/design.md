@@ -4,6 +4,10 @@ title: Connector Design Considerations
 
 The choices you make when creating a connector can include which superclass and dialect to use, and how you want to tune your connection using Tableau capabilities.
 
+## Choosing a Connection Class
+
+The class attribute is a unique key for your connector. When Tableau loads the connectors at startup, if the class has already been registered the connector will not be loaded. The class is also stamped in Tableau Workbook (.twb or .twbx) files and Tableau Datasource (.tds) files to identify what connector that particular connection was using.
+
 ## Choosing a superclass
 
 Connectors work using an inheritance pattern.
@@ -31,10 +35,6 @@ If your connection is very similar to an existing database such as PostgreSQL or
 - mysql_odbc
 
 You might find other super class values in the workbook XML from an existing Tableau connection, but we don't recommend using them; they haven't been tested.
-
-### Features based on superclass
-
-Web Authoring (creating a new connection from the web) is not currently available for all connector superclasses. If your connector is based on 'odbc' or 'jdbc,' then you can publish your workbook or datasource from desktop to server, but you can't create a new connection directly on server. Connectors based on 'mysql_odbc' do support web authoring because this ability is inherited from the mysql code they are based on. 
 
 ## Choosing a dialect
 
@@ -70,7 +70,7 @@ The dialect determines what SQL is generated for various Tableau actions. Choosi
 - VerticaDialect
 
 ### Should I create a dialect definition file?
-You don’t need a dialect definition file if your connector uses the same SQL dialect as the connector it’s based on, such as mysql_odbc. However, to make changes to an existing Tableau dialect or define a new dialect, you’ll need a new dialect definition file. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect). 
+If you want to customize the generated SQL, or your connector inherits from 'odbc' or 'jdbc', then you need a dialect file. Without a file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
 
 ## Setting connection capabilities
 

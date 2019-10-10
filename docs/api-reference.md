@@ -84,7 +84,7 @@ Defines the unique set of connection attributes which is used to generate a conn
 
 **Type:** JavaScript or XML
 
-XML is prefered since it is more performant and normalization is done many times per connection.
+XML is preferred since it is more performant and normalization is done many times per connection.
 The following table shows the most commonly used attributes. Custom attributes may also be added in the XML.
 
 _Attribute names_
