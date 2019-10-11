@@ -417,6 +417,8 @@ run_pattern_usage_text = '''
 
 action_usage_text = '''
 '''
+run_file_usage_text = '''
+'''
 
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
@@ -425,7 +427,6 @@ def create_parser():
     #Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
 
-    run_test_common_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
     run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
@@ -435,27 +436,28 @@ def create_parser():
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
-    list_parser = subparsers.add_parser('list', help='list information', usage=list_usage_text)
+    list_parser = subparsers.add_parser('list', help='List information about tests and configurations.', usage=list_usage_text)
     list_group = list_parser.add_mutually_exclusive_group(required=True)
     list_group.add_argument('--ds', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
     list_group.add_argument('--logical_config', dest='list_logical_configs', help='List available logical configs.', required=False, default=None, const='', nargs='?')
 
     #Actions.
-    action_group = subparsers.add_parser('action', help='setup stuff', usage=action_usage_text)
+    action_group = subparsers.add_parser('action', help='Various non-test actions.', usage=action_usage_text)
     action_group.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     action_group.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
     action_group.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
 
     #Run tests.
-    run_test_parser = subparsers.add_parser('run', help='run tests', parents=[run_test_common_parser], usage=run_usage_text)
-    run_test_parser.add_argument('-f', dest='run_file', help='Json file containing failed tests to run.', required=False)
+    run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
+    run_test_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_parser.add_argument('--verify', dest='smoke_test', action='store_true', help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.', required=False)  # noqa: E501
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
     
 
     #Run test pattern.
-    run_test_pattern_parser = subparsers.add_parser('run-pattern', help='run tests using a pattern', parents=[run_test_common_parser], usage=run_pattern_usage_text)
+    run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
+    run_test_pattern_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_group = run_test_pattern_parser.add_mutually_exclusive_group(required=True)
     
     run_test_group.add_argument('--exp', dest='expression_pattern', help='Only run expression tests whose name and path matches the supplied string. This is a glob pattern. Also you must set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
@@ -464,6 +466,9 @@ def create_parser():
     run_test_pattern_parser.add_argument('--tdp', dest='tds_pattern', help='The datasource tds pattern to use when running the test. See exp and logp arguments.', required=True, default=None, const='', nargs='?')
     run_test_pattern_parser.add_argument('--test-ex', dest='test_pattern_exclude', help='Exclude tests whose name matches the supplied string. This is a regular expression pattern. Can be used with exp and logp arguments. Also set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
 
+    #Run file.
+    run_file_parser = subparsers.add_parser('run-file', help='Run tests from a file.', parents=[run_test_common_parser], usage=run_file_usage_text)
+    run_file_parser.add_argument('run_file', help='Json file containing failed tests to run.')
 
     return parser
 
@@ -492,7 +497,7 @@ def init():
     return parser, ds_reg, args
 
 def is_test(args):
-    return args.command == 'run' or args.command == 'run-pattern'
+    return args.command in ['run', 'run-pattern', 'run-file']
 
 def active_thread_count(threads):
     active = 0
@@ -687,7 +692,7 @@ def main():
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
     elif is_test(args):
-        if args.command == 'run' and args.run_file:
+        if args.command == 'run-file':
             output_dir = os.getcwd()
             max_threads = get_level_of_parallelization(args)
             sys.exit(run_file(args.run_file, output_dir, max_threads, args))
