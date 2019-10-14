@@ -10,6 +10,7 @@ from .xsd_validator import validate_single_file
 
 logger = logging.getLogger(__name__)
 
+HTTPS_STRING = "https://"
 TRANSLATABLE_STRING_PREFIX = "@string/"
 TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "ja_JP", "ko_KR", "pt_BR", "zh_CN",
                                "zh_TW"]
@@ -147,6 +148,15 @@ class XMLParser:
                     children_valid = self.parse_file(new_file)
                     if not children_valid:
                         return False
+
+            if 'url' in child.attrib:
+
+                url_link = child.attrib['url']
+                # If URL does not start with https:// then do not package and return false
+                if not url_link.startswith(HTTPS_STRING):
+                    logging.error("Error: Only HTTPS URL's are allowed. URL " + url_link + 
+                        " is a non-https link in file " + file_to_parse.file_name)
+                    return False
 
             # If an element has the 'class' attribute, and the class name is not set, set the class name. If it is set,
             #  make sure it is the same name
