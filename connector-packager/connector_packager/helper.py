@@ -14,7 +14,7 @@ def check_jdk_environ_variable(exe_name: str) -> bool:
     """
     Check if executable needed in jdk is available
     """
-    path_list = os.environ[PATH_ENVIRON].split(';')
+    path_list = os.environ[PATH_ENVIRON].split(os.pathsep)
     for path in path_list:
         if os.path.isfile(Path(path) / exe_name):
             return True
