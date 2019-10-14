@@ -39,6 +39,11 @@ class TestXMLParser(unittest.TestCase):
                                                                     expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Connector with class name mismatch returned a file list when it shouldn't")
 
+        # Test connector with non-https url
+        actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("non_https"),
+                                                                    expected_file_list, expected_class_name)
+        self.assertFalse(actual_file_list, "Connector with non-https urls returned a file list when it shouldn't")
+
     def parser_test_case(self, test_folder, expected_file_list, expected_class_name):
 
         xml_parser = XMLParser(test_folder)
