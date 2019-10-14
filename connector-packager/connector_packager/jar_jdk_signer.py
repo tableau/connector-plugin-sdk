@@ -9,7 +9,9 @@ from typing import Optional, Tuple
 from .helper import check_jdk_environ_variable
 
 
-JARSIGNER_EXECUTABLE_NAME = "jarsigner.exe"
+JARSIGNER_EXECUTABLE_NAME = "jarsigner"
+if os.name == 'nt':
+    JAR_EXECUTABLE_NAME+= ".exe"
 logger = logging.getLogger(__name__)
 
 KEYSTORE_PWD_PROMPT_LENGTH = len("Enter Passphrase for keystore: ")
