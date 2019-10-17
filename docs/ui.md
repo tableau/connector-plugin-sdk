@@ -26,7 +26,8 @@ These elements are defined in the manifest.xml file:
   ...
 </connector-plugin>
 ```
-##  Custom Fields (Vendor Attributes) - 2020.1
+
+## Vendor Attributes (Custom Fields)
 Vendors can add customized attributes to their connector plugin by using the vendor attributes.
 
 These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add 3 custom fields in your connector plugin.
@@ -75,6 +76,7 @@ connection-dialog.tcd
       </connection-dialog>
 ```
 For complete files, [Click Here](https://github.com/tableau/connector-plugin-sdk/tree/dev/samples/components/dialogs/new_text_field)
+
 ## The Tableau Custom Dialog File
 
 The UI elements you see in the dialog are determined in the .tcd file:
