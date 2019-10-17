@@ -26,6 +26,54 @@ These elements are defined in the manifest.xml file:
   ...
 </connector-plugin>
 ```
+##  Custom Fields (Vendor Attributes) - 2020.1
+Vendors can add customized attributes to your connector plugin by using the vendor attributes.
+
+These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add 3 custom fields in your connector plugin.
+
+To add a custom vendor-attribute, you will need to modify your connection-dialog.tcd, connectionResolver.tdr and connectionProporties.js file like any other attribute.
+
+connection-resolver.tdr
+
+```
+...
+      <required-attributes>
+      <attribute-list>
+        ...
+        <attr> vendor1 </attr> 
+        <attr> vendor2 </attr> 
+        <attr> vendor3 </attr> 
+
+      </attribute-list>
+      </required-attributes>
+    ...
+```
+```
+connectionProporties.js
+   ...
+      props["password"] = attr[connectionHelper.attributePassword];
+      props["logLevel"] = attr[connectionHelper.attributeVendor1];
+      props["protocolVersion"] = attr[connectionHelper.attributeVendor2];
+      props["charSet"] = attr[connectionHelper.attributeVendor3];
+
+      if (attr[connectionHelper.attributeSSLMode] == "require")
+      {
+      ...
+      
+```
+connection-dialog.tcd
+
+```
+ <connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1'>
+          <connection-config>
+            ...
+            <vendor1-prompt value="Log Level: "/>
+            <vendor2-prompt value="Protocol Version: "/>
+            <vendor3-prompt value="Char Set: "/>
+
+        </connection-config>
+      </connection-dialog>
+```
 
 ## The Tableau Custom Dialog File
 
