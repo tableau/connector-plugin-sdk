@@ -2,6 +2,8 @@
 title: How to Run your Packaged Connector (Taco)
 ---
 
+The ability to load taco files was added in 2019.4 Beta 1. For loading un-packaged connectors in earlier versions of Tableau, refer to [How to Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share)
+
 # Tableau Desktop
 Simply drop your taco file into your `My Tableau Repository/Connectors` and launch Tableau.
 
