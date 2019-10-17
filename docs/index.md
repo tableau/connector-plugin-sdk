@@ -6,7 +6,7 @@ With the Tableau Connector SDK, you can add a new connector that you can use to 
 When you create a connector, you can add customizations to the connector, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
 This document describes the files that make up a connector.
 
-## What is a connector?
+# What is a connector?
 
 A connector is a set of files that describe:
 
@@ -24,38 +24,24 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 
 ![]({{ site.baseurl }}/assets/files-overview.png)
 
-## Before you begin
+# What is a taco?
+A .taco is a packaged Tableau connector file that can be dropped into your `My Tableau Repository/Connectors` folder. They will be automatically loaded by Tableau.
+
+For more information about packaging your connector into a .taco, refer to [How to Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign)
+
+# Before you begin
 
 You need to do these things before you start:
 
 - Install the ODBC or JDBC driver that you’ll use with the connector you’ll create.
 - Install Tableau Desktop 2019.2 or later on a Windows or Mac computer.
 
-## Using a Connector
+# Using a Connector
 
-You must start Tableau Desktop or Tableau Server with a special command line argument that tells Tableau where to find your Connector. See [Run Your Connector]({{ site.baseurl }}/docs/share) for more information.
+## Packaged Connector (.taco)
+Simply drop your packaged taco file into your `My Tableau Repository/Connectors` and launch Tableau.
 
-**Tableau Desktop:** 
+Note: Support for loading Taco files was added in the 2019.4 release of Tableau.
 
-For Windows:
-1. Create a directory for Tableau connectors. For example: `C:\tableau_connectors`
-1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `C:\tableau_connectors\my_connector`
-1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
-
-    ```
-    tableau.exe -DConnectPluginsPath=C:\tableau_connectors
-    ```
-
-For macOS:
-
-In the following examples, replace [user name] with your name (for example /Users/agarcia/tableau_connectors) and [Tableau version] with the version of Tableau that you’re running (for example, 2019.3.app).
-
-1. Create a directory for Tableau connectors. For example: `/Users/[user name]/tableau_connectors`
-1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example: `/Users/[user name]/tableau_connector/my connector`
-1. Run Tableau using the `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example: 
-
-    ```
-    /Applications/Tableau\ Desktop\ [Tableau version].app/Contents/MacOS/Tableau -DConnectPluginsPath=/Users/[user name]/tableau_connectors
-        
-    ```
-
+## Developer Path
+You can tell Tableau to load un-packaged connectors with a special command line argument that tells Tableau where to find your Connector. See [Run Your Connector]({{ site.baseurl }}/docs/share) for more information.
