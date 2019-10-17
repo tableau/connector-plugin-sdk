@@ -25,9 +25,9 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 ![]({{ site.baseurl }}/assets/files-overview.png)
 
 # What is a Taco?
-A .taco file is a packaged Tableau connector file that can be dropped into your `My Tableau Repository/Connectors` folder. They will be automatically loaded by Tableau.
+A `.taco` file is a packaged Tableau connector file that can be dropped into your `My Tableau Repository/Connectors` folder. They will be automatically loaded by Tableau.
 
-For more information about packaging your connector into a .taco, refer to [How to Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign)
+For more information about packaging your connector into a Taco, refer to [How to Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign)
 
 # Before you Begin
 
@@ -39,7 +39,7 @@ You need to do these things before you start:
 # Using a Connector
 
 ## Packaged Connector (Taco)
-Simply drop your packaged taco file into your `My Tableau Repository/Connectors` and launch Tableau.
+Simply drop your packaged `.taco` file into your `My Tableau Repository/Connectors` and launch Tableau.
 
 Note: Support for loading Taco files was added in the 2019.4 release of Tableau.
 
