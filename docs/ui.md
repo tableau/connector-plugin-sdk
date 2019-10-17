@@ -27,7 +27,7 @@ These elements are defined in the manifest.xml file:
 </connector-plugin>
 ```
 ##  Custom Fields (Vendor Attributes) - 2020.1
-Vendors can add customized attributes to your connector plugin by using the vendor attributes.
+Vendors can add customized attributes to their connector plugin by using the vendor attributes.
 
 These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add 3 custom fields in your connector plugin.
 
@@ -74,7 +74,7 @@ connection-dialog.tcd
         </connection-config>
       </connection-dialog>
 ```
-
+For complete files, [Click Here](https://github.com/tableau/connector-plugin-sdk/tree/dev/samples/components/dialogs/new_text_field)
 ## The Tableau Custom Dialog File
 
 The UI elements you see in the dialog are determined in the .tcd file:
@@ -97,6 +97,6 @@ The `authentication-mode` and `authentication-options` tags control how a user i
 
 The other tags control what prompts show up in the connection dialog. For example, `<port-prompt value="Port: " default="5432" />` shows the Port prompt with the label of Port and a default value of 5432.
 
-## Localizing you connector
+## Localizing your connector
 
 For information on localizing your connection dialogs, see [Localize Your Connector]({{ site.baseurl }}/docs/localize)
