@@ -48,8 +48,8 @@ connection-resolver.tdr
       </required-attributes>
     ...
 ```
-```
 connectionProporties.js
+```
    ...
       props["password"] = attr[connectionHelper.attributePassword];
       props["logLevel"] = attr[connectionHelper.attributeVendor1];
