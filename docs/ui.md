@@ -32,7 +32,8 @@ Vendors can add customized attributes to their connector plugin by using the ven
 
 These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add 3 custom fields in your connector plugin.
 
-To add a custom vendor-attribute, you will need to modify your connection-dialog.tcd, connectionResolver.tdr and connectionProporties.js file like any other attribute.
+To add a custom vendor-attribute, you will need to modify your connection-dialog.tcd, connectionResolver.tdr and connectionBuilder.js.
+**For JDBC based plugins, you will need to modify connectionProperties.js instead of connectionBuilder.js**
 
 connection-resolver.tdr
 
@@ -49,7 +50,40 @@ connection-resolver.tdr
       </required-attributes>
     ...
 ```
-connectionProporties.js
+
+connection-dialog.tcd
+
+```
+ <connector-plugin class='postgres_jdbc' superclass='jdbc' plugin-version='0.0.0' name='PostgreSQL JDBC' version='18.1'>
+          <connection-config>
+            ...
+            <vendor1-prompt value="Log Level: "/>
+            <vendor2-prompt value="Protocol Version: "/>
+            <vendor3-prompt value="Char Set: "/>
+
+        </connection-config>
+      </connection-dialog>
+```
+
+connectionBuilder.js (Non-JDBC)
+```
+   ...
+(function dsbuilder(attr)
+  {
+    var params = {};
+
+    params["SERVER"] = attr[connectionHelper.attributeServer];
+    params["PORT"] = attr[connectionHelper.attributePort];
+    params["DATABASE"] = attr[connectionHelper.attributeDatabase];
+    params["UID"] = attr[connectionHelper.attributeUsername];
+    params["PWD"] = attr[connectionHelper.attributePassword];
+    params["loglevel"] = attr[connectionHelper.attributeVendor1];
+    params["protocolVersion"] = attr[connectionHelper.attributeVendor2];
+    params["charSet"] = attr[connectionHelper.attributeVendor3];
+      
+```
+
+connectionProperties.js (For JDBC only)
 ```
    ...
       props["password"] = attr[connectionHelper.attributePassword];
@@ -62,19 +96,8 @@ connectionProporties.js
       ...
       
 ```
-connection-dialog.tcd
 
-```
- <connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1'>
-          <connection-config>
-            ...
-            <vendor1-prompt value="Log Level: "/>
-            <vendor2-prompt value="Protocol Version: "/>
-            <vendor3-prompt value="Char Set: "/>
 
-        </connection-config>
-      </connection-dialog>
-```
 For complete files, [Click Here](https://github.com/tableau/connector-plugin-sdk/tree/dev/samples/components/dialogs/new_text_field)
 
 ## The Tableau Custom Dialog File
