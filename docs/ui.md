@@ -17,7 +17,7 @@ The connector is displayed as "[Display Name] by [Company Name]" in the connecti
 "For support, contact [Company Name]" is displayed at the bottom left of the connector. Clicking on this link will send the user to the support link defined in the manifest. This link also displays in error messages.
 
 These elements are defined in the manifest.xml file:
-```
+```xml
 <connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1'>
   <vendor-information>
       <company name="Company Name"/>
@@ -37,8 +37,8 @@ To add a custom vendor-attribute, you will need to modify your connection-dialog
 
 connection-resolver.tdr
 
-```
-...
+```xml
+    ...
       <required-attributes>
       <attribute-list>
         ...
@@ -53,7 +53,7 @@ connection-resolver.tdr
 
 connection-dialog.tcd
 
-```
+```xml
  <connector-plugin class='postgres_jdbc' superclass='jdbc' plugin-version='0.0.0' name='PostgreSQL JDBC' version='18.1'>
           <connection-config>
             ...
@@ -66,7 +66,7 @@ connection-dialog.tcd
 ```
 
 connectionBuilder.js (Non-JDBC)
-```
+```js
 (function dsbuilder(attr)
   {
     var params = {};
@@ -79,13 +79,13 @@ connectionBuilder.js (Non-JDBC)
     params["loglevel"] = attr[connectionHelper.attributeVendor1];
     params["protocolVersion"] = attr[connectionHelper.attributeVendor2];
     params["charSet"] = attr[connectionHelper.attributeVendor3];
-...
+    ...
       
 ```
 
 connectionProperties.js (For JDBC only)
-```
-   ...
+```js
+      ...
       props["password"] = attr[connectionHelper.attributePassword];
       props["logLevel"] = attr[connectionHelper.attributeVendor1];
       props["protocolVersion"] = attr[connectionHelper.attributeVendor2];
@@ -103,7 +103,7 @@ For complete files, [Click Here](https://github.com/tableau/connector-plugin-sdk
 ## The Tableau Custom Dialog File
 
 The UI elements you see in the dialog are determined in the .tcd file:
-```
+```xml
 <connection-dialog class='postgres_odbc'>
   <connection-config>
     <authentication-mode value='Basic' />
