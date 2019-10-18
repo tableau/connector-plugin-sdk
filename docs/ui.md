@@ -67,7 +67,6 @@ connection-dialog.tcd
 
 connectionBuilder.js (Non-JDBC)
 ```
-   ...
 (function dsbuilder(attr)
   {
     var params = {};
@@ -80,6 +79,7 @@ connectionBuilder.js (Non-JDBC)
     params["loglevel"] = attr[connectionHelper.attributeVendor1];
     params["protocolVersion"] = attr[connectionHelper.attributeVendor2];
     params["charSet"] = attr[connectionHelper.attributeVendor3];
+...
       
 ```
 
