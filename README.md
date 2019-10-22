@@ -2,7 +2,7 @@
 
 ![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg) [![Build Status](https://travis-ci.org/tableau/connector-plugin-sdk.svg?branch=master)](https://travis-ci.org/tableau/connector-plugin-sdk)
 
-This project consists of documentation, example files, and a Python-based test harness that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
+This project consists of documentation, example files, a Python-based test harness and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
 * [Why Connectors?](#why-connectors)
 * [Get started](#get-started)
@@ -34,6 +34,11 @@ To work with connectors, you need the following:
 * An ODBC or JDBC data source and driver
 * The provided test data loaded in your data source
 
+To package the connector into a .taco file, you will also need:
+
+* Tableau Desktop or Server 2019.4 Beta 1 or higher
+* JDK 8 or higher
+
 # Get Help
 
 This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your connector:
@@ -62,6 +67,14 @@ After v1.0, we expect to work with partners to review test results and discuss c
 Many things might change, but the most likely changes are how a connector is packaged, and the components associated with enterprise authentication. We highly encourage you to sign up here in GitHub or email us to get the latest information. Partners participating in the open sprint demos will get notice of any breaking changes in real-time.
 
 [Visit the project website and documentation here.](https://tableau.github.io/connector-plugin-sdk/)
+
+# Known Issues
+
+**(Mac Only) Packaged Connectors (.taco files) throws unexpected error in 2019.4**
+You can work around this by skipping signature verification with the command line argument `-DDisableVerifyConnectorPluginSignature=true`.
+
+**Support links that are not fully qualified throw error when clicked on**
+Support links that are not fully qualified (ie include the https:// header) will throw an error when the user clicks on them. This only affects in-development connectors, as we check for this when packaging a connector into a Taco.
 
 # Contributions
 
