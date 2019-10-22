@@ -725,10 +725,11 @@ class PrintConfigurationsTest(unittest.TestCase):
             self.assertIn(correct_out, captured_output.getvalue())
 
 class MockBatchQueueWork(tdvt_core.BatchQueueWork):
-    def __init__(self, test_config, test_set, runtime_exception = None):
+    def __init__(self, mock_tests, test_config, test_set, runtime_exception = None):
         super(MockBatchQueueWork, self).__init__(test_config, test_set)
         self.keep_actual_file = True
         self.runtime_exception = runtime_exception
+        self.mock_tests = mock_tests
 
     def setup_files(self, test_list):
         pass
@@ -739,14 +740,78 @@ class MockBatchQueueWork(tdvt_core.BatchQueueWork):
         pass
 
 class MockTestSet(TestSet):
+    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
+                     expected_message):
+        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
+                     expected_message, False, True, False)
+        self.mock_test_name = mock_test_name
+        self.mock_test_path = mock_test_path
+
     def get_expected_output_file_path(self, test_file, output_dir):
-        return 'something_that_doesnt_exist'
+        return self.mock_test_path +'actual.' + self.mock_test_name
+
+class ResultsTest(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def test_results_passed(self):
+        test_name = 'setup.mytest.txt'
+        test_path = './tests/e/suite1/'
+        mock_batch = self.create_mock_and_process(test_name, test_path)
+
+        self.assertTrue(len(mock_batch.results) == 1)
+        for test_file in mock_batch.results:
+            self.assertTrue(mock_batch.results[test_file].all_passed())
+
+    def test_results_missing_actual(self):
+        test_name = 'setup.mytest.txt'
+        test_path = './tests/e/suite1/missing_actual_1/'
+        mock_batch = self.create_mock_and_process(test_name, test_path)
+
+        self.assertTrue(len(mock_batch.results) == 1)
+        for test_file in mock_batch.results:
+            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
+            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorMissingActual))
+
+    def test_results_missing_tuple(self):
+        test_name = 'setup.mytest.txt'
+        test_path = './tests/e/suite1/failed_1/'
+        mock_batch = self.create_mock_and_process(test_name, test_path)
+
+        self.assertTrue(len(mock_batch.results) == 1)
+        for test_file in mock_batch.results:
+            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
+            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorResults))
+            self.assertTrue(mock_batch.results[test_file].diff_count == 14)
+
+    def create_mock_and_process(self, test_name, test_path):
+        mock_tests = [TestFile('tests', test_path + test_name)]
+        test_config = TdvtInvocation()
+        ts1_expr = MockTestSet(test_path, test_name, 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        mock_batch = MockBatchQueueWork(mock_tests, test_config, ts1_expr)
+        mock_batch.run(mock_batch.mock_tests)
+        mock_batch.process_test_results(mock_batch.mock_tests)
+        return mock_batch
+
+    def test_results_wrong_value(self):
+        test_name = 'setup.mytest.txt'
+        test_path = './tests/e/suite1/tuple_1/'
+        mock_batch = self.create_mock_and_process(test_name, test_path)
+
+        self.assertTrue(len(mock_batch.results) == 1)
+        for test_file in mock_batch.results:
+            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
+            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorResults))
+            self.assertTrue(mock_batch.results[test_file].diff_count == 1)
 
 class ResultsExceptionTest(unittest.TestCase):
     def setUp(self):
         self.mock_tests = [TestFile('tests', './tests/e/suite1/setup.mytest.txt')]
         self.test_config = TdvtInvocation()
-        self.ts1_expr = MockTestSet('mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        self.ts1_expr = MockTestSet('not used', 'not used', 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
 
     def tearDown(self):
         pass
@@ -754,45 +819,58 @@ class ResultsExceptionTest(unittest.TestCase):
     def test_runtime_error(self):
         error_message = 'Mock RunTime Error'
         error_state = TestErrorOther
-        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, RuntimeError(error_message))
+        mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, self.ts1_expr, RuntimeError(error_message))
 
-        self.check_error(error_message, error_state, mock_batch)
+        self.check_errors(error_message, error_state, mock_batch)
 
     def test_process_error_timeout(self):
         error_message = 'Test timed out.'
         error_state = TestErrorTimeout
-        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, subprocess.TimeoutExpired('test', 1))
+        mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, self.ts1_expr, subprocess.TimeoutExpired('test', 1))
 
-        self.check_error(error_message, error_state, mock_batch)
+        self.check_errors(error_message, error_state, mock_batch)
 
     def test_process_error_abort(self):
         error_message = 'error message from exception'
         error_state = TestErrorAbort
         proc_error_code = 18
-        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
-        self.check_error(error_message, error_state, mock_batch)
+        mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, self.ts1_expr, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_errors(error_message, error_state, mock_batch)
 
     def test_process_error_other(self):
         error_message = 'error message from exception'
         error_state = TestErrorOther
         proc_error_code = 1
-        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
-        self.check_error(error_message, error_state, mock_batch)
+        mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, self.ts1_expr, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_errors(error_message, error_state, mock_batch)
 
     def test_process_error_expected(self):
         error_state = TestErrorExpected
         proc_error_code = 1
-        test_set_expected = MockTestSet('mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        test_set_expected = MockTestSet('not_used', 'not used', 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
         test_set_expected.expected_message = 'No one expects the Spanish Inquisition'
         error_message = 'some stuff ' + test_set_expected.expected_message + ' some other stuff'
-        mock_batch = MockBatchQueueWork(self.test_config, test_set_expected, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
-        self.check_error(error_message, error_state, mock_batch)
+        mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, test_set_expected, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_errors(error_message, error_state, mock_batch)
 
-    def check_error(self, expected_message, expected_state, mock_batch):
-        mock_batch.run(self.mock_tests)
-        mock_batch.process_test_results(self.mock_tests)
+    def test_process_timeout_multiple(self):
+        test_name = 'setup.mytest.txt'
+        test_name2 = 'setup.mytest2.txt'
+        test_path = './tests/e/suite1/missing_actual_1/'
+        mock_tests = [TestFile('tests', test_path + test_name), TestFile('tests', test_path + test_name2)]
+        ts1_expr = MockTestSet(test_path, test_name, 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        mock_batch = MockBatchQueueWork(mock_tests, self.test_config, ts1_expr, subprocess.TimeoutExpired('test', 1))
 
-        self.assertTrue(len(mock_batch.results) == 1)
+        error_message = 'Test timed out.'
+        error_state = TestErrorTimeout
+        self.check_errors(error_message, error_state, mock_batch, 2)
+
+
+    def check_errors(self, expected_message, expected_state, mock_batch, error_count = 1):
+        mock_batch.run(mock_batch.mock_tests)
+        mock_batch.process_test_results(mock_batch.mock_tests)
+
+        self.assertTrue(len(mock_batch.results) == error_count)
         for test_file in mock_batch.results:
             actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
             self.assertTrue(actual_message == expected_message, "Expected [{0}] got [{1}]".format(expected_message, actual_message))

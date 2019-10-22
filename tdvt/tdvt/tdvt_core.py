@@ -180,8 +180,8 @@ class BatchQueueWork(object):
                 base_test_filepath = base_filepath
                 actual_filepath = actual_output_filepath
 
-            if not os.path.isfile(actual_filepath):
-                logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + actual_filepath)
+            if not os.path.isfile(existing_output_filepath):
+                logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + existing_output_filepath)
                 sys.stdout.write('?')
                 self.add_missing_test_failure(t)
                 continue
