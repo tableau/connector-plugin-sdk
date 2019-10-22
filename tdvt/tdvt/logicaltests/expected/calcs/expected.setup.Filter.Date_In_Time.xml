@@ -2,12 +2,6 @@
 
 <results>
   <test name='setup.Filter.Date_In_Time.xml'>
-    <sql>
-      SELECT CAST(CONCAT(TO_DATE(CAST (`Calcs`.`date0` AS DATE)), &apos; 00:00:00&apos;) AS TIMESTAMP) AS `tdy_calculation_2683863928708153344_ok`&#10;FROM `testv1_Calcs` `Calcs`&#10;WHERE (CAST(CONCAT(TO_DATE(CAST (`Calcs`.`date0` AS DATE)), &apos; 00:00:00&apos;) AS TIMESTAMP) IN (CAST(&apos;1972-07-04 00:00:00&apos; AS TIMESTAMP), CAST(&apos;1975-11-12 00:00:00&apos; AS TIMESTAMP)))&#10;GROUP BY CAST(CONCAT(TO_DATE(CAST (`Calcs`.`date0` AS DATE)), &apos; 00:00:00&apos;) AS TIMESTAMP)
-    </sql>
-    <query-time>
-      16823.000
-    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hadoophive_cloudera].[tdy:Calculation_2683863928708153344:ok]</column>
