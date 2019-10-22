@@ -5,7 +5,7 @@ import json
 import re
 
 from .config_gen.tdvtconfig import TdvtInvocation
-
+from .config_gen.test_config import TestSet
 
 TEST_DISABLED = "Test disabled in .ini file."
 TEST_SKIPPED = "Test not run because smoke tests failed."
@@ -24,7 +24,7 @@ class TestCaseResult(object):
         self.table = table
         self.execution_time = query_time
         self.error_message = error_msg
-        self.error_type = error_type
+        self.error_type: TestErrorState = error_type
         self.diff_count = 0
         self.diff_string = ''
         self.passed_sql = False
@@ -53,7 +53,7 @@ class TestCaseResult(object):
         if self.error_message:
             return self.error_message
 
-        if not self.all_passed():
+        if not self.all_passed() and isinstance(self.error_type, TestErrorResults):
             return 'Actual does not match expected.'
 
         return ''
@@ -117,6 +117,11 @@ class TestErrorStartup(TestErrorState):
         return "Test did not start."
 
 
+class TestErrorNotRun(TestErrorState):
+    def get_error(self):
+        return "Test did not run."
+
+
 class TestErrorTimeout(TestErrorState):
     def get_error(self):
         return "Test timed out."
@@ -142,6 +147,11 @@ class TestErrorDisabledTest(TestErrorState):
         return "Test disabled in .ini file."
 
 
+class TestErrorResults(TestErrorState):
+    def get_error(self):
+        return "Actual does not match expected."
+
+
 class TestErrorSkippedTest(TestErrorState):
     def get_error(self):
         return "Test not run because smoke tests failed."
@@ -149,7 +159,7 @@ class TestErrorSkippedTest(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtInvocation(), test_file = '', relative_test_file = '', test_set = None, error_status=None):
+    def __init__(self, base_name = '', test_config = TdvtInvocation(), test_file = '', relative_test_file = '', test_set: TestSet = None, error_status=None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -164,31 +174,41 @@ class TestResult(object):
         self.test_case_map = []
         self.cmd_output = ''
         self.relative_test_file = relative_test_file
-        self.test_set = test_set
+        self.test_set: TestSet = test_set
 
         self.parse_default_test_cases()
 
     def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
+        #TestCaseResult error messages should be specific to that exact test case. Overall test problems should be
+        #set at a higher level (TestResult).
         if self.test_set.test_is_enabled is False:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_DISABLED, 0, "", 0, TEST_DISABLED, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config)
             else:
-                return TestCaseResult(TEST_DISABLED, str(test_case_count), "", test_case_count, TEST_DISABLED,
-                                      TEST_DISABLED, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, '',
+                                      TestErrorDisabledTest(), None, self.test_config)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_SKIPPED, 0, "", 0, TEST_SKIPPED, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorSkippedTest(), None, self.test_config)
             else:
-                return TestCaseResult(TEST_SKIPPED, str(test_case_count), "", test_case_count, TEST_SKIPPED,
-                                      TEST_SKIPPED, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, '',
+                                      TestErrorSkippedTest(), None, self.test_config)
         else:
+
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_NOT_RUN, 0, "", 0, TEST_NOT_RUN, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorNotRun(), None, self.test_config)
             else:
-                return TestCaseResult(TEST_NOT_RUN, str(test_case_count), "", test_case_count, TEST_NOT_RUN,
-                                      self.error_status, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, '',
+                                      TestErrorNotRun(), None, self.test_config)
 
     def parse_default_test_cases(self):
+        if self.test_set and self.test_set.test_is_enabled is False:
+                self.overall_error_message = TEST_DISABLED
+        elif self.test_set and self.test_set.test_is_skipped is True:
+            self.overall_error_message = TEST_SKIPPED
+        else:
+            self.overall_error_message = TEST_NOT_RUN
+
         # If it is an expression test with no results, it probably means the test failed and the individual test cases
         # weren't run. Count them here. Parse the setup file to get the count.
         if not self.test_case_map and self.test_set:
@@ -274,7 +294,7 @@ class TestResult(object):
             if case.get_error_message():
                 msg += case.get_error_message() + '\n'
 
-        if msg:
+        if msg and not msg.isspace():
             return msg
 
         return self.get_failure_message()
@@ -288,12 +308,12 @@ class TestResult(object):
         if self.saved_error_message:
             return self.saved_error_message
 
+        if self.error_status:
+            return self.error_status.get_error()
+
         #TODO need this?
         if self.overall_error_message:
             return self.overall_error_message
-
-        if self.error_status:
-            return self.error_status.get_error()
 
         return "No results found."
 

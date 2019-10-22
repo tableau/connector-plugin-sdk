@@ -21,10 +21,11 @@ import subprocess
 import threading
 import time
 from .version import __version__
+from typing import List
 
 from .config_gen.gentests import list_configs, list_config
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
-from .config_gen.test_config import SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
+from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .resources import make_temp_dir
@@ -309,7 +310,7 @@ def enqueue_tests(ds_info, args, suite):
     tests = []
     test_set_configs = []
     if not is_test(args):
-        return
+        return test_set_configs
 
     logging.debug("Enqueing tests for " + ds_info.dsname)
     if args.logical_only or args.expression_only:
@@ -523,7 +524,7 @@ def test_runner(all_tests, test_queue, max_threads):
     return failed_tests, total_tests
 
 
-def run_tests_impl(tests, max_threads, args):
+def run_tests_impl(tests: List[TestSet], max_threads, args):
     smoke_test_queue = queue.Queue()
     smoke_tests = []
     test_queue = queue.Queue()
@@ -623,7 +624,7 @@ def run_desired_tests(args, ds_registry):
         sys.exit(0)
 
     max_threads = get_level_of_parallelization(args)
-    test_sets = []
+    test_sets: List[TestSet] = []
 
     for ds in ds_to_run:
         ds_info = ds_registry.get_datasource_info(ds)

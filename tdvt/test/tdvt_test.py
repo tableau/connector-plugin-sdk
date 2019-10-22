@@ -21,6 +21,7 @@ import logging
 import os
 import pkg_resources
 import shutil
+import subprocess
 import sys
 import unittest
 
@@ -31,7 +32,7 @@ from defusedxml.ElementTree import parse
 from tdvt import tdvt_core
 from tdvt.tdvt import enqueue_failed_tests, create_parser, get_ds_list
 from tdvt.config_gen import datasource_list
-from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTimeTestConfig
+from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTimeTestConfig, TestFile
 from tdvt.test_results import *
 from tdvt.tabquery import *
 
@@ -723,6 +724,79 @@ class PrintConfigurationsTest(unittest.TestCase):
             datasource_list.print_configurations(MockTestRegistry, None, None)
             self.assertIn(correct_out, captured_output.getvalue())
 
+class MockBatchQueueWork(tdvt_core.BatchQueueWork):
+    def __init__(self, test_config, test_set, runtime_exception = None):
+        super(MockBatchQueueWork, self).__init__(test_config, test_set)
+        self.keep_actual_file = True
+        self.runtime_exception = runtime_exception
+
+    def setup_files(self, test_list):
+        pass
+
+    def run_process(self, cmdline):
+        if self.runtime_exception:
+            raise self.runtime_exception
+        pass
+
+class MockTestSet(TestSet):
+    def get_expected_output_file_path(self, test_file, output_dir):
+        return 'something_that_doesnt_exist'
+
+class ResultsExceptionTest(unittest.TestCase):
+    def setUp(self):
+        self.mock_tests = [TestFile('tests', './tests/e/suite1/setup.mytest.txt')]
+        self.test_config = TdvtInvocation()
+        self.ts1_expr = MockTestSet('mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+
+    def tearDown(self):
+        pass
+
+    def test_runtime_error(self):
+        error_message = 'Mock RunTime Error'
+        error_state = TestErrorOther
+        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, RuntimeError(error_message))
+
+        self.check_error(error_message, error_state, mock_batch)
+
+    def test_process_error_timeout(self):
+        error_message = 'Test timed out.'
+        error_state = TestErrorTimeout
+        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, subprocess.TimeoutExpired('test', 1))
+
+        self.check_error(error_message, error_state, mock_batch)
+
+    def test_process_error_abort(self):
+        error_message = 'error message from exception'
+        error_state = TestErrorAbort
+        proc_error_code = 18
+        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_error(error_message, error_state, mock_batch)
+
+    def test_process_error_other(self):
+        error_message = 'error message from exception'
+        error_state = TestErrorOther
+        proc_error_code = 1
+        mock_batch = MockBatchQueueWork(self.test_config, self.ts1_expr, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_error(error_message, error_state, mock_batch)
+
+    def test_process_error_expected(self):
+        error_state = TestErrorExpected
+        proc_error_code = 1
+        test_set_expected = MockTestSet('mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        test_set_expected.expected_message = 'No one expects the Spanish Inquisition'
+        error_message = 'some stuff ' + test_set_expected.expected_message + ' some other stuff'
+        mock_batch = MockBatchQueueWork(self.test_config, test_set_expected, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_error(error_message, error_state, mock_batch)
+
+    def check_error(self, expected_message, expected_state, mock_batch):
+        mock_batch.run(self.mock_tests)
+        mock_batch.process_test_results(self.mock_tests)
+
+        self.assertTrue(len(mock_batch.results) == 1)
+        for test_file in mock_batch.results:
+            actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
+            self.assertTrue(actual_message == expected_message, "Expected [{0}] got [{1}]".format(expected_message, actual_message))
+            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, expected_state))
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
