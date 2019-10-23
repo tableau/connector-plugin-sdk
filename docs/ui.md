@@ -17,7 +17,7 @@ The connector is displayed as "[Display Name] by [Company Name]" in the connecti
 "For support, contact [Company Name]" is displayed at the bottom left of the connector. Clicking on this link will send the user to the support link defined in the manifest. This link also displays in error messages.
 
 These elements are defined in the manifest.xml file:
-```xml
+```
 <connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='18.1'>
   <vendor-information>
       <company name="Company Name"/>
@@ -27,83 +27,10 @@ These elements are defined in the manifest.xml file:
 </connector-plugin>
 ```
 
-## Vendor Attributes (Custom Fields)
-Vendors can add customized attributes to their connector plugin by using the vendor attributes.
-
-These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add 3 custom fields in your connector plugin.
-
-To add a custom vendor-attribute, you will need to modify your connection-dialog.tcd, connectionResolver.tdr and connectionBuilder.js.
-**For JDBC based plugins, you will need to modify connectionProperties.js instead of connectionBuilder.js**
-
-connection-resolver.tdr
-
-```xml
-    ...
-      <required-attributes>
-      <attribute-list>
-        ...
-        <attr> vendor1 </attr> 
-        <attr> vendor2 </attr> 
-        <attr> vendor3 </attr> 
-
-      </attribute-list>
-      </required-attributes>
-    ...
-```
-
-connection-dialog.tcd
-
-```xml
- <connector-plugin class='postgres_jdbc' superclass='jdbc' plugin-version='0.0.0' name='PostgreSQL JDBC' version='18.1'>
-          <connection-config>
-            ...
-            <vendor1-prompt value="Log Level: "/>
-            <vendor2-prompt value="Protocol Version: "/>
-            <vendor3-prompt value="Char Set: "/>
-
-        </connection-config>
-      </connection-dialog>
-```
-
-connectionBuilder.js (Non-JDBC)
-```js
-(function dsbuilder(attr)
-  {
-    var params = {};
-
-    params["SERVER"] = attr[connectionHelper.attributeServer];
-    params["PORT"] = attr[connectionHelper.attributePort];
-    params["DATABASE"] = attr[connectionHelper.attributeDatabase];
-    params["UID"] = attr[connectionHelper.attributeUsername];
-    params["PWD"] = attr[connectionHelper.attributePassword];
-    params["loglevel"] = attr[connectionHelper.attributeVendor1];
-    params["protocolVersion"] = attr[connectionHelper.attributeVendor2];
-    params["charSet"] = attr[connectionHelper.attributeVendor3];
-    ...
-      
-```
-
-connectionProperties.js (For JDBC only)
-```js
-      ...
-      props["password"] = attr[connectionHelper.attributePassword];
-      props["logLevel"] = attr[connectionHelper.attributeVendor1];
-      props["protocolVersion"] = attr[connectionHelper.attributeVendor2];
-      props["charSet"] = attr[connectionHelper.attributeVendor3];
-
-      if (attr[connectionHelper.attributeSSLMode] == "require")
-      {
-      ...
-      
-```
-
-
-For complete files, [Click Here](https://github.com/tableau/connector-plugin-sdk/tree/dev/samples/components/dialogs/new_text_field)
-
 ## The Tableau Custom Dialog File
 
 The UI elements you see in the dialog are determined in the .tcd file:
-```xml
+```
 <connection-dialog class='postgres_odbc'>
   <connection-config>
     <authentication-mode value='Basic' />
@@ -122,6 +49,6 @@ The `authentication-mode` and `authentication-options` tags control how a user i
 
 The other tags control what prompts show up in the connection dialog. For example, `<port-prompt value="Port: " default="5432" />` shows the Port prompt with the label of Port and a default value of 5432.
 
-## Localizing your connector
+## Localizing you connector
 
 For information on localizing your connection dialogs, see [Localize Your Connector]({{ site.baseurl }}/docs/localize)
