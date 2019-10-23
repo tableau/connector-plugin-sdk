@@ -16,7 +16,7 @@ The Connection Resolver is made up of several components:
 
 ### connection-builder
 
-Builds the ODBC ConnectString or JDBC Connection URL. For JDBC Connection URL, it is suggested that the conection-builder contains only non-secure attributes such as : server, port, dbname.
+Builds the ODBC ConnectString or JDBC Connection URL. For JDBC Connection URL only, it is required that the conection-builder contains only non-secure attributes such as : server, port, dbname.
 
 **Type:** JavaScript
 
@@ -38,7 +38,7 @@ Builds the ODBC ConnectString or JDBC Connection URL. For JDBC Connection URL, i
 
 ### connection-properties
 
-Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL, it is suggested that connection-properties contain secure attributes such as username and password. 
+Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL only, it is required that connection-properties contain secure attributes such as username and password. 
 
 **Type:** JavaScript
 
