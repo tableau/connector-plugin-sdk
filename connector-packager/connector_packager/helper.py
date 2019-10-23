@@ -1,6 +1,7 @@
 import os
 import logging
 
+from imp import reload
 from pathlib import Path
 
 from .version import __version__
@@ -25,8 +26,9 @@ def check_jdk_environ_variable(exe_name: str) -> bool:
 
 
 def init_logging(log_path: str, verbose: bool = False) -> logging.Logger:
+    reload(logging)
     # Create logger.
-    logging.basicConfig(filename=log_path, level=logging.DEBUG, filemode='w', format='%(asctime)s | %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(message)s', filename=log_path, filemode='w')
     logger = logging.getLogger()
     ch = logging.StreamHandler()
     if verbose:
