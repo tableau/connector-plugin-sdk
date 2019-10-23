@@ -16,7 +16,7 @@ The Connection Resolver is made up of several components:
 
 ### connection-builder
 
-Builds the ODBC ConnectString or JDBC Connection URL.
+Builds the ODBC ConnectString or JDBC Connection URL. For JDBC Connection URL only, it is required that the conection-builder contains only non-secure attributes such as : server, port, dbname.
 
 **Type:** JavaScript
 
@@ -25,20 +25,20 @@ Builds the ODBC ConnectString or JDBC Connection URL.
 **Input:** attr, a dictionary of key/value pairs
 
 ```javascript
-{"server" : "myserver.somewhere.net", "username" : "myusername"}
+{"server" : "myserver.somewhere.net"}
 ```
 
 **Return:** vector of formatted key=value pairs
 
 ```javascript
-["DRIVER={My ODBC Driver}", "UID=myusername", "Host=myserver.somewhere.net"];
+["DRIVER={My ODBC Driver}", "Host=myserver.somewhere.net"];
 ```
 
 ---
 
 ### connection-properties
 
-Similar to connection-builder but is used to build the JDBC properties file.
+Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL only, it is required that connection-properties contain secure attributes such as username and password. 
 
 **Type:** JavaScript
 
@@ -47,13 +47,13 @@ Similar to connection-builder but is used to build the JDBC properties file.
 **Input:** attr, a dictionary of key/value pairs
 
 ```javascript
-{"server" : "myserver.somewhere.net", "username" : "myusername"}
+{"server" : "myserver.somewhere.net", "username" : "myusername", "password" : "mypassword"}
 ```
 
 **Return:** vector of formatted key=value pairs that will be written to the properties file
 
 ```javascript
-["UID=myusername", "Host=myserver.somewhere.net"];
+["UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"];
 ```
 
 ---
