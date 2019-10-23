@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='setup.Filter.Date_In_Time.xml'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hadoophive_cloudera].[tdy:Calculation_2683863928708153344:ok]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-12 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
