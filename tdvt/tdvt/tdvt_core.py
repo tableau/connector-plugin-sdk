@@ -169,8 +169,13 @@ class BatchQueueWork(object):
                     self.add_other_test_failure(t, test_count)
                     sys.stdout.write('E')
                     continue
+                else:
+                    logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + existing_output_filepath)
+                    sys.stdout.write('?')
+                    self.add_missing_test_failure(t)
+                    continue
 
-            if self.test_config.logical and os.path.isfile(existing_output_filepath):
+            if self.test_config.logical:
                 # Copy the test process filename to the actual. filename.
                 actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(t.test_file,
                                                                                                     self.test_config.output_dir)
@@ -180,11 +185,6 @@ class BatchQueueWork(object):
                 base_test_filepath = base_filepath
                 actual_filepath = actual_output_filepath
 
-            if not os.path.isfile(existing_output_filepath):
-                logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + existing_output_filepath)
-                sys.stdout.write('?')
-                self.add_missing_test_failure(t)
-                continue
 
             result = compare_results(t.test_name, base_test_filepath, t.test_file, self)
             result.relative_test_file = t.relative_test_file

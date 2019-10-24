@@ -250,6 +250,35 @@ def build_config_name(prefix, dsname):
 def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
 
+class TabQueryPath(object):
+    sep = ';'
+
+    def __init__(self, linux_path, mac_path, windows_path):
+        self.linux_path = linux_path
+        self.mac_path = mac_path
+        self.windows_path = windows_path
+        if self.sep in self.linux_path or self.sep in self.mac_path or self.sep in self.windows_path:
+            raise ValueError
+
+    @staticmethod
+    def from_string(paths):
+        split_paths = paths.split(TabQueryPath.sep)
+        if len(split_paths) != 3:
+            raise IndexError
+        t = TabQueryPath(split_paths[0], split_paths[1], split_paths[2])
+        return t
+
+    def to_string(self):
+        return "{0}{1}{2}{3}{4}".format(self.linux_path, self.sep, self.mac_path, self.sep, self.windows_path)
+
+    def get_tabquery_path(self, os):
+        if os.startswith("darwin"):
+            return self.mac_path
+        elif os.startswith("linux"):
+            return self.linux_path
+        else:
+            return self.windows_path
+
 class RunTimeTestConfig(object):
     """
         Tracks specifics about how a group of tests were run.
@@ -259,25 +288,25 @@ class RunTimeTestConfig(object):
         self.d_override = d_override
         self.run_as_perf = run_as_perf
         self.maxthread = int(maxthread)
-        self.linux_path = ''
-        self.mac_path = ''
-        self.windows_path = ''
+        self.tabquery_paths = None
 
     def set_tabquery_paths(self, linux_path, mac_path, windows_path):
-        self.linux_path = linux_path
-        self.mac_path = mac_path
-        self.windows_path = windows_path
+        if not linux_path and not mac_path and not windows_path:
+            return
+        self.tabquery_paths = TabQueryPath(linux_path, mac_path, windows_path)
+
+    def set_tabquery_path_from_string(self, path_string):
+        if not path_string:
+            return
+        self.tabquery_paths = TabQueryPath.from_string(path_string)
 
     def has_customized_tabquery_path(self):
-        return self.linux_path is not '' or self.mac_path is not '' or self.windows_path is not ''
+        return self.tabquery_paths is not None
 
     def get_tabquery_path(self, os):
-        if os.startswith("darwin"):
-            return self.mac_path
-        elif os.startswith("linux"):
-            return self.linux_path
-        else:
-            return self.windows_path
+        if not self.tabquery_paths:
+            return ''
+        return self.tabquery_paths.get_tabquery_path(os)
 
 
 class TestConfig(object):

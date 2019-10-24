@@ -14,15 +14,9 @@
 """
 
 
-import configparser
-import argparse
 import io
-import logging
-import os
-import pkg_resources
 import shutil
 import subprocess
-import sys
 import unittest
 
 from unittest import mock
@@ -32,7 +26,7 @@ from defusedxml.ElementTree import parse
 from tdvt import tdvt_core
 from tdvt.tdvt import enqueue_failed_tests, create_parser, get_ds_list
 from tdvt.config_gen import datasource_list
-from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTimeTestConfig, TestFile
+from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTimeTestConfig, TestFile, TabQueryPath
 from tdvt.test_results import *
 from tdvt.tabquery import *
 
@@ -775,6 +769,8 @@ class ResultsTest(unittest.TestCase):
         for test_file in mock_batch.results:
             self.assertTrue(mock_batch.results[test_file].all_passed() == False)
             self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorMissingActual))
+            self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, TestErrorMissingActual))
+            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == False)
 
     def test_results_missing_tuple(self):
         test_name = 'setup.mytest.txt'
@@ -853,6 +849,12 @@ class ResultsExceptionTest(unittest.TestCase):
         mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, test_set_expected, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
         self.check_errors(error_message, error_state, mock_batch)
 
+        for test_file in mock_batch.results:
+            actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
+            self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
+            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
+
+
     def test_process_timeout_multiple(self):
         test_name = 'setup.mytest.txt'
         test_name2 = 'setup.mytest2.txt'
@@ -875,6 +877,31 @@ class ResultsExceptionTest(unittest.TestCase):
             actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
             self.assertTrue(actual_message == expected_message, "Expected [{0}] got [{1}]".format(expected_message, actual_message))
             self.assertTrue(isinstance(mock_batch.results[test_file].error_status, expected_state))
+
+class TabQueryPathTest(unittest.TestCase):
+    def test_init(self):
+        t = TabQueryPath('linux', 'mac', 'win')
+        self.assertTrue(t.get_tabquery_path('darwin') == 'mac')
+        self.assertTrue(t.get_tabquery_path('linux') == 'linux')
+        self.assertTrue(t.get_tabquery_path('windows') == 'win')
+
+    def test_values(self):
+        self.assertRaises(ValueError, TabQueryPath, 'linux;', 'mac', 'windows')
+        self.assertRaises(ValueError, TabQueryPath, 'linux', 'mac', 'windo;ws')
+        self.assertRaises(IndexError, TabQueryPath.from_string, 'linux;;;;;macwindo;ws')
+
+    def test_string(self):
+        t = TabQueryPath('linux', 'mac', 'win')
+        self.assertTrue(t.get_tabquery_path('darwin') == 'mac')
+        self.assertTrue(t.get_tabquery_path('linux') == 'linux')
+        self.assertTrue(t.get_tabquery_path('windows') == 'win')
+
+        string_value = t.to_string()
+        self.assertTrue(string_value == 'linux;mac;win')
+        t2 = TabQueryPath.from_string(string_value)
+        self.assertTrue(t2.get_tabquery_path('darwin') == 'mac')
+        self.assertTrue(t2.get_tabquery_path('linux') == 'linux')
+        self.assertTrue(t2.get_tabquery_path('windows') == 'win')
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')

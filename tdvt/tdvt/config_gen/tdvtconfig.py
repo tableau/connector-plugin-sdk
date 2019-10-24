@@ -1,9 +1,7 @@
 """ Test result and configuration related classes. """
 
-import json
-import re
+import sys
 
-from ..resources import *
 from .test_config import TestConfig, RunTimeTestConfig
 
 class TdvtInvocation(object):
@@ -27,6 +25,7 @@ class TdvtInvocation(object):
         self.thread_id = -1
         self.tds = ''
         self.tested_run_time_config = None
+        self.tabquery_path = ''
 
         if from_args:
             self.init_from_args(from_args)
@@ -41,6 +40,8 @@ class TdvtInvocation(object):
             self.d_override = rtt.d_override
             self.run_as_perf = rtt.run_as_perf
             self.tested_run_time_config = rtt
+            if rtt.tabquery_paths:
+                self.tabquery_path = rtt.tabquery_paths.to_string()
 
     def init_from_args(self, args):
         if args.compare_sql: 
@@ -63,6 +64,13 @@ class TdvtInvocation(object):
         self.verbose = json['verbose']
         self.tds = json['tds']
         self.noheader = json['noheader']
+        if 'tabquery_path' in json:
+            self.tabquery_path = json['tabquery_path']
+            if self.tabquery_path:
+                rtt = RunTimeTestConfig()
+                #Shouldn't rerun a file on another OS.
+                rtt.set_tabquery_path_from_string(self.tabquery_path)
+                self.tested_run_time_config = rtt
         self.thread_count = json['thread_count']
 
     def __str__(self):
@@ -79,7 +87,8 @@ class TdvtInvocation(object):
         'd_override' : self.d_override, 
         'verbose' : self.verbose, 
         'tds' : self.tds, 
-        'noheader' : self.noheader, 
+        'noheader' : self.noheader,
+        'tabquery_path' : self.tabquery_path,
         'thread_count' : self.thread_count }
 
     def __eq__(self, other):

@@ -196,10 +196,10 @@ class TestResult(object):
         else:
 
             if self.test_set.is_logical:
-                return TestCaseResult('', 0, "", 0, '', TestErrorNotRun(), None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', self.error_status, None, self.test_config)
             else:
                 return TestCaseResult('', str(test_case_count), "", test_case_count, '',
-                                      TestErrorNotRun(), None, self.test_config)
+                                      self.error_status, None, self.test_config)
 
     def parse_default_test_cases(self):
         if self.test_set and self.test_set.test_is_enabled is False:
