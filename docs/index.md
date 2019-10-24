@@ -39,9 +39,9 @@ You need to do these things before you start:
 # Using a Connector
 
 ## Packaged Connector (Taco)
-Simply drop your packaged `.taco` file into your `My Tableau Repository/Connectors` and launch Tableau.
+Simply drop your packaged `.taco` file into your `My Tableau Repository/Connectors` and launch Tableau. See [How to Run your Packaged Connector (Taco)]({{ site.baseurl }}/docs/share) for more information.
 
 Note: Support for loading Taco files was added in the 2019.4 release of Tableau.
 
 ## Developer Path
-You can tell Tableau to load un-packaged connectors with a special command line argument that tells Tableau where to find your Connector. See [Run Your Connector]({{ site.baseurl }}/docs/share) for more information.
+You can tell Tableau to load un-packaged connectors with a special command line argument that tells Tableau where to find your Connector. See [How to Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share) for more information.
