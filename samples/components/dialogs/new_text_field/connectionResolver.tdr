@@ -5,19 +5,7 @@
       <script file='connectionBuilder.js'/>
     </connection-builder>
     <connection-normalizer>
-       <required-attributes>
-        <attribute-list>
-          <attr>server</attr>
-          <attr>port</attr>
-          <attr>vendor1</attr>
-          <attr>vendor2</attr>
-          <attr>vendor3</attr>
-          <attr>dbname</attr>
-          <attr>username</attr>
-          <attr>password</attr>
-          <attr>service</attr>
-        </attribute-list>
-      </required-attributes>
+      <script file='connectionRequired.js'/>
     </connection-normalizer>
 	</connection-resolver>
 	<driver-resolver>

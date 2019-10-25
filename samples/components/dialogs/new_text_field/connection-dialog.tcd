@@ -11,11 +11,9 @@
     <server-prompt value="Server: " />
     <!-- You can resuse the service field as an arbitrary text box. -->
     <service-prompt value="A new service text field" />
-      <show-service-prompt value="true" />
-      <show-ssl-checkbox value="true" />
-    <!-- You can use the vendorN-prompt (N =1,2 or 3) field as an arbitrary text box. -->
-    <vendor1-prompt value="Vendor defined first textbox" />
-    <vendor2-prompt value="Vendor defined second textbox" />
-    <vendor3-prompt value="Vendor defined third textbox"/>
+	<show-service-prompt value="true" />
+	<show-ssl-checkbox value="true" />
+    <!-- You can resuse the warehouse field as an arbitrary text box. -->
+    <warehouse-prompt value="Another new warehouse text field" />
   </connection-config>
 </connection-dialog>
