@@ -4,8 +4,6 @@
 """
 
 import glob
-import os
-import tempfile
 import re
 from ..resources import *
 
@@ -251,27 +249,22 @@ def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
 
 class TabQueryPath(object):
-    sep = ';'
-
     def __init__(self, linux_path, mac_path, windows_path):
         self.linux_path = linux_path
         self.mac_path = mac_path
         self.windows_path = windows_path
-        if self.sep in self.linux_path or self.sep in self.mac_path or self.sep in self.windows_path:
-            raise ValueError
 
     @staticmethod
-    def from_string(paths):
-        split_paths = paths.split(TabQueryPath.sep)
-        if len(split_paths) != 3:
+    def from_array(paths):
+        if len(paths) != 3:
             raise IndexError
-        t = TabQueryPath(split_paths[0], split_paths[1], split_paths[2])
+        t = TabQueryPath(paths[0], paths[1], paths[2])
         return t
 
-    def to_string(self):
-        return "{0}{1}{2}{3}{4}".format(self.linux_path, self.sep, self.mac_path, self.sep, self.windows_path)
+    def to_array(self):
+        return [self.linux_path, self.mac_path, self.windows_path]
 
-    def get_tabquery_path(self, os):
+    def get_path(self, os):
         if os.startswith("darwin"):
             return self.mac_path
         elif os.startswith("linux"):
@@ -295,19 +288,13 @@ class RunTimeTestConfig(object):
             return
         self.tabquery_paths = TabQueryPath(linux_path, mac_path, windows_path)
 
-    def set_tabquery_path_from_string(self, path_string):
-        if not path_string:
+    def set_tabquery_path_from_array(self, path_list):
+        if not path_list:
             return
-        self.tabquery_paths = TabQueryPath.from_string(path_string)
+        self.tabquery_paths = TabQueryPath.from_array(path_list)
 
     def has_customized_tabquery_path(self):
         return self.tabquery_paths is not None
-
-    def get_tabquery_path(self, os):
-        if not self.tabquery_paths:
-            return ''
-        return self.tabquery_paths.get_tabquery_path(os)
-
 
 class TestConfig(object):
     """

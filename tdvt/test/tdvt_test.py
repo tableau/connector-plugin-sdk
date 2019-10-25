@@ -625,9 +625,9 @@ class ConfigTest(unittest.TestCase):
         config.read(get_path('tool_test/ini', 'postgres_jdbc_tabquerytool.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
 
-        self.assertTrue(test_config.run_time_config.get_tabquery_path("darwin")  == 'tabquerytool_mac')
-        self.assertTrue(test_config.run_time_config.get_tabquery_path("linux")  == 'tabquerytool_linux')
-        self.assertTrue(test_config.run_time_config.get_tabquery_path("win32")  == 'tabquerytool_windows.exe')
+        self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("darwin")  == 'tabquerytool_mac')
+        self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("linux")  == 'tabquerytool_linux')
+        self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("win32")  == 'tabquerytool_windows.exe')
 
 
     def test_load_ini_bigquery_sql(self):
@@ -880,28 +880,26 @@ class ResultsExceptionTest(unittest.TestCase):
 
 class TabQueryPathTest(unittest.TestCase):
     def test_init(self):
-        t = TabQueryPath('linux', 'mac', 'win')
-        self.assertTrue(t.get_tabquery_path('darwin') == 'mac')
-        self.assertTrue(t.get_tabquery_path('linux') == 'linux')
-        self.assertTrue(t.get_tabquery_path('windows') == 'win')
-
-    def test_values(self):
-        self.assertRaises(ValueError, TabQueryPath, 'linux;', 'mac', 'windows')
-        self.assertRaises(ValueError, TabQueryPath, 'linux', 'mac', 'windo;ws')
-        self.assertRaises(IndexError, TabQueryPath.from_string, 'linux;;;;;macwindo;ws')
+        t = TabQueryPath('linux/linux', 'mac/mac/mac', 'win\\win.exe')
+        a = str(t.get_path('darwin'))
+        self.assertTrue(str(t.get_path('darwin')) == 'mac/mac/mac')
+        self.assertTrue(str(t.get_path('linux')) == 'linux/linux')
+        self.assertTrue(str(t.get_path('windows')) == 'win\\win.exe')
 
     def test_string(self):
         t = TabQueryPath('linux', 'mac', 'win')
-        self.assertTrue(t.get_tabquery_path('darwin') == 'mac')
-        self.assertTrue(t.get_tabquery_path('linux') == 'linux')
-        self.assertTrue(t.get_tabquery_path('windows') == 'win')
+        self.assertTrue(t.get_path('darwin') == 'mac')
+        self.assertTrue(t.get_path('linux') == 'linux')
+        self.assertTrue(t.get_path('windows') == 'win')
 
-        string_value = t.to_string()
-        self.assertTrue(string_value == 'linux;mac;win')
-        t2 = TabQueryPath.from_string(string_value)
-        self.assertTrue(t2.get_tabquery_path('darwin') == 'mac')
-        self.assertTrue(t2.get_tabquery_path('linux') == 'linux')
-        self.assertTrue(t2.get_tabquery_path('windows') == 'win')
+        string_value = t.to_array()
+        self.assertTrue(string_value[0] == 'linux')
+        self.assertTrue(string_value[1] == 'mac')
+        self.assertTrue(string_value[2] == 'win')
+        t2 = TabQueryPath.from_array(string_value)
+        self.assertTrue(t2.get_path('darwin') == 'mac')
+        self.assertTrue(t2.get_path('linux') == 'linux')
+        self.assertTrue(t2.get_path('windows') == 'win')
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')

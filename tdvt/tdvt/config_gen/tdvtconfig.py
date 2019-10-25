@@ -41,7 +41,7 @@ class TdvtInvocation(object):
             self.run_as_perf = rtt.run_as_perf
             self.tested_run_time_config = rtt
             if rtt.tabquery_paths:
-                self.tabquery_path = rtt.tabquery_paths.to_string()
+                self.tabquery_path = rtt.tabquery_paths.to_array()
 
     def init_from_args(self, args):
         if args.compare_sql: 
@@ -65,12 +65,9 @@ class TdvtInvocation(object):
         self.tds = json['tds']
         self.noheader = json['noheader']
         if 'tabquery_path' in json:
-            self.tabquery_path = json['tabquery_path']
-            if self.tabquery_path:
-                rtt = RunTimeTestConfig()
-                #Shouldn't rerun a file on another OS.
-                rtt.set_tabquery_path_from_string(self.tabquery_path)
-                self.tested_run_time_config = rtt
+            rtt = RunTimeTestConfig()
+            rtt.set_tabquery_path_from_array(self.tabquery_path)
+            self.tested_run_time_config = rtt
         self.thread_count = json['thread_count']
 
     def __str__(self):
