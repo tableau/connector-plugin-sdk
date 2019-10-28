@@ -1,5 +1,5 @@
 ---
-title: How to Package and Sign Your Connector for Distribution 
+title: Package and Sign Your Connector for Distribution 
 ---
 
 Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file.  Signing ensures that Tableau will load only .taco files that have been signed, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory. 

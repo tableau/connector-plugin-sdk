@@ -1,8 +1,8 @@
 ---
-title: How to Run your Packaged Connector (Taco)
+title: Run your Packaged Connector (Taco)
 ---
 
-The ability to load taco files was added in 2019.4 Beta 1. For loading un-packaged connectors in earlier versions of Tableau, refer to [How to Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share)
+The ability to load taco files was added in 2019.4 Beta 1. For loading un-packaged connectors in earlier versions of Tableau, refer to [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share)
 
 # Tableau Desktop
 Simply drop your `.taco` file into your `My Tableau Repository/Connectors` and launch Tableau.
@@ -31,6 +31,6 @@ For information about using TSM to set the option, see [tsm configuration set Op
 # Troubleshooting
 
 ## Package signature verification failed during connection creation.
-This means that the connector couldn't be verified. To be loaded in Tableau, a `.taco` must be signed by a trusted certificate. For more information about signing Tacos, refer to [How to Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign) and [Signature Verification Log Entries]({{ site.baseurl }}/docs/log-entries)
+This means that the connector couldn't be verified. To be loaded in Tableau, a `.taco` must be signed by a trusted certificate. For more information about signing Tacos, refer to [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign) and [Signature Verification Log Entries]({{ site.baseurl }}/docs/log-entries)
 
 As a workaround, you can disable taco verification in Tableau by using the command line argument `-DDisableVerifyConnectorPluginSignature=true`.
