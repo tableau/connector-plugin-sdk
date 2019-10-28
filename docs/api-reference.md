@@ -16,7 +16,7 @@ The Connection Resolver is made up of several components:
 
 ### connection-builder
 
-Builds the ODBC ConnectString or JDBC Connection URL. For JDBC Connection URL only, it is required that the conection-builder contains only non-secure attributes such as : server, port, dbname.
+Builds the ODBC ConnectString or JDBC Connection URL. For a JDBC Connection URL, we require that the that the connection-builder contains only non-secure attributes, such as server, port, and dbname.
 
 **Type:** JavaScript
 
@@ -38,7 +38,7 @@ Builds the ODBC ConnectString or JDBC Connection URL. For JDBC Connection URL on
 
 ### connection-properties
 
-Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL only, it is required that connection-properties contain secure attributes such as username and password. 
+Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL, we require that connection-properties contain secure attributes such as username and password.
 
 **Type:** JavaScript
 
@@ -191,7 +191,7 @@ Example:
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
 
     odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
-    
+
 _Throw Tableau Exception_
 
 Normally, throwing an exception in a JavaScript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
