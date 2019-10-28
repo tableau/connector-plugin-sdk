@@ -31,7 +31,7 @@ For more information about packaging your connector into a Taco, refer to [Packa
 
 # Before you Begin
 
-You need to do these things before you start:
+Prerequisites:
 
 - Install the ODBC or JDBC driver that you’ll use with the connector you’ll create.
 - Install Tableau Desktop 2019.2 or later on a Windows or Mac computer. Tableau Desktop 2019.4 or later is required to work with `.taco` files.
