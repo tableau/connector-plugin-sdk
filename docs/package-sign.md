@@ -22,17 +22,17 @@ Make sure you have the following:
 
 ### Ensure your connector is ready to be packaged
 
-As part of the packaging process, the packager will ensure that:
+As part of the packaging process, the packager ensures that:
 
 -   All xml files are valid against the XSD files located in the validate folder of the SDK
 
 -   All files referenced exist
 
--   All files are smaller than 3 mb
+-   All files are smaller than 3 MB
 
 -   The connection class is the same in all places
 
-However, this validation does not guarantee that the connector will work in Tableau. The packager does not validate javascript, for example, or that the connection class is unique. To ensure that your connector works before packaging it you can [run your unpackaged connector]({{ site.baseurl }}/docs/share), or test it using [TDVT]({{ site.baseurl }}/docs/tdvt). 
+However, this validation does not guarantee that the connector will work in Tableau. The packager does not validate JavaScript, for example, or that the connection class is unique. To ensure that your connector works before packaging it, you can [run your unpackaged connector]({{ site.baseurl }}/docs/share), or test it using [TDVT]({{ site.baseurl }}/docs/tdvt). 
 
 ### Set up the virtual environment for packaging and signing
 

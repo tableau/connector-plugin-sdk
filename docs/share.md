@@ -39,7 +39,7 @@ In the following examples, replace [user name] with your name (for example /User
 
     If you get a configuration error during this step, try adding the `--force-keys` option to the end of the command.
 
-1. Apply the pending configuration changes.  This will restart the server.
+1. Apply the pending configuration changes.  This restarts the server.
 
     ```
     tsm pending-changes apply
@@ -47,5 +47,5 @@ In the following examples, replace [user name] with your name (for example /User
 
     Note that whenever you add, remove, or update a connector, you need to restart the server to see the changes.
 
-For information about using TSM to set the option, see [tsm configuration set Options](https://onlinehelp.tableau.com/current/server-linux/en-us/cli_configuration-set_tsm.htm) in the Tableau Server help.
+For information about using TSM to set the option, see [tsm configuration set Options](https://onlinehelp.tableau.com/current/server-linux/en-us/cli_configuration-set_tsm.htm) in the Tableau Server Help.
 
