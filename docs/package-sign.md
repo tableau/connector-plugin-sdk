@@ -20,7 +20,19 @@ Make sure you have the following:
 
 -   [Git](https://git-scm.com/downloads)
 
- 
+### Ensure your connector is ready to be packaged
+
+As part of the packaging process, the packager will ensure that:
+
+-   All xml files are valid against the XSD files located in the validate folder of the SDK
+
+-   All files referenced exist
+
+-   All files are smaller than 3 mb
+
+-   The connection class is the same in all places
+
+However, this validation does not guarantee that the connector will work in Tableau. The packager does not validate javascript, for example, or that the connection class is unique. To ensure that your connector works before packaging it you can [run your unpackaged connector]({{ site.baseurl }}/docs/share), or test it using [TDVT]({{ site.baseurl }}/docs/tdvt). 
 
 ### Set up the virtual environment for packaging and signing
 
@@ -37,11 +49,11 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
 1.  Set up the virtual environment by going to the connector-packager folder and running python –m venv .venv  
 
     For example: 
-    
+
     ```
     C:\\connector-plugin-sdk\\connector-packager> python -m venv .venv
     ```
-    
+
     For more information about venv, see [venv – Creation of virtual environments](https://docs.python.org/3/library/venv.html) on the Python website.
 
 1.  Activate the virtual environment using the activate command.  
@@ -100,7 +112,7 @@ For example: 
 A certificate signing request (CSR) is a request for a certificate authority (CA) to create a public certificate for your organization. To generate a CSR, run the following command:
 
 ```
-keytool -certreq -alias alias -keystore keystore -file certreq\_file  
+keytool -certreq -alias alias -keystore keystore -file certreq\_file
 ```
 
 For example: 
@@ -152,7 +164,7 @@ The connector-packager tool must be run from the connector-plugin-sdk/co
     ```
 
     For example:  
-    
+
     ```
     python -m connector\_packager.package .\\tests\\test\_resources\\valid\_connector -a key\_same\_pwd -ks tests\\test\_resources\\test\_keystore\\test\_ks.jks --dest d:/pp 
     ```
@@ -163,9 +175,9 @@ The connector-packager tool must be run from the connector-plugin-sdk/co
     ```
     python -m connector\_packager.package \[path\_to\_plugin\_folder\] --package-only  
     ```
-    
+
     For example:
-    
+
     ```
     python -m connector\_packager.package d:/plugins-samples/postgres\_odbc --package-only
     ```
