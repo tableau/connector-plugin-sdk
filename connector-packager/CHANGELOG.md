@@ -9,4 +9,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.1] - 10-3-2019
 Initial release of the Connector Packaging Tool
 
-This release allows for the packaging, signing, and verification of Tableau Connectors (`.taco`).
+This release allows for the packaging, signing, and verification of Tableau Connector (`.taco`) files.
