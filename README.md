@@ -4,6 +4,13 @@
 
 This project consists of documentation, example files, and a Python-based test harness that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
+
+| Tool                                             | Latest Version     |
+|:------------------------------------------------:|:------------------:|
+| Connector Packager SDK (Beta) for Tableau 2019.3 | 10-02-2019         |
+| TDVT                                             | 1.5.21 (09-12-2019)|
+| Connector Packager                               | 0.0.1 (10-03-2019) |
+
 * [Why Connectors?](#why-connectors)
 * [Get started](#get-started)
 * [Samples](#samples)
