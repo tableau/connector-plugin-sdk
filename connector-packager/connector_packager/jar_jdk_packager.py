@@ -14,7 +14,7 @@ from .version import __min_version_tableau__
 JAR_EXECUTABLE_NAME = "jar"
 if os.name == 'nt':
     JAR_EXECUTABLE_NAME += ".exe"
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('packager_logger')
 MANIFEST_FILE_TYPE = "manifest"
 MANIFEST_FILE_NAME = MANIFEST_FILE_TYPE + ".xml"
 MANIFEST_FILE_COPY_NAME = MANIFEST_FILE_TYPE + "_copy.xml"
