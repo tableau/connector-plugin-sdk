@@ -4,8 +4,6 @@
 """
 
 import glob
-import os
-import tempfile
 import re
 from ..resources import *
 
@@ -250,6 +248,30 @@ def build_config_name(prefix, dsname):
 def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
 
+class TabQueryPath(object):
+    def __init__(self, linux_path, mac_path, windows_path):
+        self.linux_path = linux_path
+        self.mac_path = mac_path
+        self.windows_path = windows_path
+
+    @staticmethod
+    def from_array(paths):
+        if len(paths) != 3:
+            raise IndexError
+        t = TabQueryPath(paths[0], paths[1], paths[2])
+        return t
+
+    def to_array(self):
+        return [self.linux_path, self.mac_path, self.windows_path]
+
+    def get_path(self, os):
+        if os.startswith("darwin"):
+            return self.mac_path
+        elif os.startswith("linux"):
+            return self.linux_path
+        else:
+            return self.windows_path
+
 class RunTimeTestConfig(object):
     """
         Tracks specifics about how a group of tests were run.
@@ -259,26 +281,20 @@ class RunTimeTestConfig(object):
         self.d_override = d_override
         self.run_as_perf = run_as_perf
         self.maxthread = int(maxthread)
-        self.linux_path = ''
-        self.mac_path = ''
-        self.windows_path = ''
+        self.tabquery_paths = None
 
     def set_tabquery_paths(self, linux_path, mac_path, windows_path):
-        self.linux_path = linux_path
-        self.mac_path = mac_path
-        self.windows_path = windows_path
+        if not linux_path and not mac_path and not windows_path:
+            return
+        self.tabquery_paths = TabQueryPath(linux_path, mac_path, windows_path)
+
+    def set_tabquery_path_from_array(self, path_list):
+        if not path_list:
+            return
+        self.tabquery_paths = TabQueryPath.from_array(path_list)
 
     def has_customized_tabquery_path(self):
-        return self.linux_path is not '' or self.mac_path is not '' or self.windows_path is not ''
-
-    def get_tabquery_path(self, os):
-        if os.startswith("darwin"):
-            return self.mac_path
-        elif os.startswith("linux"):
-            return self.linux_path
-        else:
-            return self.windows_path
-
+        return self.tabquery_paths is not None
 
 class TestConfig(object):
     """
