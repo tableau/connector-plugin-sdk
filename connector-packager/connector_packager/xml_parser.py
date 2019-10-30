@@ -9,7 +9,8 @@ from defusedxml.ElementTree import parse
 from .connector_file import ConnectorFile
 from .xsd_validator import validate_single_file
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('packager_logger')
+
 
 TRANSLATABLE_STRING_PREFIX = "@string/"
 TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "ja_JP", "ko_KR", "pt_BR", "zh_CN",

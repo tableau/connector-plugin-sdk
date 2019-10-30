@@ -1,14 +1,15 @@
 import os
+import logging
 
 from argparse import ArgumentParser
 
 from pathlib import Path
 
-from .helper import init_logging
 from .jar_jdk_packager import jdk_create_jar
 from .jar_jdk_signer import jdk_sign_jar, validate_signing_input
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
+from .version import __version__
 
 PACKAGED_EXTENSION = ".taco"
 
@@ -30,6 +31,33 @@ def create_arg_parser() -> ArgumentParser:
     parser.add_argument('-ks', '--keystore', dest='keystore',
                         help='keystore location, default is the jks file in user home directory', required=False)
     return parser
+
+
+def init_logging(log_path: str, verbose: bool = False) -> logging.Logger:
+    # Create logger.
+    logger = logging.getLogger('packager_logger')
+    logger.setLevel(logging.DEBUG)
+    logger.propagate = False
+
+    fh = logging.FileHandler(log_path, mode='w')
+    fh.setLevel(logging.DEBUG)
+
+    formatter = logging.Formatter('%(asctime)s [%(levelname)s] | %(message)s')
+    fh.setFormatter(formatter)
+
+    ch = logging.StreamHandler()
+    if verbose:
+        # Log to console also.
+        ch.setLevel(logging.DEBUG)
+    else:
+        ch.setLevel(logging.INFO)
+
+    logger.addHandler(ch)
+    logger.addHandler(fh)
+
+    logger.debug("Starting Tableau Connector Packaging Version " + __version__)
+
+    return logger
 
 
 def main():
