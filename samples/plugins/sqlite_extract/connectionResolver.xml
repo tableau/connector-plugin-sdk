@@ -9,6 +9,7 @@
             <setImpersonateAttributes/>
             <attribute-list>
             <attr>server</attr>
+            <attr>authentication</attr>
             <attr>one-time-sql</attr>
             </attribute-list>
         </required-attributes>
@@ -17,7 +18,7 @@
 
 <driver-resolver>
     <driver-match >
-      <driver-name type='regex'>SQLite3 ODBC*</driver-name>
+      <driver-name type='exact'>SQLite3 ODBC Driver</driver-name>
     </driver-match>
 </driver-resolver>
 </tdr>
