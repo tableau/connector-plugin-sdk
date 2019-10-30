@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<connector-plugin class='sqlite_extract' superclass='odbc' plugin-version='0.0.0' name='SQLite Extract-Only Taco' version='18.1'>
+<connector-plugin class='sqlite_extract' superclass='odbc' plugin-version='0.0.0' name='SQLite Extract-Only' version='18.1'>
    <vendor-information>
       <company name="Example"/>
       <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
