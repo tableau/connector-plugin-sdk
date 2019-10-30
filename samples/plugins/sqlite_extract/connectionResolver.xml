@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<tdr class='sqlite_extract'>
+	<connection-resolver>
+    <connection-builder>
+      <script file='connectionBuilder.js'/>
+    </connection-builder>
+    <connection-normalizer>
+      <required-attributes>
+        <setImpersonateAttributes/>
+        <attribute-list>
+          <attr>server</attr>
+          <attr>one-time-sql</attr>
+        </attribute-list>
+      </required-attributes>
+    </connection-normalizer>
+	</connection-resolver>
+
+<driver-resolver>
+    <driver-match >
+      <driver-name type='regex'>SQLite3 ODBC*</driver-name>
+    </driver-match>
+</driver-resolver>
+</tdr>
