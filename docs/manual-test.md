@@ -97,25 +97,11 @@ Make valid entries in each field (Server, Username, password, Port etc.) and ver
 
    ![]({{ site.baseurl }}/assets/mt-connect-ssl.png) 
  
-* Duplicate the data connection.
-
-   ![]({{ site.baseurl }}/assets/mt-dup.png) 
-
-   Verify that data source was duplicated and the duplicate data source name has “(copy)” appended to the end.
-
-   ![]({{ site.baseurl }}/assets/mt-copy.png)  
- 
 * Verify that the data source connection properties are correct.
  
     ![]({{ site.baseurl }}/assets/mt-prop-menu.png) 
 
     ![]({{ site.baseurl }}/assets/mt-properties.png) 
-
-* Check that you can refresh the data source. Right-click the data source, then click **Refresh** in the context menu, or press **F5**.
-
-   ![]({{ site.baseurl }}/assets/mt-refresh.png) 
- 
-   For more information, see [Refresh Data Sources](https://onlinehelp.tableau.com/current/pro/desktop/en-us/refreshing_data.htm) in Tableau Desktop and Web Authoring Help. 
 
 ### Test extracts
 
@@ -151,18 +137,6 @@ Change all possible items and verify that changes are applied.
 
       ![]({{ site.baseurl }}/assets/mt-new-server.png) 
  
-### Create a workbook
-
-1. Create a workbook connected to your connector using a live connection and save it as a .twb file. 
-
-1. Close Tableau Desktop and remove the connector before launching Desktop again. 
-
-1. Open the workbook. 
-
-1. Check the error message. Here is an example:
-
-      ![]({{ site.baseurl }}/assets/mt-twb-error.png) 
- 
 
 ### Test localization
 
@@ -172,16 +146,9 @@ Change the language to any language but English (United States).
 
       ![]({{ site.baseurl }}/assets/mt-loc.png) 
 
-1. Restart Tableau Desktop with your connector from a command window using the `-DConnectPluginsPath` argument.
+1. Restart Tableau Desktop.
 
-1. Connect to your data source again.
- 
-
-### Connect to the correct database with valid credentials, but without the driver installed.
-
-Verify that the "Download and install the drivers" link appears in the Sign In dialog box:
-
-![]({{ site.baseurl }}/assets/mt-download-driver.png) 
+1. Connect to your data source again and verify the localized text.
  
 
 ### Connect to the correct database with the wrong credentials.
@@ -189,30 +156,6 @@ Verify that the "Download and install the drivers" link appears in the Sign In d
 Verify that an error message appears and that it says 'Invalid username or password'. Some features may not work if Tableau cannot correctly interpret a bad password error. In this case you will see a generic error message instead of 'Invalid username or password': 
 
 ![]({{ site.baseurl }}/assets/mt-wrong-cred.png) 
-
-### Test without the connector installed 
-
-* Access a published *data source with an extract* from Tableau Desktop *without the connector* installed.
-
-   You should be able to connect to the data source with an extract without errors.
-
-* Access a published *data source without an extract* from Tableau Desktop *without the connector* installed.
-
-
-   Verify that an error message appears:
-
-    ![]({{ site.baseurl }}/assets/mt-no-connector-error.png)   
-
-* Download a workbook *without an extract* from Tableau Server, and then re-open it in Tableau Desktop *without the connector* installed.
-
-   Verify that an error message appears:
-
-    ![]({{ site.baseurl }}/assets/mt-no-plugin-error.png)    
-  
-
-* Download a workbook *with an extract* from Tableau Server, and then re-open it in Tableau Desktop *without the connector* installed.
-
-   The workbook should open without errors.
 
 ### [Optional] Test driver version
 
@@ -230,28 +173,12 @@ For example, in Mariadb, &lt;driver-version min='3.0'/&gt; is defined in connect
 
 Perform the publishing tests listed below. For more information about publishing, see the publishing resources listed at the end of this section.
 
-* Publish a data source to Tableau Server *without* the connector installed on the server. (If the connector is on Tableau Server, you need to remove it for this test.)
-
-    Verify that an error message appears:
-
-    ![]({{ site.baseurl }}/assets/mt-publish-fail.png) 
-
-* Publish a workbook to Tableau Server *without* the connector installed on the server. (If the connector is on Tableau Server, you need to remove it for this test.)
-
-    Like the preceding test, you should see a publish failure error message.
-
-    
 * Publish a *workbook without an extract* to Tableau Server *with the connector* installed on the server.
 
 
     The workbook should publish without errors.
 
    
-* Publish a *workbook with an extract* to Tableau Server *with the connector* installed on the server.
-
-    The workbook should publish without errors.
-
- 
 * Publish a *data source with an extract* to Tableau Server *with the connector* installed on the server.
 
     The workbook should publish without errors.
@@ -265,34 +192,11 @@ Perform the publishing tests listed below. For more information about publishing
         ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)  
 
 
-* Publish a *data source without an extract* to Tableau Server *with the connector* installed on the server.
+* Publish a *workbook without an extract* to Tableau Server *with the connector* installed on the server.  Do not embed credentials when you publish the workbook.
 
-    The workbook should publish without errors.
+    Open the published workbook that doesn't have embedded credentials. 
 
-    
-* Publish a *workbook without an extract* to Tableau Server *without the driver* installed on the server.
-
-    Verify that an error message appears:
-
-    ![]({{ site.baseurl }}/assets/mt-missing-driver.png)  
-
-* Publish a *workbook with an extract* to Tableau Server *without the driver* installed on the server.
-
-    The workbook with an extract should publish without errors.
-
-* Publish a *data source without an extract* to Tableau Server *without the driver* installed on the server.
-
-    Verify that an error message appears:
-
-     ![]({{ site.baseurl }}/assets/mt-driver-error.png)  
-
-* Publish a *data source with an extract* to Tableau Server *without the driver* installed on the server.
-
-    The data source with an extract should publish without errors.
-
-* Verify that a Sign In dialog opens if you didn't embed credentials when you published the workbook.
-
-    Open a published workbook that doesn't have embedded credentials. 
+    Verify that a Sign In dialog opens.
 
     ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)  
  
@@ -310,7 +214,9 @@ For information about publishing a workbook, see [Comprehensive Steps to Publish
 
 Refresh the extract on Tableau Server with the connector installed on the server.
 
-* Open the workbook with an extract on Tableau Server and refresh the extract.
+* Publish a *workbook with an extract* to Tableau Server *with the connector* installed on the server.
+
+    Open the workbook with an extract on Tableau Server and refresh the extract.
 
     ![]({{ site.baseurl }}/assets/mt-wkbk-extract-refresh.png)  
 
@@ -345,49 +251,3 @@ Refresh the extract on Tableau Server with the connector installed on the server
 
     **Note:** Web authoring (creating a new connection from the web) is not currently available for all connector superclasses, and in those cases your connector won't appear on the list of connectors on Tableau Server. If you can publish a workbook or data source using your connector to your server, then your connector is loaded correctly, even if you can't see it on the list of connectors.
 
-
-* Open a published workbook on Tableau Server *with the connector* installed on the server.
-
-    The workbook should open without errors.
-
-* Create a new workbook on Tableau Server *without the driver* installed on the server.
-
-    Verify that an error message appears.
-
-    ![]({{ site.baseurl }}/assets/mt-wkbk-driver-error.png)
-
-* Open a published workbook on Tableau Server *without the connector* installed on the server.
-
-    Verify that an error message appears.
-
-    ![]({{ site.baseurl }}/assets/mt-wkbk-signin.png)
-
-* Open a published data source on Tableau Server and create a new workbook *without the connector* installed on the server.
-
-    Verify that an error message appears.
-
-     ![]({{ site.baseurl }}/assets/mt-ds-error.png)
-
- 
-### [Optional] Test driver version 
-
-If you defined a minimum driver version in your connector, install an older version of that driver and try making a connection with your connector.
-
-Verify that an error message appears:
-
- ![]({{ site.baseurl }}/assets/mt-driver-required.png)
-
-
-### Restart the server with and without your connector
-
-Launch tsm with the connector installed, then remove the connector and re-launch tsm.
-
-1. If you haven't already, do steps 1 and 2 in **Before you begin** under the **On Tableau Server** section to launch tsm with your connector. 
-1. Then delete the directory that contains your connector. 
-1. Run the following command to re-launch tsm.
-
-    ```
-    tsm restart 
-    ```
-
-    Server should restart.
