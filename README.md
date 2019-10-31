@@ -28,7 +28,7 @@ Review the [Tableau Connector SDK developer guide](https://tableau.github.io/con
 
 # Samples
 
-We have created three [standalone example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.
+The SDK includes several [standalone example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.
 
 # Prerequisites
 
