@@ -10,7 +10,6 @@
             <attribute-list>
             <attr>server</attr>
             <attr>authentication</attr>
-            <attr>one-time-sql</attr>
             </attribute-list>
         </required-attributes>
     </connection-normalizer>
