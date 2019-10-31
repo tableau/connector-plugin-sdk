@@ -232,7 +232,7 @@ def enqueue_single_test(args, ds_info: TestConfig, suite):
     return test_set, tdvt_invocation
 
 
-def enqueue_failed_tests(run_file, root_directory, args):
+def enqueue_failed_tests(run_file, root_directory, args, rt: RunTimeTestConfig = None):
     try:
         with open(run_file, 'r', encoding='utf8') as file:
             tests = json.load(file)
@@ -254,6 +254,8 @@ def enqueue_failed_tests(run_file, root_directory, args):
         tds = get_tds_full_path(root_directory, tds_base)
         logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
         tdvt_invocation = TdvtInvocation(from_json=f['test_config'])
+        if rt:
+            tdvt_invocation.set_run_time_test_config(rt)
         tdvt_invocation.tds = tds
         tdvt_invocation.leave_temp_dir = is_test(args) and args.noclean if args else False
         suite_name = f['test_config']['suite_name']
