@@ -56,12 +56,26 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
 
     For more information about venv, see [venv – Creation of virtual environments](https://docs.python.org/3/library/venv.html) on the Python website.
 
-1.  Activate the virtual environment using the activate command.  
-
-    For example:  
+1.  Activate the virtual environment using the activate command. For example:
+    
+    On Windows:
 
     ```
     C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate  
+
+    ```
+    
+    On Mac:
+    
+    ```
+    mac-3:connector-packager qa.auto$ source ./.venv/bin/activate
+    ```
+    
+    On Linux:
+    
+    ```
+    [centos@ip-10-177-53-47 connector-packager]$ source ./.venv/bin/activate
+
     ```
 
 1.  Install the packaging module in the virtual environment: 
