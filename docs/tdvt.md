@@ -69,7 +69,7 @@ Multiple expected files are supported.
 
 1. If it's not already installed, install Tableau Desktop which includes the tabquerytool needed to run the tests.
 
-1. Setup your TDVT workspace. When you run TDVT it looks in the current working directory for the test configuration files which setup test suites for your datasource. Follow these steps to setup TDVT for the included sample datasources, or you can run `py -3 -m tdvt.tdvt --setup` to create an empty environment.
+1. Setup your TDVT workspace. When you run TDVT it looks in the current working directory for the test configuration files which setup test suites for your datasource. Follow these steps to setup TDVT for the included sample datasources, or you can run `py -3 -m tdvt.tdvt action --setup` to create an empty environment.
     - create a new directory, for example 'tdvt_workspace'.
     - copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
     - copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.
@@ -97,7 +97,7 @@ TDVT looks for the necessary config and setup files relative to the current work
 Always run TDVT commands from the top level directory of your generated folder structure.
 Use double quotes to wrap arguments that contain spaces.
 
-`tdvt --generate` is used to update some config files.
+`tdvt run mydb --generate` is used to update some config files.
 You need to run it if you add a new datasource or change your mydb.ini file.
 
 ## Add a new datasource
@@ -120,19 +120,11 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 
    ![]({{ site.baseurl }}/assets/tdvt_connection_2.png)
 
-1. Open the TDS file in a text editor and embed the password in the <connection> tag of the TDS file next to the existing 'username' value.
-   Save the file.
+1. Run `tdvt action --add_ds mydb`. Chose to generate the password file and pick the logical query config. This will create a mydb.ini file under /config and will modify your two TDS files to rename the connection and link them to the tds/mydb.password password file.
 
-1. Repeat this for the 'Staples' table.
+1. Edit the generated tds/mydb.password file and enter the password for your connection. This can also be done manually. See [The Sample TDS Files](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/tds)
 
-1. Run `tdvt --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two TDS files to rename the connection.
-
-1. Update the generated ini file (mydb.ini) and choose a logical query config that matches what your database supports.
-   See the section below titled 'Choose a logical query config'.
-
-1. Run: `tdvt --generate`
-
-1. Verify your new test suite by running: `tdvt --list your_datasource_name`. It should show you a list of test suites associated with this datasource.
+1. Verify your new test suite by running: `tdvt list --ds your_datasource_name`. It should show you a list of test suites associated with this datasource.
 
 The `add_ds` command renames the connection names to 'leaf'.
 See one of the TDS files in '/tds' for an example.
@@ -143,7 +135,7 @@ The mydb.ini file names the test suite and specifies which tests to run.
 The `Name` section of the .ini file is used to find your TDS files.
 For example, if you set `Name = mydb` then your TDS files should be named `cast_calcs.mydb.tds` and `Staples.mydb.tds`.
 
-Now you can run the tests using `tdvt --run mydb`
+Now you can run the tests using `tdvt run mydb`
 
 TDC files are also supported through the Tableau Repository.
 
@@ -153,7 +145,7 @@ TDC files are also supported through the Tableau Repository.
 
 1. Note the value for 'table', in this case '[dbo].[Calcs]'.
 
-1. Run: `tdvt --list_logical_configs`
+1. Run: `tdvt list --logical_config`
 
    This prints all the logical query versions and some information about how they map things.
    Search the output of the command for something that matches '[dbo].[Calcs]'.
@@ -177,7 +169,7 @@ For example, some databases may not support spaces in identifiers, in which case
 
 1. Note the Name of the logical configuration and add this line to your INI file under the [Datasource] heading: LogicalQueryFormat = dbo
 
-1. Run: `tdvt --generate`
+1. Run: `tdvt run mydb --generate`
 
 If none of the logical configurations work for your datasource, then you can create your own in the .ini file. See the following section.
 
@@ -244,7 +236,7 @@ ExpressionExclusions_Calcs =
 [ConnectionTests]
 # An auto-generated section that is used to run tests to verify TDVT can connect to the Staples & cast_calcs tables.
 # The Connection Tests, and any other tests with the attribute `SmokeTest = True`, are run before the other tests.
-# They can be run by themselves using the --verify flag (e.g. tdvt --run postgres --verify).
+# They can be run by themselves using the --verify flag (e.g. tdvt run postgres --verify).
 CastCalcsTestEnabled = True
 StaplesTestEnabled = True
 
@@ -281,19 +273,19 @@ Try `tdvt -h` for the latest usage information.
 
 Run TDVT from your working directory since it will need the TDS and INI files you created when adding your datasource.
 
-To show the registered datasources and suites, run: `tdvt --list`
+To show the registered datasources and suites, run: `tdvt list --ds`
 
 To run a data source's tests:
-`tdvt --run postgres_generic_example`
+`tdvt run postgres_generic_example`
 
 To run smoke tests, which verify TDVT can successfully connect to tables in your data source:
-`tdvt --run postgres_generic_example --verify`
+`tdvt run postgres_generic_example --verify`
 
 To run expression tests:
-`tdvt --run postgres_generic_example -e`
+`tdvt run postgres_generic_example -e`
 
 To run logical query tests:
-`tdvt --run postgres_generic_example -q`
+`tdvt run postgres_generic_example -q`
 
 Test results are available in a CSV file called test_results_combined.
 Try loading them in Tableau Desktop to visualize the results.
@@ -304,7 +296,7 @@ Sample connectors are located in the samples/plugins folder.
 
 1. Copy the samples/plugins folder to your working directory so that they exist under /plugins. Like this: /plugins/postgres_odbc/manifest.xml
 
-2. Check that everything is set up correctly and a list of tests displays: `tdvt --list postgres_odbc`
+2. Check that everything is set up correctly and a list of tests displays: `tdvt list --ds postgres_odbc`
 
 ## Review results
 
@@ -371,9 +363,9 @@ The above files have versions named _\_combined._, such as tdvt_log_combined.txt
 ## Architecture
 
 Each datasource has an associated collection of test suites defined in the mydb.ini file.
-You can see these by running `tdvt --list mydb`.
+You can see these by running `tdvt list --ds mydb`.
 
-When you invoke `tdvt --run mydb` each test suite runs on it's own thread.
+When you invoke `tdvt run mydb` each test suite runs on it's own thread.
 Each test suite can consist of one or more tests, and each test can consist of one of more test cases.
 
 The test suite spawns a number of worker threads to run these tests in parallel.
