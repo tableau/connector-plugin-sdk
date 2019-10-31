@@ -85,7 +85,7 @@ keytool -genkeypair -alias alias -keystore keystore 
 For example: 
 
 ```
-(.venv) D:\\connector-plugin-sdk\\connector-packager>keytool -genkey -alias test1year -keystore test1yearkeystore.jks -validity 365 
+(.venv) D:\connector-plugin-sdk\connector-packager>keytool -genkey -alias test1year -keystore test1yearkeystore.jks -validity 365 
 ```
 
 For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website. 
@@ -97,13 +97,13 @@ For more information about keytool arguments, see the Java Documentation about
 Run this command to export the key to a certificate file: 
 
 ```
-keytool -export -alias alias -file cert\_file -keystore keystore 
+keytool -export -alias alias -file cert_file -keystore keystore 
 ```
 
 For example: 
 
 ```
-(.venv) D:\\connector-plugin-sdk\\connector-packager>keytool -export -alias test1year -file test1year.crt -keystore test1yearkeystore.jks 
+(.venv) D:\connector-plugin-sdk\connector-packager>keytool -export -alias test1year -file test1year.crt -keystore test1yearkeystore.jks 
 ```
  
 
@@ -112,13 +112,13 @@ For example: 
 A certificate signing request (CSR) is a request for a certificate authority (CA) to create a public certificate for your organization. To generate a CSR, run the following command:
 
 ```
-keytool -certreq -alias alias -keystore keystore -file certreq\_file
+keytool -certreq -alias alias -keystore keystore -file certreq_file
 ```
 
 For example: 
 
 ```
-(.venv) D:\\connector-plugin-sdk\\connector-packager>keytool -certreq -alias test1year -keystore test1yearkeystore.jks -file test1year.csr 
+(.venv) D:\connector-plugin-sdk\connector-packager>keytool -certreq -alias test1year -keystore test1yearkeystore.jks -file test1year.csr 
 ```
  
 
@@ -143,51 +143,51 @@ The connector-packager tool must be run from the connector-plugin-sdk/co
 -   To package the connector and sign it, run this command: 
  
     ```
-    python -m connector\_packager.package \[path\_to\_plugin\_folder\] -a \[alias\_name\] -ks \[keystore\_file\_path\]
+    python -m connector_packager.package [path_to_plugin_folder] -a [alias_name] -ks [keystore_file_path]
     ```
 
     For example:  
 
     ```
-    python -m connector\_packager.package .\\tests\\test\_resources\\valid\_connector -a key\_same\_pwd -ks tests\\test\_resources\\test\_keystore\\test\_ks.jks --dest d:/pp 
+    python -m connector_packager.package .\tests\test_resources\valid_connector -a key_same_pwd -ks tests\test_resources\test_keystore\test_ks.jks --dest d:/pp 
     ```
  
 
 -   To package the connector without signing, run this command:  
 
     ```
-    python -m connector\_packager.package \[path\_to\_plugin\_folder\] --package-only  
+    python -m connector_packager.package [path_to_plugin_folder] --package-only  
     ```
 
     For example:
 
     ```
-    python -m connector\_packager.package d:/plugins-samples/postgres\_odbc --package-only
+    python -m connector_packager.package d:/plugins-samples/postgres_odbc --package-only
     ```
 
 
 -   To validate that the .xml files are valid, run this command:
 
     ```
-    python -m connector\_packager.package --validate-only \[path\_to\_plugin\_folder\] 
+    python -m connector_packager.package --validate-only [path_to_plugin_folder] 
     ```
 
     For example:
 
     ```
-    python -m connector\_packager.package --validate-only d:/plugins 
+    python -m connector_packager.package --validate-only d:/plugins 
     ```
 
 Review the following examples:
 
-#### Example 1: .taco file is generated into connector-plugin-sdk\\connector-packager\\packaged-connector 
+#### Example 1: .taco file is generated into connector-plugin-sdk\connector-packager\packaged-connector 
 
 ```
-(.venv) E:\\connector-plugin-sdk\\connector-packager>python -m connector\_packager.package ..\\samples\\plugins\\mysql\_odbc -a test1year -ks test1yearkeystore.jks
+(.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc -a test1year -ks test1yearkeystore.jks
 
 Validation succeeded.
 
-mysql\_odbc\_sample.taco was created in E:\\connector-plugin-sdk\\connector-packager\\packaged-connector
+mysql_odbc_sample.taco was created in E:\connector-plugin-sdk\connector-packager\packaged-connector
 
 Enter keystore password:
 
@@ -199,18 +199,18 @@ Warning:
 
 No -tsa or -tsacert is provided and this jar is not timestamped. Without a timestamp, users may not be able to validate this jar after the signer certificate's expiration date (2020-10-06) or after any future revocation date.
 
-taco was signed as mysql\_odbc\_sample.taco at E:\\connector-plugin-sdk\\connector-packager\\packaged-connector
+taco was signed as mysql_odbc_sample.taco at E:\connector-plugin-sdk\connector-packager\packaged-connector
 
 ```
 
 #### Example 2: .taco file is generated into user supplied location and log file is generated into user supplied location 
 
 ```
-(.venv) E:\\connector-plugin-sdk\\connector-packager>python -m connector\_packager.package ..\\samples\\plugins\\mysql\_odbc -a test1year -ks test1yearkeystore.jks --dest e:\\temp -l e:\\temp
+(.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc -a test1year -ks test1yearkeystore.jks --dest e:\temp -l e:\temp
 
 Validation succeeded.
 
-mysql\_odbc\_sample.taco was created in e:\\temp
+mysql_odbc_sample.taco was created in e:\temp
 
 Enter keystore password:
 
@@ -236,7 +236,7 @@ You can install and test your connector one of two ways:
 -   Put your .taco file anywhere you want. Launch Tableau Desktop with the packaged and signed connector with the option -DConnectPluginsPath . For example:
 
     ```
-    "C:\\Program Files\\Tableau\\Tableau 2019.4\\bin\\tableau.exe" -DConnectPluginsPath="d:\\connector-plugin-sdk\\connector-packager\\packaged-connector" 
+    "C:\Program Files\Tableau\Tableau 2019.4\bin\tableau.exe" -DConnectPluginsPath="d:\connector-plugin-sdk\connector-packager\packaged-connector" 
     ```
 
 In both cases, when you launch Tableau Desktop, your connector is listed on the **Connect** pane, under **To a Server** > **More**.
@@ -255,13 +255,13 @@ You can verify a packaged connector without a signature. If everything is correc
 1.  Package the connector with –package-only. For example:
 
     ```
-    (.venv) E:\\connector-plugin-sdk\\connector-packager>python -m connector\_packager.package ..\\samples\\plugins\\postgres\_odbc --package-only
+    (.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\postgres_odbc --package-only
     ```
 
 1.  Launch Tableau Desktop by skipping signature verification with -DDisableVerifyConnectorPluginSignature=true. For example:
 
     ```
-    (.venv) E:\\connector-plugin-sdk\\connector-packager>"c:\\Program Files\\Tableau\\Tableau 2019.4\\bin\\tableau.exe" -DDisableVerifyConnectorPluginSignature=true -DConnectPluginsPath="E:\\connector-plugin-sdk\\connector-packager\\packaged-connector"
+    (.venv) E:\connector-plugin-sdk\connector-packager>"c:\Program Files\Tableau\Tableau 2019.4\bin\tableau.exe" -DDisableVerifyConnectorPluginSignature=true -DConnectPluginsPath="E:\connector-plugin-sdk\connector-packager\packaged-connector"
     ```
     When you launch Tableau Desktop, your connector is listed on the **Connect** pane, under **To a Server** > **More**.
 
