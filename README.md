@@ -2,7 +2,13 @@
 
 ![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg) [![Build Status](https://travis-ci.org/tableau/connector-plugin-sdk.svg?branch=master)](https://travis-ci.org/tableau/connector-plugin-sdk)
 
-This project consists of documentation, example files, and a Python-based test harness that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
+This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
+
+| Tool                                             | Latest Version     |
+|--------------------------------------------------|--------------------|
+| Connector Packager SDK (Beta) for Tableau 2019.3 | 10-02-2019         |
+| TDVT                                             | 1.5.21 (09-12-2019)|
+| Connector Packager                               | 0.0.1 (10-03-2019) |
 
 * [Why Connectors?](#why-connectors)
 * [Get started](#get-started)
@@ -22,7 +28,7 @@ Review the [Tableau Connector SDK developer guide](https://tableau.github.io/con
 
 # Samples
 
-There are two [standalone Postgres example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.
+The SDK includes several [standalone example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.
 
 # Prerequisites
 
@@ -30,7 +36,7 @@ To work with connectors, you need the following:
 
 * Windows or Mac
 * Tableau Desktop or Server 2019.1 Beta 2 or higher
-* Python 3.5 or higher
+* Python 3.7 or higher
 * An ODBC or JDBC data source and driver
 * The provided test data loaded in your data source
 
