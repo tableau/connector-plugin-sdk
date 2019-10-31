@@ -50,7 +50,7 @@ class TabqueryCommandLine(object):
 
         cmdline = [tab_cli_exe]
         if work.test_config.tested_run_time_config is not None and work.test_config.tested_run_time_config.has_customized_tabquery_path():
-            cmdline = [work.test_config.tested_run_time_config.get_tabquery_path(sys.platform)]
+            cmdline = [work.test_config.tested_run_time_config.tabquery_paths.get_path(sys.platform)]
 
         cmdline_base = [cli_arg, work.test_list_path]
         cmdline.extend(cmdline_base)

@@ -17,9 +17,11 @@ import subprocess
 import sys
 import time
 import zipfile
+from typing import List
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
+from .config_gen.test_config import TestSet
 from .resources import *
 from .tabquery import build_tabquery_command_line
 from .test_results import *
@@ -45,9 +47,9 @@ class TestResultWork(object):
 
 
 class BatchQueueWork(object):
-    def __init__(self, test_config, test_set):
+    def __init__(self, test_config, test_set: TestSet):
         self.test_config = test_config
-        self.test_set = test_set
+        self.test_set: TestSet = test_set
         self.results = {}
         self.thread_id = -1
         self.timeout_seconds = test_config.timeout_seconds
@@ -167,8 +169,13 @@ class BatchQueueWork(object):
                     self.add_other_test_failure(t, test_count)
                     sys.stdout.write('E')
                     continue
+                else:
+                    logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + existing_output_filepath)
+                    sys.stdout.write('?')
+                    self.add_missing_test_failure(t)
+                    continue
 
-            if self.test_config.logical and os.path.isfile(existing_output_filepath):
+            if self.test_config.logical:
                 # Copy the test process filename to the actual. filename.
                 actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(t.test_file,
                                                                                                     self.test_config.output_dir)
@@ -178,11 +185,6 @@ class BatchQueueWork(object):
                 base_test_filepath = base_filepath
                 actual_filepath = actual_output_filepath
 
-            if not os.path.isfile(actual_filepath):
-                logging.debug(self.get_thread_msg() + "Error: could not find test output file:" + actual_filepath)
-                sys.stdout.write('?')
-                self.add_missing_test_failure(t)
-                continue
 
             result = compare_results(t.test_name, base_test_filepath, t.test_file, self)
             result.relative_test_file = t.relative_test_file
@@ -193,21 +195,28 @@ class BatchQueueWork(object):
 
             self.add_test_result(t.test_file, result)
 
+    def setup_files(self, test_list):
+        # Setup a subdirectory for the log files.
+        self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
+        os.makedirs(self.test_config.log_dir)
+        # Write the file that contains the tests to run.
+        self.test_list_path = os.path.join(self.test_config.log_dir, 'tests.txt')
+        with open(self.test_list_path, 'w') as test_list_file:
+            for t in test_list:
+                test_list_file.write(str(t) + "\n")
+
+    def run_process(self, cmdline):
+        self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
+                                                      timeout=self.timeout_seconds))
     def run(self, test_list):
 
         if self.test_set.test_is_enabled is False:
             return 0
         if self.test_set.test_is_skipped is True:
             return 0
-        # Setup a subdirectory for the log files.
-        self.test_config.log_dir = os.path.join(self.test_config.output_dir, self.test_name.replace('.', '_'))
+
         try:
-            os.makedirs(self.test_config.log_dir)
-            # Write the file that contains the tests to run.
-            self.test_list_path = os.path.join(self.test_config.log_dir, 'tests.txt')
-            with open(self.test_list_path, 'w') as test_list_file:
-                for t in test_list:
-                    test_list_file.write(str(t) + "\n")
+            self.setup_files(test_list)
         except IOError as e:
             logging.debug(self.get_thread_msg() + "Output dir IOError " + str(e))
             return 0
@@ -217,15 +226,15 @@ class BatchQueueWork(object):
 
         start_time = time.perf_counter()
         try:
-            self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
-                                                          timeout=self.timeout_seconds))
+            self.run_process(cmdline)
         except subprocess.CalledProcessError as e:
+            error_output = str(e.output)
             logging.debug(
-                self.get_thread_msg() + "CalledProcessError: Return code: " + str(e.returncode) + " " + e.output)
+                self.get_thread_msg() + "CalledProcessError: Return code: " + str(e.returncode) + " " + error_output)
             # Let processing continue so it can try and find any output file which will contain database error messages.
             # Save the error message in case there is no result file to get it from.
-            self.saved_error_message = e.output
-            self.cmd_output = e.output
+            self.saved_error_message = error_output
+            self.cmd_output = error_output
             if self.test_set.expected_message and self.test_set.expected_message in self.saved_error_message:
                 self.error_state = TestErrorExpected()
             else:
@@ -241,7 +250,7 @@ class BatchQueueWork(object):
             self.timeout = True
         except RuntimeError as e:
             logging.debug(self.get_thread_msg() + "RuntimeError: " + str(e))
-            self.saved_error_message = e.output
+            self.saved_error_message = str(e)
             self.error_state = TestErrorOther()
 
         total_time_ms = (time.perf_counter() - start_time) * 1000
@@ -319,6 +328,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     # There should be an actual file at this point. eg actual.setup.math.txt.
     if not os.path.isfile(actual_file):
         logging.debug(work.get_thread_msg() + "Did not find actual file: " + actual_file)
+        result.error_status = TestErrorMissingActual()
         return result
 
     try:
@@ -326,6 +336,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         result.add_test_results(actual_xml, actual_file)
     except ParseError as e:
         logging.debug(work.get_thread_msg() + "Exception parsing actual file: " + actual_file + " exception: " + str(e))
+        result.error_status = TestErrorMissingActual()
         return result
 
     expected_file_version = 0
@@ -338,6 +349,7 @@ def compare_results(test_name, test_file, full_test_file, work):
                 logging.debug(
                     work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
                 try_move(actual_file, expected_file)
+            result.error_status = TestErrorOther()
             return result
         # Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(work.get_thread_msg() + " Comparing " + actual_file + " to " + expected_file)
@@ -356,11 +368,14 @@ def compare_results(test_name, test_file, full_test_file, work):
             result.matched_expected_version = expected_file_version
             try:
                 if not work.verbose:
-                    os.remove(actual_file)
+                    if not hasattr(work, 'keep_actual_file'):
+                        os.remove(actual_file)
                     os.remove(actual_diff_file)
             except:
                 pass  # Mysterious problem deleting the file. Don't worry about it. It won't impact final results.
             return result
+        else:
+            result.error_status = TestErrorResults()
 
         # Try another possible expected file.
         expected_file_version = expected_file_version + 1
@@ -597,7 +612,7 @@ def run_diff(test_config, diff):
     return 0
 
 
-def run_tests_impl(test_set, test_config: TdvtInvocation):
+def run_tests_impl(test_set: TestSet, test_config: TdvtInvocation):
     all_test_results = {}
     all_work = []
 
@@ -623,7 +638,7 @@ def run_tests_serial(tests):
     return all_test_results
 
 
-def run_tests(tdvt_test_config, test_set):
+def run_tests(tdvt_test_config, test_set: List[TestSet]):
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
     output_dir = tdvt_test_config.output_dir if tdvt_test_config.output_dir else root_directory
