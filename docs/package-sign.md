@@ -62,6 +62,7 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
 
     ```
     C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate  
+
     ```
     
     On Mac:
@@ -74,6 +75,7 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
     
     ```
     [centos@ip-10-177-53-47 connector-packager]$ source ./.venv/bin/activate
+
     ```
 
 1.  Install the packaging module in the virtual environment: 
