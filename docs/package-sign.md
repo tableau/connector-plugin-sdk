@@ -51,7 +51,7 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
     For example: 
 
     ```
-    C:\\connector-plugin-sdk\\connector-packager> python -m venv .venv
+    C:\connector-plugin-sdk\connector-packager> python -m venv .venv
     ```
 
     For more information about venv, see [venv – Creation of virtual environments](https://docs.python.org/3/library/venv.html) on the Python website.
@@ -61,13 +61,13 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
     For example:  
 
     ```
-    C:\\connector-plugin-sdk\\connector-packager>.\\.venv\\Scripts\\activate  
+    C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate  
     ```
 
 1.  Install the packaging module in the virtual environment: 
 
     ```
-    (.venv) C:\\connector-plugin-sdk\\connector-packager>python setup.py install  
+    (.venv) C:\connector-plugin-sdk\connector-packager>python setup.py install  
     ```
 
 ## Use keytool to get a certificate
@@ -132,23 +132,6 @@ After you receive/fetch the new certificate from the CA, along with any applicab
 keytool -importcert 
 ```
 
-### (Optional) Step 5: Import certificate to JRE keystore 
-
-You can import the certificate to the JRE keystore to simulate Step 4 before you get the signed certificate back from the CA. You might want to do this so you can test packaging and signing your connector. To import the certificate, run the following command:
-
-```
-keytool -import -trustcacerts -alias alias -file crt -file -keystore "C:\\Program Files\\Java\\jdk1.8.0\_131\\jre\\lib\\security\\cacerts" -storepass changeit 
-```
-
-**Note:** The path to cacerts is under java\\jdk1.8.0.131\\jre\\lib\\security, not java\\jre1.8.0\_xxx.  For JDK 9 or later, cacerts is under java\\jdk1.xxx\\lib\\security\\. 
-
-For example: 
-
-```
-(.venv) D:\\connector-plugin-sdk\\connector-packager>keytool -import -trustcacerts -alias test1year -file test1year.crt -keystore "C:\\Program Files\\Java\\jdk1.8.0\_131\\jre\\lib\\security\\cacerts" -storepass changeit 
-```
-
-When prompted to "trust this certificate," answer ‘yes’. 
 
 ## Package and sign the connector
 
@@ -289,34 +272,19 @@ You can verify a packaged connector without a signature. If everything is correc
 
 ### Where to find log files 
 
-By default, a log file packaging\_log.txt will be generated at connector-plugin-sdk/connector-packager/ directory 
+By default, a log file packaging_log.txt will be generated at connector-plugin-sdk/connector-packager/ directory 
 
 ### XML Validation failed for manifest.xml  
 
-Packaging failed. Check your\_path\\connector-plugin-sdk\\connector-packager\\packaging\_log.txt for more information. 
+Packaging failed. Check your_path\connector-plugin-sdk\connector-packager\packaging_log.txt for more information. 
 
 Check your manifest.xml file. You can do validate only with –v to get more details and make sure your package is valid. For example: 
 
 ```
-(.venv) E:\\packagetest\\connector-plugin-sdk\\connector-packager>python -m connector\_packager.package --validate-only e:\\badplugins\\mysql\_odbc –v 
+(.venv) E:\packagetest\connector-plugin-sdk\connector-packager>python -m connector_packager.package --validate-only e:\badplugins\mysql_odbc –v 
 ```
 
-### keytool error: java.io.FileNotFoundException: C:\\Program Files\\Java\\jdk1.8.0\_131\\jre\\lib\\security\\cacerts 
+### Java Error: jdk_create_jar: no jdk set up in PATH environment variable, please download JAVA JDK and add it to PATH 
 
-Check your path to see if the JRE does exist under jdk1.8.0\_131. If not, you might need to reinstall Java JDK.
+Check your PATH environment variable and make sure that JAVA_HOME is in PATH.
 
-For JDK9 and later, the path is Java\\jdk\_version\\lib\\security\\cacerts
-
- 
-
-### Java Error: jdk\_create\_jar: no jdk set up in PATH environment variable, please download JAVA JDK and add it to PATH 
-
-Check your PATH environment variable and make sure that JAVA\_HOME is in PATH.
-
-### keytool error: java.io.FileNotFoundException: C:\\Program Files\\Java\\jdk-12.0.2\\lib\\security" -storepass changeit  (The filename, directory name, or volume label syntax is incorrect) 
-
-Make sure that the path includes "cacerts" as in the following example:
-
-```
-C:\\Program Files\\Java\\jdk1.8.0\_131\\jre\\lib\\security\\cacerts 
-```
