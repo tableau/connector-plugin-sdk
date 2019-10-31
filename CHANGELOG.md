@@ -2,6 +2,7 @@
 
 ## Unreleased
 ### Added
+- New SQLite Extract-Only Sample
 ### Changed
 ### Removed
 
