@@ -120,10 +120,10 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 
    ![]({{ site.baseurl }}/assets/tdvt_connection_2.png)
 
-1. Open the TDS file in a text editor and embed the password in the <connection> tag of the TDS file next to the existing 'username' value.
-   Save the file.
-
-1. Repeat this for the 'Staples' table.
+1. In the directory where you have saved your `.tds` files, create a new file named using the format `datasource.password` (e.g. `postgres.password`). Save your password in the file using the following key/value format `datasourcetestname;password`, e.g.:
+   ```
+    postgrestestname;hunter2
+   ```
 
 1. Run `tdvt --add_ds mydb`. This wil create a mydb.ini file under /config and will modify your two TDS files to rename the connection.
 
@@ -458,7 +458,7 @@ These tests should pass completely for these datasources.
 
 ### Check your setup
 
-Make sure the TDS files include the 'password' element and that you have renamed the relations to 'leaf' as indicated in the setup instructions.
+Make sure ou have renamed the relations to 'leaf' in your `.tds` files as indicated in the setup instructions.
 
 ### Log Files
 
