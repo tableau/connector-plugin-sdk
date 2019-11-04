@@ -3,6 +3,7 @@
 ## Unreleased
 ### Added
 - New SQLite Extract-Only Sample
+- Removed unnecessary attribute from samples
 ### Changed
 ### Removed
 

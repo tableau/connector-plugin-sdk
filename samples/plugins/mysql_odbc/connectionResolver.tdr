@@ -15,7 +15,6 @@
           <attr>port</attr>
           <attr>odbc-connect-string-extras</attr>
           <attr>source-charset</attr>
-          <attr>one-time-sql</attr>
         </attribute-list>
       </required-attributes>
     </connection-normalizer>
