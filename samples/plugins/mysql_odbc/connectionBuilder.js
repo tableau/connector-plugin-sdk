@@ -20,10 +20,5 @@
         formattedParams.push(connectionHelper.formatKeyValuePair(key, params[key]));
     }
 
-    if (attr["odbc-connect-string-extra"] != "")
-    {
-        formattedParams.push(attr["odbc-connect-string-extras"])
-    }
-
     return formattedParams;
 })
