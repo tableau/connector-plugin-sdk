@@ -1,14 +1,15 @@
 import os
+import logging
 
 from argparse import ArgumentParser
 
 from pathlib import Path
 
-from .helper import init_logging
 from .jar_jdk_packager import jdk_create_jar
 from .jar_jdk_signer import jdk_sign_jar, validate_signing_input
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
+from .version import __version__
 
 PACKAGED_EXTENSION = ".taco"
 
@@ -32,6 +33,33 @@ def create_arg_parser() -> ArgumentParser:
     return parser
 
 
+def init_logging(log_path: str, verbose: bool = False) -> logging.Logger:
+    # Create logger.
+    logger = logging.getLogger('packager_logger')
+    logger.setLevel(logging.DEBUG)
+    logger.propagate = False
+
+    fh = logging.FileHandler(log_path, mode='w')
+    fh.setLevel(logging.DEBUG)
+
+    formatter = logging.Formatter('%(asctime)s [%(levelname)s] | %(message)s')
+    fh.setFormatter(formatter)
+
+    ch = logging.StreamHandler()
+    if verbose:
+        # Log to console also.
+        ch.setLevel(logging.DEBUG)
+    else:
+        ch.setLevel(logging.INFO)
+
+    logger.addHandler(ch)
+    logger.addHandler(fh)
+
+    logger.debug("Starting Tableau Connector Packaging Version " + __version__)
+
+    return logger
+
+
 def main():
     parser = create_arg_parser()
     args = parser.parse_args()
@@ -43,17 +71,27 @@ def main():
     xmlparser = XMLParser(path_from_args)
     files_to_package = xmlparser.generate_file_list()  # validates XSD's as well
 
-    if args.validate_only:
-        if args.package_only:
-            logger.warning("Because the validate-only flag was used, files will not be packaged.")
-        if files_to_package and validate_all_xml(files_to_package, path_from_args):
-            logger.info("XML Validation succeeded.")
-        else:
-            logger.info("XML Validation failed. Check " + log_file + " for more information.")
+    # Print warning if --package-only and --validate-only are used together
+    if args.package_only and args.validate_only:
+        logger.warning("Because the validate-only flag was used, files will not be packaged.")
+
+    # Validate xml. If not valid, return.
+    if files_to_package and validate_all_xml(files_to_package, path_from_args):
+        logger.info("Validation succeeded.")
+    else:
+        logger.info("Validation failed. Check " + log_file + " for more information.")
         return
 
-    if not files_to_package:
-        logger.info("Packaging failed. Check " + log_file + " for more information.")
+    # Double check that all files exist
+    for f in files_to_package:
+        f_full_path = str(Path(path_from_args / f.file_name))
+
+        if not os.path.isfile(f_full_path):
+            logger.error("Error: " + f_full_path + "does not exist or is not a file.")
+            return
+
+    # Validation is done, so if --validate-only we return before we start packaging
+    if args.validate_only:
         return
 
     package_dest_path = Path(args.dest)

@@ -8,7 +8,7 @@ from xmlschema import XMLSchema
 
 from .connector_file import ConnectorFile
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('packager_logger')
 
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 PATH_TO_XSD_FILES = Path("../validation").absolute()
