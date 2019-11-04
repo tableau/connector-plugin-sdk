@@ -458,7 +458,7 @@ These tests should pass completely for these datasources.
 
 ### Check your setup
 
-Make sure ou have renamed the relations to 'leaf' in your `.tds` files as indicated in the setup instructions.
+Make sure you have renamed the relations to 'leaf' in your `.tds` files as indicated in the setup instructions.
 
 ### Log Files
 
