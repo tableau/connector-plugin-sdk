@@ -4,8 +4,6 @@
 """
 
 import glob
-import os
-import tempfile
 import re
 from ..resources import *
 
@@ -250,29 +248,68 @@ def build_config_name(prefix, dsname):
 def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
 
+class TabQueryPath(object):
+    def __init__(self, linux_path, mac_path, windows_path):
+        self.linux_path = linux_path
+        self.mac_path = mac_path
+        self.windows_path = windows_path
+
+    @staticmethod
+    def from_array(paths):
+        if len(paths) != 3:
+            raise IndexError
+        t = TabQueryPath(paths[0], paths[1], paths[2])
+        return t
+
+    def to_array(self):
+        return [self.linux_path, self.mac_path, self.windows_path]
+
+    def get_path(self, os):
+        if os.startswith("darwin"):
+            return self.mac_path
+        elif os.startswith("linux"):
+            return self.linux_path
+        else:
+            return self.windows_path
+
+class RunTimeTestConfig(object):
+    """
+        Tracks specifics about how a group of tests were run.
+    """
+    def __init__(self, timeout_seconds=60*60, maxthread=0, d_override='', run_as_perf=False):
+        self.timeout_seconds = timeout_seconds
+        self.d_override = d_override
+        self.run_as_perf = run_as_perf
+        self.maxthread = int(maxthread)
+        self.tabquery_paths = None
+
+    def set_tabquery_paths(self, linux_path, mac_path, windows_path):
+        if not linux_path and not mac_path and not windows_path:
+            return
+        self.tabquery_paths = TabQueryPath(linux_path, mac_path, windows_path)
+
+    def set_tabquery_path_from_array(self, path_list):
+        if not path_list:
+            return
+        self.tabquery_paths = TabQueryPath.from_array(path_list)
+
+    def has_customized_tabquery_path(self):
+        return self.tabquery_paths is not None
+
 class TestConfig(object):
     """
         Defines all the tests that can be run for a single data source. An organized collection of TestSet objects.
     """
-    def __init__(self, dsname, timeout_seconds, logical_config_name, maxthread, maxsubthread, d_override='', 
-                 run_as_perf=False):
+    def __init__(self, dsname, logical_config_name, run_time_config=None):
         self.dsname = dsname
-        self.timeout_seconds = timeout_seconds
         self.logical_config_name = logical_config_name
         self.calcs_tds = self.get_tds_name('cast_calcs.')
         self.staples_tds = self.get_tds_name('Staples.')
         self.logical_test_set = []
         self.expression_test_set = []
         self.smoke_test_set = []
-        self.d_override = d_override
-        self.maxthread = 0
         self.logical_config = {}
-        self.run_as_perf = run_as_perf
-        if int(maxthread) > 0:
-            self.maxthread = int(maxthread)
-        self.maxsubthread = 0
-        if int(maxsubthread) > 0:
-            self.maxsubthread = int(maxsubthread)
+        self.run_time_config = run_time_config
 
     def get_config_name(self, prefix):
         return prefix + self.dsname
