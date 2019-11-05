@@ -120,7 +120,7 @@ TDVT uses the 'Calcs' and 'Staples' tables.
 
    ![]({{ site.baseurl }}/assets/tdvt_connection_2.png)
 
-1. Run `tdvt action --add_ds mydb`. Chose to generate the password file and pick the logical query config. This will create a mydb.ini file under /config and will modify your two TDS files to rename the connection and link them to the tds/mydb.password password file.
+1. Run `tdvt action --add_ds mydb`. Choose to generate the password file and pick the logical query config. This will create a mydb.ini file under /config and will modify your two TDS files to rename the connection and link them to the tds/mydb.password password file.
 
 1. Edit the generated tds/mydb.password file and enter the password for your connection. This can also be done manually. See [The Sample TDS Files](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/tds)
 
@@ -365,7 +365,7 @@ The above files have versions named _\_combined._, such as tdvt_log_combined.txt
 Each datasource has an associated collection of test suites defined in the mydb.ini file.
 You can see these by running `tdvt list --ds mydb`.
 
-When you invoke `tdvt run mydb` each test suite runs on it's own thread.
+When you invoke `tdvt run mydb` each test suite runs on its own thread.
 Each test suite can consist of one or more tests, and each test can consist of one of more test cases.
 
 The test suite spawns a number of worker threads to run these tests in parallel.
