@@ -45,8 +45,3 @@ Note: Support for loading Taco files was added in the 2019.4 release of Tableau.
 
 ## Developer Path
 You can tell Tableau to load un-packaged connectors with a special command line argument that tells Tableau where to find your Connector. See [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share) for more information.
-
-# Known Issues
-
-## The properties builder JavaScript truncates values containing the equal sign '='
-NOV-04-2019: A bug in the JavaScript translation layer means that you cannot use values containing the '=' character.
