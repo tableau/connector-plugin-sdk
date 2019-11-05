@@ -49,7 +49,7 @@ For example, if you include <span style="color:red">show-ssl-check box</span> an
 ## ![3]({{ site.baseurl }}/assets/pce-3.png) \*.tdr
 
 (Optional) Tableau uses the Connector Resolver (.tdr) file to create a connection to your data.
-The .tdr file calls several javascript files, and includes the driver-resolver section.
+The .tdr file calls several JavaScript files, and includes the driver-resolver section.
 
 Tableau database connections have a unique type, the class attribute.
 For example, all Postgres connections have the same class.
@@ -131,7 +131,7 @@ In most cases, the default behavior works, so you don't have to include the <spa
 
 ## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
 
-The component defines what makes up a unique connection. This can be implemented in javascript or directly in the xml. Writing the required attributes list in the xml is more performant, and is recommended for most connectors.
+The component defines what makes up a unique connection. This can be implemented in JavaScript or directly in the xml. Writing the required attributes list in the xml is more performant, and is recommended for most connectors.
 
 ```
 <required-attributes>
@@ -167,8 +167,7 @@ JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&pa
 ## ![9]({{ site.baseurl }}/assets/pce-9.png) \*.tdd
 
 After connection, Tableau uses your _.tdd dialect file to determine which SQL to generate when retrieving information from your database.
-You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent. If you are using the 'odbc' or 'jdbc' superclasses you must 
-define a dialect, since those superclasses do not have dialects.
+You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent. If you are using the 'odbc' or 'jdbc' superclasses you must define a dialect, since those superclasses do not have dialects.
 
 ### Example dialect.tdd
 

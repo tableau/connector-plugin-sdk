@@ -4,7 +4,7 @@ title: Building the Connection Dialog
 
 ## The Connection Dialog
 
-The Connection Dialog prompts the user to enter connection and authentication information that will passed into the connector builder script to build the connection string. The dialog appears when creating a new connection or editing an existing connection on both Tableau Desktop and Server. 
+The Connection Dialog prompts the user to enter connection and authentication information that is passed into the into the connector builder script to build the connection string. The dialog appears when creating a new connection or editing an existing connection on both Tableau Desktop and Tableau Server.
 
 The Connection Dialog is mainly defined in the Tableau Custom Dialog (.tcd) file.
 
@@ -14,7 +14,7 @@ The Connection Dialog is mainly defined in the Tableau Custom Dialog (.tcd) file
 
 The connector is displayed as "[Display Name] by [Company Name]" in the connection dialog and connection list.
 
-"For support, contact [Company Name]" is displayed at the bottom left of the connector. Clicking on this link will send the user to the support link defined in the manifest. This link also displays in error messages.
+"For support, contact [Company Name]" is displayed at the bottom left of the connector. Clicking this link sends the user to the support link defined in the manifest. This link also displays in error messages. The support link must use HTTPS to be packaged into a `.taco` file.
 
 These elements are defined in the manifest.xml file:
 ```xml
