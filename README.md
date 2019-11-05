@@ -77,6 +77,10 @@ You can work around this by skipping signature verification with the command lin
 **Support links that are not fully qualified throw error when clicked on**
 Support links that are not fully qualified (ie include the https:// header) will throw an error when the user clicks on them. This only affects in-development connectors, as we check for this when packaging a connector into a Taco.
 
+**The properties builder JavaScript truncates values containing the equals sign '=' in 2019.4**
+A bug in the JavaScript translation layer means that you cannot return values containing the '=' character from the JavaScript properties builder.
+
+
 # Contributions
 
 Code contributions and improvements by the community are welcomed!
