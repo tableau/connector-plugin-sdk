@@ -167,8 +167,7 @@ JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&pa
 ## ![9]({{ site.baseurl }}/assets/pce-9.png) \*.tdd
 
 After connection, Tableau uses your _.tdd dialect file to determine which SQL to generate when retrieving information from your database.
-You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent. If you are using the 'odbc' or 'jdbc' superclasses you must
-define a dialect, since those superclasses do not have dialects.
+You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent. If you are using the 'odbc' or 'jdbc' superclasses you must define a dialect, since those superclasses do not have dialects.
 
 ### Example dialect.tdd
 
