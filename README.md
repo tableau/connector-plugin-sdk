@@ -10,6 +10,7 @@ This project consists of documentation, example files, a Python-based test harne
 * [Prerequisites](#prerequisites)
 * [Get Help](#get-help)
 * [FAQ](#faq)
+* [Known Issues](#known-issues)
 * [Contributions](#contributions)
 
 # Why Connectors?
