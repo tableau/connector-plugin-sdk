@@ -681,12 +681,19 @@ def main():
         add_datasource(args.add_ds, ds_registry)
         generate_files(ds_registry, True)
         sys.exit(0)
-    elif is_test(args) and args.generate:
-        start_time = time.time()
-        generate_files(ds_registry, True)
-        end_time = time.time() - start_time
-        print("Done: " + str(end_time))
-        # It's ok to call generate and then run some tests, so don't exit here.
+    elif is_test(args):
+        if args.generate:
+            start_time = time.time()
+            generate_files(ds_registry, True)
+            end_time = time.time() - start_time
+            print("Done: " + str(end_time))
+            # It's ok to call generate and then run some tests, so don't exit here.
+        if args.command == 'run-file':
+            output_dir = os.getcwd()
+            max_threads = get_level_of_parallelization(args)
+            sys.exit(run_file(args.run_file, output_dir, max_threads, args))
+        error_code = run_desired_tests(args, ds_registry)
+        sys.exit(error_code)
     elif args.command == 'action' and args.diff:
         tdvt_invocation = TdvtInvocation(from_args=args)
         run_diff(tdvt_invocation, args.diff)
@@ -697,15 +704,8 @@ def main():
     elif args.command == 'list' and args.list_ds is not None:
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
-    elif is_test(args):
-        if args.command == 'run-file':
-            output_dir = os.getcwd()
-            max_threads = get_level_of_parallelization(args)
-            sys.exit(run_file(args.run_file, output_dir, max_threads, args))
-        error_code = run_desired_tests(args, ds_registry)
-        sys.exit(error_code)
-    
-    logging.error("Could not interpert arguments. Nothing done.")
+
+    logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
     sys.exit(-1)
 
