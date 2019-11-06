@@ -232,7 +232,7 @@ def enqueue_single_test(args, ds_info: TestConfig, suite):
     return test_set, tdvt_invocation
 
 
-def enqueue_failed_tests(run_file, root_directory, args):
+def enqueue_failed_tests(run_file, root_directory, args, rt: RunTimeTestConfig = None):
     try:
         with open(run_file, 'r', encoding='utf8') as file:
             tests = json.load(file)
@@ -254,6 +254,8 @@ def enqueue_failed_tests(run_file, root_directory, args):
         tds = get_tds_full_path(root_directory, tds_base)
         logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
         tdvt_invocation = TdvtInvocation(from_json=f['test_config'])
+        if rt:
+            tdvt_invocation.set_run_time_test_config(rt)
         tdvt_invocation.tds = tds
         tdvt_invocation.leave_temp_dir = is_test(args) and args.noclean if args else False
         suite_name = f['test_config']['suite_name']
@@ -430,7 +432,7 @@ def create_parser():
 
     run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
-    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
+    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Generate logical query test files.', required=False)
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
 
@@ -447,6 +449,7 @@ def create_parser():
     action_group.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     action_group.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
     action_group.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
+    action_group.add_argument('--generate', dest='action_generate', action='store_true', help='Generate logical query test files.', required=False)
 
     #Run tests.
     run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
@@ -667,24 +670,38 @@ def run_file(run_file, output_dir, threads, args):
     # This can be a retry-step.
     return 0
 
+def run_generate(ds_registry):
+    start_time = time.time()
+    generate_files(ds_registry, True)
+    end_time = time.time() - start_time
+    print("Done: " + str(end_time))
+
 
 def main():
     parser, ds_registry, args = init()
 
-    if args.command == 'action' and args.setup:
-        print("Creating setup files...")
-        create_test_environment()
-        sys.exit(0)
-    if args.command == 'action' and args.add_ds:
-        add_datasource(args.add_ds, ds_registry)
-        generate_files(ds_registry, True)
-        sys.exit(0)
-    elif is_test(args) and args.generate:
-        start_time = time.time()
-        generate_files(ds_registry, True)
-        end_time = time.time() - start_time
-        print("Done: " + str(end_time))
-        # It's ok to call generate and then run some tests, so don't exit here.
+    if args.command == 'action':
+        if args.setup:
+            print("Creating setup files...")
+            create_test_environment()
+            sys.exit(0)
+        elif args.add_ds:
+            add_datasource(args.add_ds, ds_registry)
+            generate_files(ds_registry, True)
+            sys.exit(0)
+        elif args.action_generate:
+            run_generate(ds_registry)
+            sys.exit(0)
+    elif is_test(args):
+        if args.generate:
+            run_generate(ds_registry)
+            # It's ok to call generate and then run some tests, so don't exit here.
+        if args.command == 'run-file':
+            output_dir = os.getcwd()
+            max_threads = get_level_of_parallelization(args)
+            sys.exit(run_file(args.run_file, output_dir, max_threads, args))
+        error_code = run_desired_tests(args, ds_registry)
+        sys.exit(error_code)
     elif args.command == 'action' and args.diff:
         tdvt_invocation = TdvtInvocation(from_args=args)
         run_diff(tdvt_invocation, args.diff)
@@ -695,15 +712,8 @@ def main():
     elif args.command == 'list' and args.list_ds is not None:
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
-    elif is_test(args):
-        if args.command == 'run-file':
-            output_dir = os.getcwd()
-            max_threads = get_level_of_parallelization(args)
-            sys.exit(run_file(args.run_file, output_dir, max_threads, args))
-        error_code = run_desired_tests(args, ds_registry)
-        sys.exit(error_code)
-    
-    logging.error("Could not interpert arguments. Nothing done.")
+
+    logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
     sys.exit(-1)
 
