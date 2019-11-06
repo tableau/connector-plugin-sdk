@@ -221,7 +221,7 @@ Example:
 ## Deprecated API
 
 ### SetImpersonateAttributes connection helper
-This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a javascript component will throw an error when attempting to connect.
+This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
 
 ### <setImpersonateAttributes/> XML tag
 This xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
