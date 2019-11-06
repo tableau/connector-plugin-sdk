@@ -432,7 +432,7 @@ def create_parser():
 
     run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
-    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
+    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Generate logical query test files.', required=False)
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
 
@@ -449,6 +449,7 @@ def create_parser():
     action_group.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     action_group.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
     action_group.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
+    action_group.add_argument('--generate', dest='action_generate', action='store_true', help='Generate logical query test files.', required=False)
 
     #Run tests.
     run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
@@ -669,24 +670,31 @@ def run_file(run_file, output_dir, threads, args):
     # This can be a retry-step.
     return 0
 
+def run_generate(ds_registry):
+    start_time = time.time()
+    generate_files(ds_registry, True)
+    end_time = time.time() - start_time
+    print("Done: " + str(end_time))
+
 
 def main():
     parser, ds_registry, args = init()
 
-    if args.command == 'action' and args.setup:
-        print("Creating setup files...")
-        create_test_environment()
-        sys.exit(0)
-    if args.command == 'action' and args.add_ds:
-        add_datasource(args.add_ds, ds_registry)
-        generate_files(ds_registry, True)
-        sys.exit(0)
+    if args.command == 'action':
+        if args.setup:
+            print("Creating setup files...")
+            create_test_environment()
+            sys.exit(0)
+        elif args.add_ds:
+            add_datasource(args.add_ds, ds_registry)
+            generate_files(ds_registry, True)
+            sys.exit(0)
+        elif args.action_generate:
+            run_generate(ds_registry)
+            sys.exit(0)
     elif is_test(args):
         if args.generate:
-            start_time = time.time()
-            generate_files(ds_registry, True)
-            end_time = time.time() - start_time
-            print("Done: " + str(end_time))
+            run_generate(ds_registry)
             # It's ok to call generate and then run some tests, so don't exit here.
         if args.command == 'run-file':
             output_dir = os.getcwd()
