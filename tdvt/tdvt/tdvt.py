@@ -705,7 +705,7 @@ def main():
                 sys.exit(run_file(rfile, output_dir, max_threads, args))
             else:
                 logging.error("Unable to open " + rfile.__str__())
-                return -1
+                sys.exit(-1)
         error_code = run_desired_tests(args, ds_registry)
         sys.exit(error_code)
 
