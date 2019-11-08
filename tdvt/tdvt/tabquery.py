@@ -15,8 +15,12 @@ def configure_tabquery_path():
     tabquery_envvar = os.environ.get('TABQUERY_CLI_PATH')
     logging.debug("TABQUERY_CLI_PATH environment variable is {}".format(tabquery_envvar))
 
+    if tabquery_envvar and not os.path.isfile(tabquery_envvar):
+        logging.warn(
+            "The environment variable TABQUERY_CLI_PATH={} is not a file and will not be used.".format(tabquery_envvar)
+        )
 
-    if tabquery_envvar:
+    if tabquery_envvar and os.path.isfile(tabquery_envvar):
         tab_cli_exe = tabquery_envvar
         logging.debug("tabquerycli path set via environment variable")
     elif sys.platform.startswith("darwin"):
