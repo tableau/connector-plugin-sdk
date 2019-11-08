@@ -18,6 +18,7 @@ def configure_tabquery_path():
 
     if tabquery_envvar:
         tab_cli_exe = tabquery_envvar
+        logging.debug("tabquerycli path set via environment variable")
     elif sys.platform.startswith("darwin"):
         tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_MAC']
     elif sys.platform.startswith("linux"):
