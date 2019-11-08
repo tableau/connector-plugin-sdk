@@ -12,17 +12,6 @@
     params["OPTION"] = "1048576"
 
     var formattedParams = [];
-    
-    var odbcConnectStringExtrasMap = {};
-    const attributeODBCConnectStringExtras = "odbc-connect-string-extras";
-    if (attributeODBCConnectStringExtras in attr) 
-    {
-        odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr[attributeODBCConnectStringExtras]);
-    }
-    for (var key in odbcConnectStringExtrasMap)
-    {
-        params[key] = odbcConnectStringExtrasMap[key];
-    }
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
 
