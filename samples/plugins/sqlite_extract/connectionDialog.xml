@@ -1,0 +1,10 @@
+<connection-dialog class='sqlite_extract'>
+  <connection-config>
+    <authentication-mode value='None' />
+    <authentication-options>
+      <option name="None" default="true" value="auth-none" />
+    </authentication-options>
+    <has-databases value='false' />
+    <server-prompt value='File:' />
+  </connection-config>
+</connection-dialog>

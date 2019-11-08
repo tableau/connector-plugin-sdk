@@ -96,7 +96,7 @@
   </xs:simpleType>
   <xs:group name="VendorInformation-G">
     <xs:sequence>
-      <xs:element minOccurs="0" name="vendor-information">
+      <xs:element name="vendor-information">
         <xs:complexType>
           <xs:sequence>
             <xs:group ref="Company-G"/>
