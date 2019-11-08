@@ -12,14 +12,19 @@ def configure_tabquery_path():
     tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
     logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
     config.read(tdvt_cfg)
+    tabquery_envvar = os.environ.get('TABQUERY_CLI_PATH')
+    logging.debug("TABQUERY_CLI_PATH environment variable is {}".format(tabquery_envvar))
 
-    if sys.platform.startswith("darwin"):
+
+    if tabquery_envvar:
+        tab_cli_exe = tabquery_envvar
+    elif sys.platform.startswith("darwin"):
         tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_MAC']
     elif sys.platform.startswith("linux"):
         tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_LINUX']
     else:
         tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
-    logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
+    logging.debug("tabquerycli path set as [{}]".format(tab_cli_exe))
 
 def get_max_process_level_of_parallelization(desired_threads):
     if sys.platform.startswith("darwin") and 'tabquerytool' in tab_cli_exe:
@@ -92,13 +97,13 @@ def tabquerycli_exists():
     global tab_cli_exe
     tabquery_envvar = os.environ.get('TABQUERY_CLI_PATH')
 
-    if os.path.isfile(tabquery_envvar):
-        logging.debug("Found tabquery at [{0}]".format(tabquery_envvar))
+    if tabquery_envvar and os.path.isfile(tabquery_envvar):
+        logging.debug("Found tabquery via environment variable at [{0}]".format(tabquery_envvar))
         return True
 
     if os.path.isfile(tab_cli_exe):
-        logging.debug("Found tabquery at [{0}]".format(tab_cli_exe))
+        logging.debug("Found tabquery via config file at [{0}]".format(tab_cli_exe))
         return True
 
-    logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
+    logging.debug("Could not find tabquery at [{0} {1}]".format(tabquery_envvar, tab_cli_exe))
     return False
