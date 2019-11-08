@@ -8,7 +8,7 @@ def configure_tabquery_path():
     """Setup the tabquery path from ini settings."""
     global tab_cli_exe
     config = configparser.ConfigParser()
-    
+
     tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
     logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
     config.read(tdvt_cfg)
@@ -90,11 +90,15 @@ class TabqueryCommandLine(object):
 
 def tabquerycli_exists():
     global tab_cli_exe
+    tabquery_envvar = os.environ.get('TABQUERY_CLI_PATH')
+
+    if os.path.isfile(tabquery_envvar):
+        logging.debug("Found tabquery at [{0}]".format(tabquery_envvar))
+        return True
+
     if os.path.isfile(tab_cli_exe):
         logging.debug("Found tabquery at [{0}]".format(tab_cli_exe))
         return True
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
-
-
