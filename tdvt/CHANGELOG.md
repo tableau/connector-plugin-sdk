@@ -6,3 +6,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 - Update handling of args.run_file to use Path
+- Update tabquery to check for an environment variable path to tabquerycli before looking in config files.
