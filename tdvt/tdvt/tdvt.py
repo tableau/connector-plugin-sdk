@@ -529,7 +529,8 @@ def test_runner(all_tests, test_queue, max_threads):
 
 def run_tests_impl(tests: List[TestSet], max_threads, args):
     if not tests:
-        return
+        print("No tests found. Check arguments.")
+        sys.exit()
 
     smoke_test_queue = queue.Queue()
     smoke_tests = []
