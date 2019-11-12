@@ -10,6 +10,7 @@
     {
         props["ssl"] = "true";
         props["sslmode"] = "require";
+
     }
 
     var formattedProps = [];
