@@ -25,7 +25,7 @@ jobs:
     - name: Install Connector Packager
       run: |
         pwd
-        cd ../connector-packager
+        cd connector-packager
         python setup.py install 
     - name: Run TDVT unit tests
       run: |
