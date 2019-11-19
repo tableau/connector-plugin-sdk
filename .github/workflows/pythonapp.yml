@@ -1,0 +1,29 @@
+name: Python application
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Setup Java Action
+      uses: actions/setup-java@v1.0.0
+      with:
+      # The JDK version to make available on the path. Takes a whole or semver Jdk version, or 1.x syntax (e.g. 1.8 => Jdk 8.x)
+        version: 1.8
+    - name: Install TDVT
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e tdvt/
+    - name: Run TDVT unit tests
+      run: |
+        cd tdvt/test
+        python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest
+    
