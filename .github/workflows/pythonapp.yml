@@ -18,11 +18,14 @@ jobs:
       with:
       # The JDK version to make available on the path. Takes a whole or semver Jdk version, or 1.x syntax (e.g. 1.8 => Jdk 8.x)
         version: 1.8
-    - name: Install TDVT & Connector Packager
+    - name: Install TDVT
       run: |
         python -m pip install --upgrade pip
         pip install -e tdvt/
-        python connector-packager/setup.py install 
+    - name: Install Connector Packager
+      run: |
+        cd connector-packager
+        connector-packager/setup.py install 
     - name: Run TDVT unit tests
       run: |
         cd tdvt/test
