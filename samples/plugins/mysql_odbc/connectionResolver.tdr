@@ -13,6 +13,7 @@
           <attr>username</attr>
           <attr>password</attr>
           <attr>port</attr>
+          <attr>sslmode</attr>
           <attr>odbc-connect-string-extras</attr>
           <attr>source-charset</attr>
         </attribute-list>
