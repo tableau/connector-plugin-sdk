@@ -4,9 +4,7 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python 3.7
@@ -14,7 +12,7 @@ jobs:
       with:
         python-version: 3.7
     - name: Setup Java Action
-      uses: actions/setup-java@v1.0.0
+      
       with:
       # The JDK version to make available on the path. Takes a whole or semver Jdk version, or 1.x syntax (e.g. 1.8 => Jdk 8.x)
         version: 1.8
@@ -30,7 +28,17 @@ jobs:
       run: |
         cd connector-packager
         python setup.py install
-    - name: Run Connector Packager unit tests
-      run: |
-        cd connector-packager
-        python setup.py test
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [1.8, 1.10, 1.12]
+    name: Run Connector Packager unit tests with JDK ${{ matrix.jdk-version }}
+      steps:
+      - uses: actions/setup-java@v1.0.0
+      - name: ${{ matrix.java }}
+        with:
+          java-version: ${{ matrix.java }}
+      - run: |
+      cd connector-packager
+      python setup.py test
