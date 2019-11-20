@@ -34,11 +34,9 @@ jobs:
       matrix:
         java: [1.8, 1.10, 1.12]
     name: Run Connector Packager unit tests with JDK ${{ matrix.java }}
-      steps:
-      - uses: actions/setup-java@v1.0.0
-      - name: ${{ matrix.java }}
-        with:
-          java-version: ${{ matrix.java }}
-      - run: |
-      cd connector-packager
-      python setup.py test
+    steps:
+    - uses: actions/setup-java@v1.0.0
+    - name: ${{ matrix.java }}
+      with:
+        java-version: ${{ matrix.java }}
+    - run: cd connector-packager && python setup.py test
