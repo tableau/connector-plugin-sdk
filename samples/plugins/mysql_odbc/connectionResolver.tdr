@@ -24,8 +24,5 @@
     <driver-match>
       <driver-name type='exact'>MySQL ODBC 8.0 Unicode Driver</driver-name>
     </driver-match>
-    <driver-match>
-      <driver-name type='exact'>MySQL ODBC 5.3 Unicode Driver</driver-name>
-    </driver-match>
   </driver-resolver>
 </tdr>
