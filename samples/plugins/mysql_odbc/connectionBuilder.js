@@ -11,6 +11,14 @@
 
     params["OPTION"] = "1048576"
 
+    if (attr["sslmode"] == "require")
+    {
+        params["SSLMODE"] = "required";
+    }
+    else{
+        params["SSLMODE"] = "disabled";
+    }
+
     var formattedParams = [];
 
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));

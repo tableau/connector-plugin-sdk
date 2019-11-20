@@ -4,6 +4,7 @@
 ### Added
 - New SQLite Extract-Only Sample
 - Removed unnecessary attribute from samples
+- Fix issue with SSL in the MySQL ODBC sample
 ### Changed
 ### Removed
 
