@@ -39,6 +39,7 @@ Builds the ODBC ConnectString or JDBC Connection URL. For a JDBC Connection URL,
 ### connection-properties
 
 Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL, we require that connection-properties contain secure attributes such as username and password.
+**Note:** A bug in the JavaScript translation layer means that you cannot use values containing the '=' character.
 
 **Type:** JavaScript
 
