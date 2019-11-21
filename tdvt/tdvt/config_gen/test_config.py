@@ -26,8 +26,8 @@ class TestSet(object):
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
     def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                 expected_message: str='', smoke_test: bool=False, test_is_enabled: bool=True,
-                 test_is_skipped: bool=False):
+                 expected_message: str = '', smoke_test: bool = False, test_is_enabled: bool = True,
+                 test_is_skipped: bool = False):
         self.ds_name = ds_name
         self.suite_name = suite_name
         self.config_name = config_name
