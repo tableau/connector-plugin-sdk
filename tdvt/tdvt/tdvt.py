@@ -372,49 +372,44 @@ list_usage_text = '''
     
 run_usage_text = '''
     The 'run' argument can take a single datasource, a list of data sources, or a test suite name in any combination.
-        run vertica
-        run sqlserver,vertica
-        run standard
+        run postgres_odbc,postgres_jdbc
 
     The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
-        run postgres --verify
+        run postgres_odbc --verify
 
     Both logical and expression tests are run by default.
-    Run all sqlserver expression tests
-       run -e sqlserver
+    Run all expression tests
+       run postgres_odbc -e
 
-    Run all vertica logical tests
-        run -q vertica
+    Run all logical tests
+        run postgres_odbc -q
 
     There are multiple suites of expression tests, for example, standard and LOD (level of detail). The config files that drive the tests
     are named expression_test.sqlserver.cfg and expression.lod.sqlserver.cfg.
     To run just one of those try entering part of the config name as an argument:
-        run -e lod --run sqlserver
+        run postgres_odbc -e lod 
 
-    And you can run all the LOD tests against the 'standard' datasource suite like
-        run -e lod --run standard
 '''
 
 run_pattern_usage_text = '''
-    Run one test against many datasources
-        run-pattern --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds sqlserver,vertica
-
-    The 'exp' argument is a glob pattern that is used to find the test file. It is the same style as what you will find
-    in the existing *.cfg files.
-    The 'test-ex' argument can be used to exclude test files. This is a regular expression pattern.
-    The tds pattern is used to find the tds. Use a '*' character where the tds name will be substituted,
-    ie cast_calcs.*.tds for cast_calcs.sqlserver.tds etc.
+    Run one expression test against many datasources
+        run-pattern postgres_odbc --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds 
 
     Run one logical query test against many datasources
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds postgres
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds
+
+    The 'exp' argument is a glob pattern that is used to find the test file using the relative test path.
+    The 'test-ex' argument can be used to exclude test files. This is a regular expression pattern.
+    The tds pattern is used to find the tds. Use a '*' character where the tds name will be substituted,
+    ie cast_calcs.*.tds
 
     This can be combined with * to run an arbitrary set of 'correct' logical query tests against a datasources
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds postgres
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds
     Alternatively
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds sqlserver
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds
 
     But skip 59740?
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740 sqlserver
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740
 
     '''
 
