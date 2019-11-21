@@ -1,0 +1,5 @@
+<dialect name='SQLiteODBCExtract'
+         class='sqlite_extract'
+         version='18.1'
+         base='CDataExtractDialect'>
+</dialect>
