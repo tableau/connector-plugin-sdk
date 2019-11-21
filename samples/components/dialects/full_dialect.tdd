@@ -1127,11 +1127,6 @@
       <argument type='int' />
     </function>
     <function group='operator' name='+' return-type='datetime'>
-      <formula>(%1 + %2)</formula>
-      <argument type='datetime' />
-      <argument type='datetime' />
-    </function>
-    <function group='operator' name='+' return-type='datetime'>
       <formula>(CASE WHEN CAST({fn TRUNCATE((%2 * 24 * 60 - CAST({fn TRUNCATE(%2 * 24 * 60,0)} AS INTEGER)) * 60,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;s&apos;, CAST(CAST({fn TRUNCATE((%2 * 24 * 60 - CAST({fn TRUNCATE(%2 * 24 * 60,0)} AS INTEGER)) * 60,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE((%2 * 24 - CAST({fn TRUNCATE(%2 * 24,0)} AS INTEGER)) * 60,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;mi&apos;, CAST(CAST({fn TRUNCATE((%2 * 24 - CAST({fn TRUNCATE(%2 * 24,0)} AS INTEGER)) * 60,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE((%2 - CAST({fn TRUNCATE(%2,0)} AS INTEGER)) * 24,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;hh&apos;, CAST(CAST({fn TRUNCATE((%2 - CAST({fn TRUNCATE(%2,0)} AS INTEGER)) * 24,0)} AS INTEGER) AS BIGINT), CAST((CASE WHEN CAST({fn TRUNCATE(%2,0)} AS INTEGER) IS NOT NULL THEN DATEADD(&apos;d&apos;, CAST(CAST({fn TRUNCATE(%2,0)} AS INTEGER) AS BIGINT), CAST(%1 AS TIMESTAMP)) END) AS TIMESTAMP)) END) AS TIMESTAMP)) END) AS TIMESTAMP)) END)</formula>
       <argument type='date' />
       <argument type='real' />
@@ -1145,11 +1140,6 @@
       <formula>DATE_ADD(%1, INTERVAL %2 DAY)</formula>
       <argument type='date' />
       <argument type='int' />
-    </function>
-    <function group='operator' name='+' return-type='date'>
-      <formula>(%1 + %2)</formula>
-      <argument type='date' />
-      <argument type='date' />
     </function>
     <function group='operator' name='-' return-type='real'>
       <formula>(-%1)</formula>
