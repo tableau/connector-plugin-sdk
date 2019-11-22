@@ -16,3 +16,8 @@
 ### Changed
 - Improved error messaging when running TDVT from the wrong directory.
 - Improved the generated Diff files.
+
+## 2019-11-22
+
+### Changed
+- XSD changes, Change connectionconfig's children could be in random order

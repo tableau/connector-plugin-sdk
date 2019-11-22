@@ -8,7 +8,7 @@
     </xs:complexType>
   </xs:element>
   <xs:complexType name="ConnectionConfig-CT">
-    <xs:sequence>
+    <xs:all>
       <xs:element minOccurs="0" name="authentication-mode" type="AuthMode-CT"/>
       <xs:element minOccurs="0" name="authentication-options" type="AuthOptions-CT"/>
       <xs:element minOccurs="0" name="connection-options" type="ConnectionOptions-CT"/>
@@ -30,7 +30,7 @@
       <xs:element minOccurs="0" name="show-uncommitted-data-checkbox" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="ssl-requires-certificate" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="warehouse-prompt" type="TextField-CT"/>
-    </xs:sequence>
+    </xs:all>
   </xs:complexType>
   <xs:complexType name="AuthMode-CT">
     <xs:attribute name="value" type="AuthModeEnum-ST" use="required"/>
