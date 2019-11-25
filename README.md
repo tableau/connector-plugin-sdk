@@ -7,7 +7,7 @@ This project consists of documentation, example files, the Tableau Datasource Ve
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 10-02-2019         |
-| TDVT                                             | 1.5.21 (09-12-2019)|
+| TDVT                                             | 2.0.0 (10-29-2019) |
 | Connector Packager                               | 0.0.1 (10-03-2019) |
 
 * [Why Connectors?](#why-connectors)
@@ -16,6 +16,7 @@ This project consists of documentation, example files, the Tableau Datasource Ve
 * [Prerequisites](#prerequisites)
 * [Get Help](#get-help)
 * [FAQ](#faq)
+* [Known Issues](#known-issues)
 * [Contributions](#contributions)
 
 # Why Connectors?
@@ -81,6 +82,10 @@ You can work around this by skipping signature verification with the command lin
 
 **Support links that are not fully qualified throw error when clicked on**
 Support links that are not fully qualified (ie include the https:// header) will throw an error when the user clicks on them. This only affects in-development connectors, as we check for this when packaging a connector into a Taco.
+
+**The properties builder JavaScript truncates values containing the equals sign '=' in 2019.4**
+A bug in the JavaScript translation layer means that you cannot return values containing the '=' character from the JavaScript properties builder.
+
 
 # Contributions
 
