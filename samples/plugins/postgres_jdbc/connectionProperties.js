@@ -7,7 +7,6 @@
     {        
         props["ssl"] = "true";
         props["sslmode"] = "require";
-    }
-   
+    }  
     return props;
 })
