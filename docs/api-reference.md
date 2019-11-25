@@ -50,10 +50,10 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 {"server" : "myserver.somewhere.net", "username" : "myusername", "password" : "mypassword"}
 ```
 
-**Return:** vector of formatted key=value pairs that will be written to the properties file
+**Return:** a dictionary of key/value pairs pairs that will be written to the properties file
 
 ```javascript
-["UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"];
+{"UID" : "myusername", "Host" : "myserver.somewhere.net", "PWD" : "mypassword"};
 ```
 
 ---
