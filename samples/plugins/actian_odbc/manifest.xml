@@ -8,7 +8,7 @@
   -->
   <vendor-information>
     <company name='Actian' />
-    <support-link url='https://www.actian.com' />
+    <support-link url='https://communities.actian.com' />
   </vendor-information>
 
   <connection-customization class="actian_odbc" enabled="true" version="10.0">
