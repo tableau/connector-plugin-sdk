@@ -60,6 +60,7 @@ def init_logging(log_path: Path, verbose: bool = False) -> logging.Logger:
 
     return logger
 
+
 def log_path_checker(path_to_logs: str) -> Path:
     proper_path = Path(path_to_logs)
     if os.path.isdir(path_to_logs):
@@ -69,7 +70,7 @@ def log_path_checker(path_to_logs: str) -> Path:
         try:
             os.mkdir(path_to_logs)
             logging.info("Created " + path_to_logs)
-        except:
+        except Exception:
             print("Unable to create log directory. Exiting.")
             sys.exit(-1)
     return Path(Path(path_to_logs) / 'packaging_logs.txt')
