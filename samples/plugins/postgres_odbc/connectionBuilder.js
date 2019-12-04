@@ -13,7 +13,7 @@
     params["Fetch"] = "2048";
 
     if (attr[connectionHelper.attributeSSLMode] == "require")
-    {        
+    {
         params["sslmode"] = "require";
     }
 

@@ -20,17 +20,18 @@ import shutil
 import subprocess
 import threading
 import time
-from .version import __version__
+from pathlib import Path
 from typing import List
 
-from .config_gen.gentests import list_configs, list_config
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
+from .config_gen.gentests import list_configs, list_config
+from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
+from .resources import make_temp_dir
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
-from .resources import make_temp_dir
 from .tdvt_core import generate_files, run_diff, run_tests
-from .config_gen.tdvtconfig import TdvtInvocation
+from .version import __version__
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
@@ -232,12 +233,12 @@ def enqueue_single_test(args, ds_info: TestConfig, suite):
     return test_set, tdvt_invocation
 
 
-def enqueue_failed_tests(run_file, root_directory, args, rt: RunTimeTestConfig = None):
+def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestConfig = None):
     try:
-        with open(run_file, 'r', encoding='utf8') as file:
+        with run_file.open('r', encoding='utf8') as file:
             tests = json.load(file)
     except:
-        logging.debug("Error opening " + run_file)
+        logging.error("Error opening " + str(run_file))
         return
 
     delete_output_files(os.getcwd())
@@ -369,7 +370,7 @@ list_usage_text = '''
     Show logical configs:
         --logical-config
 '''
-    
+
 run_usage_text = '''
     The 'run' argument can take a single datasource, a list of data sources, or a test suite name in any combination.
         run postgres_odbc,postgres_jdbc
@@ -452,13 +453,13 @@ def create_parser():
     run_test_parser.add_argument('--verify', dest='smoke_test', action='store_true', help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.', required=False)  # noqa: E501
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
-    
+
 
     #Run test pattern.
     run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
     run_test_pattern_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_group = run_test_pattern_parser.add_mutually_exclusive_group(required=True)
-    
+
     run_test_group.add_argument('--exp', dest='expression_pattern', help='Only run expression tests whose name and path matches the supplied string. This is a glob pattern. Also you must set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
     run_test_group.add_argument('--logp', dest='logical_pattern', help='Only run logical tests whose name and path matches the supplied string. this is a glob pattern. Also you must set the tds-pattern to use when running the test. Use a ? to replace the logical query config component of the test name.', required=False, default=None, const='', nargs='?')
 
@@ -609,7 +610,7 @@ def get_ds_list(ds):
     if not ds:
         return []
     ds_list = ds[0].split(',')
-    ds_list = [x.strip() for x in ds_list] 
+    ds_list = [x.strip() for x in ds_list]
     return ds_list
 
 def run_desired_tests(args, ds_registry):
@@ -654,10 +655,10 @@ def run_desired_tests(args, ds_registry):
     return failed_tests
 
 
-def run_file(run_file, output_dir, threads, args):
+def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     """Rerun all the failed tests listed in the json file."""
 
-    logging.debug("Running failed tests from : " + run_file)
+    logging.debug("Running failed tests from : " + str(run_file))
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
 
