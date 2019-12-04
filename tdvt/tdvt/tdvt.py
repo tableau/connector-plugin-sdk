@@ -8,26 +8,21 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-from zipfile import ZipFile
 import argparse
 import glob
 import json
-import logging
-import os
 import pathlib
 import queue
 import shutil
-import subprocess
 import threading
 import time
+import zipfile
 from pathlib import Path
 from typing import List
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
-from .config_gen.gentests import list_configs, list_config
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
-from .resources import make_temp_dir
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
@@ -102,12 +97,12 @@ class TestRunner():
         optional_dir_name = self.test_config.config_file.replace('.', '_')
         if is_logs is True:
             log_dir = os.path.join(src_dir, optional_dir_name)
-            glob_path = glob.glob(os.path.join(log_dir, 'log*.txt'))
-            glob_path.extend(glob.glob(os.path.join(log_dir, 'tabprotosrv*.txt')))
+            glob_path = glob.glob(os.path.join(log_dir, '*.txt'))
+            glob_path.extend(glob.glob(os.path.join(log_dir, '*.log')))
             glob_path.extend(glob.glob(os.path.join(log_dir, 'crashdumps/*')))
         else:
             glob_path = glob.glob(os.path.join(src_dir, 'actual.*'))
-        with ZipFile(dst, mode) as myzip:
+        with zipfile.ZipFile(dst, mode, zipfile.ZIP_DEFLATED) as myzip:
             for actual in glob_path:
                 path = pathlib.PurePath(actual)
                 file_to_be_zipped = path.name
@@ -233,7 +228,7 @@ def enqueue_single_test(args, ds_info: TestConfig, suite):
     return test_set, tdvt_invocation
 
 
-def enqueue_failed_tests(run_file: Path, root_directory, args):
+def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestConfig = None):
     try:
         with run_file.open('r', encoding='utf8') as file:
             tests = json.load(file)
@@ -255,6 +250,8 @@ def enqueue_failed_tests(run_file: Path, root_directory, args):
         tds = get_tds_full_path(root_directory, tds_base)
         logging.debug("Found failed test: " + test_file_path + " and tds " + tds)
         tdvt_invocation = TdvtInvocation(from_json=f['test_config'])
+        if rt:
+            tdvt_invocation.set_run_time_test_config(rt)
         tdvt_invocation.tds = tds
         tdvt_invocation.leave_temp_dir = is_test(args) and args.noclean if args else False
         suite_name = f['test_config']['suite_name']
@@ -371,49 +368,44 @@ list_usage_text = '''
 
 run_usage_text = '''
     The 'run' argument can take a single datasource, a list of data sources, or a test suite name in any combination.
-        run vertica
-        run sqlserver,vertica
-        run standard
+        run postgres_odbc,postgres_jdbc
 
     The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
-        run postgres --verify
+        run postgres_odbc --verify
 
     Both logical and expression tests are run by default.
-    Run all sqlserver expression tests
-       run -e sqlserver
+    Run all expression tests
+       run postgres_odbc -e
 
-    Run all vertica logical tests
-        run -q vertica
+    Run all logical tests
+        run postgres_odbc -q
 
     There are multiple suites of expression tests, for example, standard and LOD (level of detail). The config files that drive the tests
     are named expression_test.sqlserver.cfg and expression.lod.sqlserver.cfg.
     To run just one of those try entering part of the config name as an argument:
-        run -e lod --run sqlserver
+        run postgres_odbc -e lod 
 
-    And you can run all the LOD tests against the 'standard' datasource suite like
-        run -e lod --run standard
 '''
 
 run_pattern_usage_text = '''
-    Run one test against many datasources
-        run-pattern --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds sqlserver,vertica
-
-    The 'exp' argument is a glob pattern that is used to find the test file. It is the same style as what you will find
-    in the existing *.cfg files.
-    The 'test-ex' argument can be used to exclude test files. This is a regular expression pattern.
-    The tds pattern is used to find the tds. Use a '*' character where the tds name will be substituted,
-    ie cast_calcs.*.tds for cast_calcs.sqlserver.tds etc.
+    Run one expression test against many datasources
+        run-pattern postgres_odbc --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds 
 
     Run one logical query test against many datasources
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds postgres
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds
+
+    The 'exp' argument is a glob pattern that is used to find the test file using the relative test path.
+    The 'test-ex' argument can be used to exclude test files. This is a regular expression pattern.
+    The tds pattern is used to find the tds. Use a '*' character where the tds name will be substituted,
+    ie cast_calcs.*.tds
 
     This can be combined with * to run an arbitrary set of 'correct' logical query tests against a datasources
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds postgres
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.?.xml --tdp cast_calcs.*.tds
     Alternatively
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds sqlserver
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds
 
     But skip 59740?
-        run-pattern --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740 sqlserver
+        run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740
 
     '''
 
@@ -431,7 +423,7 @@ def create_parser():
 
     run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
     run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
-    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Force config file generation.', required=False)
+    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Generate logical query test files.', required=False)
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
 
@@ -448,6 +440,7 @@ def create_parser():
     action_group.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
     action_group.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
     action_group.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
+    action_group.add_argument('--generate', dest='action_generate', action='store_true', help='Generate logical query test files.', required=False)
 
     #Run tests.
     run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
@@ -527,7 +520,8 @@ def test_runner(all_tests, test_queue, max_threads):
 
 def run_tests_impl(tests: List[TestSet], max_threads, args):
     if not tests:
-        return
+        print("No tests found. Check arguments.")
+        sys.exit()
 
     smoke_test_queue = queue.Queue()
     smoke_tests = []
@@ -668,24 +662,38 @@ def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     # This can be a retry-step.
     return 0
 
+def run_generate(ds_registry):
+    start_time = time.time()
+    generate_files(ds_registry, True)
+    end_time = time.time() - start_time
+    print("Done: " + str(end_time))
+
 
 def main():
     parser, ds_registry, args = init()
 
-    if args.command == 'action' and args.setup:
-        print("Creating setup files...")
-        create_test_environment()
-        sys.exit(0)
-    if args.command == 'action' and args.add_ds:
-        add_datasource(args.add_ds, ds_registry)
-        generate_files(ds_registry, True)
-        sys.exit(0)
-    elif is_test(args) and args.generate:
-        start_time = time.time()
-        generate_files(ds_registry, True)
-        end_time = time.time() - start_time
-        print("Done: " + str(end_time))
-        # It's ok to call generate and then run some tests, so don't exit here.
+    if args.command == 'action':
+        if args.setup:
+            print("Creating setup files...")
+            create_test_environment()
+            sys.exit(0)
+        elif args.add_ds:
+            add_datasource(args.add_ds, ds_registry)
+            generate_files(ds_registry, True)
+            sys.exit(0)
+        elif args.action_generate:
+            run_generate(ds_registry)
+            sys.exit(0)
+    elif is_test(args):
+        if args.generate:
+            run_generate(ds_registry)
+            # It's ok to call generate and then run some tests, so don't exit here.
+        if args.command == 'run-file':
+            output_dir = os.getcwd()
+            max_threads = get_level_of_parallelization(args)
+            sys.exit(run_file(args.run_file, output_dir, max_threads, args))
+        error_code = run_desired_tests(args, ds_registry)
+        sys.exit(error_code)
     elif args.command == 'action' and args.diff:
         tdvt_invocation = TdvtInvocation(from_args=args)
         run_diff(tdvt_invocation, args.diff)
@@ -696,20 +704,8 @@ def main():
     elif args.command == 'list' and args.list_ds is not None:
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
-    elif is_test(args):
-        if args.command == 'run-file':
-            rfile = Path(args.run_file)
-            output_dir = Path.cwd()
-            max_threads = get_level_of_parallelization(args)
-            if rfile.is_file():
-                sys.exit(run_file(rfile, output_dir, max_threads, args))
-            else:
-                logging.error("Unable to open " + rfile.__str__())
-                sys.exit(-1)
-        error_code = run_desired_tests(args, ds_registry)
-        sys.exit(error_code)
 
-    logging.error("Could not interpert arguments. Nothing done.")
+    logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
     sys.exit(-1)
 

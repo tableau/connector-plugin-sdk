@@ -135,9 +135,10 @@ class TestSet(object):
         for test in tests_to_run:
             for regex in regexes:
                 if re.search(regex, test.test_path) and test in final_test_list:
-                    logging.debug("Removing test that matched: " + ex)
+                    logging.debug("Removing test that matched: " + str(regex))
                     final_test_list.remove(test)
 
+        logging.debug("Found " + str(len(final_test_list)) + " tests to run after exclusions.")
         return sorted(final_test_list, key = lambda x: x.test_path)
 
     def get_exclusions(self):
