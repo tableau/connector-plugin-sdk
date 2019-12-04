@@ -8,26 +8,21 @@ import sys
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
-from zipfile import ZipFile
 import argparse
 import glob
 import json
-import logging
-import os
 import pathlib
 import queue
 import shutil
-import subprocess
 import threading
 import time
+import zipfile
 from pathlib import Path
 from typing import List
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
-from .config_gen.gentests import list_configs, list_config
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
-from .resources import make_temp_dir
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
@@ -102,12 +97,12 @@ class TestRunner():
         optional_dir_name = self.test_config.config_file.replace('.', '_')
         if is_logs is True:
             log_dir = os.path.join(src_dir, optional_dir_name)
-            glob_path = glob.glob(os.path.join(log_dir, 'log*.txt'))
-            glob_path.extend(glob.glob(os.path.join(log_dir, 'tabprotosrv*.txt')))
+            glob_path = glob.glob(os.path.join(log_dir, '*.txt'))
+            glob_path.extend(glob.glob(os.path.join(log_dir, '*.log')))
             glob_path.extend(glob.glob(os.path.join(log_dir, 'crashdumps/*')))
         else:
             glob_path = glob.glob(os.path.join(src_dir, 'actual.*'))
-        with ZipFile(dst, mode) as myzip:
+        with zipfile.ZipFile(dst, mode, zipfile.ZIP_DEFLATED) as myzip:
             for actual in glob_path:
                 path = pathlib.PurePath(actual)
                 file_to_be_zipped = path.name
