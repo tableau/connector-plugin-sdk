@@ -165,6 +165,14 @@ class BatchQueueWork(object):
                     self.add_expected_test_failure(t)
                     sys.stdout.write('.')
                     continue
+                elif self.is_skipped():
+                    self.handle_skipped_test_failure(t)
+                    sys.stdout.write('S')
+                    continue
+                elif self.is_disabled():
+                    self.handle_disabled_test_failure(t)
+                    sys.stdout.write('D')
+                    continue
                 elif self.is_error():
                     self.add_other_test_failure(t, test_count)
                     sys.stdout.write('E')
@@ -526,6 +534,8 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tdsname = os.path.splitext(os.path.split(tds_file)[1])[0]
     # Write the csv file.
     total_failed_tests = 0
+    total_skipped_tests = 0
+    total_disabled_tests = 0
     total_tests = 0
     for path, test_result in all_test_results.items():
         generated_sql = ''
@@ -533,7 +543,12 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         if not test_result or not test_result.get_test_case_count():
             csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
             if not test_result.all_passed():
-                total_failed_tests += 1
+                if test_result.is_disabled:
+                    total_disabled_tests += 1
+                elif test_result.is_skipped:
+                    total_skipped_tests += 1
+                else:
+                    total_failed_tests += 1
             total_tests += 1
         else:
             test_case_index = 0
@@ -544,12 +559,12 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
 
     file_out.close()
 
-    return total_failed_tests, total_tests
+    return total_failed_tests, total_skipped_tests, total_disabled_tests, total_tests
 
 
 def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     if not all_test_results:
-        return 0, 0
+        return 0, 0, 0, 0
     write_standard_test_output(all_test_results, output_dir)
     return write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
 
