@@ -18,7 +18,7 @@ import threading
 import time
 import zipfile
 from pathlib import Path
-from typing import List
+from typing import List, Tuple, Union
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
@@ -80,7 +80,7 @@ def do_test_queue_work(i, q):
 
 
 class TestRunner():
-    def __init__(self, test_set, test_config, lock, verbose, thread_id):
+    def __init__(self, test_set: TestSet, test_config: TdvtInvocation, lock, verbose, thread_id):
         threading.Thread.__init__(self)
         self.test_set = test_set
         self.test_config = test_config
@@ -210,7 +210,7 @@ def get_datasource_registry(platform):
     return reg
 
 
-def enqueue_single_test(args, ds_info: TestConfig, suite):
+def enqueue_single_test(args, ds_info: TestConfig, suite) -> Union[Tuple[None, None], Tuple[Union[SingleLogicalTestSet, SingleExpressionTestSet], TdvtInvocation]]:  # noqa: E501
     if not args.command == 'run-pattern' or not args.tds_pattern or (args.logical_pattern and args.expression_pattern):
         return None, None
 

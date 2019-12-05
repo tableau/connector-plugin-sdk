@@ -653,7 +653,7 @@ def run_tests_serial(tests):
     return all_test_results
 
 
-def run_tests(tdvt_test_config, test_set: List[TestSet]):
+def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
     output_dir = tdvt_test_config.output_dir if tdvt_test_config.output_dir else root_directory
