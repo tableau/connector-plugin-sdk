@@ -244,16 +244,16 @@ class ArgumentTest(unittest.TestCase):
 
     def test_list(self):
         parser = create_parser()
-        args = parser.parse_args(['list', '--ds'])
+        args = parser.parse_args(['list'])
         self.assertTrue(args.list_ds == '')
 
-        args = parser.parse_args(['list', '--ds', 'mydb'])
+        args = parser.parse_args(['list', 'mydb'])
         self.assertTrue(args.list_ds == 'mydb')
 
-        args = parser.parse_args(['list', '--logical_config'])
+        args = parser.parse_args(['list-logical-configs'])
         self.assertTrue(args.list_logical_configs == '')
 
-        args = parser.parse_args(['list', '--logical_config', 'mydb'])
+        args = parser.parse_args(['list-logical-configs', 'mydb'])
         self.assertTrue(args.list_logical_configs == 'mydb')
 
         #self.assertRaises(argparse.ArgumentError, parser.parse_args(['list', '--logical_config', 'mydb', '--ds']))

@@ -232,8 +232,8 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
     try:
         with run_file.open('r', encoding='utf8') as file:
             tests = json.load(file)
-    except:
-        logging.error("Error opening " + str(run_file))
+    except IOError as e:
+        logging.error("Error opening " + str(run_file) + " error: " + str(e))
         return
 
     delete_output_files(os.getcwd())
@@ -355,15 +355,11 @@ def get_level_of_parallelization(args):
     return max_threads
 
 list_usage_text = '''
-    Show all test suites
-        --ds
+    Show all test suites or list the contents of a specific suite.
+'''
 
-    See what a test suite consists of
-        --ds sqlserver
-        --ds standard
-
-    Show logical configs:
-        --logical-config
+list_logical_usage_text = '''
+    Show logical configs. The argument can be empty to list all, or you can specify a config by name.
 '''
 
 run_usage_text = '''
@@ -430,10 +426,11 @@ def create_parser():
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
-    list_parser = subparsers.add_parser('list', help='List information about tests and configurations.', usage=list_usage_text)
-    list_group = list_parser.add_mutually_exclusive_group(required=True)
-    list_group.add_argument('--ds', dest='list_ds', help='List datasource config.', required=False, default=None, const='', nargs='?')
-    list_group.add_argument('--logical_config', dest='list_logical_configs', help='List available logical configs.', required=False, default=None, const='', nargs='?')
+    list_parser = subparsers.add_parser('list', help='List information about datasource tests and suites.', usage=list_usage_text)
+    list_parser.add_argument(dest='list_ds', help='List datasource config.', default='', nargs='?')
+
+    list_logical_parser = subparsers.add_parser('list-logical-configs', help='List information about logical configurations.', usage=list_logical_usage_text)
+    list_logical_parser.add_argument(dest='list_logical_configs', help='List available logical configs.', default='', nargs='?')
 
     #Actions.
     action_group = subparsers.add_parser('action', help='Various non-test actions.', usage=action_usage_text)
@@ -698,10 +695,10 @@ def main():
         tdvt_invocation = TdvtInvocation(from_args=args)
         run_diff(tdvt_invocation, args.diff)
         sys.exit(0)
-    elif args.command == 'list' and args.list_logical_configs is not None:
+    elif args.command == 'list-logical-configs':
         print_logical_configurations(ds_registry, args.list_logical_configs)
         sys.exit(0)
-    elif args.command == 'list' and args.list_ds is not None:
+    elif args.command == 'list':
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
 
