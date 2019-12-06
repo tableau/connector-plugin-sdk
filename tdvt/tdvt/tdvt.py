@@ -18,7 +18,7 @@ import threading
 import time
 import zipfile
 from pathlib import Path
-from typing import List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
@@ -243,6 +243,8 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
     all_tdvt_test_configs = {}
     all_test_pairs = []
     failed_tests = tests['failed_tests']
+    skipped_tests = tests['skipped_tests']
+    failed_and_skipped_tests = {**failed_tests, **skipped_tests}
     # Go through the failed tests and group the ones that can be run together in a FileTestSet.
     for f in failed_tests:
         test_file_path = f['test_file']
@@ -524,7 +526,7 @@ def test_runner(all_tests, test_queue, max_threads):
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
-def run_tests_impl(tests: List[TestSet], max_threads, args):
+def run_tests_impl(tests: List[TestSet], max_threads, args) -> Optional[Tuple[int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
         sys.exit()
@@ -604,13 +606,17 @@ def run_tests_impl(tests: List[TestSet], max_threads, args):
     skipped_tests += skipped_smoke_tests
     disabled_tests += disabled_smoke_tests
     total_tests += total_smoke_tests
+    total_tests_run = total_tests - disabled_tests - skipped_tests
+    total_passed_tests = total_tests_run - failed_tests
 
     print('\n')
     print("Total time: " + str(time.time() - start_time))
+    print("Total passed tests: {}".format(total_passed_tests))
     print("Total failed tests: " + str(failed_tests))
     print("Total disabled tests: " + str(disabled_tests))
     print("Total skipped tests: " + str(skipped_tests))
-    print("Total tests ran: " + str(total_tests))
+    print("Total tests: " + str(total_tests))
+    print("Total tests run: " + str(total_tests_run))
 
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
