@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.1.2] - 2019-12-05
+- Fix a bug that broke the `run-file` command.
+
 ## [2.1.1] - 2019-12-04
 ### Added
 - Include all relevant log files in the zip archive.
