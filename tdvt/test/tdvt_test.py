@@ -15,6 +15,7 @@
 
 
 import io
+from pathlib import Path
 import shutil
 import subprocess
 import unittest
@@ -194,37 +195,37 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         # Now rerun the failed tests which should fail again,
         # indicating that the 'tested_sql' option was persisted correctly.
 
-        tests = enqueue_failed_tests(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
+        tests = enqueue_failed_tests(Path(get_path('tool_test', 'tdvt_output.json', __name__)), TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
 
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__),
+        tests = enqueue_failed_tests(Path(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__)),
                                      TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'exprtests.json', __name__),
+        tests = enqueue_failed_tests(Path(get_path('tool_test/rerun_failed_tests', 'exprtests.json', __name__)),
                                      TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__),
+        tests = enqueue_failed_tests(Path(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__)),
                                      TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 3)
 
     def test_combined_rerun_local_tests(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined_local.json', __name__),
+        tests = enqueue_failed_tests(Path(get_path('tool_test/rerun_failed_tests', 'combined_local.json', __name__)),
                                      TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 5)
 
     def test_logical_rerun_fail(self):
-        tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__),
+        tests = enqueue_failed_tests(Path(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__)),
                                      TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1, False)
@@ -244,16 +245,16 @@ class ArgumentTest(unittest.TestCase):
 
     def test_list(self):
         parser = create_parser()
-        args = parser.parse_args(['list', '--ds'])
+        args = parser.parse_args(['list'])
         self.assertTrue(args.list_ds == '')
 
-        args = parser.parse_args(['list', '--ds', 'mydb'])
+        args = parser.parse_args(['list', 'mydb'])
         self.assertTrue(args.list_ds == 'mydb')
 
-        args = parser.parse_args(['list', '--logical_config'])
+        args = parser.parse_args(['list-logical-configs'])
         self.assertTrue(args.list_logical_configs == '')
 
-        args = parser.parse_args(['list', '--logical_config', 'mydb'])
+        args = parser.parse_args(['list-logical-configs', 'mydb'])
         self.assertTrue(args.list_logical_configs == 'mydb')
 
         #self.assertRaises(argparse.ArgumentError, parser.parse_args(['list', '--logical_config', 'mydb', '--ds']))
