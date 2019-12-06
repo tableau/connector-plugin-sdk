@@ -1,13 +1,12 @@
 """
     Tableau Datasource Verification Tool
-    Run logical queiries and expression tests against datasources.
+    Run logical queries and expression tests against datasources.
 
 """
 
 import argparse
 import copy
 import csv
-from defusedxml.ElementTree import parse, ParseError
 import glob
 import json
 import logging
@@ -17,7 +16,9 @@ import subprocess
 import sys
 import time
 import zipfile
-from typing import Tuple
+
+from defusedxml.ElementTree import parse, ParseError
+from typing import Optional, Tuple
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
@@ -509,7 +510,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     return columns
 
 
-def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -> Tuple[int, int, int, int]:
+def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -> Optional[Tuple[int, int, int, int]]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
