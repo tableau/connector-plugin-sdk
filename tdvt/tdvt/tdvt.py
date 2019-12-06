@@ -379,13 +379,13 @@ run_usage_text = '''
     There are multiple suites of expression tests, for example, standard and LOD (level of detail). The config files that drive the tests
     are named expression_test.sqlserver.cfg and expression.lod.sqlserver.cfg.
     To run just one of those try entering part of the config name as an argument:
-        run postgres_odbc -e lod 
+        run postgres_odbc -e lod
 
 '''
 
 run_pattern_usage_text = '''
     Run one expression test against many datasources
-        run-pattern postgres_odbc --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds 
+        run-pattern postgres_odbc --exp exprtests/standard/setup.date.datepart.second*.txt --tdp cast_calcs.*.tds
 
     Run one logical query test against many datasources
         run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.B1713.?.xml --tdp cast_calcs.*.tds
@@ -688,7 +688,7 @@ def main():
         if args.command == 'run-file':
             output_dir = os.getcwd()
             max_threads = get_level_of_parallelization(args)
-            sys.exit(run_file(args.run_file, output_dir, max_threads, args))
+            sys.exit(run_file(Path(args.run_file), Path(output_dir), max_threads, args))
         error_code = run_desired_tests(args, ds_registry)
         sys.exit(error_code)
     elif args.command == 'action' and args.diff:
