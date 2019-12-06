@@ -17,7 +17,7 @@ import subprocess
 import sys
 import time
 import zipfile
-from typing import List
+from typing import Tuple
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
@@ -440,6 +440,8 @@ def get_tuple_display_limit():
 def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0):
     # A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
     passed = False
+    skipped = False
+    disabled = False
     matched_expected = None
     diff_count = None
     test_case_name = None
@@ -476,6 +478,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     passed = False
     if case.all_passed():
         passed = True
+    if case.is_skipped():
+        skipped = True
+    if case.is_disabled():
+        disabled = True
     generated_sql = case.get_sql_text()
     test_case_name = case.name
 
@@ -490,7 +496,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         expected_sql = expected_case.get_sql_text() if expected_case else ""
         expected_time = expected_case.execution_time if expected_case else ""
 
-    if not passed:
+    if skipped or disabled or not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_msg = test_result.saved_error_message if test_result.saved_error_message else error_msg
         error_type = test_result.get_error_type()
@@ -503,7 +509,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     return columns
 
 
-def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
+def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -> Tuple[int, int, int, int]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
@@ -543,16 +549,13 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         if not test_result or not test_result.get_test_case_count():
             csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
             if not test_result.all_passed():
-                if test_result.is_disabled:
-                    total_disabled_tests += 1
-                elif test_result.is_skipped:
-                    total_skipped_tests += 1
-                else:
-                    total_failed_tests += 1
+                total_failed_tests += 1
             total_tests += 1
         else:
             test_case_index = 0
             total_failed_tests += test_result.get_failure_count()
+            total_skipped_tests += test_result.get_skipped_count()
+            total_disabled_tests += test_result.get_disabled_count()
             total_tests += test_result.get_test_case_count()
             for case_index in range(0, test_result.get_test_case_count()):
                 csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, case_index))
