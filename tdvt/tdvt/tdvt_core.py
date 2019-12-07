@@ -18,7 +18,7 @@ import time
 import zipfile
 
 from defusedxml.ElementTree import parse, ParseError
-from typing import Optional, Tuple
+from typing import Dict, Optional, Tuple
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
@@ -415,13 +415,23 @@ def write_json_results(all_test_results):
     json_file.close()
 
 
-def write_standard_test_output(all_test_results, output_dir):
+def write_standard_test_output(all_test_results: Dict, output_dir: str):
     """Write the standard output. """
-    passed = [x for x in all_test_results.values() if x.all_passed() == True]
+    passed = [x for x in all_test_results.values()
+              if x.all_passed() == True
+              and x.test_set.test_is_enabled
+              and not x.test_set.test_is_skipped]
     failed = [x for x in all_test_results.values() if x.all_passed() == False]
+    disabled = [x for x in all_test_results.values()
+                if not x.test_set.test_is_enabled is False
+                and not x.test_set.test_is_skipped]
+    skipped = [x for x in all_test_results.values()
+              if x.test_set.test_is_skipped]
     output = {'harness_name': 'TDVT',
               'actual_exp_paths_relative_to': 'this',
               'successful_tests': passed,
+              'disabled_tests': disabled,
+              'skipped_tests': skipped,
               'failed_tests': failed
               }
     json_str = json.dumps(output, cls=TestOutputJSONEncoder)
