@@ -526,7 +526,7 @@ def test_runner(all_tests, test_queue, max_threads):
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
-def run_tests_impl(tests: List[TestSet], max_threads, args) -> Optional[Tuple[int, int, int, int]]:
+def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, args) -> Optional[Tuple[int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
         sys.exit()
