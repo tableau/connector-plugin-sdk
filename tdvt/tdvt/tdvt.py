@@ -539,7 +539,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
 
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        if test_set.smoke_test and not test_set.test_is_enabled is False:
+        if test_set.smoke_test:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
         else:
