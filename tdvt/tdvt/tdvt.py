@@ -566,21 +566,24 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     skipped_smoke_tests = 0
     disabled_smoke_tests = 0
     total_smoke_tests = 0
+    smoke_tests_run = 0
 
     if smoke_tests:
         smoke_test_threads = min(len(smoke_tests), max_threads)
-        print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.")
+        print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.\n")
 
-        failed_smoke_tests, disabled_smoke_tests, skipped_smoke_tests, total_smoke_tests = test_runner(
+        failed_smoke_tests, skipped_smoke_tests, disabled_smoke_tests, total_smoke_tests = test_runner(
             smoke_tests, smoke_test_queue, smoke_test_threads)
 
-        print("{} smoke test(s) ran.".format(total_smoke_tests))
+        smoke_tests_run = total_smoke_tests - disabled_smoke_tests
+
+        print("{} smoke test(s) ran. {} smoke tests disabled.".format(smoke_tests_run, disabled_smoke_tests))
 
         if failed_smoke_tests > 0:
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
             if require_smoke_test:
-                print("Smoke tests failed, exiting.")
+                print("\nSmoke tests failed, exiting.")
                 sys.exit(1)
 
         if require_smoke_test:
