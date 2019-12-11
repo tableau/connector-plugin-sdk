@@ -420,7 +420,8 @@ def write_standard_test_output(all_test_results: Dict, output_dir: str):
               if x.all_passed() is True
               and x.test_set.test_is_enabled
               and x.test_set.test_is_skipped is False]
-    failed = [x for x in all_test_results.values() if x.all_passed() is False]
+    failed = [x for x in all_test_results.values()
+              if x.all_passed() is False]
     disabled = [x for x in all_test_results.values()
                 if x.test_set.test_is_enabled is False
                 and x.test_set.test_is_skipped is False]
