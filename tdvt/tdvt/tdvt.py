@@ -131,6 +131,10 @@ class TestRunner():
 
                 existing_results['successful_tests'].extend(results['successful_tests'])
 
+                existing_results['skipped_tests'].extend(results['skipped_tests'])
+
+                existing_results['disabled_tests'].extend(results['disabled_tests'])
+
                 # Check the newly succeeding tests, and if they are in the existing failed
                 # test list, remove them from the failed test list since they now succeed
                 for element in results['successful_tests']:
