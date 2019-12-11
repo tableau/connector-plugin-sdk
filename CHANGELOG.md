@@ -6,7 +6,7 @@
 ### Changed
 ### Removed
 
-## 2019-12-10
+## 2019-12-11
 ### Added
 - New SQLite Extract-Only Sample
 - Removed unnecessary attribute from samples
