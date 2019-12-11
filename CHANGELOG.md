@@ -6,7 +6,7 @@
 - Removed unnecessary attribute from samples
 ### Changed
 ### Removed
-
+- Removed INITSTMT from MySQL ODBC sample so that intialSQL does not run twice. 
 ## 2019-03-29
 
 ### Added
