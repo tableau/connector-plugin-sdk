@@ -571,6 +571,9 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     total_smoke_tests = 0
     smoke_tests_run = 0
 
+    absolute_start_time = time.time()
+    smoke_test_run_time = 0
+
     if smoke_tests:
         smoke_test_threads = min(len(smoke_tests), max_threads)
         print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.\n")
@@ -581,6 +584,9 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
         smoke_tests_run = total_smoke_tests - disabled_smoke_tests
 
         print("{} smoke test(s) ran. {} smoke tests disabled.".format(smoke_tests_run, disabled_smoke_tests))
+
+        smoke_test_run_time = round(time.time() - absolute_start_time, 2)
+        print("Smoke tests ran in {} seconds.".format(smoke_test_run_time))
 
         if failed_smoke_tests > 0:
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
@@ -593,8 +599,8 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
             print("\nSmoke tests finished. Exiting.")
             sys.exit(0)
 
-    if failing_ds:
-        print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
+        if failing_ds:
+            print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
 
     final_work = []
 
