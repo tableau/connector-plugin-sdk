@@ -248,7 +248,6 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
     all_test_pairs = []
     failed_tests = tests['failed_tests']
     skipped_tests = tests['skipped_tests']
-    failed_and_skipped_tests = {**failed_tests, **skipped_tests}
     # Go through the failed tests and group the ones that can be run together in a FileTestSet.
     for f in failed_tests:
         test_file_path = f['test_file']
