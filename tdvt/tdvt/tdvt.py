@@ -620,15 +620,20 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     total_tests += total_smoke_tests
     total_tests_run = total_tests - disabled_tests - skipped_tests
     total_passed_tests = total_tests_run - failed_tests
+    now_time = time.time()
+    main_test_time = round(now_time - start_time, 2)
+    total_run_time = round(now_time - absolute_start_time, 2)
 
-    print('\n')
-    print("Total time: " + str(time.time() - start_time))
-    print("Total passed tests: {}".format(total_passed_tests))
-    print("Total failed tests: " + str(failed_tests))
-    print("Total disabled tests: " + str(disabled_tests))
-    print("Total skipped tests: " + str(skipped_tests))
-    print("Total tests: " + str(total_tests))
-    print("Total tests run: " + str(total_tests_run))
+    print('\nTest Count: {} tests'.format(total_tests))
+    print("\tPassed tests: {}".format(total_passed_tests))
+    print("\tFailed tests: " + str(failed_tests))
+    print("\tTests run: " + str(total_tests_run))
+    print("\tDisabled tests: " + str(disabled_tests))
+    print("\tSkipped tests: " + str(skipped_tests))
+    print("\nOther information:")
+    print("\tSmoke test time: {} seconds".format(smoke_test_run_time))
+    print("\tMain test time: {} seconds".format(main_test_time))
+    print("\tTotal time: {} seconds".format(total_run_time))
 
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
