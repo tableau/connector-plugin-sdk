@@ -122,7 +122,6 @@ class BatchQueueWork(object):
         result.error_status = TestErrorDisabledTest()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
-
     def is_timeout(self):
         return isinstance(self.error_state, TestErrorTimeout)
 
@@ -418,15 +417,16 @@ def write_json_results(all_test_results):
 def write_standard_test_output(all_test_results: Dict, output_dir: str):
     """Write the standard output. """
     passed = [x for x in all_test_results.values()
-              if x.all_passed() == True
+              if x.all_passed() is True
               and x.test_set.test_is_enabled
-              and not x.test_set.test_is_skipped]
-    failed = [x for x in all_test_results.values() if x.all_passed() == False]
+              and x.test_set.test_is_skipped is False]
+    failed = [x for x in all_test_results.values() if x.all_passed() is False]
     disabled = [x for x in all_test_results.values()
-                if not x.test_set.test_is_enabled is False
-                and not x.test_set.test_is_skipped]
+                if x.test_set.test_is_enabled is False
+                and x.test_set.test_is_skipped is False]
     skipped = [x for x in all_test_results.values()
-              if x.test_set.test_is_skipped]
+               if x.test_set.test_is_skipped
+               and x.test_set.test_is_enabled]
     output = {'harness_name': 'TDVT',
               'actual_exp_paths_relative_to': 'this',
               'successful_tests': passed,
