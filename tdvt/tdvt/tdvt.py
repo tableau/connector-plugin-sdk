@@ -18,7 +18,7 @@ import threading
 import time
 import zipfile
 from pathlib import Path
-from typing import List
+from typing import List, Optional, Tuple, Union
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
@@ -80,7 +80,7 @@ def do_test_queue_work(i, q):
 
 
 class TestRunner():
-    def __init__(self, test_set, test_config, lock, verbose, thread_id):
+    def __init__(self, test_set: TestSet, test_config: TdvtInvocation, lock, verbose, thread_id):
         threading.Thread.__init__(self)
         self.test_set = test_set
         self.test_config = test_config
@@ -131,6 +131,10 @@ class TestRunner():
 
                 existing_results['successful_tests'].extend(results['successful_tests'])
 
+                existing_results['skipped_tests'].extend(results['skipped_tests'])
+
+                existing_results['disabled_tests'].extend(results['disabled_tests'])
+
                 # Check the newly succeeding tests, and if they are in the existing failed
                 # test list, remove them from the failed test list since they now succeed
                 for element in results['successful_tests']:
@@ -175,12 +179,14 @@ class TestRunner():
 
         start_time = time.time()
         self.test_config.thread_id = self.thread_id
-        failed_tests, total_tests = run_tests(self.test_config, self.test_set)
+        failed_tests, skipped_tests, disabled_tests, total_tests = run_tests(self.test_config, self.test_set)
         logging.debug("\nFinished tdvt " + str(self.test_config) + "\n")
         print("\nFinished {0} {1} {2}\n".format(self.test_config.suite_name, self.test_config.config_file,
                                                 str(self.thread_id)))
 
         self.failed_tests = failed_tests
+        self.skipped_tests = skipped_tests
+        self.disabled_tests = disabled_tests
         self.total_tests = total_tests
 
 
@@ -208,7 +214,7 @@ def get_datasource_registry(platform):
     return reg
 
 
-def enqueue_single_test(args, ds_info: TestConfig, suite):
+def enqueue_single_test(args, ds_info: TestConfig, suite) -> Union[Tuple[None, None], Tuple[Union[SingleLogicalTestSet, SingleExpressionTestSet], TdvtInvocation]]:  # noqa: E501
     if not args.command == 'run-pattern' or not args.tds_pattern or (args.logical_pattern and args.expression_pattern):
         return None, None
 
@@ -241,6 +247,7 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
     all_tdvt_test_configs = {}
     all_test_pairs = []
     failed_tests = tests['failed_tests']
+    skipped_tests = tests['skipped_tests']
     # Go through the failed tests and group the ones that can be run together in a FileTestSet.
     for f in failed_tests:
         test_file_path = f['test_file']
@@ -506,16 +513,20 @@ def test_runner(all_tests, test_queue, max_threads):
         worker.start()
     test_queue.join()
     failed_tests = 0
+    skipped_tests = 0
+    disabled_tests = 0
     total_tests = 0
     for work in all_tests:
         if work.copy_files_and_cleanup():
             print("Left temp dir: " + work.temp_dir)
         failed_tests += work.failed_tests if work.failed_tests else 0
+        skipped_tests += work.skipped_tests if work.skipped_tests else 0
+        disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    return failed_tests, total_tests
+    return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
-def run_tests_impl(tests: List[TestSet], max_threads, args):
+def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, args) -> Optional[Tuple[int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
         sys.exit()
@@ -528,7 +539,7 @@ def run_tests_impl(tests: List[TestSet], max_threads, args):
 
     for test_set, test_config in tests:
         runner = TestRunner(test_set, test_config, lock, args.verbose, len(all_work) + 1)
-        if test_set.smoke_test and not test_set.test_is_enabled is False:
+        if test_set.smoke_test:
             smoke_tests.append(runner)
             smoke_test_queue.put(runner)
         else:
@@ -552,29 +563,41 @@ def run_tests_impl(tests: List[TestSet], max_threads, args):
 
     failing_ds = set()
     failed_smoke_tests = 0
+    skipped_smoke_tests = 0
+    disabled_smoke_tests = 0
     total_smoke_tests = 0
+    smoke_tests_run = 0
+
+    absolute_start_time = time.time()
+    smoke_test_run_time = 0
 
     if smoke_tests:
         smoke_test_threads = min(len(smoke_tests), max_threads)
-        print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.")
+        print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.\n")
 
-        failed_smoke_tests, total_smoke_tests = test_runner(smoke_tests, smoke_test_queue, smoke_test_threads)
+        failed_smoke_tests, skipped_smoke_tests, disabled_smoke_tests, total_smoke_tests = test_runner(
+            smoke_tests, smoke_test_queue, smoke_test_threads)
 
-        print("{} smoke test(s) ran.".format(total_smoke_tests))
+        smoke_tests_run = total_smoke_tests - disabled_smoke_tests
+
+        print("{} smoke test(s) ran. {} smoke tests disabled.".format(smoke_tests_run, disabled_smoke_tests))
+
+        smoke_test_run_time = round(time.time() - absolute_start_time, 2)
+        print("Smoke tests ran in {} seconds.".format(smoke_test_run_time))
 
         if failed_smoke_tests > 0:
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
             if require_smoke_test:
-                print("Smoke tests failed, exiting.")
+                print("\nSmoke tests failed, exiting.")
                 sys.exit(1)
 
         if require_smoke_test:
-            print("Smoke tests failed, exiting.")
+            print("\nSmoke tests finished. Exiting.")
             sys.exit(0)
 
-    if failing_ds:
-        print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
+        if failing_ds:
+            print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
 
     final_work = []
 
@@ -586,17 +609,30 @@ def run_tests_impl(tests: List[TestSet], max_threads, args):
 
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
-    failed_tests, total_tests = test_runner(final_work, test_queue, max_threads)
+    failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads)
 
     failed_tests += failed_smoke_tests
+    skipped_tests += skipped_smoke_tests
+    disabled_tests += disabled_smoke_tests
     total_tests += total_smoke_tests
+    total_tests_run = total_tests - disabled_tests - skipped_tests
+    total_passed_tests = total_tests_run - failed_tests
+    now_time = time.time()
+    main_test_time = round(now_time - start_time, 2)
+    total_run_time = round(now_time - absolute_start_time, 2)
 
-    print('\n')
-    print("Total time: " + str(time.time() - start_time))
-    print("Total failed tests: " + str(failed_tests))
-    print("Total tests ran: " + str(total_tests))
+    print('\nTest Count: {} tests'.format(total_tests))
+    print("\tPassed tests: {}".format(total_passed_tests))
+    print("\tFailed tests: " + str(failed_tests))
+    print("\tTests run: " + str(total_tests_run))
+    print("\tDisabled tests: " + str(disabled_tests))
+    print("\tSkipped tests: " + str(skipped_tests))
+    print("\nOther information:")
+    print("\tSmoke test time: {} seconds".format(smoke_test_run_time))
+    print("\tMain test time: {} seconds".format(main_test_time))
+    print("\tTotal time: {} seconds".format(total_run_time))
 
-    return failed_tests, total_tests
+    return failed_tests, skipped_tests, disabled_tests, total_tests
 
 def get_ds_list(ds):
     if not ds:
@@ -643,7 +679,7 @@ def run_desired_tests(args, ds_registry):
         else:
             test_sets.extend(enqueue_tests(ds_info, args, suite))
 
-    failed_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
+    failed_tests, skipped_tests, disabled_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
     return failed_tests
 
 

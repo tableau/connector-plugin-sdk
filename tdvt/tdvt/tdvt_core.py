@@ -1,13 +1,12 @@
 """
     Tableau Datasource Verification Tool
-    Run logical queiries and expression tests against datasources.
+    Run logical queries and expression tests against datasources.
 
 """
 
 import argparse
 import copy
 import csv
-from defusedxml.ElementTree import parse, ParseError
 import glob
 import json
 import logging
@@ -17,7 +16,9 @@ import subprocess
 import sys
 import time
 import zipfile
-from typing import List
+
+from defusedxml.ElementTree import parse, ParseError
+from typing import Dict, Optional, Tuple
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
@@ -121,7 +122,6 @@ class BatchQueueWork(object):
         result.error_status = TestErrorDisabledTest()
         self.add_test_result_error(test_result_file.test_file, result, False)
 
-
     def is_timeout(self):
         return isinstance(self.error_state, TestErrorTimeout)
 
@@ -164,6 +164,14 @@ class BatchQueueWork(object):
                 elif self.is_expected_error():
                     self.add_expected_test_failure(t)
                     sys.stdout.write('.')
+                    continue
+                elif self.is_skipped():
+                    self.handle_skipped_test_failure(t)
+                    sys.stdout.write('S')
+                    continue
+                elif self.is_disabled():
+                    self.handle_disabled_test_failure(t)
+                    sys.stdout.write('D')
                     continue
                 elif self.is_error():
                     self.add_other_test_failure(t, test_count)
@@ -406,13 +414,25 @@ def write_json_results(all_test_results):
     json_file.close()
 
 
-def write_standard_test_output(all_test_results, output_dir):
+def write_standard_test_output(all_test_results: Dict, output_dir: str):
     """Write the standard output. """
-    passed = [x for x in all_test_results.values() if x.all_passed() == True]
-    failed = [x for x in all_test_results.values() if x.all_passed() == False]
+    passed = [x for x in all_test_results.values()
+              if x.all_passed() is True
+              and x.test_set.test_is_enabled
+              and x.test_set.test_is_skipped is False]
+    failed = [x for x in all_test_results.values()
+              if x.all_passed() is False]
+    disabled = [x for x in all_test_results.values()
+                if x.test_set.test_is_enabled is False
+                and x.test_set.test_is_skipped is False]
+    skipped = [x for x in all_test_results.values()
+               if x.test_set.test_is_skipped
+               and x.test_set.test_is_enabled]
     output = {'harness_name': 'TDVT',
               'actual_exp_paths_relative_to': 'this',
               'successful_tests': passed,
+              'disabled_tests': disabled,
+              'skipped_tests': skipped,
               'failed_tests': failed
               }
     json_str = json.dumps(output, cls=TestOutputJSONEncoder)
@@ -432,6 +452,8 @@ def get_tuple_display_limit():
 def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0):
     # A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
     passed = False
+    skipped = False
+    disabled = False
     matched_expected = None
     diff_count = None
     test_case_name = None
@@ -468,6 +490,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     passed = False
     if case.all_passed():
         passed = True
+    if case.is_skipped():
+        skipped = True
+    if case.is_disabled():
+        disabled = True
     generated_sql = case.get_sql_text()
     test_case_name = case.name
 
@@ -482,7 +508,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         expected_sql = expected_case.get_sql_text() if expected_case else ""
         expected_time = expected_case.execution_time if expected_case else ""
 
-    if not passed:
+    if skipped or disabled or not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
         error_msg = test_result.saved_error_message if test_result.saved_error_message else error_msg
         error_type = test_result.get_error_type()
@@ -495,7 +521,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     return columns
 
 
-def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
+def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -> Optional[Tuple[int, int, int, int]]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
@@ -526,6 +552,8 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
     tdsname = os.path.splitext(os.path.split(tds_file)[1])[0]
     # Write the csv file.
     total_failed_tests = 0
+    total_skipped_tests = 0
+    total_disabled_tests = 0
     total_tests = 0
     for path, test_result in all_test_results.items():
         generated_sql = ''
@@ -538,18 +566,20 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir):
         else:
             test_case_index = 0
             total_failed_tests += test_result.get_failure_count()
+            total_skipped_tests += test_result.get_skipped_count()
+            total_disabled_tests += test_result.get_disabled_count()
             total_tests += test_result.get_test_case_count()
             for case_index in range(0, test_result.get_test_case_count()):
                 csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, case_index))
 
     file_out.close()
 
-    return total_failed_tests, total_tests
+    return total_failed_tests, total_skipped_tests, total_disabled_tests, total_tests
 
 
 def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     if not all_test_results:
-        return 0, 0
+        return 0, 0, 0, 0
     write_standard_test_output(all_test_results, output_dir)
     return write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
 
@@ -638,7 +668,7 @@ def run_tests_serial(tests):
     return all_test_results
 
 
-def run_tests(tdvt_test_config, test_set: List[TestSet]):
+def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
     output_dir = tdvt_test_config.output_dir if tdvt_test_config.output_dir else root_directory
