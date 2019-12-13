@@ -101,6 +101,10 @@ class BaseTDVTTest(unittest.TestCase):
             rt.set_tabquery_paths(env_tabquery, env_tabquery, env_tabquery)
             self.test_config.set_run_time_test_config(rt)
 
+        if self.test_config.tested_run_time_config:
+            self.assertTrue(tabquerycli_exists(self.test_config.tested_run_time_config.tabquery_paths))
+        else:
+            self.assertTrue(tabquerycli_exists())
         self.test_config.output_dir = make_temp_dir([self.test_config.suite_name])
 
     def tearDown(self):
