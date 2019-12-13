@@ -163,7 +163,7 @@ Change all possible items and verify that changes are applied.
 
    ![]({{ site.baseurl }}/assets/mt-no-extract-error.png) 
 
-### Download a workbook
+### Download and open a workbook with the connector missing
 
 1. Remove your connector.
 
