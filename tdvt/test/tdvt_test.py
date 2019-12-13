@@ -223,6 +223,11 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 5)
 
+    def test_failed_rerun(self):
+        tests = enqueue_failed_tests(Path(get_path('tool_test/rerun_failed_tests', 'failed_tests.json', __name__)),
+                                     TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
+        self.assertTrue(tests[0][0].get_expected_message() == "Invalid username or password", "Expected message was not read in correctly.")
+
     def test_logical_rerun_fail(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__),
                                      TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
