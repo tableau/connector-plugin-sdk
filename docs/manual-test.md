@@ -17,7 +17,7 @@ Be sure that you complete all the following steps before you begin the manual te
 
 ### On Tableau Desktop
 
-1. Launch Tableau Desktop using `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example:
+5. Launch Tableau Desktop using `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example:
 
     On Windows:
 
@@ -35,8 +35,8 @@ Be sure that you complete all the following steps before you begin the manual te
 
 ### On Tableau Server
 
-1.	For each server node, follow step 4 above under **Before you begin**.
-1.	Set the native_api.connect_plugins_path option. For example:
+6.	For each server node, follow step 4 above under **Before you begin**.
+7.	Set the native_api.connect_plugins_path option. For example:
 
     ```
     tsm configuration set -k native_api.connect_plugins_path -v D:/tableau_connectors 
@@ -50,7 +50,7 @@ Be sure that you complete all the following steps before you begin the manual te
     tsm configuration set -k native_api.connect_plugins_path -v /var/tmp/plugins –force-keys
     ```
 
-1.	Run the following command to apply the pending configuration changes. This will restart the server.
+8.	Run the following command to apply the pending configuration changes. This will restart the server.
 
     ```
     tsm pending-changes apply
