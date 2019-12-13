@@ -17,7 +17,7 @@ Be sure that you complete all the following steps before you begin the manual te
 
 ### On Tableau Desktop
 
-5. Launch Tableau Desktop using `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example:
+1. Launch Tableau Desktop using `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example:
 
     On Windows:
 
@@ -35,8 +35,8 @@ Be sure that you complete all the following steps before you begin the manual te
 
 ### On Tableau Server
 
-6.	For each server node, follow step 4 above under **Before you begin**.
-7.	Set the native_api.connect_plugins_path option. For example:
+1.	For each server node, follow step 4 above under **Before you begin**.
+1.	Set the native_api.connect_plugins_path option. For example:
 
     ```
     tsm configuration set -k native_api.connect_plugins_path -v D:/tableau_connectors 
@@ -50,7 +50,7 @@ Be sure that you complete all the following steps before you begin the manual te
     tsm configuration set -k native_api.connect_plugins_path -v /var/tmp/plugins –force-keys
     ```
 
-8.	Run the following command to apply the pending configuration changes. This will restart the server.
+1.	Run the following command to apply the pending configuration changes. This will restart the server.
 
     ```
     tsm pending-changes apply
@@ -77,11 +77,11 @@ If your company name doesn't display, check to see if **company name** is define
 
 Connect and cancel. 
 
-* After you click your connector, close the window. It should return to previous window without error.
+* After you click your connector, close the window. It should return to the previous window without error.
  
    ![]({{ site.baseurl }}/assets/mt-cancel.png) 
 
-Make valid entries in each field (Server, Username, password, Port etc.) and verify that you can connect.
+Make valid entries in each field (Server, Username, Password, Port, etc.) and verify that you can connect.
 
 * Verify that the default Connection name is correct, and that you can change it.
  
@@ -96,12 +96,18 @@ Make valid entries in each field (Server, Username, password, Port etc.) and ver
    Select the **Require SSL** check box, and then click **Sign In**.
 
    ![]({{ site.baseurl }}/assets/mt-connect-ssl.png) 
+   
+* Verify that you can duplicate the data source and that the duplicate source name has "(copy)" appended to the end.
+
+   ![]({{ site.baseurl }}/assets/mt-duplicate.png) 
+  
+   ![]({{ site.baseurl }}/assets/mt-duplicate-copy.png) 
  
 * Verify that the data source connection properties are correct.
  
-    ![]({{ site.baseurl }}/assets/mt-prop-menu.png) 
+   ![]({{ site.baseurl }}/assets/mt-prop-menu.png) 
 
-    ![]({{ site.baseurl }}/assets/mt-properties.png) 
+   ![]({{ site.baseurl }}/assets/mt-properties.png) 
 
 ### Test extracts
 
@@ -137,6 +143,35 @@ Change all possible items and verify that changes are applied.
 
       ![]({{ site.baseurl }}/assets/mt-new-server.png) 
  
+### Open a workbook with the connector missing
+
+1. Create a workbook with a live connection using your connector and save as a .twb file. 
+
+1. Close Tableau Desktop and remove your connector.
+
+1. Open Tableau Desktop and open the workbook you created. Verify that an error message displays:
+
+   ![]({{ site.baseurl }}/assets/mt-missing-connector-error.png) 
+ 
+### Connect to a published data source with the connector missing
+
+1. Remove your connector.
+
+1. Use Tableau Desktop to connect to a published data source with an extract. You should be able to connect without errors.
+
+1. Use Tableau Desktop to connect to a published data source without an extract. Verify that an error message displays:
+
+   ![]({{ site.baseurl }}/assets/mt-no-extract-error.png) 
+
+### Download a workbook
+
+1. Remove your connector.
+
+1. Download a workbook with an extract from Tableau Server and open it in Tableau Desktop. The workbook should open without errors.
+
+1. Download a workbook without an extract from Tableau Server and open it in Tableau Desktop. Verify that an error message displays:
+
+   ![]({{ site.baseurl }}/assets/mt-wkbk-no-extract-error.png) 
 
 ### Test localization
 
