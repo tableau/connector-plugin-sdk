@@ -41,6 +41,8 @@ class TestSet(object):
         self.smoke_test = smoke_test
         self.test_is_enabled = test_is_enabled
         self.test_is_skipped = test_is_skipped
+        self.test_list_cached = None
+        self.test_list_checked = False
 
 
     def is_logical_test(self):
@@ -63,24 +65,20 @@ class TestSet(object):
            Return the sorted list of tests.
 
         """
-        final_test_list = self.generate_test_file_list_from_config()
+        if self.test_list_checked == True:
+            return self.test_list_cached
 
-        logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
-        if len(final_test_list) == 0:
-            logging.warning("Did not find any tests to run.")
-            print("Did not find any tests to run.")
-            return final_test_list
+        final_test_list = self.__generate_test_file_list()
 
-        for x in final_test_list:
-            logging.debug("final test path " + x.test_path)
-
-        return final_test_list
+        self.test_list_cached = final_test_list
+        self.test_list_checked = True
+        return self.test_list_cached
 
     def get_test_dirs(self):
         return (self.root_dir, get_local_test_dir())
 
-    def generate_test_file_list_from_config(self):
-        """Read the config file and generate a list of tests."""
+    def __generate_test_file_list(self):
+        """Private function to generate the list of tests."""
         allowed_tests = []
         exclude_tests = self.get_exclusions()
         exclude_tests.append('expected.')
@@ -182,7 +180,7 @@ class FileTestSet(TestSet):
     def append_test_file(self, file_path):
         self.test_paths.append(file_path)
 
-    def generate_test_file_list_from_config(self):
+    def generate_test_file_list(self):
         tests_to_run = []
         for test_file in self.test_paths:
             added_test = False

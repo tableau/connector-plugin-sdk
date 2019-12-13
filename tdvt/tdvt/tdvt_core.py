@@ -267,7 +267,7 @@ def do_work(work):
     if work.test_set.test_is_skipped is True:
         work.error_state = TestErrorSkippedTest()
 
-    final_test_list = work.test_set.generate_test_file_list_from_config()
+    final_test_list = work.test_set.generate_test_file_list()
     work.run(final_test_list)
     work.process_test_results(final_test_list)
 
