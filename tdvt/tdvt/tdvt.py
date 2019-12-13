@@ -573,7 +573,6 @@ def run_tests_impl(tests: List[TestSet], max_threads, args):
                 sys.exit(1)
 
         if require_smoke_test:
-            print("Smoke tests failed, exiting.")
             sys.exit(0)
 
     if failing_ds:
