@@ -65,7 +65,7 @@ class TestSet(object):
            Return the sorted list of tests.
 
         """
-        if self.test_list_checked == True:
+        if self.test_list_checked:
             return self.test_list_cached
 
         final_test_list = self.__generate_test_file_list()
