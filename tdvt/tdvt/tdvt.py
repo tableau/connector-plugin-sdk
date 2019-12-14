@@ -226,6 +226,10 @@ def enqueue_single_test(args, ds_info: TestConfig, suite) -> Union[Tuple[None, N
         test_set = SingleExpressionTestSet(suite, get_root_dir(), args.expression_pattern, args.tds_pattern,
                                            args.test_pattern_exclude, ds_info)
 
+    #Only try and run tests if there are some.
+    if not test_set.generate_test_file_list():
+        return None, None
+
     tdvt_invocation = TdvtInvocation(from_args=args, test_config=ds_info)
     tdvt_invocation.tds = test_set.tds_name
     tdvt_invocation.logical = test_set.is_logical
@@ -333,7 +337,7 @@ def enqueue_tests(ds_info, args, suite):
         return test_set_configs
 
     for x in tests:
-        if not x.generate_test_file_list_from_config():
+        if not x.generate_test_file_list():
             logging.error("No tests found for config " + str(x))
             return test_set_configs
 
@@ -672,9 +676,10 @@ def run_desired_tests(args, ds_registry):
                 print("Setting cannot apply since you are running multiple datasources.")
 
         suite = ds
-        single_test, single_test_config = enqueue_single_test(args, ds_info, suite)
-        if single_test:
-            test_sets.extend([(single_test, single_test_config)])
+        if args.command == 'run-pattern':
+            single_test, single_test_config = enqueue_single_test(args, ds_info, suite)
+            if single_test:
+                test_sets.extend([(single_test, single_test_config)])
         else:
             test_sets.extend(enqueue_tests(ds_info, args, suite))
 

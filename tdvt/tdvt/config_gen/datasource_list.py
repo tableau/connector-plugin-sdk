@@ -24,7 +24,7 @@ def print_ds(ds, ds_reg):
     for x in test_config.get_logical_tests():
         print("\t" * 2 + str(x))
         root_directory = get_root_dir()
-        tests = x.generate_test_file_list_from_config()
+        tests = x.generate_test_file_list()
         for test in tests:
             print("\t" * 3 + test.test_path)
 
@@ -32,7 +32,7 @@ def print_ds(ds, ds_reg):
     for x in test_config.get_expression_tests():
         print("\t" * 2 + str(x))
         root_directory = get_root_dir()
-        tests = x.generate_test_file_list_from_config()
+        tests = x.generate_test_file_list()
         for test in tests:
             print("\t" * 3 + test.test_path)
 
