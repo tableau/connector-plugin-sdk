@@ -540,6 +540,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name,
                 'duration' : obj.get_total_execution_time(),
+                'expected_message': obj.test_set.get_expected_message(),
                 'case' : test_cases,
                 'test_file' : obj.relative_test_file,
                 'test_type' : test_type,

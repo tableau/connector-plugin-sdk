@@ -17,3 +17,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compress the log file zip archive. This relies on the zlib module which seems to usually be installed by default.
 - More logging about test exclusions.
 - Update handling of args.run_file to use Path
+- Update TDVT to add `expected_message` to JSON output of failed tests.

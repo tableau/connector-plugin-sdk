@@ -254,6 +254,7 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
     # Go through the failed tests and group the ones that can be run together in a FileTestSet.
     for f in failed_tests:
         test_file_path = f['test_file']
+        expected_message = f['expected_message'] if 'expected_message' in f else ''
         test_root_dir = root_directory
 
         tds_base = os.path.split(f['tds'])[1]
@@ -295,7 +296,7 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
 
         if not current_test_set:
             current_test_set = FileTestSet(suite_name, test_root_dir, test_set_unique_id, tds, tdvt_invocation.logical, suite_name,
-                                           password_file)
+                                           password_file, expected_message)
             if tdvt_invocation.logical:
                 test_set_config.add_logical_testset(current_test_set)
             else:
