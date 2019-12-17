@@ -869,7 +869,39 @@ class ResultsExceptionTest(unittest.TestCase):
             actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
             self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
             self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
+    def test_process_error_output_json_expected(self):
+        error_state = TestErrorExpected
+        proc_error_code = 1
+        test_set_expected = MockTestSet('not_used', 'not used', 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        test_set_expected.expected_message = 'Invalid username or password'
+        error_message = test_set_expected.expected_message
+        mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, test_set_expected, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+        self.check_errors(error_message, error_state, mock_batch)
 
+        expected_json = '{"suite": "", "class": "TDVT", "test_name": ".mytest", "duration": 0, "expected_message": "Invalid username or password", "case": "mytest", "test_file": ".//e/suite1/setup.mytest.txt", "test_type": "-e", "test_config": {"tested_sql": false, "tested_tuples": true, "output_dir": "", "logical": false, "config_file": "", "suite_name": "", "d_override": "", "verbose": false, "tds": "", "noheader": false, "tabquery_path": "", "thread_count": 6}, "tds": "", "password_file": "", "expected": ""}'
+        for test_file in mock_batch.results:
+            json_str = json.dumps(mock_batch.results[test_file], cls=TestOutputJSONEncoder)
+            print(json_str)
+            self.assertEqual(json_str, expected_json)
+            self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
+            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
+
+    def test_process_error_output_json_not_expected(self):
+            error_state = TestErrorExpected
+            proc_error_code = 1
+            test_set_expected = MockTestSet('not_used', 'not used', 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+            test_set_expected.expected_message = 'Invalid username or password'
+            error_message = test_set_expected.expected_message
+            mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, test_set_expected, subprocess.CalledProcessError(proc_error_code, 'test', error_message))
+            self.check_errors(error_message, error_state, mock_batch)
+
+            expected_json = '{"suite": "", "class": "TDVT", "test_name": ".mytest", "duration": 0, "expected_message": "Unexpected_message", "case": "mytest", "test_file": ".//e/suite1/setup.mytest.txt", "test_type": "-e", "test_config": {"tested_sql": false, "tested_tuples": true, "output_dir": "", "logical": false, "config_file": "", "suite_name": "", "d_override": "", "verbose": false, "tds": "", "noheader": false, "tabquery_path": "", "thread_count": 6}, "tds": "", "password_file": "", "expected": ""}'
+            for test_file in mock_batch.results:
+                json_str = json.dumps(mock_batch.results[test_file], cls=TestOutputJSONEncoder)
+                print(json_str)
+                self.assertEqual(json_str, expected_json)
+                self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
+                self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
 
     def test_process_timeout_multiple(self):
         test_name = 'setup.mytest.txt'
