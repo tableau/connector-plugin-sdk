@@ -881,7 +881,6 @@ class ResultsExceptionTest(unittest.TestCase):
         expected_json = '{"suite": "", "class": "TDVT", "test_name": ".mytest", "duration": 0, "expected_message": "Invalid username or password", "case": "mytest", "test_file": ".//e/suite1/setup.mytest.txt", "test_type": "-e", "test_config": {"tested_sql": false, "tested_tuples": true, "output_dir": "", "logical": false, "config_file": "", "suite_name": "", "d_override": "", "verbose": false, "tds": "", "noheader": false, "tabquery_path": "", "thread_count": 6}, "tds": "", "password_file": "", "expected": ""}'
         for test_file in mock_batch.results:
             json_str = json.dumps(mock_batch.results[test_file], cls=TestOutputJSONEncoder)
-            print(json_str)
             self.assertEqual(json_str, expected_json)
             self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
             self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
@@ -898,7 +897,6 @@ class ResultsExceptionTest(unittest.TestCase):
             expected_json = '{"suite": "", "class": "TDVT", "test_name": ".mytest", "duration": 0, "expected_message": "Unexpected_message", "case": "mytest", "test_file": ".//e/suite1/setup.mytest.txt", "test_type": "-e", "test_config": {"tested_sql": false, "tested_tuples": true, "output_dir": "", "logical": false, "config_file": "", "suite_name": "", "d_override": "", "verbose": false, "tds": "", "noheader": false, "tabquery_path": "", "thread_count": 6}, "tds": "", "password_file": "", "expected": ""}'
             for test_file in mock_batch.results:
                 json_str = json.dumps(mock_batch.results[test_file], cls=TestOutputJSONEncoder)
-                print(json_str)
                 self.assertEqual(json_str, expected_json)
                 self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
                 self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
