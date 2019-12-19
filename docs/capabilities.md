@@ -42,6 +42,7 @@ CAP_SELECT_INTO | Set to 'yes' if Tableau can create a table on the fly from the
 CAP_SELECT_TOP_INTO | Set to 'yes' if Tableau can use a TOP or LIMIT row-limiting clause when creating a table from a query resultset. | &ndash; | **<span style="color:red">?</span>**   
 CAP_ODBC_METADATA_FORCE_UTF8_TEMP_TABLE_COLUMN_SIZE | Set to 'yes' if when creating temp tables specify the size of varchar columns in bytes. | &ndash; | &ndash;
 CAP_TEMP_TABLES_NOT_SESSION_SCOPED | Set to 'yes' if this datasource uses regular tables to simulate temp tables. Temporary table creation is still controlled by CAP_CREATE_TEMP_TABLE or CAP_SELECT_INTO | &ndash; | &ndash; 
+CAP_SUPPRESS_TEMP_TABLE_CHECKS | Set to 'yes' to skip the connection time check that determines if the user has permission to create temp tables. | no | no 
 
 ## String Splits 
 
