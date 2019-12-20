@@ -83,7 +83,7 @@ Many things might change, but the most likely changes are how a connector is pac
 Support links that are not fully qualified (ie include the https:// header) will throw an error when the user clicks on them. This only affects in-development connectors, as we check for this when packaging a connector into a Taco.
 
 
-## Recenlty Fixed
+## Recently Fixed
 **(Mac Only) Packaged Connectors (.taco files) throws unexpected error in 2019.4**
 You can work around this by skipping signature verification with the command line argument `-DDisableVerifyConnectorPluginSignature=true`.
 Fixed in 2019.4.1.
