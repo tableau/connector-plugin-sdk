@@ -65,6 +65,7 @@ connectionProperties.js
             props["jaasLogin"] = "false";    
         }   
 ```
+Note: Tableau supports RunAs authentication only on Linux. For configuring Runas authentication on Tableau Server, see this [article](https://help.tableau.com/current/server-linux/en-us/kerberos_runas_linux.htm). 
 
 ### Viewer Credentials authentication
 connectionProperties.js
@@ -89,4 +90,10 @@ manifest.xml
       <customization name="CAP_AUTH_KERBEROS_IMPERSONATE" value="yes"/>
 ```
 
-Note: For Tableau Server configuration, refer to these articles [server-on-linux](https://help.tableau.com/current/server-linux/en-us/kerberos_delegation.htm),  [server-on-windows](https://help.tableau.com/current/server/en-us/kerberos_delegation.htm) 
+Notes: 
+1. For configuring Kerberos delegation on Tableau Server Linux, refer to this [article](https://help.tableau.com/current/server-linux/en-us/kerberos_delegation.htm). 
+2. For configuring Kerberos delegation on Tableau Server Windows. in addition to the steps mentioned [here](https://help.tableau.com/current/server/en-us/kerberos_delegation.htm), also execute the below steps before running `tsm pending-changes apply`
+```
+    tsm configuration set -k native_api.datasource_impersonation_runas_principal -v <delegation/Run As account user or principal>
+    tsm configuration set -k native_api.datasource_impersonation_runas_keytab_path -v <path-to-file>kerberos.keytab
+```
