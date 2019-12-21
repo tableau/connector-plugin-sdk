@@ -1,0 +1,12 @@
+<connection-dialog class='postgres_jdbc_kerberos'>
+  <connection-config>
+    <authentication-mode value='ComboBoxIntegrated'/>
+    <authentication-options>
+      <option name="UseWindows" value="auth-integrated" />
+      <option name="UsernameAndPassword" value="username-password" />
+    </authentication-options>
+	<db-name-prompt value="Database: " />
+    <port-prompt value="Port: " default="5432" />
+    <show-ssl-checkbox value="true" />
+  </connection-config>
+</connection-dialog>
