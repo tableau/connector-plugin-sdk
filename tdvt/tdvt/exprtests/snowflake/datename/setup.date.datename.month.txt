@@ -1,0 +1,4 @@
+DATENAME('month', #2018-12-29#) // Sunday, 2018-W52
+
+// Test without literal to test non-empty groupby clause
+DATENAME('month', [date0])

@@ -1,0 +1,46 @@
+<results>
+  <test name='DATENAME(&apos;month&apos;, #2018-12-29#) // Sunday, 2018-W52'>
+    <sql>
+      SELECT TO_CHAR(&apos;2018-12-29&apos;::DATE, &apos;MMMM&apos;) AS &quot;TEMP(Test)(1876910820)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;HAVING (COUNT(1) &gt; 0)
+    </sql>
+    <query-time>
+      316.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(1876910820)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;December&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATENAME(&apos;month&apos;, [date0])'>
+    <sql>
+      SELECT TO_CHAR(&quot;CALCS&quot;.&quot;date0&quot;, &apos;MMMM&apos;) AS &quot;TEMP(Test)(2806871772)(0)&quot;&#10;FROM &quot;PUBLIC&quot;.&quot;CALCS&quot; &quot;CALCS&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      188.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(2806871772)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;April&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;July&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;June&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;November&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
