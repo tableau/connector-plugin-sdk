@@ -6,8 +6,8 @@ This project consists of documentation, example files, the Tableau Datasource Ve
 
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
-| Connector Packager SDK (Beta) for Tableau 2019.3 | 10-02-2019         |
-| TDVT                                             | 2.0.0 (10-29-2019) |
+| Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
+| TDVT                                             | 2.1.2 (12-05-2019) |
 | Connector Packager                               | 0.0.1 (10-03-2019) |
 
 * [Why Connectors?](#why-connectors)

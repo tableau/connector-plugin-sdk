@@ -1,5 +1,6 @@
-import os
 import logging
+import os
+import sys
 
 from argparse import ArgumentParser
 
@@ -33,7 +34,7 @@ def create_arg_parser() -> ArgumentParser:
     return parser
 
 
-def init_logging(log_path: str, verbose: bool = False) -> logging.Logger:
+def init_logging(log_path: Path, verbose: bool = False) -> logging.Logger:
     # Create logger.
     logger = logging.getLogger('packager_logger')
     logger.setLevel(logging.DEBUG)
@@ -60,10 +61,24 @@ def init_logging(log_path: str, verbose: bool = False) -> logging.Logger:
     return logger
 
 
+def log_path_checker(path_to_logs: str) -> Path:
+    proper_path = Path(path_to_logs)
+    if os.path.isdir(path_to_logs):
+        print("The log path {} exists".format(str(proper_path)))
+    else:
+        print("The specified log path does not exist - attempting to create " + path_to_logs)
+        try:
+            os.mkdir(path_to_logs)
+            logging.info("Created " + path_to_logs)
+        except Exception:
+            print("Unable to create log directory. Exiting.")
+            sys.exit(-1)
+    return Path(Path(path_to_logs) / 'packaging_logs.txt')
+
 def main():
     parser = create_arg_parser()
     args = parser.parse_args()
-    log_file = args.log_path + '/packaging_log.txt'
+    log_file = log_path_checker(args.log_path)
     logger = init_logging(log_file, args.verbose)
 
     path_from_args = Path(args.input_dir)
@@ -79,7 +94,7 @@ def main():
     if files_to_package and validate_all_xml(files_to_package, path_from_args):
         logger.info("Validation succeeded.")
     else:
-        logger.info("Validation failed. Check " + log_file + " for more information.")
+        logger.info("Validation failed. Check " + str(log_file) + " for more information.")
         return
 
     # Double check that all files exist
@@ -98,7 +113,7 @@ def main():
     package_name = xmlparser.class_name + PACKAGED_EXTENSION
 
     if not jdk_create_jar(path_from_args, files_to_package, package_name, package_dest_path):
-        logger.info("Taco packaging failed. Check " + log_file + " for more information.")
+        logger.info("Taco packaging failed. Check " + str(log_file) + " for more information.")
         return
 
     if args.package_only:
@@ -109,11 +124,11 @@ def main():
     keystore_from_args = args.keystore
 
     if not validate_signing_input(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.debug("Signing input validation failed. check " + log_file + " for more information.")
+        logger.debug("Signing input validation failed. check " + str(log_file) + " for more information.")
         return
 
     if not jdk_sign_jar(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.info("Signing failed. check console output and " + log_file + " for more information.")
+        logger.info("Signing failed. check console output and " + str(log_file) + " for more information.")
         return
 
 
