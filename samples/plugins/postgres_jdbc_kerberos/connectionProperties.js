@@ -13,7 +13,7 @@
             props["user"] = str;
             props["gsslib"] = "gssapi";	 
             props["jaasLogin"] = "false";    
-        } else {
+        } else if(connectionHelper.GetPlatform() == "win") {
             // property for SSPI on Tableau Desktop
             props["gsslib"] = "sspi";	 
         }         
