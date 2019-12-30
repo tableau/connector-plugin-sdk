@@ -2,7 +2,7 @@ name: TDVT CI
 on: [push]
 
 jobs:
-  build:
+  test:
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
