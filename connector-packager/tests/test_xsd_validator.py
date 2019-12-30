@@ -26,6 +26,7 @@ class TestXSDValidator(unittest.TestCase):
 
         self.assertTrue(validate_all_xml(files_list, test_folder), "Valid connector not marked as valid")
 
+        print("\nTest broken xml. Throws a XML validation error.")
         test_folder = TEST_FOLDER / Path("broken_xml")
 
         files_list = [ConnectorFile("manifest.xml", "manifest")]
@@ -43,16 +44,19 @@ class TestXSDValidator(unittest.TestCase):
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                         "Valid XML file not marked as valid")
 
+        print("\nTest big manifst. Throws XML validation error.")
         test_file = TEST_FOLDER / Path("big_manifest/manifest.xml")
 
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "Big XML file marked as valid")
 
+        print("\nTest broken xml. Throws XML validation error.")
         test_file = TEST_FOLDER / Path("broken_xml/manifest.xml")
 
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML file that doesn't follow schema marked as valid")
 
+        print("\nTest malformed xml. Throws XML validation error.")
         test_file = TEST_FOLDER / Path("broken_xml/connectionResolver.tdr")
         file_to_test = ConnectorFile("connectionResolver.tdr", "connection-resolver")
 
