@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Improve command line argument parsing: detect duplicated option -d/--dest
+- Update `package.py` to create directory for logs if it does not exist.
+- Change wording for -l flag
+- Update packaging unit tests to be more descriptive on the command line.
 
 ## [0.0.1] - 10-3-2019
 Initial release of the Connector Packaging Tool

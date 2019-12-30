@@ -94,6 +94,12 @@ class DiffTest(unittest.TestCase):
 class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
         self.test_config = TdvtInvocation()
+        env_tabquery = os.environ.get('TABQUERY_CLI_PATH')
+        if env_tabquery:
+            rt = RunTimeTestConfig()
+            rt.set_tabquery_paths(env_tabquery, env_tabquery, env_tabquery)
+            self.test_config.set_run_time_test_config(rt)
+
         self.test_config.output_dir = make_temp_dir([self.test_config.suite_name])
 
     def tearDown(self):
@@ -188,38 +194,38 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         # Now rerun the failed tests which should fail again,
         # indicating that the 'tested_sql' option was persisted correctly.
 
-        tests = enqueue_failed_tests(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, None)
+        tests = enqueue_failed_tests(get_path('tool_test', 'tdvt_output.json', __name__), TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
 
         self.check_results(all_test_results, 1, False)
 
     def test_logical_rerun(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical.json', __name__),
-                                     TEST_DIRECTORY, None)
+                                     TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1)
 
     def test_expression_rerun(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'exprtests.json', __name__),
-                                     TEST_DIRECTORY, None)
+                                     TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 2)
 
     def test_combined_rerun(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined.json', __name__),
-                                     TEST_DIRECTORY, None)
+                                     TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 3)
 
     def test_combined_rerun_local_tests(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'combined_local.json', __name__),
-                                     TEST_DIRECTORY, None)
+                                     TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 5)
 
     def test_logical_rerun_fail(self):
         tests = enqueue_failed_tests(get_path('tool_test/rerun_failed_tests', 'logical_compare_sql.json', __name__),
-                                     TEST_DIRECTORY, None)
+                                     TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
         self.check_results(all_test_results, 1, False)
 
