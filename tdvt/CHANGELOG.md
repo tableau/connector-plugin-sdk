@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update smoke tests to count skipped & disabled tests as "pass". Also update the command line results from a TDVT run with more details.
 - Refactor list command. list is used with suites and list-logical-configs is just for logical configs.
 
+## [2.1.3] - 2019-12-30
+- Add tests specific to Snowflake.
+
 ## [2.1.2] - 2019-12-05
 - Fix a bug that broke the `run-file` command.
 

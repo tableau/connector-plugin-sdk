@@ -1,10 +1,7 @@
 import os
 import logging
 
-from imp import reload
 from pathlib import Path
-
-from .version import __version__
 
 
 PATH_ENVIRON = "PATH"
