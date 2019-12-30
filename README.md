@@ -6,7 +6,7 @@ This project consists of documentation, example files, the Tableau Datasource Ve
 
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
-| Connector Packager SDK (Beta) for Tableau 2019.3 | 10-02-2019         |
+| Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
 | TDVT                                             | 2.1.2 (12-05-2019) |
 | Connector Packager                               | 0.0.1 (10-03-2019) |
 
@@ -75,17 +75,22 @@ Many things might change, but the most likely changes are how a connector is pac
 
 [Visit the project website and documentation here.](https://tableau.github.io/connector-plugin-sdk/)
 
+
 # Known Issues
 
-**(Mac Only) Packaged Connectors (.taco files) throws unexpected error in 2019.4**
-You can work around this by skipping signature verification with the command line argument `-DDisableVerifyConnectorPluginSignature=true`.
-
+## Current
 **Support links that are not fully qualified throw error when clicked on**
 Support links that are not fully qualified (ie include the https:// header) will throw an error when the user clicks on them. This only affects in-development connectors, as we check for this when packaging a connector into a Taco.
 
+
+## Recently Fixed
+**(Mac Only) Packaged Connectors (.taco files) throws unexpected error in 2019.4**
+You can work around this by skipping signature verification with the command line argument `-DDisableVerifyConnectorPluginSignature=true`.
+Fixed in 2019.4.1.
+
 **The properties builder JavaScript truncates values containing the equals sign '=' in 2019.4**
 A bug in the JavaScript translation layer means that you cannot return values containing the '=' character from the JavaScript properties builder.
-
+Fixed in 2019.4.1.
 
 # Contributions
 

@@ -597,7 +597,10 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
                 sys.exit(1)
 
         if require_smoke_test:
+<<<<<<< HEAD
             print("\nSmoke tests finished. Exiting.")
+=======
+>>>>>>> origin/master
             sys.exit(0)
 
         if failing_ds:
