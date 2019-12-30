@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.1.3] - 2019-12-30
+- Add tests specific to Snowflake.
+
 ## [2.1.2] - 2019-12-05
 - Fix a bug that broke the `run-file` command.
 
