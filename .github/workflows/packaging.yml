@@ -1,4 +1,4 @@
-name: Packaging Tool CI
+name: Connector Packager CI
 on: [push]
 
 jobs:
