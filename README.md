@@ -1,6 +1,6 @@
 # Tableau Connector SDK - BETA
 
-![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg) [![Build Status](https://travis-ci.org/tableau/connector-plugin-sdk.svg?branch=master)](https://travis-ci.org/tableau/connector-plugin-sdk)
+![Tableau Supported](https://img.shields.io/badge/Support%20Level-Tableau%20Supported-53bd92.svg) [![Connector Packaging CI Status](https://github.com/tableau/connector-plugin-sdk/workflows/Connector%20Packager%20CI/badge.svg?branch=master)](https://github.com/tableau/connector-plugin-sdk/actions?query=workflow%3A%22Connector+Packager+CI%22+branch%3Amaster++) [![TDVT CI Status](https://github.com/tableau/connector-plugin-sdk/workflows/TDVT%20CI/badge.svg?branch=master)](https://github.com/tableau/connector-plugin-sdk/actions?query=workflow%3A%22TDVT+CI%22+branch%3Amaster)
 
 This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
