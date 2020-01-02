@@ -133,3 +133,15 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+# Connector Packager logs
+packager_tests_logs.txt
+packaging_logs.txt
+
+# TDVT logs
+tabquery_logs.zip
+tdvt_actuals_combined.zip
+tdvt_log_combined.txt
+tdvt_output_combined_failed.json
+tdvt_output_combined.json
+test_results_combined.csv
