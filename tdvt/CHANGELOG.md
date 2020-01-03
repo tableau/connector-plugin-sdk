@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.1.4] - 2020-02-02
+- Update smoke tests to count skipped & disabled tests as "pass". Also update the command line results from a TDVT run with more details.
+- Refactor list command. list is used with suites and list-logical-configs is just for logical configs.
+- Fixes test rerun bug.
+
 ## [2.1.3] - 2019-12-30
 - Add tests specific to Snowflake.
 
@@ -18,3 +23,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compress the log file zip archive. This relies on the zlib module which seems to usually be installed by default.
 - More logging about test exclusions.
 - Update handling of args.run_file to use Path
+- Update TDVT to add `expected_message` to JSON output of failed tests.
