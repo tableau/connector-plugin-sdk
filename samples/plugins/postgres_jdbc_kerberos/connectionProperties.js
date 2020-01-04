@@ -13,10 +13,12 @@
             props["user"] = str;
             props["gsslib"] = "gssapi";	 
             props["jaasLogin"] = "false";    
-        } else if(connectionHelper.GetPlatform() == "win") {
+        } else if(connectionHelper.GetPlatform() === "win") {
             // property for SSPI on Tableau Desktop
             props["gsslib"] = "sspi";	 
-        }         
+        } else if(connectionHelper.GetPlatform() === "mac") {
+            props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
+        }            
                   
     // username-password auth     
     } else if (attr[connectionHelper.attributeAuthentication] == "username-password"){
