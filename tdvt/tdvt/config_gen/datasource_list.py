@@ -332,8 +332,8 @@ def load_test(config, test_dir=get_root_dir()):
                                                 get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                test_path + 'connection_tests/calcs/', test_dir, get_password_file(sect),
-                                                get_expected_message(sect), True,
+                                                test_path + 'connection_tests/calcs/', test_dir,
+                                                get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
