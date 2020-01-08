@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Update test names and setup file locations for CastCalcsTest, StaplesTest, and BadPasswordTest
 
 ## [2.1.4] - 2020-02-02
 - Update smoke tests to count skipped & disabled tests as "pass". Also update the command line results from a TDVT run with more details.
