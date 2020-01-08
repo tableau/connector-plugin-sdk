@@ -84,10 +84,17 @@ if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
         props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
 ```
 
-Notes:
-1. Before using the connector plugin, run `kinit user@REALM`  
-1. Next run `klist` to verify that the kerberos TGT appears in the cache. 
-1. Use the same user which is registered for kerberos in the database to open Tableau Desktop. From the terminal this can be achieved by the following commands 
+Other Configuration:
+* Only for postgres plugin - add this property `Settings.DisableNativeGSS`  as a `Boolean/YES` to the tableau plist on Mac at `/Library/Preferences/com.tableau.Tableau-<version>.plist`, for example, `/Library/Preferences/com.tableau.Tableau-2019.4.plist` . Create such a file if it does not already exist. To edit the plist in Mac OSX, you need xcode 6.4 or higher installed. Use open command to open the file in XCode.  
+```
+// Note - the below two commands require root privileges hence sudo is needed. 
+sudo open /Library/Preferences/com.tableau.Tableau-<version>.plist
+// clear the plist cache before opening Tableau 
+sudo killall -u root cfprefsd
+```
+* Before using the connector plugin, run `kinit user@REALM`  
+* Next run `klist` to verify that the kerberos TGT appears in the cache. 
+* Use the same user which is registered for kerberos in the database to open Tableau Desktop. From the terminal this can be achieved by the following commands 
 ```
 sudo su 
 su username
