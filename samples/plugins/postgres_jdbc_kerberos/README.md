@@ -85,14 +85,14 @@ if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
 ```
 
 Other Configuration:
-* Only for postgres plugin - add this property `Settings.DisableNativeGSS`  as a `Boolean/YES` to the tableau plist on Mac at `/Library/Preferences/com.tableau.Tableau-<version>.plist`, for example, `/Library/Preferences/com.tableau.Tableau-2019.4.plist` . Create such a file if it does not already exist. To edit the plist in Mac OSX, you need xcode 6.4 or higher installed. Use open command to open the file in XCode.  
+* Only for postgres plugin - add this property `Settings.DisableNativeGSS` as a `Boolean/YES` to the Tableau plist on Mac at `/Library/Preferences/com.tableau.Tableau-<version>.plist` as described below. Here version is Tableau Desktop major version, for example, `com.tableau.Tableau-2019.4.plist`.
 ```
-// Note - the below two commands require root privileges hence sudo is needed. 
-sudo open /Library/Preferences/com.tableau.Tableau-<version>.plist
+// Note - the below two commands require root privileges hence sudo is needed.
+sudo defaults write /Library/Preferences/com.tableau.Tableau-<version>.plist Settings.DisableNativeGSS -bool YES
 // clear the plist cache before opening Tableau 
 sudo killall -u root cfprefsd
 ```
-* Make sure a krb5.conf file is present at `/etc/krb5.conf` (/etc is a private directory, requires root privileges). Check for the existence of either of the following two files `/etc/krb5.conf` or `/Library/Preferences/edu.mit.Kerberos`. The recommended practice is to move/rename the file at /etc/krb5.conf. If the second file (edu.mit.Kerberos) is present it needs to be backed up and deleted.
+* Make sure a krb5.conf file is present at `/etc/krb5.conf`(/etc is a private directory, requires root privileges). Check for the existence of either of the following two files `/etc/krb5.conf` or `/Library/Preferences/edu.mit.Kerberos`. The recommended practice is to move/rename the file at /etc/krb5.conf. If the second file (edu.mit.Kerberos) is present it needs to be backed up and deleted.
 * Before using the connector plugin, run `kinit user@REALM`  
 * Next run `klist` to verify that the kerberos TGT appears in the cache. 
 * Use the same user which is registered for kerberos in the database to open Tableau Desktop. From the terminal this can be achieved by the following commands 
