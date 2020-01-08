@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [2.1.4] - 2020-02-02
+## [2.1.5] - 2020-01-08
+- Update test names and setup file locations for CastCalcsTest, StaplesTest, and BadPasswordTest
+
+## [2.1.4] - 2020-01-02
 - Update smoke tests to count skipped & disabled tests as "pass". Also update the command line results from a TDVT run with more details.
 - Refactor list command. list is used with suites and list-logical-configs is just for logical configs.
 - Fixes test rerun bug.
