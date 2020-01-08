@@ -92,6 +92,7 @@ sudo open /Library/Preferences/com.tableau.Tableau-<version>.plist
 // clear the plist cache before opening Tableau 
 sudo killall -u root cfprefsd
 ```
+* Make sure a krb5.conf file is present at `/etc/krb5.conf` (/etc is a private directory, requires root privileges). Check for the existence of either of the following two files `/etc/krb5.conf` or `/Library/Preferences/edu.mit.Kerberos`. The recommended practice is to move/rename the file at /etc/krb5.conf. If the second file (edu.mit.Kerberos) is present it needs to be backed up and deleted.
 * Before using the connector plugin, run `kinit user@REALM`  
 * Next run `klist` to verify that the kerberos TGT appears in the cache. 
 * Use the same user which is registered for kerberos in the database to open Tableau Desktop. From the terminal this can be achieved by the following commands 
