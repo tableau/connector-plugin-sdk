@@ -29,15 +29,21 @@ class TestXMLParser(unittest.TestCase):
         self.assertTrue(actual_class_name == expected_class_name,
                         "Actual class name does not match expected for valid connector")
 
-        # Test invalid connector
+        print("\nTest invalid connector. Throws XML validation error.")
+
         actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("broken_xml"),
                                                                     expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Invalid connector returned a file list when it should not have")
 
-        # Test connector with class name mismatch
+        print("\nTest connector with class name mismatch. Throws XML validation error.")
         actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("wrong_class"),
                                                                     expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Connector with class name mismatch returned a file list when it shouldn't")
+
+        # Test connector with non-https url
+        actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("non_https"),
+                                                                    expected_file_list, expected_class_name)
+        self.assertFalse(actual_file_list, "Connector with non-https urls returned a file list when it shouldn't")
 
     def parser_test_case(self, test_folder, expected_file_list, expected_class_name):
 

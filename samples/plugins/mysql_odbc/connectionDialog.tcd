@@ -2,5 +2,6 @@
   <connection-config>
     <authentication-mode value='BasicNoValidateFields' />
     <port-prompt value="Port: " default="3306" />
+    <show-ssl-checkbox value="true" />
   </connection-config>
 </connection-dialog>
