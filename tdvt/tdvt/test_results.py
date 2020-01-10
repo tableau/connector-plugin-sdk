@@ -59,7 +59,7 @@ class TestCaseResult(object):
         return ''
 
     def test_error_expected(self):
-        if isinstance(self.error_type, TestErrorExpected):
+        if isinstance(self.error_type, (TestErrorExpected, TestErrorDisabledTest, TestErrorSkippedTest)):
             return True
         else:
             return False
@@ -82,6 +82,12 @@ class TestCaseResult(object):
             passed = False
 
         return passed
+
+    def is_skipped(self):
+        return isinstance(self.error_type, TestErrorSkippedTest)
+
+    def is_disabled(self):
+        return isinstance(self.error_type, TestErrorDisabledTest)
 
     def table_to_json(self):
         json_str = 'tuple'
@@ -383,6 +389,22 @@ class TestResult(object):
 
         return failures
 
+    def get_disabled_count(self):
+        disabled = 0
+        for test_case in self.test_case_map:
+            if test_case.error_type and isinstance(test_case.error_type, TestErrorDisabledTest):
+                disabled += 1
+
+        return disabled
+
+    def get_skipped_count(self):
+        skipped = 0
+        for test_case in self.test_case_map:
+            if test_case.error_type and isinstance(test_case.error_type, TestErrorSkippedTest):
+                skipped += 1
+
+        return skipped
+
     def get_test_case_count(self):
         return len(self.test_case_map) if self.test_case_map else 0
 
@@ -518,6 +540,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name,
                 'duration' : obj.get_total_execution_time(),
+                'expected_message': obj.test_set.get_expected_message(),
                 'case' : test_cases,
                 'test_file' : obj.relative_test_file,
                 'test_type' : test_type,

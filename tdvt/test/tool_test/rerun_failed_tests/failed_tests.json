@@ -1,0 +1,40 @@
+{
+    "actual_exp_paths_relative_to": "this", 
+    "successful_tests": [], 
+    "harness_name": "TDVT", 
+    "failed_tests": [
+        {
+            "case": "calcs_key",
+            "class": "TDVT",
+            "duration": 0,
+            "expected": "",
+            "expected_message": "Invalid username or password",
+            "password_file": "postgres_badpassword.password",
+            "suite": "postgres",
+            "tds": "D:\\src\\near\\tableau-tests\\tdvt\\tds\\cast_calcs.postgres.tds",
+            "test_config":
+            {
+                "tested_sql": false,
+                "tested_tuples": true,
+                "output_dir": "C:\\TEMP\\1d139f39ac445430b5fa1a0f648f02766a243f12b8bbe0aed6cdec975skc_9c8",
+                "logical": false,
+                "config_file": "TestBadPassword.postgres",
+                "suite_name": "postgres",
+                "d_override": "-DOverride=ISO8601DateAddDiffYearQtr",
+                "verbose": false,
+                "tds": "D:\\src\\near\\tableau-tests\\tdvt\\tds\\cast_calcs.postgres.tds",
+                "noheader": false,
+                "tabquery_path": "",
+                "thread_count": 6
+            },
+            "test_file": "exprtests\\setup.sum.txt", 
+            "test_type": "-e",
+            "test_name": "postgres.calcs_key",
+            "failtype": "test_failure",
+            "message": "LoadDatasource DataSourceException: FATAL:  password authentication failed for user \"test\"\nInvalid username or password.\n\n",
+            "actual": ""
+        }
+        
+    ]
+}
+

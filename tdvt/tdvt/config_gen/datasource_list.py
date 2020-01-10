@@ -24,7 +24,7 @@ def print_ds(ds, ds_reg):
     for x in test_config.get_logical_tests():
         print("\t" * 2 + str(x))
         root_directory = get_root_dir()
-        tests = x.generate_test_file_list_from_config()
+        tests = x.generate_test_file_list()
         for test in tests:
             print("\t" * 3 + test.test_path)
 
@@ -32,7 +32,7 @@ def print_ds(ds, ds_reg):
     for x in test_config.get_expression_tests():
         print("\t" * 2 + str(x))
         root_directory = get_root_dir()
-        tests = x.generate_test_file_list_from_config()
+        tests = x.generate_test_file_list()
         for test in tests:
             print("\t" * 3 + test.test_path)
 
@@ -328,12 +328,12 @@ def load_test(config, test_dir=get_root_dir()):
             try:
                 all_ini_sections.remove(section)
                 test_config.add_expression_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                test_path + 'staples/setup.staples_connection.txt', test_dir,
+                                                test_path + 'connection_tests/staples/', test_dir,
                                                 get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                test_path + 'setup.calcs_key.txt', test_dir, get_password_file(sect),
-                                                get_expected_message(sect), True,
+                                                test_path + 'connection_tests/calcs/', test_dir,
+                                                get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
