@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update `package.py` to create directory for logs if it does not exist.
 - Change wording for -l flag
 - Update packaging unit tests to be more descriptive on the command line.
+- Enforce https for links in the manifest while packaging
 
 ## [0.0.1] - 10-3-2019
 Initial release of the Connector Packaging Tool
