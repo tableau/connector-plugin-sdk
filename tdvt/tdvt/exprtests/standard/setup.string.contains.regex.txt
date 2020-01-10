@@ -1,0 +1,2 @@
+CONTAINS(str2, "A(")
+CONTAINS(str2, "A\(")
