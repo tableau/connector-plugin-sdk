@@ -82,6 +82,7 @@ if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
         // note that for postgres jdbc driver, jaasLogin defaults to true so we don't need to specify it here
         // just add this jaasApplicationName used by Tableau's embedded jaas.conf file
         props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
+        props["user"] = <user-name-without-realm>;
 ```
 
 Other Configuration:
@@ -92,13 +93,8 @@ sudo defaults write /Library/Preferences/com.tableau.Tableau-<version>.plist Set
 ```
 * Make sure a krb5.conf file is present at `/etc/krb5.conf`(/etc is a private directory, requires root privileges). Check for the existence of either of the following two files `/etc/krb5.conf` or `/Library/Preferences/edu.mit.Kerberos`. The recommended practice is to move/rename the file at /etc/krb5.conf. If the second file (edu.mit.Kerberos) is present it needs to be backed up and deleted.
 * Before using the connector plugin, run `kinit user@REALM`  
-* Next run `klist` to verify that the kerberos TGT appears in the cache. 
-* Use the same user which is registered for kerberos in the database to open Tableau Desktop. From the terminal this can be achieved by the following commands 
-```
-sudo su 
-su username
-/Applications/Tableau\ Desktop\ [Tableau version].app/Contents/MacOS/Tableau -DConnectPluginsPath=/Users/[user name]/tableau_connectors
-```
+* Next run `klist` to verify that the kerberos TGT appears in the kerberos ticket cache. 
+
 
 ### Server RunAs authentication
 connectionProperties.js
