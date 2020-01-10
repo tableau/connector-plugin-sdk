@@ -1,10 +1,11 @@
 """ Test result and configuration related classes. """
 
+import math
 import json
 import re
 
-from .config_gen.tdvtconfig import TdvtTestConfig
-
+from .config_gen.tdvtconfig import TdvtInvocation
+from .config_gen.test_config import TestSet
 
 TEST_DISABLED = "Test disabled in .ini file."
 TEST_SKIPPED = "Test not run because smoke tests failed."
@@ -23,7 +24,7 @@ class TestCaseResult(object):
         self.table = table
         self.execution_time = query_time
         self.error_message = error_msg
-        self.error_type = error_type
+        self.error_type: TestErrorState = error_type
         self.diff_count = 0
         self.diff_string = ''
         self.passed_sql = False
@@ -52,13 +53,13 @@ class TestCaseResult(object):
         if self.error_message:
             return self.error_message
 
-        if not self.all_passed():
+        if not self.all_passed() and isinstance(self.error_type, TestErrorResults):
             return 'Actual does not match expected.'
 
         return ''
 
     def test_error_expected(self):
-        if isinstance(self.error_type, TestErrorExpected):
+        if isinstance(self.error_type, (TestErrorExpected, TestErrorDisabledTest, TestErrorSkippedTest)):
             return True
         else:
             return False
@@ -81,6 +82,12 @@ class TestCaseResult(object):
             passed = False
 
         return passed
+
+    def is_skipped(self):
+        return isinstance(self.error_type, TestErrorSkippedTest)
+
+    def is_disabled(self):
+        return isinstance(self.error_type, TestErrorDisabledTest)
 
     def table_to_json(self):
         json_str = 'tuple'
@@ -116,6 +123,11 @@ class TestErrorStartup(TestErrorState):
         return "Test did not start."
 
 
+class TestErrorNotRun(TestErrorState):
+    def get_error(self):
+        return "Test did not run."
+
+
 class TestErrorTimeout(TestErrorState):
     def get_error(self):
         return "Test timed out."
@@ -141,6 +153,11 @@ class TestErrorDisabledTest(TestErrorState):
         return "Test disabled in .ini file."
 
 
+class TestErrorResults(TestErrorState):
+    def get_error(self):
+        return "Actual does not match expected."
+
+
 class TestErrorSkippedTest(TestErrorState):
     def get_error(self):
         return "Test not run because smoke tests failed."
@@ -148,7 +165,7 @@ class TestErrorSkippedTest(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtTestConfig(), test_file = '', relative_test_file = '', test_set = None, error_status=None):
+    def __init__(self, base_name = '', test_config = TdvtInvocation(), test_file = '', relative_test_file = '', test_set: TestSet = None, error_status=None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -162,33 +179,42 @@ class TestResult(object):
         self.overall_error_message = ''
         self.test_case_map = []
         self.cmd_output = ''
-        self.run_time_ms = 0
         self.relative_test_file = relative_test_file
-        self.test_set = test_set
+        self.test_set: TestSet = test_set
 
         self.parse_default_test_cases()
 
     def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
+        #TestCaseResult error messages should be specific to that exact test case. Overall test problems should be
+        #set at a higher level (TestResult).
         if self.test_set.test_is_enabled is False:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_DISABLED, 0, "", 0, TEST_DISABLED, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config)
             else:
-                return TestCaseResult(TEST_DISABLED, str(test_case_count), "", test_case_count, TEST_DISABLED,
-                                      TEST_DISABLED, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, '',
+                                      TestErrorDisabledTest(), None, self.test_config)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_SKIPPED, 0, "", 0, TEST_SKIPPED, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorSkippedTest(), None, self.test_config)
             else:
-                return TestCaseResult(TEST_SKIPPED, str(test_case_count), "", test_case_count, TEST_SKIPPED,
-                                      TEST_SKIPPED, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, '',
+                                      TestErrorSkippedTest(), None, self.test_config)
         else:
+
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_NOT_RUN, 0, "", 0, TEST_NOT_RUN, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', self.error_status, None, self.test_config)
             else:
-                return TestCaseResult(TEST_NOT_RUN, str(test_case_count), "", test_case_count, TEST_NOT_RUN,
+                return TestCaseResult('', str(test_case_count), "", test_case_count, '',
                                       self.error_status, None, self.test_config)
 
     def parse_default_test_cases(self):
+        if self.test_set and self.test_set.test_is_enabled is False:
+                self.overall_error_message = TEST_DISABLED
+        elif self.test_set and self.test_set.test_is_skipped is True:
+            self.overall_error_message = TEST_SKIPPED
+        else:
+            self.overall_error_message = TEST_NOT_RUN
+
         # If it is an expression test with no results, it probably means the test failed and the individual test cases
         # weren't run. Count them here. Parse the setup file to get the count.
         if not self.test_case_map and self.test_set:
@@ -249,7 +275,11 @@ class TestResult(object):
             error_type = node.text.strip() if node is not None else ''
 
             node = test_child.find('query-time')
-            query_time = node.text if node is not None else '0'
+            query_time = 0
+            try:
+                query_time = float(node.text if node is not None else '0')
+            except ValueError:
+                pass
 
             node = test_child.find('sql')
             sq = node.text if node is not None else ''
@@ -270,21 +300,26 @@ class TestResult(object):
             if case.get_error_message():
                 msg += case.get_error_message() + '\n'
 
-        if msg:
+        if msg and not msg.isspace():
             return msg
 
         return self.get_failure_message()
+
+    def get_error_type(self):
+        if self.error_status:
+            return self.error_status.get_error()
+        return "None"
 
     def get_failure_message(self):
         if self.saved_error_message:
             return self.saved_error_message
 
+        if self.error_status:
+            return self.error_status.get_error()
+
         #TODO need this?
         if self.overall_error_message:
             return self.overall_error_message
-
-        if self.error_status:
-            return self.error_status.get_error()
 
         return "No results found."
 
@@ -341,7 +376,10 @@ class TestResult(object):
 
     def get_total_execution_time(self):
         """Time to run all test cases."""
-        return self.run_time_ms
+        total_query_time = 0
+        for tc in self.test_case_map:
+            total_query_time += tc.execution_time
+        return total_query_time
 
     def get_failure_count(self):
         failures = 0
@@ -350,6 +388,22 @@ class TestResult(object):
                 failures += 1
 
         return failures
+
+    def get_disabled_count(self):
+        disabled = 0
+        for test_case in self.test_case_map:
+            if test_case.error_type and isinstance(test_case.error_type, TestErrorDisabledTest):
+                disabled += 1
+
+        return disabled
+
+    def get_skipped_count(self):
+        skipped = 0
+        for test_case in self.test_case_map:
+            if test_case.error_type and isinstance(test_case.error_type, TestErrorSkippedTest):
+                skipped += 1
+
+        return skipped
 
     def get_test_case_count(self):
         return len(self.test_case_map) if self.test_case_map else 0
@@ -362,6 +416,97 @@ class TestResult(object):
             pass
 
         return case
+
+    def diff_test_results(self, expected_output: 'TestResult'):
+        """Compare the actual results to the expected test output based on the given rules."""
+
+        test_case_count = self.get_test_case_count()
+        diff_counts = [0] * test_case_count
+        diff_string = ''
+        # Go through all test cases.
+        for test_case in range(0, test_case_count):
+            expected_testcase_self = expected_output.get_test_case(test_case)
+            actual_testcase_self = self.get_test_case(test_case)
+            if not actual_testcase_self:
+                continue
+            if expected_testcase_self is None:
+                actual_testcase_self.passed_sql = False
+                actual_testcase_self.passed_tuples = False
+                continue
+
+            config = self.test_config
+            # Compare the SQL.
+            if config.tested_sql:
+                diff, diff_string = self.diff_sql_node(actual_testcase_self.sql, expected_testcase_self.sql, diff_string)
+                actual_testcase_self.passed_sql = diff == 0
+                diff_counts[test_case] = diff
+
+            # Compare the tuples.
+            if config.tested_tuples:
+                diff, diff_string = self.diff_table_node(actual_testcase_self.table, expected_testcase_self.table,
+                                                    diff_string, expected_testcase_self.name)
+                actual_testcase_self.passed_tuples = diff == 0
+                diff_counts[test_case] = diff
+
+        self.diff_string = diff_string
+        return diff_counts, diff_string
+
+    def diff_table_node(self, actual_table, expected_table, diff_string, test_name):
+        if actual_table == None or expected_table == None:
+            return (-1, diff_string)
+
+        actual_tuples = actual_table.findall('tuple')
+        expected_tuples = expected_table.findall('tuple')
+
+        if actual_tuples == None and expected_tuples == None:
+            return (0, diff_string)
+
+        diff_string += "\nTuples - " + test_name + "\n"
+        if actual_tuples == None or expected_tuples == None:
+            diff_string += "\tTuples do not exist for one side.\n"
+            return (math.fabs(len(actual_tuples) - len(expected_tuples)), diff_string)
+
+        # Compare all the values for the tuples.
+        if len(actual_tuples) != len(expected_tuples):
+            diff_string += "\tDifferent number of tuples.\n"
+
+        if not len(actual_tuples):
+            diff_string += "\tNo 'actual' file tuples.\n"
+
+        diff_count = 0
+
+        expected_tuple_list = []
+        for j in expected_tuples:
+            for k in j.findall('value'):
+                expected_tuple_list.append(k.text)
+
+        actual_tuple_list = []
+        for j in actual_tuples:
+            for k in j.findall('value'):
+                actual_tuple_list.append(k.text)
+
+        diff_count = sum(a != b for a, b in zip(actual_tuple_list, expected_tuple_list))
+        diff_count += abs(len(actual_tuple_list) - len(expected_tuple_list))
+
+        for a, b in zip(actual_tuple_list, expected_tuple_list):
+            if a != b:
+                diff_string += "\t <<<< >>>> \n"
+                diff_string += "\tactual: " + a + "\n"
+                diff_string += "\texpected: " + b + "\n"
+
+        return (diff_count, diff_string)
+
+    def diff_sql_node(self, actual_sql, expected_sql, diff_string):
+        if actual_sql == None and expected_sql == None:
+            return (0, diff_string)
+
+        diff_string += "SQL\n"
+        if actual_sql == None or expected_sql == None or (actual_sql != expected_sql):
+            diff_string += "<<<<\n" + actual_sql + "\n"
+            diff_string += ">>>>\n" + expected_sql + "\n"
+            return (1, diff_string)
+
+        return (0, diff_string)
 
 class TestResultEncoder(json.JSONEncoder):
     """For writing JSON output."""
@@ -395,6 +540,7 @@ class TestOutputJSONEncoder(json.JSONEncoder):
                 'class' : 'TDVT',
                 'test_name' : suite_name + '.' + test_name,
                 'duration' : obj.get_total_execution_time(),
+                'expected_message': obj.test_set.get_expected_message(),
                 'case' : test_cases,
                 'test_file' : obj.relative_test_file,
                 'test_type' : test_type,

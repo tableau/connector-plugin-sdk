@@ -2,13 +2,13 @@ import sys
 import logging
 
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from xmlschema import XMLSchema
 
 from .connector_file import ConnectorFile
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('packager_logger')
 
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 PATH_TO_XSD_FILES = Path("../validation").absolute()
@@ -119,7 +119,7 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
 
 
 # Return the XSD file to test against
-def get_xsd_file(file_to_test: ConnectorFile) -> str:
+def get_xsd_file(file_to_test: ConnectorFile) -> Optional[str]:
     """
     Arguments:
         file_to_test {ConnectorFile} -- the file we want to find an XSD file for

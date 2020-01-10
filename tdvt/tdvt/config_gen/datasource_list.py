@@ -10,7 +10,7 @@ import logging
 
 from .gentests import list_configs, list_config
 from ..resources import *
-from .test_config import TestConfig, build_config_name, build_tds_name
+from .test_config import TestConfig, RunTimeTestConfig
 
 RUN_IN_INCORRECT_DIRECTORY_MSG = "\nNo data sources found in this directory. To run tests, the base directory must contain a valid test configuration."
 
@@ -24,7 +24,7 @@ def print_ds(ds, ds_reg):
     for x in test_config.get_logical_tests():
         print("\t" * 2 + str(x))
         root_directory = get_root_dir()
-        tests = x.generate_test_file_list_from_config()
+        tests = x.generate_test_file_list()
         for test in tests:
             print("\t" * 3 + test.test_path)
 
@@ -32,28 +32,19 @@ def print_ds(ds, ds_reg):
     for x in test_config.get_expression_tests():
         print("\t" * 2 + str(x))
         root_directory = get_root_dir()
-        tests = x.generate_test_file_list_from_config()
+        tests = x.generate_test_file_list()
         for test in tests:
             print("\t" * 3 + test.test_path)
 
 
 def print_configurations(ds_reg, dsname, verbose):
-    if dsname:
-        ds_to_run = ds_reg.get_datasources(dsname)
-        if len(ds_to_run) == 1:
-            print_ds(ds_to_run[0], ds_reg)
-        elif len(ds_to_run) == 0:
-            pass
-        else:
-            print("\nDatasource suite " + dsname + " is " + ",".join(ds_to_run))
-            if verbose:
-                for ds in ds_to_run:
-                    print_ds(ds, ds_reg)
-
-    else:
+    if not dsname or len(ds_reg.get_datasources(dsname)) == 0:
         try:
-            ds_all = ds_reg.get_datasources('all')
-        except TypeError:
+            ds_all = ds_reg.get_datasources(['all'])
+        except TypeError as e:
+            print(RUN_IN_INCORRECT_DIRECTORY_MSG)
+            return
+        if not ds_all:
             print(RUN_IN_INCORRECT_DIRECTORY_MSG)
             return
         print("\nAvailable datasources:")
@@ -64,6 +55,17 @@ def print_configurations(ds_reg, dsname, verbose):
             print(suite)
             print("\t" + ', '.join(ds_reg.suite_map[suite]))
             print('\n')
+        return
+
+    ds_to_run = ds_reg.get_datasources(dsname)
+    if len(ds_to_run) == 1:
+        print_ds(ds_to_run[0], ds_reg)
+    else:
+        print("\nDatasource suite " + str(dsname) + " is " + ",".join(ds_to_run))
+        if verbose:
+            for ds in ds_to_run:
+                print_ds(ds, ds_reg)
+
 
 
 def get_password_file(config):
@@ -101,6 +103,7 @@ def load_test(config, test_dir=get_root_dir()):
     Name = bigquery
     LogicalQueryFormat = bool_
     CommandLineOverride =
+    TabQueryPath = [optional path to override tabquery locally.]
 
     [StandardTests]
     LogicalExclusions_Calcs =
@@ -163,8 +166,10 @@ def load_test(config, test_dir=get_root_dir()):
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
-    test_config = TestConfig(config_name, dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig['LogicalQueryFormat'], dsconfig.get('MaxThread', '0'),
-                             dsconfig.get('MaxSubThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
+    run_time_config = RunTimeTestConfig(dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig.get('MaxThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
+    run_time_config.set_tabquery_paths(dsconfig.get('TabQueryPathLinux', ''), dsconfig.get('TabQueryPathMac', ''), dsconfig.get('TabQueryPathx64', ''))
+    test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], run_time_config)
+
 
     # Add the standard test suites.
     if standard_tests in config.sections():
@@ -323,12 +328,12 @@ def load_test(config, test_dir=get_root_dir()):
             try:
                 all_ini_sections.remove(section)
                 test_config.add_expression_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                test_path + 'staples/setup.staples_connection.txt', test_dir,
+                                                test_path + 'connection_tests/staples/', test_dir,
                                                 get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                test_path + 'setup.calcs_key.txt', test_dir, get_password_file(sect),
-                                                get_expected_message(sect), True,
+                                                test_path + 'connection_tests/calcs/', test_dir,
+                                                get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
@@ -380,11 +385,12 @@ class TestRegistry(object):
             ds = config['DatasourceRegistry']
 
             for suite_name in ds:
-                self.suite_map[suite_name] = self.interpret_ds_list(ds[suite_name], False).split(',')
+                self.suite_map[suite_name] = [x.strip() for x in self.interpret_ds_list(ds[suite_name], False).split(',')]
 
         except KeyError:
             # Create a simple default.
-            self.suite_map['all'] = self.dsnames
+            if self.dsnames:
+                self.suite_map['all'] = self.dsnames
 
     def interpret_ds_list(self, ds_list, built_list=None):
         if ds_list == '*':
@@ -403,16 +409,15 @@ class TestRegistry(object):
         ds_to_run = []
         if not suite:
             return
-        for ds in suite.split(','):
-            ds = ds.strip()
+        for ds in suite:
             if ds in self.suite_map:
-                ds_to_run.extend(self.get_datasources(','.join(self.suite_map[ds])))
+                ds_to_run.extend(self.get_datasources(self.suite_map[ds]))
             elif ds:
                 ds_to_run.append(ds)
 
         # Unique list that preserves order.
         seen_ds = set()
-        return [x for x in ds_to_run if not (x in seen_ds or seen_ds.add(x))]
+        return [x.strip() for x in ds_to_run if not (x.strip() in seen_ds or seen_ds.add(x.strip()))]
 
 
 class WindowsRegistry(TestRegistry):

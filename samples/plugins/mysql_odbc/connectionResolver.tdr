@@ -13,9 +13,9 @@
           <attr>username</attr>
           <attr>password</attr>
           <attr>port</attr>
+          <attr>sslmode</attr>
           <attr>odbc-connect-string-extras</attr>
           <attr>source-charset</attr>
-          <attr>one-time-sql</attr>
         </attribute-list>
       </required-attributes>
     </connection-normalizer>
@@ -23,9 +23,6 @@
 	<driver-resolver>
     <driver-match>
       <driver-name type='exact'>MySQL ODBC 8.0 Unicode Driver</driver-name>
-    </driver-match>
-    <driver-match>
-      <driver-name type='exact'>MySQL ODBC 5.3 Unicode Driver</driver-name>
     </driver-match>
   </driver-resolver>
 </tdr>

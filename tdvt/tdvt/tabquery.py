@@ -2,6 +2,8 @@ import configparser
 import sys
 
 from .resources import *
+from .tabquery_path import TabQueryPath
+
 tab_cli_exe = ''
 
 def configure_tabquery_path():
@@ -49,6 +51,9 @@ class TabqueryCommandLine(object):
         cli_arg = "--query-file-list" if work.test_config.logical else "--expression-file-list"
 
         cmdline = [tab_cli_exe]
+        if work.test_config.tested_run_time_config is not None and work.test_config.tested_run_time_config.has_customized_tabquery_path():
+            cmdline = [work.test_config.tested_run_time_config.tabquery_paths.get_path(sys.platform)]
+
         cmdline_base = [cli_arg, work.test_list_path]
         cmdline.extend(cmdline_base)
         tds_arg = ["-d", work.test_config.tds]
@@ -85,8 +90,14 @@ class TabqueryCommandLine(object):
         work.test_config.command_line = cmdline
         return cmdline
 
-def tabquerycli_exists():
+def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
     global tab_cli_exe
+    if tabquery_cli_path:
+        resolved_path = tabquery_cli_path.get_path(sys.platform)
+        if os.path.isfile(resolved_path):
+            logging.debug("Found tabquery at [{0}]".format(resolved_path))
+            return True
+
     if os.path.isfile(tab_cli_exe):
         logging.debug("Found tabquery at [{0}]".format(tab_cli_exe))
         return True

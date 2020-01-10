@@ -4,10 +4,9 @@
 """
 
 import glob
-import os
-import tempfile
 import re
 from ..resources import *
+from ..tabquery_path import TabQueryPath
 
 class TestFile(object):
     """
@@ -28,7 +27,8 @@ class TestSet(object):
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
     def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                 expected_message, smoke_test=False, test_is_enabled=True, test_is_skipped=False):
+                 expected_message: str = '', smoke_test: bool = False, test_is_enabled: bool = True,
+                 test_is_skipped: bool = False):
         self.ds_name = ds_name
         self.suite_name = suite_name
         self.config_name = config_name
@@ -42,6 +42,8 @@ class TestSet(object):
         self.smoke_test = smoke_test
         self.test_is_enabled = test_is_enabled
         self.test_is_skipped = test_is_skipped
+        self.test_list_cached = None
+        self.test_list_checked = False
 
 
     def is_logical_test(self):
@@ -64,24 +66,20 @@ class TestSet(object):
            Return the sorted list of tests.
 
         """
-        final_test_list = self.generate_test_file_list_from_config()
+        if self.test_list_checked:
+            return self.test_list_cached
 
-        logging.debug("Found final list of " + str(len(final_test_list)) + " tests to run.")
-        if len(final_test_list) == 0:
-            logging.warning("Did not find any tests to run.")
-            print("Did not find any tests to run.")
-            return final_test_list
+        final_test_list = self.__generate_test_file_list()
 
-        for x in final_test_list:
-            logging.debug("final test path " + x.test_path)
-
-        return final_test_list
+        self.test_list_cached = final_test_list
+        self.test_list_checked = True
+        return self.test_list_cached
 
     def get_test_dirs(self):
         return (self.root_dir, get_local_test_dir())
 
-    def generate_test_file_list_from_config(self):
-        """Read the config file and generate a list of tests."""
+    def __generate_test_file_list(self):
+        """Private function to generate the list of tests."""
         allowed_tests = []
         exclude_tests = self.get_exclusions()
         exclude_tests.append('expected.')
@@ -137,9 +135,10 @@ class TestSet(object):
         for test in tests_to_run:
             for regex in regexes:
                 if re.search(regex, test.test_path) and test in final_test_list:
-                    logging.debug("Removing test that matched: " + ex)
+                    logging.debug("Removing test that matched: " + str(regex))
                     final_test_list.remove(test)
 
+        logging.debug("Found " + str(len(final_test_list)) + " tests to run after exclusions.")
         return sorted(final_test_list, key = lambda x: x.test_path)
 
     def get_exclusions(self):
@@ -182,7 +181,7 @@ class FileTestSet(TestSet):
     def append_test_file(self, file_path):
         self.test_paths.append(file_path)
 
-    def generate_test_file_list_from_config(self):
+    def generate_test_file_list(self):
         tests_to_run = []
         for test_file in self.test_paths:
             added_test = False
@@ -250,29 +249,44 @@ def build_config_name(prefix, dsname):
 def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
 
+class RunTimeTestConfig(object):
+    """
+        Tracks specifics about how a group of tests were run.
+    """
+    def __init__(self, timeout_seconds=60*60, maxthread=0, d_override='', run_as_perf=False):
+        self.timeout_seconds = timeout_seconds
+        self.d_override = d_override
+        self.run_as_perf = run_as_perf
+        self.maxthread = int(maxthread)
+        self.tabquery_paths = None
+
+    def set_tabquery_paths(self, linux_path, mac_path, windows_path):
+        if not linux_path and not mac_path and not windows_path:
+            return
+        self.tabquery_paths = TabQueryPath(linux_path, mac_path, windows_path)
+
+    def set_tabquery_path_from_array(self, path_list):
+        if not path_list:
+            return
+        self.tabquery_paths = TabQueryPath.from_array(path_list)
+
+    def has_customized_tabquery_path(self):
+        return self.tabquery_paths is not None
+
 class TestConfig(object):
     """
         Defines all the tests that can be run for a single data source. An organized collection of TestSet objects.
     """
-    def __init__(self, dsname, timeout_seconds, logical_config_name, maxthread, maxsubthread, d_override='', 
-                 run_as_perf=False):
+    def __init__(self, dsname, logical_config_name, run_time_config=None):
         self.dsname = dsname
-        self.timeout_seconds = timeout_seconds
         self.logical_config_name = logical_config_name
         self.calcs_tds = self.get_tds_name('cast_calcs.')
         self.staples_tds = self.get_tds_name('Staples.')
         self.logical_test_set = []
         self.expression_test_set = []
         self.smoke_test_set = []
-        self.d_override = d_override
-        self.maxthread = 0
         self.logical_config = {}
-        self.run_as_perf = run_as_perf
-        if int(maxthread) > 0:
-            self.maxthread = int(maxthread)
-        self.maxsubthread = 0
-        if int(maxsubthread) > 0:
-            self.maxsubthread = int(maxsubthread)
+        self.run_time_config = run_time_config
 
     def get_config_name(self, prefix):
         return prefix + self.dsname
