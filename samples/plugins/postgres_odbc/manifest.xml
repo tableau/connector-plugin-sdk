@@ -5,7 +5,7 @@
   <vendor-information>
       <company name="Company Name"/>
       <support-link url="https://tableau.github.io/connector-plugin-sdk/"/>
-      <driver-download-link url="https://drivers.example.com"/>
+      <driver-download-link url="https://odbc.postgresql.org/"/>
   </vendor-information>
   <connection-customization class="postgres_odbc" enabled="true" version="10.0">
     <vendor name="vendor"/>
