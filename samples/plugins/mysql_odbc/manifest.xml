@@ -2,7 +2,7 @@
 
 <connector-plugin class='mysql_odbc_sample' superclass='mysql_odbc' plugin-version='0.0.0' name='Sample MySQL ODBC' version='18.1' min-version-tableau='2019.4'>
   <vendor-information>
-    <company name='TestCompany' />
+    <company name='Company Name' />
     <support-link url='https://example.com' />
     <driver-download-link url="https://drivers.example.com"/>
   </vendor-information>
