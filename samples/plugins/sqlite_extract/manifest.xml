@@ -3,7 +3,7 @@
 <connector-plugin class='sqlite_extract' superclass='odbc' plugin-version='0.0.0' name='Sample SQLite Extract-Only' version='18.1'>
    <vendor-information>
       <company name="Company Name"/>
-      <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
+      <support-link url = "https://tableau.github.io/connector-plugin-sdk/"/>
   </vendor-information>
   <connection-customization class="sqlite_extract" enabled="true" version="10.0">
     <vendor name="vendor"/>
