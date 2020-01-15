@@ -27,6 +27,8 @@ At Tableau, we pride ourselves in helping people see and understand their data..
 
 Review the [Tableau Connector SDK developer guide](https://tableau.github.io/connector-plugin-sdk/) to help you design, build, and test your connector.
 
+You can also watch our [Tableau Conference 2019 talk](https://www.youtube.com/watch?v=_rfQtHLWWxU), where two of our developers walk through the basics of creating a custom Tableau connector and pacaking it into a single .tcao file.
+
 # Samples
 
 The SDK includes several [standalone example connectors](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) that use ODBC and JDBC.
