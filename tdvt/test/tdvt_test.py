@@ -15,11 +15,12 @@
 
 
 import io
-from pathlib import Path
 import shutil
 import subprocess
 import unittest
 
+from pathlib import Path
+from typing import List
 from unittest import mock
 
 from defusedxml.ElementTree import parse
@@ -734,8 +735,21 @@ class PrintConfigurationsTest(unittest.TestCase):
             datasource_list.print_configurations(MockTestRegistry, None, None)
             self.assertIn(correct_out, captured_output.getvalue())
 
+
+class MockTestSet(TestSet):
+    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
+                     expected_message):
+        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
+                     expected_message, False, True, False)
+        self.mock_test_name = mock_test_name
+        self.mock_test_path = mock_test_path
+
+    def get_expected_output_file_path(self, test_file, output_dir):
+        return self.mock_test_path +'actual.' + self.mock_test_name
+
+
 class MockBatchQueueWork(tdvt_core.BatchQueueWork):
-    def __init__(self, mock_tests, test_config, test_set, runtime_exception = None):
+    def __init__(self, mock_tests: List[MockTestSet], test_config: TdvtInvocation, test_set: MockTestSet, runtime_exception=None):
         super(MockBatchQueueWork, self).__init__(test_config, test_set)
         self.keep_actual_file = True
         self.runtime_exception = runtime_exception
@@ -749,16 +763,6 @@ class MockBatchQueueWork(tdvt_core.BatchQueueWork):
             raise self.runtime_exception
         pass
 
-class MockTestSet(TestSet):
-    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                     expected_message):
-        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                     expected_message, False, True, False)
-        self.mock_test_name = mock_test_name
-        self.mock_test_path = mock_test_path
-
-    def get_expected_output_file_path(self, test_file, output_dir):
-        return self.mock_test_path +'actual.' + self.mock_test_name
 
 class ResultsTest(unittest.TestCase):
     def setUp(self):
