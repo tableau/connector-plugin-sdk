@@ -114,13 +114,14 @@ class BaseTDVTTest(unittest.TestCase):
     def check_results(self, test_results, total_test_count, should_pass=True):
         test_status_expected = "passed" if should_pass else "failed"
         # Make sure we ran the right number of tests and that they all passed.
-        self.assertTrue(len(test_results) == total_test_count, "Ran {} rather than {} tests.".format(len(test_results), total_test_count))
+        self.assertEqual(len(test_results), total_test_count)
         for path, test_result in test_results.items():
             passed = test_result is not None
             passed = passed and test_result.all_passed()
             test_status = "passed" if passed else "failed"
             self.assertTrue(passed == should_pass,
                             "Test [{0}] {1} but should have {2}.".format(path, test_status, test_status_expected))
+
 
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
@@ -134,6 +135,7 @@ class ExpressionTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
         self.check_results(all_test_results, 2)
 
+
 class LocalExpressionTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
@@ -146,6 +148,7 @@ class LocalExpressionTest(BaseTDVTTest):
         all_test_results = {}
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
         self.check_results(all_test_results, 2)
+
 
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
@@ -161,6 +164,7 @@ class LogicalTest(BaseTDVTTest):
 
         self.check_results(all_test_results, 1)
 
+
 class LocalLogicalTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
@@ -174,6 +178,7 @@ class LocalLogicalTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
 
         self.check_results(all_test_results, 1)
+
 
 class ReRunFailedTestsTest(BaseTDVTTest):
     def setUp(self):
@@ -248,6 +253,7 @@ def build_tabquery_command_line_local(work):
     new_cmd.append(os.path.split(cmd[0])[1])
     new_cmd += cmd[1:]
     return new_cmd
+
 
 class ArgumentTest(unittest.TestCase):
     def setUp(self):
@@ -800,9 +806,9 @@ class ResultsTest(unittest.TestCase):
         self.assertEqual(len(mock_batch.results), 1)
 
         for test_file in mock_batch.results:
-            self.assertFalse(mock_batch.results[test_file].all_passed())
+            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
             self.assertIsInstance(mock_batch.results[test_file].error_status, TestErrorResults)
-            self.assertTrue(mock_batch.results[test_file].diff_count == 14)
+            self.assertEqual(mock_batch.results[test_file].diff_count, 14)
 
     def create_mock_and_process(self, test_name, test_path):
         mock_tests = [TestFile('tests', test_path + test_name)]

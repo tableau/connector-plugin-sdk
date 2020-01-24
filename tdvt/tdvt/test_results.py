@@ -317,7 +317,7 @@ class TestResult(object):
         if self.error_status:
             return self.error_status.get_error()
 
-        #TODO need this?
+        # TODO need this?
         if self.overall_error_message:
             return self.overall_error_message
 
