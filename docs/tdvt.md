@@ -110,7 +110,7 @@ Next, you need two Tableau Data Source files (.tds).
 These represent saved connection information to a particular table in your database.
 TDVT uses the 'Calcs' and 'Staples' tables.
 
-1. Start Tableau Desktop and connect to the 'Calcs' table using 'Other Database (ODBC)'.
+1. Start Tableau Desktop and connect to the 'Calcs' table using the connector you wish to test.
    After you connect, right-click the datasource in the top left 'Data' tab and select 'Add to Saved Datasources'.
    Save this in the 'tdvt/tds' directory.
    Name this file 'cast_calcs.\*.tds' or 'Staples.\*.tds' where \* represents your TDVT config name.
