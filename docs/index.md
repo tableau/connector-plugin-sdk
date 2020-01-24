@@ -25,16 +25,30 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 ![]({{ site.baseurl }}/assets/files-overview.png)
 
 # What is a Taco?
-A `.taco` file is a packaged Tableau connector file that can be dropped into your `My Tableau Repository/Connectors` folder. They will be automatically loaded by Tableau.
+A `.taco` file is a packaged Tableau Connector file that can be dropped into your `My Tableau Repository/Connectors` folder. They will be automatically loaded by Tableau.
 
 For more information about packaging your connector into a Taco, refer to [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign)
 
 # Before you Begin
 
-Prerequisites:
+## Prerequisites:
 
-- Install the ODBC or JDBC driver that you’ll use with the connector you’ll create.
-- Install Tableau Desktop 2019.2 or later on a Windows or Mac computer. Tableau Desktop 2019.4 or later is required to work with `.taco` files.
+To develop connectors, you need the following installed on your machine:
+- Windows or Mac
+- Tableau Desktop or Server 2019.2 or higher
+- Python 3.7 or higher
+- An ODBC or JDBC data source and driver
+- The provided test data loaded in your data source
+
+To package the connector into a `.taco` file, you will additionally need:
+- Tableau Desktop or Server 2019.4 or higher
+- JDK 8 or higher
+
+## Install the Connector SDK tools:
+- Install TDVT, our test harness. Refer to the "Installation" section of the [Test Your Connector Using TDVT]({{ site.baseurl }}/docs/tdvt) page.
+- Install the packaging tool. Refer to the "Set up the virtual environment for packaging and signing" section of the [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign) page.
+
+The resulting connector will work on Tableau Desktop and Tableau Server on Windows, Linux, and Mac.
 
 # Using a Connector
 

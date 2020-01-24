@@ -22,13 +22,13 @@ Builds the ODBC ConnectString or JDBC Connection URL. For a JDBC Connection URL,
 
 #### JavaScript function call signature:
 
-**Input:** attr, a dictionary of key/value pairs
+**Input:** attr, an object of key/value pairs
 
 ```javascript
 {"server" : "myserver.somewhere.net"}
 ```
 
-**Return:** vector of formatted key=value pairs
+**Return:** array of formatted key=value pairs
 
 ```javascript
 ["DRIVER={My ODBC Driver}", "Host=myserver.somewhere.net"];
@@ -45,21 +45,21 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 
 #### JavaScript function call signature:
 
-**Input:** attr, a dictionary of key/value pairs
+**Input:** attr, an object of key/value pairs
 
 ```javascript
 {"server" : "myserver.somewhere.net", "username" : "myusername", "password" : "mypassword"}
 ```
 
-**Return:** dictionary or vector
+**Return:** object or array
 
-a dictionary of key/value pairs that will be written to the properties file(recommended and available since 2019.4.1)
+an object of key/value pairs that will be written to the properties file(recommended and available since 2019.4.1)
 
 ```javascript
 ["UID" : "myusername", "Host" : "myserver.somewhere.net", "PWD" : "mypassword"];
 ```
 
-vector of formatted key=value pairs that will be written to the properties file
+array of formatted key=value pairs that will be written to the properties file
 
 ```javascript
 ["UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"];
@@ -115,13 +115,13 @@ _Attribute names_
 
 #### JavaScript function call signature:
 
-**Input:** attr, a dictionary of key/value pairs.
+**Input:** attr, an object of key/value pairs.
 
 ```javascript
 {"server" : "myserver.somewhere.net", "username" : "myusername"}
 ```
 
-**Return:** vector of attribute names. The following example values are common for username and password authentication.
+**Return:** array of attribute names. The following example values are common for username and password authentication.
 
 ```javascript
 ["server", "port", "dbname", "username", "password"];
