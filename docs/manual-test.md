@@ -9,11 +9,7 @@ Be sure that you complete all the following steps before you begin the manual te
 1.	Make sure your computer or virtual machine is running Windows, macOS or Linux.
 1.	Install and run Tableau Desktop and Tableau Server.
 1.	Install an ODBC or JDBC driver for your database on Tableau Desktop and Tableau Server
-1.	Create a directory for Tableau connectors. Each connector must have its own folder.
-
-    For example: D:\tableau_connectors contains two subfolders (postgres_jdbc and postgres_odbc), one for each connector.
-
-    ![]({{ site.baseurl }}/assets/mt-folders.png)
+1.	Setup your connectors following these [Gguidelines]({{ site.baseurl }}/docs/share).
 
 ### On Tableau Desktop
 
