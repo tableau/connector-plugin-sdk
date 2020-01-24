@@ -1,10 +1,10 @@
-**A Helpful Guide For Navigating Our Branches**
+**Things To Remember:** 
 
-* **Merge into `master`** if this is a hotfix or can run on the current version of Tableau.
-* **Merge into `{vNext}`** if your change is for the next release of Tableau (eg 2020.1).
-* **Merge into `{vNext + 1}`** if your change is for the next release + 1 of Tableau (eg 2020.2)
-
-_Also:_
-* Please update the changelog of the project you modified.
-* Update the root `README.md` if the PR includes a release of the SDK, Connector Packager, or TDVT.  
+1. Be sure to merge into the right branch. The choices are:
+* **`master`** if your PR runs on the current version of Tableau.
+* **`dev-2020.1`**
+* **`2020.2`**
+2. You should update at least one of the following:
+* The changelog of the project you modified.
+* The root `README.md` if the PR is a release of the SDK, Connector Packager, or TDVT.  
 =====
