@@ -1,3 +1,4 @@
+import argparse
 import logging
 import os
 import sys
@@ -15,16 +16,23 @@ from .version import __version__
 PACKAGED_EXTENSION = ".taco"
 
 
+class UniqueActionStore(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string):
+        if getattr(namespace, self.dest, self.default) is not self.default:
+            parser.error(option_string + " appears > 1 times.")
+        setattr(namespace, self.dest, values)
+
+
 def create_arg_parser() -> ArgumentParser:
     parser = ArgumentParser(description="Tableau Connector Packaging Tool: package and sign connector files into a single Tableau Connector (" + PACKAGED_EXTENSION + ") file.")  # noqa: E501
     parser.add_argument('input_dir', help='path to directory of connector files to package and sign')
     parser.add_argument('-v', '--verbose', dest='verbose', action='store_true', help='verbose output', required=False)
-    parser.add_argument('-l', '--log', dest='log_path', help='path to directory for logging output',
+    parser.add_argument('-l', '--log', dest='log_path', help='Path to directory for log output. Logs are saved in the file packaging_logs.txt. Default is the current working directory.',
                         default=os.getcwd())
     parser.add_argument('--validate-only', dest='validate_only', action='store_true',
                         help='runs package validation steps only', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector',
-                        default='packaged-connector')
+                        default='packaged-connector', action=UniqueActionStore)
     parser.add_argument('--package-only', dest='package_only', action='store_true',
                         help='package a taco only, skip signing', required=False)
     parser.add_argument('-a', '--alias', dest='alias',
@@ -63,17 +71,18 @@ def init_logging(log_path: Path, verbose: bool = False) -> logging.Logger:
 
 def log_path_checker(path_to_logs: str) -> Path:
     proper_path = Path(path_to_logs)
-    if os.path.isdir(path_to_logs):
+    if proper_path.exists():
         print("The log path {} exists".format(str(proper_path)))
     else:
-        print("The specified log path does not exist - attempting to create " + path_to_logs)
+        print("The specified log path does not exist - attempting to create {}".format(proper_path))
         try:
-            os.mkdir(path_to_logs)
-            logging.info("Created " + path_to_logs)
+            proper_path.mkdir()
+            logging.info("Created {}".format(proper_path))
         except Exception:
             print("Unable to create log directory. Exiting.")
             sys.exit(-1)
-    return Path(Path(path_to_logs) / 'packaging_logs.txt')
+    return proper_path / 'packaging_logs.txt'
+
 
 def main():
     parser = create_arg_parser()

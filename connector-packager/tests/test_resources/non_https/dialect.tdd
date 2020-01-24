@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dialect name='SimplePostgres'
+         class='postgres_odbc'
+         base='PostgreSQL90Dialect'
+         version='18.1'>
+   <function-map>
+    <function name='FLOAT' group='cast' return-type='real'>
+      <formula>CAST(((EXTRACT(EPOCH FROM %1) / ( 60 * 60 * 24)) + (365 * 70 + 17)) AS BIGINT)</formula>
+      <argument type='date' />
+    </function>
+   </function-map>
+ </dialect>
+

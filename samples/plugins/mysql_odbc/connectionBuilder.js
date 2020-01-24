@@ -7,9 +7,16 @@
     params["UID"] = attr[connectionHelper.attributeUsername];
     params["PWD"] = attr[connectionHelper.attributePassword];
     params["DATABASE"] = attr[connectionHelper.attributeDatabase];
-    params["INITSTMT"] = attr[connectionHelper.attributeInitialSQL];
-
+    
     params["OPTION"] = "1048576"
+
+    if (attr["sslmode"] == "require")
+    {
+        params["SSLMODE"] = "required";
+    }
+    else{
+        params["SSLMODE"] = "disabled";
+    }
 
     var formattedParams = [];
 
