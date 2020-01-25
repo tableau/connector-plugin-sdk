@@ -6,6 +6,8 @@ A connector is a set of files that describe the UI elements needed to collect us
 Starting with the set of base connector files, you can add customizations to each file, while using the connectivity test harness to validate the connector behavior along the way.
 The base connector files are described below.
 
+This example will use the PostGres sample connector located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) which is a connector for the PostGre SQL database.
+
 ![]({{ site.baseurl }}/assets/files-sequence.png)
 
 ## ![1]({{ site.baseurl }}/assets/pce-1.png) manifest.xml
@@ -49,7 +51,7 @@ For example, if you include <span style="color:red">show-ssl-check box</span> an
 ## ![3]({{ site.baseurl }}/assets/pce-3.png) \*.tdr
 
 (Optional) Tableau uses the Connector Resolver (.tdr) file to create a connection to your data.
-The .tdr file calls several JavaScript files, and includes the driver-resolver section.
+The .tdr file calls several JavaScript files, and includes the driver-resolver section. The driver-resolver is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
 
 Tableau database connections have a unique type, the class attribute.
 For example, all Postgres connections have the same class.
@@ -66,9 +68,9 @@ The Connection Resolver knows how to use these attributes to format an ODBC or J
 
 The ODBC connection string and the JDBC connection URL are created by calling the Connection Builder script and passing in a map of attributes that define how the connection is configured.
 Some values come from the connection dialog and are entered by the user (like username, password, and database name).
-They are mapped to ODBC connection string values that the PostgreSQL driver understands.
-Other attributes (like BOOLSASCHAR and LFCONVERSION) have values set to useful defaults.
-You may also set any other connection string options that you would like to pass to the driver.
+They are mapped to ODBC or JDBC connection string values that the driver understands.
+Other attributes (like BOOLSASCHAR and LFCONVERSION in the example) have values set to useful defaults. These will depend on which driver you are using to connect to your database.
+You may set any other connection string options that you would like to pass to the driver.
 
 ### Example ODBC Connection Builder
 
@@ -93,7 +95,7 @@ You may also set any other connection string options that you would like to pass
 
 ## ![5]({{ site.baseurl }}/assets/pce-5.png) Connection Properties
 
-(Optional) This script is needed only if you're using a JDBC driver.
+(Optional) This script is needed only if you're using a JDBC driver. The example below if for a connector to Amazon Athena.
 
 ### Example connectionProperties.js
 

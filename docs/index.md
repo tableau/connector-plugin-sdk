@@ -39,11 +39,21 @@ For more information about packaging your connector into a Taco, refer to [Packa
 # Before you Begin
 
 ## Recommended Workflow
+
 At a high level, these are the general steps you will need to follow to create a fully functional connector.
-- First, look at one of the sample connectors located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). These connectors can make a good starting point if you copy the connector files to your workspace.
-- Second, customize the connector files as needed to name your connector and allow it to connect to your database. See the [Example]({{ site.baseurl }}/docs/example) for more information.
-- Once your connector is able to connect, you're ready to start running the test tool [TDVT]({ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
-- When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
+
+First, look at one of the sample connectors located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). These connectors can make a good starting point if you copy the connector files to your workspace.
+
+Second, customize the connector files as needed to name your connector and allow it to connect to your database. See the [Example]({{ site.baseurl }}/docs/example) for more information. The following files are required for all connectors:
+- a manifest to define the connector.
+- a connection resolver. ODBC connectors should include a driver-resolver element but JDBC connectors do not currently support the driver-resolver.
+- a connection builder JavaScript file. JDBC connectors can make use of a properties builder JavaScript file.
+- a dialect.
+- a connection dialog.
+
+Once your connector is able to connect, you're ready to start running the test tool [TDVT]({ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
+
+When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
 
 ## Prerequisites:
 
