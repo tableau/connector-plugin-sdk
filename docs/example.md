@@ -93,7 +93,7 @@ You may also set any other connection string options that you would like to pass
 
 ## ![5]({{ site.baseurl }}/assets/pce-5.png) Connection Properties
 
-This script is needed only if you're using a JDBC driver.
+(Optional) This script is needed only if you're using a JDBC driver.
 
 ### Example connectionProperties.js
 
@@ -126,7 +126,7 @@ This script is needed only if you're using a JDBC driver.
 
 ## ![6]({{ site.baseurl }}/assets/pce-6.png) Connection Matcher
 
-This script defines how connections are matched.
+(Optional) This script defines how connections are matched.
 In most cases, the default behavior works, so you don't have to include the <span style= "font-family: courier new">connection-matcher</span> section in your \*.tdr file.
 
 ## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
