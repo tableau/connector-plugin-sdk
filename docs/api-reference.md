@@ -131,7 +131,7 @@ _Attribute names_
 
 ### driver-resolver
 
-Determines the driver name to use when connecting. This is mainly used for ODBC connections but can be used for JDBC as well. You can specify regex or string matches for the driver name, specify driver versions (if the driver correctly returns them through the ODBC interface), and have a list of multiple drivers that can be used in order.
+Determines the driver name to use when connecting. This is only used for ODBC connections. You can specify regex or string matches for the driver name, specify driver versions (if the driver correctly returns them through the ODBC interface), and have a list of multiple drivers that can be used in order.
 
 **Type:** XML
 
