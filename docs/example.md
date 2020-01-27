@@ -95,7 +95,7 @@ You may set any other connection string options that you would like to pass to t
 
 ## ![5]({{ site.baseurl }}/assets/pce-5.png) Connection Properties
 
-(Optional) This script is needed only if you're using a JDBC driver. The example below if for a connector to Amazon Athena.
+(Optional) This script is needed only if you're using a JDBC driver. The example below is for a connector to Amazon Athena.
 
 ### Example connectionProperties.js
 

@@ -14,7 +14,7 @@ A connector is a set of files that describe:
 - Any dialect or customizations needed for the connection
 - How to connect using the ODBC or JDBC driver
 
-A connector can most of the same features that any built-in Tableau connector supports, including publishing to a server if the server has the connector, creating extracts, data sources, vizzes, and so on.
+A connector can have most of the same features that any built-in Tableau connector supports, including publishing to a server if the server has the connector, creating extracts, data sources, vizzes, and so on.
 
 A connector developed using this SDK is appropriate for connecting to an ODBC or JDBC driver which interfaces using SQL. The underlying technology works well with relation databases.
 
