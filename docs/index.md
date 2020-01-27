@@ -3,7 +3,7 @@ title: Tableau Connector SDK
 ---
 
 With the Tableau Connector SDK, you can create a new connector that you can use to visualize your data from any database through an ODBC or JDBC driver.
-You can customize connector behavior, finely tune SQL generation, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
+You can customize connector behavior, fine tune SQL generation, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
 This document provides and overview of what a connector is and how it is created.
 
 # What is a Connector?
