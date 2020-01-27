@@ -743,10 +743,10 @@ class PrintConfigurationsTest(unittest.TestCase):
 
 
 class MockTestSet(TestSet):
-    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                     expected_message):
-        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                     expected_message, False, True, False)
+    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions,
+                 test_pattern, is_logical, suite_name, password_file, expected_message):
+        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern,
+                                          is_logical, suite_name, password_file, expected_message, False, True, False)
         self.mock_test_name = mock_test_name
         self.mock_test_path = mock_test_path
 
@@ -755,7 +755,8 @@ class MockTestSet(TestSet):
 
 
 class MockBatchQueueWork(tdvt_core.BatchQueueWork):
-    def __init__(self, mock_tests: List[MockTestSet], test_config: TdvtInvocation, test_set: MockTestSet, runtime_exception=None):
+    def __init__(self, mock_tests: List[MockTestSet], test_config: TdvtInvocation, test_set: MockTestSet,
+                 runtime_exception=None):
         super(MockBatchQueueWork, self).__init__(test_config, test_set)
         self.keep_actual_file = True
         self.runtime_exception = runtime_exception
@@ -806,14 +807,15 @@ class ResultsTest(unittest.TestCase):
         self.assertEqual(len(mock_batch.results), 1)
 
         for test_file in mock_batch.results:
-            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
+            self.assertFalse(mock_batch.results[test_file].all_passed())
             self.assertIsInstance(mock_batch.results[test_file].error_status, TestErrorResults)
-            self.assertEqual(mock_batch.results[test_file].diff_count, 14)
+            self.assertEqual(mock_batch.results[test_file].diff_count, 17)
 
     def create_mock_and_process(self, test_name, test_path):
         mock_tests = [TestFile('tests', test_path + test_name)]
         test_config = TdvtInvocation()
-        ts1_expr = MockTestSet(test_path, test_name, 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        ts1_expr = MockTestSet(test_path, test_name, 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt',
+                               False, 'mock suite expression', '', '')
         mock_batch = MockBatchQueueWork(mock_tests, test_config, ts1_expr)
         mock_batch.run(mock_batch.mock_tests)
         mock_batch.process_test_results(mock_batch.mock_tests)
@@ -828,7 +830,7 @@ class ResultsTest(unittest.TestCase):
         for test_file in mock_batch.results:
             self.assertFalse(mock_batch.results[test_file].all_passed())
             self.assertIsInstance(mock_batch.results[test_file].error_status, TestErrorResults)
-            self.assertEqual(mock_batch.results[test_file].diff_count == 1)
+            self.assertEqual(mock_batch.results[test_file].diff_count, 1)
 
 class ResultsExceptionTest(unittest.TestCase):
     def setUp(self):
