@@ -1,4 +1,0 @@
-Diff of [./tests/e/suite1/tuple_1\actual.setup.mytest.txt] and [./tests/e/suite1/tuple_1\expected.setup.mytest.txt].
-
-Tuples - [key]
-	Different number of tuples.
