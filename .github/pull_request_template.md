@@ -1,11 +1,10 @@
-**A Helpful Guide For Navigating Our Branches**
+**Things To Remember:** 
 
-* If this is a hotfix, make your PR against `master`.
-* If your change can ship immediately, make your PR against `dev-tdvt`.
-* If your change is for a future release, make your PR against the appropriate holding branch (eg `dev-2020.1`)
-
-_Also:_
-* Please update the changelog of the project you modified, either under `vNext` or under a point release if you bumped the version.
-* If you are merging into master, update the root `README.md` if the PR includes a release of the SDK, Connector Packager, or TDVT.
-
-Thank you and feel free to delete this from your PR description!
+1. Be sure to merge into the right branch. The choices are:
+* **`master`** if your PR runs on the current version of Tableau.
+* **`dev-2020.1`**
+* **`2020.2`**
+2. You should update at least one of the following:
+* The changelog of the project you modified.
+* The root `README.md` if the PR is a release of the SDK, Connector Packager, or TDVT.  
+=====
