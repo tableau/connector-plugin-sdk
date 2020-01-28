@@ -93,6 +93,7 @@ class DiffTest(unittest.TestCase):
         logging.debug("Ending diff tests:\n")
         return len(test_files), len(failed_tests)
 
+
 class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
         self.test_config = TdvtInvocation()
@@ -119,8 +120,7 @@ class BaseTDVTTest(unittest.TestCase):
             passed = test_result is not None
             passed = passed and test_result.all_passed()
             test_status = "passed" if passed else "failed"
-            self.assertTrue(passed == should_pass,
-                            "Test [{0}] {1} but should have {2}.".format(path, test_status, test_status_expected))
+            self.assertEqual(passed, should_pass)
 
 
 class ExpressionTest(BaseTDVTTest):
@@ -159,7 +159,6 @@ class LogicalTest(BaseTDVTTest):
         self.test_config.logical = True
 
     def test_logical_tests(self):
-        all_test_results = {}
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
 
         self.check_results(all_test_results, 1)
@@ -205,7 +204,8 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         # Now rerun the failed tests which should fail again,
         # indicating that the 'tested_sql' option was persisted correctly.
 
-        tests = enqueue_failed_tests(Path(get_path('tool_test', 'tdvt_output.json', __name__)), TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
+        tests = enqueue_failed_tests(Path(get_path('tool_test', 'tdvt_output.json', __name__)), TEST_DIRECTORY, None,
+                                     self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
 
         self.check_results(all_test_results, 1, False)
