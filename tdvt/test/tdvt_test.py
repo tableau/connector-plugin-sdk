@@ -15,11 +15,12 @@
 
 
 import io
-from pathlib import Path
 import shutil
 import subprocess
 import unittest
 
+from pathlib import Path
+from typing import List
 from unittest import mock
 
 from defusedxml.ElementTree import parse
@@ -92,6 +93,7 @@ class DiffTest(unittest.TestCase):
         logging.debug("Ending diff tests:\n")
         return len(test_files), len(failed_tests)
 
+
 class BaseTDVTTest(unittest.TestCase):
     def setUp(self):
         self.test_config = TdvtInvocation()
@@ -112,14 +114,14 @@ class BaseTDVTTest(unittest.TestCase):
 
     def check_results(self, test_results, total_test_count, should_pass=True):
         test_status_expected = "passed" if should_pass else "failed"
-        #Make sure we ran the right number of tests and that they all passed.
-        self.assertTrue(len(test_results) == total_test_count, "Did not run the right number of tests.")
+        # Make sure we ran the right number of tests and that they all passed.
+        self.assertEqual(len(test_results), total_test_count)
         for path, test_result in test_results.items():
             passed = test_result is not None
             passed = passed and test_result.all_passed()
             test_status = "passed" if passed else "failed"
-            self.assertTrue(passed == should_pass,
-                            "Test [{0}] {1} but should have {2}.".format(path, test_status, test_status_expected))
+            self.assertEqual(passed, should_pass)
+
 
 class ExpressionTest(BaseTDVTTest):
     def setUp(self):
@@ -132,6 +134,7 @@ class ExpressionTest(BaseTDVTTest):
         all_test_results = {}
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
         self.check_results(all_test_results, 2)
+
 
 class LocalExpressionTest(BaseTDVTTest):
     def setUp(self):
@@ -146,6 +149,7 @@ class LocalExpressionTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
         self.check_results(all_test_results, 2)
 
+
 class LogicalTest(BaseTDVTTest):
     def setUp(self):
         super(type(self), self).setUp()
@@ -155,10 +159,10 @@ class LogicalTest(BaseTDVTTest):
         self.test_config.logical = True
 
     def test_logical_tests(self):
-        all_test_results = {}
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
 
         self.check_results(all_test_results, 1)
+
 
 class LocalLogicalTest(BaseTDVTTest):
     def setUp(self):
@@ -173,6 +177,7 @@ class LocalLogicalTest(BaseTDVTTest):
         all_test_results = tdvt_core.run_tests_impl(self.config_set, self.test_config)
 
         self.check_results(all_test_results, 1)
+
 
 class ReRunFailedTestsTest(BaseTDVTTest):
     def setUp(self):
@@ -199,7 +204,8 @@ class ReRunFailedTestsTest(BaseTDVTTest):
         # Now rerun the failed tests which should fail again,
         # indicating that the 'tested_sql' option was persisted correctly.
 
-        tests = enqueue_failed_tests(Path(get_path('tool_test', 'tdvt_output.json', __name__)), TEST_DIRECTORY, None, self.test_config.tested_run_time_config)
+        tests = enqueue_failed_tests(Path(get_path('tool_test', 'tdvt_output.json', __name__)), TEST_DIRECTORY, None,
+                                     self.test_config.tested_run_time_config)
         all_test_results = tdvt_core.run_tests_serial(tests)
 
         self.check_results(all_test_results, 1, False)
@@ -247,6 +253,7 @@ def build_tabquery_command_line_local(work):
     new_cmd.append(os.path.split(cmd[0])[1])
     new_cmd += cmd[1:]
     return new_cmd
+
 
 class ArgumentTest(unittest.TestCase):
     def setUp(self):
@@ -734,8 +741,22 @@ class PrintConfigurationsTest(unittest.TestCase):
             datasource_list.print_configurations(MockTestRegistry, None, None)
             self.assertIn(correct_out, captured_output.getvalue())
 
+
+class MockTestSet(TestSet):
+    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions,
+                 test_pattern, is_logical, suite_name, password_file, expected_message):
+        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern,
+                                          is_logical, suite_name, password_file, expected_message, False, True, False)
+        self.mock_test_name = mock_test_name
+        self.mock_test_path = mock_test_path
+
+    def get_expected_output_file_path(self, test_file, output_dir):
+        return self.mock_test_path +'actual.' + self.mock_test_name
+
+
 class MockBatchQueueWork(tdvt_core.BatchQueueWork):
-    def __init__(self, mock_tests, test_config, test_set, runtime_exception = None):
+    def __init__(self, mock_tests: List[MockTestSet], test_config: TdvtInvocation, test_set: MockTestSet,
+                 runtime_exception=None):
         super(MockBatchQueueWork, self).__init__(test_config, test_set)
         self.keep_actual_file = True
         self.runtime_exception = runtime_exception
@@ -749,16 +770,6 @@ class MockBatchQueueWork(tdvt_core.BatchQueueWork):
             raise self.runtime_exception
         pass
 
-class MockTestSet(TestSet):
-    def __init__(self, mock_test_path, mock_test_name, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                     expected_message):
-        super(MockTestSet, self).__init__(ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                     expected_message, False, True, False)
-        self.mock_test_name = mock_test_name
-        self.mock_test_path = mock_test_path
-
-    def get_expected_output_file_path(self, test_file, output_dir):
-        return self.mock_test_path +'actual.' + self.mock_test_name
 
 class ResultsTest(unittest.TestCase):
     def setUp(self):
@@ -772,7 +783,7 @@ class ResultsTest(unittest.TestCase):
         test_path = './tests/e/suite1/'
         mock_batch = self.create_mock_and_process(test_name, test_path)
 
-        self.assertTrue(len(mock_batch.results) == 1)
+        self.assertEqual(len(mock_batch.results), 1)
         for test_file in mock_batch.results:
             self.assertTrue(mock_batch.results[test_file].all_passed())
 
@@ -783,26 +794,28 @@ class ResultsTest(unittest.TestCase):
 
         self.assertTrue(len(mock_batch.results) == 1)
         for test_file in mock_batch.results:
-            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
-            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorMissingActual))
-            self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, TestErrorMissingActual))
-            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == False)
+            self.assertFalse(mock_batch.results[test_file].all_passed())
+            self.assertIsInstance(mock_batch.results[test_file].error_status, TestErrorMissingActual)
+            self.assertIsInstance(mock_batch.results[test_file].test_case_map[0].error_type, TestErrorMissingActual)
+            self.assertFalse(mock_batch.results[test_file].test_case_map[0].all_passed())
 
     def test_results_missing_tuple(self):
         test_name = 'setup.mytest.txt'
         test_path = './tests/e/suite1/failed_1/'
         mock_batch = self.create_mock_and_process(test_name, test_path)
 
-        self.assertTrue(len(mock_batch.results) == 1)
+        self.assertEqual(len(mock_batch.results), 1)
+
         for test_file in mock_batch.results:
-            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
-            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorResults))
-            self.assertTrue(mock_batch.results[test_file].diff_count == 14)
+            self.assertFalse(mock_batch.results[test_file].all_passed())
+            self.assertIsInstance(mock_batch.results[test_file].error_status, TestErrorResults)
+            self.assertEqual(mock_batch.results[test_file].diff_count, 17)
 
     def create_mock_and_process(self, test_name, test_path):
         mock_tests = [TestFile('tests', test_path + test_name)]
         test_config = TdvtInvocation()
-        ts1_expr = MockTestSet(test_path, test_name, 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt', False, 'mock suite expression', '', '')
+        ts1_expr = MockTestSet(test_path, test_name, 'mock ds', 'tests', 'mock config', 'mock.tds', '', 'tests/*.txt',
+                               False, 'mock suite expression', '', '')
         mock_batch = MockBatchQueueWork(mock_tests, test_config, ts1_expr)
         mock_batch.run(mock_batch.mock_tests)
         mock_batch.process_test_results(mock_batch.mock_tests)
@@ -813,11 +826,11 @@ class ResultsTest(unittest.TestCase):
         test_path = './tests/e/suite1/tuple_1/'
         mock_batch = self.create_mock_and_process(test_name, test_path)
 
-        self.assertTrue(len(mock_batch.results) == 1)
+        self.assertEqual(len(mock_batch.results), 1)
         for test_file in mock_batch.results:
-            self.assertTrue(mock_batch.results[test_file].all_passed() == False)
-            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, TestErrorResults))
-            self.assertTrue(mock_batch.results[test_file].diff_count == 1)
+            self.assertFalse(mock_batch.results[test_file].all_passed())
+            self.assertIsInstance(mock_batch.results[test_file].error_status, TestErrorResults)
+            self.assertEqual(mock_batch.results[test_file].diff_count, 1)
 
 class ResultsExceptionTest(unittest.TestCase):
     def setUp(self):
@@ -867,8 +880,9 @@ class ResultsExceptionTest(unittest.TestCase):
 
         for test_file in mock_batch.results:
             actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
-            self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
-            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
+            self.assertIsInstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state)
+            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed())
+
     def test_process_error_output_json_expected(self):
         error_state = TestErrorExpected
         proc_error_code = 1
@@ -882,8 +896,8 @@ class ResultsExceptionTest(unittest.TestCase):
             json_str = json.dumps(mock_batch.results[test_file], cls=TestOutputJSONEncoder)
             json_object = json.loads(json_str)
             self.assertEqual(json_object['expected_message'], error_message)
-            self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
-            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
+            self.assertIsInstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state)
+            self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed())
 
     def test_process_error_output_json_not_expected(self):
             error_state = TestErrorExpected
@@ -898,8 +912,8 @@ class ResultsExceptionTest(unittest.TestCase):
                 json_str = json.dumps(mock_batch.results[test_file], cls=TestOutputJSONEncoder)
                 json_object = json.loads(json_str)
                 self.assertEqual(json_object['expected_message'], error_message)
-                self.assertTrue(isinstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state))
-                self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed() == True)
+                self.assertIsInstance(mock_batch.results[test_file].test_case_map[0].error_type, error_state)
+                self.assertTrue(mock_batch.results[test_file].test_case_map[0].all_passed())
 
     def test_process_timeout_multiple(self):
         test_name = 'setup.mytest.txt'
@@ -913,16 +927,16 @@ class ResultsExceptionTest(unittest.TestCase):
         error_state = TestErrorTimeout
         self.check_errors(error_message, error_state, mock_batch, 2)
 
-
     def check_errors(self, expected_message, expected_state, mock_batch, error_count = 1):
         mock_batch.run(mock_batch.mock_tests)
         mock_batch.process_test_results(mock_batch.mock_tests)
 
-        self.assertTrue(len(mock_batch.results) == error_count)
+        self.assertEqual(len(mock_batch.results), error_count)
         for test_file in mock_batch.results:
             actual_message = mock_batch.results[test_file].get_failure_message_or_all_exceptions()
             self.assertTrue(actual_message == expected_message, "Expected [{0}] got [{1}]".format(expected_message, actual_message))
-            self.assertTrue(isinstance(mock_batch.results[test_file].error_status, expected_state))
+            self.assertIsInstance(mock_batch.results[test_file].error_status, expected_state)
+
 
 class TabQueryPathTest(unittest.TestCase):
     def test_init(self):
