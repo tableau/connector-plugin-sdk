@@ -140,11 +140,17 @@
         <xs:group ref="VendorInformation-G"/>
         <xs:element minOccurs="0" name="platforms" type="Platforms-CT"/>
         <xs:group ref="DataConnectionCustomization-G"/>
-        <xs:element minOccurs="0" name="connection-dialog" type="ScriptElement-CT"/>
+        <xs:choice>
+          <xs:element minOccurs="0" name="connection-fields" type="ScriptElement-CT"/>
+          <xs:element minOccurs="0" name="connection-dialog" type="ScriptElement-CT"/>
+        </xs:choice>
+        <xs:element minOccurs="0" name="connection-metadata" type="ScriptElement-CT"/>
         <xs:element minOccurs="0" name="connection-resolver" type="ScriptElement-CT"/>
         <xs:element minOccurs="0" name="dialect" type="ScriptElement-CT"/>
+        <xs:element minOccurs="0" name="oauth-config" type="ScriptElement-CT"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" name="license-key" type="LicenseKey-ST"/>
       </xs:sequence>
+
       <xs:attribute name="class" type="xs:token" use="required"/>
       <xs:attribute name="name" type="xs:string" use="required"/>
       <xs:attribute name="plugin-version" type="VersionNumber-ST" use="required"/>
