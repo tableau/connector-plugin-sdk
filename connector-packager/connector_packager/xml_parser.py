@@ -154,15 +154,15 @@ class XMLParser:
                 self.file_list.append(new_file)
 
                 # If connection-metadata, make sure that connection-fields file exists
-                if child.tag == "connection-metadata":
-                    connection_metadata_exists = False
+                if child.tag == 'connection-metadata':
+                    connection_fields_exists = False
 
                     for xml_file in self.file_list:
-                        if xml_file.file_type == "connection-fields":
-                            connection_metadata_exists = True
+                        if xml_file.file_type == 'connection-fields':
+                            connection_fields_exists = True
                             break
 
-                    if not connection_metadata_exists:
+                    if not connection_fields_exists:
                         logger.debug("Error: connection-metadata file requires a connection-fields file")
                         return False
 
