@@ -20,7 +20,10 @@ XSD_DICT = {
     "connection-dialog": "tcd_latest",
     "connection-resolver": "tdr_latest",
     "dialect": "tdd_latest",
-    "resource": "connector_plugin_resources_latest"
+    "resource": "connector_plugin_resources_latest",
+    "connection-fields": "connection_fields",
+    "connection-metadata": "connector_plugin_metadata"
+
 }
 
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="connection-metadata">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="database" minOccurs="0" type="Hierachy-CT"/>
+        <xs:element name="schema" minOccurs="0" type="SimpleHierachy-CT"/>
+        <xs:element name="table" minOccurs="0" type="SimpleHierachy-CT"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Hierachy-CT">
+    <xs:complexContent>
+      <xs:extension base="SimpleHierachy-CT">
+        <xs:sequence>
+          <xs:element name="field" minOccurs="0" type="HierachyField-CT"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="SimpleHierachy-CT">
+      <xs:attribute name="enabled" type="xs:boolean" use="required"/>
+      <xs:attribute name="label" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="HierachyField-CT">
+    <xs:attribute name="default-value" type="xs:string"/>
+    <xs:attribute name="optional" type="xs:boolean"/>
+  </xs:complexType>
+
+</xs:schema>
