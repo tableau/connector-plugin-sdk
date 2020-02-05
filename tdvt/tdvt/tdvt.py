@@ -310,7 +310,7 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
             for each_test_set in test_set_config.get_logical_tests() + test_set_config.get_expression_tests():
                 tdvt_invocation = all_tdvt_test_configs[test_set_id]
                 all_test_pairs.append((each_test_set, tdvt_invocation))
-                logging.debug("Queing up tests: " + str(tdvt_invocation))
+                logging.debug("Queuing up tests: " + str(tdvt_invocation))
 
     return all_test_pairs
 
