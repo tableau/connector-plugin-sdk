@@ -48,6 +48,12 @@ To package the connector into a .taco file, you will also need:
 * Tableau Desktop or Server 2019.4 Beta 1 or higher
 * JDK 8 or higher
 
+For a JDBC connector, your driver must fulfill the following requirements:
+
+* You must have read permissions on the .jar file.
+* Tableau requires a JDBC 4.0 or later driver.
+* Tableau requires a Type 4 JDBC driver.
+
 # Get Help
 
 This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your connector:
