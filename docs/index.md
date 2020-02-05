@@ -68,6 +68,11 @@ To package the connector into a `.taco` file, you will additionally need:
 - Tableau Desktop or Server 2019.4 or higher
 - JDK 8 or higher
 
+For a JDBC connector, your driver must fulfill the following requirements:
+- You must have read permissions on the .jar file.
+- Tableau requires a JDBC 4.0 or later driver.
+- Tableau requires a Type 4 JDBC driver.
+
 ## Install the Connector SDK tools:
 - Install TDVT, our test harness. Refer to the "Installation" section of the [Test Your Connector Using TDVT]({{ site.baseurl }}/docs/tdvt) page.
 - Install the packaging tool. Refer to the "Set up the virtual environment for packaging and signing" section of the [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign) page.
