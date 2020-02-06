@@ -10,23 +10,9 @@ The class attribute is a unique key for your connector. When Tableau loads the c
 
 ## Choosing a superclass
 
-Connectors work using an inheritance pattern.
-You can make a simple connector that reuses all of the PostgreSQL code by subclassing the ‘postgres’ class.
-You can then customize some or all of the connector as needed, for example, by picking a different driver, renaming the connection, and changing the generated SQL.
+Connectors work using an inheritance pattern. The superclass refers to the Tableau native connector your connector inherits the behavior of.
 
-The simplest connector  consists of just a manifest.xml file:
-
-```
-<connector-plugin class='example' superclass='postgres' plugin-version='0.0.0' name='Super PostgreSQL Connector' version='18.1'>
-</connector-plugin>
-```
-
-This simple connector will inherit all behavior from the native Tableau PostgreSQL connector.
-
-Tableau’s native connectors have special code and optimizations that may not be appropriate for your connection.
-We recommend using the ‘odbc’ or ‘jdbc’ base classes for most connectors.
-These handle connecting and retrieving data in a standard way and can be further customized as needed.
-If your connection is very similar to an existing database such as PostgreSQL or MySQL, then choosing that as superclass might save considerable development time.
+Because Tableau’s native connectors have special code and optimizations that may not be appropriate for your connection, we recommend using ‘odbc’ or ‘jdbc’ for your superclass. These handle connecting and retrieving data in a standard way and can be further customized as needed.
 
 ### Available superclass attributes
 
