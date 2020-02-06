@@ -60,8 +60,8 @@ Multiple expected files are supported.
 ## Installation
 
 1. Clone the [TDVT Python module](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt). You can create an archive package and install that, or install from the live directory if you want to modify TDVT. Run the following commands from the top level 'tdvt' directory.
-    - Create an archive package: `py -3 setup.py sdist --formats gztar`
-    - Install from an archive file: `py -3 -m pip install tdvt-1.1.59.zip`.
+    - Create an archive package into dist folder: `py -3 setup.py sdist --formats gztar`.
+    - Change directory into dist folder and install from the archived file: `py -3 -m pip install tdvt-1.1.59.zip`.
     - Alternatively, install the live version: `py -3 -m pip install -e .`
     - Verify it is installed by running `py -3 -m pip list`.
 
@@ -111,7 +111,7 @@ These represent saved connection information to a particular table in your datab
 TDVT uses the 'Calcs' and 'Staples' tables.
 
 1. Start Tableau Desktop and connect to the 'Calcs' table using the connector you wish to test.
-   After you connect, right-click the datasource in the top left 'Data' tab and select 'Add to Saved Datasources'.
+   After you connect, right-click the datasource in the top left 'Data' tab and select 'Add to Saved Datasources' (make sure you right-click the datasource through a workbook sheet, rather than from the data source panel).
    Save this in the 'tdvt/tds' directory.
    Name this file 'cast_calcs.\*.tds' or 'Staples.\*.tds' where \* represents your TDVT config name.
    For example 'cast_calcs.mydb.tds'.

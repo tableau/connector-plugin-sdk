@@ -102,7 +102,7 @@ For example: 
 (.venv) D:\connector-plugin-sdk\connector-packager>keytool -genkey -alias test1year -keystore test1yearkeystore.jks -validity 365 
 ```
 
-For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website. 
+The default password for keystore is changeit. For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website. 
 
  
 
@@ -152,7 +152,7 @@ keytool -importcert 
 
 ### Run the package module 
 
-The connector-packager tool must be run from the connector-plugin-sdk/connector-packager/ directory.  There are several ways to run the tool:
+The connector-packager tool must be run from the connector-plugin-sdk/connector-packager/ directory.  The packaged .taco file in default will be generated within packaged-connector folder. There are several ways to run the tool:
 
 -   To package the connector and sign it, run this command: 
  
