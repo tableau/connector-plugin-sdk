@@ -62,7 +62,9 @@ Multiple expected files are supported.
 1. Clone the [TDVT Python module](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt). You can create an archive package and install that, or install from the live directory if you want to modify TDVT. Run the following commands from the top level 'tdvt' directory.
     - Create an archive package into dist folder: `py -3 setup.py sdist --formats gztar`.
     - Change directory into dist folder and install from the archived file: `py -3 -m pip install tdvt-1.1.59.zip`.
-    - Alternatively, install the live version: `py -3 -m pip install -e .`
+
+   Alternatively, you can install the live version by running the following commands:
+    - Install the live version: `py -3 -m pip install -e .`
     - Verify it is installed by running `py -3 -m pip list`.
 
 1. Extract and then load the TestV1 minimal dataset into your database.

@@ -102,7 +102,7 @@ For example: 
 (.venv) D:\connector-plugin-sdk\connector-packager>keytool -genkey -alias test1year -keystore test1yearkeystore.jks -validity 365 
 ```
 
-The default password for keystore is changeit. For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website. 
+For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website. 
 
  
 
