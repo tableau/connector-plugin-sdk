@@ -8,13 +8,15 @@ The log file is called log.txt and is located in the \My Tableau Repository\Logs
  
 ## Connector loads after the signature is verified
 
+### Log entry examples
+
 #### .taco verified.
 
 The certificate used for signing is a valid and a trusted one, and the signature verification succeeded. Since the integrity and identity of the connector is verified, Tableau loads the connector. 
 
 #### Signed by: CN=A, OU=B, O=C, L=D, ST=E, C=F 
 
-This displays information about the connector.taco developer:  
+This displays information about the connector .taco developer:
 
    **CN=A** is the first and last name of the developer   
    **OU=B** is the organizational unit   
@@ -30,7 +32,7 @@ If this error dialog opens when you try to connect, it means that the connector 
 ![]({{ site.baseurl }}/assets/log-entries-error.png) 
 
 ### Log entry examples
- 
+
 #### .taco is not signed.
 
 The connector hasn't been signed with a certificate. As a result, the integrity and the identity of the connector cannot be verified, and Tableau won't load the connector.taco package. 

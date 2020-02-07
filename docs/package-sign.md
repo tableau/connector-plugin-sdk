@@ -152,7 +152,7 @@ keytool -importcert 
 
 ### Run the package module 
 
-The connector-packager tool must be run from the connector-plugin-sdk/connector-packager/ directory.  There are several ways to run the tool:
+The connector-packager tool must be run from the connector-plugin-sdk/connector-packager/ directory. The packaged .taco file in default will be generated within packaged-connector folder. There are several ways to run the tool:
 
 -   To package the connector and sign it, run this command: 
  
