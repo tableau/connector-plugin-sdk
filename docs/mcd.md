@@ -27,11 +27,9 @@ If you wish to modify metadata hierarchy behavior you can add to the manifest a 
 
 # The Connection Fields File
 
-**TODO** link to xsd?
-
 The Connection Fields file dictates the content and behavior of Connection Dialog as seen by the user. It also specifies the names of the connection attributes that will be available, along with the values specified by the user, in the ConnectionBuilder(). 
 
-The Connection Fields file is indentified in the manifest using the `<connection-fields>` element. Here we discuss the structure of this file. 
+The Connection Fields file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connection_fields.xsd)) is indentified in the manifest using the `<connection-fields>` element. Here we discuss the structure of this file. 
 
 To avoid confusion, in the following we use the term "field" in place of "connection attribute," and use the generic term "attribute" to mean an XML element attribute. 
 
@@ -97,8 +95,8 @@ A child of selection-group, this represents one entry in the drop-down. It has t
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| value | The value sent to ConnectionBuilder() | No | | |
-| label | The text the user sees | No | | |
+| value | The value sent to ConnectionBuilder() | No | Any string value | |
+| label | The text the user sees | No | Any string value | |
 
 ### `<conditions>`
 
@@ -112,8 +110,8 @@ Hence, this is a container element for the condition elements. It has no XML att
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| field | Name of the field whose value will be checked for equality | No | | |
-| value | The value to match. If the field's value is equal to this, the condition is true. | No | | |
+| field | Name of the field whose value will be checked for equality | No | Any string value | |
+| value | The value to match. If the field's value is equal to this, the condition is true. | No | Any string value | |
 
 
 ## Example
@@ -259,7 +257,7 @@ The Connection Metadata file provides some control over the metadata hierarchy e
 - provide a default value for Database on the connection dialog, and
 - supress the Database, Schema, or Table selectors from the schema viewer, which the user sees after the connection is established.
 
-The Connection Metadata file is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file. 
+The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file. 
 
 ## XML Elements
 
