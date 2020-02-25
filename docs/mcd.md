@@ -12,11 +12,11 @@ To use MCD, in the manifest replace `<connection-dialog>`, which references a .t
 
 If you wish to modify metadata hierarchy behavior you can add to the manifest a `<connection-metadata>` element, which also references a .xml file and is described below. 
 
-```
+```xml
   manifest.xml
 
   <?xml version='1.0' encoding='utf-8' ?>
-  <connector-plugin class='...
+  <connector-plugin class=...>
     ...
     <connection-fields   file='modular-dialog.xml'/>       <!-- use this instead of connection-dialog -->
     <connection-metadata file='connection-metadata.xml'/>  <!-- add this to modify metadata hierarchy behavior -->
@@ -129,7 +129,7 @@ The images below show the Connection Dialog produced using this file. The left s
 
 AutoReconnect is an example of a non-editable field. It will not be visible in the connection dialog, but its default value of `0` will be available in ConnectionBuilder() to add to the Connection String.
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
  
 <connection-fields>
@@ -308,7 +308,9 @@ An optional child of `<connection-metadata>`, this controls whether the Table se
 
 The Connection Metadata file below matches the default--that is, what you get if you don't reference the file in the manifest at all--except that it provides a default value of 'TestV1' for Database. 
 
-```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+
 <connection-metadata>
   <database enabled='true' label='Database'>
     <field optional='true' default-value='TestV1' />
