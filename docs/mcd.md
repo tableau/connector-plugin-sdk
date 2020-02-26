@@ -16,6 +16,7 @@ If you wish to modify metadata hierarchy behavior you can add to the manifest a 
   manifest.xml
 
   <?xml version='1.0' encoding='utf-8' ?>
+
   <connector-plugin class=...>
     ...
     <connection-fields   file='modular-dialog.xml'/>       <!-- use this instead of connection-dialog -->
@@ -45,14 +46,14 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the attribute, which is used in the ConnectionBuilder() | No | **TODO** Any constraints beyond XML attr value constraints and uniqueness? | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). <br> **TODO correct link** <br>**TODO: what happens if I use name "database"?** |
-| label | Label that appears on the connection dialog for the field | No | **TODO** Any constraints beyond XML attr value constraints? | |
-| value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | |
+| name  | Unique name of the attribute, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). <br> **TODO correct link** |
+| label | Label that appears on the connection dialog for the field | No | | |
+| value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | In the 2020.2 release `file` is not supported. |
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> <ul><li>string: `""`</li><li>option: first option</li><li>boolean: `false`</li><li>file: `""`</li></ul>| |
 | optional | Whether the user must specify a value for the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | |
 | editable | Whether the user can edit the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `true`. | When set to `false`, the attribute is not shown in the connection dialog, and its default-value is passed to the ConnectionBuilder(). |
-| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | <span style="color:red">In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure.</span>|
-| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> <ul><li>`endpoint` (for server, port, etc.)</li><li>`metadata` (for data hierarchy)</li><li>`authentication`</li><li>`general`</li><li>`initial-sql`</li><li>`advanced`</li></ul> Default value: `general` | <span style="color:red">In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported.</span> | 
+| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. |
+| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> <ul><li>`endpoint` (for server, port, etc.)</li><li>`metadata` (for data hierarchy)</li><li>`authentication`</li><li>`general`</li><li>`initial-sql`</li><li>`advanced`</li></ul> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. | 
 
 ### `<validation-rule>`
 
@@ -102,7 +103,7 @@ A child of selection-group, this represents one entry in the drop-down. It has t
 
 An optional child of field or selection group, this is used for conditional display. It specifies whether the field or selection group should be visible in the dialog based on the values the user has specified for other fields. 
 
-Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one of the `<condition>` elements is matched.
+Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one of the `<condition>` elements is matched. The connector will not load if there are circular references. 
 
 Hence, this is a container element for the condition elements. It has no XML attributes. 
 
@@ -250,8 +251,6 @@ AutoReconnect is an example of a non-editable field. It will not be visible in t
 
 
 # The Connection Metadata File
-
-**TODO** link to xsd?
 
 The Connection Metadata file provides some control over the metadata hierarchy elements Database, Schema, and Table. For example, it can be used to:
 - provide a default value for Database on the connection dialog, and
