@@ -1,14 +1,14 @@
-# Modular Connection Dialog (MCD)
+# Tableau Connector
 
 **IMPORTANT:** This is alpha software and should be used in a test environment. Do not deploy the connector to a production environment.
 
-MCD is a new feature that enables a more fully data-driven connection dialog for plug in connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established. 
+Tableau Connector is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
 This feature is new in 2020.2. It is an alpha feature, and as such it is available in Desktop only. In future releases it will become available in other Tableau products including Server and Prep. 
 
-# How to Use MCD
+# How to Use Tableau Connector
 
-To use MCD, in the manifest replace `<connection-dialog>`, which references a .tcd file, with `<connection-fields>`, which references a .xml file, described below. The connector will fail to load if both elements appear in the manifest. 
+To use Tableau Connector, in the manifest replace `<connection-dialog>`, which references a .tcd file, with `<connection-fields>`, which references a .xml file, described below. The connector will fail to load if both elements appear in the manifest.
 
 If you wish to modify metadata hierarchy behavior you can add to the manifest a `<connection-metadata>` element, which also references a .xml file and is described below. 
 
@@ -19,7 +19,7 @@ If you wish to modify metadata hierarchy behavior you can add to the manifest a 
 
   <connector-plugin class=...>
     ...
-    <connection-fields   file='modular-dialog.xml'/>       <!-- use this instead of connection-dialog -->
+    <connection-fields   file='connection-fields.xml'/>    <!-- use this instead of connection-dialog -->
     <connection-metadata file='connection-metadata.xml'/>  <!-- add this to modify metadata hierarchy behavior -->
     <connection-resolver file="connectionResolver.tdr"/>
     <dialect file='dialect.tdd'/>
@@ -46,7 +46,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the attribute, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). <br> **TODO correct link** |
+| name  | Unique name of the field, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). <br> **TODO correct link** |
 | label | Label that appears on the connection dialog for the field | No | | |
 | value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | In the 2020.2 release `file` is not supported. |
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> <ul><li>string: `""`</li><li>option: first option</li><li>boolean: `false`</li><li>file: `""`</li></ul>| |
@@ -62,7 +62,7 @@ It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| reg-exp | Regular Expression | No | | |
+| reg-exp | Regular Expression | No | | In the 2020.2 release the validation rule is not enforced. |
 
 ### `<boolean-options>`
 
@@ -103,7 +103,7 @@ A child of selection-group, this represents one entry in the drop-down. It has t
 
 An optional child of field or selection group, this is used for conditional display. It specifies whether the field or selection group should be visible in the dialog based on the values the user has specified for other fields. 
 
-Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one of the `<condition>` elements is matched. The connector will not load if there are circular references. 
+Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one or more of the `<condition>` elements is matched. The connector will not load if there are circular references.
 
 Hence, this is a container element for the condition elements. It has no XML attributes. 
 
@@ -119,11 +119,11 @@ Hence, this is a container element for the condition elements. It has no XML att
 
 The Connection Fields file below demonstrates both conditional display of fields and a non-editable field. 
 
-The images below show the Connection Dialog produced using this file. The left side shows the dialog as it is initially displayed, and the right side shows what it changes to when the user selects Authentication Kerberos. 
+The images below show the Connection Dialog produced using this file. The left side shows the dialog as it is initially displayed, after the user enters a Server name. Note that the default Authentication option is No Authentication, and the Sign In button is enabled. The right side shows what it changes to when the user selects Authentication Username and Password. 
 
 <p float="left">
-  <img src="{{ site.baseurl }}/assets/mcd-connection-dialog-1.png" alt="Connection Dialog as initially displayed" align=top hspace=40/>
-  <img src="{{ site.baseurl }}/assets/mcd-connection-dialog-2.png" alt="Connection Dialog after user selects Authentication Kerberos" align=top />
+  <img src="{{ site.baseurl }}/assets/mcd-connection-dialog-1.png" alt="Connection Dialog as initially displayed, after the user enters a Server name" align=top hspace=40/>
+  <img src="{{ site.baseurl }}/assets/mcd-connection-dialog-2.png" alt="Connection Dialog after user selects Authentication Username and Password" align=top />
 </p>
 
 AutoReconnect is an example of a non-editable field. It will not be visible in the connection dialog, but its default value of `0` will be available in ConnectionBuilder() to add to the Connection String.
@@ -137,110 +137,26 @@ AutoReconnect is an example of a non-editable field. It will not be visible in t
     <validation-rule reg-exp="^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$"/>
   </field>
  
-  <field name="port" label="Port" category="endpoint" value-type="string" default-value="1000"/>
+  <field name="port" label="Port" category="endpoint" value-type="string" default-value="5432"/>
  
-  <field name="authentication-type" label="Authentication" category="authentication" value-type="selection" >
+  <field name="authentication" label="Authentication" category="authentication" value-type="selection" >
     <selection-group>
-      <option value="0" label="No Authentication"/>
-      <option value="1" label="Kerberos"/>
-      <option value="2" label="Username"/>
-      <option value="3" label="Username and Password"/>
-      <option value="6" label="Microsoft Azure HDInsight Service"/>
+      <option value="auth-none" label="No Authentication"/>
+      <option value="auth-user" label="Username"/>
+      <option value="auth-user-pass" label="Username and Password"/>
     </selection-group>
   </field>
- 
-  <field name="transport-type" label="Transport" category="authentication" value-type="selection" >
 
-    <selection-group>
-      <conditions>
-        <condition field="authentication-type" value="0"/>
-      </conditions>
-      <option value="0" label="Binary"/>
-      <option value="2" label="HTTP"/>
-    </selection-group>
- 
-    <selection-group>
-      <conditions>
-        <condition field="authentication-type" value="1"/>
-      </conditions>
-      <option value="1" label="SASL"/>
-      <option value="2" label="HTTP"/>
-    </selection-group>
- 
-    <selection-group>
-      <conditions>
-        <condition field="authentication-type" value="2"/>
-      </conditions>
-      <option value="1" label="SASL"/>
-    </selection-group>
-   
-    <selection-group>
-      <conditions>
-        <condition field="authentication-type" value="3"/>
-      </conditions>
-      <option value="0" label="Binary"/>
-      <option value="1" label="SASL"/>
-      <option value="2" label="HTTP"/>
-    </selection-group>
- 
-    <selection-group>
-      <conditions>
-        <condition field="authentication-type" value="6"/>
-      </conditions>
-      <option value="2" label="HTTP"/>
-    </selection-group>
- 
-  </field>
- 
-  <field name="kerberos-realm" label="Realm" category="authentication" value-type="string">
-    <conditions>
-      <condition field="authentication-type" value="1"/>
-    </conditions>
-  </field>
- 
-  <field name="kerberos-host" label="Host FQDN" category="authentication" value-type="string">
-    <conditions>
-      <condition field="authentication-type" value="1"/>
-    </conditions>
-  </field>
- 
-  <field name="kerberos-service" label="Service Name" category="authentication" value-type="string">
-    <conditions>
-      <condition field="authentication-type" value="1"/>
-    </conditions>
-  </field>
- 
   <field name="username" label="Username" category="authentication" value-type="string">
     <conditions>
-      <condition field="authentication-type" value="2"/>
-      <condition field="authentication-type" value="3"/>
-      <condition field="authentication-type" value="6"/>
+      <condition field="authentication" value="auth-user"/>
+      <condition field="authentication" value="auth-user-pass"/>
     </conditions>
   </field>
  
   <field name="password" label="Password" category="authentication" value-type="string" secure="true">
     <conditions>
-      <condition field="authentication-type" value="3"/>
-      <condition field="authentication-type" value="6"/>
-    </conditions>
-  </field>
- 
-  <field name="http-path" label="HTTP Path" category="authentication" value-type="string">
-    <conditions>
-      <condition field="transport-type" value="2"/>
-    </conditions>
-  </field>
- 
-  <field name="SSL" label="Require SSL" value-type="boolean" default-value="">
-    <boolean-options>
-      <false-value value="" />
-      <true-value value="1" />
-    </boolean-options>
-  </field>
- 
-  <field name="TrustedCerts" label="Custom SSL certificate file" value-type="file">
-    <conditions>
-      <condition field="SSL" value="1"/>
+      <condition field="authentication" value="auth-user-pass"/>
     </conditions>
   </field>
  
@@ -252,9 +168,11 @@ AutoReconnect is an example of a non-editable field. It will not be visible in t
 
 # The Connection Metadata File
 
-The Connection Metadata file provides some control over the metadata hierarchy elements Database, Schema, and Table. For example, it can be used to:
+The Connection Metadata file provides some limited control over the metadata hierarchy elements Database, Schema, and Table. For example, it can be used to:
 - provide a default value for Database on the connection dialog, and
 - supress the Database, Schema, or Table selectors from the schema viewer, which the user sees after the connection is established.
+
+If you don't provide a Connection Metadata file, then by default all three selectors will be shown.
 
 The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file. 
 
