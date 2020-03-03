@@ -1,16 +1,16 @@
-# Tableau Connector
+# Connection Dialog v2
 
 **IMPORTANT:** This is alpha software and should be used in a test environment. Do not deploy the connector to a production environment.
 
-Tableau Connector is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
+Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
 This feature is new in 2020.2. It is an alpha feature, and as such it is available in Desktop only. In future releases it will become available in other Tableau products including Server and Prep. 
 
-# How to Use Tableau Connector
+# How to Use Connection Dialog v2
 
-To use Tableau Connector, in the manifest replace `<connection-dialog>`, which references a .tcd file, with `<connection-fields>`, which references a .xml file, described below. The connector will fail to load if both elements appear in the manifest.
+To use Connection Dialog v2, in the manifest replace `<connection-dialog>` with `<connection-fields>`, described below. The connector will fail to load if both elements appear in the manifest.
 
-If you wish to modify metadata hierarchy behavior you can add to the manifest a `<connection-metadata>` element, which also references a .xml file and is described below. 
+If you wish to modify metadata hierarchy behavior you can add to the manifest a `<connection-metadata>` element, which is also described below. 
 
 ```xml
   manifest.xml
@@ -46,7 +46,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the field, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). <br> **TODO correct link** |
+| name  | Unique name of the field, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). |
 | label | Label that appears on the connection dialog for the field | No | | |
 | value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | In the 2020.2 release `file` is not supported. |
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> <ul><li>string: `""`</li><li>option: first option</li><li>boolean: `false`</li><li>file: `""`</li></ul>| |
