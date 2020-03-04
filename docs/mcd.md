@@ -46,7 +46,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the field, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Tableau-defined attribute names](https://gitlab.tableausoftware.com/connectivity/connector-plugin-sdk-internal/blob/master/docs/attributes.md). |
+| name  | Unique name of the field, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See Tableau-defined attribute names. |
 | label | Label that appears on the connection dialog for the field | No | | |
 | value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | In the 2020.2 release `file` is not supported. |
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> <ul><li>string: `""`</li><li>option: first option</li><li>boolean: `false`</li><li>file: `""`</li></ul>| |
