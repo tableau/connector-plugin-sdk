@@ -103,9 +103,9 @@ A child of selection-group, this represents one entry in the drop-down. It has t
 
 An optional child of field or selection group, this is used for conditional display. It specifies whether the field or selection group should be visible in the dialog based on the values the user has specified for other fields. 
 
-Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one or more of the `<condition>` elements is matched. The connector will not load if there are circular references.
+Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one or more of the `<condition>` elements is matched. Hence, this is a container element for the condition elements. It has no XML attributes.
 
-Hence, this is a container element for the condition elements. It has no XML attributes. 
+The connector will not load if there are circular references.
 
 ### `<condition>`
 
@@ -115,18 +115,40 @@ Hence, this is a container element for the condition elements. It has no XML att
 | value | The value to match. If the field's value is equal to this, the condition is true. | No | Any string value | |
 
 
-## Example
+## Example - A Non-Editable Field
 
-The Connection Fields file below demonstrates both conditional display of fields and a non-editable field. 
+The image shows the Connection Dialog produced using the Connection Fields file below. The username and password fields are required and don't have default-values, so the Sign In button will not be enabled until the user provides values for them. 
 
-The images below show the Connection Dialog produced using this file. The left side shows the dialog as it is initially displayed, after the user enters a Server name. Note that the default Authentication option is No Authentication, and the Sign In button is enabled. The right side shows what it changes to when the user selects Authentication Username and Password. 
+![alt text]({{ site.baseurl }}/assets/mcd-connection-dialog-3.png "Connection Dialog with fixed authentication auth-user-pass")
 
-<p float="left">
-  <img src="{{ site.baseurl }}/assets/mcd-connection-dialog-1.png" alt="Connection Dialog as initially displayed, after the user enters a Server name" align=top hspace=40/>
-  <img src="{{ site.baseurl }}/assets/mcd-connection-dialog-2.png" alt="Connection Dialog after user selects Authentication Username and Password" align=top />
-</p>
+The field "authentication" is non-editable and so will not be visible in the connection dialog, but its default value of "auth-user-pass" will be available in ConnectionBuilder() to add to the connection string.
 
-AutoReconnect is an example of a non-editable field. It will not be visible in the connection dialog, but its default value of `0` will be available in ConnectionBuilder() to add to the Connection String.
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+
+  <field name="server" label="Server" category="endpoint" value-type="string">
+    <validation-rule reg-exp="^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$"/>
+  </field>
+
+  <field name="port" label="Port" category="endpoint" value-type="string" default-value="5432"/>
+
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
+  <field name="username" label="Username" category="authentication" value-type="string" />
+
+  <field name="password" label="Password" category="authentication" value-type="string" secure="true" />
+
+</connection-fields>
+```
+
+
+## Example 2 - Conditional Display of Fields
+
+The images show the Connection Dialog produced using the Connection Fields file below. The left side shows the dialog as it is initially displayed, after the user enters a Server name. Note that the default Authentication option is No Authentication, and the Sign In button is enabled. If the user clicks Sign In at this point, in ConnectionBuilder() the field "authentication" will have value "auth-none". The right side shows what it changes to when the user selects Authentication Username and Password. If the user enters a username and password then clicks Sign In, in ConnectionBuilder() the field "authentication" will have value "auth-user-pass".
+
+![alt text]({{ site.baseurl }}/assets/mcd-connection-dialog-1.png "Connection Dialog as initially displayed, after the user enters a Server name")&nbsp;![alt text]({{ site.baseurl }}/assets/mcd-connection-dialog-2.png "Connection Dialog after user selects Authentication Username and Password")
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -164,7 +186,6 @@ AutoReconnect is an example of a non-editable field. It will not be visible in t
  
 </connection-fields>
 ```
-
 
 # The Connection Metadata File
 
@@ -237,8 +258,4 @@ The Connection Metadata file below matches the default--that is, what you get if
 
 The left side image below shows what the Schema Viewer will look like with this Connection Metadata file. The right side shows what it will look like if you remove the `<schema>` element from the file.
 
-<p float="left">
-  <img src="{{ site.baseurl }}/assets/mcd-schema-viewer-1.png" alt="Schema Viewer with Connection Metadata file" align=top hspace=40/>
-  <img src="{{ site.baseurl }}/assets/mcd-schema-viewer-2.png" alt="Schema Viewer after removing schema element from Connection Metadata file" align=top />
-</p>
-
+![alt text]({{ site.baseurl }}/assets/mcd-schema-viewer-1.png "Schema Viewer with Connection Metadata file")&nbsp;![alt text]({{ site.baseurl }}/assets/mcd-schema-viewer-2.png "Schema Viewer after removing schema element from Connection Metadata file")
