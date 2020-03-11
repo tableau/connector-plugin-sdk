@@ -62,7 +62,7 @@ an object of key/value pairs that will be written to the properties file(recomme
 array of formatted key=value pairs that will be written to the properties file
 
 ```javascript
-["UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"];
+{"UID" : "myusername", "Host" : "myserver.somewhere.net", "PWD" : "mypassword"};
 ```
 
 ---
@@ -227,3 +227,10 @@ Example:
 
     formattedParams.push(connectionHelper.FormatKeyValuePair(driverLocator.keywordDriver, driverLocator.LocateDriver(attr)));
 
+## Deprecated API
+
+### SetImpersonateAttributes connection helper
+This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
+
+### <setImpersonateAttributes/> XML tag
+This xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
