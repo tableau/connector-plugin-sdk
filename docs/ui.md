@@ -42,9 +42,9 @@ connection-resolver.tdr
       <required-attributes>
       <attribute-list>
         ...
-        <attr> vendor1 </attr> 
-        <attr> vendor2 </attr> 
-        <attr> vendor3 </attr> 
+        <attr> vendor1 </attr>
+        <attr> vendor2 </attr>
+        <attr> vendor3 </attr>
 
       </attribute-list>
       </required-attributes>
@@ -65,7 +65,7 @@ connection-dialog.tcd
       </connection-dialog>
 ```
 
-connectionBuilder.js (Non-JDBC)
+connectionBuilder.js (ODBC)
 ```js
 (function dsbuilder(attr)
   {
@@ -80,7 +80,7 @@ connectionBuilder.js (Non-JDBC)
     params["protocolVersion"] = attr[connectionHelper.attributeVendor2];
     params["charSet"] = attr[connectionHelper.attributeVendor3];
     ...
-      
+
 ```
 
 connectionProperties.js (For JDBC only)
@@ -94,7 +94,7 @@ connectionProperties.js (For JDBC only)
       if (attr[connectionHelper.attributeSSLMode] == "require")
       {
       ...
-      
+
 ```
 
 
