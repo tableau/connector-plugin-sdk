@@ -4,8 +4,11 @@
 
 This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
+The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2020.1**. This means that the samples may not work on older versions of tableau, and connectors packaged with newer versions may not work in older versions.
+
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
+| Connector SDK for Tableau 2019.4                 | 3-13-2020          |
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
 | TDVT                                             | 2.1.7 (02-04-2020) |
 | Connector Packager                               | 0.0.1 (10-03-2019) |
@@ -74,7 +77,7 @@ Connectors allow for a much more extensive level of customization than using the
 We intend for the Connector SDK to eventually support additional connector types, but we're starting with ODBC and JDBC.
 
 **How do I distribute a connector to my customers?**
-Starting with Tableau 2019.4, you can package and sign your connector using a public certificate: https://tableau.github.io/connector-plugin-sdk/docs/package-sign  
+Starting with Tableau 2019.4, you can package and sign your connector using a public certificate: https://tableau.github.io/connector-plugin-sdk/docs/package-sign
 
 To run your packaged connector, Simply drop the .taco file, into your "My Tableau Respository/Connectors" folder: https://tableau.github.io/connector-plugin-sdk/docs/run-taco
 
