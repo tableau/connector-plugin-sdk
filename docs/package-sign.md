@@ -129,11 +129,11 @@ mysql_odbc_sample.taco was created in e:\temp
 
 ## Signing your packaged connector using jarsigner
 
-At this point, your connector has been packaged into a single `.taco` file. However, will not be loaded automatically into Tableau unless you sign the file, or disable signature verification.
+At this point, your connector has been packaged into a single `.taco` file. However, it will not be loaded automatically into Tableau unless you sign the file, or disable signature verification.
 
 ### Why we require connectors to be signed
 
-Connectors are sensitive parts of the Tableau code. They handle with database authentication and communicate directly with your driver. We require that connector authors have gone through the steps to obtain a trusted certificate so that our customers can be confidant their data is safe.
+Connectors are sensitive parts of the Tableau code. They handle database authentication and communicate directly with your driver. We require that connector authors have gone through the steps to obtain a trusted certificate so that our customers can be confident their data is safe.
 
 ### Getting your connector signed
 
@@ -141,7 +141,7 @@ A packaged Tableau Connector (`.taco`) file is, functionally, a `.jar` file. Tab
 
 To sign a taco file, you must:
 1. Generate a certificate signature request (csr). You can use java's [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/keytool.html) to generate this.
-1. Send the csr to a certificate authority that is trusted by the java keystore. Make sure that to certificate you get is a code-signing certificate.
+1. Send the csr to a certificate authority that is trusted by the java keystore. Make sure that certificate you get is a code-signing certificate.
 1. Sign your `.taco` file using [jarsigner](https://docs.oracle.com/javase/tutorial/deployment/jar/signing.html).
 
 ### Historical Note
@@ -153,11 +153,11 @@ Earlier versions of the packager would sign your connector using jarsigner inter
 
 ### Where to find log files 
 
-By default, a log file packaging_log.txt will be generated at connector-plugin-sdk/connector-packager/ directory 
+By default, a log file packaging_log.txt will be generated at connector-plugin-sdk/connector-packager/
 
 ### XML Validation failed for manifest.xml  
 
-Packaging failed. Check your_path\connector-plugin-sdk\connector-packager\packaging_log.txt for more information. 
+Packaging failed. Check [your_path]\connector-plugin-sdk\connector-packager\packaging_log.txt for more information. 
 
 Check your manifest.xml file. You can do validate only with –v to get more details and make sure your package is valid. For example: 
 

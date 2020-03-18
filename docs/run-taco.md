@@ -36,7 +36,7 @@ To be loaded in Tableau, a `.taco` must be signed by a trusted certificate. If y
 Package signature verification failed during connection creation.
 ```
 
-that the connector couldn't be verified. This can be because the connector is unsigned, or that the certificate's trust chain does not link bck to a trusted certificate authority.
+the connector couldn't be verified. This can be because the connector is unsigned, or because the certificate's trust chain does not link back to a trusted certificate authority.
 
 For more information about signing a .taco file, see [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign) and [Signature Verification Log Entries]({{ site.baseurl }}/docs/log-entries)
 
@@ -46,4 +46,4 @@ Signature verification was added to Tableau Desktop in 2019.4 and Tableau Server
 
 To use an unsigned `.taco` file, you can disable signature verification using the following command line argument: `-DDisableVerifyConnectorPluginSignature=true`.
 
-On server, you can disable signature verification by setting the `native_api.disable_verify_connector_plugin_signature` option via TSM.
+On server, you can disable signature verification by setting the `native_api.disable_verify_connector_plugin_signature` option to 'true' via TSM.
