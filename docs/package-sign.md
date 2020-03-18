@@ -133,7 +133,7 @@ At this point, your connector has been packaged into a single `.taco` file. Howe
 
 ### Why we require connectors to be signed
 
-Connectors are sensitive parts of the Tableau code. They handle database authentication and communicate directly with your driver. We require that connector authors have gone through the steps to obtain a trusted certificate so that our customers can be confident their data is safe.
+Connectors are sensitive parts of the Tableau code. They handle database authentication and communicate directly with your driver. By signing the connector, Tableau can verify the authenticity and integrity of the connector, and customers can be confident the the plugin author is who they say they are, and the `.taco` file itself has not been tampered with since it was signed.
 
 ### Getting your connector signed
 
