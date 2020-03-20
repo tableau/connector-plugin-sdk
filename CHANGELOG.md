@@ -3,8 +3,12 @@
 ## Unreleased
 
 ### Added
+- Updated Tableau Workbook to analyze TDVT test results
+- 2020.1 and 2019.4 Versions Available
 ### Changed
+- Documentation to match
 ### Removed
+- Old workbook
 
 ## 2019-12-11
 ### Added
