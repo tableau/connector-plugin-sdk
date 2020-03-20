@@ -308,7 +308,7 @@ TDVT includes a sample Tableau workbook that will help you analyze the results o
 
 You can use these steps as a guide to develop your own workbook.
 
-1. Open the file called [Example Postgres Calc Test Result.twbx](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/results/Example%20Postgres%20Calc%20Test%20Results.twbx), or start Tableau and connect to 'Text File'.
+1. Open the file called "TDVT Results.twbx" [located in /tdvt/](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twbx).
 
 1. Navigate to the "Data Source" tab.
 
@@ -326,9 +326,9 @@ You can use these steps as a guide to develop your own workbook.
 
 1. Change the "text qualifier" to use a double quote.
 
-1. View the viz by clicking "Functional Test Pass," which should look like the information below. The viz shows the test pass rate by Test Category. Click the bars to see the relevant failed tests in the "Test Details" section.
+1. View the viz by clicking the "TDVT Test Results" dashboard, which should look like the information below. The viz shows the test pass rate by Test Category and shows individual test case failures. Interact with the dashboard to dive into the test failures.
 
-   ![]({{ site.baseurl }}/assets/tdvt_edit_results3.png)
+   ![]({{ site.baseurl }}/assets/tdvt_results_dashboard.png)
 
 ## File structure
 
