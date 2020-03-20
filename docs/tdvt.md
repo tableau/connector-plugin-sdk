@@ -308,7 +308,7 @@ TDVT includes a sample Tableau workbook that will help you analyze the results o
 
 You can use these steps as a guide to develop your own workbook.
 
-1. Open the file called "TDVT Results.twbx" located in /tdvt/.
+1. Open the file called "TDVT Results.twbx" [located in /tdvt/](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twbx).
 
 1. Navigate to the "Data Source" tab.
 
