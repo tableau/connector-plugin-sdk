@@ -158,7 +158,7 @@ The connection field names below should specify the `authentication` category.
 | password | Password | Yes | Supports `secure` field attribute |
 
 
-## Example - A Non-Editable Field
+## Example 1 - A Non-Editable Field
 
 The image shows the Connection Dialog produced using the Connection Fields file below. The username and password fields are required and don't have default-values, so the Sign In button will not be enabled until the user provides values for them. 
 
@@ -227,6 +227,27 @@ The images show the Connection Dialog produced using the Connection Fields file 
  
 </connection-fields>
 ```
+
+## Example 3 - Boolean Field
+
+This example shows how to add a checkbox to the dialog. For sslmode custom boolean values are required to be defined, following [Connection Field Platform Integration](##Connection-Field-Platform-Integration).  The default-value matches false-value, ensuring the checkbox is unchecked by default.  Within the ConnectionBuilder() the field "sslmode" will only have value "" or "require".
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+ 
+<connection-fields>
+  ...
+
+  <field name="sslmode" label="Require SSL" value-type="boolean" category="general" default-value="" >
+    <boolean-options>
+      <false-value value="" />
+      <true-value value="require" />
+    </boolean-options>
+  </field>
+
+</connection-fields>
+```
+
 
 # The Connection Metadata File
 
