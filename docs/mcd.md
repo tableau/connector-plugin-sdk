@@ -46,7 +46,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the field, which is used in the ConnectionBuilder() | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. The Tableau-defined attribute name list is coming soon. |
+| name  | Unique name of the field: used in the platform, connection-normalizer and connection-builder | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Connection Field Platform Integration](##Connection-Field-Platform-Integration) section below. |
 | label | Label that appears on the connection dialog for the field | No | | |
 | value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | In the 2020.2 release `file` is not supported. |
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> <ul><li>string: `""`</li><li>option: first option</li><li>boolean: `false`</li><li>file: `""`</li></ul>| |
@@ -114,8 +114,51 @@ The connector will not load if there are circular references.
 | field | Name of the field whose value will be checked for equality | No | Any string value | |
 | value | The value to match. If the field's value is equal to this, the condition is true. | No | Any string value | |
 
+## Connection Field Platform Integration 
 
-## Example - A Non-Editable Field
+As referenced above in the `<field>` element section, some `name` attribute values describe platform functionality. It is important that if the desired connector functionality matches any of the descriptions below then the names and values below must be used.
+
+Additionally there are a set of reserved `name` attribute values not documented at this time. Recommendations, documentation and enforcement coming soon.
+
+### Endpoint
+
+The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.
+
+The connection field names below should specify the `endpoint` category. 
+
+| Name  | Meaning | Optional? | Value Notes | 
+| ----  | ------- | --------- | ----------- |
+| server | Server or URL of connection | No | |
+| port | Port of connection | Yes | Allowed Values: numeric value, 0 - 65535 |
+
+### SSL
+
+The SSL requirements of the connection. No platform functionality is provided at this time, but field name and values are reserved based on historical usage. If used, the value is generally passed to driver via ODBC connection string or JDBC properties. 
+
+The connection field names below can specify the `endpoint` or `general` category depending on dialog layout preference. 
+
+| Name  | Meaning | Optional? | Value Notes | 
+| ----  | ------- | --------- | ----------- |
+| sslmode | Is SSL enabled or disabled for connection | Yes | Allowed Values: `require` or `''` (empty string) |
+
+### Authentication
+
+The authentication attributes control how and when a user is prompted to enter data source credentials. The primary scenarios where authentication occurs:
+
+- Creating a new connection with the connection dialog
+- Opening a workbook and reconnecting to the data source
+- Publishing a workbook or data source to Tableau Server
+
+The connection field names below should specify the `authentication` category.  
+
+| Name  | Meaning | Optional? | Value Notes | 
+| ----  | ------- | --------- | ----------- |
+| authentication | The authentication mode for connection | No | Meaning: Allowed Values<br> <ul><li>None: `auth-none`</li><li>Username Only: `auth-user`</li><li>Username and Password: `auth-user-pass`</li><li>Password Only: `auth-pass`</li> |
+| username | Username | Yes |  |
+| password | Password | Yes | Supports `secure` field attribute |
+
+
+## Example 1 - A Non-Editable Field
 
 The image shows the Connection Dialog produced using the Connection Fields file below. The username and password fields are required and don't have default-values, so the Sign In button will not be enabled until the user provides values for them. 
 
@@ -182,10 +225,29 @@ The images show the Connection Dialog produced using the Connection Fields file 
     </conditions>
   </field>
  
-  <field name="AutoReconnect" label="" value-type="string" default-value="0" editable="false" />
- 
 </connection-fields>
 ```
+
+## Example 3 - Boolean Field
+
+This example shows how to add a checkbox to the dialog. For sslmode custom boolean values are required to be defined, following [Connection Field Platform Integration](##Connection-Field-Platform-Integration).  The default-value matches false-value, ensuring the checkbox is unchecked by default.  Within the ConnectionBuilder() the field "sslmode" will only have value "" or "require".
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+ 
+<connection-fields>
+  ...
+
+  <field name="sslmode" label="Require SSL" value-type="boolean" category="general" default-value="" >
+    <boolean-options>
+      <false-value value="" />
+      <true-value value="require" />
+    </boolean-options>
+  </field>
+
+</connection-fields>
+```
+
 
 # The Connection Metadata File
 
