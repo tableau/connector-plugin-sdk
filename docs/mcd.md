@@ -116,13 +116,13 @@ The connector will not load if there are circular references.
 
 ## Connection Field Platform Integration 
 
-As referenced above in the `<field>` element section, some `name` attribute values describe platform functionality. It is important that if the connector functionality desired matches any of the descriptions below then names and values below must be used.
+As referenced above in the `<field>` element section, some `name` attribute values describe platform functionality. It is important that if the desired connector functionality matches any of the descriptions below then the names and values below must be used.
 
 Additionally there are a set of reserved `name` attribute values not documented at this time. Recommendations, documentation and enforcement coming soon.
 
 ### Endpoint
 
-The endpoint attributes describe the unique parameters of a connection. Many connections provider additional field names and values not defined by the platform.
+The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.
 
 The connection field names below should specify the `endpoint` category. 
 
