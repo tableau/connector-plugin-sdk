@@ -46,14 +46,14 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the field: used in the platform, connection-normalizer and connection-builder | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See [Connection Field Platform Integration](##Connection-Field-Platform-Integration) section below. |
+| name  | Unique name of the field: used in the platform, connection-normalizer and connection-builder | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See 'Connection Field Platform Integration' section below. |
 | label | Label that appears on the connection dialog for the field | No | | |
-| value-type | Dictates the default validation rule and the UI widget | No | Allowed Values / UI Widget Type <br> <ul><li>`string` / text box</li><li>`option` / drop-down</li><li>`boolean` / checkbox</li><li>`file` / file picker</li> | In the 2020.2 release `file` is not supported. |
-| default-value | Default value for the attribute | Yes	| Default values by value-type <br> <ul><li>string: `""`</li><li>option: first option</li><li>boolean: `false`</li><li>file: `""`</li></ul>| |
+| value-type | Dictates the default validation rule and the UI widget | No | Allowed Values: UI Widget Type <br> `string`: text box <br> `option`: drop-down <br> `boolean`: checkbox <br> `file`: file picker | In the 2020.2 release `file` is not supported. |
+| default-value | Default value for the attribute | Yes	| Default values by value-type <br> string: `""` <br> option: first option <br> boolean: `false` <br> file: `""` | |
 | optional | Whether the user must specify a value for the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | |
 | editable | Whether the user can edit the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `true`. | When set to `false`, the attribute is not shown in the connection dialog, and its default-value is passed to the ConnectionBuilder(). |
 | secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. |
-| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> <ul><li>`endpoint` (for server, port, etc.)</li><li>`metadata` (for data hierarchy)</li><li>`authentication`</li><li>`general`</li><li>`initial-sql`</li><li>`advanced`</li></ul> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. | 
+| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> `endpoint` (for server, port, etc.) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. | 
 
 ### `<validation-rule>`
 
@@ -153,7 +153,7 @@ The connection field names below should specify the `authentication` category.
 
 | Name  | Meaning | Optional? | Value Notes | 
 | ----  | ------- | --------- | ----------- |
-| authentication | The authentication mode for connection | No | Meaning: Allowed Values<br> <ul><li>None: `auth-none`</li><li>Username Only: `auth-user`</li><li>Username and Password: `auth-user-pass`</li><li>Password Only: `auth-pass`</li> |
+| authentication | The authentication mode for connection | No | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only |
 | username | Username | Yes |  |
 | password | Password | Yes | Supports `secure` field attribute |
 
@@ -230,7 +230,7 @@ The images show the Connection Dialog produced using the Connection Fields file 
 
 ## Example 3 - Boolean Field
 
-This example shows how to add a checkbox to the dialog. For sslmode custom boolean values are required to be defined, following [Connection Field Platform Integration](##Connection-Field-Platform-Integration).  The default-value matches false-value, ensuring the checkbox is unchecked by default.  Within the ConnectionBuilder() the field "sslmode" will only have value "" or "require".
+This example shows how to add a checkbox to the dialog. For sslmode custom boolean values are required to be defined, following 'Connection Field Platform Integration' section below.  The default-value matches false-value, ensuring the checkbox is unchecked by default.  Within the ConnectionBuilder() the field "sslmode" will only have value "" or "require".
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
