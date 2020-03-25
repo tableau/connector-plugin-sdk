@@ -585,7 +585,7 @@ def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     return write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
 
 
-def generate_files(ds_registry: OsSpecificTestRegistry, force=False):
+def generate_files(ds_registry: OsSpecificTestRegistry, force: bool = False) -> int:
     """ Generate the config files and logical query test permutations. """
     logical_input = get_path('logicaltests/generate/input/')
     logical_output = get_path('logicaltests/setup')
