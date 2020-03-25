@@ -500,7 +500,7 @@ def init() -> Tuple[argparse.Namespace, OsSpecificTestRegistry, argparse.Argumen
 
     return parser, ds_reg, args
 
-def is_test(args):
+def is_test(args) -> bool:
     return args.command in ['run', 'run-pattern', 'run-file']
 
 def active_thread_count(threads):
@@ -646,7 +646,7 @@ def get_ds_list(ds):
     ds_list = [x.strip() for x in ds_list]
     return ds_list
 
-def run_desired_tests(args, ds_registry):
+def run_desired_tests(args: argparse.Namespace, ds_registry: OsSpecificTestRegistry):
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:

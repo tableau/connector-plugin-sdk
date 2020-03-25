@@ -23,6 +23,7 @@ from typing import Dict, Optional, Tuple
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
+from .custom_types import OsSpecificTestRegistry
 from .resources import *
 from .tabquery import build_tabquery_command_line
 from .test_results import *
@@ -584,8 +585,8 @@ def process_test_results(all_test_results, tds_file, skip_header, output_dir):
     return write_csv_test_output(all_test_results, tds_file, skip_header, output_dir)
 
 
-def generate_files(ds_registry, force=False):
-    """Generate the config files and logical query test permutations."""
+def generate_files(ds_registry: OsSpecificTestRegistry, force=False):
+    """ Generate the config files and logical query test permutations. """
     logical_input = get_path('logicaltests/generate/input/')
     logical_output = get_path('logicaltests/setup')
     logging.debug("Checking generated logical setup files...")
