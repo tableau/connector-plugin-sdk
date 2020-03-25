@@ -23,6 +23,7 @@ from typing import List, Optional, Tuple, Union
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
+from .custom_types import OsSpecificTestRegistry
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
@@ -202,7 +203,7 @@ def delete_output_files(root_dir):
                     continue
 
 
-def get_datasource_registry(platform):
+def get_datasource_registry(platform) -> OsSpecificTestRegistry:
     """Get the datasources to run based on the suite parameter."""
     if sys.platform.startswith("darwin"):
         reg = MacRegistry()
@@ -421,7 +422,7 @@ action_usage_text = '''
 run_file_usage_text = '''
 '''
 
-def create_parser():
+def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
 
@@ -476,7 +477,7 @@ def create_parser():
     return parser
 
 
-def init():
+def init() -> Tuple[argparse.Namespace, OsSpecificTestRegistry, argparse.ArgumentParser]:
     parser = create_parser()
     args = parser.parse_args()
     # Create logger.
