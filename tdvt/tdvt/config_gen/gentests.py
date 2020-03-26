@@ -12,8 +12,8 @@ import sys
 from string import Template
 from typing import List
 
-from .custom_types import OsSpecificTestRegistry
 from .templates import *
+from ..custom_types import OsSpecificTestRegistry
 from ..resources import *
 
 debug = False
