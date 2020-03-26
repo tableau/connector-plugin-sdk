@@ -10,7 +10,7 @@ import shutil
 import sys
 
 from string import Template
-from typing import List
+from typing import Dict, List
 
 from .templates import *
 from ..custom_types import OsSpecificTestRegistry
@@ -18,7 +18,7 @@ from ..resources import *
 
 debug = False
 
-def get_logical_config_templates(ds_registry):
+def get_logical_config_templates(ds_registry) -> Dict:
     all_templates = template_attributes.copy()
 
     for ds in ds_registry.dsnames:
@@ -29,10 +29,10 @@ def get_logical_config_templates(ds_registry):
 
     return all_templates
 
-def get_logical_config_template(ds_registry, config_name):
+def get_logical_config_template(ds_registry: OsSpecificTestRegistry, config_name: str) -> Dict:
     return get_logical_config_templates(ds_registry)[config_name]
 
-def get_customized_table_name(attributes, base_table):
+def get_customized_table_name(attributes, base_table) -> str:
     table_prefix = ""
     if 'tablePrefix' in attributes:
         table_prefix = attributes['tablePrefix']
@@ -85,7 +85,7 @@ def get_new_field_name(field, attrs):
 
     return new_field
 
-def get_field_name_map(fields, attrs):
+def get_field_name_map(fields, attrs) -> Dict:
     m = {}
     for f in fields:
         m[f] = get_new_field_name(f, attrs)
@@ -146,7 +146,7 @@ def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_re
     #Go through all the ini files and see if any of them define a logical config. Generate test files for those.
 
 
-def process_text(ds, text, attributes, fields, field_map):
+def process_text(ds, text, attributes, fields, field_map) -> str:
     new_text = ''
     for line in text:
         new_line = get_modified_line(line, attributes, fields, field_map)
@@ -154,7 +154,7 @@ def process_text(ds, text, attributes, fields, field_map):
         new_text += new_line + '\n'
     return new_text
 
-def get_config_text(config_name, config_attributes, fields, config_field_map):
+def get_config_text(config_name, config_attributes, fields, config_field_map) -> List:
     configs = []
     sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', 'Camel Case = ' + fields[0], 'bool0 = ' + fields[1], 'Date = ' + fields[2] ]
 
