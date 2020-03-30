@@ -46,7 +46,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| name  | Unique name of the field: used in the platform, connection-normalizer and connection-builder | No | Names must be unique, and cannot be any of the reserved names `dbname`, `schema`, `tablename`. | If there is a Tableau-defined name for this attribute, that name must be used. See 'Connection Field Platform Integration' section below. |
+| name  | Unique name of the field: used in the platform, connection-normalizer and connection-builder | No | Names must be unique <br> Name is a Tableau-defined name **OR** prefixed with `v-` | If there is a Tableau-defined name for this attribute, that name must be used. See 'Connection Field Platform Integration' section below. |
 | label | Label that appears on the connection dialog for the field | No | | |
 | value-type | Dictates the default validation rule and the UI widget | No | Allowed Values: UI Widget Type <br> `string`: text box <br> `option`: drop-down <br> `boolean`: checkbox <br> `file`: file picker | In the 2020.2 release `file` is not supported. |
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> string: `""` <br> option: first option <br> boolean: `false` <br> file: `""` | |
@@ -118,6 +118,8 @@ The connector will not load if there are circular references.
 
 As referenced above in the `<field>` element section, some `name` attribute values describe platform functionality. It is important that if the desired connector functionality matches any of the descriptions below then the names and values below must be used.
 
+If the field functionality does not match any of the descriptions below see 'Vendor Defined' section.
+
 Additionally there are a set of reserved `name` attribute values not documented at this time. Recommendations, documentation and enforcement coming soon.
 
 ### Endpoint
@@ -157,6 +159,13 @@ The connection field names below should specify the `authentication` category.
 | username | Username | Yes |  |
 | password | Password | Yes | Supports `secure` field attribute |
 
+### Vendor Defined
+
+The vendor defined attributes are unique to an individual connector and do not imply platform functionality. They are pass-through to the connection normalizer, connection builder and properties builder.
+
+| Name  | Meaning | Optional? | Value Notes | 
+| ----  | ------- | --------- | ----------- |
+| v- | The `v-` prefix indicates a vendor defined name | Yes | Any value compatible with type | 
 
 ## Example 1 - A Non-Editable Field
 
