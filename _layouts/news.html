@@ -1,0 +1,47 @@
+---
+layout: news
+---
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include head.html %}
+</head>
+
+<body>
+    <div class="container">
+        {% include header.html %}
+        <div>
+		<h3>Connector SDK News</h3>
+		    <ul class=posts >
+			  {% for post in site.posts %}
+	          <li><a href="#{{ post.id }}" >{{ post.title }}</a> &nbsp;  <span style="font-size:80%;">({{ post.date | date_to_string }})</span></li>
+	         {% endfor %}
+		    </ul>
+			<hr/>
+	   </div>
+        <ul class="blogul">
+            {% for post in site.posts %}
+            <div>
+                <h1 id="{{post.id}}">{{ post.title }} </a></h1>
+                <hr>
+                <p><span class="glyphicon glyphicon-time"></span> Posted on {{ post.date | date: "%-d %B %Y" }}</p>
+                <hr>
+                <p class="lead">
+                    {{ post.abstract }}
+                </p>
+                {% if post.photoname %}
+                <img class="img-responsive" src="{{ site.baseurl }}/assets/{{ post.photoname}}" alt="">
+                {% endif %}
+                <hr>
+                <div class="blog-content">
+                    {{ post.content }}
+                </div>
+            </div>
+            {% endfor %}
+        </ul>
+        {% include footer.html %}
+    </div>
+</body>
+
+</html>
