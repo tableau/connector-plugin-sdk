@@ -10,7 +10,7 @@ The latest version of the SDK is always targeted towards the latest, non-beta ve
 |--------------------------------------------------|--------------------|
 | Connector SDK for Tableau 2019.4                 | 3-13-2020          |
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
-| TDVT                                             | 2.1.7 (02-04-2020) |
+| TDVT                                             | 2.1.8 (03-06-2020) |
 | Connector Packager                               | 0.0.1 (10-03-2019) |
 
 * [Why Connectors?](#why-connectors)
