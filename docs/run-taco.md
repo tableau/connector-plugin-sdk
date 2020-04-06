@@ -44,6 +44,8 @@ Signature verification was added to Tableau Desktop in 2019.4 and Tableau Server
 
 ## Disabling signature verification
 
-To use an unsigned `.taco` file, you can disable signature verification using the following command line argument: `-DDisableVerifyConnectorPluginSignature=true`.
+To use an unsigned `.taco` file, you can disable signature verification.
+
+On Tableau Desktop, you use the following command line argument: `-DDisableVerifyConnectorPluginSignature=true`.
 
 On server, you can disable signature verification by setting the `native_api.disable_verify_connector_plugin_signature` option to 'true' via TSM.
