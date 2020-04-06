@@ -86,9 +86,6 @@ Follow these steps to get the packaging tool and set up the virtual environment.
 
 ## Package the connector
 
-
-### Run the package module 
-
 The connector-packager tool must be run from the connector-plugin-sdk/connector-packager/ directory. The packaged .taco file in default will be generated within packaged-connector folder. There are several ways to run the tool:
 
 -   To package the connector, run this command: 
@@ -105,7 +102,7 @@ The connector-packager tool must be run from the connector-plugin-sdk/co
 
 Review the following examples:
 
-#### Example 1: .taco file is generated into connector-plugin-sdk\connector-packager\packaged-connector 
+### Example 1: .taco file is generated into connector-plugin-sdk\connector-packager\packaged-connector 
 
 ```
 (.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc
@@ -116,7 +113,7 @@ mysql_odbc_sample.taco was created in E:\connector-plugin-sdk\connector-packager
 
 ```
 
-#### Example 2: .taco file is generated into user supplied location and log file is generated into user supplied location 
+### Example 2: .taco file is generated into user supplied location and log file is generated into user supplied location 
 
 ```
 (.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc  --dest e:\temp -l e:\temp
@@ -137,12 +134,73 @@ Connectors are sensitive parts of the Tableau code. They handle database authent
 
 ### Getting your connector signed
 
-A packaged Tableau Connector (`.taco`) file is, functionally, a `.jar` file. Tableau checks that packaged connectors are signed by a trusted certificate authority before loading them, using the default java keystore in the JRE. Because a `.taco` file is fundamentally a `.jar` file, you can follow generic documentation for signing jar files.
+A packaged Tableau Connector (`.taco`) file is, functionally, a `.jar` file. Tableau checks that packaged connectors are signed by a trusted certificate authority before loading them, using the default java keystore in the JRE. Because a `.taco` file is fundamentally a `.jar` file, you can follow Java documentation for signing jar files.
 
 To sign a taco file, you must:
 1. Generate a certificate signature request (csr). You can use java's [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/keytool.html) to generate this.
 1. Send the csr to a certificate authority that is trusted by the java keystore. Make sure that certificate you get is a code-signing certificate.
-1. Sign your `.taco` file using [jarsigner](https://docs.oracle.com/javase/tutorial/deployment/jar/signing.html).
+1. Sign your `.taco` file using [jarsigner](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jarsigner.html).
+1. Verify that your `.taco` file is signed using jarsigner
+
+### Verifying that .taco is properly signed
+
+First, check tha the .taco is signed using jarsigner using the following command:
+
+```
+jarsigner -verify path_to_taco -verbose -certs -strict
+```
+
+If `jar verified` appears, your `.taco` file should be ready to be used in Tableau. Double check the certificate chain to make sure that the final certificate is that of your certificate authority.
+
+### Example: Sign a .taco with a basic signed certificate
+
+Getting a certificate is a multi-step process.
+
+#### Step 1: Generate a Certificate Signing Request (csr) file
+
+A certificate signing request (CSR) is a request for a certificate authority (CA) to create a public certificate for your organization.
+
+First, generate a key pair using this command:
+
+```
+keytool -genkeypair -alias your_alias -keystore your_keystore
+```
+
+Next, export the key to a certificate file:
+```
+keytool -export -alias your_alias -file cert_file -keystore your_keystore
+```
+
+Now you can generate your certificate signing request:
+
+```
+keytool -certreq -alias your_alias -keystore your_keystore -file certreq_file
+```
+
+Keep all files you've generated (the key pair, the keystore, and the csr) secure, you will need them later.
+
+For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website.
+
+
+#### Step 2: Get the CSR signed by the certificate authority
+
+Send the certificate signing request to the CA you want to create a certificate for you (for example, Verisign, Thawte, or some other CA). The CA will sign the CSR file with their own signature and send that certificate back to you. You can then use this signed certificate to sign the .taco file.
+
+After you receive/fetch the new certificate from the CA, along with any applicable 'chain' or 'intermediate' certificates, run the following command to install the new cert and chain into the keystore:
+
+```
+keytool -importcert cert_from_ca -keystore your_keystore
+```
+
+#### Step 3: Use jarsigner to sign .taco file
+
+Using the keystore you imported your signed certificate to, use jarsigner to sign your `.taco` file:
+
+```
+jarsigner -keystore your_keystore path_to_taco your_alias
+```
+
+For more information about jarsigner arguments, see the Java Documentation about [jarsigner](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jarsigner.html).
 
 ### Historical Note
 
