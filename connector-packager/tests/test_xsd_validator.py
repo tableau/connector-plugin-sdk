@@ -68,7 +68,7 @@ class TestXSDValidator(unittest.TestCase):
 
     def test_validate_vendor_prefix(self):
 
-        test_file = TEST_FOLDER / Path("modular_dialog_connector/connectionFields.xml")
+        test_file = TEST_FOLDER / "modular_dialog_connector/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         xml_violations_buffer = []
 
@@ -76,7 +76,7 @@ class TestXSDValidator(unittest.TestCase):
                         "Valid XML file not marked as valid")
 
         print("\nTest malformed xml. Throws XML validation error.")
-        test_file = TEST_FOLDER / Path("broken_xml/connectionFields.xml")
+        test_file = TEST_FOLDER / "broken_xml/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML file that doesn't follow valid name values marked as valid")
 
