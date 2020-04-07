@@ -65,3 +65,20 @@ class TestXSDValidator(unittest.TestCase):
         logging.debug("test_validate_single_file xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
+
+    def test_validate_vendor_prefix(self):
+
+        test_file = TEST_FOLDER / Path("modular_dialog_connector/connectionFields.xml")
+        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                        "Valid XML file not marked as valid")
+
+        test_file = TEST_FOLDER / Path("broken_xml/connectionFields.xml")
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                         "XML file that doesn't follow valid name values marked as valid")
+
+        logging.debug("test_validate_vendor_prefix xml violations:")
+        for violation in xml_violations_buffer:
+            logging.debug(violation)
