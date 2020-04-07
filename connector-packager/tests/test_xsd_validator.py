@@ -78,7 +78,7 @@ class TestXSDValidator(unittest.TestCase):
         print("\nTest malformed xml. Throws XML validation error.")
         test_file = TEST_FOLDER / "broken_xml/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML file that doesn't follow valid name values marked as valid")
+                         "XML file with invalid name values marked as valid")
 
         logging.debug("test_validate_vendor_prefix xml violations:")
         for violation in xml_violations_buffer:
