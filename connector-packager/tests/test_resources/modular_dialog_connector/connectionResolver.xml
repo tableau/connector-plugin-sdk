@@ -11,6 +11,7 @@
           <attr>server</attr>
           <attr>port</attr>
           <attr>dbname</attr>
+          <attr>v-custom</attr>
           <attr>username</attr>
           <attr>password</attr>
         </attribute-list>
