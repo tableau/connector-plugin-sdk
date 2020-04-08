@@ -472,6 +472,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if test_result and test_result.test_config:
         test_type = 'logical' if test_result.test_config.logical else 'expression'
 
+    # Truncate long process outputs to keep size of csv down
+    if len(cmd_output) > 514:
+        cmd_output = cmd_output[:512] + ".."
+
     if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
         error_msg = test_result.get_failure_message() if test_result else None
         error_type = test_result.get_failure_message() if test_result else None
