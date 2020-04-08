@@ -34,9 +34,9 @@ As part of the packaging process, the packager ensures that:
 
 However, this validation does not guarantee that the connector will work in Tableau. The packager does not validate JavaScript, for example, or that the connection class is unique. To ensure that your connector works before packaging it, you can [run your unpackaged connector]({{ site.baseurl }}/docs/share), or test it using [TDVT]({{ site.baseurl }}/docs/tdvt). 
 
-### Set up the virtual environment for packaging and signing
+### Set up the virtual environment for packaging
 
-Follow these steps to get the packaging and signing tool and set up the virtual environment. 
+Follow these steps to get the packaging tool and set up the virtual environment. 
 
 1.  Get the [Connector SDK repository](https://github.com/tableau/connector-plugin-sdk) on GitHub.
 
@@ -57,22 +57,22 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
     For more information about venv, see [venv – Creation of virtual environments](https://docs.python.org/3/library/venv.html) on the Python website.
 
 1.  Activate the virtual environment using the activate command. For example:
-    
+
     On Windows:
 
     ```
     C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate  
 
     ```
-    
+
     On Mac:
-    
+
     ```
     mac-3:connector-packager qa.auto$ source ./.venv/bin/activate
     ```
-    
+
     On Linux:
-    
+
     ```
     [centos@ip-10-177-53-47 connector-packager]$ source ./.venv/bin/activate
 
@@ -84,213 +84,138 @@ Follow these steps to get the packaging and signing tool and set up the virtual 
     (.venv) C:\connector-plugin-sdk\connector-packager>python setup.py install  
     ```
 
-## Use keytool to get a certificate
-
-Getting a certificate is a multi-step process.
-
-### Step 1: Use keytool to generate a key pair 
-
-To generate a key pair, run this command:
-
-```
-keytool -genkeypair -alias alias -keystore keystore 
-```
-
-For example: 
-
-```
-(.venv) D:\connector-plugin-sdk\connector-packager>keytool -genkey -alias test1year -keystore test1yearkeystore.jks -validity 365 
-```
-
-For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website. 
-
- 
-
-### Step 2: Export key to certificate file
-
-Run this command to export the key to a certificate file: 
-
-```
-keytool -export -alias alias -file cert_file -keystore keystore 
-```
-
-For example: 
-
-```
-(.venv) D:\connector-plugin-sdk\connector-packager>keytool -export -alias test1year -file test1year.crt -keystore test1yearkeystore.jks 
-```
- 
-
-### Step 3: Generate a Certificate Signing Request 
-
-A certificate signing request (CSR) is a request for a certificate authority (CA) to create a public certificate for your organization. To generate a CSR, run the following command:
-
-```
-keytool -certreq -alias alias -keystore keystore -file certreq_file
-```
-
-For example: 
-
-```
-(.venv) D:\connector-plugin-sdk\connector-packager>keytool -certreq -alias test1year -keystore test1yearkeystore.jks -file test1year.csr 
-```
- 
-
-### Step 4: Get the CSR signed by the certificate authority 
-
-Send the certificate signing request to the CA you want to create a certificate for you (for example, Verisign, Thawte, or some other CA). The CA will sign the CSR file with their own signature and send that certificate back to you. You can then use this signed certificate to sign the .taco file.
-
-After you receive/fetch the new certificate from the CA, along with any applicable 'chain' or 'intermediate' certificates, run the following command to install the new cert and chain into the keystore:
-
-```
-keytool -importcert 
-```
-
-
-## Package and sign the connector
-
-
-### Run the package module 
+## Package the connector
 
 The connector-packager tool must be run from the connector-plugin-sdk/connector-packager/ directory. The packaged .taco file in default will be generated within packaged-connector folder. There are several ways to run the tool:
 
--   To package the connector and sign it, run this command: 
+-   To package the connector, run this command: 
  
     ```
-    python -m connector_packager.package [path_to_plugin_folder] -a [alias_name] -ks [keystore_file_path]
+    python -m connector_packager.package [path_to_plugin_folder]
     ```
 
-    For example:  
-
-    ```
-    python -m connector_packager.package .\tests\test_resources\valid_connector -a key_same_pwd -ks tests\test_resources\test_keystore\test_ks.jks --dest d:/pp 
-    ```
- 
-
--   To package the connector without signing, run this command:  
-
-    ```
-    python -m connector_packager.package [path_to_plugin_folder] --package-only  
-    ```
-
-    For example:
-
-    ```
-    python -m connector_packager.package d:/plugins-samples/postgres_odbc --package-only
-    ```
-
-
--   To validate that the .xml files are valid, run this command:
+-   To validate that the .xml files are valid without packaging the connector, run this command:
 
     ```
     python -m connector_packager.package --validate-only [path_to_plugin_folder] 
     ```
 
-    For example:
-
-    ```
-    python -m connector_packager.package --validate-only d:/plugins 
-    ```
-
 Review the following examples:
 
-#### Example 1: .taco file is generated into connector-plugin-sdk\connector-packager\packaged-connector 
+### Example 1: .taco file is generated into connector-plugin-sdk\connector-packager\packaged-connector 
 
 ```
-(.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc -a test1year -ks test1yearkeystore.jks
+(.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc
 
 Validation succeeded.
 
 mysql_odbc_sample.taco was created in E:\connector-plugin-sdk\connector-packager\packaged-connector
 
-Enter keystore password:
-
-Enter password for alias test1year:(RETURN if same as keystore password)
-
-jar signed.
-
-Warning:
-
-No -tsa or -tsacert is provided and this jar is not timestamped. Without a timestamp, users may not be able to validate this jar after the signer certificate's expiration date (2020-10-06) or after any future revocation date.
-
-taco was signed as mysql_odbc_sample.taco at E:\connector-plugin-sdk\connector-packager\packaged-connector
-
 ```
 
-#### Example 2: .taco file is generated into user supplied location and log file is generated into user supplied location 
+### Example 2: .taco file is generated into user supplied location and log file is generated into user supplied location 
 
 ```
-(.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc -a test1year -ks test1yearkeystore.jks --dest e:\temp -l e:\temp
+(.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc  --dest e:\temp -l e:\temp
 
 Validation succeeded.
 
 mysql_odbc_sample.taco was created in e:\temp
 
-Enter keystore password:
-
-Enter password for alias test1year:(RETURN if same as keystore password)
-
-jar signed.
-
-Warning:
-
-No -tsa or -tsacert is provided and this jar is not timestamped. Without a timestamp, users may not be able to validate this jar after the signer certificate's expiration date (2020-10-06) or after any future revocation date.
-
 ```
 
+## Signing your packaged connector using jarsigner
 
-### Verify the connector with signature
+At this point, your connector has been packaged into a single `.taco` file. However, it will not be loaded automatically into Tableau unless you sign the file, or disable signature verification.
 
-**Note:** You can use the package tool to package and sign the connector, and use the connector in Tableau Desktop 2019.x. Signature verification is supported starting in Tableau Desktop 2019.4 on Windows.  
+### Why we require connectors to be signed
 
-You can install and test your connector one of two ways:
+Connectors are sensitive parts of the Tableau code. They handle database authentication and communicate directly with your driver. By signing the connector, Tableau can verify the authenticity and integrity of the connector, and customers can be confident the the plugin author is who they say they are, and the `.taco` file itself has not been tampered with since it was signed.
 
--   Put your .taco file in the standard location, My Tableau Repository/Connectors, then launch Tableau Desktop. 
+### Getting your connector signed
 
--   Put your .taco file anywhere you want. Launch Tableau Desktop with the packaged and signed connector with the option -DConnectPluginsPath . For example:
+A packaged Tableau Connector (`.taco`) file is, functionally, a `.jar` file. Tableau checks that packaged connectors are signed by a trusted certificate authority before loading them, using the default java keystore in the JRE. Because a `.taco` file is fundamentally a `.jar` file, you can follow Java documentation for signing jar files.
 
-    ```
-    "C:\Program Files\Tableau\Tableau 2019.4\bin\tableau.exe" -DConnectPluginsPath="d:\connector-plugin-sdk\connector-packager\packaged-connector" 
-    ```
+To sign a taco file, you must:
+1. Generate a certificate signature request (csr). You can use java's [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/keytool.html) to generate this.
+1. Send the csr to a certificate authority that is trusted by the java keystore. Make sure that certificate you get is a code-signing certificate.
+1. Sign your `.taco` file using [jarsigner](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jarsigner.html).
+1. Verify that your `.taco` file is signed using jarsigner
 
-In both cases, when you launch Tableau Desktop, your connector is listed on the **Connect** pane, under **To a Server** > **More**.
+### Verifying that .taco is properly signed
 
-![]({{ site.baseurl }}/assets/connect-pane.png) 
- 
+First, check tha the .taco is signed using jarsigner using the following command:
 
-To connect, select the name of your connector, enter the information in the Connection dialog, and then click **Sign In**.
+```
+jarsigner -verify path_to_taco -verbose -certs -strict
+```
 
-![]({{ site.baseurl }}/assets/data-source-page.png)
+If `jar verified` appears, your `.taco` file should be ready to be used in Tableau. Double check the certificate chain to make sure that the final certificate is that of your certificate authority.
 
-### (Optional) Verify the connector without a signature
+### Example: Sign a .taco with a basic signed certificate
 
-You can verify a packaged connector without a signature. If everything is correct, other than the signature, the process should only skip the signature verification part and perform all the other steps correctly. This includes connecting to the data. To verify the connector without a signature, follow these steps:
+Getting a certificate is a multi-step process.
 
-1.  Package the connector with –package-only. For example:
+#### Step 1: Generate a Certificate Signing Request (csr) file
 
-    ```
-    (.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\postgres_odbc --package-only
-    ```
+A certificate signing request (CSR) is a request for a certificate authority (CA) to create a public certificate for your organization.
 
-1.  Launch Tableau Desktop by skipping signature verification with -DDisableVerifyConnectorPluginSignature=true. For example:
+First, generate a key pair using this command:
 
-    ```
-    (.venv) E:\connector-plugin-sdk\connector-packager>"c:\Program Files\Tableau\Tableau 2019.4\bin\tableau.exe" -DDisableVerifyConnectorPluginSignature=true -DConnectPluginsPath="E:\connector-plugin-sdk\connector-packager\packaged-connector"
-    ```
-    When you launch Tableau Desktop, your connector is listed on the **Connect** pane, under **To a Server** > **More**.
+```
+keytool -genkeypair -alias your_alias -keystore your_keystore
+```
 
-1.  Select the connector, enter the information you're prompted for, and click **Sign In** to connect. 
+Next, export the key to a certificate file:
+```
+keytool -export -alias your_alias -file cert_file -keystore your_keystore
+```
+
+Now you can generate your certificate signing request:
+
+```
+keytool -certreq -alias your_alias -keystore your_keystore -file certreq_file
+```
+
+Keep all files you've generated (the key pair, the keystore, and the csr) secure, you will need them later.
+
+For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website.
+
+
+#### Step 2: Get the CSR signed by the certificate authority
+
+Send the certificate signing request to the CA you want to create a certificate for you (for example, Verisign, Thawte, or some other CA). The CA will sign the CSR file with their own signature and send that certificate back to you. You can then use this signed certificate to sign the .taco file.
+
+After you receive/fetch the new certificate from the CA, along with any applicable 'chain' or 'intermediate' certificates, run the following command to install the new cert and chain into the keystore:
+
+```
+keytool -importcert cert_from_ca -keystore your_keystore
+```
+
+#### Step 3: Use jarsigner to sign .taco file
+
+Using the keystore you imported your signed certificate to, use jarsigner to sign your `.taco` file:
+
+```
+jarsigner -keystore your_keystore path_to_taco your_alias
+```
+
+For more information about jarsigner arguments, see the Java Documentation about [jarsigner](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jarsigner.html).
+
+### Historical Note
+
+Earlier versions of the packager would sign your connector using jarsigner internally. This functionality was removed in favor of the connector author calling jarsigner directly, which provides more control over how your connector is signed.
 
 ## Troubleshoot connector packaging and signing
 
 
 ### Where to find log files 
 
-By default, a log file packaging_log.txt will be generated at connector-plugin-sdk/connector-packager/ directory 
+By default, a log file packaging_log.txt will be generated at connector-plugin-sdk/connector-packager/
 
 ### XML Validation failed for manifest.xml  
 
-Packaging failed. Check your_path\connector-plugin-sdk\connector-packager\packaging_log.txt for more information. 
+Packaging failed. Check [your_path]\connector-plugin-sdk\connector-packager\packaging_log.txt for more information. 
 
 Check your manifest.xml file. You can do validate only with –v to get more details and make sure your package is valid. For example: 
 
