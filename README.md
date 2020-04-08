@@ -8,7 +8,7 @@ This project consists of documentation, example files, the Tableau Datasource Ve
 |--------------------------------------------------|--------------------|
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
 | TDVT                                             | 2.1.7 (02-04-2020) |
-| Connector Packager                               | 0.0.1 (10-03-2019) |
+| Connector Packager                               | 2.0.0 (04-08-2020) |
 
 * [Why Connectors?](#why-connectors)
 * [Get started](#get-started)
@@ -74,7 +74,7 @@ Connectors allow for a much more extensive level of customization than using the
 We intend for the Connector SDK to eventually support additional connector types, but we're starting with ODBC and JDBC.
 
 **How do I distribute a connector to my customers?**
-Starting with Tableau 2019.4, you can package and sign your connector using a public certificate: https://tableau.github.io/connector-plugin-sdk/docs/package-sign  
+Starting with Tableau 2019.4, you can package and sign your connector using a public certificate: https://tableau.github.io/connector-plugin-sdk/docs/package-sign
 
 To run your packaged connector, Simply drop the .taco file, into your "My Tableau Respository/Connectors" folder: https://tableau.github.io/connector-plugin-sdk/docs/run-taco
 
