@@ -47,12 +47,6 @@ optional arguments:
                         path of logging output
   --validate-only       runs package validation steps only
   -d DEST, --dest DEST  destination folder for packaged connector
-  --package-only        package a taco only, skip signing
-  -a ALIAS, --alias ALIAS
-                        alias identifying the private key to be used to sign
-                        taco file
-  -ks KEYSTORE, --keystore KEYSTORE
-                        location of keystore file where key is stored
 ```
 
 ## Development
