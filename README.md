@@ -4,10 +4,13 @@
 
 This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
+The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2020.1**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau.
+
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
+| Connector SDK for Tableau 2019.4                 | 3-13-2020          |
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
-| TDVT                                             | 2.1.7 (02-04-2020) |
+| TDVT                                             | 2.1.8 (04-06-2020) |
 | Connector Packager                               | 2.0.0 (04-08-2020) |
 
 * [Why Connectors?](#why-connectors)
