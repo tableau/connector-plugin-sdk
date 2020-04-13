@@ -117,7 +117,7 @@ def mangle_tds(file_path, connection_password_name):
     print ('Modifying ' + file_path)
     try:
         r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
-        r2 = re.compile('(^\s*<relation connection=\').*?(\' .*>)')
+        r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
         r3 = re.compile('(^\s*<connection .*?)(\s*/>)')
 
         f =  open(file_path, 'r')
