@@ -3,10 +3,10 @@
     var params = {};
 
     params["SERVER"] = attr[connectionHelper.attributeServer];
-    params["PORT"] = attr[[connectionHelper.attributePort];
+    params["PORT"] = attr[connectionHelper.attributePort];
     params["DATABASE"] = attr[connectionHelper.attributeDatabase];
     params["UID"] = attr[connectionHelper.attributeUsername];
-    params["PWD"] = attr[[connectionHelper.attributePassword];
+    params["PWD"] = attr[connectionHelper.attributePassword];
     params["BOOLSASCHAR"] = "0";
     params["LFCONVERSION"] = "0";
     params["UseDeclareFetch"] = "1";

@@ -1,0 +1,28 @@
+<results>
+  <test name='CONTAINS(str2, &apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(2461168362)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='CONTAINS(str2, LEFT(str2, 0))'>
+    <table>
+      <schema>
+        <column>[cast_calcs.firebird].[TEMP(Test)(3977299552)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

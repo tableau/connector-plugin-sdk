@@ -253,9 +253,9 @@ class CommandLineTest(unittest.TestCase):
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
         elif sys.platform in ('darwin', 'linux'):
-            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
         else:
             self.skipTest("Unsupported test OS: {}".format(sys.platform))
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
@@ -280,9 +280,9 @@ class CommandLineTest(unittest.TestCase):
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'  # noqa: E501
+            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable --test_arg my/output/dir'  # noqa: E501
         elif sys.platform in ('darwin', 'linux'):
-            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall --test_arg my/output/dir'  # noqa: E501
+            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable --test_arg my/output/dir'  # noqa: E501
         else:
             self.skipTest("Unsupported test OS: {}".format(sys.platform))
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
@@ -292,9 +292,9 @@ class CommandLineTest(unittest.TestCase):
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
         elif sys.platform in ('darwin', 'linux'):
-            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
         else:
             self.skipTest("Unsupported test OS: {}".format(sys.platform))
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
@@ -306,9 +306,9 @@ class CommandLineTest(unittest.TestCase):
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
         if sys.platform in ('win32', 'cygwin'):
-            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+            expected = 'tabquerytool.exe --expression-file-list mytest\\tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
         elif sys.platform in ('darwin', 'linux'):
-            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall'  # noqa: E501
+            expected = 'tabquerytool --expression-file-list mytest/tests.txt -d mytds.tds --combined -DLogDir=mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable'  # noqa: E501
         else:
             self.skipTest(reason="Unsupported test OS: {}".format(sys.platform))
         self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
