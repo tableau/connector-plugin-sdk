@@ -1,14 +1,14 @@
 ---
 title: Tableau Connector SDK
 ---
+Tableau has great connectivity that allows you to visualize data from virtually anywhere. Tableau includes dozens of connectors already, and also gives you the tools to build a new connector with the Tableau Connector SDK. 
 
-With the Tableau Connector SDK, you can create a new connector that you can use to visualize your data from any database through an ODBC or JDBC driver.
-You can customize connector behavior, fine tune SQL generation, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
-This document provides an overview of what a connector is and how it is created.
+With this SDK, you can create a new connector that you can use to visualize your data from any database through an ODBC or JDBC driver.
+You can customize connector behavior, fine-tune SQL generation, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
 
-# What is a Connector?
+# What is a Tableau connector?
 
-A connector is a set of files that describe:
+A connector a set of files that describe:
 
 - UI elements needed to collect user input for creating a connection to a data source
 - Any dialect or customizations needed for the connection
@@ -22,69 +22,70 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 
 ![]({{ site.baseurl }}/assets/files-overview.png)
 
-# Why build a Connector?
+# Why build a connector?
 
-You can user the 'Other Databases (ODBC)' and 'Other Databases (JDBC)' connectors to connect to your database. The Connector SDK is similar but offers the following advantages:
+You can user the "Other Databases (ODBC)" and "Other Databases (JDBC)" connectors to connect to your database. The Tableau Connector SDK is similar, but offers the following advantages:
 - Better live query support. You can customize the dialect used to generate SQL queries so they are compatabile and optimized for your database. The Other Database connectors rely on higher level standard SQL which may not always be appropriate.
-- Simpler connection experience. An SDK connector can provide it's own customized dialect and you do not need to rely on using DSNs. Users will not need to enter in obscure JDBC URL strings or create a DSN or configure odbc.ini files. Your connector can provide a simple customized connection dialog.
-- Runs in Tableau Desktop and Tableau Server. No configuration is required once you install the Connector.
+- Simpler connection experience. An SDK connector can provide its own customized dialect and you do not need to rely on using DSNs. Users will not need to enter in obscure JDBC URL strings or create a DSN or configure odbc.ini files. Your connector can provide a simple customized connection dialog.
+- Runs in Tableau Desktop and Tableau Server. No configuration is required once you install the connector.
 
-If your datasource does not fit the relational ODBC/JDBC model then it may be worth looking into [Web Data Connectors](https://tableau.github.io/webdataconnector).
+If your data source does not fit the relational ODBC/JDBC model, then it may be worth looking into [Web data connectors](https://tableau.github.io/webdataconnector).
 
-# What is a Taco?
-A `.taco` file is a packaged Tableau Connector file that can be dropped into your `My Tableau Repository/Connectors` folder. They will be automatically loaded by Tableau.
+# What is a TACO file?
+A TACO file (.taco)  is a packaged Tableau connector file that can be placed in your "My Tableau Repository/Connectors" folder. From there, Tableau automatically loads all connectors it finds.
 
-For more information about packaging your connector into a Taco, refer to [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign)
+For more information about packaging your connector into a TACO, see [Package and sign your connector for distribution]({{ site.baseurl }}/docs/package-sign)
 
-# Before you Begin
+# Overview of the process
 
-## Recommended Workflow
+This is an overview of steps you should follow to create a fully functional connector.
 
-At a high level, these are the general steps you will need to follow to create a fully functional connector.
+1. Have a look at one of the sample connectors located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). These connectors can make a good starting point if you copy the connector files to your workspace.
 
-First, look at one of the sample connectors located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). These connectors can make a good starting point if you copy the connector files to your workspace.
+2. Customize the connector files as needed to name your connector and allow it to connect to your database. See the [Example]({{ site.baseurl }}/docs/example) for more information. 
 
-Second, customize the connector files as needed to name your connector and allow it to connect to your database. See the [Example]({{ site.baseurl }}/docs/example) for more information. The following files are required for all connectors:
-- a manifest to define the connector.
-- a connection resolver. ODBC connectors should include a driver-resolver element but JDBC connectors do not currently support the driver-resolver.
-- a connection builder JavaScript file. JDBC connectors can make use of a properties builder JavaScript file.
-- a dialect.
-- a connection dialog.
+3. Make sure your connector has all the required files:
+> * __Manifest file__. This defines the connector.
+> * __Connection resolver (ODBC-based connectors only)__. ODBC connectors should include a driver-resolver element. JDBC connectors do not currently support the driver-resolver.
+> * __Connection builder JavaScript file__. JDBC connectors can make use of a properties builder JavaScript file.
+> * __Dialect definition file__.
+> * __Connection dialog__.
 
-Once your connector is able to connect, you're ready to start running the test tool [TDVT]({ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
+4. Once your connector is able to connect, start running the test tool [TDVT]({ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
 
-When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
+5. When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
 
-## Prerequisites:
+## Prerequisites
 
-To develop connectors, you need the following installed on your machine:
+To develop connectors, you need the following installed on your computer:
 - Windows or Mac
 - Tableau Desktop or Server 2019.2 or higher
 - Python 3.7 or higher
 - An ODBC or JDBC data source and driver
 - The provided test data loaded in your data source
 
-To package the connector into a `.taco` file, you will additionally need:
+To package the connector into a TACO file, you will also need:
 - Tableau Desktop or Server 2019.4 or higher
 - JDK 8 or higher
 
-For a JDBC connector, your driver must fulfill the following requirements:
-- You must have read permissions on the .jar file.
+For a JDBC connector, your driver must meet these requirements:
+- You must have read permissions on the JAR file.
 - Tableau requires a JDBC 4.0 or later driver.
 - Tableau requires a Type 4 JDBC driver.
 
-## Install the Connector SDK tools:
-- Install TDVT, our test harness. Refer to the "Installation" section of the [Test Your Connector Using TDVT]({{ site.baseurl }}/docs/tdvt) page.
-- Install the packaging tool. Refer to the "Set up the virtual environment for packaging and signing" section of the [Package and Sign Your Connector for Distribution]({{ site.baseurl }}/docs/package-sign) page.
+## Install the SDK tools
+Install the following:
+ - __TDVT.__ This is our test harness. See the "Installation" section of [Test Your Connector Using TDVT]({{ site.baseurl }}/docs/tdvt) for details.
+ - __The packaging tool__. See the "Set up the virtual environment for packaging and signing" section of [Package and sign your connector for distribution]({{ site.baseurl }}/docs/package-sign) for details.
 
 The resulting connector will work on Tableau Desktop and Tableau Server on Windows, Linux, and Mac.
 
-# Using a Connector
+# Using a connector
 
-## Packaged Connector (Taco)
-Drop your packaged `.taco` file into your `My Tableau Repository/Connectors` and launch Tableau. See [Run your Packaged Connector (.taco)]({{ site.baseurl }}/docs/share) for more information.
+## Packaged connector (TACO)
+Place your packaged TACO file in the My Tableau Repository/Connectors folder and launch Tableau. See [Run your packaged connector (.taco)]({{ site.baseurl }}/docs/share) for more information.
 
-Note: Support for loading Taco files was added in the 2019.4 release of Tableau.
+Note: Support for loading TACO files was added in the 2019.4 release of Tableau.
 
-## Developer Path
-You can tell Tableau to load un-packaged connectors with a special command line argument that tells Tableau where to find your Connector. See [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share) for more information.
+## Developer path
+You can tell Tableau to load unpackaged connectors with a special command-line argument that tells Tableau where to find your connector. See [Run your "under development" connector]({{ site.baseurl }}/docs/share) for more information.
