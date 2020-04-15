@@ -2,34 +2,47 @@
 title: Connector Example
 ---
 
-A connector is a set of files that describe the UI elements needed to collect user input for creating a connection to a data source, any dialect or customizations needed, a connection string builder, driver resolver, and the ODBC- or JDBC-based driver.
-Starting with the set of base connector files, you can add customizations to each file, while using the connectivity test harness to validate the connector behavior along the way.
-The base connector files are described below.
+A Tableau connector is a set of files that describe the UI elements needed to collect user input for creating a connection to a data source, any dialect or customizations needed, a connection string builder, driver resolver, and the ODBC- or JDBC-based driver.
 
-This example will use the PostGres sample connector located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) which is a connector for the PostGre SQL database.
+Tableau connector files include:
+- __Manifest file__ that tells Tableau about the connector. Tableau uses the name from this file to add it to the list of available connectors in the UI.
+- __Tableau Custom Dialog file__ is optional. It customizes the connection dialog as needed for this connection. 
+- __Tableau Connection Resolver file__ is optional. It creates the connection to your file using JavaScript files to define and make the connection.
+- __Tableau Dialect file__ identifies which SQL dialect to use.
+
+Tableau provides a base set of connector files that you use to create your own customized connector. You can use the connectivity test harness to validate the connector behavior as you build it. 
+
+This diagram shows how the connector interacts with Tableau and the database. Details and examples for these component files are below the diagram. 
 
 ![]({{ site.baseurl }}/assets/files-sequence.png)
 
-## ![1]({{ site.baseurl }}/assets/pce-1.png) manifest.xml
+Most of the following examples use the connector for the PostGre SQL database, located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins).
 
-The manifest.xml file informs Tableau about your connector and displays the connector name in the Tableau Connect pane.
+## ![1]({{ site.baseurl }}/assets/pce-1.png)
+
+The Manifest file (manifest.xml)  informs Tableau about your connector and displays the connector name in the Tableau Connect pane.
 It's a required file that defines the connector class and description.
-The <span style="color:red">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+The <span style="color:blue; font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
 
-Each connector is typically based on a "class" such as ODBC or JDBC, and provides additional customizations beyond the class.
-The <span style="color:blue; font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
+Each connector is typically based on a "class" such as ODBC or JDBC, and provides additional customizations.
 
-You may also specify the vendor information. The <span style="font-family: courier new">company name</span> value displays the name of the connector's creator next to the connector name on the Tableau **Connect** pane (for example, Connector Name by Creator), and the <span style="color:blue; font-family: courier new">support link</span> value is the URL of a website where users of the connector can get support.
+- The <span style="color:blue; font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+- The <span style="color:blue; font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
+- You may also specify the vendor information. 
+- The <span style="font-family: courier new">company name</span> value displays the name of the connector's creator next to the connector name on the Tableau **Connect** pane (for example, Connector Name by Creator).
+- The <span style="color:blue; font-family: courier new">support link</span> value is the URL of a website where users of the connector can get support.
 
 
 ![]({{ site.baseurl }}/assets/manifest-xml.png)
 
 ![]({{ site.baseurl }}/assets/pce-connect-pane.png)
 
-## ![2]({{ site.baseurl }}/assets/pce-2.png) \*.tcd
+## ![2]({{ site.baseurl }}/assets/pce-2.png) 
 
-(Optional) You can use the Tableau Custom Dialog (.tcd) file to customize the connection dialog, or your connector can inherit a dialog from its parent.
-For example, if you include <span style="color:red">show-ssl-check box</span> and set the value to "true", the **Require SSL** check box will display on the sign-in dialog.
+The Tableau Custom Dialog file (.tdc) is optional. By default, your connecor inerits a connection dialog from its parent (defined by <span style="color:blue; font-family: courier new">superclass</span> You can use the TDC file to customize the connection dialog.
+For example, if you set <span style="color:red">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
+
+Here's an example:
 
 ```
 <connection-dialog class='postgres_odbc'>
@@ -48,35 +61,42 @@ For example, if you include <span style="color:red">show-ssl-check box</span> an
 
 ![]({{ site.baseurl }}/assets/pce-connection-dialog-box.png)
 
-## ![3]({{ site.baseurl }}/assets/pce-3.png) \*.tdr
+## ![3]({{ site.baseurl }}/assets/pce-3.png) 
 
-(Optional) Tableau uses the Connector Resolver (.tdr) file to create a connection to your data.
-The .tdr file calls several JavaScript files, and includes the driver-resolver section. The driver-resolver is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
+The Connector Resolver file (.tdr) is optional. Tableau uses it to create a connection to your data.
 
-Tableau database connections have a unique type, the class attribute.
-For example, all Postgres connections have the same class.
+The TDR file calls these scripts (described in the following sections): 
+- Connection Builder
+- Connection Properties
+- Connection Matcher
+- Connection Normalizer
+
+The TDR file also includes the driver-resolver section. The <span style="color:blue; font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
+
+Tableau database connections have a unique type, the <span style="color:blue; font-family: courier new">class</span> attribute.
+For example, all Postgres connections have the same <span style="color:blue; font-family: courier new">class</span>.
 Each connection also has a set of _connection attributes_ with unique values.
 Typically these attributes include the database server, username, and password.
 If the attributes and their values are identical then the connections are considered the same and can be reused and shared within the Tableau process.
 
-Connection attributes are also used to pass values from the connection dialog or the saved Tableau workbook to the _Connection Resolver_.
-The Connection Resolver knows how to use these attributes to format an ODBC or JDBC connection string.
+Connection attributes pass values from the connection dialog or the saved Tableau workbook to the _Connection Resolver_.
+In turn, the Connection Resolver uses these attributes to format an ODBC or JDBC connection string.
 
 ![]({{ site.baseurl }}/assets/pce-tdr.png)
 
 ## ![4]({{ site.baseurl }}/assets/pce-4.png) Connection Builder
 
-The ODBC connection string and the JDBC connection URL are created by calling the Connection Builder script and passing in a map of attributes that define how the connection is configured.
-Some values come from the connection dialog and are entered by the user (like username, password, and database name).
-They are mapped to ODBC or JDBC connection string values that the driver understands.
-Other attributes (like BOOLSASCHAR and LFCONVERSION in the example) have values set to useful defaults. These will depend on which driver you are using to connect to your database.
-You may set any other connection string options that you would like to pass to the driver.
+Tableau uses the Connection Builder script (connectionBuilder.js) to create the ODBC connection string and the JDBC connection URL. The script maps attributes that define how the connection is configured.
+Some values -- such as username, password, and database name -- are user entries from the connection dialog.
+They are mapped to ODBC or JDBC connection string values that the driver (in this case, PostgresSQL) uses.
+Other attributes (such as BOOLSASCHAR and LFCONVERSION in this example) have values set to useful defaults. These depend on which driver you are using to connect to your database.
+You can use this script to set any other connection string options that you would like to pass to the driver.
 
-### Example ODBC Connection Builder
+This is an example Connection Builder script for ODBC:
 
 ![]({{ site.baseurl }}/assets/pce-connectionbuilder.png)
 
-### Example JDBC Connection Builder
+This is an example Connection Builder script for JDBC:
 
 ```
 (function dsbuilder(attr) {
@@ -95,9 +115,9 @@ You may set any other connection string options that you would like to pass to t
 
 ## ![5]({{ site.baseurl }}/assets/pce-5.png) Connection Properties
 
-(Optional) This script is needed only if you're using a JDBC driver. The example below is for a connector to Amazon Athena.
+The Connection Properties script (connectionProperties.js) is optional. You need this script only if you're using a JDBC driver. 
 
-### Example connectionProperties.js
+This example is for a connector to Amazon Athena.
 
 ```
 (function propertiesBuilder(attr) {
@@ -128,12 +148,12 @@ You may set any other connection string options that you would like to pass to t
 
 ## ![6]({{ site.baseurl }}/assets/pce-6.png) Connection Matcher
 
-(Optional) This script defines how connections are matched.
-In most cases, the default behavior works, so you don't have to include the <span style= "font-family: courier new">connection-matcher</span> section in your \*.tdr file.
+This script is optional, and defines how connections are matched.
+In most cases, the default behavior works, so you don't have to include the <span style= "font-family: courier new">connection-matcher</span> section in your TDR file.
 
 ## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
 
-The component defines what makes up a unique connection. This can be implemented in JavaScript or directly in the xml. Writing the required attributes list in the xml is more performant, and is recommended for most connectors.
+The component defines what makes up a unique connection. This can be implemented in JavaScript or directly in the XML file. Writing the required attributes list in XML is more performant, and is recommended for most connectors.
 
 ```
 <required-attributes>
@@ -150,7 +170,7 @@ The component defines what makes up a unique connection. This can be implemented
 ```
 `<setImpersonateAttributes/>` and `<attr>one-time-sql</attr>` add support for impersonate attributes and initial sql respectively, and should be in every connector.
 
-## ![8]({{ site.baseurl }}/assets/pce-8.png) Example connection
+## ![8]({{ site.baseurl }}/assets/pce-8.png) Connection example
 
 The Tableau Connection Resolver file (\*.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosrv.txt.
 
@@ -166,12 +186,12 @@ For JDBC, search for <span style= "font-family: courier new">Connection URL</spa
 JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&password=********
 ```
 
-## ![9]({{ site.baseurl }}/assets/pce-9.png) \*.tdd
+## ![9]({{ site.baseurl }}/assets/pce-9.png) 
 
-After connection, Tableau uses your _.tdd dialect file to determine which SQL to generate when retrieving information from your database.
-You can define your own dialect in the _.tdd file, or your connector can inherit a dialect from its parent. If you are using the 'odbc' or 'jdbc' superclasses you must define a dialect, since those superclasses do not have dialects.
+After connection, Tableau uses your Tableau Dialect file (.tdd) to determine which SQL to generate for data retrieval from your database.
+You can define your own dialect in the TDD file, or your connector can inherit a dialect from its parent (defined by the superclass). If you are using the 'odbc' or 'jdbc' superclasses you must define a dialect, since those superclasses do not have dialects.
 
-### Example dialect.tdd
+This is an example Tableau Dialect (.tdd) file:
 
 ```
 <?xml version="1.0" encoding="utf-8"?>
