@@ -71,7 +71,7 @@ The TDR file calls these scripts (described in the following sections):
 - Connection Matcher
 - Connection Normalizer
 
-The TDR file also includes the driver-resolver section. The <span font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
+The TDR file also includes the driver-resolver section. The <span font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
 
 Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
 For example, all Postgres connections have the same <span style="font-family: courier new">class</span>.
