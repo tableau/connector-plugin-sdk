@@ -1,26 +1,22 @@
 ---
-title: Create a Tableau Dialect Definition (TDD) File 
+title: Create a Tableau Dialect Definition File 
 ---
 
-## What is a dialect? 
+A Tableau Dialect Definition file (.tdd) maps Tableau's query language to a database’s SQL. This is an XML file with a .tdd filename extension, and is one of the main components of a Tableau connector. 
 
-A dialect maps Tableau's query language to a database’s SQL. A dialect is defined in an XML file as one of the main components of a Tableau connector. 
+YOu should create a dialect definition file whenever you need to make changes to an existing Tableau dialect or define an entirely new dialect. If your connector uses the same SQL dialect as the connector it’s based on, such as PostgreSQL, then a new  TDD file isn't necessary. 
 
-## When should I create a dialect definition file? 
+Create a TDD file 
 
-Dialect definition files can be used to make changes to an existing Tableau dialect or define an entirely new dialect. If your connector uses the same SQL dialect as the connector it’s based on, such as PostgreSQL, then a TDD file isn't necessary. 
-
-## How do I create one? 
-
-If you want to get started quickly, copy and modify the sample dialect.tdd file located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). 
+To get started quickly, you can copy the sample dialect.tdd file from the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) and use the copy to make your modifications. 
 
 For an example of the XML schema for the TDD file format, see the [sample XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
 
 Tableau searches for a TDD file in the location specified by the connector manifest XML file. The TDD format breaks down as follows: 
 
-### Dialect 
+### Dialect tag
 
-The *dialect* tag serves as the root for the document. It has several required attributes and a couple of optional ones. 
+The <span file-format="Courier">dialect</span> tag serves as the root for the document. It has several required attributes and a couple of optional ones. 
 
 Attribute | Required | Description 
 -|-|- 
