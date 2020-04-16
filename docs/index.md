@@ -38,7 +38,7 @@ For more information about packaging your connector into a TACO, see [Package an
 
 # Overview of the process
 
-This is an overview of steps you should follow to create a fully functional connector.
+These are the general steps you will follow to create a fully functional connector.
 
 1. Have a look at one of the sample connectors located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). These connectors can make a good starting point if you copy the connector files to your workspace.
 
@@ -57,9 +57,9 @@ This is an overview of steps you should follow to create a fully functional conn
 
 ## Prerequisites
 
-To develop connectors, you need the following installed on your computer:
-- Windows or Mac
-- Tableau Desktop or Server 2019.2 or higher
+To develop connectors, be sure you have the following installed on your computer:
+- Windows or Mac operating system
+- Tableau Desktop or Tableau Server 2019.2 or higher
 - Python 3.7 or higher
 - An ODBC or JDBC data source and driver
 - The provided test data loaded in your data source
