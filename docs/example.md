@@ -22,15 +22,15 @@ Most of the following examples use the connector for the PostGre SQL database, l
 
 The Manifest file (manifest.xml)  informs Tableau about your connector and displays the connector name in the Tableau Connect pane.
 It's a required file that defines the connector class and description.
-The <span style="color:blue; font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+The <span font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
 
 Each connector is typically based on a "class" such as ODBC or JDBC, and provides additional customizations.
 
-- The <span style="color:blue; font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
-- The <span style="color:blue; font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
+- The <span font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+- The <span style="font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
 - You may also specify the vendor information. 
 - The <span style="font-family: courier new">company name</span> value displays the name of the connector's creator next to the connector name on the Tableau **Connect** pane (for example, Connector Name by Creator).
-- The <span style="color:blue; font-family: courier new">support link</span> value is the URL of a website where users of the connector can get support.
+- The <span style="font-family: courier new">support link</span> value is the URL of a website where users of the connector can get support.
 
 
 ![]({{ site.baseurl }}/assets/manifest-xml.png)
@@ -39,8 +39,8 @@ Each connector is typically based on a "class" such as ODBC or JDBC, and provide
 
 ## ![2]({{ site.baseurl }}/assets/pce-2.png) 
 
-The Tableau Custom Dialog file (.tdc) is optional. By default, your connecor inerits a connection dialog from its parent (defined by <span style="color:blue; font-family: courier new">superclass</span> You can use the TDC file to customize the connection dialog.
-For example, if you set <span style="color:red">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
+The Tableau Custom Dialog file (.tdc) is optional. By default, your connecor inerits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TDC file to customize the connection dialog.
+For example, if you set <span style="font-family: courier new">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
 
 Here's an example:
 
@@ -71,10 +71,10 @@ The TDR file calls these scripts (described in the following sections):
 - Connection Matcher
 - Connection Normalizer
 
-The TDR file also includes the driver-resolver section. The <span style="color:blue; font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
+The TDR file also includes the driver-resolver section. The <span font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
 
-Tableau database connections have a unique type, the <span style="color:blue; font-family: courier new">class</span> attribute.
-For example, all Postgres connections have the same <span style="color:blue; font-family: courier new">class</span>.
+Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
+For example, all Postgres connections have the same <span style="font-family: courier new">class</span>.
 Each connection also has a set of _connection attributes_ with unique values.
 Typically these attributes include the database server, username, and password.
 If the attributes and their values are identical then the connections are considered the same and can be reused and shared within the Tableau process.
@@ -172,7 +172,7 @@ The component defines what makes up a unique connection. This can be implemented
 
 ## ![8]({{ site.baseurl }}/assets/pce-8.png) Connection example
 
-The Tableau Connection Resolver file (\*.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosrv.txt.
+The Tableau Connection Resolver file (.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosrv.txt.
 
 For ODBC, search for <span style= "font-family: courier new">ConnectString</span> to find something like this example:
 
@@ -189,7 +189,7 @@ JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&pa
 ## ![9]({{ site.baseurl }}/assets/pce-9.png) 
 
 After connection, Tableau uses your Tableau Dialect file (.tdd) to determine which SQL to generate for data retrieval from your database.
-You can define your own dialect in the TDD file, or your connector can inherit a dialect from its parent (defined by the superclass). If you are using the 'odbc' or 'jdbc' superclasses you must define a dialect, since those superclasses do not have dialects.
+You can define your own dialect in the TDD file, or your connector can inherit a dialect from its parent (defined by the superclass). If you are using the "odbc" or "jdbc" superclass, you must define a dialect, since those superclasses do not have dialects.
 
 This is an example Tableau Dialect (.tdd) file:
 
