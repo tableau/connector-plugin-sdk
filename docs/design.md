@@ -73,15 +73,13 @@ For information on common capabilities and how they are used, see [Capabilities]
 
 Consider these two questions:
 
-- __Does your database support temporary tables?__
-
-__Important:__ Your database should support temporary tables and subqueries for the best user experience, but at least one of those is required to support complete integration with Tableau.
-
-If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.
-
+__Does your database support temporary tables?__  
+__Important:__ Your database should support temporary tables and subqueries for the best user experience, but at least one of those is required to support complete integration with Tableau.   
+  
+If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.    
+   
 A common example is filtering the top three regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to __Rows__, then drag it again to __Filters__. Click the Top tab and select [Sales Total] aggregated by sum.
 
-- __Does your database support null column metadata?__
-
+__Does your database support null column metadata?__  
 Tableau relies on accurate column metadata from the ODBC or JDBC result set in order to make certain query optimizations. If information about whether a column contains null values is inaccurate, Tableau may generate inefficient or incorrect queries. If your database does not support null column information, then it is safer to indicate that all columns contain null values. This ensures that Tableau does not generate an optimized query that actually returns incorrect results.
 Tableau uses "SQLColAttribute" with "SQL_DESC_NULLABLE" on the result set metadata for ODBC connections and the "isNullable" method on the "ResultSetMetaData" object for JDBC.
