@@ -6,7 +6,7 @@ A Tableau Dialect Definition file (.tdd) maps Tableau's query language to a data
 
 YOu should create a dialect definition file whenever you need to make changes to an existing Tableau dialect or define an entirely new dialect. If your connector uses the same SQL dialect as the connector it’s based on, such as PostgreSQL, then a new  TDD file isn't necessary. 
 
-Create a TDD file 
+## Create a TDD file 
 
 To get started quickly, you can copy the sample dialect.tdd file from the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) and use the copy to make your modifications. 
 
@@ -16,7 +16,16 @@ Tableau searches for a TDD file in the location specified by the connector manif
 
 ### Dialect tag
 
-The <span file-format="Courier">dialect</span> tag serves as the root for the document. It has several required attributes and a couple of optional ones. 
+The <span style="font-family: courier new">dialect</span> tag serves as the root for the document. For example:
+
+...
+<dialect
+   name='CustomDialect'
+   class='postgres'
+   version='2020.2'>
+...
+
+The <span style="font-family: courier new">dialect</span> tag has several required attributes and a couple of optional ones. 
 
 Attribute | Required | Description 
 -|-|- 
