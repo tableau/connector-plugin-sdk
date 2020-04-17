@@ -213,22 +213,22 @@ Refresh the extract on Tableau Server with the connector installed on the server
  
 __Create and open workbooks and data sources on Tableau Server__
 
-* Create a new workbook on Tableau Server with the connector installed on the server. For example:
+Create a new workbook on Tableau Server with the connector installed on the server:
 
-    1. Sign in to Tableau Server.
+1. Sign in to Tableau Server.
     
-    1. Under **Explore**, click **Create**.
+1. Under **Explore**, click **Create**.
     
-    1. From the dropdown menu, select **Workbook**.    
+1. From the dropdown menu, select **Workbook**.    
         ![]({{ site.baseurl }}/assets/mt-wkbk-explore.png)
         
-    1. Select your connector. In this example, the connector name is MariaDB.    
+1. Select your connector. In this example, the connector name is MariaDB.    
         ![]({{ site.baseurl }}/assets/mt-wkbk-mariadb.png)
         
-    1. Enter the required information to sign in.   
+1. Enter the required information to sign in.   
         ![]({{ site.baseurl }}/assets/mt-wkbk-signin.png)
         
-    1. After you connect to the data source, you should be able to create a new workbook and save it on the server.
+1. After you connect to the data source, you should be able to create a new workbook and save it on the server.
 
     **Note:** Web authoring (creating a new connection from the web) is not currently available for all connector superclasses. In those cases, your connector won't appear on the list of connectors on Tableau Server. If you can publish a workbook or data source using your connector to your server, then your connector is loaded correctly, even if you can't see it on the list of connectors.
 
