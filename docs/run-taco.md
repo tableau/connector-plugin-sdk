@@ -30,7 +30,7 @@ Starting in 2019.4 Beta 1, you can load packaged connectors (otherwise known as 
 
 For information about using TSM to set the option, see [tsm configuration set Options](https://onlinehelp.tableau.com/current/server-linux/en-us/cli_configuration-set_tsm.htm) in the Tableau Server Help.
 
-## Veify the signature
+## Verify the signature
 
 To be loaded in Tableau, a packaged connector must be signed by a trusted certificate. 
 
