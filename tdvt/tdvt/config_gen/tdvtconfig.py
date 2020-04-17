@@ -9,6 +9,7 @@ class TdvtInvocation(object):
     def __init__(self, from_args=None, from_json=None, test_config: TestConfig=None):
         self.tested_sql = False
         self.tested_tuples = True
+        self.tested_error = False
         self.log_dir = ''
         self.output_dir = ''
         self.timeout_seconds = 60 * 60
@@ -44,10 +45,12 @@ class TdvtInvocation(object):
                 self.tabquery_path = rtt.tabquery_paths.to_array()
 
     def init_from_args(self, args):
-        if args.compare_sql: 
-            self.tested_sql = args.compare_sql 
+        if args.compare_sql:
+            self.tested_sql = args.compare_sql
         if args.nocompare_tuples:
             self.tested_tuples = False
+        if args.compare_error:
+            self.tested_error = True
         if args.noclean:
             self.leave_temp_dir = True
         if args.verbose:
@@ -56,6 +59,7 @@ class TdvtInvocation(object):
     def init_from_json(self, json):
         self.tested_sql = json['tested_sql']
         self.tested_tuples = json['tested_tuples']
+        self.tested_error = json['tested_error']
         self.output_dir = json['output_dir']
         self.logical = json['logical']
         self.config_file = json['config_file']
@@ -71,19 +75,20 @@ class TdvtInvocation(object):
         self.thread_count = json['thread_count']
 
     def __str__(self):
-        return "suite [{}]: tested sql [{}]: tested tuples [{}]: output dir [{}]: logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]".format(self.suite_name, self.tested_sql, self.tested_tuples, self.output_dir, self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
+        return "suite [{}]: tested sql [{}]: tested tuples [{}]: tested error [{}]: output dir [{}]: logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]".format(self.suite_name, self.tested_sql, self.tested_tuples, self.tested_error, self.output_dir, self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
 
     def __json__(self):
         return {
-        'tested_sql' : self.tested_sql, 
-        'tested_tuples' : self.tested_tuples, 
-        'output_dir' : self.output_dir, 
-        'logical' : self.logical, 
-        'config_file' : self.config_file, 
-        'suite_name' : self.suite_name, 
-        'd_override' : self.d_override, 
-        'verbose' : self.verbose, 
-        'tds' : self.tds, 
+        'tested_sql' : self.tested_sql,
+        'tested_tuples' : self.tested_tuples,
+        'tested_error' : self.tested_error,
+        'output_dir' : self.output_dir,
+        'logical' : self.logical,
+        'config_file' : self.config_file,
+        'suite_name' : self.suite_name,
+        'd_override' : self.d_override,
+        'verbose' : self.verbose,
+        'tds' : self.tds,
         'noheader' : self.noheader,
         'tabquery_path' : self.tabquery_path,
         'thread_count' : self.thread_count }

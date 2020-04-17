@@ -245,12 +245,12 @@ class BatchQueueWork(object):
             self.cmd_output = error_output
             if self.test_set.expected_message and self.test_set.expected_message in self.saved_error_message:
                 self.error_state = TestErrorExpected()
-            else:
-                self.error_state = TestErrorOther()
-            if e.returncode == 18:
+            elif e.returncode == 18:
                 logging.debug(self.get_thread_msg() + "Tests aborted")
                 sys.stdout.write('A')
                 self.error_state = TestErrorAbort()
+            else:
+                self.error_state = TestErrorOther()
         except subprocess.TimeoutExpired as e:
             logging.debug(self.get_thread_msg() + "Test timed out")
             sys.stdout.write('T')

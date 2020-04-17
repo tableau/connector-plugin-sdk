@@ -29,6 +29,7 @@ class TestCaseResult(object):
         self.diff_string = ''
         self.passed_sql = False
         self.passed_tuples = False
+        self.passed_error = False
         self.tested_config = test_config
 
     def set_diff(self, diff_string, diff_count):
@@ -80,6 +81,8 @@ class TestCaseResult(object):
             passed = False
         if self.tested_config.tested_tuples and not self.passed_tuples:
             passed = False
+        if self.tested_config.tested_error and not self.passed_error:
+            passed = False
 
         return passed
 
@@ -101,7 +104,7 @@ class TestCaseResult(object):
         return {'tuples' : tuple_list}
 
     def __json__(self):
-        return {'tested_sql' : self.tested_sql, 'tested_tuples' : self.tested_tuples, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
+        return {'tested_sql' : self.tested_config.tested_sql, 'tested_tuples' : self.tested_config.tested_tuples, 'tested_error' : self.tested_config.tested_error, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
 
 
 class TestErrorState(object):
@@ -432,6 +435,7 @@ class TestResult(object):
             if expected_testcase_self is None:
                 actual_testcase_self.passed_sql = False
                 actual_testcase_self.passed_tuples = False
+                actual_testcase_self.passed_error = False
                 continue
 
             config = self.test_config
@@ -446,6 +450,12 @@ class TestResult(object):
                 diff, diff_string = self.diff_table_node(actual_testcase_self.table, expected_testcase_self.table,
                                                     diff_string, expected_testcase_self.name)
                 actual_testcase_self.passed_tuples = diff == 0
+                diff_counts[test_case] = diff
+
+            # Compare the error.
+            if config.tested_error:
+                diff, diff_string = self.diff_error_node(actual_testcase_self.error_message, expected_testcase_self.error_message, diff_string)
+                actual_testcase_self.passed_error = diff == 0
                 diff_counts[test_case] = diff
 
         self.diff_string = diff_string
@@ -504,6 +514,18 @@ class TestResult(object):
         if actual_sql == None or expected_sql == None or (actual_sql != expected_sql):
             diff_string += "<<<<\n" + actual_sql + "\n"
             diff_string += ">>>>\n" + expected_sql + "\n"
+            return (1, diff_string)
+
+        return (0, diff_string)
+
+    def diff_error_node(self, actual_error, expected_error, diff_string):
+        if actual_error == None and expected_error == None:
+            return (0, diff_string)
+
+        diff_string += "Error\n"
+        if actual_error == None or expected_error == None or (expected_error not in actual_error):
+            diff_string += "<<<<\n" + actual_error + "\n"
+            diff_string += ">>>>\n" + expected_error + "\n"
             return (1, diff_string)
 
         return (0, diff_string)
