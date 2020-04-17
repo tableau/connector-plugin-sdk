@@ -91,7 +91,7 @@ mysql_odbc_sample.taco was created in E:\connector-plugin-sdk\connector-packager
 
 ```
 
-__Example 2__
+__Example 2__  
 
 This example shows how a TACO file and log file are generated in a user-supplied locations:
 
@@ -130,7 +130,8 @@ To sign a TACO file:
 
 Getting a certificate is a multi-step process. This example illustrates how to sign a TACO file with a basic signed certificate.
 
-__Step 1: Generate a Certificate Signing Request (CSR) file__
+__Step 1: Generate a Certificate Signing Request (CSR) file__  
+
 A certificate signing request (CSR) is a request for a certificate authority (CA) to create a public certificate for your organization.   
 1. Generate a key pair using this command:   
 `keytool -genkeypair -alias your_alias -keystore your_keystore`   
