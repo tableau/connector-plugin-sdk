@@ -23,7 +23,7 @@ __Note:__ In the steps below, replace [username] with your name (for example /Us
 `/Users/[username]/tableau_connectors`
 1. Put the folder containing your connector's manifest.xml file in this directory. Each connector should have its own folder. For example:   
 `/Users/[username]/tableau_connector/my connector`
-1. Run Tableau using the <span style="font-family: courier new">-DConnectPluginsPath</span> command-line argument and pointing to your connector directory. For example:    
+1. Run Tableau using the `-DConnectPluginsPath` command-line argument and pointing to your connector directory. For example:    
     ```
     /Applications/Tableau\ Desktop\[version].app/Contents/MacOS/Tableau -DConnectPluginsPath=/Users/[username]/tableau_connectors
 
@@ -41,7 +41,7 @@ __Note:__ In the steps below, replace [username] with your name (for example /Us
     ```
     tsm configuration set -k native_api.connect_plugins_path -v C:/tableau_connectors
     ```   
-    If you get a configuration error during this step, try adding the <span style="font-family: courier new">--force-keys</span> option to the end of the command.
+    If you get a configuration error during this step, try adding the `--force-keys` option to the end of the command.
 
 1. Apply the pending configuration changes to restart the server:   
     `tsm pending-changes apply`    
