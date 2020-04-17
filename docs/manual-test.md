@@ -21,7 +21,7 @@ Be sure that you complete all the following steps before you begin the manual te
        D:\>"C:\Program Files\Tableau <version>\bin\tableau.exe" -DConnectPluginsPath=D:\tableau_connectors
     ```
 
-    On macOS:
+    On macOS: 
 
     ```
        "/Applications/Tableau Desktop <version>.app/Contents/MacOS/Tableau" -"DConnectPluginsPath=/var/tmp/plugins"
