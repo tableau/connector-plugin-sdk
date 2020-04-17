@@ -80,7 +80,7 @@ __Notes:__
 TDVT checks the current working directory for the test configuration files that set up test suites for your data source. 
     - Run these steps to set up TDVT with a sample data source:
         1. Create a new directory, for example:
-    'tdvt_workspace'.
+    `tdvt_workspace`
         1. Copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
         1. Copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.   
 Note that tdvt_workspace should contain the following subdirectories: config, plugins, tds.  
