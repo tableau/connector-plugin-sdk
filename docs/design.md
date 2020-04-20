@@ -28,7 +28,7 @@ The dialect determines what SQL is generated for various Tableau actions.
 
 Choosing the right dialect is a critical part of writing a connector. For example:
 
-- If you set <span style="font-family: courier new">base</span> to "mysql_odbc' as the parent, you can skip configuring a dialect, and your connector will use the parent’s dialect.
+- If you set <span style="font-family: courier new">base</span> to "mysql_odbc" as the parent, you can skip configuring a dialect, and your connector will use the parent’s dialect.
 - If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point.
 
 These are valid values for <span style="font-family: courier new">base</span>:
