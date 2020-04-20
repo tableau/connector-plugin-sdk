@@ -404,7 +404,7 @@ You can find this by running:
 
 Expression tests have a name like "setup.agg.avg.txt" and a corresponding expected file like "expected.setup.agg.avg.txt".
 There may be optional alternative expected files like "expected.setup.agg.avg.1.txt", and so on.
-The expected files are located in the exprtests direcory within the TDVT package directory.
+The expected files are located in the "exprtests" direcory within the TDVT package directory.
 
 Logical tests have names like "setup.Filter.slicing_Q_date_month_instance_filter.prefix_bool\_.xml".
 The last section of the name "prefix_bool\_" corresponds to the name of the logical query config from your mydb.ini file.
