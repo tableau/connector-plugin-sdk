@@ -4,9 +4,11 @@ import sys
 
 from .test_config import TestConfig, RunTimeTestConfig
 
+
 class TdvtInvocation(object):
     """Track how items were tested. This captures how tdvt was invoked."""
-    def __init__(self, from_args=None, from_json=None, test_config: TestConfig=None):
+
+    def __init__(self, from_args=None, from_json=None, test_config: TestConfig = None):
         self.tested_sql = False
         self.tested_tuples = True
         self.tested_error = False
@@ -37,12 +39,12 @@ class TdvtInvocation(object):
             self.suite_name = test_config.dsname
 
     def set_run_time_test_config(self, rtt: RunTimeTestConfig):
-            self.timeout_seconds = rtt.timeout_seconds
-            self.d_override = rtt.d_override
-            self.run_as_perf = rtt.run_as_perf
-            self.tested_run_time_config = rtt
-            if rtt.tabquery_paths:
-                self.tabquery_path = rtt.tabquery_paths.to_array()
+        self.timeout_seconds = rtt.timeout_seconds
+        self.d_override = rtt.d_override
+        self.run_as_perf = rtt.run_as_perf
+        self.tested_run_time_config = rtt
+        if rtt.tabquery_paths:
+            self.tabquery_path = rtt.tabquery_paths.to_array()
 
     def init_from_args(self, args):
         if args.compare_sql:
@@ -79,22 +81,21 @@ class TdvtInvocation(object):
 
     def __json__(self):
         return {
-        'tested_sql' : self.tested_sql,
-        'tested_tuples' : self.tested_tuples,
-        'tested_error' : self.tested_error,
-        'output_dir' : self.output_dir,
-        'logical' : self.logical,
-        'config_file' : self.config_file,
-        'suite_name' : self.suite_name,
-        'd_override' : self.d_override,
-        'verbose' : self.verbose,
-        'tds' : self.tds,
-        'noheader' : self.noheader,
-        'tabquery_path' : self.tabquery_path,
-        'thread_count' : self.thread_count }
+            'tested_sql': self.tested_sql,
+            'tested_tuples': self.tested_tuples,
+            'tested_error': self.tested_error,
+            'output_dir': self.output_dir,
+            'logical': self.logical,
+            'config_file': self.config_file,
+            'suite_name': self.suite_name,
+            'd_override': self.d_override,
+            'verbose': self.verbose,
+            'tds': self.tds,
+            'noheader': self.noheader,
+            'tabquery_path': self.tabquery_path,
+            'thread_count': self.thread_count}
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self.__dict__ == other.__dict__
         return False
-

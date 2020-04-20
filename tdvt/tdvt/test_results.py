@@ -101,14 +101,15 @@ class TestCaseResult(object):
                 for v in t.findall('value'):
                     tuple_list.append(v.text)
 
-        return {'tuples' : tuple_list}
+        return {'tuples': tuple_list}
 
     def __json__(self):
-        return {'tested_sql' : self.tested_config.tested_sql, 'tested_tuples' : self.tested_config.tested_tuples, 'tested_error' : self.tested_config.tested_error, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
+        return {'tested_sql': self.tested_config.tested_sql, 'tested_tuples': self.tested_config.tested_tuples, 'tested_error': self.tested_config.tested_error, 'id': self.id, 'name': self.name, 'sql': self.get_sql_text(), 'table': self.table_to_json()}
 
 
 class TestErrorState(object):
     """The cause of a test failure."""
+
     def __init__(self):
         pass
 
@@ -168,7 +169,8 @@ class TestErrorSkippedTest(TestErrorState):
 
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
-    def __init__(self, base_name = '', test_config = TdvtInvocation(), test_file = '', relative_test_file = '', test_set: TestSet = None, error_status=None):
+
+    def __init__(self, base_name='', test_config=TdvtInvocation(), test_file='', relative_test_file='', test_set: TestSet = None, error_status=None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -188,8 +190,8 @@ class TestResult(object):
         self.parse_default_test_cases()
 
     def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
-        #TestCaseResult error messages should be specific to that exact test case. Overall test problems should be
-        #set at a higher level (TestResult).
+        # TestCaseResult error messages should be specific to that exact test case. Overall test problems should be
+        # set at a higher level (TestResult).
         if self.test_set.test_is_enabled is False:
             if self.test_set.is_logical:
                 return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config)
@@ -212,7 +214,7 @@ class TestResult(object):
 
     def parse_default_test_cases(self):
         if self.test_set and self.test_set.test_is_enabled is False:
-                self.overall_error_message = TEST_DISABLED
+            self.overall_error_message = TEST_DISABLED
         elif self.test_set and self.test_set.test_is_skipped is True:
             self.overall_error_message = TEST_SKIPPED
         else:
@@ -232,16 +234,17 @@ class TestResult(object):
                         test_case_count = 0
                         for line in test_file.readlines():
                             if not re.match(reg_blank, line) and not re.match(reg_comment, line):
-                                test_result = self.return_testcaseresult_for_not_run_tests(test_case_count)
+                                test_result = self.return_testcaseresult_for_not_run_tests(
+                                    test_case_count)
                                 self.test_case_map.append(test_result)
                                 test_case_count += 1
                 except IOError:
                     pass
 
     def __json__(self):
-        return {'all_passed' : self.all_passed(), 'name' : self.name,
-                'matched_expected' : self.matched_expected_version, 'expected_diffs' : self.diff_count,
-                'test_cases' : self.test_case_map, 'expected_results' : self.best_matching_expected_results}
+        return {'all_passed': self.all_passed(), 'name': self.name,
+                'matched_expected': self.matched_expected_version, 'expected_diffs': self.diff_count,
+                'test_cases': self.test_case_map, 'expected_results': self.best_matching_expected_results}
 
     def add_test_results(self, test_xml, actual_path):
         """
@@ -263,7 +266,7 @@ class TestResult(object):
 
         """
         self.path_to_actual = actual_path
-        #Go through all the test nodes under 'results'.
+        # Go through all the test nodes under 'results'.
         if not test_xml:
             return
 
@@ -271,7 +274,7 @@ class TestResult(object):
         for i in range(0, len(list(test_xml))):
             test_child = test_xml[i]
 
-            node= test_child.find('error')
+            node = test_child.find('error')
             error_msg = node.text if node is not None else ''
 
             node = test_child.find('error-type')
@@ -290,11 +293,12 @@ class TestResult(object):
             test_child_name = test_child.get('name')
             if not test_child_name:
                 continue
-            test_result = TestCaseResult(test_child_name, str(i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config)
+            test_result = TestCaseResult(test_child_name, str(
+                i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config)
             temp_test_cases.append(test_result)
 
         if temp_test_cases:
-            #Clear any dummy place holders.
+            # Clear any dummy place holders.
             self.test_case_map = temp_test_cases
 
     def get_failure_message_or_all_exceptions(self):
@@ -329,7 +333,7 @@ class TestResult(object):
     def get_exceptions(self):
         if self.error_status:
             return []
-        return [ tc.error_type for tc in self.test_case_map if not tc.all_passed() and tc.error_type ]
+        return [tc.error_type for tc in self.test_case_map if not tc.all_passed() and tc.error_type]
 
     def set_diff_counts(self, diff_counts):
         if len(diff_counts) != len(self.test_case_map):
@@ -441,20 +445,22 @@ class TestResult(object):
             config = self.test_config
             # Compare the SQL.
             if config.tested_sql:
-                diff, diff_string = self.diff_sql_node(actual_testcase_self.sql, expected_testcase_self.sql, diff_string)
+                diff, diff_string = self.diff_sql_node(
+                    actual_testcase_self.sql, expected_testcase_self.sql, diff_string)
                 actual_testcase_self.passed_sql = diff == 0
                 diff_counts[test_case] = diff
 
             # Compare the tuples.
             if config.tested_tuples:
                 diff, diff_string = self.diff_table_node(actual_testcase_self.table, expected_testcase_self.table,
-                                                    diff_string, expected_testcase_self.name)
+                                                         diff_string, expected_testcase_self.name)
                 actual_testcase_self.passed_tuples = diff == 0
                 diff_counts[test_case] = diff
 
             # Compare the error.
             if config.tested_error:
-                diff, diff_string = self.diff_error_node(actual_testcase_self.error_message, expected_testcase_self.error_message, diff_string)
+                diff, diff_string = self.diff_error_node(
+                    actual_testcase_self.error_message, expected_testcase_self.error_message, diff_string)
                 actual_testcase_self.passed_error = diff == 0
                 diff_counts[test_case] = diff
 
@@ -495,7 +501,8 @@ class TestResult(object):
             for k in j.findall('value'):
                 actual_tuple_list.append(k.text)
 
-        diff_count = sum(a != b for a, b in zip(actual_tuple_list, expected_tuple_list))
+        diff_count = sum(a != b for a, b in zip(
+            actual_tuple_list, expected_tuple_list))
         diff_count += abs(len(actual_tuple_list) - len(expected_tuple_list))
 
         for a, b in zip(actual_tuple_list, expected_tuple_list):
@@ -530,15 +537,19 @@ class TestResult(object):
 
         return (0, diff_string)
 
+
 class TestResultEncoder(json.JSONEncoder):
     """For writing JSON output."""
+
     def default(self, obj):
         if hasattr(obj, '__json__'):
             return obj.__json__()
         return json.JSONEncoder.default(self, obj)
 
+
 class TestOutputJSONEncoder(json.JSONEncoder):
     """Simple wrapper to output expected JSON format."""
+
     def default(self, obj):
         if type(obj) is not TestResult:
             return "failed" + str(obj)
@@ -551,26 +562,27 @@ class TestOutputJSONEncoder(json.JSONEncoder):
         else:
             test_cases = test_name
             if obj.test_case_map:
-                joined_cases = ",".join(sorted([x.name for x in obj.test_case_map if not x.all_passed()]))
+                joined_cases = ",".join(
+                    sorted([x.name for x in obj.test_case_map if not x.all_passed()]))
                 if joined_cases:
                     test_cases = test_name + ":" + joined_cases
 
             if not test_cases:
                 test_cases = test_name
 
-        json_output = {'suite' : suite_name,
-                'class' : 'TDVT',
-                'test_name' : suite_name + '.' + test_name,
-                'duration' : obj.get_total_execution_time(),
-                'expected_message': obj.test_set.get_expected_message(),
-                'case' : test_cases,
-                'test_file' : obj.relative_test_file,
-                'test_type' : test_type,
-                'test_config' : obj.test_config.__json__(),
-                'tds' : obj.test_config.tds,
-                'password_file' : obj.test_set.password_file,
-                'expected' : obj.path_to_expected,
-               }
+        json_output = {'suite': suite_name,
+                       'class': 'TDVT',
+                       'test_name': suite_name + '.' + test_name,
+                       'duration': obj.get_total_execution_time(),
+                       'expected_message': obj.test_set.get_expected_message(),
+                       'case': test_cases,
+                       'test_file': obj.relative_test_file,
+                       'test_type': test_type,
+                       'test_config': obj.test_config.__json__(),
+                       'tds': obj.test_config.tds,
+                       'password_file': obj.test_set.password_file,
+                       'expected': obj.path_to_expected,
+                       }
         if obj.all_passed():
             return json_output
 

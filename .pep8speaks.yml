@@ -2,7 +2,7 @@ scanner:
     linter: flake8
 
 flake8:
-    max-line-length: 120  # Default is 79 in PEP 8
+    max-line-length: 500  # Default is 79 in PEP 8
 
 no_blank_comment: False
 descending_issues_order: True
