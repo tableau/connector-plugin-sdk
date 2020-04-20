@@ -8,7 +8,7 @@ You can customize connector behavior, fine-tune SQL generation, use the connecti
 
 # What is a Tableau connector?
 
-A connector a set of files that describe:
+A connector is a set of files that describe:
 
 - UI elements needed to collect user input for creating a connection to a data source
 - Any dialect or customizations needed for the connection
