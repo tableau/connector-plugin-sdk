@@ -6,8 +6,8 @@ A Tableau connector is a set of files that describe the UI elements needed to co
 
 Tableau connector files include:
 - __Manifest file__ that tells Tableau about the connector. Tableau uses the name from this file to add it to the list of available connectors in the UI.
-- __Tableau Custom Dialog file__ is optional. It customizes the connection dialog as needed for this connection. 
-- __Tableau Connection Resolver file__ is optional. It creates the connection to your file using JavaScript files to define and make the connection.
+- __Tableau Custom Dialog file__ customizes the connection dialog as needed for this connection. (If the base is not set to "odbc" or "jdbc", then this is file may not be required.)
+- __Tableau Connection Resolver file__ creates the connection to your file using JavaScript files to define and make the connection. (If the base is not set to "odbc" or "jdbc", then this is file may not be required.)
 - __Tableau Dialect file__ identifies which SQL dialect to use.
 
 Tableau provides a base set of connector files that you use to create your own customized connector. You can use the connectivity test harness to validate the connector behavior as you build it. 
@@ -39,7 +39,7 @@ Each connector is typically based on a "class" such as ODBC or JDBC, and provide
 
 ## ![2]({{ site.baseurl }}/assets/pce-2.png) 
 
-The Tableau Custom Dialog file (.tdc) is optional. By default, your connecor inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TDC file to customize the connection dialog.
+The Tableau Custom Dialog file (.tcd) is optional. By default, your connecor inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TCD file to customize the connection dialog.
 For example, if you set <span style="font-family: courier new">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
 
 Here's an example:
@@ -153,7 +153,7 @@ In most cases, the default behavior works, so you don't have to include the <spa
 
 ## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
 
-The component defines what makes up a unique connection. This can be implemented in JavaScript or directly in the XML file. Writing the required attributes list in XML is more performant, and is recommended for most connectors.
+The component defines what makes up a unique connection. This is best implemented directly in the XML file. Writing the required attributes list in XML is more performant than using a JavaScript file, and is recommended for most connectors.
 
 ```
 <required-attributes>
