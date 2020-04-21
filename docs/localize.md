@@ -8,10 +8,12 @@ Connector SDK supports localizing connectors in these languages. You can localiz
 
 For the best user experience with Tableau, we recommended that you include translation support in your connector.
 ## Specify localized strings
-Localized strings are specified using tag `@string/<string_id>/`, for example, `@string/database_prompt/`. You can use the tag anywhere a string is defined in the `manifest.xml` file or the Tableau Custom Dialog (.tcd) file.
+You can specify localized strings using the <span style="font-family: courier new">@string/<string_id>/</span> tag. For example:    
+  `@string/database_prompt/`
+ 
+ You can use the tag anywhere a string is defined in the manifest.xml file or the Tableau Custom Dialog (.tcd) file.
 
-
-Here is an example of a Tableau Custom Dialog (.tcd) file with localized strings.
+This is an example of a Tableau Custom Dialog (.tcd) file with localized strings:
 ```xml
 <!-- Connection Dialog -->
 <connection-dialog class='sample'>
@@ -25,9 +27,15 @@ Here is an example of a Tableau Custom Dialog (.tcd) file with localized strings
 
 
 ## Add string translations
-String translations are added using resource files. Each language has its own resource file. The resource files must follow the naming convention `resources-<language>-<region>.xml`, where `<language>` is a lowercase two letter language code and `<region>` is an uppercase two letter region code. The resource file names for the currently supported languages are listed below.
+You can add string translations to a connection dialog using resource files. Each language has its own resource file. The resource files must follow this naming convention: 
 
-
+<span style="font-family: courier new">resources-*language*-*region*.xml</span>
+  
+  where:
+  - *language* is a lowercase two-letter language code. 
+  - *region* is an uppercase two-letter region code. 
+  
+This list shows the resource filenames for the currently supported languages:  
 ```
 resources-de_DE.xml
 resources-en_GB.xml
@@ -42,16 +50,15 @@ resources-pt_BR.xml
 resources-zh_CN.xml
 resources-zh_TW.xml
 ``` 
-The resource files must be encoded in UTF-8. Add the string translation for each language to the corresponding resource file.
+__Note:__ The resource files must be encoded in UTF-8. 
 
+Add the string translation for each language to the corresponding resource file.
 
 When you use any localized strings in your connector, you must include resources-en-US.xml, and it must include all localized strings in English (United States). If a string translation is missing in a resource file, or the resource file itself is missing, Tableau falls back to use the English (United States) translation. 
 
+Here are examples of resources-en_US.xml (English/United States) and the corresponding resources-es_ES.xml (Spanish/Spain) resource files.
 
-Here is an example of resource file `resources-en_US.xml` and corresponding `resources-es_ES.xml`.
-
-
-resources-en_US.xml 
+__resources-en_US.xml__  
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -59,7 +66,7 @@ resources-en_US.xml
   <string name="database_prompt">Database:</string>
 </resources>
 ```
-resources-es_ES.xml
+__resources-es_ES.xml__  
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
