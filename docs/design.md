@@ -56,7 +56,7 @@ These are valid values for <span style="font-family: courier new">base</span>:
 - Teradata1410Dialect
 - VerticaDialect
 
-### Should I create a diralect definition file?
+### Should I create a dialect definition file?
 
 If you want to customize the generated SQL, or if your connector inherits from ODBC or JDBC, then you need to create a custom dialect file. Without a file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
 
