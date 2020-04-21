@@ -112,7 +112,7 @@ See complete files [here](https://github.com/tableau/connector-plugin-sdk/tree/d
 
 The TCD file defines which UI elements display in the dialog. 
 
-Here's an example of a TDC file:
+Here's an example of a TCD file:
 
 ```xml
 <connection-dialog class='postgres_odbc'>
