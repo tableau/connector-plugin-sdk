@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Update mocked unit tests to run correctly.
 
+## [2.1.10] - 2020-04-20
+- Add test for initialsql
+
 ## [2.1.9] - 2020-04-13
 - Change regex in setup_env.py to accomodate OM changes
 
