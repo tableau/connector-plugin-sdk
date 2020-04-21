@@ -30,7 +30,7 @@ The <span style="font-family: courier new">dialect</span> tag has several re
 Attribute | Required | Description 
 -|-|- 
 name | Y | Dialect name. Used for dependency lookup. 
-class | Y | Indicates the datasource class whose dialect you'd like to modify, for example "sqlserver", "postgres", or "genericodbc". 
+class | Y | Should match the plug-in's class, as defined in the manifest. 
 base | N | Specifies a base dialect to build upon. If a certain property or function isn't defined in a dialect definition file, the connector will fall back to its base dialect's behavior (assuming a value for <span style="font-family: courier new">base</span> is defined), and SQL-92 default behavior (if a value for <span style="font-family: courier new">base</span> is not defined).  **Important:** This must be a valid, existing dialect. If the specified base does not exist, the connector will fail to load. For a list of bases, see [Dialect base classes]({{ site.baseurl }}/docs/design#dialect-base-classes). 
 dialect-version | N | Indicates the minimum database version applicable to the TDD file. For example, if you're adding a function definition that wasn't implemented until FooDB 3.0, then <span style="font-family: courier new">set dialect-version='3.0'</span>. 
 version | Y | Must match the current Tableau version in the format YY.Q; for example, "20.1". 
