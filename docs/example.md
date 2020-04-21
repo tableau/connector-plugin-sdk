@@ -148,8 +148,7 @@ This example is for a connector to Amazon Athena.
 
 ## ![6]({{ site.baseurl }}/assets/pce-6.png) Connection Matcher
 
-This script is optional, and defines how connections are matched.
-In most cases, the default behavior works, so you don't have to include the <span style= "font-family: courier new">connection-matcher</span> section in your TDR file.
+This component defines how connections are matched, and the default settings are already performance optimized. It is rare that you will need to include a custom <span style= "font-family: courier new">connection-matcher</span> section in your TDR file.  
 
 ## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
 
