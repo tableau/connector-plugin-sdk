@@ -104,7 +104,9 @@ class TestCaseResult(object):
         return {'tuples': tuple_list}
 
     def __json__(self):
-        return {'tested_sql': self.tested_config.tested_sql, 'tested_tuples': self.tested_config.tested_tuples, 'tested_error': self.tested_config.tested_error, 'id': self.id, 'name': self.name, 'sql': self.get_sql_text(), 'table': self.table_to_json()}
+        return {'tested_sql': self.tested_config.tested_sql, 'tested_tuples': self.tested_config.tested_tuples,
+            'tested_error': self.tested_config.tested_error, 'id': self.id, 'name': self.name,
+            'sql': self.get_sql_text(), 'table': self.table_to_json()}
 
 
 class TestErrorState(object):

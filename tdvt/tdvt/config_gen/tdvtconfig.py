@@ -59,25 +59,28 @@ class TdvtInvocation(object):
             self.verbose = args.verbose
 
     def init_from_json(self, json):
-        self.tested_sql = json['tested_sql']
-        self.tested_tuples = json['tested_tuples']
-        self.tested_error = json['tested_error']
-        self.output_dir = json['output_dir']
-        self.logical = json['logical']
-        self.config_file = json['config_file']
-        self.suite_name = json['suite_name']
-        self.d_override = json['d_override']
-        self.verbose = json['verbose']
-        self.tds = json['tds']
-        self.noheader = json['noheader']
+        self.tested_sql = json.get('tested_sql', self.tested_sql)
+        self.tested_tuples = json.get('tested_tuples', self.tested_tuples)
+        self.tested_error = json.get('tested_error', self.tested_error)
+        self.output_dir = json.get('output_dir', self.output_dir)
+        self.logical = json.get('logical', self.logical)
+        self.config_file = json.get('config_file', self.config_file)
+        self.suite_name = json.get('suite_name', self.suite_name)
+        self.d_override = json.get('d_override', self.d_override)
+        self.verbose = json.get('verbose', self.verbose)
+        self.tds = json.get('tds', self.tds)
+        self.noheader = json.get('noheader', self.noheader)
         if 'tabquery_path' in json:
             rtt = RunTimeTestConfig()
             rtt.set_tabquery_path_from_array(self.tabquery_path)
             self.tested_run_time_config = rtt
-        self.thread_count = json['thread_count']
+        self.thread_count = json.get('thread_count', self.thread_count)
 
     def __str__(self):
-        return "suite [{}]: tested sql [{}]: tested tuples [{}]: tested error [{}]: output dir [{}]: logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]".format(self.suite_name, self.tested_sql, self.tested_tuples, self.tested_error, self.output_dir, self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
+        return ("suite [{}]: tested sql [{}]: tested tuples [{}]: tested error [{}]: output dir [{}]: " +
+            "logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]").format(
+                self.suite_name, self.tested_sql, self.tested_tuples, self.tested_error, self.output_dir,
+                self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
 
     def __json__(self):
         return {
