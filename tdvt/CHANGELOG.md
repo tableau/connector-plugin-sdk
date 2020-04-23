@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Update mocked unit tests to run correctly.
 
+## [2.1.11] - 2020-04-23
+- Added error comparison (comparing the `<error>` tag in query output); added `--compare-error` arg option.
+
 ## [2.1.10] - 2020-04-20
 - Add test for initialsql
 
