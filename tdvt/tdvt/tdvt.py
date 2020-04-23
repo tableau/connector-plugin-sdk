@@ -433,6 +433,7 @@ def create_parser():
     run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Generate logical query test files.', required=False)
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
+    run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
 
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
