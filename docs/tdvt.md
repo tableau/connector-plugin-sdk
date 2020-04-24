@@ -1,5 +1,5 @@
 ---
-title: Test Your Connector
+title: Test with TDVT Suite
 ---
 
 Tableau provides an automated testing tool called the Tableau Data source Verification Tool, or TDVT, to test Tableau connectivity with a database. TDVT runs tests that range from simple expressions to complex SQL.
