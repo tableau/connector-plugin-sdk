@@ -1,5 +1,5 @@
 ---
-title: Run your packaged connector (TACO file)
+title: Run Your Packaged Connector (TACO file)
 ---
 
 Starting in 2019.4 Beta 1, you can load packaged connectors (otherwise known as TACO files). To use a connector in earlier Tableau versions, see  [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share)

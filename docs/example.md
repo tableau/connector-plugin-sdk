@@ -22,11 +22,11 @@ Most of the following examples use the connector for the PostGre SQL database, l
 
 The Manifest file (manifest.xml)  informs Tableau about your connector and displays the connector name in the Tableau Connect pane.
 It's a required file that defines the connector class and description.
-The <span font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+The <span style="font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
 
 Each connector is typically based on a "class" such as ODBC or JDBC, and provides additional customizations.
 
-- The <span font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
+- The <span style="font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
 - The <span style="font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
 - You may also specify the vendor information. 
 - The <span style="font-family: courier new">company name</span> value displays the name of the connector's creator next to the connector name on the Tableau **Connect** pane (for example, Connector Name by Creator).
@@ -71,7 +71,7 @@ The TDR file calls these scripts (described in the following sections):
 - Connection Matcher
 - Connection Normalizer
 
-The TDR file also includes the driver-resolver section. The <span font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
+The TDR file also includes the driver-resolver section. The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
 
 Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
 For example, all Postgres connections have the same <span style="font-family: courier new">class</span>.
