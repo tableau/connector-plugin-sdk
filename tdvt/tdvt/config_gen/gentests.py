@@ -2,21 +2,25 @@
     Generate datasource specific logical query files based on a set of genericized input files.
 """
 
-import sys
-import os
-import shutil
 import argparse
-from .templates import *
-from string import Template
-import re
 import glob
+import os
+import re
+import shutil
+import sys
+
+from string import Template
+from typing import Dict, List
+
+from .templates import *
+from ..custom_types import OsSpecificTestRegistry
 from ..resources import *
 
 debug = False
 
-def get_logical_config_templates(ds_registry):
+def get_logical_config_templates(ds_registry) -> Dict:
     all_templates = template_attributes.copy()
-    
+
     for ds in ds_registry.dsnames:
         info = ds_registry.get_datasource_info(ds)
         if not info:
@@ -25,10 +29,10 @@ def get_logical_config_templates(ds_registry):
 
     return all_templates
 
-def get_logical_config_template(ds_registry, config_name):
+def get_logical_config_template(ds_registry: OsSpecificTestRegistry, config_name: str) -> Dict:
     return get_logical_config_templates(ds_registry)[config_name]
 
-def get_customized_table_name(attributes, base_table):
+def get_customized_table_name(attributes, base_table) -> str:
     table_prefix = ""
     if 'tablePrefix' in attributes:
         table_prefix = attributes['tablePrefix']
@@ -50,7 +54,7 @@ def get_customized_table_name(attributes, base_table):
         table_name= table_name.lower()
 
     if 'tablenamePrefix' in attributes:
-        table_name = attributes['tablenamePrefix'] + table_name 
+        table_name = attributes['tablenamePrefix'] + table_name
     if 'tablenamePostfix' in attributes:
         table_name += attributes['tablenamePostfix']
 
@@ -69,7 +73,7 @@ def get_new_field_name(field, attrs):
             new_field = '[' + m.group(1) + '_]'
 
     if 'fieldnameLower' in attrs:
-        new_field = new_field.lower()        
+        new_field = new_field.lower()
     if 'fieldnameUpper' in attrs:
         new_field = new_field.upper()
     if 'fieldnameNoSpace' in attrs:
@@ -81,7 +85,7 @@ def get_new_field_name(field, attrs):
 
     return new_field
 
-def get_field_name_map(fields, attrs):
+def get_field_name_map(fields, attrs) -> Dict:
     m = {}
     for f in fields:
         m[f] = get_new_field_name(f, attrs)
@@ -142,7 +146,7 @@ def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_re
     #Go through all the ini files and see if any of them define a logical config. Generate test files for those.
 
 
-def process_text(ds, text, attributes, fields, field_map):
+def process_text(ds, text, attributes, fields, field_map) -> str:
     new_text = ''
     for line in text:
         new_line = get_modified_line(line, attributes, fields, field_map)
@@ -150,7 +154,7 @@ def process_text(ds, text, attributes, fields, field_map):
         new_text += new_line + '\n'
     return new_text
 
-def get_config_text(config_name, config_attributes, fields, config_field_map):
+def get_config_text(config_name, config_attributes, fields, config_field_map) -> List:
     configs = []
     sample_text = [ 'Name = $Name$', 'Calcs = $Calcs$', 'Staples = $Staples$', 'Camel Case = ' + fields[0], 'bool0 = ' + fields[1], 'Date = ' + fields[2] ]
 
@@ -158,10 +162,10 @@ def get_config_text(config_name, config_attributes, fields, config_field_map):
     configs.append(cfg)
     return configs
 
-def list_config(ds_registry, config_name):
+def list_config(ds_registry: OsSpecificTestRegistry, config_name) -> List:
     return list_configs(ds_registry, config_name)
 
-def list_configs(ds_registry, target_config_name=None):
+def list_configs(ds_registry: OsSpecificTestRegistry, target_config_name=None) -> List:
     configs = []
 
     fields = ['[Camel Case]', '[bool0]', '[Date]']
@@ -174,21 +178,21 @@ def list_configs(ds_registry, target_config_name=None):
         configs += get_config_text(config_name, cfg_template, fields, field_name_map)
     return configs
 
-def clean_create_dir(new_dir):
+def clean_create_dir(new_dir) -> None:
     try:
         shutil.rmtree(new_dir, True)
         create_dir(new_dir)
     except OSError:
         return
 
-def create_dir(new_dir):
+def create_dir(new_dir) -> None:
     #Make the output dir if needed, otherwise continue on our way since its there.
     try:
         os.makedirs(new_dir)
     except OSError:
         return
 
-def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
+def generate_logical_files(input_dir: str, output_dir: str, ds_registry: OsSpecificTestRegistry, force=False) -> None:
     base_output_dir = output_dir
     create_dir(base_output_dir)
 
@@ -290,4 +294,3 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
                 for input_root, input_dirs, input_files in os.walk(input_dir):
                     for input_filename in input_files:
                         process_test_file( os.path.join(input_root, input_filename), output_dir, staples_fields, calcs_fields, ds_registry )
-
