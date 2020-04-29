@@ -33,7 +33,8 @@ def create_tdvt_ini_file():
         pass
 
 def add_datasource(name, ds_registry):
-    """Create the datasource ini file and try to rename the connections in the tds file. This is a necessary step for the logical query tests."""
+    """Create the datasource ini file and try to rename the connections in the tds file. This is a necessary step for
+    the logical query tests."""
     print ("Make sure you have already saved the appropriate TDS files in the tds directory.")
     print ("Adding a new datasource [" + name + "] ...")
 

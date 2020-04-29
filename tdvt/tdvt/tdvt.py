@@ -688,7 +688,7 @@ def run_desired_tests(args, ds_registry):
     return failed_tests
 
 
-def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
+def run_file(run_file: Path, output_dir: Path, threads: int, args) -> Union[Optional[Tuple[int, int, int, int]], int]:
     """Rerun all the failed tests listed in the json file."""
 
     logging.debug("Running failed tests from : " + str(run_file))
@@ -701,7 +701,7 @@ def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     # This can be a retry-step.
     return 0
 
-def run_generate(ds_registry):
+def run_generate(ds_registry) -> None:
     start_time = time.time()
     generate_files(ds_registry, True)
     end_time = time.time() - start_time
