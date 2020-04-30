@@ -455,7 +455,7 @@ def create_parser():
     run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
     run_test_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_parser.add_argument('--verify', dest='smoke_test', action='store_true', help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.', required=False)  # noqa: E501
-    run_test_parser.add_argument('--force-run', dest='force_fun', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
+    run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
 
