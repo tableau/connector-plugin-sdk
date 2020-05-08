@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-## [2.11.12] – 2020-04-30
+## [2.1.13] - 2020-05-8
+- Fix the `force-run` flag logic to work with `run-file` command.
+
+## [2.1.12] – 2020-04-30
 - Add a `force-run` flag to run tests on all data source even if smoke tests fail.
 - Update mocked unit tests to run correctly.
 

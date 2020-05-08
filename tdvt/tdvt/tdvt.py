@@ -555,7 +555,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     logging.debug("test queue size is: " + str(len(all_work)))
 
     require_smoke_test = args.command == 'run' and args.smoke_test
-    force_run = args.force_run
+    force_run = args.command == 'run' and args.force_run
 
     if not smoke_tests:
         logging.warning("No smoke tests detected.")
@@ -594,8 +594,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
 
         if failed_smoke_tests > 0:
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
-            if not force_run:
-                failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
+            failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
                 sys.exit(1)
@@ -610,8 +609,9 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     final_work = []
 
     for item in all_work:
-        if item.test_set.ds_name in failing_ds:
-            item.test_set.test_is_skipped = True
+        if not force_run:
+            if item.test_set.ds_name in failing_ds:
+                item.test_set.test_is_skipped = True
         final_work.append(item)
         test_queue.put(item)
 
