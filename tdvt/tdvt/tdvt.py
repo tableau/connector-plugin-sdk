@@ -695,7 +695,8 @@ def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
 
-    failed_tests, total_tests = run_tests_impl(enqueue_failed_tests(run_file, root_directory, args), threads, args)
+    failed_tests, skipped_tests, disabled_tests, total_tests = \
+        run_tests_impl(enqueue_failed_tests(run_file, root_directory, args), threads, args)
 
     # This can be a retry-step.
     return 0

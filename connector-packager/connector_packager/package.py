@@ -8,7 +8,6 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 from .jar_jdk_packager import jdk_create_jar
-from .jar_jdk_signer import jdk_sign_jar, validate_signing_input
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
 from .version import __version__
@@ -33,12 +32,6 @@ def create_arg_parser() -> ArgumentParser:
                         help='runs package validation steps only', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector',
                         default='packaged-connector', action=UniqueActionStore)
-    parser.add_argument('--package-only', dest='package_only', action='store_true',
-                        help='package a taco only, skip signing', required=False)
-    parser.add_argument('-a', '--alias', dest='alias',
-                        help='alias identifying the private key to be used to sign taco file', required=False)
-    parser.add_argument('-ks', '--keystore', dest='keystore',
-                        help='keystore location, default is the jks file in user home directory', required=False)
     return parser
 
 
@@ -95,10 +88,6 @@ def main():
     xmlparser = XMLParser(path_from_args)
     files_to_package = xmlparser.generate_file_list()  # validates XSD's as well
 
-    # Print warning if --package-only and --validate-only are used together
-    if args.package_only and args.validate_only:
-        logger.warning("Because the validate-only flag was used, files will not be packaged.")
-
     # Validate xml. If not valid, return.
     if files_to_package and validate_all_xml(files_to_package, path_from_args):
         logger.info("Validation succeeded.")
@@ -125,20 +114,7 @@ def main():
         logger.info("Taco packaging failed. Check " + str(log_file) + " for more information.")
         return
 
-    if args.package_only:
-        logger.info("Taco packaging finished completely, signing skipped")
-        return
-
-    alias_from_args = args.alias
-    keystore_from_args = args.keystore
-
-    if not validate_signing_input(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.debug("Signing input validation failed. check " + str(log_file) + " for more information.")
-        return
-
-    if not jdk_sign_jar(package_dest_path, package_name, alias_from_args, keystore_from_args):
-        logger.info("Signing failed. check console output and " + str(log_file) + " for more information.")
-        return
+    logger.info("Taco packaged. To sign taco file, use jarsigner.")
 
 
 if __name__ == '__main__':
