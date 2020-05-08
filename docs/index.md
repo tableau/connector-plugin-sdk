@@ -55,17 +55,14 @@ These are the general steps you will follow to create a fully functional connect
 
 5. When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
 
-## Prerequisites
+## Prerequisites for Development
 
 To develop connectors, be sure you have the following installed on your computer:
 - Windows or Mac operating system
-- Tableau Desktop or Tableau Server 2019.2 or higher
+- Tableau Desktop or Tableau Server 2019.2 or higher (__note:__ Tableau 2019.4 is required to run .taco files)
 - Python 3.7 or higher
 - An ODBC or JDBC data source and driver
 - The provided test data loaded in your data source
-
-To package the connector into a TACO file, you will also need:
-- Tableau Desktop or Server 2019.4 or higher
 - JDK 8 or higher
 
 For a JDBC connector, your driver must meet these requirements:
