@@ -6,6 +6,8 @@ from typing import List, Optional
 
 from xmlschema import XMLSchema
 
+from defusedxml.ElementTree import parse
+
 from .connector_file import ConnectorFile
 
 logger = logging.getLogger('packager_logger')
@@ -13,6 +15,8 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
+PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password']
+VENDOR_FIELD_NAME_PREFIX = 'v-'
 
 # Holds the mapping between file type and XSD file name
 XSD_DICT = {
@@ -20,7 +24,10 @@ XSD_DICT = {
     "connection-dialog": "tcd_latest",
     "connection-resolver": "tdr_latest",
     "dialect": "tdd_latest",
-    "resource": "connector_plugin_resources_latest"
+    "resource": "connector_plugin_resources_latest",
+    "connection-fields": "connection_fields",
+    "connection-metadata": "connector_plugin_metadata"
+
 }
 
 
@@ -115,6 +122,10 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
+    if not validate_file_specific_rules(file_to_test, path_to_file, xml_violations_buffer):
+        logger.error("XML Validation failed for " + file_to_test.file_name)
+        return False
+
     return True
 
 
@@ -132,3 +143,20 @@ def get_xsd_file(file_to_test: ConnectorFile) -> Optional[str]:
         return xsd_file + ".xsd"
     else:
         return None
+
+
+def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+
+    if file_to_test.file_type == 'connection-fields':
+        xml_tree = parse(str(path_to_file))
+        root = xml_tree.getroot()
+
+        for child in root.iter('field'):
+            if 'name' in child.attrib:
+                field_name = child.attrib['name']
+                if not (field_name in PLATFORM_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX)):
+                    xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
+                                                 "' not an allowed value. See 'Connection Field Platform Integration' section of documentation for allowed values.")
+                    return False
+
+    return True

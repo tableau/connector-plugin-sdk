@@ -45,6 +45,27 @@ class TestXMLParser(unittest.TestCase):
                                                                     expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Connector with non-https urls returned a file list when it shouldn't")
 
+    def test_genreate_file_list_mcd(self):
+        # Test modular dialog connector
+        expected_class_name = "postgres_mcd"
+        expected_file_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script")]
+
+        actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("modular_dialog_connector"),
+                                                                    expected_file_list, expected_class_name)
+
+        self.assertTrue(actual_file_list, "Valid connector did not return a file list")
+        self.assertTrue(sorted(actual_file_list) == sorted(expected_file_list),
+                        "Actual file list does not match expected for valid connector")
+        self.assertTrue(actual_class_name == expected_class_name,
+                        "Actual class name does not match expected for valid connector")
+
     def parser_test_case(self, test_folder, expected_file_list, expected_class_name):
 
         xml_parser = XMLParser(test_folder)

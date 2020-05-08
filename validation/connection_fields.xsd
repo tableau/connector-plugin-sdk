@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema
+    elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="connection-fields">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="field" maxOccurs="unbounded" type="Field-CT"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="Field-CT">
+    <xs:sequence>
+      <xs:element name="conditions" minOccurs="0" type="Conditions-CT"/>
+      <xs:element name="validation-rule" minOccurs="0" type="ValidationRule-CT"/>
+      <xs:choice minOccurs="0">
+        <xs:element name="selection-group" maxOccurs="unbounded" type="SelectionGroup-CT"/>
+        <xs:element name="boolean-options" type="BooleanOptions-CT"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="category" type="Category-ST"/>
+    <xs:attribute name="default-value" type="xs:string"/>
+    <xs:attribute name="editable" type="xs:boolean"/>
+    <xs:attribute name="secure" type="xs:boolean"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="label" type="xs:string" use="required"/>
+    <xs:attribute name="optional" type="xs:boolean"/>
+    <xs:attribute name="value-type" type="ValueType-ST" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="Category-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="endpoint"/>
+      <xs:enumeration value="metadata"/>
+      <xs:enumeration value="authentication"/>
+      <xs:enumeration value="general"/>
+      <xs:enumeration value="ssl"/>
+      <xs:enumeration value="initial-sql"/>
+      <xs:enumeration value="advanced"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ValueType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="string"/>
+      <xs:enumeration value="selection"/>
+      <xs:enumeration value="boolean"/>
+      <xs:enumeration value="file"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Conditions-CT">
+    <xs:sequence>
+      <xs:element name="condition" maxOccurs="unbounded" type="Condition-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Condition-CT">
+    <xs:attribute name="field" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="ValidationRule-CT">
+    <xs:attribute name="reg-exp" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="SelectionGroup-CT">
+    <xs:sequence>
+      <xs:element name="conditions" minOccurs="0" type="Conditions-CT"/>
+      <xs:element name="option" maxOccurs="unbounded" type="Option-CT"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Option-CT">
+    <xs:attribute name="label" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="BooleanOptions-CT">
+    <xs:sequence>
+      <xs:element name="false-value" type="BooleanOption-CT" />
+      <xs:element name="true-value" type="BooleanOption-CT" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="BooleanOption-CT">
+    <xs:attribute name="value" use="required"/>
+  </xs:complexType>
+
+</xs:schema>

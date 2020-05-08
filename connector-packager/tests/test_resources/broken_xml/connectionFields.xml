@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+  <field name="server" label="Server" value-type="string" category="endpoint" />
+
+  <field name="port" label="Port" value-type="string" category="endpoint" default-value="5432" />
+
+  <field name="warehouse" label="Warehouse" value-type="string" category="metadata" />
+
+  <field name="username" label="Username" value-type="string" category="authentication" />
+
+  <field name="password" label="Password" value-type="string" category="authentication" secure="true" />
+
+</connection-fields>

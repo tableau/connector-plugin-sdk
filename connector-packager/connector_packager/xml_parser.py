@@ -153,6 +153,19 @@ class XMLParser:
                 # add new file to list
                 self.file_list.append(new_file)
 
+                # If connection-metadata, make sure that connection-fields file exists
+                if child.tag == 'connection-metadata':
+                    connection_fields_exists = False
+
+                    for xml_file in self.file_list:
+                        if xml_file.file_type == 'connection-fields':
+                            connection_fields_exists = True
+                            break
+
+                    if not connection_fields_exists:
+                        logger.debug("Error: connection-metadata file requires a connection-fields file")
+                        return False
+
                 # If not a script and not in list, parse the file for more files to include
                 if child.tag != 'script' and not already_in_list:
                     children_valid = self.parse_file(new_file)
@@ -164,7 +177,7 @@ class XMLParser:
                 url_link = child.attrib['url']
                 # If URL does not start with https:// then do not package and return false
                 if not url_link.startswith(HTTPS_STRING):
-                    logging.error("Error: Only HTTPS URL's are allowed. URL " + url_link + 
+                    logging.error("Error: Only HTTPS URL's are allowed. URL " + url_link +
                         " is a non-https link in file " + file_to_parse.file_name)
                     return False
 

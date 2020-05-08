@@ -9,7 +9,7 @@ from typing import List
 
 from .connector_file import ConnectorFile
 from .helper import check_jdk_environ_variable
-from .version import __min_version_tableau__
+from .version import __default_min_version_tableau__
 
 JAR_EXECUTABLE_NAME = "jar"
 if os.name == 'nt':
@@ -20,6 +20,28 @@ MANIFEST_FILE_NAME = MANIFEST_FILE_TYPE + ".xml"
 MANIFEST_FILE_COPY_NAME = MANIFEST_FILE_TYPE + "_copy.xml"
 MANIFEST_ROOT_ELEM = "connector-plugin"
 MIN_TABLEAU_VERSION_ATTR = "min-version-tableau"
+
+
+def get_min_support_version(file_list: List[ConnectorFile]) -> str:
+    """
+    Get the minimum support version based on features used in the connector
+
+    :param file_list: files need to be packaged
+    :type file_list: list of ConnectorFile
+
+    :return: String
+    """
+
+    # set minimum tableau version to default, then check for features requiring later version
+    min_version_tableau = __default_min_version_tableau__
+
+    # Check file types
+    for connector_file in file_list:
+        # if we have a connection-fields file, then we are using modular dialogs and need 2020.2+
+        if connector_file.file_type == "connection-fields":
+            min_version_tableau = "2020.2"
+
+    return min_version_tableau
 
 
 def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], jar_filename: str) -> bool:
@@ -52,12 +74,13 @@ def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], j
     shutil.copyfile(input_dir / manifest_file.file_name, input_dir / MANIFEST_FILE_COPY_NAME)
 
     # stamp the original manifest file
+    min_version_tableau = get_min_support_version(file_list)
     manifest = ET.parse(input_dir / manifest_file.file_name)
     plugin_elem = manifest.getroot()
     if plugin_elem.tag != MANIFEST_ROOT_ELEM:
         logger.info("Manifest's root element has been modified after xml validation")
         return False
-    plugin_elem.set(MIN_TABLEAU_VERSION_ATTR, __min_version_tableau__)
+    plugin_elem.set(MIN_TABLEAU_VERSION_ATTR, min_version_tableau)
     manifest.write(input_dir / manifest_file.file_name, encoding="utf-8", xml_declaration=True)
 
     # update the connector manifest inside taco
