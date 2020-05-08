@@ -433,6 +433,7 @@ def create_parser():
     run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Generate logical query test files.', required=False)
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
+    run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
 
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
@@ -454,6 +455,7 @@ def create_parser():
     run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
     run_test_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
     run_test_parser.add_argument('--verify', dest='smoke_test', action='store_true', help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.', required=False)  # noqa: E501
+    run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
 
@@ -553,6 +555,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     logging.debug("test queue size is: " + str(len(all_work)))
 
     require_smoke_test = args.command == 'run' and args.smoke_test
+    force_run = args.force_run
 
     if not smoke_tests:
         logging.warning("No smoke tests detected.")
@@ -590,8 +593,9 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
         print("Smoke tests ran in {} seconds.".format(smoke_test_run_time))
 
         if failed_smoke_tests > 0:
-            failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
+            if not force_run:
+                failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
                 sys.exit(1)
@@ -600,7 +604,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
             print("\nSmoke tests finished. Exiting.")
             sys.exit(0)
 
-        if failing_ds:
+        if failing_ds and not force_run:
             print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
 
     final_work = []

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='c:\git\connector-plugin-sdk\tdvt\tdvt\logicaltests/setup/error\setup.chaos_typeoutofrange.view_lower.xml'>
+    <error>don't have permission</error>
+
+    <table>
+    </table>
+  </test>
+</results>

@@ -5,7 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [2.11.12] – 2020-04-30
+- Add a `force-run` flag to run tests on all data source even if smoke tests fail.
 - Update mocked unit tests to run correctly.
+
+## [2.1.11] - 2020-04-23
+- Added error comparison (comparing the `<error>` tag in query output); added `--compare-error` arg option.
+
+## [2.1.10] - 2020-04-20
+- Add test for initialsql
+
+## [2.1.9] - 2020-04-13
+- Change regex in setup_env.py to accomodate OM changes
 
 ## [2.1.7] - 2020-02-04
 - Change return type in tdvt.py to resolve ValueError

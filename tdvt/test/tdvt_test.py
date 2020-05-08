@@ -55,6 +55,7 @@ class DiffTest(unittest.TestCase):
             expected_xml = parse(expected_file).getroot()
             compare_sql = False
             compare_tuples = False
+            compare_error = False
             if 'expected.sql' in test:
                 compare_sql = True
             if 'expected.tuples' in test:
@@ -62,9 +63,12 @@ class DiffTest(unittest.TestCase):
             if 'expected.both' in test:
                 compare_tuples = True
                 compare_sql = True
+            if 'expected.error' in test:
+                compare_error = True
             test_config = TdvtInvocation()
             test_config.tested_sql = compare_sql
             test_config.tested_tuples = compare_tuples
+            test_config.tested_error = compare_error
             results = tdvt_core.TestResult(test_config=test_config)
             results.add_test_results(actual_xml, actual_file)
             expected_output = tdvt_core.TestResult(test_config=test_config)

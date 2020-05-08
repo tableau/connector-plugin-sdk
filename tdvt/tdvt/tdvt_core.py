@@ -245,12 +245,12 @@ class BatchQueueWork(object):
             self.cmd_output = error_output
             if self.test_set.expected_message and self.test_set.expected_message in self.saved_error_message:
                 self.error_state = TestErrorExpected()
-            else:
-                self.error_state = TestErrorOther()
-            if e.returncode == 18:
+            elif e.returncode == 18:
                 logging.debug(self.get_thread_msg() + "Tests aborted")
                 sys.stdout.write('A')
                 self.error_state = TestErrorAbort()
+            else:
+                self.error_state = TestErrorOther()
         except subprocess.TimeoutExpired as e:
             logging.debug(self.get_thread_msg() + "Test timed out")
             sys.stdout.write('T')
@@ -457,7 +457,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     matched_expected = None
     diff_count = None
     test_case_name = None
-    error_msg = None
+    error_msg = None # A description on why the test failed. This may or may not the query error in test output.
     error_type = None
     time = None
     expected_time = None
@@ -465,6 +465,8 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     expected_sql = None
     actual_tuples = None
     expected_tuples = None
+    actual_error = None # The query error in test output, which may be expected. Not to be confused with error_msg.
+    expected_error = None
     suite = test_result.test_config.suite_name if test_result else ''
     test_set_name = test_result.test_config.config_file if test_result else ''
     cmd_output = test_result.cmd_output if test_result else ''
@@ -482,6 +484,8 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
                    expected_tuples]
         if test_result.test_config.tested_sql:
             columns.extend([expected_sql, expected_time])
+        if test_result.test_config.tested_error:
+            columns.extend([actual_error, expected_error])
         return columns
 
     case = test_result.get_test_case(test_case_index)
@@ -498,15 +502,19 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     test_case_name = case.name
 
     actual_tuples = "\n".join(case.get_tuples()[0:get_tuple_display_limit()])
-    if not test_result.best_matching_expected_results:
-        expected_tuples = ''
-        expected_sql = ''
-    else:
+    actual_error = case.error_message
+    if test_result.best_matching_expected_results:
         expected_case = test_result.best_matching_expected_results.get_test_case(test_case_index)
         expected_tuples = expected_case.get_tuples() if expected_case else ""
         expected_tuples = "\n".join(expected_tuples[0:get_tuple_display_limit()])
         expected_sql = expected_case.get_sql_text() if expected_case else ""
         expected_time = expected_case.execution_time if expected_case else ""
+        expected_error = expected_case.error_message if expected_case else ""
+    else:
+        expected_tuples = ''
+        expected_sql = ''
+        expected_error = ''
+
 
     if skipped or disabled or not passed:
         error_msg = case.get_error_message() if case and case.get_error_message() else test_result.get_failure_message()
@@ -518,8 +526,9 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
                float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
     if test_result.test_config.tested_sql:
         columns.extend([expected_sql, float(expected_time)])
+    if test_result.test_config.tested_error:
+        columns.extend([actual_error, expected_error])
     return columns
-
 
 def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -> Optional[Tuple[int, int, int, int]]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
@@ -544,8 +553,11 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
                  'Test Case', 'Test Type', 'Process Output', 'Error Msg', 'Error Type', 'Query Time (ms)',
                  'Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     results_values = list(all_test_results.values())
-    if results_values and results_values[0].test_config.tested_sql:
-        csvheader.extend(['Expected SQL', 'Expected Query Time (ms)'])
+    if results_values:
+        if results_values[0].test_config.tested_sql:
+            csvheader.extend(['Expected SQL', 'Expected Query Time (ms)'])
+        if results_values[0].test_config.tested_error:
+            csvheader.extend(['Actual Error', 'Expected Error'])
     if not skip_header:
         csv_out.writerow(csvheader)
 
