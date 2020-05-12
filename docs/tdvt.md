@@ -266,7 +266,7 @@ Type = expression #expression or logical.
 
 Name = expression_test1. #This name should be unique among test suites.
 
-TDS = cast_calcs.bigquery_sql_dates2.tds
+TDS = cast_calcs.your_datasource_name.tds
 
 Exclusions = string.ascii
 
