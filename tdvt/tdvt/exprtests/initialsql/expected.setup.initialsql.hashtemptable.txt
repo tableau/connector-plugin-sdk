@@ -1,14 +1,14 @@
 <results>
-  <test name='RAWSQL_STR(&quot;select c3 from testIsql&quot;)'>
+  <test name='RAWSQL_STR(&quot;select c3 from #testIsql&quot;)'>
     <sql>
-      SELECT (select c3 from testIsql) AS &quot;TEMP(Test)(4103485166)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
+      SELECT (select c3 from #testIsql) AS [TEMP(Test)(3031742172)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
     </sql>
     <query-time>
-      162.000
+      31.000
     </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(4103485166)(0)]</column>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3031742172)(0)]</column>
       </schema>
       <tuple>
         <value>&quot;YOU FOUND ME&quot;</value>
