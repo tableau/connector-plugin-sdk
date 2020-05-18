@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.1.14] - 2020-05-18
+- Add more tests for initialsql
+
 ## [2.1.13] - 2020-05-8
 - Fix the `force-run` flag logic to work with `run-file` command.
 
