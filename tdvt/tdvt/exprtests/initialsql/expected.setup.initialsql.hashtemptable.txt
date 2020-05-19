@@ -1,0 +1,18 @@
+<results>
+  <test name='RAWSQL_STR(&quot;select c3 from #testIsql&quot;)'>
+    <sql>
+      SELECT (select c3 from #testIsql) AS [TEMP(Test)(3031742172)(0)]&#10;FROM [dbo].[Calcs] [Calcs]&#10;GROUP BY ()
+    </sql>
+    <query-time>
+      31.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(3031742172)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;YOU FOUND ME&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

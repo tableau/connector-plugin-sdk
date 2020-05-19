@@ -1,18 +1,15 @@
 <results>
-  <test name='RAWSQL_STR(&quot;select c3 from testIsql where c1=%1&quot;,[str0])'>
+  <test name='RAWSQL_STR(&quot;select c3 from testIsql&quot;)'>
     <sql>
-      SELECT (select c3 from testIsql where c1=&quot;Calcs&quot;.&quot;str0&quot;) AS &quot;TEMP(Test)(1227510043)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1
+      SELECT (select c3 from testIsql) AS &quot;TEMP(Test)(4103485166)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)
     </sql>
     <query-time>
-      44.000
+      162.000
     </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1227510043)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4103485166)(0)]</column>
       </schema>
-      <tuple>
-        <value>%null%</value>
-      </tuple>
       <tuple>
         <value>&quot;YOU FOUND ME&quot;</value>
       </tuple>
