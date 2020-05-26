@@ -11,14 +11,14 @@ Starting in 2019.4 Beta 1, you can load packaged connectors (otherwise known as 
 ## Run a packaged connector in Tableau Server
 ### Option 1
 For each server node:
-1. Drop your `.taco` file into [Your Tableau Server Install Directory]/data/tabsvc/vizqlserver/Connectors
+1. Drop your `.taco` file into [Your Tableau Server Install Directory]/data/tabsvc/vizqlserver/Connectors. On a default install, this will be in the ProgramData folder. For example:
+`C:\ProgramData\Tableau\Tableau Server\data\tabsvc\vizqlserver\Connectors`
 
 
 ### Option 2
-For each server node:
-1. Create a directory for Tableau connectors. For example:   
+1. Create a directory for Tableau connectors. This needs to be the same path on each node. For example:   
 `C:\tableau_connectors`
-1. Copy your packaged connector file (with a .taco filename extension) into  the folder your created.
+1. Copy your packaged connector file (with a .taco filename extension) into  the folder your created on each node.
 1. Set the `native_api.connect_plugins_path` option. For example:
 
     ```
