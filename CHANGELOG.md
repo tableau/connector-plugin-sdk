@@ -6,6 +6,11 @@
 ### Changed
 ### Removed
 
+## 2020-12-11
+### Changed
+- Date functions in dialect examples to have only `<formula part='week'>` for functions with `localstr` as last argument. See [isuue](https://github.com/tableau/connector-plugin-sdk/issues/505) for details
+
+
 ## 2019-12-11
 ### Added
 - New SQLite Extract-Only Sample
