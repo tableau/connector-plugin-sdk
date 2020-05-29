@@ -228,7 +228,7 @@ Note: the ```value``` attribute value for all options is customizable by connect
 })
 ```
 
-### Database impersonation using embedded credentials
+### Database impersonation using embedded credentials (DelegationUID)
 
 This applies to databases which support a user that can delegate requests on another user's behalf. Databases support this by enabling the client to pass a DelegationUID to the server.
 In the case of Tableau server, you can pass the identity of the logged-in user on Tableau Server as the DelegationUID. Tableau would then pass that property to the database using driver properties and authentication is taken care of by the database. This community [article](https://community.tableau.com/docs/DOC-11137) give more information on Database Impersonation using Embedded credentials.   
@@ -260,6 +260,7 @@ For this to work on Tableau Server, user should select the option "Impersonate u
     <customizations>
       <customization name="CAP_AUTH_DB_IMPERSONATE" value="yes"/>
     </customizations>
+ ```
  
  Impala delegation sample link(TBA)  
  
