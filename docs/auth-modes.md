@@ -230,8 +230,8 @@ Note: the ```value``` attribute value for all options is customizable by connect
 
 ### Database impersonation using embedded credentials (DelegationUID)
 
-This applies to databases which support a user that can delegate requests on another user's behalf. Databases support this by enabling the client to pass a DelegationUID to the server.
-In the case of Tableau server, you can pass the identity of the logged-in user on Tableau Server as the DelegationUID. Tableau would then pass that property to the database using driver properties and authentication is taken care of by the database. This community [article](https://community.tableau.com/docs/DOC-11137) give more information on Database Impersonation using Embedded credentials.   
+This applies to databases which support a user that can delegate requests from other user(s). Databases support this by enabling the client to pass a DelegationUID to the server.
+In the case of Tableau server, you can pass the identity of the logged-in user on Tableau Server as the DelegationUID. Tableau would then pass that property to the database using driver properties and authentication is taken care of by the database. This community [article](https://community.tableau.com/docs/DOC-11137) gives more information on Database Impersonation using Embedded credentials.   
 
 For this to work on Tableau Server, user should select the option "Impersonate using embedded password" while publishing the workbook from  Tableau Desktop. Below is an example for how to pass DelegationUID in a JDBC plugin. Please note that some JDBC drivers may have a different name for this property so take a look at driver documentation for the appropriate property name.
  
@@ -254,7 +254,7 @@ For this to work on Tableau Server, user should select the option "Impersonate u
     }
  ```
  
- Add CAP_AUTH_DB_IMPERSONATE to the list of capabilities in manifest.xml so that the option "Impersonate using embedded password" shows up in the publish dialog.
+ Also add CAP_AUTH_DB_IMPERSONATE to the list of capabilities in plugin manifest so that the option "Impersonate using embedded password" shows up in the publish dialog.
  ```xml 
    // manifest.xml 
     <customizations>
