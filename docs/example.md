@@ -6,8 +6,8 @@ A Tableau connector is a set of files that describe the UI elements needed to co
 
 Tableau connector files include:
 - __Manifest file__ that tells Tableau about the connector. Tableau uses the name from this file to add it to the list of available connectors in the UI.
-- __Tableau Custom Dialog file__ customizes the connection dialog as needed for this connection. (If the base is not set to "odbc" or "jdbc", then this is file may not be required.)
-- __Tableau Connection Resolver file__ creates the connection to your file using JavaScript files to define and make the connection. (If the base is not set to "odbc" or "jdbc", then this is file may not be required.)
+- __Tableau Custom Dialog file__ customizes the connection dialog as needed for this connection. This file is optional. If not created, it will be based off the superclass set in the Manifest file (manifest.xml) by default. However if the superclass is set to "odbc" or "jdbc", then this file is required.
+- __Tableau Connection Resolver file__ creates the connection to your file using JavaScript files to define and make the connection. This file is optional. If not created, it will be based off the superclass set in the Manifest file (manifest.xml) by default. However if the superclass is set to "odbc" or "jdbc", then this file is required.
 - __Tableau Dialect file__ identifies which SQL dialect to use.
 
 Tableau provides a base set of connector files that you use to create your own customized connector. You can use the connectivity test harness to validate the connector behavior as you build it. 
