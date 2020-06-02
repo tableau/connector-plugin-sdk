@@ -1006,7 +1006,6 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula>TO_NUMBER(TO_CHAR(%2,&apos;%1&apos; %3&apos;))</formula>
       <formula part='week'>FLOOR((7 + TO_NUMBER(TO_CHAR(%2,'DDD')) - 1 + MOD(7 + MOD(TO_NUMBER(TO_CHAR(TRUNC(CAST(%2 AS DATE), 'YYYY'), 'J')) + 1, 7) - %3, 7)) / 7)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
