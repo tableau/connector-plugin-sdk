@@ -47,6 +47,7 @@ An <span style="font-family: courier new">aggregation</span> element has one req
 
 The <span style="font-family: courier new">function-map</span> element has no attributes and contains any number of <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span>, and <span style="font-family: courier new">remove-function</span> elements. 
 
+
 - __function element__   
 Each <span style="font-family: courier new">function</span> elements defines a single function. It has a few required attributes, contain a <span style="font-family: courier new">formula</span> element (and in some cases, an <span style="font-family: courier new">unagg-formula</span> element) and any number of <span style="font-family: courier new">argument</span> elements. For a list of supported functions, see the [full_dialect.tdd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/full_dialect.tdd) file sample. 
 
@@ -60,7 +61,58 @@ return-type | Y | Indicates the return type of the function. For a list of allow
 
 - __date-function element__  
 The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.  
-The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATEFORMAT, DATENAME, DATEPARSE, DATEPART, DATETRUNC.  
+The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATEFORMAT, DATENAME, DATEPARSE, DATEPART, DATETRUNC.   
+
+  -  __DATEPART without custom start of week__
+    ```xml
+        ...
+        <date-function name='DATEPART' return-type='int'>
+          <formula>CAST(TRUNC(EXTRACT(%1 FROM %2)) AS INTEGER)</formula>
+          <formula part='weekday'>(1 + CAST(EXTRACT(DOW FROM %2) AS INTEGER))</formula>
+          <formula part='week'>CAST(FLOOR((7 + EXTRACT(DOY FROM %2) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, %2))) / 7) AS INTEGER)</formula>
+          <argument type='localstr' />
+          <argument type='datetime' />
+        </date-function>
+        ...
+    ```
+
+    Here the first argument (%1) is grabbed from the `<date-part-group>` in the dialect file. It is used with generic (non-part-specific) date function formulas.
+    A date-part-group can apply to one or more date functions, denoted by date-function child elements. If none are specified, the group acts as the default.
+    The name attribute specifies a Tableau date part, while the value attribute contains the date part string literal to use in corresponding date functions.
+
+    ```xml
+        ...
+          <date-part-group>
+            <date-function name='DATEPART' />
+            <part name='year' value='YEAR' />
+            <part name='quarter' value='QUARTER' />
+            <part name='month' value='MONTH' />
+            <part name='week' value='WEEK' />
+            <part name='weekday' value='DOW' />
+            <part name='dayofyear' value='DOY' />
+            <part name='day' value='DAY' />
+            <part name='hour' value='HOUR' />
+            <part name='minute' value='MINUTE' />
+            <part name='second' value='SECOND' />
+          </date-part-group>
+        ...
+    ```
+    A single date function can have multiple overloaded functions with different parameters. For example here, the DatePart function is overloaded with argument for the start of the week.
+    Here, the you can add  `<formula part='week'>`  part of the date function and everything else is grabbed from the original function definition. Here, the third argument `%3 AS BIGINT` is 
+    used to change the start of the week which is not part of the original function.  
+    -  __Custom Start of Week__
+
+    ```xml
+        ...
+          <date-function name='DATEPART' return-type='int'>
+          <formula part='week'>CAST(FLOOR((7 + EXTRACT(DOY FROM %2) - 1 + (CAST(7 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, %2)) - %3 AS BIGINT) % 7)) / 7) AS INTEGER)</formula>
+          <argument type='localstr' />
+          <argument type='datetime' />
+          <argument type='localstr' />
+        </date-function>
+        ...
+    ```
+
   
   Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required. 
 
