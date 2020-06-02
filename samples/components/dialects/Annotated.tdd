@@ -980,7 +980,6 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>(TO_NUMBER(TO_CHAR(%3,&apos;J&apos;)) - TO_NUMBER(TO_CHAR(%2,&apos;J&apos;)))</formula>
       <formula part='week'>FLOOR(((TO_NUMBER(TO_CHAR(%3,'J')) - MOD(7 + MOD(TO_NUMBER(TO_CHAR(%3, 'J')) + 1, 7) - %4, 7)) - (TO_NUMBER(TO_CHAR(%2,'J')) - MOD(7 + MOD(TO_NUMBER(TO_CHAR(%2, 'J')) + 1, 7) - %4, 7)) )/7)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
@@ -994,7 +993,6 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula>TO_NCHAR(%2,&apos;%1&apos; %3&apos;)</formula>
       <formula part='week'>TO_NCHAR(FLOOR((7 + TO_NUMBER(TO_CHAR(%2,'DDD')) - 1 + MOD(7 + MOD(TO_NUMBER(TO_CHAR(TRUNC(CAST(%2 AS DATE), 'YYYY'), 'J')) + 1, 7) - %3, 7) ) / 7))</formula>
       <argument type='localstr' />
       <argument type='datetime' />
@@ -1015,14 +1013,12 @@
       <argument type='localstr' />
     </date-function>
     <date-function name='DATETRUNC' return-type='datetime'>
-      <formula>TRUNC( CAST(%2 AS DATE), &apos;%1&apos; )</formula>
       <formula part='week'>(TRUNC(CAST(%2 AS DATE), &apos;DD&apos;) - MOD(TO_NUMBER(TO_CHAR(%2, &apos;J&apos;)) + 1, 7))</formula>
       <formula part='second'>TO_DATE(TO_CHAR(%2, &apos;YYYY-MM-DD HH24:MI:SS&apos;), &apos;YYYY-MM-DD HH24:MI:SS&apos;)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
     </date-function>
     <date-function name='DATETRUNC' return-type='datetime'>
-      <formula>TRUNC( CAST(%2 AS DATE), &apos;%1&apos;, &apos;%1&apos; )</formula>
       <formula part='week'>(TRUNC(CAST(%2 AS DATE), 'DD') - MOD( 7 + MOD(TO_NUMBER(TO_CHAR(%2, 'J')) + 1, 7) - %3, 7) )</formula>
       <argument type='localstr' />
       <argument type='datetime' />
