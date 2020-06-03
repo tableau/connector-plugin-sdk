@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<tdr class='myimpala'>
+<tdr class='impala_jdbc_delegationUID'>
   <connection-resolver>
     <connection-builder>
       <script file='connectionBuilder.js'/>

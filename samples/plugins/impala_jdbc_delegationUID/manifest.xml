@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<connector-plugin class='myimpala' superclass='jdbc' plugin-version='1.0.0' name='Impala Plugin' version='19.4'>
+<connector-plugin class='impala_jdbc_delegationUID' superclass='jdbc' plugin-version='1.0.0' name='Impala JDBC Plugin' version='19.4'>
   <vendor-information>
     <company name="Company"/>
     <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
     <driver-download-link url = "some url"/>
   </vendor-information>
-  <connection-customization class="myimpala" enabled="true" version="10.0">
+  <connection-customization class="impala_jdbc_delegationUID" enabled="true" version="10.0">
     <vendor name="vendor"/>
     <driver name="driver"/>
     <customizations>
