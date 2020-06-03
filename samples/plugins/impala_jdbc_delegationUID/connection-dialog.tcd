@@ -1,4 +1,4 @@
-<connection-dialog class='myimpala'>
+<connection-dialog class='impala_jdbc_delegationUID'>
   <connection-config>
     <authentication-mode value='Basic' />
     <authentication-options>
