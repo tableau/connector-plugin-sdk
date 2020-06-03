@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- See notes below for definitions that require 2020.3 or newer -->
 <dialect name='FullPostgreSQL90ODBC'
          class='postgres_odbc'
          version='18.1'>
@@ -1082,7 +1084,7 @@
     </date-parts>
     <format-date-literal formula="(DATE '%1')"  format='yyyy-MM-dd' />
     <format-datetime-literal formula="(TIMESTAMP '%1')" format='yyyy-MM-dd HH:mm:ss.SSS' />
-    <format-false literal='FALSE' predicate='FALSE' />
+    <format-false literal='FALSE' predicate='FALSE' /> <!-- Requires 2020.3 or newer -->
     <format-is-distinct value='Keyword' />
     <format-order-by value='Nulls' />
     <format-select>
@@ -1095,7 +1097,7 @@
       <part name='Top' value='LIMIT %1' />
     </format-select>
     <format-string-literal value='Extended' />  <!-- Postgres specific -->
-    <format-true literal='TRUE' predicate='TRUE' />
+    <format-true literal='TRUE' predicate='TRUE' /> <!-- Requires 2020.3 or newer -->
     <icu-date-token-map>
       <!-- used by DATEPARSE -->
       <!-- http://userguide.icu-project.org/formatparse/datetime -->
