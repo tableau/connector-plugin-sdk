@@ -1628,7 +1628,6 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>DATEDIFF(%1,%2,%3)</formula>
       <formula part='week'>DATEDIFF(week,%2,%3)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
@@ -1636,7 +1635,6 @@
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>DATEDIFF(%3,TIMESTAMP(%2))</formula>
       <formula part='week'> INTEGER(( (FLOOR(TIMESTAMP_TO_SEC(%3) / 86400) - DAYOFWEEK(%3) ) - (FLOOR(TIMESTAMP_TO_SEC(%2) / 86400) - DAYOFWEEK(%2) ) ) / 7)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
@@ -1644,7 +1642,6 @@
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>TIMESTAMP_DIFF(CAST(%3 AS TIMESTAMP),%2, SECOND)</formula>
       <formula part='week'> CAST(( (FLOOR(UNIX_SECONDS(CAST(%3 AS TIMESTAMP)) / 86400) - EXTRACT(DAYOFWEEK FROM %3) ) - (FLOOR(UNIX_SECONDS(CAST(%2 AS TIMESTAMP)) / 86400) - EXTRACT(DAYOFWEEK FROM %2) ) ) / 7 AS INT64)</formula>
       <argument type='localstr' />
       <argument type='date' />
@@ -1652,7 +1649,6 @@
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>DATEDIFF(TIMESTAMP(%3),TIMESTAMP(%2))</formula>
       <formula part='week'> INTEGER(( (FLOOR(TIMESTAMP_TO_SEC(%3) / 86400) - DAYOFWEEK(%3) ) - (FLOOR(TIMESTAMP_TO_SEC(%2) / 86400) - DAYOFWEEK(%2) ) ) / 7)</formula>
       <argument type='localstr' />
       <argument type='date' />
@@ -1689,14 +1685,12 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula>RTRIM(CHAR(%1(TIMESTAMP_ISO(%2))))</formula>
       <formula part='week'>RTRIM(CHAR(FLOOR((7 + DAYOFYEAR(%2) - 1 + DAYOFWEEK(DATE(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-01-01&apos;))) - 1) / 7)))</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;%1&apos;)</formula>
       <formula part='week'>(5 + CAST(TO_CHAR(%2, &apos;DDD&apos;) AS INT) + CAST(TO_CHAR(DATE_TRUNC(&apos;year&apos;, %2), &apos;D&apos;) AS INT)) / 7</formula>
       <argument type='localstr' />
       <argument type='date' />
@@ -1737,14 +1731,12 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula>DATEPART(%1,%2)</formula>
       <formula part='week'>DATEPART(week,%2)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula>CAST(EXTRACT(%1 FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
       <formula part='week'>(5 + CAST(TO_CHAR(%2, &apos;DDD&apos;) AS INT) + CAST(TO_CHAR(DATE_TRUNC(&apos;year&apos;, %2), &apos;D&apos;) AS INT)) / 7</formula>
       <argument type='localstr' />
       <argument type='date' />
@@ -1781,14 +1773,12 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATETRUNC' return-type='datetime'>
-      <formula>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos;%1&apos;))</formula>
       <formula part='week'>(TIMESTAMP(&apos;1900-01-01 00:00:00&apos;) + ( JULIAN_DAY(%2) - 2415021 - (DAYOFWEEK(%2) - 1) ) DAYS)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATETRUNC' return-type='datetime'>
-      <formula>DATE_TRUNC( &apos;%1&apos;, CAST(%2 AS TIMESTAMP) )</formula>
       <formula part='week'>TO_DATE(TO_CHAR(CAST(TO_CHAR(%2, &apos;J&apos;) AS INT) - MOD(CAST(TO_CHAR(%2, &apos;D&apos;) AS INT) + 6, 7), &apos;99999999&apos;), &apos;J&apos;)</formula>
       <argument type='localstr' />
       <argument type='date' />
