@@ -61,9 +61,10 @@ return-type | Y | Indicates the return type of the function. For a list of allow
 
 - __date-function element__  
 The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.  
-The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATEFORMAT, DATENAME, DATEPARSE, DATEPART, DATETRUNC.   
+The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATENAME, DATEPARSE, DATEPART, DATETRUNC.   
 
-  -  __DATEPART without custom start of week__
+  - __DATEPART without custom start of week__
+
     ```xml
         ...
         <date-function name='DATEPART' return-type='int'>
@@ -76,8 +77,8 @@ The function <span style="font-family: courier new">name</span> must be one of t
         ...
     ```
 
-    Here the first argument (%1) is grabbed from the `<date-part-group>` in the dialect file. It is used with generic (non-part-specific) date function formulas.
-    A date-part-group can apply to one or more date functions, denoted by date-function child elements. If none are specified, the group acts as the default.
+    Here the first argument (%1) is the value from the `<date-part-group>` in the dialect file.  A date-part-group can apply to one or more date functions, denoted by date-function child elements. 
+    If none are specified, the group acts as the default.
     The name attribute specifies a Tableau date part, while the value attribute contains the date part string literal to use in corresponding date functions.
 
     ```xml
@@ -97,10 +98,11 @@ The function <span style="font-family: courier new">name</span> must be one of t
           </date-part-group>
         ...
     ```
-    A single date function can have multiple overloaded functions with different parameters. For example here, the DatePart function is overloaded with argument for the start of the week.
-    Here, the you can add  `<formula part='week'>`  part of the date function and everything else is grabbed from the original function definition. Here, the third argument `%3 AS BIGINT` is 
-    used to change the start of the week which is not part of the original function.  
-    -  __Custom Start of Week__
+    A single date function can have multiple overloaded functions with different parameters.
+    <br/>
+    To support Tableau's Custom Start of Week functionality each of the following: DATEDIFF, DATENAME, DATEPART, DATETRUNC need to also have an overloaded form with an additional `<argument type='localstr'/>`. <br/>
+    Here, is the example for the `DATEPART` function. 
+  - __Custom Start of Week__
 
     ```xml
         ...
