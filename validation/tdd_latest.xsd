@@ -539,6 +539,11 @@ as passed-in parameters.
       </xs:element>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="FormatBool-CT">
+    <xs:attribute name="literal" type="xs:string" /> <!-- added 2020.3 -->
+    <xs:attribute name="predicate" type="xs:string" /> <!-- added 2020.3 -->
+    <xs:attribute name="value" type="xs:string" /> <!-- backwards compatible -->
+  </xs:complexType>
   <xs:complexType name="FormatSelect-CT">
     <xs:sequence>
       <xs:element name="part" maxOccurs="unbounded">
@@ -596,7 +601,7 @@ as passed-in parameters.
       <xs:element minOccurs="0" name="format-date-literal" type="DateLiteral-CT"/>
       <xs:element minOccurs="0" name="format-datetime-literal" type="DateTimeLiteral-CT"/>
       <xs:element minOccurs="0" name="format-drop-table" type="CreateTable-CT"/>
-      <xs:element minOccurs="0" name="format-false" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="format-false" type="FormatBool-CT"/>
       <xs:element minOccurs="0" name="format-if-then-else" type="IfThenElse-CT"/>
       <xs:element minOccurs="0" name="format-index" type="Index-CT"/>
       <xs:element minOccurs="0" name="format-insert" type="Insert-CT"/>
@@ -608,7 +613,7 @@ as passed-in parameters.
       <xs:element minOccurs="0" name="format-simple-case" type="SimpleCase-CT"/>
       <xs:element minOccurs="0" name="format-stored-proc-call" type="StoredProc-CT"/>
       <xs:element minOccurs="0" name="format-string-literal" type="StringLiteral-CT"/>
-      <xs:element minOccurs="0" name="format-true" type="ValueString-CT"/>
+      <xs:element minOccurs="0" name="format-true" type="FormatBool-CT"/>
       <xs:element minOccurs="0" name="icu-date-token-map" type="ICUDateTokenMap-CT"/>
       <xs:element minOccurs="0" name="id-allowed-characters" type="ValueString-CT"/>
       <xs:element minOccurs="0" name="id-case" type="IdentifierCase-CT"/>
