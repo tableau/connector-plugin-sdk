@@ -63,7 +63,7 @@ return-type | Y | Indicates the return type of the function. For a list of allow
 The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.  
 The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATENAME, DATEPARSE, DATEPART, DATETRUNC.   
 
-  - __DATEPART without custom start of week__
+  **Example: DATEPART without custom start of week**
 
     ```xml
         ...
@@ -100,10 +100,9 @@ The function <span style="font-family: courier new">name</span> must be one of t
     ```
     A single date function can have multiple overloaded functions with different parameters.
     <br/>
-    To support Tableau's Custom Start of Week functionality each of the following: DATEDIFF, DATENAME, DATEPART, DATETRUNC need to also have an overloaded form with an additional `<argument type='localstr'/>`. <br/>
-    Here, is the example for the `DATEPART` function. 
-  - __Custom Start of Week__
-
+    To support Tableau's Custom Start of Week functionality each of the following: DATEDIFF, DATENAME, DATEPART, DATETRUNC need to also have an overloaded form with an additional `<argument type='localstr' />`.  
+    <br/>
+    **Example: DATEPART for Custom Start of Week**
     ```xml
         ...
           <date-function name='DATEPART' return-type='int'>
