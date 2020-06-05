@@ -114,11 +114,11 @@ The function <span style="font-family: courier new">name</span> must be one of t
         ...
     ```
     
-    
   **DATEPARSE function**  
   The <span style="font-family: courier new">DATEPARSE</span> function is used to define which parts of your field are which parts of a date. It uses the <span style="font-family: courier new">icu-date-token-map</span> instead of the <span style="font-family: courier new">date-part-group</span> formula used primarily by the other date function. As a modifier for the date string to be converted into a date, it uses the <span style="font-family: courier new">date-literal-escape</span>. 
   As an example, for the [DATEPARSE function](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L945) with arguments <span style="font-family: courier new">%1</span> and <span style="font-family: courier new">%2</span>, 
   the string values for <span style="font-family: courier new">%1</span> are defined by [icu-token-map](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L1369) and the string values for <span style="font-family: courier new">%2</span> are defined by [date-literal-escape](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L1130) .
+
   
   Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required. 
 
