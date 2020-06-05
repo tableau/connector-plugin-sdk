@@ -63,6 +63,8 @@ return-type | Y | Indicates the return type of the function. For a list of allow
 The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.  
 The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATENAME, DATEPARSE, DATEPART, DATETRUNC.   
 
+ Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required. 
+
   **Example: DATEPART without custom start of week**
 
     ```xml
@@ -113,9 +115,11 @@ The function <span style="font-family: courier new">name</span> must be one of t
         </date-function>
         ...
     ```
-
-  
-  Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required. 
+    
+  **DATEPARSE function**  
+  The <span style="font-family: courier new">DATEPARSE</span> function is used to define which parts of your field are which parts of a date. It uses the <span style="font-family: courier new">icu-date-token-map</span> instead of the <span style="font-family: courier new">date-part-group</span> formula used primarily by the other date function. As a modifier for the date string to be converted into a date, it uses the <span style="font-family: courier new">date-literal-escape</span>. 
+  As an example, for the [DATEPARSE function](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L945) with arguments <span style="font-family: courier new">%1</span> and <span style="font-family: courier new">%2</span>, 
+  the string values for <span style="font-family: courier new">%1</span> are defined by [icu-token-map](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L1369) and the string values for <span style="font-family: courier new">%2</span> are defined by [date-literal-escape](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L1130) .
 
 - __remove-function element__  
 The <span style="font-family: courier new">remove-function</span> is used to remove existing functions in a function map without overriding them. It requires only a <span style="font-family: courier new">name</span> attribute and doesn't require you to specify any <span style="font-family: courier new">formula</span>. 
@@ -132,4 +136,3 @@ The <span style="font-family: courier new">unagg-formula</span> (unaggregated 
 The <span style="font-family: courier new">argument</span> element is an optional child of all three types of <span style="font-family: courier new">function</span> elements. It contains a single attribute, <span style="font-family: courier new">type</span>, which specifies the abbreviated argument type. Arguments must be listed in the correct order.   
 Allowable types: none, bool, real, int, str, datetime, date, localstr, null, error, any, tuple, spatial, localreal, localint.  
 Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second. 
-
