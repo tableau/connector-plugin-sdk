@@ -155,30 +155,25 @@ Use care when logging so that you don’t expose sensitive information like pass
 
 _Attribute names_
 
-| Function                       | Description                                                 |
-| ------------------------------ | ----------------------------------------------------------- |
-| attributeAuthentication        | Connection attribute for the authentication type            |
-| attributeClass                 | Connection attribute for the connection type                |
-| attributeDatabase              | Connection attribute for the database                       |
-| attributeInitialSQL            | Connection attribute for initial SQL                        |
-| attributePassword              | Connection attribute for the password                       |
-| attributePort                  | Connection attribute for the port                           |
-| attributeServer                | Connection attribute for the server                         |
-| attributeService               | Connection attribute for the service                        |
-| attributeSSLCert               | Connection attribute for the SSL Certfile                   |
-| attributeSSLMode               | Connection attribute for the SSL Mode                       |
-| attributeTableauServerAuthMode | Connection attribute for tableau server authentication mode |
-| attributeTableauServerUser     | Connection attribute for tableau server user                |
-| attributeUsername              | Connection attribute for the user name                      |
-| attributeWarehouse             | Connection attribute for the Warehouse                      |
-| keywordODBCUsername            | ODBC Username keyword                                       |
-| keywordODBCPassword            | ODBC Password keyword                                       |
-
-_Attribute values_
-
-| Function                       | Description                                                 | 
-| ------------------------------ | ----------------------------------------------------------- |
-| valueAuthModeDBImpersonate     | Attribute value for database impersonation auth mode        |
+| Function                       | Description                                                    |
+| ------------------------------ | -------------------------------------------------------------- |
+| attributeAuthentication        | Connection attribute for the authentication type               |
+| attributeClass                 | Connection attribute for the connection type                   |
+| attributeDatabase              | Connection attribute for the database                          |
+| attributeInitialSQL            | Connection attribute for initial SQL                           |
+| attributePassword              | Connection attribute for the password                          |
+| attributePort                  | Connection attribute for the port                              |
+| attributeServer                | Connection attribute for the server                            |
+| attributeService               | Connection attribute for the service                           |
+| attributeSSLCert               | Connection attribute for the SSL Certfile                      |
+| attributeSSLMode               | Connection attribute for the SSL Mode                          |
+| attributeTableauServerAuthMode | Connection attribute for tableau server authentication mode    |
+| attributeTableauServerUser     | Connection attribute for tableau server user                   |
+| attributeUsername              | Connection attribute for the user name                         |
+| attributeWarehouse             | Connection attribute for the Warehouse                         |
+| keywordODBCUsername            | ODBC Username keyword                                          |
+| keywordODBCPassword            | ODBC Password keyword                                          |
+| valueAuthModeDBImpersonate     | Attribute value for database impersonation authentication mode |
 
 _Functions_
 
