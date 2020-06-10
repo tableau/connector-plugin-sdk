@@ -35,7 +35,6 @@ base | N | Specifies a base dialect to build upon. If a certain property or func
 dialect-version | N | Indicates the minimum database version applicable to the TDD file. For example, if you're adding a function definition that wasn't implemented until FooDB 3.0, then <span style="font-family: courier new">set dialect-version='3.0'</span>. 
 version | Y | Must match the current Tableau version in the format YY.Q; for example, "20.1". 
 
-
 ### Supported-aggregations element
 
 The <span style="font-family: courier new">supported-aggregations</span> element contains a list of aggregations and date truncation levels supported by the database, represented by one or more <span style="font-family: courier new">aggregation</span> elements. 
@@ -113,6 +112,7 @@ The function <span style="font-family: courier new">name</span> must be one of t
         </date-function>
         ...
     ```
+    
 
   
   Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required. 
@@ -133,3 +133,40 @@ The <span style="font-family: courier new">argument</span> element is an opt
 Allowable types: none, bool, real, int, str, datetime, date, localstr, null, error, any, tuple, spatial, localreal, localint.  
 Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second. 
 
+### Join Support:
+**Format is distinct** <br/>
+ `<format-is-distinct>` Defines a strategy for determining whether two values are distinct.  <br/>
+ The value for this property can be: 
+
+  - __NoNullCheck__
+      Does not check that the value of LHS and RHS is null. Formula: `(lhs [!]= rhs)`
+  - __Keyword__
+      Uses `DISTINCT` keyword for comparision. Formula: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
+  - __Operator__
+    Uses `<=>` for comparions. Formula:`([NOT] (lhs <=> rhs))`
+
+  By default, format is distinct checks that the value for LHS and RHS is not null.   <br/>
+  Formula :`((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))`
+  
+  ```xml 
+  <format-is-distinct value='NoNullCheck' />
+  ```
+ 
+  **Supported Joins** <br/>
+  Some database does not support all types of join.`<supported-joins>` enumerates list of supported join types.  
+
+  ```xml
+    ...
+        <supported-joins>
+          <part name='Inner' />
+          <part name='Left' />
+          <part name='Right' />
+          <part name='Full' />
+          <part name='Cross' />
+        </supported-joins>
+      </sql-format>
+      </dialect>
+    ...
+```   
+  **CAP QUERY JOIN**  <br/>
+  You can set the capabilities for joins in your manifest file. See capabilities for the Query section to see join capabilities  [here]({{ site.baseurl }}/docs/capabilities).
