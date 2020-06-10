@@ -35,6 +35,7 @@ base | N | Specifies a base dialect to build upon. If a certain property or func
 dialect-version | N | Indicates the minimum database version applicable to the TDD file. For example, if you're adding a function definition that wasn't implemented until FooDB 3.0, then <span style="font-family: courier new">set dialect-version='3.0'</span>. 
 version | Y | Must match the current Tableau version in the format YY.Q; for example, "20.1". 
 
+
 ### Supported-aggregations element
 
 The <span style="font-family: courier new">supported-aggregations</span> element contains a list of aggregations and date truncation levels supported by the database, represented by one or more <span style="font-family: courier new">aggregation</span> elements. 
@@ -112,7 +113,6 @@ The function <span style="font-family: courier new">name</span> must be one of t
         </date-function>
         ...
     ```
-    
 
   
   Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required. 
