@@ -134,25 +134,8 @@ Allowable types: none, bool, real, int, str, datetime, date, localstr, null, e
 Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second. 
 
 ### Join Support:
-**Format is distinct** <br/>
- `<format-is-distinct>` Defines a strategy for determining whether two values are distinct.  <br/>
- The value for this property can be: 
 
-  - __NoNullCheck__
-      Does not check that the value of LHS and RHS is null. Formula: `(lhs [!]= rhs)`
-  - __Keyword__
-      Uses `DISTINCT` keyword for comparision. Formula: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
-  - __Operator__
-    Uses `<=>` for comparions. Formula:`([NOT] (lhs <=> rhs))`
-
-  By default, format is distinct checks that the value for LHS and RHS is not null.   <br/>
-  Formula :`((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))`
-  
-  ```xml 
-  <format-is-distinct value='NoNullCheck' />
-  ```
- 
-  **Supported Joins** <br/>
+ **Supported Joins** <br/>
   Some database does not support all types of join.`<supported-joins>` enumerates list of supported join types.  
 
   ```xml
@@ -168,5 +151,22 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
       </dialect>
     ...
 ```   
-  **CAP QUERY JOIN**  <br/>
-  You can set the capabilities for joins in your manifest file. See capabilities for the Query section to see join capabilities  [here]({{ site.baseurl }}/docs/capabilities).
+**Format is distinct** <br/>
+ `<format-is-distinct>` Defines a strategy for determining whether two values are distinct.  <br/>
+ The value for this property can be: 
+
+  - __NoNullCheck__
+      Does not check that the value of LHS and RHS is null. Logic: `(lhs [!]= rhs)`
+  - __Keyword__
+      Uses `DISTINCT` keyword for comparision. Logic: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
+  - __Operator__
+    Uses `<=>` for comparions. Logic:`([NOT] (lhs <=> rhs))`
+  - __Formula__
+        By default formula is used. In this case format is distinct checks that the value for LHS and RHS is not null. Logic :`((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))`
+
+  ```xml 
+  <format-is-distinct value='NoNullCheck' />
+  ```
+
+  **Join Capabilities**  <br/>
+  Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
