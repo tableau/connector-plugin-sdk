@@ -1,16 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <!--
-  This dialect is the implementation of SQLDialect and BaseDialect.
+  This is the base implementation of SQL dialects.
   dialect
   Name: The name of the dialect. Can be referenced as the base of another dialect for inheritance.
   Class: The class of the connector the dialect is associated with
-  Dialect-version (optional): The minimum database version this dialect should be used with
   Base (optional): The name of the dialect that this one builds off of.
                    All functions and properties default to the base dialect's implementation.
   Version: Tableau document version
 -->
-<dialect class='example' dialect-version='1.0' name='SQLDialect' version='18.1'>
+<dialect class='example' name='SQLDialect' version='18.1'>
   <!--
     function-map
     Map of Tableau functions to SQL expressions. Can include function, date-function,
@@ -178,11 +177,12 @@
       where no type-specific formula is given.
     -->
     <format-null>
-      <local-type name='real' value='NULL' />
       <local-type name='int' value='NULL' />
+      <local-type name='real' value='NULL' />
+      <local-type name='str' value='NULL' />
+      <local-type name='datetime' value='NULL' />
       <local-type name='bool' value='NULL' />
       <local-type name='date' value='NULL' />
-      <local-type name='datetime' value='NULL' />
       <local-type name='localint' value='NULL' />
       <local-type name='localreal' value='NULL' />
       <local-type name='localstr' value='NULL' />
