@@ -10,10 +10,13 @@
 ### Added
 - Add SQLDialect to samples/components/dialects
 
-## 2020-06-03
+## 2020-06-11
+### Removed
+- Remove `base-types` from tdd samples. Intended functionality is exposed in `<format-column-definition>`
+
+## 2020-06-02
 ### Changed
 - Date functions in dialect examples to have only `<formula part='week'>` for functions with `localstr` as last argument. See [isuue](https://github.com/tableau/connector-plugin-sdk/issues/505) for details
-
 
 ## 2019-12-11
 ### Added
