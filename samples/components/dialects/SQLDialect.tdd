@@ -183,9 +183,6 @@
       <local-type name='datetime' value='NULL' />
       <local-type name='bool' value='NULL' />
       <local-type name='date' value='NULL' />
-      <local-type name='localint' value='NULL' />
-      <local-type name='localreal' value='NULL' />
-      <local-type name='localstr' value='NULL' />
       <local-type name='spatial' value='NULL' />
     </format-null>
     <!--
