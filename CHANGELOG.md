@@ -6,6 +6,10 @@
 ### Changed
 ### Removed
 
+## 2020-06-10
+### Added
+- Add SQLDialect to samples/components/dialects
+
 ## 2020-06-11
 ### Removed
 - Remove `base-types` from tdd samples. Intended functionality is exposed in `<format-column-definition>`

@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!--
+  This is the base implementation of SQL dialects.
+  dialect
+  Name: The name of the dialect. Can be referenced as the base of another dialect for inheritance.
+  Class: The class of the connector the dialect is associated with
+  Base (optional): The name of the dialect that this one builds off of.
+                   All functions and properties default to the base dialect's implementation.
+  Version: Tableau document version
+-->
+<dialect class='example' name='SQLDialect' version='18.1'>
+  <!--
+    function-map
+    Map of Tableau functions to SQL expressions. Can include function, date-function,
+    remove-function (rare), native-split-function, and recursive-split-function.
+  -->
+  <function-map>
+    <!--
+      function
+      Group: Tableau function group. Multiple groups are comma-separated.
+      Name: Function name
+      Return-type: Tableau data type. These include bool, date, datetime,
+                    int, real, spatial, str
+    -->
+    <function group='numeric' name='DIV' return-type='int'>
+      <!--
+        formula
+        SQL expression formula. Input parameters are denoted with %1, %2, etc.
+      -->
+      <formula>CASE WHEN %2 = 0 THEN NULL ELSE ( %1 / %2 ) END</formula>
+      <!--
+        argument
+        One or more arguments. Data type can include bool, date, datetime,
+        localint, localreal, localstr, int, real, spatial, or str.
+        Local types must be literals.
+      -->
+      <argument type='int' />
+      <argument type='int' />
+    </function>
+    <function group='numeric' name='HEXBINX' return-type='real'>
+      <formula>(((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN 1.5 ELSE 0.0 END) - (CASE WHEN ((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0) &lt; 0.0) AND ((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN 1.5 ELSE 0.0 END) &gt; 0.0) THEN 3.0 ELSE 0.0 END)) + (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))</formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
+    <function group='numeric' name='HEXBINY' return-type='real'>
+      <formula>CAST( (((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN SQRT(3.0) / 2.0 ELSE 0.0 END) - (CASE WHEN ((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)) &lt; 0.0) AND ((CASE WHEN (ABS((%2) - (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0)))) + SQRT(3.0) * ((ABS((%1) - (CAST( ( (%1) / 3.0 ) AS NUMERIC(18, 0) ) * 3.0))) - 1.0) &gt; 0.0 THEN SQRT(3.0) / 2.0 ELSE 0.0 END) &gt; 0.0) THEN SQRT(3.0) ELSE 0.0 END)) + (CAST( ( (%2) / SQRT(3.0) ) AS NUMERIC(18, 0) ) * SQRT(3.0))) AS NUMERIC(18,3) )</formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
+  </function-map>
+
+  <!--
+    sql-format
+    Strategies and formulas for SQL expressions that
+    are too complex for simple function mapping
+  -->
+  <sql-format>
+    <!--
+      date-literal-escape
+      Used with the DATEPARSE function.
+      Defines how Tableau formats literals in a date format string.
+      MySQLStyle: Alphanumerics are not quoted. '%' is doubled.
+      OracleStyle: Alphanumerics are wrapped in double quotes. Existing double quotes are doubled.
+      PostgresStyle: Alphanumerics are wrapped in double quotes. Existing double quotes are escaped with a backslash.
+      [Default]Standard: Alphanumerics are wrapped in single quotes. Existing single quotes are doubled.
+    -->
+    <date-literal-escape value='Standard' />
+    <!--
+      format-bool-as-value
+      Used in CASE statements. Determines whether the true or false case is used first.
+      [Default]TrueFirst: CASE WHEN %1 THEN 1 WHEN NOT %1 THEN 0 ELSE NULL END
+      FalseFirst: CASE WHEN NOT %1 THEN 0 WHEN %1 THEN 1 ELSE NULL END
+    -->
+    <format-bool-as-value value='TrueFirst' />
+    <!--
+      format-column-definition
+      Specifies a more exact mapping of Tableau internal data types
+      to database types. Allows the use of string substitutions
+      for width (%w), scale (%s), and precision (%p)
+    -->
+    <format-column-definition>
+      <local-type name='int'>
+        <remote-type name='I2' value='SMALLINT' />
+        <remote-type name='I4' value='INTEGER' />
+        <remote-type name='default' value='BIGINT' />
+      </local-type>
+      <local-type name='real'>
+        <remote-type name='R4' value='FLOAT(24)' />
+        <remote-type name='default' value='FLOAT(53)' />
+      </local-type>
+      <local-type name='str'>
+        <remote-type name='default' value='VARCHAR(%w)' />
+      </local-type>
+      <local-type name='datetime'>
+        <remote-type name='TIME' value='TIME' />
+        <remote-type name='DATE' value='DATE' />
+        <remote-type name='default' value='TIMESTAMP' />
+      </local-type>
+      <local-type name='date'>
+        <remote-type name='default' value='DATE' />
+      </local-type>
+      <local-type name='bool'>
+        <remote-type name='default' value='BOOLEAN' />
+      </local-type>
+    </format-column-definition>
+    <!--
+      format-create-table
+      Piece-by-piece formula for creating a table.
+      Predicates can be used with tokens that only correspond
+      to a certain type of table.
+      Predicates:
+        GlobalTemp
+        LocalTemp
+        AnyTemp
+        NoTemp
+      String substitution tokens:
+        %n - table name
+        %f - formatted column list
+      -->
+    <format-create-table>
+      <formula>CREATE </formula>
+      <formula predicate='GlobalTemp'>GLOBAL </formula>
+      <formula predicate='LocalTemp'>LOCAL </formula>
+      <formula predicate='AnyTemp'>TEMPORARY </formula>
+      <formula>TABLE %n (</formula>
+      <formula>%f</formula>
+      <formula>)</formula>
+      <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
+    </format-create-table>
+    <!--
+      format-drop-table
+      Format for dropping a table. %1 is the table name.
+      Each formula is executed as a separate statement.
+    -->
+    <format-drop-table>
+      <formula>DROP TABLE %1</formula>
+    </format-drop-table>
+    <!--
+      format-false
+      String literal or expression for boolean false
+    -->
+    <format-false value='(1=0)' />
+    <!--
+      format-if-then-else
+      Strategy for formatting if/then/else statement
+      [Default]Case: (CASE WHEN %1 THEN %2 ELSE %3 END)
+      IIF: Use IIF formula
+    -->
+    <format-if-then-else value='Case' />
+    <!--
+      format-index
+      Strategy for qualifying an index name in a CREATE INDEX statement
+      [Default]FullyQualified: CREATE INDEX "table"."index" ON "schema"."table" ("table"."column")
+      ColumnNameOnly: CREATE INDEX index ON "schema"."table" ("table"."column")
+    -->
+    <format-index value='FullyQualified' />
+    <!--
+      format-insert
+      Strategy for formatting an INSERT statement
+      [Default]Individual: Separate INSERT query for each row
+      Bulk: Single INSERT query can insert multiple rows at once
+    -->
+    <format-insert value='Individual' />
+    <!--
+      format-is-distinct
+      Defines a strategy for determining whether two values are distinct.
+      NoNullCheck: (lhs [!]= rhs)
+      Keyword: (lhs IS [NOT ]DISTINCT FROM rhs)
+      Operator: ([NOT (]lhs <=> rhs[)])
+      [Default]Formula: ((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))
+    -->
+    <format-is-distinct value='Formula' />
+    <!--
+      format-null
+      Allows a type-specific expression for NULL. Tableau defaults to 'NULL'
+      where no type-specific formula is given.
+    -->
+    <format-null>
+      <local-type name='int' value='NULL' />
+      <local-type name='real' value='NULL' />
+      <local-type name='str' value='NULL' />
+      <local-type name='datetime' value='NULL' />
+      <local-type name='bool' value='NULL' />
+      <local-type name='date' value='NULL' />
+      <local-type name='spatial' value='NULL' />
+    </format-null>
+    <!--
+      format-order-by
+      [Default]DirectionOnly: ORDER BY col ASC/DESC
+      Nulls: ORDER BY col ASC NULLS FIRST/DESC NULLS LAST
+    -->
+    <format-order-by value='DirectionOnly' />
+    <!--
+      format-select
+      Piece-by-piece formula for defining a SELECT statement
+    -->
+    <format-select>
+      <part name='Select' value='SELECT %1' />
+      <part name='Top' value='TOP %1 ' />
+      <part name='TopPercent' value='TOP %1 PERCENT ' />
+      <part name='TopSamplePercent' value='TOP %1 PERCENT ' />
+      <part name='TopSampleRecords' value='TOP %1 ' />
+      <part name='Into' value='INTO %1' />
+      <part name='From' value='FROM %1' />
+      <part name='Where' value='WHERE %1' />
+      <part name='Group' value='GROUP BY %1' />
+      <part name='Having' value='HAVING %1' />
+      <part name='OrderBy' value='ORDER BY %1' />
+    </format-select>
+    <!--
+      format-set-isolation-level
+      Formula for setting session isolation level
+    -->
+    <format-set-isolation-level value='SET TRANSACTION ISOLATION LEVEL %1' />
+    <!--
+      format-simple-case
+      [Default]Case
+      BalancedIIF
+    -->
+    <format-simple-case value='Case' />
+    <!--
+      format-stored-proc-call
+      Formula for calling a stored procedure.
+      use-name-value-format indicates whether arguments are 'name=value' (true) or just 'value' (false)
+    -->
+    <format-stored-proc-call value='EXEC %1 %2' use-name-value-format='true' />
+    <!--
+      format-string-literal
+      Defines which special characters are escaped in string literals.
+      [Default]Standard: Escape single quotes only
+      Extended: Also escape \', \\, \x0A, \x0D, \t, \b, and \f
+    -->
+    <format-string-literal value='Standard' />
+    <!--
+      format-true
+      String literal or expression for boolean true
+    -->
+    <format-true value='(1=1)' />
+    <!--
+      id-max-length
+      Maximum identifier length
+    -->
+    <id-max-length value='0' />
+    <!--
+      id-quotes
+      Add quote to the Beginning and end of an identifier string when formatting string identifier
+    -->
+    <id-quotes value='"' />
+    <!--
+      start-of-week-offset
+      Tableau's start of week functions assume Sunday is 0.
+      This is used to specify an offset. For example, if the
+      database says Sunday is 1, the offset value should be 1.
+      If Sunday is 6, the offset value should be either 6 or -1.
+    -->
+    <start-of-week-offset value='0' />
+    <!--
+      supported-joins
+      Enumerated list of supported join types
+    -->
+    <supported-joins>
+      <part name='Inner' />
+      <part name='Left' />
+      <part name='Right' />
+      <part name='Full' />
+      <part name='Cross' />
+    </supported-joins>
+  </sql-format>
+</dialect>
