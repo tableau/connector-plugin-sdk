@@ -135,3 +135,41 @@ The <span style="font-family: courier new">unagg-formula</span> (unaggregated 
 The <span style="font-family: courier new">argument</span> element is an optional child of all three types of <span style="font-family: courier new">function</span> elements. It contains a single attribute, <span style="font-family: courier new">type</span>, which specifies the abbreviated argument type. Arguments must be listed in the correct order.   
 Allowable types: none, bool, real, int, str, datetime, date, localstr, null, error, any, tuple, spatial, localreal, localint.  
 Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second. 
+
+### Join Support:
+
+ **Supported Joins** <br/>
+  Some database does not support all types of join.`<supported-joins>` enumerates list of supported join types.  
+
+  ```xml
+    ...
+        <supported-joins>
+          <part name='Inner' />
+          <part name='Left' />
+          <part name='Right' />
+          <part name='Full' />
+          <part name='Cross' />
+        </supported-joins>
+      </sql-format>
+      </dialect>
+    ...
+```   
+**Format is distinct** <br/>
+ `<format-is-distinct>` Defines a strategy for determining whether two values are distinct.  <br/>
+ The value for this property can be: 
+
+  - __NoNullCheck__
+      Does not check that the value of LHS and RHS is null. Logic: `(lhs [!]= rhs)`
+  - __Keyword__
+      Uses `DISTINCT` keyword for comparision. Logic: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
+  - __Operator__
+    Uses `<=>` for comparions. Logic:`([NOT] (lhs <=> rhs))`
+  - __Formula__
+        By default formula is used. In this case format is distinct checks that the value for LHS and RHS is not null. Logic :`((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))`
+
+  ```xml 
+  <format-is-distinct value='NoNullCheck' />
+  ```
+
+  **Join Capabilities**  <br/>
+  Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
