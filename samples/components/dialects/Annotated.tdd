@@ -1107,18 +1107,6 @@
   -->
   <sql-format>
     <!--
-      base-types
-      Map of Tableau types to basic DB types
-    -->
-    <base-types>
-      <local-type name='real' value='DOUBLE' />
-      <local-type name='int' value='BIGINT' />
-      <local-type name='str' value='VARCHAR' />
-      <local-type name='bool' value='TINYINT' />
-      <local-type name='date' value='DATE' />
-      <local-type name='datetime' value='TIMESTAMP' />
-    </base-types>
-    <!--
       date-literal-escape
       Used with the DATEPARSE function.
       Defines how Tableau formats literals in a date format string.
