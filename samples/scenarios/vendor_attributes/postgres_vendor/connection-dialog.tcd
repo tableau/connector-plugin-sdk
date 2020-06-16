@@ -1,4 +1,4 @@
-<connection-dialog class='postgres_jdbc'>
+<connection-dialog class='postgres_vendor'>
   <connection-config>
     <authentication-mode value='Basic' />
     <authentication-options>
