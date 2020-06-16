@@ -173,3 +173,88 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
 
   **Join Capabilities**  <br/>
   Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
+
+### Boolean Support:
+  We can use boolean support functions when a database lacks native boolean support. <br/>
+   **format-true** <br/> 
+  String literal or expression for boolean false value.  
+  ```xml 
+   <format-true value='(1=1)' />
+  ```
+  **format-false** <br/>
+  String literal or expression for boolean false value. 
+  ```xml 
+  <format-false value='(1=0)' />
+  ```
+   **format-bool-as-value** <br/>
+    Used in CASE statements. Determines whether the true or false case is used first. 
+    The value for this property can be: 
+  - __TrueFirst__
+      This is the default case. Logic: `CASE WHEN %1 THEN 1 WHEN NOT %1 THEN 0 ELSE NULL END`
+  - __FalseFirst__
+      False case is used first. Logic: `CASE WHEN NOT %1 THEN 0 WHEN %1 THEN 1 ELSE NULL END`
+
+  ```xml 
+    <format-bool-as-value value='TrueFirst' />
+  ```
+  
+ **Boolean Capabilities**  <br/>
+  
+  Boolean usage is also defined by capabilities in the manifest file. The capabilities are: <br>
+  - __CAP_QUERY_BOOLEXPR_TO_INTEXPR__
+  -  __CAP_QUERY_BOOLEXPR_TO_INTEXPR__
+  - __CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL__
+  - __CAP_QUERY_GROUP_BY_BOOL__
+  - __CAP_ODBC_BIND_BOOL_AS_WCHAR_TFLITERAL__ <br/>
+  This capability seems to be necessary only for Hive/Impala connector. 
+- __CAP_ODBC_BIND_BOOL_AS_WCHAR_01LITERAL__ <br/> 
+  See the Query section for boolean capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
+
+ **TDVT Coverage**  <br/>
+The following TDVT tests check that the boolean functions are working as expected in tabquery for a database connector. 
+logical.bool	exprtests\standard\setup.logical.bool.txt
+logical	exprtests\standard\setup.logical.txt
+
+### Temp Table Support:
+   **format-create-table** <br/> 
+  This function uses  piece-by-piece formulas for creating a table.
+  Predicates can be used with tokens that only corresponds to a certain type of table.
+  Predicates: <br/>
+  -  __GlobalTemp__
+  -  __LocalTemp__
+  -  __AnyTemp__
+  -  __NoTemp__ <br/>
+   You should also be able to use the following string substitution tokens along with the predicate:
+      - __%n - table name__
+     - __%f - formatted column list__
+      
+  ```xml 
+  <format-create-table>
+      <formula>CREATE </formula>
+      <formula predicate='GlobalTemp'>GLOBAL </formula>
+      <formula predicate='LocalTemp'>LOCAL </formula>
+      <formula predicate='AnyTemp'>TEMPORARY </formula>
+      <formula>TABLE %n (</formula>
+      <formula>%f</formula>
+      <formula>)</formula>
+      <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
+    </format-create-table>
+  ```
+  **format-select** <br/>
+    This function uses piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
+    the `Into` clause in `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using `INTO` clause.
+  ```xml 
+    <format-select>
+      <part name='Into' value='CREATE GLOBAL TEMPORARY TABLE %1 ON COMMIT PRESERVE ROWS AS' />
+      <part name='Top' value='SELECT * FROM (' />
+      <part name='Select' value='SELECT %1' />
+      <part name='From' value='FROM %1' />
+      <part name='Where' value='WHERE %1' />
+      ...
+    </format-select> />
+  ```
+  
+ **Temp Tables Capabilities**  <br/>
+  
+  Temp table usage is also defined by capabilities in the manifest file.
+  See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities#temporary-tables) for more details.
