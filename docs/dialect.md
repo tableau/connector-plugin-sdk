@@ -212,8 +212,7 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
 
  **TDVT Coverage**  <br/>
 The following TDVT tests check that the boolean functions are working as expected in tabquery for a database connector. 
-logical.bool	exprtests\standard\setup.logical.bool.txt
-logical	exprtests\standard\setup.logical.txt
+logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\standard\setup.logical.txt`. See [this](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/tdvt/exprtests/standard) for more details. 
 
 ### Temp Table Support:
    **format-create-table** <br/> 
@@ -257,4 +256,4 @@ logical	exprtests\standard\setup.logical.txt
  **Temp Tables Capabilities**  <br/>
   
   Temp table usage is also defined by capabilities in the manifest file.
-  See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities#temporary-tables) for more details.
+  See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
