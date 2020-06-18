@@ -175,19 +175,38 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
   Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
 
 ### Boolean Support:
-  We can use boolean support functions when a database lacks native boolean support. <br/>
+  Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
    **format-true** <br/> 
   String literal or expression for boolean false value.  
   ```xml 
    <format-true value='(1=1)' />
   ```
+'format-true' and 'format-false' are used in two use cases: literals and predicates
+
   **format-false** <br/>
   String literal or expression for boolean false value. 
   ```xml 
   <format-false value='(1=0)' />
   ```
+
+**Note: Changes in Tableau 2020.3**
+
+  With the release of Tableau 2020.3, `format-true` and `format-false` will have two parameters, literal and predicate. <br/>
+  Literals is used when a boolean is used as a value. Default to: `x ? 1 : 0` <br/>
+  Example usage: `SELECT 1 as literalBool` <br/>
+  Predicates is used when a boolean is used as a predicate. Default to: `isTrue ? (1=1) : (1=0)` <br/>
+  Example usage: `SELECT something as test WHERE (1=1)` <br/>
+  `value` attribute is used as `predicate` for backwards compatability <br/>
+  Example:
+  ```xml 
+    <format-true literal='TRUE' predicate='TRUE' />
+  ```
+  ```xml 
+    <format-false literal='FALSE' predicate='FALSE' />
+  ```
+
    **format-bool-as-value** <br/>
-    Used in CASE statements. Determines whether the true or false case is used first. 
+    Used in CASE statements. Determines whether the true or false case is used first. The fucntion is only used when `CAP_QUERY_BOOLEXPR_TO_INTEXPR` capiblity is set to yes. 
     The value for this property can be: 
   - __TrueFirst__
       This is the default case. Logic: `CASE WHEN %1 THEN 1 WHEN NOT %1 THEN 0 ELSE NULL END`
@@ -200,21 +219,14 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
   
  **Boolean Capabilities**  <br/>
   
-  Boolean usage is also defined by capabilities in the manifest file. The capabilities are: <br>
-  - __CAP_QUERY_BOOLEXPR_TO_INTEXPR__
-  -  __CAP_QUERY_BOOLEXPR_TO_INTEXPR__
-  - __CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL__
-  - __CAP_QUERY_GROUP_BY_BOOL__
-  - __CAP_ODBC_BIND_BOOL_AS_WCHAR_TFLITERAL__ <br/>
-  This capability seems to be necessary only for Hive/Impala connector. 
-- __CAP_ODBC_BIND_BOOL_AS_WCHAR_01LITERAL__ <br/> 
+  Boolean usage is also defined by capabilities in the manifest file. <br\>
   See the Query section for boolean capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
 
  **TDVT Coverage**  <br/>
-The following TDVT tests check that the boolean functions are working as expected in tabquery for a database connector. 
+The following TDVT tests check that the boolean functionality is working as expected for a connector. 
 logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\standard\setup.logical.txt`. See [this](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/tdvt/exprtests/standard) for more details. 
 
-### Temp Table Support:
+### Temporary Table Support:
    **format-create-table** <br/> 
   This function uses  piece-by-piece formulas for creating a table.
   Predicates can be used with tokens that only corresponds to a certain type of table.
