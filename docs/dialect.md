@@ -253,6 +253,7 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
   **format-select** <br/>
   This function uses piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
   the `Into` clause in `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using `INTO` clause.
+  `INTO` cluse is only aviable when `CAP_SELECT_INTO` capability is set to yes. 
   
   ```xml 
       <format-select>
