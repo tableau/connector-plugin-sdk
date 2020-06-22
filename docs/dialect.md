@@ -176,15 +176,12 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
 
 ### Boolean Support:
   Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
+  `format-true` and `format-false` are used in predicate statements. <br/>
    **format-true** <br/> 
-  String literal or expression for boolean false value.  
   ```xml 
    <format-true value='(1=1)' />
   ```
-'format-true' and 'format-false' are used in two use cases: literals and predicates
-
   **format-false** <br/>
-  String literal or expression for boolean false value. 
   ```xml 
   <format-false value='(1=0)' />
   ```
@@ -238,32 +235,45 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
    You should also be able to use the following string substitution tokens along with the predicate:
       - __%n - table name__
      - __%f - formatted column list__
-      
+    This function is avialable when `CAP_CREATE_TEMP_TABLES` capability is set to yes. 
+  
   ```xml 
-  <format-create-table>
-      <formula>CREATE </formula>
-      <formula predicate='GlobalTemp'>GLOBAL </formula>
-      <formula predicate='LocalTemp'>LOCAL </formula>
-      <formula predicate='AnyTemp'>TEMPORARY </formula>
-      <formula>TABLE %n (</formula>
-      <formula>%f</formula>
-      <formula>)</formula>
-      <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
-    </format-create-table>
+    <format-create-table>
+        <formula>CREATE </formula>
+        <formula predicate='GlobalTemp'>GLOBAL </formula>
+        <formula predicate='LocalTemp'>LOCAL </formula>
+        <formula predicate='AnyTemp'>TEMPORARY </formula>
+        <formula>TABLE %n (</formula>
+        <formula>%f</formula>
+        <formula>)</formula>
+        <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
+      </format-create-table>
   ```
+
   **format-select** <br/>
-    This function uses piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
-    the `Into` clause in `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using `INTO` clause.
+  This function uses piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
+  the `Into` clause in `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using `INTO` clause.
+  
   ```xml 
-    <format-select>
-      <part name='Into' value='CREATE GLOBAL TEMPORARY TABLE %1 ON COMMIT PRESERVE ROWS AS' />
-      <part name='Top' value='SELECT * FROM (' />
-      <part name='Select' value='SELECT %1' />
-      <part name='From' value='FROM %1' />
-      <part name='Where' value='WHERE %1' />
-      ...
-    </format-select> />
+      <format-select>
+        <part name='Into' value='CREATE GLOBAL TEMPORARY TABLE %1 ON COMMIT PRESERVE ROWS AS' />
+        <part name='Top' value='SELECT * FROM (' />
+        <part name='Select' value='SELECT %1' />
+        <part name='From' value='FROM %1' />
+        <part name='Where' value='WHERE %1' />
+        ...
+      </format-select> />
   ```
+
+  **format-drop-table** <br/>
+    This function defines the format for dropping a table. %1 is the table name. Each formula is executed as a separate statement. <br/>
+    This function is only used when `CAP_TEMP_TABLES_NOT_SESSION_SCOPED` capability is set to yes. 
+  ```xml 
+     <format-drop-table>
+      <formula>TRUNCATE TABLE %1</formula>
+      <formula>DROP TABLE %1 PURGE</formula>
+    </format-drop-table>
+  ``` 
   
  **Temp Tables Capabilities**  <br/>
   
