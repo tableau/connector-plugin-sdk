@@ -189,10 +189,10 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
 **Note: Changes in Tableau 2020.3**
 
   With the release of Tableau 2020.3, `format-true` and `format-false` will have two parameters, literal and predicate. <br/>
-  Literals is used when a boolean is used as a value. Default to: `x ? 1 : 0` <br/>
-  Example usage: `SELECT 1 as literalBool` <br/>
-  Predicates is used when a boolean is used as a predicate. Default to: `isTrue ? (1=1) : (1=0)` <br/>
-  Example usage: `SELECT something as test WHERE (1=1)` <br/>
+  Literals is used when a boolean is used as a value. The default values are 1 and 0. <br/>
+  Example usage: `SELECT 1 AS literalBool` <br/>
+  Predicates is used when a boolean is used as a predicate. The default values are `(1=1)` and `(1=0)`. <br/>
+  Example usage: `SELECT something AS test WHERE (1=1)` <br/>
   `value` attribute is used as `predicate` for backwards compatability <br/>
   Example:
   ```xml 
@@ -203,7 +203,7 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
   ```
 
    **format-bool-as-value** <br/>
-    Used in CASE statements. Determines whether the true or false case is used first. The fucntion is only used when `CAP_QUERY_BOOLEXPR_TO_INTEXPR` capiblity is set to yes. 
+    Used in CASE statements. Determines whether the true or false case is used first. The function is only used when the `CAP_QUERY_BOOLEXPR_TO_INTEXPR` capiblity is set to yes. 
     The value for this property can be: 
   - __TrueFirst__
       This is the default case. Logic: `CASE WHEN %1 THEN 1 WHEN NOT %1 THEN 0 ELSE NULL END`
@@ -235,7 +235,7 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
    You should also be able to use the following string substitution tokens along with the predicate:
       - __%n - table name__
      - __%f - formatted column list__
-    This function is avialable when `CAP_CREATE_TEMP_TABLES` capability is set to yes. 
+    This function is avialable when the `CAP_CREATE_TEMP_TABLES` capability is set to yes. 
   
   ```xml 
     <format-create-table>
@@ -251,9 +251,9 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
   ```
 
   **format-select** <br/>
-  This function uses piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
-  the `Into` clause in `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using `INTO` clause.
-  `INTO` cluse is only aviable when `CAP_SELECT_INTO` capability is set to yes. 
+  This function uses a piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
+  the `Into` clauses in the `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using an `INTO` clause.
+  `INTO` cluse is only aviable when the `CAP_SELECT_INTO` capability is set to yes. 
   
   ```xml 
       <format-select>
@@ -270,13 +270,13 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
     This function defines the format for dropping a table. %1 is the table name. Each formula is executed as a separate statement. <br/>
     This function is only used when `CAP_TEMP_TABLES_NOT_SESSION_SCOPED` capability is set to yes. 
   ```xml 
-     <format-drop-table>
+    <format-drop-table>
       <formula>TRUNCATE TABLE %1</formula>
       <formula>DROP TABLE %1 PURGE</formula>
     </format-drop-table>
   ``` 
   
- **Temp Tables Capabilities**  <br/>
+ **Temporary Table Capabilities**  <br/>
   
-  Temp table usage is also defined by capabilities in the manifest file.
+  Temporary table usage is also defined by capabilities in the manifest file.
   See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
