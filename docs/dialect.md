@@ -235,7 +235,7 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
    You should also be able to use the following string substitution tokens along with the predicate:
       - __%n - table name__
      - __%f - formatted column list__
-    This function is avialable when the `CAP_CREATE_TEMP_TABLES` capability is set to yes. 
+    This function is available when the `CAP_CREATE_TEMP_TABLES` capability is set to yes. 
   
   ```xml 
     <format-create-table>
@@ -253,7 +253,7 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
   **format-select** <br/>
   This function uses a piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
   the `Into` clauses in the `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using an `INTO` clause.
-  `INTO` cluse is only aviable when the `CAP_SELECT_INTO` capability is set to yes. 
+  `INTO` clause  is only available when the `CAP_SELECT_INTO` capability is set to yes. 
   
   ```xml 
       <format-select>
@@ -272,7 +272,7 @@ logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\
   ```xml 
     <format-drop-table>
       <formula>TRUNCATE TABLE %1</formula>
-      <formula>DROP TABLE %1 PURGE</formula>
+      <formula>DROP TABLE %1</formula>
     </format-drop-table>
   ``` 
   
