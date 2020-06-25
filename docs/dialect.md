@@ -173,3 +173,110 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
 
   **Join Capabilities**  <br/>
   Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
+
+### Boolean Support:
+  Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
+  `format-true` and `format-false` are used in predicate statements. <br/>
+   **format-true** <br/> 
+  ```xml 
+   <format-true value='(1=1)' />
+  ```
+  **format-false** <br/>
+  ```xml 
+  <format-false value='(1=0)' />
+  ```
+
+**Note: Changes in Tableau 2020.3**
+
+  With the release of Tableau 2020.3, `format-true` and `format-false` will have two parameters, literal and predicate. <br/>
+  Literals is used when a boolean is used as a value. The default values are 1 and 0. <br/>
+  Example usage: `SELECT 1 AS literalBool` <br/>
+  Predicates is used when a boolean is used as a predicate. The default values are `(1=1)` and `(1=0)`. <br/>
+  Example usage: `SELECT something AS test WHERE (1=1)` <br/>
+  `value` attribute is used as `predicate` for backwards compatability <br/>
+  Example:
+  ```xml 
+    <format-true literal='TRUE' predicate='TRUE' />
+  ```
+  ```xml 
+    <format-false literal='FALSE' predicate='FALSE' />
+  ```
+
+   **format-bool-as-value** <br/>
+    Used in CASE statements. Determines whether the true or false case is used first. The function is only used when the `CAP_QUERY_BOOLEXPR_TO_INTEXPR` capiblity is set to yes. 
+    The value for this property can be: 
+  - __TrueFirst__
+      This is the default case. Logic: `CASE WHEN %1 THEN 1 WHEN NOT %1 THEN 0 ELSE NULL END`
+  - __FalseFirst__
+      False case is used first. Logic: `CASE WHEN NOT %1 THEN 0 WHEN %1 THEN 1 ELSE NULL END`
+
+  ```xml 
+    <format-bool-as-value value='TrueFirst' />
+  ```
+  
+ **Boolean Capabilities**  <br/>
+  
+  Boolean usage is also defined by capabilities in the manifest file. <br\>
+  See the Query section for boolean capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
+
+ **TDVT Coverage**  <br/>
+The following TDVT tests check that the boolean functionality is working as expected for a connector. 
+logical.bool	`exprtests\standard\setup.logical.bool.txt` and logical	`exprtests\standard\setup.logical.txt`. See [this](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/tdvt/exprtests/standard) for more details. 
+
+### Temporary Table Support:
+   **format-create-table** <br/> 
+  This function uses  piece-by-piece formulas for creating a table.
+  Predicates can be used with tokens that only corresponds to a certain type of table.
+  Predicates: <br/>
+  -  __GlobalTemp__
+  -  __LocalTemp__
+  -  __AnyTemp__
+  -  __NoTemp__ <br/>
+   You should also be able to use the following string substitution tokens along with the predicate:
+      - __%n - table name__
+     - __%f - formatted column list__
+    This function is available when the `CAP_CREATE_TEMP_TABLES` capability is set to yes. 
+  
+  ```xml 
+    <format-create-table>
+        <formula>CREATE </formula>
+        <formula predicate='GlobalTemp'>GLOBAL </formula>
+        <formula predicate='LocalTemp'>LOCAL </formula>
+        <formula predicate='AnyTemp'>TEMPORARY </formula>
+        <formula>TABLE %n (</formula>
+        <formula>%f</formula>
+        <formula>)</formula>
+        <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
+      </format-create-table>
+  ```
+
+  **format-select** <br/>
+  This function uses a piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
+  the `Into` clauses in the `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using an `INTO` clause.
+  `INTO` clause  is only available when the `CAP_SELECT_INTO` capability is set to yes. 
+  
+  ```xml 
+      <format-select>
+        <part name='Into' value='CREATE GLOBAL TEMPORARY TABLE %1 ON COMMIT PRESERVE ROWS AS' />
+        <part name='Top' value='SELECT * FROM (' />
+        <part name='Select' value='SELECT %1' />
+        <part name='From' value='FROM %1' />
+        <part name='Where' value='WHERE %1' />
+        ...
+      </format-select> />
+  ```
+
+  **format-drop-table** <br/>
+    This function defines the format for dropping a table. %1 is the table name. Each formula is executed as a separate statement. <br/>
+    This function is only used when `CAP_TEMP_TABLES_NOT_SESSION_SCOPED` capability is set to yes. 
+  ```xml 
+    <format-drop-table>
+      <formula>TRUNCATE TABLE %1</formula>
+      <formula>DROP TABLE %1</formula>
+    </format-drop-table>
+  ``` 
+  
+ **Temporary Table Capabilities**  <br/>
+  
+  Temporary table usage is also defined by capabilities in the manifest file.
+  See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
