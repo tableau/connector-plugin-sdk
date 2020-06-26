@@ -1,5 +1,6 @@
-# Connection Dialog v2
-
+---
+title: Connection Dialog v2
+--- 
 **IMPORTANT:** This is alpha software and should be used in a test environment. Do not deploy the connector to a production environment.
 
 Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
