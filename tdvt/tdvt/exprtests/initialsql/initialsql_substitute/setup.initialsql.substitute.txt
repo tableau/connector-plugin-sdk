@@ -1,0 +1,1 @@
+RAWSQL_STR("select c3 from testIsql where c1=%1",[str0])

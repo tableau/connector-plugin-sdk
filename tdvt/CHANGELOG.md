@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.1.15] - 2020-06-15
+- Add initialsql tests for vertica
+
 ## [2.1.14] - 2020-05-18
 - Add more tests for initialsql
 
