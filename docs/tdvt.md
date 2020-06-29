@@ -162,7 +162,7 @@ For example, if you set <span style="font-family: courier new">Name = mydb</span
 1. Note the value for "table", in this case "[dbo].[Calcs]".
 
 1. Run this command:   
-`tdvt list --logical_config`  
+`tdvt list-logical-configs`  
    This prints all the logical query versions and some information about how they map things.
    Search the output of the command for something that matches "[dbo].[Calcs]".   
 This is a selection of the output:   
