@@ -1,0 +1,1 @@
+This sample shows how use the mysql_odbc base class to make a connector that inherits from our existing MySQL connector. Thkis may be useful for a database that follows the MySQL protocol closely. This is not a fully-formed connector.
