@@ -16,6 +16,9 @@ The following sections have been added to the dialect documentation:
     - __format-true__
     - __format-false__
     - __format-bool-as-value__
+- __String Literal Support__
+    - __Standard vs Extended__
+    - __Unicode Prefix__
 - __Temporary Table Support__
     - __format-create-table__
     - __format-select__
