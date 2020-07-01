@@ -1,4 +1,4 @@
-To help our partners get a head start on their connectors, we have provided several samples covering different types of connectors. These connectors are meant only as examples, and are provided as-is.
+To help get a head start on their connectors, we have provided several samples covering different types of connectors. These connectors are meant only as examples, and are provided as-is.
 
 There are three types of samples:
 - Components are examples of a single piece of a connector. We have component samples for dialects, scripts, and more.
