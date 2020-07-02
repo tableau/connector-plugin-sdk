@@ -96,6 +96,8 @@ CAP_QUERY_TOP_SAMPLE_PERCENT | Set to 'yes' if TOP supports sampling by percenta
 CAP_QUERY_USE_DOMAIN_RANGES_OPTIMIZATION | Set to 'no' if domain ranges cannot be used to optimize set functions. | yes | yes
 CAP_QUERY_USE_QUERY_FUSION | Set to ‘no’ to prevent Tableau from combining multiple individual queries into a single combined query. Turn off this capability for performance tuning or if the database is unable to process large queries.  | yes | yes 
 CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subquery wrapped with only a TOP clause | no | no 
+CAP_QUERY_TIME_REQUIRES_CAST | Set to 'yes' if the time columns must be cast to timestamp/datetime. This capability applies to ODBC connectors. | no | **<span style="color:red">?</span>**   
+
 
 ## JDBC 
 
