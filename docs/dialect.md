@@ -55,7 +55,7 @@ Each <span style="font-family: courier new">function</span> elements defines a
 
 Attribute | Required | Description 
 -|-|-
-name | Y | Indicates the name of the function being added or overridden. Remember, just because a function is present in a dialect doesn't mean that our calculated field expression parser will recognize it. 
+name | Y | Indicates the name of the function being added or overridden.
 group | Y | Contains one or more (comma-separated) groups that this function belongs to. Allowable types: aggregate, cast, date, logical, numeric, operator, passthru, special, string, system. 
 return-type | Y | Indicates the return type of the function. For a list of allowable types, see [argument-element](#Argument) below. 
 
