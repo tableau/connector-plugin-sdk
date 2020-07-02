@@ -47,11 +47,11 @@ User is never prompted for credentials.
 </tdr>
 ```
 
-Sample connection dialog [noAuthOption.tcd](https://github.com/tableau/connector-plugin-sdk/blob/dev/samples/components/dialogs/noAuthOption.tcd)
+Sample connection dialog [noAuthOption.tcd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialogs/noAuthOption.tcd)
 
 ### Username only
 
-User is prompted for username during initial connection creation.
+User is prompted for username during initial connection creation.  Before Tableau 2020.3 the ```option``` element required ```value='no'``` instead of example below.
 
 ```xml
 <!-- Connection Dialog -->
@@ -59,7 +59,7 @@ User is prompted for username during initial connection creation.
     <connection-config>
         <authentication-mode value='BasicUserNameOnly' />
         <authentication-options>
-            <option name="Username" default="true" value="no"/>
+            <option name="Username" default="true" value="auth-user"/>
         </authentication-options>
         ...
     </connection-config>
@@ -97,6 +97,9 @@ User is prompted for password during initial connection creation and reconnectin
 <connection-dialog class='sample'>
     <connection-config>
         <authentication-mode value='PasswordOnly' />
+        <authentication-options>
+            <option name="Password" default="true" value="auth-pass"/>
+        </authentication-options>
         ...
     </connection-config>
 </connection-dialog>
@@ -111,6 +114,7 @@ User is prompted for password during initial connection creation and reconnectin
             <required-attributes>
                 <attribute-list>
                     ...
+                    <attr>authentication</attr>
                     <attr>password</attr>
                     ...
                 </attribute-list>
@@ -131,6 +135,9 @@ User is prompted for username and password during initial connection creation, a
 <connection-dialog class='sample'>
     <connection-config>
         <authentication-mode value='Basic' />
+        <authentication-options>
+            <option name="UsernameAndPassword" default="true" value="auth-user-pass"/>
+        </authentication-options>
         ...
     </connection-config>
 </connection-dialog>
@@ -145,6 +152,7 @@ User is prompted for username and password during initial connection creation, a
             <required-attributes>
                 <attribute-list>
                     ...
+                    <attr>authentication</attr>
                     <attr>username</attr>
                     <attr>password</attr>
                     ...
@@ -177,15 +185,22 @@ LDAP
         <authentication-mode value='ComboBoxIntegrated' />
         <authentication-options>
             <option name="None" value="auth-none" />
-            <option name="Username" value="username" />
-            <option name="UsernameAndPassword" value="username-password" default="true" />
+            <option name="Username" value="auth-user" />
+            <option name="UsernameAndPassword" value="auth-user-pass" default="true" />
         </authentication-options>
         ...
     </connection-config>
 </connection-dialog>
 ```
 
-Note: the ```value``` attribute value for all options is customizable by connector author, except None, which is required to be ```auth-none```.  These option values are the persisted value of the authentication attribute in a Tableau workbook (twb) or Tableau data source (tds) file. 
+Note: the ```value``` attribute value for all options is customizable by connector author, except None, which is required to be ```auth-none```.  These option values are the persisted value of the authentication attribute in a Tableau workbook (twb) or Tableau data source (tds) file.  Starting in Tableau 2020.3, the recommendation is to standardize ```value``` to the following when possible:
+
+Option | ```value```
+-|-
+None | auth-none
+Username | auth-user
+UsernameAndPassword | auth-user-pass
+Password | auth-pass
 
 ```xml
 <!-- Connection Resolver -->
@@ -216,9 +231,9 @@ Note: the ```value``` attribute value for all options is customizable by connect
     var authAttrValue = attr[connectionHelper.attributeAuthentication];
     if (authAttrValue == "auth-none")
         // no-op
-    else if (authAttrValue == "username")
+    else if (authAttrValue == "auth-user")
         params["UID"] = attr[connectionHelper.attributeUsername];
-    else if (authAttrValue == "username-password")
+    else if (authAttrValue == "auth-user-pass")
     {
         params["UID"] = attr[connectionHelper.attributeUsername];
         params["PWD"] = attr[connectionHelper.attributePassword];
