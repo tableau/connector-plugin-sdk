@@ -25,7 +25,7 @@ from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
 from .resources import *
 from .tabquery import build_tabquery_command_line
-from .tabquery import build_tabquery_command_line_connectors
+from .tabquery import build_connectors_test_tabquery_command_line
 from .test_results import *
 
 ALWAYS_GENERATE_EXPECTED = False
@@ -36,8 +36,9 @@ class ConnectorsTest(object):
         self.conn_test_name = conn_test_name
         self.conn_test_file = conn_test_file
         self.timeout_seconds = 10
+
     def run_connectors_test(self):
-        cmdline = build_tabquery_command_line_connectors(self.conn_test_name, self.conn_test_file)
+        cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file)
         self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
                                                       timeout=self.timeout_seconds))
         print(self.cmd_output)
@@ -710,3 +711,4 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
 def run_connectors_test_core(conn_test_name, conn_test_file):
     connectors_test = ConnectorsTest(conn_test_name, conn_test_file)
     connectors_test.run_connectors_test()
+    

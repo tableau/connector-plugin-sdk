@@ -715,15 +715,12 @@ def run_connectors_test(args):
     if not tabquerycli_exists():
         print("Could not find Tabquerycli.")
         sys.exit(0)
-    connTestName = ''
-    connTestFileName = ''
 
-    if args.conn_test:
-        connTestName = args.conn_test
-    if args.conn_test_file:
-        connTestFileName = args.conn_test_file
+    if not args.conn_test or not args.conn_test_file:
+        print("Missing arguments. Not running Connectors Test")
+        sys.exit(0)
 
-    print(run_connectors_test_core(connTestName, connTestFileName))
+    print(run_connectors_test_core( args.conn_test, args.conn_test_file))
 
 def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     """Rerun all the failed tests listed in the json file."""
