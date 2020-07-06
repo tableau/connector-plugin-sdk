@@ -711,4 +711,3 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
 def run_connectors_test_core(conn_test_name, conn_test_file):
     connectors_test = ConnectorsTest(conn_test_name, conn_test_file)
     connectors_test.run_connectors_test()
-    
