@@ -41,10 +41,18 @@ def build_tabquery_command_line(work):
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
 
+def build_tabquery_command_line_connectors(connTestName, connTestFileName):
+    global tab_cli_exe
+    cmdline = [tab_cli_exe]
+    cmdline.extend(["--conn-test", connTestName])
+    cmdline.extend(["--conn-test-file", connTestFileName])
+    return cmdline
+    
 class TabqueryCommandLine(object):
     def extend_command_line(self, cmdline, work):
         pass
 
+    
     def build_tabquery_command_line(self, work):
         """Build the command line string for calling tabquerycli."""
         global tab_cli_exe
