@@ -417,7 +417,7 @@ run_pattern_usage_text = '''
     '''
 run_connectors_test_usage_text = '''
     The commands below can be used to run the connectors tests.
-    'filename.txt' in the below commands is the path of the xml test file used to run the tests.
+    'filename.xml' in the below commands is the path of the xml test file used to run the tests.
     Run ConnectionBuilderTest
         run-connectors-test --conn-test connectionBuilder --conn-test-file filepath.xml
     Run NormalizeConnectionAttributes Test
@@ -492,8 +492,8 @@ def create_parser():
 
     #Run Connectors Test
     run_connectors_test_parser = subparsers.add_parser('run-connectors-test', help='Run a connectors test using a file', parents=[run_test_common_parser], usage=run_connectors_test_usage_text)
-    run_connectors_test_parser.add_argument('--conn-test', dest='conn_test', help='Name of the Connectors Test to run.',  required=True, default=None, const='', nargs='?')
-    run_connectors_test_parser.add_argument('--conn-test-file', dest='conn_test_file', help='Path to the setup-expected file to run the connectors test',  required=True, default=None, const='', nargs='?')
+    run_connectors_test_parser.add_argument('--conn-test', dest='conn_test', help='Name of the Connectors Test to run.',  required=True)
+    run_connectors_test_parser.add_argument('--conn-test-file', dest='conn_test_file', help='Path to the setup-expected file to run the connectors test',  required=True)
 
     return parser
 
