@@ -161,8 +161,9 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
 
             if 'category' in child.attrib:
                 category = child.attrib['category']
-                optional = 'optional' not in child.attrib or child.attrib['optional'] == 'true'
-                if category == 'advanced' and not optional and 'default-value' not in child.attrib:
+                optional = child.attrib.get('optional','true') == 'true'
+                default_present = child.attrib.get('default-value','') != ''
+                if category == 'advanced' and not optional and not default_present:
                     xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
                                                  "': Required fields in the Advanced category must be assigned a default value.")
                     return False
