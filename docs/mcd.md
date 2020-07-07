@@ -5,7 +5,6 @@ title: Connection Dialog v2
 
 Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
-This feature is new in 2020.2. It is an alpha feature, and as such it is available in Desktop only. In future releases it will become available in other Tableau products including Server and Prep. 
 
 # How to Use Connection Dialog v2
 

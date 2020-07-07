@@ -198,6 +198,8 @@ CommandLineOverride = -DLogLevel=Debug #Space separated list of arguments that a
 
 MaxThread = 6   #You can add this to control Max Thread number when you use TDVT to run single datasource, it cannot apply with multi datasource
 
+TimeoutSeconds = 6000 # You can overload the timeout for queries if your queries are running slow. By default this is set to 3600.
+
 LogicalQueryFormat = dbo
 
 #You can add a new logical config here and use it above. These are example attributes; you wouldn't set them all since some are mutually exclusive.

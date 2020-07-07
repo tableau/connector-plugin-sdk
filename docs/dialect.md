@@ -10,7 +10,7 @@ You should create a dialect definition file whenever you need to make changes to
 
 To get started quickly, you can copy the sample dialect.tdd file from the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) and use the copy to make your modifications.
 
-For an example of the XML schema for the TDD file format, see the [sample XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
+The XML schema for the plugin XML files is validated using XSD files. The dialect(.tdd) file is validated using [this XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
 
 Tableau searches for a TDD file in the location specified by the connector manifest XML file. The TDD format breaks down as follows:
 
@@ -55,9 +55,9 @@ Each <span style="font-family: courier new">function</span> elements defines a
 
 Attribute | Required | Description
 -|-|-
-name | Y | Indicates the name of the function being added or overridden. Remember, just because a function is present in a dialect doesn't mean that our calculated field expression parser will recognize it.
-group | Y | Contains one or more (comma-separated) groups that this function belongs to. Allowable types: aggregate, cast, date, logical, numeric, operator, passthru, special, string, system.
-return-type | Y | Indicates the return type of the function. For a list of allowable types, see [argument-element](#Argument) below.
+name | Y | Indicates the name of the function being added or overridden.
+group | Y | Contains one or more (comma-separated) groups that this function belongs to. Allowable types: aggregate, cast, date, logical, numeric, operator, passthru, special, string, system. 
+return-type | Y | Indicates the return type of the function. For a list of allowable types, see [argument-element](#Argument) below. 
 
 - __date-function element__
 The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.
