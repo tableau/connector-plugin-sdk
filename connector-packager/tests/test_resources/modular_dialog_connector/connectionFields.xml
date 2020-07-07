@@ -12,5 +12,7 @@
   <field name="username" label="Username" value-type="string" category="authentication" />
 
   <field name="password" label="Password" value-type="string" category="authentication" secure="true" />
+  
+  <field name="v-custom2" label="Advanced Custom" value-type="string" category="advanced" optional="false" default-value="" />
 
 </connection-fields>
