@@ -99,7 +99,6 @@ CAP_QUERY_USE_QUERY_FUSION | Set to ‘no’ to prevent Tableau from combining m
 CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subquery wrapped with only a TOP clause | no | no 
 
 
-
 ## JDBC 
 
 Capability | Description | Default | Recommended 
