@@ -8,6 +8,10 @@
 
 ## 2020-06-10
 ### Added
+- Changed sqlite_extract\dialect.xml, make it doesn't inherit from any base dialect
+
+## 2020-06-10
+### Added
 - Add SQLDialect to samples/components/dialects
 
 ## 2020-06-11
