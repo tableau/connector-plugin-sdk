@@ -159,4 +159,11 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                                                  "' not an allowed value. See 'Connection Field Platform Integration' section of documentation for allowed values.")
                     return False
 
+                category = child.attrib['category']
+                optional = 'optional' not in child.attrib or child.attrib['optional'] == 'true'
+                if category == 'advanced' and not optional and 'default-value' not in child.attrib:
+                    xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
+                                                 "': Required fields in the Advanced category must be assigned a default value.")
+                    return False
+
     return True
