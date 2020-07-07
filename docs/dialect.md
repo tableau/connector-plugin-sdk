@@ -10,7 +10,7 @@ You should create a dialect definition file whenever you need to make changes to
 
 To get started quickly, you can copy the sample dialect.tdd file from the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) and use the copy to make your modifications.
 
-For an example of the XML schema for the TDD file format, see the [sample XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
+The XML schema for the plugin XML files is validated using XSD files. The dialect(.tdd) file is validated using [this XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
 
 Tableau searches for a TDD file in the location specified by the connector manifest XML file. The TDD format breaks down as follows:
 

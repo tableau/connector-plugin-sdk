@@ -87,6 +87,7 @@ CAP_QUERY_SUBQUERIES | Set to 'yes' if the data source supports subqueries. | &n
 CAP_QUERY_SUBQUERIES_WITH_TOP | Set to 'yes' if the data source supports a TOP or LIMIT row-limiting clause within a subquery. | yes | **<span style="color:red">?</span>**  
 CAP_QUERY_SUBQUERY_QUERY_CONTEXT | Set to 'yes' to force Tableau to use a subquery for context filters instead of a temporary table or locally cached results. | yes | yes 
 CAP_QUERY_SUPPORT_EMPTY_GROUPBY | Set to 'yes' if data source supports empty group by clause | &ndash; | &ndash; 
+CAP_QUERY_TIME_REQUIRES_CAST | Set to 'yes' if the time columns must be cast to timestamp/datetime. This capability applies to ODBC connectors. | &ndash; | &ndash; 
 CAP_QUERY_TOP_0 | Set to 'no' if the server cannot handle a "TOP 0" request | yes | yes
 CAP_QUERY_TOP_N | Set to 'yes' if the data source supports any form of row-limiting clause. The exact forms supported are described below. | no | **<span style="color:red">yes</span>** 
 CAP_QUERY_TOP_PERCENT | Set to 'yes' if TOP supports percent | no | **<span style="color:red">?</span>** 
@@ -96,7 +97,7 @@ CAP_QUERY_TOP_SAMPLE_PERCENT | Set to 'yes' if TOP supports sampling by percenta
 CAP_QUERY_USE_DOMAIN_RANGES_OPTIMIZATION | Set to 'no' if domain ranges cannot be used to optimize set functions. | yes | yes
 CAP_QUERY_USE_QUERY_FUSION | Set to ‘no’ to prevent Tableau from combining multiple individual queries into a single combined query. Turn off this capability for performance tuning or if the database is unable to process large queries.  | yes | yes 
 CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subquery wrapped with only a TOP clause | no | no 
-CAP_QUERY_TIME_REQUIRES_CAST | Set to 'yes' if the time columns must be cast to timestamp/datetime. This capability applies to ODBC connectors. | &ndash; | &ndash; 
+
 
 
 ## JDBC 
