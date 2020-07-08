@@ -1,1 +1,23 @@
-
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>
+	<testCase>
+		<connection class='postgres_odbc' server='postgres.test.tsi.lan' dbname='TestV1' username='test' password='password' tablename='Calcs'/>
+		<expected minVersion="10.1" exactVersion="11.0.2" maxVersion="11.3.6"/>
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='postgres.test.tsi.lan' dbname='TestV1' username='test' password='password' tablename='Calcs'/>
+		<expected minVersion="10.1.0" />
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='postgres.test.tsi.lan' dbname='TestV1' username='test' password='password' tablename='Calcs'/>
+		<expected  maxVersion="11.3.6"/>
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='postgres.test.tsi.lan' dbname='TestV1' username='test' password='password' tablename='Calcs'/>
+		<expected  exactVersion="11.0.2" />
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='postgres.test.tsi.lan' dbname='TestV1' username='test' password='password' tablename='Calcs'/>
+		<expected minVersion="10.1"  maxVersion="11.3.6"/>
+	</testCase>
+</testCases>
