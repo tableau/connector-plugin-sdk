@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>
+    <testCase>
+        <connection authentication='username-password' class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='postgres' username='test' password='pswd' />
+        <expected />
+    </testCase>
+</testCases>
