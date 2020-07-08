@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<testCases>
-    
+<testCases>   
     <testCase match='true'>
         <!-- Does not normalize attributes first. -->
         <connection authentication='username-password' class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='postgres' username='test' />
@@ -16,5 +15,4 @@
         <connection authentication='username-password' class='postgres_odbc' somekey='t' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='postgres' username='test' />
         <key authentication='username-password' class='itspostgres_odbc' dbname='TestV1' somekey='y' odbc-native-protocol='' one-time-sql='' port='5432' server='postgres' username='test' />
     </testCase>
-
 </testCases>
