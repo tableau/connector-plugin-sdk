@@ -1,3 +1,4 @@
+<!-- The properties builder test is only used for jdbc based connectors -->
 <?xml version='1.0' encoding='utf-8' ?>
 <testCases>
     <testCase>
