@@ -12,7 +12,7 @@
     </testCase>
     <!-- Different classes. -->
     <testCase match='false'>
-        <connection class='postgres_odbc' somekey='t' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
-        <key class='itspostgres_odbc' dbname='TestV1' somekey='y' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+        <connection class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+        <key class='itspostgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
     </testCase>
 </testCases>
