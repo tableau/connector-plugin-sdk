@@ -1,3 +1,4 @@
+<!-- Server is set to localhost in the tests below. Update it to the database test server to be tested, before running the tests. -->
 <?xml version='1.0' encoding='utf-8' ?>
 <testCases>
 	<testCase>
