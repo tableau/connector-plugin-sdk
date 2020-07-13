@@ -1228,66 +1228,9 @@
     <aggregation value='TRUNC_SECOND' />
   </supported-aggregations>
   <sql-format>
-    <date-literal-escape value='Standard' />
-    <format-bool-as-value value='TrueFirst' />
-    <format-column-definition>
-      <local-type name='int'>
-        <remote-type name='I2' value='SMALLINT' />
-        <remote-type name='I4' value='INTEGER' />
-        <remote-type name='default' value='BIGINT' />
-      </local-type>
-      <local-type name='real'>
-        <remote-type name='R4' value='FLOAT(24)' />
-        <remote-type name='default' value='FLOAT(53)' />
-      </local-type>
-      <local-type name='str'>
-        <remote-type name='default' value='VARCHAR(%w)' />
-      </local-type>
-      <local-type name='datetime'>
-        <remote-type name='TIME' value='TIME' />
-        <remote-type name='DATE' value='DATE' />
-        <remote-type name='default' value='TIMESTAMP' />
-      </local-type>
-      <local-type name='date'>
-        <remote-type name='default' value='DATE' />
-      </local-type>
-      <local-type name='bool'>
-        <remote-type name='default' value='BOOLEAN' />
-      </local-type>
-      <local-type name='spatial'>
-        <remote-type name='default' value='GEOGRAPHY' />
-      </local-type>
-    </format-column-definition>
-    <format-create-table>
-      <formula>CREATE </formula>
-      <formula predicate='GlobalTemp'>GLOBAL </formula>
-      <formula predicate='LocalTemp'>LOCAL </formula>
-      <formula predicate='AnyTemp'>TEMPORARY </formula>
-      <formula>TABLE %n (</formula>
-      <formula>%f</formula>
-      <formula>)</formula>
-      <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
-    </format-create-table>
-    <format-date-literal formula="{d '%1'}"  format='yyyy-MM-dd' /><!--??-->
-    <format-datetime-literal formula="{ts '%1'}" format='yyyy-MM-dd HH:mm:ss.SSS' /><!--??-->
-    <format-drop-table>
-      <formula>DROP TABLE %1</formula>
-    </format-drop-table>
+    <format-date-literal formula="{d '%1'}"  format='yyyy-MM-dd' />
+    <format-datetime-literal formula="{ts '%1'}" format='yyyy-MM-dd HH:mm:ss.SSS' />
     <format-false value='(0 &lt;&gt; 0)' />
-    <format-if-then-else value='Case' />
-    <format-index value='FullyQualified' />
-    <format-insert value='Individual' />
-    <format-is-distinct value='Formula' />
-    <format-null>
-      <local-type name='int' value='NULL' />
-      <local-type name='real' value='NULL' />
-      <local-type name='str' value='NULL' />
-      <local-type name='datetime' value='NULL' />
-      <local-type name='bool' value='NULL' />
-      <local-type name='date' value='NULL' />
-      <local-type name='spatial' value='NULL' />
-    </format-null>
-    <format-order-by value='DirectionOnly' />
     <format-select>
       <part name='Select' value='SELECT %1' />
       <part name='Into' value='INTO %1' />
@@ -1299,21 +1242,9 @@
       <part name='Top' value='LIMIT %1 ' />
       <part name='TopPercent' value='LIMIT %1 PERCENT ' />
     </format-select>
-    <format-set-isolation-level value='SET TRANSACTION ISOLATION LEVEL %1' />
-    <format-simple-case value='Case' />
-    <format-stored-proc-call value='EXEC %1 %2' use-name-value-format='true' />
-    <format-string-literal value='Extended' />
     <format-true value='(1 &lt;&gt; 0)' />
     <id-allowed-characters value='_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' />
     <id-max-length value='63' />
-    <id-quotes value='"' />
     <start-of-week-offset value='1' />
-    <supported-joins>
-      <part name='Inner' />
-      <part name='Left' />
-      <part name='Right' />
-      <part name='Full' />
-      <part name='Cross' />
-    </supported-joins>
   </sql-format>
 </dialect>
