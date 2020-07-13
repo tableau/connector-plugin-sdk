@@ -85,6 +85,7 @@
       <xs:enumeration value="ThirdPartySSO"/>
       <xs:enumeration value="Invalid"/>
       <xs:enumeration value="SAMLIdP"/>
+      <xs:enumeration value="Password"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ExtendedProperties-CT">
