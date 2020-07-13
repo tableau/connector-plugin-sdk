@@ -11,6 +11,9 @@
 - Add `PasswordOnly` as an option to AuthMode-CT in `tcd_latest.xsd`.
 - Add `Password` as an option to AuthOptionEnum-ST in `tcd_latest.xsd`.
 
+## 2020-06-10
+### Added
+- Add SQLDialect to samples/components/dialects
 
 ## 2020-06-11
 ### Removed

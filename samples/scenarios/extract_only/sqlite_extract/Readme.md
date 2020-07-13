@@ -1,0 +1,1 @@
+This sample shows how to make an extract-only connector, using SQLLite as an example. This is not a fully-formed connector.
