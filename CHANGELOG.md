@@ -6,6 +6,10 @@
 ### Changed
 ### Removed
 
+## 2020-07-13
+### Added
+- Add `PasswordOnly` as an option to AuthMode-CT in `tcd_latest.xsd`.
+
 ## 2020-06-11
 ### Removed
 - Remove `base-types` from tdd samples. Intended functionality is exposed in `<format-column-definition>`
