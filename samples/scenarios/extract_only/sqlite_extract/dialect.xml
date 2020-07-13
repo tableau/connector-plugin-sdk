@@ -1242,6 +1242,7 @@
       <part name='Top' value='LIMIT %1 ' />
       <part name='TopPercent' value='LIMIT %1 PERCENT ' />
     </format-select>
+    <format-string-literal value='Extended' />
     <format-true value='(1 &lt;&gt; 0)' />
     <id-allowed-characters value='_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' />
     <id-max-length value='63' />
