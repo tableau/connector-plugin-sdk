@@ -41,11 +41,13 @@ def build_tabquery_command_line(work):
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
 
-def build_connectors_test_tabquery_command_line(connTestName, connTestFileName):
+def build_connectors_test_tabquery_command_line(connTestName, connTestFileName, connTestPasswordFile):
     global tab_cli_exe
     cmdline = [tab_cli_exe]
     cmdline.extend(["--conn-test", connTestName])
     cmdline.extend(["--conn-test-file", connTestFileName])
+    if connTestPasswordFile:
+        cmdline.extend(["--conn-test-password-file", connTestPasswordFile])
     return cmdline
 
 class TabqueryCommandLine(object):
