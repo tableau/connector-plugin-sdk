@@ -1,0 +1,1 @@
+This sample shows how use the mysql_odbc base class to make a connector that inherits from our existing MySQL connector. This may be useful for a database that follows the MySQL design closely. This is not a fully-formed connector.

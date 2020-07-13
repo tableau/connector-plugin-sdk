@@ -419,7 +419,7 @@ run_connectors_test_usage_text = '''
     The commands below can be used to run the connectors tests.
     'filename.txt' in the below commands is the path of the xml test file used to run the tests.
     'passwordfilepath.password' in the below commands is the path of the password file used for the ServerVersionTest.
-    
+
     Run ConnectionBuilderTest
         run-connectors-test --conn-test connectionBuilder --conn-test-file filepath.xml
     Run NormalizeConnectionAttributes Test
