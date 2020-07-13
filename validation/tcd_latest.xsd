@@ -50,6 +50,7 @@
       <xs:enumeration value="SharePoint"/>
       <xs:enumeration value="SAPBW"/>
       <xs:enumeration value="SwitchModal"/>
+            <xs:enumeration value="PasswordOnly"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="AuthOptions-CT">
