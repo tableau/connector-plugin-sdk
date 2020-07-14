@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>
+    <testCase>
+        <connection class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' password='password' />
+        <expected port='5432' class='postgres_odbc' server='localhost' username='test' dbname='TestV1' sslmode='' password='password' :protocol-customizations='' one-time-sql='' />
+    </testCase>
+    <!-- connection has spurious attributes. -->
+    <testCase>
+        <connection  class='postgres_odbc' somekey='t' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' password='password'/>
+        <expected port='5432' class='postgres_odbc' server='localhost' username='test' dbname='TestV1' sslmode='' password='password' :protocol-customizations='' one-time-sql='' />
+    </testCase>
+</testCases>

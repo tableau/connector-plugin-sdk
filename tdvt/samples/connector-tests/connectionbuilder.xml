@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>
+<!-- Driver Present -->
+<connection  installedDrivers64='PostgreSQL Unicode(x64)'  bitness='64' class='postgres_odbc' sslmode='require' username='test' password='password' dbname='TestV1' odbc-connect-string-extras='' port='5432' server='localhost' >DRIVER={PostgreSQL Unicode(x64)};DATABASE=TestV1;SERVER=localhost;UID=test;PWD=password;PORT=5432;BOOLSASCHAR=0;LFCONVERSION=0;UseDeclareFetch=1;Fetch=2048;sslmode=require</connection>
+<!-- Missing driver -->
+<connection installedDrivers64=''  bitness='64' class='postgres_odbc' sslmode='require' username='test' password='password' dbname='TestV1' odbc-connect-string-extras='' port='5432' server='localhost' >DRIVER={};DATABASE=TestV1;SERVER=localhost;UID=test;PWD=password;PORT=5432;BOOLSASCHAR=0;LFCONVERSION=0;UseDeclareFetch=1;Fetch=2048;sslmode=require</connection>
+</testCases>

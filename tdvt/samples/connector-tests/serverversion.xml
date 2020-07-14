@@ -1,0 +1,24 @@
+<!-- Server is set to localhost in the tests below. Update it to the database test server to be tested, before running the tests. -->
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>
+	<testCase>
+		<connection class='postgres_odbc' server='localhost' dbname='TestV1' username='test' tablename='Calcs' tdvtconnection='postgres_odbc_test'/>
+		<expected minVersion="10.1" exactVersion="11.0.2" maxVersion="11.3.6"/>
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='localhost' dbname='TestV1' username='test' tablename='Calcs'  tdvtconnection='postgres_odbc_test'/>
+		<expected minVersion="10.1.0" />
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='localhost' dbname='TestV1' username='test' tablename='Calcs'  tdvtconnection='postgres_odbc_test'/>
+		<expected  maxVersion="11.3.6"/>
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='localhost' dbname='TestV1' username='test' tablename='Calcs'  tdvtconnection='postgres_odbc_test'/>
+		<expected  exactVersion="11.0.2" />
+	</testCase>
+	<testCase>
+		<connection class='postgres_odbc' server='localhost' dbname='TestV1' username='test' tablename='Calcs'  tdvtconnection='postgres_odbc_test'/>
+		<expected minVersion="10.1"  maxVersion="11.3.6"/>
+	</testCase>
+</testCases>
