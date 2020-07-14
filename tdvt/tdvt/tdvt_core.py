@@ -32,13 +32,14 @@ ALWAYS_GENERATE_EXPECTED = False
 
 
 class ConnectorsTest(object):
-    def __init__(self, conn_test_name, conn_test_file):
+    def __init__(self, conn_test_name, conn_test_file, conn_test_password_file):
         self.conn_test_name = conn_test_name
         self.conn_test_file = conn_test_file
+        self.conn_test_password_file = conn_test_password_file
         self.timeout_seconds = 10
 
     def run_connectors_test(self):
-        cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file)
+        cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file, self.conn_test_password_file)
         self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
                                                       timeout=self.timeout_seconds))
         print(self.cmd_output)
@@ -708,6 +709,6 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
 
     return process_test_results(all_test_results, tds_file, tdvt_test_config.noheader, output_dir)
 
-def run_connectors_test_core(conn_test_name, conn_test_file):
-    connectors_test = ConnectorsTest(conn_test_name, conn_test_file)
+def run_connectors_test_core(conn_test_name, conn_test_file, conn_test_password_file = None):
+    connectors_test = ConnectorsTest(conn_test_name, conn_test_file, conn_test_password_file)
     connectors_test.run_connectors_test()

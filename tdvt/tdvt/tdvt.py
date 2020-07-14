@@ -418,6 +418,8 @@ run_pattern_usage_text = '''
 run_connectors_test_usage_text = '''
     The commands below can be used to run the connectors tests.
     'filename.xml' in the below commands is the path of the xml test file used to run the tests.
+    'passwordfilepath.password' in the below commands is the path of the password file used for the ServerVersionTest.
+
     Run ConnectionBuilderTest
         run-connectors-test --conn-test connectionBuilder --conn-test-file filepath.xml
     Run NormalizeConnectionAttributes Test
@@ -427,7 +429,7 @@ run_connectors_test_usage_text = '''
     Run PropertiesBuilderTest
         run-connectors-test --conn-test propertiesBuilder --conn-test-file filepath.xml
     Run ServerVersionTest
-        run-connectors-test --conn-test serverVersion --conn-test-file filepath.xml   
+        run-connectors-test --conn-test serverVersion --conn-test-file filepath.xml --conn-test-password-file passwordfilepath.password  
 
 '''
 
@@ -494,6 +496,7 @@ def create_parser():
     run_connectors_test_parser = subparsers.add_parser('run-connectors-test', help='Run a connectors test using a file', parents=[run_test_common_parser], usage=run_connectors_test_usage_text)
     run_connectors_test_parser.add_argument('--conn-test', dest='conn_test', help='Name of the Connectors Test to run.',  required=True)
     run_connectors_test_parser.add_argument('--conn-test-file', dest='conn_test_file', help='Path to the setup-expected file to run the connectors test',  required=True)
+    run_connectors_test_parser.add_argument('--conn-test-password-file', dest='conn_test_password_file', help='Path to the password file used for the ServerVersionTest')
 
     return parser
 
@@ -720,7 +723,10 @@ def run_connectors_test(args):
         print("Missing arguments. Not running Connectors Test")
         sys.exit(0)
 
-    print(run_connectors_test_core( args.conn_test, args.conn_test_file))
+    if args.conn_test_password_file:
+        print(run_connectors_test_core( args.conn_test, args.conn_test_file, args.conn_test_password_file))
+    else:
+         print(run_connectors_test_core( args.conn_test, args.conn_test_file))
 
 def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     """Rerun all the failed tests listed in the json file."""
