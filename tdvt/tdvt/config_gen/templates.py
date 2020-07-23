@@ -1,12 +1,15 @@
 """
-This defines a mapping to the table and columns in the datasource. It is used to generate a set of logical query tests that will work with the peculiarities of the data source.
+This defines a mapping to the table and columns in the datasource. It is used to generate a set of logical query tests
+that will work with the peculiarities of the data source.
 
 You can run [tdvt --list_logical_configs] to see the resulting values.
 
 The value on the left is the key that is used in your datasource ini file. THESE VALUES ARE CASE INSENSITIVE!
 Keys you can set to control the generation are:
 
-This should always be present. $dsName will be replaced with Calcs or Staples. You can put a string before the $dsName token to append something to your table name but if you want to set something on the end you need to use tablenamePostfix.
+This should always be present. $dsName will be replaced with Calcs or Staples. You can put a string before the $dsName
+token to append something to your table name but if you want to set something on the end you need to use
+tablenamePostfix.
      'tablename' : '$dsName',
 
 To change the table name: Say your table is called 'test_Calcs_view'. You can achieve this by setting:
