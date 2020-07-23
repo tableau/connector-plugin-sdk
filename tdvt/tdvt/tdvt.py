@@ -28,7 +28,7 @@ from .config_gen.test_config import (
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
-from .version import __version__
+from .version import __version__ as tdvt_version
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
@@ -536,7 +536,7 @@ def init():
         ch.setLevel(logging.WARNING)
     logger.addHandler(ch)
 
-    logging.debug('TDVT version: ' + str(__version__))
+    logging.debug('TDVT version: ' + tdvt_version)
     logging.debug('TDVT Arguments: ' + str(args))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
@@ -577,7 +577,7 @@ def test_runner(all_tests, test_queue, max_threads):
 
 
 def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, args) -> Optional[
-    Tuple[int, int, int, int]]:
+    Tuple[int, int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
         sys.exit()
@@ -619,6 +619,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     disabled_smoke_tests = 0
     total_smoke_tests = 0
     smoke_tests_run = 0
+    exit_code = 0
 
     absolute_start_time = time.time()
     smoke_test_run_time = 0
@@ -673,6 +674,8 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     now_time = time.time()
     main_test_time = round(now_time - start_time, 2)
     total_run_time = round(now_time - absolute_start_time, 2)
+    if failed_tests > 0:
+        exit_code = 1
 
     print('\nTest Count: {} tests'.format(total_tests))
     print("\tPassed tests: {}".format(total_passed_tests))
@@ -685,7 +688,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     print("\tMain test time: {} seconds".format(main_test_time))
     print("\tTotal time: {} seconds".format(total_run_time))
 
-    return failed_tests, skipped_tests, disabled_tests, total_tests
+    return failed_tests, skipped_tests, disabled_tests, total_tests, exit_code
 
 
 def get_ds_list(ds):
@@ -696,7 +699,7 @@ def get_ds_list(ds):
     return ds_list
 
 
-def run_desired_tests(args, ds_registry):
+def run_desired_tests(args, ds_registry) -> int:
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
@@ -735,8 +738,8 @@ def run_desired_tests(args, ds_registry):
         else:
             test_sets.extend(enqueue_tests(ds_info, args, suite))
 
-    failed_tests, skipped_tests, disabled_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
-    return failed_tests
+    failed_tests, skipped_tests, disabled_tests, total_tests, exit_code = run_tests_impl(test_sets, max_threads, args)
+    return exit_code
 
 
 def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
@@ -746,11 +749,11 @@ def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
 
-    failed_tests, skipped_tests, disabled_tests, total_tests = \
+    failed_tests, skipped_tests, disabled_tests, total_tests, exit_code = \
         run_tests_impl(enqueue_failed_tests(run_file, root_directory, args), threads, args)
 
     # This can be a retry-step.
-    return 0
+    return exit_code
 
 
 def run_generate(ds_registry):
@@ -796,7 +799,7 @@ def main():
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
     elif args.version:
-        print("TDVT", __version__)
+        print("TDVT", tdvt_version)
         sys.exit(0)
 
     logging.error("Could not interpret arguments. Nothing done.")
