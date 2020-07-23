@@ -429,6 +429,8 @@ run_file_usage_text = '''
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
+    parser.add_argument('--version', dest='version', action='store_true', help='Output TDVT version to command line.',
+                        required=False)
 
     # Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
@@ -792,6 +794,9 @@ def main():
         sys.exit(0)
     elif args.command == 'list':
         print_configurations(ds_registry, [args.list_ds], args.verbose)
+        sys.exit(0)
+    elif args.version:
+        print("TDVT", __version__)
         sys.exit(0)
 
     logging.error("Could not interpret arguments. Nothing done.")
