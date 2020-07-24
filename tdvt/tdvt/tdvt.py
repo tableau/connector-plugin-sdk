@@ -425,12 +425,25 @@ action_usage_text = '''
 run_file_usage_text = '''
 '''
 
+error_codes_useage_text = """
+    The following error codes are used by TDVT:
+    +------------------------------------+
+    | Error Code |         Meaning       |
+    |============|=======================|
+    |      0     | All tests passed.     |
+    |      1     | Test(s) failed.       |
+    |      2     | Smoke test(s) failed. |
+    +------------------------------------|
+"""
+
 
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
     parser.add_argument('--version', dest='version', action='store_true', help='Output TDVT version to command line.',
                         required=False)
+    parser.add_argument('--error-codes', dest='error_codes', action='store_true',
+                        help='List error codes used by TDVT.', required=False)
 
     # Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
@@ -643,7 +656,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
-                sys.exit(1)
+                sys.exit(2)
 
         if require_smoke_test:
             print("\nSmoke tests finished. Exiting.")
@@ -800,6 +813,9 @@ def main():
         sys.exit(0)
     elif args.version:
         print("TDVT", tdvt_version)
+        sys.exit(0)
+    elif args.error_codes:
+        print(error_codes_useage_text)
         sys.exit(0)
 
     logging.error("Could not interpret arguments. Nothing done.")
