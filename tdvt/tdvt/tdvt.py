@@ -427,13 +427,13 @@ run_file_usage_text = '''
 
 error_codes_useage_text = """
     The following error codes are used by TDVT:
-    +------------------------------------+
-    | Error Code |         Meaning       |
-    |============|=======================|
-    |      0     | All tests passed.     |
-    |      1     | Test(s) failed.       |
-    |      2     | Smoke test(s) failed. |
-    +------------------------------------|
+    +-------------------------------------+
+    | Error Code |         Meaning        |
+    |============|========================|
+    |      0     | All actions succeeded. |
+    |      1     | Test(s) failed.        |
+    |      2     | Smoke test(s) failed.  |
+    +-------------------------------------|
 """
 
 
