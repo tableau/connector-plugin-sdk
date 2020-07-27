@@ -1,0 +1,21 @@
+<results>
+  <test name='RAWSQL_STR(&quot;select c3 from testIsql where c1=%1&quot;,[str0])'>
+    <sql>
+      SELECT (select c3 from testIsql where c1=&quot;Calcs&quot;.&quot;str0&quot;) AS &quot;temp_test__1227510043__0_&quot;&#10;FROM &quot;TestV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;GROUP BY 1
+    </sql>
+    <query-time>
+      42.000
+    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.vertica].[TEMP(Test)(1227510043)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;YOU FOUND ME&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
