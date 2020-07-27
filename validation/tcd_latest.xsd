@@ -30,6 +30,9 @@
       <xs:element minOccurs="0" name="show-uncommitted-data-checkbox" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="ssl-requires-certificate" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="warehouse-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="vendor1-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="vendor2-prompt" type="TextField-CT"/>
+      <xs:element minOccurs="0" name="vendor3-prompt" type="TextField-CT"/>
     </xs:all>
   </xs:complexType>
   <xs:complexType name="AuthMode-CT">
