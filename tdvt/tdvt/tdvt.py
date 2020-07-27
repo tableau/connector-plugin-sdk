@@ -20,6 +20,14 @@ import zipfile
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
+# Import for optional Sentry integration
+try:
+    import sentry_sdk as sentry
+except ImportError:
+    sentry_installed = False
+else:
+    sentry_installed = True
+
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import (
