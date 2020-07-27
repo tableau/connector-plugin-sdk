@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [3.0.0b1]
+- `--version` command line flag.
+- Error codes return are more consistent. You can use the `--error-codes` flag to see them.
+
 ## [2.1.14] - 2020-05-18
 - Add more tests for initialsql
 
