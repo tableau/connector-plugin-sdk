@@ -1628,68 +1628,28 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>DATEDIFF(%1,%2,%3)</formula>
-      <formula part='year'>DATEDIFF(year,%2,%3)</formula>
-      <formula part='quarter'>DATEDIFF(quarter,%2,%3)</formula>
-      <formula part='month'>DATEDIFF(month,%2,%3)</formula>
-      <formula part='dayofyear'>DATEDIFF(dayofyear,%2,%3)</formula>
-      <formula part='day'>DATEDIFF(day,%2,%3)</formula>
-      <formula part='weekday'>DATEDIFF(weekday,%2,%3)</formula>
       <formula part='week'>DATEDIFF(week,%2,%3)</formula>
-      <formula part='hour'>DATEDIFF(hour,%2,%3)</formula>
-      <formula part='minute'>DATEDIFF(minute,%2,%3)</formula>
-      <formula part='second'>DATEDIFF(second,%2,%3)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>DATEDIFF(%3,TIMESTAMP(%2))</formula>
-      <formula part='year'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE (YEAR(%3) - YEAR(%2)) END</formula>
-      <formula part='quarter'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE INTEGER((  (4 * YEAR(%3)) + INTEGER( (MONTH(%3) - 1) / 3 ) + 1  ) - (  (4 * YEAR(%2)) + INTEGER( (MONTH(%2) - 1) / 3 ) + 1  )) END</formula>
-      <formula part='month'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE INTEGER(( (12 * YEAR(%3)) + MONTH(%3) ) -( (12 * YEAR(%2)) + MONTH(%2) )) END</formula>
-      <formula part='dayofyear'>DATEDIFF(%3, %2)</formula>
-      <formula part='day'>DATEDIFF(%3,%2)</formula>
-      <formula part='weekday'>DATEDIFF(%3,%2)</formula>
       <formula part='week'> INTEGER(( (FLOOR(TIMESTAMP_TO_SEC(%3) / 86400) - DAYOFWEEK(%3) ) - (FLOOR(TIMESTAMP_TO_SEC(%2) / 86400) - DAYOFWEEK(%2) ) ) / 7)</formula>
-      <formula part='hour'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE DATEDIFF(%3, %2)*24 + (HOUR(%3) - HOUR(%2)) END</formula>
-      <formula part='minute'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE DATEDIFF(%3, %2)*24*60 + (HOUR(%3) - HOUR(%2))*60 + (MINUTE(%3) - MINUTE(%2)) END</formula>
-      <formula part='second'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE DATEDIFF(%3, %2)*24*60*60 + (HOUR(%3) - HOUR(%2))*60*60 + (MINUTE(%3) - MINUTE(%2))*60 + (SECOND(%3) - SECOND(%2)) END</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='date' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>TIMESTAMP_DIFF(CAST(%3 AS TIMESTAMP),%2, SECOND)</formula>
-      <formula part='year'>DATE_DIFF(CAST(%3 AS DATE), CAST(%2 AS DATE), YEAR)</formula>
-      <formula part='quarter'>DATE_DIFF(CAST(%3 AS DATE), CAST(%2 AS DATE), QUARTER)</formula>
-      <formula part='month'>DATE_DIFF(CAST(%3 AS DATE), CAST(%2 AS DATE), MONTH)</formula>
-      <formula part='dayofyear'>DATE_DIFF(CAST(%3 AS DATE), CAST(%2 AS DATE), DAY)</formula>
-      <formula part='day'>DATE_DIFF(CAST(%3 AS DATE), CAST(%2 AS DATE), DAY)</formula>
-      <formula part='weekday'>DATE_DIFF(CAST(%3 AS DATE), CAST(%2 AS DATE), DAY)</formula>
       <formula part='week'> CAST(( (FLOOR(UNIX_SECONDS(CAST(%3 AS TIMESTAMP)) / 86400) - EXTRACT(DAYOFWEEK FROM %3) ) - (FLOOR(UNIX_SECONDS(CAST(%2 AS TIMESTAMP)) / 86400) - EXTRACT(DAYOFWEEK FROM %2) ) ) / 7 AS INT64)</formula>
-      <formula part='hour'>TIMESTAMP_DIFF(CAST(%3 AS TIMESTAMP), CAST(%2 AS TIMESTAMP), HOUR)</formula>
-      <formula part='minute'>TIMESTAMP_DIFF(CAST(%3 AS TIMESTAMP), CAST(%2 AS TIMESTAMP), MINUTE)</formula>
-      <formula part='second'>TIMESTAMP_DIFF(CAST(%3 AS TIMESTAMP), CAST(%2 AS TIMESTAMP), SECOND)</formula>
       <argument type='localstr' />
       <argument type='date' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula>DATEDIFF(TIMESTAMP(%3),TIMESTAMP(%2))</formula>
-      <formula part='year'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE (YEAR(%3) - YEAR(%2)) END</formula>
-      <formula part='quarter'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE INTEGER((  (4 * YEAR(%3)) + INTEGER( (MONTH(%3) - 1) / 3 ) + 1  ) - (  (4 * YEAR(%2)) + INTEGER( (MONTH(%2) - 1) / 3 ) + 1  )) END</formula>
-      <formula part='month'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE INTEGER(( (12 * YEAR(%3)) + MONTH(%3) ) -( (12 * YEAR(%2)) + MONTH(%2) )) END</formula>
-      <formula part='dayofyear'>DATEDIFF(%3, %2)</formula>
-      <formula part='day'>DATEDIFF(%3,%2)</formula>
-      <formula part='weekday'>DATEDIFF(%3,%2)</formula>
       <formula part='week'> INTEGER(( (FLOOR(TIMESTAMP_TO_SEC(%3) / 86400) - DAYOFWEEK(%3) ) - (FLOOR(TIMESTAMP_TO_SEC(%2) / 86400) - DAYOFWEEK(%2) ) ) / 7)</formula>
-      <formula part='hour'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE DATEDIFF(%3, %2)*24 + (HOUR(%3) - HOUR(%2)) END</formula>
-      <formula part='minute'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE DATEDIFF(%3, %2)*24*60 + (HOUR(%3) - HOUR(%2))*60 + (MINUTE(%3) - MINUTE(%2)) END</formula>
-      <formula part='second'>CASE WHEN %2 IS NULL OR %3 IS NULL THEN INTEGER(NULL) ELSE DATEDIFF(%3, %2)*24*60*60 + (HOUR(%3) - HOUR(%2))*60*60 + (MINUTE(%3) - MINUTE(%2))*60 + (SECOND(%3) - SECOND(%2)) END</formula>
       <argument type='localstr' />
       <argument type='date' />
       <argument type='date' />
@@ -1725,33 +1685,13 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula>RTRIM(CHAR(%1(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='year'>RTRIM(CHAR(YEAR(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='quarter'>RTRIM(CHAR(QUARTER(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='month'>RTRIM(CHAR(MONTHNAME(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='dayofyear'>RTRIM(CHAR(DAYOFYEAR(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='day'>RTRIM(CHAR(DAY(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='weekday'>RTRIM(CHAR(DAYNAME(TIMESTAMP_ISO(%2))))</formula>
       <formula part='week'>RTRIM(CHAR(FLOOR((7 + DAYOFYEAR(%2) - 1 + DAYOFWEEK(DATE(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-01-01&apos;))) - 1) / 7)))</formula>
-      <formula part='hour'>RTRIM(CHAR(HOUR(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='minute'>RTRIM(CHAR(MINUTE(TIMESTAMP_ISO(%2))))</formula>
-      <formula part='second'>RTRIM(CHAR(SECOND(TIMESTAMP_ISO(%2))))</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;%1&apos;)</formula>
-      <formula part='year'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;YYYY&apos;)</formula>
-      <formula part='quarter'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;Q&apos;)</formula>
-      <formula part='month'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMMonth&apos;)</formula>
-      <formula part='dayofyear'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMDDD&apos;)</formula>
-      <formula part='day'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMDD&apos;)</formula>
-      <formula part='weekday'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMDay&apos;)</formula>
       <formula part='week'>(5 + CAST(TO_CHAR(%2, &apos;DDD&apos;) AS INT) + CAST(TO_CHAR(DATE_TRUNC(&apos;year&apos;, %2), &apos;D&apos;) AS INT)) / 7</formula>
-      <formula part='hour'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMHH24&apos;)</formula>
-      <formula part='minute'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMMI&apos;)</formula>
-      <formula part='second'>TO_CHAR(CAST(%2 AS TIMESTAMP), &apos;FMSS&apos;)</formula>
       <argument type='localstr' />
       <argument type='date' />
       <argument type='localstr' />
@@ -1791,33 +1731,13 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula>DATEPART(%1,%2)</formula>
-      <formula part='year'>DATEPART(year,%2)</formula>
-      <formula part='quarter'>DATEPART(quarter,%2)</formula>
-      <formula part='month'>DATEPART(month,%2)</formula>
-      <formula part='dayofyear'>DATEPART(dayofyear,%2)</formula>
-      <formula part='day'>DATEPART(day,%2)</formula>
-      <formula part='weekday'>DATEPART(weekday,%2)</formula>
       <formula part='week'>DATEPART(week,%2)</formula>
-      <formula part='hour'>DATEPART(hour,%2)</formula>
-      <formula part='minute'>DATEPART(minute,%2)</formula>
-      <formula part='second'>DATEPART(second,%2)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula>CAST(EXTRACT(%1 FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='year'>CAST(EXTRACT(YEAR FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='quarter'>(EXTRACT(MONTH FROM %2) - 1) / 3 + 1</formula>
-      <formula part='month'>CAST(EXTRACT(MONTH FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='dayofyear'>CAST(EXTRACT(DOY FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='day'>CAST(EXTRACT(DAY FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='weekday'>CAST(TO_CHAR(%2,&apos;D&apos;) AS INTEGER)</formula>
       <formula part='week'>(5 + CAST(TO_CHAR(%2, &apos;DDD&apos;) AS INT) + CAST(TO_CHAR(DATE_TRUNC(&apos;year&apos;, %2), &apos;D&apos;) AS INT)) / 7</formula>
-      <formula part='hour'>CAST(EXTRACT(HOUR FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='minute'>CAST(EXTRACT(MINUTE FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
-      <formula part='second'>CAST(EXTRACT(SECOND FROM CAST(%2 AS TIMESTAMP)) AS INTEGER)</formula>
       <argument type='localstr' />
       <argument type='date' />
       <argument type='localstr' />
@@ -1853,33 +1773,13 @@
       <argument type='date' />
     </date-function>
     <date-function name='DATETRUNC' return-type='datetime'>
-      <formula>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos;%1&apos;))</formula>
-      <formula part='year'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-01-01 00:00:00&apos;))</formula>
-      <formula part='quarter'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(3*(QUARTER(%2)-1)+1),2) || &apos;-01 00:00:00&apos;))</formula>
-      <formula part='month'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-01 00:00:00&apos;))</formula>
-      <formula part='dayofyear'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos; 00:00:00&apos;))</formula>
-      <formula part='day'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos; 00:00:00&apos;))</formula>
-      <formula part='weekday'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos; 00:00:00&apos;))</formula>
       <formula part='week'>(TIMESTAMP(&apos;1900-01-01 00:00:00&apos;) + ( JULIAN_DAY(%2) - 2415021 - (DAYOFWEEK(%2) - 1) ) DAYS)</formula>
-      <formula part='hour'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos; &apos; || RIGHT(DIGITS(HOUR(TIMESTAMP_ISO(%2))),2) || &apos;:00:00&apos;))</formula>
-      <formula part='minute'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos; &apos; || RIGHT(DIGITS(HOUR(TIMESTAMP_ISO(%2))),2) || &apos;:&apos; || RIGHT(DIGITS(MINUTE(TIMESTAMP_ISO(%2))),2) || &apos;:00&apos;))</formula>
-      <formula part='second'>TIMESTAMP(CHAR(RIGHT(DIGITS(YEAR(%2)),4) || &apos;-&apos; || RIGHT(DIGITS(MONTH(%2)),2) || &apos;-&apos; || RIGHT(DIGITS(DAY(%2)),2) || &apos; &apos; || RIGHT(DIGITS(HOUR(TIMESTAMP_ISO(%2))),2) || &apos;:&apos; || RIGHT(DIGITS(MINUTE(TIMESTAMP_ISO(%2))),2) || &apos;:&apos; || RIGHT(DIGITS(SECOND(TIMESTAMP_ISO(%2))),2)))</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
     <date-function name='DATETRUNC' return-type='datetime'>
-      <formula>DATE_TRUNC( &apos;%1&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='year'>DATE_TRUNC( &apos;YEAR&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='quarter'>CAST(TO_CHAR(%2, &apos;YYYY-&apos;) || 3*((EXTRACT(MONTH FROM %2) - 1) / 3) + 1 || &apos;-01 00:00:00&apos; AS TIMESTAMP)</formula>
-      <formula part='month'>DATE_TRUNC( &apos;MONTH&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='dayofyear'>DATE_TRUNC( &apos;DAY&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='day'>DATE_TRUNC( &apos;DAY&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='weekday'>DATE_TRUNC( &apos;DAY&apos;, CAST(%2 AS TIMESTAMP) )</formula>
       <formula part='week'>TO_DATE(TO_CHAR(CAST(TO_CHAR(%2, &apos;J&apos;) AS INT) - MOD(CAST(TO_CHAR(%2, &apos;D&apos;) AS INT) + 6, 7), &apos;99999999&apos;), &apos;J&apos;)</formula>
-      <formula part='hour'>DATE_TRUNC( &apos;HOUR&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='minute'>DATE_TRUNC( &apos;MINUTE&apos;, CAST(%2 AS TIMESTAMP) )</formula>
-      <formula part='second'>DATE_TRUNC( &apos;SECOND&apos;, CAST(%2 AS TIMESTAMP) )</formula>
       <argument type='localstr' />
       <argument type='date' />
       <argument type='localstr' />
