@@ -22,11 +22,13 @@ from typing import List, Optional, Tuple, Union
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
-from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
+from .config_gen.test_config import (
+    TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
+)
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
-from .version import __version__
+from .version import __version__ as tdvt_version
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
@@ -226,7 +228,7 @@ def enqueue_single_test(args, ds_info: TestConfig, suite) -> Union[Tuple[None, N
         test_set = SingleExpressionTestSet(suite, get_root_dir(), args.expression_pattern, args.tds_pattern,
                                            args.test_pattern_exclude, ds_info)
 
-    #Only try and run tests if there are some.
+    # Only try and run tests if there are some.
     if not test_set.generate_test_file_list():
         return None, None
 
@@ -267,8 +269,9 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
         tdvt_invocation.leave_temp_dir = is_test(args) and args.noclean if args else False
         suite_name = f['test_config']['suite_name']
         password_file = f['password_file'] if 'password_file' in f else ''
-        # Use a hash of the test file path to distinguish unique test runs (since the config only supports one test path).
-        # other wise two tests with the same name could show up and the first result file would overwrite the second.
+        # Use a hash of the test file path to distinguish unique test runs (since the config only supports one test
+        # path). Otherwise two tests with the same name could show up and the first result file would overwrite the
+        # second.
         tt = "L" if tdvt_invocation.logical else "E"
         test_set_unique_id = hashlib.sha224(
             (os.path.split(test_file_path)[0] + "_" + tds_base + "_" + tt).replace("-", "_").encode())
@@ -280,7 +283,7 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
         if not test_set_unique_id in all_test_configs[suite_name]:
             tdvt_invocation.output_dir = make_temp_dir([test_set_unique_id])
             all_tdvt_test_configs[test_set_unique_id] = tdvt_invocation
-            run_time_config = RunTimeTestConfig(60*60, 1)
+            run_time_config = RunTimeTestConfig(60 * 60, 1)
             test_set_config = TestConfig(suite_name, '', run_time_config)
             all_test_configs[suite_name][test_set_unique_id] = test_set_config
         else:
@@ -295,8 +298,8 @@ def enqueue_failed_tests(run_file: Path, root_directory, args, rt: RunTimeTestCo
             current_test_set = current_test_set[0]
 
         if not current_test_set:
-            current_test_set = FileTestSet(suite_name, test_root_dir, test_set_unique_id, tds, tdvt_invocation.logical, suite_name,
-                                           password_file, expected_message)
+            current_test_set = FileTestSet(suite_name, test_root_dir, test_set_unique_id, tds, tdvt_invocation.logical,
+                                           suite_name, password_file, expected_message)
             if tdvt_invocation.logical:
                 test_set_config.add_logical_testset(current_test_set)
             else:
@@ -343,7 +346,7 @@ def enqueue_tests(ds_info, args, suite):
             return test_set_configs
 
     for test_set in tests:
-        tdvt_invocation = TdvtInvocation(from_args=args, test_config = ds_info)
+        tdvt_invocation = TdvtInvocation(from_args=args, test_config=ds_info)
         tdvt_invocation.logical = test_set.is_logical_test()
         tdvt_invocation.tds = test_set.tds_name
         tdvt_invocation.config_file = test_set.config_name
@@ -364,6 +367,7 @@ def get_level_of_parallelization(args):
 
     print("Setting tdvt thread count to: " + str(max_threads))
     return max_threads
+
 
 list_usage_text = '''
     Show all test suites or list the contents of a specific suite.
@@ -421,58 +425,109 @@ action_usage_text = '''
 run_file_usage_text = '''
 '''
 
+error_codes_useage_text = """
+    The following error codes are used by TDVT:
+    +-------------------------------------+
+    | Error Code |         Meaning        |
+    |============|========================|
+    |      0     | All actions succeeded. |
+    |      1     | Test(s) failed.        |
+    |      2     | Smoke test(s) failed.  |
+    +-------------------------------------|
+"""
+
+
 def create_parser():
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
+    parser.add_argument('--version', dest='version', action='store_true', help='Output TDVT version to command line.',
+                        required=False)
+    parser.add_argument('--error-codes', dest='error_codes', action='store_true',
+                        help='List error codes used by TDVT.', required=False)
 
-    #Common run test options.
+    # Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
 
-    run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int, help='Max number of threads to use.', required=False)
-    run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.', required=False)
-    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true', help='Generate logical query test files.', required=False)
-    run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
-    run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
-    run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
+    run_test_common_parser.add_argument('--threads', '-t', dest='thread_count', type=int,
+                                        help='Max number of threads to use.', required=False)
+    run_test_common_parser.add_argument('--no-clean', dest='noclean', action='store_true', help='Leave temp dirs.',
+                                        required=False)
+    run_test_common_parser.add_argument('--generate', dest='generate', action='store_true',
+                                        help='Generate logical query test files.', required=False)
+    run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.',
+                                        required=False)
+    run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true',
+                                        help='Do not compare Tuples.', required=False)
+    run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true',
+                                        help='Compare error.', required=False)
 
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
-    #Get information.
-    list_parser = subparsers.add_parser('list', help='List information about datasource tests and suites.', usage=list_usage_text)
+    # Get information.
+    list_parser = subparsers.add_parser('list', help='List information about datasource tests and suites.',
+                                        usage=list_usage_text)
     list_parser.add_argument(dest='list_ds', help='List datasource config.', default='', nargs='?')
 
-    list_logical_parser = subparsers.add_parser('list-logical-configs', help='List information about logical configurations.', usage=list_logical_usage_text)
-    list_logical_parser.add_argument(dest='list_logical_configs', help='List available logical configs.', default='', nargs='?')
+    list_logical_parser = subparsers.add_parser('list-logical-configs',
+                                                help='List information about logical configurations.',
+                                                usage=list_logical_usage_text)
+    list_logical_parser.add_argument(dest='list_logical_configs', help='List available logical configs.', default='',
+                                     nargs='?')
 
-    #Actions.
+    # Actions.
     action_group = subparsers.add_parser('action', help='Various non-test actions.', usage=action_usage_text)
-    action_group.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.', required=False)
+    action_group.add_argument('--setup', dest='setup', action='store_true', help='Create setup directory structure.',
+                              required=False)
     action_group.add_argument('--add_ds', dest='add_ds', help='Add a new datasource.', required=False)
-    action_group.add_argument('--diff-test', '-dd', dest='diff', help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.', required=False)
-    action_group.add_argument('--generate', dest='action_generate', action='store_true', help='Generate logical query test files.', required=False)
+    action_group.add_argument('--diff-test', '-dd', dest='diff',
+                              help='Diff the results of the given test (ie exprtests/standard/setup.calcs_data.txt) against the expected files. Can be used with the sql and tuple options.',
+                              required=False)
+    action_group.add_argument('--generate', dest='action_generate', action='store_true',
+                              help='Generate logical query test files.', required=False)
 
-    #Run tests.
-    run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser], usage=run_usage_text)
-    run_test_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
-    run_test_parser.add_argument('--verify', dest='smoke_test', action='store_true', help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.', required=False)  # noqa: E501
-    run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
-    run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
-    run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
+    # Run tests.
+    run_test_parser = subparsers.add_parser('run', help='Run tests.', parents=[run_test_common_parser],
+                                            usage=run_usage_text)
+    run_test_parser.add_argument('ds',
+                                 help='Comma separated list of Datasource names or groups to test. See the \'list\' command.',
+                                 nargs='+')
+    run_test_parser.add_argument('--verify', dest='smoke_test', action='store_true',
+                                 help='Verifies the connection to a data source against tests in your .ini file with SmokeTest = True.',
+                                 required=False)  # noqa: E501
+    run_test_parser.add_argument('--force-run', dest='force_run', action='store_true',
+                                 help='Attempts to run the tests for a data source, even if its smoke tests fail.')
+    run_test_parser.add_argument('--logical', '-q', dest='logical_only',
+                                 help='Only run logical tests whose config file name matches the supplied string, or all if blank.',
+                                 required=False, default=None, const='*', nargs='?')
+    run_test_parser.add_argument('--expression', '-e', dest='expression_only',
+                                 help='Only run expression tests whose config file name matches the suppled string, or all if blank.',
+                                 required=False, default=None, const='*', nargs='?')
 
-
-    #Run test pattern.
-    run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
-    run_test_pattern_parser.add_argument('ds', help='Comma separated list of Datasource names or groups to test. See the \'list\' command.', nargs='+')
+    # Run test pattern.
+    run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.',
+                                                    parents=[run_test_common_parser], usage=run_pattern_usage_text)
+    run_test_pattern_parser.add_argument('ds',
+                                         help='Comma separated list of Datasource names or groups to test. See the \'list\' command.',
+                                         nargs='+')
     run_test_group = run_test_pattern_parser.add_mutually_exclusive_group(required=True)
 
-    run_test_group.add_argument('--exp', dest='expression_pattern', help='Only run expression tests whose name and path matches the supplied string. This is a glob pattern. Also you must set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
-    run_test_group.add_argument('--logp', dest='logical_pattern', help='Only run logical tests whose name and path matches the supplied string. this is a glob pattern. Also you must set the tds-pattern to use when running the test. Use a ? to replace the logical query config component of the test name.', required=False, default=None, const='', nargs='?')
+    run_test_group.add_argument('--exp', dest='expression_pattern',
+                                help='Only run expression tests whose name and path matches the supplied string. This is a glob pattern. Also you must set the tds-pattern to use when running the test.',
+                                required=False, default=None, const='', nargs='?')
+    run_test_group.add_argument('--logp', dest='logical_pattern',
+                                help='Only run logical tests whose name and path matches the supplied string. this is a glob pattern. Also you must set the tds-pattern to use when running the test. Use a ? to replace the logical query config component of the test name.',
+                                required=False, default=None, const='', nargs='?')
 
-    run_test_pattern_parser.add_argument('--tdp', dest='tds_pattern', help='The datasource tds pattern to use when running the test. See exp and logp arguments.', required=True, default=None, const='', nargs='?')
-    run_test_pattern_parser.add_argument('--test-ex', dest='test_pattern_exclude', help='Exclude tests whose name matches the supplied string. This is a regular expression pattern. Can be used with exp and logp arguments. Also set the tds-pattern to use when running the test.', required=False, default=None, const='', nargs='?')
+    run_test_pattern_parser.add_argument('--tdp', dest='tds_pattern',
+                                         help='The datasource tds pattern to use when running the test. See exp and logp arguments.',
+                                         required=True, default=None, const='', nargs='?')
+    run_test_pattern_parser.add_argument('--test-ex', dest='test_pattern_exclude',
+                                         help='Exclude tests whose name matches the supplied string. This is a regular expression pattern. Can be used with exp and logp arguments. Also set the tds-pattern to use when running the test.',
+                                         required=False, default=None, const='', nargs='?')
 
-    #Run file.
-    run_file_parser = subparsers.add_parser('run-file', help='Run tests from a file.', parents=[run_test_common_parser], usage=run_file_usage_text)
+    # Run file.
+    run_file_parser = subparsers.add_parser('run-file', help='Run tests from a file.', parents=[run_test_common_parser],
+                                            usage=run_file_usage_text)
     run_file_parser.add_argument('run_file', help='Json file containing failed tests to run.')
 
     return parser
@@ -494,15 +549,17 @@ def init():
         ch.setLevel(logging.WARNING)
     logger.addHandler(ch)
 
-    logging.debug('TDVT version: ' + str(__version__))
+    logging.debug('TDVT version: ' + tdvt_version)
     logging.debug('TDVT Arguments: ' + str(args))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
 
     return parser, ds_reg, args
 
+
 def is_test(args):
     return args.command in ['run', 'run-pattern', 'run-file']
+
 
 def active_thread_count(threads):
     active = 0
@@ -532,7 +589,8 @@ def test_runner(all_tests, test_queue, max_threads):
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
-def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, args) -> Optional[Tuple[int, int, int, int]]:
+def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, args) -> Optional[
+    Tuple[int, int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
         sys.exit()
@@ -574,6 +632,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     disabled_smoke_tests = 0
     total_smoke_tests = 0
     smoke_tests_run = 0
+    exit_code = 0
 
     absolute_start_time = time.time()
     smoke_test_run_time = 0
@@ -597,7 +656,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
-                sys.exit(1)
+                sys.exit(2)
 
         if require_smoke_test:
             print("\nSmoke tests finished. Exiting.")
@@ -628,6 +687,8 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     now_time = time.time()
     main_test_time = round(now_time - start_time, 2)
     total_run_time = round(now_time - absolute_start_time, 2)
+    if failed_tests > 0:
+        exit_code = 1
 
     print('\nTest Count: {} tests'.format(total_tests))
     print("\tPassed tests: {}".format(total_passed_tests))
@@ -640,7 +701,8 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     print("\tMain test time: {} seconds".format(main_test_time))
     print("\tTotal time: {} seconds".format(total_run_time))
 
-    return failed_tests, skipped_tests, disabled_tests, total_tests
+    return failed_tests, skipped_tests, disabled_tests, total_tests, exit_code
+
 
 def get_ds_list(ds):
     if not ds:
@@ -649,7 +711,8 @@ def get_ds_list(ds):
     ds_list = [x.strip() for x in ds_list]
     return ds_list
 
-def run_desired_tests(args, ds_registry):
+
+def run_desired_tests(args, ds_registry) -> int:
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
@@ -688,8 +751,8 @@ def run_desired_tests(args, ds_registry):
         else:
             test_sets.extend(enqueue_tests(ds_info, args, suite))
 
-    failed_tests, skipped_tests, disabled_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
-    return failed_tests
+    failed_tests, skipped_tests, disabled_tests, total_tests, exit_code = run_tests_impl(test_sets, max_threads, args)
+    return exit_code
 
 
 def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
@@ -699,11 +762,12 @@ def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
 
-    failed_tests, skipped_tests, disabled_tests, total_tests = \
+    failed_tests, skipped_tests, disabled_tests, total_tests, exit_code = \
         run_tests_impl(enqueue_failed_tests(run_file, root_directory, args), threads, args)
 
     # This can be a retry-step.
-    return 0
+    return exit_code
+
 
 def run_generate(ds_registry):
     start_time = time.time()
@@ -747,10 +811,17 @@ def main():
     elif args.command == 'list':
         print_configurations(ds_registry, [args.list_ds], args.verbose)
         sys.exit(0)
+    elif args.version:
+        print("TDVT", tdvt_version)
+        sys.exit(0)
+    elif args.error_codes:
+        print(error_codes_useage_text)
+        sys.exit(0)
 
     logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
     sys.exit(-1)
+
 
 if __name__ == '__main__':
     main()
