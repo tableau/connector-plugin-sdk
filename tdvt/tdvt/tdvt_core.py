@@ -27,6 +27,18 @@ from .resources import *
 from .tabquery import build_tabquery_command_line
 from .test_results import *
 
+# Import for optional Sentry integration
+try:
+    import sentry_sdk as sentry
+except ImportError:
+    sentry_installed = False
+else:
+    sentry_installed = True
+
+sentry.init(
+    "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
+)
+
 ALWAYS_GENERATE_EXPECTED = False
 
 
@@ -345,6 +357,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     except ParseError as e:
         logging.debug(work.get_thread_msg() + "Exception parsing actual file: " + actual_file + " exception: " + str(e))
         result.error_status = TestErrorMissingActual()
+        logging.error("Missing Actual.")
         return result
 
     expected_file_version = 0

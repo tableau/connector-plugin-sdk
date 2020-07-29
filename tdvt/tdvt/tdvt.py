@@ -626,13 +626,14 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     if not smoke_tests:
         logging.warning("No smoke tests detected.")
         if require_smoke_test:
+            logging.error("No smoke tests; terminating.")
             sys.exit(1)
         else:
             logging.warning("Tests will run without verifying the data source connection.")
 
     if not all_work and not smoke_tests:
-        print("No tests found. Check arguments.")
-        sys.exit()
+        logging.error("No tests found. Check arguments.")
+        sys.exit(1)
 
     failing_ds = set()
     failed_smoke_tests = 0
