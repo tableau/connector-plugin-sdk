@@ -78,6 +78,10 @@ as passed-in parameters.
       <xs:enumeration value="AGG_MONTHYEAR"/>
       <xs:enumeration value="AGG_MDY"/>
       <xs:enumeration value="AGG_END"/>
+      <xs:enumeration value="AGG_ISO_YEAR"/>
+      <xs:enumeration value="AGG_ISO_QTR"/>
+      <xs:enumeration value="AGG_ISO_WEEK"/>
+      <xs:enumeration value="AGG_ISO_WEEKDAY"/>
       <xs:enumeration value="TRUNC_YEAR"/>
       <xs:enumeration value="TRUNC_QTR"/>
       <xs:enumeration value="TRUNC_MONTH"/>
@@ -86,6 +90,10 @@ as passed-in parameters.
       <xs:enumeration value="TRUNC_HOUR"/>
       <xs:enumeration value="TRUNC_MINUTE"/>
       <xs:enumeration value="TRUNC_SECOND"/>
+      <xs:enumeration value="TRUNC_ISO_YEAR"/>
+      <xs:enumeration value="TRUNC_ISO_QTR"/>
+      <xs:enumeration value="TRUNC_ISO_WEEK"/>
+      <xs:enumeration value="TRUNC_ISO_WEEKDAY"/>
       <xs:enumeration value="AGG_QUART1"/>
       <xs:enumeration value="AGG_QUART3"/>
       <xs:enumeration value="AGG_SKEWNESS"/>
