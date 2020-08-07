@@ -637,7 +637,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     disabled_smoke_tests = 0
     total_smoke_tests = 0
     smoke_tests_run = 0
-    exit_code = EXIT_ALL_SUCCESS
+    exit_code = EXIT_SUCCESS
 
     absolute_start_time = time.time()
     smoke_test_run_time = 0
@@ -665,7 +665,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
 
         if require_smoke_test:
             print("\nSmoke tests finished. Exiting.")
-            sys.exit(EXIT_ALL_SUCCESS)
+            sys.exit(EXIT_SUCCESS)
 
         if failing_ds and not force_run:
             print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
@@ -788,14 +788,14 @@ def main():
         if args.setup:
             print("Creating setup files...")
             create_test_environment()
-            sys.exit(EXIT_ALL_SUCCESS)
+            sys.exit(EXIT_SUCCESS)
         elif args.add_ds:
             add_datasource(args.add_ds, ds_registry)
             generate_files(ds_registry, True)
-            sys.exit(EXIT_ALL_SUCCESS)
+            sys.exit(EXIT_SUCCESS)
         elif args.action_generate:
             run_generate(ds_registry)
-            sys.exit(EXIT_ALL_SUCCESS)
+            sys.exit(EXIT_SUCCESS)
     elif is_test(args):
         if args.generate:
             run_generate(ds_registry)
@@ -809,19 +809,19 @@ def main():
     elif args.command == 'action' and args.diff:
         tdvt_invocation = TdvtInvocation(from_args=args)
         run_diff(tdvt_invocation, args.diff)
-        sys.exit(EXIT_ALL_SUCCESS)
+        sys.exit(EXIT_SUCCESS)
     elif args.command == 'list-logical-configs':
         print_logical_configurations(ds_registry, args.list_logical_configs)
-        sys.exit(EXIT_ALL_SUCCESS)
+        sys.exit(EXIT_SUCCESS)
     elif args.command == 'list':
         print_configurations(ds_registry, [args.list_ds], args.verbose)
-        sys.exit(EXIT_ALL_SUCCESS)
+        sys.exit(EXIT_SUCCESS)
     elif args.version:
         print("TDVT", tdvt_version)
-        sys.exit(EXIT_ALL_SUCCESS)
+        sys.exit(EXIT_SUCCESS)
     elif args.error_codes:
         print(error_codes_useage_text)
-        sys.exit(EXIT_ALL_SUCCESS)
+        sys.exit(EXIT_SUCCESS)
 
     logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
