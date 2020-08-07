@@ -37,6 +37,7 @@ from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
 from .version import __version__ as tdvt_version
+from .constants import *
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
@@ -441,6 +442,10 @@ error_codes_useage_text = """
     |      0     | All actions succeeded. |
     |      1     | Test(s) failed.        |
     |      2     | Smoke test(s) failed.  |
+    |      3     | Tests not found.       |
+    |      4     | Data source not found. |
+    |      5     | Tabquery not found.    |
+    |      6     | Bad command.           |
     +-------------------------------------|
 """
 
@@ -601,7 +606,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     Tuple[int, int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
-        sys.exit()
+        sys.exit(EXIT_NO_TESTS_FOUND)
 
     smoke_test_queue = queue.Queue()
     smoke_tests = []
@@ -626,14 +631,23 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     if not smoke_tests:
         logging.warning("No smoke tests detected.")
         if require_smoke_test:
+<<<<<<< HEAD
             logging.error("No smoke tests; terminating.")
             sys.exit(1)
+=======
+            sys.exit(EXIT_TESTS_FAILED)
+>>>>>>> tdvt-3.0
         else:
             logging.warning("Tests will run without verifying the data source connection.")
 
     if not all_work and not smoke_tests:
+<<<<<<< HEAD
         logging.error("No tests found. Check arguments.")
         sys.exit(1)
+=======
+        print("No tests found. Check arguments.")
+        sys.exit(EXIT_NO_TESTS_FOUND)
+>>>>>>> tdvt-3.0
 
     failing_ds = set()
     failed_smoke_tests = 0
@@ -641,7 +655,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     disabled_smoke_tests = 0
     total_smoke_tests = 0
     smoke_tests_run = 0
-    exit_code = 0
+    exit_code = EXIT_SUCCESS
 
     absolute_start_time = time.time()
     smoke_test_run_time = 0
@@ -665,11 +679,11 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
-                sys.exit(2)
+                sys.exit(EXIT_SMOKE_TEST_FAIL)
 
         if require_smoke_test:
             print("\nSmoke tests finished. Exiting.")
-            sys.exit(0)
+            sys.exit(EXIT_SUCCESS)
 
         if failing_ds and not force_run:
             print("Tests for the following data source(s) will not be run: {}".format(', '.join(failing_ds)))
@@ -697,7 +711,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     main_test_time = round(now_time - start_time, 2)
     total_run_time = round(now_time - absolute_start_time, 2)
     if failed_tests > 0:
-        exit_code = 1
+        exit_code = EXIT_TESTS_FAILED
 
     print('\nTest Count: {} tests'.format(total_tests))
     print("\tPassed tests: {}".format(total_passed_tests))
@@ -725,14 +739,14 @@ def run_desired_tests(args, ds_registry) -> int:
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
-        sys.exit(0)
+        sys.exit(EXIT_DATA_SOURCE_NOT_FOUND)
 
     if len(ds_to_run) > 0:
         delete_output_files(os.getcwd())
 
     if not tabquerycli_exists():
         print("Could not find Tabquerycli.")
-        sys.exit(0)
+        sys.exit(EXIT_TABQUERY_NOT_FOUND)
 
     max_threads = get_level_of_parallelization(args)
     test_sets: List[TestSet] = []
@@ -792,14 +806,14 @@ def main():
         if args.setup:
             print("Creating setup files...")
             create_test_environment()
-            sys.exit(0)
+            sys.exit(EXIT_SUCCESS)
         elif args.add_ds:
             add_datasource(args.add_ds, ds_registry)
             generate_files(ds_registry, True)
-            sys.exit(0)
+            sys.exit(EXIT_SUCCESS)
         elif args.action_generate:
             run_generate(ds_registry)
-            sys.exit(0)
+            sys.exit(EXIT_SUCCESS)
     elif is_test(args):
         if args.generate:
             run_generate(ds_registry)
@@ -813,23 +827,23 @@ def main():
     elif args.command == 'action' and args.diff:
         tdvt_invocation = TdvtInvocation(from_args=args)
         run_diff(tdvt_invocation, args.diff)
-        sys.exit(0)
+        sys.exit(EXIT_SUCCESS)
     elif args.command == 'list-logical-configs':
         print_logical_configurations(ds_registry, args.list_logical_configs)
-        sys.exit(0)
+        sys.exit(EXIT_SUCCESS)
     elif args.command == 'list':
         print_configurations(ds_registry, [args.list_ds], args.verbose)
-        sys.exit(0)
+        sys.exit(EXIT_SUCCESS)
     elif args.version:
         print("TDVT", tdvt_version)
-        sys.exit(0)
+        sys.exit(EXIT_SUCCESS)
     elif args.error_codes:
         print(error_codes_useage_text)
-        sys.exit(0)
+        sys.exit(EXIT_SUCCESS)
 
     logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
-    sys.exit(-1)
+    sys.exit(EXIT_BAD_COMMAND)
 
 
 if __name__ == '__main__':
