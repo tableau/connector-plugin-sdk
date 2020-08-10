@@ -20,15 +20,17 @@ import zipfile
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
-# Import for optional Sentry integration
 try:
     import sentry_sdk as sentry
-    sentry_installed = True
-    sentry.init(
-        "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
-    )
 except ImportError:
     sentry_installed = False
+    logging.info("Sentry SDK not installed")
+else:
+    sentry.init(
+    "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
+    )
+    sentry_installed = True
+    logging.info("Sentry installed.")
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
@@ -159,6 +161,7 @@ class TestRunner():
                 json.dump(existing_results, dst_file)
                 dst_file.close()
         except IOError:
+            logging.error("Error copying test result file:", IOError)
             return
 
     def copy_files_and_cleanup(self):
@@ -169,7 +172,7 @@ class TestRunner():
             self.copy_output_files()
             self.copy_test_result_file()
         except Exception as e:
-            print(e)
+            logging.error("Exception during copy files & cleanup:", e)
             pass
 
         try:
@@ -211,7 +214,7 @@ def delete_output_files(root_dir):
                 try:
                     os.unlink(out_file)
                 except Exception as e:
-                    print(e)
+                    logging.error("Exception deleting output files:", e)
                     continue
 
 
@@ -459,6 +462,8 @@ def create_parser():
                         required=False)
     parser.add_argument('--error-codes', dest='error_codes', action='store_true',
                         help='List error codes used by TDVT.', required=False)
+    # parser.add_argument('--sentry', dest='enable_sentry', action='store_true', help='Enable Sentry logging.',
+    #                     required=False)
 
     # Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
@@ -794,6 +799,18 @@ def run_generate(ds_registry):
 
 def main():
     parser, ds_registry, args = init()
+    # if args.enable_sentry:
+    #     try:
+    #         import sentry_sdk as sentry
+    #     except ImportError:
+    #         sentry_installed = False
+    #         logging.error("Sentry SDK not installed")
+    #     else:
+    #         sentry.init(
+    #             "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
+    #         )
+    #         sentry_installed = True
+    #         logging.info("Sentry installed.")
 
     if args.command == 'action':
         if args.setup:
