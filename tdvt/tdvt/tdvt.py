@@ -23,13 +23,12 @@ from typing import List, Optional, Tuple, Union
 # Import for optional Sentry integration
 try:
     import sentry_sdk as sentry
-except ImportError:
-    sentry_installed = False
-else:
     sentry_installed = True
     sentry.init(
         "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
     )
+except ImportError:
+    sentry_installed = False
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
