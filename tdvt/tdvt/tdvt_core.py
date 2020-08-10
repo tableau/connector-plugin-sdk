@@ -27,17 +27,16 @@ from .resources import *
 from .tabquery import build_tabquery_command_line
 from .test_results import *
 
-# Import for optional Sentry integration
-try:
-    import sentry_sdk as sentry
-except ImportError:
-    sentry_installed = False
-else:
-    sentry_installed = True
-
-sentry.init(
-    "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
-)
+# # Import for optional Sentry integration
+# try:
+#     import sentry_sdk as sentry
+#     sentry.init(
+#         "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
+#     )
+# except ImportError:
+#     sentry_installed = False
+# else:
+#     sentry_installed = True
 
 ALWAYS_GENERATE_EXPECTED = False
 

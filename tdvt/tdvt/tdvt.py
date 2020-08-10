@@ -27,6 +27,9 @@ except ImportError:
     sentry_installed = False
 else:
     sentry_installed = True
+    sentry.init(
+        "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
+    )
 
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
