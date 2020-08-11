@@ -26,9 +26,6 @@ except ImportError:
     sentry_installed = False
     logging.info("Sentry SDK not installed")
 else:
-    sentry.init(
-    "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
-    )
     sentry_installed = True
     logging.info("Sentry installed.")
 
@@ -37,6 +34,7 @@ from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import (
     TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 )
+from .custom_types import ExitCode
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
@@ -462,8 +460,8 @@ def create_parser():
                         required=False)
     parser.add_argument('--error-codes', dest='error_codes', action='store_true',
                         help='List error codes used by TDVT.', required=False)
-    # parser.add_argument('--sentry', dest='enable_sentry', action='store_true', help='Enable Sentry logging.',
-    #                     required=False)
+    parser.add_argument('--sentry', dest='enable_sentry', action='store_true', help='Enable Sentry logging.',
+                        required=False)
 
     # Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
@@ -733,7 +731,7 @@ def get_ds_list(ds):
     return ds_list
 
 
-def run_desired_tests(args, ds_registry) -> int:
+def run_desired_tests(args, ds_registry) -> ExitCode:
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
@@ -776,7 +774,7 @@ def run_desired_tests(args, ds_registry) -> int:
     return exit_code
 
 
-def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
+def run_file(run_file: Path, output_dir: Path, threads: int, args) -> ExitCode:
     """Rerun all the failed tests listed in the json file."""
 
     logging.debug("Running failed tests from : " + str(run_file))
@@ -797,21 +795,19 @@ def run_generate(ds_registry):
     print("Done: " + str(end_time))
 
 
+should_sentry_be_initialized = False
+
 def main():
     parser, ds_registry, args = init()
-    # if args.enable_sentry:
-    #     try:
-    #         import sentry_sdk as sentry
-    #     except ImportError:
-    #         sentry_installed = False
-    #         logging.error("Sentry SDK not installed")
-    #     else:
-    #         sentry.init(
-    #             "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
-    #         )
-    #         sentry_installed = True
-    #         logging.info("Sentry installed.")
 
+    if args.enable_sentry is True and sentry_installed is True:
+        try:
+            sentry.init("https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053")
+        except:
+            logging.error("Error initializing Sentry in tdvt.py. Sentry will not be used.")
+        else:
+            global should_sentry_be_initialized = True
+            logging.info("Sentry initialized in tdvt.py.")
     if args.command == 'action':
         if args.setup:
             print("Creating setup files...")

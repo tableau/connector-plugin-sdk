@@ -25,19 +25,16 @@ from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
 from .resources import *
 from .tabquery import build_tabquery_command_line
+from .tdvt import sentry_installed, should_sentry_be_initialized
 from .test_results import *
 
-try:
+# an optional import for the Sentry SDK.
+if sentry_installed and should_sentry_be_initialized:
     import sentry_sdk as sentry
-except ImportError:
-    sentry_installed = False
-    logging.info("Sentry SDK not installed")
-else:
     sentry.init(
-    "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
+        "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
     )
-    sentry_installed = True
-    logging.info("Sentry installed.")
+    logging.info("Sentry initialized in tdvt_core.py.")
 
 ALWAYS_GENERATE_EXPECTED = False
 
@@ -332,7 +329,7 @@ def save_results_diff(actual_file, diff_file, expected_file, diff_string):
         pass
 
 
-def compare_results(test_name, test_file, full_test_file, work):
+def compare_results(test_name, test_file, full_test_file, work) -> TestResult:
     """Return a TestResult object that specifies what was tested and whether it passed.
        test_file is the full path to the test file (base test name without any logical specification).
        full_test_file is the full path to the actual test file.
