@@ -672,6 +672,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
 
         if failed_smoke_tests > 0:
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
+            logging.error("{} smoke tests failured.".format(failed_smoke_tests))
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
@@ -696,6 +697,9 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
     failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads)
+
+    if failed_tests > 0:
+        logging.error("{} tests failed".format(failed_tests))
 
     failed_tests += failed_smoke_tests
     skipped_tests += skipped_smoke_tests
@@ -806,7 +810,8 @@ def main():
         except:
             logging.error("Error initializing Sentry in tdvt.py. Sentry will not be used.")
         else:
-            global should_sentry_be_initialized = True
+            global should_sentry_be_initialized
+            should_sentry_be_initialized = True
             logging.info("Sentry initialized in tdvt.py.")
     if args.command == 'action':
         if args.setup:
