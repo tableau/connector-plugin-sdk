@@ -208,19 +208,19 @@ TEMP_TABLES_AND_SUBQUERIES	Reference Line	tdvt/logicaltests/calcs	BUGS.TFS660780
 TEMP_TABLES_AND_SUBQUERIES	Filters	tdvt/logicaltests/calcs	BUGS.TFS660780	SUM	Required
 <=	Aggregation	tdvt/logicaltests/calcs	BUGS.TFS660780	SUM	Required
 <=	Calculation	tdvt/logicaltests/calcs	BUGS.TFS660780	SUM	Required
-<=	Filters	tdvt/logicaltests/union	calcs.union	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
->=	Temp Tables and Subqueries	tdvt/logicaltests/union	calcs.union	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
->=	Union	tdvt/logicaltests/union	calcs.union	UNION	Required for Relational
->=	Filters	tdvt/exprtests/standard	calcs_data	MAX	Required for Relational
-	Domain	tdvt/exprtests/standard	calcs_data	MAX	Required for Relational
-MIN	Aggregation	tdvt/exprtests/standard	calcs_data	MAX	Required for Relational
-MIN	Calculation	tdvt/exprtests/standard	calcs_data	MAX	Required for Relational
-MIN	CAP_QUERY_TIME_REQUIRES_CAST	tdvt/exprtests/standard	calcs_data	TIME1899	Required for Relational
-MIN	Time Values	tdvt/exprtests/standard	calcs_data	TIME1899	Required for Relational
-DATE	Filters	tdvt/exprtests/standard	calcs_data	MIN	Required for Relational
-DATE	Domain	tdvt/exprtests/standard	calcs_data	MIN	Required for Relational
-COUNT	Aggregation	tdvt/exprtests/standard	calcs_data	MIN	Required for Relational
-COUNT	Calculation	tdvt/exprtests/standard	calcs_data	MIN	Required for Relational
+<=	Filters	tdvt/logicaltests/union	calcs.union	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+>=	Temp Tables and Subqueries	tdvt/logicaltests/union	calcs.union	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+>=	Union	tdvt/logicaltests/union	calcs.union	UNION	Required If Supported
+>=	Filters	tdvt/exprtests/standard	calcs_data	MAX	Required If Supported
+	Domain	tdvt/exprtests/standard	calcs_data	MAX	Required If Supported
+MIN	Aggregation	tdvt/exprtests/standard	calcs_data	MAX	Required If Supported
+MIN	Calculation	tdvt/exprtests/standard	calcs_data	MAX	Required If Supported
+MIN	CAP_QUERY_TIME_REQUIRES_CAST	tdvt/exprtests/standard	calcs_data	TIME1899	Required If Supported
+MIN	Time Values	tdvt/exprtests/standard	calcs_data	TIME1899	Required If Supported
+DATE	Filters	tdvt/exprtests/standard	calcs_data	MIN	Required If Supported
+DATE	Domain	tdvt/exprtests/standard	calcs_data	MIN	Required If Supported
+COUNT	Aggregation	tdvt/exprtests/standard	calcs_data	MIN	Required If Supported
+COUNT	Calculation	tdvt/exprtests/standard	calcs_data	MIN	Required If Supported
 COUNT	Calculation	tdvt/exprtests/standard	cast.float	FLOAT	Required
 COUNT	Cast	tdvt/exprtests/standard	cast.float	FLOAT	Required
 COUNT	Data Prep	tdvt/exprtests/standard	cast.float	FLOAT	Required
@@ -361,19 +361,19 @@ SUM	Date Filters	tdvt/exprtests/standard	date.dateadd.minute	DATEADD	Required
 SUM	Calculation	tdvt/exprtests/standard	date.dateadd.month	DATEADD	Required
 SUM	Date Aggregation	tdvt/exprtests/standard	date.dateadd.month	DATEADD	Required
 SUM	Date Filters	tdvt/exprtests/standard	date.dateadd.month	DATEADD	Required
-LOD_STYLE_JOIN	Cast	tdvt/exprtests/standard	date.dateadd.nulls	DATE	Recommended
-FLOAT	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	DATE	Recommended
-FLOAT	Reference Line	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Recommended
-FLOAT	Filters	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Recommended
-DATETRUNC	Domain	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Recommended
-DATETRUNC	Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Recommended
-DATETRUNC	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Recommended
-COUNT	Date Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Recommended
-COUNT	Date Filters	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Recommended
-COUNT	Date Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	DATETIME	Recommended
-COUNT	Date Filters	tdvt/exprtests/standard	date.dateadd.nulls	DATETIME	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	DATETIME	Recommended
+LOD_STYLE_JOIN	Cast	tdvt/exprtests/standard	date.dateadd.nulls	DATE	Required If Supported
+FLOAT	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	DATE	Required If Supported
+FLOAT	Reference Line	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Required If Supported
+FLOAT	Filters	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Required If Supported
+DATETRUNC	Domain	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Required If Supported
+DATETRUNC	Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Required If Supported
+DATETRUNC	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Required If Supported
+COUNT	Date Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Required If Supported
+COUNT	Date Filters	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Required If Supported
+COUNT	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Required If Supported
+COUNT	Date Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	DATETIME	Required If Supported
+COUNT	Date Filters	tdvt/exprtests/standard	date.dateadd.nulls	DATETIME	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	date.dateadd.nulls	DATETIME	Required If Supported
 DATEPART	Calculation	tdvt/exprtests/standard	date.dateadd.quarter	DATEADD	Required
 DATEPART	Date Aggregation	tdvt/exprtests/standard	date.dateadd.quarter	DATEADD	Required
 MIN	Date Filters	tdvt/exprtests/standard	date.dateadd.quarter	DATEADD	Required
@@ -435,19 +435,19 @@ DATETRUNC	Calculation	tdvt/exprtests/standard	date.datediff.month	DATEDIFF	Requi
 DATETRUNC	Date Aggregation	tdvt/exprtests/standard	date.datediff.month	DATETIME	Required
 POWER	Date Filters	tdvt/exprtests/standard	date.datediff.month	DATETIME	Required
 POWER	Calculation	tdvt/exprtests/standard	date.datediff.month	DATETIME	Required
-DEGREES	Aggregation	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Recommended
-DEGREES	Calculation	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.datediff.nulls	DATE	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.datediff.nulls	DATETIME	Recommended
-DATE	Cast	tdvt/exprtests/standard	date.datediff.nulls	DATE	Recommended
-DATE	Date Aggregation	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Recommended
--	Date Aggregation	tdvt/exprtests/standard	date.datediff.nulls	DATETIME	Recommended
--	Date Filters	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Recommended
-SIN	Date Filters	tdvt/exprtests/standard	date.datediff.nulls	DATETIME	Recommended
-SIN	Domain	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Recommended
-COUNT	Filters	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Recommended
-COUNT	Reference Line	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Recommended
+DEGREES	Aggregation	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Required If Supported
+DEGREES	Calculation	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	date.datediff.nulls	DATE	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	date.datediff.nulls	DATETIME	Required If Supported
+DATE	Cast	tdvt/exprtests/standard	date.datediff.nulls	DATE	Required If Supported
+DATE	Date Aggregation	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Required If Supported
+-	Date Aggregation	tdvt/exprtests/standard	date.datediff.nulls	DATETIME	Required If Supported
+-	Date Filters	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Required If Supported
+SIN	Date Filters	tdvt/exprtests/standard	date.datediff.nulls	DATETIME	Required If Supported
+SIN	Domain	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Required If Supported
+COUNT	Filters	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Required If Supported
+COUNT	Reference Line	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Required If Supported
 COUNT	Date Aggregation	tdvt/exprtests/standard	date.datediff.quarter	DATEDIFF	Required
 COUNT	Date Filters	tdvt/exprtests/standard	date.datediff.quarter	DATEDIFF	Required
 COUNT	Calculation	tdvt/exprtests/standard	date.datediff.quarter	DATEDIFF	Required
@@ -601,19 +601,19 @@ AVG	Filters	tdvt/exprtests/iso8601week	date.datename.iso-year	COUNT	Recommended
 FLOAT	Date Aggregation	tdvt/exprtests/standard	date.datename.month	DATENAME	Required
 FLOAT	Date Filters	tdvt/exprtests/standard	date.datename.month	DATENAME	Required
 FLOAT	Calculation	tdvt/exprtests/standard	date.datename.month	DATENAME	Required
-COUNT	Cast	tdvt/exprtests/standard	date.datename.nulls	DATE	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.datename.nulls	DATE	Recommended
-COUNT	Reference Line	tdvt/exprtests/standard	date.datename.nulls	COUNT	Recommended
-COUNT	Filters	tdvt/exprtests/standard	date.datename.nulls	COUNT	Recommended
-COUNT	Domain	tdvt/exprtests/standard	date.datename.nulls	COUNT	Recommended
-MIN	Aggregation	tdvt/exprtests/standard	date.datename.nulls	COUNT	Recommended
-MIN	Calculation	tdvt/exprtests/standard	date.datename.nulls	COUNT	Recommended
-MIN	Date Aggregation	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Recommended
-MIN	Date Filters	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Recommended
-	Calculation	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Recommended
-DATEPART	Date Aggregation	tdvt/exprtests/standard	date.datename.nulls	DATETIME	Recommended
-DATEPART	Date Filters	tdvt/exprtests/standard	date.datename.nulls	DATETIME	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.datename.nulls	DATETIME	Recommended
+COUNT	Cast	tdvt/exprtests/standard	date.datename.nulls	DATE	Required If Supported
+COUNT	Calculation	tdvt/exprtests/standard	date.datename.nulls	DATE	Required If Supported
+COUNT	Reference Line	tdvt/exprtests/standard	date.datename.nulls	COUNT	Required If Supported
+COUNT	Filters	tdvt/exprtests/standard	date.datename.nulls	COUNT	Required If Supported
+COUNT	Domain	tdvt/exprtests/standard	date.datename.nulls	COUNT	Required If Supported
+MIN	Aggregation	tdvt/exprtests/standard	date.datename.nulls	COUNT	Required If Supported
+MIN	Calculation	tdvt/exprtests/standard	date.datename.nulls	COUNT	Required If Supported
+MIN	Date Aggregation	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Required If Supported
+MIN	Date Filters	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Required If Supported
+	Calculation	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Required If Supported
+DATEPART	Date Aggregation	tdvt/exprtests/standard	date.datename.nulls	DATETIME	Required If Supported
+DATEPART	Date Filters	tdvt/exprtests/standard	date.datename.nulls	DATETIME	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	date.datename.nulls	DATETIME	Required If Supported
 >=	Calculation	tdvt/exprtests/standard	date.datename.quarter	DATENAME	Required
 >=	Date Aggregation	tdvt/exprtests/standard	date.datename.quarter	DATENAME	Required
 >=	Date Filters	tdvt/exprtests/standard	date.datename.quarter	DATENAME	Required
@@ -761,19 +761,19 @@ DATEPART	Date Filters	tdvt/exprtests/standard	date.datepart.minute	DATEPART	Requ
 DATEPART	Date Aggregation	tdvt/exprtests/standard	date.datepart.month	DATEPART	Required
 DATEPART	Date Filters	tdvt/exprtests/standard	date.datepart.month	DATEPART	Required
 DATEPART	Calculation	tdvt/exprtests/standard	date.datepart.month	DATEPART	Required
-DATEPART	Aggregation	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Recommended
-TAN	Calculation	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Recommended
-DATEDIFF	Calculation	tdvt/exprtests/standard	date.datepart.nulls	DATE	Recommended
-DATEDIFF	Calculation	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Recommended
-DATEDIFF	Calculation	tdvt/exprtests/standard	date.datepart.nulls	DATETIME	Recommended
-DATETIME	Cast	tdvt/exprtests/standard	date.datepart.nulls	DATE	Recommended
-DATETIME	Date Aggregation	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Recommended
-DATETIME	Date Aggregation	tdvt/exprtests/standard	date.datepart.nulls	DATETIME	Recommended
-DATETRUNC	Date Filters	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Recommended
-DATETRUNC	Date Filters	tdvt/exprtests/standard	date.datepart.nulls	DATETIME	Recommended
-DATETRUNC	Domain	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Recommended
-FLOAT	Filters	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Recommended
-FLOAT	Reference Line	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Recommended
+DATEPART	Aggregation	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Required If Supported
+TAN	Calculation	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Required If Supported
+DATEDIFF	Calculation	tdvt/exprtests/standard	date.datepart.nulls	DATE	Required If Supported
+DATEDIFF	Calculation	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Required If Supported
+DATEDIFF	Calculation	tdvt/exprtests/standard	date.datepart.nulls	DATETIME	Required If Supported
+DATETIME	Cast	tdvt/exprtests/standard	date.datepart.nulls	DATE	Required If Supported
+DATETIME	Date Aggregation	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Required If Supported
+DATETIME	Date Aggregation	tdvt/exprtests/standard	date.datepart.nulls	DATETIME	Required If Supported
+DATETRUNC	Date Filters	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Required If Supported
+DATETRUNC	Date Filters	tdvt/exprtests/standard	date.datepart.nulls	DATETIME	Required If Supported
+DATETRUNC	Domain	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Required If Supported
+FLOAT	Filters	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Required If Supported
+FLOAT	Reference Line	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Required If Supported
 FLOAT	Date Aggregation	tdvt/exprtests/standard	date.datepart.quarter	DATEPART	Required
 DATENAME	Date Filters	tdvt/exprtests/standard	date.datepart.quarter	DATEPART	Required
 DATENAME	Calculation	tdvt/exprtests/standard	date.datepart.quarter	DATEPART	Required
@@ -901,19 +901,19 @@ DATENAME	Calculation	tdvt/exprtests/standard	date.datetrunc.minute	DATETRUNC	Req
 DATEDIFF	Calculation	tdvt/exprtests/standard	date.datetrunc.month	DATETRUNC	Required
 DATEDIFF	Date Aggregation	tdvt/exprtests/standard	date.datetrunc.month	DATETRUNC	Required
 DATEDIFF	Date Filters	tdvt/exprtests/standard	date.datetrunc.month	DATETRUNC	Required
-DATETIME	Cast	tdvt/exprtests/standard	date.datetrunc.nulls	DATE	Recommended
-DATETIME	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	DATE	Recommended
-DATETIME	Reference Line	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Recommended
-DATE	Filters	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Recommended
-DATE	Domain	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Recommended
-DATEPART	Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Recommended
-DATEPART	Date Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETIME	Recommended
-MAX	Date Filters	tdvt/exprtests/standard	date.datetrunc.nulls	DATETIME	Recommended
-MAX	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETIME	Recommended
-MAX	Date Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Recommended
-MAX	Date Filters	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Recommended
-ENDSWITH	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Recommended
+DATETIME	Cast	tdvt/exprtests/standard	date.datetrunc.nulls	DATE	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	DATE	Required If Supported
+DATETIME	Reference Line	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Required If Supported
+DATE	Filters	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Required If Supported
+DATE	Domain	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Required If Supported
+DATEPART	Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Required If Supported
+DATEPART	Date Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETIME	Required If Supported
+MAX	Date Filters	tdvt/exprtests/standard	date.datetrunc.nulls	DATETIME	Required If Supported
+MAX	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETIME	Required If Supported
+MAX	Date Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Required If Supported
+MAX	Date Filters	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Required If Supported
+ENDSWITH	Calculation	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Required If Supported
 ENDSWITH	Calculation	tdvt/exprtests/standard	date.datetrunc.quarter	DATETRUNC	Required
 MIN	Date Aggregation	tdvt/exprtests/standard	date.datetrunc.quarter	DATETRUNC	Required
 MIN	Date Filters	tdvt/exprtests/standard	date.datetrunc.quarter	DATETRUNC	Required
@@ -1073,32 +1073,32 @@ DATEADD	Date Filters	tdvt/exprtests/standard	date.now	NOW	Recommended
 DATEADD	Calculation	tdvt/exprtests/standard	date.now	NOW	Recommended
 DATEDIFF	Date Filters	tdvt/exprtests/standard	date.now	NOW	Recommended
 DATENAME	Calculation	tdvt/exprtests/standard	date.now	NOW	Recommended
-DATENAME	Reference Line	tdvt/exprtests/standard	date.today	COUNT	Recommended
-DATENAME	Filters	tdvt/exprtests/standard	date.today	COUNT	Recommended
-DATEPART	Domain	tdvt/exprtests/standard	date.today	COUNT	Recommended
-DATEPART	Aggregation	tdvt/exprtests/standard	date.today	COUNT	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	date.today	COUNT	Recommended
-DATEPART	Date Aggregation	tdvt/exprtests/standard	date.today	DATEPART	Recommended
-DATETRUNC	Date Filters	tdvt/exprtests/standard	date.today	DATEPART	Recommended
-DATETRUNC	Calculation	tdvt/exprtests/standard	date.today	DATEPART	Recommended
-COUNT	Filters	tdvt/exprtests/standard	date.today	MIN	Recommended
-COUNT	Domain	tdvt/exprtests/standard	date.today	MIN	Recommended
-COUNT	Aggregation	tdvt/exprtests/standard	date.today	MIN	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.today	MIN	Recommended
-COUNT	Filters	tdvt/exprtests/standard	date.today	==	Recommended
-COUNT	Operator	tdvt/exprtests/standard	date.today	==	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.today	==	Recommended
-COUNT	Filters	tdvt/exprtests/standard	date.today	MAX	Recommended
-COUNT	Domain	tdvt/exprtests/standard	date.today	MAX	Recommended
-COUNT	Aggregation	tdvt/exprtests/standard	date.today	MAX	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.today	MAX	Recommended
-COUNT	Date Aggregation	tdvt/exprtests/standard	date.today	DATEPART	Recommended
-COUNT	Date Filters	tdvt/exprtests/standard	date.today	DATEPART	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.today	DATEPART	Recommended
-COUNT	Date Filters	tdvt/exprtests/standard	date.today	TODAY	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.today	TODAY	Recommended
-COUNT	Date Filters	tdvt/exprtests/standard	date.today	TODAY	Recommended
-COUNT	Calculation	tdvt/exprtests/standard	date.today	TODAY	Recommended
+DATENAME	Reference Line	tdvt/exprtests/standard	date.today	COUNT	Required
+DATENAME	Filters	tdvt/exprtests/standard	date.today	COUNT	Required
+DATEPART	Domain	tdvt/exprtests/standard	date.today	COUNT	Required
+DATEPART	Aggregation	tdvt/exprtests/standard	date.today	COUNT	Required
+DATEPART	Calculation	tdvt/exprtests/standard	date.today	COUNT	Required
+DATEPART	Date Aggregation	tdvt/exprtests/standard	date.today	DATEPART	Required
+DATETRUNC	Date Filters	tdvt/exprtests/standard	date.today	DATEPART	Required
+DATETRUNC	Calculation	tdvt/exprtests/standard	date.today	DATEPART	Required
+COUNT	Filters	tdvt/exprtests/standard	date.today	MIN	Required
+COUNT	Domain	tdvt/exprtests/standard	date.today	MIN	Required
+COUNT	Aggregation	tdvt/exprtests/standard	date.today	MIN	Required
+COUNT	Calculation	tdvt/exprtests/standard	date.today	MIN	Required
+COUNT	Filters	tdvt/exprtests/standard	date.today	==	Required
+COUNT	Operator	tdvt/exprtests/standard	date.today	==	Required
+COUNT	Calculation	tdvt/exprtests/standard	date.today	==	Required
+COUNT	Filters	tdvt/exprtests/standard	date.today	MAX	Required
+COUNT	Domain	tdvt/exprtests/standard	date.today	MAX	Required
+COUNT	Aggregation	tdvt/exprtests/standard	date.today	MAX	Required
+COUNT	Calculation	tdvt/exprtests/standard	date.today	MAX	Required
+COUNT	Date Aggregation	tdvt/exprtests/standard	date.today	DATEPART	Required
+COUNT	Date Filters	tdvt/exprtests/standard	date.today	DATEPART	Required
+COUNT	Calculation	tdvt/exprtests/standard	date.today	DATEPART	Required
+COUNT	Date Filters	tdvt/exprtests/standard	date.today	TODAY	Required
+COUNT	Calculation	tdvt/exprtests/standard	date.today	TODAY	Required
+COUNT	Date Filters	tdvt/exprtests/standard	date.today	TODAY	Required
+COUNT	Calculation	tdvt/exprtests/standard	date.today	TODAY	Required
 COUNT	Cast	tdvt/exprtests/standard	datetime.cast.date	DATE	Required
 COUNT	Calculation	tdvt/exprtests/standard	datetime.cast.date	DATE	Required
 COUNT	Data Prep	tdvt/exprtests/standard	datetime.cast.float	FLOAT	Required
@@ -1298,308 +1298,308 @@ DATE	Calculation	tdvt/logicaltests/staples	Filter.Trademark	SUM	Smoke
 DATE	Filters	tdvt/logicaltests/staples	Filter.Trademark	<=	Smoke
 DATE	Operator	tdvt/logicaltests/staples	Filter.Trademark	<=	Smoke
 DATE	Calculation	tdvt/logicaltests/staples	Filter.Trademark	<=	Smoke
-DATE	Aggregation	tdvt/logicaltests/calcs	join.null.bool	SUM	Recommended
-DATE	Calculation	tdvt/logicaltests/calcs	join.null.bool	SUM	Recommended
-DATE	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.bool	COLUMN_NULLABILITY	Recommended
-DATE	Filters	tdvt/logicaltests/calcs	join.null.bool	SUM	Recommended
-DATE	Reference Line	tdvt/logicaltests/calcs	join.null.bool	SUM	Recommended
-DATE	Aggregation	tdvt/logicaltests/calcs	join.null.date	SUM	Recommended
-DATEADD	Calculation	tdvt/logicaltests/calcs	join.null.date	SUM	Recommended
-DATEADD	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.date	COLUMN_NULLABILITY	Recommended
-DATEADD	Filters	tdvt/logicaltests/calcs	join.null.date	SUM	Recommended
-DATEADD	Reference Line	tdvt/logicaltests/calcs	join.null.date	SUM	Recommended
-DATEADD	Aggregation	tdvt/logicaltests/calcs	join.null.datetime	SUM	Recommended
-DATEADD	Calculation	tdvt/logicaltests/calcs	join.null.datetime	DATETIME	Recommended
-DATEADD	Calculation	tdvt/logicaltests/calcs	join.null.datetime	SUM	Recommended
-DATEADD	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.datetime	COLUMN_NULLABILITY	Recommended
-DATEADD	Date Aggregation	tdvt/logicaltests/calcs	join.null.datetime	DATETIME	Recommended
-DATEADD	Date Filters	tdvt/logicaltests/calcs	join.null.datetime	DATETIME	Recommended
-DATEADD	Filters	tdvt/logicaltests/calcs	join.null.datetime	SUM	Recommended
-DATEADD	Reference Line	tdvt/logicaltests/calcs	join.null.datetime	SUM	Recommended
-DATEDIFF	Aggregation	tdvt/logicaltests/calcs	join.null.int	SUM	Recommended
-DATEDIFF	Calculation	tdvt/logicaltests/calcs	join.null.int	SUM	Recommended
-DATEDIFF	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.int	COLUMN_NULLABILITY	Recommended
-DATEDIFF	Filters	tdvt/logicaltests/calcs	join.null.int	SUM	Recommended
-DATEDIFF	Reference Line	tdvt/logicaltests/calcs	join.null.int	SUM	Recommended
-DATEDIFF	Aggregation	tdvt/logicaltests/calcs	join.null.real	SUM	Recommended
-DATEDIFF	Calculation	tdvt/logicaltests/calcs	join.null.real	SUM	Recommended
-DATEDIFF	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.real	COLUMN_NULLABILITY	Recommended
-DATEDIFF	Filters	tdvt/logicaltests/calcs	join.null.real	SUM	Recommended
-DATEDIFF	Reference Line	tdvt/logicaltests/calcs	join.null.real	SUM	Recommended
-DATEDIFF	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.str	COLUMN_NULLABILITY	Recommended
-DATEDIFF	Reference Line	tdvt/logicaltests/calcs	join.null.str	SUM	Recommended
-DATEDIFF	Filters	tdvt/logicaltests/calcs	join.null.str	SUM	Recommended
-DATEDIFF	Aggregation	tdvt/logicaltests/calcs	join.null.str	SUM	Recommended
-DATENAME	Calculation	tdvt/logicaltests/calcs	join.null.str	SUM	Recommended
-DATENAME	Reference Line	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required for Relational
-DATENAME	Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required for Relational
-DATENAME	Domain	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required for Relational
-DATENAME	Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required for Relational
-DATENAME	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required for Relational
-DATENAME	Level of Detail	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	LOD_STYLE_JOIN	Required for Relational
-DATENAME	Date Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required for Relational
-DATENAME	Date Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required for Relational
-DATENAME	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required for Relational
-DATENAME	Reference Line	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required for Relational
-DATENAME	Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required for Relational
-DATENAME	Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required for Relational
-DATEPART	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required for Relational
-DATEPART	Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required for Relational
-DATEPART	Domain	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required for Relational
-DATEPART	Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required for Relational
-DATEPART	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required for Relational
-DATEPART	Aggregation	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required for Relational
-DATEPART	Calculation	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required for Relational
-DATEPART	Domain	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required for Relational
-DATEPART	Filters	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required for Relational
-DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.10_As in-out Set	LOD_STYLE_JOIN	Required for Relational
-DATEPART	Aggregation	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required for Relational
-DATEPART	Calculation	tdvt/logicaltests/lod	lod.11_As in-out Set	ISNULL	Required for Relational
-DATEPART	Calculation	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required for Relational
-DATETIME	Domain	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required for Relational
-DATETIME	Filters	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required for Relational
-DATETIME	Filters	tdvt/logicaltests/lod	lod.11_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
-DATETIME	Level of Detail	tdvt/logicaltests/lod	lod.11_As in-out Set	LOD_STYLE_JOIN	Required for Relational
-DATETIME	NULL Semantics	tdvt/logicaltests/lod	lod.11_As in-out Set	ISNULL	Required for Relational
-DATETIME	Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.11_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
-DATETIME	Aggregation	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required for Relational
-DATETIME	Calculation	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required for Relational
-DATETIME	Domain	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required for Relational
-DATETIME	Filters	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required for Relational
-DATETIME	Level of Detail	tdvt/logicaltests/lod	lod.12_As in-out Set	LOD_STYLE_JOIN	Required for Relational
-DATETIME	Aggregation	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required for Relational
-DATETIME	Calculation	tdvt/logicaltests/lod	lod.13_As in-out Set	ISNULL	Required for Relational
-DATETIME	Calculation	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required for Relational
-DATETIME	Domain	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required for Relational
-DATETIME	Filters	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required for Relational
-DATETRUNC	Filters	tdvt/logicaltests/lod	lod.13_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
-DATETRUNC	Level of Detail	tdvt/logicaltests/lod	lod.13_As in-out Set	LOD_STYLE_JOIN	Required for Relational
-DATETRUNC	NULL Semantics	tdvt/logicaltests/lod	lod.13_As in-out Set	ISNULL	Required for Relational
-DATETRUNC	Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.13_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
-DATETRUNC		tdvt/logicaltests/lod	lod.14_As in-out Set	$IN_SET$	Required for Relational
-DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required for Relational
-DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required for Relational
-DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required for Relational
-DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required for Relational
-DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required for Relational
-DATETRUNC	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required for Relational
-DATETRUNC	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required for Relational
-FIND	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required for Relational
-FLOAT	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	ISNULL	Required for Relational
-FLOAT	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required for Relational
-FLOAT	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required for Relational
-FLOOR	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required for Relational
-HEXBINX	Data Prep	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required for Relational
-HEXBINY	Domain	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required for Relational
-IFNULL	Domain	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required for Relational
-IIF	Domain	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required for Relational
-IIF	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required for Relational
-IIF	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required for Relational
-IIF	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required for Relational
-INT	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required for Relational
-INT	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required for Relational
-INT	Level of Detail	tdvt/logicaltests/lod	lod.14_As in-out Set	LOD_STYLE_JOIN	Required for Relational
-INT	NULL Semantics	tdvt/logicaltests/lod	lod.14_As in-out Set	ISNULL	Required for Relational
-INT	Operator	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required for Relational
-INT	Reference Line	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required for Relational
-INT	Reference Line	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required for Relational
-INT	Reference Line	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required for Relational
-ISNULL	Reference Line	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required for Relational
-ISNULL	Filters	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required for Relational
-LEFT	Aggregation	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required for Relational
-LEFT	Calculation	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required for Relational
-LN		tdvt/logicaltests/lod	lod.15_As Bin	SYS_NUMBIN	Required for Relational
-LN	Level of Detail	tdvt/logicaltests/lod	lod.15_As Bin	LOD_STYLE_JOIN	Required for Relational
-LOG		tdvt/logicaltests/lod	lod.16_As Group	$IN_SET$	Required for Relational
-LOG	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required for Relational
-LOWER	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required for Relational
-LOWER	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required for Relational
-LTRIM	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	==	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required for Relational
-MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required for Relational
-MAX	Cast	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required for Relational
-MAX	Data Prep	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required for Relational
-MAX	Date Aggregation	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required for Relational
-MID	Date Aggregation	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required for Relational
-MID	Date Filters	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required for Relational
-MID	Date Filters	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required for Relational
-MID	Domain	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required for Relational
-MIN	Domain	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required for Relational
-MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	==	Required for Relational
-MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required for Relational
-MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required for Relational
-MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required for Relational
-MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required for Relational
-MIN	Level of Detail	tdvt/logicaltests/lod	lod.16_As Group	LOD_STYLE_JOIN	Required for Relational
-MIN	Operator	tdvt/logicaltests/lod	lod.16_As Group	==	Required for Relational
-NOW	Reference Line	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required for Relational
-POWER	Reference Line	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required for Relational
-POWER	Reference Line	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required for Relational
-REPLACE	Level of Detail	tdvt/logicaltests/lod	lod.17_Nesting	LOD_STYLE_JOIN	Required for Relational
-REPLACE	Reference Line	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required for Relational
-RIGHT	Filters	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required for Relational
-RIGHT	Aggregation	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required for Relational
-ROUND	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required for Relational
-ROUND	Operator	tdvt/logicaltests/lod	lod.17_Nesting	+	Required for Relational
-RTRIM	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	+	Required for Relational
-SPLIT	Operator	tdvt/logicaltests/lod	lod.17_Nesting	/	Required for Relational
-SQRT	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	/	Required for Relational
-SQRT	Data Prep	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required for Relational
-SQUARE	Cast	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required for Relational
-SQUARE	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required for Relational
-STARTSWITH		tdvt/logicaltests/lod	lod.2_Cross Join	$AGGREGATE$	Required for Relational
-STR	Aggregation	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required for Relational
-STR	Calculation	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required for Relational
-STR	Filters	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required for Relational
-STR	Level of Detail	tdvt/logicaltests/lod	lod.2_Cross Join	LOD_STYLE_JOIN	Required for Relational
-STR	Reference Line	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required for Relational
-STR		tdvt/logicaltests/lod	lod.3_Disjoint LOD	$AGGREGATE$	Required for Relational
-STR	Aggregation	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required for Relational
-STR	Calculation	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required for Relational
-SUM	Filters	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required for Relational
-SUM	Level of Detail	tdvt/logicaltests/lod	lod.3_Disjoint LOD	LOD_STYLE_JOIN	Required for Relational
-TODAY	Reference Line	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required for Relational
-TRIM	Aggregation	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required for Relational
-TRIM	Calculation	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required for Relational
-VAR	Filters	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required for Relational
-VARP	Level of Detail	tdvt/logicaltests/lod	lod.4_Subset Fixed	LOD_STYLE_JOIN	Required for Relational
-ZN	Reference Line	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required for Relational
-^^	Aggregation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required for Relational
-||	Calculation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required for Relational
-DATE	Calculation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required for Relational
-DATE	Cast	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required for Relational
-DATE	Data Prep	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required for Relational
-DATE	Filters	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required for Relational
-DATE	Level of Detail	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	LOD_STYLE_JOIN	Required for Relational
-DATE	Reference Line	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required for Relational
-DATE	Reference Line	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required for Relational
-DATE	Filters	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required for Relational
-DATE	Aggregation	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required for Relational
-DATE	Calculation	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required for Relational
-DATE	Level of Detail	tdvt/logicaltests/lod	lod.6_Include - 1	LOD_STYLE_JOIN	Required for Relational
-FLOAT	Reference Line	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required for Relational
-FLOAT	Filters	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required for Relational
-FLOAT	Aggregation	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required for Relational
-INT	Calculation	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required for Relational
-INT	Level of Detail	tdvt/logicaltests/lod	lod.7_Percent of Total 1	LOD_STYLE_JOIN	Required for Relational
-INT	Reference Line	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required for Relational
-INT	Filters	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required for Relational
-INT	Aggregation	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required for Relational
-INT	Calculation	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required for Relational
-INT	Level of Detail	tdvt/logicaltests/lod	lod.8_Precent of Total 2	LOD_STYLE_JOIN	Required for Relational
-INT	Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required for Relational
-STR	Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required for Relational
-STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required for Relational
-STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	FLOOR	Required for Relational
-STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required for Relational
-STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required for Relational
-STR	Date Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required for Relational
-STR	Date Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required for Relational
-STR	Domain	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required for Relational
-COLUMN_NULLABILITY	Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required for Relational
-COLUMN_NULLABILITY	Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required for Relational
-!	Level of Detail	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	LOD_STYLE_JOIN	Required for Relational
-FIND	Reference Line	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required for Relational
-FLOAT	Aggregation	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required for Relational
-FLOAT	Aggregation	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required for Relational
-FLOAT	Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	FLOOR	Required for Relational
-INT	Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required for Relational
-INT	Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required for Relational
-INT	Domain	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required for Relational
-INT	Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required for Relational
-INT	Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required for Relational
-INT	Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
-INT	Level of Detail	tdvt/logicaltests/lod	lod.calc.1.TopN	LOD_STYLE_JOIN	Required for Relational
-INT	Reference Line	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required for Relational
-LEFT	Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.calc.1.TopN	TEMP_TABLES_AND_SUBQUERIES	Required for Relational
-LEFT	Aggregation	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required for Relational
-MID	Aggregation	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required for Relational
-MID	Calculation	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required for Relational
-MID	Calculation	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required for Relational
-MID	Domain	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required for Relational
-SPLIT	Filters	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required for Relational
-TRIM	Filters	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required for Relational
-TRIM	Level of Detail	tdvt/logicaltests/lod	lod.calc.11.Exclude	LOD_STYLE_JOIN	Required for Relational
-DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required for Relational
-DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required for Relational
-DATEADD		tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	$AGGREGATE$	Required for Relational
-DATEADD	Level of Detail	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	LOD_STYLE_JOIN	Required for Relational
-DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required for Relational
-DATEADD	Filters	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required for Relational
-DATEADD	Aggregation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required for Relational
-DATEADD	Calculation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required for Relational
-DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required for Relational
-DATEADD	Filters	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required for Relational
-DATEADD	Aggregation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required for Relational
-DATEADD	Calculation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required for Relational
-DATEDIFF	Aggregation	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required for Relational
-DATEDIFF	Calculation	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required for Relational
-DATEDIFF	Filters	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required for Relational
-DATEDIFF	Level of Detail	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	LOD_STYLE_JOIN	Required for Relational
-DATEDIFF	Reference Line	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required for Relational
-DATEDIFF	Reference Line	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required for Relational
-DATEDIFF	Filters	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required for Relational
-DATEDIFF	Aggregation	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required for Relational
-DATEDIFF	Calculation	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required for Relational
-DATEDIFF	Level of Detail	tdvt/logicaltests/lod	lod.calc.4.Lookup	LOD_STYLE_JOIN	Required for Relational
-DATEDIFF	Data Prep	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required for Relational
-DATEDIFF	Cast	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required for Relational
-DATEDIFF	Calculation	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required for Relational
-DATEDIFF	Aggregation	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required for Relational
-DATENAME	Calculation	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required for Relational
-DATENAME	Filters	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required for Relational
-DATENAME	Level of Detail	tdvt/logicaltests/lod	lod.calc.5.LOD Set	LOD_STYLE_JOIN	Required for Relational
-DATENAME	Reference Line	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required for Relational
-DATENAME	Aggregation	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required for Relational
-DATENAME	Calculation	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required for Relational
-DATENAME	Filters	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required for Relational
-DATENAME	Level of Detail	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	LOD_STYLE_JOIN	Required for Relational
-DATENAME	Reference Line	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required for Relational
-DATENAME		tdvt/logicaltests/lod	lod.calc.7. LOD Bins	$AGGREGATE$	Required for Relational
-DATENAME		tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SYS_NUMBIN	Required for Relational
-DATENAME	Aggregation	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required for Relational
-DATENAME	Calculation	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required for Relational
-DATEPART	Filters	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required for Relational
-DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	LOD_STYLE_JOIN	Required for Relational
-DATEPART	Reference Line	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required for Relational
-DATEPART	Reference Line	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required for Relational
-DATEPART	Filters	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required for Relational
-DATEPART	Aggregation	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required for Relational
-DATEPART	Calculation	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required for Relational
-DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.calc.8. Include	LOD_STYLE_JOIN	Required for Relational
-DATEPART		tdvt/logicaltests/lod	lod.calc.9.Fixed	$AGGREGATE$	Required for Relational
-DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.calc.9.Fixed	LOD_STYLE_JOIN	Required for Relational
-DATEPART	Reference Line	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required for Relational
-DATEPART	Filters	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required for Relational
-DATEPART	Aggregation	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required for Relational
-DATETIME	Calculation	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required for Relational
-DATETIME		tdvt/exprtests/lodcalcs	lod.calcs	$AGGREGATE$	Required for Relational
-DATETIME		tdvt/exprtests/lodcalcs	lod.calcs	INDEX	Required for Relational
-DATETIME	Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required for Relational
-DATETIME	Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required for Relational
-DATETIME	Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required for Relational
-DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	/	Required for Relational
-DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required for Relational
-DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required for Relational
-DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	EXCLUDE	Required for Relational
-DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	FIXED	Required for Relational
-DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required for Relational
-DATETIME	Domain	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required for Relational
-DATETIME	Filters	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required for Relational
-DATETIME	Filters	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required for Relational
-DATETIME	Filters	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required for Relational
-DATETRUNC	Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	EXCLUDE	Required for Relational
-DATETRUNC	Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	FIXED	Required for Relational
-DATETRUNC	Operator	tdvt/exprtests/lodcalcs	lod.calcs	/	Required for Relational
-DATETRUNC	Reference Line	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required for Relational
-DATETRUNC	Reference Line	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required for Relational
-DATETRUNC	Reference Line	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required for Relational
+DATE	Aggregation	tdvt/logicaltests/calcs	join.null.bool	SUM	Required If Supported
+DATE	Calculation	tdvt/logicaltests/calcs	join.null.bool	SUM	Required If Supported
+DATE	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.bool	COLUMN_NULLABILITY	Required If Supported
+DATE	Filters	tdvt/logicaltests/calcs	join.null.bool	SUM	Required If Supported
+DATE	Reference Line	tdvt/logicaltests/calcs	join.null.bool	SUM	Required If Supported
+DATE	Aggregation	tdvt/logicaltests/calcs	join.null.date	SUM	Required If Supported
+DATEADD	Calculation	tdvt/logicaltests/calcs	join.null.date	SUM	Required If Supported
+DATEADD	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.date	COLUMN_NULLABILITY	Required If Supported
+DATEADD	Filters	tdvt/logicaltests/calcs	join.null.date	SUM	Required If Supported
+DATEADD	Reference Line	tdvt/logicaltests/calcs	join.null.date	SUM	Required If Supported
+DATEADD	Aggregation	tdvt/logicaltests/calcs	join.null.datetime	SUM	Required If Supported
+DATEADD	Calculation	tdvt/logicaltests/calcs	join.null.datetime	DATETIME	Required If Supported
+DATEADD	Calculation	tdvt/logicaltests/calcs	join.null.datetime	SUM	Required If Supported
+DATEADD	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.datetime	COLUMN_NULLABILITY	Required If Supported
+DATEADD	Date Aggregation	tdvt/logicaltests/calcs	join.null.datetime	DATETIME	Required If Supported
+DATEADD	Date Filters	tdvt/logicaltests/calcs	join.null.datetime	DATETIME	Required If Supported
+DATEADD	Filters	tdvt/logicaltests/calcs	join.null.datetime	SUM	Required If Supported
+DATEADD	Reference Line	tdvt/logicaltests/calcs	join.null.datetime	SUM	Required If Supported
+DATEDIFF	Aggregation	tdvt/logicaltests/calcs	join.null.int	SUM	Required If Supported
+DATEDIFF	Calculation	tdvt/logicaltests/calcs	join.null.int	SUM	Required If Supported
+DATEDIFF	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.int	COLUMN_NULLABILITY	Required If Supported
+DATEDIFF	Filters	tdvt/logicaltests/calcs	join.null.int	SUM	Required If Supported
+DATEDIFF	Reference Line	tdvt/logicaltests/calcs	join.null.int	SUM	Required If Supported
+DATEDIFF	Aggregation	tdvt/logicaltests/calcs	join.null.real	SUM	Required If Supported
+DATEDIFF	Calculation	tdvt/logicaltests/calcs	join.null.real	SUM	Required If Supported
+DATEDIFF	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.real	COLUMN_NULLABILITY	Required If Supported
+DATEDIFF	Filters	tdvt/logicaltests/calcs	join.null.real	SUM	Required If Supported
+DATEDIFF	Reference Line	tdvt/logicaltests/calcs	join.null.real	SUM	Required If Supported
+DATEDIFF	Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.str	COLUMN_NULLABILITY	Required If Supported
+DATEDIFF	Reference Line	tdvt/logicaltests/calcs	join.null.str	SUM	Required If Supported
+DATEDIFF	Filters	tdvt/logicaltests/calcs	join.null.str	SUM	Required If Supported
+DATEDIFF	Aggregation	tdvt/logicaltests/calcs	join.null.str	SUM	Required If Supported
+DATENAME	Calculation	tdvt/logicaltests/calcs	join.null.str	SUM	Required If Supported
+DATENAME	Reference Line	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required If Supported
+DATENAME	Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required If Supported
+DATENAME	Domain	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required If Supported
+DATENAME	Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required If Supported
+DATENAME	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required If Supported
+DATENAME	Level of Detail	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	LOD_STYLE_JOIN	Required If Supported
+DATENAME	Date Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required If Supported
+DATENAME	Date Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required If Supported
+DATENAME	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required If Supported
+DATENAME	Reference Line	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required If Supported
+DATENAME	Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required If Supported
+DATENAME	Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required If Supported
+DATEPART	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required If Supported
+DATEPART	Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required If Supported
+DATEPART	Domain	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required If Supported
+DATEPART	Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required If Supported
+DATEPART	Calculation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required If Supported
+DATEPART	Aggregation	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required If Supported
+DATEPART	Calculation	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required If Supported
+DATEPART	Domain	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required If Supported
+DATEPART	Filters	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required If Supported
+DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.10_As in-out Set	LOD_STYLE_JOIN	Required If Supported
+DATEPART	Aggregation	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required If Supported
+DATEPART	Calculation	tdvt/logicaltests/lod	lod.11_As in-out Set	ISNULL	Required If Supported
+DATEPART	Calculation	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required If Supported
+DATETIME	Domain	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required If Supported
+DATETIME	Filters	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required If Supported
+DATETIME	Filters	tdvt/logicaltests/lod	lod.11_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+DATETIME	Level of Detail	tdvt/logicaltests/lod	lod.11_As in-out Set	LOD_STYLE_JOIN	Required If Supported
+DATETIME	NULL Semantics	tdvt/logicaltests/lod	lod.11_As in-out Set	ISNULL	Required If Supported
+DATETIME	Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.11_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+DATETIME	Aggregation	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required If Supported
+DATETIME	Calculation	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required If Supported
+DATETIME	Domain	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required If Supported
+DATETIME	Filters	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required If Supported
+DATETIME	Level of Detail	tdvt/logicaltests/lod	lod.12_As in-out Set	LOD_STYLE_JOIN	Required If Supported
+DATETIME	Aggregation	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required If Supported
+DATETIME	Calculation	tdvt/logicaltests/lod	lod.13_As in-out Set	ISNULL	Required If Supported
+DATETIME	Calculation	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required If Supported
+DATETIME	Domain	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required If Supported
+DATETIME	Filters	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required If Supported
+DATETRUNC	Filters	tdvt/logicaltests/lod	lod.13_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+DATETRUNC	Level of Detail	tdvt/logicaltests/lod	lod.13_As in-out Set	LOD_STYLE_JOIN	Required If Supported
+DATETRUNC	NULL Semantics	tdvt/logicaltests/lod	lod.13_As in-out Set	ISNULL	Required If Supported
+DATETRUNC	Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.13_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+DATETRUNC		tdvt/logicaltests/lod	lod.14_As in-out Set	$IN_SET$	Required If Supported
+DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required If Supported
+DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required If Supported
+DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required If Supported
+DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required If Supported
+DATETRUNC	Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required If Supported
+DATETRUNC	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required If Supported
+DATETRUNC	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required If Supported
+FIND	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required If Supported
+FLOAT	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	ISNULL	Required If Supported
+FLOAT	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required If Supported
+FLOAT	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required If Supported
+FLOOR	Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required If Supported
+HEXBINX	Data Prep	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required If Supported
+HEXBINY	Domain	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required If Supported
+IFNULL	Domain	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required If Supported
+IIF	Domain	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required If Supported
+IIF	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required If Supported
+IIF	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required If Supported
+IIF	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required If Supported
+INT	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required If Supported
+INT	Filters	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required If Supported
+INT	Level of Detail	tdvt/logicaltests/lod	lod.14_As in-out Set	LOD_STYLE_JOIN	Required If Supported
+INT	NULL Semantics	tdvt/logicaltests/lod	lod.14_As in-out Set	ISNULL	Required If Supported
+INT	Operator	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required If Supported
+INT	Reference Line	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required If Supported
+INT	Reference Line	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required If Supported
+INT	Reference Line	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required If Supported
+ISNULL	Reference Line	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required If Supported
+ISNULL	Filters	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required If Supported
+LEFT	Aggregation	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required If Supported
+LEFT	Calculation	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required If Supported
+LN		tdvt/logicaltests/lod	lod.15_As Bin	SYS_NUMBIN	Required If Supported
+LN	Level of Detail	tdvt/logicaltests/lod	lod.15_As Bin	LOD_STYLE_JOIN	Required If Supported
+LOG		tdvt/logicaltests/lod	lod.16_As Group	$IN_SET$	Required If Supported
+LOG	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required If Supported
+LOWER	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required If Supported
+LOWER	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required If Supported
+LTRIM	Aggregation	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	==	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required If Supported
+MAX	Calculation	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required If Supported
+MAX	Cast	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required If Supported
+MAX	Data Prep	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required If Supported
+MAX	Date Aggregation	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required If Supported
+MID	Date Aggregation	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required If Supported
+MID	Date Filters	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required If Supported
+MID	Date Filters	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required If Supported
+MID	Domain	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required If Supported
+MIN	Domain	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required If Supported
+MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	==	Required If Supported
+MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required If Supported
+MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required If Supported
+MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required If Supported
+MIN	Filters	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required If Supported
+MIN	Level of Detail	tdvt/logicaltests/lod	lod.16_As Group	LOD_STYLE_JOIN	Required If Supported
+MIN	Operator	tdvt/logicaltests/lod	lod.16_As Group	==	Required If Supported
+NOW	Reference Line	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required If Supported
+POWER	Reference Line	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required If Supported
+POWER	Reference Line	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required If Supported
+REPLACE	Level of Detail	tdvt/logicaltests/lod	lod.17_Nesting	LOD_STYLE_JOIN	Required If Supported
+REPLACE	Reference Line	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required If Supported
+RIGHT	Filters	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required If Supported
+RIGHT	Aggregation	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required If Supported
+ROUND	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required If Supported
+ROUND	Operator	tdvt/logicaltests/lod	lod.17_Nesting	+	Required If Supported
+RTRIM	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	+	Required If Supported
+SPLIT	Operator	tdvt/logicaltests/lod	lod.17_Nesting	/	Required If Supported
+SQRT	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	/	Required If Supported
+SQRT	Data Prep	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required If Supported
+SQUARE	Cast	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required If Supported
+SQUARE	Calculation	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required If Supported
+STARTSWITH		tdvt/logicaltests/lod	lod.2_Cross Join	$AGGREGATE$	Required If Supported
+STR	Aggregation	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required If Supported
+STR	Calculation	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required If Supported
+STR	Filters	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required If Supported
+STR	Level of Detail	tdvt/logicaltests/lod	lod.2_Cross Join	LOD_STYLE_JOIN	Required If Supported
+STR	Reference Line	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required If Supported
+STR		tdvt/logicaltests/lod	lod.3_Disjoint LOD	$AGGREGATE$	Required If Supported
+STR	Aggregation	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required If Supported
+STR	Calculation	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required If Supported
+SUM	Filters	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required If Supported
+SUM	Level of Detail	tdvt/logicaltests/lod	lod.3_Disjoint LOD	LOD_STYLE_JOIN	Required If Supported
+TODAY	Reference Line	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required If Supported
+TRIM	Aggregation	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required If Supported
+TRIM	Calculation	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required If Supported
+VAR	Filters	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required If Supported
+VARP	Level of Detail	tdvt/logicaltests/lod	lod.4_Subset Fixed	LOD_STYLE_JOIN	Required If Supported
+ZN	Reference Line	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required If Supported
+^^	Aggregation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required If Supported
+||	Calculation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required If Supported
+DATE	Calculation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required If Supported
+DATE	Cast	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required If Supported
+DATE	Data Prep	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required If Supported
+DATE	Filters	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required If Supported
+DATE	Level of Detail	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	LOD_STYLE_JOIN	Required If Supported
+DATE	Reference Line	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required If Supported
+DATE	Reference Line	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required If Supported
+DATE	Filters	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required If Supported
+DATE	Aggregation	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required If Supported
+DATE	Calculation	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required If Supported
+DATE	Level of Detail	tdvt/logicaltests/lod	lod.6_Include - 1	LOD_STYLE_JOIN	Required If Supported
+FLOAT	Reference Line	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required If Supported
+FLOAT	Filters	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required If Supported
+FLOAT	Aggregation	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required If Supported
+INT	Calculation	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required If Supported
+INT	Level of Detail	tdvt/logicaltests/lod	lod.7_Percent of Total 1	LOD_STYLE_JOIN	Required If Supported
+INT	Reference Line	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required If Supported
+INT	Filters	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required If Supported
+INT	Aggregation	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required If Supported
+INT	Calculation	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required If Supported
+INT	Level of Detail	tdvt/logicaltests/lod	lod.8_Precent of Total 2	LOD_STYLE_JOIN	Required If Supported
+INT	Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required If Supported
+STR	Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required If Supported
+STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required If Supported
+STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	FLOOR	Required If Supported
+STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required If Supported
+STR	Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required If Supported
+STR	Date Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required If Supported
+STR	Date Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required If Supported
+STR	Domain	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required If Supported
+COLUMN_NULLABILITY	Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required If Supported
+COLUMN_NULLABILITY	Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required If Supported
+!	Level of Detail	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	LOD_STYLE_JOIN	Required If Supported
+FIND	Reference Line	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required If Supported
+FLOAT	Aggregation	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required If Supported
+FLOAT	Aggregation	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required If Supported
+FLOAT	Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	FLOOR	Required If Supported
+INT	Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required If Supported
+INT	Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required If Supported
+INT	Domain	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required If Supported
+INT	Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required If Supported
+INT	Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required If Supported
+INT	Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+INT	Level of Detail	tdvt/logicaltests/lod	lod.calc.1.TopN	LOD_STYLE_JOIN	Required If Supported
+INT	Reference Line	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required If Supported
+LEFT	Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.calc.1.TopN	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
+LEFT	Aggregation	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required If Supported
+MID	Aggregation	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required If Supported
+MID	Calculation	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required If Supported
+MID	Calculation	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required If Supported
+MID	Domain	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required If Supported
+SPLIT	Filters	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required If Supported
+TRIM	Filters	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required If Supported
+TRIM	Level of Detail	tdvt/logicaltests/lod	lod.calc.11.Exclude	LOD_STYLE_JOIN	Required If Supported
+DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required If Supported
+DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required If Supported
+DATEADD		tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	$AGGREGATE$	Required If Supported
+DATEADD	Level of Detail	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	LOD_STYLE_JOIN	Required If Supported
+DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required If Supported
+DATEADD	Filters	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required If Supported
+DATEADD	Aggregation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required If Supported
+DATEADD	Calculation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required If Supported
+DATEADD	Reference Line	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required If Supported
+DATEADD	Filters	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required If Supported
+DATEADD	Aggregation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required If Supported
+DATEADD	Calculation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required If Supported
+DATEDIFF	Aggregation	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required If Supported
+DATEDIFF	Calculation	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required If Supported
+DATEDIFF	Filters	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required If Supported
+DATEDIFF	Level of Detail	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	LOD_STYLE_JOIN	Required If Supported
+DATEDIFF	Reference Line	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required If Supported
+DATEDIFF	Reference Line	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required If Supported
+DATEDIFF	Filters	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required If Supported
+DATEDIFF	Aggregation	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required If Supported
+DATEDIFF	Calculation	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required If Supported
+DATEDIFF	Level of Detail	tdvt/logicaltests/lod	lod.calc.4.Lookup	LOD_STYLE_JOIN	Required If Supported
+DATEDIFF	Data Prep	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required If Supported
+DATEDIFF	Cast	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required If Supported
+DATEDIFF	Calculation	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required If Supported
+DATEDIFF	Aggregation	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required If Supported
+DATENAME	Calculation	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required If Supported
+DATENAME	Filters	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required If Supported
+DATENAME	Level of Detail	tdvt/logicaltests/lod	lod.calc.5.LOD Set	LOD_STYLE_JOIN	Required If Supported
+DATENAME	Reference Line	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required If Supported
+DATENAME	Aggregation	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required If Supported
+DATENAME	Calculation	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required If Supported
+DATENAME	Filters	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required If Supported
+DATENAME	Level of Detail	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	LOD_STYLE_JOIN	Required If Supported
+DATENAME	Reference Line	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required If Supported
+DATENAME		tdvt/logicaltests/lod	lod.calc.7. LOD Bins	$AGGREGATE$	Required If Supported
+DATENAME		tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SYS_NUMBIN	Required If Supported
+DATENAME	Aggregation	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required If Supported
+DATENAME	Calculation	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required If Supported
+DATEPART	Filters	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required If Supported
+DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	LOD_STYLE_JOIN	Required If Supported
+DATEPART	Reference Line	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required If Supported
+DATEPART	Reference Line	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required If Supported
+DATEPART	Filters	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required If Supported
+DATEPART	Aggregation	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required If Supported
+DATEPART	Calculation	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required If Supported
+DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.calc.8. Include	LOD_STYLE_JOIN	Required If Supported
+DATEPART		tdvt/logicaltests/lod	lod.calc.9.Fixed	$AGGREGATE$	Required If Supported
+DATEPART	Level of Detail	tdvt/logicaltests/lod	lod.calc.9.Fixed	LOD_STYLE_JOIN	Required If Supported
+DATEPART	Reference Line	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required If Supported
+DATEPART	Filters	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required If Supported
+DATEPART	Aggregation	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required If Supported
+DATETIME	Calculation	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required If Supported
+DATETIME		tdvt/exprtests/lodcalcs	lod.calcs	$AGGREGATE$	Required If Supported
+DATETIME		tdvt/exprtests/lodcalcs	lod.calcs	INDEX	Required If Supported
+DATETIME	Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required If Supported
+DATETIME	Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required If Supported
+DATETIME	Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	/	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	EXCLUDE	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	FIXED	Required If Supported
+DATETIME	Calculation	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required If Supported
+DATETIME	Domain	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required If Supported
+DATETIME	Filters	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required If Supported
+DATETIME	Filters	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required If Supported
+DATETIME	Filters	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required If Supported
+DATETRUNC	Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	EXCLUDE	Required If Supported
+DATETRUNC	Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	FIXED	Required If Supported
+DATETRUNC	Operator	tdvt/exprtests/lodcalcs	lod.calcs	/	Required If Supported
+DATETRUNC	Reference Line	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required If Supported
+DATETRUNC	Reference Line	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required If Supported
+DATETRUNC	Reference Line	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required If Supported
 DATETRUNC		tdvt/exprtests/standard	logical	$CASE$	Required
 DATETRUNC	Filters	tdvt/exprtests/standard	logical	MIN	Required
 DATETRUNC	Domain	tdvt/exprtests/standard	logical	MIN	Required
@@ -2414,8 +2414,8 @@ DATEPART	Data Prep	tdvt/exprtests/standard	string.left	LEFT	Required
 DATEPART	Calculation	tdvt/exprtests/standard	string.left	LEFT	Required
 DATEPART	Data Prep	tdvt/exprtests/standard	string.left	LEFT	Required
 DATEPART	Calculation	tdvt/exprtests/standard	string.left	LEFT	Required
-DATEPART	Data Prep	tdvt/exprtests/standard	string.left.negative	LEFT	Recommended
-DATEPART	Calculation	tdvt/exprtests/standard	string.left.negative	LEFT	Recommended
+DATEPART	Data Prep	tdvt/exprtests/standard	string.left.negative	LEFT	Required If Supported
+DATEPART	Calculation	tdvt/exprtests/standard	string.left.negative	LEFT	Required If Supported
 DATETRUNC	Calculation	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
 DATETRUNC	Calculation	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
 COUNT	Data Prep	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
@@ -2461,12 +2461,12 @@ MIN	Filters	tdvt/exprtests/standard	string.len	COUNT	Required
 >=	Domain	tdvt/exprtests/standard	string.min	MIN	Required
 >=	Aggregation	tdvt/exprtests/standard	string.min	MIN	Required
 AVG	Calculation	tdvt/exprtests/standard	string.min	MIN	Required
-AVG	Aggregation	tdvt/exprtests/standard	string.replace	COUNT	Recommended
-AVG	Calculation	tdvt/exprtests/standard	string.replace	COUNT	Recommended
-AVG	Calculation	tdvt/exprtests/standard	string.replace	REPLACE	Recommended
-AVG	Domain	tdvt/exprtests/standard	string.replace	COUNT	Recommended
-AVG	Filters	tdvt/exprtests/standard	string.replace	COUNT	Recommended
-COUNT	Reference Line	tdvt/exprtests/standard	string.replace	COUNT	Recommended
+AVG	Aggregation	tdvt/exprtests/standard	string.replace	COUNT	Required If Supported
+AVG	Calculation	tdvt/exprtests/standard	string.replace	COUNT	Required If Supported
+AVG	Calculation	tdvt/exprtests/standard	string.replace	REPLACE	Required If Supported
+AVG	Domain	tdvt/exprtests/standard	string.replace	COUNT	Required If Supported
+AVG	Filters	tdvt/exprtests/standard	string.replace	COUNT	Required If Supported
+COUNT	Reference Line	tdvt/exprtests/standard	string.replace	COUNT	Required If Supported
 COUNTD	Aggregation	tdvt/exprtests/standard	string.right	COUNT	Required
 MIN	Calculation	tdvt/exprtests/standard	string.right	COUNT	Required
 MIN	Calculation	tdvt/exprtests/standard	string.right	RIGHT	Required
@@ -2507,13 +2507,13 @@ ISNULL	Data Prep	tdvt/exprtests/standard	string.space.int.constant	INT	Required
 <=	Calculation	tdvt/exprtests/standard	string.split	COUNT	Required
 <=	Data Prep	tdvt/exprtests/standard	string.split	SPLIT	Required
 <=	Calculation	tdvt/exprtests/standard	string.split	SPLIT	Required
-<=	Aggregation	tdvt/exprtests/standard	string.split.right	COUNT	Recommended
-<=	Calculation	tdvt/exprtests/standard	string.split.right	COUNT	Recommended
-<=	Calculation	tdvt/exprtests/standard	string.split.right	SPLIT	Recommended
-<=	Data Prep	tdvt/exprtests/standard	string.split.right	SPLIT	Recommended
-<=	Domain	tdvt/exprtests/standard	string.split.right	COUNT	Recommended
-<=	Filters	tdvt/exprtests/standard	string.split.right	COUNT	Recommended
-<=	Reference Line	tdvt/exprtests/standard	string.split.right	COUNT	Recommended
+<=	Aggregation	tdvt/exprtests/standard	string.split.right	COUNT	Required If Supported
+<=	Calculation	tdvt/exprtests/standard	string.split.right	COUNT	Required If Supported
+<=	Calculation	tdvt/exprtests/standard	string.split.right	SPLIT	Required If Supported
+<=	Data Prep	tdvt/exprtests/standard	string.split.right	SPLIT	Required If Supported
+<=	Domain	tdvt/exprtests/standard	string.split.right	COUNT	Required If Supported
+<=	Filters	tdvt/exprtests/standard	string.split.right	COUNT	Required If Supported
+<=	Reference Line	tdvt/exprtests/standard	string.split.right	COUNT	Required If Supported
 <=	Aggregation	tdvt/exprtests/standard	string.startswith	COUNT	Required
 <=	Aggregation	tdvt/exprtests/standard	string.startswith	MAX	Required
 ==	Aggregation	tdvt/exprtests/standard	string.startswith	MIN	Required
@@ -2529,10 +2529,10 @@ ISNULL	Data Prep	tdvt/exprtests/standard	string.space.int.constant	INT	Required
 >=	Filters	tdvt/exprtests/standard	string.startswith	MIN	Required
 >=	Filters	tdvt/exprtests/standard	string.startswith	STARTSWITH	Required
 >=	Reference Line	tdvt/exprtests/standard	string.startswith	COUNT	Required
->=	Data Prep	tdvt/exprtests/standard	string.trim	TRIM	Recommended
->=	Calculation	tdvt/exprtests/standard	string.trim	TRIM	Recommended
->=	Operator	tdvt/exprtests/standard	string.trim	+	Recommended
->=	Calculation	tdvt/exprtests/standard	string.trim	+	Recommended
+>=	Data Prep	tdvt/exprtests/standard	string.trim	TRIM	Required If Supported
+>=	Calculation	tdvt/exprtests/standard	string.trim	TRIM	Required If Supported
+>=	Operator	tdvt/exprtests/standard	string.trim	+	Required If Supported
+>=	Calculation	tdvt/exprtests/standard	string.trim	+	Required If Supported
 >=	Reference Line	tdvt/exprtests/standard	string.upper	COUNT	Required
 >=	Filters	tdvt/exprtests/standard	string.upper	COUNT	Required
 AVG	Domain	tdvt/exprtests/standard	string.upper	COUNT	Required
