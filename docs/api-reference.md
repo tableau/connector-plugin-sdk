@@ -56,7 +56,7 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 ["UID" : "myusername", "Host" : "myserver.somewhere.net", "PWD" : "mypassword"];
 ```
 
-#### JavaScript function call signature (Legacy):
+#### JavaScript function call signature (Deprecated):
 **Note:** A bug in the JavaScript translation layer means that you cannot use values containing the '=' character. You can mitigate this by using the recomended API above. This API should only be used to maintain backwards compatibility with Tableau versions older than 2019.4.1.
 
 **Input:** attr, an object of key/value pairs
