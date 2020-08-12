@@ -253,7 +253,7 @@ Below is an example of how to pass DelegationUID in a JDBC plugin in Tableau Ser
     }
  ```
  
- Also add CAP_AUTH_DB_IMPERSONATE to the list of capabilities in plugin manifest so that the option "Impersonate using embedded password" shows up in the publish dialog.
+To enable the "Impersonate using embedded password" option in the publish dialog ensure CAP_AUTH_DB_IMPERSONATE is enabled in the plugin manifest.xml.
  ```xml 
    // manifest.xml 
     <customizations>
