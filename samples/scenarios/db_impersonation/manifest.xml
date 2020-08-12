@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<connector-plugin class='impala_jdbc_delegationUID' superclass='jdbc' plugin-version='1.0.0' name='Impala JDBC Plugin' version='19.4'>
+<connector-plugin class='impala_jdbc_delegationUID' superclass='jdbc' plugin-version='1.0.0' name='Impala JDBC Plugin' version='19.4' min-version-tableau='2020.3'>
   <vendor-information>
     <company name="Company"/>
     <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
