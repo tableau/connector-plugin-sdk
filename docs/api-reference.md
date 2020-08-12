@@ -42,7 +42,7 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 
 **Type:** JavaScript
 
-#### JavaScript function call signature (Recomended, added in 2019.4.1):
+#### JavaScript function call signature (Recommended, added in 2019.4.1):
 
 **Input:** attr, an object of key/value pairs
 
@@ -68,7 +68,7 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 **Return:** an array of formatted key=value pairs that will be written to the properties file
 
 ```javascript
-{"UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"};
+["UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"]
 ```
 
 ---
