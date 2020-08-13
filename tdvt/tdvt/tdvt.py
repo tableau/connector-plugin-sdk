@@ -803,7 +803,7 @@ def main():
 
     if args.enable_sentry and sentry_installed is True:
         try:
-            sentry.init("https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053")
+            sentry.init(sentry.register(os.environ.get('SENTRY_DSN_TDVT')))
         except:
             logging.error("Error initializing Sentry in tdvt.py. Sentry will not be used.")
         else:
