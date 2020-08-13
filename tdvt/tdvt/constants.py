@@ -7,3 +7,19 @@ EXIT_NO_TESTS_FOUND = 3
 EXIT_DATA_SOURCE_NOT_FOUND = 4
 EXIT_TABQUERY_NOT_FOUND = 5
 EXIT_BAD_COMMAND = 6
+
+# Tags used by internal CI
+tags_list = [
+  'connectorName',
+  'dataSourceName',
+  'driverName',
+  'driverType',
+  'email',
+  'os',
+  'submissionId',
+  'submissionTrigger',
+  'tableauBranch',
+  'tableauVersion',
+  'jobId',
+  'tdvtTestSuites',
+]
