@@ -11,6 +11,7 @@ if sys.version_info[0] < 3:
 import argparse
 import glob
 import json
+import logging
 import pathlib
 import queue
 import shutil
@@ -73,7 +74,7 @@ class TestOutputFiles(object):
             src_file.close()
             dst_file.close()
         except IOError as e:
-            logging.debug("Exception while copying files: " + str(e))
+            logging.exception("Exception while copying files: " + str(e))
             return
 
 
@@ -178,7 +179,8 @@ class TestRunner():
                 shutil.rmtree(self.temp_dir)
             else:
                 left_temp_dir = True
-        except:
+        except Exception as e:
+            logging.exception(e)
             pass
 
         return left_temp_dir
@@ -671,8 +673,8 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
         print("Smoke tests ran in {} seconds.".format(smoke_test_run_time))
 
         if failed_smoke_tests > 0:
+            logging.error("{} smoke tests failed; there may be a connection issue.".format(failed_smoke_tests))
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
-            logging.error("{} smoke tests failured.".format(failed_smoke_tests))
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
                 print("\nSmoke tests failed, exiting.")
@@ -697,9 +699,6 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
     failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads)
-
-    if failed_tests > 0:
-        logging.error("{} tests failed".format(failed_tests))
 
     failed_tests += failed_smoke_tests
     skipped_tests += skipped_smoke_tests
@@ -799,19 +798,15 @@ def run_generate(ds_registry):
     print("Done: " + str(end_time))
 
 
-should_sentry_be_initialized = False
-
 def main():
     parser, ds_registry, args = init()
 
-    if args.enable_sentry is True and sentry_installed is True:
+    if args.enable_sentry and sentry_installed is True:
         try:
             sentry.init("https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053")
         except:
             logging.error("Error initializing Sentry in tdvt.py. Sentry will not be used.")
         else:
-            global should_sentry_be_initialized
-            should_sentry_be_initialized = True
             logging.info("Sentry initialized in tdvt.py.")
     if args.command == 'action':
         if args.setup:
