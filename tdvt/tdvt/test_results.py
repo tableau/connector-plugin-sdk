@@ -2,14 +2,22 @@
 
 import math
 import json
+import logging
 import re
 
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet
+# from .tdvt import should_sentry_be_initialized
+
 
 TEST_DISABLED = "Test disabled in .ini file."
 TEST_SKIPPED = "Test not run because smoke tests failed."
 TEST_NOT_RUN = "Not run"
+
+# if should_sentry_be_initialized:
+#     from sentry_sdk import catch_exception
+
+# div_my_zero = 1/0
 
 class TestCaseResult(object):
     """The actual or expected results of a test run.
@@ -240,7 +248,8 @@ class TestResult(object):
                                     test_case_count)
                                 self.test_case_map.append(test_result)
                                 test_case_count += 1
-                except IOError:
+                except IOError as e:
+                    logging.exception(e)
                     pass
 
     def __json__(self):
@@ -286,7 +295,8 @@ class TestResult(object):
             query_time = 0
             try:
                 query_time = float(node.text if node is not None else '0')
-            except ValueError:
+            except ValueError as e:
+                logging.exception(e)
                 pass
 
             node = test_child.find('sql')
@@ -421,7 +431,8 @@ class TestResult(object):
         case = None
         try:
             case = self.test_case_map[index]
-        except IndexError:
+        except IndexError as e:
+            logging.exception(e)
             pass
 
         return case

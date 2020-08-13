@@ -2,18 +2,6 @@ import re
 from .resources import *
 from .config_gen.datasource_list import print_logical_configurations
 
-try:
-    import sentry_sdk as sentry
-except ImportError:
-    sentry_installed = False
-    logging.info("Sentry SDK not installed")
-else:
-    sentry.init(
-    "https://5c254973a1cd4d73a0fdf875b7aaefd8@o179815.ingest.sentry.io/5358053",
-    )
-    sentry_installed = True
-    logging.info("Sentry installed.")
-
 def create_test_environment():
     """Create directories and necessary ini files."""
     create_setup_structure()
