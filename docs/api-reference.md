@@ -39,11 +39,10 @@ Builds the ODBC ConnectString or JDBC Connection URL. For a JDBC Connection URL,
 ### connection-properties
 
 Similar to connection-builder but is used to build the JDBC properties file. For JDBC Connection URL, we require that connection-properties contain secure attributes such as username and password.
-**Note:** A bug in the JavaScript translation layer means that you cannot use values containing the '=' character.
 
 **Type:** JavaScript
 
-#### JavaScript function call signature:
+#### JavaScript function call signature (Recommended, added in 2019.4.1):
 
 **Input:** attr, an object of key/value pairs
 
@@ -51,18 +50,25 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 {"server" : "myserver.somewhere.net", "username" : "myusername", "password" : "mypassword"}
 ```
 
-**Return:** object or array
-
-an object of key/value pairs that will be written to the properties file(recommended and available since 2019.4.1)
+**Return:** an object of key/value pairs that will be written to the properties file(recommended and available since 2019.4.1)
 
 ```javascript
 ["UID" : "myusername", "Host" : "myserver.somewhere.net", "PWD" : "mypassword"];
 ```
 
-array of formatted key=value pairs that will be written to the properties file
+#### JavaScript function call signature (Deprecated):
+**Note:** A bug in the JavaScript translation layer means that you cannot use values containing the '=' character. You can mitigate this by using the recomended API above. This API should only be used to maintain backwards compatibility with Tableau versions older than 2019.4.1.
+
+**Input:** attr, an object of key/value pairs
 
 ```javascript
-{"UID" : "myusername", "Host" : "myserver.somewhere.net", "PWD" : "mypassword"};
+{"server" : "myserver.somewhere.net", "username" : "myusername", "password" : "mypassword"}
+```
+
+**Return:** an array of formatted key=value pairs that will be written to the properties file
+
+```javascript
+["UID=myusername", "Host=myserver.somewhere.net", "PWD=mypassword"]
 ```
 
 ---
