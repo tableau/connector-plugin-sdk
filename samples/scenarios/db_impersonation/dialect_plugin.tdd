@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dialect name='ImpalaSampleDialect'
+         class='impala_jdbc_delegationUID'
+         base='Impala23Dialect'
+         version='18.1'>
+</dialect>

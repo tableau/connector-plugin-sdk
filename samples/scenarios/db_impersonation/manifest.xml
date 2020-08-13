@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='impala_jdbc_delegationUID' superclass='jdbc' plugin-version='1.0.0' name='Impala JDBC Plugin' version='19.4' min-version-tableau='2020.3'>
+  <vendor-information>
+    <company name="Company"/>
+    <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
+    <driver-download-link url = "some url"/>
+  </vendor-information>
+  <connection-customization class="impala_jdbc_delegationUID" enabled="true" version="10.0">
+    <vendor name="vendor"/>
+    <driver name="driver"/>
+    <customizations>
+      <customization name="CAP_CREATE_TEMP_TABLES" value="no"/>
+      <customization name="CAP_FAST_METADATA" value="no"/>
+      <customization name="CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL" value="yes"/>
+      <customization name="CAP_QUERY_BOOLEXPR_TO_INTEXPR" value="no"/>
+      <customization name="CAP_QUERY_FROM_REQUIRES_ALIAS" value="no"/>
+      <customization name="CAP_QUERY_GROUP_ALLOW_DUPLICATES" value="yes"/>
+      <customization name="CAP_QUERY_GROUP_BY_ALIAS" value="no"/>
+      <customization name="CAP_QUERY_GROUP_BY_BOOL" value="yes"/>
+      <customization name="CAP_QUERY_GROUP_BY_DEGREE" value="no"/>
+      <customization name="CAP_QUERY_HAVING_REQUIRES_GROUP_BY" value="no"/>
+      <customization name="CAP_QUERY_HAVING_UNSUPPORTED" value="no"/>
+      <customization name="CAP_QUERY_INITIAL_SQL_SPLIT_STATEMENTS" value="yes"/>
+      <customization name="CAP_QUERY_JOIN_ACROSS_SCHEMAS" value="yes"/>
+      <customization name="CAP_QUERY_JOIN_MISMATCHED_VARCHAR_WIDTHS" value="yes"/>
+      <customization name="CAP_QUERY_JOIN_PREDICATE_REQUIRES_SCOPE" value="no"/>
+      <customization name="CAP_QUERY_NULL_REQUIRES_CAST" value="yes"/>
+      <customization name="CAP_QUERY_SELECT_ALIASES_SORTED" value="no"/>
+      <customization name="CAP_QUERY_SORT_BY_DEGREE" value="no"/>
+      <customization name="CAP_QUERY_SORT_BY" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERIES_WITH_TOP" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERIES" value="yes"/>
+      <customization name="CAP_QUERY_SUBQUERY_QUERY_CONTEXT" value="yes"/>
+      <customization name="CAP_QUERY_TOP_0_METADATA" value="no"/>
+      <customization name="CAP_QUERY_TOP_N" value="yes"/>
+      <customization name="CAP_QUERY_TOPSTYLE_LIMIT" value="yes"/>
+      <customization name="CAP_QUERY_TOPSTYLE_ROWNUM" value="no"/>
+      <customization name="CAP_QUERY_TOPSTYLE_TOP" value="no"/>
+      <customization name="CAP_QUERY_WHERE_FALSE_METADATA" value="yes"/>
+      <customization name="CAP_SELECT_INTO" value="no"/>
+      <customization name="CAP_SELECT_TOP_INTO" value="no"/>
+      <customization name="CAP_SUPPORTS_SPLIT_FROM_LEFT" value="yes"/>
+      <customization name="CAP_SUPPORTS_SPLIT_FROM_RIGHT" value="yes"/>
+      <customization name="CAP_JDBC_QUERY_ASYNC" value="no"/>
+      <customization name="CAP_JDBC_QUERY_CANCEL" value="yes"/>
+      <customization name="CAP_AUTH_DB_IMPERSONATE" value="yes"/>
+    </customizations>
+  </connection-customization>
+  <connection-dialog file='connection-dialog.tcd'/>
+  <connection-resolver file="connectionResolver.tdr"/>
+  <dialect file='dialect_plugin.tdd'/>
+</connector-plugin>
