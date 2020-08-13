@@ -161,22 +161,25 @@ Use care when logging so that you don’t expose sensitive information like pass
 
 _Attribute names_
 
-| Function                | Description                                      |
-| ----------------------- | ------------------------------------------------ |
-| attributeAuthentication | Connection attribute for the authentication type |
-| attributeClass          | Connection attribute for the connection type     |
-| attributeDatabase       | Connection attribute for the database            |
-| attributeInitialSQL     | Connection attribute for initial SQL             |
-| attributePassword       | Connection attribute for the password            |
-| attributePort           | Connection attribute for the port                |
-| attributeServer         | Connection attribute for the server              |
-| attributeService        | Connection attribute for the service             |
-| attributeSSLCert        | Connection attribute for the SSL Certfile        |
-| attributeSSLMode        | Connection attribute for the SSL Mode            |
-| attributeUsername       | Connection attribute for the user name           |
-| attributeWarehouse      | Connection attribute for the Warehouse           |
-| keywordODBCUsername     | ODBC Username keyword                            |
-| keywordODBCPassword     | ODBC Password keyword                            |
+| Function                       | Description                                                    |
+| ------------------------------ | -------------------------------------------------------------- |
+| attributeAuthentication        | Connection attribute for the authentication type               |
+| attributeClass                 | Connection attribute for the connection type                   |
+| attributeDatabase              | Connection attribute for the database                          |
+| attributeInitialSQL            | Connection attribute for initial SQL                           |
+| attributePassword              | Connection attribute for the password                          |
+| attributePort                  | Connection attribute for the port                              |
+| attributeServer                | Connection attribute for the server                            |
+| attributeService               | Connection attribute for the service                           |
+| attributeSSLCert               | Connection attribute for the SSL Certfile                      |
+| attributeSSLMode               | Connection attribute for the SSL Mode                          |
+| attributeTableauServerAuthMode | Connection attribute for tableau server authentication mode    |
+| attributeTableauServerUser     | Connection attribute for tableau server user                   |
+| attributeUsername              | Connection attribute for the user name                         |
+| attributeWarehouse             | Connection attribute for the Warehouse                         |
+| keywordODBCUsername            | ODBC Username keyword                                          |
+| keywordODBCPassword            | ODBC Password keyword                                          |
+| valueAuthModeDBImpersonate     | Attribute value for database impersonation authentication mode |
 
 _Functions_
 
@@ -206,7 +209,11 @@ Example:
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
 
     odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
-
+    
+    if (attr[connectionHelper.attributeTableauServerAuthMode] == connectionHelper.valueAuthModeDBImpersonate) {
+         props["DelegationUID"] = attr[connectionHelper.attributeTableauServerUser];
+    }
+    
 _Throw Tableau Exception_
 
 Normally, throwing an exception in a JavaScript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:

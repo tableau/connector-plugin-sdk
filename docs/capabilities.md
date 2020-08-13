@@ -35,7 +35,6 @@ CAP_QUERY_WHERE_FALSE_METADATA | Set to 'yes' if the datasource can handle a "WH
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_CREATE_TEMP_TABLES | Set to 'yes' if Tableau can create temporary tables needed for certain complex or optimized queries. Set to 'no' if creating temporary tables is not supported.  See also: CAP_SELECT_INTO. | &ndash; | **<span style="color:red">?</span>**  
-CAP_CREATE_TEMP_TABLES_DROP_NULLABILITY | Set to 'yes' if Tableau needs to drop nullability when creating temp tables through SELECT INTO | &ndash; | &ndash;
 CAP_INDEX_TEMP_TABLES | Set to 'yes' if datasource supports creation of indexes on temp tables database | &ndash; | &ndash; 
 CAP_QUERY_USE_TEMP_TABLE_NAMES_AS_SUBQUERY_ALIASES | Set to 'yes' if Tableau must use generated temporary table names for aliases of subqueries because they might end up implemented as temporary tables | no | no
 CAP_SELECT_INTO | Set to 'yes' if Tableau can create a table on the fly from the resultset of another query. See also: CAP_CREATE_TEMP_TABLES. | &ndash; | **<span style="color:red">?</span>**   
@@ -50,6 +49,12 @@ Capability | Description | Default | Recommended
 -|-|-|-
 CAP_SUPPORTS_SPLIT_FROM_LEFT | Set to 'yes' if data source supports splitting a string from the left | &ndash; | **<span style="color:red">yes</span>**  
 CAP_SUPPORTS_SPLIT_FROM_RIGHT | Set to 'yes' if data source supports splitting a string from the right | &ndash; | **<span style="color:red">?</span>**  
+
+## Initial SQL 
+
+Capability | Description | Default | Recommended 
+-|-|-|-
+CAP_SUPPORTS_INITIAL_SQL | Set to 'yes' to enable Initial SQL on the connection dialog. Available in Tableau 2020.3 and newer. | &ndash; | **<span style="color:red">yes</span>**
 
 ## Query
 
@@ -103,7 +108,9 @@ CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subqu
 
 Capability | Description | Default | Recommended 
 -|-|-|-
+CAP_JDBC_BIND_BIGDECIMAL_STRING | Set to 'yes' to bind bigdecimal as string for JDBC. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
 CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING | Set to 'yes' to allow Tableau to detect and recover from a JDBC data source that reports the field names in a result set using only upper-case or lower-case characters, instead of the expected field names.  | &ndash;  | &ndash; 
+CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to integer for data insertion. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
 CAP_JDBC_EXPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable use of parallel loops to translate Tableau DataValues to wire buffers on exports | yes | yes 
 CAP_JDBC_JNI_FETCH_SIZE_SMALL | Set to ‘yes’ to Fetch 10 rows per JNI call | &ndash; | &ndash;  
@@ -113,11 +120,13 @@ CAP_JDBC_JNI_FETCH_SIZE_MASSIVE | Set to ‘yes’ to Fetch 10000 rows per JNI c
 CAP_JDBC_METADATA_GET_INDEX_INFO | Set to 'no' to disable reading index info | yes | yes  
 CAP_JDBC_METADATA_READ_FOREIGNKEYS | Set to 'no' to disable reading foreign key metadata | yes | yes   
 CAP_JDBC_METADATA_READ_PRIMARYKEYS | Set to 'no' to disable reading primary key metadata | yes | yes 
+CAP_JDBC_PARAMETER_METADATA_REQUIRES_EXECUTE | Set to 'yes' if retrieving parameter metadata for inserts requires execution of an empty batch. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread | &ndash; | **<span style="color:red">yes</span>**  
 CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries | &ndash; | **<span style="color:red">yes</span>** 
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash; 
+CAP_JDBC_TRIM_STRING_PADDING | Set to 'yes' to trim trailing whitespace from string columns which has been added by the driver. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
 
 ## ODBC 
 
@@ -148,6 +157,7 @@ CAP_ODBC_CURSOR_DYNAMIC | Set to 'yes' to force the Tableau native ODBC protocol
 CAP_ODBC_CURSOR_FORWARD_ONLY | Set to 'yes' to force the Tableau native ODBC protocol to set the cursor type for all statements to Forward-only (non-scrollable). | &ndash; | **<span style="color:red">?</span>** 
 CAP_ODBC_CURSOR_KEYSET_DRIVEN | Set to 'yes' to force the Tableau native ODBC protocol to set the cursor type for all statements to Keyset-driven (scrollable, detects changes to values within a row). | &ndash; | &ndash; 
 CAP_ODBC_CURSOR_STATIC | Set to 'yes' to force Tableau to set the cursor type for all statements to Static (scrollable, does not detect changes). | &ndash; | &ndash; 
+CAP_ODBC_ENABLE_AUTO_IPD | Set to 'yes' to enable automatic population of the IPD if supported by driver. Available in Tableau 2020.3 and newer. | &ndash; | &ndash;
 CAP_ODBC_ERROR_IGNORE_FALSE_ALARM | Set to 'yes' to allow the Tableau native ODBC protocol to ignore SQL_ERROR conditions where SQLSTATE is '00000' (meaning "no error"). | &ndash; | &ndash; 
 CAP_ODBC_ERROR_IGNORE_SQLNODATA_FOR_COMMAND_QUERIES | Set to 'yes' to ignore when SQLExecDirect returns SQL_NO_DATA even when data is not expected back | &ndash; | &ndash; 
 CAP_ODBC_EXPORT_ALLOW_CHAR_UTF8 | Set to 'yes' to allow the use of single-byte char data type for binding Unicode strings as UTF-8. | no | no 
