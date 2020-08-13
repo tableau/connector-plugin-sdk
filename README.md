@@ -4,10 +4,11 @@
 
 This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
-The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2020.2**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau.
+The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2020.3**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau. You can download past releases of the SDK to work with older versions of Tableau if necessary.
 
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
+| Connector SDK for Tableau 2020.2                 | 8-12-2020          |
 | Connector SDK for Tableau 2020.1                 | 5-08-2020          |
 | Connector SDK for Tableau 2019.4                 | 3-13-2020          |
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
@@ -97,7 +98,7 @@ Many things might change, but the most likely changes are how a connector is pac
 Support links that are not fully qualified (ie include the https:// header) will throw an error when the user clicks on them. This only affects in-development connectors, as we check for this when packaging a connector into a Taco.
 
 
-## Recently Fixed
+## Fixed
 **(Mac Only) Packaged Connectors (.taco files) throws unexpected error in 2019.4**
 You can work around this by skipping signature verification with the command line argument `-DDisableVerifyConnectorPluginSignature=true`.
 Fixed in 2019.4.1.
