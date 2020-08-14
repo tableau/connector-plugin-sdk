@@ -35,6 +35,7 @@ from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import (
     TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 )
+from .constants import SENTRY_TAGS_LIST
 from .custom_types import ExitCode
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
@@ -462,7 +463,7 @@ def create_parser():
                         required=False)
     parser.add_argument('--error-codes', dest='error_codes', action='store_true',
                         help='List error codes used by TDVT.', required=False)
-    parser.add_argument('--sentry', dest='enable_sentry', action='store_true', help='Enable Sentry logging.',
+    parser.add_argument('--sentry', dest='enable_sentry', default=None, help='Enable Sentry logging.',
                         required=False)
 
     # Common run test options.
@@ -797,17 +798,28 @@ def run_generate(ds_registry):
     end_time = time.time() - start_time
     print("Done: " + str(end_time))
 
+def parse_json_for_sentry_tags(json_dump):
+    dict_of_input = json.loads(json_dump)
+    with sentry.configure_scope() as scope:
+        for item in dict_of_input.keys():
+            if item in SENTRY_TAGS_LIST:
+                scope.set_tag(item, dict_of_input.get(item))
+        else:
+            logging.info("{} is not a tag TDVT looks for.".format(item))
+
 
 def main():
     parser, ds_registry, args = init()
 
     if args.enable_sentry and sentry_installed is True:
         try:
-            sentry.init(sentry.register(os.environ.get('SENTRY_DSN_TDVT')))
+            sentry.init(os.environ.get('SENTRY_DSN_TDVT'))
         except:
             logging.error("Error initializing Sentry in tdvt.py. Sentry will not be used.")
         else:
             logging.info("Sentry initialized in tdvt.py.")
+            logging.info("Attempting to add tags to Sentry.")
+            parse_json_for_sentry_tags(args.enable_sentry)
     if args.command == 'action':
         if args.setup:
             print("Creating setup files...")

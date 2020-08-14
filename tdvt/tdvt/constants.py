@@ -9,7 +9,7 @@ EXIT_TABQUERY_NOT_FOUND = 5
 EXIT_BAD_COMMAND = 6
 
 # Tags used by internal CI
-tags_list = [
+SENTRY_TAGS_LIST = [
   'connectorName',
   'dataSourceName',
   'driverName',
