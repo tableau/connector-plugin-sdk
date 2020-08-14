@@ -7,17 +7,12 @@ import re
 
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet
-# from .tdvt import should_sentry_be_initialized
 
 
 TEST_DISABLED = "Test disabled in .ini file."
 TEST_SKIPPED = "Test not run because smoke tests failed."
 TEST_NOT_RUN = "Not run"
 
-# if should_sentry_be_initialized:
-#     from sentry_sdk import catch_exception
-
-# div_my_zero = 1/0
 
 class TestCaseResult(object):
     """The actual or expected results of a test run.
