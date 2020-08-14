@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<connection-fields>
-  <field name="v-custom" label="Custom" value-type="string" category="advanced" optional="false" />
-
-</connection-fields>

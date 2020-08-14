@@ -1,1 +1,0 @@
-This sample is a modified version of our Postgres JDBC sample that shows how to use vendor attributes to add arbitrary, non-secure text fields to the connection dialog. This is not a fully-formed connector.

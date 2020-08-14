@@ -83,21 +83,3 @@ class TestXSDValidator(unittest.TestCase):
         logging.debug("test_validate_vendor_prefix xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
-
-    def test_validate_required_advanced_field_has_default_value(self):
-
-        test_file = TEST_FOLDER / "modular_dialog_connector/connectionFields.xml"
-        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
-        xml_violations_buffer = []
-
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                        "Valid XML file not marked as valid")
-
-        print("\nTest missing default-value for non-optional advanced field. Throws XML validation error.")
-        test_file = TEST_FOLDER / "advanced_required_missing_default/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML file containing required field in 'advanced' category with no default value marked as valid")
-
-        logging.debug("test_validate_required_advanced_field_has_default_value xml violations:")
-        for violation in xml_violations_buffer:
-            logging.debug(violation)

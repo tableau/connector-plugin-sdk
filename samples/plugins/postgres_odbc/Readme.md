@@ -1,1 +1,0 @@
-A sample ODBC connector. This requires the Postgres ODBC driver.

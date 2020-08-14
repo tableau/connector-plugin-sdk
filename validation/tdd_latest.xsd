@@ -470,8 +470,7 @@ as passed-in parameters.
     <xs:attribute name="format" type="xs:string"/>
   </xs:complexType>
   <xs:complexType name="StringLiteral-CT">
-    <xs:attribute name="value" type="StringLiteralApproach-ST" />
-    <xs:attribute name="unicode-prefix" type="xs:string" />
+    <xs:attribute name="value" type="StringLiteralApproach-ST"/>
   </xs:complexType>
   <xs:complexType name="IdentifierCase-CT">
     <xs:attribute name="value" type="IdentifierCase-ST"/>
