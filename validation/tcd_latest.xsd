@@ -26,6 +26,7 @@
       <xs:element minOccurs="0" name="show-encryption-checkbox" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="show-import-ssl-cert-label" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="show-service-prompt" type="BooleanProperty-CT"/>
+      <xs:element minOccurs="0" name="show-instance-url-prompt" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="show-ssl-checkbox" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="show-uncommitted-data-checkbox" type="BooleanProperty-CT"/>
       <xs:element minOccurs="0" name="ssl-requires-certificate" type="BooleanProperty-CT"/>
@@ -50,9 +51,6 @@
       <xs:enumeration value="ComboBox"/>
       <xs:enumeration value="ComboBoxIntegrated"/>
       <xs:enumeration value="Hive"/>
-      <xs:enumeration value="SharePoint"/>
-      <xs:enumeration value="SAPBW"/>
-      <xs:enumeration value="SwitchModal"/>
       <xs:enumeration value="PasswordOnly"/>
     </xs:restriction>
   </xs:simpleType>
@@ -74,21 +72,18 @@
       <xs:enumeration value="UseWindowsPreferred"/>
       <xs:enumeration value="Teradata"/>
       <xs:enumeration value="LDAP"/>
-      <xs:enumeration value="VirtualNode"/>
       <xs:enumeration value="None"/>
       <xs:enumeration value="Kerberos"/>
       <xs:enumeration value="Integrated"/>
       <xs:enumeration value="Username"/>
       <xs:enumeration value="UsernameAndPassword"/>
-      <xs:enumeration value="HDIService"/>
+      <xs:enumeration value="Password"/>
       <xs:enumeration value="AccessNoSecurity"/>
       <xs:enumeration value="AccessYesSecurity"/>
-      <xs:enumeration value="OAuth"/>
-      <xs:enumeration value="Forms"/>
-      <xs:enumeration value="ThirdPartySSO"/>
       <xs:enumeration value="Invalid"/>
       <xs:enumeration value="SAMLIdP"/>
-      <xs:enumeration value="Password"/>
+      <xs:enumeration value="ADUsernameAndPassword"/>
+      <xs:enumeration value="OAuth"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="ExtendedProperties-CT">
