@@ -10,7 +10,7 @@ def configure_tabquery_path():
     """Setup the tabquery path from ini settings."""
     global tab_cli_exe
     config = configparser.ConfigParser()
-    
+
     tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
     logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
     config.read(tdvt_cfg)
@@ -36,6 +36,7 @@ def build_tabquery_command_line(work):
         tb = TabqueryCommandLineExtension()
         logging.debug("Imported extension extend_tabquery")
     except:
+        logging.error("Unable to import extension extend_tabquery.")
         tb = TabqueryCommandLine()
 
     cmdline = tb.build_tabquery_command_line(work)
@@ -105,5 +106,3 @@ def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
-
-

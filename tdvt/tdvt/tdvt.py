@@ -11,6 +11,7 @@ if sys.version_info[0] < 3:
 import argparse
 import glob
 import json
+import logging
 import pathlib
 import queue
 import shutil
@@ -20,11 +21,22 @@ import zipfile
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
+try:
+    import sentry_sdk as sentry
+except ImportError:
+    sentry_installed = False
+    logging.info("Sentry SDK not installed")
+else:
+    sentry_installed = True
+    logging.info("Sentry installed.")
+
 from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import (
     TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 )
+from .constants import SENTRY_TAGS_LIST
+from .custom_types import ExitCode
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests
@@ -63,7 +75,7 @@ class TestOutputFiles(object):
             src_file.close()
             dst_file.close()
         except IOError as e:
-            logging.debug("Exception while copying files: " + str(e))
+            logging.exception("Exception while copying files: " + str(e))
             return
 
 
@@ -149,6 +161,7 @@ class TestRunner():
                 json.dump(existing_results, dst_file)
                 dst_file.close()
         except IOError:
+            logging.error("Error copying test result file:", IOError)
             return
 
     def copy_files_and_cleanup(self):
@@ -159,7 +172,7 @@ class TestRunner():
             self.copy_output_files()
             self.copy_test_result_file()
         except Exception as e:
-            print(e)
+            logging.error("Exception during copy files & cleanup:", e)
             pass
 
         try:
@@ -167,7 +180,8 @@ class TestRunner():
                 shutil.rmtree(self.temp_dir)
             else:
                 left_temp_dir = True
-        except:
+        except Exception as e:
+            logging.exception(e)
             pass
 
         return left_temp_dir
@@ -201,7 +215,7 @@ def delete_output_files(root_dir):
                 try:
                     os.unlink(out_file)
                 except Exception as e:
-                    print(e)
+                    logging.error("Exception deleting output files:", e)
                     continue
 
 
@@ -449,6 +463,8 @@ def create_parser():
                         required=False)
     parser.add_argument('--error-codes', dest='error_codes', action='store_true',
                         help='List error codes used by TDVT.', required=False)
+    parser.add_argument('--sentry', dest='enable_sentry', default=None, help='Enable Sentry logging.',
+                        required=False)
 
     # Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
@@ -623,12 +639,13 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
     if not smoke_tests:
         logging.warning("No smoke tests detected.")
         if require_smoke_test:
+            logging.error("No smoke tests; terminating.")
             sys.exit(EXIT_TESTS_FAILED)
         else:
             logging.warning("Tests will run without verifying the data source connection.")
 
     if not all_work and not smoke_tests:
-        print("No tests found. Check arguments.")
+        logging.error("No tests found. Check arguments.")
         sys.exit(EXIT_NO_TESTS_FOUND)
 
     failing_ds = set()
@@ -657,6 +674,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
         print("Smoke tests ran in {} seconds.".format(smoke_test_run_time))
 
         if failed_smoke_tests > 0:
+            logging.error("{} smoke tests failed; there may be a connection issue.".format(failed_smoke_tests))
             print("{} smoke test(s) failed. Please check logs for information.".format(failed_smoke_tests))
             failing_ds = set(item.test_set.ds_name for item in smoke_tests if item.failed_tests > 0)
             if require_smoke_test:
@@ -717,7 +735,7 @@ def get_ds_list(ds):
     return ds_list
 
 
-def run_desired_tests(args, ds_registry) -> int:
+def run_desired_tests(args, ds_registry) -> ExitCode:
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
@@ -760,7 +778,7 @@ def run_desired_tests(args, ds_registry) -> int:
     return exit_code
 
 
-def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
+def run_file(run_file: Path, output_dir: Path, threads: int, args) -> ExitCode:
     """Rerun all the failed tests listed in the json file."""
 
     logging.debug("Running failed tests from : " + str(run_file))
@@ -780,10 +798,28 @@ def run_generate(ds_registry):
     end_time = time.time() - start_time
     print("Done: " + str(end_time))
 
+def parse_json_for_sentry_tags(json_dump):
+    dict_of_input = json.loads(json_dump)
+    with sentry.configure_scope() as scope:
+        for item in dict_of_input.keys():
+            if item in SENTRY_TAGS_LIST:
+                scope.set_tag(item, dict_of_input.get(item))
+        else:
+            logging.info("{} is not a tag TDVT looks for.".format(item))
+
 
 def main():
     parser, ds_registry, args = init()
 
+    if args.enable_sentry and sentry_installed is True:
+        try:
+            sentry.init(os.environ.get('SENTRY_DSN_TDVT'))
+        except:
+            logging.error("Error initializing Sentry in tdvt.py. Sentry will not be used.")
+        else:
+            logging.info("Sentry initialized in tdvt.py.")
+            logging.info("Attempting to add tags to Sentry.")
+            parse_json_for_sentry_tags(args.enable_sentry)
     if args.command == 'action':
         if args.setup:
             print("Creating setup files...")

@@ -43,6 +43,7 @@ def print_configurations(ds_reg, dsname, verbose):
             ds_all = ds_reg.get_datasources(['all'])
         except TypeError as e:
             print(RUN_IN_INCORRECT_DIRECTORY_MSG)
+            logging.exception(e)
             return
         if not ds_all:
             print(RUN_IN_INCORRECT_DIRECTORY_MSG)
@@ -191,7 +192,7 @@ def load_test(config, test_dir=get_root_dir()):
                                             test_dir, get_password_file(standard), get_expected_message(standard),
                                             get_is_smoke_test(standard), get_is_test_enabled(standard), False)
         except KeyError as e:
-            logging.debug(e)
+            logging.exception(e)
             pass
 
     # Add the optional LOD tests.
@@ -208,7 +209,7 @@ def load_test(config, test_dir=get_root_dir()):
                                             get_expected_message(lod), get_is_smoke_test(lod), get_is_test_enabled(lod),
                                             False)
         except KeyError as e:
-            logging.debug(e)
+            logging.exception(e)
             pass
 
     # Add the optional Staples data check test.

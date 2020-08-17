@@ -10,11 +10,13 @@ def create_test_environment():
 def create_setup_structure():
     try:
         os.mkdir('tds')
-    except:
+    except Exception as e:
+        logging.error("Exception creating tds/ directory:", e)
         pass
     try:
         os.makedirs('config/tdvt')
-    except:
+    except Exception as e:
+        logging.error("Exception creating setup structure:", e)
         pass
 
 def create_tdvt_ini_file():
@@ -29,7 +31,8 @@ def create_tdvt_ini_file():
         ini.write('TAB_CLI_EXE_MAC = Full Or Relataive/Path/to/tabquerytool.exe\n')
         print ("Created ini file: " + ini_path)
         print ("Please set the tabquery executable file path.")
-    except:
+    except Exception as e:
+        logging.error("Exception creating tdvt_override.ini", e)
         pass
 
 def add_datasource(name, ds_registry):
@@ -90,7 +93,8 @@ def create_ds_ini_file(name, logical_config):
         if not logical_config:
             print ("Please set the LogicalQueryFormat value to the expected format.")
 
-    except:
+    except Exception as e:
+        logging.error("Exception creating datasource .ini:", e)
         pass
 
 def create_password_file(name, connection_name, password):
@@ -107,6 +111,7 @@ def create_password_file(name, connection_name, password):
         print ("Created file: " + file_path)
     except IOError as e:
         print(e)
+        logging.error("Exception creating password file:", e)
         pass
 
 def update_tds_files(name, connection_password_name):
@@ -143,5 +148,6 @@ def mangle_tds(file_path, connection_password_name):
         f.write(new_tds)
         f.close()
     except IOError as e:
-        print (e)
+        logging.error("Exception when mangling tds files:", e)
+        print(e)
         return

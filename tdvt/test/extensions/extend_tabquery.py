@@ -8,5 +8,3 @@ class TabqueryCommandLineExtension(TabqueryCommandLine):
             cmdline.extend(["--test_arg", work.test_config.output_dir])
         except AttributeError:
             pass
-
-
