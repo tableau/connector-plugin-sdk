@@ -8,13 +8,13 @@
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>1.0</value>
+        <value>1</value>
       </tuple>
       <tuple>
-        <value>2.0</value>
+        <value>2</value>
       </tuple>
       <tuple>
-        <value>8.0</value>
+        <value>8</value>
       </tuple>
     </table>
   </test>
