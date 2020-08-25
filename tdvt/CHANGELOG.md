@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Change Staples smoke test to be logical
 
+## [2.1.17] - 2020-08-21
+- Updating expected values for Snowflake int % int test.
+
 ## [2.1.16] - 2020-07-29
 - Add invalid driver tests for ODBC/JDBC plugins.
 
