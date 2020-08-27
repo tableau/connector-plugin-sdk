@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+- Change Staples smoke test to be logical
+
+## [2.1.17] - 2020-08-21
+- Updating expected values for Snowflake int % int test.
+
+## [2.1.16] - 2020-07-29
+- Add invalid driver tests for ODBC/JDBC plugins.
 
 ## [2.1.15] - 2020-06-15
 - Add initialsql tests for vertica
