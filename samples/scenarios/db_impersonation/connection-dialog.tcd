@@ -1,0 +1,13 @@
+<connection-dialog class='impala_jdbc_delegationUID'>
+  <connection-config>
+    <authentication-mode value='Basic' />
+    <authentication-options>
+      <option name="UsernameAndPassword" default="true" />
+    </authentication-options>
+    <has-databases value="true" />
+    <has-schemas value="true" />
+    <port-prompt value="Port: " default="21050" />
+    <show-db-browse-button value="true" />
+    <show-ssl-checkbox value="true" />
+  </connection-config>
+</connection-dialog>
