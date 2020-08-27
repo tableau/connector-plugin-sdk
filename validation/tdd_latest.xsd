@@ -299,6 +299,10 @@ as passed-in parameters.
       <xs:enumeration value="hour"/>
       <xs:enumeration value="minute"/>
       <xs:enumeration value="second"/>
+      <xs:enumeration value="iso-year"/>
+      <xs:enumeration value="iso-quarter"/>
+      <xs:enumeration value="iso-week"/>
+      <xs:enumeration value="iso-weekday"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="DateFunction-ST">
