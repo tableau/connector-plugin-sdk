@@ -9,6 +9,10 @@
 ### Removed
 
 
+## 2020-08-27
+### Added
+- Add ISO8601 support to postgres_odbc and postgres_jdbc samples
+
 ## 2020-07-13
 ### Changed
 - Changed sqlite_extract\dialect.xml, make it doesn't inherit from any base dialect
