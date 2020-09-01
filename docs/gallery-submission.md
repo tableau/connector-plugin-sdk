@@ -8,7 +8,7 @@ title: Connector Gallery Submission Guide
 
 ![]({{ site.baseurl }}/assets/tableau-logo.png)
 
-Thanks for your interest in submitting a connector for the Extension Gallery. This document will walk you through the publishing steps and the assets required to submit your Connector to the Extension Gallery. This process was built to be as self-service as possible, but there are many opportunities for touchpoints witbh our team along the way if you get stuck or need help.
+Thanks for your interest in submitting a connector for the Extension Gallery. This document will walk you through the publishing steps and the assets required to submit your Connector to the Extension Gallery. This process was built to be as self-service as possible, but there are many opportunities for touchpoints with our team along the way if you get stuck or need help.
 
 ---
 
