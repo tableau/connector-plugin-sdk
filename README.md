@@ -64,7 +64,7 @@ For a JDBC connector, your driver must fulfill the following requirements:
 
 This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your connector:
 * Start by submitting a GitHub Issue here in this project
-* or you can reach us on the [Developer Forums](https://community.tableau.com/community/developers/content) in Tableau Community.
+* or you can reach us on the [Developer Forums](https://community.tableau.com/s/developers) in Tableau Community.
 
 
 # FAQ
