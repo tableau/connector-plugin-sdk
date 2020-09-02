@@ -1,10 +1,10 @@
 ---
-title: Build the Connection Dialog
+title: Build the Connection Dialog with Connection Dialog v1
 ---
 
 The connection dialog prompts the user to enter connection and authentication information. That information is passed into the Connector Builder script to build the connection string. The dialog appears when creating a new connection or editing an existing connection and is used by both Tableau Desktop and Tableau Server.
 
-The connection dialog is mainly defined in the Tableau Custom Dialog (.tcd) file. 
+The connection dialog is mainly defined in the Tableau Custom Dialog (.tcd) file.
 
 Here's an example of a connection dialog:
 
@@ -110,7 +110,7 @@ See complete files [here](https://github.com/tableau/connector-plugin-sdk/tree/d
 
 ## Define Tableau Custom Dialog file elements
 
-The TCD file defines which UI elements display in the dialog. 
+The TCD file defines which UI elements display in the dialog.
 
 Here's an example of a TCD file:
 
@@ -133,7 +133,7 @@ The <span style="font-family: courier new">authentication-mode</span> and <span 
 
 The other tags control what prompts show up in the connection dialog. For example, this shows the Port prompt with the label of Port and a default value of 5432:
 
-`<port-prompt value="Port: " default="5432" />` 
+`<port-prompt value="Port: " default="5432" />`
 
 ## Localize your connector
 
