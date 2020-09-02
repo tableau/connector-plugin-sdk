@@ -1,5 +1,5 @@
 ---
-title: Build the Connection Dialog (Legacy)
+title: Build the Connection Dialog with Connection Dialog v1
 ---
 
 The connection dialog prompts the user to enter connection and authentication information. That information is passed into the Connector Builder script to build the connection string. The dialog appears when creating a new connection or editing an existing connection and is used by both Tableau Desktop and Tableau Server.

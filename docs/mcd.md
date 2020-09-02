@@ -1,7 +1,7 @@
 ---
 title: Build the Connection Dialog with Connection Dialog v2
 ---
-**IMPORTANT:** This feature is only available in Tableau 2020.3 or later. For compatibility with older versions, use the legacy connection dialogs (documentation found [here]({ site.baseurl }}/docs/ui)).
+**IMPORTANT:** This feature is available only in Tableau 2020.3 or later. For compatibility with older versions, use Connection Dialog v1 (documentation found [here]({ site.baseurl }}/docs/ui)).
 
 Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
