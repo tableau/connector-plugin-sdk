@@ -98,7 +98,6 @@ class BatchQueueWork(object):
         self.add_test_result(test_file, result)
 
     def create_test_result(self, test_result_file, test_category):
-        # print("Searching for", test_name, " size: ", len(self.metadata_map))
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
                           test_result_file.relative_test_file, self.test_set, test_category, TestMetadata('Unknown'))
         test_name = result.get_name()
