@@ -11,13 +11,35 @@ TEST_DISABLED = "Test disabled in .ini file."
 TEST_SKIPPED = "Test not run because smoke tests failed."
 TEST_NOT_RUN = "Not run"
 
+class TestMetadata(object):
+    """Simple struct containing lists of categories and functions tested for a single test"""
+    def __init__(self, priority):
+        self.categories = set()
+        self.functions = set()
+        self.priority = priority
+
+    def add_category(self, category):
+        self.categories.add(category)
+
+    def add_function(self, function):
+        self.functions.add(function)
+
+    def concat_categories(self):
+        return ','.join(self.categories)
+
+    def concat_functions(self):
+        return ','.join(self.functions)
+
+    def get_priority(self):
+        return self.priority
+
 class TestCaseResult(object):
     """The actual or expected results of a test run.
 
         ie The math.round test contains ROUND(int), ROUND(num) etc test cases.
 
     """
-    def __init__(self, name, id, sql, query_time, error_msg, error_type, table, test_config):
+    def __init__(self, name, id, sql, query_time, error_msg, error_type, table, test_config, test_metadata):
         self.name = name
         self.id = id
         self.sql = sql
@@ -31,6 +53,7 @@ class TestCaseResult(object):
         self.passed_tuples = False
         self.passed_error = False
         self.tested_config = test_config
+        self.test_metadata = test_metadata
 
     def set_diff(self, diff_string, diff_count):
         self.diff_string = diff_string
@@ -172,7 +195,7 @@ class TestErrorSkippedTest(TestErrorState):
 class TestResult(object):
     """Information about a test run. A test can contain one or more test cases."""
 
-    def __init__(self, base_name='', test_config=TdvtInvocation(), test_file='', relative_test_file='', test_set: TestSet = None, error_status=None):
+    def __init__(self, base_name='', test_config=TdvtInvocation(), test_file='', relative_test_file='', test_set: TestSet = None, error_status=None, test_metadata: TestMetadata = None):
         self.name = base_name
         self.test_config = test_config
         self.matched_expected_version = 0
@@ -188,6 +211,7 @@ class TestResult(object):
         self.cmd_output = ''
         self.relative_test_file = relative_test_file
         self.test_set: TestSet = test_set
+        self.test_metadata = test_metadata
 
         self.parse_default_test_cases()
 
@@ -196,23 +220,23 @@ class TestResult(object):
         # set at a higher level (TestResult).
         if self.test_set.test_is_enabled is False:
             if self.test_set.is_logical:
-                return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config, self.test_metadata)
             else:
                 return TestCaseResult('', str(test_case_count), "", test_case_count, '',
                                       TestErrorDisabledTest(), None, self.test_config)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
-                return TestCaseResult('', 0, "", 0, '', TestErrorSkippedTest(), None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', TestErrorSkippedTest(), None, self.test_config, self.test_metadata)
             else:
                 return TestCaseResult('', str(test_case_count), "", test_case_count, '',
-                                      TestErrorSkippedTest(), None, self.test_config)
+                                      TestErrorSkippedTest(), None, self.test_config, self.test_metadata)
         else:
 
             if self.test_set.is_logical:
-                return TestCaseResult('', 0, "", 0, '', self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, '', self.error_status, None, self.test_config, self.test_metadata)
             else:
                 return TestCaseResult('', str(test_case_count), "", test_case_count, '',
-                                      self.error_status, None, self.test_config)
+                                      self.error_status, None, self.test_config, self.test_metadata)
 
     def parse_default_test_cases(self):
         if self.test_set and self.test_set.test_is_enabled is False:
@@ -246,7 +270,9 @@ class TestResult(object):
     def __json__(self):
         return {'all_passed': self.all_passed(), 'name': self.name,
                 'matched_expected': self.matched_expected_version, 'expected_diffs': self.diff_count,
-                'test_cases': self.test_case_map, 'expected_results': self.best_matching_expected_results}
+                'test_cases': self.test_case_map, 'expected_results': self.best_matching_expected_results,
+                'priority': self.test_metadata.get_priority(), 'functions': self.test_metadata.concat_functions(),
+                'categories': self.test_metadata.concat_categories()}
 
     def add_test_results(self, test_xml, actual_path):
         """
@@ -296,7 +322,7 @@ class TestResult(object):
             if not test_child_name:
                 continue
             test_result = TestCaseResult(test_child_name, str(
-                i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config)
+                i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config, self.test_metadata)
             temp_test_cases.append(test_result)
 
         if temp_test_cases:
@@ -584,6 +610,9 @@ class TestOutputJSONEncoder(json.JSONEncoder):
                        'tds': obj.test_config.tds,
                        'password_file': obj.test_set.password_file,
                        'expected': obj.path_to_expected,
+                       'priority': obj.test_metadata.get_priority() if obj.test_metadata else 'unknown',
+                       'functions': obj.test_metadata.concat_functions() if obj.test_metadata else 'unknown',
+                       'categories': obj.test_metadata.concat_categories() if obj.test_metadata else 'unknown'
                        }
         if obj.all_passed():
             return json_output
