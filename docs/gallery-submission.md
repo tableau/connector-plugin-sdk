@@ -149,28 +149,52 @@ A short list of email addresses to give access to the Beta feedback. Should be i
 Beta Process and Preparing Your Go-to-Market Materials
 
 ---
-## **Beta Process**
+## **Beta Process and Preparing Go-to-Market Materials**
 
 Upon acceptance into the Extension Gallery, you'll need to Beta test your connector with at least 5 customers to move to a General Audience (GA) release. TDVT does a great job in catching most issues with connectors, but customers often have unique environments that need to be tested to ensure that everything works as expected. Because of this we request that you reach out to 5 unique customers to test your connector. Customers can find our Beta test scenarios and [Beta feedback form](https://forms.gle/xjWGk86tv8eD43Mk7) on the feedback button in the Extension Gallery. Note that the feedback form is specific to your connector, and you will be able to monitor the progress of the Beta on your own. The total beta testing process shouldn't take more than 30 minutes for a customer to complete.
 
 In order to pass from Beta into GA all customers must submit feedback saying that there were no blocking issues with creating or publishing workbooks on Tableau Desktop and Server. If any issues are encountered, you will need to fix them, send us your new .taco file, and have those customers re-run the beta test scenarios.
 
 ---
-## **Go-to-Market**
+## **Partner-Led GTM Activities**
 
-Many partners choose to put out blogs and a press release once they offer a custom connector for customers in the Extension Gallery. We recommend that partners looking to promote their work to the fullest extent collect a public customer case study that they can use to promote their new Tableau Connector to their application/database. Not only does Tableau have mechanisms and channels to promote your customer case study, but historical data shows that referencing customer case studies generate on average 5x more traffic than standalone blogs.
+We’re really excited to start working with you on go-to-market activities! We’ve outlined several ways in which we can get the word out about the great things that we’re doing together. 
 
-We are happy to support partners looking to issue a Tableau-specific press release. We require that any partner press release mentioning Tableau is first submitted for approval to ensure that the Tableau positioning and branding is accurate.
+It’s important that you’ve joined our technology partner program and have access to our [Partner Portal](https://partner.tableau.com/) to take advantage of the marketing materials that we have for our partners in the ‘[Activate Marketing Campaigns](https://partners.tableau.com/)’ section as well as assets to get started. If you’re already a partner and need access to the Partner Portal, you can reach out to [partners@tableau.com](mailto:partners@tableau.com). 
 
-**Tableau PR requires a 2-week approval timeline for press releases.**
+Note that for joint GTM activity, such as a webinar, we like to have a few published joint customer case studies with the partner first. This helps us to ensure we have assets that help explain the value of our joint solution and to understand how these types of activities could fit into our greater integrated campaigns. 
 
-The process:
+**1. Out-of-the-box Campaign**
 
-1. The partner drafts a press release utilizing the Tableau Partner Brand Guidelines (available to partners in the PDC). Note: The release should not include the Tableau corporate boilerplate.
-2. Partner submits the draft to the Partner Marketing team via email (partnermarketing@tableau.com) for initial review.
-3. Next, the Partner Marketing team will reach out to Tableau PR for a full review and legal sign off.
+To explore go-to-market activities, the best first step is to review the resources available to you in the Partner Portal.  If you go to “Activate Marketing Campaign” within the portal’s Partner Demand Center (PDC), you’ll find some out-of-the box campaigns that you can leverage (templates for landing pages, emails, and content syndication pages). Most Technology Partners use the “Create your own” Campaigns so they can insert their own messaging. If you are interested in learning more on how to best leverage the PDC, feel free to check out this [webinar](https://www.tableau.com/sites/default/files/partner_demand_center_training_webinar.mp4). 
 
-**Note** : We consider quote attribution from a Tableau spokesperson on a case-by-case basis. Press releases that announce milestone product launches and significant customer successes are typically reviewed to determine relevant quote attribution. For these types of releases, the partner can include a proposed Tableau quote as part of the draft for consideration.
+**2. Blog Post** 
+
+Blog posts are an easy way for our partners to announce our integration partnership and increase our awareness in the market. You’re at liberty to structure the post however you see fit, but here are a few points to writing a successful post:
+- Focus on customer value. 
+- Shouldn’t be overly technical in nature. It should complement documentation that’s available elsewhere. 
+- A picture is worth a thousand words. Screenshots, gifs, or videos can help illustrate value. 
+- Customer quotes validate the solution. See #3 on [Customer Evidence]().
+
+Please utilize the [Tableau Partner Brand Guidelines](https://www.tableau.com/sites/default/files/media/tableaupartners_brandstyleguide.pdf) (in the partner portal under ‘Activate Marketing Campaign’) 
+
+Examples of blog posts are partners have written announcing their new integrations: 
+- [Dremio's new connector](https://www.dremio.com/announcing-dremion-on-the-tableau-extension-gallery/)
+- [Arria's new extension](http://blog.arria.com/in-the-news/arria-now-featured-on-the-tableau-extension-gallery)
+- [Collibra's customer success with Lockheed Martin](https://www.collibra.com/blog/lockheed-martins-journey-to-data-intelligence)
+
+**3. Press Release**
+
+We are happy to support partners looking to issue a Tableau-specific press release. We require that any partner press release mentioning Tableau is first submitted for approval to ensure that the Tableau positioning and branding is accurate. 
+ 
+Tableau PR requires a 2-week approval timeline for press releases. 
+ 
+The process: 
+1. The partner drafts a press release utilizing the [Tableau Partner Brand Guidelines](https://www.tableau.com/sites/default/files/media/tableaupartners_brandstyleguide.pdf) (in the partner portal under ‘Activate Marketing Campaign’) Note: The release should not include the Tableau corporate boilerplate. 
+2. Partner submits the draft to the Partner Marketing team via email ([partnermarketing@tableau.com](mailto:partnermarketing@tableau.com)) for initial review. 
+3. Next, the Partner Marketing team will reach out to Tableau PR for a full review and legal sign off. 
+
+Note: We consider quote attribution from a Tableau spokesperson on a case-by-case basis. Press releases that announce milestone product launches and significant customer successes are typically reviewed to determine relevant quote attribution. For these types of releases, the partner can include a proposed Tableau quote as part of the draft for consideration. 
 
 ---
 ## Launch Your Connector
