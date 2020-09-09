@@ -39,14 +39,14 @@ Building a connector generally takes 2 - 6 weeks depending on complexity. Once t
 
 Join our [Tableau Developer Program](https://www.tableau.com/developer) to gain access to a free development sandbox. Once you've signed up for our developer program, check out our [Connector SDK documentation](https://tableau.github.io/connector-plugin-sdk/) materials which will provide you with what you need to get started building a connector. If you encounter issues with the SDK or need help, submit an issue through our GitHub issues page. You should [use TDVT](https://tableau.github.io/connector-plugin-sdk/docs/tdvt) to ensure that your connector meets our guidelines for connector functionality.
 
-Submitting Your Connector to the Extension Gallery
+## Submitting Your Connector to the Extension Gallery
 
-1. Sign up for Technology Partner Program
-2. Submit a request to publish your Connector in the Extension Gallery
-3. Sign Gallery Agreement
-4. Submit TDVT Results and get connector approved
+3. Sign up for Technology Partner Program
+4. Submit a request to publish your Connector in the Extension Gallery
+5. Sign Gallery Agreement
+6. Submit TDVT Results and get connector approved
 
-Once you've built your integration and are passing 90% of TDVT results, sign up for our [Technology Partner Program](https://www.tableau.com/partners/resources/technology/partner-agreement). By signing up for the Technology Partner Program you allow us to discuss confidential information with you and enables us to promote your products through our marketing channels, like the Extension Gallery.
+Once you've built your integration and are passing 90% of TDVT results, sign up for our [Technology Partner Program](https://www.tableau.com/partners/resources/technology/partner-agreement). By signing up for the Technology Partner Program you allow us to discuss confidential information with you and enables us to promote your products through our marketing channels, like the Extension Gallery, and gives you access benefits such as demo licenses, discount codes for training, and more!
 
 After you've built your integration, you should [submit a request](https://forms.gle/2FisXfmwwuQEaXKG9) to publish your Connector in the Extension Gallery. From there we will send you a copy of the Extension Gallery Agreement and a form where you can submit your TDVT results and other Gallery Submission Materials.
 
