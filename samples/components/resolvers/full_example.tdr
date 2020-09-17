@@ -5,73 +5,44 @@
          Think of these as a property collection of key/value pairs.
          
          The ConnectionNormalizer is used to decide which of these attributes are
-         required to identify a unique connection. You may not need to add a connection-normalizer section to your plugin, but it 
-         can be useful for authentication and other more complicated scenarios.
-
-         The ConnectionMatcher is used to control whether one database connection matches another connection. Matching connections can be
-         swapped so it is important to distinguish between them for security reasons. The default implementation matches on key attributes
-         like the server you are connected to and the username used. Usually the default will be good enough.
+         required to identify a unique connection. Usually it is the list of all attributes set in the connection dialog and 
+         used in connectionBuilder.js.
 
          The ConnectionBuilder takes the set of required attributes and returns a driver connection string. In the case of an ODBC based
          connection this should be a valid driver connection string which can be passed to SQLDriverConnect. You might want to customize 
          this if your driver needs additional connection options.
     
+         The ConnectionProperties takes the set of required attributes and returns a formatted set of JDBC connection properties.
+
          The DriverResolver determines which driver to load. It supports various name and version number criteria.
     -->
-
-
-
-    <!-- Specify an optional cache size for connection attribute normalization. This done many times per connection, but usually the attribute keys are the same. -->
-    <!-- <connection-normalizer cacheSize='0'> -->
     <connection-normalizer>
-      <!-- Optional XML method to normalize a connection. Choose this, or use a script element.-->
-      <required-attributes>
 
-        <!-- You can check certain attributes and then add required attributes. This one checks the 'authentication' attribute 
-                 and if the value is not equal to 'auth-integrated' it adds username and password to the required attributes. -->
-        <authentication-conditional operator='ne' value='auth-integrated'>
-          <attribute-list>
-            <attr>username</attr>
-            <attr>password</attr>
-          </attribute-list>
-        </authentication-conditional>
+      <!-- Optional XML method to normalize a connection. -->
+      <required-attributes>
 
         <!-- This sets a default value for an attribute on every connection.-->
         <default-attributes>
-          <default-attribute name='authentication'>auth-teradata</default-attribute>
+          <default-attribute name='authentication'>auth-user-pass</default-attribute>
         </default-attributes>
 
         <!-- These are the required attributes. -->
         <attribute-list>
-          <attr>class</attr>
           <attr>server</attr>
-          <attr>enum-with-permissions</attr>
-          <attr>expected-driver-version</attr>
-          <attr>one-time-sql</attr>
-          <attr>:protocol-customizations</attr>
-          <attr>disable-unicode</attr>
-          <attr>source-charset</attr>
-          <attr>encryptionMode</attr>
+          <attr>dbname</attr>
           <attr>authentication</attr>
-          <attr>odbc-native-protocol</attr>
-          <attr>query-band-spec</attr>
+          <attr>username</attr>
+          <attr>password</attr>
           <attr>odbc-connect-string-extras</attr>
         </attribute-list>
 
       </required-attributes>
-      <!-- Or you can use a javascript file that returns a vector of strings. -->
-      <!-- <script file="connectionRequired.js"/> -->
     </connection-normalizer>
 
     <!--This file builds the ODBC Connection String or the JDBC URL. -->
     <connection-builder>
       <script file="connectionBuilder.js"/>
     </connection-builder>
-
-    <!-- This file controls how database connections are matched. It is optional and not needed in most cases.-->
-    <connection-matcher>
-      <script file="connectionMatcher.js"/>
-    </connection-matcher>
 
     <!-- This is used to build the JDBC connection properties file and is optional.-->
     <connection-properties>
