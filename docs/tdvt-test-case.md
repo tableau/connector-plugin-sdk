@@ -85,7 +85,6 @@ One common database error happens when the dialect is incorrect and sends bad SQ
 - Tableau constructed the SQL statement wrong, or in a way your database does not support. If the generated SQL includes an incorrect SELECT statement or GROUPS BY something it shouldn't, you probably need to change your connector's capabilities. Search the [capabilities reference]({{ site.baseurl }}/docs/capabilities) list to find the relevant Tableau capability.
 
 ## Case 4: The error originated from Tableau, no Generated SQL was generated and actual tuples is Null
-Other errors may occur. In most cases, the error message should be enough to diagnose and fix the issue. If not, you can open a github issue to ask us about the error.
-
+Other errors may occur. In most cases, the error message should be enough to diagnose and fix the issue. If not, you can [open a GitHub issue](https://github.com/tableau/connector-plugin-sdk/issues) to ask us about the error.
 
 
