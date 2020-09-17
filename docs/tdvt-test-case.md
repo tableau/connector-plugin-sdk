@@ -5,6 +5,24 @@ title: Fixing TDVT Test Failures
 # TDVT Results Workbook
 Running TDVT produces a CSV file with data on all the tests cases that were executed, and the best way to view data is, of course, in Tableau. We provide a [TDVT Results Workbook](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twbx) that gives you a high level overview on how many tests passed in each category and gives you tools to drill down to individual test cases and see the expected values versus actual values, the sql statement that was sent to the database, and any errors Tableau reported while running the test.
 
+## Setup TDVT Results Workbook with Test Data
+The TDVT workbook is loaded with sample test data. To load in your test data, follow these steps:
+
+1. Once the TDVT tests have run, you can use this workbook to analyze the results and improve performance of the Connector Plugin.
+1. Start by navigating to the "Data Source" tab, clicking on the "test_results" connection on the left-hand side, and selecting "Edit Connection".
+1. From there, choose the relevant "test_results_combined.csv" from your latest test and drag the new table onto the data canvas.
+1. Lastly, be sure to ensure the "Text File Properties" is set to use double quotes as the text qualifier.
+
+## Using the Results Workbook
+The first thing to look at is the TDVT Test Results dashboard. This gives you an overview of your test run, and lets you drill down into test failures by category.
+
+![]({{ site.baseurl }}/assets/tdvt_usage_guide.png)
+
+You also have the Test Details worksheet, which includes the most relevant information for each individual test case, and lets you filter by test type, category, error message, and whether or not it passed. This is great for getting a deeper look at specific test cases.
+
+![]({{ site.baseurl }}/assets/tdvt_test_details_worksheet.png)
+
+
 # Parts of a Test Case
 One row of the test_results_combined.csv file you get from a TDVT run equals one test case. Each test case has the following columns:
 
