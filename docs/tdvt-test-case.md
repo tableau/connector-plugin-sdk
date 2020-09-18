@@ -61,7 +61,7 @@ If the error is not significant then you can either skip the test or add a new e
 - Misaligned date functions.
 Another common problem involves various date functions that might be off by a day. These can be caused by start of week errors (Sunday should be 1 and Saturday is 7). Other causes might include discrepancies around some start of week calculations or quarter boundaries. You may need to change your TDS file's connection properties to have Sunday be the first day of the week (instructions can be found [here](https://help.tableau.com/current/pro/desktop/en-us/date_properties.htm))
 
-If those cases do not apply, you'll have to look deeper at the results you got and why it isn't matching our expected values. Something that can help is to do the calculation on paper.
+If those cases do not apply, you'll have to look deeper at the results you got and why it isn't matching the expected values. Something that can help is to do the calculation on paper.
 
 Let's say that, for the agg.max test you are failing every one. For example, the `MAX([int0])` test case, the actual result is `1` while the expected value is `11`.
 
@@ -86,5 +86,4 @@ One common database error happens when the dialect is incorrect and sends bad SQ
 
 ## Case 4: The error originated from Tableau, no Generated SQL was generated and actual tuples is Null
 Other errors may occur. In most cases, the error message should be enough to diagnose and fix the issue. If not, you can [open a GitHub issue](https://github.com/tableau/connector-plugin-sdk/issues) to ask us about the error.
-
 
