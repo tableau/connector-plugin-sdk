@@ -234,7 +234,7 @@ Add this section to run LOD tests. This section is required.
 Option | Example Value | Default | Description | Required?
 -|-|-|-|-
 LogicalExclusions_Staples | Filter.Trademark | N/A | Exclude logical tests that target the Staples table | No
-ExpressionExclusions_Calcs | string.ascii,string.char | N/A | Exclude expression tests that target the Calcs table| No
+ExpressionExclusions_Standard | string.ascii,string.char | N/A | Exclude expression tests| No
 
 ### [UnionTest]
 Add this section to run Union tests. This section is required.
@@ -242,7 +242,7 @@ Add this section to run Union tests. This section is required.
 Option | Example Value | Default | Description | Required?
 -|-|-|-|-
 LogicalExclusions_Staples | Filter.Trademark | N/A | Exclude logical tests that target the Staples table | No
-ExpressionExclusions_Calcs | string.ascii,string.char | N/A | Exclude expression tests that target the Calcs table| No
+ExpressionExclusions_Standard | string.ascii,string.char | N/A | Exclude expression tests that| No
 
 ### [StaplesDataTest]
 Add this section to test that your Staples data test is loaded correctly. This section is optional.
@@ -269,7 +269,7 @@ LogicalQueryFormat = simple_public
 CommandLineOverride = -DLogLevel=Debug -DConnectPluginsPath=plugins
 
 [StandardTests]
-ExpressionExclusions_Standard = string.isdate,date.datediff.day,date.datediff.dayofyear,date.datediff.hour,date.datediff.minute,date.datediff.second,date.datediff.sow.day,date.datediff.sow.dayofyear,date.datediff.weekday,date.datediff.sow.hour,date.datediff.sow.minute,date.datediff.sow.second,date.datediff.sow.weekday,datetime.cast.float
+ExpressionExclusions_Standard = string.isdate, date.datediff.*
 LogicalExclusions_Calcs = BUGS.B26728, Filter.Date_In
 LogicalExclusions_Staples = lod.17_Nesting
 
@@ -458,7 +458,7 @@ You can re-map these in the TDS file by adding a column definition like this:
 
 __Check that test data is loaded correctly__
 Incorrect data can cause many test failures. There are two tests that test if your data is loaded correctly:
-- calcs_data.
+- calcs_data
 The standard test group include a test named calcs_data that contains several test cases, one for each column in the table.
 Make sure this test and all test cases pass first before troubleshooting elsewhere.
 

@@ -78,7 +78,7 @@ Looking at the numbers, you can see that `11` is the largest one, which matches 
 This error occurs if your dialect does not implement a function and Tableau tries to use it. Adding the function to the dialect will fix this issue.
 
 ## Case 3: The error originated from the driver or database, Generated SQL was generated and actual tuples is Null
-If an error happened in the driver or database, you'll need to us your knowledge of the database to triage the issue.
+If an error happened in the driver or database, you'll need to use your knowledge of the database to triage the issue.
 
 One common database error happens when the dialect is incorrect and sends bad SQL commands that the database can't parse. This can happen a few different ways:
 - The mapping from Tableau function to your database's SQL protocol is incorrect. In this case, fixing the function in your dialect will fix the issue.
