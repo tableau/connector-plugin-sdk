@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Change Staples smoke test to be logical
 
+## [2.1.20] - 2020-09-22
+- test_results_combined.csv is now sorted by test complexity (number of distinct function tested)
+
 ## [2.1.19] - 2020-09-08
 - test_results_combined.csv now include test priority, categories, and functions.
 
