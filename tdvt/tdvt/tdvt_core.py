@@ -61,6 +61,7 @@ class BatchQueueWork(object):
         self.test_name = self.test_set.config_name
         self.setup_logs_and_tests()
         self.error_state = None
+        self.metadata_map = {}
 
     def get_thread_msg(self):
         return "Thread-[{0}] ".format(self.thread_id)
@@ -70,6 +71,18 @@ class BatchQueueWork(object):
         log_dir = self.test_name.replace('*', '_')
         self.test_config.log_dir = os.path.join(self.test_config.output_dir, log_dir)
         self.test_list_path = os.path.join(self.test_config.log_dir, 'tests.txt')
+
+    def load_test_metadata(self):
+        metadata_file_path = os.path.join(get_metadata_dir(), 'test_metadata.csv')
+        with open(metadata_file_path, 'r') as metadata_file:
+            reader = csv.DictReader(metadata_file, delimiter='\t')
+            for row in reader:
+                test = row['Test Name Categorized']
+                if test not in self.metadata_map:
+                    self.metadata_map[test] = TestMetadata(row['Priority'])
+                entry = self.metadata_map[test]
+                entry.add_function(row['Function Categorized'])
+                entry.add_category(row['Test Category'])
 
     def add_test_result(self, test_file, result):
         self.results[test_file] = result
@@ -84,42 +97,41 @@ class BatchQueueWork(object):
                 result.saved_error_message = "Error. Previous error message is: " + self.saved_error_message
         self.add_test_result(test_file, result)
 
-    def add_timeout_test_failure(self, test_result_file):
+    def create_test_result(self, test_result_file, test_category):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set, TestErrorTimeout())
+                          test_result_file.relative_test_file, self.test_set, test_category, TestMetadata('Unknown'))
+        test_name = result.get_name()
+        if test_name in self.metadata_map:
+            result.test_metadata = self.metadata_map[test_name]
+        return result
+
+    def add_timeout_test_failure(self, test_result_file):
+        result = self.create_test_result(test_result_file, TestErrorTimeout())
         self.add_test_result_error(test_result_file.test_file, result)
         self.timeout = True
 
     def add_aborted_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set, TestErrorAbort())
+        result = self.create_test_result(test_result_file, TestErrorAbort())
         self.add_test_result_error(test_result_file.test_file, result)
 
     def add_other_test_failure(self, test_result_file, test_count):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set, TestErrorOther())
+        result = self.create_test_result(test_result_file, TestErrorOther())
         self.add_test_result_error(test_result_file.test_file, result, test_count == 0)
 
     def add_expected_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set, TestErrorExpected())
+        result = self.create_test_result(test_result_file, TestErrorExpected())
         self.add_test_result_error(test_result_file.test_file, result)
 
     def add_missing_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set, TestErrorMissingActual())
+        result = self.create_test_result(test_result_file, TestErrorMissingActual())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
     def handle_skipped_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorSkippedTest()
+        result = self.create_test_result(test_result_file, TestErrorSkippedTest())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
     def handle_disabled_test_failure(self, test_result_file):
-        result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                            test_result_file.relative_test_file, self.test_set)
-        result.error_status = TestErrorDisabledTest()
+        result = self.create_test_result(test_result_file, TestErrorDisabledTest())
         self.add_test_result_error(test_result_file.test_file, result, False)
 
     def is_timeout(self):
@@ -201,6 +213,8 @@ class BatchQueueWork(object):
             sys.stdout.write('.' if result.all_passed() else 'F')
             sys.stdout.flush()
 
+            if result.get_name() in self.metadata_map:
+                result.test_metadata = self.metadata_map[result.get_name()]
             self.add_test_result(t.test_file, result)
 
     def setup_files(self, test_list):
@@ -212,6 +226,7 @@ class BatchQueueWork(object):
         with open(self.test_list_path, 'w') as test_list_file:
             for t in test_list:
                 test_list_file.write(str(t) + "\n")
+        self.load_test_metadata()
 
     def run_process(self, cmdline):
         self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
@@ -474,14 +489,18 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if test_result and test_result.test_config:
         test_type = 'logical' if test_result.test_config.logical else 'expression'
 
+    priority = test_result.test_metadata.get_priority() if test_result and test_result.test_metadata else 'unknown'
+    categories = test_result.test_metadata.concat_categories() if test_result and test_result.test_metadata else 'unknown'
+    functions = test_result.test_metadata.concat_functions() if test_result and test_result.test_metadata else 'unknown'
+
     if not test_result or not test_result.get_test_case_count() or not test_result.get_test_case(test_case_index):
         error_msg = test_result.get_failure_message() if test_result else None
         error_type = test_result.get_failure_message() if test_result else None
         if test_result.all_passed():
             passed = True
         columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
-                   test_case_name, test_type, cmd_output, error_msg, error_type, time, generated_sql, actual_tuples,
-                   expected_tuples]
+                   test_case_name, test_type, priority, categories, functions, cmd_output, error_msg, error_type,
+                   time, generated_sql, actual_tuples, expected_tuples]
         if test_result.test_config.tested_sql:
             columns.extend([expected_sql, expected_time])
         if test_result.test_config.tested_error:
@@ -522,8 +541,9 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         error_type = test_result.get_error_type()
 
     columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected),
-               str(diff_count), test_case_name, test_type, cmd_output, str(error_msg), str(error_type),
-               float(case.execution_time), generated_sql, actual_tuples, expected_tuples]
+               str(diff_count), test_case_name, test_type, priority, categories, functions, cmd_output,
+               str(error_msg), str(error_type), float(case.execution_time), generated_sql, actual_tuples,
+               expected_tuples]
     if test_result.test_config.tested_sql:
         columns.extend([expected_sql, float(expected_time)])
     if test_result.test_config.tested_error:
@@ -550,7 +570,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
     # Suite is the datasource name (ie mydb).
     # Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
     csvheader = ['Suite', 'Test Set', 'TDSName', 'TestName', 'TestPath', 'Passed', 'Closest Expected', 'Diff count',
-                 'Test Case', 'Test Type', 'Process Output', 'Error Msg', 'Error Type', 'Query Time (ms)',
+                 'Test Case', 'Test Type', 'Priority', 'Categories', 'Functions', 'Process Output', 'Error Msg', 'Error Type', 'Query Time (ms)',
                  'Generated SQL', actualTuplesHeader, expectedTuplesHeader]
     results_values = list(all_test_results.values())
     if results_values:
