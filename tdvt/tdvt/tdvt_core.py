@@ -558,12 +558,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
 
-    custom_dialect = csv.excel
-    custom_dialect.lineterminator = '\n'
-    custom_dialect.delimiter = ','
-    custom_dialect.strict = True
-    custom_dialect.skipinitialspace = True
-    csv_out = csv.writer(file_out, dialect=custom_dialect, quoting=csv.QUOTE_MINIMAL)
+    csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
     tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
     actualTuplesHeader = 'Actual ' + tupleLimitStr
     expectedTuplesHeader = 'Expected ' + tupleLimitStr
