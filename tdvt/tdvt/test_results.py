@@ -19,10 +19,12 @@ class TestMetadata(object):
         self.priority = priority
 
     def add_category(self, category):
-        self.categories.add(category)
+        if category:
+            self.categories.add(category)
 
     def add_function(self, function):
-        self.functions.add(function)
+        if function:
+            self.functions.add(function)
 
     def concat_categories(self):
         return ','.join(self.categories)
