@@ -24,21 +24,18 @@ You might find other superclass values in the workbook XML from an existing Tabl
 
 ## Assign a plugin version
 
-Plugin-version is a requirement for submitting your connector to the Tableau Connector Gallery, especially with a partner releasing a newer version in Tableau gallery and notifying customers to download an update. 
+Plugin-version is a requirement for submitting your connector to the Tableau Connector Gallery.  It helps customers and partners understand which version of a connector is being used currently and if it is the most up-to-date. 
 You should start your plugin version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector. 
 
-## Set your min-tableau-version
+## Know the min-tableau-version
 For the min-tableau-version, is checked before a connector is registered to tableau. If the current version of tableau does is less than the min-tableau-version then the connector is not registered. 
-You should set your `min-version-tableau` to the version that has the features used in your connector. 
+This is set by the packager and there is no need set this manually. 
 
 ***Note: `version` in the manifest file does not refer to plugin version. Please leave this set to `version='18.1'`*** <br />
 
 ***FAQs about Versioning***
-- When should I update I update min-tableau-version?
-    - Update the min-tableau version only when there is a breaking change dependent on a feature on the newer version of Tableau.  
-
 - What should I (partner) do if I need to make a breaking change to the connector?
-  - If there is a breaking change to your connector you should submit a new connector. This will ensure that there is a connector for the workbooks that used older connector and prevents the downgrade issue with server and desktop using a different version of the connectors.
+  - If there is a breaking change to your connector you should submit a new connector. This will ensure that there is a connector for an existing workbook that used the older connector. It also prevents issues with workbook version downgrade scenarios when Tableau Server and Desktop are using different version of a connector.
 
 ## Choose a dialect
 
