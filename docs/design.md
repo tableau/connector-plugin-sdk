@@ -28,8 +28,8 @@ Plugin-version is a requirement for submitting your connector to the Tableau Con
 You should start your plugin version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector. 
 
 ## Know the min-tableau-version
-For the min-tableau-version, is checked before a connector is registered to tableau. If the current version of tableau does is less than the min-tableau-version then the connector is not registered. 
-This is set by the packager and there is no need set this manually. 
+For the min-tableau-version, is checked before a connector is loaded in Tableau. If the current version of Tableau is less than the min-tableau-version then the connector is not loaded. 
+This is set by the packager and if set manually will be overwritten.
 
 ***Note: `version` in the manifest file does not refer to plugin version. Please leave this set to `version='18.1'`*** <br />
 
