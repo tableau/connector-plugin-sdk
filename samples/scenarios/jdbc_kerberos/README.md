@@ -36,7 +36,7 @@ From Tableau desktop, there are the two publish options available for Kerberos a
 
 ## <a id="how-to-plugin-auth"></a>How to plugin auth?
 
-This sample plugin has been written in such a way that it supports all the three authentication methods listed here. However, the individual sections of the plugin components concern specific authentication modes and have been laid out here for the purposes of re-use and understanding. 
+This sample plugin has been written in such a way that it supports all the four authentication methods listed here. However, the individual sections of the plugin components concern specific authentication modes and have been laid out here for the purposes of re-use and understanding. 
 If you are publishing from Tableau Desktop, which is the most common use case, then Server RunAs and Viewer credentials auth will be visible in publish options only if you have logged into tableau using Integrated Authentication.  
 
 ### SSPI authentication for Tableau Desktop on Windows
@@ -55,8 +55,6 @@ connectionProperties.js
      props["jaasLogin"] = "false";  
      props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
 ```
-
-1. It is recommended to use Postgres JDBC driver version 42.2.10+. The plugin was tested on previous versions of the driver and failed due to bug [#1482](https://github.com/pgjdbc/pgjdbc/issues/1482) which has since been fixed in version 42.2.10.    
 
 ### Kerberos SSO for Tableau Desktop on Mac
 connection-fields.xml

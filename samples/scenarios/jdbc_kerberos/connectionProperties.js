@@ -7,13 +7,14 @@
 
     // Adding properties for Kerberos authentication
     if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
-	    var serverUser = attr[connectionHelper.attributeTableauServerUser];
-        // str is not empty means it is Tableau Server which is connecting	    
-        if (!isEmpty(serverUser)) {
+	    var loggedInUser = attr[connectionHelper.attributeTableauServerUser];
+        // loggedInUser is not empty means this is a Tableau Server Environment	    
+        if (!isEmpty(loggedInUser)) {
             props["user"] = serverUser;
             props["gsslib"] = "gssapi";	 
             props["jaasLogin"] = "false";    
         } else {
+        // properties for SSO on Tableau Desktop    
             props["gsslib"] = "gssapi";	 
             props["jaasLogin"] = "false";  
             props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
