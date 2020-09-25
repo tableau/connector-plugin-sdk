@@ -65,14 +65,12 @@ connection-fields.xml
 ```
 connectionProperties.js
 ```
-if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
-    if(connectionHelper.GetPlatform() === "win") {
-            // property for SSPI on Tableau Desktop
-            props["gsslib"] = "sspi";
+     props["gsslib"] = "gssapi";	 
+     props["jaasLogin"] = "false";  
+     props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
 ```
-Notes: 
-1. The postgres jdbc driver uses waffle-jna library for SSPI authentication. Therefore, it is required to download waffle-jna and all its compile dependencies from the [maven repository](https://mvnrepository.com/artifact/com.github.waffle/waffle-jna/2.1.0).  The plugin code has been tested to work on waffle-jna 2.1.0.
-2. It is recommended to use Postgres JDBC driver version 42.2.10+. The plugin was tested on previous versions of the driver and failed due to bug [#1482](https://github.com/pgjdbc/pgjdbc/issues/1482) which has since been fixed in version 42.2.10.    
+
+1. It is recommended to use Postgres JDBC driver version 42.2.10+. The plugin was tested on previous versions of the driver and failed due to bug [#1482](https://github.com/pgjdbc/pgjdbc/issues/1482) which has since been fixed in version 42.2.10.    
 
 ### Kerberos via JAAS and Java GSS-API for Tableau on Mac Desktop
 connection-fields.xml
@@ -87,10 +85,8 @@ connection-fields.xml
 
 connectionProperties.js
 ```
-if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
-    if(connectionHelper.GetPlatform() === "mac") {
-        // note that for postgres jdbc driver, jaasLogin defaults to true so we don't need to specify it here
-        // just add this jaasApplicationName used by Tableau's embedded jaas.conf file
+        props["gsslib"] = "gssapi";	 
+        props["jaasLogin"] = "false";  
         props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
 ```
 
@@ -114,8 +110,8 @@ connectionProperties.js
 
     if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
         // if attributeTableauServerUser is non-empty, it means the connector plugin is currently being accessed in a tableau server environment
-        var str = attr[connectionHelper.attributeTableauServerUser];
-        if (!isEmpty(str)) {
+        var serverUser = attr[connectionHelper.attributeTableauServerUser];
+        if (!isEmpty(serverUser)) {
             props["user"] = str;
             props["gsslib"] = "gssapi";  
             props["jaasLogin"] = "false";    
@@ -133,8 +129,8 @@ connectionProperties.js
     if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
         // if attributeTableauServerUser attribute is non-empty, it means the connector plugin is currently being 
         // accessed in a tableau server environment
-        var str = attr[connectionHelper.attributeTableauServerUser];
-        if (!isEmpty(str)) {
+        var serverUser = attr[connectionHelper.attributeTableauServerUser];
+        if (!isEmpty(serverUser)) {
             props["user"] = str;
             props["gsslib"] = "gssapi";  
             props["jaasLogin"] = "false";    

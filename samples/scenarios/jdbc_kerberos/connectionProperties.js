@@ -7,18 +7,16 @@
 
     // Adding properties for Kerberos authentication
     if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
-	var str = attr[connectionHelper.attributeTableauServerUser];
+	    var serverUser = attr[connectionHelper.attributeTableauServerUser];
         // str is not empty means it is Tableau Server which is connecting	    
-	if (!isEmpty(str)) {
-            props["user"] = str;
+        if (!isEmpty(serverUser)) {
+            props["user"] = serverUser;
             props["gsslib"] = "gssapi";	 
             props["jaasLogin"] = "false";    
-        } else if(connectionHelper.GetPlatform() === "win") {
-            // gsslib property for invoking SSPI on Tableau Desktop for Windows
-            props["gsslib"] = "sspi";	 
-        } else if(connectionHelper.GetPlatform() === "mac") {
-            // add this jaasApplicationName used by Tableau's embedded jaas.conf file
-	    props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
+        } else {
+            props["gsslib"] = "gssapi";	 
+            props["jaasLogin"] = "false";  
+            props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
         }            
                   
     // username-password auth     
