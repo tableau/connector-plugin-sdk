@@ -74,15 +74,18 @@ class BatchQueueWork(object):
 
     def load_test_metadata(self):
         metadata_file_path = os.path.join(get_metadata_dir(), 'test_metadata.csv')
-        with open(metadata_file_path, 'r') as metadata_file:
-            reader = csv.DictReader(metadata_file, delimiter='\t')
-            for row in reader:
-                test = row['Test Name Categorized']
-                if test not in self.metadata_map:
-                    self.metadata_map[test] = TestMetadata(row['Priority'])
-                entry = self.metadata_map[test]
-                entry.add_function(row['Function Categorized'])
-                entry.add_category(row['Test Category'])
+        try:
+            with open(metadata_file_path, 'r') as metadata_file:
+                reader = csv.DictReader(metadata_file, delimiter='\t')
+                for row in reader:
+                    test = row['Test Name Categorized']
+                    if test not in self.metadata_map:
+                        self.metadata_map[test] = TestMetadata(row['Priority'])
+                    entry = self.metadata_map[test]
+                    entry.add_function(row['Function Categorized'])
+                    entry.add_category(row['Test Category'])
+        except IOError as e:
+            logging.debug("Error loading test metadata: " + str(e))
 
     def add_test_result(self, test_file, result):
         self.results[test_file] = result

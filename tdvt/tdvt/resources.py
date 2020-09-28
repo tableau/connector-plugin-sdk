@@ -39,7 +39,7 @@ def get_extensions_dir():
     return os.path.join(os.getcwd(), "extensions")
 
 def get_metadata_dir():
-    return os.path.join(os.getcwd(), "tdvt", "metadata")
+    return os.path.join(get_root_dir(), "metadata")
 
 def get_local_logical_test_dir():
     return os.path.join(get_local_test_dir(), "logical")
