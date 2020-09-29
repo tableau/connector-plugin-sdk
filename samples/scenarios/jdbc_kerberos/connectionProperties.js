@@ -7,10 +7,10 @@
 
     // Adding properties for Kerberos authentication
     if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
-	    var loggedInUser = attr[connectionHelper.attributeTableauServerUser];
+	    var tableauServerUser = attr[connectionHelper.attributeTableauServerUser];
         // loggedInUser is not empty means this is a Tableau Server Environment	    
-        if (!isEmpty(loggedInUser)) {
-            props["user"] = serverUser;
+        if (!isEmpty(tableauServerUser)) {
+            props["user"] = tableauServerUser;
             props["gsslib"] = "gssapi";	 
             props["jaasLogin"] = "false";    
         } else {
