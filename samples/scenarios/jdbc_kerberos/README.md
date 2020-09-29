@@ -18,7 +18,7 @@ Contents
 
 Below I give a brief introduction on how Java uses GSS-API to implement Kerberos authentication.
 
-## <a id="intro"> Introduction to Kerberos on Java ?
+## <a id="intro"> Introduction to Kerberos on Java
 
 ### GSS-API
 GSS-API offers application programmers uniform access to security services atop a variety of underlying security mechanisms, including Kerberos. The GSSAPI, by itself, does not provide any security. Instead, security-service vendors provide GSSAPI implementations - usually in the form of libraries installed with their security software. These libraries present a GSSAPI-compatible interface to application writers who can write their application to use only the vendor-independent GSSAPI. If the security implementation ever needs replacing, the application need not be rewritten. The dominant GSSAPI mechanism implementation in use is Kerberos. (source - [wikipedia](https://en.wikipedia.org/wiki/Generic_Security_Services_Application_Program_Interface))
@@ -56,9 +56,9 @@ connection-fields.xml
 ```
 connectionProperties.js
 ```
-     props["gsslib"] = "gssapi";	 
-     props["jaasLogin"] = "false";  
-     props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
+    props["gsslib"] = "gssapi";	 
+    props["jaasLogin"] = "false";  
+    props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
 ```
 
 ### Kerberos SSO for Tableau Desktop on Mac
@@ -74,9 +74,9 @@ connection-fields.xml
 
 connectionProperties.js
 ```
-        props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
-        props["gsslib"] = "gssapi";	 
-        props["jaasLogin"] = "false";  
+    props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
+    props["gsslib"] = "gssapi";	 
+    props["jaasLogin"] = "false";  
 ```
 
 Other Configuration:
@@ -117,10 +117,8 @@ connectionProperties.js
 ### Viewer Credentials authentication
 
 Kerberos delegation enables Tableau Server to use the Kerberos credentials of the viewer of a workbook or view to execute a query on behalf of the viewer. This is useful in the following situations:
-
--   You need to know who is accessing the data (the viewer's name will appear in the access logs for the data source).
-    
--   Your data source has row-level security, where different users have access to different rows
+* You need to know who is accessing the data (the viewer's name will appear in the access logs for the data source).
+* Your data source has row-level security, where different users have access to different rows
 
 While configuring Tableau Server for kerberos delegation, users need to provide impersonation_runas_principal and keytab which will be used to impersonate the viewer. For configuring Kerberos delegation on Tableau Server for Linux, refer to this [article](https://help.tableau.com/current/server-linux/en-us/kerberos_delegation.htm). For configuring Kerberos delegation for Tableau Server on Windows, refer to this [article](https://help.tableau.com/current/server/en-us/kerberos_delegation_jdbc.htm) 
 
