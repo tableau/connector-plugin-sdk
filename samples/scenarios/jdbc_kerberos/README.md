@@ -1,7 +1,7 @@
 
 # Readme
 
-The postgres jdbc kerberos sample connector plugin demonstrates how to incorporate different kerberos-based authentication modes for your Tableau + postgres + jdbc use cases. This sample plugin code has been tested for all the authentication methods listed here with all platforms (Mac Desktop, Windows Desktop and Server, Linux Server). However, the individual sections of the plugin components concern specific authentication modes and have been laid out here for the purposes of understanding and re-use. While publishing from Tableau Desktop, the Server RunAs and Viewer credentials authentication options will be visible in publish dialog only if you have logged into tableau using Integrated Authentication. 
+The postgres jdbc kerberos sample connector plugin demonstrates how to incorporate different kerberos-based authentication modes for your "Tableau + Postgres + JDBC" use cases. This sample plugin code has been tested for all the authentication methods listed here with all platforms (Mac Desktop, Windows Desktop and Server, Linux Server). However, the individual sections of the plugin components concern specific authentication modes and have been laid out here for the purposes of understanding and re-use. While publishing from Tableau Desktop, the Server RunAs and Viewer credentials authentication options will be visible in publish dialog only if you have logged into tableau using Integrated Authentication. 
 
 Contents
 1. [Use case(s) of this connector plugin](#purpose)
@@ -144,3 +144,5 @@ manifest.xml
 <!-- This capability is needed to support kerberos delegation on tableau server --> 
       <customization name="CAP_AUTH_KERBEROS_IMPERSONATE" value="yes"/>
 ```
+
+
