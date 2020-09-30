@@ -8,8 +8,8 @@
 
   <field name="authentication" label="Authentication" category="authentication" value-type="selection" >
     <selection-group>
+      <option value="auth-integrated" label="Kerberos"/>
       <option value="auth-user-pass" label="Username and Password"/>
-      <option value="auth-integrated" label="Integrated"/>
     </selection-group>
   </field>
 
