@@ -61,6 +61,8 @@ connectionProperties.js
     props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
 ```
 
+![Image](images/DesktopConnectionDialog.png)
+
 ### Kerberos SSO for Tableau Desktop on Mac
 connection-fields.xml
 ```
@@ -91,6 +93,8 @@ sudo defaults write /Library/Preferences/com.tableau.Tableau-<version>.plist Set
 
 ## <a id="server"/> Kerberos RunAs and Delegation on Server
 When a user logs into Tableau desktop using Integrated authentication, there are the two publish options available for Kerberos authentication, namely, "Server run-as" and "Viewer Credentials/Kerberos Delegation".
+
+![Image](images/PublishKerberosAuthOptions.png)
 
 ### Server RunAs authentication
 You can configure Tableau Server to use a Kerberos service account to access a database. In this scenario, Tableau Server connects to databases with a service account, also referred to as a "RunAs account". 
