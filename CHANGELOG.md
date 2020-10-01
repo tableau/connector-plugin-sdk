@@ -4,6 +4,7 @@
 
 ### Added
 - Add `vendor[1,2,3]-prompt` as options to ConnectionConfig-CT in `tcd_latest.xsd`.
+- Add JDBC Kerberos scenario for postgres 
 
 ### Changed
 ### Removed

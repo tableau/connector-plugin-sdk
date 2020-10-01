@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+
+  <field name="server" label="Server" category="endpoint" value-type="string"/>
+
+  <field name="port" label="Port" category="endpoint" value-type="string" default-value="5432"/>
+
+  <field name="authentication" label="Authentication" category="authentication" value-type="selection" >
+    <selection-group>
+      <option value="auth-integrated" label="Kerberos"/>
+      <option value="auth-user-pass" label="Username and Password"/>
+    </selection-group>
+  </field>
+
+  <field name="username" label="Username" category="authentication" value-type="string">
+    <conditions>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+
+  <field name="password" label="Password" category="authentication" value-type="string" secure="true">
+    <conditions>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+  
+  <field name="sslmode" label="Require SSL" value-type="boolean" category="general" default-value="" >
+    <boolean-options>
+      <false-value value="" />
+      <true-value value="require" />
+    </boolean-options>
+  </field>
+</connection-fields>
