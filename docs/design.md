@@ -92,7 +92,7 @@ If the driver includes more than a single file, create a unique subfolder under 
 - Linux: /opt/tableau/tableau_driver/jdbc 
 <br/> 
 
-Copy all files to folder "A". This will create an isolated classloader for that driver. To learn more about JDBC drivers, check Specify the right JDBC driver in  the  [user documentation](https://help.tableau.com/current/pro/desktop/en-us/examples_otherdatabases_jdbc.htm) .
+Copy all files to folder "A". This will create an isolated classloader for that driver. To learn more about JDBC drivers, check *Specify the right JDBC driver* section in  the  [user documentation](https://help.tableau.com/current/pro/desktop/en-us/examples_otherdatabases_jdbc.htm).
 
 ## Consider database capability 
 
