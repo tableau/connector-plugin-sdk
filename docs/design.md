@@ -84,13 +84,15 @@ Tableau capabilities are Boolean settings you can use to tune many aspects of yo
 
 For information on common capabilities and how they are used, see [Capabilities]({{ site.baseurl }}/docs/capabilities).
 
-## Know the min-tableau-version
-For the min-tableau-version, is checked before a connector is loaded in Tableau. If the current version of Tableau is less than the min-tableau-version then the connector is not loaded. 
-This is set by the packager and if set manually will be overwritten.
+## JDBC Driver Class Isolation
+If the driver only includes a single jar file, just copy it to the JDBC driver loaction. <br/>
+If the driver includes more than a single file, create a subfolder "A" under JDBC driver location. 
+- Windows: C:\Program Files\Tableau\Drivers
+- Mac: ~/Library/Tableau/Drivers
+- Linux: /opt/tableau/tableau_driver/jdbc 
+<br/> 
 
-## JDBC Driver Location
-If the driver only includes a single jar file, just copy it to C:/Program Files/Tableau/Drivers. <br />
-If the driver includes more than a single file, create a subfolder "A" under C:/Program Files/Tableau/Drivers, then copy all files to folder "A". This will create an isolated classloader for that driver.
+Copy all files to folder "A". This will create an isolated classloader for that driver.
 
 
 ## Consider database capability 
