@@ -85,15 +85,14 @@ Tableau capabilities are Boolean settings you can use to tune many aspects of yo
 For information on common capabilities and how they are used, see [Capabilities]({{ site.baseurl }}/docs/capabilities).
 
 ## JDBC Driver Class Isolation
-If the driver only includes a single jar file, just copy it to the JDBC driver loaction. <br/>
-If the driver includes more than a single file, create a subfolder "A" under JDBC driver location. 
+If the driver only includes a single jar file, copy it to the JDBC driver location. <br/>
+If the driver includes more than a single file, create a unique subfolder under JDBC driver location and include all required files. 
 - Windows: C:\Program Files\Tableau\Drivers
 - Mac: ~/Library/Tableau/Drivers
 - Linux: /opt/tableau/tableau_driver/jdbc 
 <br/> 
 
-Copy all files to folder "A". This will create an isolated classloader for that driver.
-
+Copy all files to folder "A". This will create an isolated classloader for that driver. To learn more about JDBC drivers, check Specify the right JDBC driver in  the  [user documentation](https://help.tableau.com/current/pro/desktop/en-us/examples_otherdatabases_jdbc.htm) .
 
 ## Consider database capability 
 
