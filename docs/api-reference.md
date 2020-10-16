@@ -78,7 +78,6 @@ The connection-normalizer is represented using a xml component in the [connectio
 ```
 <connection-normalizer>
     <required-attributes>
-        <setImpersonateAttributes/>
         <attribute-list>
             <attr>server</attr>
             <attr>port</attr>

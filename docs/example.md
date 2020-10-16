@@ -74,7 +74,6 @@ The TDR file also contains the connection-normalizer and the driver-resolver sec
 ```
 <connection-normalizer>
     <required-attributes>
-        <setImpersonateAttributes/>
         <attribute-list>
             <attr>server</attr>
             <attr>port</attr>
@@ -112,7 +111,6 @@ In turn, the Connection Resolver uses these attributes to format an ODBC or JDBC
         </connection-properties>
         <connection-normalizer>
             <required-attributes>
-                <setImpersonateAttributes/>
                 <attribute-list>
                     <attr>server</attr>
                     <attr>port</attr>
@@ -242,7 +240,7 @@ ConnectString: DRIVER={PostgreSQL Unicode(x64)};SERVER=postgres;PORT=5432;DATABA
 For JDBC, search for <span style= "font-family: courier new">Connection URL</span> to find something like this example:
 
 ```
-JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&password=********
+JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1
 ```
 
 ## ![7]({{ site.baseurl }}/assets/pce-9.png) 
