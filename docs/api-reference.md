@@ -67,34 +67,29 @@ array of formatted key=value pairs that will be written to the properties file
 
 ---
 
-### connection-matcher
-
-Determines if two sets of required connection attributes match. This is optional and in most cases will not be needed.
-
-**Type:** JavaScript
-
-#### JavaScript function call signature:
-
-**Input:** attr1, attr2, two dictionaries of key/value pairs
-
-```javascript
-{"server" : "myserver.somewhere.net", "username" : "myusername"}
-
-{"server" : "myserver.somewhere.net", "username" : "someoneelse"}
-```
-
-**Return:** true or false if the attributes match
-
----
-
 ### connection-normalizer
 
 Defines the unique set of connection attributes which is used to generate a connection "key" and has important security considerations. Connections can be reused and shared within Tableau processes based on this key, so it must contain attributes whose values will be unique in a given security context. Username is a commonly used attribute that will make a unique connection for each user, for example.
 
-**Type:** JavaScript or XML
+**Type:** XML
 
-XML is preferred since it is more performant and normalization is done many times per connection.
-The following table shows the most commonly used attributes. Custom attributes may also be added in the XML.
+The connection-normalizer is represented using a xml component in the [connectionResolver.tdr](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/connectionResolver.tdr) file. An example is :
+
+```
+<connection-normalizer>
+    <required-attributes>
+        <attribute-list>
+            <attr>server</attr>
+            <attr>port</attr>
+            <attr>dbname</attr>
+            <attr>username</attr>
+            <attr>password</attr>
+        </attribute-list>               
+    </required-attributes>
+</connection-normalizer>
+
+```
+The following table shows the most commonly used attributes in the attribute-list. Custom attributes may also be added.
 
 _Attribute names_
 
@@ -112,20 +107,6 @@ _Attribute names_
 | sslmode                    | Connection attribute for the SSL Mode                              |
 | username                   | Connection attribute for the user name                             |
 | warehouse                  | Connection attribute for the Warehouse                             |
-
-#### JavaScript function call signature:
-
-**Input:** attr, an object of key/value pairs.
-
-```javascript
-{"server" : "myserver.somewhere.net", "username" : "myusername"}
-```
-
-**Return:** array of attribute names. The following example values are common for username and password authentication.
-
-```javascript
-["server", "port", "dbname", "username", "password"];
-```
 
 ---
 
@@ -228,6 +209,9 @@ Example:
     formattedParams.push(connectionHelper.FormatKeyValuePair(driverLocator.keywordDriver, driverLocator.LocateDriver(attr)));
 
 ## Deprecated API
+
+### ConnectionNormalizer and ConnectionMatcher JavaSscript files
+The JavaScript files for connection normalizer and connection matcher are deprecated as of Tableau 2020.3. This means the element  `<script file="fileName.js"/>` (which was added inside the `<connection-matcher>` and `<connection-normalizer>` element) and the `<connection-matcher>` element itself are deprecated as of 2020.3. The `<connection-normalizer>` component can be added to the connectionResolver.tdr fie as shown in the connection-normalizer section above.
 
 ### SetImpersonateAttributes connection helper
 This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
