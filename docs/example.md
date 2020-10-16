@@ -86,8 +86,6 @@ The TDR file also contains the connection-normalizer and the driver-resolver sec
 </connection-normalizer>
 
 ```
-`<setImpersonateAttributes/>` adds support for impersonate attributes and should be in every connector.
-
 
 The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
 
@@ -109,6 +107,7 @@ In turn, the Connection Resolver uses these attributes to format an ODBC or JDBC
         </connection-builder>
         <connection-properties>
             // This is the component number 5 in the diagram above
+            // It is only used for JDBC Connectors
             <script file="connectionProperties.js">
         </connection-properties>
         <connection-normalizer>
