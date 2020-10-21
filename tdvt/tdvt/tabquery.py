@@ -14,7 +14,7 @@ def configure_tabquery_path():
     if os.environ.get('TABQUERY_CLI_PATH'):
         tab_cli_exe = os.environ.get('TABQUERY_CLI_PATH')
         logging.info(
-            "Tabquery path from TABQUERY_CLI_PATH environment variable is: %f"
+            "Tabquery path from TABQUERY_CLI_PATH environment variable is: {}"
             .format(tab_cli_exe)
         )
     else:
