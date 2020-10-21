@@ -228,8 +228,7 @@ CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_DDL_COMMAND_QUERIES | Set to 'yes' to execu
 CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_DML_COMMAND_QUERIES | Set to 'yes' to execute DML commands (e.g. INSERT INTO) directly (i.e, no prepared statement). | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_NON_COMMAND_QUERIES | Set to 'yes' to execute all non-command queries directly (no prepared statement). | &ndash; | &ndash;
 CAP_ODBC_TRANSACTIONS_COMMIT_INVALIDATES_PREPARED_QUERY | Set to ‘yes’ to indicate that a transaction will invalidate all prepared statements and close any open cursors. | &ndash; | &ndash; 
-CAP_ODBC_TRANSACTIONS_SUPPRESS_AUTO_COMMIT | Set to 'yes' to prevent the Native ODBC Protocol from using default auto-committing transaction behavior in ODBC. This capability cannot be used with CAP_ODBC_TRANSACTIONS_SUPPRESS_EXPLICIT_COMMIT. | &ndash; | &ndash; 
-CAP_ODBC_TRANSACTIONS_SUPPRESS_EXPLICIT_COMMIT | Set to 'yes' to prevent the Native ODBC Protocol from explicitly managing transactions. This capability cannot be used with CAP_ODBC_TRANSACTIONS_SUPPRESS_AUTO_COMMIT. | &ndash; | &ndash; 
+CAP_ODBC_TRANSACTIONS_SUPPRESS_EXPLICIT_COMMIT | Set to 'yes' to prevent the Native ODBC Protocol from explicitly managing transactions. | &ndash; | &ndash; 
 CAP_ODBC_TRIM_CHAR_LEAVE_PADDING | Set to 'yes' to leave whitespace padding at the end of a character or text data type. Most data sources will trim this whitespace automatically, but the behavior depends on the driver. | &ndash; | &ndash; 
 CAP_ODBC_TRIM_VARCHAR_PADDING | Set to 'yes' to force the Tableau native ODBC protocol to trim trailing whitespace from VARCHAR columns which the driver has erroneously padded. | &ndash; | &ndash; 
 CAP_ODBC_UNBIND_AUTO | Set to 'yes' to force the Tableau native ODBC protocol to unbind and deallocate columns automatically, which can reduce ODBC API calls. | &ndash; | &ndash; 
