@@ -18,6 +18,7 @@ def configure_tabquery_path():
             .format(tab_cli_exe)
         )
     else:
+        logging.info("TABQUERY_CLI_PATH environment variable not set. Trying ini files.")
         config = configparser.ConfigParser()
         
         tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
