@@ -2,7 +2,7 @@
 title: Filing a Bug with the SDK
 ---
 
-If you encounter a bug with the Tableau Connector SDk, please file it as a github issue. We will take a look at it and respond as soon as we are able.
+If you encounter a bug with the Tableau Connector SDK, please file it as a github issue. We will take a look at it and respond as soon as we are able.
 
 # Artifacts
 When filing an bug on github, attaching the following to the issue:
@@ -11,10 +11,11 @@ When filing an bug on github, attaching the following to the issue:
     - A short description of the bug
     - Repro steps with screenshots
     - The product(s) it appears in
-    - The exact version of the Tableau products you are using (ie Desktop 2020.3.1, Server 2020.2.2, TDVT 2.1.1, etc), as relevant to the bug
+    - The exact version of the Tableau products you are using (ie Desktop 2020.3.1, Server 2020.2.2), as relevant to the bug
+    - The exact version of TDVT you are running, if the ug is realted to TDVT or discovered during a TDVt run
     - The operating system you are using
 - Connector Files. Can be either a folder with the loose connector files or a packaged .taco connector. Should be the latest version of the connector.
-- Clean logs showing the error. This will be in the "My Tableau Repository\Logs" folder for desktop. For server, the "tsm maintenance ziplogs" command can be used, see this page.
+- Clean logs showing the error
     - Desktop: This will be in the "My Tableau Repository\Logs" folder for desktop. Remove all items from the folder and then reproduce the bug, then copy the remaining files.
     - Server: The "tsm maintenance ziplogs" command can be used, see [this](https://help.tableau.com/current/server/en-us/logs_loc.htm) page
 
