@@ -12,7 +12,7 @@ When filing an bug on github, attaching the following to the issue:
     - Repro steps with screenshots
     - The product(s) it appears in
     - The exact version of the Tableau products you are using (ie Desktop 2020.3.1, Server 2020.2.2), as relevant to the bug
-    - The exact version of TDVT you are running, if the ug is realted to TDVT or discovered during a TDVt run
+    - The exact version of TDVT you are running, if the bug is related to TDVT or discovered during a TDVT run
     - The operating system you are using
 - Connector Files. Can be either a folder with the loose connector files or a packaged .taco connector. Should be the latest version of the connector.
 - Clean logs showing the error
