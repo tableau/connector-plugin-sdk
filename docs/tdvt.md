@@ -16,7 +16,6 @@ We recommend running TDVT each time you do one of these things:
 
 - Release a new driver
 - Release a database
-- Release a database
 - Add or modify a connector
 
 
@@ -55,7 +54,9 @@ Multiple expected files are supported.
 1. Be sure your system includes these prerequisites:
     - PC or VM running Windows or macOS.
     - Tableau Desktop installed
-    - Python 3.7. Pip comes by default with the Python installation. Be sure to enable the "install environmental variables" option.
+    - Python 3.7 (See: [Windows releases](https://www.python.org/downloads/windows/) / [Mac releases](https://www.python.org/downloads/mac-osx/))
+    - Pip (by default comes by with the Python installation)
+      Be sure to enable the "install environmental variables" option.
     - An ODBC or JDBC driver for your database.
     - The Calcs and Staples table loaded in your database.
 1. Clone the [TDVT Python module](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt).
