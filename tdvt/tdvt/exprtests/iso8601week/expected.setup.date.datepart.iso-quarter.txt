@@ -59,22 +59,22 @@
       </tuple>
     </table>
   </test>
-  <test name='DATENAME(&apos;iso-quarter&apos;, [date2])'>
+  <test name='DATEPART(&apos;iso-quarter&apos;, [date2])'>
     <table>
       <schema>
         <column>[cast_calcs.sqlserver].[TEMP(Test)(2891652532)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;1&quot;</value>
+        <value>1</value>
       </tuple>
       <tuple>
-        <value>&quot;2&quot;</value>
+        <value>2</value>
       </tuple>
       <tuple>
-        <value>&quot;3&quot;</value>
+        <value>3</value>
       </tuple>
       <tuple>
-        <value>&quot;4&quot;</value>
+        <value>4</value>
       </tuple>
     </table>
   </test>

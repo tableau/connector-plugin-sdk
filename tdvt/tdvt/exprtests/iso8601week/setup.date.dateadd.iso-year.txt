@@ -1,0 +1,12 @@
+// Same day
+DATEADD('iso-year', 0, #2014-12-29#) // #2014-12-29#
+
+// Jump 2 Gregorian years.
+DATEADD('iso-year', 1, #2014-12-29#) // #2016-01-04#
+
+// Different ISO year, same gregorian year
+DATEADD('iso-year', 1, #2012-01-01#) // #2012-12-30#
+DATEADD('iso-year', -1, #2012-12-31#) // #2012-01-02#
+
+// Test without literal to test non-empty groupby clause
+DATEADD('iso-year', 0, [date2])
