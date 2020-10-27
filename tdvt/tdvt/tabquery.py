@@ -1,4 +1,5 @@
 import configparser
+import os
 import sys
 
 from .resources import *
@@ -9,19 +10,28 @@ tab_cli_exe = ''
 def configure_tabquery_path():
     """Setup the tabquery path from ini settings."""
     global tab_cli_exe
-    config = configparser.ConfigParser()
-    
-    tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
-    logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
-    config.read(tdvt_cfg)
 
-    if sys.platform.startswith("darwin"):
-        tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_MAC']
-    elif sys.platform.startswith("linux"):
-        tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_LINUX']
+    if os.environ.get('TABQUERY_CLI_PATH'):
+        tab_cli_exe = os.environ.get('TABQUERY_CLI_PATH')
+        logging.info(
+            "Tabquery path from TABQUERY_CLI_PATH environment variable is: {}"
+            .format(tab_cli_exe)
+        )
     else:
-        tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
-    logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
+        logging.info("TABQUERY_CLI_PATH environment variable not set. Trying ini files.")
+        config = configparser.ConfigParser()
+
+        tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
+        logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
+        config.read(tdvt_cfg)
+
+        if sys.platform.startswith("darwin"):
+            tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_MAC']
+        elif sys.platform.startswith("linux"):
+            tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_LINUX']
+        else:
+            tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
+        logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
 
 def get_max_process_level_of_parallelization(desired_threads):
     if sys.platform.startswith("darwin") and 'tabquerytool' in tab_cli_exe:
