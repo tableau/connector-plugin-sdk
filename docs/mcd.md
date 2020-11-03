@@ -165,7 +165,10 @@ The vendor defined attributes are unique to an individual connector and do not i
 
 | Name  | Meaning | Optional? | Value Notes | 
 | ----  | ------- | --------- | ----------- |
-| v- | The `v-` prefix indicates a vendor defined name | Yes | Any value compatible with type | 
+| v- | The `v-` prefix indicates a vendor defined name | Yes | Any value compatible with type |
+| vendor1 | Vendor attribute field 1 | Yes | Any value compatible with type |
+| vendor2 | Vendor attribute field 2 | Yes | Any value compatible with type |
+| vendor3 | Vendor attribute field 3 | Yes | Any value compatible with type |
 
 ## Example 1 - A Non-Editable Field
 
