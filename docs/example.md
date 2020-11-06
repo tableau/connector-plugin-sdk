@@ -18,7 +18,7 @@ This diagram shows how the connector interacts with Tableau and the database. De
 
 Most of the following examples use the connector for the PostGre SQL database, located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins).
 
-## ![1]({{ site.baseurl }}/assets/pce-1.png)
+## ![1]({{ site.baseurl }}/assets/pce-1.png) Manifest File
 
 The Manifest file (manifest.xml)  informs Tableau about your connector and displays the connector name in the Tableau Connect pane.
 It's a required file that defines the connector class and description.
@@ -37,7 +37,7 @@ Each connector is typically based on a "class" such as ODBC or JDBC, and provide
 
 ![]({{ site.baseurl }}/assets/pce-connect-pane.png)
 
-## ![2]({{ site.baseurl }}/assets/pce-2.png) 
+## ![2]({{ site.baseurl }}/assets/pce-2.png) Tableau Custom Dialog File
 
 The Tableau Custom Dialog file (.tcd) is optional. By default, your connecor inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TCD file to customize the connection dialog.
 For example, if you set <span style="font-family: courier new">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
@@ -61,7 +61,7 @@ Here's an example:
 
 ![]({{ site.baseurl }}/assets/pce-connection-dialog-box.png)
 
-## ![3]({{ site.baseurl }}/assets/pce-3.png) 
+## ![3]({{ site.baseurl }}/assets/pce-3.png) Tableau Connector Resolver File
 
 The Connector Resolver file (.tdr) is optional. Tableau uses it to create a connection to your data.
 
@@ -169,7 +169,7 @@ The component defines what makes up a unique connection. This is best implemente
 ```
 `<setImpersonateAttributes/>` and `<attr>one-time-sql</attr>` add support for impersonate attributes and initial sql respectively, and should be in every connector.
 
-## ![8]({{ site.baseurl }}/assets/pce-8.png) Connection example
+## ![8]({{ site.baseurl }}/assets/pce-8.png) Connection - ODBC String or JDBC URL 
 
 The Tableau Connection Resolver file (.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosrv.txt.
 
@@ -185,7 +185,7 @@ For JDBC, search for <span style= "font-family: courier new">Connection URL</spa
 JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&password=********
 ```
 
-## ![9]({{ site.baseurl }}/assets/pce-9.png) 
+## ![9]({{ site.baseurl }}/assets/pce-9.png) Tableau Dialect File
 
 After connection, Tableau uses your Tableau Dialect file (.tdd) to determine which SQL to generate for data retrieval from your database.
 You can define your own dialect in the TDD file, or your connector can inherit a dialect from its parent (defined by the superclass). If you are using the "odbc" or "jdbc" superclass, you must define a dialect, since those superclasses do not have dialects.
