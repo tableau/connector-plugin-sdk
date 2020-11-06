@@ -117,7 +117,7 @@ This is an example Connection Builder script for JDBC:
 
 The Connection Properties script (connectionProperties.js) is optional. You need this script only if you're using a JDBC driver. 
 
-This example is for a connector to Amazon Athena.
+This example is for a connector to Amazon Athena. 
 
 ```
 (function propertiesBuilder(attr) {
