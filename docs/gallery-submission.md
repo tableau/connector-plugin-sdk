@@ -69,7 +69,7 @@ When we receive your request to publish, we will send you:
 
 ---
 
-#### Extension Gallery Submission Materials
+### Extension Gallery Submission Materials
 
 _All of the following materials are required for submission of an extension into the Extension Gallery unless stated otherwise. Submission of these materials and signing of the agreement does not guarantee the addition of an extension to the Gallery._
 
