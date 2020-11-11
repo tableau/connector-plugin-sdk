@@ -1,0 +1,5 @@
+// Checking the alias resolves to the correct values
+ISOYEAR(#2000-01-01#) // 1999
+ISOQUARTER(#2000-01-01#) // 4
+ISOWEEK(#2000-01-01#) // 52
+ISOWEEKDAY(#2004-04-15#) // 4

@@ -1,0 +1,42 @@
+<results>
+  <test name='ISOYEAR(#2000-01-01#) // 1999'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1463160520)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1999</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ISOQUARTER(#2000-01-01#) // 4'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(6352360872)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ISOWEEK(#2000-01-01#) // 52'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(6530668804)(0)]</column>
+      </schema>
+      <tuple>
+        <value>52</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ISOWEEKDAY(#2004-04-15#) // 4'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3423645404)(0)]</column>
+      </schema>
+      <tuple>
+        <value>4</value>
+      </tuple>
+    </table>
+  </test>
+</results>

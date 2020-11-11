@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Change Staples smoke test to be logical
 
+## [2.2.1] - 2020-10-29
+- Added: Moved some ISO8601 test cases from the Python 2.7 test framework to the TDVT suite
+- Updated: Fixed some test cases with P3 defects initially checked in to use the correct functions (eg. DATENAME vs. DATETRUNC).
+
 ## [2.1.22] - 2020-10-05
 - Added a expected file expected.setup.cast.str.13.txt to support Postgres 12 database server output. PR 626 
 

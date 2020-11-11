@@ -1,0 +1,62 @@
+<results>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2004-04-15#, #2004-04-15#) // 0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(8183057766)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2004-04-15#, #2003-04-20#) // -1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4384161818)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2013-12-30#, #2014-01-07#) // 0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(5152382614)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2014-12-28#, #2015-12-28#) // 1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(200151713)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, #2015-12-28#, #2014-12-28#) // -1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(7046400745)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-year&apos;, [date2], [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(4384161818)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+</results>

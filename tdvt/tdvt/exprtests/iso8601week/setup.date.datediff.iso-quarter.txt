@@ -1,0 +1,18 @@
+// Same ISO quarter, different Gregorian years
+DATEDIFF('iso-quarter', #2013-12-30#, #2014-01-05#) // 0
+
+// Same Gregorian quarter, different ISO quarters
+DATEDIFF('iso-quarter', #2014-03-30#, #2014-03-31#) // 1
+DATEDIFF('iso-quarter', #2014-03-31#, #2014-03-30#) // -1
+
+// 2014-Q2 through 2015-W40 (quarters in different ISO years,)
+DATEDIFF('iso-quarter', #2014-04-08#, #2015-09-30#) // 6
+
+// 2015-W53-07 through 2017-W01-01 (quarters spanning a 52-week year)
+DATEDIFF('iso-quarter', #2016-01-03#, #2017-01-02#) // 5
+
+// 2014-W52-07 through 2016-W01-01 (quarters spanning a 53-week year)
+DATEDIFF('iso-quarter', #2014-12-28#, #2016-01-04#) // 5
+
+// Test without literal to test non-empty groupby clause
+DATEDIFF('iso-quarter', [date2], [date2])
