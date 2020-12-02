@@ -158,17 +158,17 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
  `<format-is-distinct>` Defines a strategy for determining whether two values are distinct.  <br/>
  The value for this property can be:
 
-  - __NoNullCheck__
-      Does not check that the value of LHS and RHS is null. Logic: `(lhs [!]= rhs)` . Note : A known limitation is that using this value will cause Tableau to give the wrong answer in some cases, if the column is ever null. It is advised not to use this value unless there is no other option.
   - __Keyword__
       Uses `DISTINCT` keyword for comparision. Logic: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
   - __Operator__
     Uses `<=>` for comparions. Logic:`([NOT] (lhs <=> rhs))`
   - __Formula__
         By default formula is used. In this case format is distinct checks that the value for LHS and RHS is not null. Logic :`((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))`
+  - __NoNullCheck__
+      Does not check that the value of LHS and RHS is null. Logic: `(lhs [!]= rhs)` . Note: A known limitation is that using this value will cause Tableau to give the wrong answer in some scenarios if the column contains null. This is not recommended unless required by the underlying database.
 
   ```xml
-  <format-is-distinct value='NoNullCheck' />
+  <format-is-distinct value='Operator' />
   ```
 
   **Join Capabilities**  <br/>
