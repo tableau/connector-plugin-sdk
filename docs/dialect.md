@@ -159,7 +159,7 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
  The value for this property can be:
 
   - __NoNullCheck__
-      Does not check that the value of LHS and RHS is null. Logic: `(lhs [!]= rhs)`
+      Does not check that the value of LHS and RHS is null. Logic: `(lhs [!]= rhs)` . Note : A known limitation is that using this value will cause Tableau to give the wrong answer in some cases, if the column is ever null. It is adviced not to use this value unless there is no other option.
   - __Keyword__
       Uses `DISTINCT` keyword for comparision. Logic: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
   - __Operator__
