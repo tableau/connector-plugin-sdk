@@ -2,8 +2,8 @@
 title: Connector Gallery Submission Guide
 ---
 
-**Note:** Download a PDF version of this guide [here]({{ site.baseurl }}/assets/Connector-Gallery-Submission-Guide.pdf).
-
+**Note:** Download a PDF version of this guide [here]({{ site.baseurl }}/assets/Connector-Gallery-Submission-Guide.pdf).  
+  
 > ![]({{ site.baseurl }}/assets/tableau-logo.png)
 > 
 > Thanks for your interest in submitting a connector for the Extension Gallery. This document describes the steps and assets required to submit your 
@@ -130,6 +130,14 @@ Installation instructions have two parts:
   * Installing the TACO file
   * Installing the driver
 - Your custom installation instructions
+
+**Note on Prep Builder Instructions:** If your connector can be used with Prep Builder, add information about where to put the TACO file.    
+- For Tableau Prep Builder:  
+  - Windows: C:\Users\<Windows User>\Documents\My Tableau Prep Repository\Connectors  
+  - MacOS: /Users/<user>/Documents/My Tableau Prep Repository/Connectors  
+- For Tableau Server (Flow web authoring): <Tableau_Server_Installation_Directory>/data/tabsvc/flowqueryservice/Connectors  
+- For Tableau Server (Tableau Prep Conductor): <Tableau_Server_Installation_Directory>/data/tabsvc/flowprocessor/Connectors  
+
 
 To make things easy, we've created a template for your custom installation instructions (included below, markdown friendly). Any additional installation instructions should be appended below the Tableau installation instructions.
 
