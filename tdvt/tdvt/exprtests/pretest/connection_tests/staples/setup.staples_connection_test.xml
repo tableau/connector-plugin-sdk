@@ -53,7 +53,7 @@
             <identifierExp class="logical-expression" identifier="[Sales Total]" />
           </binding>
         </expressions>
-        <relationOp class="logical-operator" connection="leaf" name="[Staples]">
+        <relationOp class="logical-operator" connection="leaf" name="$Staples$">
           <relation name="Staples" table="[Staples]" type="table" />
           <cols>
           </cols>
