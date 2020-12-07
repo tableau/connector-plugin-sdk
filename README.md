@@ -12,7 +12,7 @@ The latest version of the SDK is always targeted towards the latest, non-beta ve
 | Connector SDK for Tableau 2020.1                 | 5-08-2020          |
 | Connector SDK for Tableau 2019.4                 | 3-13-2020          |
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
-| TDVT                                             | 2.1.15 (06-15-2020) |
+| TDVT                                             | 2.2.0 (10-27-2020) |
 |                                                  | 1.5.24 (04-13-2020) |
 | Connector Packager                               | 2.1.0 (05-08-2020) |
 
@@ -64,7 +64,7 @@ For a JDBC connector, your driver must fulfill the following requirements:
 
 This SDK is supported, so if you have problems getting the test harness set up, find defects, or have questions related to the configuration or testing of your connector:
 * Start by submitting a GitHub Issue here in this project
-* or you can reach us on the [Developer Forums](https://community.tableau.com/community/developers/content) in Tableau Community.
+* or you can reach us on the [Developer Forums](https://community.tableau.com/s/developers) in Tableau Community.
 
 
 # FAQ

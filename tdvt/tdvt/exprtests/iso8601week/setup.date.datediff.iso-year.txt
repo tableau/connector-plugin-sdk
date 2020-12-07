@@ -1,0 +1,15 @@
+// Same day
+DATEDIFF('iso-year', #2004-04-15#, #2004-04-15#) // 0
+
+// Same ISO week
+DATEDIFF('iso-year', #2004-04-15#, #2003-04-20#) // -1
+
+// Different ISO weeks, same ISO year
+DATEDIFF('iso-year', #2013-12-30#, #2014-01-07#) // 0
+
+// Weeks in different ISO years
+DATEDIFF('iso-year', #2014-12-28#, #2015-12-28#) // 1
+DATEDIFF('iso-year', #2015-12-28#, #2014-12-28#) // -1
+
+// Test without literal to test non-empty groupby clause
+DATEDIFF('iso-year', [date2], [date2]) // 0

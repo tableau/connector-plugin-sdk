@@ -17,4 +17,4 @@ DATEPART('iso-quarter', #2015-12-21#) // Monday, 2015-W52
 DATEPART('iso-quarter', #2015-12-28#) // Monday, 2015-W53
 
 // Test without literal to test non-empty groupby clause
-DATENAME('iso-quarter', [date2])
+DATEPART('iso-quarter', [date2])

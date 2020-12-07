@@ -1,0 +1,100 @@
+<results>
+  <test name='DATEADD(&apos;iso-quarter&apos;, 0, #2013-12-25#) // #2013-12-25#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1174617229)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-12-25 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-quarter&apos;, 1, #2013-12-30#) // #2014-03-31#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(183748825)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2014-03-31 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-quarter&apos;, -1, #2014-01-06#) // #2013-10-07#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3881990827)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2013-10-07 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-quarter&apos;, 2, #2014-12-23#) // #2015-06-23#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3307660145)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2015-06-23 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEADD(&apos;iso-quarter&apos;, 1, [date2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sqlserver].[TEMP(Test)(66430377)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-10-11 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-06-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-08-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-12-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-05-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-07-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-10-25 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1981-02-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-07-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-12-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-08-29 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-12-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-11-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-05-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-07-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

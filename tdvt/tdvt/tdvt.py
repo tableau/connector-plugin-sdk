@@ -9,6 +9,7 @@ if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
 
 import argparse
+import csv
 import glob
 import json
 import pathlib
@@ -38,31 +39,48 @@ class TestOutputFiles(object):
     output_csv = "test_results_combined.csv"
     output_json = "tdvt_output_combined.json"
     all_output_files = [output_actuals, output_csv, output_json, output_tabquery_log]
+    combined_output = []
 
-    @staticmethod
-    def copy_output_file(src_name, src_dir, dst, trim_header, append=True):
+    @classmethod
+    def copy_output_file(c, src_name, src_dir):
         src = os.path.join(src_dir, src_name)
-        dst = os.path.join(os.getcwd(), dst)
-        logging.debug("Copying {0} to {1}".format(src, dst))
+        logging.debug("Copying {0} to output".format(src))
         try:
-            dst_exists = os.path.isfile(dst)
-            src_file = open(src, 'r', encoding='utf8')
-            mode = 'w' if not dst_exists or not append else 'a'
-            dst_file = open(dst, mode, encoding='utf8')
+            with open(src, 'r', encoding='utf8') as src_file:
+                reader = csv.DictReader(src_file, dialect='tdvt')
+                for row in reader:
+                    c.combined_output.append(row)
 
-            line_count = 0
-            for line in src_file:
-                line_count += 1
-                if line_count == 1 and trim_header and dst_exists:
-                    continue
-                dst_file.write(line)
-
-            src_file.close()
-            dst_file.close()
         except IOError as e:
             logging.debug("Exception while copying files: " + str(e))
             return
 
+    @classmethod
+    def write_test_results_csv(c):
+        if not c.combined_output:
+            logging.debug("write_test_results_csv called with no test output")
+            return
+
+        logging.debug("Copying output to {0}".format(c.output_csv))
+        # Sort combined_output on the number of distinct functions (order of complexity)
+        sort_by_complexity = lambda row: len(row['Functions'].split(','))
+        try:
+            c.combined_output.sort(key=sort_by_complexity)
+        except KeyError as e:
+            logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
+
+        dst = os.path.join(os.getcwd(), c.output_csv)
+        try:
+            dst_exists = os.path.isfile(dst)
+            with open(dst, 'w', encoding='utf8') as dst_file:
+                writer = csv.DictWriter(dst_file, fieldnames=c.combined_output[0],
+                    dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
+                writer.writeheader()
+                for row in c.combined_output:
+                    writer.writerow(row)
+        except IOError as e:
+            logging.debug("Exception while writing to file: " + str(e))
+            return
 
 def do_test_queue_work(i, q):
     """This will be called in a queue.join() context, so make sure to mark all work items as done and
@@ -110,7 +128,7 @@ class TestRunner():
                 myzip.write(actual, inner_output)
 
     def copy_output_files(self):
-        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir, TestOutputFiles.output_csv, True)
+        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir)
 
     def copy_test_result_file(self):
         src = os.path.join(self.temp_dir, "tdvt_output.json")
@@ -501,6 +519,14 @@ def create_parser():
     return parser
 
 
+def register_tdvt_dialect():
+    custom_dialect = csv.excel
+    custom_dialect.lineterminator = '\n'
+    custom_dialect.delimiter = ','
+    custom_dialect.strict = True
+    custom_dialect.skipinitialspace = True
+    csv.register_dialect('tdvt', custom_dialect)
+
 def init():
     parser = create_parser()
     args = parser.parse_args()
@@ -521,6 +547,7 @@ def init():
     logging.debug('TDVT Arguments: ' + str(args))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
+    register_tdvt_dialect()
 
     return parser, ds_reg, args
 
@@ -552,6 +579,7 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
+    TestOutputFiles.write_test_results_csv()
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
