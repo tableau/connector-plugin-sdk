@@ -44,7 +44,8 @@ class ConnectorsTest(object):
                                                       timeout=self.timeout_seconds))
         print(self.cmd_output)
         sys.exit(0)
-    
+   
+
 class TestResultWork(object):
     def __init__(self, test_file, output_dir, logical):
         self.relative_test_file = test_file.relative_test_path
