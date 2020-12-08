@@ -1,7 +1,7 @@
 ---
-title: Connection Dialog v2
---- 
-**IMPORTANT:** This feature is only available in Tableau 2020.3 or later.
+title: Build the Connection Dialog with Connection Dialog v2
+---
+**IMPORTANT:** This feature is available only in Tableau 2020.3 or later. For compatibility with older versions, use Connection Dialog v1 (documentation found [here]({ site.baseurl }}/docs/ui)).
 
 Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
@@ -10,7 +10,7 @@ Connection Dialog v2 is a new feature that enables a more fully data-driven conn
 
 To use Connection Dialog v2, in the manifest replace `<connection-dialog>` with `<connection-fields>`, described below. The connector will fail to load if both elements appear in the manifest.
 
-If you wish to modify metadata hierarchy behavior you can add to the manifest a `<connection-metadata>` element, which is also described below. 
+If you wish to modify metadata hierarchy behavior you can add to the manifest a `<connection-metadata>` element, which is also described below.
 
 ```xml
   manifest.xml
@@ -28,11 +28,11 @@ If you wish to modify metadata hierarchy behavior you can add to the manifest a 
 
 # The Connection Fields File
 
-The Connection Fields file dictates the content and behavior of Connection Dialog as seen by the user. It also specifies the names of the connection attributes that will be available, along with the values specified by the user, in the ConnectionBuilder(). 
+The Connection Fields file dictates the content and behavior of Connection Dialog as seen by the user. It also specifies the names of the connection attributes that will be available, along with the values specified by the user, in the ConnectionBuilder().
 
-The Connection Fields file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connection_fields.xsd)) is indentified in the manifest using the `<connection-fields>` element. Here we discuss the structure of this file. 
+The Connection Fields file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connection_fields.xsd)) is indentified in the manifest using the `<connection-fields>` element. Here we discuss the structure of this file.
 
-To avoid confusion, in the following we use the term "field" in place of "connection attribute," and use the generic term "attribute" to mean an XML element attribute. 
+To avoid confusion, in the following we use the term "field" in place of "connection attribute," and use the generic term "attribute" to mean an XML element attribute.
 
 ## XML Elements
 
@@ -42,7 +42,7 @@ This is the parent element for fields.
 
 ### `<field>`
 
-Each connection attribute is represented by a field element in the XML. The field element has the following XML attributes. 
+Each connection attribute is represented by a field element in the XML. The field element has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
@@ -53,11 +53,11 @@ Each connection attribute is represented by a field element in the XML. The fiel
 | optional | Whether the user must specify a value for the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | If a field is in the `advanced` category and is not optional, it must be given a default value. |
 | editable | Whether the user can edit the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `true`. | When set to `false`, the attribute is not shown in the connection dialog, and its default-value is passed to the ConnectionBuilder(). |
 | secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. |
-| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> `endpoint` (for server, port, etc.) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. | 
+| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> `endpoint` (for server, port, etc.) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. |
 
 ### `<validation-rule>`
 
-An optional child of field, validation-rule lets you specify a regular expression for validating the user input. 
+An optional child of field, validation-rule lets you specify a regular expression for validating the user input.
 It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
@@ -66,7 +66,7 @@ It has the following XML attributes.
 
 ### `<boolean-options>`
 
-A required child of field when value-type is `boolean`, this is the container element for the two boolean options. It has no XML attributes. 
+A required child of field when value-type is `boolean`, this is the container element for the two boolean options. It has no XML attributes.
 
 ### `<false-value>`
 
@@ -86,13 +86,13 @@ A required child of boolean-options when value-type is `boolean`. This is the va
 
 ### `<selection-group>`
 
-A required child of field when value-type is `option`. This is the container element for the options that will appear in the drop-down. It has no XML attributes. 
+A required child of field when value-type is `option`. This is the container element for the options that will appear in the drop-down. It has no XML attributes.
 
 Multiple selection-group elements can be used; see `<conditions>`.
 
 ### `<option>`
 
-A child of selection-group, this represents one entry in the drop-down. It has the following XML attributes. 
+A child of selection-group, this represents one entry in the drop-down. It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
@@ -101,7 +101,7 @@ A child of selection-group, this represents one entry in the drop-down. It has t
 
 ### `<conditions>`
 
-An optional child of field or selection group, this is used for conditional display. It specifies whether the field or selection group should be visible in the dialog based on the values the user has specified for other fields. 
+An optional child of field or selection group, this is used for conditional display. It specifies whether the field or selection group should be visible in the dialog based on the values the user has specified for other fields.
 
 Multiple condition elements can be used, and will be OR'd. That is, the field or selection group will be visible when any one or more of the `<condition>` elements is matched. Hence, this is a container element for the condition elements. It has no XML attributes.
 
@@ -114,7 +114,7 @@ The connector will not load if there are circular references.
 | field | Name of the field whose value will be checked for equality | No | Any string value | |
 | value | The value to match. If the field's value is equal to this, the condition is true. | No | Any string value | |
 
-## Connection Field Platform Integration 
+## Connection Field Platform Integration
 
 As referenced above in the `<field>` element section, some `name` attribute values describe platform functionality. It is important that if the desired connector functionality matches any of the descriptions below then the names and values below must be used.
 
@@ -126,20 +126,20 @@ Additionally there are a set of reserved `name` attribute values not documented 
 
 The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.
 
-The connection field names below should specify the `endpoint` category. 
+The connection field names below should specify the `endpoint` category.
 
-| Name  | Meaning | Optional? | Value Notes | 
+| Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
 | server | Server or URL of connection | No | |
 | port | Port of connection | Yes | Allowed Values: numeric value, 0 - 65535 |
 
 ### SSL
 
-The SSL requirements of the connection. No platform functionality is provided at this time, but field name and values are reserved based on historical usage. If used, the value is generally passed to driver via ODBC connection string or JDBC properties. 
+The SSL requirements of the connection. No platform functionality is provided at this time, but field name and values are reserved based on historical usage. If used, the value is generally passed to driver via ODBC connection string or JDBC properties.
 
-The connection field names below can specify the `endpoint` or `general` category depending on dialog layout preference. 
+The connection field names below can specify the `endpoint` or `general` category depending on dialog layout preference.
 
-| Name  | Meaning | Optional? | Value Notes | 
+| Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
 | sslmode | Is SSL enabled or disabled for connection | Yes | Allowed Values: `require` or `''` (empty string) |
 
@@ -151,9 +151,9 @@ The authentication attributes control how and when a user is prompted to enter d
 - Opening a workbook and reconnecting to the data source
 - Publishing a workbook or data source to Tableau Server
 
-The connection field names below should specify the `authentication` category.  
+The connection field names below should specify the `authentication` category.
 
-| Name  | Meaning | Optional? | Value Notes | 
+| Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
 | authentication | The authentication mode for connection | No | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only |
 | username | Username | Yes |  |
@@ -163,13 +163,16 @@ The connection field names below should specify the `authentication` category.
 
 The vendor defined attributes are unique to an individual connector and do not imply platform functionality. They are pass-through to the connection normalizer, connection builder and properties builder.
 
-| Name  | Meaning | Optional? | Value Notes | 
+| Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
-| v- | The `v-` prefix indicates a vendor defined name | Yes | Any value compatible with type | 
+| v- | The `v-` prefix indicates a vendor defined name | Yes | Any value compatible with type |
+| vendor1 | Vendor attribute field 1 | Yes | Any value compatible with type. Parity with the vendor attribute value used in Connection Dialog V1 |
+| vendor2 | Vendor attribute field 2 | Yes | Any value compatible with type. Parity with the vendor attribute value used in Connection Dialog V1 |
+| vendor3 | Vendor attribute field 3 | Yes | Any value compatible with type. Parity with the vendor attribute value used in Connection Dialog V1 |
 
 ## Example 1 - A Non-Editable Field
 
-The image shows the Connection Dialog produced using the Connection Fields file below. The username and password fields are required and don't have default-values, so the Sign In button will not be enabled until the user provides values for them. 
+The image shows the Connection Dialog produced using the Connection Fields file below. The username and password fields are required and don't have default-values, so the Sign In button will not be enabled until the user provides values for them.
 
 ![alt text]({{ site.baseurl }}/assets/mcd-connection-dialog-3.png "Connection Dialog with fixed authentication auth-user-pass")
 
@@ -204,15 +207,15 @@ The images show the Connection Dialog produced using the Connection Fields file 
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
- 
+
 <connection-fields>
 
   <field name="server" label="Server" category="endpoint" value-type="string">
     <validation-rule reg-exp="^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$"/>
   </field>
- 
+
   <field name="port" label="Port" category="endpoint" value-type="string" default-value="5432"/>
- 
+
   <field name="authentication" label="Authentication" category="authentication" value-type="selection" >
     <selection-group>
       <option value="auth-none" label="No Authentication"/>
@@ -227,13 +230,13 @@ The images show the Connection Dialog produced using the Connection Fields file 
       <condition field="authentication" value="auth-user-pass"/>
     </conditions>
   </field>
- 
+
   <field name="password" label="Password" category="authentication" value-type="string" secure="true">
     <conditions>
       <condition field="authentication" value="auth-user-pass"/>
     </conditions>
   </field>
- 
+
 </connection-fields>
 ```
 
@@ -243,7 +246,7 @@ This example shows how to add a checkbox to the dialog. For sslmode custom boole
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
- 
+
 <connection-fields>
   ...
 
@@ -266,17 +269,17 @@ The Connection Metadata file provides some limited control over the metadata hie
 
 If you don't provide a Connection Metadata file, then by default all three selectors will be shown.
 
-The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file. 
+The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file.
 
 ## XML Elements
 
 ### `<connection-metadata>`
 
-This is the parent element for the metadata hierarchy elements. 
+This is the parent element for the metadata hierarchy elements.
 
 ### `<database>`
 
-An optional child of `<connection-metadata>`, this controls whether the Database selector is shown in the connection dialog and the schema viewer. If it is not present, Database does not appear. It has the following XML attributes. 
+An optional child of `<connection-metadata>`, this controls whether the Database selector is shown in the connection dialog and the schema viewer. If it is not present, Database does not appear. It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
@@ -285,7 +288,7 @@ An optional child of `<connection-metadata>`, this controls whether the Database
 
 ### `<field>`
 
-An optional child of `<database>`, this indicates whether the user must provide a value for Database, and a default value for it. It has the following XML attributes. 
+An optional child of `<database>`, this indicates whether the user must provide a value for Database, and a default value for it. It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
@@ -294,7 +297,7 @@ An optional child of `<database>`, this indicates whether the user must provide 
 
 ### `<schema>`
 
-An optional child of `<connection-metadata>`, this controls whether the Schema selector is shown in the shema viewer. If it is not present, Schema does not appear. It has the following XML attributes. 
+An optional child of `<connection-metadata>`, this controls whether the Schema selector is shown in the shema viewer. If it is not present, Schema does not appear. It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
@@ -303,7 +306,7 @@ An optional child of `<connection-metadata>`, this controls whether the Schema s
 
 ### `<table>`
 
-An optional child of `<connection-metadata>`, this controls whether the Table selector is shown in the shema viewer. If it is not present, Table does not appear. It has the following XML attributes. 
+An optional child of `<connection-metadata>`, this controls whether the Table selector is shown in the shema viewer. If it is not present, Table does not appear. It has the following XML attributes.
 
 | Name  | Meaning | Optional? | Value Notes | Other Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
@@ -313,7 +316,7 @@ An optional child of `<connection-metadata>`, this controls whether the Table se
 
 ## Example
 
-The Connection Metadata file below matches the default--that is, what you get if you don't reference the file in the manifest at all--except that it provides a default value of 'TestV1' for Database. 
+The Connection Metadata file below matches the default--that is, what you get if you don't reference the file in the manifest at all--except that it provides a default value of 'TestV1' for Database.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
