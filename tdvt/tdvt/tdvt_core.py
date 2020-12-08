@@ -24,8 +24,8 @@ from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
 from .resources import *
-from .tabquery import build_tabquery_command_line
 from .tabquery import build_connectors_test_tabquery_command_line
+from .tabquery import build_tabquery_command_line
 from .test_results import *
 
 ALWAYS_GENERATE_EXPECTED = False
