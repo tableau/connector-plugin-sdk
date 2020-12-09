@@ -2,12 +2,21 @@
 
 ## Unreleased
 
+## 2020-10-01
 ### Added
 - Add JDBC Kerberos scenario for postgres 
+
+## 2020-09-21
+### Changed
+- Validate length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
 
 ## 2020-08-27
 ### Added
 - Add ISO8601 support to postgres_odbc and postgres_jdbc samples
+
+## 2020-08-11
+### Added
+-  Add `vendor[1,2,3]-prompt` as options to ConnectionConfig-CT in `tcd_latest.xsd`.
 
 ## 2020-07-13
 ### Changed
