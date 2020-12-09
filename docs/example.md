@@ -243,7 +243,7 @@ For JDBC, search for <span style= "font-family: courier new">Connection URL</spa
 JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1
 ```
 
-## ![7]({{ site.baseurl }}/assets/pce-9.png) 
+## ![7]({{ site.baseurl }}/assets/pce-9.png) Tableau Dialect File
 
 After connection, Tableau uses your Tableau Dialect file (.tdd) to determine which SQL to generate for data retrieval from your database.
 You can define your own dialect in the TDD file, or your connector can inherit a dialect from its parent (defined by the superclass). If you are using the "odbc" or "jdbc" superclass, you must define a dialect, since those superclasses do not have dialects.
