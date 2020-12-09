@@ -3,14 +3,7 @@
 ## Unreleased
 
 ### Added
-- Add `vendor[1,2,3]-prompt` as options to ConnectionConfig-CT in `tcd_latest.xsd`.
-
 - Add JDBC Kerberos scenario for postgres 
-
-### Changed
-- Validate length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
-
-### Removed
 
 ## 2020-08-27
 ### Added
