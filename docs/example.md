@@ -68,10 +68,25 @@ The Connector Resolver file (.tdr) is optional. Tableau uses it to create a conn
 The TDR file calls these scripts (described in the following sections): 
 - Connection Builder
 - Connection Properties
-- Connection Matcher
-- Connection Normalizer
 
-The TDR file also includes the driver-resolver section. The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
+The TDR file also contains the connection-normalizer and the driver-resolver section. The <span style="font-family: courier new">connection-normalizer</span> component defines what makes up a unique connection. An example of the component : 
+
+```
+<connection-normalizer>
+    <required-attributes>
+        <attribute-list>
+            <attr>server</attr>
+            <attr>port</attr>
+            <attr>dbname</attr>
+            <attr>username</attr>
+            <attr>password</attr>
+        </attribute-list>               
+    </required-attributes>
+</connection-normalizer>
+
+```
+
+The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
 
 Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
 For example, all Postgres connections have the same <span style="font-family: courier new">class</span>.
@@ -82,7 +97,40 @@ If the attributes and their values are identical then the connections are consid
 Connection attributes pass values from the connection dialog or the saved Tableau workbook to the _Connection Resolver_.
 In turn, the Connection Resolver uses these attributes to format an ODBC or JDBC connection string.
 
-![]({{ site.baseurl }}/assets/pce-tdr.png)
+```
+<tdr class='postgres_odbc'>
+    <connection-resolver>
+        <connection-builder>
+            // This is the component number 4 in the diagram above
+            <script file='connectionBuilder.js'/> 
+        </connection-builder>
+        <connection-properties>
+            // This is the component number 5 in the diagram above
+            // It is only used for JDBC Connectors
+            <script file="connectionProperties.js">
+        </connection-properties>
+        <connection-normalizer>
+            <required-attributes>
+                <attribute-list>
+                    <attr>server</attr>
+                    <attr>port</attr>
+                    <attr>dbname</attr>
+                    <attr>username</attr>
+                    <attr>password</attr>
+                </attribute-list>
+            </required-attributes>
+        </connection-normalizer>
+    </connection-resolver>
+    // The driver resolver defines the rules for locating the ODBC driver
+    // You don't need a driver resolver for JDBC plugins
+    <driver-resolver>
+        <driver-match>
+            <driver-name type='regex'>PostgreSQL Unicode*</driver-name>
+        </driver-match>
+    </driver-resolver>
+</tdr>
+
+```
 
 ## ![4]({{ site.baseurl }}/assets/pce-4.png) Connection Builder
 
@@ -94,7 +142,40 @@ You can use this script to set any other connection string options that you woul
 
 This is an example Connection Builder script for ODBC:
 
-![]({{ site.baseurl }}/assets/pce-connectionbuilder.png)
+```
+(function dsbuilder(attr)
+{
+    var params = {};
+
+    // The values below come from the connection dialog and are entered by the user.
+    // Here they are mapped to the ODBC connection string values the the driver can use.
+    params["SERVER"] = attr[connectionHelper.attributeServer];
+    params["PORT"] = attr[connectionHelper.attributePort];
+    params["DATABASE"] = attr[connectionHelper.attributeDatabase];
+    params["UID"] = attr[connectionHelper.attributeUsername];
+    params["PWD"] = attr[connectionHelper.attributePassword];
+    params["BOOLSASCHAR"] = "0";
+
+    // The values below can be set to useful defaults.
+    params["LFCONVERSION"] = "0";
+    params["UseDeclareFetch"] = "1";
+    params["Fetch"] = "2048";
+
+    var formattedParams = [];
+    
+    // The driver resolver is invoked below to find the matching ODBC driver
+    formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
+
+    for (var key in params)
+    {
+        // This formats the params map into a set of ODBC key value pairs
+        formattedParams.push(connectionHelper.formatKeyValuePair(key, params[key]));
+    }
+
+    return formattedParams;
+})
+
+```
 
 This is an example Connection Builder script for JDBC:
 
@@ -146,46 +227,23 @@ This example is for a connector to Amazon Athena.
 })
 ```
 
-## ![6]({{ site.baseurl }}/assets/pce-6.png) Connection Matcher
-
-This component defines how connections are matched, and the default settings are already performance optimized. It is rare that you will need to include a custom <span style= "font-family: courier new">connection-matcher</span> section in your TDR file.  
-
-## ![7]({{ site.baseurl }}/assets/pce-7.png) Connection Normalizer
-
-The component defines what makes up a unique connection. This is best implemented directly in the XML file. Writing the required attributes list in XML is more performant than using a JavaScript file, and is recommended for most connectors.
-
-```
-<required-attributes>
-        <setImpersonateAttributes/>
-        <attribute-list>
-          <attr>server</attr>
-          <attr>port</attr>
-          <attr>dbname</attr>
-          <attr>username</attr>
-          <attr>password</attr>
-          <attr>one-time-sql</attr>
-        </attribute-list>
-</required-attributes>
-```
-`<setImpersonateAttributes/>` and `<attr>one-time-sql</attr>` add support for impersonate attributes and initial sql respectively, and should be in every connector.
-
-## ![8]({{ site.baseurl }}/assets/pce-8.png) Connection - ODBC String or JDBC URL 
+## ![6]({{ site.baseurl }}/assets/pce-8.png) Connection example
 
 The Tableau Connection Resolver file (.tdr) generates an ODBC ConnectString or a JDBC Connection URL, which you can find in tabprotosrv.txt.
 
 For ODBC, search for <span style= "font-family: courier new">ConnectString</span> to find something like this example:
 
 ```
-ConnectString: DRIVER={PostgreSQL Unicode(x64)};SERVER=postgres;PORT=5432;DATABASE=TestV1;UID=test;PWD=********;BOOLSASCHAR=0;LFCONVERSION=0;UseDeclareFetch=1;Fetch=2525
+ConnectString: DRIVER={PostgreSQL Unicode(x64)};SERVER=postgres;PORT=5432;DATABASE=TestV1;UID=test;PWD=********;BOOLSASCHAR=0;LFCONVERSION=0;UseDeclareFetch=1;Fetch=2048
 ```
 
 For JDBC, search for <span style= "font-family: courier new">Connection URL</span> to find something like this example:
 
 ```
-JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1?user=test&password=********
+JDBCProtocol Connection URL: jdbc:postgresql://postgres:5342/TestV1
 ```
 
-## ![9]({{ site.baseurl }}/assets/pce-9.png) Tableau Dialect File
+## ![7]({{ site.baseurl }}/assets/pce-9.png) Tableau Dialect File
 
 After connection, Tableau uses your Tableau Dialect file (.tdd) to determine which SQL to generate for data retrieval from your database.
 You can define your own dialect in the TDD file, or your connector can inherit a dialect from its parent (defined by the superclass). If you are using the "odbc" or "jdbc" superclass, you must define a dialect, since those superclasses do not have dialects.

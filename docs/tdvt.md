@@ -308,6 +308,30 @@ To run logical query tests:
 Test results are available in a CSV file called test_results_combined.
 Try loading them in Tableau Desktop to visualize the results.
 
+## Run Connectors tests
+
+Run Connector tests from the TDVT working directory. Sample setup files required to run the connector tests are located in the [/tdvt/samples/connector-tests/](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/) folder.
+
+- Run ConnectionBuilderTest:
+
+   tdvt run-connectors-test --conn-test connectionBuilder --conn-test-file [connBuilderSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/connectionbuilder.xml)
+
+- Run NormalizeConnectionAttributes Test:
+
+   tdvt run-connectors-test --conn-test normalizeConnectionAttributes --conn-test-file [normalizaConnAttrSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/matchesattributes.xml)
+
+- Run MatchesConnectionAttributesTest:
+
+   tdvt run-connectors-test --conn-test matchesConnectionAttributes --conn-test-file [matchesConnAttrSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/normalizeattributes.xml)
+
+- Run PropertiesBuilderTest:
+
+   tdvt run-connectors-test --conn-test propertiesBuilder --conn-test-file [propBuilderSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/propertiesbuilder.xml)
+
+- Run ServerVersionTest:
+
+   tdvt run-connectors-test --conn-test serverVersion --conn-test-file [serVersionSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversion.xml) --conn-test-password-file [serVersionPassword.password](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversiontest.password)
+   
 ## Test the sample connectors
 
 Sample connectors are located in the samples/plugins folder.
