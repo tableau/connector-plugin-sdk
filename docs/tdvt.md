@@ -310,19 +310,19 @@ Try loading them in Tableau Desktop to visualize the results.
 
 ## Run Connectors tests
 
-Run Connector tests from the TDVT working directory. Sample setup files required to run the connector tests are located in the [/tdvt/samples/connector-tests/](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/) folder.
+Run Connector tests from the TDVT working directory. Sample setup files required to run the connector tests are located in the [/tdvt/samples/connector-tests/](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/) folder.
 
 - Run ConnectionBuilderTest:
 
-   tdvt run-connectors-test --conn-test connectionBuilder --conn-test-file [connBuilderSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/connectionbuilder.xml)
+   tdvt run-connectors-test --conn-test connectionBuilder --conn-test-file [connBuilderSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/connectionbuilder.xml)
 
 - Run NormalizeConnectionAttributes Test:
 
-   tdvt run-connectors-test --conn-test normalizeConnectionAttributes --conn-test-file [normalizaConnAttrSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/matchesattributes.xml)
+   tdvt run-connectors-test --conn-test normalizeConnectionAttributes --conn-test-file [normalizaConnAttrSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/matchesattributes.xml)
 
 - Run MatchesConnectionAttributesTest:
 
-   tdvt run-connectors-test --conn-test matchesConnectionAttributes --conn-test-file [matchesConnAttrSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/normalizeattributes.xml)
+   tdvt run-connectors-test --conn-test matchesConnectionAttributes --conn-test-file [matchesConnAttrSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/normalizeattributes.xml)
 
 - Run PropertiesBuilderTest:
 
@@ -330,7 +330,7 @@ Run Connector tests from the TDVT working directory. Sample setup files required
 
 - Run ServerVersionTest:
 
-   tdvt run-connectors-test --conn-test serverVersion --conn-test-file [serVersionSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/serverversion.xml) --conn-test-password-file [serVersionPassword.password](https://github.com/tableau/connector-plugin-sdk/tree/dev-2020.4/tdvt/samples/connector-tests/serverversiontest.password)
+   tdvt run-connectors-test --conn-test serverVersion --conn-test-file [serVersionSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversion.xml) --conn-test-password-file [serVersionPassword.password](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversiontest.password)
    
 ## Test the sample connectors
 
