@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+
+<field name="server" label="Server1" value-type="string" category="endpoint" />
+<field name="server" label="Server2" value-type="string" category="endpoint" />
+
+</connection-fields>
