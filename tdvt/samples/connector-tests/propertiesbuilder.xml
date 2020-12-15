@@ -1,0 +1,8 @@
+<!-- The properties builder test is only used for jdbc based connectors. -->
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>
+    <testCase>
+        <connection class='postgres_jdbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' password='password' sslmode='require' />
+        <expected sslmode='require' ssl='true' password='password' user='test' />
+    </testCase>
+</testCases>

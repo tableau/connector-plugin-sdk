@@ -26,7 +26,7 @@ from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
-from .tdvt_core import generate_files, run_diff, run_tests
+from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core
 from .version import __version__
 
 # This contains the dictionary of configs you can run.
@@ -433,6 +433,23 @@ run_pattern_usage_text = '''
         run-pattern postgres_odbc --logp logicaltests/setup/calcs/setup.BUGS.*.dbo.xml --tdp cast_calcs.*.tds --test-ex 59740
 
     '''
+run_connectors_test_usage_text = '''
+    The commands below can be used to run the connectors tests.
+    'filename.xml' in the below commands is the path of the xml test file used to run the tests.
+    'passwordfilepath.password' in the below commands is the path of the password file used for the ServerVersionTest.
+
+    Run ConnectionBuilderTest
+        run-connectors-test --conn-test connectionBuilder --conn-test-file filepath.xml
+    Run NormalizeConnectionAttributes Test
+        run-connectors-test --conn-test normalizeConnectionAttributes --conn-test-file filepath.xml
+    Run MatchesConnectionAttributesTest
+         run-connectors-test --conn-test matchesConnectionAttributes --conn-test-file filepath.xml
+    Run PropertiesBuilderTest
+        run-connectors-test --conn-test propertiesBuilder --conn-test-file filepath.xml
+    Run ServerVersionTest
+        run-connectors-test --conn-test serverVersion --conn-test-file filepath.xml --conn-test-password-file passwordfilepath.password  
+
+'''
 
 action_usage_text = '''
 '''
@@ -493,6 +510,12 @@ def create_parser():
     run_file_parser = subparsers.add_parser('run-file', help='Run tests from a file.', parents=[run_test_common_parser], usage=run_file_usage_text)
     run_file_parser.add_argument('run_file', help='Json file containing failed tests to run.')
 
+    #Run Connectors Test
+    run_connectors_test_parser = subparsers.add_parser('run-connectors-test', help='Run a connectors test using a file', parents=[run_test_common_parser], usage=run_connectors_test_usage_text)
+    run_connectors_test_parser.add_argument('--conn-test', dest='conn_test', help='Name of the Connectors Test to run.',  required=True)
+    run_connectors_test_parser.add_argument('--conn-test-file', dest='conn_test_file', help='Path to the setup-expected file to run the connectors test',  required=True)
+    run_connectors_test_parser.add_argument('--conn-test-password-file', dest='conn_test_password_file', help='Path to the password file used for the ServerVersionTest')
+
     return parser
 
 
@@ -529,7 +552,7 @@ def init():
     return parser, ds_reg, args
 
 def is_test(args):
-    return args.command in ['run', 'run-pattern', 'run-file']
+    return args.command in ['run', 'run-pattern', 'run-file', 'run-connectors-test']
 
 def active_thread_count(threads):
     active = 0
@@ -719,6 +742,19 @@ def run_desired_tests(args, ds_registry):
     failed_tests, skipped_tests, disabled_tests, total_tests = run_tests_impl(test_sets, max_threads, args)
     return failed_tests
 
+def run_connectors_test(args):
+    if not tabquerycli_exists():
+        print("Could not find Tabquerycli.")
+        sys.exit(0)
+
+    if not args.conn_test or not args.conn_test_file:
+        print("Missing arguments. Not running Connectors Test")
+        sys.exit(0)
+
+    if args.conn_test_password_file:
+        print(run_connectors_test_core( args.conn_test, args.conn_test_file, args.conn_test_password_file))
+    else:
+         print(run_connectors_test_core( args.conn_test, args.conn_test_file))
 
 def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     """Rerun all the failed tests listed in the json file."""
@@ -763,6 +799,9 @@ def main():
             output_dir = os.getcwd()
             max_threads = get_level_of_parallelization(args)
             sys.exit(run_file(Path(args.run_file), Path(output_dir), max_threads, args))
+        if args.command == 'run-connectors-test':
+            run_connectors_test(args)
+            sys.exit(0)
         error_code = run_desired_tests(args, ds_registry)
         sys.exit(error_code)
     elif args.command == 'action' and args.diff:

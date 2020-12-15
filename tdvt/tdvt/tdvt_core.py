@@ -24,11 +24,27 @@ from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
 from .resources import *
+from .tabquery import build_connectors_test_tabquery_command_line
 from .tabquery import build_tabquery_command_line
 from .test_results import *
 
 ALWAYS_GENERATE_EXPECTED = False
 
+
+class ConnectorsTest(object):
+    def __init__(self, conn_test_name, conn_test_file, conn_test_password_file):
+        self.conn_test_name = conn_test_name
+        self.conn_test_file = conn_test_file
+        self.conn_test_password_file = conn_test_password_file
+        self.timeout_seconds = 10
+
+    def run_connectors_test(self):
+        cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file, self.conn_test_password_file)
+        self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
+                                                      timeout=self.timeout_seconds))
+        print(self.cmd_output)
+        sys.exit(0)
+   
 
 class TestResultWork(object):
     def __init__(self, test_file, output_dir, logical):
@@ -711,3 +727,7 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
     all_test_results = run_tests_impl(test_set, tdvt_test_config)
 
     return process_test_results(all_test_results, tds_file, tdvt_test_config.noheader, output_dir)
+
+def run_connectors_test_core(conn_test_name, conn_test_file, conn_test_password_file = None):
+    connectors_test = ConnectorsTest(conn_test_name, conn_test_file, conn_test_password_file)
+    connectors_test.run_connectors_test()

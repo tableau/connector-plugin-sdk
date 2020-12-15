@@ -913,9 +913,29 @@
       <argument type='bool' />
       <argument type='bool' />
     </function>
+    <function group='date' name='ISOYEAR' return-type='int'>
+      <formula>CAST(TRUNC(EXTRACT(ISOYEAR FROM %1)) AS INTEGER)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='ISOQUARTER' return-type='int'>
+      <formula>(LEAST(CAST((EXTRACT(WEEK FROM %1) - 1) AS BIGINT) / 13, 3) + 1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='ISOWEEK' return-type='int'>
+      <formula>CAST(TRUNC(EXTRACT(WEEK FROM %1)) AS INTEGER)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='ISOWEEKDAY' return-type='int'>
+      <formula>CAST(TRUNC(EXTRACT(ISODOW FROM %1)) AS INTEGER)</formula>
+      <argument type='datetime' />
+    </function>
     <date-function name='DATEADD' return-type='datetime'>
       <formula>(%3 + %2 * INTERVAL &apos;1 %1&apos;)</formula>
       <formula part='quarter'>(%3 + %2 * 3 * INTERVAL &apos;1 MONTH&apos;)</formula>
+      <formula part='iso-week'>(%3 + %2 * INTERVAL &apos;1 WEEK&apos;)</formula>
+      <formula part='iso-weekday'>(%3 + %2 * INTERVAL &apos;1 DAY&apos;)</formula>
+      <formula part='iso-year'>(%3 + (((CAST(DATE_TRUNC(&apos;DAY&apos;, CAST((DATE(&apos;1753-01-04&apos;) + ((EXTRACT(ISOYEAR FROM CAST(%3 AS TIMESTAMP)) + %2) - 1753) * INTERVAL &apos;1 YEAR&apos;) AS TIMESTAMP)) AS DATE) - (((7 + CAST(EXTRACT(DOW FROM (DATE(&apos;1753-01-04&apos;) + ((EXTRACT(ISOYEAR FROM CAST(%3 AS TIMESTAMP)) + %2) - 1753) * INTERVAL &apos;1 YEAR&apos;)) AS BIGINT) - 1) % 7) * INTERVAL &apos;1 DAY&apos;)) + (CAST(%3 AS DATE) - TO_DATE(TO_CHAR(%3, &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;)) * INTERVAL &apos;1 DAY&apos;) - CAST(%3 AS DATE)))</formula>
+      <formula part='iso-quarter'>(%3 + (((CAST(DATE_TRUNC(&apos;DAY&apos;, CAST((DATE(&apos;1753-01-04&apos;) + ((CAST(((EXTRACT(ISOYEAR FROM CAST(%3 AS TIMESTAMP)) * 4 + (LEAST(CAST((EXTRACT(WEEK FROM %3) - 1) AS BIGINT) / 13, 3) + 1)) + %2) AS INT) / 4) - 1753) * INTERVAL &apos;1 YEAR&apos;) AS TIMESTAMP)) AS DATE) - (((7 + CAST(EXTRACT(DOW FROM (DATE(&apos;1753-01-04&apos;) + ((CAST(((EXTRACT(ISOYEAR FROM CAST(%3 AS TIMESTAMP)) * 4 + (LEAST(CAST((EXTRACT(WEEK FROM %3) - 1) AS BIGINT) / 13, 3) + 1)) + %2) AS INT) / 4) - 1753) * INTERVAL &apos;1 YEAR&apos;)) AS BIGINT) - 1) % 7) * INTERVAL &apos;1 DAY&apos;)) + (((CAST(((EXTRACT(ISOYEAR FROM CAST(%3 AS TIMESTAMP)) * 4 + (LEAST(CAST((EXTRACT(WEEK FROM %3) - 1) AS BIGINT) / 13, 3) + 1)) + %2) AS INT) % 4) - 1) * 91 + (CAST(%3 AS DATE) - TO_DATE(TO_CHAR(%3, &apos;IYYY-&apos;) || (LEAST(CAST((EXTRACT(WEEK FROM %3) - 1) AS BIGINT) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;))) * INTERVAL &apos;1 DAY&apos;) - CAST(%3 AS DATE)))</formula>
       <argument type='localstr' />
       <argument type='int' />
       <argument type='datetime' />
@@ -929,6 +949,10 @@
       <formula part='hour'>CAST( FLOOR(EXTRACT(EPOCH FROM CAST(%3 AS TIMESTAMP)) / 3600) - FLOOR(EXTRACT(EPOCH FROM CAST(%2 AS TIMESTAMP)) / 3600) AS BIGINT)</formula>
       <formula part='minute'>CAST( FLOOR(EXTRACT(EPOCH FROM CAST(%3 AS TIMESTAMP)) / 60) - FLOOR(EXTRACT(EPOCH FROM CAST(%2 AS TIMESTAMP)) / 60) AS BIGINT)</formula>
       <formula part='second'>CAST( EXTRACT(EPOCH FROM CAST(%3 AS TIMESTAMP)) - EXTRACT(EPOCH FROM CAST(%2 AS TIMESTAMP)) AS BIGINT)</formula>
+      <formula part='iso-week'>CAST( FLOOR(( (FLOOR(EXTRACT(EPOCH FROM CAST(%3 AS TIMESTAMP)) / 86400) - ((7 + CAST(EXTRACT(DOW FROM %3) AS BIGINT) - 1) % 7)) - (FLOOR(EXTRACT(EPOCH FROM CAST(%2 AS TIMESTAMP)) / 86400) - ((7 + CAST(EXTRACT(DOW FROM %2) AS BIGINT) - 1) % 7)) ) / 7) AS BIGINT)</formula>
+      <formula part='iso-weekday'>CAST( FLOOR(EXTRACT(EPOCH FROM CAST(%3 AS TIMESTAMP)) / 86400) - FLOOR(EXTRACT(EPOCH FROM CAST(%2 AS TIMESTAMP)) / 86400) AS BIGINT)</formula>
+      <formula part='iso-year'>CAST( EXTRACT(ISOYEAR FROM CAST(%3 AS TIMESTAMP)) - EXTRACT(ISOYEAR FROM CAST(%2 AS TIMESTAMP)) AS BIGINT)</formula>
+      <formula part='iso-quarter'>CAST((4 * EXTRACT(ISOYEAR FROM %3) + (LEAST(CAST((EXTRACT(WEEK FROM %3) - 1) AS BIGINT) / 13, 3) + 1)) - (4 * EXTRACT(ISOYEAR FROM %2) + (LEAST(CAST((EXTRACT(WEEK FROM %2) - 1) AS BIGINT) / 13, 3) + 1)) AS BIGINT)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='datetime' />
@@ -943,6 +967,10 @@
     <date-function name='DATENAME' return-type='str'>
       <formula>TO_CHAR(%2, &apos;%1&apos;)</formula>
       <formula part='week'>CAST(FLOOR((7 + EXTRACT(DOY FROM %2) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, %2))) / 7) AS TEXT)</formula>
+      <formula part='iso-quarter'>CAST((LEAST(CAST((EXTRACT(WEEK FROM %2) - 1) AS BIGINT) / 13, 3) + 1) AS TEXT)</formula>
+      <formula part='iso-week'>TO_CHAR(%2, &apos;IW&apos;)</formula>
+      <formula part='iso-weekday'>TO_CHAR(%2, &apos;ID&apos;)</formula>
+      <formula part='iso-year'>TO_CHAR(%2, &apos;IYYY&apos;)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
     </date-function>
@@ -961,6 +989,10 @@
       <formula>CAST(TRUNC(EXTRACT(%1 FROM %2)) AS INTEGER)</formula>
       <formula part='weekday'>(1 + CAST(EXTRACT(DOW FROM %2) AS INTEGER))</formula>
       <formula part='week'>CAST(FLOOR((7 + EXTRACT(DOY FROM %2) - 1 + EXTRACT(DOW FROM DATE_TRUNC(&apos;YEAR&apos;, %2))) / 7) AS INTEGER)</formula>
+      <formula part='iso-quarter'>(LEAST(CAST((EXTRACT(WEEK FROM %2) - 1) AS BIGINT) / 13, 3) + 1)</formula>
+      <formula part='iso-week'>CAST(TRUNC(EXTRACT(WEEK FROM %2)) AS INTEGER)</formula>
+      <formula part='iso-weekday'>CAST(TRUNC(EXTRACT(ISODOW FROM %2)) AS INTEGER)</formula>
+      <formula part='iso-year'>CAST(TRUNC(EXTRACT(ISOYEAR FROM %2)) AS INTEGER)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
     </date-function>
@@ -974,6 +1006,10 @@
       <formula>DATE_TRUNC( &apos;%1&apos;, CAST(%2 AS TIMESTAMP) )</formula>
       <formula part='quarter'>CAST(DATE_TRUNC(&apos;QUARTER&apos;, CAST(%2 AS DATE)) AS DATE)</formula>
       <formula part='week'>CAST((DATE_TRUNC( &apos;DAY&apos;, CAST(%2 AS DATE) ) + (-EXTRACT(DOW FROM %2) * INTERVAL &apos;1 DAY&apos;)) AS DATE)</formula>
+      <formula part='iso-quarter'>TO_DATE(TO_CHAR(%2, &apos;IYYY-&apos;) || (LEAST(CAST((EXTRACT(WEEK FROM %2) - 1) AS BIGINT) / 13, 3) * 13 + 1), &apos;IYYY-IW&apos;)</formula>
+      <formula part='iso-week'>DATE_TRUNC(&apos;WEEK&apos;, CAST(%2 AS TIMESTAMP))</formula>
+      <formula part='iso-weekday'>DATE_TRUNC( &apos;DAY&apos;, CAST(%2 AS TIMESTAMP) )</formula>
+      <formula part='iso-year'>TO_DATE(TO_CHAR(%2, &apos;IYYY-01&apos;), &apos;IYYY-IW&apos;)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
     </date-function>
@@ -1016,6 +1052,10 @@
     <aggregation value='AGG_HOUR'/>
     <aggregation value='AGG_MINUTE'/>
     <aggregation value='AGG_SECOND'/>
+    <aggregation value='AGG_ISO_YEAR'/>
+    <aggregation value='AGG_ISO_QTR'/>
+    <aggregation value='AGG_ISO_WEEK'/>
+    <aggregation value='AGG_ISO_WEEKDAY'/>
 
     <aggregation value='TRUNC_YEAR'/>
     <aggregation value='TRUNC_QTR'/>
@@ -1025,6 +1065,10 @@
     <aggregation value='TRUNC_HOUR'/>
     <aggregation value='TRUNC_MINUTE'/>
     <aggregation value='TRUNC_SECOND'/>
+    <aggregation value='TRUNC_ISO_YEAR'/>
+    <aggregation value='TRUNC_ISO_QTR'/>
+    <aggregation value='TRUNC_ISO_WEEK'/>
+    <aggregation value='TRUNC_ISO_WEEKDAY'/>
   </supported-aggregations>
   <sql-format>
     <date-literal-escape value='PostgresStyle' />

@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<testCases>   
+    <testCase match='true'>
+        <!-- Does not normalize attributes first. -->
+        <connection class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+        <key class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+    </testCase>
+    <!-- Non required key is different. -->
+    <testCase match='true' normalize='true'>
+        <connection class='postgres_odbc' somekey='t' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+        <key class='postgres_odbc' dbname='TestV1' somekey='y' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+    </testCase>
+    <!-- Different classes. -->
+    <testCase match='false'>
+        <connection class='postgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+        <key class='itspostgres_odbc' dbname='TestV1' odbc-native-protocol='' one-time-sql='' port='5432' server='localhost' username='test' />
+    </testCase>
+</testCases>
