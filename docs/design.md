@@ -62,7 +62,6 @@ These are valid values for <span style="font-family: courier new">base</span>:
 - Oracle102Dialect
 - PostgreSQL90Dialect
 - PrestoDialect
-- ProgressOpenEdgeDialect
 - RedShiftDialect
 - SQLServer10Dialect_Datetime2
 - SnowflakeDialect
