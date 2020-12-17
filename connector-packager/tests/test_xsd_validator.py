@@ -101,3 +101,21 @@ class TestXSDValidator(unittest.TestCase):
         logging.debug("test_validate_required_advanced_field_has_default_value xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
+
+    def test_validate_duplicate_fields_absent(self):
+
+        test_file = TEST_FOLDER / "modular_dialog_connector/connectionFields.xml"
+        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                        "Valid XML file not marked as valid")
+
+        print("\nTest duplicate fields not allowed. Throws XML validation error.")
+        test_file = TEST_FOLDER / "duplicate_fields/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                         "A field with the field name = server already exists. Cannot have multiple fields with the same name.")
+
+        logging.debug("test_validate_duplicate_fields_absent xml violations:")
+        for violation in xml_violations_buffer:
+            logging.debug(violation)

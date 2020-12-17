@@ -148,6 +148,7 @@ def get_xsd_file(file_to_test: ConnectorFile) -> Optional[str]:
 def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
 
     if file_to_test.file_type == 'connection-fields':
+        field_names = set()
         xml_tree = parse(str(path_to_file))
         root = xml_tree.getroot()
 
@@ -158,6 +159,12 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                     xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
                                                  "' not an allowed value. See 'Connection Field Platform Integration' section of documentation for allowed values.")
                     return False
+                if field_name in field_names:
+                    xml_violations_buffer.append("A field with the field name = " + field_name +
+                                                 " already exists. Cannot have multiple fields with the same name.")
+
+                    return False
+                field_names.add(field_name)
 
             if 'category' in child.attrib:
                 category = child.attrib['category']
