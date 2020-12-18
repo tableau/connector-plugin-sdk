@@ -5,7 +5,7 @@ title: Run Your Packaged Connector (TACO file)
 Starting in 2019.4 Beta 1, you can load packaged connectors (otherwise known as TACO files). To use a connector in earlier Tableau versions, see  [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/share)
 
 ## Run a packaged connector in Tableau Desktop
-1. Copy your packaged connector file (with a .taco filename extension) into your My Tableau Repository/Connectors directory. 
+1. Copy your packaged connector file (with a .taco filename extension) into your My Tableau Repository/Connectors directory.
 1. Launch Tableau Desktop.
 
 ## Run a packaged connector in Tableau Server
@@ -17,7 +17,7 @@ For each machine:
 
 
 ### Option 2
-1. Create a directory for Tableau connectors. This needs to be the same path on each machine. For example:   
+1. Create a directory for Tableau connectors. This needs to be the same path on each machine, and on the same drive as the server is installed on. For example:
 `C:\tableau_connectors`
 1. Copy your packaged connector file (with a .taco filename extension) into  the folder your created on each node.
 1. Set the `native_api.connect_plugins_path` option. For example:
@@ -40,11 +40,11 @@ For information about using TSM to set the option, see [tsm configuration set Op
 
 ## Verify the signature
 
-To be loaded in Tableau, a packaged connector must be signed by a trusted certificate. 
+To be loaded in Tableau, a packaged connector must be signed by a trusted certificate.
 
 __Note:__ Signature verification was added to Tableau Desktop in 2019.4 and Tableau Server in 2020.1.
 
-If the connector can't be verified, you will see the following error:    
+If the connector can't be verified, you will see the following error:
 `Package signature verification failed during connection creation`
 
 This can happen because the connector is unsigned, or because the certificate's trust chain does not link back to a trusted certificate authority.
@@ -55,7 +55,7 @@ For more information about signing a packaged connector, see [Package and Sign Y
 
 To use an unsigned packaged connector, you can disable signature verification.
 
-- On Tableau Desktop, you use this command:    
+- On Tableau Desktop, you use this command:
 `-DDisableVerifyConnectorPluginSignature=true`
 
 - On server, you can disable signature verification by setting  `native_api.disable_verify_connector_plugin_signature` to true via TSM.
