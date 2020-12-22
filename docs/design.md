@@ -43,9 +43,10 @@ The dialect determines what SQL is generated for various Tableau actions.
 
 Choosing the right dialect is a critical part of writing a connector. For example:
 
-- Use superclass's dialect scenario: If you set <span style="font-family: courier new">base</span> to "mysql_odbc" as the parent, you can skip configuring a dialect, and your connector will use the parent’s dialect.
-- Inherit a base dialect scenario: If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point, you can also add your own customizations beyond the base dialect.
 - Write a complete dialect scenario (recommended): You can create a complete dialect definition without any base dialect. Refer to the [Postgres_odbc sample's full dialect](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/dialect.tdd) as a starting point.
+- Inherit a base dialect scenario: If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point, you can also add your own customizations beyond the base dialect.
+- Use superclass's dialect scenario: If you set <span style="font-family: courier new">base</span> to "mysql_odbc" as the parent, you can skip configuring a dialect, and your connector will use the parent’s dialect.
+
 
 These are valid values for <span style="font-family: courier new">base</span>:
 
