@@ -71,7 +71,6 @@ These are valid values for <span style="font-family: courier new">base</span>:
 - Teradata1410Dialect
 - VerticaDialect
 
-One warning to note is that a new version of Tableau may change those base dialects' behavior and may cause unintended side effects for connectors inheriting from those base dialects.
 
 ### Should I create a dialect definition file?
 
