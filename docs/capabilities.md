@@ -84,6 +84,7 @@ CAP_QUERY_JOIN_PUSH_DOWN_CONDITION_EXPRESSIONS | Set to 'yes' if the data source
 CAP_QUERY_JOIN_REQUIRES_SCOPE | Set to 'yes' if SQL queries must scope each join clause within parentheses to ensure a proper order of evaluation. | &ndash; | &ndash; 
 CAP_QUERY_JOIN_REQUIRES_SUBQUERY | Set to ‘yes’ to force join expressions involving more than two tables to be composed with subqueries. | &ndash; | &ndash; 
 CAP_QUERY_NAKED_JOINS | Set to 'yes' if Tableau needs to wrap the base relation to join filters | yes | yes
+CAP_QUERY_OUTER_JOIN_CONDITION_NO_TRIVIAL | Set to 'yes' to rewrite empty outer join conditions to non-trivial conditions. Available in Tableau 2020.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_SELECT_ALIASES_SORTED | Set to 'yes' if Tableau must impose a deterministic order on the SELECT expressions (sorted by alias) to ensure that query results can be properly matched with each field in the Tableau visualization. This is only required for data sources which do not preserve the aliases of the SELECT expressions when returning metadata with the query results. | no | no  
 CAP_QUERY_SORT_BY | Set to 'yes' to enables the 'Field' option in the Sort menu | no | **<span style="color:red">yes</span>**  
 CAP_QUERY_SORT_BY_DEGREE | Set to 'yes' if SQL queries can reference the sorting columns by the ordinal position of each column, e.g. ORDER BY 2, 5. See also: CAP_QUERY_GROUP_BY_DEGREE. | yes | **<span style="color:red">?</span>** 
@@ -92,6 +93,7 @@ CAP_QUERY_SUBQUERIES | Set to 'yes' if the data source supports subqueries. | &n
 CAP_QUERY_SUBQUERIES_WITH_TOP | Set to 'yes' if the data source supports a TOP or LIMIT row-limiting clause within a subquery. | yes | **<span style="color:red">?</span>**  
 CAP_QUERY_SUBQUERY_QUERY_CONTEXT | Set to 'yes' to force Tableau to use a subquery for context filters instead of a temporary table or locally cached results. | yes | yes 
 CAP_QUERY_SUPPORT_EMPTY_GROUPBY | Set to 'yes' if data source supports empty group by clause | &ndash; | &ndash; 
+CAP_QUERY_SUPPORTS_UNIQUE_IDENTIFIER | Set to 'yes' if data source supports uniqueidentifier data type. Available in Tableau 2020.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_TIME_REQUIRES_CAST | Set to 'yes' if the time columns must be cast to timestamp/datetime. This capability applies to ODBC connectors. | &ndash; | &ndash; 
 CAP_QUERY_TOP_0 | Set to 'no' if the server cannot handle a "TOP 0" request | yes | yes
 CAP_QUERY_TOP_N | Set to 'yes' if the data source supports any form of row-limiting clause. The exact forms supported are described below. | no | **<span style="color:red">yes</span>** 
@@ -110,6 +112,9 @@ Capability | Description | Default | Recommended
 -|-|-|-
 CAP_JDBC_BIND_BIGDECIMAL_STRING | Set to 'yes' to bind bigdecimal as string for JDBC. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
 CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING | Set to 'yes' to allow Tableau to detect and recover from a JDBC data source that reports the field names in a result set using only upper-case or lower-case characters, instead of the expected field names.  | &ndash;  | &ndash; 
+CAP_JDBC_BIND_SPATIAL_AS_WKB | Set to 'yes' to use WKB for spatial types serialization. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
+CAP_JDBC_BIND_UNKNOWN_COLUMNS | Set to 'yes' to bind unknown columns. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
+CAP_JDBC_CONVERT_WKB_HEX_STRING | Set to 'yes' to convert a hex string to regular WKB. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to integer for data insertion. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
 CAP_JDBC_EXPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable use of parallel loops to translate Tableau DataValues to wire buffers on exports | yes | yes 
@@ -117,16 +122,22 @@ CAP_JDBC_JNI_FETCH_SIZE_SMALL | Set to ‘yes’ to Fetch 10 rows per JNI call |
 CAP_JDBC_JNI_FETCH_SIZE_MEDIUM | Set to ‘yes’ to Fetch 100 rows per JNI call | yes | yes 
 CAP_JDBC_JNI_FETCH_SIZE_LARGE | Set to ‘yes’ to Fetch 1000 rows per JNI call | &ndash; | &ndash; 
 CAP_JDBC_JNI_FETCH_SIZE_MASSIVE | Set to ‘yes’ to Fetch 10000 rows per JNI call | &ndash; | &ndash;  
+CAP_JDBC_MAX_STRING_LENGTH_MEDIUM | Set to 'yes' to use 512 character string length limit. Default is 16K. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_GET_INDEX_INFO | Set to 'no' to disable reading index info | yes | yes  
+CAP_JDBC_METADATA_NUMERIC_DEFAULT_PREC_SCALE_DOUBLE | Set to 'yes' to use precision=17 and no scale for numeric with undefined precision/scale. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_READ_FOREIGNKEYS | Set to 'no' to disable reading foreign key metadata | yes | yes   
 CAP_JDBC_METADATA_READ_PRIMARYKEYS | Set to 'no' to disable reading primary key metadata | yes | yes 
+CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE | Set to 'yes' to get column metadata from the result set of a select * query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_PARAMETER_METADATA_REQUIRES_EXECUTE | Set to 'yes' if retrieving parameter metadata for inserts requires execution of an empty batch. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread | &ndash; | **<span style="color:red">yes</span>**  
 CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries | &ndash; | **<span style="color:red">yes</span>** 
+CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
+CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash; 
 CAP_JDBC_TRIM_STRING_PADDING | Set to 'yes' to trim trailing whitespace from string columns which has been added by the driver. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
+CAP_JDBC_USE_SINGLE_ROW_FETCH | Set to 'yes' to use single row fetch. May require CAP_JDBC_QUERY_FORCE_PREPARE. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 
 ## ODBC 
 
@@ -221,6 +232,7 @@ CAP_ODBC_METADATA_SUPPRESS_SQLSTATISTICS_API | Set to 'yes' to prevent reading u
 CAP_ODBC_REBIND_SKIP_UNBIND | Set to 'yes' to force the Tableau native ODBC protocol to rebind a column directly and skip unbinding, which reduces ODBC API calls when resizing buffers to refetch truncated data. | &ndash; | &ndash; 
 CAP_ODBC_SUPPORTS_LONG_DATA_BULK | Set to 'yes' if driver can fetch multiple long-data rows at a time. | no | no |
 CAP_ODBC_SUPPORTS_LONG_DATA_ORDERED | Set to 'yes' if driver requires long-data columns to come after non-long-data ones | no | no | 
+CAP_ODBC_SUPPRESS_CATALOG_NAME | Set 'yes' to suppress passing catalog name for SQLTables, SQLPrimaryKeys, SQLForeignKeys, SQLStatistics calls | &ndash; | &ndash;
 CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES | Set to 'yes' to prevent tables from "information_schema" schema from being returned by EnumerateTables | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_PG_TEMP_SCHEMA_TABLES | Set to 'yes' to prevent tables from "pg_temp" schema from being returned by EnumerateTables | &ndash; | &ndash;  
 CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_ALL_COMMAND_QUERIES | Set to 'yes' to execute all commands directly (i.e., no prepared statement). | &ndash; | &ndash; 
