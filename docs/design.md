@@ -43,8 +43,10 @@ The dialect determines what SQL is generated for various Tableau actions.
 
 Choosing the right dialect is a critical part of writing a connector. For example:
 
-- If you set <span style="font-family: courier new">base</span> to "mysql_odbc" as the parent, you can skip configuring a dialect, and your connector will use the parent’s dialect.
-- If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point.
+- Write a complete dialect scenario (recommended): You can create a complete dialect definition without any base dialect. Refer to the [Postgres_odbc sample's full dialect](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/dialect.tdd) as a starting point.
+- Inherit a base dialect scenario: If your database follows the SQL standards of another database that Tableau already supports (listed below), then you can choose that dialect as a starting point, you can also add your own customizations beyond the base dialect.
+- Use superclass's dialect scenario: If you set <span style="font-family: courier new">base</span> to "mysql_odbc" as the parent, you can skip configuring a dialect, and your connector will use the parent’s dialect.
+
 
 These are valid values for <span style="font-family: courier new">base</span>:
 
@@ -62,7 +64,6 @@ These are valid values for <span style="font-family: courier new">base</span>:
 - Oracle102Dialect
 - PostgreSQL90Dialect
 - PrestoDialect
-- ProgressOpenEdgeDialect
 - RedShiftDialect
 - SQLServer10Dialect_Datetime2
 - SnowflakeDialect
@@ -71,9 +72,14 @@ These are valid values for <span style="font-family: courier new">base</span>:
 - Teradata1410Dialect
 - VerticaDialect
 
+
 ### Should I create a dialect definition file?
 
-If you want to customize the generated SQL, or if your connector inherits from ODBC or JDBC, then you need to create a custom dialect file. Without a file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
+If you want to customize the generated SQL, or if your connector inherits from ODBC or JDBC, then you need to create a custom dialect file. 
+
+Only if your database follows the SQL standards of a database that Tableau currently supports (listed above) should you consider choosing that base dialect as a starting point.  Also, any new Tableau version can change those base dialects' behavior, which may cause unintended side effects for connectors inheriting from those base dialects.
+
+Without a dialect file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
 
 ## Set connection capabilities
 
