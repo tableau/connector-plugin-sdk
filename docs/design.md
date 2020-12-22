@@ -75,7 +75,9 @@ One warning to note is that a new version of Tableau may change those base diale
 
 ### Should I create a dialect definition file?
 
-If you want to customize the generated SQL instead of using the superclass's dialect, or if your connector inherits from ODBC or JDBC, then you need to create a custom dialect file. If your database follows the SQL standards of any database that Tableau currently supports(listed above), then you can choose that base dialect as a starting point.
+If you want to customize the generated SQL, or if your connector inherits from ODBC or JDBC, then you need to create a custom dialect file. 
+
+Only if your database follows the SQL standards of a database that Tableau currently supports (listed above) should you consider choosing that base dialect as a starting point.  Also, any new Tableau version can change those base dialects' behavior, which may cause unintended side effects for connectors inheriting from those base dialects.
 
 Without a dialect file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
 
