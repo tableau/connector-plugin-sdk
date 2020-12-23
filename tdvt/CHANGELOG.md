@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [2.3.1] - 2020-12-23
+- Revert Staples smoke test to be Expression; will fix in 2.3.2.
 ## [2.3.0] - 2020-12-09
 - Change Staples smoke test to be logical.
 - Added Connectors Tests.
