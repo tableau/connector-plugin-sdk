@@ -85,6 +85,8 @@ CAP_QUERY_JOIN_REQUIRES_SCOPE | Set to 'yes' if SQL queries must scope each join
 CAP_QUERY_JOIN_REQUIRES_SUBQUERY | Set to ‘yes’ to force join expressions involving more than two tables to be composed with subqueries. | &ndash; | &ndash; 
 CAP_QUERY_NAKED_JOINS | Set to 'yes' if Tableau needs to wrap the base relation to join filters | yes | yes
 CAP_QUERY_OUTER_JOIN_CONDITION_NO_TRIVIAL | Set to 'yes' to rewrite empty outer join conditions to non-trivial conditions. Available in Tableau 2020.1 and newer. | &ndash; | &ndash;
+CAP_QUERY_SCALAR_SELECTS_ALL_IN_GROUP_BYS | Set to 'yes' if all scalar selects must be in an aggregated query's GROUP BY clause | &ndash; | &ndash;
+CAP_QUERY_SCALAR_SELECTS_SOME_IN_GROUP_BYS | Set to 'yes' if some scalar selects must be in an aggregated query's GROUP BY clause. Available in Tableau 2020.2 and newer. | &ndash; | &ndash;
 CAP_QUERY_SELECT_ALIASES_SORTED | Set to 'yes' if Tableau must impose a deterministic order on the SELECT expressions (sorted by alias) to ensure that query results can be properly matched with each field in the Tableau visualization. This is only required for data sources which do not preserve the aliases of the SELECT expressions when returning metadata with the query results. | no | no  
 CAP_QUERY_SORT_BY | Set to 'yes' to enables the 'Field' option in the Sort menu | no | **<span style="color:red">yes</span>**  
 CAP_QUERY_SORT_BY_DEGREE | Set to 'yes' if SQL queries can reference the sorting columns by the ordinal position of each column, e.g. ORDER BY 2, 5. See also: CAP_QUERY_GROUP_BY_DEGREE. | yes | **<span style="color:red">?</span>** 
