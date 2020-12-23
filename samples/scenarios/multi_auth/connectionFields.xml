@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+  <field name="server" label="Server" value-type="string" category="endpoint" >
+    <validation-rule reg-exp="^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$"/>
+  </field>
+
+  <field name="port" label="Port" value-type="string" category="endpoint" default-value="5432" />
+
+  <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="auth-user-pass" >
+    <selection-group>
+      <option value="auth-none" label="No Authentication"/>
+      <option value="auth-user" label="Username"/>
+      <option value="auth-user-pass" label="Username and Password"/>
+      <option value="auth-pass" label="Password"/>
+    </selection-group>
+  </field>
+
+  <field name="username" label="Custom Username" category="authentication" value-type="string">
+    <conditions>
+      <condition field="authentication" value="auth-user"/>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+ 
+  <field name="v-username" label="Extra Username" category="authentication" optional="true" value-type="string">
+    <conditions>
+      <condition field="authentication" value="auth-user"/>
+      <condition field="authentication" value="auth-user-pass"/>
+      <condition field="authentication" value="auth-pass"/>
+    </conditions>
+  </field>
+
+  <field name="password" label="Custom Password" category="authentication" value-type="string" secure="true">
+    <conditions>
+      <condition field="authentication" value="auth-user-pass"/>
+      <condition field="authentication" value="auth-pass"/>
+    </conditions>
+  </field>
+
+</connection-fields>
