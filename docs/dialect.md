@@ -174,6 +174,12 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
   **Join Capabilities**  <br/>
   Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
 
+  **Disable Join Modification** <br/>
+  Tableau performs modifications to join types to make queries faster. *If you use OLAP cubes for your database and want the same query as the one that is present in the cube follow this step to get the unoptimized queries:* <br/>
+  In the "Data Source" page, "Data" menu, there is an option to "Convert to Custom SQL". If we use that option, the Join type should not be changed. 
+  Also, add stuff about joins when data blending. 
+
+
 ### Boolean Support:
   Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
   `format-true` and `format-false` are used in predicate statements. <br/>
