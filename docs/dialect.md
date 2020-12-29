@@ -179,7 +179,7 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
   In the "Data Source" page, "Data" menu, use the option to "Convert to Custom SQL". This will prevent Tableau from modifying the join type.
 
   **Data Blending** <br/>
-  When using data blending, a Tableau creates a left join between the primary and secondary datasource. Data blending can only be a LEFT join, which means the primary table should contain all possible values.
+  When using data blending, Tableau creates a left join between the primary and secondary datasource. Data blending can only be a LEFT join, which means the primary table should contain all possible values.
 
 ### Boolean Support:
   Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
