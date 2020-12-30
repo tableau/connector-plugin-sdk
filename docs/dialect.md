@@ -174,6 +174,13 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hou
   **Join Capabilities**  <br/>
   Join usage is also defined by capabilities in the manifest file. See the Query section for join relation capabilities [here]({{ site.baseurl }}/docs/capabilities).
 
+  **Disable Join Modification** <br/>
+  Tableau can modify join types to make queries faster. *If you use OLAP cubes for your database and want the same query as the one that is present in the cube follow this step to get the unoptimized queries:* <br/>
+  In the "Data Source" page, "Data" menu, use the option to "Convert to Custom SQL". This will prevent Tableau from modifying the join type.
+
+  **Data Blending** <br/>
+  When using data blending, Tableau creates a left join between the primary and secondary datasource. Data blending can only be a LEFT join, which means the primary table should contain all possible values.
+
 ### Boolean Support:
   Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
   `format-true` and `format-false` are used in predicate statements. <br/>
