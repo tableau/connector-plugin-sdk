@@ -30,8 +30,8 @@
       <customization name="CAP_QUERY_TIME_REQUIRES_CAST" value="yes"/>
     </customizations>
   </connection-customization>
-  <connection-fields file='connectionFields.xml'/>
-  <connection-metadata file='connectionMetadata.xml'/>
+  <connection-fields file="connectionFields.xml"/>
+  <connection-metadata file="connectionMetadata.xml"/>
   <connection-resolver file="connectionResolver.tdr"/>
-  <dialect file='dialect.tdd'/>
+  <dialect file="dialect.tdd"/>
 </connector-plugin>
