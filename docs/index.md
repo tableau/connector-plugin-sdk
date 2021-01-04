@@ -51,7 +51,7 @@ These are the general steps you will follow to create a fully functional connect
 > * __Dialect definition file__.
 > * __Connection dialog__.
 
-4. Once your connector is able to connect, start running the test tool [TDVT]({ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
+4. Once your connector is able to connect, start running the test tool [TDVT]({{ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
 
 5. When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
 
