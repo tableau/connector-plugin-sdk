@@ -327,7 +327,7 @@ def load_test(config, test_dir=get_root_dir()):
 
             try:
                 all_ini_sections.remove(section)
-                test_config.add_logical_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
+                test_config.add_expression_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
                                                 test_path + 'connection_tests/staples/', test_dir,
                                                 get_password_file(sect), get_expected_message(sect),  True,
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
