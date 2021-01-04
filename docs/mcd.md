@@ -1,7 +1,7 @@
 ---
 title: Build the Connection Dialog with Connection Dialog v2
 ---
-**IMPORTANT:** This feature is available only in Tableau 2020.3 or later. For compatibility with older versions, use Connection Dialog v1 (documentation found [here]({ site.baseurl }}/docs/ui)).
+**IMPORTANT:** This feature is available only in Tableau 2020.3 or later. For compatibility with older versions, use Connection Dialog v1 (documentation found [here]({{ site.baseurl }}/docs/ui)).
 
 Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
@@ -30,7 +30,7 @@ If you wish to modify metadata hierarchy behavior you can add to the manifest a 
 
 The Connection Fields file dictates the content and behavior of Connection Dialog as seen by the user. It also specifies the names of the connection attributes that will be available, along with the values specified by the user, in the ConnectionBuilder().
 
-The Connection Fields file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connection_fields.xsd)) is indentified in the manifest using the `<connection-fields>` element. Here we discuss the structure of this file.
+The Connection Fields file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/connection_fields.xsd)) is indentified in the manifest using the `<connection-fields>` element. Here we discuss the structure of this file.
 
 To avoid confusion, in the following we use the term "field" in place of "connection attribute," and use the generic term "attribute" to mean an XML element attribute.
 
@@ -269,7 +269,7 @@ The Connection Metadata file provides some limited control over the metadata hie
 
 If you don't provide a Connection Metadata file, then by default all three selectors will be shown.
 
-The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2020.2/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file.
+The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file.
 
 ## XML Elements
 
