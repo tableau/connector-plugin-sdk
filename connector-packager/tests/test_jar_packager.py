@@ -13,7 +13,7 @@ from connector_packager.version import __default_min_version_tableau__
 TEST_FOLDER = Path("tests/test_resources")
 MANIFEST_FILE_NAME = "manifest.xml"
 
-VERSION_2020_2 = "2020.2"
+VERSION_2020_3 = "2020.3"
 
 
 class TestJarPackager(unittest.TestCase):
@@ -96,7 +96,7 @@ class TestJarPackager(unittest.TestCase):
 
         manifest = ET.parse(path_to_extracted_manifest)
         self.assertEqual(manifest.getroot().get("min-version-tableau"),
-                         VERSION_2020_2, "wrong min-version-tableau attr or doesn't exist")
+                         VERSION_2020_3, "wrong min-version-tableau attr or doesn't exist")
 
         if dest_dir.exists():
             shutil.rmtree(dest_dir)
