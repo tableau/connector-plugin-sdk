@@ -43,6 +43,9 @@ def get_min_support_version(file_list: List[ConnectorFile]) -> str:
         if connector_file.file_type == "connection-fields":
             min_version_tableau = "2020.3"
             reasons.append("Connector uses Connection Dialogs V2, which was added in the 2020.3 release")
+        elif connector_file.file_type == "oauth-config":
+            min_version_tableau = "2021.1"
+            reasons.append("Connector uses OAuth, which was added in the 2021.1 release")
 
     return min_version_tableau, reasons
 
