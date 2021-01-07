@@ -35,13 +35,16 @@ def get_min_support_version(file_list: List[ConnectorFile]) -> str:
     # set minimum tableau version to default, then check for features requiring later version
     min_version_tableau = __default_min_version_tableau__
 
+    reasons = []
+
     # Check file types
     for connector_file in file_list:
-        # if we have a connection-fields file, then we are using modular dialogs and need 2020.2+
+        # if we have a connection-fields file, then we are using modular dialogs and need 2020.3+
         if connector_file.file_type == "connection-fields":
-            min_version_tableau = "2020.2"
+            min_version_tableau = "2020.3"
+            reasons.append("Connector uses Connection Dialogs V2, which was added in the 2020.3 release")
 
-    return min_version_tableau
+    return min_version_tableau, reasons
 
 
 def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], jar_filename: str) -> bool:
@@ -74,7 +77,7 @@ def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], j
     shutil.copyfile(input_dir / manifest_file.file_name, input_dir / MANIFEST_FILE_COPY_NAME)
 
     # stamp the original manifest file
-    min_version_tableau = get_min_support_version(file_list)
+    min_version_tableau, reasons = get_min_support_version(file_list)
     manifest = ET.parse(input_dir / manifest_file.file_name)
     plugin_elem = manifest.getroot()
     if plugin_elem.tag != MANIFEST_ROOT_ELEM:
@@ -96,6 +99,11 @@ def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], j
     if return_code != 0:
         logger.info("Unable to stamp minimum support version while packaging")
         return False
+
+    logger.info("Detected minimum Tableau version required: " + min_version_tableau)
+    for reason in reasons:
+        logger.info("-" + reason)
+
     return True
 
 
