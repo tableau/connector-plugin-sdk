@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pluginOAuthConfig>
-    <dbclass>databricks2</dbclass>
+    <dbclass>test_oauth</dbclass>
 
     <clientIdDesktop>******</clientIdDesktop>
     <clientSecretDesktop>******</clientSecretDesktop>
@@ -18,17 +18,4 @@
     <scopes>profile</scopes>
     <scopes>offline_access</scopes>
 
-    <!-- TODO: required attrs need review -->
-    <requiredAuthAttrs>class</requiredAuthAttrs>
-    <requiredAuthAttrs>server</requiredAuthAttrs>
-    <requiredAuthAttrs>dbname</requiredAuthAttrs>
-    <requiredAuthAttrs>instanceurl</requiredAuthAttrs>
-    <requiredAuthAttrs>oauth-client</requiredAuthAttrs>
-    <requiredRefreshAttrs>class</requiredRefreshAttrs>
-    <requiredRefreshAttrs>server</requiredRefreshAttrs>
-    <requiredRefreshAttrs>dbname</requiredRefreshAttrs>
-    <requiredRefreshAttrs>authentication</requiredRefreshAttrs>
-    <requiredRefreshAttrs>instanceurl</requiredRefreshAttrs>
-    <requiredRefreshAttrs>REFRESHTOKEN</requiredRefreshAttrs>
-    <requiredRefreshAttrs>oauth-client</requiredRefreshAttrs>
 </pluginOAuthConfig>
