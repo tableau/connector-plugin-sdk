@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<dialect name='PostgresMCD'
+<dialect name='TestOAuthDialect'
          class='test_oauth'
          base='PostgreSQL90Dialect'
          version='18.1'>
