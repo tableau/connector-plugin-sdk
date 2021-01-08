@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pluginOAuthConfig>
+    <dbclass>databricks2</dbclass>
+
+    <clientIdDesktop>******</clientIdDesktop>
+    <clientSecretDesktop>******</clientSecretDesktop>
+    <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
+
+    <clientIdServerCustom>******</clientIdServerCustom>
+    <clientSecretServerCustom>******</clientSecretServerCustom>
+    <redirectUrisServerCustom>http://localhost/auth/add_oauth_token</redirectUrisServerCustom>
+
+    <authUri>/oauth2/v2.0/authorize</authUri>
+    <tokenUri>/oauth2/v2.0/token</tokenUri>
+
+    <scopes>openid</scopes>
+    <scopes>email</scopes>
+    <scopes>profile</scopes>
+    <scopes>offline_access</scopes>
+
+    <!-- TODO: required attrs need review -->
+    <requiredAuthAttrs>class</requiredAuthAttrs>
+    <requiredAuthAttrs>server</requiredAuthAttrs>
+    <requiredAuthAttrs>dbname</requiredAuthAttrs>
+    <requiredAuthAttrs>instanceurl</requiredAuthAttrs>
+    <requiredAuthAttrs>oauth-client</requiredAuthAttrs>
+    <requiredRefreshAttrs>class</requiredRefreshAttrs>
+    <requiredRefreshAttrs>server</requiredRefreshAttrs>
+    <requiredRefreshAttrs>dbname</requiredRefreshAttrs>
+    <requiredRefreshAttrs>authentication</requiredRefreshAttrs>
+    <requiredRefreshAttrs>instanceurl</requiredRefreshAttrs>
+    <requiredRefreshAttrs>REFRESHTOKEN</requiredRefreshAttrs>
+    <requiredRefreshAttrs>oauth-client</requiredRefreshAttrs>
+</pluginOAuthConfig>
