@@ -8,12 +8,17 @@
     <connection-normalizer>
       <required-attributes>
         <attribute-list>
-          <attr>server</attr>
-          <attr>port</attr>
-          <attr>dbname</attr>
-          <attr>v-custom</attr>
-          <attr>username</attr>
-          <attr>password</attr>
+            <attr>server</attr>
+            <attr>authentication</attr>
+            <attr>username</attr>
+            <attr>password</attr>
+            <attr>authentication-type</attr>
+            <attr>instanceurl</attr>
+            <attr>ACCESSTOKEN</attr>
+            <attr>REFRESHTOKEN</attr>
+            <attr>access-token-issue-time</attr>
+            <attr>access-token-expires-in</attr>
+            <attr>oauth-client</attr>
         </attribute-list>
       </required-attributes>
     </connection-normalizer>
