@@ -19,7 +19,7 @@ Example query: `SELECT * FROM default.testv1_batters WHERE 1=0`
 Conditions: CAP_QUERY_TOP_0_METADATA = true AND (CAP_ODBC_METADATA_SUPPRESS_PREPARED_QUERY = false OR CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY = false)
 Example query: `SELECT * FROM default.testv1_batters LIMIT 0`
 
-4. Less reliable but fast API for querying table metadata directly from [SQLColumns](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcolumns-function?view=sql-server-ver15) calls
+4. Querying table metadata directly from [SQLColumns](https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/sqlcolumns-function), which is fast, but can be less reliable.
 Conditions: CAP_ODBC_METADATA_SUPPRESS_SQLCOLUMNS_API = false
 
 5. Full "select *" query
