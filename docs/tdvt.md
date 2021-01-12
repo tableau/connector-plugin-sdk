@@ -4,6 +4,10 @@ title: Test with TDVT Suite
 
 Tableau provides an automated testing tool called the Tableau Data source Verification Tool, or TDVT, to test Tableau connectivity with a database. TDVT runs tests that range from simple expressions to complex SQL.
 
+#### Check out our step-by-step guide to using TDVT:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rAgnnByJIJA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 When evaluating the connection to your database, use a named connector if one exists.
 Named connectors are optimized connections and provide a faster, cleaner experience for customers.
 
@@ -344,31 +348,31 @@ Sample connectors are located in the samples/plugins folder.
 
 ## Review results
 
-After the tests have run, you see a “test_results_combined.csv” spreadsheet.
-This contains the data about the test passes and failure from the previous run.
-TDVT includes a sample Tableau workbook that will help you analyze the results of this file.
+**Note:** This process is explained in our comprehensive TDVT Guide: [Tableau Connector SDK: Optimizing Tableau Connectors with TDVT](https://youtu.be/rAgnnByJIJA) [[28:26](https://youtu.be/rAgnnByJIJA?t=1706)].
 
-Use these steps as a guide to develop your own workbook:
+After the tests have run, "test_results_combined.csv" is outputted to the working directory. It contains data around the passes and failures of each test case of the previous run, along with error messages, generated SQL, and more. The [/tdvt/ directory](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/) contains a Tableau workbook to analyze the results and diagnose issues with the connector.
 
-1. Open the file called "TDVT Results.twbx" [located in /tdvt/](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twbx).
+These steps show how to connect your test results to the workbook:
 
-1. Navigate to the "Data Source" tab.
+1. Locate the file "TDVT Results.twb" in [/tdvt/ directory](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/) and copy it to your TDVT workspace.
 
-1. Click the "test_results" connection on the left, and click "Edit Connection".
+1. Copy the "test_metadata.csv" file found in [/tdvt/tdvt/metadata/](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/tdvt/metadata) into the TDVT workspace.
+
+   ![]({{ site.baseurl }}/assets/sample-workspace.png)
+
+1. Open the workbook and change to the "Data Source" tab.
+
+1. Right-click the "test_results_combined" connection on the left, and click "Edit Connection".
 
    ![]({{ site.baseurl }}/assets/tdvt_edit_results.png)
 
 1. In the File Navigator that opens, choose the "test_results_combined" spreadsheet in your tdvt folder.
 
-1. Drag  the new "test_results_combined.csv" file to replace the old file in the data canvas.
+1. Confirm the new connection is working by finding the proper TDS names in the data preview pane.
 
-1. Right-click the new table, and click __Text File Properties__.
+1. If the data is full of null values and seems corrupted, please change the text qualifier to use a double quote by right-clicking the "test_results_combined.csv" connection in the data pane, and selecting __Text File Properties__.
 
-   ![]({{ site.baseurl }}/assets/tdvt_edit_results2.png)
-
-1. Change the text qualifier to use a double quote.
-
-1. Click the "TDVT Test Results" dashboard to view the viz. The dashboard should look like the image below. The viz shows the test pass rate by Test Category and shows individual test case failures. Interact with the dashboard to dive into the test failures.
+1. See [Fixing TDVT Test Failures](https://tableau.github.io/connector-plugin-sdk/docs/tdvt-test-case) for more on how to leverage the workbook and diagnose connector failures.
 
    ![]({{ site.baseurl }}/assets/tdvt_results_dashboard.png)
 
