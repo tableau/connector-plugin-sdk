@@ -1,90 +1,135 @@
 
 # Readme
 
-This sample connector plugin demonstrates how to incorporate different Kerberos-based authentication modes for your "Tableau + Postgres + JDBC" use cases. This sample plugin code has been tested for all the authentication methods listed here with all platforms (Mac Desktop, Windows Desktop and Server, Linux Server). You can directly incorporate the plugin if your use case matches the ones below. However, the individual sections of the plugin components concern specific authentication modes and have been laid out here for the purposes of understanding and re-use.
-
+This sample connector plugin demonstrates how to add OAuth Authentication type to Snowflake datasource.  This sample plugin code has been tested for all the authentication methods listed here with all platforms (Mac Desktop, Windows Desktop and Server, Linux Server). You can use this as an example for how to add OAuth to your own connector. 
+For Under Development connetor, refer to this page on how to enable it locally: https://tableau.github.io/connector-plugin-sdk/docs/share.
 
 ## <a id="purpose"/> Use case(s) of this connector plugin
-1. Use **SSPI** authentication to connect a Postgres database with `Tableau Desktop on Windows`. See [Kerberos SSO for Tableau Desktop](#desktop)   
-1. Use **Kerberos SSO** to connect a Postgres database with `Tableau Desktop on Mac`. See [Kerberos SSO for Tableau Desktop](#desktop)
-1. Publish a viz from `Tableau Desktop` using **Server RunAs/Kerberos RunAs authentication** and open it in Tableau Server. See [Kerberos RunAs and Delegation on Server](#server)
-1. Publish a viz from `Tableau Desktop` using **Kerberos Delegation/Viewer Credentials authentication** and open it in Tableau Server. See [Kerberos RunAs and Delegation on Server](#server) 
+1. Use **OAuth** authentication to connect to Snowflake with `Tableau Desktop on Windows`/`Tableau Desktop on Mac`.  
+1. Publish a viz from `Tableau Desktop` using **Prompt** and open it in Tableau Server.
+1. Publish a viz from `Tableau Desktop` using **Embed [your_username]** and open it in Tableau Server.
 
 
-## <a id="desktop"></a>Kerberos SSO for Tableau Desktop
+## <a id="desktop"></a>OAuth for Tableau Desktop
 
-Tableau Desktop uses [native GSS-API](https://docs.oracle.com/en/java/javase/11/security/accessing-native-gss-api.html) to accomplish this. On Windows specifically, Tableau uses JDK's [sspi-bridge](https://bugs.openjdk.java.net/browse/JDK-8199569) library to accomplish this. However, all of this has been abstracted out for plugin developers so just make sure you have the below code changes in place and it should work magically.   
-**connection-fields.xml**
+Tableau Desktop oauth-service which is a separate service to handle OAuth flows, there are multiple places need to be configured:
+**manigest.xml**
+
+Your manifest.xml file needs to include a new file which is oauthConfig.xml.
 ```
-<field name="authentication" label="Authentication" category="authentication" value-type="selection">
+ <oauth-config file='oauthConfig.xml'/>
+```
+**connectionFields.xml**
+
+For connectionFields.xml, be sure to name value for oauth option as "oauth", case sensitive.  
+
+```
+<field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="auth-user-pass" >
   <selection-group>
-    <option value="auth-integrated" label="Kerberos" />
-    <!-- other auth options -->
+    <option value="auth-user-pass" label="Username and Password"/>
+    <option value="oauth" label="OAuth"/>
   </selection-group>
 </field>
 ```
-**connectionProperties.js**
+**connectionBuilder.js**
+
+For connectionBuilder.js, you need to use your DB sepcific logic to handle how to pass in OAuth attributes. For Snowflake it's like this:
 ```
-props["gsslib"] = "gssapi";	 
-props["jaasLogin"] = "false";  
-props["jaasApplicationName"] = "com.sun.security.jgss.krb5.initiate";
-```
-
-![Image](images/DesktopConnectionDialog.png)
-
-Other Configurations for Mac:
-* Only for Postgres JDBC plugin on Mac - add this property `Settings.DisableNativeGSS` as a `Boolean/YES` to the Tableau plist on Mac at `/Library/Preferences/com.tableau.Tableau-<version>.plist` as described below. Here version is Tableau Desktop major version, for example, `com.tableau.Tableau-2020.4.plist`.
-```
-// Note - the below command requires root privileges hence sudo is needed.
-sudo defaults write /Library/Preferences/com.tableau.Tableau-<version>.plist Settings.DisableNativeGSS -bool YES
-```
-A [bug](https://github.com/pgjdbc/pgjdbc/issues/1662) has been opened on pgjdbc repository to fix this issue.
-* Make sure a krb5.conf file is present at `/etc/krb5.conf`(/etc is a private directory, requires root privileges). Check for the existence of either of the following two files `/etc/krb5.conf` or `/Library/Preferences/edu.mit.Kerberos`. If the second file (edu.mit.Kerberos) is present it needs to be backed up and deleted.
-* Before connecting, run `klist` to verify Kerberos TGT for the user principal is present in the Kerberos ticket cache. If not, run `kinit user@REALM` before opening Tableau Desktop.  
-
-## <a id="server"/> Kerberos RunAs and Delegation on Server
-When a user opens Tableau Desktop and login to Postgres using Kerberos there are the two publish options available, namely, "Server run-as" and "Viewer Credentials/Kerberos Delegation".
-
-![Image](images/PublishKerberosAuthOptions.png)
-
-These are the code changes needed for both the Kerberos RunAs and Delegation authentication on Tableau Server.  
-
-**connectionProperties.js**
-```
-    function isEmpty(str) {
-        return (!str || 0 === str.length); 
+ else if(authAttrValue == "oauth")
+    {
+        params["AUTHENTICATOR"] = "OAUTH";
+        params["TOKEN"] = attr["ACCESSTOKEN"];
     }
 
-    if (attr[connectionHelper.attributeAuthentication] == "auth-integrated") {
-        // if attributeTableauServerUser is non-empty, it means the connector plugin is currently being accessed in a Tableau Server environment
-        var serverUser = attr[connectionHelper.attributeTableauServerUser];
-        if (!isEmpty(serverUser)) {
-            props["user"] = serverUser;
-            props["gsslib"] = "gssapi";  
-            props["jaasLogin"] = "false";    
-        }
-    }        
+```
+**oauthConfig.xml**
+
+The oauthConfig file holds oAuth related attrs about this connector, they must be provided upon registration so the oauth-service know how to invoke the oauth flow.
+```
+<?xml version="1.0" encoding="utf-8"?>
+<pluginOAuthConfig>
+    // dbclass must correspond to the dbclass registered in manifest.xml  
+    <dbclass>snowflake_oauth</dbclass>
+    // Subsitute these with your OAuth Client Id and Client Secret
+    <clientIdDesktop>[your_client_id]</clientIdDesktop>
+    <clientSecretDesktop>[your_client_secret]</clientSecretDesktop>
+    // Desktop redirectUri, subsitute for your own registered desktop redirectUri 
+    <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
+    // authUri and tokenUri only contains the path since it has CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
+    // your input instanceUrl + authUri/tokenUri
+    <authUri>/oauth/authorize</authUri>
+    <tokenUri>/oauth/token-request</tokenUri>
+    // Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort
+    <instanceUrlValidationRegex>^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)</instanceUrlValidationRegex>
+    // Snowflake need refresh_token scope to issue refresh tokens
+    <scopes>refresh_token</scopes>
+    // Snowflake supports PKCE, Cutom domain, fixed callback url
+    <capabilities>
+        <entry>
+            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_SUPPORTS_CUSTOM_DOMAIN</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_REQUIRE_PKCE</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <value>true</value>
+        </entry>
+    </capabilities>
+    // Map Tableau recognized attr <key> to Snowflake OAuth response attr <value>
+    <accessTokenResponseMaps>
+        <entry>
+            <key>ACCESSTOKEN</key>
+            <value>access_token</value>
+        </entry>
+        <entry>
+            <key>REFRESHTOKEN</key>
+            <value>refresh_token</value>
+        </entry>
+        <entry>
+            <key>access-token-issue-time</key>
+            <value>issued_at</value>
+        </entry>
+        <entry>
+            <key>access-token-expires-in</key>
+            <value>expires_in</value>
+        </entry>
+        <entry>
+            <key>username</key>
+            <value>username</value>
+        </entry>
+    </accessTokenResponseMaps>
+    // No refreshTokenResponseMaps needed since that's same with the accessTokenResponseMaps
+ </pluginOAuthConfig>
+
 ```
 
-In case of Kerberos RunAs, attributeTableauServerUser which is passed down by Tableau is the Service RunAsUser configured on the Tableau Server instance. In case of Kerberos Delegation, attributeTableauServerUser maps to the user/viewer currently logged into Tableau Server.
+**attribute and capability map to be added**
 
-Additionally, for enabling Kerberos Delegation, CAP_AUTH_KERBEROS_IMPERSONATE needs to be enabled in the manifest file.
+## <a id="server"/> OAuth on Tableau Server
 
-**manifest.xml**
+Config your OAuth client on your server: This would be the first step you need to perform for enabling OAuth on Tableau Server, this will setup OAuth Client information to be used on Tableau Server, e.g.:
 ```
-<!-- This capability is needed to support Kerberos Delegation on Tableau Server --> 
-      <customization name="CAP_AUTH_KERBEROS_IMPERSONATE" value="yes"/>
+tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"snowflake_oauth\", \"oauth.config.client_id\":\"[your_client_id]\", \"oauth.config.client_secret\":\"[your_client_secret]\", \"oauth.config.redirect_uri\":\"[your_redirect_url]\"}]" --force-keys
 ```
+You need to subsitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
+[your_redirect_url] needs to follow certain format, if your server address is https://Myserver/ then [your_reirect_uri] needs to be https://Myserver/auth/add_oauth_token.
 
-* Important Tableau Server configuration needed for Kerberos RunAs   
-For Kerberos RunAs authentication, users need to provide RunAs user principal name and a keytab file path. Tableau Server uses the keytab to login to Kerberos KDC and the TGT thus obtained is used by JDBC driver for making a database connection.
-For configuring a Tableau Server on Linux, see this Tableau [article](https://help.tableau.com/current/server-linux/en-us/kerberos_runas_linux.htm). 
-For configuring a Tableau Server on Windows, see this Tableau [article](https://help.tableau.com/current/server/en-us/kerberos_runas_jdbc.htm). 
+To add an OAuth credential on Tableau Server, you will go to **My Account Settings** page, look for your class in the **Saved Credentals For DataSources** Section.
+After successfully added your credential you will notice an entry appear under your class.
 
-* Important Tableau Server configuration for Kerberos Delegation  
-While configuring Tableau Server for Kerberos Delegation, users need to provide impersonation_runas_principal and keytab path which will be used to impersonate the viewer. 
-For configuring Tableau Server on Linux, refer to this [article](https://help.tableau.com/current/server-linux/en-us/kerberos_delegation.htm). 
-For configuring Tableau Server on Windows, refer to this [article](https://help.tableau.com/current/server/en-us/kerberos_delegation_jdbc.htm) 
+When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil see multiple auth options:
+**propmt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
+**embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding.
 
-
-
+For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.
