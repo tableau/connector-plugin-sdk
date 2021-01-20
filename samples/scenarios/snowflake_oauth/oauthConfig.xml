@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pluginOAuthConfig>	 
 	<dbclass>snowflake_oauth</dbclass>
-    <clientIdDesktop>UP+iCpaEoSG9qM1Q1+Xx6kpxwF0=</clientIdDesktop>
-    <clientSecretDesktop>EAofGQyN1du/vqpIK/eThPGhLNBHNyb9DA9Js8bk2YA=</clientSecretDesktop>
+    <clientIdDesktop>xxxxxxxx</clientIdDesktop>
+    <clientSecretDesktop>xxxxxxxx</clientSecretDesktop>
     <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
     <redirectUrisDesktop>http://localhost:55556/Callback</redirectUrisDesktop>
     <redirectUrisDesktop>http://localhost:55557/Callback</redirectUrisDesktop>
