@@ -26,9 +26,8 @@ XSD_DICT = {
     "dialect": "tdd_latest",
     "resource": "connector_plugin_resources_latest",
     "connection-fields": "connection_fields",
-    "connection-metadata": "connector_plugin_metadata"
-
-}
+    "connection-metadata": "connector_plugin_metadata",
+    "oauth-config": "oauth_config"}
 
 
 def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool:
