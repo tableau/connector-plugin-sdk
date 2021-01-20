@@ -1,7 +1,9 @@
 # Tableau Connector SDK Changelog
 
 ## Unreleased
-
+## 2021-01-10
+### Added
+- Add OAuth Scenario for Snowflake
 ## 2020-10-01
 ### Added
 - Add JDBC Kerberos scenario for postgres 
