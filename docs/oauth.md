@@ -82,7 +82,7 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
 | refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | if not defined will use accessTokenResponseMaps by default |
 
-## Supported Capabilities
+## Supported OAuth Capabilities
 
 This set of OAuth Config capabilities are not shared with the regular plugin capabilities so that's why we are listing these here.
 
@@ -212,4 +212,3 @@ hen publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil 
 ## Web Create flow
 
 For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.
-
