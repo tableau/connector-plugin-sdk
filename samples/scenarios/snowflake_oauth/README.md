@@ -1,7 +1,7 @@
 
 # Readme
 
-This sample connector plugin demonstrates how to add OAuth Authentication type to Snowflake datasource.  This sample plugin code has been tested for all the authentication methods listed here with all platforms (Mac Desktop, Windows Desktop and Server, Linux Server). You can use this as an example for how to add OAuth to your own connector. 
+This sample connector demonstrates how to add OAuth Authentication type to Snowflake datasource.  This sample connector has been tested for all the authentication methods listed here with all platforms (Mac Desktop, Windows Desktop and Server, Linux Server). You can use this as an example for how to add OAuth to your own connector. 
 For Under Development connetor, refer to this page on how to enable it locally: https://tableau.github.io/connector-plugin-sdk/docs/share.
 
 ## <a id="purpose"/> Use case(s) of this connector plugin
