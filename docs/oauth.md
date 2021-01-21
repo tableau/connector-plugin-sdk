@@ -5,6 +5,8 @@ title: OAuth Authentication Support
 
 # How to enable OAuth for a plugin connector
 
+First check your Database and Driver document to make sure if it supports OAuth.
+
 To enable OAUth for your connector, in the manifest add another field `<oauth-config>` and link to a oauthConfig.xml you created, described below. 
 
 ```xml
@@ -29,7 +31,7 @@ In your connectionFields.xml file make sure add an authentication with value equ
 
 ```xml
   connectionFields.xml Multiple Auth Types:
-  
+
   <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="auth-user-pass" >
     <selection-group>
       <option value="auth-user-pass" label="Username and Password"/>
@@ -99,7 +101,78 @@ This set of OAuth Config capabilities are not shared with the regular plugin cap
 | CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add propmt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
 | CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. e.g. https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
 
-### Desktop Sign in flow
+## Example OAuthConfig file:
+**oauthConfig.xml**
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<pluginOAuthConfig>
+    <!-- dbclass must correspond to the class registered in manifest.xml --> 
+    <dbclass>snowflake_oauth</dbclass>
+    <!-- Subsitute these with your OAuth Client Id and Client Secret -->
+    <clientIdDesktop>[your_client_id]</clientIdDesktop>
+    <clientSecretDesktop>[your_client_secret]</clientSecretDesktop>
+    <-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
+    <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
+    <!-- authUri and tokenUri only contains the path since it has CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
+    your input instanceUrl + authUri/tokenUri -->
+    <authUri>/oauth/authorize</authUri>
+    <tokenUri>/oauth/token-request</tokenUri>
+    <!-- Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort -->
+    <instanceUrlValidationRegex>^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)</instanceUrlValidationRegex>
+    <!-- Snowflake need refresh_token scope to issue refresh tokens -->
+    <scopes>refresh_token</scopes>
+    <!-- Snowflake supports PKCE, Cutom domain, fixed callback url -->
+    <capabilities>
+        <entry>
+            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_SUPPORTS_CUSTOM_DOMAIN</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_REQUIRE_PKCE</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <value>true</value>
+        </entry>
+    </capabilities>
+    <!-- Map Tableau recognized attr <key> to Snowflake OAuth response attr <value> -->
+    <accessTokenResponseMaps>
+        <entry>
+            <key>ACCESSTOKEN</key>
+            <value>access_token</value>
+        </entry>
+        <entry>
+            <key>REFRESHTOKEN</key>
+            <value>refresh_token</value>
+        </entry>
+        <entry>
+            <key>access-token-issue-time</key>
+            <value>issued_at</value>
+        </entry>
+        <entry>
+            <key>access-token-expires-in</key>
+            <value>expires_in</value>
+        </entry>
+        <entry>
+            <key>username</key>
+            <value>username</value>
+        </entry>
+    </accessTokenResponseMaps>
+    <!-- No refreshTokenResponseMaps needed since that's same with the accessTokenResponseMaps -->
+ </pluginOAuthConfig>
+
+```
+# OAuth on Tableau Desktop
 
 Your Desktop sign in Dialog will look like this, you can choose different auth mode and notice different required fields appear. This example has multiple auth type supported and one of them is oauth. 
 
@@ -109,7 +182,9 @@ By clicking the sign in button, you will be directed to your OAuth Provider's si
 
 ![Image](../assets/oauth-desktop-complete.png)
 
-### Configure OAuth Clients on Server
+# OAuth on Tableau Server
+
+## Configure OAuth Clients on Server
 
 Config your OAuth client on your server: This would be the first step you need to perform for enabling OAuth on Tableau Server, this will setup OAuth Client information to be used on Tableau Server, e.g.:
 ```
@@ -118,14 +193,14 @@ tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"snowfl
 You need to subsitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
 [your_redirect_url] needs to follow certain format, if your server address is https://Myserver/ then [your_reirect_uri] needs to be https://Myserver/auth/add_oauth_token.
 
-### Server Add OAuth token flow
+## Server Add OAuth token flow
 
 To add an OAuth credential on Tableau Server, you will go to **My Account Settings** page, look for your class in the **Saved Credentals For DataSources** Section.
 After successfully added your credential you will notice an entry appear under your class.
 
 ![Image](../assets//oauth-server-addtoken.png)
 
-### Desktop Publish flow
+## Desktop Publish flow
 
 hen publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil see multiple auth options:
 **propmt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
@@ -134,7 +209,7 @@ hen publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil 
 
 ![Image](../assets/oauth-desktop-publish.PNG)
 
-### Web Create flow
+## Web Create flow
 
 For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.
 
