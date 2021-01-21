@@ -5,12 +5,12 @@ This sample connector plugin demonstrates how to add OAuth Authentication type t
 For Under Development connetor, refer to this page on how to enable it locally: https://tableau.github.io/connector-plugin-sdk/docs/share.
 
 ## <a id="purpose"/> Use case(s) of this connector plugin
-1. Use **OAuth** authentication to connect to Snowflake with `Tableau Desktop on Windows`/`Tableau Desktop on Mac`.  
-1. Publish a viz from `Tableau Desktop` using **Prompt** and open it in Tableau Server.
-1. Publish a viz from `Tableau Desktop` using **Embed [your_username]** and open it in Tableau Server.
+1. Use **OAuth** authentication to connect to Snowflake with `Tableau Desktop on Windows`/`Tableau Desktop on Mac`. See [OAuth for Tableau Desktop](#desktop)    
+1. Publish a viz from `Tableau Desktop` using **Prompt** and open it in Tableau Server. See [OAuth for Tableau Server](#server)
+1. Publish a viz from `Tableau Desktop` using **Embed [your_username]** and open it in Tableau Server. See [OAuth for Tableau Server](#server)
 
 
-## <a id="desktop"></a>OAuth for Tableau Desktop
+## <a id="component"></a>OAuth Component explanation
 
 Tableau Desktop oauth-service which is a separate service to handle OAuth flows, there are multiple places need to be configured:
 **manigest.xml**
@@ -48,22 +48,22 @@ The oauthConfig file holds oAuth related attrs about this connector, they must b
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <pluginOAuthConfig>
-    // dbclass must correspond to the dbclass registered in manifest.xml  
+    <!-- dbclass must correspond to the dbclass registered in manifest.xml --> 
     <dbclass>snowflake_oauth</dbclass>
-    // Subsitute these with your OAuth Client Id and Client Secret
+    <!-- Subsitute these with your OAuth Client Id and Client Secret -->
     <clientIdDesktop>[your_client_id]</clientIdDesktop>
     <clientSecretDesktop>[your_client_secret]</clientSecretDesktop>
-    // Desktop redirectUri, subsitute for your own registered desktop redirectUri 
+    <-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
     <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
-    // authUri and tokenUri only contains the path since it has CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
-    // your input instanceUrl + authUri/tokenUri
+    <!-- authUri and tokenUri only contains the path since it has CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
+    your input instanceUrl + authUri/tokenUri -->
     <authUri>/oauth/authorize</authUri>
     <tokenUri>/oauth/token-request</tokenUri>
-    // Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort
+    <!-- Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort -->
     <instanceUrlValidationRegex>^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)</instanceUrlValidationRegex>
-    // Snowflake need refresh_token scope to issue refresh tokens
+    <!-- Snowflake need refresh_token scope to issue refresh tokens -->
     <scopes>refresh_token</scopes>
-    // Snowflake supports PKCE, Cutom domain, fixed callback url
+    <!-- Snowflake supports PKCE, Cutom domain, fixed callback url -->
     <capabilities>
         <entry>
             <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
@@ -86,7 +86,7 @@ The oauthConfig file holds oAuth related attrs about this connector, they must b
             <value>true</value>
         </entry>
     </capabilities>
-    // Map Tableau recognized attr <key> to Snowflake OAuth response attr <value>
+    <!-- Map Tableau recognized attr <key> to Snowflake OAuth response attr <value> -->
     <accessTokenResponseMaps>
         <entry>
             <key>ACCESSTOKEN</key>
@@ -109,12 +109,21 @@ The oauthConfig file holds oAuth related attrs about this connector, they must b
             <value>username</value>
         </entry>
     </accessTokenResponseMaps>
-    // No refreshTokenResponseMaps needed since that's same with the accessTokenResponseMaps
+    <!-- No refreshTokenResponseMaps needed since that's same with the accessTokenResponseMaps -->
  </pluginOAuthConfig>
 
 ```
 
-**attribute and capability map to be added**
+## <a id="desktop"></a>OAuth on Tableau Desktop
+
+Your Desktop sign in Dialog will look like this, you can choose different auth mode and notice different required fields appear.
+
+![Image](images/DesktopConnectionDialog.png)
+
+By clicking the sign in button, you will be directed to your OAuth Provider's sign in Url in a default browser on your machine where you can input your credentials, Tableau will get the required attrs back and upon complete you will see this screen:
+
+![Image](images/DesktopComplete.png)
+
 
 ## <a id="server"/> OAuth on Tableau Server
 
@@ -128,8 +137,13 @@ You need to subsitute [your_client_id], [your_client_secret], [your_redirect_url
 To add an OAuth credential on Tableau Server, you will go to **My Account Settings** page, look for your class in the **Saved Credentals For DataSources** Section.
 After successfully added your credential you will notice an entry appear under your class.
 
+![Image](images/ServerAddToken.png)
+
 When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil see multiple auth options:
 **propmt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
-**embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding.
+**embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding. 
+**embed Password** is no longer a supported auth mechanism for Pluggable OAuth connectors and an error will show up if you choose that option.
+
+![Image](images/DesktopPublish.png)
 
 For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.
