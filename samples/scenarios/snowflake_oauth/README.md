@@ -118,11 +118,11 @@ The oauthConfig file holds oAuth related attrs about this connector, they must b
 
 Your Desktop sign in Dialog will look like this, you can choose different auth mode and notice different required fields appear.
 
-![Image](images/DesktopConnectionDialog.png)
+![Image](images/DesktopConnectionDialog.PNG)
 
 By clicking the sign in button, you will be directed to your OAuth Provider's sign in Url in a default browser on your machine where you can input your credentials, Tableau will get the required attrs back and upon complete you will see this screen:
 
-![Image](images/DesktopComplete.png)
+![Image](images/DesktopComplete.PNG)
 
 
 ## <a id="server"/> OAuth on Tableau Server
@@ -137,13 +137,13 @@ You need to subsitute [your_client_id], [your_client_secret], [your_redirect_url
 To add an OAuth credential on Tableau Server, you will go to **My Account Settings** page, look for your class in the **Saved Credentals For DataSources** Section.
 After successfully added your credential you will notice an entry appear under your class.
 
-![Image](images/ServerAddToken.png)
+![Image](images/ServerAddToken.PNG)
 
 When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil see multiple auth options:
 **propmt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
 **embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding. 
 **embed Password** is no longer a supported auth mechanism for Pluggable OAuth connectors and an error will show up if you choose that option.
 
-![Image](images/DesktopPublish.png)
+![Image](images/DesktopPublish.PNG)
 
 For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.
