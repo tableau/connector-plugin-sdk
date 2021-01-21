@@ -202,7 +202,7 @@ After successfully added your credential you will notice an entry appear under y
 
 ## Desktop Publish flow
 
-hen publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil see multiple auth options:
+When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you will see multiple auth options:
 **Prompt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
 **Embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding. 
 **Embed Password** is no longer a supported auth mechanism for Pluggable OAuth connectors and an error will show up if you choose that option.
