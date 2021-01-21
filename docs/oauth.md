@@ -84,7 +84,7 @@ Each OAuth config attribute is represented by an element in the XML, the element
 
 ## Supported OAuth Capabilities
 
-This set of OAuth Config capabilities are not shared with the regular plugin capabilities so that's why we are listing these here.
+This set of OAuth Config capabilities are not shared with the regular connector capabilities.
 
 | Capability Name  | Description | Default | Recommendation | 
 | ----  | ------- | --------- | ----------- |
