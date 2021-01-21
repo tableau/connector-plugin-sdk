@@ -5,7 +5,7 @@ title: OAuth Authentication Support
 
 # How to enable OAuth for a plugin connector
 
-First check your Database and Driver document to make sure if it supports OAuth.
+First check your Database and Driver document to make sure if it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/dev-2021.1/samples/scenarios/snowflake_oauth.
 
 To enable OAUth for your connector, in the manifest add another field `<oauth-config>` and link to a oauthConfig.xml you created, described below. 
 
@@ -82,7 +82,7 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
 | refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | if not defined will use accessTokenResponseMaps by default |
 
-## Supported OAuth Capabilities
+## OAuth Capabilities
 
 This set of OAuth Config capabilities are not shared with the regular connector capabilities.
 
@@ -108,21 +108,25 @@ This set of OAuth Config capabilities are not shared with the regular connector 
 <?xml version="1.0" encoding="utf-8"?>
 <pluginOAuthConfig>
     <!-- dbclass must correspond to the class registered in manifest.xml --> 
-    <dbclass>snowflake_oauth</dbclass>
+    <dbclass>Example</dbclass>
     <!-- Subsitute these with your OAuth Client Id and Client Secret -->
     <clientIdDesktop>[your_client_id]</clientIdDesktop>
     <clientSecretDesktop>[your_client_secret]</clientSecretDesktop>
-    <-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
+    <!-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
     <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
     <!-- authUri and tokenUri only contains the path since it has CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
     your input instanceUrl + authUri/tokenUri -->
     <authUri>/oauth/authorize</authUri>
     <tokenUri>/oauth/token-request</tokenUri>
-    <!-- Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort -->
-    <instanceUrlValidationRegex>^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)</instanceUrlValidationRegex>
-    <!-- Snowflake need refresh_token scope to issue refresh tokens -->
-    <scopes>refresh_token</scopes>
-    <!-- Snowflake supports PKCE, Cutom domain, fixed callback url -->
+    <!-- Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort 
+    E.g. for snowflake this could be: ^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)-->
+    <instanceUrlValidationRegex>[your_instanceUrl_validation_rule]</instanceUrlValidationRegex>
+    <!-- Add the scopes needed for OAuth flow
+    E.g. Snowflake need refresh_token scope to issue refresh tokens -->
+    <scopes>scope1</scopes>
+    <scopes>scope2</scopes>
+    <scopes>scope3</scopes>
+    <!-- My Example OAuth Provider supports PKCE, Cutom domain, fixed callback url -->
     <capabilities>
         <entry>
             <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
@@ -145,7 +149,7 @@ This set of OAuth Config capabilities are not shared with the regular connector 
             <value>true</value>
         </entry>
     </capabilities>
-    <!-- Map Tableau recognized attr <key> to Snowflake OAuth response attr <value> -->
+    <!-- Map Tableau recognized attr <key> to My Example OAuth Provider response attr <value> -->
     <accessTokenResponseMaps>
         <entry>
             <key>ACCESSTOKEN</key>
@@ -211,4 +215,4 @@ When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil
 
 ## Web Create flow
 
-For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.
+For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.[abc](## Supported OAuth Capabilities)

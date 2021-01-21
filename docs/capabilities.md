@@ -13,6 +13,7 @@ Use Tableau capabilities to customize and tune your connector behavior.
 * [Stored Procedures](#stored-procedures)
 * [Isolation Level](#isolation-level)
 * [Uncommon](#uncommon)
+* [OAuth](#oauth)
 
 **Read the table**
 
@@ -282,3 +283,7 @@ Capability | Description | Default | Recommended
 CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only. | &ndash; | &ndash;  
 CAP_SUPPRESS_GET_SERVER_TIME | Some datasources, such as Hive, are very slow at retrieving the server time.  | &ndash; | &ndash; 
 CAP_SUPPORTS_UNION | Set to 'no' if data source doesn't support UNION functionality. | yes | yes 
+
+## OAuth
+
+Please refer to [OAuth Capabilities]({{ site.baseurl }}/docs/oauth#oauth-capabilities).
