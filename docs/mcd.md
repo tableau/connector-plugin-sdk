@@ -155,7 +155,7 @@ The connection field names below should specify the `authentication` category.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
-| authentication | The authentication mode for connection | No | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only |
+| authentication | The authentication mode for connection | No | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only <br> `oauth`: See the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for details  |
 | username | Username | Yes |  |
 | password | Password | Yes | Supports `secure` field attribute |
 
