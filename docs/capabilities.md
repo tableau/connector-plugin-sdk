@@ -13,7 +13,6 @@ Use Tableau capabilities to customize and tune your connector behavior.
 * [Stored Procedures](#stored-procedures)
 * [Isolation Level](#isolation-level)
 * [Uncommon](#uncommon)
-* [OAuth](#oauth)
 
 **Read the table**
 
