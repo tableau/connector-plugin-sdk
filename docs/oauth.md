@@ -5,7 +5,7 @@ title: OAuth Authentication Support
 
 # How to enable OAuth for a plugin connector
 
-First check your Database and Driver document to make sure if it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/dev-2021.1/samples/scenarios/snowflake_oauth.
+First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/dev-2021.1/samples/scenarios/snowflake_oauth.
 
 To enable OAUth for your connector, in the manifest add another field `<oauth-config>` and link to a oauthConfig.xml you created, described below. 
 
@@ -215,4 +215,4 @@ When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you wil
 
 ## Web Create flow
 
-For Web Create, the UI dialog would be same with Tableau Desktop with the difference that we are using the server OAuth Client configs.[abc](## Supported OAuth Capabilities)
+For Web Authoring, the UI dialog will be same as Tableau Desktop. The difference will be that we are using the server OAuth Client configs.
