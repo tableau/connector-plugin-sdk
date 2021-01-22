@@ -1,13 +1,13 @@
 ---
 title: OAuth Authentication Support
 ---
-**IMPORTANT:** This feature is available only in Tableau 2021.1 or later. 
+**IMPORTANT:** This feature is available in Tableau 2021.1 and newer. 
 
 # How to enable OAuth for a plugin connector
 
 First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/dev-2021.1/samples/scenarios/snowflake_oauth.
 
-To enable OAUth for your connector, in the manifest add another field `<oauth-config>` and link to a oauthConfig.xml you created, described below. 
+To enable OAuth for your connector add an `<oauth-config>` field in the manifest.xml and link to an oauthConfig.xml you created, described below. 
 
 ```xml
   manifest.xml
@@ -21,7 +21,7 @@ To enable OAUth for your connector, in the manifest add another field `<oauth-co
   </connector-plugin>
 ```
 
-In your connectionFields.xml file make sure add an authentication with value equal to "oauth"
+In your connectionFields.xml file make sure add an `authentication` field with a value equal to `oauth`.
 
 ```xml
   connectionFields.xml Single Auth Type:
@@ -40,20 +40,20 @@ In your connectionFields.xml file make sure add an authentication with value equ
   </field>
 ```
 
-In your connectionBuilder.js file you need to use your DB sepcific logic to handle how to pass in OAuth attributes. E.g. for snowflake:
+In your connectionBuilder.js file you need to use your DB sepcific logic to handle how to pass in OAuth attributes. Example:
 
 ```js
   connectionBuilder.js
   if(authAttrValue == "oauth")
-    {
-        params["AUTHENTICATOR"] = "OAUTH";
-        params["TOKEN"] = attr["ACCESSTOKEN"];
-    }
+  {
+      params["AUTHENTICATOR"] = "OAUTH";
+      params["TOKEN"] = attr["ACCESSTOKEN"];
+  }
 ```
 
 # The OAuth Config File
 
-The OAuth Config file defines your oauth connector configs and also provide the ability to customize how your oauth flow should work.
+The OAuth Config file defines your connector's OAuth configuration and also provide the ability to customize how the OAuth flow should work.
 
 The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2021.1/validation/oauth_config.xsd)) is indentified in the manifest using the `<oauth-config>` element. Here we discuss the structure of this file.
 
@@ -69,18 +69,18 @@ Each OAuth config attribute is represented by an element in the XML, the element
 
 | Name  | Type | Meaning | Optional? | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| dbclass | String | The dbclass for your oauthConfig | No | dbclass must be same with the `class` attribute in manifest.xml | 
-| clientIdDesktop | String | Client ID you registered for Tableau Desktop | Yes | This is not considered as secrets and will be stored in plain text | 
-| clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | Yes | This is not considered as secrets and will be stored in plain text | 
+| dbclass | String | The identifier for your oauthConfig | No | The dbclass must be same with as the `class` attribute in manifest.xml | 
+| clientIdDesktop | String | Client ID you registered for Tableau Desktop | Yes | This is not considered a secret and will be stored in plain text | 
+| clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | Yes | This is not considered a secret and will be stored in plain text | 
 | redirectUrisDesktop | String[] | Redirect Urls for Desktop | Yes	| The host for redirectUrisDesktop must be a valid loopback address| 
 | authUri | String | Authorization endpoint URI | No | |
 | tokenUri | String | Token endpoint URI | No | |
 | userInfoUri | String | User Info UrI | Yes | |
 | instanceUrlValidationRegex | String | Use to validate against your OAuth instance Url. | Yes | |
 | scopes | String[] | scopes | No | |
-| capabilities | Map<String, String> | This defines how oauth flow behaves differently according the caps you set. | Yes | |
+| capabilities | Map<String, String> | This defines how OAuth flow behaves differently according the capabilities set. | Yes | |
 | accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
-| refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | if not defined will use accessTokenResponseMaps by default |
+| refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | If not defined will use accessTokenResponseMaps by default |
 
 ## OAuth Capabilities
 
@@ -178,11 +178,11 @@ This set of OAuth Config capabilities are not shared with the regular connector 
 ```
 # OAuth on Tableau Desktop
 
-Your Desktop sign in Dialog will look like this, you can choose different auth mode and notice different required fields appear. This example has multiple auth type supported and one of them is oauth. 
+In Tableau Desktop the connection dialog will look like this.  If a different auth mode is chosen, notice different required fields appear. This example has multiple auth modes supported and one of them is OAuth. 
 
 ![Image](../assets/oauth-desktop-dialog.png)
 
-By clicking the sign in button, you will be directed to your OAuth Provider's sign in Url in a default browser on your machine where you can input your credentials, Tableau will get the required attrs back and upon complete you will see this screen:
+By clicking the sign in button, you will be directed to your OAuth Provider's sign in Url in a default browser on your machine where you can input your credentials, Tableau will get the required attributes back and upon complete you will see this screen:
 
 ![Image](../assets/oauth-desktop-complete.png)
 
@@ -199,20 +199,20 @@ You need to subsitute [your_client_id], [your_client_secret], [your_redirect_url
 
 ## Server Add OAuth token flow
 
-To add an OAuth credential on Tableau Server, you will go to **My Account Settings** page, look for your class in the **Saved Credentals For DataSources** Section.
-After successfully added your credential you will notice an entry appear under your class.
+To add an OAuth credential on Tableau Server, you will go to **My Account Settings** page, look for your connector in the **Saved Credentals For DataSources** Section.
+After successfully added your credential you will notice an entry appear under your connector.
 
 ![Image](../assets//oauth-server-addtoken.png)
 
 ## Desktop Publish flow
 
-When publishing a pluggable OAuth Workbook/DataSource to Tableau Server, you will see multiple auth options:
+When publishing an OAuth enabled connector's Workbook or Data Source to Tableau Server, you will see multiple auth options:
 **Prompt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
 **Embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding. 
-**Embed Password** is no longer a supported auth mechanism for Pluggable OAuth connectors and an error will show up if you choose that option.
+**Embed Password** is not a supported auth mechanism for OAuth connectors and an error will show up if you choose that option.
 
 ![Image](../assets/oauth-desktop-publish.PNG)
 
-## Web Create flow
+## Tableau Server Web Authoring flow
 
 For Web Authoring, the UI dialog will be same as Tableau Desktop. The difference will be that we are using the server OAuth Client configs.
