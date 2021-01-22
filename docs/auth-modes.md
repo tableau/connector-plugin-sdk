@@ -279,7 +279,11 @@ To enable the "Impersonate using embedded password" option in the publish dialog
 The connector plugin present on a Tableau Server instance MUST contain the above two code changes and the server admin should run "tsm pending-changes apply". After this, user should be able to use a vanilla plugin on a Tableau Desktop Client with the same class name and capable of doing basic username-password authentication. Thereafter, when the user tries to publish a workbook using Tableau Desktop to a Tableau Server instance, they should be able to publish it using the option "Impersonate using embedded password". When the workbook is opened in Tableau Server, the delegation should have taken place automatically if appropriate delegation permissions are configured for the authenticated_user and delegated_user(user logged into Tableau server) or else an error message of this sort is thrown from the database "User user1 is not authorized to delegate to user2". For more information on deploying connector plugins in Tableau Server, please refer this [document](https://tableau.github.io/connector-plugin-sdk/docs/share)
 
 A [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins/db_impersonation) JDBC plugin is provided using an Impala database as an example. For documentation on how to configure delegation in Impala, refer to database [documentation](https://impala.apache.org/docs/build/html/topics/impala_delegation.html).
- 
+
+## OAuth Authentication
+
+Please refer to the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for more details.
+
 ## Considerations for 'hadoophive' and 'spark' base classes
 
 When using 'hadoophive' or 'spark' as a base class there are additional constraints and requirements in the Connection Dialog and Connection Resolver.
