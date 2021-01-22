@@ -280,10 +280,6 @@ The connector plugin present on a Tableau Server instance MUST contain the above
 
 A [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins/db_impersonation) JDBC plugin is provided using an Impala database as an example. For documentation on how to configure delegation in Impala, refer to database [documentation](https://impala.apache.org/docs/build/html/topics/impala_delegation.html).
 
-## OAuth Authentication
-
-Please refer to the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for more details.
-
 ## Considerations for 'hadoophive' and 'spark' base classes
 
 When using 'hadoophive' or 'spark' as a base class there are additional constraints and requirements in the Connection Dialog and Connection Resolver.
