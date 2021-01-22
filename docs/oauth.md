@@ -211,7 +211,7 @@ When publishing an OAuth enabled connector's Workbook or Data Source to Tableau 
 **Embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you wanna use for embedding. 
 **Embed Password** is not a supported auth mechanism for OAuth connectors and an error will show up if you choose that option.
 
-![Image](../assets/oauth-desktop-publish.PNG)
+![Image](../assets/oauth-desktop-publish.png)
 
 ## Tableau Server Web Authoring flow
 
