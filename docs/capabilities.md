@@ -115,7 +115,6 @@ Capability | Description | Default | Recommended
 CAP_JDBC_BIND_BIGDECIMAL_STRING | Set to 'yes' to bind bigdecimal as string for JDBC. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
 CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING | Set to 'yes' to allow Tableau to detect and recover from a JDBC data source that reports the field names in a result set using only upper-case or lower-case characters, instead of the expected field names.  | &ndash;  | &ndash; 
 CAP_JDBC_BIND_SPATIAL_AS_WKB | Set to 'yes' to use WKB for spatial types serialization. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
-CAP_JDBC_BIND_UNKNOWN_COLUMNS | Set to 'yes' to bind unknown columns. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_CONVERT_WKB_HEX_STRING | Set to 'yes' to convert a hex string to regular WKB. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to integer for data insertion. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
