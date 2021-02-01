@@ -88,18 +88,18 @@ This set of OAuth Config capabilities are not shared with the regular connector 
 
 | Capability Name  | Description | Default | Recommendation | 
 | ----  | ------- | --------- | ----------- |
-| CAP_SUPPORTS_CUSTOM_DOMAIN | Whether your OAuth provider supports custom domain. i.e. OAuth endpoint host is not fixed. | false | - |
-| CAP_REQUIRE_PKCE | Whether your OAuth provider supports PKCE, more detials: https://oauth.net/2/pkce/ | false | true |
-| CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD | Whether your OAuth provider PKCE requires code_challenging_method passed in. If set to true, we are using S256 by default. | false | true |
-| CAP_SUPPORTS_STATE | Used to protect against CSRF attacks, more details: https://auth0.com/docs/protocols/state-parameters | false | true |
-| CAP_REQUIRES_VERIFY_STATE | Used together with CAP_SUPPORTS_STATE | false | true |
-| CAP_GET_USERNAME_USES_POST_REQUEST | Only use if you define a USERINFO_URI in oauthConfig file to retrieve the userinfo in a separate request | false | - |
-| CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM | Use this if Client secrets are expected in the query parameter instead of the request header. | false | - |
-| CAP_FIXED_PORT_IN_CALLBACK_URL | Use this when your OAuth provider native app(Tableau Desktop) OAuth clients only support fixed callback url | false | - |
-| CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS | Use this when your OAuth provider native app(Tableau Desktop) OAuth clients support Loopback callback url. E.g. https://developers.google.com/identity/protocols/oauth2/native-app | false | - |
-| CAP_REQUIRES_PROMPT_CONSENT | Add prompt=consent to the request. | false | - |
-| CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add propmt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
-| CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. e.g. https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
+| OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN | Whether your OAuth provider supports custom domain. i.e. OAuth endpoint host is not fixed. | false | - |
+| OAUTH_CAP_REQUIRE_PKCE | Whether your OAuth provider supports PKCE, more detials: https://oauth.net/2/pkce/ | false | true |
+| OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD | Whether your OAuth provider PKCE requires code_challenging_method passed in. If set to true, we are using S256 by default. | false | true |
+| OAUTH_CAP_SUPPORTS_STATE | Used to protect against CSRF attacks, more details: https://auth0.com/docs/protocols/state-parameters | false | true |
+| OAUTH_CAP_REQUIRES_VERIFY_STATE | Used together with OAUTH_CAP_SUPPORTS_STATE | false | true |
+| OAUTH_CAP_GET_USERNAME_USES_POST_REQUEST | Only use if you define a USERINFO_URI in oauthConfig file to retrieve the userinfo in a separate request | false | - |
+| OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM | Use this if Client secrets are expected in the query parameter instead of the request header. | false | - |
+| OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL | Use this when your OAuth provider native app(Tableau Desktop) OAuth clients only support fixed callback url | false | - |
+| OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS | Use this when your OAuth provider native app(Tableau Desktop) OAuth clients support Loopback callback url. E.g. https://developers.google.com/identity/protocols/oauth2/native-app | false | - |
+| OAUTH_CAP_REQUIRES_PROMPT_CONSENT | Add prompt=consent to the request. | false | - |
+| OAUTH_CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add propmt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
+| OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. e.g. https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
 
 ## Example OAuthConfig file:
 **oauthConfig.xml**
@@ -114,7 +114,7 @@ This set of OAuth Config capabilities are not shared with the regular connector 
     <clientSecretDesktop>[your_client_secret]</clientSecretDesktop>
     <!-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
     <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
-    <!-- authUri and tokenUri only contains the path since it has CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
+    <!-- authUri and tokenUri only contains the path since it has OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
     your input instanceUrl + authUri/tokenUri -->
     <authUri>/oauth/authorize</authUri>
     <tokenUri>/oauth/token-request</tokenUri>
@@ -129,23 +129,23 @@ This set of OAuth Config capabilities are not shared with the regular connector 
     <!-- My Example OAuth Provider supports PKCE, Cutom domain, fixed callback url -->
     <capabilities>
         <entry>
-            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
             <value>true</value>
         </entry>
         <entry>
-            <key>CAP_SUPPORTS_CUSTOM_DOMAIN</key>
+            <key>OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN</key>
             <value>true</value>
         </entry>
         <entry>
-            <key>CAP_REQUIRE_PKCE</key>
+            <key>OAUTH_CAP_REQUIRE_PKCE</key>
             <value>true</value>
         </entry>
         <entry>
-            <key>CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+            <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
             <value>true</value>
         </entry>
         <entry>
-            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
             <value>true</value>
         </entry>
     </capabilities>
