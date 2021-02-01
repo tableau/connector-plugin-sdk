@@ -46,6 +46,7 @@ def build_tabquery_command_line(work):
         tb = TabqueryCommandLineExtension()
         logging.debug("Imported extension extend_tabquery")
     except:
+        logging.error("Unable to import extension extend_tabquery.")
         tb = TabqueryCommandLine()
 
     cmdline = tb.build_tabquery_command_line(work)
@@ -66,6 +67,7 @@ class TabqueryCommandLine(object):
 
     def build_tabquery_command_line(self, work):
         """Build the command line string for calling tabquerycli."""
+
         global tab_cli_exe
         cli_arg = "--query-file-list" if work.test_config.logical else "--expression-file-list"
 
@@ -97,8 +99,8 @@ class TabqueryCommandLine(object):
 
         logical_rewrite_iter = next((i for i in cmdline if i.find('-DLogicalQueryRewriteDisable') != -1), None)
         if logical_rewrite_iter == None:
-            #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-            #that tests what you would expect.
+            # Disable constant expression folding. This will bypass the VizEngine for certain simple calculations.
+            # This way we run a full database query that tests what you would expect.
             cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
         # LogicalQuery cache can cache results across multiple expressions, and prevent
@@ -123,5 +125,3 @@ def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
-
-

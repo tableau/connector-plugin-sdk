@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+##[2.4.0]
+- `--version` command line flag.
+- Error codes return are more consistent. You can use the `--error-codes` flag to see them.
 ## [2.3.1] - 2020-12-23
 - Revert Staples smoke test to be Expression; will fix in 2.3.2.
 ## [2.3.0] - 2020-12-09
@@ -36,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.16] - 2020-07-29
 - Add invalid driver tests for ODBC/JDBC plugins.
+[3.0.0 betas]
 
 ## [2.1.15] - 2020-06-15
 - Add initialsql tests for vertica

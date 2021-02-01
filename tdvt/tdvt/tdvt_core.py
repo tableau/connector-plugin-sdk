@@ -28,6 +28,7 @@ from .tabquery import build_connectors_test_tabquery_command_line
 from .tabquery import build_tabquery_command_line
 from .test_results import *
 
+
 ALWAYS_GENERATE_EXPECTED = False
 
 
@@ -260,7 +261,7 @@ class BatchQueueWork(object):
         try:
             self.setup_files(test_list)
         except IOError as e:
-            logging.debug(self.get_thread_msg() + "Output dir IOError " + str(e))
+            logging.error(self.get_thread_msg() + "Output dir IOError " + str(e))
             return 0
 
         cmdline = build_tabquery_command_line(self)
@@ -271,7 +272,7 @@ class BatchQueueWork(object):
             self.run_process(cmdline)
         except subprocess.CalledProcessError as e:
             error_output = str(e.output)
-            logging.debug(
+            logging.error(
                 self.get_thread_msg() + "CalledProcessError: Return code: " + str(e.returncode) + " " + error_output)
             # Let processing continue so it can try and find any output file which will contain database error messages.
             # Save the error message in case there is no result file to get it from.
@@ -280,7 +281,7 @@ class BatchQueueWork(object):
             if self.test_set.expected_message and self.test_set.expected_message in self.saved_error_message:
                 self.error_state = TestErrorExpected()
             elif e.returncode == 18:
-                logging.debug(self.get_thread_msg() + "Tests aborted")
+                logging.error(self.get_thread_msg() + "Tests aborted")
                 sys.stdout.write('A')
                 self.error_state = TestErrorAbort()
             else:
@@ -291,7 +292,7 @@ class BatchQueueWork(object):
             self.error_state = TestErrorTimeout()
             self.timeout = True
         except RuntimeError as e:
-            logging.debug(self.get_thread_msg() + "RuntimeError: " + str(e))
+            logging.error(self.get_thread_msg() + "RuntimeError: " + str(e))
             self.saved_error_message = str(e)
             self.error_state = TestErrorOther()
 
@@ -324,7 +325,7 @@ def do_work(work):
         try:
             os.remove(work.log_zip_file)
         except Exception as e:
-            logging.debug(work.get_thread_msg() + "got exception deleting zipped log file: " + str(e))
+            logging.error(work.get_thread_msg() + "got exception deleting zipped log file: " + str(e))
             pass
 
 
@@ -350,11 +351,12 @@ def save_results_diff(actual_file, diff_file, expected_file, diff_string):
         f.write("Diff of [{}] and [{}].\n".format(actual_file, expected_file))
         f.write(diff_string)
         f.close()
-    except:
+    except Exception as e:
+        logging.exception(e)
         pass
 
 
-def compare_results(test_name, test_file, full_test_file, work):
+def compare_results(test_name, test_file, full_test_file, work) -> TestResult:
     """Return a TestResult object that specifies what was tested and whether it passed.
        test_file is the full path to the test file (base test name without any logical specification).
        full_test_file is the full path to the actual test file.
@@ -377,7 +379,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         actual_xml = parse(actual_file).getroot()
         result.add_test_results(actual_xml, actual_file)
     except ParseError as e:
-        logging.debug(work.get_thread_msg() + "Exception parsing actual file: " + actual_file + " exception: " + str(e))
+        logging.exception(work.get_thread_msg() + "Exception parsing actual file: " + actual_file + " exception: " + str(e))
         result.error_status = TestErrorMissingActual()
         return result
 
@@ -399,7 +401,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         try:
             expected_output.add_test_results(parse(expected_file).getroot(), '')
         except ParseError as e:
-            logging.debug(
+            logging.exception(
                 work.get_thread_msg() + "Exception parsing expected file: " + expected_file + " exception: " + str(e))
 
         diff_counts, diff_string = result.diff_test_results(expected_output)
@@ -476,7 +478,7 @@ def write_standard_test_output(all_test_results: Dict, output_dir: str):
         json_file.write(json_str)
         json_file.close()
     except Exception:
-        logging.debug("Error writing ouput file [{0}].".format(json_file_path))
+        logging.exception("Error writing ouput file [{0}].".format(json_file_path))
 
 
 def get_tuple_display_limit():
@@ -574,7 +576,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
     except IOError:
-        logging.debug("Could not open output file [{0}].".format(csv_file_path))
+        logging.exception("Could not open output file [{0}].".format(csv_file_path))
         return
 
     csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
@@ -667,12 +669,12 @@ def run_diff(test_config, diff):
             try:
                 actual_xml = parse(actual).getroot()
             except ParseError as e:
-                logging.debug("Exception parsing actual file: " + actual + " exception: " + str(e))
+                logging.error("Exception parsing actual file: " + actual + " exception: " + str(e))
                 continue
             try:
                 expected_xml = parse(f).getroot()
             except ParseError as e:
-                logging.debug("Exception parsing expected file: " + f + " exception: " + str(e))
+                logging.error("Exception parsing expected file: " + f + " exception: " + str(e))
                 continue
 
             result = TestResult(test_config=test_config)

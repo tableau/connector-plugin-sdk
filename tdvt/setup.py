@@ -17,5 +17,6 @@ setup(
     test_suite='test',
     scripts=['tdvt_launcher.py'],
     install_requires=['defusedxml'],
+    extras_require={'sentry': ['sentry-sdk']},
     include_package_data=True
 )
