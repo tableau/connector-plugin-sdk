@@ -1,70 +1,23 @@
-# Tableau Connector SDK Changelog
+# Changelog
+All notable changes to this project will be documented in this file.
 
-## Unreleased
-## 2021-02-03
-### Addd
-- Add instanceurl to validate fields in packaging tool
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2021-01-10
-### Added
-- Add OAuth Scenario for Snowflake
+## [2.1.0] - 5/8/2020
+- Add support for packaging connectors using connection dialogs v2
 
-## 2020-10-01
-### Added
-- Add JDBC Kerberos scenario for postgres 
+## [2.0.0] - 4/7/2020
+- Remove option to sign .taco file
 
-## 2020-09-21
-### Changed
-- Validate length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
+## [1.0.0] - 1/10/2020
+- Improve command line argument parsing: detect duplicated option -d/--dest
+- Update `package.py` to create directory for logs if it does not exist.
+- Change wording for -l flag
+- Update packaging unit tests to be more descriptive on the command line.
+- Enforce https for links in the manifest while packaging
 
-## 2020-08-27
-### Added
-- Add ISO8601 support to postgres_odbc and postgres_jdbc samples
+## [0.0.1] - 10-3-2019
+Initial release of the Connector Packaging Tool
 
-## 2020-08-11
-### Added
--  Add `vendor[1,2,3]-prompt` as options to ConnectionConfig-CT in `tcd_latest.xsd`.
-
-## 2020-07-13
-### Changed
-- Changed sqlite_extract\dialect.xml, make it doesn't inherit from any base dialect
-
-## 2020-07-13
-### Added
-- Add `PasswordOnly` as an option to AuthMode-CT in `tcd_latest.xsd`.
-- Add `Password` as an option to AuthOptionEnum-ST in `tcd_latest.xsd`.
-
-
-## 2020-06-10
-### Added
-- Add SQLDialect to samples/components/dialects
-
-## 2020-06-11
-### Removed
-- Remove `base-types` from tdd samples. Intended functionality is exposed in `<format-column-definition>`
-
-## 2020-06-02
-### Changed
-- Date functions in dialect examples to have only `<formula part='week'>` for functions with `localstr` as last argument. See [isuue](https://github.com/tableau/connector-plugin-sdk/issues/505) for details
-
-## 2019-12-11
-### Added
-- New SQLite Extract-Only Sample
-- Removed unnecessary attribute from samples
-- Fix issue with SSL in the MySQL ODBC sample
-### Changed
-### Removed
-- Removed INITSTMT from MySQL ODBC sample so that intialSQL does not run twice. 
-
-## 2019-03-29
-### Added
-- Brought in changes from internal repository.
-- New ISO Date test cases.
-### Changed
-- Improved error messaging when running TDVT from the wrong directory.
-- Improved the generated Diff files.
-
-## 2019-11-22
-
-### Changed
-- XSD changes, Change connectionconfig's children could be in random order
+This release allows for the packaging, signing, and verification of Tableau Connector (`.taco`) files.
