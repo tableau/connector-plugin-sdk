@@ -15,7 +15,7 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
-PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'vendor1', 'vendor2', 'vendor3']
+PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'instanceurl', 'vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAME_PREFIX = 'v-'
 
 # Holds the mapping between file type and XSD file name
