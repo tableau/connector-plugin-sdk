@@ -164,7 +164,7 @@ __Step 3: Use jarsigner to sign TACO file__
 Using the keystore you imported your signed certificate to, use jarsigner to sign your TACO file:
 `jarsigner -keystore your_keystore path_to_taco your_alias -tsa url`
 
-The `-tsa url` argument is optional, but strongly encouraged. It's the url to a Timestamp Authority, and by adding this argument you will stamp the signed TACO file with a timestamp, extending its period of validity. While there are several free options for timestamp authority, the CA you got the certificate from will most likely have a timestamp authority you can use.
+The `-tsa url` argument is optional, but **strongly encouraged**. It's the url to a Timestamp Authority, and by adding this argument you will stamp the signed TACO file with a timestamp, extending its period of validity. While there are several free options for timestamp authority, the CA you got the certificate from will most likely have a timestamp authority you can use.
 
 For more information about jarsigner arguments, see the Java Documentation about [jarsigner](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jarsigner.html).
 
