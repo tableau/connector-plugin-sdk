@@ -133,6 +133,8 @@ def load_test(config, test_dir=get_root_dir()):
     SmokeTest = True  # tests are treated as smoke tests if SmokeTest = True
     Enabled = False # If set to False, the test is marked `D`, not run, and counted as a fail.
 
+    [ExtractTests]
+
     [LogicalConfig]
     Name = mydb_config
     key = value
@@ -157,6 +159,7 @@ def load_test(config, test_dir=get_root_dir()):
     percentile_test = 'PercentileTests'
     logical_config = 'LogicalConfig'
     connection_test = 'ConnectionTests'
+    extract_tests = 'ExtractTests'
 
     KEY_EXCLUSIONS = 'Exclusions'
 
@@ -334,6 +337,22 @@ def load_test(config, test_dir=get_root_dir()):
                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
                                                 test_path + 'connection_tests/calcs/', test_dir,
+                                                get_password_file(sect), get_expected_message(sect), True,
+                                                get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
+            except KeyError as e:
+                logging.debug(e)
+                pass
+        elif extract_tests in section:
+            test_path = 'exprtests/'
+
+            try:
+                all_ini_sections.remove(section)
+                test_config.add_expression_test('StaplesExtractTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
+                                                test_path + 'staples/setup.staples_data.txt', test_dir,
+                                                get_password_file(sect), get_expected_message(sect),  True,
+                                                get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
+                test_config.add_expression_test('CastCalcsExtractTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
+                                                test_path + 'connection_tests/calcs/setup.calcs_data.txt', test_dir,
                                                 get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:

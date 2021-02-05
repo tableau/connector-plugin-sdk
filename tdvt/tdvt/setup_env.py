@@ -59,10 +59,11 @@ def add_datasource(name, ds_registry):
         if logical == 's':
             logical = None
 
-    create_ds_ini_file(name, logical)
+    extract_only = input("Is this an extract-only datasource? y/n: ").lower() == 'y'
+    create_ds_ini_file(name, logical, extract_only)
     update_tds_files(name, connection_password_name)
 
-def create_ds_ini_file(name, logical_config):
+def create_ds_ini_file(name, logical_config, extract_only: bool):
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
@@ -78,15 +79,20 @@ def create_ds_ini_file(name, logical_config):
         else:
             ini.write('LogicalQueryFormat = ' + logical_config + '\n')
         ini.write('\n')
-        ini.write('[StandardTests]\n')
-        ini.write('\n')
-        ini.write('[LODTests]\n')
-        ini.write('\n')
-        ini.write('[UnionTest]\n')
-        ini.write('\n')
-        ini.write('[ConnectionTests]\n')
-        ini.write('StaplesTestEnabled = True\n')
-        ini.write('CastCalcsTestEnabled = True\n')
+        if extract_only_datasource:
+            ini.write('[ExtractTests]\n')
+            ini.write('StaplesEnabled = True\n')
+            ini.write('CalcsEnabled = True\n')
+        else:
+            ini.write('[StandardTests]\n')
+            ini.write('\n')
+            ini.write('[LODTests]\n')
+            ini.write('\n')
+            ini.write('[UnionTest]\n')
+            ini.write('\n')
+            ini.write('[ConnectionTests]\n')
+            ini.write('StaplesTestEnabled = True\n')
+            ini.write('CastCalcsTestEnabled = True\n')
         ini.write('\n')
 
         print ("Created ini file: " + ini_path)
