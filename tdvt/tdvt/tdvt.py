@@ -36,12 +36,12 @@ from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import (
     TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 )
-from .constants import SENTRY_TAGS_LIST
+from .constants import *
 from .custom_types import ExitCode
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core
-from .version import __version__
+from .version import __version__ as tdvt_version
 
 # This contains the dictionary of configs you can run.
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
