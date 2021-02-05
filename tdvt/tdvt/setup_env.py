@@ -79,7 +79,7 @@ def create_ds_ini_file(name, logical_config, extract_only: bool):
         else:
             ini.write('LogicalQueryFormat = ' + logical_config + '\n')
         ini.write('\n')
-        if extract_only_datasource:
+        if extract_only:
             ini.write('[ExtractTests]\n')
             ini.write('StaplesEnabled = True\n')
             ini.write('CalcsEnabled = True\n')
