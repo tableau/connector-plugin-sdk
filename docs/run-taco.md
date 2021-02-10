@@ -4,7 +4,7 @@ title: Run Your Connector
 
 # Load order and class name collisions
 
-If a connector has the same class as a connector that has already been registered, the new connector will be rejected. This means that connectors loaded first have precedent when two connectors share the same class name.
+If a connector has the same class as a connector that has already been registered, the new connector will be rejected. This means that connectors loaded first have precedence when two connectors share the same class name.
 
 Tableau loads connectors by directory in the following order:
 1. Built-in Tableau connectors
