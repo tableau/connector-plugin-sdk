@@ -36,7 +36,7 @@ As part of the packaging process, the packager ensures that:
 
 However, this validation does not guarantee that the connector will work in Tableau. The packager does not validate JavaScript, for example.
 To ensure that your connector works before packaging it, you can do one of the following:
-- [Run your unpackaged connector]({{ site.baseurl }}/docs/share)
+- [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector)
 - Test it using [TDVT]({{ site.baseurl }}/docs/tdvt) 
 
 ### Set up the virtual environment for packaging
