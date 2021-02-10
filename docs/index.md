@@ -1,7 +1,7 @@
 ---
 title: Tableau Connector SDK
 ---
-Tableau has great connectivity that allows you to visualize data from virtually anywhere. Tableau includes dozens of connectors already, and also gives you the tools to build a new connector with the Tableau Connector SDK. 
+Tableau has great connectivity that allows you to visualize data from virtually anywhere. Tableau includes dozens of connectors already, and also gives you the tools to build a new connector with the Tableau Connector SDK.
 
 With this SDK, you can create a new connector that you can use to visualize your data from any database through an ODBC or JDBC driver.
 You can customize connector behavior, fine-tune SQL generation, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
@@ -42,7 +42,7 @@ These are the general steps you will follow to create a fully functional connect
 
 1. Have a look at one of the sample connectors located in the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins). These connectors can make a good starting point if you copy the connector files to your workspace.
 
-2. Customize the connector files as needed to name your connector and allow it to connect to your database. See the [Example]({{ site.baseurl }}/docs/example) for more information. 
+2. Customize the connector files as needed to name your connector and allow it to connect to your database. See the [Example]({{ site.baseurl }}/docs/example) for more information.
 
 3. Make sure your connector has all the required files:
 > * __Manifest file__. This defines the connector.
@@ -81,9 +81,9 @@ The resulting connector will work on Tableau Desktop and Tableau Server on Windo
 # Using a connector
 
 ## Packaged connector (TACO)
-Place your packaged TACO file in the My Tableau Repository/Connectors folder and launch Tableau. See [Run your packaged connector (.taco)]({{ site.baseurl }}/docs/share) for more information.
+Place your packaged TACO file in the My Tableau Repository/Connectors folder and launch Tableau. See [Run your packaged connector (.taco)]({{ site.baseurl }}/docs/run-taco) for more information.
 
 Note: Support for loading TACO files was added in the 2019.4 release of Tableau.
 
 ## Developer path
-You can tell Tableau to load unpackaged connectors with a special command-line argument that tells Tableau where to find your connector. See [Run your "under development" connector]({{ site.baseurl }}/docs/share) for more information.
+You can tell Tableau to load unpackaged connectors with a special command-line argument that tells Tableau where to find your connector. See [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector) for more information.
