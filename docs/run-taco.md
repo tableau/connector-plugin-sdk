@@ -13,7 +13,7 @@ Tableau loads connectors by directory in the following order:
 
 # Run Your Packaged Connector (TACO file)
 
-Starting in 2019.4 Beta 1, you can load packaged connectors (otherwise known as TACO files). To use a connector in earlier Tableau versions, or to run an unpackaged connector, see [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector) below.
+Starting in 2019.4, you can load packaged connectors (otherwise known as TACO files). To use a connector in earlier Tableau versions, or to run an unpackaged connector, see [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector) below.
 
 ## Run a packaged connector in Tableau Desktop
 1. Copy your packaged connector file (with a .taco filename extension) into your My Tableau Repository/Connectors directory.
