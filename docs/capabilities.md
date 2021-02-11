@@ -279,6 +279,6 @@ CAP_SET_ISOLATION_LEVEL_VIA_SQL | Set to 'yes' to force Tableau to set the trans
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only. | &ndash; | &ndash;  
-CAP_FORCE_COUNT_FOR_NUMBEROFRECORDS | Set to 'yes' to  use COUNT() rather than SUM() for calculating number of records.  Available in Tableau 2020.2 and newer. | &ndash; | &ndash;  
+CAP_FORCE_COUNT_FOR_NUMBEROFRECORDS | Set to 'yes' to force these alternatives for calculating number of records: <br>1. COUNT(1) rather than SUM(1) <br>2. COUNT(const) * const rather than SUM(const) <br>Available in Tableau 2020.2 and newer. | &ndash; | &ndash;  
 CAP_SUPPRESS_GET_SERVER_TIME | Some datasources, such as Hive, are very slow at retrieving the server time.  | &ndash; | &ndash; 
 CAP_SUPPORTS_UNION | Set to 'no' if data source doesn't support UNION functionality. | yes | yes 
