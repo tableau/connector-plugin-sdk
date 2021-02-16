@@ -86,6 +86,8 @@ The TDR file also contains the connection-normalizer and the driver-resolver sec
 
 ```
 
+Starting in Tableau 2021.1 a connector using [Connection Dialog V2]({{ site.baseurl }}/docs/mcd) can let the system determine at runtime the correct <span style="font-family: courier new">connection-normalizer</span> by not defining it. See [API Reference]({{ site.baseurl }}/docs/api-reference#connection-normalizer) for more details.
+
 The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
 
 Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
