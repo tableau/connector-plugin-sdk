@@ -37,7 +37,7 @@ To add a custom vendor attribute for an ODBC-based connector, you must modify th
 - connectionResolver.tdr
 - connectionBuilder.js
 
-To add a custom vendor attribute for an ODBC-based connector, you must modify these files:
+To add a custom vendor attribute for an JDBC-based connector, you must modify these files:
 - connection-dialog.tcd
 - connectionResolver.tdr
 - connectionProperties.js
