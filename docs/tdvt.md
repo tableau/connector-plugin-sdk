@@ -334,7 +334,7 @@ Run Connector tests from the TDVT working directory. Sample setup files required
 - Run ServerVersionTest:
 
    tdvt run-connectors-test --conn-test serverVersion --conn-test-file [serVersionSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversion.xml) --conn-test-password-file [serVersionPassword.password](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversiontest.password)
-   
+
 ## Test the sample connectors
 
 Sample connectors are located in the samples/plugins folder.
@@ -460,6 +460,27 @@ The first thing TDVT does is try and connect to your database using the .tds fil
 `py -3 tdvt.py …`
 
 1. Check tabquerytool.exe. This file should be placed in your Tableau bin directory and tdvt/config/tdvt_override.ini should be updated to point at that executable.
+
+__Tests fail with "Reference to undefined field..."__
+The first thing to check is that the column exists in your test database. If it doesn't, you will need to load the data again.
+
+TDVT expects the column names to exactly match those in the TestV1 datasets provided. It is recommended to match the column names exactly, as TDVT tests referencing those fields will fail otherwise.
+
+If for some reason the columns in your test database have to be named something different, you can work around that by adding column definitions to your TDS file that do match. For example, if your instance of the Staples table has the field Discounts with a trailing underscore, like so:
+
+```xml
+<column caption='Discount_' datatype='real' name='[discount_]' role='measure' type='quantitative' />
+```
+
+Add the following column definition:
+
+```xml
+<column datatype='real' name='[discount]' role='measure' type='quantitative'>
+    <calculation class='tableau' formula='[discount_]' />
+</column>
+```
+
+The new column will have the same data, and TDVT will be able to find it.
 
 __Boolean data types are not recognized or your database doesn't support them__
 You may need to rename a column in the TDS file.
