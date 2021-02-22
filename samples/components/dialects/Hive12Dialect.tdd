@@ -1,4 +1,10 @@
-<dialect name='FullHive12Dialect' class='hive_clone' version='18.1'>
+<!--
+  This example is based on Hive12Dialect.
+  The current version is a middle ground of Hive12Dialect with HiveDialect as base, the ultimate goal of
+  this dialect sample is to define everything from stretch without a base, we have TFS 1234333 to track
+  the work.
+-->
+<dialect name='FullHive12Dialect' base='HiveDialect' class='hadoophive' version='18.1'>
   <function-map>
     <function group='numeric' name='ABS' return-type='real'>
       <formula>ABS(%1)</formula>
