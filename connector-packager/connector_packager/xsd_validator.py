@@ -163,6 +163,21 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                                                  " already exists. Cannot have multiple fields with the same name.")
 
                     return False
+                if field_name == 'instanceurl':
+                    used_for_oauth = False
+                    for conditions in child.iter("conditions"):
+                        for condition in conditions.iter("condition"):
+                            if 'field' in condition.attrib:
+                                if condition.attrib['field'] == 'authentication':
+                                    if 'value' in condition.attrib:
+                                        if condition.attrib['value'] == 'oauth':
+                                            used_for_oauth = True
+                    if not used_for_oauth:
+                        xml_violations_buffer.append("Element 'field', attribute 'name'='instanceurl' can only be used conditional on field " + 
+                                                     "'authentication' with 'value'='oauth'. See 'Connection Field Platform Integration' section " + 
+                                                     "of documentation for more information.")
+                        return False
+
                 field_names.add(field_name)
 
             if 'category' in child.attrib:
