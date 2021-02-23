@@ -1211,7 +1211,6 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula part='weekday'>CAST((8 + DATEDIFF(CAST(%2 AS DATE),NEXT_DAY(%2,%3))) AS STRING)</formula>
       <formula part='week'>FORMAT_NUMBER(FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),%3)))/7),0)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
@@ -1232,7 +1231,6 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula part='weekday'>(8 + DATEDIFF(CAST(%2 AS DATE),NEXT_DAY(%2,%3)))</formula>
       <formula part='week'>FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),%3)))/7)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
