@@ -220,6 +220,7 @@ fieldnameLower | True | N/A | Set to true if the column names are all lowercase 
 fieldnameNoSpace | True | N/A | Set to true if the column names have no spaces | No
 fieldnameLower_underscore | True | N/A | Set to true if the column names have underscores and are all lowercase | No
 fieldnameUnderscoreNotSpace | True | N/A | Set to true if the column names replace spaces with underscores | No
+fieldnamePostfix | SomePostfix | N/A | Postfix that is applied to every column name | No
 
 ### [StandardTests]
 This is required to run the standard tests.
