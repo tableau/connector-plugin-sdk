@@ -244,6 +244,8 @@ The images show the Connection Dialog produced using the Connection Fields file 
 
 This example shows how to add a checkbox to the dialog. For sslmode custom boolean values are required to be defined, following 'Connection Field Platform Integration' section below.  The default-value matches false-value, ensuring the checkbox is unchecked by default.  Within the ConnectionBuilder() the field "sslmode" will only have value "" or "require".
 
+![alt text]({{ site.baseurl }}/assets/mcd-connection-dialog-4.png "Connection Dialog with a 'Require SSL' checkbox")
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 
