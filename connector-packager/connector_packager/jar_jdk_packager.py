@@ -4,6 +4,7 @@ import subprocess
 import shutil
 import xml.etree.ElementTree as ET
 
+from packaging import version
 from pathlib import Path
 from typing import List
 
@@ -22,7 +23,7 @@ MANIFEST_ROOT_ELEM = "connector-plugin"
 MIN_TABLEAU_VERSION_ATTR = "min-version-tableau"
 
 
-def get_min_support_version(file_list: List[ConnectorFile]) -> str:
+def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tableau: str) -> str:
     """
     Get the minimum support version based on features used in the connector
 
@@ -43,6 +44,10 @@ def get_min_support_version(file_list: List[ConnectorFile]) -> str:
         if connector_file.file_type == "connection-fields":
             min_version_tableau = "2020.3"
             reasons.append("Connector uses Connection Dialogs V2, which was added in the 2020.3 release")
+
+    if version.parse(cur_min_version_tableau) > version.parse(min_version_tableau):
+        reasons.append("min-tableau-version set to " + cur_min_version_tableau + ", since that is higher than calculated version of " + min_version_tableau)
+        min_version_tableau = cur_min_version_tableau
 
     return min_version_tableau, reasons
 
@@ -76,13 +81,15 @@ def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], j
     # make a copy of manifest file
     shutil.copyfile(input_dir / manifest_file.file_name, input_dir / MANIFEST_FILE_COPY_NAME)
 
-    # stamp the original manifest file
-    min_version_tableau, reasons = get_min_support_version(file_list)
     manifest = ET.parse(input_dir / manifest_file.file_name)
     plugin_elem = manifest.getroot()
     if plugin_elem.tag != MANIFEST_ROOT_ELEM:
         logger.info("Manifest's root element has been modified after xml validation")
         return False
+
+    # stamp the min-tableau-version onto original manifest
+    cur_min_version_tableau = plugin_elem.get(MIN_TABLEAU_VERSION_ATTR, "0")
+    min_version_tableau, reasons = get_min_support_version(file_list, cur_min_version_tableau)
     plugin_elem.set(MIN_TABLEAU_VERSION_ATTR, min_version_tableau)
     manifest.write(input_dir / manifest_file.file_name, encoding="utf-8", xml_declaration=True)
 
