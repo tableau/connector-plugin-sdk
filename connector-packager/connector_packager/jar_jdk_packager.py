@@ -4,6 +4,7 @@ import subprocess
 import shutil
 import xml.etree.ElementTree as ET
 
+from packaging import version
 from pathlib import Path
 from typing import List
 
@@ -44,7 +45,7 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
             min_version_tableau = "2020.3"
             reasons.append("Connector uses Connection Dialogs V2, which was added in the 2020.3 release")
 
-    if float(cur_min_version_tableau) > float(min_version_tableau):
+    if version.parse(cur_min_version_tableau) > version.parse(min_version_tableau):
         reasons.append("min-tableau-version set to " + cur_min_version_tableau + ", since that is higher than calculated version of " + min_version_tableau)
         min_version_tableau = cur_min_version_tableau
 
