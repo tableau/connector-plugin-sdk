@@ -194,7 +194,7 @@ Config your OAuth client on your server: This would be the first step you need t
 ```
 tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"[your_dbclass]\", \"oauth.config.client_id\":\"[your_client_id]\", \"oauth.config.client_secret\":\"[your_client_secret]\", \"oauth.config.redirect_uri\":\"[your_redirect_url]\"}]" --force-keys
 ```
-Replace [your_dbclass] with the `dbclass` element registered in your oauthConfig.xml file. Subsitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
+Replace [your_dbclass] with the `dbclass` element registered in your oauthConfig.xml file. Substitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
 [your_redirect_url] needs to follow certain format, if your server address is https://Myserver/ then [your_reirect_uri] needs to be https://Myserver/auth/add_oauth_token.
 
 ## Server Add OAuth token flow
