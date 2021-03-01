@@ -135,7 +135,7 @@ __To test a new data source__
 1. Run `tdvt action --add_ds mydb`.
 Choose to generate the password file and choose the logical query config. This creates a mydb.ini file under /config and will modify your two TDS files to rename the connection and link them to the tds/mydb.password password file.
 
-1. Edit the generated tds/mydb.password file and enter the password for your connection.
+1. Edit the generated tds/mydb.password file and enter the password for your connection. If your db needs multiple fields for authentication such as oauth tokens, pass them in a json string like this: {"ACCESSTOKEN" : "your_access_token", "REFRESHTOKEN" : "your_refresh_token"}. You can obtain "your_access_token" and "your_refresh_token" from any 3rd party tool to retrive oauth tokens such as Postman.
 __Note:__ This can also be done manually. See [The Sample TDS Files](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/tds).
 
 1. Verify your new test suite by running:
