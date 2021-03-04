@@ -249,6 +249,17 @@ Example:
    <format-string-literal value='Standard' unicode-prefix='_utf16' />
  ```
 
+### Date Literal Support
+Date and Datetime formatting elements take a formula, typically used to cast the string literal to a date type, and a date string format.
+
+The `formula` attribute uses the token '%1' to insert the formatted date string. The `format` attribute describes the database's accepted string format for date literals, using [ICU Date/Time format syntax](https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax).
+
+Example:
+  ```xml
+    <format-date-literal formula="(DATE '%1')"  format='yyyy-MM-dd' />
+    <format-datetime-literal formula="(TIMESTAMP '%1')" format='yyyy-MM-dd HH:mm:ss.SSS' />
+ ```
+
 ### Temporary Table Support:
    **format-create-table** <br/>
   This function uses  piece-by-piece formulas for creating a table.
