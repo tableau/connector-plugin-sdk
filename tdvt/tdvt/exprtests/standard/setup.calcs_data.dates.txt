@@ -1,0 +1,9 @@
+//Test the data in the table.
+date0
+date1
+date2
+date3
+datetime0
+datetime1
+time0
+time1
