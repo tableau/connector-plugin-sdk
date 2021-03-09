@@ -2,7 +2,7 @@
   <test name='time0'>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(4245842207)(0)]</column>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(4245842207)(0)]</column>
       </schema>
       <tuple>
         <value>#21:07:32#</value>
@@ -60,46 +60,46 @@
   <test name='time1'>
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver_2014].[TEMP(Test)(665897456)(0)]</column>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(665897456)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>#00:05:57#</value>
+        <value>#1901-01-31 00:05:57#</value>
       </tuple>
       <tuple>
-        <value>#02:05:25#</value>
+        <value>#1901-01-31 02:05:25#</value>
       </tuple>
       <tuple>
-        <value>#04:40:49#</value>
+        <value>#1901-01-31 04:40:49#</value>
       </tuple>
       <tuple>
-        <value>#04:48:07#</value>
+        <value>#1901-01-31 04:48:07#</value>
       </tuple>
       <tuple>
-        <value>#09:33:31#</value>
+        <value>#1901-01-31 09:33:31#</value>
       </tuple>
       <tuple>
-        <value>#12:33:57#</value>
+        <value>#1901-01-31 12:33:57#</value>
       </tuple>
       <tuple>
-        <value>#18:58:41#</value>
+        <value>#1901-01-31 18:58:41#</value>
       </tuple>
       <tuple>
-        <value>#19:36:22#</value>
+        <value>#1901-01-31 19:36:22#</value>
       </tuple>
       <tuple>
-        <value>#19:48:23#</value>
+        <value>#1901-01-31 19:48:23#</value>
       </tuple>
       <tuple>
-        <value>#19:57:33#</value>
+        <value>#1901-01-31 19:57:33#</value>
       </tuple>
       <tuple>
-        <value>#22:20:14#</value>
+        <value>#1901-01-31 22:20:14#</value>
       </tuple>
       <tuple>
-        <value>#22:50:16#</value>
+        <value>#1901-01-31 22:50:16#</value>
       </tuple>
     </table>
   </test>

@@ -2,7 +2,7 @@
   <test name='date0'>
     <table>
       <schema>
-        <column>[cast_calcs.teradata].[TEMP(Test)(1090544928)(0)]</column>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(1090544928)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -27,7 +27,7 @@
   <test name='date1'>
     <table>
       <schema>
-        <column>[cast_calcs.teradata].[TEMP(Test)(1295100109)(0)]</column>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(1295100109)(0)]</column>
       </schema>
       <tuple>
         <value>#2004-04-01#</value>
@@ -85,7 +85,7 @@
   <test name='date2'>
     <table>
       <schema>
-        <column>[cast_calcs.teradata].[TEMP(Test)(2028340584)(0)]</column>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(2028340584)(0)]</column>
       </schema>
       <tuple>
         <value>#1972-07-12#</value>
@@ -143,7 +143,7 @@
   <test name='date3'>
     <table>
       <schema>
-        <column>[cast_calcs.teradata].[TEMP(Test)(550459061)(0)]</column>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(550459061)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -180,7 +180,7 @@
   <test name='datetime0'>
     <table>
       <schema>
-        <column>[cast_calcs.teradata].[TEMP(Test)(3848052829)(0)]</column>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(3848052829)(0)]</column>
       </schema>
       <tuple>
         <value>#2004-07-04 22:49:28#</value>
@@ -238,10 +238,13 @@
   <test name='datetime1'>
     <table>
       <schema>
-        <column>[cast_calcs.teradata].[TEMP(Test)(1108086785)(0)]</column>
+        <column>[cast_calcs.sybase_ase].[TEMP(Test)(1108086785)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot; &quot;</value>
       </tuple>
     </table>
   </test>
