@@ -5,5 +5,3 @@ date2
 date3
 datetime0
 datetime1
-time0
-time1
