@@ -1,0 +1,248 @@
+<results>
+  <test name='date0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(1090544928)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-07-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-19 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(1295100109)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-06 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-10 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-11 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-14 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-17 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date2'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(2028340584)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#1972-07-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-03-17 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1974-05-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1976-09-09 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-02-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1977-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-07-26 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1980-11-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1988-01-05 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1994-04-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-06-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1995-09-03 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-05-30 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-09-19 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1998-08-12 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2001-02-04 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2002-04-27 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='date3'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(550459061)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1979-04-01 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1983-05-22 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1986-03-20 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1986-11-08 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1992-01-18 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-07 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-05-13 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-02 00:00:00#</value>
+      </tuple>
+      <tuple>
+        <value>#1999-08-20 00:00:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='datetime0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(3848052829)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-07-04 22:49:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-05 13:14:20#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-09 10:17:35#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-12 17:30:16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 07:43:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-14 08:16:44#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-17 14:01:56#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-19 22:21:31#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-22 00:30:23#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-23 21:13:37#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-25 15:22:26#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-26 12:30:34#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 06:54:50#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 12:34:28#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-28 23:30:22#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-07-31 11:57:52#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-08-02 07:59:23#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='datetime1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.oracle_12c].[TEMP(Test)(1108086785)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>
