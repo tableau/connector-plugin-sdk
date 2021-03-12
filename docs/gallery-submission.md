@@ -73,7 +73,7 @@ When we receive your request to publish, we will send you:
 
 _All of the following materials are required for submission of an extension into the Extension Gallery unless stated otherwise. Submission of these materials and signing of the agreement does not guarantee the addition of an extension to the Gallery._
 
-[_https://airtable.com/shrTBaQKvKAUElF5e_](https://airtable.com/shrTBaQKvKAUElF5e)
+[_Submit a Connector to the Gallery via Google Tables_](https://tables.area120.google.com/u/0/form/aazkn9dCirC305k3Czjkoa/t/aTDxX-eQDxddDrdwaKi4X18Wrn9R7TiQQ9mm_2PBJkUtb2RwGj3__s5bdc0rDX6_c0)
 
 ##### Signed Agreement
 
