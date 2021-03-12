@@ -510,7 +510,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
 
     # Truncate long process outputs to keep size of csv down
     if len(cmd_output) > 1024:
-        cmd_output = cmd_output[:1022] + ".."
+        cmd_output = cmd_output[:1024] + "<output_truncated>"
 
     priority = test_result.test_metadata.get_priority() if test_result and test_result.test_metadata else 'unknown'
     categories = test_result.test_metadata.concat_categories() if test_result and test_result.test_metadata else 'unknown'
