@@ -69,6 +69,8 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         else:
             xml_violations_found += 1
 
+        check_file_content(file_to_test, path_to_file)
+
     if xml_violations_found <= 0:
         logger.debug("No XML violations found")
     else:
@@ -176,3 +178,13 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                     return False
 
     return True
+
+# Check if connector file content contains warnings needs to notify connector developer
+def check_file_content(file_to_test: ConnectorFile, path_to_file: Path):
+
+    if file_to_test.file_type == 'dialect':
+        xml_tree = parse(str(path_to_file))
+        root = xml_tree.getroot()
+        if 'base' in root.attrib and root.attrib['base'] == 'DefaultSQLDialect':
+            logger.warning("Warning: DefaultSQLDialect is not a recommended base to inherit from, please change your base dialect to a better one, "
+                            "you can find the recommended base dialect list on our SDK documentation page.")
