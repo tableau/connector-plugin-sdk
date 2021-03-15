@@ -187,4 +187,4 @@ def check_file_content(file_to_test: ConnectorFile, path_to_file: Path):
         root = xml_tree.getroot()
         if 'base' in root.attrib and root.attrib['base'] == 'DefaultSQLDialect':
             logger.warning("Warning: DefaultSQLDialect is not a recommended base to inherit from, please change your base dialect to a better one, "
-                            "you can find the recommended base dialect list on our SDK documentation page.")
+                           "you can find the recommended base dialect list on our SDK documentation page.")
