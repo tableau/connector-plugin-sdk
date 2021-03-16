@@ -50,7 +50,20 @@ In your connectionBuilder.js file you need to use your DB sepcific logic to hand
       params["TOKEN"] = attr["ACCESSTOKEN"];
   }
 ```
+In your connectionResolver.tdr file, the following related OAuth attrs will be auto included so you do not need to define them:
+```ACCESSTOKEN, REFRESHTOKEN, access-token-issue-time, access-token-expires-in, CLIENTID, CLIENTSECRET, oauth-client, id-token(if any), instanceurl(if any)```
+You still need to define other required attributes for your connector, `authentication` and `username` are currently required for OAuth connections so make sure to add them as well.
 
+```xml
+<required-attributes>
+    <attribute-list>
+        <attr>server</attr>
+        <attr>dbname</attr>
+        <attr>sslmode</attr>
+        <attr>authentication</attr>
+        <attr>username</attr>
+    </attribute-list>
+</required-attributes>
 # The OAuth Config File
 
 The OAuth Config file defines your connector's OAuth configuration and also provide the ability to customize how the OAuth flow should work.
