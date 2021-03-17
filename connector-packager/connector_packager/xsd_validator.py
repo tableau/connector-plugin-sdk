@@ -17,8 +17,6 @@ PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
 PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAME_PREFIX = 'v-'
-DEFAULTSQLDIALECT_AS_BASE_WARNING_MESSAGE = 'Warning: DefaultSQLDialect is not a recommended base to inherit from, ' \
-                                            'please choose base dialect from the recommended base dialect list here: https://tableau.github.io/connector-plugin-sdk/docs/design#choose-a-dialect'
 
 # Holds the mapping between file type and XSD file name
 XSD_DICT = {
@@ -71,7 +69,7 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         else:
             xml_violations_found += 1
 
-        check_file_content(file_to_test, path_to_file)
+        warn_file_specific_rules(file_to_test, path_to_file)
 
     if xml_violations_found <= 0:
         logger.debug("No XML violations found")
@@ -182,10 +180,11 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
     return True
 
 # Check if connector file content contains warnings needs to notify connector developer
-def check_file_content(file_to_test: ConnectorFile, path_to_file: Path):
+def warn_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path):
 
     if file_to_test.file_type == 'dialect':
         xml_tree = parse(str(path_to_file))
         root = xml_tree.getroot()
         if 'base' in root.attrib and root.attrib['base'] == 'DefaultSQLDialect':
-            logger.warning(DEFAULTSQLDIALECT_AS_BASE_WARNING_MESSAGE)
+            logger.warning('Warning: DefaultSQLDialect is not a recommended base to inherit from, ' \
+                           'please see the documentation for current best practices: https://tableau.github.io/connector-plugin-sdk/docs/design#choose-a-dialect')

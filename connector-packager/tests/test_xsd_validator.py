@@ -2,7 +2,7 @@ import unittest
 import logging
 from pathlib import Path
 
-from connector_packager.xsd_validator import validate_all_xml, validate_single_file, check_file_content, DEFAULTSQLDIALECT_AS_BASE_WARNING_MESSAGE
+from connector_packager.xsd_validator import validate_all_xml, validate_single_file, warn_file_specific_rules
 from connector_packager.connector_file import ConnectorFile
 
 logger = logging.getLogger(__name__)
@@ -126,7 +126,8 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("dialect.tdd", "dialect")
 
         with self.assertLogs('packager_logger', level='WARNING') as cm:
-            check_file_content(file_to_test, test_dialect_file)
+            warn_file_specific_rules(file_to_test, test_dialect_file)
 
-        self.assertIn('WARNING:packager_logger:' + DEFAULTSQLDIALECT_AS_BASE_WARNING_MESSAGE, cm.output)
+        self.assertEqual(len(cm.output), 1)
+        self.assertIn('DefaultSQLDialect', cm.output[0], "DefaultSQLDialect not found in warning message")
 
