@@ -2,7 +2,7 @@ import unittest
 import logging
 from pathlib import Path
 
-from connector_packager.xsd_validator import validate_all_xml, validate_single_file
+from connector_packager.xsd_validator import validate_all_xml, validate_single_file, warn_file_specific_rules
 from connector_packager.connector_file import ConnectorFile
 
 logger = logging.getLogger(__name__)
@@ -119,3 +119,15 @@ class TestXSDValidator(unittest.TestCase):
         logging.debug("test_validate_duplicate_fields_absent xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
+
+    def test_warn_defaultSQLDialect_as_base(self):
+
+        test_dialect_file = TEST_FOLDER / "defaultSQLDialect_as_base/dialect.tdd"
+        file_to_test = ConnectorFile("dialect.tdd", "dialect")
+
+        with self.assertLogs('packager_logger', level='WARNING') as cm:
+            warn_file_specific_rules(file_to_test, test_dialect_file)
+
+        self.assertEqual(len(cm.output), 1)
+        self.assertIn('DefaultSQLDialect', cm.output[0], "DefaultSQLDialect not found in warning message")
+
