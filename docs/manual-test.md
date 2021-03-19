@@ -178,7 +178,7 @@ The workbook should publish without errors.
     - Make sure **Allow refresh access** is selected as an authentication option. To do this:
         1. In the Publish Data Source dialog box, under **Authentication**, click __Edit__ next to **Refresh not enabled**.
         1. Under **Authentication**, select **Allow refresh access** from the drop-down list.<br/>
-        ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)
+        ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)<br/>
 The workbook should publish without errors.
 
 * Publish a workbook without an extract to Tableau Server.
@@ -186,7 +186,7 @@ The workbook should publish without errors.
     - Be sure not to embed credentials when you publish the workbook.
     - Open the published workbook.
     - Verify that a Sign In dialog opens.<br/>
-    ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)
+    ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)<br/>
     For more information, see [Set Credentials for Accessing Your Published Data](https://onlinehelp.tableau.com/current/pro/desktop/en-us/publishing_sharing_authentication.htm) in the Tableau Desktop and Web Authoring Help.
 
 
@@ -204,11 +204,11 @@ Refresh the extract on Tableau Server with the connector installed on the server
 * Publish a workbook with an extract to Tableau Server.
     - Be sure the connector is installed on the server.
     - Open the workbook with an extract on Tableau Server and refresh the extract.<br/>
-    ![]({{ site.baseurl }}/assets/mt-wkbk-extract-refresh.png)
+    ![]({{ site.baseurl }}/assets/mt-wkbk-extract-refresh.png)<br/>
     The extract should refresh without errors.
 
 * Open a data source with an extract on Tableau Server and refresh the extract.<br/>
-    ![]({{ site.baseurl }}/assets/mt-ds-extract-refresh.png)
+    ![]({{ site.baseurl }}/assets/mt-ds-extract-refresh.png)<br/>
     The extract should refresh without errors.
 
 __Create and open workbooks and data sources on Tableau Server__
