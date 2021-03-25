@@ -2,7 +2,7 @@
   <connection-config>
     <authentication-mode value='Basic' />
     <authentication-options>
-      <option name="UsernameAndPassword" default="true" />
+      <option name="UsernameAndPassword" default="true" value="auth-user-pass" />
     </authentication-options>
     <db-name-prompt value="Database: " />
     <has-pre-connect-database value="true" />
