@@ -88,19 +88,19 @@
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>-11710.5</value>
+        <value>-11710.521</value>
       </tuple>
       <tuple>
-        <value>-10491.3</value>
+        <value>-10491.333</value>
       </tuple>
       <tuple>
-        <value>-85.4</value>
+        <value>-85.428877</value>
       </tuple>
       <tuple>
-        <value>-40.0</value>
+        <value>-39.979421</value>
       </tuple>
       <tuple>
-        <value>-31.5</value>
+        <value>-31.55162</value>
       </tuple>
     </table>
   </test>

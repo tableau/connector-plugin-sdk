@@ -44,7 +44,7 @@ class ConnectorsTest(object):
                                                       timeout=self.timeout_seconds))
         print(self.cmd_output)
         sys.exit(0)
-   
+
 
 class TestResultWork(object):
     def __init__(self, test_file, output_dir, logical):
@@ -507,6 +507,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     test_type = 'unknown'
     if test_result and test_result.test_config:
         test_type = 'logical' if test_result.test_config.logical else 'expression'
+
+    # Truncate long process outputs to keep size of csv down
+    if len(cmd_output) > 4096:
+        cmd_output = cmd_output[:4096] + "<output_truncated>"
 
     priority = test_result.test_metadata.get_priority() if test_result and test_result.test_metadata else 'unknown'
     categories = test_result.test_metadata.concat_categories() if test_result and test_result.test_metadata else 'unknown'

@@ -107,21 +107,15 @@
       <xs:annotation>
         <xs:documentation>Matches two sets of protocol attributes. This is used to establish when a connection can be shared.</xs:documentation>
       </xs:annotation>
-      <xs:element name="script" minOccurs="0" type="ScriptElement-CT"/>
     </xs:sequence>
-    <xs:attribute name="cacheSize" type="xs:integer"/>
   </xs:complexType>
   <xs:complexType name="ConnectionNormalizer-CT">
     <xs:sequence>
       <xs:annotation>
         <xs:documentation>Normalize attributes required for protocol matching. This is used to establish when a connection can be shared.</xs:documentation>
       </xs:annotation>
-      <xs:choice>
-        <xs:element name="required-attributes" minOccurs="0" type="RequiredAttributes-CT"/>
-        <xs:element name="script" minOccurs="0" type="ScriptElement-CT"/>
-      </xs:choice>
+      <xs:element name="required-attributes" minOccurs="0" type="RequiredAttributes-CT"/>
     </xs:sequence>
-    <xs:attribute name="cacheSize" type="xs:integer"/>
   </xs:complexType>
   <xs:complexType name="ConnectionProperties-CT">
     <xs:sequence>

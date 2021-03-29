@@ -16,7 +16,7 @@ debug = False
 
 def get_logical_config_templates(ds_registry):
     all_templates = template_attributes.copy()
-    
+
     for ds in ds_registry.dsnames:
         info = ds_registry.get_datasource_info(ds)
         if not info:
@@ -50,7 +50,7 @@ def get_customized_table_name(attributes, base_table):
         table_name= table_name.lower()
 
     if 'tablenamePrefix' in attributes:
-        table_name = attributes['tablenamePrefix'] + table_name 
+        table_name = attributes['tablenamePrefix'] + table_name
     if 'tablenamePostfix' in attributes:
         table_name += attributes['tablenamePostfix']
 
@@ -69,7 +69,7 @@ def get_new_field_name(field, attrs):
             new_field = '[' + m.group(1) + '_]'
 
     if 'fieldnameLower' in attrs:
-        new_field = new_field.lower()        
+        new_field = new_field.lower()
     if 'fieldnameUpper' in attrs:
         new_field = new_field.upper()
     if 'fieldnameNoSpace' in attrs:
@@ -78,6 +78,10 @@ def get_new_field_name(field, attrs):
         new_field = new_field.lower().replace(' ', '_')
     if 'fieldnameUnderscoreNotSpace' in attrs:
         new_field = new_field.replace(' ', '_')
+    if 'fieldnamePostfix' in attrs:
+        m = re.search('\[(.*)\]', new_field, flags=re.IGNORECASE)
+        if m:
+            new_field = '[' + m.group(1) + attrs['fieldnamePostfix'] + ']'
 
     return new_field
 
