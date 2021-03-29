@@ -68,6 +68,8 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         else:
             xml_violations_found += 1
 
+        warn_file_specific_rules(file_to_test, path_to_file)
+
     if xml_violations_found <= 0:
         logger.debug("No XML violations found")
     else:
@@ -102,7 +104,6 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         return False
 
     manifest_schema = XMLSchema(str(PATH_TO_XSD_FILES / Path(xsd_file)))
-    saved_error = None
 
     # If the file is too big, we shouldn't try and parse it, just log the violation and move on
     if path_to_file.stat().st_size > MAX_FILE_SIZE:
@@ -190,3 +191,42 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                     return False
 
     return True
+
+
+# Check if connector file content contains warnings needs to notify connector developer
+def warn_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path):
+
+    if file_to_test.file_type == 'dialect':
+        warn_file_specific_rules_dialect(path_to_file)
+    elif file_to_test.file_type == 'connection-resolver':
+        warn_file_specific_rules_tdr(path_to_file)
+
+
+def warn_file_specific_rules_dialect(path_to_file: Path):
+
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    if 'base' in root.attrib and root.attrib['base'] == 'DefaultSQLDialect':
+        logger.warning('Warning: DefaultSQLDialect is not a recommended base to inherit from, '
+                       'please see the documentation for current best practices: '
+                       'https://tableau.github.io/connector-plugin-sdk/docs/design#choose-a-dialect')
+
+
+def warn_file_specific_rules_tdr(path_to_file: Path):
+
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    attribute_list = root.find('.//connection-normalizer/required-attributes/attribute-list')
+
+    if not attribute_list:
+        return
+
+    authentication_attr_exists = False
+    for attr in attribute_list.iter('attr'):
+        if attr.text == 'authentication':
+            authentication_attr_exists = True
+            break
+
+    if not authentication_attr_exists:
+        logger.warning("Warning: 'authentication' attribute is missing from "
+                       "<connection-normalizer>/<required-attributes>/<attribute-list> in " + str(path_to_file) + ".")

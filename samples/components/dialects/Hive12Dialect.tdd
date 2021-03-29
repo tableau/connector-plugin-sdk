@@ -1,7 +1,4 @@
-<dialect name='HiveDialectSDK'
-         base='HiveDialect'
-         class='hive_clone'
-         version='18.1'>
+<dialect name='FullHive12Dialect' base='HiveDialect' class='hive_clone' version='18.1'>
   <function-map>
     <function group='numeric' name='ABS' return-type='real'>
       <formula>ABS(%1)</formula>
@@ -23,8 +20,8 @@
       <formula>ATAN(%1)</formula>
       <argument type='real' />
     </function>
-    <function group='numeric' name='CEILING' return-type='real'>
-      <formula>CEILING(%1)</formula>
+    <function group='numeric' name='CEILING' return-type='int'>
+      <formula>CAST(CEILING(%1) AS BIGINT)</formula>
       <argument type='real' />
     </function>
     <function group='numeric' name='COS' return-type='real'>
@@ -48,8 +45,8 @@
       <formula>EXP(%1)</formula>
       <argument type='real' />
     </function>
-    <function group='numeric' name='FLOOR' return-type='real'>
-      <formula>FLOOR(%1)</formula>
+    <function group='numeric' name='FLOOR' return-type='int'>
+      <formula>CAST(FLOOR(%1) AS BIGINT)</formula>
       <argument type='real' />
     </function>
     <function group='numeric' name='HEXBINX' return-type='real'>
@@ -354,11 +351,11 @@
       <argument type='str' />
     </function>
     <function group='cast' name='DATE' return-type='date'>
-      <formula>%1</formula>
+      <formula>CAST(FROM_UNIXTIME(CAST(%1 AS BIGINT),&apos;yyyy-MM-dd&apos;) AS DATE)</formula>
       <argument type='real' />
     </function>
     <function group='cast' name='DATE' return-type='date'>
-      <formula>%1</formula>
+      <formula>CAST(FROM_UNIXTIME(%1,&apos;yyyy-MM-dd&apos;) AS DATE)</formula>
       <argument type='int' />
     </function>
     <function group='cast' name='DATE' return-type='date'>
@@ -374,7 +371,7 @@
       <argument type='date' />
     </function>
     <function group='cast' name='DATETIME' return-type='datetime'>
-      <formula>%1</formula>
+      <formula>CAST(FROM_UNIXTIME(CAST(%1 AS BIGINT)) AS TIMESTAMP)</formula>
       <argument type='real' />
     </function>
     <function group='cast' name='DATETIME' return-type='datetime'>
@@ -1108,6 +1105,30 @@
       <formula>DAY(%1)</formula>
       <argument type='date' />
     </function>
+    <function group='date;logical' name='ISDATE' return-type='bool'>
+      <formula>(CAST(%1 AS DATE) IS NOT NULL)</formula>
+      <argument type='str' />
+    </function>
+    <function group='date' name='MAX' return-type='datetime'>
+      <formula>(CASE&#10;&#9;WHEN (%1 IS NULL) OR (%2 IS NULL) THEN NULL&#10;&#9;WHEN %1 &gt; %2 THEN %1&#10;&#9;ELSE %2 END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='MAX' return-type='date'>
+      <formula>(CASE&#10;&#9;WHEN (%1 IS NULL) OR (%2 IS NULL) THEN NULL&#10;&#9;WHEN %1 &gt; %2 THEN %1&#10;&#9;ELSE %2 END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
+    <function group='date' name='MIN' return-type='datetime'>
+      <formula>(CASE&#10;&#9;WHEN (%1 IS NULL) OR (%2 IS NULL) THEN NULL&#10;&#9;WHEN %1 &lt; %2 THEN %1&#10;&#9;ELSE %2 END)</formula>
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </function>
+    <function group='date' name='MIN' return-type='date'>
+      <formula>(CASE&#10;&#9;WHEN (%1 IS NULL) OR (%2 IS NULL) THEN NULL&#10;&#9;WHEN %1 &lt; %2 THEN %1&#10;&#9;ELSE %2 END)</formula>
+      <argument type='date' />
+      <argument type='date' />
+    </function>
     <function group='date' name='MONTH' return-type='int'>
       <formula>MONTH(%1)</formula>
       <argument type='datetime' />
@@ -1153,9 +1174,23 @@
       <argument type='int' />
       <argument type='datetime' />
     </date-function>
-
     <date-function name='DATEDIFF' return-type='int'>
-      <formula part='week'>FLOOR(DATEDIFF(NEXT_DAY(%2,&apos;SU&apos;),NEXT_DAY(%1,&apos;SU&apos;))/7)</formula>
+      <formula part='year'>CAST(YEAR(%3) - YEAR(%2) AS BIGINT)</formula>
+      <formula part='quarter'>CAST((4 * YEAR(%3) + CAST((MONTH(%3) - 1) / 3 + 1 AS BIGINT)) - (4 * YEAR(%2) + CAST((MONTH(%2) - 1) / 3 + 1 AS BIGINT)) AS BIGINT)</formula>
+      <formula part='month'>CAST((12 * YEAR(%3) + MONTH(%3)) - (12 * YEAR(%2) + MONTH(%2)) AS BIGINT)</formula>
+      <formula part='dayofyear'>DATEDIFF(TO_DATE(%3), TO_DATE(%2))</formula>
+      <formula part='day'>DATEDIFF(TO_DATE(%3), TO_DATE(%2))</formula>
+      <formula part='weekday'>DATEDIFF(TO_DATE(%3), TO_DATE(%2))</formula>
+      <formula part='week'>FLOOR(DATEDIFF(NEXT_DAY(%3,&apos;SU&apos;),NEXT_DAY(%2,&apos;SU&apos;))/7)</formula>
+      <formula part='hour'>CAST((DATEDIFF(TO_DATE(%3), TO_DATE(%2)) * 24 + COALESCE(CAST(SUBSTR(%3,12,2) AS INT), 0) - COALESCE(CAST(SUBSTR(%2,12,2) AS INT), 0)) AS BIGINT)</formula>
+      <formula part='minute'>CAST(((DATEDIFF(TO_DATE(%3), TO_DATE(%2)) * 24 + COALESCE(CAST(SUBSTR(%3,12,2) AS INT), 0) - COALESCE(CAST(SUBSTR(%2,12,2) AS INT), 0)) * 60 + COALESCE(MINUTE(%3), 0) - COALESCE(MINUTE(%2), 0)) AS BIGINT)</formula>
+      <formula part='second'>CAST((((DATEDIFF(TO_DATE(%3), TO_DATE(%2)) * 24 + COALESCE(CAST(SUBSTR(%3,12,2) AS INT), 0) - COALESCE(CAST(SUBSTR(%2,12,2) AS INT), 0)) * 60 + COALESCE(MINUTE(%3), 0) - COALESCE(MINUTE(%2), 0)) * 60 + COALESCE(SECOND(%3), 0) - COALESCE(SECOND(%2), 0)) AS BIGINT)</formula>
+      <argument type='localstr' />
+      <argument type='datetime' />
+      <argument type='datetime' />
+    </date-function>
+    <date-function name='DATEDIFF' return-type='int'>
+      <formula part='week'>FLOOR(DATEDIFF(NEXT_DAY(%3,%4),NEXT_DAY(%2,%4))/7</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='datetime' />
@@ -1176,7 +1211,7 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATENAME' return-type='str'>
-      <formula part='week'>FORMAT_NUMBER(FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),&apos;SU&apos;)))/7),0)</formula>
+      <formula part='week'>FORMAT_NUMBER(FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),%3)))/7),0)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
@@ -1196,10 +1231,128 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATEPART' return-type='int'>
-      <formula part='week'>FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),&apos;SU&apos;)))/7)</formula>
+      <formula part='week'>FLOOR((14 + DATEDIFF(%2, TRUNC(%2,&apos;YY&apos;)) + DATEDIFF(TRUNC(%2,&apos;YY&apos;),NEXT_DAY(TRUNC(%2,&apos;YY&apos;),%3)))/7)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='localstr' />
     </date-function>
+    <date-function name='DATETRUNC' return-type='datetime'>
+      <formula part='year'>CAST(TRUNC(%2,&apos;YY&apos;) AS DATE)</formula>
+      <formula part='quarter'>CAST(CONCAT(YEAR(%2), (CASE WHEN MONTH(%2)&lt;4 THEN &apos;-01&apos;  WHEN MONTH(%2)&lt;7 THEN &apos;-04&apos;  WHEN MONTH(%2)&lt;10 THEN &apos;-07&apos;  ELSE &apos;-10&apos; END), &apos;-01 00:00:00&apos;) AS TIMESTAMP)</formula>
+      <formula part='month'>CAST(TRUNC(%2,&apos;MM&apos;) AS DATE)</formula>
+      <formula part='dayofyear'>CAST (%2 AS DATE)</formula>
+      <formula part='day'>CAST(TO_DATE(%2) AS DATE)</formula>
+      <formula part='weekday'>CAST (%2 AS DATE)</formula>
+      <formula part='week'>CAST(DATE_ADD(NEXT_DAY(%2,&apos;SU&apos;),-7) AS DATE)</formula>
+      <formula part='hour'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(%2), &apos;yyyy-MM-dd HH:00:00&apos;) AS TIMESTAMP)</formula>
+      <formula part='minute'>CAST(FROM_UNIXTIME(UNIX_TIMESTAMP(%2), &apos;yyyy-MM-dd HH:mm:00&apos;) AS TIMESTAMP)</formula>
+      <formula part='second'>%2</formula>
+      <argument type='localstr' />
+      <argument type='datetime' />
+    </date-function>
+    <date-function name='DATETRUNC' return-type='datetime'>
+      <formula part='week'>CAST(DATE_ADD(NEXT_DAY(%2,%3),-7) AS DATE)</formula>
+      <argument type='datetime' />
+      <argument type='localstr' />
+    </date-function>
   </function-map>
+
+  <supported-aggregations>
+    <aggregation value='AGG_STDEV' />
+    <aggregation value='AGG_STDEVP' />
+    <aggregation value='AGG_VAR' />
+    <aggregation value='AGG_VARP' />
+    <aggregation value='AGG_COVAR' />
+    <aggregation value='AGG_COVARP' />
+    <aggregation value='AGG_CORR' />
+    <aggregation value='AGG_MEDIAN' />
+    <aggregation value='AGG_PERCENTILE' />
+    <aggregation value='AGG_QTR' />
+    <aggregation value='AGG_WEEKDAY' />
+    <aggregation value='AGG_SUM' />
+    <aggregation value='AGG_AVG' />
+    <aggregation value='AGG_MIN' />
+    <aggregation value='AGG_MAX' />
+    <aggregation value='AGG_COUNT' />
+    <aggregation value='AGG_COUNTD' />
+    <aggregation value='AGG_YEAR' />
+    <aggregation value='AGG_MONTH' />
+    <aggregation value='AGG_DAY' />
+    <aggregation value='AGG_HOUR' />
+    <aggregation value='AGG_MINUTE' />
+    <aggregation value='AGG_SECOND' />
+    <aggregation value='AGG_WEEK' />
+    <aggregation value='AGG_MONTHYEAR' />
+    <aggregation value='AGG_MDY' />
+    <aggregation value='TRUNC_YEAR' />
+    <aggregation value='TRUNC_QTR' />
+    <aggregation value='TRUNC_MONTH' />
+    <aggregation value='TRUNC_WEEK' />
+    <aggregation value='TRUNC_DAY' />
+    <aggregation value='TRUNC_HOUR' />
+    <aggregation value='TRUNC_MINUTE' />
+    <aggregation value='TRUNC_SECOND' />
+  </supported-aggregations>
+
+  <sql-format>
+    <format-column-definition>
+      <local-type name='int'>
+        <remote-type name='I1' value='TINYINT' />
+        <remote-type name='I2' value='SMALLINT' />
+        <remote-type name='I4' value='INT' />
+        <remote-type name='default' value='BIGINT' />
+      </local-type>
+      <local-type name='real'>
+        <remote-type name='R4' value='FLOAT' />
+        <remote-type name='default' value='DOUBLE' />
+      </local-type>
+      <local-type name='str'>
+        <remote-type name='default' value='STRING' />
+      </local-type>
+      <local-type name='datetime'>
+        <remote-type name='default' value='TIMESTAMP' />
+      </local-type>
+      <local-type name='date'>
+        <remote-type name='default' value='DATE' />
+      </local-type>
+      <local-type name='bool'>
+        <remote-type name='default' value='BOOLEAN' />
+      </local-type>
+    </format-column-definition>
+    <format-date-literal formula="CAST('%1' AS DATE)"  format='yyyy-MM-dd' />
+    <format-datetime-literal formula="CAST('%1' AS TIMESTAMP)" format='yyyy-MM-dd HH:mm:ss' />
+    <format-is-distinct value='Operator' />
+    <format-null>
+      <local-type name='bool' value='CAST(NULL AS BOOLEAN)' />
+      <local-type name='int' value='CAST(NULL AS INT)' />
+      <local-type name='real' value='CAST(NULL AS DOUBLE)' />
+      <local-type name='str' value='CAST(NULL AS STRING)' />
+      <local-type name='date' value='CAST(NULL AS DATE)' />
+      <local-type name='datetime' value='CAST(NULL AS TIMESTAMP)' />
+    </format-null>
+    <format-select>
+      <part name='Select' value='SELECT %1' />
+      <part name='Into' value='INTO %1' />
+      <part name='From' value='FROM %1' />
+      <part name='Where' value='WHERE %1' />
+      <part name='Group' value='GROUP BY %1' />
+      <part name='Having' value='HAVING %1' />
+      <part name='OrderBy' value='ORDER BY %1' />
+      <part name='Top' value='LIMIT %1' />
+      <part name='TopSampleRecords' value='ORDER BY rand()\nLIMIT %1' />
+    </format-select>
+    <format-simple-case value='BalancedIIF' />
+    <format-true value='true' />
+    <id-allowed-characters value='_abcdefghijklmnopqrstuvwxyz0123456789' />
+    <id-case value='Lower' />
+    <id-max-length value='63' />
+    <id-quotes value='`' />
+    <supported-joins>
+      <part name='Inner' />
+      <part name='Left' />
+      <part name='Right' />
+      <part name='Full' />
+    </supported-joins>
+  </sql-format>
+
 </dialect>

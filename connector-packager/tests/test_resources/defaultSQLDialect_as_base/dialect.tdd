@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dialect name='SimplePostgres'
+         class='postgres_odbc'
+         base='DefaultSQLDialect'
+         version='18.1'>
+ </dialect>
