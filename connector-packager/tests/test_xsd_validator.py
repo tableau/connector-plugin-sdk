@@ -33,8 +33,6 @@ class TestXSDValidator(unittest.TestCase):
 
         self.assertFalse(validate_all_xml(files_list, test_folder), "Invalid connector was marked as valid")
 
-        test_folder = TEST_FOLDER / Path("broken_xml")
-
     def test_validate_single_file(self):
 
         test_file = TEST_FOLDER / Path("valid_connector/manifest.xml")
@@ -131,3 +129,26 @@ class TestXSDValidator(unittest.TestCase):
         self.assertEqual(len(cm.output), 1)
         self.assertIn('DefaultSQLDialect', cm.output[0], "DefaultSQLDialect not found in warning message")
 
+    def test_warn_authentication_attribute(self):
+
+        file_to_test = ConnectorFile("connectionResolver.tdr", "connection-resolver")
+
+        print("\nTest no warning when authentication attribute is in required attributes list.")
+        test_tdr_file = TEST_FOLDER / "authentication_attribute/with_authentication.tdr"
+        with self.assertLogs('packager_logger', level='WARNING') as cm:
+            # Log a dummy message so that the log will exist.
+            logging.getLogger('packager_logger').warning('dummy message')
+            warn_file_specific_rules(file_to_test, test_tdr_file)
+
+        self.assertEqual(len(cm.output), 1)
+        self.assertNotIn("'authentication' attribute is missing", cm.output[0],
+                         "\"'authentication' attribute is missing\" found in warning message")
+
+        print("Test warning when authentication attribute is not in required attributes list.")
+        test_tdr_file = TEST_FOLDER / "authentication_attribute/without_authentication.tdr"
+        with self.assertLogs('packager_logger', level='WARNING') as cm:
+            warn_file_specific_rules(file_to_test, test_tdr_file)
+
+        self.assertEqual(len(cm.output), 1)
+        self.assertIn("'authentication' attribute is missing", cm.output[0],
+                      "\"'authentication' attribute is missing\" not found in warning message")
