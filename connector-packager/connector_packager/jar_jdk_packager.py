@@ -42,8 +42,13 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
     for connector_file in file_list:
         # if we have a connection-fields file, then we are using modular dialogs and need 2020.3+
         if connector_file.file_type == "connection-fields":
-            min_version_tableau = "2020.3"
+            if 2020.3 > float(min_version_tableau):
+                min_version_tableau = "2020.3"
             reasons.append("Connector uses Connection Dialogs V2, which was added in the 2020.3 release")
+        elif connector_file.file_type == "oauth-config":
+            if 2021.1 > float(min_version_tableau):
+                min_version_tableau = "2021.1"
+            reasons.append("Connector uses OAuth, which was added in the 2021.1 release")
 
     if version.parse(cur_min_version_tableau) > version.parse(min_version_tableau):
         reasons.append("min-tableau-version set to " + cur_min_version_tableau + ", since that is higher than calculated version of " + min_version_tableau)

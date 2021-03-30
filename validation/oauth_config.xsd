@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="pluginOAuthConfig" type="pluginOAuthConfigType"/>
+  <xs:complexType name="entryType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="key"/>
+      <xs:element type="xs:string" name="value"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="capabilitiesType">
+    <xs:sequence>
+      <xs:element type="entryType" name="entry" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="accessTokenResponseMapsType">
+  <xs:sequence>
+    <xs:element type="entryType" name="entry" maxOccurs="unbounded" minOccurs="0"/>
+  </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="refreshTokenResponseMapsType">
+    <xs:sequence>
+      <xs:element type="entryType" name="entry" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="pluginOAuthConfigType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="dbclass"/>
+      <!--Allow registering oauth for server use only, mostly for connectorless OAuth-->
+      <xs:element type="xs:string" name="clientIdDesktop" maxOccurs="1" minOccurs="0"/>
+      <!--Some oauth provider allow native app using oauth without clientSecret-->
+      <xs:element type="xs:string" name="clientSecretDesktop" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:string" name="redirectUrisDesktop" maxOccurs="unbounded" minOccurs="0"/>
+      <!--Allow registering the client info on tableau server-->
+      <xs:element type="xs:string" name="clientIdServerCustom" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:string" name="clientSecretServerCustom" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:string" name="redirectUrisServerCustom" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="xs:string" name="authUri"/>
+      <xs:element type="xs:string" name="tokenUri"/>
+      <xs:element type="xs:string" name="userInfoUri" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:string" name="instanceUrlValidationRegex" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:string" name="scopes" maxOccurs="unbounded" minOccurs="1"/>
+      <xs:element type="xs:string" name="requiredAuthAttrs" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="xs:string" name="requiredRefreshAttrs" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="capabilitiesType" name="capabilities" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="accessTokenResponseMapsType" name="accessTokenResponseMaps" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="refreshTokenResponseMapsType" name="refreshTokenResponseMaps" maxOccurs="1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='snowflake_oauth' superclass='odbc' plugin-version='0.0.0' name='My snowflake_oauth' version='18.1'>
+  <vendor-information>
+      <company name="Sample Company"/>
+      <support-link url = "http://example.com"/>
+  </vendor-information>
+  <connection-customization class="snowflake_oauth" enabled="true" version="10.0">
+    <vendor name="vendor"/>
+    <driver name="driver"/>
+     <customizations>
+      <customization name="CAP_QUERY_HAVING_REQUIRES_GROUP_BY" value="yes"/>
+      <customization name="CAP_QUERY_INITIAL_SQL_SPLIT_STATEMENTS" value="yes"/>
+    </customizations>
+  </connection-customization>
+  <connection-fields file='connectionFields.xml'/>
+  <connection-resolver file="connectionResolver.tdr"/>
+  <dialect file='dialect.tdd'/>
+  <oauth-config file='oauthConfig.xml'/>
+</connector-plugin>

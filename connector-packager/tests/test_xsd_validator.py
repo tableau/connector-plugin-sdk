@@ -118,6 +118,20 @@ class TestXSDValidator(unittest.TestCase):
         for violation in xml_violations_buffer:
             logging.debug(violation)
 
+    def test_validate_instanceurl(self):
+        test_file = TEST_FOLDER / "oauth_connector/connectionFields.xml"
+        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                        "Valid XML file not marked as valid")
+
+        test_file = TEST_FOLDER / "instanceurl/connectionFields.xml"
+        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
+        xml_violations_buffer = []
+
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                        "An instanceurl field must be conditional to authentication field with value=oauth")
     def test_warn_defaultSQLDialect_as_base(self):
 
         test_dialect_file = TEST_FOLDER / "defaultSQLDialect_as_base/dialect.tdd"

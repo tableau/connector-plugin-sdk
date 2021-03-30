@@ -131,8 +131,18 @@ class XMLParser:
         # Check children. If they have a "file" or a "script" attribute then make a new ConnectorFile and parse
         for child in root.iter():
 
-            # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
+            # Check the tag
+            # Oauth config file uses dbclass tag instead of class attribute. We need to make sure that matches the class name as well.
+            if child.tag == "dbclass":
+                if child.text != self.class_name:
+                    logging.error("Error: dbclass in file " + file_to_parse.file_name +
+                                  " does not equal class attribute in manifest.")
+                    logging.debug(self.class_name + " in manifest, " + child.text + " in " +
+                                  file_to_parse.file_name)
+                    return False
 
+            # Check the attributes
+            # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
             if 'file' in child.attrib:
 
                 # Check to make sure the file actually exists
