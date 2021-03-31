@@ -5,7 +5,7 @@ title: OAuth Authentication Support
 
 # How to enable OAuth for a plugin connector
 
-First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/dev-2021.1/samples/scenarios/snowflake_oauth.
+First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/snowflake_oauth.
 
 To enable OAuth for your connector add an `<oauth-config>` field in the manifest.xml and link to an oauthConfig.xml you created, described below. 
 
