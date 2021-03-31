@@ -120,6 +120,8 @@ As referenced above in the `<field>` element section, some `name` attribute valu
 
 If the field functionality does not match any of the descriptions below see 'Vendor Defined' section.
 
+For each `<field>` element used its `name` attribute value is required to be listed in the `<attribute-list>` section of the `.tdr` file as well. See [connection-normalizer]({{ site.baseurl }}/docs/api-reference#connection-normalizer) for more details.
+
 Additionally there are a set of reserved `name` attribute values not documented at this time. Recommendations, documentation and enforcement coming soon.
 
 ### Endpoint
@@ -130,7 +132,7 @@ The connection field names below should specify the `endpoint` category.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
-| server | Server or URL of connection | No | |
+| server | Server or URL of connection | **No** | |
 | port | Port of connection | Yes | Allowed Values: numeric value, 0 - 65535 |
 
 ### SSL
@@ -155,7 +157,7 @@ The connection field names below should specify the `authentication` category.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
-| authentication | The authentication mode for connection | No | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only <br> `oauth`: See the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for details  |
+| authentication | The authentication mode for connection | **No** | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only <br> `oauth`: See the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for details  |
 | username | Username | Yes |  |
 | password | Password | Yes | Supports `secure` field attribute |
 | instanceurl | OAuth Instance Url | Yes | Only supported for use when `authentication` value is `oauth` |
