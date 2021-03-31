@@ -68,7 +68,7 @@ You still need to define other required attributes for your connector, `authenti
 
 The OAuth Config file defines your connector's OAuth configuration and also provide the ability to customize how the OAuth flow should work.
 
-The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/dev-2021.1/validation/oauth_config.xsd)) is indentified in the manifest using the `<oauth-config>` element. Here we discuss the structure of this file.
+The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/oauth_config.xsd)) is indentified in the manifest using the `<oauth-config>` element. Here we discuss the structure of this file.
 
 ## XML Elements
 
