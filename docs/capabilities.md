@@ -117,12 +117,7 @@ CAP_JDBC_BIND_DETECT_ALIAS_CASE_FOLDING | Set to 'yes' to allow Tableau to detec
 CAP_JDBC_BIND_SPATIAL_AS_WKB | Set to 'yes' to use WKB for spatial types serialization. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_CONVERT_WKB_HEX_STRING | Set to 'yes' to convert a hex string to regular WKB. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to integer for data insertion. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
-CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
-CAP_JDBC_EXPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable use of parallel loops to translate Tableau DataValues to wire buffers on exports | yes | yes 
-CAP_JDBC_JNI_FETCH_SIZE_SMALL | Set to ‘yes’ to Fetch 10 rows per JNI call | &ndash; | &ndash;  
-CAP_JDBC_JNI_FETCH_SIZE_MEDIUM | Set to ‘yes’ to Fetch 100 rows per JNI call | yes | yes 
-CAP_JDBC_JNI_FETCH_SIZE_LARGE | Set to ‘yes’ to Fetch 1000 rows per JNI call | &ndash; | &ndash; 
-CAP_JDBC_JNI_FETCH_SIZE_MASSIVE | Set to ‘yes’ to Fetch 10000 rows per JNI call | &ndash; | &ndash;  
+CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes
 CAP_JDBC_MAX_STRING_LENGTH_MEDIUM | Set to 'yes' to use 512 character string length limit. Default is 16K. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_GET_INDEX_INFO | Set to 'no' to disable reading index info | yes | yes  
 CAP_JDBC_METADATA_NUMERIC_DEFAULT_PREC_SCALE_DOUBLE | Set to 'yes' to use precision=17 and no scale for numeric with undefined precision/scale. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
@@ -130,8 +125,7 @@ CAP_JDBC_METADATA_READ_FOREIGNKEYS | Set to 'no' to disable reading foreign key 
 CAP_JDBC_METADATA_READ_PRIMARYKEYS | Set to 'no' to disable reading primary key metadata | yes | yes 
 CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE | Set to 'yes' to get column metadata from the result set of a select * query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_PARAMETER_METADATA_REQUIRES_EXECUTE | Set to 'yes' if retrieving parameter metadata for inserts requires execution of an empty batch. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
-CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread | &ndash; | **<span style="color:red">yes</span>**  
-CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries | &ndash; | **<span style="color:red">yes</span>** 
+CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries | yes | yes
 CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
