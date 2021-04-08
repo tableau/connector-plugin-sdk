@@ -126,7 +126,8 @@ CAP_JDBC_METADATA_READ_PRIMARYKEYS | Set to 'no' to disable reading primary key 
 CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE | Set to 'yes' to get column metadata from the result set of a select * query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_SUPPRESS_PREPARED_QUERY | If CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE is enabled, set this capability to 'yes' to disable preparing the query used for reading the table metadata. We will execute the query wrapped with a where-false clause. | &ndash; | &ndash;
 CAP_JDBC_PARAMETER_METADATA_REQUIRES_EXECUTE | Set to 'yes' if retrieving parameter metadata for inserts requires execution of an empty batch. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
-CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries | yes | yes
+CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread. | &ndash; | **<span style="color:red">yes</span>**
+CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries. Requires CAP_JDBC_QUERY_ASYNC to be set. | yes | yes
 CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER | Enable parameterized queries, requires that CAP_JDBC_QUERY_FORCE_PREPARE is also enabled. Boolean values not supported. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
