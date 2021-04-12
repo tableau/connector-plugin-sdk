@@ -130,13 +130,6 @@ CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread. | &ndash; 
 CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries. Requires CAP_JDBC_QUERY_ASYNC to be set. | yes | yes
 CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER | Enable parameterized queries, requires that CAP_JDBC_QUERY_FORCE_PREPARE is also enabled. Boolean values not supported. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER_FOR_STRING | Use parameter markers for string values in queries instead of literals. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER_FOR_REAL | Use parameter markers for real values in queries instead of literals. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER_FOR_INTEGER | Use parameter markers for integer values in queries instead of literals. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER_FOR_DATE | Use parameter markers for date values in queries instead of literals. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER_FOR_DATETIME | Use parameter markers for datetime values in queries instead of literals. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
-CAP_JDBC_QUERY_USE_PREPARE_PARAMETER_MARKER_FOR_TIME | Use parameter markers for time values in queries instead of literals. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_EMPTY_CATALOG_NAME | Set to 'yes' to ignore missing catalog. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash; 
