@@ -1086,3 +1086,8 @@ Filters	tdvt/logicaltests/staples	ZTesting.Staples9	>=	Recommended
 Operator	tdvt/logicaltests/staples	ZTesting.Staples9	>=	Recommended
 Logical	tdvt/logicaltests/staples	ZTesting.Staples9	$SYS_NARY_AND$	Recommended
 Date Filters	tdvt/logicaltests/staples	ZTesting.Staples9	DATEPART	Recommended
+Date Aggregation	tdvt/exprtests/standard	calcs_data.dates		Required
+Cast	tdvt/exprtests/standard	date.cast.datetime	DATETIME	Required
+Calculation	tdvt/exprtests/standard	math.atan2	ATAN2	Required If Supported
+Calculation	tdvt/exprtests/standard	string.contains.empty	CONTAINS	Required
+Calculation	tdvt/exprtests/standard	string.contains.regex	CONTAINS	Required If Supported
