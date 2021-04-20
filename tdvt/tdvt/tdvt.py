@@ -21,7 +21,7 @@ import zipfile
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
-from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
+from .config_gen.datasource_list import TestRegistry, print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 from .setup_env import create_test_environment, add_datasource
@@ -42,41 +42,40 @@ class TestOutputFiles(object):
     combined_output = []
 
     @classmethod
-    def copy_output_file(c, src_name, src_dir):
+    def copy_output_file(cls, src_name, src_dir):
         src = os.path.join(src_dir, src_name)
         logging.debug("Copying {0} to output".format(src))
         try:
             with open(src, 'r', encoding='utf8') as src_file:
                 reader = csv.DictReader(src_file, dialect='tdvt')
                 for row in reader:
-                    c.combined_output.append(row)
+                    cls.combined_output.append(row)
 
         except IOError as e:
             logging.debug("Exception while copying files: " + str(e))
             return
 
     @classmethod
-    def write_test_results_csv(c):
-        if not c.combined_output:
+    def write_test_results_csv(cls):
+        if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
 
-        logging.debug("Copying output to {0}".format(c.output_csv))
+        logging.debug("Copying output to {0}".format(cls.output_csv))
         # Sort combined_output on the number of distinct functions (order of complexity)
         sort_by_complexity = lambda row: len(row['Functions'].split(','))
         try:
-            c.combined_output.sort(key=sort_by_complexity)
+            cls.combined_output.sort(key=sort_by_complexity)
         except KeyError as e:
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
-        dst = os.path.join(os.getcwd(), c.output_csv)
+        dst = os.path.join(os.getcwd(), cls.output_csv)
         try:
-            dst_exists = os.path.isfile(dst)
             with open(dst, 'w', encoding='utf8') as dst_file:
-                writer = csv.DictWriter(dst_file, fieldnames=c.combined_output[0],
+                writer = csv.DictWriter(dst_file, fieldnames=cls.combined_output[0],
                     dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
                 writer.writeheader()
-                for row in c.combined_output:
+                for row in cls.combined_output:
                     writer.writerow(row)
         except IOError as e:
             logging.debug("Exception while writing to file: " + str(e))
@@ -90,7 +89,7 @@ def do_test_queue_work(i, q):
     abort_test_run = False
     while True:
         # This blocks if the queue is empty.
-        work = q.get()
+        work: TestRunner = q.get()
 
         work.run()
 
@@ -197,7 +196,7 @@ class TestRunner():
 
         start_time = time.time()
         self.test_config.thread_id = self.thread_id
-        failed_tests, skipped_tests, disabled_tests, total_tests = run_tests(self.test_config, self.test_set)
+        failed_tests, skipped_tests, disabled_tests, total_tests = run_tests(self.test_config, self.test_set,)
         logging.debug("\nFinished tdvt " + str(self.test_config) + "\n")
         print("\nFinished {0} {1} {2}\n".format(self.test_config.suite_name, self.test_config.config_file,
                                                 str(self.thread_id)))
@@ -447,7 +446,7 @@ run_connectors_test_usage_text = '''
     Run PropertiesBuilderTest
         run-connectors-test --conn-test propertiesBuilder --conn-test-file filepath.xml
     Run ServerVersionTest
-        run-connectors-test --conn-test serverVersion --conn-test-file filepath.xml --conn-test-password-file passwordfilepath.password  
+        run-connectors-test --conn-test serverVersion --conn-test-file filepath.xml --conn-test-password-file passwordfilepath.password
 
 '''
 
@@ -493,7 +492,6 @@ def create_parser():
     run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
-
 
     #Run test pattern.
     run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
@@ -700,7 +698,7 @@ def get_ds_list(ds):
     ds_list = [x.strip() for x in ds_list]
     return ds_list
 
-def run_desired_tests(args, ds_registry):
+def run_desired_tests(args, ds_registry: TestRegistry):
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:

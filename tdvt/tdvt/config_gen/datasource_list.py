@@ -7,6 +7,7 @@ import configparser
 import glob
 import os.path
 import logging
+from typing import List, Optional
 
 from .gentests import list_configs, list_config
 from ..resources import *
@@ -166,8 +167,17 @@ def load_test(config, test_dir=get_root_dir()):
     dsconfig = config[datasource_section]
     all_ini_sections.remove(datasource_section)
     config_name = dsconfig['Name']
-    run_time_config = RunTimeTestConfig(dsconfig.getint('TimeoutSeconds', 60 * 60), dsconfig.get('MaxThread', '0'), dsconfig.get('CommandLineOverride', ''), dsconfig.getboolean('RunAsPerf', False))
-    run_time_config.set_tabquery_paths(dsconfig.get('TabQueryPathLinux', ''), dsconfig.get('TabQueryPathMac', ''), dsconfig.get('TabQueryPathx64', ''))
+    run_time_config = RunTimeTestConfig(
+        dsconfig.getint('TimeoutSeconds', 60 * 60),
+        dsconfig.get('MaxThread', '0'),
+        dsconfig.get('CommandLineOverride', ''),
+        dsconfig.getboolean('RunAsPerf', False)
+    )
+    run_time_config.set_tabquery_paths(
+        dsconfig.get('TabQueryPathLinux', ''),
+        dsconfig.get('TabQueryPathMac', ''),
+        dsconfig.get('TabQueryPathx64', '')
+    )
     test_config = TestConfig(config_name, dsconfig['LogicalQueryFormat'], run_time_config)
 
 
@@ -400,12 +410,12 @@ class TestRegistry(object):
     def add_test(self, test_config):
         self.dsnames[test_config.dsname] = test_config
 
-    def get_datasource_info(self, dsname):
+    def get_datasource_info(self, dsname) -> Optional[TestConfig]:
         if dsname in self.dsnames:
             return self.dsnames[dsname]
         return None
 
-    def get_datasources(self, suite):
+    def get_datasources(self, suite) -> Optional[List]:
         ds_to_run = []
         if not suite:
             return
