@@ -64,6 +64,7 @@ You still need to define other required attributes for your connector, `authenti
         <attr>username</attr>
     </attribute-list>
 </required-attributes>
+```
 # The OAuth Config File
 
 The OAuth Config file defines your connector's OAuth configuration and also provide the ability to customize how the OAuth flow should work.
@@ -94,6 +95,8 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | capabilities | Map<String, String> | This defines how OAuth flow behaves differently according the capabilities set. | Yes | |
 | accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
 | refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | If not defined will use accessTokenResponseMaps by default |
+
+<br>
 
 ## OAuth Capabilities
 
