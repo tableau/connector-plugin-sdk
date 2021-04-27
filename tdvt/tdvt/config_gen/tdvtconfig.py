@@ -29,6 +29,7 @@ class TdvtInvocation(object):
         self.tds = ''
         self.tested_run_time_config = None
         self.tabquery_path = ''
+        self.iteration: int = 0
 
         if from_args:
             self.init_from_args(from_args)
@@ -41,7 +42,7 @@ class TdvtInvocation(object):
     def set_run_time_test_config(self, rtt: RunTimeTestConfig):
         self.timeout_seconds = rtt.timeout_seconds
         self.d_override = rtt.d_override
-        self.run_as_perf = rtt.run_as_perf
+        self.run_as_perf = rtt.run_as_perf or self.run_as_perf
         self.tested_run_time_config = rtt
         if rtt.tabquery_paths:
             self.tabquery_path = rtt.tabquery_paths.to_array()
@@ -57,6 +58,10 @@ class TdvtInvocation(object):
             self.leave_temp_dir = True
         if args.verbose:
             self.verbose = args.verbose
+        if args.perf_run:
+            self.run_as_perf = True
+        if args.perf_iteration:
+            self.iteration = args.perf_iteration
 
     def init_from_json(self, json):
         self.tested_sql = json.get('tested_sql', self.tested_sql)

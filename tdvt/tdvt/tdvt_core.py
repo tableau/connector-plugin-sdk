@@ -483,7 +483,7 @@ def get_tuple_display_limit():
     return 100
 
 
-def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0, perf_run: bool=False):
+def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0):
     # A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
     passed = False
     skipped = False
@@ -512,6 +512,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
     if len(cmd_output) > 4096:
         cmd_output = cmd_output[:4096] + "<output_truncated>"
 
+    # info for perf run output
+    is_perf_run = test_result.test_config.run_as_perf
+    perf_iteration = test_result.test_config.iteration
+
     priority = test_result.test_metadata.get_priority() if test_result and test_result.test_metadata else 'unknown'
     categories = test_result.test_metadata.concat_categories() if test_result and test_result.test_metadata else 'unknown'
     functions = test_result.test_metadata.concat_functions() if test_result and test_result.test_metadata else 'unknown'
@@ -521,8 +525,8 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         error_type = test_result.get_failure_message() if test_result else None
         if test_result.all_passed():
             passed = True
-        if perf_run:
-            columns = [suite, test_set_name, test_name, tds_name, str(error_type), cmd_output, None, None, None, str(error_msg), None, None, None, "Query Time", "TimeTest", case.execution_time]
+        if is_perf_run:
+            columns = [suite, test_set_name, test_name, tds_name, str(error_type), cmd_output, perf_iteration, None, None, str(error_msg), None, None, None, "Query Time", "TimeTest", case.execution_time]
         else:
             columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
                    test_case_name, test_type, priority, categories, functions, cmd_output, error_msg, error_type,
@@ -566,8 +570,25 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         error_msg = test_result.saved_error_message if test_result.saved_error_message else error_msg
         error_type = test_result.get_error_type()
 
-    if perf_run:
-        columns = [suite, test_set_name, test_name, tds_name, str(error_type), cmd_output, None, None, None, str(error_msg), None, None, None, "Query Time", "TimeTest", case.execution_time]
+    if is_perf_run:
+        columns = [
+            suite,
+            test_set_name,
+            test_name,
+            tds_name,
+            str(error_type),
+            cmd_output,
+            perf_iteration,
+            None,
+            None,
+            str(error_msg),
+            None,
+            None,
+            None,
+            "Query Time",
+            "TimeTest",
+            case.execution_time
+        ]
     else:
         columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected),
                 str(diff_count), test_case_name, test_type, priority, categories, functions, cmd_output,
@@ -579,7 +600,13 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         columns.extend([actual_error, expected_error])
     return columns
 
-def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir, perf_run: bool=False) -> Optional[Tuple[int, int, int, int]]:
+def write_csv_test_output(
+    all_test_results: Dict,
+    tds_file: str,
+    skip_header: bool,
+    output_dir: str,
+    perf_run: bool=False
+) -> Optional[Tuple[int, int, int, int]]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
@@ -650,7 +677,7 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir, p
             total_disabled_tests += test_result.get_disabled_count()
             total_tests += test_result.get_test_case_count()
             for case_index in range(0, test_result.get_test_case_count()):
-                csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, case_index,perf_run))
+                csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, case_index))
 
     file_out.close()
 
@@ -758,7 +785,7 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
 
     tds_file = tdvt_test_config.tds
 
-    perf_run = tdvt_test_config.run_as_perf
+    perf_run:bool = tdvt_test_config.run_as_perf
 
     all_test_results = run_tests_impl(test_set, tdvt_test_config)
 
