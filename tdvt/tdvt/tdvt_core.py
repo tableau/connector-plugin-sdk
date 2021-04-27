@@ -526,7 +526,24 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         if test_result.all_passed():
             passed = True
         if is_perf_run:
-            columns = [suite, test_set_name, test_name, tds_name, str(error_type), cmd_output, perf_iteration, None, None, str(error_msg), None, None, None, "Query Time", "TimeTest", case.execution_time]
+            columns = [
+            suite,
+            test_set_name,
+            test_name,
+            tds_name,
+            passed,
+            None,
+            perf_iteration,
+            None,
+            None,
+            None,
+            passed,
+            None,
+            None,
+            "Query Time",
+            "TimeTest",
+            0
+        ]
         else:
             columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
                    test_case_name, test_type, priority, categories, functions, cmd_output, error_msg, error_type,
@@ -576,13 +593,13 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
             test_set_name,
             test_name,
             tds_name,
-            str(error_type),
-            cmd_output,
+            None,
+            None,
             perf_iteration,
             None,
             None,
-            str(error_msg),
             None,
+            passed,
             None,
             None,
             "Query Time",
@@ -614,7 +631,10 @@ def write_csv_test_output(
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
 
-    csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
+    if perf_run:
+        csv_out = csv.writer(file_out, dialect='perflab', quoting=csv.QUOTE_MINIMAL)
+    else:
+        csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
 
     tdsname = os.path.splitext(os.path.split(tds_file)[1])[0]
     # Write the csv file.
@@ -642,8 +662,7 @@ def write_csv_test_output(
             "MetricResourceInstance",
             "Result"
         ]
-        perf_csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
-        perf_csv_out.writerow(csv_header)
+        csv_out.writerow(csv_header)
     else:
         tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
         actualTuplesHeader = 'Actual ' + tupleLimitStr

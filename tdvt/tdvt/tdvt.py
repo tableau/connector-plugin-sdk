@@ -47,7 +47,7 @@ class TestOutputFiles(object):
         logging.debug("Copying {0} to output".format(src))
         try:
             with open(src, 'r', encoding='utf8') as src_file:
-                reader = csv.DictReader(src_file, dialect='tdvt')
+                reader = csv.DictReader(src_file)
                 for row in reader:
                     cls.combined_output.append(row)
 
@@ -527,6 +527,14 @@ def register_tdvt_dialect():
     custom_dialect.skipinitialspace = True
     csv.register_dialect('tdvt', custom_dialect)
 
+def register_perflab_dialect():
+    custom_dialect = csv.excel
+    custom_dialect.lineterminator = '\n'
+    custom_dialect.delimiter = '|'
+    custom_dialect.strict = True
+    custom_dialect.skipinitialspace = True
+    csv.register_dialect('perflab', custom_dialect)
+
 def init():
     parser = create_parser()
     args = parser.parse_args()
@@ -548,6 +556,7 @@ def init():
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
     register_tdvt_dialect()
+    register_perflab_dialect()
 
     return parser, ds_reg, args
 

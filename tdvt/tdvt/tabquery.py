@@ -39,14 +39,7 @@ def get_max_process_level_of_parallelization(desired_threads):
     return desired_threads
 
 def build_tabquery_command_line(work):
-    try:
-        sys.path.insert(0, get_extensions_dir())
-        from extend_tabquery import TabqueryCommandLineExtension
-        sys.path.pop(0)
-        tb = TabqueryCommandLineExtension()
-        logging.debug("Imported extension extend_tabquery")
-    except:
-        tb = TabqueryCommandLine()
+    tb = TabqueryCommandLine()
 
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
