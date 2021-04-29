@@ -196,7 +196,7 @@ class TestRunner():
 
         start_time = time.time()
         self.test_config.thread_id = self.thread_id
-        failed_tests, skipped_tests, disabled_tests, total_tests = run_tests(self.test_config, self.test_set,)
+        failed_tests, skipped_tests, disabled_tests, total_tests = run_tests(self.test_config, self.test_set)
         logging.debug("\nFinished tdvt " + str(self.test_config) + "\n")
         print("\nFinished {0} {1} {2}\n".format(self.test_config.suite_name, self.test_config.config_file,
                                                 str(self.thread_id)))
