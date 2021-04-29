@@ -37,11 +37,19 @@ class ConnectorsTest(object):
         self.conn_test_file = conn_test_file
         self.conn_test_password_file = conn_test_password_file
         self.timeout_seconds = 10
+        self.cmd_output: str = ''
 
     def run_connectors_test(self):
         cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file, self.conn_test_password_file)
-        self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
-                                                      timeout=self.timeout_seconds))
+        self.cmd_output = str(
+            subprocess.check_call(
+                cmdline,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT,
+                universal_newlines=True,
+                timeout=self.timeout_seconds
+            )
+        )
         print(self.cmd_output)
         sys.exit(0)
 
@@ -70,7 +78,7 @@ class BatchQueueWork(object):
         self.results = {}
         self.thread_id = -1
         self.timeout_seconds = test_config.timeout_seconds
-        self.cmd_output = None
+        self.cmd_output = ''
         self.saved_error_message = None
         self.log_zip_file = ''
         self.verbose = test_config.verbose
@@ -248,8 +256,16 @@ class BatchQueueWork(object):
         self.load_test_metadata()
 
     def run_process(self, cmdline):
-        self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
-                                                      timeout=self.timeout_seconds))
+        self.cmd_output = str(
+            subprocess.check_call(
+                cmdline,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT,
+                universal_newlines=True,
+                timeout=self.timeout_seconds
+            )
+        )
+
     def run(self, test_list):
 
         if self.test_set.test_is_enabled is False:
@@ -483,7 +499,7 @@ def get_tuple_display_limit():
     return 100
 
 
-def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_index=0):
+def get_csv_row_data(tds_name: str, test_name: str, test_path: str, test_result: TestResult, test_case_index=0):
     # A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
     passed = False
     skipped = False
@@ -509,7 +525,7 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result, test_case_inde
         test_type = 'logical' if test_result.test_config.logical else 'expression'
 
     # Truncate long process outputs to keep size of csv down
-    if len(cmd_output) > 4096:
+    if cmd_output and len(cmd_output) > 4096:
         cmd_output = cmd_output[:4096] + "<output_truncated>"
 
     # info for perf run output

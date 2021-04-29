@@ -3,6 +3,7 @@
 import math
 import json
 import re
+from typing import Optional
 
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet
@@ -212,12 +213,12 @@ class TestResult(object):
         self.test_case_map = []
         self.cmd_output = ''
         self.relative_test_file = relative_test_file
-        self.test_set: TestSet = test_set
-        self.test_metadata = test_metadata
+        self.test_set: Optional[TestSet] = test_set
+        self.test_metadata: Optional[TestMetadata] = test_metadata
 
         self.parse_default_test_cases()
 
-    def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
+    def return_testcaseresult_for_not_run_tests(self, test_case_count=None) -> TestCaseResult:
         # TestCaseResult error messages should be specific to that exact test case. Overall test problems should be
         # set at a higher level (TestResult).
         if self.test_set.test_is_enabled is False:
