@@ -31,8 +31,14 @@ To learn more about ODBC drivers and Tableau, check the *Tableau and ODBC* page 
 ## Requirements
 - Tableau requires an ODBC version of 3 or higher
 
-# Requirements for both
+# Important SQLStates
 
-## Return SQLState 28000 for invalid credentials
-To display the correct error message to the user, and trigger the correct behavior for reconnect and and other scenarios, Tableau expects to receive SQLState 28000 when invalid credentials are entered. Not receiving the correct SQLState for invalid credentials may cause bugs.
+Tableau expects correct SQLStates to be returned in certain situations. Inaccurate SQLStates (for example, returning a generic error instead of SLQState 28000 for invalid credentials) may cause bugs in the connector.
+
+SQLSTATE | Error | Scenario
+- | - | -
+1002 | Disconnect Error | Connection is disconnected
+08001 | Unable to Connect | Client unable to connect to server
+28000 | Invalid Authorization Specialization | User enters invalid credentials (Bad username\password, etc)
+
 
