@@ -122,7 +122,7 @@ _Attribute names_
 
 Determines the driver name to use when connecting. This is only used for ODBC connections. You can specify regex or string matches for the driver name, specify driver versions (if the driver correctly returns them through the ODBC interface), and have a list of multiple drivers that can be used in order.
 
-Note: ODBC driver versions are only reliably returned on windows. We don't recommend relying on minimum driver version for mac or linux.
+Note: We do not recommend using ODBC driver version constraints, unless required for your scenario.  There are inconsistencies in the version values returned due to differences in the underlying operating and file systems on MacOS and Linux.
 
 **Type:** XML
 
