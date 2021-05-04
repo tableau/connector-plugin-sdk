@@ -92,7 +92,7 @@ The connection-normalizer is represented using a xml component in the [connectio
             <attr>dbname</attr>
             <attr>username</attr>
             <attr>password</attr>
-        </attribute-list>               
+        </attribute-list>
     </required-attributes>
 </connection-normalizer>
 
@@ -121,6 +121,8 @@ _Attribute names_
 ### driver-resolver
 
 Determines the driver name to use when connecting. This is only used for ODBC connections. You can specify regex or string matches for the driver name, specify driver versions (if the driver correctly returns them through the ODBC interface), and have a list of multiple drivers that can be used in order.
+
+Note: We do not recommend using ODBC driver version constraints, unless required for your scenario.  There are inconsistencies in the version values returned due to differences in the underlying operating and file systems on MacOS and Linux.
 
 **Type:** XML
 
@@ -192,11 +194,11 @@ Example:
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
 
     odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
-    
+
     if (attr[connectionHelper.attributeTableauServerAuthMode] == connectionHelper.valueAuthModeDBImpersonate) {
          props["DelegationUID"] = attr[connectionHelper.attributeTableauServerUser];
     }
-    
+
 _Throw Tableau Exception_
 
 Normally, throwing an exception in a JavaScript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:

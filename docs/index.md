@@ -62,14 +62,9 @@ To develop connectors, be sure you have the following installed on your computer
 - Tableau Desktop or Tableau Server 2019.2 or higher
 - __Note:__ Tableau 2019.4 is required to run TACO files
 - Python 3.7 or higher
-- An ODBC or JDBC data source and driver
+- An ODBC or JDBC data source and driver that meets the requirements listed [here]({{ site.baseurl }}/docs/drivers)
 - The provided test data loaded in your data source
 - JDK 8 or higher
-
-For a JDBC connector, your driver must meet these requirements:
-- You must have read permissions on the JAR file.
-- Tableau requires a JDBC 4.0 or later driver.
-- Tableau requires a Type 4 JDBC driver.
 
 ## Install the SDK tools
 Install the following:
