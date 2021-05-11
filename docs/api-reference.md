@@ -77,6 +77,8 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 
 Defines the unique set of connection attributes which is used to generate a connection "key" and has important security considerations. Connections can be reused and shared within Tableau processes based on this key, so it must contain attributes whose values will be unique in a given security context. Username is a commonly used attribute that will make a unique connection for each user, for example.
 
+Starting in Tableau 2021.1 a connector using Connection Dialog V2 style, connection-fields, can let the system determine at runtime the correct connection-normalizer by not defining it. Any connection-normalizer defined in the tdr file will take precedence at runtime. To use set min-version-tableau='2021.1' or newer in the manifest file.
+
 **Type:** XML
 
 The connection-normalizer is represented using a xml component in the [connectionResolver.tdr](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/connectionResolver.tdr) file. An example is :
@@ -90,7 +92,7 @@ The connection-normalizer is represented using a xml component in the [connectio
             <attr>dbname</attr>
             <attr>username</attr>
             <attr>password</attr>
-        </attribute-list>               
+        </attribute-list>
     </required-attributes>
 </connection-normalizer>
 
@@ -119,6 +121,8 @@ _Attribute names_
 ### driver-resolver
 
 Determines the driver name to use when connecting. This is only used for ODBC connections. You can specify regex or string matches for the driver name, specify driver versions (if the driver correctly returns them through the ODBC interface), and have a list of multiple drivers that can be used in order.
+
+Note: We do not recommend using ODBC driver version constraints, unless required for your scenario.  There are inconsistencies in the version values returned due to differences in the underlying operating and file systems on MacOS and Linux.
 
 **Type:** XML
 
@@ -190,11 +194,11 @@ Example:
     params[connectionHelper.keywordODBCUsername] = attr[connectionHelper.attributeUsername];
 
     odbcConnectStringExtrasMap = connectionHelper.ParseODBCConnectString(attr["odbc-connect-string-extras"]);
-    
+
     if (attr[connectionHelper.attributeTableauServerAuthMode] == connectionHelper.valueAuthModeDBImpersonate) {
          props["DelegationUID"] = attr[connectionHelper.attributeTableauServerUser];
     }
-    
+
 _Throw Tableau Exception_
 
 Normally, throwing an exception in a JavaScript component will show the user a more generic error message in the product. To have a custom error message appear in Tableau, use the following format:
@@ -223,7 +227,7 @@ Example:
 
 ## Deprecated API
 
-### ConnectionNormalizer and ConnectionMatcher JavaSscript files
+### ConnectionNormalizer and ConnectionMatcher JavaScript files
 The JavaScript files for connection normalizer and connection matcher are deprecated as of Tableau 2020.3. This means the element  `<script file="fileName.js"/>` (which was added inside the `<connection-matcher>` and `<connection-normalizer>` element) and the `<connection-matcher>` element itself are deprecated as of 2020.3. The `<connection-normalizer>` component can be added to the connectionResolver.tdr fie as shown in the connection-normalizer section above.
 
 ### SetImpersonateAttributes connection helper

@@ -118,26 +118,25 @@ CAP_JDBC_BIND_SPATIAL_AS_WKB | Set to 'yes' to use WKB for spatial types seriali
 CAP_JDBC_CONVERT_WKB_HEX_STRING | Set to 'yes' to convert a hex string to regular WKB. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to integer for data insertion. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
-CAP_JDBC_EXPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable use of parallel loops to translate Tableau DataValues to wire buffers on exports | yes | yes 
-CAP_JDBC_JNI_FETCH_SIZE_SMALL | Set to ‘yes’ to Fetch 10 rows per JNI call | &ndash; | &ndash;  
-CAP_JDBC_JNI_FETCH_SIZE_MEDIUM | Set to ‘yes’ to Fetch 100 rows per JNI call | yes | yes 
-CAP_JDBC_JNI_FETCH_SIZE_LARGE | Set to ‘yes’ to Fetch 1000 rows per JNI call | &ndash; | &ndash; 
-CAP_JDBC_JNI_FETCH_SIZE_MASSIVE | Set to ‘yes’ to Fetch 10000 rows per JNI call | &ndash; | &ndash;  
 CAP_JDBC_MAX_STRING_LENGTH_MEDIUM | Set to 'yes' to use 512 character string length limit. Default is 16K. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_GET_INDEX_INFO | Set to 'no' to disable reading index info | yes | yes  
 CAP_JDBC_METADATA_NUMERIC_DEFAULT_PREC_SCALE_DOUBLE | Set to 'yes' to use precision=17 and no scale for numeric with undefined precision/scale. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_READ_FOREIGNKEYS | Set to 'no' to disable reading foreign key metadata | yes | yes   
 CAP_JDBC_METADATA_READ_PRIMARYKEYS | Set to 'no' to disable reading primary key metadata | yes | yes 
 CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE | Set to 'yes' to get column metadata from the result set of a select * query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
+CAP_JDBC_METADATA_SUPPRESS_PREPARED_QUERY | If CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE is enabled, set this capability to 'yes' to disable preparing the query used for reading the table metadata. We will execute the query wrapped with a where-false clause. | &ndash; | &ndash;
 CAP_JDBC_PARAMETER_METADATA_REQUIRES_EXECUTE | Set to 'yes' if retrieving parameter metadata for inserts requires execution of an empty batch. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
-CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread | &ndash; | **<span style="color:red">yes</span>**  
-CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries | &ndash; | **<span style="color:red">yes</span>** 
+CAP_JDBC_QUERY_ASYNC | Set to 'yes' to run queries on another thread. | &ndash; | **<span style="color:red">yes</span>**
+CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries. Requires CAP_JDBC_QUERY_ASYNC to be set. | yes | yes
 CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
+CAP_JDBC_SUPPRESS_EMPTY_CATALOG_NAME | Set to 'yes' to ignore missing catalog. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash; 
+CAP_JDBC_SET_CLIENT_INFO | Enable the JDBC setClientInfo API to pass trace information to the database. Available in Tableau 2021.2 and newer for on-premise Tableau Server. Needs additional configuration see documentation. | &ndash; | &ndash;
 CAP_JDBC_TRIM_STRING_PADDING | Set to 'yes' to trim trailing whitespace from string columns which has been added by the driver. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
+CAP_JDBC_USE_ADAPTIVE_FETCH_SIZE | Set to 'yes' to use ResultSet metadata to determine optimal fetch size. May require CAP_JDBC_QUERY_FORCE_PREPARE to be enabled to work properly. Available in Tableau 2020.4 and newer. | yes | &ndash;
 CAP_JDBC_USE_SINGLE_ROW_FETCH | Set to 'yes' to use single row fetch. May require CAP_JDBC_QUERY_FORCE_PREPARE. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 
 ## ODBC 
