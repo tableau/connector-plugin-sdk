@@ -134,7 +134,7 @@
       %1 is the format string and %2 is the formatted date literal.
     -->
     <format-date-literal formula="TO_DATE('%1', '%2')"  format='yyyy-MM-dd' />
-    <format-datetime-literal formula="TO_TIMESTAMP('%1', '%2')" format='yyyy-MM-dd HH:mm:ss.SSS' />
+    <format-datetime-literal formula="TO_TIMESTAMP('%1', '%2')" format='yyyy-MM-dd HH:mm:ss' />
     <!--
       format-drop-table
       Format for dropping a table. %1 is the table name.
