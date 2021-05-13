@@ -61,6 +61,7 @@ These are valid values for <span style="font-family: courier new">base</span>:
 - Impala23Dialect
 - JetDialect
 - MySQL41UnicodeDriverDialect
+- MySQL8Dialect
 - Oracle102Dialect
 - PostgreSQL90Dialect
 - PrestoDialect
