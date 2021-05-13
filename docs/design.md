@@ -81,25 +81,48 @@ Only if your database follows the SQL standards of a database that Tableau curre
 
 Without a dialect file, the dialect from the superclass is used. For more information, see [Create a Tableau Dialect Definition (TDD) File]({{ site.baseurl }}/docs/dialect).
 
-## Set connection capabilities
+## Set connector capabilities
 
-Tableau capabilities are Boolean settings you can use to tune many aspects of your connector behavior, including:
+Tableau capabilities are Boolean settings you can use to tune many aspects of your connector behavior based on database functionality, including:
 - The types of queries that Tableau generates
 - How metadata is read
 - How Tableau binds to the drivers result set
 
-For information on common capabilities and how they are used, see [Capabilities]({{ site.baseurl }}/docs/capabilities).
+Common capabilities and how they are used: [Capabilities]({{ site.baseurl }}/docs/capabilities) 
 
-## Consider database capability
+### Subquery support
 
-Consider these two questions:
+- CAP_QUERY_SUBQUERIES
+- CAP_QUERY_SUBQUERIES_WITH_TOP
 
-__Does your database support temporary tables?__
-__Important:__ Your database should support temporary tables and subqueries for the best user experience, but at least one of those is required to support complete integration with Tableau.
+__Important:__ Your database must support subqueries or temporary tables for complete integration with Tableau. For the best user experience its recommended both are supported.
 
-If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.
+### Temporary Table support
+
+- CAP_CREATE_TEMP_TABLES
+- CAP_SELECT_INTO
+- CAP_SELECT_TOP_INTO
+
+If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities#temporary-tables). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.
 
 A common example is filtering the top three regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to __Rows__, then drag it again to __Filters__. Click the Top tab and select [Sales Total] aggregated by sum.
+
+### Review capabilties list
+
+There are some capabilities which Tableau either cannot provide a sensible default, or the platform default and current recommendation are different for backwards compatibility reasons.
+
+Review the [full list]({{ site.baseurl }}/docs/capabilities) of latest recommendations, highlighted in **<span style="color:red">Red</span>**, when writing a connector.  
+
+Common customizations:
+- CAP_QUERY_GROUP_BY_BOOL
+- CAP_QUERY_GROUP_BY_DEGREE
+- CAP_QUERY_SORT_BY
+- CAP_QUERY_SORT_BY_DEGREE 
+- CAP_QUERY_TOP_N 
+- CAP_JDBC_QUERY_ASYNC
+- [Metadata Enumeration]({{ site.baseurl }}/docs/metadata-enumeration)
+
+### Null Column Metadata support
 
 __Does your database support null column metadata?__
 Tableau relies on accurate column metadata from the ODBC or JDBC result set in order to make certain query optimizations. If information about whether a column contains null values is inaccurate, Tableau may generate inefficient or incorrect queries. If your database does not support null column information, then it is safer to indicate that all columns contain null values. This ensures that Tableau does not generate an optimized query that actually returns incorrect results.
