@@ -49,7 +49,7 @@ The <span style="font-family: courier new">function-map</span> element has
 
 
 - __function element__
-Each <span style="font-family: courier new">function</span> elements defines a single function. It has a few required attributes, contain a <span style="font-family: courier new">formula</span> element (and in some cases, an <span style="font-family: courier new">unagg-formula</span> element) and any number of <span style="font-family: courier new">argument</span> elements. For a list of supported functions, see the [full_dialect.tdd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/full_dialect.tdd) file sample.
+Each <span style="font-family: courier new">function</span> elements defines a single function. It has a few required attributes, contain a <span style="font-family: courier new">formula</span> element (and in some cases, an <span style="font-family: courier new">unagg-formula</span> element) and any number of <span style="font-family: courier new">argument</span> elements. For a list of supported functions, see the [FullFunctionMap.tdd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/FullFunctionMap.tdd) file sample.
 
 
 
