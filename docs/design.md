@@ -96,7 +96,7 @@ Common capabilities and how they are used: [Capabilities]({{ site.baseurl }}/doc
 - CAP_QUERY_SUBQUERIES
 - CAP_QUERY_SUBQUERIES_WITH_TOP
 
-__Important:__ Your database must support subqueries or temporary tables for complete integration with Tableau. For the best user experience its recommended both are supported.
+__Important:__ Your database must support subqueries or temporary tables for complete integration with Tableau. For the best user experience it is recommended both are supported.
 
 ### Temporary Table support
 
@@ -108,9 +108,9 @@ If your database supports temp tables, we recommend that you enable them through
 
 A common example is filtering the top three regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to __Rows__, then drag it again to __Filters__. Click the Top tab and select [Sales Total] aggregated by sum.
 
-### Review capabilties list
+### Review Capabilities list
 
-There are some capabilities which Tableau either cannot provide a sensible default, or the platform default and current recommendation are different for backwards compatibility reasons.
+There are some capabilities for which Tableau either cannot provide a sensible default, or the platform default and current recommendation are different for backwards compatibility reasons.
 
 Review the [full list]({{ site.baseurl }}/docs/capabilities) of latest recommendations, highlighted in **<span style="color:red">Red</span>**, when writing a connector.  
 
