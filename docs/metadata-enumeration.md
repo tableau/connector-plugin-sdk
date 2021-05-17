@@ -29,6 +29,8 @@ Example query: `SELECT * FROM default.testv1_batters`
 ## JDBC Metadata Enumeration
 There are six JDBC capabilities controlling JDBC metadata enumeration, They are all prefixed with `CAP_JDBC_METADATA_`. When metadata is enumerated by a SQL query, it will be logged with keyword `grpc-protocol-read-query-metadata`. When reading the metadata of columns from a table, the event will be logged with keyword `grpc-protocol-read-table-metadata`.
 
+Without any of below capabilities being set, our default behavior is to use JDBC APIs like getCatalogs, getSchemas, getTables, and getColumns from [DatabaseMetaData](https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html).
+
 1. Set `CAP_JDBC_METADATA_SUPPRESS_PREPARED_QUERY` to true to disable SQLPrepare query, query will include a `WHERE 1=0` clause in order to read metadata.
 
 2. Set `CAP_JDBC_METADATA_USE_RESULTSET_FOR_TABLE` to true to read metadata using an empty result set, example query as `select * from <tableName> where 1=0`. Turn this capability off to read the metadata of ResultSet for a particular table.
@@ -38,9 +40,5 @@ There are six JDBC capabilities controlling JDBC metadata enumeration, They are 
 4. Set `CAP_JDBC_METADATA_READ_PRIMARYKEYS` to false to disable reading primary key metadata.
 
 5. Set `CAP_JDBC_METADATA_GET_INDEX_INFO` to false to disable reading index info.
-
-6. Set `CAP_JDBC_METADATA_NUMERIC_DEFAULT_PREC_SCALE_DOUBLE` to true to use precision=17 and no scale for numeric with undefined precision/scale.
-
-7. Set `CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES`, `CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS`, or `CAP_JDBC_SUPPRESS_ENUMERATE_TABLES` to true to disable database, schema, table enumeration.
 
 For all Tableau connector capabilities, please refer to capabilities [documentation](https://tableau.github.io/connector-plugin-sdk/docs/capabilities).
