@@ -186,11 +186,12 @@ class TestXSDValidator(unittest.TestCase):
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                         "Valid XML file not marked as valid")
 
-        print("Test connectionFields is invalidated by XSD when field name contains special character other than - or _")
+        print("Test connectionFields is invalidated by XSD when field name" 
+        "contains special character other than - or _")
         test_file = TEST_FOLDER / "field_name_validation/invalid/special_character/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
-       
+
         print("Test connectionFields is invalidated by XSD when field name starts with a number")
         test_file = TEST_FOLDER / "field_name_validation/invalid/starting_number/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
@@ -200,17 +201,13 @@ class TestXSDValidator(unittest.TestCase):
         test_file = TEST_FOLDER / "field_name_validation/invalid/starting_space/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
-
         print("Test connectionFields is invalidated by XSD when field name has space in between")
+
         test_file = TEST_FOLDER / "field_name_validation/invalid/space_in_between/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
 
-        print("Test connectionFields is invalidated by XSD when field name starts with a space")
+        print("Test connectionFields is invalidated by XSD when field name ends with a space")
         test_file = TEST_FOLDER / "field_name_validation/invalid/ending_space/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
-       
-       
-
-      
