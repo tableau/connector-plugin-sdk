@@ -1,0 +1,40 @@
+<connection-fields>
+  <field label='APIKey' name='v-apikey' 
+          value-type='string' default-value='' optional='false' 
+          secure='false' category='general'>
+                  <conditions>
+                      <condition field='v-authscheme' value='basic' />
+                  </conditions>
+  </field>
+  <field label='AuthScheme' name='v-authscheme' 
+          value-type='selection' default-value='basic' optional='true' 
+          secure='false' category='general'>
+          <selection-group>
+              <option label='Basic' value='basic'/>
+              <option label='OAuth' value='oauth'/>
+          </selection-group>
+  </field>
+  <!-- -  is valid -->
+  <field label='LogModules' name='v-logmodules' 
+          value-type='string' default-value='' optional='true' 
+          secure='false' category='advanced'>
+  </field>
+  <!-- Underscore end is valid -->
+  <field label='Logfile' name='v-logfile_' 
+          value-type='string' default-value='' optional='true' 
+          secure='false' category='advanced'>
+  </field>
+  <!-- Underscore _ in between is valid -->
+  <field label='MaxLogFileCount' name='v-maxlogfi_lecount' 
+          value-type='string' default-value='-1' optional='true' 
+          secure='false' category='advanced'>
+  </field>
+  <!-- Numbers are valid if is not first character -->
+  <field label='MaxLogFileSize' name='v-maxlogfilesize33' 
+          value-type='string' default-value='100MB' optional='true' 
+          secure='false' category='advanced'>
+  </field>
+  <field label='Connection String' name='v-0ther' value-type='string' optional='true' default-value='' category='general' />
+  <field label='' name='authentication' value-type='string' optional='true' editable='false' default-value='auth-none' category='authentication' />
+  <field label='' name='server' value-type='string' optional='true' editable='false' default-value='MailChimp' category='endpoint' />
+</connection-fields>

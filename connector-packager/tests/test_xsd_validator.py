@@ -179,22 +179,38 @@ class TestXSDValidator(unittest.TestCase):
                       "\"'authentication' attribute is missing\" not found in warning message")
 
     def test_validate_connetionFieldName(self):
-        test_file = TEST_FOLDER / "modular_dialog_connector/connectionFields.xml"
+        test_file = TEST_FOLDER / "field_name_validation/valid/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
-        print("Test connectionFields is validated by XSD when field name is vaild")
+        print("Test connectionFields is validated by XSD when field name is vaild ")
         xml_violations_buffer = []
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                         "Valid XML file not marked as valid")
 
         print("Test connectionFields is invalidated by XSD when field name contains special character other than - or _")
-        test_file = TEST_FOLDER / "invalid_field_name_special/connectionFields.xml"
+        test_file = TEST_FOLDER / "field_name_validation/invalid/special_character/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
        
         print("Test connectionFields is invalidated by XSD when field name starts with a number")
-        test_file = TEST_FOLDER / "invalid_field_name_number/connectionFields.xml"
+        test_file = TEST_FOLDER / "field_name_validation/invalid/starting_number/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
+
+        print("Test connectionFields is invalidated by XSD when field name starts with a space")
+        test_file = TEST_FOLDER / "field_name_validation/invalid/starting_space/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                         "XML Validation failed for connectionFields.xml")
+
+        print("Test connectionFields is invalidated by XSD when field name has space in between")
+        test_file = TEST_FOLDER / "field_name_validation/invalid/space_in_between/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                         "XML Validation failed for connectionFields.xml")
+
+        print("Test connectionFields is invalidated by XSD when field name starts with a space")
+        test_file = TEST_FOLDER / "field_name_validation/invalid/ending_space/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
+                         "XML Validation failed for connectionFields.xml")
+       
        
 
       

@@ -5,7 +5,7 @@
     <validation-rule reg-exp="^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$"/>
   </field>
 
-  <field name="1port" label="Port" value-type="string" category="endpoint" default-value="5432" />
+  <field name="port" label="Port" value-type="string" category="endpoint" default-value="5432" />
 
   <field name="v-custom" label="Custom" value-type="string" category="endpoint" />
 
@@ -18,7 +18,7 @@
   <field name="vendor1" label="Advanced Vendor1" value-type="string" category="advanced" optional="false" default-value="testVendor1" />
   
   <field name="vendor2" label="Advanced Vendor2" value-type="string" category="advanced" optional="false" default-value="testVendor2" />
-  
-  <field name="vendor3" label="Advanced Vendor3" value-type="string" category="advanced" optional="false" default-value="testVendor3" />
+  <!-- Special character-->
+  <field name="vendor$3" label="Advanced Vendor3" value-type="string" category="advanced" optional="false" default-value="testVendor3" />
 
 </connection-fields>
