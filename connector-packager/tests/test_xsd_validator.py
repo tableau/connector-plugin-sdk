@@ -211,3 +211,7 @@ class TestXSDValidator(unittest.TestCase):
         test_file = TEST_FOLDER / "field_name_validation/invalid/ending_space/connectionFields.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
+
+        logging.debug("test_validate_connetionFieldName xml violations:")
+        for violation in xml_violations_buffer:
+            logging.debug(violation)
