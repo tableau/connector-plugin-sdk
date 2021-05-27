@@ -28,7 +28,7 @@
     <xs:attribute name="name" use="required">
      <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:pattern value="[:a-zA-Z_]([a-zA-Z0-9_\-.])*"/>
+          <xs:pattern value="[a-zA-Z_]([a-zA-Z0-9_.-])*"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -55,6 +55,7 @@
       <xs:enumeration value="selection"/>
       <xs:enumeration value="boolean"/>
       <xs:enumeration value="file"/>
+      <xs:enumeration value="textbox"/>
     </xs:restriction>
   </xs:simpleType>
 
