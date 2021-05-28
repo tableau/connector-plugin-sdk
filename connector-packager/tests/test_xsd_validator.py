@@ -178,7 +178,7 @@ class TestXSDValidator(unittest.TestCase):
         self.assertIn("'authentication' attribute is missing", cm.output[0],
                       "\"'authentication' attribute is missing\" not found in warning message")
 
-    def test_validate_connetionFieldName(self):
+    def test_validate_connetion_field_name(self):
         test_file = TEST_FOLDER / "field_name_validation/valid/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         print("Test connectionFields is validated by XSD when field name is vaild ")
@@ -212,45 +212,7 @@ class TestXSDValidator(unittest.TestCase):
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
                          "XML Validation failed for connectionFields.xml")
 
-        logging.debug("test_validate_connetionFieldName xml violations:")
-        for violation in xml_violations_buffer:
-            logging.debug(violation)
-
-    def test_validate_attribute_list(self):
-        test_file = TEST_FOLDER / "attribute_list_validation/valid/connectionResolver.tdr"
-        file_to_test = ConnectorFile("connectionResolver.tdr", "connection-resolver")
-        print("Test attribute-list is validated by XSD when attribute-list is vaild ")
-        xml_violations_buffer = []
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                        "XML Validation passed for connectionResolver.tdr")
-
-        print("Test attribute-list is invalidated by XSD when attribute" 
-        "contains special character other than - or _")
-        test_file = TEST_FOLDER / "attribute_list_validation/invalid/special_character/connectionResolver.tdr"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML Validation failed for connectionResolver.tdr")
-
-        print("Test attribute-list is invalidated by XSD when attribute starts with a number")
-        test_file = TEST_FOLDER / "attribute_list_validation/invalid/starting_number/connectionResolver.tdr"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML Validation failed for connectionResolver.tdr")
-
-        print("Test attribute-list is invalidated by XSD when attribute starts with a space")
-        test_file = TEST_FOLDER / "attribute_list_validation/invalid/starting_space/connectionResolver.tdr"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML Validation failed for connectionResolver.tdr")
-
-        print("Test attribute-list is invalidated by XSD when attribute has space in between")
-        test_file = TEST_FOLDER / "attribute_list_validation/invalid/space_in_between/connectionResolver.tdr"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML Validation failed for connectionResolver.tdr")
-
-        print("Test attribute-list is invalidated by XSD when attribute ends with a space")
-        test_file = TEST_FOLDER / "attribute_list_validation/invalid/ending_space/connectionResolver.tdr"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer),
-                         "XML Validation failed for connectionResolver.tdr")
-
-        logging.debug("test_validate_attribute_list xml violations:")
+        logging.debug("test_validate_connetion_field_name xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
 
