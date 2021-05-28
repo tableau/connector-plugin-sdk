@@ -61,13 +61,7 @@
   </xs:simpleType>
   <xs:complexType name="AttributeList-CT">
     <xs:sequence>
-      <xs:element name="attr" maxOccurs="unbounded">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:pattern value="[a-zA-Z_]([a-zA-Z0-9_.-])*"/>
-          </xs:restriction>
-        </xs:simpleType>
-    </xs:element>
+      <xs:element name="attr" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="DefaultAttribute-CT">
