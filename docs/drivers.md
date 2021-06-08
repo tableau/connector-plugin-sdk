@@ -41,4 +41,4 @@ SQLSTATE | Error | Scenario
 08001 | Unable to Connect | Client unable to connect to server
 28000 | Invalid Authorization Specialization | User enters invalid credentials (Bad username\password, etc)
 
-
+You can see the full list of SQLSTATES in the official [ODBC documentation](https://docs.microsoft.com/en-us/sql/odbc/reference/appendixes/appendix-a-odbc-error-codes?view=sql-server-ver15) and official [JDBC documentation](https://docs.oracle.com/cd/E15817_01/appdev.111/b31228/appd.htm).
