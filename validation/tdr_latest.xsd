@@ -16,19 +16,6 @@
       <xs:enumeration value="linux"/>
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="Double-ST">
-    <xs:union memberTypes="xs:double XML-RealSpecial-ST"/>
-  </xs:simpleType>
-  <xs:simpleType name="Float-ST">
-    <xs:union memberTypes="xs:float XML-RealSpecial-ST"/>
-  </xs:simpleType>
-  <xs:simpleType name="XML-RealSpecial-ST">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="nan"/>
-      <xs:enumeration value="inf"/>
-      <xs:enumeration value="-inf"/>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:simpleType name="VersionNumber-ST">
     <xs:restriction base="xs:string">
       <xs:pattern value="(\d+)((\.)(\d+))*((-)(\d+))*"/>
