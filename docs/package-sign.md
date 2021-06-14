@@ -4,7 +4,7 @@ title: Package and Sign Your Connector for Distribution 
 
 Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file.  Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. When the certificate expires, Tableau will reject the .taco file unless there is a valid timestamp.
 
-Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory. 
+Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory. 
 
 This document explains how to package and sign your connector using the Connector SDK. 
 
@@ -12,11 +12,11 @@ This document explains how to package and sign your connector using the Connecto
 
 Be sure your system includes the following:
 
--   Python version 3.7.3 or later 
+-   Python version 3.7.3 or later 
 
--   Java JDK is installed, JAVA\_HOME is set, and the JDK is in your PATH environment variable 
+-   Java JDK is installed, JAVA\_HOME is set, and the JDK is in your PATH environment variable 
 
--   Tableau Desktop 2019.4 or later   
+-   Tableau Desktop 2019.4 or later   
 
 -   A connector, developed with the Tableau Connector SDK, that you would like to package or sign 
 
@@ -47,16 +47,16 @@ Follow these steps to get the packaging tool and set up the virtual environment.
 Here's one method to do that:
     1. Open a terminal in the directory where you want to copy the Tableau Connector SDK.
     1. Run the following command to clone the Tableau Connector SDK git repository:
-    `git clone https://github.com/tableau/connector-plugin-sdk.git`
+    `git clone https://github.com/tableau/connector-plugin-sdk.git`
 
-1.  Set up the virtual environment by going to the connector-packager folder and running `python –m venv .venv`.     
-For example: 
-    `C:\connector-plugin-sdk\connector-packager> python -m venv .venv`
+1.  Set up the virtual environment by going to the connector-packager folder and running `python –m venv .venv`.     
+For example: 
+    `C:\connector-plugin-sdk\connector-packager> python -m venv .venv`
     For more information about venv, see [venv – Creation of virtual environments](https://docs.python.org/3/library/venv.html) on the Python website.
 
-1.  Activate the virtual environment using the activate command. 
+1.  Activate the virtual environment using the activate command. 
 For example, on Windows:
-`C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate`  
+`C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate`  
 Or, on Mac:
 `mac-3:connector-packager qa.auto$ source ./.venv/bin/activate`
 Or, on Linux:
@@ -66,18 +66,18 @@ Or, on Linux:
 1.  Install the packaging module in the virtual environment: 
 
     ```
-    (.venv) C:\connector-plugin-sdk\connector-packager>python setup.py install  
+    (.venv) C:\connector-plugin-sdk\connector-packager>python setup.py install  
     ```
 
 ## Package the connector
 
-You must run the connector-packager tool from the connector-plugin-sdk/connector-packager/ directory. The packaged TACO file, by  default, will be generated within packaged-connector folder. There are several ways to run the tool:
+You must run the connector-packager tool from the connector-plugin-sdk/connector-packager/ directory. The packaged TACO file, by  default, will be generated within packaged-connector folder. There are several ways to run the tool:
 
--   To package the connector, run this command: 
- `python -m connector_packager.package [path_to_plugin_folder]`
+-   To package the connector, run this command: 
+ `python -m connector_packager.package [path_to_plugin_folder]`
 
--   To validate that the XML files are valid without packaging the connector, run this command:
-`python -m connector_packager.package --validate-only [path_to_plugin_folder]`
+-   To validate that the XML files are valid without packaging the connector, run this command:
+`python -m connector_packager.package --validate-only [path_to_plugin_folder]`
 
 ### Packager examples
 __Example 1__
@@ -154,7 +154,7 @@ For more information about keytool arguments, see the Java Documentation about [
 
 __Step 2: Get the CSR signed by the certificate authority__
 
-Send the certificate signing request to the CA you want to create a certificate for you (for example, Verisign or Thawte). The CA will sign the CSR file with their own signature and send that certificate back to you. You can then use this signed certificate to sign the TACO file.
+Send the certificate signing request to the CA you want to create a certificate for you (for example, Verisign or Thawte). The CA will sign the CSR file with their own signature and send that certificate back to you. You can then use this signed certificate to sign the TACO file.
 
 After you receive/fetch the new certificate from the CA, along with any applicable "chain" or intermediate certificates, run the following command to install the new certificate and chain into the keystore:
 `keytool -importcert cert_from_ca -keystore your_keystore`
