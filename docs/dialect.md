@@ -16,7 +16,7 @@ Tableau searches for a TDD file in the location specified by the connector manif
 
 ### Dialect tag
 
-The <span style="font-family: courier new">dialect</span> tag serves as the root for the document. For example:
+The <span style="font-family: courier new">dialect</span> tag serves as the root for the document. For example:
 
 ```
 <dialect
@@ -25,7 +25,7 @@ The <span style="font-family: courier new">dialect</span> tag serves as the 
    version='20.1'>
 ```
 
-The <span style="font-family: courier new">dialect</span> tag has several required attributes and a couple of optional ones.
+The <span style="font-family: courier new">dialect</span> tag has several required attributes and a couple of optional ones.
 
 Attribute | Required | Description
 -|-|-
@@ -38,18 +38,18 @@ version | Y | Must match the current Tableau version in the format YY.Q; for exa
 
 ### Supported-aggregations element
 
-The <span style="font-family: courier new">supported-aggregations</span> element contains a list of aggregations and date truncation levels supported by the database, represented by one or more <span style="font-family: courier new">aggregation</span> elements.
+The <span style="font-family: courier new">supported-aggregations</span> element contains a list of aggregations and date truncation levels supported by the database, represented by one or more <span style="font-family: courier new">aggregation</span> elements.
 
 - __aggregation element__
 An <span style="font-family: courier new">aggregation</span> element has one required attribute, <span style="font-family: courier new">value</span>, which specifies a single aggregation or truncation. For a list, see [supported aggregations](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/Annotated.tdd#L1051).
 
 ### Function-map element
 
-The <span style="font-family: courier new">function-map</span> element has no attributes and contains any number of <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span>, and <span style="font-family: courier new">remove-function</span> elements.
+The <span style="font-family: courier new">function-map</span> element has no attributes and contains any number of <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span>, and <span style="font-family: courier new">remove-function</span> elements.
 
 
 - __function element__
-Each <span style="font-family: courier new">function</span> element defines a single function. It has a few required attributes, contains a <span style="font-family: courier new">formula</span> element (and in some cases, an <span style="font-family: courier new">unagg-formula</span> element) and any number of <span style="font-family: courier new">argument</span> elements. For a list of supported functions, see the [FullFunctionMap.tdd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/FullFunctionMap.tdd) file sample.
+Each <span style="font-family: courier new">function</span> element defines a single function. It has a few required attributes, contains a <span style="font-family: courier new">formula</span> element (and in some cases, an <span style="font-family: courier new">unagg-formula</span> element) and any number of <span style="font-family: courier new">argument</span> elements. For a list of supported functions, see the [FullFunctionMap.tdd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialects/FullFunctionMap.tdd) file sample.
 
 
 
@@ -60,9 +60,9 @@ group | Y | Contains one or more (comma-separated) groups that this function bel
 return-type | Y | Indicates the return type of the function. For a list of allowable types, see [argument-element](#Argument) below.
 
 - __date-function element__
-The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.
+The <span style="font-family: courier new">date-function</span> element is a specialized variant of <span style="font-family: courier new">function</span>. In addition to the base formula, you can specify one or more datepart formulas, which are used instead of the generic formula when available.
 The function <span style="font-family: courier new">name</span> must be one of these: DATEADD, DATEDIFF, DATENAME, DATEPARSE, DATEPART, DATETRUNC.
- Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required.
+ Like <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span> requires name and return-type, but unlike <span style="font-family: courier new">function</span>, group is not required.
 
   **Example: DATEPART without custom start of week**
 
@@ -124,20 +124,20 @@ The function <span style="font-family: courier new">name</span> must be one of t
   When writing datetime functions, use the default date 1900-01-01 where appropriate to standardize with other Tableau connectors.
 
 - __remove-function element__
-The <span style="font-family: courier new">remove-function</span> is used to remove existing functions in a function map without overriding them. It requires only a <span style="font-family: courier new">name</span> attribute and doesn't require you to specify any <span style="font-family: courier new">formula</span>.
+The <span style="font-family: courier new">remove-function</span> is used to remove existing functions in a function map without overriding them. It requires only a <span style="font-family: courier new">name</span> attribute and doesn't require you to specify any <span style="font-family: courier new">formula</span>.
 
 Each of the <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span>, and <span style="font-family: courier new">remove-function</span> elements can contain the following:
 
 - __formula element__
-The <span style="font-family: courier new">formula</span> element is a required child of <span style="font-family: courier new">function</span> and <span style="font-family: courier new">date-function</span> elements and specifies the function's formula using standard Tableau string substitution syntax for arguments (%1, %2, etc.). You can use the optional <span style="font-family: courier new">part</span> attribute to specify a formula for a specific date part.
+The <span style="font-family: courier new">formula</span> element is a required child of <span style="font-family: courier new">function</span> and <span style="font-family: courier new">date-function</span> elements and specifies the function's formula using standard Tableau string substitution syntax for arguments (%1, %2, etc.). You can use the optional <span style="font-family: courier new">part</span> attribute to specify a formula for a specific date part.
 
 - __unagg-formula element__
-The <span style="font-family: courier new">unagg-formula</span> (unaggregated formula) element is an optional child of <span style="font-family: courier new">function</span> elements. It should be specified *only* if the function is part of the aggregate group. Unaggregated formulas should represent a reasonable way of expressing the aggregate of a single value. For example, for average, it should be the value itself. For variance, it should be 0.
+The <span style="font-family: courier new">unagg-formula</span> (unaggregated formula) element is an optional child of <span style="font-family: courier new">function</span> elements. It should be specified *only* if the function is part of the aggregate group. Unaggregated formulas should represent a reasonable way of expressing the aggregate of a single value. For example, for average, it should be the value itself. For variance, it should be 0.
 
 - __argument element__
-The <span style="font-family: courier new">argument</span> element is an optional child of all three types of <span style="font-family: courier new">function</span> elements. It contains a single attribute, <span style="font-family: courier new">type</span>, which specifies the abbreviated argument type. Arguments must be listed in the correct order.
-Allowable types: none, bool, real, int, str, datetime, date, localstr, null, error, any, tuple, spatial, localreal, localint.
-Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second.
+The <span style="font-family: courier new">argument</span> element is an optional child of all three types of <span style="font-family: courier new">function</span> elements. It contains a single attribute, <span style="font-family: courier new">type</span>, which specifies the abbreviated argument type. Arguments must be listed in the correct order.
+Allowable types: none, bool, real, int, str, datetime, date, localstr, null, error, any, tuple, spatial, localreal, localint.
+Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour, minute, second.
 
 ### Join Support:
 
