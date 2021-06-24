@@ -21,9 +21,10 @@ MANIFEST_FILE_NAME = MANIFEST_FILE_TYPE + ".xml"
 MANIFEST_FILE_COPY_NAME = MANIFEST_FILE_TYPE + "_copy.xml"
 MANIFEST_ROOT_ELEM = "connector-plugin"
 MIN_TABLEAU_VERSION_ATTR = "min-version-tableau"
+TABLEAU_SUPPORT_LINK = "https://www.tableau.com/support"
 
 
-def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tableau: str) -> str:
+def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tableau: str, manifest_plugin_elem: ET.Element) -> str:
     """
     Get the minimum support version based on features used in the connector
 
@@ -37,6 +38,13 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
     min_version_tableau = __default_min_version_tableau__
 
     reasons = []
+
+    # Check support link
+    support_link = manifest_plugin_elem.find("vendor-information").find("support-link").get("url")
+    if support_link == TABLEAU_SUPPORT_LINK:
+        if 2021.1 > float(min_version_tableau):
+            min_version_tableau = "2021.1"
+        reasons.append("Tableau support link not usable in versions before 2021.1")
 
     # Check file types
     for connector_file in file_list:
@@ -94,7 +102,7 @@ def stamp_min_support_version(input_dir: Path, file_list: List[ConnectorFile], j
 
     # stamp the min-tableau-version onto original manifest
     cur_min_version_tableau = plugin_elem.get(MIN_TABLEAU_VERSION_ATTR, "0")
-    min_version_tableau, reasons = get_min_support_version(file_list, cur_min_version_tableau)
+    min_version_tableau, reasons = get_min_support_version(file_list, cur_min_version_tableau, plugin_elem)
     plugin_elem.set(MIN_TABLEAU_VERSION_ATTR, min_version_tableau)
     manifest.write(input_dir / manifest_file.file_name, encoding="utf-8", xml_declaration=True)
 
