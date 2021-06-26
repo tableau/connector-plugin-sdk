@@ -54,6 +54,7 @@ In your connectionResolver.tdr file, the following related OAuth attrs will be a
 ```ACCESSTOKEN, REFRESHTOKEN, access-token-issue-time, access-token-expires-in, CLIENTID, CLIENTSECRET, oauth-client, id-token(if any), instanceurl(if any)```
 You still need to define other required attributes for your connector, `authentication` and `username` are currently required for OAuth connections so make sure to add them as well.
 
+
 ```xml
   <required-attributes>
                 <attribute-list>
@@ -95,6 +96,12 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | capabilities | Map<String, String> | This defines how OAuth flow behaves differently according the capabilities set. | Yes | |
 | accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
 | refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | If not defined will use accessTokenResponseMaps by default |
+
+
+> Note: For accessTokenResponseMaps, these following feilds are reserved for oauth flow and you need explicit map to these:  
+Required fields: `ACCESSTOKEN`(Used to Connector to your data), `REFRESHTOKEN`(Used to get a new ACCESSTOKEN), `username`(Used to identify the token by Tableau).  
+Optional fields: `access-token-issue-time` will default to the time when the token is sent back to Tableau if not present, `access-token-expires-in` will default to 3600s if not present.  
+Not listed fields: In tehory you can add any field as you like and maintain those, but they will not take effect in any oauth flow(initial auth, refresh token, get >user info, etc).  
 
 ## OAuth Capabilities
 
@@ -200,9 +207,9 @@ By clicking the sign in button, you will be directed to your OAuth Provider's si
 
 ![Image](../assets/oauth-desktop-complete.png)
 
-# OAuth on Tableau Server
+# OAuth on Tableau Server & Tableau Online
 
-## Configure OAuth Clients on Server
+## Server-Wide OAuth Clients
 
 Config your OAuth client on your server: This would be the first step you need to perform for enabling OAuth on Tableau Server, this will setup OAuth Client information to be used on Tableau Server, e.g.:
 ```
@@ -210,6 +217,19 @@ tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"[your_
 ```
 Replace [your_dbclass] with the `dbclass` element registered in your oauthConfig.xml file. Substitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
 [your_redirect_url] needs to follow certain format, if your server address is https://Myserver/ then [your_reirect_uri] needs to be https://Myserver/auth/add_oauth_token.
+
+Tableau Online is managed by Tableau, in order for you connector to work on Tableau Online you will need to provide us(instruct us on how to create) the set of clientId/clientSecret/redirect_uri. 
+
+## Site-Wide OAuth Clients
+Another way is through the site level OAuth client feature where the server admin for Tableau Server/ site admin for Tableau Online will be able to register the oauth client on a particular site, for example setting Azure AD oauth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.  
+The oauth clients will only be effective in the particular site, it did not require a restart and take precedence over the server wide oauth clients if any.
+
+| Server-Wide OAuth Clients  | Site-Wide OAuth Clients | 
+| ----  | ------- | 
+| tsm command running by server admin | User Interface and can be accessed by site admin(Tableau Online) or server admin(Tableau Server)|
+| Need restart server| No need to restart server|
+| Apply to whole server| Only apply to the particular site, will not affect other sites|
+| Low priority | High priority |
 
 ## Server Add OAuth token flow
 
