@@ -54,7 +54,6 @@ In your connectionResolver.tdr file, the following related OAuth attrs will be a
 ```ACCESSTOKEN, REFRESHTOKEN, access-token-issue-time, access-token-expires-in, CLIENTID, CLIENTSECRET, oauth-client, id-token(if any), instanceurl(if any)```
 You still need to define other required attributes for your connector, `authentication` and `username` are currently required for OAuth connections so make sure to add them as well.
 
-
 ```xml
   <required-attributes>
                 <attribute-list>
