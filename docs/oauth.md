@@ -81,20 +81,30 @@ This is the parent element for all fields.
 
 Each OAuth config attribute is represented by an element in the XML, the element name is the attribute name and the content is the attribute value.
 
-| Name  | Type | Meaning | Optional? | Notes |
+| Name  | Type | Meaning | Required? | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| dbclass | String | The identifier for your oauthConfig | No | The dbclass must be same with as the `class` attribute in manifest.xml | 
-| clientIdDesktop | String | Client ID you registered for Tableau Desktop | Yes | This is not considered a secret and will be stored in plain text | 
-| clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | Yes | This is not considered a secret and will be stored in plain text | 
-| redirectUrisDesktop | String[] | Redirect Urls for Desktop | Yes	| The host for redirectUrisDesktop must be a valid loopback address| 
-| authUri | String | Authorization endpoint URI | No | |
-| tokenUri | String | Token endpoint URI | No | |
-| userInfoUri | String | User Info UrI | Yes | |
-| instanceUrlValidationRegex | String | Use to validate against your OAuth instance Url. | Yes | |
-| scopes | String[] | scopes | No | |
-| capabilities | Map<String, String> | This defines how OAuth flow behaves differently according the capabilities set. | Yes | |
-| accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
-| refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | If not defined will use accessTokenResponseMaps by default |
+| dbclass | String | The identifier for your oauthConfig | Yes | The dbclass must be same with as the `class` attribute in manifest.xml | 
+| clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
+| clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
+| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| The host for redirectUrisDesktop must be a valid loopback address| 
+| authUri | String | Authorization endpoint URI | Yes | |
+| tokenUri | String | Token endpoint URI | Yes | |
+| userInfoUri | String | User Info UrI | No | |
+| instanceUrlValidationRegex | String | Use to validate against your OAuth instance Url. | No | |
+| scopes | String[] | scopes | Yes | |
+| capabilities | Map<String, String> | This defines how OAuth flow behaves differently according the capabilities set. | No | |
+| accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | Yes | |
+| refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | No | If not defined will use accessTokenResponseMaps by default |
+
+Note: The keys in accessTokenResponseMaps and refreshTokenResponseMaps are Tableau preferred field names and are defined in the followed table. The values are what your OAuth provider returns in the raw response
+| Name of the key | Required for accessTokenResponseMaps | Required for refreshTokenResponseMaps | Notes |
+| ----  | ------- | --------- |  ----------- |
+| ACCESSTOKEN | Yes | Yes | Used by Tableau to connect to your data. |
+| REFRESHTOKEN | Yes | No | Used by Tableau to get a new ACCESSTOKEN when the old one expired. |
+| username | Yes | No | Used by Tableau to identify the token. |
+| access-token-issue-time | No | No | Used to note when the token is issued, will default to the time when the token is sent back to Tableau if not set. |
+| access-token-expires-in | No | No | Use to note the validation time of your ACCESSTOKEN, will default to 3600s if not set. |
+| [your own field] | No | No | It is usually not needed to define your own field, and this field will not be able to participate in any oauth flow. |
 
 <br>
 
@@ -202,9 +212,9 @@ By clicking the sign in button, you will be directed to your OAuth Provider's si
 
 ![Image](../assets/oauth-desktop-complete.png)
 
-# OAuth on Tableau Server
+# OAuth on Tableau Server & Tableau Online
 
-## Configure OAuth Clients on Server
+## Server-Wide OAuth Clients
 
 Config your OAuth client on your server: This would be the first step you need to perform for enabling OAuth on Tableau Server, this will setup OAuth Client information to be used on Tableau Server, e.g.:
 ```
@@ -212,6 +222,19 @@ tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"[your_
 ```
 Replace [your_dbclass] with the `dbclass` element registered in your oauthConfig.xml file. Substitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
 [your_redirect_url] needs to follow certain format, if your server address is https://Myserver/ then [your_reirect_uri] needs to be https://Myserver/auth/add_oauth_token.
+
+Tableau Online is managed by Tableau, so in order for a connector to work on Tableau Online instructions to create a clientId, clientSecret, and redirect_uri will need to provided.
+
+## Site-Wide OAuth Clients
+Another way is through the site level OAuth client feature where the server admin for Tableau Server, or site admin for Tableau Online, will be able to register the OAuth client on a particular site. For example setting Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.  
+The oauth clients will only be effective in the particular site, it did not require a restart and take precedence over the server wide oauth clients if any.
+
+| Server-Wide OAuth Clients  | Site-Wide OAuth Clients | 
+| ----  | ------- | 
+| tsm command running by server admin | User Interface and can be accessed by site admin(Tableau Online) or server admin(Tableau Server)|
+| Need restart server| No need to restart server|
+| Apply to whole server| Only apply to the particular site, will not affect other sites|
+| - | Take precedence over Server-Wide OAuth Clients if both exist |
 
 ## Server Add OAuth token flow
 
