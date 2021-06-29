@@ -96,11 +96,15 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | accessTokenResponseMaps | Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | No | |
 | refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | Yes | If not defined will use accessTokenResponseMaps by default |
 
-
-> Note: For accessTokenResponseMaps, these following feilds are reserved for oauth flow and you need explicit map to these:  
-Required fields: `ACCESSTOKEN`(Used to Connector to your data), `REFRESHTOKEN`(Used to get a new ACCESSTOKEN), `username`(Used to identify the token by Tableau).  
-Optional fields: `access-token-issue-time` will default to the time when the token is sent back to Tableau if not present, `access-token-expires-in` will default to 3600s if not present.  
-Not listed fields: In tehory you can add any field as you like and maintain those, but they will not take effect in any oauth flow(initial auth, refresh token, get >user info, etc).  
+Note: The keys in accessTokenResponseMaps and refreshTokenResponseMaps are tableau preserved field names and is defined in the followed table, the values are what your oauth provider returns in the raw response.
+| Name of the key | Optional/Required | Notes |
+| ----  | ------- | --------- |
+| ACCESSTOKEN | Required for both | Used by Tableau to connect to your data. |
+| REFRESHTOKEN | Required for accessTokenResponseMaps, Optional for refreshTokenResponseMaps | Used by Tableau to get a new ACCESSTOKEN when the old one expired. |
+| username | Required for accessTokenResponseMaps, Optional for refreshTokenResponseMaps | Used by Tableau to identify the token. |
+| access-token-issue-time | Optional for both | Used to note when the token is issued, will default to the time when the token is sent back to Tableau if not set. |
+| access-token-expires-in | Optional for both | Use to note the validation time of your ACCESSTOKEN, will default to 3600s if not set. |
+| [your own field] | Optional for both | It is usually not needed to define your own field, and this field will not be able to participate in any oauth flow. |
 
 ## OAuth Capabilities
 
@@ -217,7 +221,7 @@ tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"[your_
 Replace [your_dbclass] with the `dbclass` element registered in your oauthConfig.xml file. Substitute [your_client_id], [your_client_secret], [your_redirect_url] with the ones you registered in your provider's OAuth registration page.
 [your_redirect_url] needs to follow certain format, if your server address is https://Myserver/ then [your_reirect_uri] needs to be https://Myserver/auth/add_oauth_token.
 
-Tableau Online is managed by Tableau, in order for you connector to work on Tableau Online you will need to provide us(instruct us on how to create) the set of clientId/clientSecret/redirect_uri. 
+Tableau Online is managed by Tableau, so in order for a connector to work on Tableau Online instructions to create a clientId, clientSecret, and redirect_uri will need to provided.
 
 ## Site-Wide OAuth Clients
 Another way is through the site level OAuth client feature where the server admin for Tableau Server/ site admin for Tableau Online will be able to register the oauth client on a particular site, for example setting Azure AD oauth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.  
@@ -228,7 +232,7 @@ The oauth clients will only be effective in the particular site, it did not requ
 | tsm command running by server admin | User Interface and can be accessed by site admin(Tableau Online) or server admin(Tableau Server)|
 | Need restart server| No need to restart server|
 | Apply to whole server| Only apply to the particular site, will not affect other sites|
-| Low priority | High priority |
+| - | Take precedence over Server-Wide OAuth Clients if both exist |
 
 ## Server Add OAuth token flow
 
