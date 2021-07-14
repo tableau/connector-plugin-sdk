@@ -3,10 +3,6 @@
     var params = {};
     var authAttrValue = attr[connectionHelper.attributeAuthentication];
 
-    for (var i = 0, keys = Object.keys(attr), ii = keys.length; i < ii; i++) {
-          logging.log(keys[i] + '|' + attr[keys[i]]);
-    }
-
     params["SERVER"] = attr[connectionHelper.attributeServer];
     params["UID"] = attr[connectionHelper.attributeUsername];
     if(authAttrValue =="auth-user-pass")

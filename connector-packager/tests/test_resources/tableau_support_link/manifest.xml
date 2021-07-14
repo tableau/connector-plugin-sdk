@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='test' superclass='postgres' plugin-version='0.0.0' name='Test' version='18.1' min-version-tableau='2019.4'>
+  <vendor-information>
+      <company name="Company Name"/>
+      <support-link url="https://www.tableau.com/support"/>
+  </vendor-information>
+</connector-plugin>

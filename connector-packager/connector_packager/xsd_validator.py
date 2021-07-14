@@ -15,7 +15,7 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
-PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'vendor1', 'vendor2', 'vendor3']
+PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'instanceurl', 'vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAME_PREFIX = 'v-'
 
 # Holds the mapping between file type and XSD file name
@@ -26,9 +26,8 @@ XSD_DICT = {
     "dialect": "tdd_latest",
     "resource": "connector_plugin_resources_latest",
     "connection-fields": "connection_fields",
-    "connection-metadata": "connector_plugin_metadata"
-
-}
+    "connection-metadata": "connector_plugin_metadata",
+    "oauth-config": "oauth_config"}
 
 
 def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool:
@@ -69,6 +68,8 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         else:
             xml_violations_found += 1
 
+        warn_file_specific_rules(file_to_test, path_to_file)
+
     if xml_violations_found <= 0:
         logger.debug("No XML violations found")
     else:
@@ -103,7 +104,6 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         return False
 
     manifest_schema = XMLSchema(str(PATH_TO_XSD_FILES / Path(xsd_file)))
-    saved_error = None
 
     # If the file is too big, we shouldn't try and parse it, just log the violation and move on
     if path_to_file.stat().st_size > MAX_FILE_SIZE:
@@ -164,6 +164,21 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                                                  " already exists. Cannot have multiple fields with the same name.")
 
                     return False
+                if field_name == 'instanceurl':
+                    used_for_oauth = False
+                    for conditions in child.iter("conditions"):
+                        for condition in conditions.iter("condition"):
+                            if 'field' in condition.attrib:
+                                if condition.attrib['field'] == 'authentication':
+                                    if 'value' in condition.attrib:
+                                        if condition.attrib['value'] == 'oauth':
+                                            used_for_oauth = True
+                    if not used_for_oauth:
+                        xml_violations_buffer.append("Element 'field', attribute 'name'='instanceurl' can only be used conditional on field " + 
+                                                     "'authentication' with 'value'='oauth'. See 'Connection Field Platform Integration' section " + 
+                                                     "of documentation for more information.")
+                        return False
+
                 field_names.add(field_name)
 
             if 'category' in child.attrib:
@@ -176,3 +191,42 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
                     return False
 
     return True
+
+
+# Check if connector file content contains warnings needs to notify connector developer
+def warn_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path):
+
+    if file_to_test.file_type == 'dialect':
+        warn_file_specific_rules_dialect(path_to_file)
+    elif file_to_test.file_type == 'connection-resolver':
+        warn_file_specific_rules_tdr(path_to_file)
+
+
+def warn_file_specific_rules_dialect(path_to_file: Path):
+
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    if 'base' in root.attrib and root.attrib['base'] == 'DefaultSQLDialect':
+        logger.warning('Warning: DefaultSQLDialect is not a recommended base to inherit from, '
+                       'please see the documentation for current best practices: '
+                       'https://tableau.github.io/connector-plugin-sdk/docs/design#choose-a-dialect')
+
+
+def warn_file_specific_rules_tdr(path_to_file: Path):
+
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    attribute_list = root.find('.//connection-normalizer/required-attributes/attribute-list')
+
+    if not attribute_list:
+        return
+
+    authentication_attr_exists = False
+    for attr in attribute_list.iter('attr'):
+        if attr.text == 'authentication':
+            authentication_attr_exists = True
+            break
+
+    if not authentication_attr_exists:
+        logger.warning("Warning: 'authentication' attribute is missing from "
+                       "<connection-normalizer>/<required-attributes>/<attribute-list> in " + str(path_to_file) + ".")
