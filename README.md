@@ -8,6 +8,7 @@ The latest version of the SDK is always targeted towards the latest, non-beta ve
 
 | Tool                                             | Latest Version     |
 |--------------------------------------------------|--------------------|
+| Connector SDK for Tableau 2021.1                 | 07-14-2021         |
 | Connector SDK for Tableau 2020.4                 | 03-29-2021         |
 | Connector SDK for Tableau 2020.3                 | 12-07-2020         |
 | Connector SDK for Tableau 2020.2                 | 8-12-2020          |
