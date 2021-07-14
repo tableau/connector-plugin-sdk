@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+  <field name="server" label="Server" value-type="string" category="endpoint" >
+    <validation-rule reg-exp="^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$"/>
+  </field>
+
+  <field name="port" label="Port" value-type="string" category="endpoint" default-value="5432" />
+
+  <field name="authentication" label="Auth" category="authentication" value-type="selection" default-value="oauth">
+        <selection-group>
+            <option label="OAuth" value="oauth"/>
+            <option label="Username/Password" value="auth-user-pass" />
+        </selection-group>
+   </field>
+
+   <field name="username" label="Username" category="authentication" value-type="string">
+        <conditions>
+            <condition field="authentication" value="auth-user-pass" />
+        </conditions>
+    </field>
+
+    <field name="password" label="Password" category="authentication" value-type="string" secure="true">
+     <conditions>
+         <condition field="authentication" value="auth-user-pass" />
+      </conditions>
+    </field>
+
+    <field name="instanceurl" label="OAuth Instance Url" category="authentication" value-type="string">
+      <conditions>
+        <condition field="authentication" value="oauth" />
+      </conditions>
+      <validation-rule reg-exp="^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)"/>
+    </field>
+
+</connection-fields>

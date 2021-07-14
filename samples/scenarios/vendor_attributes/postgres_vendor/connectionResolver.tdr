@@ -13,6 +13,7 @@
           <attr>vendor3</attr>
           <attr>port</attr>
           <attr>dbname</attr>
+          <attr>authentication</attr>
           <attr>username</attr>
           <attr>password</attr>
           <attr>sslmode</attr>

@@ -1,0 +1,106 @@
+<results>
+  <test name='time0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(4245842207)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#21:07:32#</value>
+      </tuple>
+      <tuple>
+        <value>#22:15:40#</value>
+      </tuple>
+      <tuple>
+        <value>#22:24:08#</value>
+      </tuple>
+      <tuple>
+        <value>#22:42:43#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 01:31:32#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 04:57:51#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 07:37:48#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 08:59:39#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 09:00:59#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 11:58:29#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 13:48:48#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 13:53:46#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 15:01:19#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 18:21:08#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 18:51:48#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 19:45:54#</value>
+      </tuple>
+      <tuple>
+        <value>#1900-01-01 20:36:00#</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='time1'>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(665897456)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 00:05:57#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 02:05:25#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 04:40:49#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 04:48:07#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 09:33:31#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 12:33:57#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 18:58:41#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 19:36:22#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 19:48:23#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 19:57:33#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 22:20:14#</value>
+      </tuple>
+      <tuple>
+        <value>#1901-01-31 22:50:16#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

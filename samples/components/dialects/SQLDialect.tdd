@@ -129,6 +129,13 @@
       <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
     </format-create-table>
     <!--
+      format-date-literal
+      Specifies a formula for expressing a date literal, as well as an *ICU* date format.
+      %1 is the format string and %2 is the formatted date literal.
+    -->
+    <format-date-literal formula="TO_DATE('%1', '%2')"  format='yyyy-MM-dd' />
+    <format-datetime-literal formula="TO_TIMESTAMP('%1', '%2')" format='yyyy-MM-dd HH:mm:ss' />
+    <!--
       format-drop-table
       Format for dropping a table. %1 is the table name.
       Each formula is executed as a separate statement.
