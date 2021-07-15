@@ -1,20 +1,13 @@
 # Tableau Connector SDK Changelog
-
-## Unreleased
-## 2021-01-10
-### Added
-- Add OAuth Scenario for Snowflake
-## 2020-01-22
+## 2021-01-22
 ### Removed
 - Remove support for `script` element and `cacheSize` attribute in ConnectionNormalizer-CT and ConnectionMatcher-CT in `tdr_latest.xsd`.  This has not been a recommended pattern since initial release and deprecated in 2020.3 release.  Documentation, samples and [API Reference](https://tableau.github.io/connector-plugin-sdk/docs/api-reference) have been previously updated.
-
-## Unreleased
 ## 2021-01-10
 ### Added
 - Add OAuth Scenario for Snowflake
 ## 2020-10-01
 ### Added
-- Add JDBC Kerberos scenario for postgres 
+- Add JDBC Kerberos scenario for postgres
 
 ## 2020-09-21
 ### Changed
@@ -57,7 +50,7 @@
 - Fix issue with SSL in the MySQL ODBC sample
 ### Changed
 ### Removed
-- Removed INITSTMT from MySQL ODBC sample so that intialSQL does not run twice. 
+- Removed INITSTMT from MySQL ODBC sample so that intialSQL does not run twice.
 
 ## 2019-03-29
 ### Added
