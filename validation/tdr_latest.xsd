@@ -37,9 +37,16 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="type" type="NameMatchType-ST" use="required"/>
+        <xs:attribute name="use-system-class-loader" type="xs:boolean"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:simpleType name="DriverResolverType-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="jdbc"/>
+      <xs:enumeration value="odbc"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="ConditionalOperator-ST">
     <xs:restriction base="xs:string">
       <xs:enumeration value="eq"/>
@@ -159,6 +166,7 @@
         <xs:documentation>Use to restrict the driver search to the specified bitness. The default is unrestricted which means that Tableau will try to find a 64bit driver first and then try to find a 32bit driver.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="type" type="DriverResolverType-ST"/>
   </xs:complexType>
   <xs:element name="tdr">
     <xs:complexType>
