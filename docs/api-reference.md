@@ -228,7 +228,7 @@ Example:
 ## Deprecated API
 
 ### ConnectionNormalizer and ConnectionMatcher JavaScript files
-The JavaScript files for connection normalizer and connection matcher are deprecated as of Tableau 2020.3. This means the element  `<script file="fileName.js"/>` (which was added inside the `<connection-matcher>` and `<connection-normalizer>` element) and the `<connection-matcher>` element itself are deprecated as of 2020.3. The `<connection-normalizer>` component can be added to the connectionResolver.tdr fie as shown in the connection-normalizer section above.
+The JavaScript files for connection normalizer and connection matcher are deprecated as of Tableau 2020.3. In Tableau 2021.2 support was removed and an error will occur when loading the connector. The element `<script file="fileName.js"/>`, which was added inside the `<connection-matcher>` and `<connection-normalizer>` element, and the `<connection-matcher>` element itself, are the deprecated APIs. The `<connection-normalizer>` element is still supported in the connectionResolver.tdr file as shown in the connection-normalizer section above.
 
 ### SetImpersonateAttributes connection helper
 This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
