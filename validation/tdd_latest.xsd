@@ -209,12 +209,16 @@ as passed-in parameters.
     <xs:restriction base="xs:string">
       <xs:enumeration value="Case"/>
       <xs:enumeration value="BalancedIIF"/>
+      <xs:enumeration value="BalancedIIF_"/>
+      <xs:enumeration value="BalancedIF"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="IfThenElseApproach-ST">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Case"/>
       <xs:enumeration value="IIF"/>
+      <xs:enumeration value="IIF_"/>
+      <xs:enumeration value="IF"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="BoolAsValueApproach-ST">
@@ -458,6 +462,14 @@ as passed-in parameters.
       <xs:enumeration value="xxxxx"/>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="StartOfWeekFormat-ST">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Number"/>
+      <xs:enumeration value="String"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="SimpleCase-CT">
     <xs:attribute name="value" type="SimpleCaseApproach-ST"/>
   </xs:complexType>
@@ -548,6 +560,7 @@ as passed-in parameters.
       <xs:element maxOccurs="unbounded" minOccurs="0" name="part">
         <xs:complexType>
           <xs:attribute name="name" type="JoinType-ST" use="required"/>
+          <xs:attribute name="value" type="xs:string" />
         </xs:complexType>
       </xs:element>
     </xs:sequence>
@@ -594,6 +607,9 @@ as passed-in parameters.
       <xs:element maxOccurs="unbounded" name="local-type" type="ColumnDefinitionLocalType-CT"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="StartOfWeekFormat-CT">
+    <xs:attribute name="value" type="StartOfWeekFormat-ST" />
+  </xs:complexType>
   <xs:complexType name="ValueBool-CT">
     <xs:attribute name="value" type="xs:boolean" use="required"/>
   </xs:complexType>
@@ -633,6 +649,7 @@ as passed-in parameters.
       <xs:element minOccurs="0" name="id-max-length" type="ValueUInt-CT"/>
       <xs:element minOccurs="0" name="id-quotes" type="ValueString-CT"/>
       <xs:element minOccurs="0" name="start-of-week-offset" type="ValueUInt-CT"/>
+      <xs:element minOccurs="0" name="start-of-week-format" type="StartOfWeekFormat-CT"/>
       <xs:element minOccurs="0" name="supported-joins" type="SupportedJoins-CT"/>
     </xs:sequence>
   </xs:complexType>
