@@ -215,8 +215,8 @@ as passed-in parameters.
     <xs:restriction base="xs:string">
       <xs:enumeration value="Case"/>
       <xs:enumeration value="IIF"/>
-      <xs:enumeration value="IIF_"/>
-      <xs:enumeration value="IF"/>
+      <xs:enumeration value="IIF_"/> <!-- added 2021.3 -->
+      <xs:enumeration value="IF"/> <!-- added 2021.3 -->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="BoolAsValueApproach-ST">
@@ -558,7 +558,7 @@ as passed-in parameters.
       <xs:element maxOccurs="unbounded" minOccurs="0" name="part">
         <xs:complexType>
           <xs:attribute name="name" type="JoinType-ST" use="required"/>
-          <xs:attribute name="value" type="xs:string" />
+          <xs:attribute name="value" type="xs:string" /> <!-- added 2021.3 -->
         </xs:complexType>
       </xs:element>
     </xs:sequence>
@@ -647,7 +647,7 @@ as passed-in parameters.
       <xs:element minOccurs="0" name="id-max-length" type="ValueUInt-CT"/>
       <xs:element minOccurs="0" name="id-quotes" type="ValueString-CT"/>
       <xs:element minOccurs="0" name="start-of-week-offset" type="ValueUInt-CT"/>
-      <xs:element minOccurs="0" name="start-of-week-format" type="StartOfWeekFormat-CT"/>
+      <xs:element minOccurs="0" name="start-of-week-format" type="StartOfWeekFormat-CT"/> <!-- added 2021.3 -->
       <xs:element minOccurs="0" name="supported-joins" type="SupportedJoins-CT"/>
     </xs:sequence>
   </xs:complexType>
