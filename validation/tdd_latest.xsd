@@ -209,8 +209,8 @@ as passed-in parameters.
     <xs:restriction base="xs:string">
       <xs:enumeration value="Case"/>
       <xs:enumeration value="BalancedIIF"/>
-      <xs:enumeration value="BalancedIIF_"/>
-      <xs:enumeration value="BalancedIF"/>
+      <xs:enumeration value="BalancedIIF_"/>  <!-- added 2021.4 -->
+      <xs:enumeration value="BalancedIF"/>  <!-- added 2021.4 -->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="IfThenElseApproach-ST">
