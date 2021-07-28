@@ -48,6 +48,7 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
 
     # Check file types
     for connector_file in file_list:
+
         # if we have a connection-fields file, then we are using modular dialogs and need 2020.3+
         if connector_file.file_type == "connection-fields":
             if 2020.3 > float(min_version_tableau):
@@ -57,7 +58,7 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
             if 2021.1 > float(min_version_tableau):
                 min_version_tableau = "2021.1"
             reasons.append("Connector uses OAuth, which was added in the 2021.1 release")
-        elif connector_file.file_type == "connector-resolver":
+        elif connector_file.file_type == "connection-resolver":
             # Check to see if we're using inferred connection resolver, which needs 2021.1+
             tdr_root = ET.parse(input_dir / connector_file.file_name).getroot()
             attribute_list = tdr_root.find('.//connection-normalizer/required-attributes/attribute-list')
