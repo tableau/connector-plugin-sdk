@@ -18,7 +18,8 @@ class TestXMLParser(unittest.TestCase):
             ConnectorFile("connection-dialog.tcd", "connection-dialog"),
             ConnectorFile("connectionBuilder.js", "script"),
             ConnectorFile("dialect.tdd", "dialect"),
-            ConnectorFile("connectionResolver.tdr", "connection-resolver")]
+            ConnectorFile("connectionResolver.tdr", "connection-resolver"),
+            ConnectorFile("resources-en_US.xml", "resource")]
 
         actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("valid_connector"),
                                                                     expected_file_list, expected_class_name)
