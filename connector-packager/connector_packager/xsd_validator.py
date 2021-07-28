@@ -9,6 +9,7 @@ from xmlschema import XMLSchema
 from defusedxml.ElementTree import parse
 
 from .connector_file import ConnectorFile
+from .connector_properties import ConnectorProperties
 
 logger = logging.getLogger('packager_logger')
 
@@ -17,8 +18,6 @@ PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
 PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'instanceurl', 'vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAME_PREFIX = 'v-'
-
-USES_TCD = False  # We'll set this to true if we load a .tcd file
 
 # Holds the mapping between file type and XSD file name
 XSD_DICT = {
@@ -54,6 +53,8 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         logger.error("Error: validate_all_xml: input list is empty")
         return False
 
+    properties = ConnectorProperties()
+
     xml_violations_found = 0
     xml_violations_buffer = ["XML violations found."]
     # If xml violations are found, we save them here and logger.debug at end of method
@@ -65,7 +66,7 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         if file_to_test.extension() not in VALID_XML_EXTENSIONS:
             continue
 
-        if validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
+        if validate_single_file(file_to_test, path_to_file, xml_violations_buffer, properties):
             logger.debug("XML validation successful")
         else:
             xml_violations_found += 1
@@ -85,7 +86,7 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
     return xml_violations_found <= 0
 
 
-def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
     """
     Arguments:
         file_to_test {ConnectorFile} -- path to a single file to test
@@ -96,11 +97,10 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         bool -- True if the xml file passes validation, false if it does not or there is an error
         Any xml violation messages will be appended to xml_violations_buffer
     """
-
     logger.debug("Validating " + str(path_to_file))
 
     if file_to_test.file_type == 'connection-dialog':
-        USES_TCD = True
+        properties.uses_tcd = True
 
     xsd_file = get_xsd_file(file_to_test)
 
@@ -127,7 +127,7 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
-    if not validate_file_specific_rules(file_to_test, path_to_file, xml_violations_buffer):
+    if not validate_file_specific_rules(file_to_test, path_to_file, xml_violations_buffer, properties):
         logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
@@ -150,7 +150,7 @@ def get_xsd_file(file_to_test: ConnectorFile) -> Optional[str]:
         return None
 
 
-def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
     """
     Arguments:
         file_to_test {ConnectorFile} -- the file we want to validate
@@ -165,7 +165,7 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
     if file_to_test.file_type == 'connection-fields':
         return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer)
     elif file_to_test.file_type == 'connection-resolver':
-        return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer)
+        return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
 
     return True
 
@@ -215,7 +215,7 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
     return True
 
 
-def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
 
     xml_tree = parse(str(path_to_file))
     root = xml_tree.getroot()
@@ -223,7 +223,7 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
 
     # The connection resolver appears after the dialog elements in the manifest's xml, so we know
     # USES_TCD is accurate here
-    if not attribute_list and USES_TCD:
+    if not attribute_list and properties.uses_tcd:
         xml_violations_buffer.append("Connectors using a .tcd file cannot use inferred connection resolver,"
                                      "must manually populate required-attributes/attributes-list in "
                                      + str(path_to_file) + ".")
