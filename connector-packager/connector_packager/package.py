@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 
 from pathlib import Path
 
+from .connector_properties import ConnectorProperties
 from .jar_jdk_packager import jdk_create_jar
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
@@ -89,7 +90,8 @@ def main():
     files_to_package = xmlparser.generate_file_list()  # validates XSD's as well
 
     # Validate xml. If not valid, return.
-    if files_to_package and validate_all_xml(files_to_package, path_from_args):
+    properties = ConnectorProperties()
+    if files_to_package and validate_all_xml(files_to_package, path_from_args, properties):
         logger.info("Validation succeeded.")
     else:
         logger.info("Validation failed. Check " + str(log_file) + " for more information.")

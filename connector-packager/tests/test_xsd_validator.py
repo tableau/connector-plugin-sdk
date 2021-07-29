@@ -27,14 +27,14 @@ class TestXSDValidator(unittest.TestCase):
             ConnectorFile("connectionResolver.tdr", "connection-resolver"),
             ConnectorFile("resources-en_US.xml", "resource")]
 
-        self.assertTrue(validate_all_xml(files_list, test_folder), "Valid connector not marked as valid")
+        self.assertTrue(validate_all_xml(files_list, test_folder, dummy_properties), "Valid connector not marked as valid")
 
         print("\nTest broken xml. Throws a XML validation error.")
         test_folder = TEST_FOLDER / Path("broken_xml")
 
         files_list = [ConnectorFile("manifest.xml", "manifest")]
 
-        self.assertFalse(validate_all_xml(files_list, test_folder), "Invalid connector was marked as valid")
+        self.assertFalse(validate_all_xml(files_list, test_folder, dummy_properties), "Invalid connector was marked as valid")
 
     def test_validate_single_file(self):
 
@@ -134,7 +134,8 @@ class TestXSDValidator(unittest.TestCase):
         xml_violations_buffer = []
 
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
-                        "An instanceurl field must be conditional to authentication field with value=oauth")
+                         "An instanceurl field must be conditional to authentication field with value=oauth")
+
     def test_warn_defaultSQLDialect_as_base(self):
 
         test_dialect_file = TEST_FOLDER / "defaultSQLDialect_as_base/dialect.tdd"
@@ -181,7 +182,7 @@ class TestXSDValidator(unittest.TestCase):
         self.assertIn("'authentication' attribute is missing", cm.output[0],
                       "\"'authentication' attribute is missing\" not found in warning message")
 
-    def test_validate_connetion_field_name(self):
+    def test_validate_connection_field_name(self):
         test_file = TEST_FOLDER / "field_name_validation/valid/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         print("Test connectionFields is validated by XSD when field name is vaild ")
@@ -218,4 +219,20 @@ class TestXSDValidator(unittest.TestCase):
         logging.debug("test_validate_connetion_field_name xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
+
+    def test_inferred_connection_resolver_validation(self):
+        properties = ConnectorProperties()
+        xml_violations_buffer = []
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "inferred_connection_resolver/connectionResolver.xml"
+
+        print("Test that connection resolver without connection-normalizer for a connector that uses a .tcd file is invalidated")
+        properties.uses_tcd = True
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                         "Inferred connection resolver validated when tcd was used")
+
+        print("Test that connection resolver with connection-normalizer for a connector that uses a .tcd file is validated")
+        properties.uses_tcd = False
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "Inferred connection resolver validated when tcd was used")
 

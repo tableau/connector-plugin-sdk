@@ -31,7 +31,7 @@ XSD_DICT = {
     "oauth-config": "oauth_config"}
 
 
-def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool:
+def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path, properties: ConnectorProperties) -> bool:
     """"
     Arguments:
         files_list {list[ConnectorFile]} -- List of files to validate
@@ -52,8 +52,6 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
     if len(files_list) < 1:
         logger.error("Error: validate_all_xml: input list is empty")
         return False
-
-    properties = ConnectorProperties()
 
     xml_violations_found = 0
     xml_violations_buffer = ["XML violations found."]
