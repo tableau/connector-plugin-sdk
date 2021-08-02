@@ -11,6 +11,7 @@ from string import Template
 import re
 import glob
 from ..resources import *
+import logging
 
 debug = False
 
@@ -31,8 +32,13 @@ def get_logical_config_template(ds_registry, config_name):
 def check_logical_config_boolean_attr_value(attrs, key):
     if key not in attrs:
         return False
-    if key in attrs and attrs[key] == 'False':
+    if attrs[key] == 'False':
         return False
+    if attrs[key] == 'True':
+        return True
+
+    # For backwards compatibility
+    logging.warning("Only True or False are valid for attribute " + key)
     return True
 
 def get_customized_table_name(attributes, base_table):
