@@ -28,6 +28,13 @@ def get_logical_config_templates(ds_registry):
 def get_logical_config_template(ds_registry, config_name):
     return get_logical_config_templates(ds_registry)[config_name]
 
+def check_logical_config_boolean_attr_value(attrs, key):
+    if key not in attrs:
+        return False
+    if key in attrs and attrs[key] == 'False':
+        return False
+    return True
+
 def get_customized_table_name(attributes, base_table):
     table_prefix = ""
     if 'tablePrefix' in attributes:
@@ -37,12 +44,12 @@ def get_customized_table_name(attributes, base_table):
 
     t = Template(table_name)
     #These substitution holders are in templates.py.
-    if 'tablenameUpper' in attributes:
+    if check_logical_config_boolean_attr_value(attributes,'tablenameUpper'):
         table_name = t.substitute(dsName=base_table.upper())
     else:
         table_name = t.substitute(dsName=base_table)
 
-    if 'tablenameLower' in attributes:
+    if check_logical_config_boolean_attr_value(attributes,'tablenameLower'):
         table_name = table_name.lower()
     elif 'calcsnameLower' in attributes and 'calcs' in table_name.lower():
         table_name = table_name.lower()
@@ -58,25 +65,25 @@ def get_customized_table_name(attributes, base_table):
 
 def get_new_field_name(field, attrs):
     new_field = field
-    if 'bool_underscore' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'bool_underscore'):
         m = re.search('\[(bool[0-9])\]', new_field, flags=re.IGNORECASE)
         if m:
             new_field = '[' + m.group(1) + '_]'
 
-    if 'fieldnameDate_underscore' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'fieldnameDate_underscore'):
         m = re.search('\[(.*? date)\]', new_field, flags=re.IGNORECASE)
         if m:
             new_field = '[' + m.group(1) + '_]'
 
-    if 'fieldnameLower' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'fieldnameLower'):
         new_field = new_field.lower()
-    if 'fieldnameUpper' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'fieldnameUpper'):
         new_field = new_field.upper()
-    if 'fieldnameNoSpace' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'fieldnameNoSpace'):
         new_field = new_field.replace(' ', '')
-    if 'fieldnameLower_underscore' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'fieldnameLower_underscore'):
         new_field = new_field.lower().replace(' ', '_')
-    if 'fieldnameUnderscoreNotSpace' in attrs:
+    if check_logical_config_boolean_attr_value(attrs,'fieldnameUnderscoreNotSpace'):
         new_field = new_field.replace(' ', '_')
     if 'fieldnamePostfix' in attrs:
         m = re.search('\[(.*)\]', new_field, flags=re.IGNORECASE)
