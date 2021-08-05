@@ -36,6 +36,7 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path, propert
     Arguments:
         files_list {list[ConnectorFile]} -- List of files to validate
         folder_path {Path} -- path to folder that contains the files
+        properties {ConnectorProperties} -- an object contating properties that apply to the entire connector
 
     Returns:
         bool -- True if all xml files pass validation,false if they do not or there is an error
@@ -90,6 +91,7 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         file_to_test {ConnectorFile} -- path to a single file to test
         path_to_file {Path} -- path to the file
         xml_violations_buffer {list[str]} -- a list of strings that holds the xml violation messages
+        properties {ConnectorProperties} -- an object contating properties that apply to the entire connector
 
     Returns:
         bool -- True if the xml file passes validation, false if it does not or there is an error
@@ -154,6 +156,7 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
         file_to_test {ConnectorFile} -- the file we want to validate
         path_to_file {Path} -- the path to the file we want to validate
         xml_violations_buffer {list[str]} -- a list of strings that holds the xml violation messages
+        properties {ConnectorProperties} -- an object contating properties that apply to the entire connector
 
     Returns:
         bool -- True if the file passes all the file specific rules, otherwise false
