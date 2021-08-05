@@ -9,6 +9,7 @@ from xmlschema import XMLSchema
 from defusedxml.ElementTree import parse
 
 from .connector_file import ConnectorFile
+from .connector_properties import ConnectorProperties
 
 logger = logging.getLogger('packager_logger')
 
@@ -30,11 +31,12 @@ XSD_DICT = {
     "oauth-config": "oauth_config"}
 
 
-def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool:
+def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path, properties: ConnectorProperties) -> bool:
     """"
     Arguments:
         files_list {list[ConnectorFile]} -- List of files to validate
         folder_path {Path} -- path to folder that contains the files
+        properties {ConnectorProperties} -- an object contating properties that apply to the entire connector
 
     Returns:
         bool -- True if all xml files pass validation,false if they do not or there is an error
@@ -63,7 +65,7 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
         if file_to_test.extension() not in VALID_XML_EXTENSIONS:
             continue
 
-        if validate_single_file(file_to_test, path_to_file, xml_violations_buffer):
+        if validate_single_file(file_to_test, path_to_file, xml_violations_buffer, properties):
             logger.debug("XML validation successful")
         else:
             xml_violations_found += 1
@@ -83,19 +85,22 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path) -> bool
     return xml_violations_found <= 0
 
 
-def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
     """
     Arguments:
         file_to_test {ConnectorFile} -- path to a single file to test
         path_to_file {Path} -- path to the file
         xml_violations_buffer {list[str]} -- a list of strings that holds the xml violation messages
+        properties {ConnectorProperties} -- an object contating properties that apply to the entire connector
 
     Returns:
         bool -- True if the xml file passes validation, false if it does not or there is an error
         Any xml violation messages will be appended to xml_violations_buffer
     """
-
     logger.debug("Validating " + str(path_to_file))
+
+    if file_to_test.file_type == 'connection-dialog':
+        properties.uses_tcd = True
 
     xsd_file = get_xsd_file(file_to_test)
 
@@ -122,7 +127,7 @@ def validate_single_file(file_to_test: ConnectorFile, path_to_file: Path, xml_vi
         logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
-    if not validate_file_specific_rules(file_to_test, path_to_file, xml_violations_buffer):
+    if not validate_file_specific_rules(file_to_test, path_to_file, xml_violations_buffer, properties):
         logger.error("XML Validation failed for " + file_to_test.file_name)
         return False
 
@@ -145,50 +150,85 @@ def get_xsd_file(file_to_test: ConnectorFile) -> Optional[str]:
         return None
 
 
-def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
+    """
+    Arguments:
+        file_to_test {ConnectorFile} -- the file we want to validate
+        path_to_file {Path} -- the path to the file we want to validate
+        xml_violations_buffer {list[str]} -- a list of strings that holds the xml violation messages
+        properties {ConnectorProperties} -- an object contating properties that apply to the entire connector
+
+    Returns:
+        bool -- True if the file passes all the file specific rules, otherwise false
+        Any rule violation messages will be appended to xml_violations_buffer
+    """
 
     if file_to_test.file_type == 'connection-fields':
-        field_names = set()
-        xml_tree = parse(str(path_to_file))
-        root = xml_tree.getroot()
+        return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer)
+    elif file_to_test.file_type == 'connection-resolver':
+        return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
 
-        for child in root.iter('field'):
-            if 'name' in child.attrib:
-                field_name = child.attrib['name']
-                if not (field_name in PLATFORM_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX)):
-                    xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
-                                                 "' not an allowed value. See 'Connection Field Platform Integration' section of documentation for allowed values.")
+    return True
+
+
+def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+    field_names = set()
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+
+    for child in root.iter('field'):
+        if 'name' in child.attrib:
+            field_name = child.attrib['name']
+            if not (field_name in PLATFORM_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX)):
+                xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
+                                                "' not an allowed value. See 'Connection Field Platform Integration' section of documentation for allowed values.")
+                return False
+            if field_name in field_names:
+                xml_violations_buffer.append("A field with the field name = " + field_name +
+                                                " already exists. Cannot have multiple fields with the same name.")
+
+                return False
+            if field_name == 'instanceurl':
+                used_for_oauth = False
+                for conditions in child.iter("conditions"):
+                    for condition in conditions.iter("condition"):
+                        if 'field' in condition.attrib:
+                            if condition.attrib['field'] == 'authentication':
+                                if 'value' in condition.attrib:
+                                    if condition.attrib['value'] == 'oauth':
+                                        used_for_oauth = True
+                if not used_for_oauth:
+                    xml_violations_buffer.append("Element 'field', attribute 'name'='instanceurl' can only be used conditional on field " +
+                                                    "'authentication' with 'value'='oauth'. See 'Connection Field Platform Integration' section " +
+                                                    "of documentation for more information.")
                     return False
-                if field_name in field_names:
-                    xml_violations_buffer.append("A field with the field name = " + field_name +
-                                                 " already exists. Cannot have multiple fields with the same name.")
 
-                    return False
-                if field_name == 'instanceurl':
-                    used_for_oauth = False
-                    for conditions in child.iter("conditions"):
-                        for condition in conditions.iter("condition"):
-                            if 'field' in condition.attrib:
-                                if condition.attrib['field'] == 'authentication':
-                                    if 'value' in condition.attrib:
-                                        if condition.attrib['value'] == 'oauth':
-                                            used_for_oauth = True
-                    if not used_for_oauth:
-                        xml_violations_buffer.append("Element 'field', attribute 'name'='instanceurl' can only be used conditional on field " + 
-                                                     "'authentication' with 'value'='oauth'. See 'Connection Field Platform Integration' section " + 
-                                                     "of documentation for more information.")
-                        return False
+            field_names.add(field_name)
 
-                field_names.add(field_name)
+        if 'category' in child.attrib:
+            category = child.attrib['category']
+            optional = child.attrib.get('optional','true') == 'true'
+            default_present = child.attrib.get('default-value','') != ''
+            if category == 'advanced' and not optional and not default_present:
+                xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
+                                                "': Required fields in the Advanced category must be assigned a default value.")
+                return False
+    return True
 
-            if 'category' in child.attrib:
-                category = child.attrib['category']
-                optional = child.attrib.get('optional','true') == 'true'
-                default_present = child.attrib.get('default-value','') != ''
-                if category == 'advanced' and not optional and not default_present:
-                    xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
-                                                 "': Required fields in the Advanced category must be assigned a default value.")
-                    return False
+
+def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
+
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    attribute_list = root.find('.//connection-normalizer/required-attributes/attribute-list')
+
+    # The connection resolver appears after the dialog elements in the manifest's xml, so we know
+    # USES_TCD is accurate here
+    if not attribute_list and properties.uses_tcd:
+        xml_violations_buffer.append("Connectors using a .tcd file cannot use inferred connection resolver,"
+                                     "must manually populate required-attributes/attributes-list in "
+                                     + str(path_to_file) + ".")
+        return False
 
     return True
 
