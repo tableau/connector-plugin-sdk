@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 TEST_FOLDER = Path("tests/test_resources")
 
-dummy_properties = ConnectorProperties
+dummy_properties = ConnectorProperties()
 
 
 class TestXSDValidator(unittest.TestCase):
@@ -234,5 +234,23 @@ class TestXSDValidator(unittest.TestCase):
         print("Test that connection resolver with connection-normalizer for a connector that uses a .tcd file is validated")
         properties.uses_tcd = False
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
-                        "Inferred connection resolver validated when tcd was used")
+                        "Valid connector marked as invalid")
 
+    def test_all_fields_in_normalizer(self):
+        properties = ConnectorProperties()
+        properties.uses_tcd = False
+        properties.connection_fields = ['server', 'port', 'v-custom', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
+        xml_violations_buffer = []
+
+
+        print("Test that normalizer not containing all the fields in connection-fields is invalidated")
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "mcd_field_not_in_normalizer/connectionResolver.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                         "Inferred connection resolver validated when tcd was used")
+
+        print("Test that normalizer containing all the fields in connection-fields is validated")
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "modular_dialog_connector/connectionResolver.xml"
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "Valid connector marked as invalid")

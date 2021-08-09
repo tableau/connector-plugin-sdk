@@ -2,3 +2,4 @@
 class ConnectorProperties:
     def __init__(self):
         self.uses_tcd = False
+        self.connection_fields = []
