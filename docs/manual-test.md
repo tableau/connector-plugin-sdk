@@ -179,7 +179,6 @@ The workbook should publish without errors.
         1. In the Publish Data Source dialog box, under **Authentication**, click __Edit__ next to **Refresh not enabled**.
         1. Under **Authentication**, select **Allow refresh access** from the drop-down list.<br/>
         ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)<br/>
-
 The workbook should publish without errors.
 
 * Publish a workbook without an extract to Tableau Server.
@@ -248,7 +247,7 @@ If your connector supports oauth, you need to perform this extra step to make su
 
 1. Find your connector in the connector list and click **Add** button next to it, which will invoke the OAuth flow, authenticate yourself and we will save the oauth token securly in Tableau Server.
 
-1. Exam the oauth token saved, it should contain a username which uniquely identify you, it may also contain a instanceUrl if your oauthConfig file has OAUTH_SUPPORTS_CUSTOM_DOMAIN enabled.
+1. Examine the saved OAuth token, it should contain a username which uniquely identify you, it may also contain a instanceUrl if your oauthConfig file has OAUTH_SUPPORTS_CUSTOM_DOMAIN enabled.
 
 1. Click the **Test** button next to your saved credential, it will try to refresh the accessToken and you should see a success message.
 ![]({{ site.baseurl }}/assets/oauth-server-test-token.png)
