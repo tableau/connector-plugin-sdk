@@ -179,6 +179,11 @@ The workbook should publish without errors.
         1. In the Publish Data Source dialog box, under **Authentication**, click __Edit__ next to **Refresh not enabled**.
         1. Under **Authentication**, select **Allow refresh access** from the drop-down list.<br/>
         ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)<br/>
+        1. For a datasource using OAuth, go to the server settings page to add your credential for the datasource.
+        ![]({{ site.baseurl }}/assets/oauth-server-addtoken.png)<br/> 
+        1. Then under **Authentication** select **Embed <username>** from the drop-down list.
+        ![]({{ site.baseurl }}/assets/oauth-desktop-publish.png)<br/> 
+
 The workbook should publish without errors.
 
 * Publish a workbook without an extract to Tableau Server.
@@ -187,6 +192,8 @@ The workbook should publish without errors.
     - Open the published workbook.
     - Verify that a Sign In dialog opens.<br/>
     ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)<br/>
+    - For OAuth workbooks the Sign In dialog would look like this:
+    ![]({{ site.baseurl }}/assets/oauth-server-prompt.png)<br/>
     For more information, see [Set Credentials for Accessing Your Published Data](https://onlinehelp.tableau.com/current/pro/desktop/en-us/publishing_sharing_authentication.htm) in the Tableau Desktop and Web Authoring Help.
 
 
@@ -232,3 +239,16 @@ Create a new workbook on Tableau Server with the connector installed on the serv
 
     **Note:** Web authoring (creating a new connection from the web) is not currently available for all connector superclasses. In those cases, your connector won't appear on the list of connectors on Tableau Server. If you can publish a workbook or data source using your connector to your server, then your connector is loaded correctly, even if you can't see it on the list of connectors.
 
+__Test refresing OAuth token on Tableau Server__
+
+If your connector supports oauth, you need to perform this extra step to make sure Tableau can successfully refresh your token.
+1. Go to user's server settings page and find the pane for Saved Credentials for Data Sources.
+
+1. Find your connector in the connector list and click **Add** button next to it.
+
+1. This will invoke the OAuth flow, go ahead and authenticate and this will save the oauth token securly in Tableau Server.
+
+1. Exam the oauth token saved, it should contain a username which uniquely identify you, it may also contain a instanceUrl if your oauthConfig file has OAUTH_SUPPORTS_CUSTOM_DOMAIN enabled.
+
+1. Click the **Test** button next to your saved credential, it will try to refresh the accessToken and you should see a success message.
+![]({{ site.baseurl }}/assets/oauth-server-test-token.png)
