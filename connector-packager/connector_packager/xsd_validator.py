@@ -164,14 +164,14 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
     """
 
     if file_to_test.file_type == 'connection-fields':
-        return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer)
+        return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer, properties)
     elif file_to_test.file_type == 'connection-resolver':
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
 
     return True
 
 
-def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str]) -> bool:
+def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str],  properties: ConnectorProperties) -> bool:
     field_names = set()
     xml_tree = parse(str(path_to_file))
     root = xml_tree.getroot()
@@ -179,6 +179,8 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
     for child in root.iter('field'):
         if 'name' in child.attrib:
             field_name = child.attrib['name']
+            properties.connection_fields.append(field_name)
+
             if not (field_name in PLATFORM_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX)):
                 xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
                                                 "' not an allowed value. See 'Connection Field Platform Integration' section of documentation for allowed values.")
@@ -229,6 +231,18 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
                                      "must manually populate required-attributes/attributes-list in "
                                      + str(path_to_file) + ".")
         return False
+
+    # Check that all the connection-fields attributes are in the required attributes
+    if properties.connection_fields and attribute_list:
+        attributes = []
+        for attr in attribute_list.iter():
+            attributes.append(attr.text)
+
+        if len(attributes) > 0 and properties.connection_fields:
+            for field in properties.connection_fields:
+                if field not in attributes:
+                    xml_violations_buffer.append("Attribute '" + field + "' in connection-fields but not in required-attributes list.")
+                    return False
 
     return True
 

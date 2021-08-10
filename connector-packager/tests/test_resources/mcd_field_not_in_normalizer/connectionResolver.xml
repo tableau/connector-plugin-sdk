@@ -16,7 +16,7 @@
           <attr>username</attr>
           <attr>password</attr>
           <attr>authentication</attr>
-          <attr>vendor1</attr>
+          <!-- <attr>vendor1</attr> -->
           <attr>vendor2</attr>
           <attr>vendor3</attr>
         </attribute-list>
