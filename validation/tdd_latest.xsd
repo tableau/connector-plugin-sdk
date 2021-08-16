@@ -239,6 +239,8 @@ as passed-in parameters.
     <xs:restriction base="xs:string">
       <xs:enumeration value="DirectionOnly"/>
       <xs:enumeration value="Nulls"/>
+      <xs:enumeration value="AliasDirection"/> <!-- added 2021.4 -->
+      <xs:enumeration value="AliasNulls"/> <!-- added 2021.4 -->
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="StringLiteralApproach-ST">

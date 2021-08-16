@@ -1332,6 +1332,7 @@
       <local-type name='date' value='CAST(NULL AS DATE)' />
       <local-type name='datetime' value='CAST(NULL AS TIMESTAMP)' />
     </format-null>
+    <format-order-by value='AliasDirection' />
     <format-select>
       <part name='Select' value='SELECT %1' />
       <part name='Into' value='INTO %1' />
