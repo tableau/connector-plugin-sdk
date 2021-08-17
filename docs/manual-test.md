@@ -232,7 +232,10 @@ Create a new workbook on Tableau Server with the connector installed on the serv
 
     **Note:** Web authoring (creating a new connection from the web) is not currently available for all connector superclasses. In those cases, your connector won't appear on the list of connectors on Tableau Server. If you can publish a workbook or data source using your connector to your server, then your connector is loaded correctly, even if you can't see it on the list of connectors.
 
-## Test an OAuth Connector on Tableau Desktop
+## OAuth Connector Test Cases
+If your connector supports OAuth Authentication, besides the previous test steps, there are some extra steps you need to verify for OAuth on Tableau Desktop/Server.
+
+### Test an OAuth Connector on Tableau Desktop
 
 __Connect to the database with OAuth tokens__
 
@@ -244,9 +247,7 @@ __Connect to the database with OAuth tokens__
 ![]({{ site.baseurl }}/assets/oauth-desktop-complete.png)
 1. Then you can close your browser and you should be able to perform the normal manual test steps [here](#Test-your-connector-with-tableau-desktop)
 
-## Test an OAuth Connector on Tableau Server
-
-If your connector supports OAuth Authentication, besides the previous test steps, there are some extra steps you need to verify for OAuth on Tableau Server.
+### Test an OAuth Connector on Tableau Server
 
 __Prerequisite__
 
