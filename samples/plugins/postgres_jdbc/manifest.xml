@@ -32,6 +32,6 @@
   </connection-customization>
   <connection-fields file='connectionFields.xml'/>
   <connection-metadata file='connectionMetadata.xml'/>
-  <connection-resolver file="connectionResolver.xml"/>
+  <connection-resolver file="connectionResolver.tdr"/>
   <dialect file='dialect.tdd'/>
 </connector-plugin>
