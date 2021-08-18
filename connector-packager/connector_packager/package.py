@@ -31,6 +31,8 @@ def create_arg_parser() -> ArgumentParser:
                         default=os.getcwd())
     parser.add_argument('--validate-only', dest='validate_only', action='store_true',
                         help='runs package validation steps only', required=False)
+    parser.add_argument('--ignore-validation', dest='ignore_validation', action='store_true',
+                        help='packages taco even if validation fails', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector',
                         default='packaged-connector', action=UniqueActionStore)
     return parser
@@ -95,7 +97,14 @@ def main():
         logger.info("Validation succeeded.")
     else:
         logger.info("Validation failed. Check " + str(log_file) + " for more information.")
-        return
+
+        # If ignoring validation, continue and display warning. Otherwise, return out of main.
+        if args.ignore_validation:
+            logger.info("--ignore_validation flag on, packaging anyway.")
+            logger.warning("Warning: Invalid connector may not load in Tableau, or may have bugs. Packaging may fail.")
+
+        else:
+            return
 
     # Double check that all files exist
     for f in files_to_package:
