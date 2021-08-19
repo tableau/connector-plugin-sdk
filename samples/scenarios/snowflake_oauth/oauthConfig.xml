@@ -15,23 +15,23 @@
     <scopes>refresh_token</scopes>
     <capabilities>
         <entry>
-            <key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
             <value>true</value>
         </entry>
         <entry>
-            <key>CAP_SUPPORTS_CUSTOM_DOMAIN</key>
+            <key>OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN</key>
             <value>true</value>
         </entry>
     	<entry>
-    		<key>CAP_REQUIRE_PKCE</key>
+    		<key>OAUTH_CAP_REQUIRE_PKCE</key>
     		<value>true</value>
     	</entry>
         <entry>
-            <key>CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+            <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
             <value>true</value>
         </entry>
     	<entry>
-    		<key>CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+    		<key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
     		<value>true</value>
     	</entry>
     </capabilities>
