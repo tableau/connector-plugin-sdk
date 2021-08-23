@@ -2,7 +2,7 @@
 title: Localize Your Connector
 ---
 
-Tableau products are localized in English (United States), English (United Kingdom), French, German, Brazilian Portuguese, Spanish, Korean, Japanese, simplified Chinese, and traditional Chinese.
+Tableau products are localized in English (United States), English (United Kingdom), French (France), French (Canada), German, Brazilian Portuguese, Spanish, Korean, Japanese, simplified Chinese, and traditional Chinese.
 
 Connector SDK supports localizing connectors in these languages. You can localize the strings that display in the Tableau user interface, such as the connector name and the prompts in the connection dialog.
 
@@ -41,6 +41,7 @@ resources-de_DE.xml
 resources-en_GB.xml
 resources-en_US.xml
 resources-es_ES.xml
+resources-fr_CA.xml
 resources-fr_FR.xml
 resources-ga_IE.xml
 resources-it_IT.xml
