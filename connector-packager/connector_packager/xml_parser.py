@@ -16,7 +16,7 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 HTTPS_STRING = "https://"
 TRANSLATABLE_STRING_PREFIX = "@string/"
-TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR", "pt_BR",
+TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR", "pt_BR",
                                "zh_CN", "zh_TW"]
 
 
