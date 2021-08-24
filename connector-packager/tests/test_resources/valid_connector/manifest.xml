@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='@string/postgres' version='18.1'>
+<connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='@string/postgres/' version='18.1'>
   <vendor-information>
       <company name="Company Name"/>
       <support-link url="https://example.com"/>

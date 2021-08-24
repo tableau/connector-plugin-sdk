@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2021-08-23
+### Added
+- Add language support for French (Canada)
 ## 2021-01-22
 ### Removed
 - Remove support for `script` element and `cacheSize` attribute in ConnectionNormalizer-CT and ConnectionMatcher-CT in `tdr_latest.xsd`.  This has not been a recommended pattern since initial release and deprecated in 2020.3 release.  Documentation, samples and [API Reference](https://tableau.github.io/connector-plugin-sdk/docs/api-reference) have been previously updated.
