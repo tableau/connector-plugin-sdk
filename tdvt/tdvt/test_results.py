@@ -91,10 +91,10 @@ class TestCaseResult(object):
                 for v in t.findall('value'):
                     tuple_list.append(v.text)
 
-        return {'tuples' : tuple_list}
+        return {'tuples': tuple_list}
 
     def __json__(self):
-        return {'tested_sql' : self.tested_sql, 'tested_tuples' : self.tested_tuples, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
+        return {'tested_sql': self.tested_sql, 'tested_tuples': self.tested_tuples, 'id' : self.id, 'name' : self.name, 'sql' : self.get_sql_text(), 'table' : self.table_to_json()}
 
 
 class TestErrorState(object):
@@ -171,21 +171,21 @@ class TestResult(object):
     def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
         if self.test_set.test_is_enabled is False:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_DISABLED, 0, "", 0, TEST_DISABLED, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, TEST_DISABLED, self.error_status, None, self.test_config)
             else:
-                return TestCaseResult(TEST_DISABLED, str(test_case_count), "", test_case_count, TEST_DISABLED,
-                                      TEST_DISABLED, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, TEST_DISABLED,
+                                      '', None, self.test_config)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_SKIPPED, 0, "", 0, TEST_SKIPPED, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, TEST_SKIPPED, self.error_status, None, self.test_config)
             else:
-                return TestCaseResult(TEST_SKIPPED, str(test_case_count), "", test_case_count, TEST_SKIPPED,
-                                      TEST_SKIPPED, None, self.test_config)
+                return TestCaseResult('', str(test_case_count), "", test_case_count, TEST_SKIPPED,
+                                      '', None, self.test_config)
         else:
             if self.test_set.is_logical:
-                return TestCaseResult(TEST_NOT_RUN, 0, "", 0, TEST_NOT_RUN, self.error_status, None, self.test_config)
+                return TestCaseResult('', 0, "", 0, TEST_NOT_RUN, self.error_status, None, self.test_config)
             else:
-                return TestCaseResult(TEST_NOT_RUN, str(test_case_count), "", test_case_count, TEST_NOT_RUN,
+                return TestCaseResult('', str(test_case_count), "", test_case_count, TEST_NOT_RUN,
                                       self.error_status, None, self.test_config)
 
     def parse_default_test_cases(self):
