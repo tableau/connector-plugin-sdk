@@ -274,7 +274,7 @@ The publishing experience for OAuth is different than a username-password connec
     - Make sure **Embed <username>** is selected as an authentication option. To do this:
         1. For a datasource using OAuth, go to the server settings page to add your credential for the datasource.
         ![]({{ site.baseurl }}/assets/oauth-server-addtoken.png)<br/> 
-        1. Then under **Authentication** select **Embed <username>** from the drop-down list.
+        1. Then under **Authentication** select **Embed <username>** from the drop-down lists.
         ![]({{ site.baseurl }}/assets/oauth-desktop-publish.png)<br/> 
 
 The workbook should publish without errors.
