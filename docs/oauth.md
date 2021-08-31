@@ -86,7 +86,7 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | dbclass | String | The identifier for your oauthConfig | Yes | The dbclass must be same with as the `class` attribute in manifest.xml | 
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
 | clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
-| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to false. The host for redirectUrisDesktop must be a valid loopback address|
+| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. The host for redirectUrisDesktop must be a valid loopback address|
 | authUri | String | Authorization endpoint URI | Yes | |
 | tokenUri | String | Token endpoint URI | Yes | |
 | userInfoUri | String | User Info UrI | No | |
