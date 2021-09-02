@@ -86,7 +86,7 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | dbclass | String | The identifier for your oauthConfig | Yes | The dbclass must be same with as the `class` attribute in manifest.xml | 
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
 | clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
-| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| The host for redirectUrisDesktop must be a valid loopback address| 
+| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. The host for redirectUrisDesktop must be a valid loopback address|
 | authUri | String | Authorization endpoint URI | Yes | |
 | tokenUri | String | Token endpoint URI | Yes | |
 | userInfoUri | String | User Info UrI | No | |
@@ -97,6 +97,7 @@ Each OAuth config attribute is represented by an element in the XML, the element
 | refreshTokenResponseMaps | Map<String, String> | Key value pair that maps an refresh token request response attribute <value> to Tableau recognized attribute <key> | No | If not defined will use accessTokenResponseMaps by default |
 
 Note: The keys in accessTokenResponseMaps and refreshTokenResponseMaps are Tableau preferred field names and are defined in the followed table. The values are what your OAuth provider returns in the raw response
+
 | Name of the key | Required for accessTokenResponseMaps | Required for refreshTokenResponseMaps | Notes |
 | ----  | ------- | --------- |  ----------- |
 | ACCESSTOKEN | Yes | Yes | Used by Tableau to connect to your data. |
@@ -118,7 +119,6 @@ This set of OAuth Config capabilities are not shared with the regular connector 
 | OAUTH_CAP_REQUIRE_PKCE | Whether your OAuth provider supports PKCE, more detials: https://oauth.net/2/pkce/ | false | true |
 | OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD | Whether your OAuth provider PKCE requires code_challenging_method passed in. If set to true, we are using S256 by default. | false | true |
 | OAUTH_CAP_SUPPORTS_STATE | Used to protect against CSRF attacks, more details: https://auth0.com/docs/protocols/state-parameters | false | true |
-| OAUTH_CAP_REQUIRES_VERIFY_STATE | Used together with OAUTH_CAP_SUPPORTS_STATE | false | true |
 | OAUTH_CAP_GET_USERNAME_USES_POST_REQUEST | Only use if you define a USERINFO_URI in oauthConfig file to retrieve the userinfo in a separate request | false | - |
 | OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM | Use this if Client secrets are expected in the query parameter instead of the request header. | false | - |
 | OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL | Use this when your OAuth provider native app(Tableau Desktop) OAuth clients only support fixed callback url | false | - |

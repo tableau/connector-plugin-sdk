@@ -272,10 +272,11 @@ The publishing experience for OAuth is different than a username-password connec
 * Publish a data source with an extract to Tableau Server.
     - Be sure the the connector is installed on the server.
     - Make sure **Embed <username>** is selected as an authentication option. To do this:
-        1. For a datasource using OAuth, go to the server settings page to add your credential for the datasource.
-        ![]({{ site.baseurl }}/assets/oauth-server-addtoken.png)<br/> 
-        1. Then under **Authentication** select **Embed <username>** from the drop-down list.
-        ![]({{ site.baseurl }}/assets/oauth-desktop-publish.png)<br/> 
+        1. For a datasource using OAuth, go to the server settings page to add your credential for the datasource.<br/>
+        ![]({{ site.baseurl }}/assets/oauth-server-addtoken.png)
+
+        1. Then under **Authentication** select **Embed <username>** from the drop-down list.<br/>
+        ![]({{ site.baseurl }}/assets/oauth-desktop-publish.png)
 
 The workbook should publish without errors.
 
