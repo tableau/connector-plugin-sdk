@@ -264,7 +264,7 @@ class TestXSDValidator(unittest.TestCase):
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "Empty company name marked as valid")
 
-        print("Test that ompany name with length greater than 24 is invalidated")
+        print("Test that company name with length greater than 24 is invalidated")
         test_file = TEST_FOLDER / "company_name_length_validation/max/manifest.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "Company name with length greater than 24 marked as valid")
