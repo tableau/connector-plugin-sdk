@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2021-09-02
+### Changed
+- Validate max length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
 ## 2021-08-23
 ### Added
 - Add language support for French (Canada)
@@ -14,7 +17,7 @@
 
 ## 2020-09-21
 ### Changed
-- Validate length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
+- Validate min length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
 
 ## 2020-08-27
 ### Added

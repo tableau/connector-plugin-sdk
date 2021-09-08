@@ -254,3 +254,17 @@ class TestXSDValidator(unittest.TestCase):
         test_file = TEST_FOLDER / "modular_dialog_connector/connectionResolver.xml"
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
                         "Valid connector marked as invalid")
+
+    def test_validate_company_name_length(self):
+        xml_violations_buffer = []
+        file_to_test = ConnectorFile("manifest.xml", "manifest")
+
+        print("Test that company name with length less than 1 is invalidated")
+        test_file = TEST_FOLDER / "company_name_length_validation/min/manifest.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "Empty company name marked as valid")
+
+        print("Test that company name with length greater than 24 is invalidated")
+        test_file = TEST_FOLDER / "company_name_length_validation/max/manifest.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "Company name with length greater than 24 marked as valid")
