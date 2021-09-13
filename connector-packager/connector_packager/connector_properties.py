@@ -4,3 +4,4 @@ class ConnectorProperties:
         self.uses_tcd = False
         self.connection_fields = []
         self.backwards_compatibility_mode = False
+        self.is_jdbc = False
