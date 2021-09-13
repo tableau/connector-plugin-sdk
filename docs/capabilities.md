@@ -60,12 +60,15 @@ CAP_SUPPORTS_INITIAL_SQL | Set to 'yes' to enable Initial SQL on the connection 
 
 Capability | Description | Default | Recommended
 -|-|-|-
+CAP_QUERY_AGG_NO_BOOLEXPR | Set to 'yes' to transform boolean expressions to integers for arguments to aggregates. Available in Tableau 2020.2 and newer. | &ndash; | &ndash;
 CAP_QUERY_ALLOW_JOIN_REORDER | Set to 'yes' to use query optimization to reduce database work with some inner and equality joins. | yes | yes 
 CAP_QUERY_ALLOW_PARTIAL_AGGREGATION | Tableau can minimize data movement (and boost performance) in federated join scenarios by performing as much aggregation as possible in remote databases before shipping the data back. This can introduce additional groupbys on the fields used in the join condition. If the join is on a string field, not all datasources handle the additional groupbys on strings efficiently, leading to a rapid degradation in performance the more join key fields are used. | yes | yes 
 CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL | Set to 'yes' if the dialect can handle WHEN [bit column] THEN or does it need something like WHEN [column] = 1 THEN. | &ndash; | &ndash; 
 CAP_QUERY_BOOLEXPR_TO_INTEXPR | Set to 'yes' if data source does not support booleans natively in a result set. Set to 'no' if booleans are supported natively. | &ndash; | **<span style="color:red">?</span>**   
 CAP_QUERY_CASE_MATCHES_NULL | Set to 'yes' if CASE can match a null in a valued CASE expression | no | no 
+CAP_QUERY_CASE_OUT_NO_BOOL_OPS | Set to 'yes' if CASE outputs cannot contain boolean operators like AND/OR/NOT. Available in Tableau 2020.2 and newer. | &ndash; | &ndash;
 CAP_QUERY_CASE_PROMOTES_CHAR | Set to 'no' if CASE cannot promote character types? | yes | yes 
+CAP_QUERY_CAST_MONEY_AS_NUMERIC | Set to 'yes' to cast money as numeric. Available in Tableau 2021.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_FROM_REQUIRES_ALIAS | Set to 'yes' if the FROM clause must provide an alias for the given table. | &ndash; | &ndash;
 CAP_QUERY_GROUP_ALLOW_DUPLICATES | Set to 'no' if SQL queries cannot contain duplicate expressions in the GROUP BY clause (this is uncommon). | yes | yes
 CAP_QUERY_GROUP_BY_ALIAS | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by their corresponding alias in the SELECT list, e.g. GROUP BY "none_ShipCountry_nk". | no | no 
@@ -118,8 +121,10 @@ CAP_JDBC_BIND_SPATIAL_AS_WKB | Set to 'yes' to use WKB for spatial types seriali
 CAP_JDBC_CONVERT_WKB_HEX_STRING | Set to 'yes' to convert a hex string to regular WKB. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to integer for data insertion. Available in Tableau 2020.2 and newer. | &ndash; | &ndash; 
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes 
+CAP_JDBC_INSERT_COERCE_INT_TO_BOOL | Set to 'yes' to convert integer type to boolean only when the column type and source type are different. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
 CAP_JDBC_MAX_STRING_LENGTH_MEDIUM | Set to 'yes' to use 512 character string length limit. Default is 16K. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_GET_INDEX_INFO | Set to 'no' to disable reading index info | yes | yes  
+CAP_JDBC_METADATA_IGNORE_NULLABILITY | Set to 'yes' to ignore column nullability retrieved from query metadata and always set it to true for all columns in the query result. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_NUMERIC_DEFAULT_PREC_SCALE_DOUBLE | Set to 'yes' to use precision=17 and no scale for numeric with undefined precision/scale. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_READ_FOREIGNKEYS | Set to 'no' to disable reading foreign key metadata | yes | yes   
 CAP_JDBC_METADATA_READ_PRIMARYKEYS | Set to 'no' to disable reading primary key metadata | yes | yes 
@@ -214,6 +219,10 @@ CAP_ODBC_FETCH_RESIZE_BUFFERS | Set to 'yes' to allow the Tableau native ODBC pr
 CAP_ODBC_FORCE_SINGLE_ROW_BINDING | Set to 'yes' to force the Tableau native ODBC protocol to use a single row for result set transfers instead of the more efficient bulk-fetch. | &ndash; | &ndash; 
 CAP_ODBC_IMPORT_ERASE_BUFFERS | Set to 'yes' to reset the contents of data buffers before fetching each block. | &ndash; | &ndash; 
 CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable decoding data locally in parallel. | yes | yes 
+CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_SMALL | Set to 'yes' to use a small degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
+CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_MEDIUM | Set to 'yes' to use a medium degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
+CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_LARGE | Set to 'yes' to use a large degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
+CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_XL | Set to 'yes' to use a extra-large degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION | Set to 'yes' to force the Tableau native ODBC protocol to use the column "length" as the numeric precision. This is an uncommon setting. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10 | Set to 'yes' to force the Tableau native ODBC protocol to assume the numeric precision is reported in base-10 digits. This is an uncommon setting. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_FORCE_UNKNOWN_AS_STRING | Set to 'yes' to force the Native ODBC Protocol to treat unknown data types as string instead of ignoring the associated column. | &ndash; | &ndash; 
@@ -233,6 +242,7 @@ CAP_ODBC_REBIND_SKIP_UNBIND | Set to 'yes' to force the Tableau native ODBC prot
 CAP_ODBC_SUPPORTS_LONG_DATA_BULK | Set to 'yes' if driver can fetch multiple long-data rows at a time. | no | no |
 CAP_ODBC_SUPPORTS_LONG_DATA_ORDERED | Set to 'yes' if driver requires long-data columns to come after non-long-data ones | no | no | 
 CAP_ODBC_SUPPRESS_CATALOG_NAME | Set 'yes' to suppress passing catalog name for SQLTables, SQLPrimaryKeys, SQLForeignKeys, SQLStatistics calls | &ndash; | &ndash;
+CAP_ODBC_SUPPRESS_ENUMERATE_SCHEMA_WITHOUT_CATALOG | Set 'yes' to suppress enumerating schemas without a valid catalog. | &ndash; | &ndash;
 CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES | Set to 'yes' to prevent tables from "information_schema" schema from being returned by EnumerateTables | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_PG_TEMP_SCHEMA_TABLES | Set to 'yes' to prevent tables from "pg_temp" schema from being returned by EnumerateTables | &ndash; | &ndash;  
 CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_ALL_COMMAND_QUERIES | Set to 'yes' to execute all commands directly (i.e., no prepared statement). | &ndash; | &ndash; 
