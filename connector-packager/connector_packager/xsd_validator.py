@@ -229,6 +229,16 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
                 xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
                                                 "': Required fields in the Advanced category must be assigned a default value.")
                 return False
+
+    # Check that "authentication" is listed as a connection field
+    if 'authentication' not in properties.connection_fields:
+
+        if properties.backwards_compatibility_mode:
+            logger.warning("No authentication field present in " + file_to_test.file_name + ". Still packaging connector because of backwards compatibility mode.")
+        else:
+            xml_violations_buffer.append("No authentication field present in " + file_to_test.file_name)
+            return False
+
     return True
 
 

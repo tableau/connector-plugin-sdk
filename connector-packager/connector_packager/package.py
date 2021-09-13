@@ -31,6 +31,8 @@ def create_arg_parser() -> ArgumentParser:
                         default=os.getcwd())
     parser.add_argument('--validate-only', dest='validate_only', action='store_true',
                         help='runs package validation steps only', required=False)
+    parser.add_argument('--backwards-compatible', dest='backwards_compatible', action='store_true',
+                        help='forgives some validation errors to package connectors made with older versions of the SDK', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector',
                         default='packaged-connector', action=UniqueActionStore)
     return parser
@@ -91,6 +93,7 @@ def main():
 
     # Validate xml. If not valid, return.
     properties = ConnectorProperties()
+    properties.backwards_compatibility_mode = args.backwards_compatible
     if files_to_package and validate_all_xml(files_to_package, path_from_args, properties):
         logger.info("Validation succeeded.")
     else:

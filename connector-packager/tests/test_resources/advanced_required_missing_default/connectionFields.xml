@@ -3,4 +3,5 @@
 <connection-fields>
   <field name="v-custom" label="Custom" value-type="string" category="advanced" optional="false" />
 
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
 </connection-fields>
