@@ -163,12 +163,26 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
         Any rule violation messages will be appended to xml_violations_buffer
     """
 
-    if file_to_test.file_type == 'connection-fields':
+    if file_to_test.file_type == 'manifest':
+        return validate_file_specific_rules_manifest(file_to_test, path_to_file, properties)
+    elif file_to_test.file_type == 'connection-fields':
         return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer, properties)
     elif file_to_test.file_type == 'connection-metadata':
         return validate_file_specific_rules_connection_metadata(file_to_test, path_to_file, properties)
     elif file_to_test.file_type == 'connection-resolver':
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
+
+    return True
+
+
+def validate_file_specific_rules_manifest(file_to_test: ConnectorFile, path_to_file: Path, properties: ConnectorProperties) -> bool:
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+
+    if 'superclass' in root.attrib:
+        # other superclasses could be jdbc-based, but this will catch the common case
+        if 'jdbc' == root.attrib['superclass']:
+            properties.is_jdbc = True
 
     return True
 
@@ -217,6 +231,16 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
                 xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
                                                 "': Required fields in the Advanced category must be assigned a default value.")
                 return False
+
+    # Check that "authentication" is listed as a connection field
+    if 'authentication' not in properties.connection_fields:
+
+        if properties.backwards_compatibility_mode:
+            logger.warning("No authentication field present in " + file_to_test.file_name + ". Still packaging connector because of backwards compatibility mode.")
+        else:
+            xml_violations_buffer.append("No authentication field present in " + file_to_test.file_name)
+            return False
+
     return True
 
 
@@ -261,6 +285,13 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
             if 'dbname' not in attributes:
                 xml_violations_buffer.append("Field 'database' enabled in connection-metadata but 'dbname' not in required-attributes list.")
                 return False
+
+    properties_builder = root.find('.//connection-properties')
+
+    if not properties_builder and properties.is_jdbc:
+        xml_violations_buffer.append("Connectors using a 'jdbc' superclass must declare a <connection-properties> element in " + 
+                                     str(path_to_file) + ".")
+        return False
 
     return True
 
