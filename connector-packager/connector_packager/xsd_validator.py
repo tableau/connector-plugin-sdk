@@ -165,6 +165,8 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
 
     if file_to_test.file_type == 'connection-fields':
         return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer, properties)
+    elif file_to_test.file_type == 'connection-metadata':
+        return validate_file_specific_rules_connection_metadata(file_to_test, path_to_file, properties)
     elif file_to_test.file_type == 'connection-resolver':
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
 
@@ -218,6 +220,17 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
     return True
 
 
+def validate_file_specific_rules_connection_metadata(file_to_test: ConnectorFile, path_to_file: Path, properties: ConnectorProperties) -> bool:
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+
+    for database in root.iter('database'):
+        for field in database.iter('field'):
+            properties.database_field = True
+
+    return True
+
+
 def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
 
     xml_tree = parse(str(path_to_file))
@@ -243,6 +256,11 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
                 if field not in attributes:
                     xml_violations_buffer.append("Attribute '" + field + "' in connection-fields but not in required-attributes list.")
                     return False
+
+        if len(attributes) > 0 and properties.database_field:
+            if 'dbname' not in attributes:
+                xml_violations_buffer.append("Field 'database' enabled in connection-metadata but 'dbname' not in required-attributes list.")
+                return False
 
     return True
 

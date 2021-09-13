@@ -64,3 +64,4 @@ class TestConnectorProperties(unittest.TestCase):
         properties = ConnectorProperties()
         self.assertTrue(validate_all_xml(files_list, test_folder, properties), "Valid connector not marked as valid")
         self.assertEqual(expected_connection_fields, properties.connection_fields, "Actual properties.connection_fields did not match expected")
+        self.assertTrue(properties.database_field, "Database field not detected")

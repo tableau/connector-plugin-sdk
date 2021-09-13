@@ -240,6 +240,7 @@ class TestXSDValidator(unittest.TestCase):
         properties = ConnectorProperties()
         properties.uses_tcd = False
         properties.connection_fields = ['server', 'port', 'v-custom', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
+        properties.database_field = True
         xml_violations_buffer = []
 
 
@@ -254,6 +255,12 @@ class TestXSDValidator(unittest.TestCase):
         test_file = TEST_FOLDER / "modular_dialog_connector/connectionResolver.xml"
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
                         "Valid connector marked as invalid")
+
+        print("Test that normalizer not containing 'dbname' if connection-metadata database field is used is invalidated")
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "database_field_not_in_normalizer/connectionResolver.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                         "Missing 'dbname' attribute not detected")
 
     def test_validate_company_name_length(self):
         xml_violations_buffer = []
