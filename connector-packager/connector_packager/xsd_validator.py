@@ -248,9 +248,11 @@ def validate_file_specific_rules_connection_metadata(file_to_test: ConnectorFile
     xml_tree = parse(str(path_to_file))
     root = xml_tree.getroot()
 
+    # connection-metadata file and database element are both optional, on by default
     for database in root.iter('database'):
-        for field in database.iter('field'):
-            properties.database_field = True
+        if 'enabled' in database.attrib:
+            if 'true' != database.attrib['enabled']:
+                properties.connection_metadata_database = False
 
     return True
 
@@ -281,9 +283,9 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
                     xml_violations_buffer.append("Attribute '" + field + "' in connection-fields but not in required-attributes list.")
                     return False
 
-        if len(attributes) > 0 and properties.database_field:
+        if len(attributes) > 0 and properties.connection_metadata_database and not properties.uses_tcd:
             if 'dbname' not in attributes:
-                xml_violations_buffer.append("Field 'database' enabled in connection-metadata but 'dbname' not in required-attributes list.")
+                xml_violations_buffer.append("connection-metadata 'database' enabled but 'dbname' not in required-attributes list.")
                 return False
 
     properties_builder = root.find('.//connection-properties')

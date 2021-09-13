@@ -254,7 +254,7 @@ class TestXSDValidator(unittest.TestCase):
         properties = ConnectorProperties()
         properties.uses_tcd = False
         properties.connection_fields = ['server', 'port', 'v-custom', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
-        properties.database_field = True
+        properties.connection_metadata_database = True
         xml_violations_buffer = []
 
 
