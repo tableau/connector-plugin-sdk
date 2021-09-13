@@ -278,7 +278,7 @@ class TestXSDValidator(unittest.TestCase):
         print("Test that a connection resolver without <connection-properties> and non-jdbc superclass is valid")
         properties.is_jdbc = False
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
-                         "optional connection-properties not found and marked invalid")
+                        "optional connection-properties not found and marked invalid")
 
         print("Test that a connection resolver without <connection-properties> and jdbc superclass is invalid")
         properties.is_jdbc = True
@@ -290,9 +290,9 @@ class TestXSDValidator(unittest.TestCase):
         print("Test that a connection resolver with <connection-properties> and non-jdbc superclass is valid")
         properties.is_jdbc = False
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
-                         "optional connection-properties found and marked as invalid")
+                        "optional connection-properties found and marked as invalid")
 
         print("Test that a connection resolver with <connection-properties> and jdbc superclass is valid")
         properties.is_jdbc = True
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
-                         "required connection-properties found and marked as invalid")
+                        "required connection-properties found and marked as invalid")

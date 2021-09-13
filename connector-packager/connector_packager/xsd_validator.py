@@ -261,8 +261,8 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
     properties_builder = root.find('.//connection-properties')
 
     if not properties_builder and properties.is_jdbc:
-        xml_violations_buffer.append("Connectors using a 'jdbc' superclass must declare a <connection-properties> element in "
-                                     + str(path_to_file) + ".")
+        xml_violations_buffer.append("Connectors using a 'jdbc' superclass must declare a <connection-properties> element in " + 
+                                     str(path_to_file) + ".")
         return False
 
     return True
