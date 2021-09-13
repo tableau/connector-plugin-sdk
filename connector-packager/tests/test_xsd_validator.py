@@ -182,6 +182,20 @@ class TestXSDValidator(unittest.TestCase):
         self.assertIn("'authentication' attribute is missing", cm.output[0],
                       "\"'authentication' attribute is missing\" not found in warning message")
 
+    def test_validate_auth_attr_in_connection_fields(self):
+        test_file = TEST_FOLDER / "authentication_attribute/connection_fields_with_authentication.xml"
+        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
+        properties = ConnectorProperties()
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "XML Validation failed for valid connection fields file")
+
+        test_file = TEST_FOLDER / "authentication_attribute/connection_fields_no_authentication.xml"
+        properties = ConnectorProperties()
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "XML Validation passed for connection fields file without authentication field")
+
     def test_validate_connection_field_name(self):
         test_file = TEST_FOLDER / "field_name_validation/valid/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")

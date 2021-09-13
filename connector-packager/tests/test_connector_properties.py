@@ -48,7 +48,7 @@ class TestConnectorProperties(unittest.TestCase):
 
     def test_connector_fields_property(self):
         # Check that we correctly populate the connection fields property
-        expected_connection_fields = ['server', 'port', 'v-custom', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
+        expected_connection_fields = ['server', 'port', 'v-custom', 'authentication', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
 
         test_folder = TEST_FOLDER / Path("modular_dialog_connector")  # This connector uses a connection-fields.xml file
 
