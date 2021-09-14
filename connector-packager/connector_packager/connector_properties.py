@@ -5,3 +5,4 @@ class ConnectorProperties:
         self.connection_fields = []
         self.backwards_compatibility_mode = False
         self.is_jdbc = False
+        self.connection_metadata_database = True

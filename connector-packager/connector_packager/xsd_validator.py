@@ -167,6 +167,8 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
         return validate_file_specific_rules_manifest(file_to_test, path_to_file, properties)
     elif file_to_test.file_type == 'connection-fields':
         return validate_file_specific_rules_connection_fields(file_to_test, path_to_file, xml_violations_buffer, properties)
+    elif file_to_test.file_type == 'connection-metadata':
+        return validate_file_specific_rules_connection_metadata(file_to_test, path_to_file, properties)
     elif file_to_test.file_type == 'connection-resolver':
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
 
@@ -242,6 +244,19 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
     return True
 
 
+def validate_file_specific_rules_connection_metadata(file_to_test: ConnectorFile, path_to_file: Path, properties: ConnectorProperties) -> bool:
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+
+    # connection-metadata file and database element are both optional, on by default
+    for database in root.iter('database'):
+        if 'enabled' in database.attrib:
+            if 'true' != database.attrib['enabled']:
+                properties.connection_metadata_database = False
+
+    return True
+
+
 def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
 
     xml_tree = parse(str(path_to_file))
@@ -267,6 +282,11 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
                 if field not in attributes:
                     xml_violations_buffer.append("Attribute '" + field + "' in connection-fields but not in required-attributes list.")
                     return False
+
+        if len(attributes) > 0 and properties.connection_metadata_database and not properties.uses_tcd:
+            if 'dbname' not in attributes:
+                xml_violations_buffer.append("connection-metadata 'database' enabled but 'dbname' not in required-attributes list.")
+                return False
 
     properties_builder = root.find('.//connection-properties')
 
