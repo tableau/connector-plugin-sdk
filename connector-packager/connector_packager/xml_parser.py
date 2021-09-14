@@ -16,7 +16,8 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 HTTPS_STRING = "https://"
 TRANSLATABLE_STRING_PREFIX = "@string/"
-TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR",
+TABLEAU_FALLBACK_LANGUAGE = "en_US"  # If localizing a connector, US English must be translated since we'll fall back to the English strings if we can't find one for the correct language
+TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR",
                                "pt_BR", "zh_CN", "zh_TW"]
 
 
@@ -77,6 +78,16 @@ class XMLParser:
             logger.debug('Strings found:')
             for s in self.loc_strings:
                 logger.debug("-- " + s)
+
+            # Check that the fallback language (English) exists
+            fallback_resource_file_name = "resources-" + TABLEAU_FALLBACK_LANGUAGE + ".xml"
+            path_to_fallback_resource = self.path_to_folder / Path(fallback_resource_file_name)
+            if path_to_fallback_resource.is_file():
+                self.file_list.append(ConnectorFile(fallback_resource_file_name, "resource"))
+                logging.debug("Adding file to list (name = " + fallback_resource_file_name + ", type = resource)")
+            else:
+                logger.error("Error: Found localized strings but " + fallback_resource_file_name + " does not exist. US English translations are required to fall back on if other languages are not translated.")
+                return None
 
             # Check for files for each of the languages we suport
             for language in TABLEAU_SUPPORTED_LANGUAGES:
