@@ -48,7 +48,7 @@ class TestConnectorProperties(unittest.TestCase):
 
     def test_connector_fields_property(self):
         # Check that we correctly populate the connection fields property
-        expected_connection_fields = ['server', 'port', 'v-custom', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
+        expected_connection_fields = ['server', 'port', 'v-custom', 'authentication', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
 
         test_folder = TEST_FOLDER / Path("modular_dialog_connector")  # This connector uses a connection-fields.xml file
 
@@ -64,3 +64,68 @@ class TestConnectorProperties(unittest.TestCase):
         properties = ConnectorProperties()
         self.assertTrue(validate_all_xml(files_list, test_folder, properties), "Valid connector not marked as valid")
         self.assertEqual(expected_connection_fields, properties.connection_fields, "Actual properties.connection_fields did not match expected")
+
+    def test_connection_metadata_property(self):
+        test_folder = TEST_FOLDER / Path("modular_dialog_connector")  # This connector uses a connection-fields.xml file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script")]
+
+        properties = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties), "Valid connector not marked as valid")
+        self.assertTrue(properties.connection_metadata_database, "Database metadata not detected")
+
+        test_folder = TEST_FOLDER / Path("database_field_not_in_normalizer")  # This connector uses a connection-fields.xml file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script")]
+
+        properties = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties), "Valid connector not marked as valid")
+        self.assertFalse(properties.connection_metadata_database, "Database metadata detected incorrectly")
+
+
+    def test_is_jdbc_property(self):
+        # Check that validate_all_xml properly sets is_jdbc to False if not using superclass=jdbc
+        test_folder = TEST_FOLDER / Path("valid_connector")  # This connector uses a .tcd file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connection-dialog.tcd", "connection-dialog"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.tdd", "dialect"),
+            ConnectorFile("connectionResolver.tdr", "connection-resolver"),
+            ConnectorFile("resources-en_US.xml", "resource")]
+
+        properties_not_jdbc = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_not_jdbc), "Valid connector not marked as valid")
+        self.assertFalse(properties_not_jdbc.is_jdbc, "is_jdbc not set to False for connector with superclass other than jdbc")
+
+        # Check that validate_all_xml properly sets is_jdbc to True if using superclass=jdbc
+        test_folder = TEST_FOLDER / Path("modular_dialog_connector")  # This connector uses a connection-fields.xml file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script")]
+
+        properties_is_jdbc = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_is_jdbc), "Valid connector not marked as valid")
+        self.assertTrue(properties_is_jdbc.is_jdbc, "is_jdbc not set to True for connector with superclass jdbc")
+

@@ -182,6 +182,20 @@ class TestXSDValidator(unittest.TestCase):
         self.assertIn("'authentication' attribute is missing", cm.output[0],
                       "\"'authentication' attribute is missing\" not found in warning message")
 
+    def test_validate_auth_attr_in_connection_fields(self):
+        test_file = TEST_FOLDER / "authentication_attribute/connection_fields_with_authentication.xml"
+        file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
+        properties = ConnectorProperties()
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "XML Validation failed for valid connection fields file")
+
+        test_file = TEST_FOLDER / "authentication_attribute/connection_fields_no_authentication.xml"
+        properties = ConnectorProperties()
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "XML Validation passed for connection fields file without authentication field")
+
     def test_validate_connection_field_name(self):
         test_file = TEST_FOLDER / "field_name_validation/valid/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
@@ -240,6 +254,7 @@ class TestXSDValidator(unittest.TestCase):
         properties = ConnectorProperties()
         properties.uses_tcd = False
         properties.connection_fields = ['server', 'port', 'v-custom', 'username', 'password', 'v-custom2', 'vendor1', 'vendor2', 'vendor3']
+        properties.connection_metadata_database = True
         xml_violations_buffer = []
 
 
@@ -255,6 +270,12 @@ class TestXSDValidator(unittest.TestCase):
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
                         "Valid connector marked as invalid")
 
+        print("Test that normalizer not containing 'dbname' if connection-metadata database field is used is invalidated")
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "database_field_not_in_normalizer/connectionResolver.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                         "Missing 'dbname' attribute not detected")
+
     def test_validate_company_name_length(self):
         xml_violations_buffer = []
         file_to_test = ConnectorFile("manifest.xml", "manifest")
@@ -268,3 +289,31 @@ class TestXSDValidator(unittest.TestCase):
         test_file = TEST_FOLDER / "company_name_length_validation/max/manifest.xml"
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "Company name with length greater than 24 marked as valid")
+
+    def test_validate_jdbc_properties_builder(self):
+        properties = ConnectorProperties()
+        xml_violations_buffer = []
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "properties_builder/odbc/connectionResolver.xml"
+
+        print("Test that a connection resolver without <connection-properties> and non-jdbc superclass is valid")
+        properties.is_jdbc = False
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "optional connection-properties not found and marked invalid")
+
+        print("Test that a connection resolver without <connection-properties> and jdbc superclass is invalid")
+        properties.is_jdbc = True
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                         "required connection-properties not found and marked valid")
+
+        test_file = TEST_FOLDER / "properties_builder/jdbc/connectionResolver.xml"
+
+        print("Test that a connection resolver with <connection-properties> and non-jdbc superclass is valid")
+        properties.is_jdbc = False
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "optional connection-properties found and marked as invalid")
+
+        print("Test that a connection resolver with <connection-properties> and jdbc superclass is valid")
+        properties.is_jdbc = True
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "required connection-properties found and marked as invalid")
