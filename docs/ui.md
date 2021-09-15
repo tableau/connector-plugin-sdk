@@ -42,6 +42,8 @@ To add a custom vendor attribute for an JDBC-based connector, you must modify th
 - connectionResolver.tdr
 - connectionProperties.js
 
+**Vendor defined attributes will be logged and persisted to Tableau workbook xml in plain text.** This means the input for these fields cannot contain any Personally Identifiable Information (PII), as they are not secure and could leak sensitive customer information.
+
 See examples below.
 
 __connection-resolver.tdr__

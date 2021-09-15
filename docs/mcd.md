@@ -52,7 +52,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> string: `""` <br> option: first option <br> boolean: `false` <br> file: `""` | |
 | optional | Whether the user must specify a value for the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | If a field is in the `advanced` category and is not optional, it must be given a default value. |
 | editable | Whether the user can edit the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `true`. | When set to `false`, the attribute is not shown in the connection dialog, and its default-value is passed to the ConnectionBuilder(). |
-| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. |
+| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. **Any fields not marked secure will be logged and persisted to Tableau workbook xml in plain text.** |
 | category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> `endpoint` (for server, port, etc.) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. |
 
 ### `<validation-rule>`
@@ -165,6 +165,8 @@ The connection field names below should specify the `authentication` category.
 ### Vendor Defined
 
 The vendor defined attributes are unique to an individual connector and do not imply platform functionality. They are pass-through to the connection normalizer, connection builder and properties builder.
+
+**Vendor defined attributes will be logged and persisted to Tableau workbook xml in plain text.** This means the input for these fields cannot contain any Personally Identifiable Information (PII), as they are not secure and could leak sensitive customer information.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
