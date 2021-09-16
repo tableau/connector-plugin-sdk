@@ -27,7 +27,7 @@ Conditions: CAP_ODBC_METADATA_SUPPRESS_PREPARED_QUERY = false OR CAP_ODBC_METADA
 Example query: `SELECT * FROM default.testv1_batters`
 
 ## JDBC Metadata Enumeration
-There are JDBC capabilities controlling JDBC metadata enumeration and are all prefixed with `CAP_JDBC_METADATA_`. When metadata is enumerated by a SQL query, it will be logged with keyword `grpc-protocol-read-query-metadata`. When reading the metadata of columns from a table, the event will be logged with keyword `grpc-protocol-read-table-metadata`.
+There are several JDBC capabilities controlling JDBC metadata enumeration and are all prefixed with `CAP_JDBC_METADATA_`. When metadata is enumerated by a SQL query, it will be logged with keyword `grpc-protocol-read-query-metadata`. When reading the metadata of columns from a table, the event will be logged with keyword `grpc-protocol-read-table-metadata`.
 
 Without any of below capabilities being set, our default behavior is to use JDBC APIs like getCatalogs, getSchemas, getTables, and getColumns from [DatabaseMetaData](https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html).
 
