@@ -12,195 +12,25 @@ A combination of Connection Dialog and Connection Resolver changes implement eac
 
 ## Supported Authentication Modes
 
-### No Authentication
-User is never prompted for credentials.
+| Name | value | Description |
+| - | - | - |
+| No Authentication | `auth-none` | User is never prompted for credentials |
+| Username only | `auth-user` | User is prompted for username during initial connection creation. |
+| Username and Password | `auth-user-pass` | User is prompted for username and password during initial connection creation, and password only when reconnecting to the data source |
+| Password only | `auth-pass` | User is prompted for password during initial connection creation and reconnecting to the data source |
+| OAuth | `oauth` | User is prompted with the default brower for [OAuth]({{ site.baseurl }}/docs/oauth) credentials during initial connection creation and reconnecting to the data source |
 
-```xml
-<!-- Connection Dialog -->
-<connection-dialog class='sample'>
-    <connection-config>
-        <authentication-mode value='None' />
-        <authentication-options>
-            <option name="None" default="true" value="auth-none" />
-        </authentication-options>
-        ...
-    </connection-config>
-</connection-dialog>
-```
+The ```authentication``` attribute in a Tableau workbook (twb) or Tableau data source (tds) file contains the ```value``` defined above.
 
-```xml
-<!-- Connection Resolver -->
-<tdr class='sample'>
-    <connection-resolver>
-        ...
-        <connection-normalizer>
-            <required-attributes>
-                <attribute-list>
-                    ...
-                    <attr>authentication</attr>
-                    ...
-                </attribute-list>
-            </required-attributes>
-        </connection-normalizer>
-    </connection-resolver>
-    ...
-</tdr>
-```
+The specific usage patterns of these values can be found on the individual Connection Dialog pages:
 
-Sample connection dialog [noAuthOption.tcd](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/components/dialogs/noAuthOption.tcd)
+- [Connection Dialog v1]({{ site.baseurl }}/docs/ui#supported-authentication-modes) 
+- [Connection Dialog v2]({{ site.baseurl }}/docs/mcd#authentication)
 
-### Username only
-
-User is prompted for username during initial connection creation.  Before Tableau 2020.3 the ```option``` element required ```value='no'``` instead of example below.
-
-```xml
-<!-- Connection Dialog -->
-<connection-dialog class='sample'>
-    <connection-config>
-        <authentication-mode value='BasicUserNameOnly' />
-        <authentication-options>
-            <option name="Username" default="true" value="auth-user"/>
-        </authentication-options>
-        ...
-    </connection-config>
-</connection-dialog>
-```
-
-```xml
-<!-- Connection Resolver -->
-<tdr class='sample'>
-    <connection-resolver>
-        ...
-        <connection-normalizer>
-            <required-attributes>
-                <attribute-list>
-                    ...
-                    <attr>authentication</attr>
-                    <attr>username</attr>
-                    ...
-                </attribute-list>
-            </required-attributes>
-        </connection-normalizer>
-    </connection-resolver>
-    ...
-</tdr>
-```
-
-### Password only
-
-##### Tableau 2019.4 and later
-
-User is prompted for password during initial connection creation and reconnecting to the data source.
-
-```xml
-<!-- Connection Dialog -->
-<connection-dialog class='sample'>
-    <connection-config>
-        <authentication-mode value='PasswordOnly' />
-        <authentication-options>
-            <option name="Password" default="true" value="auth-pass"/>
-        </authentication-options>
-        ...
-    </connection-config>
-</connection-dialog>
-```
-
-```xml
-<!-- Connection Resolver -->
-<tdr class='sample'>
-    <connection-resolver>
-        ...
-        <connection-normalizer>
-            <required-attributes>
-                <attribute-list>
-                    ...
-                    <attr>authentication</attr>
-                    <attr>password</attr>
-                    ...
-                </attribute-list>
-            </required-attributes>
-        </connection-normalizer>
-    </connection-resolver>
-    ...
-</tdr>
-```
-
-
-### Username and Password
-
-User is prompted for username and password during initial connection creation, and password only when reconnecting to the data source.  If the username can be blank replace ```value='Basic'``` with ```value='BasicNoValidateFields'``` below.
-
-```xml
-<!-- Connection Dialog -->
-<connection-dialog class='sample'>
-    <connection-config>
-        <authentication-mode value='Basic' />
-        <authentication-options>
-            <option name="UsernameAndPassword" default="true" value="auth-user-pass"/>
-        </authentication-options>
-        ...
-    </connection-config>
-</connection-dialog>
-```
-
-```xml
-<!-- Connection Resolver -->
-<tdr class='sample'>
-    <connection-resolver>
-        ...
-        <connection-normalizer>
-            <required-attributes>
-                <attribute-list>
-                    ...
-                    <attr>authentication</attr>
-                    <attr>username</attr>
-                    <attr>password</attr>
-                    ...
-                </attribute-list>
-            </required-attributes>
-        </connection-normalizer>
-    </connection-resolver>
-    ...
-</tdr>
-```
 
 ### Multiple Authentication Modes
 
 User is prompted for which authentication option to use, then a set of fields appear, conditional on that option.  Depending on the option selected the user may or may not be prompted for credentials when reconnecting to the data source.
-
-Supported authentication options are below.  Starting in Tableau 2019.4, ```Password``` option is supported.
-
-```
-None
-Username
-Password
-UsernameAndPassword
-LDAP
-```
-
-```xml
-<!-- Connection Dialog -->
-<connection-dialog class='sample'>
-    <connection-config>
-        <authentication-mode value='ComboBoxIntegrated' />
-        <authentication-options>
-            <option name="None" value="auth-none" />
-            <option name="Username" value="auth-user" />
-            <option name="UsernameAndPassword" value="auth-user-pass" default="true" />
-        </authentication-options>
-        ...
-    </connection-config>
-</connection-dialog>
-```
-
-Note: the ```value``` attribute value for all options is customizable by connector author, except None, which is required to be ```auth-none```.  These option values are the persisted value of the authentication attribute in a Tableau workbook (twb) or Tableau data source (tds) file.  Starting in Tableau 2020.3, the recommendation is to standardize ```value``` to the following when possible:
-
-Option | ```value```
--|-
-None | auth-none
-Username | auth-user
-UsernameAndPassword | auth-user-pass
-Password | auth-pass
 
 ```xml
 <!-- Connection Resolver -->
@@ -224,8 +54,7 @@ Password | auth-pass
 ```
 
 ```javascript
-// Connection Builder
-(function dsbuilder(attr)
+// Connection Builder (ODBC) or Properties Builder (JDBC)
 {
     ...
     var authAttrValue = attr[connectionHelper.attributeAuthentication];
