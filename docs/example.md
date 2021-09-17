@@ -6,13 +6,13 @@ A Tableau connector is a set of files that describe the UI elements needed to co
 
 Tableau connector files include:
 - __Manifest file__ that tells Tableau about the connector. Tableau uses the name from this file to add it to the list of available connectors in the UI.
-- __Tableau Custom Dialog file__ customizes the connection dialog as needed for this connection.
+- __Tableau Connection Dialog file__ customizes the connection dialog as needed for this connection.
 - __Tableau Connection Resolver file__ creates the connection to your file using JavaScript files to define and make the connection.
 - __Tableau Dialect file__ identifies which SQL dialect to use.
 
-Tableau provides a base set of connector files that you use to create your own customized connector. You can use the connectivity test harness to validate the connector behavior as you build it. 
+Tableau provides a base set of connector files that you use to create your own customized connector. You can use the connectivity test harness to validate the connector behavior as you build it.
 
-This diagram shows how the connector interacts with Tableau and the database. Details and examples for these component files are below the diagram. 
+This diagram shows how the connector interacts with Tableau and the database. Details and examples for these component files are below the diagram.
 
 ![]({{ site.baseurl }}/assets/files-sequence.png)
 
@@ -28,7 +28,7 @@ Each connector is typically based on a "class" such as ODBC or JDBC, and provide
 
 - The <span style="font-family: courier new">class</span> value is a unique key for your connector and is used in other XML files to apply their customizations and in Tableau workbooks to match connection types.
 - The <span style="font-family: courier new">name</span> value displays the connector name in the Tableau **Connect** pane.
-- You may also specify the vendor information. 
+- You may also specify the vendor information.
 - The <span style="font-family: courier new">company name</span> value displays the name of the connector's creator next to the connector name on the Tableau **Connect** pane (for example, Connector Name by Creator).
 - The <span style="font-family: courier new">support link</span> value is the URL of a website where users of the connector can get support.
 
@@ -37,9 +37,9 @@ Each connector is typically based on a "class" such as ODBC or JDBC, and provide
 
 ![]({{ site.baseurl }}/assets/pce-connect-pane.png)
 
-## ![2]({{ site.baseurl }}/assets/pce-2.png) Tableau Custom Dialog File
+## ![2]({{ site.baseurl }}/assets/pce-2.png) Tableau Connection Dialog File
 
-The Tableau Custom Dialog file (.tcd) is optional. By default, your connecor inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TCD file to customize the connection dialog.
+The Tableau Connection Dialog file (.tcd) is optional. By default, your connecor inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TCD file to customize the connection dialog.
 For example, if you set <span style="font-family: courier new">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
 
 Here's an example:
@@ -65,11 +65,11 @@ Here's an example:
 
 The Connector Resolver file (.tdr) is optional. Tableau uses it to create a connection to your data.
 
-The TDR file calls these scripts (described in the following sections): 
+The TDR file calls these scripts (described in the following sections):
 - Connection Builder
 - Connection Properties
 
-The TDR file also contains the connection-normalizer and the driver-resolver section. The <span style="font-family: courier new">connection-normalizer</span> component defines what makes up a unique connection. An example of the component : 
+The TDR file also contains the connection-normalizer and the driver-resolver section. The <span style="font-family: courier new">connection-normalizer</span> component defines what makes up a unique connection. An example of the component :
 
 ```
 <connection-normalizer>
@@ -88,7 +88,7 @@ The TDR file also contains the connection-normalizer and the driver-resolver sec
 
 Starting in Tableau 2021.1 a connector using [Connection Dialog V2]({{ site.baseurl }}/docs/mcd) can let the system determine at runtime the correct <span style="font-family: courier new">connection-normalizer</span> by not defining it. See [API Reference]({{ site.baseurl }}/docs/api-reference#connection-normalizer) for more details.
 
-The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript. 
+The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
 
 Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
 For example, all Postgres connections have the same <span style="font-family: courier new">class</span>.
@@ -104,7 +104,7 @@ In turn, the Connection Resolver uses these attributes to format an ODBC or JDBC
     <connection-resolver>
         <connection-builder>
             // This is the component number 4 in the diagram above
-            <script file='connectionBuilder.js'/> 
+            <script file='connectionBuilder.js'/>
         </connection-builder>
         <connection-properties>
             // This is the component number 5 in the diagram above
@@ -164,7 +164,7 @@ This is an example Connection Builder script for ODBC:
     params["Fetch"] = "2048";
 
     var formattedParams = [];
-    
+
     // The driver resolver is invoked below to find the matching ODBC driver
     formattedParams.push(connectionHelper.formatKeyValuePair(driverLocator.keywordDriver, driverLocator.locateDriver(attr)));
 
@@ -183,7 +183,7 @@ This is an example Connection Builder script for JDBC:
 
 ```
 (function dsbuilder(attr) {
-    var urlBuilder = "jdbc:postgresql://" + attr[connectionHelper.attributeServer] + ":" + attr[connectionHelper.attributePort] + 
+    var urlBuilder = "jdbc:postgresql://" + attr[connectionHelper.attributeServer] + ":" + attr[connectionHelper.attributePort] +
         "/" + attr[connectionHelper.attributeDatabase] + "?";
 
     return [urlBuilder];
@@ -192,9 +192,9 @@ This is an example Connection Builder script for JDBC:
 
 ## ![5]({{ site.baseurl }}/assets/pce-5.png) Connection Properties
 
-The Connection Properties script (connectionProperties.js) is optional. You need this script only if you're using a JDBC driver. 
+The Connection Properties script (connectionProperties.js) is optional. You need this script only if you're using a JDBC driver.
 
-This example is for a connector to Amazon Athena. 
+This example is for a connector to Amazon Athena.
 
 ```
 (function propertiesBuilder(attr) {

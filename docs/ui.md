@@ -4,7 +4,7 @@ title: Build the Connection Dialog with Connection Dialog v1
 
 The connection dialog prompts the user to enter connection and authentication information. That information is passed into the Connector Builder script to build the connection string. The dialog appears when creating a new connection or editing an existing connection and is used by both Tableau Desktop and Tableau Server.
 
-The connection dialog is mainly defined in the Tableau Custom Dialog (.tcd) file.
+The connection dialog is mainly defined in the Tableau Connection Dialog (.tcd) file.
 
 Here's an example of a connection dialog:
 
@@ -110,7 +110,7 @@ __connectionProperties.js (JDBC only)__
 
 See complete files [here](https://github.com/tableau/connector-plugin-sdk/tree/dev/samples/components/dialogs/new_text_field).
 
-## Define Tableau Custom Dialog file elements
+## Define Tableau Connection Dialog file elements
 
 The TCD file defines which UI elements display in the dialog.
 
