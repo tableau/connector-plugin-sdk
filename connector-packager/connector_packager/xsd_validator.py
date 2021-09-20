@@ -17,6 +17,7 @@ MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on
 PATH_TO_XSD_FILES = Path("../validation").absolute()
 VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extensions that we will validate
 PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'instanceurl', 'vendor1', 'vendor2', 'vendor3']
+VENDOR_FIELD_NAMES = ['vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAME_PREFIX = 'v-'
 
 # Holds the mapping between file type and XSD file name
@@ -171,6 +172,8 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
         return validate_file_specific_rules_connection_metadata(file_to_test, path_to_file, properties)
     elif file_to_test.file_type == 'connection-resolver':
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
+    elif file_to_test.file_type == 'connection-dialog':
+        return validate_file_specific_rules_tcd(file_to_test, path_to_file, xml_violations_buffer, properties)
 
     return True
 
@@ -196,6 +199,9 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
         if 'name' in child.attrib:
             field_name = child.attrib['name']
             properties.connection_fields.append(field_name)
+
+            if field_name in VENDOR_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX):
+                properties.vendor_defined_fields.append(field_name)
 
             if not (field_name in PLATFORM_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX)):
                 xml_violations_buffer.append("Element 'field', attribute 'name'='" + field_name +
@@ -291,12 +297,29 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
     properties_builder = root.find('.//connection-properties')
 
     if not properties_builder and properties.is_jdbc:
-        xml_violations_buffer.append("Connectors using a 'jdbc' superclass must declare a <connection-properties> element in " + 
+        xml_violations_buffer.append("Connectors using a 'jdbc' superclass must declare a <connection-properties> element in " +
                                      str(path_to_file) + ".")
         return False
 
     return True
 
+def validate_file_specific_rules_tcd(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
+
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+
+    # Check to see if we're using the vendor-defined fields (vendor1, etc), add them to the vendor_defined_fields list
+    vendor1 = root.find('.//connection-config/vendor1-prompt')
+    if vendor1 is not None:
+        properties.vendor_defined_fields.append('vendor1')
+    vendor2 = root.find('.//connection-config/vendor2-prompt')
+    if vendor2 is not None:
+        properties.vendor_defined_fields.append('vendor2')
+    vendor3 = root.find('.//connection-config/vendor3-prompt')
+    if vendor3 is not None:
+        properties.vendor_defined_fields.append('vendor3')
+
+    return True
 
 # Check if connector file content contains warnings needs to notify connector developer
 def warn_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path):
