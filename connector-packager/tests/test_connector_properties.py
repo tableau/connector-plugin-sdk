@@ -129,3 +129,58 @@ class TestConnectorProperties(unittest.TestCase):
         self.assertTrue(validate_all_xml(files_list, test_folder, properties_is_jdbc), "Valid connector not marked as valid")
         self.assertTrue(properties_is_jdbc.is_jdbc, "is_jdbc not set to True for connector with superclass jdbc")
 
+    def test_vendor_defined_fields_tcd(self):
+        # This connector uses a .tcd file and does not have vendor-defined fields
+        test_folder = TEST_FOLDER / Path("valid_connector")  # This connector uses a .tcd file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connection-dialog.tcd", "connection-dialog"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.tdd", "dialect"),
+            ConnectorFile("connectionResolver.tdr", "connection-resolver"),
+            ConnectorFile("resources-en_US.xml", "resource")]
+
+        properties_no_vendor_defined_fields = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_no_vendor_defined_fields), "Valid connector not marked as valid")
+        self.assertFalse(properties_no_vendor_defined_fields.vendor_defined_fields, "Found vendor-defined fields when none were defined")
+
+        # This connector uses a .tcd file and has vendor-defined fields
+        test_folder = TEST_FOLDER / Path("tcd_vendor_defined_fields")
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connection-dialog.tcd", "connection-dialog")]
+
+        properties_has_vendor_defined_fields = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_has_vendor_defined_fields), "Valid connector not marked as valid")
+        self.assertListEqual(properties_has_vendor_defined_fields.vendor_defined_fields, ['vendor1', 'vendor2', 'vendor3'], "Vendor-defined attributes not detected")
+
+    def test_vendor_defined_fields_mcd(self):
+        # This connector uses connection-fields file and does not have vendor-defined fields
+        test_folder = TEST_FOLDER / Path("mcd_no_vendor_defined_fields")  # This connector uses a .tcd file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata")]
+
+        properties_no_vendor_defined_fields = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_no_vendor_defined_fields), "Valid connector not marked as valid")
+        self.assertFalse(properties_no_vendor_defined_fields.vendor_defined_fields, "Found vendor-defined fields when none were defined")
+
+        # This connector uses a connection-fields file and has vendor-defined fields
+        test_folder = TEST_FOLDER / Path("modular_dialog_connector")
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script")]
+
+        properties_has_vendor_defined_fields = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_has_vendor_defined_fields), "Valid connector not marked as valid")
+        self.assertListEqual(properties_has_vendor_defined_fields.vendor_defined_fields, ['v-custom', 'v-custom2', 'vendor1', 'vendor2', 'vendor3'], "Vendor-defined attributes not detected")
