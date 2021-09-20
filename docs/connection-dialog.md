@@ -6,9 +6,9 @@ The connection dialog prompts the user to enter connection and authentication in
 
 The connection dialog can be defined in two different ways:
 - [Connection Dialog v1]({{ site.baseurl }}/docs/ui) 
-- [Connection Dialog v2]({{ site.baseurl }}/docs/mcd) in Tableau 2020.3 or later 
+- [Connection Dialog v2]({{ site.baseurl }}/docs/mcd) in Tableau 2020.3 or later
 
-Connection Dialog v2 is the recommended pattern for new connectors.
+**Connection Dialog v2 is the recommended pattern for new connectors.**
 
 ## Set connector name and vendor information
 
@@ -22,6 +22,7 @@ These elements are defined in the manifest.xml file:
   <vendor-information>
       <company name="Company Name"/>
       <support-link url = "http://example.com"/>
+      <driver-download-link url="https://drivers.example.com"/>
   </vendor-information>
   ...
 </connector-plugin>
@@ -29,13 +30,13 @@ These elements are defined in the manifest.xml file:
 
 ## Define how the connector authenticates 
 
-The ```authentication``` attribute controls how a user is prompted to enter data source credentials. For information on authentication modes, see [Authentication modes]({{ site.baseurl }}/docs/auth-modes).
+The ```authentication``` attribute is a required field and controls how a user is prompted to enter data source credentials. For more information on authentication modes, see [Authentication modes]({{ site.baseurl }}/docs/auth-modes).
 
 ## Define custom vendor attributes
 
-Vendors can add customized attributes (fields) to their connector plugin by using the a ```field``` element in V2 or the pre-defined ```vendor*``` elements in V1.
+Vendors can add customized attributes (fields) to their connector plugin by using the a ```field``` element in V2 or the pre-defined ```vendor*``` elements in V1.  Ensure the vendor defined fields do not duplicate functionality defined in the [Connection Field Platform Integration]({{ site.baseurl }}/docs/mcd#connection-field-platform-integration) section.
 
-These fields have a custom label and can be used for attributes in the connection strings.
+These fields have a custom label and can be used for attributes in the connection strings.  
 
 To add a custom vendor attribute for an ODBC-based connector, you must modify these files:
 - connectionFields.xml or connection-dialog.tcd

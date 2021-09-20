@@ -1,5 +1,5 @@
 ---
-title: Build the Connection Dialog with Connection Dialog v2
+title: Connection Dialog v2
 ---
 **IMPORTANT:** This feature is available only in Tableau 2020.3 or later. For compatibility with older versions, use Connection Dialog v1 (documentation found [here]({{ site.baseurl }}/docs/ui)).
 

@@ -19,6 +19,7 @@ A combination of Connection Dialog and Connection Resolver changes implement eac
 | Username and Password | `auth-user-pass` | User is prompted for username and password during initial connection creation, and password only when reconnecting to the data source |
 | Password only | `auth-pass` | User is prompted for password during initial connection creation and reconnecting to the data source |
 | OAuth | `oauth` | User is prompted with the default brower for [OAuth]({{ site.baseurl }}/docs/oauth) credentials during initial connection creation and reconnecting to the data source |
+| Integrated | `auth-integrated` | User is not prompted for credentials and relies on driver supported SSO like Kerberos: [details](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/jdbc_kerberos) |
 
 The ```authentication``` attribute in a Tableau workbook (twb) or Tableau data source (tds) file contains the ```value``` defined above.
 
@@ -30,7 +31,35 @@ The specific usage patterns of these values can be found on the individual Conne
 
 ### Multiple Authentication Modes
 
-User is prompted for which authentication option to use, then a set of fields appear, conditional on that option.  Depending on the option selected the user may or may not be prompted for credentials when reconnecting to the data source.
+User is prompted for which authentication option to use and conditionally shown additional fields.  Depending on the option selected, the user may or may not be prompted for credentials when reconnecting to the data source.
+
+These are the relevant segments from the [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/multi_auth) that implements multiple authentication modes. 
+
+```xml
+<!-- Connection Dialog v2 -->
+<connection-fields>
+  ...
+  <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="auth-user-pass" >
+    <selection-group>
+      <option value="auth-none" label="No Authentication"/>
+      <option value="auth-user" label="Username"/>
+      <option value="auth-user-pass" label="Username and Password"/>
+    </selection-group>
+  </field>
+  <field name="username" label="Username" category="authentication" value-type="string">
+    <conditions>
+      <condition field="authentication" value="auth-user"/>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+   <field name="password" label="Password" category="authentication" value-type="string" secure="true">
+    <conditions>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+  ...
+</connection-fields>
+```
 
 ```xml
 <!-- Connection Resolver -->
@@ -116,7 +145,7 @@ When using 'hadoophive' or 'spark' as a base class there are additional constrai
 In the Connection Dialog, any authentication ```option``` elements used must match the definition below.
 
 ```xml
-<!-- Connection Dialog -->
+<!-- Connection Dialog V1 -->
 
 <!-- <authentication-options> -->
 <option name="None" value="0" />

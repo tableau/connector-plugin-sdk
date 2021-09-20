@@ -1,6 +1,8 @@
 ---
-title: Build the Connection Dialog with Connection Dialog v1
+title: Connection Dialog v1
 ---
+
+Connection Dialog v2 is the recommended pattern for new connectors. For more details see the [Connection Dialog v2]({{ site.baseurl }}/docs/mcd) page.
 
 ## Define Tableau Custom Dialog file elements
 
@@ -23,7 +25,7 @@ Here's an example of a TCD file:
 </connection-dialog>
 ```
 
-The ```authentication-mode``` and ```authentication-options``` tags control how a user is prompted to enter data source credentials. For information on authentication modes, see [Authentication modes]({{ site.baseurl }}/docs/auth-modes).
+The ```authentication-mode``` and ```authentication-options``` tags control how a user is prompted to enter data source credentials. For more information on authentication modes, see [Authentication modes]({{ site.baseurl }}/docs/auth-modes).
 
 The other tags control what prompts show up in the connection dialog. For example, this shows the Port prompt with the label of Port and a default value of 5432:
 
@@ -82,13 +84,7 @@ __connectionBuilder.js (ODBC only)__
 ```js
 (function dsbuilder(attr)
   {
-    var params = {};
-
-    params["SERVER"] = attr[connectionHelper.attributeServer];
-    params["PORT"] = attr[connectionHelper.attributePort];
-    params["DATABASE"] = attr[connectionHelper.attributeDatabase];
-    params["UID"] = attr[connectionHelper.attributeUsername];
-    params["PWD"] = attr[connectionHelper.attributePassword];
+    ...
     params["loglevel"] = attr[connectionHelper.attributeVendor1];
     params["protocolVersion"] = attr[connectionHelper.attributeVendor2];
     params["charSet"] = attr[connectionHelper.attributeVendor3];
@@ -99,13 +95,9 @@ __connectionBuilder.js (ODBC only)__
 __connectionProperties.js (JDBC only)__
 ```js
       ...
-      props["password"] = attr[connectionHelper.attributePassword];
       props["logLevel"] = attr[connectionHelper.attributeVendor1];
       props["protocolVersion"] = attr[connectionHelper.attributeVendor2];
       props["charSet"] = attr[connectionHelper.attributeVendor3];
-
-      if (attr[connectionHelper.attributeSSLMode] == "require")
-      {
       ...
 
 ```
@@ -343,7 +335,3 @@ Password | auth-pass
     ...
 })
 ```
-
-## Localize your connector
-
-For information on localizing your connection dialogs, see [Localize Your Connector]({{ site.baseurl }}/docs/localize).
