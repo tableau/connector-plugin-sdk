@@ -39,8 +39,8 @@ Each connector is typically based on a "class" such as ODBC or JDBC, and provide
 
 ## ![2]({{ site.baseurl }}/assets/pce-2.png) Tableau Connection Dialog File
 
-The Tableau Connection Dialog file (.tcd) is optional. By default, your connecor inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TCD file to customize the connection dialog.
-For example, if you set <span style="font-family: courier new">show-ssl-check box</span> to "true", the **Require SSL** check box will display on the connection dialog.
+The Tableau Connection Dialog file (.tcd) is optional. By default, your connector inherits a connection dialog from its parent (defined by <span style="font-family: courier new">superclass</span> You can use the TCD file to customize the connection dialog.
+For example, if you set <span style="font-family: courier new">show-ssl-check box</span> to "true", the **Require SSL** checkbox will display on the connection dialog.
 
 Here's an example:
 
@@ -88,7 +88,7 @@ The TDR file also contains the connection-normalizer and the driver-resolver sec
 
 Starting in Tableau 2021.1 a connector using [Connection Dialog V2]({{ site.baseurl }}/docs/mcd) can let the system determine at runtime the correct <span style="font-family: courier new">connection-normalizer</span> by not defining it. See [API Reference]({{ site.baseurl }}/docs/api-reference#connection-normalizer) for more details.
 
-The <span style="font-family: courier new">driver-resolver</span> is currently only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
+The <span style="font-family: courier new">driver-resolver</span> is only used for ODBC drivers. JDBC connectors can specify the driver name in the URL built by the connection builder JavaScript.
 
 Tableau database connections have a unique type, the <span style="font-family: courier new">class</span> attribute.
 For example, all Postgres connections have the same <span style="font-family: courier new">class</span>.

@@ -28,9 +28,9 @@ These elements are defined in the manifest.xml file:
 ```
 
 ## Define custom vendor attributes
-Vendors can add customized attributes (fields) to their connector plugin by using the vendor attributes.
+Vendors can add customized attributes (fields) to their connector plug-in by using the vendor attributes.
 
-These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add three custom fields in your connector plugin.
+These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add three custom fields in your connector plug-in.
 
 To add a custom vendor attribute for an ODBC-based connector, you must modify these files:
 - connection-dialog.tcd
@@ -42,7 +42,7 @@ To add a custom vendor attribute for an JDBC-based connector, you must modify th
 - connectionResolver.tdr
 - connectionProperties.js
 
-**Vendor defined attributes will be logged and persisted to Tableau workbook xml in plain text.** This means the input for these fields cannot contain any Personally Identifiable Information (PII), as they are not secure and could leak sensitive customer information.
+**Vendor defined attributes will be logged and persisted to Tableau workbook XML in plain text.** This means the input for these fields cannot contain any Personally Identifiable Information (PII), as they are not secure and could leak sensitive customer information.
 
 See examples below.
 

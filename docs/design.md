@@ -6,7 +6,7 @@ The choices you make when creating a connector can include which superclass and 
 
 ## Choose a connection class
 
-The <span style="font-family: courier new">class</span> attribute is a unique key for your connector. Make it something that is unlikely to be used by another connector. When Tableau loads the connectors at startup, if the class is already registered, the connector will not be loaded. The class is also stamped in Tableau Workbook (.twb or .twbx) files and Tableau Datasource (.tds) files to identify what connector that particular connection was using.
+The <span style="font-family: courier new">class</span> attribute is a unique key for your connector. Make it something that is unlikely to be used by another connector. When Tableau loads the connectors at startup, if the class is already registered, the connector will not be loaded. The class is also stamped in Tableau Workbook (.twb or .twbx) files and Tableau data source (.tds) files to identify what connector that particular connection was using.
 
 ## Choose a superclass
 
@@ -22,16 +22,16 @@ These are available <span style="font-family: courier new">superclass</span> val
 
 You might find other superclass values in the workbook XML from an existing Tableau connection, but we don't recommend using them. They haven't been tested.
 
-## Assign a plugin version
+## Assign a plug-in version
 
 Plugin-version is a requirement for submitting your connector to the Tableau Connector Gallery.  It helps customers and partners understand which version of a connector is being used currently and if it is the most up-to-date.
-You should start your plugin version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector.
+You should start your plug-in version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector.
 
 ## Know the min-tableau-version
 For the min-tableau-version, is checked before a connector is loaded in Tableau. If the current version of Tableau is less than the min-tableau-version then the connector is not loaded.
 This is set by the packager and if set manually will be overwritten.
 
-***Note: `version` in the manifest file does not refer to plugin version. Please leave this set to `version='18.1'`*** <br />
+***Note: `version` in the manifest file does not refer to plug-in version. Please leave this set to `version='18.1'`*** <br />
 
 ***FAQs about Versioning***
 - What should I (partner) do if I need to make a breaking change to the connector?
@@ -104,7 +104,7 @@ __Important:__ Your database must support subqueries or temporary tables for com
 - CAP_SELECT_INTO
 - CAP_SELECT_TOP_INTO
 
-If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities#temporary-tables). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large data sets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.
+If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities#temporary-tables). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large datasets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.
 
 A common example is filtering the top three regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to __Rows__, then drag it again to __Filters__. Click the Top tab and select [Sales Total] aggregated by sum.
 

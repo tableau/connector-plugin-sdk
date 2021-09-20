@@ -44,7 +44,7 @@ Join our [Tableau Developer Program](https://www.tableau.com/developer) to gain 
 
 ### Step 2: Build your integration
 
-Once you've signed up for our developer program, use the information in this Connector SDK documentation to get started building a connector. 
+After you've signed up for our developer program, use the information in this Connector SDK documentation to get started building a connector. 
 
 Be sure to test your connector with the [TDVT suite](https://tableau.github.io/connector-plugin-sdk/docs/tdvt) to ensure that your connector meets our guidelines for connector functionality.
 
@@ -55,11 +55,11 @@ Be sure to test your connector with the [TDVT suite](https://tableau.github.io/c
 
 ### Step 3: Sign up for Technology Partner Program
 
-Once you've built your integration and are passing 90% of TDVT results, sign up for our [Technology Partner Program](https://www.tableau.com/partners/resources/technology/partner-agreement). By signing up for the Technology Partner Program you allow us to discuss confidential information with you and enables us to promote your products through our marketing channels, like the Extension Gallery.
+After you've built your integration and are passing 90% of TDVT results, sign up for our [Technology Partner Program](https://www.tableau.com/partners/resources/technology/partner-agreement). By signing up for the Technology Partner Program you allow us to discuss confidential information with you and enables us to promote your products through our marketing channels, like the Extension Gallery.
 
 ### Step 4: Submit a Request to Publish
 
-Once you've built and tested your integration, [submit a request](https://forms.gle/2FisXfmwwuQEaXKG9) to publish your connector in the Extension Gallery. 
+After you've built and tested your integration, [submit a request](https://forms.gle/2FisXfmwwuQEaXKG9) to publish your connector in the Extension Gallery. 
 
 ### Step 5: Sign Gallery Agreement 
 
@@ -117,7 +117,7 @@ For your connector's detail page, provide a long description. Include these thre
 
    Example:   
    
-   _This connector provides a smooth and easy way to connect to Google Big Query. By using this connector, customers can leverage Google's internal storage and extract APIs which offer up to 10x performance increases when extracting large amounts of data. This connector also allows users to use custom OAuth which is not currently supported natively with an Other JDBC connection._
+   _This connector provides a smooth and easy way to connect to Google Big Query. By using this connector, customers can leverage Google's internal storage and extract APIs, which offer up to 10x performance increases when extracting large amounts of data. This connector also allows users to use custom OAuth, which is not currently supported natively with an Other JDBC connection._
 - Known issues or version requirements for the connector
 
 Markdown for this field is supported. We encourage partners to submit a robust long description so that customers understand why they want to download the connector.
@@ -160,7 +160,7 @@ Include an agreement between you and the customers using your connector. Can be 
 
 ##### Terms of Service
 
-Include an agreement between you and the customers using your connector. Includes regulations on how your extension can be used, usage restrictions, availability, liability provisions, etc. The same Terms of Service can be used across multiple extensions. PDF or URL.
+Include an agreement between you and the customers using your connector. Includes regulations on how your extension can be used, usage restrictions, availability, liability provisions, and so on. The same Terms of Service can be used across multiple extensions. PDF or URL.
 
 ##### Support Link
 
@@ -188,7 +188,7 @@ Complete the submission form and return it with your TDVT results to Tableau.
 
 Many partners choose to put out blogs and a press release once they offer custom connectors for their customers in the Extension Gallery. To fully promote your work, we recommend collecting a public customer case study that highlights the advantages and usefulness of your new connector. Not only does Tableau have mechanisms and channels to promote your customer case study, but historical data shows that referencing customer case studies generate on average five times more traffic than standalone blogs.
 
-We are happy to support partners looking to issue Tableau-specific press releases. We require that any partner press release mentioning Tableau is first submitted for approval to ensure that the Tableau positioning and branding is accurate.
+We are happy to support partners looking to issue Tableau-specific press releases. We require that any partner press release mentioning Tableau is first submitted for approval to ensure that the Tableau positioning and branding are accurate.
 
 **Tableau PR requires a 2-week approval timeline for press releases.**
 
@@ -198,7 +198,7 @@ The process:
 
 Note: The release should not include the Tableau corporate boilerplate.
 2. Partner submits the draft to the Partner Marketing team via email (partnermarketing@tableau.com) for initial review.
-3. The Partner Marketing team contacts Tableau PR for a full review and legal sign off.
+3. The Partner Marketing team contacts Tableau PR for a full review and legal sign-off.
 
 **Note** : We consider quote attribution from a Tableau spokesperson on a case-by-case basis. Press releases that announce milestone product launches and significant customer successes are typically reviewed to determine relevant quote attribution. For these types of releases, the partner can include a proposed Tableau quote as part of the draft for consideration.
 
@@ -212,7 +212,7 @@ When your connector is approved, it will be released to the Extension Gallery fo
 
 ### Step 9: Get beta-testing feedback from five customers.
 
-Once your connector is added to the Extension Gallery, you'll need to beta-test your connector with at least **five customers** before your connector can move to a General Audience (GA) release. While you'll be able to catch most issues with the TDVT suite, customer testing helps refine your results. Customers often have unique environments that need to be tested to ensure that everything works as expected.  
+After your connector is added to the Extension Gallery, you'll need to beta-test your connector with at least **five customers** before your connector can move to a General Audience (GA) release. While you'll be able to catch most issues with the TDVT suite, customer testing helps refine your results. Customers often have unique environments that need to be tested to ensure that everything works as expected.  
 
 Customers can find our beta test scenarios and [Beta feedback form](https://forms.gle/xjWGk86tv8eD43Mk7) on the feedback button in the Extension Gallery. Note that the feedback form is specific to your connector, and you will be able to monitor the progress of the beta test on your own. The total beta testing process shouldn't take more than 30 minutes for a customer to complete.
 
@@ -224,4 +224,4 @@ To pass from beta into a General Audience release, all customers must submit fee
 
 ### Step 10: Launch the connector in the Gallery and publish Go-To-Market materials. 
 
-Once your beta testing phase is finished and your go-to-market materials are planned, contact Tableau to choose the date and time your connector will be pushed to production. 
+After your beta testing phase is finished and your go-to-market materials are planned, contact Tableau to choose the date and time your connector will be pushed to production. 
