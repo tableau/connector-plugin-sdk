@@ -21,7 +21,7 @@ These elements are defined in the manifest.xml file:
 <connector-plugin class='postgres_odbc' superclass='odbc' plugin-version='0.0.0' name='PostgreSQL ODBC' version='20.1'>
   <vendor-information>
       <company name="Company Name"/>
-      <support-link url = "http://example.com"/>
+      <support-link url = "https://example.com"/>
       <driver-download-link url="https://drivers.example.com"/>
   </vendor-information>
   ...
