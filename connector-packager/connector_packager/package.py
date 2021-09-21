@@ -95,10 +95,17 @@ def main():
     properties = ConnectorProperties()
     properties.backwards_compatibility_mode = args.backwards_compatible
     if files_to_package and validate_all_xml(files_to_package, path_from_args, properties):
-        logger.info("Validation succeeded.")
+        logger.info("Validation succeeded.\n")
     else:
         logger.info("Validation failed. Check " + str(log_file) + " for more information.")
         return
+
+    # Display warning that vendor-defined attributes will be logged
+    if len(properties.vendor_defined_fields) > 0:
+        logger.info("Detected vendor-defined fields:")
+        logger.info(properties.vendor_defined_fields)
+        logger.info("Vendor-defined fields will be logged and persisted to Tableau workbook xml in plain text. You must" +
+                    " confirm that the user inputs for fields listed above do not contain PII before distributing this connector to customers.\n")
 
     # Double check that all files exist
     for f in files_to_package:
@@ -119,7 +126,7 @@ def main():
         logger.info("Taco packaging failed. Check " + str(log_file) + " for more information.")
         return
 
-    logger.info("Taco packaged. To sign taco file, use jarsigner.")
+    logger.info("\nTaco packaged. To sign taco file, use jarsigner.")
 
 
 if __name__ == '__main__':
