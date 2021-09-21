@@ -22,16 +22,16 @@ These are available <span style="font-family: courier new">superclass</span> val
 
 You might find other superclass values in the workbook XML from an existing Tableau connection, but we don't recommend using them. They haven't been tested.
 
-## Assign a plug-in version
+## Assign a plugin version
 
 Plugin-version is a requirement for submitting your connector to the Tableau Connector Gallery.  It helps customers and partners understand which version of a connector is being used currently and if it is the most up-to-date.
-You should start your plug-in version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector.
+You should start your plugin version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector.
 
 ## Know the min-tableau-version
 For the min-tableau-version, is checked before a connector is loaded in Tableau. If the current version of Tableau is less than the min-tableau-version then the connector is not loaded.
 This is set by the packager and if set manually will be overwritten.
 
-***Note: `version` in the manifest file does not refer to plug-in version. Please leave this set to `version='18.1'`*** <br />
+***Note: `version` in the manifest file does not refer to plugin version. Please leave this set to `version='18.1'`*** <br />
 
 ***FAQs about Versioning***
 - What should I (partner) do if I need to make a breaking change to the connector?

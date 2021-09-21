@@ -10,7 +10,7 @@ You should create a dialect definition file whenever you need to make changes to
 
 To get started quickly, you can copy the sample dialect.tdd file from the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) and use the copy to make your modifications.
 
-The XML schema for the plug-in XML files is validated using XSD files. The dialect (.tdd) file is validated using [this XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
+The XML schema for the plugin XML files is validated using XSD files. The dialect (.tdd) file is validated using [this XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
 
 Tableau searches for a TDD file in the location specified by the connector manifest XML file. The TDD format breaks down as follows:
 
@@ -30,7 +30,7 @@ The <span style="font-family: courier new">dialect</span> tag has several requir
 Attribute | Required | Description
 -|-|-
 name | Y | Dialect name. Used for dependency lookup.
-class | Y | Should match the plug-in's class, as defined in the manifest.
+class | Y | Should match the plugin's class, as defined in the manifest.
 base | N | Specifies a base dialect to build upon. If a certain property or function isn't defined in a dialect definition file, the connector will fall back to its base dialect's behavior (assuming a value for <span style="font-family: courier new">base</span> is defined), and SQL-92 default behavior (if a value for <span style="font-family: courier new">base</span> is not defined). **Important:** This must be a valid, existing dialect. If the specified base does not exist, the connector will fail to load. For a list of bases, see [Dialect base classes]({{ site.baseurl }}/docs/design#dialect-base-classes).
 dialect-version | N | Indicates the minimum database version applicable to the TDD file. For example, if you're adding a function definition that wasn't implemented until FooDB 3.0, then <span style="font-family: courier new">set dialect-version='3.0'</span>.
 version | Y | Must match the current Tableau version in the format YY.Q; for example, "20.1".

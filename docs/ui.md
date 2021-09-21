@@ -32,9 +32,9 @@ The other tags control what prompts show up in the connection dialog. For exampl
 `<port-prompt value="Port: " default="5432" />`
 
 ## Define custom vendor attributes
-Vendors can add customized attributes (fields) to their connector plug-in by using the vendor attributes.
+Vendors can add customized attributes (fields) to their connector plugin by using the vendor attributes.
 
-These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add three custom fields in your connector plug-in.
+These fields have a custom label and can be used for attributes in the connection strings that are not available in the attribute list. You can currently add three custom fields in your connector plugin.
 
 To add a custom vendor attribute for an ODBC-based connector, you must modify these files:
 - connection-dialog.tcd
