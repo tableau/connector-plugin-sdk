@@ -151,9 +151,12 @@ Change the language to any language but English (United States).
 1. Connect to your data source again and verify the localized text.
 
 __Connect to the correct database with the wrong credentials__
-- Verify that an error message appears, saying "Invalid username or password".
-Some features may not work if Tableau cannot correctly interpret a bad password error. In this case, you will see a generic error message instead:<br/>
+- Verify that an error message appears
+- **Verify that the error message says "Invalid username or password" instead of a generic error like "Bad Connection".** The correct error message is highlighted in the screenshot below.<br/>
 ![]({{ site.baseurl }}/assets/mt-wrong-cred.png)
+Some features may not work if Tableau cannot correctly interpret a bad password error. If the error is not "Invalid username or password" your driver is likely not returning SQLSTATE 28000 (See Important SQLStates in [Driver Requirements]({{ site.baseurl }}/docs/driver))
+
+Note that the detailed error message in the box is taken from the driver and has no meaning to the Tableau platform. To pass the test, the error message above the box must say "Invalid username or password".
 
 __[Optional] Test driver version__
 
@@ -267,7 +270,7 @@ If your connector supports oauth, you need to perform this extra step to make su
 
 __Publish OAuth resource to Tableau Server__
 
-The publishing experience for OAuth is different than a username-password connection, 
+The publishing experience for OAuth is different than a username-password connection,
 
 * Publish a data source with an extract to Tableau Server.
     - Be sure the the connector is installed on the server.
