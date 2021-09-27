@@ -152,7 +152,7 @@ Change the language to any language but English (United States).
 
 __Connect to the correct database with the wrong credentials__
 - Verify that an error message appears
-- **Verify that the error message says "Invalid username or password" instead of a generic error like "Bad Connection".** The correct error message is highlighted in teh screenshot below.<br/>
+- **Verify that the error message says "Invalid username or password" instead of a generic error like "Bad Connection".** The correct error message is highlighted in the screenshot below.<br/>
 ![]({{ site.baseurl }}/assets/mt-wrong-cred.png)
 Some features may not work if Tableau cannot correctly interpret a bad password error. If the error is not "Invalid username or password" your driver is likely not returning SQLSTATE 28000 (See Important SQLStates in [Driver Requirements]({{ site.baseurl }}/docs/driver))
 
