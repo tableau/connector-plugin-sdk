@@ -1,5 +1,5 @@
 <results>
-  <test name='date0 &gt; #11/12/1975#'>
+  <test name='date0 &lt; #11/12/1975#'>
     <table>
       <schema>
         <column>[cast_calcs.composite].[TEMP(Test)(3193322782)(0)]</column>
