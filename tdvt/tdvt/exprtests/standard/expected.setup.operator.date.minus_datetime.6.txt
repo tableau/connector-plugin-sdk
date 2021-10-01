@@ -1,0 +1,27 @@
+<results>
+  <test name='date0 - datetime0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(937166222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-11710.521</value>
+      </tuple>
+      <tuple>
+        <value>-10491.333</value>
+      </tuple>
+      <tuple>
+        <value>-85.428889</value>
+      </tuple>
+      <tuple>
+        <value>-39.979444</value>
+      </tuple>
+      <tuple>
+        <value>-31.551597</value>
+      </tuple>
+    </table>
+  </test>
+</results>

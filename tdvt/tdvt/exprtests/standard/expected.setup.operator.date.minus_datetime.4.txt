@@ -1,0 +1,27 @@
+<results>
+  <test name='date0 - datetime0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.sparksql].[TEMP(Test)(937166222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-11710.521</value>
+      </tuple>
+      <tuple>
+        <value>-10491.291</value>
+      </tuple>
+      <tuple>
+        <value>-85.428877</value>
+      </tuple>
+      <tuple>
+        <value>-39.979421</value>
+      </tuple>
+      <tuple>
+        <value>-31.55162</value>
+      </tuple>
+    </table>
+  </test>
+</results>
