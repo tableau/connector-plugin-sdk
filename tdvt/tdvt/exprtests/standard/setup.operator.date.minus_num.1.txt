@@ -1,0 +1,24 @@
+<results>
+  <test name='date0 - num4'>
+    <table>
+      <schema>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(2923065813)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1972-06-23 03:36:01#</value>
+      </tuple>
+      <tuple>
+        <value>#1975-11-25 11:16:48#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 01:11:00#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-06-10 16:19:12#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
