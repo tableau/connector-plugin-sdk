@@ -2,11 +2,11 @@
   <connection-config>
     <authentication-mode value='Basic' />
     <authentication-options>
-      <option name="UsernameAndPassword" default="true" value="auth-user-pass" />
+      <option name="UsernameAndPassword" default="true" />
     </authentication-options>
     <db-name-prompt value="Database: " />
     <has-pre-connect-database value="true" />
-    <port-prompt value="Port: " default="5432" />
+    <port-prompt value="@string/port_prompt/" default="5432" />
     <show-ssl-checkbox value="true" />
   </connection-config>
 </connection-dialog>

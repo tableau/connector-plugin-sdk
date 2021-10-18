@@ -1,6 +1,7 @@
 import logging
 from typing import List, Optional
 import os
+import sys
 
 from pathlib import Path
 
@@ -12,10 +13,12 @@ from .xsd_validator import validate_single_file
 logger = logging.getLogger('packager_logger')
 
 
+MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 HTTPS_STRING = "https://"
 TRANSLATABLE_STRING_PREFIX = "@string/"
-TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "en_US", "es_ES", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR", "pt_BR",
-                               "zh_CN", "zh_TW"]
+TABLEAU_FALLBACK_LANGUAGE = "en_US"  # If localizing a connector, US English must be translated since we'll fall back to the English strings if we can't find one for the correct language
+TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR",
+                               "pt_BR", "zh_CN", "zh_TW"]
 
 
 class XMLParser:
@@ -76,20 +79,21 @@ class XMLParser:
             for s in self.loc_strings:
                 logger.debug("-- " + s)
 
+            # Check that the fallback language (English) exists
+            fallback_resource_file_name = "resources-" + TABLEAU_FALLBACK_LANGUAGE + ".xml"
+            path_to_fallback_resource = self.path_to_folder / Path(fallback_resource_file_name)
+            if path_to_fallback_resource.is_file():
+                self.file_list.append(ConnectorFile(fallback_resource_file_name, "resource"))
+                logging.debug("Adding file to list (name = " + fallback_resource_file_name + ", type = resource)")
+            else:
+                logger.error("Error: Found localized strings but " + fallback_resource_file_name + " does not exist. US English translations are required to fall back on if other languages are not translated.")
+                return None
+
             # Check for files for each of the languages we suport
             for language in TABLEAU_SUPPORTED_LANGUAGES:
                 resource_file_name = "resources-" + language + ".xml"
                 path_to_resource = self.path_to_folder / Path(resource_file_name)
                 if path_to_resource.is_file():
-                    # Validate that the resource file is valid.
-                    new_file = ConnectorFile(resource_file_name, "resource")
-                    xml_violations_buffer = []
-
-                    if not validate_single_file(new_file, path_to_resource, xml_violations_buffer):
-                        for error in xml_violations_buffer:
-                            logging.debug(error)
-                        return None
-
                     self.file_list.append(ConnectorFile(resource_file_name, "resource"))
                     logging.debug("Adding file to list (name = " + resource_file_name + ", type = resource)")
 
@@ -116,17 +120,24 @@ class XMLParser:
         path_to_file = self.path_to_folder / str(file_to_parse.file_name)
         xml_violation_buffer = []
 
-        # if the file is not valid, return false
-        if not validate_single_file(file_to_parse, path_to_file, xml_violation_buffer):
-            for v in xml_violation_buffer:
-                logger.debug(v)
-            return False
-
         logger.debug("Parsing " + str(path_to_file))
 
+        # If the file is too big, we shouldn't try and parse it, just log the violation and move on
+        if path_to_file.stat().st_size > MAX_FILE_SIZE:
+            logging.error(file_to_parse.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + " KB")
+            return False
+
         # Get XML file ready for parsing
-        xml_tree = parse(str(path_to_file))
-        root = xml_tree.getroot()
+        # Catch any errors and display them to user
+        try:
+            xml_tree = parse(str(path_to_file))
+            root = xml_tree.getroot()
+        except Exception:
+            saved_error_type = sys.exc_info()[0]
+            saved_error = sys.exc_info()[1]
+            logger.error("Error parsing " + file_to_parse.file_name + "\nError Type: " + str(saved_error_type) +
+                         "\n" + str(saved_error))
+            return False
 
         # Check children. If they have a "file" or a "script" attribute then make a new ConnectorFile and parse
         for child in root.iter():

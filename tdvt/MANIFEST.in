@@ -3,4 +3,5 @@ recursive-include tdvt/config *.ini
 recursive-include tdvt/exprtests *.txt
 recursive-include tdvt/logicaltests/expected *.xml
 recursive-include tdvt/logicaltests/generate *.xml
+recursive-include tdvt/metadata *.csv
 include tdvt/tds *.tds

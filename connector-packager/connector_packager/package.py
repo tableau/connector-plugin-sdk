@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 
 from pathlib import Path
 
+from .connector_properties import ConnectorProperties
 from .jar_jdk_packager import jdk_create_jar
 from .xsd_validator import validate_all_xml
 from .xml_parser import XMLParser
@@ -30,6 +31,8 @@ def create_arg_parser() -> ArgumentParser:
                         default=os.getcwd())
     parser.add_argument('--validate-only', dest='validate_only', action='store_true',
                         help='runs package validation steps only', required=False)
+    parser.add_argument('--backwards-compatible', dest='backwards_compatible', action='store_true',
+                        help='forgives some validation errors to package connectors made with older versions of the SDK', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector',
                         default='packaged-connector', action=UniqueActionStore)
     return parser
@@ -89,11 +92,20 @@ def main():
     files_to_package = xmlparser.generate_file_list()  # validates XSD's as well
 
     # Validate xml. If not valid, return.
-    if files_to_package and validate_all_xml(files_to_package, path_from_args):
-        logger.info("Validation succeeded.")
+    properties = ConnectorProperties()
+    properties.backwards_compatibility_mode = args.backwards_compatible
+    if files_to_package and validate_all_xml(files_to_package, path_from_args, properties):
+        logger.info("Validation succeeded.\n")
     else:
         logger.info("Validation failed. Check " + str(log_file) + " for more information.")
         return
+
+    # Display warning that vendor-defined attributes will be logged
+    if len(properties.vendor_defined_fields) > 0:
+        logger.info("Detected vendor-defined fields:")
+        logger.info(properties.vendor_defined_fields)
+        logger.info("Vendor-defined fields will be logged and persisted to Tableau workbook xml in plain text. You must" +
+                    " confirm that the user inputs for fields listed above do not contain PII before distributing this connector to customers.\n")
 
     # Double check that all files exist
     for f in files_to_package:
@@ -114,7 +126,7 @@ def main():
         logger.info("Taco packaging failed. Check " + str(log_file) + " for more information.")
         return
 
-    logger.info("Taco packaged. To sign taco file, use jarsigner.")
+    logger.info("\nTaco packaged. To sign taco file, use jarsigner.")
 
 
 if __name__ == '__main__':

@@ -7,6 +7,8 @@
 
   <field name="warehouse" label="Warehouse" value-type="string" category="metadata" />
 
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
   <field name="username" label="Username" value-type="string" category="authentication" />
 
   <field name="password" label="Password" value-type="string" category="authentication" secure="true" />

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='postgres_mcd' superclass='postgres' plugin-version='0.0.1' name='PostgreSQL MCD' version='18.1'>
+  <vendor-information>
+    <company name="Connector SDK"/>
+    <support-link url = "https://example.com"/>
+  </vendor-information>
+  <connection-fields file='connectionFields.xml'/>
+  <connection-metadata file='connectionMetadata.xml'/>
+</connector-plugin>

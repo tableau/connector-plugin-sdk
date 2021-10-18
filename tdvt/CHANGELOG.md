@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.5] - 2021-04-30
+- Hotfix for when cmd_output does not exist.
+
+## [2.3.4] - 2021-04-12
+- Clean up and simplify test metadata file
+- Fix missing metadata file when running setup.py
+
 ## [2.3.3] - 2021-03-15
 - Refactor calcs_data test
 - Add logical query format option for fieldname postfix
@@ -13,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.3.1] - 2020-12-23
 - Revert Staples smoke test to be Expression; will fix in 2.3.2.
+
 ## [2.3.0] - 2020-12-09
 - Change Staples smoke test to be logical.
 - Added Connectors Tests.
