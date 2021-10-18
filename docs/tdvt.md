@@ -220,6 +220,7 @@ fieldnameLower | True | N/A | Set to true if the column names are all lowercase 
 fieldnameNoSpace | True | N/A | Set to true if the column names have no spaces | No
 fieldnameLower_underscore | True | N/A | Set to true if the column names have underscores and are all lowercase | No
 fieldnameUnderscoreNotSpace | True | N/A | Set to true if the column names replace spaces with underscores | No
+fieldnamePostfix | SomePostfix | N/A | Postfix that is applied to every column name | No
 
 ### [StandardTests]
 This is required to run the standard tests.
@@ -334,7 +335,7 @@ Run Connector tests from the TDVT working directory. Sample setup files required
 - Run ServerVersionTest:
 
    tdvt run-connectors-test --conn-test serverVersion --conn-test-file [serVersionSetupFilePath.xml](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversion.xml) --conn-test-password-file [serVersionPassword.password](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/connector-tests/serverversiontest.password)
-   
+
 ## Test the sample connectors
 
 Sample connectors are located in the samples/plugins folder.

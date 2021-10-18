@@ -1,5 +1,5 @@
 ---
-title: Build the Connection Dialog with Connection Dialog v2
+title: Connection Dialog v2
 ---
 **IMPORTANT:** This feature is available only in Tableau 2020.3 or later. For compatibility with older versions, use Connection Dialog v1 (documentation found [here]({{ site.baseurl }}/docs/ui)).
 
@@ -53,7 +53,7 @@ Each connection attribute is represented by a field element in the XML. The fiel
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> string: `""` <br> option: first option <br> boolean: `false` <br> file: `""` | |
 | optional | Whether the user must specify a value for the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | If a field is in the `advanced` category and is not optional, it must be given a default value. |
 | editable | Whether the user can edit the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `true`. | When set to `false`, the attribute is not shown in the connection dialog, and its default-value is passed to the ConnectionBuilder(). |
-| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. |
+| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. **Any fields not marked secure will be logged and persisted to Tableau workbook xml in plain text.** |
 | category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> `endpoint` (for server, port, etc.) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. |
 
 ### `<validation-rule>`
@@ -121,6 +121,8 @@ As referenced above in the `<field>` element section, some `name` attribute valu
 
 If the field functionality does not match any of the descriptions below see 'Vendor Defined' section.
 
+For each `<field>` element used its `name` attribute value is required to be listed in the `<attribute-list>` section of the `.tdr` file as well. See [connection-normalizer]({{ site.baseurl }}/docs/api-reference#connection-normalizer) for more details.
+
 Additionally there are a set of reserved `name` attribute values not documented at this time. Recommendations, documentation and enforcement coming soon.
 
 ### Endpoint
@@ -131,7 +133,7 @@ The connection field names below should specify the `endpoint` category.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
-| server | Server or URL of connection | No | |
+| server | Server or URL of connection | **No** | |
 | port | Port of connection | Yes | Allowed Values: numeric value, 0 - 65535 |
 
 ### SSL
@@ -156,7 +158,7 @@ The connection field names below should specify the `authentication` category.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
-| authentication | The authentication mode for connection | No | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only <br> `oauth`: See the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for details  |
+| authentication | The authentication mode for connection | **No** | Allowed Values: Meaning <br> `auth-none`: None <br> `auth-user`: Username Only <br> `auth-user-pass`: Username and Password <br> `auth-pass`: Password Only <br> `oauth`: See the [OAuth Authentication Support](({{ site.baseurl }}/docs/oauth)) for details  |
 | username | Username | Yes |  |
 | password | Password | Yes | Supports `secure` field attribute |
 | instanceurl | OAuth Instance Url | Yes | Only supported for use when `authentication` value is `oauth` |
@@ -164,6 +166,8 @@ The connection field names below should specify the `authentication` category.
 ### Vendor Defined
 
 The vendor defined attributes are unique to an individual connector and do not imply platform functionality. They are pass-through to the connection normalizer, connection builder and properties builder.
+
+**Vendor defined attributes will be logged and persisted to Tableau workbook xml in plain text.** This means the input for these fields cannot contain any Personally Identifiable Information (PII), as they are not secure and could leak sensitive customer information.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
@@ -245,6 +249,8 @@ The images show the Connection Dialog produced using the Connection Fields file 
 ## Example 3 - Boolean Field
 
 This example shows how to add a checkbox to the dialog. For sslmode custom boolean values are required to be defined, following 'Connection Field Platform Integration' section below.  The default-value matches false-value, ensuring the checkbox is unchecked by default.  Within the ConnectionBuilder() the field "sslmode" will only have value "" or "require".
+
+![alt text]({{ site.baseurl }}/assets/mcd-connection-dialog-4.png "Connection Dialog with a 'Require SSL' checkbox")
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
