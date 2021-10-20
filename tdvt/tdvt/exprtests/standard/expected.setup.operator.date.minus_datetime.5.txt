@@ -14,13 +14,13 @@
         <value>-10491.333</value>
       </tuple>
       <tuple>
-        <value>-85.428888</value>
+        <value>-85.428889</value>
       </tuple>
       <tuple>
-        <value>-39.979446</value>
+        <value>-39.979444</value>
       </tuple>
       <tuple>
-        <value>-31.551596</value>
+        <value>-31.551597</value>
       </tuple>
     </table>
   </test>

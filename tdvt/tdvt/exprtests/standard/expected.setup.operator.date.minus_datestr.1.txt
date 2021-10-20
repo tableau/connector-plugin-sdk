@@ -2,7 +2,7 @@
   <test name='datetime0 - #1/1/2004#'>
     <table>
       <schema>
-        <column>[cast_calcs.greenplum].[TEMP(Test)(100938644)(0)]</column>
+        <column>[cast_calcs.netezza].[TEMP(Test)(100938644)(0)]</column>
       </schema>
       <tuple>
         <value>185.95102</value>
@@ -44,7 +44,7 @@
         <value>209.28808</value>
       </tuple>
       <tuple>
-        <value>209.52394</value>
+        <value>209.52393</value>
       </tuple>
       <tuple>
         <value>209.97942</value>

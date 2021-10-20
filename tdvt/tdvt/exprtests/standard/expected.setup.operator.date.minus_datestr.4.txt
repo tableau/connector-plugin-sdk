@@ -2,58 +2,58 @@
   <test name='datetime0 - #1/1/2004#'>
     <table>
       <schema>
-        <column>[cast_calcs.presto].[TEMP(Test)(100938644)(0)]</column>
+        <column>[cast_calcs.sybaseiq].[TEMP(Test)(100938644)(0)]</column>
       </schema>
       <tuple>
-        <value>185.90935</value>
+        <value>185.95102</value>
       </tuple>
       <tuple>
-        <value>186.50995</value>
+        <value>186.55162</value>
       </tuple>
       <tuple>
-        <value>190.38721</value>
+        <value>190.42888</value>
       </tuple>
       <tuple>
-        <value>193.68769</value>
+        <value>193.72935</value>
       </tuple>
       <tuple>
-        <value>195.27986</value>
+        <value>195.32153</value>
       </tuple>
       <tuple>
-        <value>195.30329</value>
+        <value>195.34495</value>
       </tuple>
       <tuple>
-        <value>198.54301</value>
+        <value>198.58468</value>
       </tuple>
       <tuple>
-        <value>200.88994</value>
+        <value>200.93161</value>
       </tuple>
       <tuple>
-        <value>202.97943</value>
+        <value>203.0211</value>
       </tuple>
       <tuple>
-        <value>204.84279</value>
+        <value>204.88446</value>
       </tuple>
       <tuple>
-        <value>206.59891</value>
+        <value>206.64058</value>
       </tuple>
       <tuple>
-        <value>207.47956</value>
+        <value>207.52123</value>
       </tuple>
       <tuple>
-        <value>209.24641</value>
+        <value>209.28808</value>
       </tuple>
       <tuple>
-        <value>209.48227</value>
+        <value>209.52393</value>
       </tuple>
       <tuple>
-        <value>209.93775</value>
+        <value>209.97942</value>
       </tuple>
       <tuple>
-        <value>212.45685</value>
+        <value>212.49852</value>
       </tuple>
       <tuple>
-        <value>214.29124</value>
+        <value>214.3329</value>
       </tuple>
     </table>
   </test>

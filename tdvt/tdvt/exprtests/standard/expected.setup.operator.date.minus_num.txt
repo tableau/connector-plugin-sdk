@@ -8,13 +8,13 @@
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>#1972-06-23 03:36:00.003#</value>
+        <value>#1972-06-23 03:36:01#</value>
       </tuple>
       <tuple>
         <value>#1975-11-25 11:16:48#</value>
       </tuple>
       <tuple>
-        <value>#2004-06-10 01:11:59.996#</value>
+        <value>#2004-06-10 01:11:00#</value>
       </tuple>
       <tuple>
         <value>#2004-06-10 16:19:12#</value>

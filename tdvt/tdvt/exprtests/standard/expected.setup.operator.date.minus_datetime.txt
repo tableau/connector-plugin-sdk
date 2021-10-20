@@ -2,7 +2,7 @@
   <test name='date0 - datetime0'>
     <table>
       <schema>
-        <column>[cast_calcs.composite].[TEMP(Test)(937166222)(0)]</column>
+        <column>[cast_calcs.greenplum].[TEMP(Test)(937166222)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -14,13 +14,13 @@
         <value>-10491.333</value>
       </tuple>
       <tuple>
-        <value>-85.428889</value>
+        <value>-85.428877</value>
       </tuple>
       <tuple>
-        <value>-39.979444</value>
+        <value>-39.979421</value>
       </tuple>
       <tuple>
-        <value>-31.551597</value>
+        <value>-31.55162</value>
       </tuple>
     </table>
   </test>

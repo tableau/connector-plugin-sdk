@@ -1,8 +1,8 @@
 <results>
-  <test name='date0 - datetime0'>
+ <test name='date0 - datetime0'>
     <table>
       <schema>
-        <column>[cast_calcs.memsql].[TEMP(Test)(937166222)(0)]</column>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(937166222)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -11,16 +11,16 @@
         <value>-11710.521</value>
       </tuple>
       <tuple>
-        <value>-10491.333</value>
+        <value>-10491.332</value>
       </tuple>
       <tuple>
-        <value>-85.4289</value>
+        <value>-85.428</value>
       </tuple>
       <tuple>
-        <value>-39.9794</value>
+        <value>-39.979</value>
       </tuple>
       <tuple>
-        <value>-31.5516</value>
+        <value>-31.551</value>
       </tuple>
     </table>
   </test>

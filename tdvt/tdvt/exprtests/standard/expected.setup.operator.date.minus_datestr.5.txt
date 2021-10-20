@@ -2,58 +2,58 @@
   <test name='datetime0 - #1/1/2004#'>
     <table>
       <schema>
-        <column>[cast_calcs.sybaseiq].[TEMP(Test)(100938644)(0)]</column>
+        <column>[cast_calcs.snowflake].[TEMP(Test)(100938644)(0)]</column>
       </schema>
       <tuple>
-        <value>185.95102</value>
+        <value>185.951</value>
       </tuple>
       <tuple>
-        <value>186.55162</value>
+        <value>186.551</value>
       </tuple>
       <tuple>
-        <value>190.42888</value>
+        <value>190.428</value>
       </tuple>
       <tuple>
-        <value>193.72935</value>
+        <value>193.729</value>
       </tuple>
       <tuple>
-        <value>195.32153</value>
+        <value>195.321</value>
       </tuple>
       <tuple>
-        <value>195.34495</value>
+        <value>195.344</value>
       </tuple>
       <tuple>
-        <value>198.58468</value>
+        <value>198.584</value>
       </tuple>
       <tuple>
-        <value>200.93161</value>
+        <value>200.931</value>
       </tuple>
       <tuple>
-        <value>203.0211</value>
+        <value>203.021</value>
       </tuple>
       <tuple>
-        <value>204.88446</value>
+        <value>204.884</value>
       </tuple>
       <tuple>
-        <value>206.64058</value>
+        <value>206.64</value>
       </tuple>
       <tuple>
-        <value>207.52123</value>
+        <value>207.521</value>
       </tuple>
       <tuple>
-        <value>209.28808</value>
+        <value>209.288</value>
       </tuple>
       <tuple>
-        <value>209.52393</value>
+        <value>209.523</value>
       </tuple>
       <tuple>
-        <value>209.97942</value>
+        <value>209.979</value>
       </tuple>
       <tuple>
-        <value>212.49852</value>
+        <value>212.498</value>
       </tuple>
       <tuple>
-        <value>214.3329</value>
+        <value>214.332</value>
       </tuple>
     </table>
   </test>

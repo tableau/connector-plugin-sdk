@@ -2,7 +2,7 @@
   <test name='date0 - datetime0'>
     <table>
       <schema>
-        <column>[cast_calcs.sparksql].[TEMP(Test)(937166222)(0)]</column>
+        <column>[cast_calcs.composite].[TEMP(Test)(937166222)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -11,16 +11,16 @@
         <value>-11710.521</value>
       </tuple>
       <tuple>
-        <value>-10491.291</value>
+        <value>-10491.333</value>
       </tuple>
       <tuple>
-        <value>-85.428877</value>
+        <value>-85.428888</value>
       </tuple>
       <tuple>
-        <value>-39.979421</value>
+        <value>-39.979446</value>
       </tuple>
       <tuple>
-        <value>-31.55162</value>
+        <value>-31.551596</value>
       </tuple>
     </table>
   </test>
