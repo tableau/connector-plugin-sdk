@@ -25,7 +25,7 @@ The ```authentication``` attribute in a Tableau workbook (twb) or Tableau data s
 
 The specific usage patterns of these values can be found on the individual Connection Dialog pages:
 
-- [Connection Dialog v1]({{ site.baseurl }}/docs/ui#supported-authentication-modes) 
+- [Connection Dialog v1]({{ site.baseurl }}/docs/ui#supported-authentication-modes)
 - [Connection Dialog v2]({{ site.baseurl }}/docs/mcd#authentication)
 
 
@@ -33,7 +33,7 @@ The specific usage patterns of these values can be found on the individual Conne
 
 User is prompted for which authentication option to use and conditionally shown additional fields.  Depending on the option selected, the user may or may not be prompted for credentials when reconnecting to the data source.
 
-These are the relevant segments from the [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/multi_auth) that implements multiple authentication modes. 
+These are the relevant segments from the [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/multi_auth) that implements multiple authentication modes.
 
 ```xml
 <!-- Connection Dialog v2 -->

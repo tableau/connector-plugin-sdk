@@ -1,13 +1,13 @@
 ---
 title: OAuth Authentication Support
 ---
-**IMPORTANT:** This feature is available in Tableau 2021.1 and newer. 
+**IMPORTANT:** This feature is available in Tableau 2021.1 and newer.
 
 # How to enable OAuth for a plugin connector
 
 First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/snowflake_oauth.
 
-To enable OAuth for your connector add an `<oauth-config>` field in the manifest.xml and link to an oauthConfig.xml you created, described below. 
+To enable OAuth for your connector add an `<oauth-config>` field in the manifest.xml and link to an oauthConfig.xml you created, described below.
 
 ```xml
   manifest.xml
@@ -83,9 +83,9 @@ Each OAuth config attribute is represented by an element in the XML, the element
 
 | Name  | Type | Meaning | Required? | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
-| dbclass | String | The identifier for your oauthConfig | Yes | The dbclass must be same with as the `class` attribute in manifest.xml | 
-| clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
-| clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text | 
+| dbclass | String | The identifier for your oauthConfig | Yes | The dbclass must be same with as the `class` attribute in manifest.xml |
+| clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
+| clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. The host for redirectUrisDesktop must be a valid loopback address|
 | authUri | String | Authorization endpoint URI | Yes | |
 | tokenUri | String | Token endpoint URI | Yes | |
@@ -104,7 +104,7 @@ Note: The keys in accessTokenResponseMaps and refreshTokenResponseMaps are Table
 | REFRESHTOKEN | Yes | No | Used by Tableau to get a new ACCESSTOKEN when the old one expired. |
 | username | Yes | No | Used by Tableau to identify the token. |
 | access-token-issue-time | No | No | Used to note when the token is issued, will default to the time when the token is sent back to Tableau if not set. |
-| access-token-expires-in | No | No | Use to note the validation time of your ACCESSTOKEN, will default to 3600 s if not set. |
+| access-token-expires-in | No | No | Use to note the validation time of your ACCESSTOKEN, will default to 3600 seconds if not set. |
 | [your own field] | No | No | It is usually not needed to define your own field, and this field will not be able to participate in any OAuth flow. |
 
 <br>
@@ -113,7 +113,7 @@ Note: The keys in accessTokenResponseMaps and refreshTokenResponseMaps are Table
 
 This set of OAuth Config capabilities is not shared with the regular connector capabilities.
 
-| Capability Name  | Description | Default | Recommendation | 
+| Capability Name  | Description | Default | Recommendation |
 | ----  | ------- | --------- | ----------- |
 | OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN | Whether your OAuth provider supports custom domain. i.e. OAuth endpoint host is not fixed. | false | - |
 | OAUTH_CAP_REQUIRE_PKCE | Whether your OAuth provider supports PKCE, more details: https://oauth.net/2/pkce/ | false | true |
@@ -133,18 +133,18 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <pluginOAuthConfig>
-    <!-- dbclass must correspond to the class registered in manifest.xml --> 
+    <!-- dbclass must correspond to the class registered in manifest.xml -->
     <dbclass>Example</dbclass>
     <!-- Subsitute these with your OAuth Client Id and Client Secret -->
     <clientIdDesktop>[your_client_id]</clientIdDesktop>
     <clientSecretDesktop>[your_client_secret]</clientSecretDesktop>
-    <!-- Desktop redirectUri, subsitute for your own registered desktop redirectUri --> 
+    <!-- Desktop redirectUri, subsitute for your own registered desktop redirectUri -->
     <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
-    <!-- authUri and tokenUri only contains the path since it has OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be 
+    <!-- authUri and tokenUri only contains the path since it has OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN on, so the final oauth endpoint will be
     your input instanceUrl + authUri/tokenUri -->
     <authUri>/oauth/authorize</authUri>
     <tokenUri>/oauth/token-request</tokenUri>
-    <!-- Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort 
+    <!-- Used to prevent malicious instanceUrl, your instanceUrl must match this regular expression or OAuth flow will abort
     E.g. for snowflake this could be: ^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)-->
     <instanceUrlValidationRegex>[your_instanceUrl_validation_rule]</instanceUrlValidationRegex>
     <!-- Add the scopes needed for OAuth flow
@@ -204,7 +204,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 ```
 # OAuth on Tableau Desktop
 
-In Tableau Desktop the connection dialog will look like this.  If a different auth mode is chosen, notice different required fields appear. This example has multiple auth modes supported and one of them is OAuth. 
+In Tableau Desktop the connection dialog will look like this.  If a different auth mode is chosen, notice different required fields appear. This example has multiple auth modes supported and one of them is OAuth.
 
 ![Image](../assets/oauth-desktop-dialog.png)
 
@@ -229,8 +229,8 @@ Tableau Online is managed by Tableau. So, in order for a connector to work on Ta
 Another way is through the site level OAuth client feature where the server admin for Tableau Server, or site admin for Tableau Online, will be able to register the OAuth client on a particular site. For example setting Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.  
 The OAuth clients will only be effective in the particular site, it did not require a restart and take precedence over the server-wide OAuth clients if any.
 
-| Server-Wide OAuth Clients  | Site-Wide OAuth Clients | 
-| ----  | ------- | 
+| Server-Wide OAuth Clients  | Site-Wide OAuth Clients |
+| ----  | ------- |
 | tsm command running by server admin | User Interface and can be accessed by site admin(Tableau Online) or server admin(Tableau Server)|
 | Need restart server| No need to restart server|
 | Apply to whole server| Only apply to the particular site, will not affect other sites|
@@ -247,7 +247,7 @@ After successfully added your credential you will notice an entry appear under y
 
 When publishing an OAuth enabled connector's Workbook or Data Source to Tableau Server, you will see multiple auth options:
 **Prompt** means this resource will published without embedding credential, viewers would need to provide credential to access the resource.
-**Embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you want to use for embedding. 
+**Embedding [your_username]** means you will embed the credential with username **[your_username]** to this resource, so all the viewer can use the same credential **[ABC]** to access the resource. Note in order for this to show up, you must already have added a saved OAuth credential according to previous section. You would see multiple entries if you have multiple records of saved credentials and you can pick which one you want to use for embedding.
 **Embed Password** is not a supported auth mechanism for OAuth connectors and an error will show up if you choose that option.
 
 ![Image](../assets/oauth-desktop-publish.png)

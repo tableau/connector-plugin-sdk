@@ -97,7 +97,7 @@ The connection-normalizer is represented using an XML component in the [connecti
 </connection-normalizer>
 
 ```
-The following table shows the most commonly used attributes in the attribute-list. You an also add custom attributes.
+The following table shows the most commonly used attributes in the attribute-list. You can also add custom attributes.
 
 _Attribute names_
 
