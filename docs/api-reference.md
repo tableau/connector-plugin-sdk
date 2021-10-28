@@ -16,7 +16,7 @@ The Connection Resolver is made up of several components:
 
 ### connection-builder
 
-Builds the ODBC ConnectString or JDBC Connection URL. For a JDBC Connection URL, we require that the that the connection-builder contains only non-secure attributes, such as server, port, and dbname.
+Builds the ODBC ConnectString or JDBC Connection URL. For a JDBC Connection URL, we require that the connection-builder contains only non-secure attributes, such as server, port, and dbname.
 
 **Type:** JavaScript
 
@@ -57,7 +57,7 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 ```
 
 #### JavaScript function call signature (Deprecated):
-**Note:** A bug in the JavaScript translation layer means that you cannot use values containing the '=' character. You can mitigate this by using the recomended API above. This API should only be used to maintain backwards compatibility with Tableau versions older than 2019.4.1.
+**Note:** A bug in the JavaScript translation layer means that you cannot use values containing the '=' character. You can mitigate this by using the preceding recommended API. This API should only be used to maintain backwards compatibility with Tableau versions older than 2019.4.1.
 
 **Input:** attr, an object of key/value pairs
 
@@ -75,13 +75,13 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 
 ### connection-normalizer
 
-Defines the unique set of connection attributes which is used to generate a connection "key" and has important security considerations. Connections can be reused and shared within Tableau processes based on this key, so it must contain attributes whose values will be unique in a given security context. Username is a commonly used attribute that will make a unique connection for each user, for example.
+Defines the unique set of connection attributes that is used to generate a connection "key" and has important security considerations. Connections can be reused and shared within Tableau processes based on this key, so it must contain attributes whose values will be unique in a given security context. Username is a commonly used attribute that will make a unique connection for each user, for example.
 
 Starting in Tableau 2021.1 a connector using Connection Dialog V2 style, connection-fields, can let the system determine at runtime the correct connection-normalizer by not defining it. Any connection-normalizer defined in the tdr file will take precedence at runtime. To use set min-version-tableau='2021.1' or newer in the manifest file.
 
 **Type:** XML
 
-The connection-normalizer is represented using a xml component in the [connectionResolver.tdr](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/connectionResolver.tdr) file. An example is :
+The connection-normalizer is represented using an XML component in the [connectionResolver.tdr](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/connectionResolver.tdr) file. An example is :
 
 ```
 <connection-normalizer>
@@ -97,7 +97,7 @@ The connection-normalizer is represented using a xml component in the [connectio
 </connection-normalizer>
 
 ```
-The following table shows the most commonly used attributes in the attribute-list. Custom attributes may also be added.
+The following table shows the most commonly used attributes in the attribute-list. You can also add custom attributes.
 
 _Attribute names_
 
@@ -113,7 +113,7 @@ _Attribute names_
 | service                    | Connection attribute for the service                               |
 | sslcert                    | Connection attribute for the SSL Certfile                          |
 | sslmode                    | Connection attribute for the SSL Mode                              |
-| username                   | Connection attribute for the user name                             |
+| username                   | Connection attribute for the username                             |
 | warehouse                  | Connection attribute for the Warehouse                             |
 
 ---
@@ -160,7 +160,7 @@ _Attribute names_
 | attributeSSLMode               | Connection attribute for the SSL Mode                          |
 | attributeTableauServerAuthMode | Connection attribute for tableau server authentication mode    |
 | attributeTableauServerUser     | Connection attribute for tableau server user                   |
-| attributeUsername              | Connection attribute for the user name                         |
+| attributeUsername              | Connection attribute for the username                         |
 | attributeWarehouse             | Connection attribute for the Warehouse                         |
 | keywordODBCUsername            | ODBC Username keyword                                          |
 | keywordODBCPassword            | ODBC Password keyword                                          |
@@ -182,7 +182,7 @@ Returns a map of the key value pairs defined in the ```odbc-connect-string-extra
 
     String GetPlatform();
 
-Returns the name of the os Tableau is running on. Possible values are:
+Returns the name of the operating system Tableau is running on. Possible values are:
 - win
 - mac
 - linux
@@ -234,4 +234,4 @@ The JavaScript files for connection normalizer and connection matcher are deprec
 This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
 
 ### <setImpersonateAttributes/> XML tag
-This xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
+This XML tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.

@@ -3,7 +3,7 @@ title: Tableau Connector SDK
 ---
 Tableau has great connectivity that allows you to visualize data from virtually anywhere. Tableau includes dozens of connectors already, and also gives you the tools to build a new connector with the Tableau Connector SDK.
 
-With this SDK, you can create a new connector that you can use to visualize your data from any database through an ODBC or JDBC driver.
+With this SDK, you can create a connector that you can use to visualize your data from any database through an ODBC or JDBC driver.
 You can customize connector behavior, fine-tune SQL generation, use the connectivity test harness to validate the connector behavior during the development process, and then package and distribute the connector to users.
 
 # What is a Tableau connector?
@@ -16,7 +16,7 @@ A connector is a set of files that describe:
 
 A connector can have most of the same features that any built-in Tableau connector supports, including publishing to a server if the server has the connector, creating extracts, data sources, vizzes, and so on.
 
-A connector developed using this SDK is appropriate for connecting to an ODBC or JDBC driver which interfaces using SQL. The underlying technology works well with relation databases.
+A connector developed using this SDK is appropriate for connecting to an ODBC or JDBC driver that interfaces using SQL. The underlying technology works well with relation databases.
 
 See the relationship between the connector files (in blue) and the Tableau **Connect** pane and connection dialog:
 
@@ -25,9 +25,9 @@ See the relationship between the connector files (in blue) and the Tableau **Con
 # Why build a connector?
 
 You can user the "Other Databases (ODBC)" and "Other Databases (JDBC)" connectors to connect to your database. The Tableau Connector SDK is similar, but offers the following advantages:
-- Better live query support. You can customize the dialect used to generate SQL queries so they are compatabile and optimized for your database. The Other Database connectors rely on higher level standard SQL which may not always be appropriate.
+- Better live query support. You can customize the dialect used to generate SQL queries so they are compatible and optimized for your database. The Other Database connectors rely on higher-level standard SQL that may not always be appropriate.
 - Simpler connection experience. An SDK connector can provide its own customized dialect and you do not need to rely on using DSNs. Users will not need to enter in obscure JDBC URL strings or create a DSN or configure odbc.ini files. Your connector can provide a simple customized connection dialog.
-- Runs in Tableau Desktop and Tableau Server. No configuration is required once you install the connector.
+- Runs in Tableau Desktop and Tableau Server. No configuration is required after you install the connector.
 
 If your data source does not fit the relational ODBC/JDBC model, then it may be worth looking into [Web data connectors](https://tableau.github.io/webdataconnector).
 
@@ -51,7 +51,7 @@ These are the general steps you will follow to create a fully functional connect
 > * __Dialect definition file__.
 > * __Connection dialog__.
 
-4. Once your connector is able to connect, start running the test tool [TDVT]({{ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
+4. After your connector is able to connect, start running the test tool [TDVT]({{ site.baseurl }}/docs/tdvt) to verify your connector is compatible with Tableau. Load the test data into your database, [for example](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/postgres/README.md).
 
 5. When the TDVT tests are passing you are ready to [package and sign your connector]({{ site.baseurl }}/docs/package-sign).
 
