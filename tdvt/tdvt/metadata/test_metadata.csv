@@ -1,1093 +1,1093 @@
-Test Category	Test Path Categorized	Test Name Categorized	Function Categorized	Priority
-Aggregation	tdvt/exprtests/standard	agg.avg	AVG	Required
-Aggregation	tdvt/exprtests/standard	agg.avg	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.count	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.countd	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.countd	COUNTD	Required
-Column Metadata Nullability	tdvt/exprtests/standard	agg.countd	COLUMN_NULLABILITY	Required
-Aggregation	tdvt/exprtests/standard	agg.max	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.max	MAX	Required
-Aggregation	tdvt/exprtests/standard	agg.min	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.min	MIN	Required
-Aggregation	tdvt/exprtests/standard	agg.stddev	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.stddev	STDEVP	Required
-Aggregation	tdvt/exprtests/standard	agg.stddev	STDEV	Required
-Aggregation	tdvt/exprtests/standard	agg.sum	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.sum	SUM	Required
-Aggregation	tdvt/exprtests/standard	agg.var	COUNT	Required
-Aggregation	tdvt/exprtests/standard	agg.var	VAR	Required
-Aggregation	tdvt/exprtests/standard	agg.var	VARP	Required
-Operator	tdvt/logicaltests/staples	BUGS.B14080	-	Required
-Operator	tdvt/logicaltests/staples	BUGS.B14080	!	Required
-Sets	tdvt/logicaltests/staples	BUGS.B14080	$IN_SET$	Required
-Logical	tdvt/logicaltests/staples	BUGS.B14080	$SYS_NARY_AND$	Required
-Cast	tdvt/logicaltests/staples	BUGS.B14080	FLOAT	Required
-Calculation	tdvt/logicaltests/staples	BUGS.B14080	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/staples	BUGS.B14080	ISNULL	Required
-Aggregation	tdvt/logicaltests/staples	BUGS.B14080	SUM	Required
-Filters	tdvt/logicaltests/calcs	BUGS.B1713	<=	Required
-Operator	tdvt/logicaltests/calcs	BUGS.B1713	<=	Required
-Filters	tdvt/logicaltests/calcs	BUGS.B1713	>=	Required
-Operator	tdvt/logicaltests/calcs	BUGS.B1713	>=	Required
-Logical	tdvt/logicaltests/calcs	BUGS.B1713	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/calcs	BUGS.B1713	$SYS_NARY_OR$	Required
-Aggregation	tdvt/logicaltests/calcs	BUGS.B1713	COUNT	Required
-Aggregation	tdvt/logicaltests/calcs	BUGS.B1713	SUM	Required
-Filters	tdvt/logicaltests/calcs	BUGS.B1713	TEMP_TABLES_AND_SUBQUERIES	Required
-Temp Tables and Subqueries	tdvt/logicaltests/calcs	BUGS.B1713	TEMP_TABLES_AND_SUBQUERIES	Required
-Filters	tdvt/logicaltests/staples	BUGS.B24394	<=	Required
-Operator	tdvt/logicaltests/staples	BUGS.B24394	<=	Required
-Date Filters	tdvt/logicaltests/staples	BUGS.B24394	DATEPART	Required
-Date Filters	tdvt/logicaltests/staples	BUGS.B24394	DATETRUNC	Required
-Date Filters	tdvt/logicaltests/calcs	BUGS.B26728	DATEDIFF	Required
-Bins	tdvt/logicaltests/calcs	BUGS.B26728	SYS_NUMBIN	Required
-Aggregation	tdvt/logicaltests/calcs	BUGS.B27875-asc-nulls-first	SUM	Recommended
-Filters	tdvt/logicaltests/calcs	BUGS.B27875-asc-nulls-first	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Temp Tables and Subqueries	tdvt/logicaltests/calcs	BUGS.B27875-asc-nulls-first	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Aggregation	tdvt/logicaltests/calcs	BUGS.B27875-desc-nulls-last	SUM	Recommended
-Filters	tdvt/logicaltests/calcs	BUGS.B27875-desc-nulls-last	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Temp Tables and Subqueries	tdvt/logicaltests/calcs	BUGS.B27875-desc-nulls-last	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Filters	tdvt/logicaltests/staples	BUGS.B340	<=	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B340	<=	Recommended
-Filters	tdvt/logicaltests/staples	BUGS.B340	>=	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B340	>=	Recommended
-Logical	tdvt/logicaltests/staples	BUGS.B340	$SYS_NARY_AND$	Recommended
-Aggregation	tdvt/logicaltests/staples	BUGS.B340	MIN	Recommended
-Aggregation	tdvt/logicaltests/staples	BUGS.B340	SUM	Recommended
-Temp Tables and Subqueries	tdvt/logicaltests/staples	BUGS.B340	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Filters	tdvt/logicaltests/staples	BUGS.B340	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B530764	/	Recommended
-Aggregation	tdvt/logicaltests/staples	BUGS.B530764	COUNT	Recommended
-Aggregation	tdvt/logicaltests/staples	BUGS.B530764	SUM	Recommended
-Filters	tdvt/logicaltests/calcs	BUGS.B59740	==	Required
-Operator	tdvt/logicaltests/calcs	BUGS.B59740	==	Required
-Sets	tdvt/logicaltests/calcs	BUGS.B59740	$IN_SET$	Required
-Sets	tdvt/logicaltests/calcs	BUGS.B641638	$IN_SET$	Recommended
-Aggregation	tdvt/logicaltests/calcs	BUGS.B641638	SUM	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B8888	-	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B8888	/	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B8888	+	Recommended
-Filters	tdvt/logicaltests/staples	BUGS.B8888	<	Recommended
-Operator	tdvt/logicaltests/staples	BUGS.B8888	<	Recommended
-Aggregation	tdvt/logicaltests/staples	BUGS.B8888	COUNTD	Recommended
-Date Filters	tdvt/logicaltests/staples	BUGS.B8888	DATEADD	Recommended
-Date Filters	tdvt/logicaltests/staples	BUGS.B8888	DATEPART	Recommended
-Date Filters	tdvt/logicaltests/staples	BUGS.B8888	DATETRUNC	Recommended
-Cast	tdvt/logicaltests/staples	BUGS.B8888	INT	Recommended
-Filters	tdvt/logicaltests/calcs	BUGS.TFS660780	==	Required
-Operator	tdvt/logicaltests/calcs	BUGS.TFS660780	==	Required
-Aggregation	tdvt/logicaltests/calcs	BUGS.TFS660780	COUNT	Required
-Aggregation	tdvt/logicaltests/calcs	BUGS.TFS660780	SUM	Required
-Filters	tdvt/logicaltests/union	calcs.union	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Temp Tables and Subqueries	tdvt/logicaltests/union	calcs.union	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Union	tdvt/logicaltests/union	calcs.union	UNION	Required If Supported
-Aggregation	tdvt/exprtests/standard	calcs_data	MAX	Required If Supported
-Time Values	tdvt/exprtests/standard	calcs_data	TIME1899	Required If Supported
-Aggregation	tdvt/exprtests/standard	calcs_data	MIN	Required If Supported
-Cast	tdvt/exprtests/standard	cast.float	FLOAT	Required
-Cast	tdvt/exprtests/standard	cast.float.string	FLOAT	Required
-Operator	tdvt/exprtests/standard	cast.float.string	+	Required
-Calculation	tdvt/exprtests/standard	cast.float.string	RIGHT	Required
-Cast	tdvt/exprtests/standard	cast.float.string	FLOAT	Required
-Cast	tdvt/exprtests/standard	cast.int	INT	Required
-Cast	tdvt/exprtests/standard	cast.int.nulls	INT	Required
-Cast	tdvt/exprtests/standard	cast.int.nulls	INT	Required
-Cast	tdvt/exprtests/standard	cast.int.nulls	STR	Required
-Cast	tdvt/exprtests/standard	cast.int.nulls	STR	Required
-Operator	tdvt/exprtests/standard	cast.int.nulls	+	Required
-Cast	tdvt/exprtests/standard	cast.str	STR	Required
-Cast	tdvt/exprtests/standard	cast.str.date	DATE	Required
-Cast	tdvt/exprtests/standard	cast.str.date	STR	Required
-Cast	tdvt/exprtests/standard	cast.str.str	STR	Required
-Aggregation	tdvt/exprtests/standard	date.B639952	COUNT	Required
-Aggregation	tdvt/exprtests/standard	date.B639952	SUM	Required
-Cast	tdvt/exprtests/standard	date.B639952	DATE	Required
-Cast	tdvt/exprtests/standard	date.B639952	DATE	Required
-Date Filters	tdvt/exprtests/standard	date.B639952	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.B639952	DATEADD	Required
-Operator	tdvt/exprtests/standard	date.B639952	+	Required
-Operator	tdvt/exprtests/standard	date.B639952	-	Required
-Cast	tdvt/exprtests/standard	date.cast.date	DATE	Required
-Aggregation	tdvt/exprtests/standard	date.cast.datetime.630831	COUNT	Smoke
-Cast	tdvt/exprtests/standard	date.cast.datetime.630831	DATE	Smoke
-Cast	tdvt/exprtests/standard	date.cast.datetime.630831	DATE	Smoke
-Cast	tdvt/exprtests/standard	date.cast.float	FLOAT	Recommended
-Aggregation	tdvt/exprtests/standard	date.cast.float.extended	COUNT	Recommended
-Cast	tdvt/exprtests/standard	date.cast.float.extended	FLOAT	Recommended
-Cast	tdvt/exprtests/standard	date.cast.float.extended	FLOAT	Recommended
-Aggregation	tdvt/exprtests/standard	date.cast.int.extended	COUNT	Recommended
-Cast	tdvt/exprtests/standard	date.cast.int.extended	INT	Recommended
-Cast	tdvt/exprtests/standard	date.cast.int.extended	INT	Recommended
-Cast	tdvt/exprtests/standard	date.cast.num_to_date	DATE	Recommended
-Calculation	tdvt/exprtests/standard	date.cast.str	TRIM	Required
-Cast	tdvt/exprtests/standard	date.cast.str	STR	Required
-Data Prep	tdvt/exprtests/standard	date.cast.str	TRIM	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.day	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.dayofyear	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.hour	DATEADD	Required
-Aggregation	tdvt/exprtests/iso8601week	date.dateadd.iso-week	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.dateadd.iso-week	DATEADD	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.dateadd.iso-weekday	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.dateadd.iso-weekday	DATEADD	Recommended
-Date Filters	tdvt/exprtests/standard	date.dateadd.minute	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.month	DATEADD	Required
-Cast	tdvt/exprtests/standard	date.dateadd.nulls	DATE	Required If Supported
-Aggregation	tdvt/exprtests/standard	date.dateadd.nulls	COUNT	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.dateadd.nulls	DATEADD	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.dateadd.quarter	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.second	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.week	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.weekday	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.dateadd.year	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.day	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.dayofyear	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.hour	DATEDIFF	Required
-Aggregation	tdvt/exprtests/iso8601week	date.datediff.iso-week	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datediff.iso-week	DATEDIFF	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datediff.iso-weekday	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datediff.iso-weekday	DATEDIFF	Recommended
-Date Filters	tdvt/exprtests/standard	date.datediff.minute	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.month	DATEDIFF	Required
-Aggregation	tdvt/exprtests/standard	date.datediff.nulls	COUNT	Required If Supported
-Cast	tdvt/exprtests/standard	date.datediff.nulls	DATE	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datediff.nulls	DATEDIFF	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datediff.quarter	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.second	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.day	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.dayofyear	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.hour	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.minute	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.month	DATEDIFF	Required
-Aggregation	tdvt/exprtests/standard	date.datediff.sow.nulls	COUNT	Recommended
-Cast	tdvt/exprtests/standard	date.datediff.sow.nulls	DATE	Recommended
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.nulls	DATEDIFF	Recommended
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.quarter	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.second	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.week	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.weekday	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.sow.year	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.week	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.week.extended	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.weekday	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datediff.year	DATEDIFF	Required
-Date Filters	tdvt/exprtests/standard	date.datename.day	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.dayofyear	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.hour	DATENAME	Required
-Aggregation	tdvt/exprtests/iso8601week	date.datename.iso-quarter	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datename.iso-quarter	DATENAME	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datename.iso-week	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datename.iso-week	DATENAME	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datename.iso-weekday	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datename.iso-weekday	DATENAME	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datename.iso-year	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datename.iso-year	DATENAME	Recommended
-Date Filters	tdvt/exprtests/standard	date.datename.minute	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.month	DATENAME	Required
-Cast	tdvt/exprtests/standard	date.datename.nulls	DATE	Required If Supported
-Aggregation	tdvt/exprtests/standard	date.datename.nulls	COUNT	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datename.nulls	DATENAME	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datename.quarter	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.second	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.day	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.dayofyear	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.hour	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.minute	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.month	DATENAME	Required
-Aggregation	tdvt/exprtests/standard	date.datename.sow.nulls	COUNT	Recommended
-Cast	tdvt/exprtests/standard	date.datename.sow.nulls	DATE	Recommended
-Date Filters	tdvt/exprtests/standard	date.datename.sow.nulls	DATENAME	Recommended
-Date Filters	tdvt/exprtests/standard	date.datename.sow.quarter	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.second	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.week	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.weekday	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.sow.year	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.week	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.weekday	DATENAME	Required
-Date Filters	tdvt/exprtests/standard	date.datename.year	DATENAME	Required
-Aggregation	tdvt/exprtests/dateparse	date.dateparse.hour	COUNT	Recommended
-Date Filters	tdvt/exprtests/dateparse	date.dateparse.hour	DATEPARSE	Recommended
-Aggregation	tdvt/exprtests/dateparse	date.dateparse.month	COUNT	Recommended
-Date Filters	tdvt/exprtests/dateparse	date.dateparse.month	DATEPARSE	Recommended
-Aggregation	tdvt/exprtests/dateparse	date.dateparse.weekday	COUNT	Recommended
-Date Filters	tdvt/exprtests/dateparse	date.dateparse.weekday	DATEPARSE	Recommended
-Date Filters	tdvt/exprtests/dateparse	date.dateparse.year	DATEPARSE	Recommended
-Aggregation	tdvt/exprtests/dateparse	date.dateparse.year	COUNT	Recommended
-Date Filters	tdvt/exprtests/standard	date.datepart.dateadd.defect603107	DATEADD	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.dateadd.defect603107	DATEPART	Required
-Operator	tdvt/exprtests/standard	date.datepart.dateadd.defect603107	+	Required
-Operator	tdvt/exprtests/standard	date.datepart.dateadd.defect603107	-	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.day	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.dayofyear	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.hour	DATEPART	Required
-Aggregation	tdvt/exprtests/iso8601week	date.datepart.iso-quarter	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datepart.iso-quarter	DATEPART	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datepart.iso-week	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datepart.iso-week	DATEPART	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datepart.iso-weekday	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datepart.iso-weekday	DATEPART	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datepart.iso-year	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datepart.iso-year	DATEPART	Recommended
-Date Filters	tdvt/exprtests/standard	date.datepart.minute	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.month	DATEPART	Required
-Aggregation	tdvt/exprtests/standard	date.datepart.nulls	COUNT	Required If Supported
-Cast	tdvt/exprtests/standard	date.datepart.nulls	DATE	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datepart.nulls	DATEPART	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datepart.quarter	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.second	DATEPART	Required
-Aggregation	tdvt/exprtests/standard	date.datepart.second.ms	COUNT	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.second.ms	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.day	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.dayofyear	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.hour	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.minute	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.month	DATEPART	Required
-Cast	tdvt/exprtests/standard	date.datepart.sow.nulls	DATE	Recommended
-Aggregation	tdvt/exprtests/standard	date.datepart.sow.nulls	COUNT	Recommended
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.nulls	DATEPART	Recommended
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.quarter	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.second	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.week	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.weekday	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.sow.year	DATEPART	Required
-Cast	tdvt/exprtests/standard	date.datepart.week	DATE	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.week	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.weekday	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datepart.year	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.day	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.dayofyear	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.hour	DATETRUNC	Required
-Aggregation	tdvt/exprtests/iso8601week	date.datetrunc.iso-quarter	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datetrunc.iso-quarter	DATEPART	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datetrunc.iso-quarter	DATETRUNC	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datetrunc.iso-week	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datetrunc.iso-week	DATETRUNC	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datetrunc.iso-weekday	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datetrunc.iso-weekday	DATETRUNC	Recommended
-Aggregation	tdvt/exprtests/iso8601week	date.datetrunc.iso-year	COUNT	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datetrunc.iso-year	DATEPART	Recommended
-Date Filters	tdvt/exprtests/iso8601week	date.datetrunc.iso-year	DATETRUNC	Recommended
-Date Filters	tdvt/exprtests/standard	date.datetrunc.minute	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.month	DATETRUNC	Required
-Cast	tdvt/exprtests/standard	date.datetrunc.nulls	DATE	Required If Supported
-Aggregation	tdvt/exprtests/standard	date.datetrunc.nulls	COUNT	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datetrunc.nulls	DATETRUNC	Required If Supported
-Date Filters	tdvt/exprtests/standard	date.datetrunc.quarter	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.second	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.day	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.dayofyear	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.hour	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.minute	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.month	DATETRUNC	Required
-Aggregation	tdvt/exprtests/standard	date.datetrunc.sow.nulls	COUNT	Recommended
-Cast	tdvt/exprtests/standard	date.datetrunc.sow.nulls	DATE	Recommended
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.nulls	DATETRUNC	Recommended
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.quarter	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.second	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.week	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.weekday	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.sow.year	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.week	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.weekday	DATETRUNC	Required
-Date Filters	tdvt/exprtests/standard	date.datetrunc.year	DATETRUNC	Required
-Aggregation	tdvt/exprtests/standard	date.math	COUNT	Recommended
-Aggregation	tdvt/exprtests/standard	date.math	MAX	Recommended
-Aggregation	tdvt/exprtests/standard	date.math	MIN	Recommended
-Date Filters	tdvt/exprtests/standard	date.math	DATEDIFF	Recommended
-Date Filters	tdvt/exprtests/standard	date.math	NOW	Recommended
-Date Filters	tdvt/exprtests/standard	date.math	TODAY	Recommended
-Filters	tdvt/exprtests/standard	date.math	<	Recommended
-Filters	tdvt/exprtests/standard	date.math	<=	Recommended
-Filters	tdvt/exprtests/standard	date.math	==	Recommended
-Filters	tdvt/exprtests/standard	date.math	>	Recommended
-Filters	tdvt/exprtests/standard	date.math	>=	Recommended
-Operator	tdvt/exprtests/standard	date.math	!=	Recommended
-Operator	tdvt/exprtests/standard	date.math	+	Recommended
-Operator	tdvt/exprtests/standard	date.math	-	Recommended
-Operator	tdvt/exprtests/standard	date.math	<	Recommended
-Operator	tdvt/exprtests/standard	date.math	<=	Recommended
-Operator	tdvt/exprtests/standard	date.math	==	Recommended
-Operator	tdvt/exprtests/standard	date.math	>	Recommended
-Operator	tdvt/exprtests/standard	date.math	>=	Recommended
-Operator	tdvt/exprtests/standard	date.math.date_minus_date	-	Recommended
-Aggregation	tdvt/exprtests/standard	date.max	COUNT	Required
-Aggregation	tdvt/exprtests/standard	date.max	MAX	Required
-Aggregation	tdvt/exprtests/standard	date.min	COUNT	Required
-Aggregation	tdvt/exprtests/standard	date.min	MIN	Required
-Cast	tdvt/exprtests/standard	date.misc	DATE	Required
-Date Filters	tdvt/exprtests/standard	date.misc	YEAR	Required
-Date Aggregation	tdvt/exprtests/standard	date.misc	YEAR	Required
-Calculation	tdvt/exprtests/standard	date.misc	YEAR	Required
-Date Filters	tdvt/exprtests/standard	date.misc	MONTH	Required
-Date Aggregation	tdvt/exprtests/standard	date.misc	MONTH	Required
-Calculation	tdvt/exprtests/standard	date.misc	MONTH	Required
-Date Aggregation	tdvt/exprtests/standard	date.misc	DAY	Required
-Date Filters	tdvt/exprtests/standard	date.misc	DAY	Required
-Calculation	tdvt/exprtests/standard	date.misc	DAY	Required
-Aggregation	tdvt/exprtests/standard	date.now	COUNT	Recommended
-Date Filters	tdvt/exprtests/standard	date.now	DATEPART	Recommended
-Aggregation	tdvt/exprtests/standard	date.now	MIN	Recommended
-Filters	tdvt/exprtests/standard	date.now	==	Recommended
-Operator	tdvt/exprtests/standard	date.now	==	Recommended
-Aggregation	tdvt/exprtests/standard	date.now	MAX	Recommended
-Date Filters	tdvt/exprtests/standard	date.now	DATEPART	Recommended
-Date Filters	tdvt/exprtests/standard	date.now	NOW	Recommended
-Date Filters	tdvt/exprtests/standard	date.now	NOW	Recommended
-Aggregation	tdvt/exprtests/standard	date.today	COUNT	Required
-Date Filters	tdvt/exprtests/standard	date.today	DATEPART	Required
-Aggregation	tdvt/exprtests/standard	date.today	MIN	Required
-Filters	tdvt/exprtests/standard	date.today	==	Required
-Operator	tdvt/exprtests/standard	date.today	==	Required
-Aggregation	tdvt/exprtests/standard	date.today	MAX	Required
-Date Filters	tdvt/exprtests/standard	date.today	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	date.today	TODAY	Required
-Date Filters	tdvt/exprtests/standard	date.today	TODAY	Required
-Cast	tdvt/exprtests/standard	datetime.cast.date	DATE	Required
-Cast	tdvt/exprtests/standard	datetime.cast.float	FLOAT	Required
-Calculation	tdvt/exprtests/standard	datetime.cast.str	TRIM	Required
-Cast	tdvt/exprtests/standard	datetime.cast.str	STR	Required
-Data Prep	tdvt/exprtests/standard	datetime.cast.str	TRIM	Required
-Operator	tdvt/logicaltests/staples	Filter.Add_to_context	!	Required
-Filters	tdvt/logicaltests/staples	Filter.Add_to_context	==	Required
-Operator	tdvt/logicaltests/staples	Filter.Add_to_context	==	Required
-Logical	tdvt/logicaltests/staples	Filter.Add_to_context	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Filter.Add_to_context	SUM	Required
-Sets	tdvt/logicaltests/calcs	Filter.Date_In	$IN_SET$	Required
-Filters	tdvt/logicaltests/calcs	Filter.datetime_fractional	==	Recommended
-Operator	tdvt/logicaltests/calcs	Filter.datetime_fractional	==	Recommended
-Temp Tables and Subqueries	tdvt/logicaltests/calcs	Filter.datetime_fractional	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Filters	tdvt/logicaltests/calcs	Filter.datetime_fractional	TEMP_TABLES_AND_SUBQUERIES	Recommended
-Operator	tdvt/logicaltests/calcs	Filter.Exclude-list-not-null	!	Required
-Sets	tdvt/logicaltests/calcs	Filter.Exclude-list-not-null	$IN_SET$	Required
-Logical	tdvt/logicaltests/calcs	Filter.Exclude-list-not-null	$SYS_NARY_OR$	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.Exclude-list-not-null	ISNULL	Required
-Calculation	tdvt/logicaltests/calcs	Filter.Exclude-list-not-null	ISNULL	Required
-Operator	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	!	Required
-Filters	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	<=	Required
-Operator	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	<=	Required
-Filters	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	>=	Required
-Operator	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	>=	Required
-Logical	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	$SYS_NARY_OR$	Required
-Calculation	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.Exclude-range-not-null	ISNULL	Required
-Filters	tdvt/logicaltests/calcs	Filter.FilterBy-to-no-results	>	Required
-Operator	tdvt/logicaltests/calcs	Filter.FilterBy-to-no-results	>	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.FilterBy-to-no-results	SUM	Required
-Filters	tdvt/logicaltests/staples	Filter.Q_date_instance_filter	<=	Required
-Operator	tdvt/logicaltests/staples	Filter.Q_date_instance_filter	<=	Required
-Filters	tdvt/logicaltests/staples	Filter.Q_date_instance_filter	>=	Required
-Operator	tdvt/logicaltests/staples	Filter.Q_date_instance_filter	>=	Required
-Logical	tdvt/logicaltests/staples	Filter.Q_date_instance_filter	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Filter.Q_date_instance_filter	COUNT	Required
-Filters	tdvt/logicaltests/staples	Filter.Q_date_month_instance_filter	<=	Required
-Operator	tdvt/logicaltests/staples	Filter.Q_date_month_instance_filter	<=	Required
-Date Filters	tdvt/logicaltests/staples	Filter.Q_date_month_instance_filter	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Filter.Q_date_month_instance_filter	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-max-NotNull	<=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-max-NotNull	<=	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-max-NotNull	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-max-Null	<=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-max-Null	<=	Required
-Logical	tdvt/logicaltests/calcs	Filter.QFilter-max-Null	$SYS_NARY_OR$	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.QFilter-max-Null	ISNULL	Required
-Calculation	tdvt/logicaltests/calcs	Filter.QFilter-max-Null	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-max-Null	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-min-NotNull	>=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-min-NotNull	>=	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-min-NotNull	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-min-Null	>=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-min-Null	>=	Required
-Logical	tdvt/logicaltests/calcs	Filter.QFilter-min-Null	$SYS_NARY_OR$	Required
-Calculation	tdvt/logicaltests/calcs	Filter.QFilter-min-Null	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.QFilter-min-Null	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-min-Null	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-minmax-NotNull	<=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-minmax-NotNull	<=	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-minmax-NotNull	>=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-minmax-NotNull	>=	Required
-Logical	tdvt/logicaltests/calcs	Filter.QFilter-minmax-NotNull	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-minmax-NotNull	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	<=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	<=	Required
-Filters	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	>=	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	>=	Required
-Logical	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	$SYS_NARY_OR$	Required
-Calculation	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-minmax-Null	SUM	Required
-Operator	tdvt/logicaltests/calcs	Filter.QFilter-NotNull	!	Required
-Calculation	tdvt/logicaltests/calcs	Filter.QFilter-NotNull	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.QFilter-NotNull	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-NotNull	SUM	Required
-Calculation	tdvt/logicaltests/calcs	Filter.QFilter-Null	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/calcs	Filter.QFilter-Null	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.QFilter-Null	SUM	Required
-Filters	tdvt/logicaltests/staples	Filter.slicing_Q_date_instance_filter	<=	Required
-Operator	tdvt/logicaltests/staples	Filter.slicing_Q_date_instance_filter	<=	Required
-Filters	tdvt/logicaltests/staples	Filter.slicing_Q_date_instance_filter	>=	Required
-Operator	tdvt/logicaltests/staples	Filter.slicing_Q_date_instance_filter	>=	Required
-Logical	tdvt/logicaltests/staples	Filter.slicing_Q_date_instance_filter	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Filter.slicing_Q_date_instance_filter	SUM	Required
-Date Filters	tdvt/logicaltests/staples	Filter.slicing_Q_date_month_instance_filter	DATEPART	Required
-Filters	tdvt/logicaltests/calcs	Filter.TopN-context	<=	Required
-Operator	tdvt/logicaltests/calcs	Filter.TopN-context	<=	Required
-Filters	tdvt/logicaltests/calcs	Filter.TopN-context	>=	Required
-Operator	tdvt/logicaltests/calcs	Filter.TopN-context	>=	Required
-Logical	tdvt/logicaltests/calcs	Filter.TopN-context	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/calcs	Filter.TopN-context	$SYS_NARY_OR$	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.TopN-context	COUNT	Required
-Aggregation	tdvt/logicaltests/calcs	Filter.TopN-context	SUM	Required
-Filters	tdvt/logicaltests/calcs	Filter.TopN-context	TEMP_TABLES_AND_SUBQUERIES	Required
-Temp Tables and Subqueries	tdvt/logicaltests/calcs	Filter.TopN-context	TEMP_TABLES_AND_SUBQUERIES	Required
-Filters	tdvt/logicaltests/staples	Filter.Trademark	<=	Smoke
-Operator	tdvt/logicaltests/staples	Filter.Trademark	<=	Smoke
-Filters	tdvt/logicaltests/staples	Filter.Trademark	>=	Smoke
-Operator	tdvt/logicaltests/staples	Filter.Trademark	>=	Smoke
-Sets	tdvt/logicaltests/staples	Filter.Trademark	$IN_SET$	Smoke
-Logical	tdvt/logicaltests/staples	Filter.Trademark	$SYS_NARY_AND$	Smoke
-Logical	tdvt/logicaltests/staples	Filter.Trademark	$SYS_NARY_OR$	Smoke
-Aggregation	tdvt/logicaltests/staples	Filter.Trademark	SUM	Smoke
-Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.bool	COLUMN_NULLABILITY	Required If Supported
-Aggregation	tdvt/logicaltests/calcs	join.null.bool	SUM	Required If Supported
-Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.date	COLUMN_NULLABILITY	Required If Supported
-Aggregation	tdvt/logicaltests/calcs	join.null.date	SUM	Required If Supported
-Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.datetime	COLUMN_NULLABILITY	Required If Supported
-Aggregation	tdvt/logicaltests/calcs	join.null.datetime	SUM	Required If Supported
-Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.int	COLUMN_NULLABILITY	Required If Supported
-Aggregation	tdvt/logicaltests/calcs	join.null.int	SUM	Required If Supported
-Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.real	COLUMN_NULLABILITY	Required If Supported
-Aggregation	tdvt/logicaltests/calcs	join.null.real	SUM	Required If Supported
-Column Metadata Nullability	tdvt/logicaltests/calcs	join.null.str	COLUMN_NULLABILITY	Required If Supported
-Aggregation	tdvt/logicaltests/calcs	join.null.str	SUM	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	COUNT	Required If Supported
-Date Filters	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	DATEDIFF	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	MIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.1_Difference From with Cross Join	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.10_As in-out Set	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.10_As in-out Set	MIN	Required If Supported
-Calculation	tdvt/logicaltests/lod	lod.11_As in-out Set	ISNULL	Required If Supported
-NULL Semantics	tdvt/logicaltests/lod	lod.11_As in-out Set	ISNULL	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.11_As in-out Set	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.11_As in-out Set	MIN	Required If Supported
-Filters	tdvt/logicaltests/lod	lod.11_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.11_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.12_As in-out Set	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.12_As in-out Set	MIN	Required If Supported
-Calculation	tdvt/logicaltests/lod	lod.13_As in-out Set	ISNULL	Required If Supported
-NULL Semantics	tdvt/logicaltests/lod	lod.13_As in-out Set	ISNULL	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.13_As in-out Set	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.13_As in-out Set	MIN	Required If Supported
-Filters	tdvt/logicaltests/lod	lod.13_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.13_As in-out Set	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Operator	tdvt/logicaltests/lod	lod.14_As in-out Set	!	Required If Supported
-Sets	tdvt/logicaltests/lod	lod.14_As in-out Set	$IN_SET$	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	AVG	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	COUNT	Required If Supported
-Calculation	tdvt/logicaltests/lod	lod.14_As in-out Set	ISNULL	Required If Supported
-NULL Semantics	tdvt/logicaltests/lod	lod.14_As in-out Set	ISNULL	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.14_As in-out Set	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	MAX	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	MIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.14_As in-out Set	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.15_As Bin	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.15_As Bin	SUM	Required If Supported
-Bins	tdvt/logicaltests/lod	lod.15_As Bin	SYS_NUMBIN	Required If Supported
-Filters	tdvt/logicaltests/lod	lod.16_As Group	==	Required If Supported
-Operator	tdvt/logicaltests/lod	lod.16_As Group	==	Required If Supported
-Sets	tdvt/logicaltests/lod	lod.16_As Group	$IN_SET$	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.16_As Group	AVG	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.16_As Group	COUNT	Required If Supported
-Date Filters	tdvt/logicaltests/lod	lod.16_As Group	DATEDIFF	Required If Supported
-Date Filters	tdvt/logicaltests/lod	lod.16_As Group	DATEPART	Required If Supported
-Cast	tdvt/logicaltests/lod	lod.16_As Group	FLOAT	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.16_As Group	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.16_As Group	MIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.16_As Group	SUM	Required If Supported
-Operator	tdvt/logicaltests/lod	lod.17_Nesting	/	Required If Supported
-Operator	tdvt/logicaltests/lod	lod.17_Nesting	+	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.17_Nesting	AVG	Required If Supported
-Cast	tdvt/logicaltests/lod	lod.17_Nesting	FLOAT	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.17_Nesting	LOD_STYLE_JOIN	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.2_Cross Join	$AGGREGATE$	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.2_Cross Join	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.2_Cross Join	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.3_Disjoint LOD	$AGGREGATE$	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.3_Disjoint LOD	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.3_Disjoint LOD	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.4_Subset Fixed	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.4_Subset Fixed	SUM	Required If Supported
-Cast	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	FLOAT	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.5_Subset Fixed - 2	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.6_Include - 1	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.6_Include - 1	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.7_Percent of Total 1	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.7_Percent of Total 1	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.8_Precent of Total 2	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.8_Precent of Total 2	SUM	Required If Supported
-Date Filters	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	DATEPART	Required If Supported
-Calculation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	FLOOR	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	MIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.9_Fixed as Dimension	SUM	Required If Supported
-Calculation	tdvt/logicaltests/lod	lod.calc.1.TopN	FLOOR	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.1.TopN	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.1.TopN	MIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.1.TopN	SUM	Required If Supported
-Filters	tdvt/logicaltests/lod	lod.calc.1.TopN	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Temp Tables and Subqueries	tdvt/logicaltests/lod	lod.calc.1.TopN	TEMP_TABLES_AND_SUBQUERIES	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.11.Exclude	COUNT	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.11.Exclude	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.11.Exclude	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	$AGGREGATE$	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	AVG	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.2.Two-level Agg	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.3.LOD Metadata	SUM	Required If Supported
-Cast	tdvt/logicaltests/lod	lod.calc.4.Lookup	FLOAT	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.4.Lookup	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.4.Lookup	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.5.LOD Set	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.5.LOD Set	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.6. LOD Dimension	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	$AGGREGATE$	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SUM	Required If Supported
-Bins	tdvt/logicaltests/lod	lod.calc.7. LOD Bins	SYS_NUMBIN	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.8. Include	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.8. Include	SUM	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.9.Fixed	$AGGREGATE$	Required If Supported
-Level of Detail	tdvt/logicaltests/lod	lod.calc.9.Fixed	LOD_STYLE_JOIN	Required If Supported
-Aggregation	tdvt/logicaltests/lod	lod.calc.9.Fixed	SUM	Required If Supported
-Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	$AGGREGATE$	Required If Supported
-Table Calc	tdvt/exprtests/lodcalcs	lod.calcs	INDEX	Required If Supported
-Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	AVG	Required If Supported
-Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	COUNT	Required If Supported
-Aggregation	tdvt/exprtests/lodcalcs	lod.calcs	SUM	Required If Supported
-Calculation	tdvt/exprtests/lodcalcs	lod.calcs	EXCLUDE	Required If Supported
-Calculation	tdvt/exprtests/lodcalcs	lod.calcs	FIXED	Required If Supported
-Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	EXCLUDE	Required If Supported
-Level of Detail	tdvt/exprtests/lodcalcs	lod.calcs	FIXED	Required If Supported
-Operator	tdvt/exprtests/lodcalcs	lod.calcs	/	Required If Supported
-Logical	tdvt/exprtests/standard	logical	$CASE$	Required
-Aggregation	tdvt/exprtests/standard	logical	MIN	Required
-Cast	tdvt/exprtests/standard	logical	INT	Required
-Filters	tdvt/exprtests/standard	logical	LOWER	Required
-Calculation	tdvt/exprtests/standard	logical	LOWER	Required
-NULL Semantics	tdvt/exprtests/standard	logical	ISNULL	Required
-Calculation	tdvt/exprtests/standard	logical	ISNULL	Required
-Date Filters	tdvt/exprtests/standard	logical	DATEPART	Required
-Operator	tdvt/exprtests/standard	logical	!=	Required
-Operator	tdvt/exprtests/standard	logical	!	Required
-Aggregation	tdvt/exprtests/standard	logical	MIN	Required
-Calculation	tdvt/exprtests/standard	logical	IFNULL	Required
-Logical	tdvt/exprtests/standard	logical	IIF	Required
-Filters	tdvt/exprtests/standard	logical	>	Required
-Operator	tdvt/exprtests/standard	logical	>	Required
-Aggregation	tdvt/exprtests/standard	logical	COUNT	Required
-Date Filters	tdvt/exprtests/standard	logical	DATEPART	Required
-Filters	tdvt/exprtests/standard	logical	==	Required
-Operator	tdvt/exprtests/standard	logical	==	Required
-NULL Semantics	tdvt/exprtests/standard	logical	ISNULL	Required
-Calculation	tdvt/exprtests/standard	logical	ISNULL	Required
-Logical	tdvt/exprtests/standard	logical	IIF	Required
-Operator	tdvt/exprtests/standard	logical	&&	Required
-Logical	tdvt/exprtests/standard	logical	$IF$	Required
-Sets	tdvt/exprtests/standard	logical	$IN_SET$	Required
-Filters	tdvt/exprtests/standard	logical	LOWER	Required
-Calculation	tdvt/exprtests/standard	logical	LOWER	Required
-Cast	tdvt/exprtests/standard	logical	INT	Required
-Aggregation	tdvt/exprtests/standard	logical	MAX	Required
-Logical	tdvt/exprtests/standard	logical.bool	$IF$	Required
-Aggregation	tdvt/exprtests/standard	logical.bool	MAX	Required
-Aggregation	tdvt/exprtests/standard	logical.bool	MIN	Required
-Logical	tdvt/exprtests/standard	logical.bool	IIF	Required
-Logical	tdvt/exprtests/standard	logical.bool	IIF	Required
-Calculation	tdvt/exprtests/standard	logical.bool	ISNULL	Required
-Calculation	tdvt/exprtests/standard	logical.bool	ISNULL	Required
-Cast	tdvt/exprtests/standard	logical.bool	INT	Required
-Cast	tdvt/exprtests/standard	logical.bool	INT	Required
-Filters	tdvt/exprtests/standard	logical.bool	==	Required
-NULL Semantics	tdvt/exprtests/standard	logical.bool	ISNULL	Required
-NULL Semantics	tdvt/exprtests/standard	logical.bool	ISNULL	Required
-Operator	tdvt/exprtests/standard	logical.bool	==	Required
-Filters	tdvt/exprtests/standard	logical.case.null	==	Required
-Operator	tdvt/exprtests/standard	logical.case.null	==	Required
-Sets	tdvt/exprtests/standard	logical.case.null	$IN_SET$	Required
-Logical	tdvt/exprtests/standard	logical.case.null	$CASE$	Required
-Date Filters	tdvt/exprtests/standard	logical.case.null	DATEPART	Required
-Date Filters	tdvt/exprtests/standard	logical.case.null	DATEPART	Required
-Logical	tdvt/exprtests/standard	logical.case.str	$CASE$	Required
-Sets	tdvt/exprtests/standard	logical.case.str	$IN_SET$	Required
-Filters	tdvt/exprtests/standard	logical.case.str	==	Required
-Operator	tdvt/exprtests/standard	logical.case.str	==	Required
-Aggregation	tdvt/exprtests/standard	logical.ifnull	COUNT	Required
-Aggregation	tdvt/exprtests/standard	logical.ifnull	COUNTD	Required
-Calculation	tdvt/exprtests/standard	logical.ifnull	IFNULL	Required
-Calculation	tdvt/exprtests/standard	math.abs	ABS	Required
-Calculation	tdvt/exprtests/standard	math.abs	ABS	Required
-Calculation	tdvt/exprtests/standard	math.acos	ACOS	Recommended
-Calculation	tdvt/exprtests/standard	math.acos	ACOS	Recommended
-Operator	tdvt/exprtests/standard	math.acos	/	Recommended
-Calculation	tdvt/exprtests/standard	math.asin	ASIN	Recommended
-Calculation	tdvt/exprtests/standard	math.asin	ASIN	Recommended
-Operator	tdvt/exprtests/standard	math.asin	/	Recommended
-Calculation	tdvt/exprtests/standard	math.atan	ATAN	Recommended
-Calculation	tdvt/exprtests/standard	math.atan	ATAN	Recommended
-Calculation	tdvt/exprtests/standard	math.atan	ATAN2	Recommended
-Calculation	tdvt/exprtests/standard	math.atan	ATAN2	Recommended
-Calculation	tdvt/exprtests/standard	math.ceilfloor	CEILING	Required
-Calculation	tdvt/exprtests/standard	math.ceilfloor	FLOOR	Required
-Operator	tdvt/exprtests/standard	math.ceilfloor	+	Required
-Calculation	tdvt/exprtests/standard	math.cos	COS	Required
-Calculation	tdvt/exprtests/standard	math.cos	COS	Required
-Calculation	tdvt/exprtests/standard	math.cot	COT	Required
-Calculation	tdvt/exprtests/standard	math.cot	COT	Required
-Calculation	tdvt/exprtests/standard	math.degree	DEGREES	Required
-Calculation	tdvt/exprtests/standard	math.degree	DEGREES	Required
-Calculation	tdvt/exprtests/standard	math.div	DIV	Required
-Calculation	tdvt/exprtests/standard	math.div	DIV	Required
-Operator	tdvt/exprtests/standard	math.exp	*	Required
-Calculation	tdvt/exprtests/standard	math.exp	EXP	Required
-Calculation	tdvt/exprtests/standard	math.exp	EXP	Required
-Mapping	tdvt/exprtests/standard	math.hexbin	HEXBINX	Recommended
-Mapping	tdvt/exprtests/standard	math.hexbin	HEXBINY	Recommended
-Calculation	tdvt/exprtests/standard	math.ln	LN	Required
-Calculation	tdvt/exprtests/standard	math.ln	LN	Required
-Calculation	tdvt/exprtests/standard	math.log	LOG	Required
-Calculation	tdvt/exprtests/standard	math.log	LOG	Required
-Aggregation	tdvt/exprtests/standard	math.max	COUNT	Required
-Aggregation	tdvt/exprtests/standard	math.max	MAX	Required
-Aggregation	tdvt/exprtests/standard	math.min	COUNT	Required
-Aggregation	tdvt/exprtests/standard	math.min	MIN	Required
-Aggregation	tdvt/exprtests/standard	math.pi	COUNT	Required
-Calculation	tdvt/exprtests/standard	math.pi	PI	Required
-Calculation	tdvt/exprtests/standard	math.pi	PI	Required
-Operator	tdvt/exprtests/standard	math.pi	*	Required
-Table Calc	tdvt/exprtests/standard	math.power	POWER	Required
-Calculation	tdvt/exprtests/standard	math.power	POWER	Required
-Calculation	tdvt/exprtests/standard	math.power.real	POWER	Recommended
-Calculation	tdvt/exprtests/standard	math.power.real	POWER	Recommended
-Operator	tdvt/exprtests/standard	math.power.real	*	Recommended
-Table Calc	tdvt/exprtests/standard	math.power.real	POWER	Recommended
-Table Calc	tdvt/exprtests/standard	math.power.real	POWER	Recommended
-Calculation	tdvt/exprtests/standard	math.radians	RADIANS	Required
-Calculation	tdvt/exprtests/standard	math.radians	RADIANS	Required
-Calculation	tdvt/exprtests/standard	math.round	ROUND	Required
-Calculation	tdvt/exprtests/standard	math.round	ROUND	Required
-Calculation	tdvt/exprtests/standard	math.round.B584401	ROUND	Recommended
-Calculation	tdvt/exprtests/standard	math.sign	SIGN	Required
-Calculation	tdvt/exprtests/standard	math.sign	SIGN	Required
-Calculation	tdvt/exprtests/standard	math.sin	SIN	Required
-Calculation	tdvt/exprtests/standard	math.sin	SIN	Required
-Calculation	tdvt/exprtests/standard	math.sqrt	SQRT	Required
-Calculation	tdvt/exprtests/standard	math.sqrt	SQRT	Required
-Calculation	tdvt/exprtests/standard	math.square	SQUARE	Required
-Calculation	tdvt/exprtests/standard	math.square	SQUARE	Required
-Calculation	tdvt/exprtests/standard	math.tan	TAN	Required
-Calculation	tdvt/exprtests/standard	math.zn	ZN	Required
-Column Metadata Nullability	tdvt/exprtests/standard	math.zn	COLUMN_NULLABILITY	Required
-Table Calc	tdvt/exprtests/standard	math.zn	ZN	Required
-Logical	tdvt/exprtests/standard	operator.bool	$SYS_NARY_AND$	Required
-Logical	tdvt/exprtests/standard	operator.bool	$SYS_NARY_OR$	Required
-Aggregation	tdvt/exprtests/standard	operator.bool	COUNT	Required
-Aggregation	tdvt/exprtests/standard	operator.bool	MAX	Required
-Aggregation	tdvt/exprtests/standard	operator.bool	MIN	Required
-Filters	tdvt/exprtests/standard	operator.bool	==	Required
-Operator	tdvt/exprtests/standard	operator.bool	!	Required
-Operator	tdvt/exprtests/standard	operator.bool	!=	Required
-Operator	tdvt/exprtests/standard	operator.bool	&&	Required
-Operator	tdvt/exprtests/standard	operator.bool	==	Required
-Operator	tdvt/exprtests/standard	operator.bool	||	Required
-Aggregation	tdvt/exprtests/standard	operator.date	MAX	Required
-Aggregation	tdvt/exprtests/standard	operator.date	MIN	Required
-Filters	tdvt/exprtests/standard	operator.date	<	Required
-Filters	tdvt/exprtests/standard	operator.date	<=	Required
-Filters	tdvt/exprtests/standard	operator.date	==	Required
-Filters	tdvt/exprtests/standard	operator.date	>	Required
-Filters	tdvt/exprtests/standard	operator.date	>=	Required
-Operator	tdvt/exprtests/standard	operator.date	!=	Required
-Operator	tdvt/exprtests/standard	operator.date	+	Required
-Operator	tdvt/exprtests/standard	operator.date	-	Required
-Operator	tdvt/exprtests/standard	operator.date	<	Required
-Operator	tdvt/exprtests/standard	operator.date	<=	Required
-Operator	tdvt/exprtests/standard	operator.date	==	Required
-Operator	tdvt/exprtests/standard	operator.date	>	Required
-Operator	tdvt/exprtests/standard	operator.date	>=	Required
-Operator	tdvt/exprtests/standard	operator.int	%	Required
-Operator	tdvt/exprtests/standard	operator.int	/	Required
-Operator	tdvt/exprtests/standard	operator.int	^^	Required
-Operator	tdvt/exprtests/standard	operator.num	*	Required
-Filters	tdvt/exprtests/standard	operator.num	>=	Required
-Operator	tdvt/exprtests/standard	operator.num	>=	Required
-Operator	tdvt/exprtests/standard	operator.num	^^	Required
-Aggregation	tdvt/exprtests/standard	operator.num	MIN	Required
-Filters	tdvt/exprtests/standard	operator.num	==	Required
-Operator	tdvt/exprtests/standard	operator.num	==	Required
-Aggregation	tdvt/exprtests/standard	operator.num	MAX	Required
-Calculation	tdvt/exprtests/standard	operator.num	ABS	Required
-Calculation	tdvt/exprtests/standard	operator.num	ABS	Required
-Filters	tdvt/exprtests/standard	operator.num	<	Required
-Filters	tdvt/exprtests/standard	operator.num	<=	Required
-Filters	tdvt/exprtests/standard	operator.num	>	Required
-Operator	tdvt/exprtests/standard	operator.num	!=	Required
-Operator	tdvt/exprtests/standard	operator.num	+	Required
-Operator	tdvt/exprtests/standard	operator.num	-	Required
-Operator	tdvt/exprtests/standard	operator.num	/	Required
-Operator	tdvt/exprtests/standard	operator.num	<	Required
-Operator	tdvt/exprtests/standard	operator.num	<=	Required
-Operator	tdvt/exprtests/standard	operator.num	>	Required
-Aggregation	tdvt/exprtests/standard	operator.str	COUNT	Required
-Aggregation	tdvt/exprtests/standard	operator.str	MAX	Required
-Aggregation	tdvt/exprtests/standard	operator.str	MIN	Required
-Logical	tdvt/exprtests/standard	operator.str	IIF	Required
-Logical	tdvt/exprtests/standard	operator.str	IIF	Required
-Calculation	tdvt/exprtests/standard	operator.str	LOWER	Required
-Calculation	tdvt/exprtests/standard	operator.str	LOWER	Required
-Filters	tdvt/exprtests/standard	operator.str	<	Required
-Filters	tdvt/exprtests/standard	operator.str	<=	Required
-Filters	tdvt/exprtests/standard	operator.str	==	Required
-Filters	tdvt/exprtests/standard	operator.str	>	Required
-Filters	tdvt/exprtests/standard	operator.str	>=	Required
-Filters	tdvt/exprtests/standard	operator.str	LOWER	Required
-Filters	tdvt/exprtests/standard	operator.str	LOWER	Required
-Operator	tdvt/exprtests/standard	operator.str	!=	Required
-Operator	tdvt/exprtests/standard	operator.str	+	Required
-Operator	tdvt/exprtests/standard	operator.str	<	Required
-Operator	tdvt/exprtests/standard	operator.str	<=	Required
-Operator	tdvt/exprtests/standard	operator.str	==	Required
-Operator	tdvt/exprtests/standard	operator.str	>	Required
-Operator	tdvt/exprtests/standard	operator.str	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Dates_MDY	*	Required
-Operator	tdvt/logicaltests/staples	Query.Dates_MDY	+	Required
-Date Filters	tdvt/logicaltests/staples	Query.Dates_MDY	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Query.Dates_MDY	SUM	Required
-Operator	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	*	Required
-Operator	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	+	Required
-Filters	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	$SYS_NARY_OR$	Required
-Date Filters	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Query.Dates_MDY_Filtered	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_AVG	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_AVG	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_AVG	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_AVG	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_AVG	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_AVG	AVG	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_CNT	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_CNT	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_CNT	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_CNT	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_CNT	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_CNT	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_Exclude1	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_Exclude1	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_Exclude1	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_Exclude1	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_Exclude1	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_Exclude1	$SYS_NARY_OR$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_Exclude1	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_Include1	==	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_Include1	==	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_Include1	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_MAX	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_MAX	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_MAX	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_MAX	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_MAX	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_MAX	MAX	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_MIN	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_MIN	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_MIN	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_MIN	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_MIN	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_MIN	MIN	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQ	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQ_AxisQ	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQ_AxisQ	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQ_AxisQ	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQ_AxisQ	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SliceAggQ_AxisQ	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQ_AxisQ	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQ	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQ	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQ	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQ	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQ	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQ	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQO	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	$SYS_NARY_AND$	Required
-Date Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQ_AxisQOYear	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	$SYS_NARY_AND$	Required
-Date Filters	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SUM	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SUM	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Filter_SUM	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Filter_SUM	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Filter_SUM	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Filter_SUM	SUM	Required
-Filters	tdvt/logicaltests/calcs	Query.Filter.IsNOTNULL	<=	Required
-Operator	tdvt/logicaltests/calcs	Query.Filter.IsNOTNULL	<=	Required
-Filters	tdvt/logicaltests/calcs	Query.Filter.IsNOTNULL	>=	Required
-Operator	tdvt/logicaltests/calcs	Query.Filter.IsNOTNULL	>=	Required
-Logical	tdvt/logicaltests/calcs	Query.Filter.IsNOTNULL	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/calcs	Query.Filter.IsNOTNULL	SUM	Required
-Calculation	tdvt/logicaltests/calcs	Query.Filter.IsNULL	ISNULL	Required
-NULL Semantics	tdvt/logicaltests/calcs	Query.Filter.IsNULL	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Query.Filter.IsNULL	SUM	Required
-Sets	tdvt/logicaltests/calcs	Query.Filter.NullAndOne	$IN_SET$	Required
-Logical	tdvt/logicaltests/calcs	Query.Filter.NullAndOne	$SYS_NARY_OR$	Required
-NULL Semantics	tdvt/logicaltests/calcs	Query.Filter.NullAndOne	ISNULL	Required
-Calculation	tdvt/logicaltests/calcs	Query.Filter.NullAndOne	ISNULL	Required
-Aggregation	tdvt/logicaltests/calcs	Query.Filter.NullAndOne	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	<	Required
-Operator	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	<	Required
-Filters	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	<=	Required
-Operator	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	<=	Required
-Filters	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	>=	Required
-Operator	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	>=	Required
-Sets	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	$SYS_NARY_OR$	Required
-Date Filters	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	MIN	Required
-Aggregation	tdvt/logicaltests/staples	Query.FilterBy_DateTime_Slices	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.FilterBy_Q	<	Required
-Operator	tdvt/logicaltests/staples	Query.FilterBy_Q	<	Required
-Aggregation	tdvt/logicaltests/staples	Query.FilterBy_Q	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.FilterBy_Q	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.HideEmptyRows	<=	Required
-Operator	tdvt/logicaltests/staples	Query.HideEmptyRows	<=	Required
-Filters	tdvt/logicaltests/staples	Query.HideEmptyRows	>=	Required
-Operator	tdvt/logicaltests/staples	Query.HideEmptyRows	>=	Required
-Logical	tdvt/logicaltests/staples	Query.HideEmptyRows	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.HideEmptyRows	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.HideEmptyRows	MIN	Required
-Filters	tdvt/logicaltests/staples	Query.MultipleFilters	<=	Required
-Operator	tdvt/logicaltests/staples	Query.MultipleFilters	<=	Required
-Filters	tdvt/logicaltests/staples	Query.MultipleFilters	==	Required
-Operator	tdvt/logicaltests/staples	Query.MultipleFilters	==	Required
-Filters	tdvt/logicaltests/staples	Query.MultipleFilters	>=	Required
-Operator	tdvt/logicaltests/staples	Query.MultipleFilters	>=	Required
-Sets	tdvt/logicaltests/staples	Query.MultipleFilters	$IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.MultipleFilters	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/staples	Query.MultipleFilters	$SYS_NARY_OR$	Required
-Aggregation	tdvt/logicaltests/staples	Query.MultipleFilters	AVG	Required
-Date Filters	tdvt/logicaltests/staples	Query.MultipleFilters	DATEPART	Required
-Aggregation	tdvt/logicaltests/staples	Query.MultipleFilters	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_FilterO1_SliceOQ	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	$SYS_NARY_OR$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	$SYS_NARY_AND$	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	$SYS_NARY_OR$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_FilterO1O2_SliceOQ_SortByO1O2	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_SliceQ	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_SliceQ	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_SliceQ	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_SliceQ	>=	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_SliceQ	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_SliceQ	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_SliceQ	SUM	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_SliceQO	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_SliceQO	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Nest_SliceQO	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Nest_SliceQO	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Nest_SliceQO	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Nest_SliceQO	$SYS_NARY_AND$	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_SliceQO	AVG	Required
-Aggregation	tdvt/logicaltests/staples	Query.Nest_SliceQO	SUM	Required
-Aggregation	tdvt/logicaltests/staples	Query.Sort_Alphabetic_DESC_Top1	SUM	Required
-Temp Tables and Subqueries	tdvt/logicaltests/staples	Query.Sort_Alphabetic_DESC_Top1	TEMP_TABLES_AND_SUBQUERIES	Required
-Filters	tdvt/logicaltests/staples	Query.Sort_Alphabetic_DESC_Top1	TEMP_TABLES_AND_SUBQUERIES	Required
-Aggregation	tdvt/logicaltests/staples	Query.Sort_Alphabetic_DESC_Top10	SUM	Required
-Temp Tables and Subqueries	tdvt/logicaltests/staples	Query.Sort_Alphabetic_DESC_Top10	TEMP_TABLES_AND_SUBQUERIES	Required
-Filters	tdvt/logicaltests/staples	Query.Sort_Alphabetic_DESC_Top10	TEMP_TABLES_AND_SUBQUERIES	Required
-Aggregation	tdvt/logicaltests/staples	Query.Sort_Natural_DESC	SUM	Required
-Aggregation	tdvt/logicaltests/staples	Query.Top99_ByField	AVG	Required
-Filters	tdvt/logicaltests/staples	Query.Top99_ByField	TEMP_TABLES_AND_SUBQUERIES	Required
-Temp Tables and Subqueries	tdvt/logicaltests/staples	Query.Top99_ByField	TEMP_TABLES_AND_SUBQUERIES	Required
-Filters	tdvt/logicaltests/staples	Query.Unaggregated_Filter	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Unaggregated_Filter	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Unaggregated_Filter	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Unaggregated_Filter	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Unaggregated_Filter	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.Unaggregated_Filter	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Unaggregated_Filter	$SYS_NARY_AND$	Required
-Date Filters	tdvt/logicaltests/staples	Query.Unaggregated_Filter	DATEPART	Required
-Filters	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	<=	Required
-Operator	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	<=	Required
-Filters	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	>=	Required
-Operator	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	>=	Required
-Sets	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	$IN_SET$	Required
-Sets	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	$NOT_IN_SET$	Required
-Logical	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	$SYS_NARY_AND$	Required
-Date Filters	tdvt/logicaltests/staples	Query.Unaggregated_Filter_NoDateTime	DATEPART	Required
-Aggregation	tdvt/exprtests/standard	string.ascii	COUNT	Recommended
-Calculation	tdvt/exprtests/standard	string.ascii	ASCII	Recommended
-Calculation	tdvt/exprtests/standard	string.ascii	ASCII	Recommended
-Cast	tdvt/exprtests/standard	string.B21622	INT	Required
-Cast	tdvt/exprtests/standard	string.B21622	INT	Required
-Cast	tdvt/exprtests/standard	string.B21622	STR	Required
-Cast	tdvt/exprtests/standard	string.B21622	STR	Required
-Aggregation	tdvt/exprtests/bind	string.bind_trim	COUNT	Recommended
-Operator	tdvt/exprtests/bind	string.bind_trim	+	Recommended
-Calculation	tdvt/exprtests/standard	string.char	CHAR	Smoke
-Calculation	tdvt/exprtests/standard	string.char	CHAR	Smoke
-Aggregation	tdvt/exprtests/standard	string.char	COUNT	Smoke
-Aggregation	tdvt/exprtests/standard	string.constants	COUNT	Required
-Operator	tdvt/exprtests/standard	string.constants	+	Required
-Aggregation	tdvt/exprtests/standard	string.contains	MAX	Required
-Aggregation	tdvt/exprtests/standard	string.contains	MIN	Required
-Calculation	tdvt/exprtests/standard	string.contains	CONTAINS	Required
-Wildcard Filters	tdvt/exprtests/standard	string.contains	CONTAINS	Required
-Aggregation	tdvt/exprtests/standard	string.endswith	MAX	Required
-Filters	tdvt/exprtests/standard	string.endswith	ENDSWITH	Required
-Calculation	tdvt/exprtests/standard	string.endswith	ENDSWITH	Required
-Aggregation	tdvt/exprtests/standard	string.endswith	MIN	Required
-Operator	tdvt/exprtests/standard	string.find	*	Required
-Data Prep	tdvt/exprtests/standard	string.find	FIND	Required
-Calculation	tdvt/exprtests/standard	string.find	FIND	Required
-Data Prep	tdvt/exprtests/standard	string.find	FIND	Required
-Calculation	tdvt/exprtests/standard	string.find	FIND	Required
-Data Prep	tdvt/exprtests/standard	string.left	LEFT	Required
-Calculation	tdvt/exprtests/standard	string.left	LEFT	Required
-Data Prep	tdvt/exprtests/standard	string.left	LEFT	Required
-Calculation	tdvt/exprtests/standard	string.left	LEFT	Required
-Data Prep	tdvt/exprtests/standard	string.left.negative	LEFT	Required If Supported
-Calculation	tdvt/exprtests/standard	string.left.negative	LEFT	Required If Supported
-Calculation	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
-Calculation	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
-Data Prep	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
-Data Prep	tdvt/exprtests/standard	string.left.real	LEFT	Recommended
-Aggregation	tdvt/exprtests/standard	string.len	COUNT	Required
-Data Prep	tdvt/exprtests/standard	string.len	LEN	Required
-Calculation	tdvt/exprtests/standard	string.len	LEN	Required
-Data Prep	tdvt/exprtests/standard	string.len	LEN	Required
-Calculation	tdvt/exprtests/standard	string.len	LEN	Required
-Filters	tdvt/exprtests/standard	string.lower	LOWER	Required
-Calculation	tdvt/exprtests/standard	string.lower	LOWER	Required
-Filters	tdvt/exprtests/standard	string.lower	LOWER	Required
-Calculation	tdvt/exprtests/standard	string.lower	LOWER	Required
-Calculation	tdvt/exprtests/standard	string.ltrim	LTRIM	Required
-Operator	tdvt/exprtests/standard	string.ltrim	+	Required
-Aggregation	tdvt/exprtests/standard	string.max	MAX	Required
-Calculation	tdvt/exprtests/standard	string.mid	MID	Required
-Calculation	tdvt/exprtests/standard	string.mid	MID	Required
-Data Prep	tdvt/exprtests/standard	string.mid	MID	Required
-Data Prep	tdvt/exprtests/standard	string.mid	MID	Required
-Calculation	tdvt/exprtests/standard	string.mid.calc	MID	Required
-Calculation	tdvt/exprtests/standard	string.mid.calc	MID	Required
-Data Prep	tdvt/exprtests/standard	string.mid.calc	MID	Required
-Data Prep	tdvt/exprtests/standard	string.mid.calc	MID	Required
-Operator	tdvt/exprtests/standard	string.mid.calc	*	Required
-Operator	tdvt/exprtests/standard	string.mid.calc	+	Required
-Aggregation	tdvt/exprtests/standard	string.min	COUNT	Required
-Aggregation	tdvt/exprtests/standard	string.min	MIN	Required
-Aggregation	tdvt/exprtests/standard	string.replace	COUNT	Required If Supported
-Calculation	tdvt/exprtests/standard	string.replace	REPLACE	Required If Supported
-Aggregation	tdvt/exprtests/standard	string.right	COUNT	Required
-Calculation	tdvt/exprtests/standard	string.right	RIGHT	Required
-Calculation	tdvt/exprtests/standard	string.right	RIGHT	Required
-Calculation	tdvt/exprtests/standard	string.right.real	RIGHT	Required
-Calculation	tdvt/exprtests/standard	string.right.real	RIGHT	Required
-Calculation	tdvt/exprtests/standard	string.rtrim	RTRIM	Required
-Operator	tdvt/exprtests/standard	string.rtrim	+	Required
-Aggregation	tdvt/exprtests/standard	string.space	COUNT	Required
-Operator	tdvt/exprtests/standard	string.space	+	Required
-Calculation	tdvt/exprtests/standard	string.space	SPACE	Required
-Cast	tdvt/exprtests/standard	string.space.int.constant	INT	Required
-Cast	tdvt/exprtests/standard	string.space.int.constant	INT	Required
-Aggregation	tdvt/exprtests/standard	string.space.int.constant	COUNT	Required
-Calculation	tdvt/exprtests/standard	string.space.int.constant	SPACE	Required
-Calculation	tdvt/exprtests/standard	string.space.int.var	SPACE	Required
-Aggregation	tdvt/exprtests/standard	string.split	COUNT	Required
-Data Prep	tdvt/exprtests/standard	string.split	SPLIT	Required
-Calculation	tdvt/exprtests/standard	string.split	SPLIT	Required
-Aggregation	tdvt/exprtests/standard	string.split.right	COUNT	Required If Supported
-Calculation	tdvt/exprtests/standard	string.split.right	SPLIT	Required If Supported
-Data Prep	tdvt/exprtests/standard	string.split.right	SPLIT	Required If Supported
-Aggregation	tdvt/exprtests/standard	string.startswith	COUNT	Required
-Aggregation	tdvt/exprtests/standard	string.startswith	MAX	Required
-Aggregation	tdvt/exprtests/standard	string.startswith	MIN	Required
-Calculation	tdvt/exprtests/standard	string.startswith	STARTSWITH	Required
-Filters	tdvt/exprtests/standard	string.startswith	STARTSWITH	Required
-Data Prep	tdvt/exprtests/standard	string.trim	TRIM	Required If Supported
-Calculation	tdvt/exprtests/standard	string.trim	TRIM	Required If Supported
-Operator	tdvt/exprtests/standard	string.trim	+	Required If Supported
-Aggregation	tdvt/exprtests/standard	string.upper	COUNT	Required
-Calculation	tdvt/exprtests/standard	string.upper	UPPER	Required
-Calculation	tdvt/exprtests/standard	string.upper	UPPER	Required
-Aggregation	tdvt/exprtests/standard	string.utf8	COUNT	Recommended
-Calculation	tdvt/exprtests/standard	string.utf8	FIND	Recommended
-Calculation	tdvt/exprtests/standard	string.utf8	REPLACE	Recommended
-Data Prep	tdvt/exprtests/standard	string.utf8	FIND	Recommended
-Filters	tdvt/logicaltests/staples	ZTesting.Staples9	<=	Recommended
-Operator	tdvt/logicaltests/staples	ZTesting.Staples9	<=	Recommended
-Filters	tdvt/logicaltests/staples	ZTesting.Staples9	==	Recommended
-Operator	tdvt/logicaltests/staples	ZTesting.Staples9	==	Recommended
-Filters	tdvt/logicaltests/staples	ZTesting.Staples9	>=	Recommended
-Operator	tdvt/logicaltests/staples	ZTesting.Staples9	>=	Recommended
-Logical	tdvt/logicaltests/staples	ZTesting.Staples9	$SYS_NARY_AND$	Recommended
-Date Filters	tdvt/logicaltests/staples	ZTesting.Staples9	DATEPART	Recommended
-Date Aggregation	tdvt/exprtests/standard	calcs_data.dates		Required
-Cast	tdvt/exprtests/standard	date.cast.datetime	DATETIME	Required
-Calculation	tdvt/exprtests/standard	math.atan2	ATAN2	Required If Supported
-Calculation	tdvt/exprtests/standard	string.contains.empty	CONTAINS	Required
-Calculation	tdvt/exprtests/standard	string.contains.regex	CONTAINS	Required If Supported
+Test Category,Test Path Categorized,Test Name Categorized,Function Categorized,Priority
+Aggregation,tdvt/exprtests/standard,agg.avg,AVG,Required
+Aggregation,tdvt/exprtests/standard,agg.avg,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.count,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.countd,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.countd,COUNTD,Required
+Column Metadata Nullability,tdvt/exprtests/standard,agg.countd,COLUMN_NULLABILITY,Required
+Aggregation,tdvt/exprtests/standard,agg.max,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.max,MAX,Required
+Aggregation,tdvt/exprtests/standard,agg.min,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.min,MIN,Required
+Aggregation,tdvt/exprtests/standard,agg.stddev,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.stddev,STDEVP,Required
+Aggregation,tdvt/exprtests/standard,agg.stddev,STDEV,Required
+Aggregation,tdvt/exprtests/standard,agg.sum,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.sum,SUM,Required
+Aggregation,tdvt/exprtests/standard,agg.var,COUNT,Required
+Aggregation,tdvt/exprtests/standard,agg.var,VAR,Required
+Aggregation,tdvt/exprtests/standard,agg.var,VARP,Required
+Operator,tdvt/logicaltests/staples,BUGS.B14080,-,Required
+Operator,tdvt/logicaltests/staples,BUGS.B14080,!,Required
+Sets,tdvt/logicaltests/staples,BUGS.B14080,$IN_SET$,Required
+Logical,tdvt/logicaltests/staples,BUGS.B14080,$SYS_NARY_AND$,Required
+Cast,tdvt/logicaltests/staples,BUGS.B14080,FLOAT,Required
+Calculation,tdvt/logicaltests/staples,BUGS.B14080,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/staples,BUGS.B14080,ISNULL,Required
+Aggregation,tdvt/logicaltests/staples,BUGS.B14080,SUM,Required
+Filters,tdvt/logicaltests/calcs,BUGS.B1713,<=,Required
+Operator,tdvt/logicaltests/calcs,BUGS.B1713,<=,Required
+Filters,tdvt/logicaltests/calcs,BUGS.B1713,>=,Required
+Operator,tdvt/logicaltests/calcs,BUGS.B1713,>=,Required
+Logical,tdvt/logicaltests/calcs,BUGS.B1713,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/calcs,BUGS.B1713,$SYS_NARY_OR$,Required
+Aggregation,tdvt/logicaltests/calcs,BUGS.B1713,COUNT,Required
+Aggregation,tdvt/logicaltests/calcs,BUGS.B1713,SUM,Required
+Filters,tdvt/logicaltests/calcs,BUGS.B1713,TEMP_TABLES_AND_SUBQUERIES,Required
+Temp Tables and Subqueries,tdvt/logicaltests/calcs,BUGS.B1713,TEMP_TABLES_AND_SUBQUERIES,Required
+Filters,tdvt/logicaltests/staples,BUGS.B24394,<=,Required
+Operator,tdvt/logicaltests/staples,BUGS.B24394,<=,Required
+Date Filters,tdvt/logicaltests/staples,BUGS.B24394,DATEPART,Required
+Date Filters,tdvt/logicaltests/staples,BUGS.B24394,DATETRUNC,Required
+Date Filters,tdvt/logicaltests/calcs,BUGS.B26728,DATEDIFF,Required
+Bins,tdvt/logicaltests/calcs,BUGS.B26728,SYS_NUMBIN,Required
+Aggregation,tdvt/logicaltests/calcs,BUGS.B27875-asc-nulls-first,SUM,Recommended
+Filters,tdvt/logicaltests/calcs,BUGS.B27875-asc-nulls-first,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Temp Tables and Subqueries,tdvt/logicaltests/calcs,BUGS.B27875-asc-nulls-first,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Aggregation,tdvt/logicaltests/calcs,BUGS.B27875-desc-nulls-last,SUM,Recommended
+Filters,tdvt/logicaltests/calcs,BUGS.B27875-desc-nulls-last,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Temp Tables and Subqueries,tdvt/logicaltests/calcs,BUGS.B27875-desc-nulls-last,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Filters,tdvt/logicaltests/staples,BUGS.B340,<=,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B340,<=,Recommended
+Filters,tdvt/logicaltests/staples,BUGS.B340,>=,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B340,>=,Recommended
+Logical,tdvt/logicaltests/staples,BUGS.B340,$SYS_NARY_AND$,Recommended
+Aggregation,tdvt/logicaltests/staples,BUGS.B340,MIN,Recommended
+Aggregation,tdvt/logicaltests/staples,BUGS.B340,SUM,Recommended
+Temp Tables and Subqueries,tdvt/logicaltests/staples,BUGS.B340,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Filters,tdvt/logicaltests/staples,BUGS.B340,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B530764,/,Recommended
+Aggregation,tdvt/logicaltests/staples,BUGS.B530764,COUNT,Recommended
+Aggregation,tdvt/logicaltests/staples,BUGS.B530764,SUM,Recommended
+Filters,tdvt/logicaltests/calcs,BUGS.B59740,==,Required
+Operator,tdvt/logicaltests/calcs,BUGS.B59740,==,Required
+Sets,tdvt/logicaltests/calcs,BUGS.B59740,$IN_SET$,Required
+Sets,tdvt/logicaltests/calcs,BUGS.B641638,$IN_SET$,Recommended
+Aggregation,tdvt/logicaltests/calcs,BUGS.B641638,SUM,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B8888,-,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B8888,/,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B8888,+,Recommended
+Filters,tdvt/logicaltests/staples,BUGS.B8888,<,Recommended
+Operator,tdvt/logicaltests/staples,BUGS.B8888,<,Recommended
+Aggregation,tdvt/logicaltests/staples,BUGS.B8888,COUNTD,Recommended
+Date Filters,tdvt/logicaltests/staples,BUGS.B8888,DATEADD,Recommended
+Date Filters,tdvt/logicaltests/staples,BUGS.B8888,DATEPART,Recommended
+Date Filters,tdvt/logicaltests/staples,BUGS.B8888,DATETRUNC,Recommended
+Cast,tdvt/logicaltests/staples,BUGS.B8888,INT,Recommended
+Filters,tdvt/logicaltests/calcs,BUGS.TFS660780,==,Required
+Operator,tdvt/logicaltests/calcs,BUGS.TFS660780,==,Required
+Aggregation,tdvt/logicaltests/calcs,BUGS.TFS660780,COUNT,Required
+Aggregation,tdvt/logicaltests/calcs,BUGS.TFS660780,SUM,Required
+Filters,tdvt/logicaltests/union,calcs.union,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Temp Tables and Subqueries,tdvt/logicaltests/union,calcs.union,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Union,tdvt/logicaltests/union,calcs.union,UNION,Required If Supported
+Aggregation,tdvt/exprtests/standard,calcs_data,MAX,Required If Supported
+Time Values,tdvt/exprtests/standard,calcs_data,TIME1899,Required If Supported
+Aggregation,tdvt/exprtests/standard,calcs_data,MIN,Required If Supported
+Cast,tdvt/exprtests/standard,cast.float,FLOAT,Required
+Cast,tdvt/exprtests/standard,cast.float.string,FLOAT,Required
+Operator,tdvt/exprtests/standard,cast.float.string,+,Required
+Calculation,tdvt/exprtests/standard,cast.float.string,RIGHT,Required
+Cast,tdvt/exprtests/standard,cast.float.string,FLOAT,Required
+Cast,tdvt/exprtests/standard,cast.int,INT,Required
+Cast,tdvt/exprtests/standard,cast.int.nulls,INT,Required
+Cast,tdvt/exprtests/standard,cast.int.nulls,INT,Required
+Cast,tdvt/exprtests/standard,cast.int.nulls,STR,Required
+Cast,tdvt/exprtests/standard,cast.int.nulls,STR,Required
+Operator,tdvt/exprtests/standard,cast.int.nulls,+,Required
+Cast,tdvt/exprtests/standard,cast.str,STR,Required
+Cast,tdvt/exprtests/standard,cast.str.date,DATE,Required
+Cast,tdvt/exprtests/standard,cast.str.date,STR,Required
+Cast,tdvt/exprtests/standard,cast.str.str,STR,Required
+Aggregation,tdvt/exprtests/standard,date.B639952,COUNT,Required
+Aggregation,tdvt/exprtests/standard,date.B639952,SUM,Required
+Cast,tdvt/exprtests/standard,date.B639952,DATE,Required
+Cast,tdvt/exprtests/standard,date.B639952,DATE,Required
+Date Filters,tdvt/exprtests/standard,date.B639952,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.B639952,DATEADD,Required
+Operator,tdvt/exprtests/standard,date.B639952,+,Required
+Operator,tdvt/exprtests/standard,date.B639952,-,Required
+Cast,tdvt/exprtests/standard,date.cast.date,DATE,Required
+Aggregation,tdvt/exprtests/standard,date.cast.datetime.630831,COUNT,Smoke
+Cast,tdvt/exprtests/standard,date.cast.datetime.630831,DATE,Smoke
+Cast,tdvt/exprtests/standard,date.cast.datetime.630831,DATE,Smoke
+Cast,tdvt/exprtests/standard,date.cast.float,FLOAT,Recommended
+Aggregation,tdvt/exprtests/standard,date.cast.float.extended,COUNT,Recommended
+Cast,tdvt/exprtests/standard,date.cast.float.extended,FLOAT,Recommended
+Cast,tdvt/exprtests/standard,date.cast.float.extended,FLOAT,Recommended
+Aggregation,tdvt/exprtests/standard,date.cast.int.extended,COUNT,Recommended
+Cast,tdvt/exprtests/standard,date.cast.int.extended,INT,Recommended
+Cast,tdvt/exprtests/standard,date.cast.int.extended,INT,Recommended
+Cast,tdvt/exprtests/standard,date.cast.num_to_date,DATE,Recommended
+Calculation,tdvt/exprtests/standard,date.cast.str,TRIM,Required
+Cast,tdvt/exprtests/standard,date.cast.str,STR,Required
+Data Prep,tdvt/exprtests/standard,date.cast.str,TRIM,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.day,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.dayofyear,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.hour,DATEADD,Required
+Aggregation,tdvt/exprtests/iso8601week,date.dateadd.iso-week,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.dateadd.iso-week,DATEADD,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.dateadd.iso-weekday,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.dateadd.iso-weekday,DATEADD,Recommended
+Date Filters,tdvt/exprtests/standard,date.dateadd.minute,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.month,DATEADD,Required
+Cast,tdvt/exprtests/standard,date.dateadd.nulls,DATE,Required If Supported
+Aggregation,tdvt/exprtests/standard,date.dateadd.nulls,COUNT,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.dateadd.nulls,DATEADD,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.dateadd.quarter,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.second,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.week,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.weekday,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.dateadd.year,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.day,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.dayofyear,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.hour,DATEDIFF,Required
+Aggregation,tdvt/exprtests/iso8601week,date.datediff.iso-week,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datediff.iso-week,DATEDIFF,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datediff.iso-weekday,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datediff.iso-weekday,DATEDIFF,Recommended
+Date Filters,tdvt/exprtests/standard,date.datediff.minute,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.month,DATEDIFF,Required
+Aggregation,tdvt/exprtests/standard,date.datediff.nulls,COUNT,Required If Supported
+Cast,tdvt/exprtests/standard,date.datediff.nulls,DATE,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datediff.nulls,DATEDIFF,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datediff.quarter,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.second,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.day,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.dayofyear,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.hour,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.minute,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.month,DATEDIFF,Required
+Aggregation,tdvt/exprtests/standard,date.datediff.sow.nulls,COUNT,Recommended
+Cast,tdvt/exprtests/standard,date.datediff.sow.nulls,DATE,Recommended
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.nulls,DATEDIFF,Recommended
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.quarter,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.second,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.week,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.weekday,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.sow.year,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.week,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.week.extended,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.weekday,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datediff.year,DATEDIFF,Required
+Date Filters,tdvt/exprtests/standard,date.datename.day,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.dayofyear,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.hour,DATENAME,Required
+Aggregation,tdvt/exprtests/iso8601week,date.datename.iso-quarter,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datename.iso-quarter,DATENAME,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datename.iso-week,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datename.iso-week,DATENAME,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datename.iso-weekday,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datename.iso-weekday,DATENAME,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datename.iso-year,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datename.iso-year,DATENAME,Recommended
+Date Filters,tdvt/exprtests/standard,date.datename.minute,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.month,DATENAME,Required
+Cast,tdvt/exprtests/standard,date.datename.nulls,DATE,Required If Supported
+Aggregation,tdvt/exprtests/standard,date.datename.nulls,COUNT,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datename.nulls,DATENAME,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datename.quarter,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.second,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.day,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.dayofyear,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.hour,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.minute,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.month,DATENAME,Required
+Aggregation,tdvt/exprtests/standard,date.datename.sow.nulls,COUNT,Recommended
+Cast,tdvt/exprtests/standard,date.datename.sow.nulls,DATE,Recommended
+Date Filters,tdvt/exprtests/standard,date.datename.sow.nulls,DATENAME,Recommended
+Date Filters,tdvt/exprtests/standard,date.datename.sow.quarter,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.second,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.week,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.weekday,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.sow.year,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.week,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.weekday,DATENAME,Required
+Date Filters,tdvt/exprtests/standard,date.datename.year,DATENAME,Required
+Aggregation,tdvt/exprtests/dateparse,date.dateparse.hour,COUNT,Recommended
+Date Filters,tdvt/exprtests/dateparse,date.dateparse.hour,DATEPARSE,Recommended
+Aggregation,tdvt/exprtests/dateparse,date.dateparse.month,COUNT,Recommended
+Date Filters,tdvt/exprtests/dateparse,date.dateparse.month,DATEPARSE,Recommended
+Aggregation,tdvt/exprtests/dateparse,date.dateparse.weekday,COUNT,Recommended
+Date Filters,tdvt/exprtests/dateparse,date.dateparse.weekday,DATEPARSE,Recommended
+Date Filters,tdvt/exprtests/dateparse,date.dateparse.year,DATEPARSE,Recommended
+Aggregation,tdvt/exprtests/dateparse,date.dateparse.year,COUNT,Recommended
+Date Filters,tdvt/exprtests/standard,date.datepart.dateadd.defect603107,DATEADD,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.dateadd.defect603107,DATEPART,Required
+Operator,tdvt/exprtests/standard,date.datepart.dateadd.defect603107,+,Required
+Operator,tdvt/exprtests/standard,date.datepart.dateadd.defect603107,-,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.day,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.dayofyear,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.hour,DATEPART,Required
+Aggregation,tdvt/exprtests/iso8601week,date.datepart.iso-quarter,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datepart.iso-quarter,DATEPART,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datepart.iso-week,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datepart.iso-week,DATEPART,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datepart.iso-weekday,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datepart.iso-weekday,DATEPART,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datepart.iso-year,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datepart.iso-year,DATEPART,Recommended
+Date Filters,tdvt/exprtests/standard,date.datepart.minute,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.month,DATEPART,Required
+Aggregation,tdvt/exprtests/standard,date.datepart.nulls,COUNT,Required If Supported
+Cast,tdvt/exprtests/standard,date.datepart.nulls,DATE,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datepart.nulls,DATEPART,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datepart.quarter,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.second,DATEPART,Required
+Aggregation,tdvt/exprtests/standard,date.datepart.second.ms,COUNT,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.second.ms,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.day,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.dayofyear,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.hour,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.minute,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.month,DATEPART,Required
+Cast,tdvt/exprtests/standard,date.datepart.sow.nulls,DATE,Recommended
+Aggregation,tdvt/exprtests/standard,date.datepart.sow.nulls,COUNT,Recommended
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.nulls,DATEPART,Recommended
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.quarter,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.second,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.week,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.weekday,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.sow.year,DATEPART,Required
+Cast,tdvt/exprtests/standard,date.datepart.week,DATE,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.week,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.weekday,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datepart.year,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.day,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.dayofyear,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.hour,DATETRUNC,Required
+Aggregation,tdvt/exprtests/iso8601week,date.datetrunc.iso-quarter,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datetrunc.iso-quarter,DATEPART,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datetrunc.iso-quarter,DATETRUNC,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datetrunc.iso-week,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datetrunc.iso-week,DATETRUNC,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datetrunc.iso-weekday,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datetrunc.iso-weekday,DATETRUNC,Recommended
+Aggregation,tdvt/exprtests/iso8601week,date.datetrunc.iso-year,COUNT,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datetrunc.iso-year,DATEPART,Recommended
+Date Filters,tdvt/exprtests/iso8601week,date.datetrunc.iso-year,DATETRUNC,Recommended
+Date Filters,tdvt/exprtests/standard,date.datetrunc.minute,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.month,DATETRUNC,Required
+Cast,tdvt/exprtests/standard,date.datetrunc.nulls,DATE,Required If Supported
+Aggregation,tdvt/exprtests/standard,date.datetrunc.nulls,COUNT,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datetrunc.nulls,DATETRUNC,Required If Supported
+Date Filters,tdvt/exprtests/standard,date.datetrunc.quarter,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.second,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.day,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.dayofyear,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.hour,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.minute,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.month,DATETRUNC,Required
+Aggregation,tdvt/exprtests/standard,date.datetrunc.sow.nulls,COUNT,Recommended
+Cast,tdvt/exprtests/standard,date.datetrunc.sow.nulls,DATE,Recommended
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.nulls,DATETRUNC,Recommended
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.quarter,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.second,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.week,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.weekday,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.sow.year,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.week,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.weekday,DATETRUNC,Required
+Date Filters,tdvt/exprtests/standard,date.datetrunc.year,DATETRUNC,Required
+Aggregation,tdvt/exprtests/standard,date.math,COUNT,Recommended
+Aggregation,tdvt/exprtests/standard,date.math,MAX,Recommended
+Aggregation,tdvt/exprtests/standard,date.math,MIN,Recommended
+Date Filters,tdvt/exprtests/standard,date.math,DATEDIFF,Recommended
+Date Filters,tdvt/exprtests/standard,date.math,NOW,Recommended
+Date Filters,tdvt/exprtests/standard,date.math,TODAY,Recommended
+Filters,tdvt/exprtests/standard,date.math,<,Recommended
+Filters,tdvt/exprtests/standard,date.math,<=,Recommended
+Filters,tdvt/exprtests/standard,date.math,==,Recommended
+Filters,tdvt/exprtests/standard,date.math,>,Recommended
+Filters,tdvt/exprtests/standard,date.math,>=,Recommended
+Operator,tdvt/exprtests/standard,date.math,!=,Recommended
+Operator,tdvt/exprtests/standard,date.math,+,Recommended
+Operator,tdvt/exprtests/standard,date.math,-,Recommended
+Operator,tdvt/exprtests/standard,date.math,<,Recommended
+Operator,tdvt/exprtests/standard,date.math,<=,Recommended
+Operator,tdvt/exprtests/standard,date.math,==,Recommended
+Operator,tdvt/exprtests/standard,date.math,>,Recommended
+Operator,tdvt/exprtests/standard,date.math,>=,Recommended
+Operator,tdvt/exprtests/standard,date.math.date_minus_date,-,Recommended
+Aggregation,tdvt/exprtests/standard,date.max,COUNT,Required
+Aggregation,tdvt/exprtests/standard,date.max,MAX,Required
+Aggregation,tdvt/exprtests/standard,date.min,COUNT,Required
+Aggregation,tdvt/exprtests/standard,date.min,MIN,Required
+Cast,tdvt/exprtests/standard,date.misc,DATE,Required
+Date Filters,tdvt/exprtests/standard,date.misc,YEAR,Required
+Date Aggregation,tdvt/exprtests/standard,date.misc,YEAR,Required
+Calculation,tdvt/exprtests/standard,date.misc,YEAR,Required
+Date Filters,tdvt/exprtests/standard,date.misc,MONTH,Required
+Date Aggregation,tdvt/exprtests/standard,date.misc,MONTH,Required
+Calculation,tdvt/exprtests/standard,date.misc,MONTH,Required
+Date Aggregation,tdvt/exprtests/standard,date.misc,DAY,Required
+Date Filters,tdvt/exprtests/standard,date.misc,DAY,Required
+Calculation,tdvt/exprtests/standard,date.misc,DAY,Required
+Aggregation,tdvt/exprtests/standard,date.now,COUNT,Recommended
+Date Filters,tdvt/exprtests/standard,date.now,DATEPART,Recommended
+Aggregation,tdvt/exprtests/standard,date.now,MIN,Recommended
+Filters,tdvt/exprtests/standard,date.now,==,Recommended
+Operator,tdvt/exprtests/standard,date.now,==,Recommended
+Aggregation,tdvt/exprtests/standard,date.now,MAX,Recommended
+Date Filters,tdvt/exprtests/standard,date.now,DATEPART,Recommended
+Date Filters,tdvt/exprtests/standard,date.now,NOW,Recommended
+Date Filters,tdvt/exprtests/standard,date.now,NOW,Recommended
+Aggregation,tdvt/exprtests/standard,date.today,COUNT,Required
+Date Filters,tdvt/exprtests/standard,date.today,DATEPART,Required
+Aggregation,tdvt/exprtests/standard,date.today,MIN,Required
+Filters,tdvt/exprtests/standard,date.today,==,Required
+Operator,tdvt/exprtests/standard,date.today,==,Required
+Aggregation,tdvt/exprtests/standard,date.today,MAX,Required
+Date Filters,tdvt/exprtests/standard,date.today,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,date.today,TODAY,Required
+Date Filters,tdvt/exprtests/standard,date.today,TODAY,Required
+Cast,tdvt/exprtests/standard,datetime.cast.date,DATE,Required
+Cast,tdvt/exprtests/standard,datetime.cast.float,FLOAT,Required
+Calculation,tdvt/exprtests/standard,datetime.cast.str,TRIM,Required
+Cast,tdvt/exprtests/standard,datetime.cast.str,STR,Required
+Data Prep,tdvt/exprtests/standard,datetime.cast.str,TRIM,Required
+Operator,tdvt/logicaltests/staples,Filter.Add_to_context,!,Required
+Filters,tdvt/logicaltests/staples,Filter.Add_to_context,==,Required
+Operator,tdvt/logicaltests/staples,Filter.Add_to_context,==,Required
+Logical,tdvt/logicaltests/staples,Filter.Add_to_context,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Filter.Add_to_context,SUM,Required
+Sets,tdvt/logicaltests/calcs,Filter.Date_In,$IN_SET$,Required
+Filters,tdvt/logicaltests/calcs,Filter.datetime_fractional,==,Recommended
+Operator,tdvt/logicaltests/calcs,Filter.datetime_fractional,==,Recommended
+Temp Tables and Subqueries,tdvt/logicaltests/calcs,Filter.datetime_fractional,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Filters,tdvt/logicaltests/calcs,Filter.datetime_fractional,TEMP_TABLES_AND_SUBQUERIES,Recommended
+Operator,tdvt/logicaltests/calcs,Filter.Exclude-list-not-null,!,Required
+Sets,tdvt/logicaltests/calcs,Filter.Exclude-list-not-null,$IN_SET$,Required
+Logical,tdvt/logicaltests/calcs,Filter.Exclude-list-not-null,$SYS_NARY_OR$,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.Exclude-list-not-null,ISNULL,Required
+Calculation,tdvt/logicaltests/calcs,Filter.Exclude-list-not-null,ISNULL,Required
+Operator,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,!,Required
+Filters,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,<=,Required
+Operator,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,<=,Required
+Filters,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,>=,Required
+Operator,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,>=,Required
+Logical,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,$SYS_NARY_OR$,Required
+Calculation,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.Exclude-range-not-null,ISNULL,Required
+Filters,tdvt/logicaltests/calcs,Filter.FilterBy-to-no-results,>,Required
+Operator,tdvt/logicaltests/calcs,Filter.FilterBy-to-no-results,>,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.FilterBy-to-no-results,SUM,Required
+Filters,tdvt/logicaltests/staples,Filter.Q_date_instance_filter,<=,Required
+Operator,tdvt/logicaltests/staples,Filter.Q_date_instance_filter,<=,Required
+Filters,tdvt/logicaltests/staples,Filter.Q_date_instance_filter,>=,Required
+Operator,tdvt/logicaltests/staples,Filter.Q_date_instance_filter,>=,Required
+Logical,tdvt/logicaltests/staples,Filter.Q_date_instance_filter,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Filter.Q_date_instance_filter,COUNT,Required
+Filters,tdvt/logicaltests/staples,Filter.Q_date_month_instance_filter,<=,Required
+Operator,tdvt/logicaltests/staples,Filter.Q_date_month_instance_filter,<=,Required
+Date Filters,tdvt/logicaltests/staples,Filter.Q_date_month_instance_filter,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Filter.Q_date_month_instance_filter,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-max-NotNull,<=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-max-NotNull,<=,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-max-NotNull,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-max-Null,<=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-max-Null,<=,Required
+Logical,tdvt/logicaltests/calcs,Filter.QFilter-max-Null,$SYS_NARY_OR$,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.QFilter-max-Null,ISNULL,Required
+Calculation,tdvt/logicaltests/calcs,Filter.QFilter-max-Null,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-max-Null,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-min-NotNull,>=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-min-NotNull,>=,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-min-NotNull,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-min-Null,>=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-min-Null,>=,Required
+Logical,tdvt/logicaltests/calcs,Filter.QFilter-min-Null,$SYS_NARY_OR$,Required
+Calculation,tdvt/logicaltests/calcs,Filter.QFilter-min-Null,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.QFilter-min-Null,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-min-Null,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-minmax-NotNull,<=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-minmax-NotNull,<=,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-minmax-NotNull,>=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-minmax-NotNull,>=,Required
+Logical,tdvt/logicaltests/calcs,Filter.QFilter-minmax-NotNull,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-minmax-NotNull,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,<=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,<=,Required
+Filters,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,>=,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,>=,Required
+Logical,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,$SYS_NARY_OR$,Required
+Calculation,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-minmax-Null,SUM,Required
+Operator,tdvt/logicaltests/calcs,Filter.QFilter-NotNull,!,Required
+Calculation,tdvt/logicaltests/calcs,Filter.QFilter-NotNull,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.QFilter-NotNull,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-NotNull,SUM,Required
+Calculation,tdvt/logicaltests/calcs,Filter.QFilter-Null,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/calcs,Filter.QFilter-Null,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.QFilter-Null,SUM,Required
+Filters,tdvt/logicaltests/staples,Filter.slicing_Q_date_instance_filter,<=,Required
+Operator,tdvt/logicaltests/staples,Filter.slicing_Q_date_instance_filter,<=,Required
+Filters,tdvt/logicaltests/staples,Filter.slicing_Q_date_instance_filter,>=,Required
+Operator,tdvt/logicaltests/staples,Filter.slicing_Q_date_instance_filter,>=,Required
+Logical,tdvt/logicaltests/staples,Filter.slicing_Q_date_instance_filter,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Filter.slicing_Q_date_instance_filter,SUM,Required
+Date Filters,tdvt/logicaltests/staples,Filter.slicing_Q_date_month_instance_filter,DATEPART,Required
+Filters,tdvt/logicaltests/calcs,Filter.TopN-context,<=,Required
+Operator,tdvt/logicaltests/calcs,Filter.TopN-context,<=,Required
+Filters,tdvt/logicaltests/calcs,Filter.TopN-context,>=,Required
+Operator,tdvt/logicaltests/calcs,Filter.TopN-context,>=,Required
+Logical,tdvt/logicaltests/calcs,Filter.TopN-context,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/calcs,Filter.TopN-context,$SYS_NARY_OR$,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.TopN-context,COUNT,Required
+Aggregation,tdvt/logicaltests/calcs,Filter.TopN-context,SUM,Required
+Filters,tdvt/logicaltests/calcs,Filter.TopN-context,TEMP_TABLES_AND_SUBQUERIES,Required
+Temp Tables and Subqueries,tdvt/logicaltests/calcs,Filter.TopN-context,TEMP_TABLES_AND_SUBQUERIES,Required
+Filters,tdvt/logicaltests/staples,Filter.Trademark,<=,Smoke
+Operator,tdvt/logicaltests/staples,Filter.Trademark,<=,Smoke
+Filters,tdvt/logicaltests/staples,Filter.Trademark,>=,Smoke
+Operator,tdvt/logicaltests/staples,Filter.Trademark,>=,Smoke
+Sets,tdvt/logicaltests/staples,Filter.Trademark,$IN_SET$,Smoke
+Logical,tdvt/logicaltests/staples,Filter.Trademark,$SYS_NARY_AND$,Smoke
+Logical,tdvt/logicaltests/staples,Filter.Trademark,$SYS_NARY_OR$,Smoke
+Aggregation,tdvt/logicaltests/staples,Filter.Trademark,SUM,Smoke
+Column Metadata Nullability,tdvt/logicaltests/calcs,join.null.bool,COLUMN_NULLABILITY,Required If Supported
+Aggregation,tdvt/logicaltests/calcs,join.null.bool,SUM,Required If Supported
+Column Metadata Nullability,tdvt/logicaltests/calcs,join.null.date,COLUMN_NULLABILITY,Required If Supported
+Aggregation,tdvt/logicaltests/calcs,join.null.date,SUM,Required If Supported
+Column Metadata Nullability,tdvt/logicaltests/calcs,join.null.datetime,COLUMN_NULLABILITY,Required If Supported
+Aggregation,tdvt/logicaltests/calcs,join.null.datetime,SUM,Required If Supported
+Column Metadata Nullability,tdvt/logicaltests/calcs,join.null.int,COLUMN_NULLABILITY,Required If Supported
+Aggregation,tdvt/logicaltests/calcs,join.null.int,SUM,Required If Supported
+Column Metadata Nullability,tdvt/logicaltests/calcs,join.null.real,COLUMN_NULLABILITY,Required If Supported
+Aggregation,tdvt/logicaltests/calcs,join.null.real,SUM,Required If Supported
+Column Metadata Nullability,tdvt/logicaltests/calcs,join.null.str,COLUMN_NULLABILITY,Required If Supported
+Aggregation,tdvt/logicaltests/calcs,join.null.str,SUM,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.1_Difference From with Cross Join,COUNT,Required If Supported
+Date Filters,tdvt/logicaltests/lod,lod.1_Difference From with Cross Join,DATEDIFF,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.1_Difference From with Cross Join,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.1_Difference From with Cross Join,MIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.1_Difference From with Cross Join,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.10_As in-out Set,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.10_As in-out Set,MIN,Required If Supported
+Calculation,tdvt/logicaltests/lod,lod.11_As in-out Set,ISNULL,Required If Supported
+NULL Semantics,tdvt/logicaltests/lod,lod.11_As in-out Set,ISNULL,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.11_As in-out Set,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.11_As in-out Set,MIN,Required If Supported
+Filters,tdvt/logicaltests/lod,lod.11_As in-out Set,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Temp Tables and Subqueries,tdvt/logicaltests/lod,lod.11_As in-out Set,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.12_As in-out Set,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.12_As in-out Set,MIN,Required If Supported
+Calculation,tdvt/logicaltests/lod,lod.13_As in-out Set,ISNULL,Required If Supported
+NULL Semantics,tdvt/logicaltests/lod,lod.13_As in-out Set,ISNULL,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.13_As in-out Set,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.13_As in-out Set,MIN,Required If Supported
+Filters,tdvt/logicaltests/lod,lod.13_As in-out Set,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Temp Tables and Subqueries,tdvt/logicaltests/lod,lod.13_As in-out Set,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Operator,tdvt/logicaltests/lod,lod.14_As in-out Set,!,Required If Supported
+Sets,tdvt/logicaltests/lod,lod.14_As in-out Set,$IN_SET$,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.14_As in-out Set,AVG,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.14_As in-out Set,COUNT,Required If Supported
+Calculation,tdvt/logicaltests/lod,lod.14_As in-out Set,ISNULL,Required If Supported
+NULL Semantics,tdvt/logicaltests/lod,lod.14_As in-out Set,ISNULL,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.14_As in-out Set,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.14_As in-out Set,MAX,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.14_As in-out Set,MIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.14_As in-out Set,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.15_As Bin,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.15_As Bin,SUM,Required If Supported
+Bins,tdvt/logicaltests/lod,lod.15_As Bin,SYS_NUMBIN,Required If Supported
+Filters,tdvt/logicaltests/lod,lod.16_As Group,==,Required If Supported
+Operator,tdvt/logicaltests/lod,lod.16_As Group,==,Required If Supported
+Sets,tdvt/logicaltests/lod,lod.16_As Group,$IN_SET$,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.16_As Group,AVG,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.16_As Group,COUNT,Required If Supported
+Date Filters,tdvt/logicaltests/lod,lod.16_As Group,DATEDIFF,Required If Supported
+Date Filters,tdvt/logicaltests/lod,lod.16_As Group,DATEPART,Required If Supported
+Cast,tdvt/logicaltests/lod,lod.16_As Group,FLOAT,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.16_As Group,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.16_As Group,MIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.16_As Group,SUM,Required If Supported
+Operator,tdvt/logicaltests/lod,lod.17_Nesting,/,Required If Supported
+Operator,tdvt/logicaltests/lod,lod.17_Nesting,+,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.17_Nesting,AVG,Required If Supported
+Cast,tdvt/logicaltests/lod,lod.17_Nesting,FLOAT,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.17_Nesting,LOD_STYLE_JOIN,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.2_Cross Join,$AGGREGATE$,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.2_Cross Join,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.2_Cross Join,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.3_Disjoint LOD,$AGGREGATE$,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.3_Disjoint LOD,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.3_Disjoint LOD,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.4_Subset Fixed,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.4_Subset Fixed,SUM,Required If Supported
+Cast,tdvt/logicaltests/lod,lod.5_Subset Fixed - 2,FLOAT,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.5_Subset Fixed - 2,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.5_Subset Fixed - 2,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.6_Include - 1,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.6_Include - 1,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.7_Percent of Total 1,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.7_Percent of Total 1,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.8_Precent of Total 2,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.8_Precent of Total 2,SUM,Required If Supported
+Date Filters,tdvt/logicaltests/lod,lod.9_Fixed as Dimension,DATEPART,Required If Supported
+Calculation,tdvt/logicaltests/lod,lod.9_Fixed as Dimension,FLOOR,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.9_Fixed as Dimension,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.9_Fixed as Dimension,MIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.9_Fixed as Dimension,SUM,Required If Supported
+Calculation,tdvt/logicaltests/lod,lod.calc.1.TopN,FLOOR,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.1.TopN,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.1.TopN,MIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.1.TopN,SUM,Required If Supported
+Filters,tdvt/logicaltests/lod,lod.calc.1.TopN,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Temp Tables and Subqueries,tdvt/logicaltests/lod,lod.calc.1.TopN,TEMP_TABLES_AND_SUBQUERIES,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.11.Exclude,COUNT,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.11.Exclude,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.11.Exclude,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.2.Two-level Agg,$AGGREGATE$,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.2.Two-level Agg,AVG,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.2.Two-level Agg,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.2.Two-level Agg,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.3.LOD Metadata,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.3.LOD Metadata,SUM,Required If Supported
+Cast,tdvt/logicaltests/lod,lod.calc.4.Lookup,FLOAT,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.4.Lookup,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.4.Lookup,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.5.LOD Set,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.5.LOD Set,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.6. LOD Dimension,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.6. LOD Dimension,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.7. LOD Bins,$AGGREGATE$,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.7. LOD Bins,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.7. LOD Bins,SUM,Required If Supported
+Bins,tdvt/logicaltests/lod,lod.calc.7. LOD Bins,SYS_NUMBIN,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.8. Include,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.8. Include,SUM,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.9.Fixed,$AGGREGATE$,Required If Supported
+Level of Detail,tdvt/logicaltests/lod,lod.calc.9.Fixed,LOD_STYLE_JOIN,Required If Supported
+Aggregation,tdvt/logicaltests/lod,lod.calc.9.Fixed,SUM,Required If Supported
+Level of Detail,tdvt/exprtests/lodcalcs,lod.calcs,$AGGREGATE$,Required If Supported
+Table Calc,tdvt/exprtests/lodcalcs,lod.calcs,INDEX,Required If Supported
+Aggregation,tdvt/exprtests/lodcalcs,lod.calcs,AVG,Required If Supported
+Aggregation,tdvt/exprtests/lodcalcs,lod.calcs,COUNT,Required If Supported
+Aggregation,tdvt/exprtests/lodcalcs,lod.calcs,SUM,Required If Supported
+Calculation,tdvt/exprtests/lodcalcs,lod.calcs,EXCLUDE,Required If Supported
+Calculation,tdvt/exprtests/lodcalcs,lod.calcs,FIXED,Required If Supported
+Level of Detail,tdvt/exprtests/lodcalcs,lod.calcs,EXCLUDE,Required If Supported
+Level of Detail,tdvt/exprtests/lodcalcs,lod.calcs,FIXED,Required If Supported
+Operator,tdvt/exprtests/lodcalcs,lod.calcs,/,Required If Supported
+Logical,tdvt/exprtests/standard,logical,$CASE$,Required
+Aggregation,tdvt/exprtests/standard,logical,MIN,Required
+Cast,tdvt/exprtests/standard,logical,INT,Required
+Filters,tdvt/exprtests/standard,logical,LOWER,Required
+Calculation,tdvt/exprtests/standard,logical,LOWER,Required
+NULL Semantics,tdvt/exprtests/standard,logical,ISNULL,Required
+Calculation,tdvt/exprtests/standard,logical,ISNULL,Required
+Date Filters,tdvt/exprtests/standard,logical,DATEPART,Required
+Operator,tdvt/exprtests/standard,logical,!=,Required
+Operator,tdvt/exprtests/standard,logical,!,Required
+Aggregation,tdvt/exprtests/standard,logical,MIN,Required
+Calculation,tdvt/exprtests/standard,logical,IFNULL,Required
+Logical,tdvt/exprtests/standard,logical,IIF,Required
+Filters,tdvt/exprtests/standard,logical,>,Required
+Operator,tdvt/exprtests/standard,logical,>,Required
+Aggregation,tdvt/exprtests/standard,logical,COUNT,Required
+Date Filters,tdvt/exprtests/standard,logical,DATEPART,Required
+Filters,tdvt/exprtests/standard,logical,==,Required
+Operator,tdvt/exprtests/standard,logical,==,Required
+NULL Semantics,tdvt/exprtests/standard,logical,ISNULL,Required
+Calculation,tdvt/exprtests/standard,logical,ISNULL,Required
+Logical,tdvt/exprtests/standard,logical,IIF,Required
+Operator,tdvt/exprtests/standard,logical,&&,Required
+Logical,tdvt/exprtests/standard,logical,$IF$,Required
+Sets,tdvt/exprtests/standard,logical,$IN_SET$,Required
+Filters,tdvt/exprtests/standard,logical,LOWER,Required
+Calculation,tdvt/exprtests/standard,logical,LOWER,Required
+Cast,tdvt/exprtests/standard,logical,INT,Required
+Aggregation,tdvt/exprtests/standard,logical,MAX,Required
+Logical,tdvt/exprtests/standard,logical.bool,$IF$,Required
+Aggregation,tdvt/exprtests/standard,logical.bool,MAX,Required
+Aggregation,tdvt/exprtests/standard,logical.bool,MIN,Required
+Logical,tdvt/exprtests/standard,logical.bool,IIF,Required
+Logical,tdvt/exprtests/standard,logical.bool,IIF,Required
+Calculation,tdvt/exprtests/standard,logical.bool,ISNULL,Required
+Calculation,tdvt/exprtests/standard,logical.bool,ISNULL,Required
+Cast,tdvt/exprtests/standard,logical.bool,INT,Required
+Cast,tdvt/exprtests/standard,logical.bool,INT,Required
+Filters,tdvt/exprtests/standard,logical.bool,==,Required
+NULL Semantics,tdvt/exprtests/standard,logical.bool,ISNULL,Required
+NULL Semantics,tdvt/exprtests/standard,logical.bool,ISNULL,Required
+Operator,tdvt/exprtests/standard,logical.bool,==,Required
+Filters,tdvt/exprtests/standard,logical.case.null,==,Required
+Operator,tdvt/exprtests/standard,logical.case.null,==,Required
+Sets,tdvt/exprtests/standard,logical.case.null,$IN_SET$,Required
+Logical,tdvt/exprtests/standard,logical.case.null,$CASE$,Required
+Date Filters,tdvt/exprtests/standard,logical.case.null,DATEPART,Required
+Date Filters,tdvt/exprtests/standard,logical.case.null,DATEPART,Required
+Logical,tdvt/exprtests/standard,logical.case.str,$CASE$,Required
+Sets,tdvt/exprtests/standard,logical.case.str,$IN_SET$,Required
+Filters,tdvt/exprtests/standard,logical.case.str,==,Required
+Operator,tdvt/exprtests/standard,logical.case.str,==,Required
+Aggregation,tdvt/exprtests/standard,logical.ifnull,COUNT,Required
+Aggregation,tdvt/exprtests/standard,logical.ifnull,COUNTD,Required
+Calculation,tdvt/exprtests/standard,logical.ifnull,IFNULL,Required
+Calculation,tdvt/exprtests/standard,math.abs,ABS,Required
+Calculation,tdvt/exprtests/standard,math.abs,ABS,Required
+Calculation,tdvt/exprtests/standard,math.acos,ACOS,Recommended
+Calculation,tdvt/exprtests/standard,math.acos,ACOS,Recommended
+Operator,tdvt/exprtests/standard,math.acos,/,Recommended
+Calculation,tdvt/exprtests/standard,math.asin,ASIN,Recommended
+Calculation,tdvt/exprtests/standard,math.asin,ASIN,Recommended
+Operator,tdvt/exprtests/standard,math.asin,/,Recommended
+Calculation,tdvt/exprtests/standard,math.atan,ATAN,Recommended
+Calculation,tdvt/exprtests/standard,math.atan,ATAN,Recommended
+Calculation,tdvt/exprtests/standard,math.atan,ATAN2,Recommended
+Calculation,tdvt/exprtests/standard,math.atan,ATAN2,Recommended
+Calculation,tdvt/exprtests/standard,math.ceilfloor,CEILING,Required
+Calculation,tdvt/exprtests/standard,math.ceilfloor,FLOOR,Required
+Operator,tdvt/exprtests/standard,math.ceilfloor,+,Required
+Calculation,tdvt/exprtests/standard,math.cos,COS,Required
+Calculation,tdvt/exprtests/standard,math.cos,COS,Required
+Calculation,tdvt/exprtests/standard,math.cot,COT,Required
+Calculation,tdvt/exprtests/standard,math.cot,COT,Required
+Calculation,tdvt/exprtests/standard,math.degree,DEGREES,Required
+Calculation,tdvt/exprtests/standard,math.degree,DEGREES,Required
+Calculation,tdvt/exprtests/standard,math.div,DIV,Required
+Calculation,tdvt/exprtests/standard,math.div,DIV,Required
+Operator,tdvt/exprtests/standard,math.exp,*,Required
+Calculation,tdvt/exprtests/standard,math.exp,EXP,Required
+Calculation,tdvt/exprtests/standard,math.exp,EXP,Required
+Mapping,tdvt/exprtests/standard,math.hexbin,HEXBINX,Recommended
+Mapping,tdvt/exprtests/standard,math.hexbin,HEXBINY,Recommended
+Calculation,tdvt/exprtests/standard,math.ln,LN,Required
+Calculation,tdvt/exprtests/standard,math.ln,LN,Required
+Calculation,tdvt/exprtests/standard,math.log,LOG,Required
+Calculation,tdvt/exprtests/standard,math.log,LOG,Required
+Aggregation,tdvt/exprtests/standard,math.max,COUNT,Required
+Aggregation,tdvt/exprtests/standard,math.max,MAX,Required
+Aggregation,tdvt/exprtests/standard,math.min,COUNT,Required
+Aggregation,tdvt/exprtests/standard,math.min,MIN,Required
+Aggregation,tdvt/exprtests/standard,math.pi,COUNT,Required
+Calculation,tdvt/exprtests/standard,math.pi,PI,Required
+Calculation,tdvt/exprtests/standard,math.pi,PI,Required
+Operator,tdvt/exprtests/standard,math.pi,*,Required
+Table Calc,tdvt/exprtests/standard,math.power,POWER,Required
+Calculation,tdvt/exprtests/standard,math.power,POWER,Required
+Calculation,tdvt/exprtests/standard,math.power.real,POWER,Recommended
+Calculation,tdvt/exprtests/standard,math.power.real,POWER,Recommended
+Operator,tdvt/exprtests/standard,math.power.real,*,Recommended
+Table Calc,tdvt/exprtests/standard,math.power.real,POWER,Recommended
+Table Calc,tdvt/exprtests/standard,math.power.real,POWER,Recommended
+Calculation,tdvt/exprtests/standard,math.radians,RADIANS,Required
+Calculation,tdvt/exprtests/standard,math.radians,RADIANS,Required
+Calculation,tdvt/exprtests/standard,math.round,ROUND,Required
+Calculation,tdvt/exprtests/standard,math.round,ROUND,Required
+Calculation,tdvt/exprtests/standard,math.round.B584401,ROUND,Recommended
+Calculation,tdvt/exprtests/standard,math.sign,SIGN,Required
+Calculation,tdvt/exprtests/standard,math.sign,SIGN,Required
+Calculation,tdvt/exprtests/standard,math.sin,SIN,Required
+Calculation,tdvt/exprtests/standard,math.sin,SIN,Required
+Calculation,tdvt/exprtests/standard,math.sqrt,SQRT,Required
+Calculation,tdvt/exprtests/standard,math.sqrt,SQRT,Required
+Calculation,tdvt/exprtests/standard,math.square,SQUARE,Required
+Calculation,tdvt/exprtests/standard,math.square,SQUARE,Required
+Calculation,tdvt/exprtests/standard,math.tan,TAN,Required
+Calculation,tdvt/exprtests/standard,math.zn,ZN,Required
+Column Metadata Nullability,tdvt/exprtests/standard,math.zn,COLUMN_NULLABILITY,Required
+Table Calc,tdvt/exprtests/standard,math.zn,ZN,Required
+Logical,tdvt/exprtests/standard,operator.bool,$SYS_NARY_AND$,Required
+Logical,tdvt/exprtests/standard,operator.bool,$SYS_NARY_OR$,Required
+Aggregation,tdvt/exprtests/standard,operator.bool,COUNT,Required
+Aggregation,tdvt/exprtests/standard,operator.bool,MAX,Required
+Aggregation,tdvt/exprtests/standard,operator.bool,MIN,Required
+Filters,tdvt/exprtests/standard,operator.bool,==,Required
+Operator,tdvt/exprtests/standard,operator.bool,!,Required
+Operator,tdvt/exprtests/standard,operator.bool,!=,Required
+Operator,tdvt/exprtests/standard,operator.bool,&&,Required
+Operator,tdvt/exprtests/standard,operator.bool,==,Required
+Operator,tdvt/exprtests/standard,operator.bool,||,Required
+Filters,tdvt/exprtests/standard,operator.date.lt,<,Required
+Filters,tdvt/exprtests/standard,operator.date.lte,<=,Required
+Filters,tdvt/exprtests/standard,operator.date.equality,==,Required
+Filters,tdvt/exprtests/standard,operator.date.gt,>,Required
+Filters,tdvt/exprtests/standard,operator.date.gte,>=,Required
+Operator,tdvt/exprtests/standard,operator.date.not_equal,!=,Required
+Operator,tdvt/exprtests/standard,operator.date.add_num,+,Required
+Operator,tdvt/exprtests/standard,operator.date.minus_datestr,-,Required
+Operator,tdvt/exprtests/standard,operator.date.minus_datetime,-,Required
+Operator,tdvt/exprtests/standard,operator.date.minus_num,-,Required
+Operator,tdvt/exprtests/standard,operator.date.lt,<,Required
+Operator,tdvt/exprtests/standard,operator.date.lte,<=,Required
+Operator,tdvt/exprtests/standard,operator.date.equality,==,Required
+Operator,tdvt/exprtests/standard,operator.date.gt,>,Required
+Operator,tdvt/exprtests/standard,operator.date.gte,>=,Required
+Operator,tdvt/exprtests/standard,operator.int,%,Required
+Operator,tdvt/exprtests/standard,operator.int,/,Required
+Operator,tdvt/exprtests/standard,operator.int,^^,Required
+Operator,tdvt/exprtests/standard,operator.num,*,Required
+Filters,tdvt/exprtests/standard,operator.num,>=,Required
+Operator,tdvt/exprtests/standard,operator.num,>=,Required
+Operator,tdvt/exprtests/standard,operator.num,^^,Required
+Aggregation,tdvt/exprtests/standard,operator.num,MIN,Required
+Filters,tdvt/exprtests/standard,operator.num,==,Required
+Operator,tdvt/exprtests/standard,operator.num,==,Required
+Aggregation,tdvt/exprtests/standard,operator.num,MAX,Required
+Calculation,tdvt/exprtests/standard,operator.num,ABS,Required
+Calculation,tdvt/exprtests/standard,operator.num,ABS,Required
+Filters,tdvt/exprtests/standard,operator.num,<,Required
+Filters,tdvt/exprtests/standard,operator.num,<=,Required
+Filters,tdvt/exprtests/standard,operator.num,>,Required
+Operator,tdvt/exprtests/standard,operator.num,!=,Required
+Operator,tdvt/exprtests/standard,operator.num,+,Required
+Operator,tdvt/exprtests/standard,operator.num,-,Required
+Operator,tdvt/exprtests/standard,operator.num,/,Required
+Operator,tdvt/exprtests/standard,operator.num,<,Required
+Operator,tdvt/exprtests/standard,operator.num,<=,Required
+Operator,tdvt/exprtests/standard,operator.num,>,Required
+Aggregation,tdvt/exprtests/standard,operator.str,COUNT,Required
+Aggregation,tdvt/exprtests/standard,operator.str,MAX,Required
+Aggregation,tdvt/exprtests/standard,operator.str,MIN,Required
+Logical,tdvt/exprtests/standard,operator.str,IIF,Required
+Logical,tdvt/exprtests/standard,operator.str,IIF,Required
+Calculation,tdvt/exprtests/standard,operator.str,LOWER,Required
+Calculation,tdvt/exprtests/standard,operator.str,LOWER,Required
+Filters,tdvt/exprtests/standard,operator.str,<,Required
+Filters,tdvt/exprtests/standard,operator.str,<=,Required
+Filters,tdvt/exprtests/standard,operator.str,==,Required
+Filters,tdvt/exprtests/standard,operator.str,>,Required
+Filters,tdvt/exprtests/standard,operator.str,>=,Required
+Filters,tdvt/exprtests/standard,operator.str,LOWER,Required
+Filters,tdvt/exprtests/standard,operator.str,LOWER,Required
+Operator,tdvt/exprtests/standard,operator.str,!=,Required
+Operator,tdvt/exprtests/standard,operator.str,+,Required
+Operator,tdvt/exprtests/standard,operator.str,<,Required
+Operator,tdvt/exprtests/standard,operator.str,<=,Required
+Operator,tdvt/exprtests/standard,operator.str,==,Required
+Operator,tdvt/exprtests/standard,operator.str,>,Required
+Operator,tdvt/exprtests/standard,operator.str,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Dates_MDY,*,Required
+Operator,tdvt/logicaltests/staples,Query.Dates_MDY,+,Required
+Date Filters,tdvt/logicaltests/staples,Query.Dates_MDY,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Query.Dates_MDY,SUM,Required
+Operator,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,*,Required
+Operator,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,+,Required
+Filters,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,$SYS_NARY_OR$,Required
+Date Filters,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Query.Dates_MDY_Filtered,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_AVG,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_AVG,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_AVG,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_AVG,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_AVG,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_AVG,AVG,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_CNT,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_CNT,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_CNT,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_CNT,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_CNT,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_CNT,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_Exclude1,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_Exclude1,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_Exclude1,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_Exclude1,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_Exclude1,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_Exclude1,$SYS_NARY_OR$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_Exclude1,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_Include1,==,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_Include1,==,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_Include1,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_MAX,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_MAX,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_MAX,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_MAX,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_MAX,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_MAX,MAX,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_MIN,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_MIN,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_MIN,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_MIN,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_MIN,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_MIN,MIN,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQ,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQ_AxisQ,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQ_AxisQ,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQ_AxisQ,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQ_AxisQ,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SliceAggQ_AxisQ,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQ_AxisQ,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQ,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQ,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQ,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQ,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQ,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQ,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQO,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,$SYS_NARY_AND$,Required
+Date Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQ_AxisQOYear,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,$SYS_NARY_AND$,Required
+Date Filters,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SliceAggQUnaggQUnaggDT_AxisQOYear,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SUM,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SUM,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Filter_SUM,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Filter_SUM,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Filter_SUM,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Filter_SUM,SUM,Required
+Filters,tdvt/logicaltests/calcs,Query.Filter.IsNOTNULL,<=,Required
+Operator,tdvt/logicaltests/calcs,Query.Filter.IsNOTNULL,<=,Required
+Filters,tdvt/logicaltests/calcs,Query.Filter.IsNOTNULL,>=,Required
+Operator,tdvt/logicaltests/calcs,Query.Filter.IsNOTNULL,>=,Required
+Logical,tdvt/logicaltests/calcs,Query.Filter.IsNOTNULL,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/calcs,Query.Filter.IsNOTNULL,SUM,Required
+Calculation,tdvt/logicaltests/calcs,Query.Filter.IsNULL,ISNULL,Required
+NULL Semantics,tdvt/logicaltests/calcs,Query.Filter.IsNULL,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Query.Filter.IsNULL,SUM,Required
+Sets,tdvt/logicaltests/calcs,Query.Filter.NullAndOne,$IN_SET$,Required
+Logical,tdvt/logicaltests/calcs,Query.Filter.NullAndOne,$SYS_NARY_OR$,Required
+NULL Semantics,tdvt/logicaltests/calcs,Query.Filter.NullAndOne,ISNULL,Required
+Calculation,tdvt/logicaltests/calcs,Query.Filter.NullAndOne,ISNULL,Required
+Aggregation,tdvt/logicaltests/calcs,Query.Filter.NullAndOne,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,<,Required
+Operator,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,<,Required
+Filters,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,<=,Required
+Operator,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,<=,Required
+Filters,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,>=,Required
+Operator,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,>=,Required
+Sets,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,$SYS_NARY_OR$,Required
+Date Filters,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,MIN,Required
+Aggregation,tdvt/logicaltests/staples,Query.FilterBy_DateTime_Slices,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.FilterBy_Q,<,Required
+Operator,tdvt/logicaltests/staples,Query.FilterBy_Q,<,Required
+Aggregation,tdvt/logicaltests/staples,Query.FilterBy_Q,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.FilterBy_Q,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.HideEmptyRows,<=,Required
+Operator,tdvt/logicaltests/staples,Query.HideEmptyRows,<=,Required
+Filters,tdvt/logicaltests/staples,Query.HideEmptyRows,>=,Required
+Operator,tdvt/logicaltests/staples,Query.HideEmptyRows,>=,Required
+Logical,tdvt/logicaltests/staples,Query.HideEmptyRows,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.HideEmptyRows,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.HideEmptyRows,MIN,Required
+Filters,tdvt/logicaltests/staples,Query.MultipleFilters,<=,Required
+Operator,tdvt/logicaltests/staples,Query.MultipleFilters,<=,Required
+Filters,tdvt/logicaltests/staples,Query.MultipleFilters,==,Required
+Operator,tdvt/logicaltests/staples,Query.MultipleFilters,==,Required
+Filters,tdvt/logicaltests/staples,Query.MultipleFilters,>=,Required
+Operator,tdvt/logicaltests/staples,Query.MultipleFilters,>=,Required
+Sets,tdvt/logicaltests/staples,Query.MultipleFilters,$IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.MultipleFilters,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/staples,Query.MultipleFilters,$SYS_NARY_OR$,Required
+Aggregation,tdvt/logicaltests/staples,Query.MultipleFilters,AVG,Required
+Date Filters,tdvt/logicaltests/staples,Query.MultipleFilters,DATEPART,Required
+Aggregation,tdvt/logicaltests/staples,Query.MultipleFilters,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_FilterO1_SliceOQ,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,$SYS_NARY_OR$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,$SYS_NARY_AND$,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,$SYS_NARY_OR$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_FilterO1O2_SliceOQ_SortByO1O2,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_SliceQ,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_SliceQ,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_SliceQ,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_SliceQ,>=,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_SliceQ,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_SliceQ,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_SliceQ,SUM,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_SliceQO,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_SliceQO,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Nest_SliceQO,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Nest_SliceQO,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Nest_SliceQO,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Nest_SliceQO,$SYS_NARY_AND$,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_SliceQO,AVG,Required
+Aggregation,tdvt/logicaltests/staples,Query.Nest_SliceQO,SUM,Required
+Aggregation,tdvt/logicaltests/staples,Query.Sort_Alphabetic_DESC_Top1,SUM,Required
+Temp Tables and Subqueries,tdvt/logicaltests/staples,Query.Sort_Alphabetic_DESC_Top1,TEMP_TABLES_AND_SUBQUERIES,Required
+Filters,tdvt/logicaltests/staples,Query.Sort_Alphabetic_DESC_Top1,TEMP_TABLES_AND_SUBQUERIES,Required
+Aggregation,tdvt/logicaltests/staples,Query.Sort_Alphabetic_DESC_Top10,SUM,Required
+Temp Tables and Subqueries,tdvt/logicaltests/staples,Query.Sort_Alphabetic_DESC_Top10,TEMP_TABLES_AND_SUBQUERIES,Required
+Filters,tdvt/logicaltests/staples,Query.Sort_Alphabetic_DESC_Top10,TEMP_TABLES_AND_SUBQUERIES,Required
+Aggregation,tdvt/logicaltests/staples,Query.Sort_Natural_DESC,SUM,Required
+Aggregation,tdvt/logicaltests/staples,Query.Top99_ByField,AVG,Required
+Filters,tdvt/logicaltests/staples,Query.Top99_ByField,TEMP_TABLES_AND_SUBQUERIES,Required
+Temp Tables and Subqueries,tdvt/logicaltests/staples,Query.Top99_ByField,TEMP_TABLES_AND_SUBQUERIES,Required
+Filters,tdvt/logicaltests/staples,Query.Unaggregated_Filter,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Unaggregated_Filter,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Unaggregated_Filter,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Unaggregated_Filter,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Unaggregated_Filter,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.Unaggregated_Filter,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Unaggregated_Filter,$SYS_NARY_AND$,Required
+Date Filters,tdvt/logicaltests/staples,Query.Unaggregated_Filter,DATEPART,Required
+Filters,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,<=,Required
+Operator,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,<=,Required
+Filters,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,>=,Required
+Operator,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,>=,Required
+Sets,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,$IN_SET$,Required
+Sets,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,$NOT_IN_SET$,Required
+Logical,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,$SYS_NARY_AND$,Required
+Date Filters,tdvt/logicaltests/staples,Query.Unaggregated_Filter_NoDateTime,DATEPART,Required
+Aggregation,tdvt/exprtests/standard,string.ascii,COUNT,Recommended
+Calculation,tdvt/exprtests/standard,string.ascii,ASCII,Recommended
+Calculation,tdvt/exprtests/standard,string.ascii,ASCII,Recommended
+Cast,tdvt/exprtests/standard,string.B21622,INT,Required
+Cast,tdvt/exprtests/standard,string.B21622,INT,Required
+Cast,tdvt/exprtests/standard,string.B21622,STR,Required
+Cast,tdvt/exprtests/standard,string.B21622,STR,Required
+Aggregation,tdvt/exprtests/bind,string.bind_trim,COUNT,Recommended
+Operator,tdvt/exprtests/bind,string.bind_trim,+,Recommended
+Calculation,tdvt/exprtests/standard,string.char,CHAR,Smoke
+Calculation,tdvt/exprtests/standard,string.char,CHAR,Smoke
+Aggregation,tdvt/exprtests/standard,string.char,COUNT,Smoke
+Aggregation,tdvt/exprtests/standard,string.constants,COUNT,Required
+Operator,tdvt/exprtests/standard,string.constants,+,Required
+Aggregation,tdvt/exprtests/standard,string.contains,MAX,Required
+Aggregation,tdvt/exprtests/standard,string.contains,MIN,Required
+Calculation,tdvt/exprtests/standard,string.contains,CONTAINS,Required
+Wildcard Filters,tdvt/exprtests/standard,string.contains,CONTAINS,Required
+Aggregation,tdvt/exprtests/standard,string.endswith,MAX,Required
+Filters,tdvt/exprtests/standard,string.endswith,ENDSWITH,Required
+Calculation,tdvt/exprtests/standard,string.endswith,ENDSWITH,Required
+Aggregation,tdvt/exprtests/standard,string.endswith,MIN,Required
+Operator,tdvt/exprtests/standard,string.find,*,Required
+Data Prep,tdvt/exprtests/standard,string.find,FIND,Required
+Calculation,tdvt/exprtests/standard,string.find,FIND,Required
+Data Prep,tdvt/exprtests/standard,string.find,FIND,Required
+Calculation,tdvt/exprtests/standard,string.find,FIND,Required
+Data Prep,tdvt/exprtests/standard,string.left,LEFT,Required
+Calculation,tdvt/exprtests/standard,string.left,LEFT,Required
+Data Prep,tdvt/exprtests/standard,string.left,LEFT,Required
+Calculation,tdvt/exprtests/standard,string.left,LEFT,Required
+Data Prep,tdvt/exprtests/standard,string.left.negative,LEFT,Required If Supported
+Calculation,tdvt/exprtests/standard,string.left.negative,LEFT,Required If Supported
+Calculation,tdvt/exprtests/standard,string.left.real,LEFT,Recommended
+Calculation,tdvt/exprtests/standard,string.left.real,LEFT,Recommended
+Data Prep,tdvt/exprtests/standard,string.left.real,LEFT,Recommended
+Data Prep,tdvt/exprtests/standard,string.left.real,LEFT,Recommended
+Aggregation,tdvt/exprtests/standard,string.len,COUNT,Required
+Data Prep,tdvt/exprtests/standard,string.len,LEN,Required
+Calculation,tdvt/exprtests/standard,string.len,LEN,Required
+Data Prep,tdvt/exprtests/standard,string.len,LEN,Required
+Calculation,tdvt/exprtests/standard,string.len,LEN,Required
+Filters,tdvt/exprtests/standard,string.lower,LOWER,Required
+Calculation,tdvt/exprtests/standard,string.lower,LOWER,Required
+Filters,tdvt/exprtests/standard,string.lower,LOWER,Required
+Calculation,tdvt/exprtests/standard,string.lower,LOWER,Required
+Calculation,tdvt/exprtests/standard,string.ltrim,LTRIM,Required
+Operator,tdvt/exprtests/standard,string.ltrim,+,Required
+Aggregation,tdvt/exprtests/standard,string.max,MAX,Required
+Calculation,tdvt/exprtests/standard,string.mid,MID,Required
+Calculation,tdvt/exprtests/standard,string.mid,MID,Required
+Data Prep,tdvt/exprtests/standard,string.mid,MID,Required
+Data Prep,tdvt/exprtests/standard,string.mid,MID,Required
+Calculation,tdvt/exprtests/standard,string.mid.calc,MID,Required
+Calculation,tdvt/exprtests/standard,string.mid.calc,MID,Required
+Data Prep,tdvt/exprtests/standard,string.mid.calc,MID,Required
+Data Prep,tdvt/exprtests/standard,string.mid.calc,MID,Required
+Operator,tdvt/exprtests/standard,string.mid.calc,*,Required
+Operator,tdvt/exprtests/standard,string.mid.calc,+,Required
+Aggregation,tdvt/exprtests/standard,string.min,COUNT,Required
+Aggregation,tdvt/exprtests/standard,string.min,MIN,Required
+Aggregation,tdvt/exprtests/standard,string.replace,COUNT,Required If Supported
+Calculation,tdvt/exprtests/standard,string.replace,REPLACE,Required If Supported
+Aggregation,tdvt/exprtests/standard,string.right,COUNT,Required
+Calculation,tdvt/exprtests/standard,string.right,RIGHT,Required
+Calculation,tdvt/exprtests/standard,string.right,RIGHT,Required
+Calculation,tdvt/exprtests/standard,string.right.real,RIGHT,Required
+Calculation,tdvt/exprtests/standard,string.right.real,RIGHT,Required
+Calculation,tdvt/exprtests/standard,string.rtrim,RTRIM,Required
+Operator,tdvt/exprtests/standard,string.rtrim,+,Required
+Aggregation,tdvt/exprtests/standard,string.space,COUNT,Required
+Operator,tdvt/exprtests/standard,string.space,+,Required
+Calculation,tdvt/exprtests/standard,string.space,SPACE,Required
+Cast,tdvt/exprtests/standard,string.space.int.constant,INT,Required
+Cast,tdvt/exprtests/standard,string.space.int.constant,INT,Required
+Aggregation,tdvt/exprtests/standard,string.space.int.constant,COUNT,Required
+Calculation,tdvt/exprtests/standard,string.space.int.constant,SPACE,Required
+Calculation,tdvt/exprtests/standard,string.space.int.var,SPACE,Required
+Aggregation,tdvt/exprtests/standard,string.split,COUNT,Required
+Data Prep,tdvt/exprtests/standard,string.split,SPLIT,Required
+Calculation,tdvt/exprtests/standard,string.split,SPLIT,Required
+Aggregation,tdvt/exprtests/standard,string.split.right,COUNT,Required If Supported
+Calculation,tdvt/exprtests/standard,string.split.right,SPLIT,Required If Supported
+Data Prep,tdvt/exprtests/standard,string.split.right,SPLIT,Required If Supported
+Aggregation,tdvt/exprtests/standard,string.startswith,COUNT,Required
+Aggregation,tdvt/exprtests/standard,string.startswith,MAX,Required
+Aggregation,tdvt/exprtests/standard,string.startswith,MIN,Required
+Calculation,tdvt/exprtests/standard,string.startswith,STARTSWITH,Required
+Filters,tdvt/exprtests/standard,string.startswith,STARTSWITH,Required
+Data Prep,tdvt/exprtests/standard,string.trim,TRIM,Required If Supported
+Calculation,tdvt/exprtests/standard,string.trim,TRIM,Required If Supported
+Operator,tdvt/exprtests/standard,string.trim,+,Required If Supported
+Aggregation,tdvt/exprtests/standard,string.upper,COUNT,Required
+Calculation,tdvt/exprtests/standard,string.upper,UPPER,Required
+Calculation,tdvt/exprtests/standard,string.upper,UPPER,Required
+Aggregation,tdvt/exprtests/standard,string.utf8,COUNT,Recommended
+Calculation,tdvt/exprtests/standard,string.utf8,FIND,Recommended
+Calculation,tdvt/exprtests/standard,string.utf8,REPLACE,Recommended
+Data Prep,tdvt/exprtests/standard,string.utf8,FIND,Recommended
+Filters,tdvt/logicaltests/staples,ZTesting.Staples9,<=,Recommended
+Operator,tdvt/logicaltests/staples,ZTesting.Staples9,<=,Recommended
+Filters,tdvt/logicaltests/staples,ZTesting.Staples9,==,Recommended
+Operator,tdvt/logicaltests/staples,ZTesting.Staples9,==,Recommended
+Filters,tdvt/logicaltests/staples,ZTesting.Staples9,>=,Recommended
+Operator,tdvt/logicaltests/staples,ZTesting.Staples9,>=,Recommended
+Logical,tdvt/logicaltests/staples,ZTesting.Staples9,$SYS_NARY_AND$,Recommended
+Date Filters,tdvt/logicaltests/staples,ZTesting.Staples9,DATEPART,Recommended
+Date Aggregation,tdvt/exprtests/standard,calcs_data.dates,,Required
+Cast,tdvt/exprtests/standard,date.cast.datetime,DATETIME,Required
+Calculation,tdvt/exprtests/standard,math.atan2,ATAN2,Required If Supported
+Calculation,tdvt/exprtests/standard,string.contains.empty,CONTAINS,Required
+Calculation,tdvt/exprtests/standard,string.contains.regex,CONTAINS,Required If Supported
