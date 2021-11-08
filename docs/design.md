@@ -24,7 +24,7 @@ You might find other superclass values in the workbook XML from an existing Tabl
 
 ## Assign a plugin version
 
-Plugin-version is a requirement for submitting your connector to the Tableau Connector Gallery.  It helps customers and partners understand which version of a connector is being used currently and if it is the most up-to-date.
+Plugin-version is a requirement for submitting your connector to Tableau Exchange.  It helps customers and partners understand which version of a connector is being used currently and if it is the most up-to-date.
 You should start your plugin version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector.
 
 ## Know the min-tableau-version
