@@ -1,35 +1,35 @@
 ---
-title: Connector Gallery Submission Guide
+title: Connector Tableau Exchange Submission Guide
 ---
 
 **Note:** Download a PDF version of this guide [here]({{ site.baseurl }}/assets/Connector-Gallery-Submission-Guide.pdf).  
-  
+
 > ![]({{ site.baseurl }}/assets/tableau-logo.png)
-> 
-> Thanks for your interest in submitting a connector for the Extension Gallery. This document describes the steps and assets required to submit your 
-> connector to the [Extension Gallery](https://extensiongallery.tableau.com/connectors). While this is a self-service process, feel free to contact us if you need assistance.
+>
+> Thanks for your interest in submitting a connector for Tableau Exchange. This document describes the steps and assets required to submit your
+> connector to [Tableau Exchange](https://exchange.tableau.com/). While this is a self-service process, feel free to contact us if you need assistance.
 >
 >Best regards -- The Tableau Team
-> 
+>
 ---
 
 
 ## Process Overview
 
-These are the steps you'll take to prepare and submit your connector to the Tableau Extension Gallery:
+These are the steps you'll take to prepare and submit your connector to Tableau Exchange:
 
 1. Join the Tableau Developer Program.
 2. Build your integration.
 3. Sign up for the Technology Partner Program.
-4. Submit a request to publish your connector in the Extension Gallery.
-5. Sign the Gallery Agreement.
+4. Submit a request to publish your connector in Tableau Exchange.
+5. Sign the Tableau Exchange Agreement.
 6. Submit TDVT results and get approval for your connector.
 7. Prepare Go-to-Market assets and get content approved by Tableau.
-8. Release connector in Gallery for beta testing.
+8. Release connector in Tableau Exchange for beta testing.
 9. Get beta-testing feedback from five customers.
-10. Launch the connector in the Gallery and publish Go-To-Market materials. 
+10. Launch the connector in Tableau Exchange and publish Go-To-Market materials.
 
-Building a connector generally takes two to six weeks, depending on complexity. Then, before it can be published to the Extension Gallery, you'll need to submit the connector and beta test it. This typically takes another two to four weeks. 
+Building a connector generally takes two to six weeks, depending on complexity. Then, before it can be published to Tableau Exchange, you'll need to submit the connector and beta test it. This typically takes another two to four weeks.
 
 ![]({{ site.baseurl }}/assets/timeline.png)
 
@@ -40,44 +40,44 @@ Building a connector generally takes two to six weeks, depending on complexity. 
 ### Step 1: Join the Tableau Developer Program
 
 
-Join our [Tableau Developer Program](https://www.tableau.com/developer) to gain access to a free development sandbox. 
+Join our [Tableau Developer Program](https://www.tableau.com/developer) to gain access to a free development sandbox.
 
 ### Step 2: Build your integration
 
-After you've signed up for our developer program, use the information in this Connector SDK documentation to get started building a connector. 
+After you've signed up for our developer program, use the information in this Connector SDK documentation to get started building a connector.
 
 Be sure to test your connector with the [TDVT suite](https://tableau.github.io/connector-plugin-sdk/docs/tdvt) to ensure that your connector meets our guidelines for connector functionality.
 
-**Note:** If you have issues with the SDK or need help, submit an issue through our GitHub issues page. 
+**Note:** If you have issues with the SDK or need help, submit an issue through our GitHub issues page.
 
 
-## Submitting Your Connector to the Extension Gallery
+## Submitting Your Connector to Tableau Exchange
 
 ### Step 3: Sign up for Technology Partner Program
 
-After you've built your integration and are passing 90% of TDVT results, sign up for our [Technology Partner Program](https://www.tableau.com/partners/resources/technology/partner-agreement). By signing up for the Technology Partner Program you allow us to discuss confidential information with you and enables us to promote your products through our marketing channels, like the Extension Gallery.
+After you've built your integration and are passing 90% of TDVT results, sign up for our [Technology Partner Program](https://www.tableau.com/partners/resources/technology/partner-agreement). By signing up for the Technology Partner Program you allow us to discuss confidential information with you and enables us to promote your products through our marketing channels, like Tableau Exchange.
 
 ### Step 4: Submit a Request to Publish
 
-After you've built and tested your integration, [submit a request](https://forms.gle/2FisXfmwwuQEaXKG9) to publish your connector in the Extension Gallery. 
+After you've built and tested your integration, [submit a request](https://forms.gle/2FisXfmwwuQEaXKG9) to publish your connector in Tableau Exchange.
 
-### Step 5: Sign Gallery Agreement 
+### Step 5: Sign Tableau Exchange Agreement
 
 When we receive your request to publish, we will send you:
- - A copy of the Extension Gallery Agreement 
- - A submission form for your TDVT results, plus  other Gallery submission materials
+ - A copy of the Tableau Exchange Agreement
+ - A submission form for your TDVT results, plus  other Tableau Exchange submission materials
 
 ---
 
-### Extension Gallery Submission Materials
+### Tableau Exchange Submission Materials
 
-_All of the following materials are required for submission of an extension into the Extension Gallery unless stated otherwise. Submission of these materials and signing of the agreement does not guarantee the addition of an extension to the Gallery._
+_All of the following materials are required for submission of an extension into Tableau Exchange unless stated otherwise. Submission of these materials and signing of the agreement does not guarantee the addition of an extension to Tableau Exchange._
 
-[_Submit a Connector to the Gallery via Google Tables_](https://tables.area120.google.com/u/0/form/aazkn9dCirC305k3Czjkoa/t/aTDxX-eQDxddDrdwaKi4X18Wrn9R7TiQQ9mm_2PBJkUtb2RwGj3__s5bdc0rDX6_c0)
+[_Submit a Connector to Tableau Exchange via Google Tables_](https://tables.area120.google.com/u/0/form/aazkn9dCirC305k3Czjkoa/t/aTDxX-eQDxddDrdwaKi4X18Wrn9R7TiQQ9mm_2PBJkUtb2RwGj3__s5bdc0rDX6_c0)
 
 ##### Signed Agreement
 
-All Extension Gallery agreements are processed through Service Now. A copy of the Gallery agreement should be reviewed and approved by the person who will process the agreement on your side. To process the agreement, we will need:
+All Tableau Exchange agreements are processed through Service Now. A copy of the Tableau Exchange agreement should be reviewed and approved by the person who will process the agreement on your side. To process the agreement, we will need:
 
 - Legal name of your company
 - Name of the signee
@@ -106,7 +106,7 @@ Include the name for your application/database to which the connector connects .
 
 ##### Short Description
 
-Briefly describe details about your connector that are most relevant for customers. This displays on the main Connectors page of the Extensions Gallery. Maximum 116 characters. Plain text only.
+Briefly describe details about your connector that are most relevant for customers. This displays on the main Connectors page of Tableau Exchange. Maximum 116 characters. Plain text only.
 
 ##### Long Description
 
@@ -116,7 +116,7 @@ For your connector's detail page, provide a long description. Include these thre
 - A description of what the connector does that makes better than using an Other ODBC/JDBC connection.  
 
    Example:   
-   
+
    _This connector provides a smooth and easy way to connect to Google Big Query. By using this connector, customers can leverage Google's internal storage and extract APIs, which offer up to 10x performance increases when extracting large amounts of data. This connector also allows users to use custom OAuth, which is not currently supported natively with an Other JDBC connection._
 - Known issues or version requirements for the connector
 
@@ -186,7 +186,7 @@ Complete the submission form and return it with your TDVT results to Tableau.
 
 ### Step 7: Prepare Go-to-Market activities and get content approved by Tableau
 
-Many partners choose to put out blogs and a press release once they offer custom connectors for their customers in the Extension Gallery. To fully promote your work, we recommend collecting a public customer case study that highlights the advantages and usefulness of your new connector. Not only does Tableau have mechanisms and channels to promote your customer case study, but historical data shows that referencing customer case studies generate on average five times more traffic than standalone blogs.
+Many partners choose to put out blogs and a press release once they offer custom connectors for their customers in Tableau Exchange. To fully promote your work, we recommend collecting a public customer case study that highlights the advantages and usefulness of your new connector. Not only does Tableau have mechanisms and channels to promote your customer case study, but historical data shows that referencing customer case studies generate on average five times more traffic than standalone blogs.
 
 We are happy to support partners looking to issue Tableau-specific press releases. We require that any partner press release mentioning Tableau is first submitted for approval to ensure that the Tableau positioning and branding are accurate.
 
@@ -206,15 +206,15 @@ Note: The release should not include the Tableau corporate boilerplate.
 ---
 ## **Beta Process**
 
-### Step 8: Release connector in Gallery for beta testing.
+### Step 8: Release connector in Tableau Exchange for beta testing.
 
-When your connector is approved, it will be released to the Extension Gallery for beta testing.
+When your connector is approved, it will be released to Tableau Exchange for beta testing.
 
 ### Step 9: Get beta-testing feedback from five customers.
 
-After your connector is added to the Extension Gallery, you'll need to beta-test your connector with at least **five customers** before your connector can move to a General Audience (GA) release. While you'll be able to catch most issues with the TDVT suite, customer testing helps refine your results. Customers often have unique environments that need to be tested to ensure that everything works as expected.  
+After your connector is added to Tableau Exchange, you'll need to beta-test your connector with at least **five customers** before your connector can move to a General Audience (GA) release. While you'll be able to catch most issues with the TDVT suite, customer testing helps refine your results. Customers often have unique environments that need to be tested to ensure that everything works as expected.  
 
-Customers can find our beta test scenarios and [Beta feedback form](https://forms.gle/xjWGk86tv8eD43Mk7) on the feedback button in the Extension Gallery. Note that the feedback form is specific to your connector, and you will be able to monitor the progress of the beta test on your own. The total beta testing process shouldn't take more than 30 minutes for a customer to complete.
+Customers can find our beta test scenarios and [Beta feedback form](https://forms.gle/xjWGk86tv8eD43Mk7) on the feedback button in Tableau Exchange. Note that the feedback form is specific to your connector, and you will be able to monitor the progress of the beta test on your own. The total beta testing process shouldn't take more than 30 minutes for a customer to complete.
 
 To pass from beta into a General Audience release, all customers must submit feedback saying that there were no blocking issues with creating or publishing workbooks on Tableau Desktop and Server. If any issues are encountered, you will need to fix them, send us your new TACO file, and have those customers rerun the beta test scenarios.
 
@@ -222,6 +222,6 @@ To pass from beta into a General Audience release, all customers must submit fee
 ---
 ## Launch Your Connector
 
-### Step 10: Launch the connector in the Gallery and publish Go-To-Market materials. 
+### Step 10: Launch the connector in Tableau Exchange and publish Go-To-Market materials.
 
-After your beta testing phase is finished and your go-to-market materials are planned, contact Tableau to choose the date and time your connector will be pushed to production. 
+After your beta testing phase is finished and your go-to-market materials are planned, contact Tableau to choose the date and time your connector will be pushed to production.
