@@ -285,6 +285,8 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
 
         if len(attributes) > 0 and properties.connection_fields:
             for field in properties.connection_fields:
+                if field == 'instanceurl':
+                    continue
                 if field not in attributes:
                     xml_violations_buffer.append("Attribute '" + field + "' in connection-fields but not in required-attributes list.")
                     return False
@@ -292,7 +294,8 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
         if len(attributes) > 0 and properties.connection_metadata_database and not properties.uses_tcd:
             if 'dbname' not in attributes:
                 xml_violations_buffer.append("connection-metadata 'database' enabled but 'dbname' not in required-attributes list.")
-                return False
+        
+
 
     properties_builder = root.find('.//connection-properties')
 

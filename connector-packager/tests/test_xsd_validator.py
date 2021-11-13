@@ -136,6 +136,19 @@ class TestXSDValidator(unittest.TestCase):
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "An instanceurl field must be conditional to authentication field with value=oauth")
 
+        #instanceURL should not be required in required-attributes since it's automatically added
+        test_folder = TEST_FOLDER / Path("instanceurl/dremio")  # This connector uses a connection-fields.xml file
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connection-fields.xml", "connection-fields"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect_plugin.tdd", "dialect"),
+            ConnectorFile("connectionResolver.tdr", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script")]
+        properties_uses_tcd = ConnectorProperties()
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_uses_tcd), "Dremio (instanceURL not in required-attributes is valid")
+
     def test_warn_defaultSQLDialect_as_base(self):
 
         test_dialect_file = TEST_FOLDER / "defaultSQLDialect_as_base/dialect.tdd"
@@ -270,11 +283,6 @@ class TestXSDValidator(unittest.TestCase):
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
                         "Valid connector marked as invalid")
 
-        print("Test that normalizer not containing 'dbname' if connection-metadata database field is used is invalidated")
-        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
-        test_file = TEST_FOLDER / "database_field_not_in_normalizer/connectionResolver.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
-                         "Missing 'dbname' attribute not detected")
 
     def test_validate_company_name_length(self):
         xml_violations_buffer = []
