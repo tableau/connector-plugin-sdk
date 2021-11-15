@@ -140,10 +140,10 @@ Installation instructions have two parts:
 
 
 To make things easy, we've created a template for your custom installation instructions (included below, markdown friendly). Any additional installation instructions should be appended below the Tableau installation instructions.
+* [Tableau Desktop Templates](./templates/tableau-desktop-templates.md)
+* Tableau Server Templates
+* Tableau Prep Templates
 
-| **JDBC** | **ODBC** |
-| ----------- | ----------- |
-| <pre>1. Download the Connector file (.taco).<br /> 2. Move the .taco file here:<br />   - Windows: C:\Users\\[Windows User]\Documents\My Tableau Repository\Connectors<br />   - macOS: /Users/[user]/Documents/My Tableau Repository/Connectors<br />3. Start Tableau and under \*\*Connect\*\*, select the [Connector Name] connector. (\*\*Note:\*\* You'll be prompted if the driver is not yet installed. <br />4. [Connector Name] Driver Installation:<br />   A. Go to the [Driver Download](https://www.driverdownloadlinkhere.com) page.<br />   B. Download the [Connector Name] Driver .jar file and move into the following directory:<br />     - Windows: C:\Program Files\Tableau\Drivers <br />     - macOS: /Users/[user]/Library/Tableau/Drivers<br />5. Relaunch Tableau and connect using the [Connector Name] connector. </pre> | <pre>1. Download the Connector file (.taco). <br />2. Move the .taco file here:<br />   - Windows: C:\Users\\[Windows User]\Documents\My Tableau Repository\Connectors <br />3. Start Tableau and under \*\*Connect\*\*, select the [Connector Name] connector. (\*\*Note:\*\* You'll be prompted if the driver is not yet installed.) <br />4. [Connector Name] Driver Installation: <br />   A. Go to the [Driver Download](https://www.driverdownloadlinkhere.com) page.<br />   B. Download the [Connector Name] Driver and install following the instructions in the readme provided with the client installation. Ensure the 64-bit client version is installed. <br />5. Relaunch Tableau and connect using the [Connector Name] connector. </pre> |
 
 
 ##### Icon
