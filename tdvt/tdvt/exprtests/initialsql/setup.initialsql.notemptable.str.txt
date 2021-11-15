@@ -1,0 +1,1 @@
+RAWSQLAGG_STR("select str1 from Calcs where str1 = 'BINDER CLIPS'")

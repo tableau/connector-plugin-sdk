@@ -1,0 +1,16 @@
+<results>
+  <test name='RAWSQLAGG_STR(&quot;SUM(%1)&quot;, [int0])'>
+    <sql>
+      SELECT (SUM(&quot;Calcs&quot;.&quot;int0&quot;)) AS &quot;TEMP_Test__GCEFJFAEE__A_&quot;&#10;FROM &quot;TESTV1&quot;.&quot;Calcs&quot; &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      49.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.exasolution].[TEMP(Test)(624595044)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;68&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

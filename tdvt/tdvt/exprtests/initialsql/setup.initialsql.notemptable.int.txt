@@ -1,0 +1,1 @@
+RAWSQLAGG_STR("SUM(%1)", [int0])

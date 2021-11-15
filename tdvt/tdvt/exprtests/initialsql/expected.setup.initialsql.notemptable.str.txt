@@ -1,0 +1,16 @@
+<results>
+  <test name='RAWSQLAGG_STR(&quot;select str1 from Calcs where str1 = &apos;BINDER CLIPS&apos;&quot;)'>
+    <sql>
+      SELECT (select str1 from Calcs where str1 = &apos;BINDER CLIPS&apos;) AS `TEMP(Test)(4290180971)(0)`&#10;FROM `Calcs`&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      215.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.aurora].[TEMP(Test)(4290180971)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;BINDER CLIPS&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
