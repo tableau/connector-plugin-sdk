@@ -1,0 +1,36 @@
+<connection-fields>
+    <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="auth-user-pass">
+        <selection-group>
+            <option value="oauth" label="OAuth 2.0"/>
+            <option value="auth-pass" label="Personal Access Token"/>
+        </selection-group>
+        <selection-group>
+            <option value="auth-user-pass" label="Username and Password"/>
+        </selection-group>
+    </field>
+    <field name="server" label="Server" value-type="string" category="endpoint">
+    </field>
+    <field name="port" label="Port" value-type="string" category="endpoint" default-value="31010" >
+    </field>
+    <field name="username" label="Username" category="authentication" value-type="string">
+    </field>
+    <field name="password" label="Password" category="authentication" value-type="string" secure="true">
+        <conditions>
+            <condition field="authentication" value="auth-user-pass"/>
+            <condition field="authentication" value="auth-pass"/>
+        </conditions>
+    </field>
+    <field name="instanceurl" label="Dremio Authorization Server" value-type="string" category="authentication" default-value="https://login.dremio.cloud">
+        <conditions>
+          <condition field="authentication" value="oauth" />
+        </conditions>
+        <validation-rule reg-exp="^(https)\:\/\/(login\.dremio\.cloud|login\.[a-z0-9]+\.dremio.site)" />
+    </field>
+    <field name="sslmode" label="Use SSL" value-type="boolean" category="general" default-value="require">
+        <boolean-options>
+            <false-value value=""/>
+            <true-value value="require"/>
+        </boolean-options>
+    </field>
+  </connection-fields>
+  

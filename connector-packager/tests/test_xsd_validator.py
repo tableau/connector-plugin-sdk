@@ -137,7 +137,7 @@ class TestXSDValidator(unittest.TestCase):
                          "An instanceurl field must be conditional to authentication field with value=oauth")
 
         # instanceURL should not be required in required-attributes since it's automatically added
-        test_folder = TEST_FOLDER / Path("instanceurl/dremio")  # This connector uses a connection-fields.xml file
+        test_folder = TEST_FOLDER / Path("instanceurl/valid-connector")  # This connector uses a connection-fields.xml file
 
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
@@ -148,7 +148,7 @@ class TestXSDValidator(unittest.TestCase):
             ConnectorFile("connectionProperties.js", "script")]
         properties_uses_tcd = ConnectorProperties()
         self.assertTrue(validate_all_xml(files_list, test_folder, properties_uses_tcd),
-         "Dremio (instanceURL not in required-attributes is valid")
+         "InstanceURL not in required-attributes is valid")
 
     def test_warn_defaultSQLDialect_as_base(self):
 
@@ -172,7 +172,7 @@ class TestXSDValidator(unittest.TestCase):
             logging.getLogger('packager_logger').warning('dummy message')
             warn_file_specific_rules(file_to_test, test_tdr_file)
 
-        self.assertEqual(len(cm.output), 1)
+        self.assertEqual(len(cm.output), 2)
         self.assertNotIn("'authentication' attribute is missing", cm.output[0],
                          "\"'authentication' attribute is missing\" found in warning message")
 
@@ -192,7 +192,7 @@ class TestXSDValidator(unittest.TestCase):
         with self.assertLogs('packager_logger', level='WARNING') as cm:
             warn_file_specific_rules(file_to_test, test_tdr_file)
 
-        self.assertEqual(len(cm.output), 1)
+        self.assertEqual(len(cm.output), 2)
         self.assertIn("'authentication' attribute is missing", cm.output[0],
                       "\"'authentication' attribute is missing\" not found in warning message")
 

@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<!-- Copyright (C) 2017-2019 Dremio Corporation. This file is confidential and private property. -->
-<tdr class='dremio'>
+<tdr class='oauthconnector'>
   <connection-resolver>
     <connection-builder>
       <script file='connectionBuilder.js'/>
@@ -8,10 +7,6 @@
     <connection-normalizer>
       <required-attributes>
         <setImpersonateAttributes/>
-        <default-attributes>
-          <default-attribute name='server'>sql.dremio.cloud</default-attribute>
-          <default-attribute name='port'>443</default-attribute>
-        </default-attributes>
         <attribute-list>
           <attr>class</attr>
           <attr>server</attr>
@@ -20,11 +15,6 @@
           <attr>username</attr>
           <attr>password</attr>
           <attr>sslmode</attr>
-          <attr>v-project-id</attr>
-          <attr>v-engine</attr>
-          <attr>v-routing-tag</attr>
-          <attr>v-routing-queue</attr>
-          <attr>v-dremio-product</attr>
         </attribute-list>
       </required-attributes>
     </connection-normalizer>

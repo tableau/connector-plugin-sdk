@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<connector-plugin class="oauthconnector" superclass="jdbc" plugin-version="1.0.0" name="OauthConnector" version="21.3" min-version-tableau="2021.1">
+  <vendor-information>
+    <company name="OauthConnector" />
+    <support-link url="https://www.tableau.com/support" />
+    <driver-download-link url="https://www.tableau.com/drivers" />
+  </vendor-information>
+  <connection-customization class="oauthconnector" enabled="true" version="10.0">
+    <vendor name="OauthConnector" />
+    <driver name="OauthConnector" />
+    <customizations>
+      <customization name="CAP_JDBC_QUERY_ASYNC" value="no" />
+      <customization name="CAP_JDBC_QUERY_CANCEL" value="yes" />
+    </customizations>
+  </connection-customization>
+  <connection-fields file="connection-fields.xml" />
+  <connection-resolver file="connectionResolver.tdr" />
+  <dialect file="dialect_plugin.tdd" />
+  <oauth-config file="oauthConfig.xml" />
+</connector-plugin>

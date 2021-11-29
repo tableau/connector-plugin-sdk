@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright (C) 2017-2019 Dremio Corporation. This file is confidential and private property. -->
-<dialect name="DremioDialect" base="PostgreSQL90Dialect" class="dremio" version="18.1">
+<dialect name="OauthConnectorDialect" base="PostgreSQL90Dialect" class="dremio" version="18.1">
    <function-map>
-      <function group="numeric" name="ABS" return-type="real">
-         <!--
-            formula
-            SQL expression formula. Input parameters are denoted with %1, %2, etc.
-        -->
-         <formula>ABS(%1)</formula>
-         <!--
-            argument
-            One or more arguments. Data type can include bool, date, datetime,
-            localint, localreal, localstr, int, real, spatial, or str.
-            Local types must be literals.
-        -->
-         <argument type="real" />
-      </function>
       <function group="numeric" name="ABS" return-type="int">
          <formula>ABS(%1)</formula>
          <argument type="int" />
@@ -56,11 +41,6 @@
       <function group="numeric" name="DEGREES" return-type="real">
          <formula>DEGREES(%1)</formula>
          <argument type="real" />
-      </function>
-      <function group="numeric" name="DIV" return-type="int">
-         <formula>(CASE WHEN %2 = 0 THEN NULL ELSE DIV(%1,%2) END)</formula>
-         <argument type="int" />
-         <argument type="int" />
       </function>
       <function group="numeric" name="EXP" return-type="real">
          <formula>EXP(%1)</formula>
