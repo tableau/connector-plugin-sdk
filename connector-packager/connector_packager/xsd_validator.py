@@ -290,10 +290,6 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
                 if field not in attributes:
                     xml_violations_buffer.append("Attribute '" + field + "' in connection-fields but not in required-attributes list.")
                     return False
-
-        if len(attributes) > 0 and properties.connection_metadata_database and not properties.uses_tcd:
-            if 'dbname' not in attributes:
-                xml_violations_buffer.append("connection-metadata 'database' enabled but 'dbname' not in required-attributes list.")
         
 
 
@@ -361,3 +357,7 @@ def warn_file_specific_rules_tdr(path_to_file: Path):
     if not authentication_attr_exists:
         logger.warning("Warning: 'authentication' attribute is missing from "
                        "<connection-normalizer>/<required-attributes>/<attribute-list> in " + str(path_to_file) + ".")
+
+ if len(attributes) > 0 and properties.connection_metadata_database and not properties.uses_tcd:
+            if 'dbname' not in attributes:
+                xml_violations_buffer.append("Warning: connection-metadata 'database' enabled but 'dbname' not in required-attributes list.")

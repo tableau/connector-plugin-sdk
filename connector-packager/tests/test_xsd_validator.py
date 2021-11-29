@@ -136,7 +136,7 @@ class TestXSDValidator(unittest.TestCase):
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "An instanceurl field must be conditional to authentication field with value=oauth")
 
-        #instanceURL should not be required in required-attributes since it's automatically added
+        # instanceURL should not be required in required-attributes since it's automatically added
         test_folder = TEST_FOLDER / Path("instanceurl/dremio")  # This connector uses a connection-fields.xml file
 
         files_list = [
@@ -147,7 +147,8 @@ class TestXSDValidator(unittest.TestCase):
             ConnectorFile("connectionResolver.tdr", "connection-resolver"),
             ConnectorFile("connectionProperties.js", "script")]
         properties_uses_tcd = ConnectorProperties()
-        self.assertTrue(validate_all_xml(files_list, test_folder, properties_uses_tcd), "Dremio (instanceURL not in required-attributes is valid")
+        self.assertTrue(validate_all_xml(files_list, test_folder, properties_uses_tcd),
+         "Dremio (instanceURL not in required-attributes is valid")
 
     def test_warn_defaultSQLDialect_as_base(self):
 
