@@ -137,7 +137,7 @@ class TestXSDValidator(unittest.TestCase):
                          "An instanceurl field must be conditional to authentication field with value=oauth")
 
         # instanceURL should not be required in required-attributes since it's automatically added
-        test_folder = TEST_FOLDER / Path("instanceurl/valid-connector")  # This connector uses a connection-fields.xml file
+        test_folder = TEST_FOLDER / Path("oauth_connector")  # This connector uses a connection-fields.xml file
 
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
