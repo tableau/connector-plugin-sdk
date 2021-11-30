@@ -271,6 +271,12 @@ class TestXSDValidator(unittest.TestCase):
         properties.connection_metadata_database = True
         xml_violations_buffer = []
 
+        print("Test that normalizer not containing 'dbname' if connection-metadata database field is used is validated")
+        file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
+        test_file = TEST_FOLDER / "database_field_not_in_normalizer/connectionResolver.xml"
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
+                        "Dbname is optional if unused so connection resolver is valid")
+
 
         print("Test that normalizer not containing all the fields in connection-fields is invalidated")
         file_to_test = ConnectorFile("connectionResolver.xml", "connection-resolver")
