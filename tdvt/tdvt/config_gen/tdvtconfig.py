@@ -57,6 +57,8 @@ class TdvtInvocation(object):
             self.leave_temp_dir = True
         if args.verbose:
             self.verbose = args.verbose
+        if args.output_dir:
+            self.output_dir = args.output_dir
 
     def init_from_json(self, json):
         self.tested_sql = json.get('tested_sql', self.tested_sql)
