@@ -141,10 +141,10 @@ class TestXSDValidator(unittest.TestCase):
 
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
-            ConnectorFile("connection-fields.xml", "connection-fields"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
             ConnectorFile("connectionBuilder.js", "script"),
-            ConnectorFile("dialect_plugin.tdd", "dialect"),
-            ConnectorFile("connectionResolver.tdr", "connection-resolver"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
             ConnectorFile("connectionProperties.js", "script")]
         properties_uses_tcd = ConnectorProperties()
         self.assertTrue(validate_all_xml(files_list, test_folder, properties_uses_tcd),
