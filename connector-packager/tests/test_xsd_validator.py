@@ -172,7 +172,7 @@ class TestXSDValidator(unittest.TestCase):
             logging.getLogger('packager_logger').warning('dummy message')
             warn_file_specific_rules(file_to_test, test_tdr_file)
 
-        self.assertEqual(len(cm.output), 2)
+        self.assertEqual(len(cm.output), 1)
         self.assertNotIn("'authentication' attribute is missing", cm.output[0],
                          "\"'authentication' attribute is missing\" found in warning message")
 
@@ -192,7 +192,7 @@ class TestXSDValidator(unittest.TestCase):
         with self.assertLogs('packager_logger', level='WARNING') as cm:
             warn_file_specific_rules(file_to_test, test_tdr_file)
 
-        self.assertEqual(len(cm.output), 2)
+        self.assertEqual(len(cm.output), 1)
         self.assertIn("'authentication' attribute is missing", cm.output[0],
                       "\"'authentication' attribute is missing\" not found in warning message")
 
