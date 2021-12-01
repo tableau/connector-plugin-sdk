@@ -172,6 +172,18 @@ _Functions_
 
 Format the attributes as 'key=value'. By default, some values are escaped or wrapped in curly braces to follow the ODBC standard, but you can also do it here if needed.
 
+    String GetProductName();
+
+Returns the Tableau product name. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Possible values are: `TableauDesktop, TableauServer, TableauPrep, TableauBridge, Tableau`
+
+    String GetProductVersion();
+
+Returns the Tableau version as a string in Version.MaintenanceRelease format. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Example value: `2022.1.3` 
+
+    String GetPlatform();
+
+Returns the name of the operating system Tableau is running on. Possible values are: `win, mac, linux`
+
     bool MatchesConnectionAttributes(Object attr, Object inKey);
 
 Invokes attribute matching code.
@@ -179,13 +191,6 @@ Invokes attribute matching code.
     Map ParseODBCConnectString(String odbcConnectString);
 
 Returns a map of the key value pairs defined in the ```odbc-connect-string-extras``` string.
-
-    String GetPlatform();
-
-Returns the name of the os Tableau is running on. Possible values are:
-- win
-- mac
-- linux
 
 Example:
 
