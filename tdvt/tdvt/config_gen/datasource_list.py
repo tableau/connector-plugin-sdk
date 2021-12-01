@@ -332,17 +332,15 @@ def load_test(config, test_dir=get_root_dir()):
                 pass
         # Add smoke tests
         elif connection_test in section:
-            test_path = 'logicaltests/setup/connection_test/'
-
             try:
                 all_ini_sections.remove(section)
                 test_config.add_logical_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                             test_config.get_logical_test_path('logicaltests/setup/connection_test/setup.staples.*.'), test_dir,
-                                             get_password_file(sect), get_expected_message(sect),  True,
+                                             test_config.get_logical_test_path('logicaltests/setup/connection_test/setup.staples.*.'),  # noqa: E501
+                                             test_dir, get_password_file(sect), get_expected_message(sect),  True,
                                              get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_logical_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                             test_config.get_logical_test_path('logicaltests/setup/connection_test/setup.calcs.*.'), test_dir,
-                                             get_password_file(sect), get_expected_message(sect), True,
+                                             test_config.get_logical_test_path('logicaltests/setup/connection_test/setup.calcs.*.'),  # noqa: E501
+                                             test_dir, get_password_file(sect), get_expected_message(sect), True,
                                              get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
