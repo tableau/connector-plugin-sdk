@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='/Users/lpetschauer/PycharmProjects/connector-plugin-sdk/tdvt/tdvt/logicaltests/setup/connection_test/setup.staples.connection.test.simple.xml'>
+    <sql>
+      SELECT &quot;Staples&quot;.&quot;Ship Priority&quot; AS &quot;Ship Priority&quot;&#10;FROM &quot;Staples&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      122.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.postgres].[Ship Priority]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
