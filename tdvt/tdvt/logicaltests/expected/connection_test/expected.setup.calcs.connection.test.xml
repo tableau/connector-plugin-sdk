@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='setup.calcs.connection.test.simple.xml'>
+    <sql>
+      SELECT &quot;[Calcs]&quot;.&quot;key&quot; AS &quot;key&quot;&#10;FROM &quot;Calcs&quot; &quot;[Calcs]&quot;&#10;GROUP BY 1&#10;ORDER BY 1 ASC NULLS FIRST&#10;    </sql>
+    <query-time>
+      102.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[key]</column>
+      </schema>
+      <tuple>
+        <value>&quot;key00&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key01&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key02&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key03&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key04&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key05&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key06&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key07&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key08&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key09&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key10&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key11&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key12&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key13&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key14&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key15&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;key16&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
