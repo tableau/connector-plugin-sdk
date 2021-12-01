@@ -1,2 +1,0 @@
-//used to do data source connection test
-key
