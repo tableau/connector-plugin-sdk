@@ -107,8 +107,7 @@ class TestRunner():
         self.verbose = verbose
         self.thread_lock = lock
         self.temp_dir = make_temp_dir([self.test_config.suite_name, str(thread_id)])
-        if (self.test_config.output_dir == ''):
-            self.test_config.output_dir = self.temp_dir
+        self.test_config.output_dir = self.temp_dir
 
     def copy_files_to_zip(self, dst_file_name, src_dir, is_logs):
         dst = os.path.join(os.getcwd(), dst_file_name)
@@ -470,8 +469,6 @@ def create_parser():
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
-    run_test_common_parser.add_argument('--output-dir', '-o', dest='output_dir', help='Writes logs to a specific file.', required=False, default=None, const='*', nargs='?')
-
 
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
