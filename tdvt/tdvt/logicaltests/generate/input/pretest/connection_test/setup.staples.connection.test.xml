@@ -10,7 +10,7 @@
         </measures>
         <groupbys>
           <binding name='[Ship Priority]'>
-            <identifierExp class='logical-expression' identifier='[Ship Priority]' />
+            <identifierExp class='logical-expression' identifier='[Discount]' />
           </binding>
         </groupbys>
         <relationOp class='logical-operator' connection='leaf' name='$Staples$'>
