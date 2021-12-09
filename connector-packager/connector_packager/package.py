@@ -101,7 +101,7 @@ def main():
         logger.info("Validation failed. Check " + str(log_file) + " for more information.")
 
         if args.force_package:
-            logger.warning("--force-package detected, so attempting to package .taco file despite validation failing. Connector may be non-functional or buggy, and packaging process may fail.")
+            logger.warning("--force-package detected, so attempting to package .taco file despite validation failing. Connector may be non-functional or contain bugs, and packaging process may fail.")
         else:
             return
 
