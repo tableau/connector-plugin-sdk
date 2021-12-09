@@ -35,6 +35,7 @@ def create_arg_parser() -> ArgumentParser:
                         help='forgives some validation errors to package connectors made with older versions of the SDK', required=False)
     parser.add_argument('-d', '--dest', dest='dest', help='destination folder for packaged connector',
                         default='packaged-connector', action=UniqueActionStore)
+    parser.add_argument('--force-package', dest='force_package', action='store_true', help='Forces packager to package even if validation fails. Warning: may produce non-functional .taco files, and packaging process may fail.', required=False)
     return parser
 
 
@@ -98,7 +99,11 @@ def main():
         logger.info("Validation succeeded.\n")
     else:
         logger.info("Validation failed. Check " + str(log_file) + " for more information.")
-        return
+
+        if args.force_package:
+            logger.warning("--force-package detected, so attempting to package .taco file despite validation failing. Connector may be non-functional or buggy, and packaging process may fail.")
+        else:
+            return
 
     # Display warning that vendor-defined attributes will be logged
     if len(properties.vendor_defined_fields) > 0:
