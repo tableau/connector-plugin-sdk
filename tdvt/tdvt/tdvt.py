@@ -107,13 +107,15 @@ class TestRunner():
         self.verbose = verbose
         self.thread_lock = lock
         self.temp_dir = make_temp_dir([self.test_config.suite_name, str(thread_id)])
-        if (self.test_config.output_dir == ''):
-            self.test_config.output_dir = self.temp_dir
 
     def copy_files_to_zip(self, dst_file_name, src_dir, is_logs):
         dst = os.path.join(os.getcwd(), dst_file_name)
+        if self.test_config.custom_output_dir != '':
+            dst = self.test_config.custom_output_dir + '\\' + dst_file_name
         mode = 'w' if not os.path.isfile(dst) else 'a'
         optional_dir_name = self.test_config.config_file.replace('.', '_')
+        if self.test_config.custom_output_dir != '':
+            optional_dir_name = self.test_config.custom_output_dir
         if is_logs is True:
             log_dir = os.path.join(src_dir, optional_dir_name)
             glob_path = glob.glob(os.path.join(log_dir, '*.txt'))
@@ -132,7 +134,10 @@ class TestRunner():
         TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir)
 
     def copy_test_result_file(self):
-        src = os.path.join(self.temp_dir, "tdvt_output.json")
+        if self.test_config.custom_output_dir != '':
+            src = os.path.join(self.test_config.custom_output_dir, "tdvt_output.json")
+        else:
+            src = os.path.join(self.temp_dir, "tdvt_output.json")
         dst = os.path.join(os.getcwd(), TestOutputFiles.output_json)
         try:
             if not os.path.isfile(dst):
@@ -470,8 +475,8 @@ def create_parser():
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
-    run_test_common_parser.add_argument('--output-dir', '-o', dest='output_dir', help='Writes logs to a specific file.', required=False, default=None, const='*', nargs='?')
-
+    run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir', help='Writes logs to a specific file.',
+                                        required=False, default=None, const='*', nargs='?')
 
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
@@ -496,7 +501,6 @@ def create_parser():
     run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
-
 
     #Run test pattern.
     run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
