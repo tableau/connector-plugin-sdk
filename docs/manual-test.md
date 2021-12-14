@@ -292,7 +292,7 @@ The workbook should publish without errors.
     - Click Signing in should invoke the OAuth flow and after authenticated you will be able to see the content.
 
 ### Test a Connector Update
-This is the minium set of manual checks to run through when making an update to your connector, but these tests alone do not guarantee that the update is bug-free. For small or cosmetic changes, or for updates to the connector signature only, the following may be enough, but for larger changes you may be required to run through the fulls et of manual test or re-run TDVT.
+This is the minimum set of manual checks to run through when making an update to your connector, but these tests alone do not guarantee that the update is bug-free. For small or cosmetic changes, or for updates to the connector signature only, the following may be enough, but for larger changes you may be required to run through the full set of manual test or re-run TDVT.
 
 __Ensure new update can connect to database with valid credentials__
 Note: this test case is a duplicate of other manual test cases. If you're running through the full manual test suite for the update this can be skipped.
