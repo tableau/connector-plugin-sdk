@@ -56,7 +56,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(c):
+    def write_test_results_csv(c, custom_output_dir=''):
         if not c.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -70,6 +70,9 @@ class TestOutputFiles(object):
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
         dst = os.path.join(os.getcwd(), c.output_csv)
+        if custom_output_dir != '':
+            dst = os.path.join(Path(custom_output_dir), c.output_csv)
+
         try:
             dst_exists = os.path.isfile(dst)
             with open(dst, 'w', encoding='utf8') as dst_file:
@@ -111,11 +114,9 @@ class TestRunner():
     def copy_files_to_zip(self, dst_file_name, src_dir, is_logs):
         dst = os.path.join(os.getcwd(), dst_file_name)
         if self.test_config.custom_output_dir != '':
-            dst = self.test_config.custom_output_dir + '\\' + dst_file_name
+            dst = os.path.join(Path(self.test_config.custom_output_dir), dst_file_name)
         mode = 'w' if not os.path.isfile(dst) else 'a'
         optional_dir_name = self.test_config.config_file.replace('.', '_')
-        if self.test_config.custom_output_dir != '':
-            optional_dir_name = self.test_config.custom_output_dir
         if is_logs is True:
             log_dir = os.path.join(src_dir, optional_dir_name)
             glob_path = glob.glob(os.path.join(log_dir, '*.txt'))
@@ -134,11 +135,10 @@ class TestRunner():
         TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir)
 
     def copy_test_result_file(self):
-        if self.test_config.custom_output_dir != '':
-            src = os.path.join(self.test_config.custom_output_dir, "tdvt_output.json")
-        else:
-            src = os.path.join(self.temp_dir, "tdvt_output.json")
+        src = os.path.join(self.temp_dir, "tdvt_output.json")
         dst = os.path.join(os.getcwd(), TestOutputFiles.output_json)
+        if self.test_config.custom_output_dir != '':
+            dst = os.path.join(Path(self.test_config.custom_output_dir), TestOutputFiles.output_json)
         try:
             if not os.path.isfile(dst):
                 shutil.copyfile(src, dst)
@@ -586,7 +586,7 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv()
+    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 

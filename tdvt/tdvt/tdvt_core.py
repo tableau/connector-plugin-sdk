@@ -722,8 +722,6 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
     output_dir = tdvt_test_config.output_dir if tdvt_test_config.output_dir else root_directory
-    if tdvt_test_config.custom_output_dir != '':
-        output_dir = tdvt_test_config.custom_output_dir
 
     tds_file = get_tds_full_path(root_directory, tdvt_test_config.tds)
     tdvt_test_config.tds = tds_file
