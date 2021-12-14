@@ -290,3 +290,27 @@ The workbook should publish without errors.
     - Verify that a Sign In dialog opens.<br/>
     ![]({{ site.baseurl }}/assets/oauth-server-prompt.png)<br/>
     - Click Signing in should invoke the OAuth flow and after authenticated you will be able to see the content.
+
+### Test a Connector Update
+This is the minium set of manual checks to run through when making an update to your connector, but these tests alone do not guarantee that the update is bug-free. For small or cosmetic changes, or for updates to the connector signature only, the following may be enough, but for larger changes you may be required to run through the fulls et of manual test or re-run TDVT.
+
+__Ensure new update can connect to database with valid credentials__
+Note: this test case is a duplicate of other manual test cases. If you're running through the full manual test suite for the update this can be skipped.
+
+1. Open Tableau Desktop, and click on your connector in the connector list
+
+1. Make valid entries in each field (Server, Username, Password, Port, and so on) and verify that you can connect.
+
+1. Verify that you can connect using all supported methods of authentication.<br/>
+![]({{ site.baseurl }}/assets/mt-connect-auth.png)
+
+1. After connecting, go to a worksheet and drag some data onto the viz and ensure no errors occur
+
+__Ensure workbooks made with previous version of connector can be opened with new workbook__
+
+1. Create a viz using the previous version of the connector. Save as a .twb file.
+
+1. Close Tableau Desktop, and open a new instance of Tableau Desktop with the new version of your connector. (Note: Tableau must be restarted for changes to the connector to be picked up.)
+
+1. Open the .twb file you created with the old version of your connector. Ensure that the reconnect dialog is shown, and that the user is prompted to re-enter their credentials only.<br/>
+![]({{ site.baseurl }}/assets/mt-reconnect-dialog.png)
