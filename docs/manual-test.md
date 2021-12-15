@@ -308,9 +308,11 @@ Note: this test case is a duplicate of other manual test cases. If you're runnin
 
 __Ensure workbooks made with previous version of connector can be opened with new workbook__
 
-1. Create a viz using the previous version of the connector. Save as a .twb file.
+1. Create a viz using the previous version of the connector. Ensure no errors occur and the viz shows expected content. Save as a .twb file.
 
 1. Close Tableau Desktop, and open a new instance of Tableau Desktop with the new version of your connector. (Note: Tableau must be restarted for changes to the connector to be picked up.)
 
 1. Open the .twb file you created with the old version of your connector. Ensure that the reconnect dialog is shown, and that the user is prompted to re-enter their credentials only.<br/>
 ![]({{ site.baseurl }}/assets/mt-reconnect-dialog.png)
+
+1. Ensure no errors occur when viewing the viz, and that the viz appears the same as the previous version of the connector
