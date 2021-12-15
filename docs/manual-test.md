@@ -304,7 +304,7 @@ Note: this test case is a duplicate of other manual test cases. If you're runnin
 1. Verify that you can connect using all supported methods of authentication.<br/>
 ![]({{ site.baseurl }}/assets/mt-connect-auth.png)
 
-1. After connecting, go to a worksheet and drag some data onto the viz and ensure no errors occur
+1. After connecting, go to a worksheet and drag some data onto the viz and ensure no errors occur and the viz shows expected content
 
 __Ensure workbooks made with previous version of connector can be opened with new workbook__
 
