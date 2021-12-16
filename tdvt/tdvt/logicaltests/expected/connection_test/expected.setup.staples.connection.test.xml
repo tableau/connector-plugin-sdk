@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='/connector-plugin-sdk/tdvt/tdvt/logicaltests/setup/connection_test/setup.staples.connection.test.simple.xml'>
+    <sql>
+      SELECT &quot;Staples&quot;.&quot;Discount&quot; AS &quot;Ship Priority&quot;&#10;FROM &quot;Staples&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      85.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[Staples.postgres].[Ship Priority]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.01&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.02&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.03&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.04&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.05&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.06&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.07&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.08&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.09&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.1&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.11&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.12&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.13&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.15&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.21&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.24&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.27&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.3&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.36&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;0.39&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
