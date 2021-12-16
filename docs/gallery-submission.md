@@ -134,14 +134,6 @@ Installation instructions have two parts:
   * Installing the driver
 - Your custom installation instructions
 
-**Note on Prep Builder Instructions:** If your connector can be used with Prep Builder, add information about where to put the TACO file.    
-- For Tableau Prep Builder:  
-  - Windows: C:\Users\<Windows User>\Documents\My Tableau Prep Repository\Connectors  
-  - MacOS: /Users/<user>/Documents/My Tableau Prep Repository/Connectors  
-- For Tableau Server (Flow web authoring): <Tableau_Server_Installation_Directory>/data/tabsvc/flowqueryservice/Connectors  
-- For Tableau Server (Tableau Prep Conductor): <Tableau_Server_Installation_Directory>/data/tabsvc/flowprocessor/Connectors  
-
-
 To make things easy, we created templates for your custom installation instructions. These templates, linked below, are markdown friendly. If you have additional installation instructions, append them below the Tableau installation instructions.
 * [Tableau Desktop JDBC Template](./templates/tableau-desktop-jdbc-template.md)
 * [Tableau Desktop ODBC Template](./templates/tableau-desktop-odbc-template.md)
@@ -149,9 +141,6 @@ To make things easy, we created templates for your custom installation instructi
 * [Tableau Prep Builder ODBC Template](./templates/tableau-prep-odbc-template.md)
 * [Tableau Server (Flow web authoring) Template](./templates/tableau-server-flow-template.md)
 * [Tableau Server (Tableau Prep Conductor) Template](./templates/tableau-server-prep-template.md)
-
-
-
 
 ##### Icon
 
