@@ -56,7 +56,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(c):
+    def write_test_results_csv(c, custom_output_dir=''):
         if not c.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -69,7 +69,9 @@ class TestOutputFiles(object):
         except KeyError as e:
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
-        dst = os.path.join('C:\\users\sdavis\\desktop\\output_test', c.output_csv)
+        dst = os.path.join(os.getcwd(), c.output_csv)
+        if custom_output_dir != '':
+            dst = os.path.join(Path(custom_output_dir), c.output_csv)
         try:
             dst_exists = os.path.isfile(dst)
             with open(dst, 'w', encoding='utf8') as dst_file:
@@ -587,7 +589,7 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv()
+    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
