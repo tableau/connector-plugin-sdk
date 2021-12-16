@@ -12,7 +12,10 @@ title: Connector Tableau Exchange Submission Guide
 >Best regards -- The Tableau Team
 >
 ---
+**In this section**
 
+* TOC
+{:toc}
 
 ## Process Overview
 
@@ -139,10 +142,13 @@ Installation instructions have two parts:
 - For Tableau Server (Tableau Prep Conductor): <Tableau_Server_Installation_Directory>/data/tabsvc/flowprocessor/Connectors  
 
 
-To make things easy, we've created a template for your custom installation instructions (included below, markdown friendly). Any additional installation instructions should be appended below the Tableau installation instructions.
-* [Tableau Desktop Templates](./templates/tableau-desktop-templates.md)
-* Tableau Server Templates
-* Tableau Prep Templates
+To make things easy, we created templates for your custom installation instructions. These templates, linked below, are markdown friendly. If you have additional installation instructions, append them below the Tableau installation instructions.
+* [Tableau Desktop JDBC Template](./templates/tableau-desktop-odbc.md)
+* [Tableau Desktop ODBC Template](./templates/tableau-desktop-jdbc.md)
+* [Tableau Prep JDBC Template](./templates/tableau-prep-jdbc.md)
+* [Tableau Prep ODBC Template](./templates/tableau-prep-odbc.md)
+* [Tableau Server Templates](./templates/tableau-server.md)
+
 
 
 
