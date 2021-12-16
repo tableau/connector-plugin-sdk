@@ -56,7 +56,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(c, custom_output_dir=''):
+    def write_test_results_csv(c):
         if not c.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -69,10 +69,7 @@ class TestOutputFiles(object):
         except KeyError as e:
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
-        dst = os.path.join(os.getcwd(), c.output_csv)
-        if custom_output_dir != '':
-            dst = os.path.join(Path(custom_output_dir), c.output_csv)
-
+        dst = os.path.join('C:\\users\sdavis\\desktop\\output_test', c.output_csv)
         try:
             dst_exists = os.path.isfile(dst)
             with open(dst, 'w', encoding='utf8') as dst_file:
@@ -110,11 +107,13 @@ class TestRunner():
         self.verbose = verbose
         self.thread_lock = lock
         self.temp_dir = make_temp_dir([self.test_config.suite_name, str(thread_id)])
+        self.test_config.output_dir = self.temp_dir
 
     def copy_files_to_zip(self, dst_file_name, src_dir, is_logs):
         dst = os.path.join(os.getcwd(), dst_file_name)
-        if self.test_config.custom_output_dir != '':
-            dst = os.path.join(Path(self.test_config.custom_output_dir), dst_file_name)
+        custom_dir = self.test_config.custom_output_dir
+        if custom_dir != '':
+            dst = os.path.join(custom_dir, dst_file_name)
         mode = 'w' if not os.path.isfile(dst) else 'a'
         optional_dir_name = self.test_config.config_file.replace('.', '_')
         if is_logs is True:
@@ -137,8 +136,9 @@ class TestRunner():
     def copy_test_result_file(self):
         src = os.path.join(self.temp_dir, "tdvt_output.json")
         dst = os.path.join(os.getcwd(), TestOutputFiles.output_json)
-        if self.test_config.custom_output_dir != '':
-            dst = os.path.join(Path(self.test_config.custom_output_dir), TestOutputFiles.output_json)
+        custom_dir = self.test_config.custom_output_dir
+        if custom_dir != '':
+            dst = os.path.join(custom_dir, TestOutputFiles.output_json)
         try:
             if not os.path.isfile(dst):
                 shutil.copyfile(src, dst)
@@ -475,9 +475,9 @@ def create_parser():
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
-    run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir', help='Writes logs to a specific file.',
+    run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
+                                        help='Writes logs to a specific file.',
                                         required=False, default=None, const='*', nargs='?')
-
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
@@ -501,6 +501,7 @@ def create_parser():
     run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
+
 
     #Run test pattern.
     run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
@@ -586,7 +587,7 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir)
+    TestOutputFiles.write_test_results_csv()
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
