@@ -537,11 +537,24 @@ def register_tdvt_dialect():
     custom_dialect.skipinitialspace = True
     csv.register_dialect('tdvt', custom_dialect)
 
+def check_if_custom_output_dir_exists(custom_output_dir: str):
+    return Path(custom_output_dir).is_dir()
+
+
+def return_logging_path(args: argparse.ArgumentParser) -> str:
+    if args.custom_output_dir and check_if_custom_output_dir_exists(args.custom_output_dir):
+        return os.path.join(args.custom_output_dir, 'tdvt_log_combined.txt')
+    elif args.custom_output_dir:
+        raise OSError("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
+    else:
+        return 'tdvt.log_combined.txt'
+
+
 def init():
     parser = create_parser()
     args = parser.parse_args()
     # Create logger.
-    logging.basicConfig(filename='tdvt_log_combined.txt', level=logging.DEBUG, filemode='w',
+    logging.basicConfig(filename=return_logging_path(args), level=logging.DEBUG, filemode='w',
                         format='%(asctime)s %(message)s')
     logger = logging.getLogger()
     ch = logging.StreamHandler()
