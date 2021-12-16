@@ -49,14 +49,13 @@ The SDK includes several [standalone example connectors](https://github.com/tabl
 To work with connectors, you need the following:
 
 * Windows or Mac
-* Tableau Desktop or Server 2019.1 Beta 2 or higher
+* Tableau Desktop or Server 2020.4
 * Python 3.7 or higher
 * An ODBC or JDBC data source and driver
 * The provided test data loaded in your data source
 
 To package the connector into a .taco file, you will also need:
 
-* Tableau Desktop or Server 2019.4 Beta 1 or higher
 * JDK 8 or higher
 
 For a JDBC connector, your driver must fulfill the following requirements:
