@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.5.0] - 2021-12-01
 - Convert smoke tests from Expression to Logical tests to support column renaming.
 
+## [2.4.1] - 2021-12-01
+- Hotfix for incorrect parsing of datasource inis that causes lots of incorrect console logs.
+
 ## [2.3.5] - 2021-04-30
 - Hotfix for when cmd_output does not exist.
 
