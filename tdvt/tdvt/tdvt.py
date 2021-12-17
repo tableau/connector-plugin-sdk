@@ -731,8 +731,8 @@ def run_desired_tests(args, ds_registry):
 
     if len(ds_to_run) > 0:
         directory_to_delete = os.getcwd()
-        if args.custom_output_dir != '':
-            directory_to_delete
+        if args.custom_output_dir:
+            directory_to_delete = args.custom_output_dir
         delete_output_files(directory_to_delete)
 
     if not tabquerycli_exists():
