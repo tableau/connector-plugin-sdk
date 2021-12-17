@@ -2,7 +2,7 @@
     Test driver script for the Tableau Datasource Verification Tool
 
 """
-
+import os
 import sys
 
 if sys.version_info[0] < 3:
@@ -730,7 +730,10 @@ def run_desired_tests(args, ds_registry):
         sys.exit(0)
 
     if len(ds_to_run) > 0:
-        delete_output_files(os.getcwd())
+        directory_to_delete = os.getcwd()
+        if args.custom_output_dir != '':
+            directory_to_delete
+        delete_output_files(directory_to_delete)
 
     if not tabquerycli_exists():
         print("Could not find Tabquerycli.")
