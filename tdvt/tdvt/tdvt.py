@@ -2,7 +2,6 @@
     Test driver script for the Tableau Datasource Verification Tool
 
 """
-import os
 import sys
 
 if sys.version_info[0] < 3:
@@ -13,6 +12,7 @@ import csv
 import glob
 import json
 import pathlib
+import os
 import queue
 import shutil
 import threading
@@ -56,7 +56,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(c, custom_output_dir=''):
+    def write_test_results_csv(c, custom_output_dir: str=''):
         if not c.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -478,7 +478,7 @@ def create_parser():
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
     run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
-                                        help='Writes logs to a specific file.',
+                                        help='Writes logs to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
@@ -537,7 +537,7 @@ def register_tdvt_dialect():
     custom_dialect.skipinitialspace = True
     csv.register_dialect('tdvt', custom_dialect)
 
-def check_if_custom_output_dir_exists(custom_output_dir: str):
+def check_if_custom_output_dir_exists(custom_output_dir: str) -> bool:
     return Path(custom_output_dir).is_dir()
 
 
