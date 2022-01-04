@@ -37,6 +37,7 @@ class XMLParser:
         self.class_name = None  # Get this from the class name in the manifest file
         self.file_list = []  # list of files to package
         self.loc_strings = []  # list of loc strings so we can make sure they are covered in the resource files.
+        self.connector_version = None # Get ths from the plugin-version attribute in the manifest
 
     def generate_file_list(self) -> Optional[List[ConnectorFile]]:
         """
@@ -218,6 +219,11 @@ class XMLParser:
                     logging.debug(self.class_name + " in manifest, " + child.attrib['class'] + " in " +
                                   file_to_parse.file_name)
                     return False
+
+            # Set the connector version
+            if 'plugin-version' in child.attrib:
+                logging.debug("Found connector version: " + child.attrib['plugin-version'])
+                self.connector_version = child.attrib['plugin-version']
 
             # If an attribute has @string, then add that string to the loc_strings list.
             for key, value in child.attrib.items():
