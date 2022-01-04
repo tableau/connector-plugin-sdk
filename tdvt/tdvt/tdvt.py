@@ -478,7 +478,7 @@ def create_parser():
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
     run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
-                                        help='Writes logs to a specified directory. The directory must exist.',
+                                        help='Writes log files to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
