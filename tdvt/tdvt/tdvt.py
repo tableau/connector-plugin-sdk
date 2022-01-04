@@ -545,7 +545,7 @@ def return_logging_path(args: argparse.ArgumentParser) -> str:
     if args.custom_output_dir and check_if_custom_output_dir_exists(args.custom_output_dir):
         return os.path.join(args.custom_output_dir, 'tdvt_log_combined.txt')
     elif args.custom_output_dir:
-        raise OSError("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
+        sys.exit("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
     else:
         return 'tdvt.log_combined.txt'
 
@@ -639,8 +639,7 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
             logging.warning("Tests will run without verifying the data source connection.")
 
     if not all_work and not smoke_tests:
-        print("No tests found. Check arguments.")
-        sys.exit()
+        sys.exit("No tests found. Check arguments.")
 
     failing_ds = set()
     failed_smoke_tests = 0
