@@ -78,14 +78,6 @@ After you click your connector, close the window. It should return to the previo
 Select the **Require SSL** checkbox, and then click **Sign In**.<br/>
 ![]({{ site.baseurl }}/assets/mt-connect-ssl.png)
 
-1. Verify that you can duplicate the data source and that the duplicate source name has "(copy)" appended to the end.<br/>
-![]({{ site.baseurl }}/assets/mt-duplicate.png)<br/>
-![]({{ site.baseurl }}/assets/mt-duplicate-copy.png)
-
-1. Verify that the data source connection properties are correct.<br/>
-![]({{ site.baseurl }}/assets/mt-prop-menu.png)<br/>
-![]({{ site.baseurl }}/assets/mt-properties.png)
-
 __Test extracts__
 
 1. Create an extract.
@@ -110,45 +102,6 @@ The worksheet opens in Tableau.
 ![]({{ site.baseurl }}/assets/mt-change-server.png)
 1. After you click **Sign In**, you should see the new server name under **Connections**.<br/>
 ![]({{ site.baseurl }}/assets/mt-new-server.png)
-
-__Open a workbook with the connector missing__
-
-1. Create a workbook with a live connection using your connector.
-
-1. Save the workbook. The file should have a .twb filename extension.
-
-1. Close Tableau Desktop and remove your connector.
-
-1. Open Tableau Desktop and open the workbook you created. Verify that an error message displays:<br/>
-![]({{ site.baseurl }}/assets/mt-missing-connector-error.png)
-
-__Connect to a published data source with the connector missing__
-
-1. Remove your connector.
-
-1. Use Tableau Desktop to connect to a published data source with an extract. You should be able to connect without errors.
-
-1. Use Tableau Desktop to connect to a published data source without an extract. Verify that an error message displays:<br/>
-![]({{ site.baseurl }}/assets/mt-no-extract-error.png)
-
-__Download and open a workbook with the connector missing__
-
-1. Remove your connector.
-
-1. Download a workbook with an extract from Tableau Server and open it in Tableau Desktop. The workbook should open without errors.
-
-1. Download a workbook without an extract from Tableau Server and open it in Tableau Desktop. Verify that an error message displays:<br/>
-![]({{ site.baseurl }}/assets/mt-wkbk-no-extract-error.png)
-
-__Test localization__
-Change the language to any language but English (United States).
-
-1. From **Help**, select **Choose Language**, and then select a language.<br/>
-![]({{ site.baseurl }}/assets/mt-loc.png)
-
-1. Restart Tableau Desktop.
-
-1. Connect to your data source again and verify the localized text.
 
 __Connect to the correct database with the wrong credentials__
 - Verify that an error message appears
