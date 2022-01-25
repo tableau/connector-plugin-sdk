@@ -66,7 +66,7 @@ __Connect to the database with valid credentials__
 After you click your connector, close the window. It should return to the previous window without error.<br/>
 ![]({{ site.baseurl }}/assets/mt-cancel.png)
 
-1. Make valid entries in each field (Server, Username, Password, Port, and so on) and verify that you can connect.
+1. Make valid entries in each field (Server, Username, Password, Port, and so on) and verify that you can connect. Repeat this step with each supported auth mode.
 
 1. Verify that the default connection name is correct, and that you can change it.<br/>
 ![]({{ site.baseurl }}/assets/mt-cconnection-name.png)
@@ -181,7 +181,7 @@ Create a workbook on Tableau Server with the connector installed on the server:
 1. Select your connector. In this example, the connector name is MariaDB.<br/>
 ![]({{ site.baseurl }}/assets/mt-wkbk-mariadb.png)
 
-1. Enter the required information to sign in.<br/>
+1. Enter the required information to sign in. Repeat as necessary to test all auth modes.<br/>
 ![]({{ site.baseurl }}/assets/mt-wkbk-signin.png)
 
 1. After you connect to the data source, you should be able to create a workbook and save it on the server.
