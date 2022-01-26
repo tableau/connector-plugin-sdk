@@ -114,6 +114,12 @@ Perform the publishing tests listed below. For more information about publishing
 
 * Publish a workbook without an extract to Tableau Server *with the connector* installed on the server.
 The workbook should publish without errors.
+    - Be sure not to embed credentials when you publish the workbook.
+    - Open the published workbook.
+    - Verify that a Sign In dialog opens.<br/>
+    ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)<br/>
+    For more information, see [Set Credentials for Accessing Your Published Data](https://onlinehelp.tableau.com/current/pro/desktop/en-us/publishing_sharing_authentication.htm) in the Tableau Desktop and Web Authoring Help.
+
 
 * Publish a data source with an extract to Tableau Server.
     - Be sure the the connector is installed on the server.
@@ -122,15 +128,6 @@ The workbook should publish without errors.
         1. Under **Authentication**, select **Allow refresh access** from the dropdown list.<br/>
         ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)<br/>
 The workbook should publish without errors.
-
-* Publish a workbook without an extract to Tableau Server.
-    - Be sure the the connector is installed on the server.  *
-    - Be sure not to embed credentials when you publish the workbook.
-    - Open the published workbook.
-    - Verify that a Sign In dialog opens.<br/>
-    ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)<br/>
-    For more information, see [Set Credentials for Accessing Your Published Data](https://onlinehelp.tableau.com/current/pro/desktop/en-us/publishing_sharing_authentication.htm) in the Tableau Desktop and Web Authoring Help.
-
 
 __Find publishing resources__
 
