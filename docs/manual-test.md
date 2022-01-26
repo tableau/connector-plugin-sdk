@@ -89,6 +89,20 @@ Right-click the data source, then click **Extract Data**. Verify that you can cr
 
 For more information, see [Refresh Extracts](https://onlinehelp.tableau.com/current/pro/desktop/en-us/extracting_refresh.htm) in Tableau Desktop and Web Authoring Help.
 
+__Edit your connection__
+
+Change all possible items and verify that changes are applied.
+
+1. Right-click the data source and click **Edit Data Source**.<br/>
+![]({{ site.baseurl }}/assets/mt-edit-data-source.png)
+The worksheet opens in Tableau.
+1. In the left pane, under **Connections**, click the dropdown menu next to the server name and click **Edit Connection**.<br/>
+![]({{ site.baseurl }}/assets/mt-edit-connection.png)
+1. Change something. For example, change the server.<br/>
+![]({{ site.baseurl }}/assets/mt-change-server.png)
+1. After you click **Sign In**, you should see the new server name under **Connections**.<br/>
+![]({{ site.baseurl }}/assets/mt-new-server.png)
+
 __Connect to the correct database with the wrong credentials__
 - Verify that an error message appears
 - **Verify that the error message says "Invalid username or password" instead of a generic error like "Bad Connection".** The correct error message is highlighted in the screenshot below.<br/>
