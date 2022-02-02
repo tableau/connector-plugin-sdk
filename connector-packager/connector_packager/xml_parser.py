@@ -35,6 +35,7 @@ class XMLParser:
     def __init__(self, path_to_folder: Path):
         self.path_to_folder = path_to_folder
         self.class_name = None  # Get this from the class name in the manifest file
+        self.plugin_version = None # Get this from the plugin-version in the manifest file
         self.file_list = []  # list of files to package
         self.loc_strings = []  # list of loc strings so we can make sure they are covered in the resource files.
 
@@ -70,6 +71,10 @@ class XMLParser:
 
         if not self.class_name:
             logger.debug("Class name not found in files.")
+            return None
+        
+        if not self.plugin_version:
+            logger.debug("Plugin Version name not found in files.")
             return None
 
         # If we found localized strings, bring in the resource files as well
@@ -218,7 +223,9 @@ class XMLParser:
                     logging.debug(self.class_name + " in manifest, " + child.attrib['class'] + " in " +
                                   file_to_parse.file_name)
                     return False
-
+            if 'plugin-version' in child.attrib:
+                if not self.plugin_version:
+                    self.plugin_version = child.attrib['plugin-version']
             # If an attribute has @string, then add that string to the loc_strings list.
             for key, value in child.attrib.items():
                 if value.startswith(TRANSLATABLE_STRING_PREFIX):
