@@ -2,6 +2,8 @@
 
 <connection-fields>
 
+<field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
 <field name="server" label="Server1" value-type="string" category="endpoint" />
 <field name="server" label="Server2" value-type="string" category="endpoint" />
 

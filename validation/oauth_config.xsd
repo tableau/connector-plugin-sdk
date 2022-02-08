@@ -30,10 +30,6 @@
       <!--Some oauth provider allow native app using oauth without clientSecret-->
       <xs:element type="xs:string" name="clientSecretDesktop" maxOccurs="1" minOccurs="0"/>
       <xs:element type="xs:string" name="redirectUrisDesktop" maxOccurs="unbounded" minOccurs="0"/>
-      <!--Allow registering the client info on tableau server-->
-      <xs:element type="xs:string" name="clientIdServerCustom" maxOccurs="1" minOccurs="0"/>
-      <xs:element type="xs:string" name="clientSecretServerCustom" maxOccurs="1" minOccurs="0"/>
-      <xs:element type="xs:string" name="redirectUrisServerCustom" maxOccurs="unbounded" minOccurs="0"/>
       <xs:element type="xs:string" name="authUri"/>
       <xs:element type="xs:string" name="tokenUri"/>
       <xs:element type="xs:string" name="userInfoUri" maxOccurs="1" minOccurs="0"/>

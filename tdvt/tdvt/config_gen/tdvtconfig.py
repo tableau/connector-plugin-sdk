@@ -14,6 +14,7 @@ class TdvtInvocation(object):
         self.tested_error = False
         self.log_dir = ''
         self.output_dir = ''
+        self.custom_output_dir = ''
         self.timeout_seconds = 60 * 60
         self.logical = False
         self.config_file = ''
@@ -58,6 +59,8 @@ class TdvtInvocation(object):
             self.leave_temp_dir = True
         if args.verbose:
             self.verbose = args.verbose
+        if args.custom_output_dir:
+            self.custom_output_dir = args.custom_output_dir
         if args.perf_run:
             self.run_as_perf = True
         if args.perf_iteration:

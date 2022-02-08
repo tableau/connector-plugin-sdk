@@ -18,7 +18,8 @@ class TestXMLParser(unittest.TestCase):
             ConnectorFile("connection-dialog.tcd", "connection-dialog"),
             ConnectorFile("connectionBuilder.js", "script"),
             ConnectorFile("dialect.tdd", "dialect"),
-            ConnectorFile("connectionResolver.tdr", "connection-resolver")]
+            ConnectorFile("connectionResolver.tdr", "connection-resolver"),
+            ConnectorFile("resources-en_US.xml", "resource")]
 
         actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("valid_connector"),
                                                                     expected_file_list, expected_class_name)
@@ -45,7 +46,12 @@ class TestXMLParser(unittest.TestCase):
                                                                     expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Connector with non-https urls returned a file list when it shouldn't")
 
-    def test_genreate_file_list_mcd(self):
+        # Test connector with missing English transaltion
+        actual_file_list, actual_class_name = self.parser_test_case(TEST_FOLDER / Path("missing_english_translation"),
+                                                                    expected_file_list, expected_class_name)
+        self.assertFalse(actual_file_list, "Connector with localized strings but without a resources-en_US.xml file returned a file list when it shouldn't")
+
+    def test_generate_file_list_mcd(self):
         # Test modular dialog connector
         expected_class_name = "postgres_mcd"
         expected_file_list = [
@@ -66,7 +72,7 @@ class TestXMLParser(unittest.TestCase):
         self.assertTrue(actual_class_name == expected_class_name,
                         "Actual class name does not match expected for valid connector")
 
-    def test_genreate_file_list_oauth(self):
+    def test_generate_file_list_oauth(self):
         # Test oauth connector
         expected_class_name = "test_oauth"
         expected_file_list = [

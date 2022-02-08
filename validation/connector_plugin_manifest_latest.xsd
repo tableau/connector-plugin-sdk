@@ -111,7 +111,7 @@
     <xs:sequence>
       <xs:element name="company">
         <xs:complexType>
-          <xs:attribute name="name" type="NonEmptyString-ST" use="required"/>
+          <xs:attribute name="name" type="NonEmptyCompanyName-ST" use="required"/>
         </xs:complexType>
       </xs:element>
     </xs:sequence>
@@ -172,9 +172,10 @@
   <xs:complexType name="Platform-ST">
     <xs:attribute name="name" type="OSShortName-ST" use="required"/>
   </xs:complexType>
-  <xs:simpleType name="NonEmptyString-ST">
+  <xs:simpleType name="NonEmptyCompanyName-ST">
     <xs:restriction base="xs:string">
       <xs:minLength value="1"/>
+      <xs:maxLength value="24"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

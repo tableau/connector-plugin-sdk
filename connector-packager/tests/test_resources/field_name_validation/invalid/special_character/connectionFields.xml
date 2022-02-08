@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
+  <field name="username" label="Username" value-type="string" category="authentication" />
+    <!-- Special character-->
+  <field name="vendor$1" label="Advanced Vendor1" value-type="string" category="advanced" optional="false" default-value="testVendor1" />
+</connection-fields>

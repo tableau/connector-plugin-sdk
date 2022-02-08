@@ -34,7 +34,8 @@
       <customization name="CAP_ODBC_METADATA_SUPPRESS_SQLSTATISTICS_API" value="yes"/>
     </customizations>
   </connection-customization>
-  <connection-dialog file='connection-dialog.tcd'/>
+  <connection-fields file='connectionFields.xml'/>
+  <connection-metadata file='connectionMetadata.xml'/>
   <connection-resolver file="connectionResolver.tdr"/>
   <dialect file='dialect.tdd'/>
 </connector-plugin>

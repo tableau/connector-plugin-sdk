@@ -48,6 +48,15 @@
       <argument type='real' />
       <argument type='real' />
     </function>
+    <function group='system' name='TIME1899' return-type='datetime'>
+      <formula>(CAST('1899-12-30' AS DATE) + %1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='system' name='SYS_NUMBIN' return-type='int'>
+      <formula>FLOOR(%1 / %2)</formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
   </function-map>
 
   <!--
@@ -128,6 +137,13 @@
       <formula>)</formula>
       <formula predicate='AnyTemp'> ON COMMIT PRESERVE ROWS</formula>
     </format-create-table>
+    <!--
+      format-date-literal
+      Specifies a formula for expressing a date literal, as well as an *ICU* date format.
+      %1 is the format string and %2 is the formatted date literal.
+    -->
+    <format-date-literal formula="TO_DATE('%1', '%2')"  format='yyyy-MM-dd' />
+    <format-datetime-literal formula="TO_TIMESTAMP('%1', '%2')" format='yyyy-MM-dd HH:mm:ss' />
     <!--
       format-drop-table
       Format for dropping a table. %1 is the table name.

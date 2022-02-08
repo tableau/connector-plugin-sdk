@@ -13,6 +13,7 @@ import csv
 import glob
 import json
 import pathlib
+import os
 import queue
 import shutil
 import threading
@@ -56,20 +57,22 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(cls):
-        if not cls.combined_output:
+    def write_test_results_csv(c, custom_output_dir: str=''):
+        if not c.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
 
-        logging.debug("Copying output to {0}".format(cls.output_csv))
+        logging.debug("Copying output to {0}".format(c.output_csv))
         # Sort combined_output on the number of distinct functions (order of complexity)
         sort_by_complexity = lambda row: len(row['Functions'].split(','))
         try:
-            cls.combined_output.sort(key=sort_by_complexity)
+            c.combined_output.sort(key=sort_by_complexity)
         except KeyError as e:
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
-        dst = os.path.join(os.getcwd(), cls.output_csv)
+        dst = os.path.join(os.getcwd(), c.output_csv)
+        if custom_output_dir != '':
+            dst = os.path.join(Path(custom_output_dir), c.output_csv)
         try:
             with open(dst, 'w', encoding='utf8') as dst_file:
                 writer = csv.DictWriter(dst_file, fieldnames=cls.combined_output[0],
@@ -110,6 +113,9 @@ class TestRunner():
 
     def copy_files_to_zip(self, dst_file_name, src_dir, is_logs):
         dst = os.path.join(os.getcwd(), dst_file_name)
+        custom_dir = self.test_config.custom_output_dir
+        if custom_dir != '':
+            dst = os.path.join(custom_dir, dst_file_name)
         mode = 'w' if not os.path.isfile(dst) else 'a'
         optional_dir_name = self.test_config.config_file.replace('.', '_')
         if is_logs is True:
@@ -132,6 +138,9 @@ class TestRunner():
     def copy_test_result_file(self):
         src = os.path.join(self.temp_dir, "tdvt_output.json")
         dst = os.path.join(os.getcwd(), TestOutputFiles.output_json)
+        custom_dir = self.test_config.custom_output_dir
+        if custom_dir != '':
+            dst = os.path.join(custom_dir, TestOutputFiles.output_json)
         try:
             if not os.path.isfile(dst):
                 shutil.copyfile(src, dst)
@@ -468,7 +477,9 @@ def create_parser():
     run_test_common_parser.add_argument('--compare-sql', dest='compare_sql', action='store_true', help='Compare SQL.', required=False)
     run_test_common_parser.add_argument('--nocompare-tuples', dest='nocompare_tuples', action='store_true', help='Do not compare Tuples.', required=False)
     run_test_common_parser.add_argument('--compare-error', dest='compare_error', action='store_true', help='Compare error.', required=False)
-
+    run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
+                                        help='Writes log files to a specified directory. The directory must exist.',
+                                        required=False, default=None, const='*', nargs='?')
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
@@ -535,11 +546,26 @@ def register_perflab_dialect():
     custom_dialect.skipinitialspace = True
     csv.register_dialect('perflab', custom_dialect)
 
+def check_if_custom_output_dir_exists(custom_output_dir: str) -> bool:
+    return Path(custom_output_dir).is_dir()
+
+
+def return_logging_path(args: argparse.ArgumentParser) -> str:
+    if hasattr(args, 'custom_output_dir'):
+        if args.custom_output_dir is not None and check_if_custom_output_dir_exists(args.custom_output_dir):
+            return os.path.join(args.custom_output_dir, 'tdvt_log_combined.txt')
+        elif args.custom_output_dir is not None:
+            sys.exit("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
+        else:
+            pass
+    return 'tdvt.log_combined.txt'
+
+
 def init():
     parser = create_parser()
     args = parser.parse_args()
     # Create logger.
-    logging.basicConfig(filename='tdvt_log_combined.txt', level=logging.DEBUG, filemode='w',
+    logging.basicConfig(filename=return_logging_path(args), level=logging.DEBUG, filemode='w',
                         format='%(asctime)s %(message)s')
     logger = logging.getLogger()
     ch = logging.StreamHandler()
@@ -588,7 +614,7 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv()
+    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
@@ -629,8 +655,7 @@ def run_tests_impl(
             logging.warning("Tests will run without verifying the data source connection.")
 
     if not all_work and not smoke_tests:
-        print("No tests found. Check arguments.")
-        sys.exit()
+        sys.exit("No tests found. Check arguments.")
 
     failing_ds = set()
     failed_smoke_tests = 0
@@ -720,7 +745,10 @@ def run_desired_tests(args, ds_registry: TestRegistry):
         sys.exit(0)
 
     if len(ds_to_run) > 0:
-        delete_output_files(os.getcwd())
+        directory_to_delete = os.getcwd()
+        if args.custom_output_dir:
+            directory_to_delete = args.custom_output_dir
+        delete_output_files(directory_to_delete)
 
     if not tabquerycli_exists():
         print("Could not find Tabquerycli.")

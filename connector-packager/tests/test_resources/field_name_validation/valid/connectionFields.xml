@@ -1,0 +1,24 @@
+<connection-fields>
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
+  <!-- -  is valid -->
+  <field label='LogModules' name='v-logmodules'
+          value-type='string' default-value='' optional='true'
+          secure='false' category='advanced'>
+  </field>
+  <!-- Underscore end is valid -->
+  <field label='Logfile' name='v-logfile_'
+          value-type='string' default-value='' optional='true'
+          secure='false' category='advanced'>
+  </field>
+  <!-- Underscore _ in between is valid -->
+  <field label='MaxLogFileCount' name='v-maxlogfi_lecount'
+          value-type='string' default-value='-1' optional='true'
+          secure='false' category='advanced'>
+  </field>
+  <!-- Numbers are valid if is not first character -->
+  <field label='MaxLogFileSize' name='v-maxlogfilesize33'
+          value-type='string' default-value='100MB' optional='true'
+          secure='false' category='advanced'>
+  </field>
+</connection-fields>

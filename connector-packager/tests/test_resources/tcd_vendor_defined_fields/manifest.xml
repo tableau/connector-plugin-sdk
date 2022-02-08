@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='postgres_vendor' superclass='postgres' plugin-version='0.0.0' name='Vendor Attributes Example' version='18.1' min-version-tableau='2019.4'>
+  <vendor-information>
+      <company name="Company Name"/>
+      <support-link url="https://example.com"/>
+      <driver-download-link url="https://drivers.example.com"/>
+  </vendor-information>
+  <connection-dialog file='connection-dialog.tcd'/>
+</connector-plugin>
