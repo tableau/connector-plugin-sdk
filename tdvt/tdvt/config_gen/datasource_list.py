@@ -67,7 +67,6 @@ def print_configurations(ds_reg, dsname, verbose):
                 print_ds(ds, ds_reg)
 
 
-
 def get_password_file(config):
     return config.get('PasswordFile', '')
 
@@ -358,24 +357,27 @@ def load_test(config, test_dir=get_root_dir()):
 class TestRegistry(object):
     """Add a new datasource here and then add it to the appropriate registries below."""
 
-    def __init__(self, ini_file):
+    def __init__(self, ini_file, ds):
         self.dsnames = {}
         self.suite_map = {}
+        self.ds = ds
 
         # Read all the datasource ini files and load the test configuration.
         ini_files = get_all_ini_files_local_first('config')
-        for f in ini_files:
-            logging.debug("Reading ini file [{}]".format(f))
-            config = configparser.ConfigParser()
-            # Preserve the case of elements.
-            config.optionxform = str
-            try:
-                config.read(f)
-            except configparser.ParsingError as e:
-                logging.debug(e)
-                continue
+        for d in ds:
+            for f in ini_files:
+                if d in f:
+                    logging.debug("Reading ini file [{}]".format(f))
+                    config = configparser.ConfigParser()
+                    # Preserve the case of elements.
+                    config.optionxform = str
+                    try:
+                        config.read(f)
+                    except configparser.ParsingError as e:
+                        logging.debug(e)
+                        continue
 
-            self.add_test(load_test(config))
+                    self.add_test(load_test(config))
 
         self.load_ini_file(ini_file)
 
@@ -430,19 +432,19 @@ class TestRegistry(object):
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""
 
-    def __init__(self):
-        super(WindowsRegistry, self).__init__('windows')
+    def __init__(self, ds):
+        super(WindowsRegistry, self).__init__('windows', ds)
 
 
 class MacRegistry(TestRegistry):
     """Mac specific test suites."""
 
-    def __init__(self):
-        super(MacRegistry, self).__init__('mac')
+    def __init__(self, ds):
+        super(MacRegistry, self).__init__('mac', ds)
 
 
 class LinuxRegistry(TestRegistry):
     """Linux specific test suites."""
 
-    def __init__(self):
-        super(LinuxRegistry, self).__init__('linux')
+    def __init__(self, ds):
+        super(LinuxRegistry, self).__init__('linux', ds)

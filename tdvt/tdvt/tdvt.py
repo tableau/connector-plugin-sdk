@@ -228,14 +228,14 @@ def delete_output_files(root_dir):
                     continue
 
 
-def get_datasource_registry(platform):
+def get_datasource_registry(platform, ds):
     """Get the datasources to run based on the suite parameter."""
     if sys.platform.startswith("darwin"):
-        reg = MacRegistry()
+        reg = MacRegistry(ds)
     elif sys.platform.startswith("linux"):
-        reg = LinuxRegistry()
+        reg = LinuxRegistry(ds)
     else:
-        reg = WindowsRegistry()
+        reg = WindowsRegistry(ds)
 
     return reg
 
@@ -553,6 +553,7 @@ def return_logging_path(args: argparse.ArgumentParser) -> str:
 def init():
     parser = create_parser()
     args = parser.parse_args()
+    ds = args.ds
     # Create logger.
     logging.basicConfig(filename=return_logging_path(args), level=logging.DEBUG, filemode='w',
                         format='%(asctime)s %(message)s')
@@ -568,7 +569,7 @@ def init():
 
     logging.debug('TDVT version: ' + str(__version__))
     logging.debug('TDVT Arguments: ' + str(args))
-    ds_reg = get_datasource_registry(sys.platform)
+    ds_reg = get_datasource_registry(sys.platform, ds)
     configure_tabquery_path()
     register_tdvt_dialect()
 
