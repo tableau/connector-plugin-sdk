@@ -1,0 +1,7 @@
+DEFAULT_TDVT_LOGGING = [
+    ''
+]
+
+PERFLAB_TDVT_LOGGING = [
+    ''
+]
