@@ -1,5 +1,5 @@
 ---
-title: Tableau Prep Builder JDBC Template
+title: Tableau Prep Builder JDBC Installation Instructions Template
 ---
 
 1. Download the Connector file (.taco).
