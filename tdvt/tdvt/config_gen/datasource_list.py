@@ -365,22 +365,23 @@ class TestRegistry(object):
         # When the ds is a suite, we assign the datasources in the suite to the ds variable.
         registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
         self.load_registry(registry_ini_file)
-        temp = ds
-        try:
-            for x in self.suite_map[ds[0]]:
-                ds.append(x)
-            ds.pop(0)
-            if len(ds) < 2:
-                ds = temp
-        except KeyError:
-            logging.debug("Checked for suite. This is not a suite run.")
-        print(ds)
+        self.create_ds_list()
+
+        # Check if any list items are suites themselves. If so we include the datasources in those as well.
+        suites_list = ['all', 'standard', 'all_passing', 'nightly', 'slow', 'all_bigquery_sql', 'all_bigquery', 'all_redshift', 'perf']
+        for x in self.ds:
+            if x in suites_list:
+                self.create_ds_list()
+
+        print(self.ds)
 
         # Read all the datasource ini files and load the test configuration.
         ini_files = get_all_ini_files_local_first('config')
-        for d in ds:
+
+        for d in self.ds:
+            # Include only the ini files that apply to a datasource in the list.
             for f in ini_files:
-                if d in f and not d + "_" in f:
+                if d == os.path.basename(f).replace(".ini", ""):
                     logging.debug("Reading ini file [{}]".format(f))
                     config = configparser.ConfigParser()
                     # Preserve the case of elements.
@@ -393,6 +394,17 @@ class TestRegistry(object):
 
                     self.add_test(load_test(config))
         self.load_ini_file(ini_file)
+
+    def create_ds_list(self):
+        temp = self.ds
+        try:
+            for x in self.suite_map[self.ds[0]]:
+                self.ds.append(x)
+            self.ds.remove(self.ds[0])
+            if len(self.ds) < 2:
+                self.ds = temp
+        except KeyError:
+            logging.debug("Checked for suite. This is not a suite run.")
 
     def load_ini_file(self, ini_file):
         # Create the test suites (groups of datasources to test)
