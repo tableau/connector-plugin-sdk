@@ -1,5 +1,5 @@
 ---
-title: Tableau Desktop JDBC Template
+title: Tableau Desktop JDBC Installation Instructions Template
 ---
 
 1. Download the Connector file (.taco).
