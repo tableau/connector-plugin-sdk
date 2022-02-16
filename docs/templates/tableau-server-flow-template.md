@@ -1,5 +1,5 @@
 ---
-title: Tableau Server (Flow web authoring) Template
+title: Tableau Server (Flow web authoring) Installation Instructions Template
 ---
 
 1. Download the Connector file (.taco).
