@@ -2,5 +2,15 @@
 title: Tableau Prep Builder JDBC Template
 ---
 
-<pre>1. Download the Connector file (.taco).<br />2. Move the .taco file here:<br />   - Windows: C:\Users\\[Windows User]\Documents\My Tableau Prep Repository\Connectors<br />   - macOS: /Users/[user]/Documents/My Tableau Prep Repository/Connectors<br />3. Start Tableau and under \*\*Connect\*\*, select the [Connector Name] connector. (\*\*Note:\*\* You'll be prompted if the driver is not yet installed. <br />4. Go to the [Driver Download](https://www.driverdownloadlinkhere.com) page.<br />5. Download the [Connector Name] Driver .jar file.<br />6. Move into the following directory:<br />     - Windows: C:\Program Files\Tableau\Drivers <br />     - macOS: /Users/[user]/Library/Tableau/Drivers<br />7. Relaunch Tableau and connect using the [Connector Name] connector. </pre> 
+1. Download the Connector file (.taco).
+2. Move the .taco file here:
+      - Windows: C:\Users\\[Windows User]\Documents\My Tableau Prep Repository\Connectors
+      - macOS: /Users/[user]/Documents/My Tableau Prep Repository/Connectors
+3. Start Tableau and under **Connect**, select the [Connector Name] connector. (**Note**: You will be prompted if the driver is not yet installed.)
+4. Go to the [Driver Download](https://www.driverdownloadlinkhere.com) page.
+5. Download the [Connector Name] Driver .jar file.
+6. Move into the following directory:
+     - Windows: C:\Program Files\Tableau\Drivers
+     - macOS: /Users/[user]/Library/Tableau/Drivers
+7. Relaunch Tableau and connect using the [Connector Name] connector. 
 

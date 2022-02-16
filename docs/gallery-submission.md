@@ -136,9 +136,7 @@ Installation instructions have two parts:
 
 To make things easy, we created templates for your custom installation instructions. These templates, linked below, are markdown friendly. If you have additional installation instructions, append them below the Tableau installation instructions.
 * [Tableau Desktop JDBC Template](./templates/tableau-desktop-jdbc-template.md)
-* [Tableau Desktop ODBC Template](./templates/tableau-desktop-odbc-template.md)
 * [Tableau Prep Builder JDBC Template](./templates/tableau-prep-jdbc-template.md)
-* [Tableau Prep Builder ODBC Template](./templates/tableau-prep-odbc-template.md)
 * [Tableau Server (Flow web authoring) Template](./templates/tableau-server-flow-template.md)
 * [Tableau Server (Tableau Prep Conductor) Template](./templates/tableau-server-prep-template.md)
 
