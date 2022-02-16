@@ -408,6 +408,10 @@ TDVT logs are found in the main TDVT directory.
 
 The preceding files have versions named "_\_combined._" (for example, tdvt_log_combined.txt). This indicates the file contains combined results from several test suites.
 
+To specify a directory for the output files, use the "--output-dir" or "-o" flags followed by
+the directory path string. The directory must exist or the program will exit with an error.
+Files in the specified (or default) directory are overwritten with each run of the program.
+
 ## Architecture
 
 Each data source has an associated collection of test group defined in the mydb.ini file.
