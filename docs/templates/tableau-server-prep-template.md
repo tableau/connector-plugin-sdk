@@ -1,5 +1,5 @@
 ---
-title: Tableau Server (Tableau Prep Conductor) Template
+title: Tableau Server (Tableau Prep Conductor) Installation Instructions Template
 ---
 
 1. Download the Connector file (.taco).
