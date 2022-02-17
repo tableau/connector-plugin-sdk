@@ -365,20 +365,22 @@ class TestRegistry(object):
         # When the ds is a suite, we assign the datasources in the suite to the ds variable.
         registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
         self.load_registry(registry_ini_file)
-        self.create_ds_list()
 
         # Check if any list items are suites themselves. If so we include the datasources in those as well.
-        suites_list = ['all', 'standard', 'all_passing', 'nightly', 'slow', 'all_bigquery_sql', 'all_bigquery', 'all_redshift', 'perf']
-        for x in self.ds:
-            if x in suites_list:
-                self.create_ds_list()
-
-        print(self.ds)
+        suite_names = self.get_suite_names(registry_ini_file)
 
         # Read all the datasource ini files and load the test configuration.
         ini_files = get_all_ini_files_local_first('config')
 
+        # Evaluate each item in the ds argument to determine if it is a suite.
+        # If an item is a suite, we add the datasources from the suite to the ds list
         for d in self.ds:
+            for suite_name in suite_names:
+                if suite_name == d:
+                    ds_list = self.get_datasources_from_suite(suite_name, registry_ini_file)
+                    for item in ds_list:
+                        self.ds.append(item)
+
             # Include only the ini files that apply to a datasource in the list.
             for f in ini_files:
                 if d == os.path.basename(f).replace(".ini", ""):
@@ -395,16 +397,38 @@ class TestRegistry(object):
                     self.add_test(load_test(config))
         self.load_ini_file(ini_file)
 
-    def create_ds_list(self):
-        temp = self.ds
+    def get_suite_names(self, registry_ini_file):
+        suite_names = []
         try:
-            for x in self.suite_map[self.ds[0]]:
-                self.ds.append(x)
-            self.ds.remove(self.ds[0])
-            if len(self.ds) < 2:
-                self.ds = temp
+            config = configparser.ConfigParser()
+            config.read(registry_ini_file)
+            ds_config = config['DatasourceRegistry']
+
+            for suite_name in ds_config:
+                suite_names.append(suite_name)
+
         except KeyError:
-            logging.debug("Checked for suite. This is not a suite run.")
+            # Create a simple default.
+            return suite_names
+
+        return suite_names
+
+    def get_datasources_from_suite(self, suite_name, registry_ini_file):
+        suite_ds_list = []
+        try:
+            config = configparser.ConfigParser()
+            config.read(registry_ini_file)
+            ds_config = config['DatasourceRegistry']
+
+            for suite_name in ds_config:
+                self.suite_map[suite_name] = [x.strip() for x in self.interpret_ds_list(ds_config[suite_name], False).split(',')]
+                suite_ds_list = self.suite_map[suite_name]
+
+        except KeyError:
+            # Create a simple default.
+            return suite_ds_list
+
+        return suite_ds_list
 
     def load_ini_file(self, ini_file):
         # Create the test suites (groups of datasources to test)
