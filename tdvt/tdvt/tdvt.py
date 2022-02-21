@@ -57,22 +57,22 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(c, custom_output_dir: str=''):
-        if not c.combined_output:
+    def write_test_results_csv(cls, custom_output_dir: str= ''):
+        if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
 
-        logging.debug("Copying output to {0}".format(c.output_csv))
+        logging.debug("Copying output to {0}".format(cls.output_csv))
         # Sort combined_output on the number of distinct functions (order of complexity)
         sort_by_complexity = lambda row: len(row['Functions'].split(','))
         try:
-            c.combined_output.sort(key=sort_by_complexity)
+            cls.combined_output.sort(key=sort_by_complexity)
         except KeyError as e:
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
-        dst = os.path.join(os.getcwd(), c.output_csv)
+        dst = os.path.join(os.getcwd(), cls.output_csv)
         if custom_output_dir != '':
-            dst = os.path.join(Path(custom_output_dir), c.output_csv)
+            dst = os.path.join(Path(custom_output_dir), cls.output_csv)
         try:
             with open(dst, 'w', encoding='utf8') as dst_file:
                 writer = csv.DictWriter(dst_file, fieldnames=cls.combined_output[0],
@@ -240,7 +240,9 @@ def get_datasource_registry(platform):
     return reg
 
 
-def enqueue_single_test(args, ds_info: TestConfig, suite) -> Union[Tuple[None, None], Tuple[Union[SingleLogicalTestSet, SingleExpressionTestSet], TdvtInvocation]]:  # noqa: E501
+def enqueue_single_test(
+        args, ds_info: TestConfig, suite
+) -> Union[Tuple[None, None], Tuple[Union[SingleLogicalTestSet, SingleExpressionTestSet], TdvtInvocation]]:
     if not args.command == 'run-pattern' or not args.tds_pattern or (args.logical_pattern and args.expression_pattern):
         return None, None
 
@@ -755,7 +757,7 @@ def run_desired_tests(args, ds_registry: TestRegistry):
         sys.exit(0)
 
     max_threads = get_level_of_parallelization(args)
-    test_sets: List[TestSet] = []
+    test_sets: List[Tuple[TestSet, TestConfig], Tuple[TestSet, TdvtInvocation]] = []
 
     for ds in ds_to_run:
         ds_info = ds_registry.get_datasource_info(ds)
