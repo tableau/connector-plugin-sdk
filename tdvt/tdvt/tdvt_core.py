@@ -23,6 +23,7 @@ from typing import Dict, Optional, Tuple
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
+from .constants import PERFLAB_TDVT_LOGGING_HEADERS
 from .resources import *
 from .tabquery import build_connectors_test_tabquery_command_line
 from .tabquery import build_tabquery_command_line
@@ -543,22 +544,22 @@ def get_csv_row_data(tds_name: str, test_name: str, test_path: str, test_result:
             passed = True
         if is_perf_run:
             columns = [
-            suite,
-            test_set_name,
-            test_name,
-            tds_name,
-            passed,
-            None,
-            perf_iteration,
-            None,
-            None,
-            error_msg.replace("\n", "") if error_msg else None,
-            passed,
-            None,
-            None,
-            "Query Time",
-            "TimeTest",
-            0
+                suite,
+                test_set_name,
+                test_name,
+                tds_name,
+                passed,
+                None,
+                perf_iteration,
+                None,
+                None,
+                error_msg.replace("\n", "") if error_msg else None,
+                passed,
+                None,
+                None,
+                "Query Time",
+                "TimeTest",
+                0
         ]
         else:
             columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
@@ -633,6 +634,13 @@ def get_csv_row_data(tds_name: str, test_name: str, test_path: str, test_result:
         columns.extend([actual_error, expected_error])
     return columns
 
+
+def return_csv_dialect(is_perf_run: bool=False):
+    if is_perf_run:
+        return 'perflab'
+    else:
+        return 'tdvt'
+
 def write_csv_test_output(
     all_test_results: Dict,
     tds_file: str,
@@ -647,10 +655,7 @@ def write_csv_test_output(
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
 
-    if perf_run:
-        csv_out = csv.writer(file_out, dialect='perflab', quoting=csv.QUOTE_MINIMAL)
-    else:
-        csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
+    csv_out = csv.writer(file_out, dialect=return_csv_dialect(perf_run), quoting=csv.QUOTE_MINIMAL)
 
     tdsname = os.path.splitext(os.path.split(tds_file)[1])[0]
     # Write the csv file.
@@ -660,24 +665,7 @@ def write_csv_test_output(
     total_tests = 0
 
     if perf_run:
-        csv_header = [
-            "TestGroup",
-            "TestSubGroup",
-            "Test",
-            "TestComment1",
-            "TestComment2",
-            "TestComment3",
-            "Iteration",
-            "IterationStartTime",
-            "IterationEndTime",
-            "ErrorString",
-            "IterationComment1",
-            "IterationComment2",
-            "IterationComment3",
-            "MetricResourceType",
-            "MetricResourceInstance",
-            "Result"
-        ]
+        csv_header = PERFLAB_TDVT_LOGGING_HEADERS
         csv_out.writerow(csv_header)
     else:
         tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
@@ -719,7 +707,7 @@ def write_csv_test_output(
     return total_failed_tests, total_skipped_tests, total_disabled_tests, total_tests
 
 
-def process_test_results(all_test_results, tds_file, skip_header, output_dir, perf_run: bool=False):
+def process_test_results(all_test_results, tds_file, skip_header, output_dir, perf_run: bool=False) -> Optional[Tuple[int, int, int, int]]:
     if not all_test_results:
         return 0, 0, 0, 0
     write_standard_test_output(all_test_results, output_dir)
