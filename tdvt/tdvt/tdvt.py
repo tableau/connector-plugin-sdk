@@ -57,7 +57,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(cls, custom_output_dir: str= '', args):
+    def write_test_results_csv(cls, args, custom_output_dir: str = ''):
         if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -75,8 +75,12 @@ class TestOutputFiles(object):
             dst = os.path.join(Path(custom_output_dir), cls.output_csv)
         try:
             with open(dst, 'w', encoding='utf8') as dst_file:
-                writer = csv.DictWriter(dst_file, fieldnames=cls.combined_output[0],
-                    dialect=return_csv_dialect(args.is_perf_run), quoting=csv.QUOTE_MINIMAL)
+                writer = csv.DictWriter(
+                    dst_file,
+                    fieldnames=cls.combined_output[0],
+                    dialect=return_csv_dialect(args.perf_run),
+                    quoting=csv.QUOTE_MINIMAL
+                )
                 writer.writeheader()
                 for row in cls.combined_output:
                     writer.writerow(row)
@@ -616,7 +620,7 @@ def test_runner(all_tests, test_queue, max_threads, args) -> Tuple[int, int, int
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir, args)
+    TestOutputFiles.write_test_results_csv(args, work.test_config.custom_output_dir)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
