@@ -635,7 +635,7 @@ def get_csv_row_data(tds_name: str, test_name: str, test_path: str, test_result:
     return columns
 
 
-def return_csv_dialect(is_perf_run: bool=False):
+def return_csv_dialect(is_perf_run: bool = False):
     if is_perf_run:
         return 'perflab'
     else:
@@ -646,7 +646,7 @@ def write_csv_test_output(
     tds_file: str,
     skip_header: bool,
     output_dir: str,
-    perf_run: bool=False
+    perf_run: bool = False
 ) -> Optional[Tuple[int, int, int, int]]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
     try:
@@ -707,7 +707,13 @@ def write_csv_test_output(
     return total_failed_tests, total_skipped_tests, total_disabled_tests, total_tests
 
 
-def process_test_results(all_test_results, tds_file, skip_header, output_dir, perf_run: bool=False) -> Optional[Tuple[int, int, int, int]]:
+def process_test_results(
+        all_test_results,
+        tds_file,
+        skip_header,
+        output_dir,
+        perf_run: bool = False
+) -> Optional[Tuple[int, int, int, int]]:
     if not all_test_results:
         return 0, 0, 0, 0
     write_standard_test_output(all_test_results, output_dir)
