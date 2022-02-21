@@ -27,7 +27,7 @@ from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
-from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core
+from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core, return_csv_dialect
 from .version import __version__
 
 # This contains the dictionary of configs you can run.
@@ -57,7 +57,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(cls, custom_output_dir: str= ''):
+    def write_test_results_csv(cls, custom_output_dir: str= '', args):
         if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -76,7 +76,7 @@ class TestOutputFiles(object):
         try:
             with open(dst, 'w', encoding='utf8') as dst_file:
                 writer = csv.DictWriter(dst_file, fieldnames=cls.combined_output[0],
-                    dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
+                    dialect=return_csv_dialect(args.is_perf_run), quoting=csv.QUOTE_MINIMAL)
                 writer.writeheader()
                 for row in cls.combined_output:
                     writer.writerow(row)
@@ -599,7 +599,7 @@ def active_thread_count(threads):
     return active
 
 
-def test_runner(all_tests, test_queue, max_threads):
+def test_runner(all_tests, test_queue, max_threads, args) -> Tuple[int, int, int, int]:
     for i in range(0, max_threads):
         worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
         worker.setDaemon(True)
@@ -616,7 +616,7 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir)
+    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir, args)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
@@ -674,7 +674,8 @@ def run_tests_impl(
         print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.\n")
 
         failed_smoke_tests, skipped_smoke_tests, disabled_smoke_tests, total_smoke_tests = test_runner(
-            smoke_tests, smoke_test_queue, smoke_test_threads)
+            smoke_tests, smoke_test_queue, smoke_test_threads, args
+        )
 
         smoke_tests_run = total_smoke_tests - disabled_smoke_tests
 
@@ -708,7 +709,7 @@ def run_tests_impl(
 
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
-    failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads)
+    failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads, args)
 
     failed_tests += failed_smoke_tests
     skipped_tests += skipped_smoke_tests
