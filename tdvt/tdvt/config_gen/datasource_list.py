@@ -358,12 +358,28 @@ def load_test(config, test_dir=get_root_dir()):
 class TestRegistry(object):
     """Add a new datasource here and then add it to the appropriate registries below."""
 
-    def __init__(self, ini_file):
+    def __init__(self, ini_file, ds):
         self.dsnames = {}
         self.suite_map = {}
 
         # Read all the datasource ini files and load the test configuration.
+        registry_ini_file = get_ini_path_local_first('config/registry', ini_file)
+        ds_list = self.get_datasources(self.get_ds_list(ds))
+        suite_names = self.get_suite_names(registry_ini_file)
+
+        for d in ds_list:
+            if d in suite_names:
+                ds_list.remove(d)
+                suite_ds_list = self.get_datasources_from_suite(d, registry_ini_file)
+                for item in suite_ds_list:
+                    if item not in ds_list:
+                        ds_list.append(item)
+
         ini_files = get_all_ini_files_local_first('config')
+        for f in ini_files:
+            if f.replace(".ini",",") not in ds_list:
+                ini_files.remove(f)
+
         for f in ini_files:
             logging.debug("Reading ini file [{}]".format(f))
             config = configparser.ConfigParser()
@@ -378,6 +394,47 @@ class TestRegistry(object):
             self.add_test(load_test(config))
 
         self.load_ini_file(ini_file)
+
+    def get_suite_names(self, registry_ini_file):
+        suite_names = []
+        try:
+            config = configparser.ConfigParser()
+            config.read(registry_ini_file)
+            ds_config = config['DatasourceRegistry']
+
+            for suite_name in ds_config:
+                suite_names.append(suite_name)
+
+        except KeyError:
+            # Create a simple default.
+            return suite_names
+
+        return suite_names
+
+    def get_datasources_from_suite(self, suite_name, registry_ini_file):
+        suite_ds_list = []
+        try:
+            config = configparser.ConfigParser()
+            config.read(registry_ini_file)
+            ds_config = config['DatasourceRegistry']
+
+            for suite_name in ds_config:
+                self.suite_map[suite_name] = [x.strip() for x in
+                                              self.interpret_ds_list(ds_config[suite_name], False).split(',')]
+                suite_ds_list = self.suite_map[suite_name]
+
+        except KeyError:
+            # Create a simple default.
+            return suite_ds_list
+
+        return suite_ds_list
+
+    def get_ds_list(self, ds):
+        if not ds:
+            return []
+        ds_list = ds[0].split(',')
+        ds_list = [x.strip() for x in ds_list]
+        return ds_list
 
     def load_ini_file(self, ini_file):
         # Create the test suites (groups of datasources to test)
@@ -430,19 +487,19 @@ class TestRegistry(object):
 class WindowsRegistry(TestRegistry):
     """Windows specific test suites."""
 
-    def __init__(self):
-        super(WindowsRegistry, self).__init__('windows')
+    def __init__(self, ds):
+        super(WindowsRegistry, self).__init__('windows', ds)
 
 
 class MacRegistry(TestRegistry):
     """Mac specific test suites."""
 
-    def __init__(self):
-        super(MacRegistry, self).__init__('mac')
+    def __init__(self, ds):
+        super(MacRegistry, self).__init__('mac', ds)
 
 
 class LinuxRegistry(TestRegistry):
     """Linux specific test suites."""
 
-    def __init__(self):
-        super(LinuxRegistry, self).__init__('linux')
+    def __init__(self, ds):
+        super(LinuxRegistry, self).__init__('linux', ds)
