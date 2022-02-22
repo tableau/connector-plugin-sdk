@@ -19,7 +19,7 @@ DEFAULT_CSV_HEADERS = [
     'Generated SQL',
 ]
 
-PERFLAB_TDVT_LOGGING_HEADERS = [
+PERFLAB_CSV_HEADERS = [
     "TestGroup",
     "TestSubGroup",
     "Test",

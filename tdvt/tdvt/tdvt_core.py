@@ -23,7 +23,7 @@ from typing import Dict, Optional, Tuple
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
-from .constants import PERFLAB_TDVT_LOGGING_HEADERS, TUPLE_DISPLAY_LIMIT, DEFAULT_CSV_HEADERS
+from .constants import PERFLAB_CSV_HEADERS, TUPLE_DISPLAY_LIMIT, DEFAULT_CSV_HEADERS
 from .resources import *
 from .tabquery import build_connectors_test_tabquery_command_line
 from .tabquery import build_tabquery_command_line
@@ -642,11 +642,9 @@ def return_csv_dialect(is_perf_run: bool = False):
         return 'tdvt'
 
 
-def get_csv_header_data(all_test_results):
-    a_random_test_result = list(all_test_results.values())[0]
-    is_perf_run = a_random_test_result.test_config.run_as_perf
+def get_csv_header_data(all_test_results, is_perf_run: bool):
     if is_perf_run:
-        csv_header = PERFLAB_TDVT_LOGGING_HEADERS
+        csv_header = PERFLAB_CSV_HEADERS
     else:
         tuple_limit_str = '(' + str(TUPLE_DISPLAY_LIMIT) + ')tuples'
         actual_tuples_header = 'Actual ' + tuple_limit_str
@@ -662,8 +660,6 @@ def get_csv_header_data(all_test_results):
             if results_values[0].test_config.tested_error:
                 csv_header.extend(['Actual Error', 'Expected Error'])
     return csv_header
-
-
 
 
 def write_csv_test_output(
@@ -691,7 +687,7 @@ def write_csv_test_output(
     total_tests = 0
 
     # get and write csv_header
-    csv_header = get_csv_header_data(all_test_results)
+    csv_header = get_csv_header_data(all_test_results, is_perf_run)
 
     if not skip_header:
         csv_out.writerow(csv_header)
