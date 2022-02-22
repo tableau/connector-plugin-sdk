@@ -1,3 +1,24 @@
+DEFAULT_CSV_HEADERS = [
+    'Suite',
+    'Test Set',
+    'TDSName',
+    'TestName',
+    'TestPath',
+    'Passed',
+    'Closest Expected',
+    'Diff count',
+    'Test Case',
+    'Test Type',
+    'Priority',
+    'Categories',
+    'Functions',
+    'Process Output',
+    'Error Msg',
+    'Error Type',
+    'Query Time (ms)',
+    'Generated SQL',
+]
+
 PERFLAB_TDVT_LOGGING_HEADERS = [
     "TestGroup",
     "TestSubGroup",
@@ -16,3 +37,5 @@ PERFLAB_TDVT_LOGGING_HEADERS = [
     "MetricResourceInstance",
     "Result"
 ]
+
+TUPLE_DISPLAY_LIMIT = 100
