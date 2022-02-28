@@ -5,11 +5,11 @@
     Run from the 'test' directory. The path to tabquerycli is configured in test/config/tdvt.
     You can run these like:
     All tests:
-        py -3 -m tdvt_test
+        python -m tdvt_test
     A Class:
-        py -3 -m tdvt_test ReRunFailedTestsTest
+        python -m tdvt_test ReRunFailedTestsTest
     One specific test:
-        py -3 -m tdvt_test ReRunFailedTestsTest.test_logical_rerun_fail
+        python -m tdvt_test ReRunFailedTestsTest.test_logical_rerun_fail
 
 """
 
