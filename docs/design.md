@@ -4,6 +4,8 @@ title: Connector Design Considerations
 
 The choices you make when creating a connector can include which superclass and dialect to use, and how you want to tune your connection using Tableau capabilities.
 
+Also be sure to read the [Security Considerations]({{ site.baseurl }}/docs/security-considerations) page.
+
 ## Choose a connection class
 
 The <span style="font-family: courier new">class</span> attribute is a unique key for your connector. Make it something that is unlikely to be used by another connector. When Tableau loads the connectors at startup, if the class is already registered, the connector will not be loaded. The class is also stamped in Tableau Workbook (.twb or .twbx) files and Tableau Data Source (.tds) files to identify what connector that particular connection was using.
@@ -112,7 +114,7 @@ A common example is filtering the top three regions by sum of sales. You can try
 
 There are some capabilities for which Tableau either cannot provide a sensible default, or the platform default and current recommendation are different for backwards compatibility reasons.
 
-Review the [full list]({{ site.baseurl }}/docs/capabilities) of latest recommendations, highlighted in **<span style="color:red">Red</span>**, when writing a connector.  
+Review the [full list]({{ site.baseurl }}/docs/capabilities) of latest recommendations, highlighted in **<span style="color:red">Red</span>**, when writing a connector.
 
 Common customizations:
 - CAP_QUERY_GROUP_BY_BOOL
