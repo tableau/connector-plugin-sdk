@@ -18,13 +18,13 @@ At the moment, the only field that can be marked secure is password. This means 
 Examples of problematic UI fields that will be rejected:
 - Proxy Password
 - OAuth secrets (Use the official [Tableau OAuth flow](({{ site.baseurl }}/docs/oauth)) instead)
-- **Arbitrary JDBC Properties** (See following section)
+- **Freeform Driver Properties** (See following section)
 
-## Arbitrary Driver Properties
+## Freeform Driver Properties
 
-**Arbitrary Driver Properties fields are not supported in the Connector SDK, and connectors using them will not be approved for the Tableau Exchange.** An "Arbitrary Driver Properties" field allows the user to manually enter key-value pairs that will be passed directly to the driver. However, because all vendor-defined fields are non-secure, these key-value pairs will be logged in plain text and persisted in easily-inspectable XML in Tableau workbooks, datasources and Prep flows. Many driver properties are considered sensitive, and we cannot enforce that users will not enter these sensitive key-value pairs, therefore we consider "Arbitrary Driver Properties" fields a security vulnerability.
+**Freeform Driver Properties fields are not supported in the Connector SDK, and connectors using them will not be approved for the Tableau Exchange.** A "Freeform Driver Properties" field allows the user to manually enter key-value pairs that will be passed directly to the driver. However, because all vendor-defined fields are non-secure, these key-value pairs will be logged in plain text and persisted in easily-inspectable XML in Tableau workbooks, datasources and Prep flows. Many driver properties are considered sensitive, and we cannot enforce that users will not enter these sensitive key-value pairs, therefore we consider "Freeform Driver Properties" fields a security vulnerability.
 
-We recommend the following workarounds instead of an "Arbitrary Driver Properties" field:
+We recommend the following workarounds instead of an "Freeform Driver Properties" field:
 - To unblock users needing to set non-sensitive driver properties, add them as separate fields on the Advanced tab using [Connection Dialogs V2 framework](({{ site.baseurl }}/docs/mcd))
 - For JDBC, Customers can set driver properties using [JDBC Properties files](https://kb.tableau.com/articles/howto/Customizing-JDBC-Connections)
 
