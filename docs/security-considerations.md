@@ -32,7 +32,7 @@ We recommend the following workarounds instead of an "Arbitrary Driver Propertie
 
 The Tableau Exchange does not host drivers, and the responsibility of ensuring the driver is secure falls onto the driver authors.
 
-However, for the connectors that are hosted in Tableau Online, Tableau will need to host the driver in our environments. In these cases, the driver will be scanned for security vulnerabilities, including out-of-date and vulnerable third-party libraries.
+There is an additional process for connectors that are hosted in Tableau Online. Tableau will need to host the driver in our environments so, the driver will be scanned for security vulnerabilities, including out-of-date and vulnerable third-party libraries.
 
 # JDBC Connectors not using connection-properties component
 
