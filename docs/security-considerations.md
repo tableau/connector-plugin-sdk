@@ -13,7 +13,7 @@ Tableau will also pull any connector from the Tableau Exchange that is found to 
 
 The Connector SDK allows the connection dialog to be customized, using platform-defined fields as well as the creation of new, vendor-specific fields. It is important to note that these fields, with the exception of the built-in `password` field, are not secure. **The values of every non-secure UI field on the connection dialog will be logged in plain text by Tableau as well as persisted in easily-inspectable XML in Tableau workbooks, datasources and Prep flows.**
 
-At the moment, the only field that can be marked secure is password. This means that the values customers enter for vendor-specific fields **must not contain secrets, credentials or personally identifiable information (PII),** and connectors with such fields will not be approved for the Tableau Exchange. This is a known limitation of the SDK, and we are looking at ways to mitigate it in the long term.
+Currently the only field that can be marked secure is `password`. This means that the values customers enter for vendor-specific fields **must not contain secrets, credentials or personally identifiable information (PII),** and connectors with such fields will not be approved for the Tableau Exchange. This is a known limitation of the SDK and we are looking at ways to remove this constraint in the long term.
 
 Examples of problematic UI fields that will be rejected:
 - Proxy Password
