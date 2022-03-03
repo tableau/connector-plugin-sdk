@@ -4,16 +4,16 @@ title: Security Considerations
 
 Connectors built with the Connector SDK handle authentication and customer data, and handling these incorrectly can cause security vulnerabilities and leakage of sensitive data.
 
-During the connector review for the Tableau Exchange, the connector will go through a security review. Failing to address these security concerns will mean that the connector will not be approved for the Exchange until the concerns are addressed.
+During the connector review for the Tableau Exchange, the connector will go through a security review. Addressing these security concerns is a requirement for the connector to be approved for the Exchange.
 
-We will also pull any connector from the Tableau Exchange that we find a security vulnerability in, and that vulnerability must be addressed before the connector can go back to the Exchange.
+Tableau will also pull any connector from the Tableau Exchange that is found to have a security vulnerability. That vulnerability must be addressed before the connector can return to the Exchange.
 
 
 # Secure Attributes on the Connection Dialog
 
-The Connector SDK allows the connection dialog to be customized, using platform-defined fields as well as the creation of new, vendor-specific fields. It is important to note that these fields, with the exception of the built-in password field, are not secure. **The values of every non-secure UI field on the connection dialog will be logged in plain text by Tableau as well as persisted in easily-inspectable XML in Tableau workbooks, datasources and Prep flows.**
+The Connector SDK allows the connection dialog to be customized, using platform-defined fields as well as the creation of new, vendor-specific fields. It is important to note that these fields, with the exception of the built-in `password` field, are not secure. **The values of every non-secure UI field on the connection dialog will be logged in plain text by Tableau as well as persisted in easily-inspectable XML in Tableau workbooks, datasources and Prep flows.**
 
-At the moment, the only field that can be marked secure is password. This means that the values customers enter for vendor-specific fields **must not contain secrets, credentials or personally identifiable information (PII),** and connectors with such fields will not be approved for the Tableau Exchange. This is a known limitation of the SDK, and we are looking at ways to mitigate it in the long term.
+Currently the only field that can be marked secure is `password`. This means that the values customers enter for vendor-specific fields **must not contain secrets, credentials or personally identifiable information (PII),** and connectors with such fields will not be approved for the Tableau Exchange. This is a known limitation of the SDK and we are looking at ways to remove this constraint in the long term.
 
 Examples of problematic UI fields that will be rejected:
 - Proxy Password
