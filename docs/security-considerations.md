@@ -4,7 +4,7 @@ title: Security Considerations
 
 Connectors built with the Connector SDK handle authentication and customer data, and handling these incorrectly can cause security vulnerabilities and leakage of sensitive data.
 
-During the connector review for the Tableau Exchange, the connector will go through a security review. Failing to address these security concerns will mean that the connector will not be approved for the Exchange until the concerns are addressed.
+During the connector review for the Tableau Exchange, the connector will go through a security review. Addressing these security concerns is a requirement for the connector to be approved for the Exchange.
 
 We will also pull any connector from the Tableau Exchange that we find a security vulnerability in, and that vulnerability must be addressed before the connector can go back to the Exchange.
 
