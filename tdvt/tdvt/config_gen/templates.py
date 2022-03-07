@@ -197,6 +197,14 @@ template_attributes = {
                         'bool_underscore' : True
                  },
 
+    #[tactile-pulsar-824].[TestV1].[Calcs]
+    'googlebigquery' : { 
+                         'tablename' : '$dsName',
+                         'fieldnameNoSpace' : True,
+                         'tablePrefix' : '[tactile-pulsar-824].[TestV1].'
+                         },
+
+
     #tactile-pulsar-824:TestV1.Calcs
     'bigquery' : { 
                          'tablename' : '$dsName',
