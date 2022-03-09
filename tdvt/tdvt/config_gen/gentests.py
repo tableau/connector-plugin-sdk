@@ -10,6 +10,8 @@ from .templates import *
 from string import Template
 import re
 import glob
+
+from ..constants import CALCS_FIELDS, STAPLES_FIELDS
 from ..resources import *
 import logging
 from typing import Dict
@@ -123,22 +125,24 @@ def get_modified_line(line, attrs, fields, field_name_map):
     new_line = new_line.replace('$Staples$', staples_table_name)
     return new_line
 
-def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_registry ):
+def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_registry ):  # TODO: convert staples and calcs fields to a kwargs** maybe? pick up as many as are there?
     if debug: print ("Processing " + filename )
 
     input_file = open(filename, 'r', encoding='utf-8')
     base_name = os.path.basename(filename)
-    if debug: print("base_name " + base_name)
+    if debug:
+        print("base_name " + base_name)
     match = re.search('setup\.(.*)\.xml', base_name)
     if match:
         test_name = match.group(1)
     else:
         test_name = os.path.splitext(base_name)[0]
 
-    if debug: print ("Test " + test_name)
+    if debug:
+        print("Test " + test_name)
 
 
-    fields = staples_fields + calcs_fields
+    fields = staples_fields + calcs_fields  # TODO change this
 
     ds_file_map = {}
     for ds in get_logical_config_templates(ds_registry):
@@ -210,90 +214,9 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
     base_output_dir = output_dir
     create_dir(base_output_dir)
 
-    calcs_fields = []
-    calcs_fields.append('[key]'         )
-    calcs_fields.append('[num0]'        )
-    calcs_fields.append('[num1]'        )
-    calcs_fields.append('[num2]'        )
-    calcs_fields.append('[num3]'        )
-    calcs_fields.append('[num4]'        )
-    calcs_fields.append('[str0]'        )
-    calcs_fields.append('[str1]'        )
-    calcs_fields.append('[str2]'        )
-    calcs_fields.append('[str3]'        )
-    calcs_fields.append('[int0]'        )
-    calcs_fields.append('[int1]'        )
-    calcs_fields.append('[int2]'        )
-    calcs_fields.append('[int3]'        )
-    calcs_fields.append('[bool0]'       )
-    calcs_fields.append('[bool1]'       )
-    calcs_fields.append('[bool2]'       )
-    calcs_fields.append('[bool3]'       )
-    calcs_fields.append('[bool0_]'      )
-    calcs_fields.append('[bool1_]'      )
-    calcs_fields.append('[bool2_]'      )
-    calcs_fields.append('[bool3_]'      )
-    calcs_fields.append('[date0]'       )
-    calcs_fields.append('[date1]'       )
-    calcs_fields.append('[date2]'       )
-    calcs_fields.append('[date3]'       )
-    calcs_fields.append('[time0]'       )
-    calcs_fields.append('[time1]'       )
-    calcs_fields.append('[datetime0]'   )
-    calcs_fields.append('[datetime1]'   )
-    calcs_fields.append('[zzz]'         )
+    calcs_fields = CALCS_FIELDS
 
-    staples_fields = []
-    staples_fields.append('[Item Count]'               )
-    staples_fields.append('[Ship Priority]'            )
-    staples_fields.append('[Order Priority]'           )
-    staples_fields.append('[Order Status]'             )
-    staples_fields.append('[Order Quantity]'           )
-    staples_fields.append('[Sales Total]'              )
-    staples_fields.append('[Discount]'                 )
-    staples_fields.append('[Tax Rate]'                 )
-    staples_fields.append('[Ship Mode]'                )
-    staples_fields.append('[Fill Time]'                )
-    staples_fields.append('[Gross Profit]'             )
-    staples_fields.append('[Price]'                    )
-    staples_fields.append('[Ship Handle Cost]'         )
-    staples_fields.append('[Employee Name]'            )
-    staples_fields.append('[Employee Dept]'            )
-    staples_fields.append('[Manager Name]'             )
-    staples_fields.append('[Employee Yrs Exp]'         )
-    staples_fields.append('[Employee Salary]'          )
-    staples_fields.append('[Customer Name]'            )
-    staples_fields.append('[Customer State]'           )
-    staples_fields.append('[Call Center Region]'       )
-    staples_fields.append('[Customer Balance]'         )
-    staples_fields.append('[Customer Segment]'         )
-    staples_fields.append('[Prod Type1]'               )
-    staples_fields.append('[Prod Type2]'               )
-    staples_fields.append('[Prod Type3]'               )
-    staples_fields.append('[Prod Type4]'               )
-    staples_fields.append('[Product Name]'             )
-    staples_fields.append('[Product Container]'        )
-    staples_fields.append('[Ship Promo]'               )
-    staples_fields.append('[Supplier Name]'            )
-    staples_fields.append('[Supplier Balance]'         )
-    staples_fields.append('[Supplier Region]'          )
-    staples_fields.append('[Supplier State]'           )
-    staples_fields.append('[Order ID]'                 )
-    staples_fields.append('[Order Year]'               )
-    staples_fields.append('[Order Month]'              )
-    staples_fields.append('[Order Day]'                )
-    staples_fields.append('[Order Date]'               )
-    staples_fields.append('[Order Quarter]'            )
-    staples_fields.append('[Product Base Margin]'      )
-    staples_fields.append('[Product ID]'               )
-    staples_fields.append('[Receive Time]'             )
-    staples_fields.append('[Received Date]'            )
-    staples_fields.append('[Ship Date]'                )
-    staples_fields.append('[Ship Charge]'              )
-    staples_fields.append('[Total Cycle Time]'         )
-    staples_fields.append('[Product In Stock]'         )
-    staples_fields.append('[PID]'                      )
-    staples_fields.append('[Market Segment]'           )
+    staples_fields = STAPLES_FIELDS
 
     #Go through input and top level subdirs. Create those in the output and then process the files.
     for root, dirs, files in os.walk(input_dir):
