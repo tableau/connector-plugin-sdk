@@ -7,7 +7,7 @@ import logging
 import re
 import shutil
 from string import Template
-from typing import Dict
+from typing import Dict, List, Tuple
 
 from .templates import *
 from ..constants import CALCS_FIELDS, STAPLES_FIELDS
@@ -129,8 +129,9 @@ def get_modified_line(line, attrs, fields, field_name_map):
     new_line = new_line.replace('$Staples$', staples_table_name)
     return new_line
 
-def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_registry ):  # TODO: convert staples and calcs fields to a kwargs** maybe? pick up as many as are there?
-    if debug: print ("Processing " + filename )
+def process_test_file(filename, ds_registry, output_dir, *col_names: Tuple[List]):
+    if debug:
+        print("Processing " + filename)
 
     input_file = open(filename, 'r', encoding='utf-8')
     base_name = os.path.basename(filename)
@@ -145,7 +146,9 @@ def process_test_file( filename, output_dir, staples_fields, calcs_fields, ds_re
     if debug:
         print("Test " + test_name)
 
-    fields = staples_fields + calcs_fields  # TODO change this
+    fields = []
+    for table in col_names:
+        fields += table
 
     ds_file_map = {}
     for ds in get_logical_config_templates(ds_registry):
@@ -240,5 +243,4 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
                 clean_create_dir(output_dir)
                 for input_root, input_dirs, input_files in os.walk(input_dir):
                     for input_filename in input_files:
-                        process_test_file(os.path.join(input_root, input_filename), output_dir, staples_fields,
-                                          calcs_fields, ds_registry)
+                        process_test_file(os.path.join(input_root, input_filename), ds_registry, output_dir, calcs_fields, staples_fields)
