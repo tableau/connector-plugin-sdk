@@ -4,14 +4,15 @@
 
 import glob
 import logging
+import os
 import re
 import shutil
 from string import Template
 from typing import Dict, List, Tuple
 
-from .templates import *
+from .templates import template_attributes
 from ..constants import CALCS_FIELDS, STAPLES_FIELDS
-from ..resources import *
+
 
 debug = False
 
@@ -123,6 +124,7 @@ def get_modified_line(line, attrs, fields, field_name_map):
     for field in fields:
         new_line = new_line.replace(field, field_name_map[field])
 
+    # TODO: refactor the below
     calcs_table_name = get_customized_table_name(attrs, 'Calcs')
     staples_table_name = get_customized_table_name(attrs, 'Staples')
     new_line = new_line.replace('$Calcs$', calcs_table_name)
