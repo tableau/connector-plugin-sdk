@@ -2,7 +2,7 @@
 title: Connector Tableau Exchange Submission Guide
 ---
 
-**Note:** Download a PDF version of this guide [here]({{ site.baseurl }}/assets/Connector-Gallery-Submission-Guide.pdf).  
+**Note:** Download a PDF version of this guide [here]({{ site.baseurl }}/assets/Connector-Gallery-Submission-Guide.pdf).
 
 > ![]({{ site.baseurl }}/assets/tableau-logo.png)
 >
@@ -35,6 +35,8 @@ These are the steps you'll take to prepare and submit your connector to Tableau 
 Building a connector generally takes two to six weeks, depending on complexity. Then, before it can be published to Tableau Exchange, you'll need to submit the connector and beta test it. This typically takes another two to four weeks.
 
 ![]({{ site.baseurl }}/assets/timeline.png)
+
+Note: As part of the connector review we will perform a security review of the connector. Please read the [Security Considerations]({{ site.baseurl }}/docs/security-considerations) page to make sure your connector will be accepted. Connectors with security vulnerabilities will not be approved for the Exchange until a fix is provided, and connectors already posted to the Exchange that are found to have security vulnerabilities will be pulled until a fix is provided.
 
 ---
 
@@ -116,9 +118,9 @@ Briefly describe details about your connector that are most relevant for custome
 For your connector's detail page, provide a long description. Include these three parts.
 
 - A description of your application or database.
-- A description of what the connector does that makes better than using an Other ODBC/JDBC connection.  
+- A description of what the connector does that makes better than using an Other ODBC/JDBC connection.
 
-   Example:   
+   Example:
 
    _This connector provides a smooth and easy way to connect to Google Big Query. By using this connector, customers can leverage Google's internal storage and extract APIs, which offer up to 10x performance increases when extracting large amounts of data. This connector also allows users to use custom OAuth, which is not currently supported natively with an Other JDBC connection._
 - Known issues or version requirements for the connector
@@ -187,7 +189,7 @@ We are happy to support partners looking to issue Tableau-specific press release
 
 The process:
 
-1. Partner drafts a press release using the Tableau Partner Brand Guidelines (available to partners in the PDC).  
+1. Partner drafts a press release using the Tableau Partner Brand Guidelines (available to partners in the PDC).
 
 Note: The release should not include the Tableau corporate boilerplate.
 2. Partner submits the draft to the Partner Marketing team via email (partnermarketing@tableau.com) for initial review.
@@ -205,7 +207,7 @@ When your connector is approved, it will be released to Tableau Exchange for bet
 
 ### Step 9: Get beta-testing feedback from five customers.
 
-After your connector is added to Tableau Exchange, you'll need to beta-test your connector with at least **five customers** before your connector can move to a General Audience (GA) release. While you'll be able to catch most issues with the TDVT suite, customer testing helps refine your results. Customers often have unique environments that need to be tested to ensure that everything works as expected.  
+After your connector is added to Tableau Exchange, you'll need to beta-test your connector with at least **five customers** before your connector can move to a General Audience (GA) release. While you'll be able to catch most issues with the TDVT suite, customer testing helps refine your results. Customers often have unique environments that need to be tested to ensure that everything works as expected.
 
 Customers can find our beta test scenarios and [Beta feedback form](https://forms.gle/xjWGk86tv8eD43Mk7) on the feedback button in Tableau Exchange. Note that the feedback form is specific to your connector, and you will be able to monitor the progress of the beta test on your own. The total beta testing process shouldn't take more than 30 minutes for a customer to complete.
 
