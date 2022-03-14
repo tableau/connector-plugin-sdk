@@ -11,4 +11,4 @@ title: Tableau Server Installation Instructions Template
 4. Go to the [Driver Download](https://www.driver-download-link-here.com) page.
 5. Download the `[Connector Name]` Driver .jar file.
 6. Install following the instructions in the readme provided with the client installation. Ensure the 64-bit client version is installed.
-7. Relaunch Tableau and connect using the `[Connector Name]` connector.
+7. Restart Tableau Server and connect using the `[Connector Name]` connector.
