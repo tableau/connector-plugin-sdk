@@ -12,7 +12,10 @@ title: Connector Tableau Exchange Submission Guide
 >Best regards -- The Tableau Team
 >
 ---
+**In this section**
 
+* TOC
+{:toc}
 
 ## Process Overview
 
@@ -133,20 +136,10 @@ Installation instructions have two parts:
   * Installing the driver
 - Your custom installation instructions
 
-**Note on Prep Builder Instructions:** If your connector can be used with Prep Builder, add information about where to put the TACO file.
-- For Tableau Prep Builder:
-  - Windows: C:\Users\<Windows User>\Documents\My Tableau Prep Repository\Connectors
-  - MacOS: /Users/<user>/Documents/My Tableau Prep Repository/Connectors
-- For Tableau Server (Flow web authoring): <Tableau_Server_Installation_Directory>/data/tabsvc/flowqueryservice/Connectors
-- For Tableau Server (Tableau Prep Conductor): <Tableau_Server_Installation_Directory>/data/tabsvc/flowprocessor/Connectors
-
-
-To make things easy, we've created a template for your custom installation instructions (included below, markdown friendly). Any additional installation instructions should be appended below the Tableau installation instructions.
-
-| **JDBC** | **ODBC** |
-| ----------- | ----------- |
-| <pre>1. Download the Connector file (.taco).<br /> 2. Move the .taco file here:<br />   - Windows: C:\Users\\[Windows User]\Documents\My Tableau Repository\Connectors<br />   - macOS: /Users/[user]/Documents/My Tableau Repository/Connectors<br />3. Start Tableau and under \*\*Connect\*\*, select the [Connector Name] connector. (\*\*Note:\*\* You'll be prompted if the driver is not yet installed. <br />4. [Connector Name] Driver Installation:<br />   A. Go to the [Driver Download](https://www.driverdownloadlinkhere.com) page.<br />   B. Download the [Connector Name] Driver .jar file and move into the following directory:<br />     - Windows: C:\Program Files\Tableau\Drivers <br />     - macOS: /Users/[user]/Library/Tableau/Drivers<br />5. Relaunch Tableau and connect using the [Connector Name] connector. </pre> | <pre>1. Download the Connector file (.taco). <br />2. Move the .taco file here:<br />   - Windows: C:\Users\\[Windows User]\Documents\My Tableau Repository\Connectors <br />3. Start Tableau and under \*\*Connect\*\*, select the [Connector Name] connector. (\*\*Note:\*\* You'll be prompted if the driver is not yet installed.) <br />4. [Connector Name] Driver Installation: <br />   A. Go to the [Driver Download](https://www.driverdownloadlinkhere.com) page.<br />   B. Download the [Connector Name] Driver and install following the instructions in the readme provided with the client installation. Ensure the 64-bit client version is installed. <br />5. Relaunch Tableau and connect using the [Connector Name] connector. </pre> |
-
+To make things easy, we created templates for your custom installation instructions. These templates, linked below, are markdown friendly. If you have additional installation instructions, append them below the Tableau installation instructions.
+* [Tableau Desktop Installation Instructions JDBC Template](./templates/tableau-desktop-jdbc-template.md)
+* [Tableau Prep Builder Installation Instructions JDBC Template](./templates/tableau-prep-jdbc-template.md)
+* [Tableau Server Installation Instructions Template](./templates/tableau-server.md)
 
 ##### Icon
 
