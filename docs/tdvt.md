@@ -544,3 +544,12 @@ Check that any <span style="font-family: courier new">date-format</span> element
 
 __The agg.countd expression test and the join.null.int logical tests are failing__
 Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
+
+__The date string format vary according to OS date format settings__
+TDVT requires the OS locale be set to English/US so that the dates are formatted mm/dd/yyyy. 
+Another workaround is to check that all tests should store input dates (times and datetimes) in the save format as CSV has. Otherwise the format should be hardcoded to match the CSV or, better, defined somehow in test specs, for example:
+```
+date0 == #7/4/1972# // dd/mm/yyyy
+date0 >= #11/12/1975# // dd/mm/yyyy
+...
+```
