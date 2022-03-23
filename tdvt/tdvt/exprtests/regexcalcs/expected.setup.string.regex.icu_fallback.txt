@@ -1,5 +1,9 @@
 <results>
   <test name='REGEXP_EXTRACT(&apos;http://academic.research.microsoft.com/Author/232694&apos;, &apos;((https|http)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;http://academic.research.microsoft.com/Author/232694&apos;, E&apos;((https|http)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;) AS &quot;TEMP(Test)(368590675)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(368590675)(0)]</column>
@@ -10,6 +14,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT(&apos;http://3www.hit.edu.cn/&apos;, &apos;((https|http)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;http://3www.hit.edu.cn/&apos;, E&apos;((https|http)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;) AS &quot;TEMP(Test)(495640776)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(495640776)(0)]</column>
@@ -20,6 +28,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT(&apos;https://a3nm.net/&apos;, &apos;((https*+)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;https://a3nm.net/&apos;, E&apos;((https*+)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;) AS &quot;TEMP(Test)(2653850425)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2653850425)(0)]</column>
@@ -30,6 +42,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT(&apos;http://academic.research.microsoft.com/Author/232694&apos;, &apos;((https*+)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;http://academic.research.microsoft.com/Author/232694&apos;, E&apos;((https*+)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;) AS &quot;TEMP(Test)(3717783247)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3717783247)(0)]</column>
@@ -40,6 +56,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE(&apos;http://academic.research.microsoft.com/Author/232694&apos;, &apos;((https*+)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;,&apos;http://myresearch.com/&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;http://academic.research.microsoft.com/Author/232694&apos;, E&apos;((https*+)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;, &apos;http://myresearch.com/&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(3007695141)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3007695141)(0)]</column>
@@ -50,6 +70,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;http://3www.hit.edu.cn/&apos;, &apos;((https|http)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;,1)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT_NTH(&apos;http://3www.hit.edu.cn/&apos;, E&apos;((https|http)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;, 1) AS &quot;TEMP(Test)(533572812)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(533572812)(0)]</column>
@@ -60,6 +84,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT(&apos;http://ab.id.au/&apos;, &apos;((ht++ps|ht++p)+:\/\/+(www\.)?+[a-z0-9\.:-]+\/)&apos;)  '>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;http://ab.id.au/&apos;, E&apos;((ht++ps|ht++p)+:\\/\\/+(www\\.)?+[a-z0-9\\.:-]+\\/)&apos;) AS &quot;TEMP(Test)(3366179362)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3366179362)(0)]</column>
@@ -69,27 +97,39 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT(&apos;H���rtl - Caaf�&apos;, &apos;-( Ca?+af�)&apos;)'>
+  <test name='REGEXP_EXTRACT(&apos;Hääärtl - Caafé&apos;, &apos;-( Ca?+afé)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;Hääärtl - Caafé&apos;, &apos;-( Ca?+afé)&apos;) AS &quot;TEMP(Test)(3856522784)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(928305238)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3856522784)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot; Caaf�&quot;</value>
+        <value>&quot; Caafé&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_REPLACE(&apos;H���rtl - Caaf�&apos;, &apos;-( Ca?+af�)&apos;,&apos;newcafe&apos;)'>
+  <test name='REGEXP_REPLACE(&apos;Hääärtl - Caafé&apos;, &apos;-( Ca?+afé)&apos;,&apos;newcafe&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;Hääärtl - Caafé&apos;, &apos;-( Ca?+afé)&apos;, &apos;newcafe&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(2445092460)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(1022209434)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2445092460)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;H���rtl newcafe&quot;</value>
+        <value>&quot;Hääärtl newcafe&quot;</value>
       </tuple>
     </table>
   </test>
   <test name='REGEXP_EXTRACT([str1],&apos;BINDING\s{1}+(\w+)&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&quot;Extract&quot;.&quot;str1&quot;, E&apos;BINDING\\s{1}+(\\w+)&apos;) AS &quot;TEMP(Test)(1533434922)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1533434922)(0)]</column>
@@ -106,6 +146,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE([str1],&apos;BINDING\s{1}+&apos;,&apos;NEW&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&quot;Extract&quot;.&quot;str1&quot;, E&apos;BINDING\\s{1}+&apos;, &apos;NEW&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(1727026211)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1727026211)(0)]</column>
@@ -164,6 +208,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT([str2],&apos;(\w+)e{1,}+n&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&quot;Extract&quot;.&quot;str2&quot;, E&apos;(\\w+)e{1,}+n&apos;) AS &quot;TEMP(Test)(3253208029)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3253208029)(0)]</column>
@@ -189,6 +237,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT([str2],&apos;(\w+)e{2}+n&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&quot;Extract&quot;.&quot;str2&quot;, E&apos;(\\w+)e{2}+n&apos;) AS &quot;TEMP(Test)(1746493435)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1746493435)(0)]</column>
@@ -208,6 +260,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE([str2],&apos;(\w+)e{0}+n&apos;,&apos;replaced&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&quot;Extract&quot;.&quot;str2&quot;, E&apos;(\\w+)e{0}+n&apos;, &apos;replaced&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(203413954)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(203413954)(0)]</column>
@@ -242,6 +298,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT([str1],&apos;(\w+)S{1,3}+\s{1}+(\w+)&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&quot;Extract&quot;.&quot;str1&quot;, E&apos;(\\w+)S{1,3}+\\s{1}+(\\w+)&apos;) AS &quot;TEMP(Test)(1986735690)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1986735690)(0)]</column>
@@ -258,6 +318,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE([str1],&apos;(\w+)S{1,3}+\s{1}+(\w+)&apos;,&apos;doubleS&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&quot;Extract&quot;.&quot;str1&quot;, E&apos;(\\w+)S{1,3}+\\s{1}+(\\w+)&apos;, &apos;doubleS&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(1615911350)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      9.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1615911350)(0)]</column>
@@ -299,17 +363,21 @@
         <value>&quot;DOT MATRIX PRINTERS&quot;</value>
       </tuple>
       <tuple>
+        <value>&quot;doubleS&quot;</value>
+      </tuple>
+      <tuple>
         <value>&quot;DVD&quot;</value>
       </tuple>
       <tuple>
         <value>&quot;ERICSSON&quot;</value>
       </tuple>
-      <tuple>
-        <value>&quot;doubleS&quot;</value>
-      </tuple>
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;abcc&apos;,&apos;a(?&gt;bc|b)c&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;abcc&apos;, &apos;a(?&gt;bc|b)c&apos;) AS &quot;TEMP(Test)(2368614832)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      9.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2368614832)(0)]</column>
@@ -320,6 +388,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;abc&apos;,&apos;a(?&gt;bc|b)c&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;abc&apos;, &apos;a(?&gt;bc|b)c&apos;) AS &quot;TEMP(Test)(3519162385)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3519162385)(0)]</column>
@@ -330,6 +402,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT([str1],&apos;(\w+)S{1,3}+\Z&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&quot;Extract&quot;.&quot;str1&quot;, E&apos;(\\w+)S{1,3}+\\Z&apos;) AS &quot;TEMP(Test)(235477163)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(235477163)(0)]</column>
@@ -376,6 +452,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE([str1],&apos;(\w+)S{1,3}+\Z&apos;, &apos;replaced&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&quot;Extract&quot;.&quot;str1&quot;, E&apos;(\\w+)S{1,3}+\\Z&apos;, &apos;replaced&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(231634433)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(231634433)(0)]</column>
@@ -425,6 +505,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT([str1],&apos;(\w+)\s{1}+(\w+)\Z&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&quot;Extract&quot;.&quot;str1&quot;, E&apos;(\\w+)\\s{1}+(\\w+)\\Z&apos;) AS &quot;TEMP(Test)(703879681)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(703879681)(0)]</column>
@@ -468,6 +552,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH([str1],&apos;(\w+)\s{1}+(\w+)\Z&apos;,1)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT_NTH(&quot;Extract&quot;.&quot;str1&quot;, E&apos;(\\w+)\\s{1}+(\\w+)\\Z&apos;, 1) AS &quot;TEMP(Test)(2708494798)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2708494798)(0)]</column>
@@ -511,6 +599,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;0123456789&apos;, &apos;(?=\d{10})\d{5}&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;0123456789&apos;, E&apos;(?=\\d{10})\\d{5}&apos;) AS &quot;TEMP(Test)(310197325)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(310197325)(0)]</column>
@@ -521,6 +613,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE(&apos;0123456789&apos;, &apos;(?=\d{10})\d{5}&apos;,&apos;NewString&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;0123456789&apos;, E&apos;(?=\\d{10})\\d{5}&apos;, &apos;NewString&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(2980587978)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2980587978)(0)]</column>
@@ -531,6 +627,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;iamastring&apos;, &apos;(?!test)iam\w+&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;iamastring&apos;, E&apos;(?!test)iam\\w+&apos;) AS &quot;TEMP(Test)(2331363122)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2331363122)(0)]</column>
@@ -540,27 +640,39 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_MATCH(&apos;B���T�F�L100&apos;,&apos;(?&lt;=B���T�F�L)\d{3}&apos;)'>
+  <test name='REGEXP_MATCH(&apos;BÊÂÙTÌFÜL100&apos;,&apos;(?&lt;=BÊÂÙTÌFÜL)\d{3}&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;BÊÂÙTÌFÜL100&apos;, E&apos;(?&lt;=BÊÂÙTÌFÜL)\\d{3}&apos;) AS &quot;TEMP(Test)(576082448)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(542144291)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(576082448)(0)]</column>
       </schema>
       <tuple>
         <value>true</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_REPLACE(&apos;B���T�F�L100B���T�F�L&apos;,&apos;(?&lt;=B���T�F�L)\d{3}&apos;,&apos;Replaced&apos;)'>
+  <test name='REGEXP_REPLACE(&apos;BÊÂÙTÌFÜL100BÊÂÙTÌFÜL&apos;,&apos;(?&lt;=BÊÂÙTÌFÜL)\d{3}&apos;,&apos;Replaced&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;BÊÂÙTÌFÜL100BÊÂÙTÌFÜL&apos;, E&apos;(?&lt;=BÊÂÙTÌFÜL)\\d{3}&apos;, &apos;Replaced&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(3877500847)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(2176422136)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3877500847)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;B���T�F�LReplacedB���T�F�L&quot;</value>
+        <value>&quot;BÊÂÙTÌFÜLReplacedBÊÂÙTÌFÜL&quot;</value>
       </tuple>
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;USD100&apos;,&apos;\d{3}(?&lt;!EURO\d{3})&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;USD100&apos;, E&apos;\\d{3}(?&lt;!EURO\\d{3})&apos;) AS &quot;TEMP(Test)(2188965893)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2188965893)(0)]</column>
@@ -571,6 +683,10 @@
     </table>
   </test>
   <test name='REGEXP_REPLACE(&apos;USD100&apos;,&apos;\d{3}(?&lt;!EURO\d{3})&apos;,&apos;New&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_REPLACE(&apos;USD100&apos;, E&apos;\\d{3}(?&lt;!EURO\\d{3})&apos;, &apos;New&apos;, &apos;g&apos;) AS &quot;TEMP(Test)(2409157523)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2409157523)(0)]</column>
@@ -581,6 +697,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;eleven&apos;,&apos;(\w)l(\1)v(\1)n&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;eleven&apos;, E&apos;(\\w)l(\\1)v(\\1)n&apos;) AS &quot;TEMP(Test)(3494418203)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3494418203)(0)]</column>
@@ -591,6 +711,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT(&apos;eleven&apos;,&apos;(\w)l(\1)v(\1)n&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;eleven&apos;, E&apos;(\\w)l(\\1)v(\\1)n&apos;) AS &quot;TEMP(Test)(970731238)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(970731238)(0)]</column>
@@ -601,6 +725,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;Pete the cat ate breakfast&apos;,&apos;Pete.*\bbreakfast\b&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;Pete the cat ate breakfast&apos;, E&apos;Pete.*\\bbreakfast\\b&apos;) AS &quot;TEMP(Test)(3749725727)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3749725727)(0)]</column>
@@ -611,6 +739,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;abxyzcd&apos;,&apos;ab(?#comment)xyz(?#commen)cd&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;abxyzcd&apos;, &apos;ab(?#comment)xyz(?#commen)cd&apos;) AS &quot;TEMP(Test)(3475832006)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3475832006)(0)]</column>
@@ -621,6 +753,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;A1B1C1vsA1A2A3&apos;,&apos;\G[A-Z]\d&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;A1B1C1vsA1A2A3&apos;, E&apos;\\G[A-Z]\\d&apos;) AS &quot;TEMP(Test)(1918252369)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1918252369)(0)]</column>
@@ -631,6 +767,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;Jan:31 Feb:28 March:31&apos;, &apos;(?:Feb|\g):(\d+)&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;Jan:31 Feb:28 March:31&apos;, E&apos;(?:Feb|\\g):(\\d+)&apos;) AS &quot;TEMP(Test)(2074508585)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2074508585)(0)]</column>
@@ -641,6 +781,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT(&apos;Jan:31 Feb:28 March:31&apos;, &apos;(?:Feb|\g):(\d+)&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT(&apos;Jan:31 Feb:28 March:31&apos;, E&apos;(?:Feb|\\g):(\\d+)&apos;) AS &quot;TEMP(Test)(4025169493)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(4025169493)(0)]</column>
@@ -651,6 +795,10 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;Jan:31 Feb:28 March:31&apos;, &apos;(?:Feb|\g):(\d+)&apos;,1)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_EXTRACT_NTH(&apos;Jan:31 Feb:28 March:31&apos;, E&apos;(?:Feb|\\g):(\\d+)&apos;, 1) AS &quot;TEMP(Test)(2974117116)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2974117116)(0)]</column>
@@ -661,6 +809,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;ace&apos;,&apos;a(?:b|c|d)+?(.)&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;ace&apos;, &apos;a(?:b|c|d)+?(.)&apos;) AS &quot;TEMP(Test)(176705363)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(176705363)(0)]</column>
@@ -671,6 +823,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;!&apos;,&apos;[\n-#]&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;!&apos;, E&apos;[\\n-#]&apos;) AS &quot;TEMP(Test)(259656756)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(259656756)(0)]</column>
@@ -681,6 +837,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;d&apos;,&apos;[ab\Qdef\E]&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;d&apos;, E&apos;[ab\\Qdef\\E]&apos;) AS &quot;TEMP(Test)(3265759478)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3265759478)(0)]</column>
@@ -691,6 +851,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;monday&apos;,&apos;(?i)monDAY&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;monday&apos;, &apos;(?i)monDAY&apos;) AS &quot;TEMP(Test)(944927710)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(944927710)(0)]</column>
@@ -701,6 +865,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;?&apos;,&apos;\N{QUESTION MARK}&apos;) '>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;?&apos;, E&apos;\\N{QUESTION MARK}&apos;) AS &quot;TEMP(Test)(1377385081)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1377385081)(0)]</column>
@@ -711,6 +879,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;$&apos;,&apos;\N{DOLLAR SIGN}&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;$&apos;, E&apos;\\N{DOLLAR SIGN}&apos;) AS &quot;TEMP(Test)(1169663335)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1169663335)(0)]</column>
@@ -721,6 +893,10 @@
     </table>
   </test>
   <test name='REGEXP_MATCH(&apos;BCD&apos;,&apos;[\X41-\X45]{3}&apos;)'>
+    <sql>
+      SELECT TABLEAU.REGEXP_MATCH(&apos;BCD&apos;, E&apos;[\\X41-\\X45]{3}&apos;) AS &quot;TEMP(Test)(3263151276)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      5.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3263151276)(0)]</column>
