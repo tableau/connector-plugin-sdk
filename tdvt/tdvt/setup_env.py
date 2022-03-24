@@ -59,7 +59,7 @@ def add_datasource(name, ds_registry):
     create_ds_ini_file(name, logical)
     update_tds_files(name, connection_password_name)
 
-def create_ds_ini_file(name, logical_config):
+def create_ds_ini_file(name, logical_config):  # TODO: Update to be flexible depending on custom schema.
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
@@ -75,11 +75,15 @@ def create_ds_ini_file(name, logical_config):
         else:
             ini.write('LogicalQueryFormat = ' + logical_config + '\n')
         ini.write('\n')
+        # TODO: the next part is taken out for custom schema
         ini.write('[StandardTests]\n')
         ini.write('\n')
         ini.write('[LODTests]\n')
         ini.write('\n')
         ini.write('[UnionTest]\n')
+        # TODO: custom schema block goes here
+        # blah
+        # TODO: everyone gets the following:
         ini.write('\n')
         ini.write('[ConnectionTests]\n')
         ini.write('StaplesTestEnabled = True\n')
@@ -110,7 +114,7 @@ def create_password_file(name, connection_name, password):
         pass
 
 def update_tds_files(name, connection_password_name):
-     mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'), connection_password_name)
+     mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'), connection_password_name)  # TODO: Update this to take whatever
      mangle_tds(get_tds_full_path(get_root_dir(), 'Staples.' + name + '.tds'), connection_password_name)
 
 def mangle_tds(file_path, connection_password_name):
