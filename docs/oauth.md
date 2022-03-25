@@ -105,6 +105,7 @@ Note: The keys in accessTokenResponseMaps and refreshTokenResponseMaps are Table
 | username | Yes | No | Used by Tableau to identify the token. |
 | access-token-issue-time | No | No | Used to note when the token is issued, will default to the time when the token is sent back to Tableau if not set. |
 | access-token-expires-in | No | No | Use to note the validation time of your ACCESSTOKEN, will default to 3600 seconds if not set. |
+| id-token | No | No | If you have openid as your scope this field is returned and can be used to retrive userinfo. Use together with OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN |
 | [your own field] | No | No | It is usually not needed to define your own field, and this field will not be able to participate in any OAuth flow. |
 
 <br>
