@@ -2,15 +2,15 @@
 title: Fixing TDVT Test Failures
 ---
 
-How to leverage the results workbook is explained [step-by-step in our YouTube guide](https://youtu.be/rAgnnByJIJA) [[28:26](https://youtu.be/rAgnnByJIJA?t=1706)]. Running TDVT produces a CSV file with data on all the tests cases that were executed, and the best way to view data is, of course, in Tableau. We provide a [TDVT Results Workbook](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twb) that gives you a high level overview on how many tests passed in each category and gives you tools to drill down to individual test cases and see the expected values versus actual values, the sql statement that was sent to the database, and any errors Tableau reported while running the test.
+How to leverage the results workbook is explained [step by step in our YouTube guide](https://youtu.be/rAgnnByJIJA) [[28:26](https://youtu.be/rAgnnByJIJA?t=1706)]. Running TDVT produces a CSV file with data on all the tests cases that were executed, and the best way to view data is, of course, in Tableau. We provide a [TDVT Results Workbook](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twb) that gives you a high-level overview on how many tests passed in each category and gives you tools to drill down to individual test cases and see the expected values versus actual values, the sql statement that was sent to the database, and any errors Tableau reported while running the test.
 
 ![]({{ site.baseurl }}/assets/tdvt_results_dashboard.png)
 
-## Setup TDVT Results Workbook with Test Data
+## Set up TDVT Results Workbook with Test Data
 To load in your test data, follow these steps:
 
-1. Once the TDVT tests have run, you can use this workbook to analyze the results and improve performance of the connector.
-1. Start by navigating to the "Data Source" tab, clicking on the "test_results" connection on the left-hand side, and selecting "Edit Connection".
+1. After the TDVT tests have run, you can use this workbook to analyze the results and improve performance of the connector.
+1. Start by navigating to the "Data Source" tab, clicking the "test_results" connection on the left-hand side, and selecting "Edit Connection".
 1. From there, choose the relevant "test_results_combined.csv" from your latest test.
 1. Lastly, be sure to ensure the "Text File Properties" is set to use double quotes as the text qualifier.
 
@@ -19,7 +19,7 @@ At a high level, it gives you an overview of your test runs, percentage tests pa
 
 ![]({{ site.baseurl }}/assets/results_dashboard_1.png)
 
-Click the bars on the right side of the dashboard to filter to invdividual test case failures, or filter by error message and priority:
+Click the bars on the right side of the dashboard to filter to individual test case failures, or filter by error message and priority:
 
 ![]({{ site.baseurl }}/assets/results_dashboard_2.png)
 
@@ -29,15 +29,15 @@ One row of the test_results_combined.csv file you get from a TDVT run equals one
 
 Column | Description
 - | -
-Suite | The overall test suite. Each suite has its own ini file and datasource files, most TDVT runs only have one suite.
-Test Set | Test sets are broad categories like logical, expression and connection tests.
+Suite | The overall test suite. Each suite has its own ini file and data source files, most TDVT runs only have one suite.
+Test Set | Test sets are broad categories like logical, expression, and connection tests.
 TDS Name | The tds file this test used. Should either be Staples.your_db.tds or cast_calcs.your_db.tds
 TestName | The name of the test. Tests are a group of test cases that test one specific scenario or function.
 TestPath | Path to the test file that defines the test, located in your tdvt package.
 Passed | Either TRUE or FALSE, depending on if the test passed or failed.
-Closest Expected | A number corresponding to the closest expected file that the actual tuples matched. 0 is the first expected file, 1 corresponds to the file ending in 1, etc.
+Closest Expected | A number corresponding to the closest expected file that the actual tuples matched. 0 is the first expected file, 1 corresponds to the file ending in 1, and so on.
 Diff count | Number of differences between actual and expected.
-Test Case | The specific test case. For logical tests, this will point to the file that defines the query in xml. For expression, this is the Tableau calculation that was executed.
+Test Case | The specific test case. For logical tests, this will point to the file that defines the query in XML. For expression, this is the Tableau calculation that was executed.
 Test Type | Either expression or logical
 Process Output | Output of the process, if any
 Error msg | If Tableau runs into an error when executing the test case, it will be saved here. The error could originate from tableau, the driver, or the database.
@@ -73,7 +73,7 @@ Looking at the numbers, you can see that `11` is the largest one, which matches 
 
 **Note:** Some calculations return multiple values. In this case, Tableau merges all duplicate values together and then sorts them.
 
-**Note:** The expected values listed in Actual Tuples are pulled from the first expected file, which may not be the closest matching expected file. For things like dates that have a lot of potential formats, this could mean your actual results look nothing like the expected. In this case, use the "Closest Expected" column in the test case and look up the correct expected file.
+**Note:** The expected values listed in Actual Tuples are pulled from the first expected file, which may not be the closest matching expected file. For things like dates that have many potential formats, this could mean your actual results look nothing like the expected. In this case, use the "Closest Expected" column in the test case and look up the correct expected file.
 
 ## Case 2: Error message is "No such function...", no Generated SQL was generated and actual tuples is Null
 This error occurs if your dialect does not implement a function and Tableau tries to use it. Adding the function to the dialect will fix this issue.

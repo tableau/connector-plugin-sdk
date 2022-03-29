@@ -2,16 +2,16 @@
 title: Filing a Bug with the SDK
 ---
 
-If you encounter a bug with the Tableau Connector SDK, please file it as a github issue. We will take a look at it and respond as soon as we are able.
+If you encounter a bug with the Tableau Connector SDK, please file it as a GitHub issue. We will look at it and respond as soon as we are able.
 
 # Artifacts
-When filing an bug on github, attaching the following to the issue:
+When filing a bug on GitHub, attaching the following to the issue:
 - A readme file that contains the following (can be in the issue itself):
     - Your name and company
     - A short description of the bug
     - Repro steps with screenshots
     - The product(s) it appears in
-    - The exact version of the Tableau products you are using (ie Desktop 2020.3.1, Server 2020.2.2), as relevant to the bug
+    - The exact version of the Tableau products you are using (for example, Desktop 2020.3.1, Server 2020.2.2), as relevant to the bug
     - The exact version of TDVT you are running, if the bug is related to TDVT or discovered during a TDVT run
     - The operating system you are using
 - Connector Files. Can be either a folder with the loose connector files or a packaged .taco connector. Should be the latest version of the connector.
