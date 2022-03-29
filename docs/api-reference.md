@@ -132,16 +132,6 @@ See [resolvers](https://github.com/tableau/connector-plugin-sdk/tree/master/samp
 
 ## C++ objects and methods available to your JavaScript
 
-### Logging
-
-You can write to the Tableau log file (tabprotosrv.txt). Writing to the log file requires Debug level logging (-DLogLevel=Debug).
-
-Use care when logging so that you don’t expose sensitive information like passwords and other authentication information.
-
-    logging.Log("Hi")
-
----
-
 ### Connection Helper
 
 _Attribute names_
@@ -238,5 +228,9 @@ The JavaScript files for connection normalizer and connection matcher are deprec
 ### SetImpersonateAttributes connection helper
 This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
 
-### <setImpersonateAttributes/> XML tag
-This xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
+### `<setImpersonateAttributes/>` XML tag
+`<setImpersonateAttributes/>` xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
+
+### Logging
+`logging.Log()` JavaScript function is deprecated.  Any call to this function will log message "Connector SDK logging.log() function is deprecated." in the log file.
+
