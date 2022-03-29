@@ -48,6 +48,15 @@
       <argument type='real' />
       <argument type='real' />
     </function>
+    <function group='system' name='TIME1899' return-type='datetime'>
+      <formula>(CAST('1899-12-30' AS DATE) + %1)</formula>
+      <argument type='datetime' />
+    </function>
+    <function group='system' name='SYS_NUMBIN' return-type='int'>
+      <formula>FLOOR(%1 / %2)</formula>
+      <argument type='real' />
+      <argument type='real' />
+    </function>
   </function-map>
 
   <!--

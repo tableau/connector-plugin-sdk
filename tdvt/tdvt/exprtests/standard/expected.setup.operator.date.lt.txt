@@ -1,0 +1,18 @@
+<results>
+  <test name='date0 &lt; #11/12/1975#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.composite].[TEMP(Test)(3193322782)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

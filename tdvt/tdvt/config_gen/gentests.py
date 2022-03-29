@@ -12,6 +12,7 @@ import re
 import glob
 from ..resources import *
 import logging
+from typing import Dict
 
 debug = False
 
@@ -29,12 +30,12 @@ def get_logical_config_templates(ds_registry):
 def get_logical_config_template(ds_registry, config_name):
     return get_logical_config_templates(ds_registry)[config_name]
 
-def check_logical_config_boolean_attr_value(attrs, key):
+def check_logical_config_boolean_attr_value(attrs: Dict, key: str) -> bool:
     if key not in attrs:
         return False
-    if attrs[key] == 'False':
+    if attrs[key] is False or attrs[key] == 'False':
         return False
-    if attrs[key] == 'True':
+    if attrs[key] is True or attrs[key] == 'True':
         return True
 
     # For backwards compatibility
