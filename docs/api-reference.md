@@ -232,5 +232,5 @@ This connection helper is deprecated as of Tableau 2020.1, since we always set i
 `<setImpersonateAttributes/>` xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
 
 ### Logging
-`logging.Log()` JavaScript function is deprecated.  Any call to this function will log message "Connector SDK logging.log() function is deprecated." in the log file.
+`logging.Log()` JavaScript function is deprecated in Tableau 2022.1 and maintainence releases after April 2022.  Any call to this function will log message "Connector SDK logging.log() function is deprecated." in the log file.
 
