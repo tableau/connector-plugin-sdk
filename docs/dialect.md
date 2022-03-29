@@ -10,7 +10,7 @@ You should create a dialect definition file whenever you need to make changes to
 
 To get started quickly, you can copy the sample dialect.tdd file from the [postgres_odbc or postgres_jdbc folder](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins) and use the copy to make your modifications.
 
-The XML schema for the plugin XML files is validated using XSD files. The dialect(.tdd) file is validated using [this XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
+The XML schema for the plugin XML files is validated using XSD files. The dialect (.tdd) file is validated using [this XSD file](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tdd_latest.xsd).
 
 Tableau searches for a TDD file in the location specified by the connector manifest XML file. The TDD format breaks down as follows:
 
@@ -30,8 +30,8 @@ The <span style="font-family: courier new">dialect</span> tag has several requir
 Attribute | Required | Description
 -|-|-
 name | Y | Dialect name. Used for dependency lookup.
-class | Y | Should match the plug-in's class, as defined in the manifest.
-base | N | Specifies a base dialect to build upon. If a certain property or function isn't defined in a dialect definition file, the connector will fall back to its base dialect's behavior (assuming a value for <span style="font-family: courier new">base</span> is defined), and SQL-92 default behavior (if a value for <span style="font-family: courier new">base</span> is not defined).  **Important:** This must be a valid, existing dialect. If the specified base does not exist, the connector will fail to load. For a list of bases, see [Dialect base classes]({{ site.baseurl }}/docs/design#dialect-base-classes).
+class | Y | Should match the plugin's class, as defined in the manifest.
+base | N | Specifies a base dialect to build upon. If a certain property or function isn't defined in a dialect definition file, the connector will fall back to its base dialect's behavior (assuming a value for <span style="font-family: courier new">base</span> is defined), and SQL-92 default behavior (if a value for <span style="font-family: courier new">base</span> is not defined). **Important:** This must be a valid, existing dialect. If the specified base does not exist, the connector will fail to load. For a list of bases, see [Dialect base classes]({{ site.baseurl }}/docs/design#dialect-base-classes).
 dialect-version | N | Indicates the minimum database version applicable to the TDD file. For example, if you're adding a function definition that wasn't implemented until FooDB 3.0, then <span style="font-family: courier new">set dialect-version='3.0'</span>.
 version | Y | Must match the current Tableau version in the format YY.Q; for example, "20.1".
 
@@ -129,7 +129,7 @@ The <span style="font-family: courier new">remove-function</span> is used to rem
 Each of the <span style="font-family: courier new">function</span>, <span style="font-family: courier new">date-function</span>, and <span style="font-family: courier new">remove-function</span> elements can contain the following:
 
 - __formula element__
-The <span style="font-family: courier new">formula</span> element is a required child of <span style="font-family: courier new">function</span> and <span style="font-family: courier new">date-function</span> elements and specifies the function's formula using standard Tableau string substitution syntax for arguments (%1, %2, etc.). You can use the optional <span style="font-family: courier new">part</span> attribute to specify a formula for a specific date part.
+The <span style="font-family: courier new">formula</span> element is a required child of <span style="font-family: courier new">function</span> and <span style="font-family: courier new">date-function</span> elements and specifies the function's formula using standard Tableau string substitution syntax for arguments (%1, %2, and so on). You can use the optional <span style="font-family: courier new">part</span> attribute to specify a formula for a specific date part.
 
 - __unagg-formula element__
 The <span style="font-family: courier new">unagg-formula</span> (unaggregated formula) element is an optional child of <span style="font-family: courier new">function</span> elements. It should be specified *only* if the function is part of the aggregate group. Unaggregated formulas should represent a reasonable way of expressing the aggregate of a single value. For example, for average, it should be the value itself. For variance, it should be 0.
@@ -162,9 +162,9 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour,
  The value for this property can be:
 
   - __Keyword__
-      Uses `DISTINCT` keyword for comparision. Logic: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
+      Uses `DISTINCT` keyword for comparison. Logic: `(lhs IS [NOT ]DISTINCT FROM rhs)`.
   - __Operator__
-    Uses `<=>` for comparions. Logic:`([NOT] (lhs <=> rhs))`
+    Uses `<=>` for comparisons. Logic:`([NOT] (lhs <=> rhs))`
   - __Formula__
         By default formula is used. In this case format is distinct checks that the value for LHS and RHS is not null. Logic :`((lhs [!]= rhs) OR[AND] (lhs IS [NOT] NULL AND[OR] rhs IS [NOT] NULL))`
   - __NoNullCheck__
@@ -182,7 +182,7 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour,
   In the "Data Source" page, "Data" menu, use the option to "Convert to Custom SQL". This will prevent Tableau from modifying the join type.
 
   **Data Blending** <br/>
-  When using data blending, Tableau creates a left join between the primary and secondary datasource. Data blending can only be a LEFT join, which means the primary table should contain all possible values.
+  When using data blending, Tableau creates a left join between the primary and secondary data source. Data blending can only be a LEFT join, which means the primary table should contain all possible values.
 
 ### Boolean Support:
   Some databases need to customize boolean support functions.  A common case is when a database lacks native boolean support. <br/>
@@ -199,9 +199,9 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour,
 **Note: Changes in Tableau 2020.3**
 
   With the release of Tableau 2020.3, `format-true` and `format-false` will have two parameters, literal and predicate. <br/>
-  Literals is used when a boolean is used as a value. The default values are 1 and 0. <br/>
+  Literals are used when a boolean is used as a value. The default values are 1 and 0. <br/>
   Example usage: `SELECT 1 AS literalBool` <br/>
-  Predicates is used when a boolean is used as a predicate. The default values are `(1=1)` and `(1=0)`. <br/>
+  Predicates are used when a boolean is used as a predicate. The default values are `(1=1)` and `(1=0)`. <br/>
   Example usage: `SELECT something AS test WHERE (1=1)` <br/>
   `value` attribute is used as `predicate` for backwards compatability <br/>
   Example:
@@ -213,7 +213,7 @@ Allowable date parts: year, quarter, month, dayofyear, day, weekday, week, hour,
   ```
 
    **format-bool-as-value** <br/>
-    Used in CASE statements. Determines whether the true or false case is used first. The function is only used when the `CAP_QUERY_BOOLEXPR_TO_INTEXPR` capiblity is set to yes.
+    Used in CASE statements. Determines whether the true or false case is used first. The function is only used when the `CAP_QUERY_BOOLEXPR_TO_INTEXPR` capability is set to yes.
     The value for this property can be:
   - __TrueFirst__
       This is the default case. Logic: `CASE WHEN %1 THEN 1 WHEN NOT %1 THEN 0 ELSE NULL END`
@@ -263,7 +263,7 @@ Example:
 ### Temporary Table Support:
    **format-create-table** <br/>
   This function uses  piece-by-piece formulas for creating a table.
-  Predicates can be used with tokens that only corresponds to a certain type of table.
+  Predicates can be used with tokens that only correspond to a certain type of table.
   Predicates: <br/>
   -  __GlobalTemp__
   -  __LocalTemp__
@@ -289,7 +289,7 @@ Example:
 
   **format-select** <br/>
   This function uses a piece-by-piece formula for defining a SELECT statement. Here, we can define the clause used in `SELECT` statement. <br/>
-  the `Into` clauses in the `SELECT` statement creates a new table. `<format-select>` will help you define how your TEMP table is created when using an `INTO` clause.
+  the `Into` clauses in the `SELECT` statement creates a table. `<format-select>` will help you define how your TEMP table is created when using an `INTO` clause.
   `INTO` clause  is only available when the `CAP_SELECT_INTO` capability is set to yes.
 
   ```xml
