@@ -38,7 +38,7 @@ The TDVT tests for these things:
 
 ## How TDVT works
 
-TDVT consists of Python scripts that create a test framework around tabquerytool.exe, a command line tool that leverages Tableau's data connectivity layer.
+TDVT consists of Python scripts that create a test framework around tabquerytool.exe, a command-line tool that leverages Tableau's data connectivity layer.
 
 Inputs come from a TDS file, and either a logical query or an expression test file.
 Expression tests are text files that contain Tableau calculation language expressions (that is, anything you can type into an __Edit Calculation__ dialog).
@@ -76,13 +76,13 @@ You can create an archive package and install that, or install from the live dir
 1. Extract and then load the [TestV1 dataset](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1) into your database.
 __Notes:__
     - See [Postgres Example](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1/postgres/README.md) for an example of loading data into a database
-    - See the section below about troubleshooting Boolean values if your database doesn’t have a native Boolean type.
+    - See the following section about troubleshooting Boolean values if your database doesn’t have a native Boolean type.
     - Make sure that empty values are treated as nulls. This may not be the default for your database.
     - You can run the tests named StaplesData and calcs_data to retrieve every value from the table and compare it to an expected value. This helps ensure the data is loaded correctly with the right data types.
 
-1. If it's not already installed, install Tableau Desktop which includes the tabquerytool needed to run the tests.
+1. If it's not already installed, install Tableau Desktop. Tableau Desktop includes the tabquerytool needed to run the tests.
 
-1. Set up your TDVT workspace.
+2. Set up your TDVT workspace.
 TDVT checks the current working directory for the test configuration files that set up test suites for your data source.
     - Run these steps to set up TDVT with a sample data source:
         1. Create a new directory, for example:
@@ -90,7 +90,7 @@ TDVT checks the current working directory for the test configuration files that 
         1. Copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
         1. Copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.
 Note that tdvt_workspace should contain the following subdirectories: config, plugins, tds.
-    - Or,  run this command set up TDVT with an empty environment:
+    - Or,  run this command to set up TDVT with an empty environment:
 `py -3 -m tdvt.tdvt action --setup`
 
 1. Edit config/tdvt/tdvt_override.ini and set the path to tabquerytool.
@@ -135,7 +135,7 @@ __To test a new data source__
 1. Run `tdvt action --add_ds mydb`.
 Choose to generate the password file and choose the logical query config. This creates a mydb.ini file under /config and will modify your two TDS files to rename the connection and link them to the tds/mydb.password password file.
 
-1. Edit the generated tds/mydb.password file and enter the password for your connection. If your connection needs multiple fields for authentication such as oauth tokens, pass them in a json string like this: {"ACCESSTOKEN" : "your_access_token", "REFRESHTOKEN" : "your_refresh_token"}. You can obtain "your_access_token" and "your_refresh_token" from any 3rd party tool to retrieve OAuth tokens such as Postman.
+1. Edit the generated tds/mydb.password file and enter the password for your connection. If your connection needs multiple fields for authentication such as OAuth tokens, pass them in a json string like this: {"ACCESSTOKEN" : "your_access_token", "REFRESHTOKEN" : "your_refresh_token"}. You can obtain "your_access_token" and "your_refresh_token" from any third-party tool to retrieve OAuth tokens such as Postman.
 __Note:__ This can also be done manually. See [The Sample TDS Files](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/tds).
 
 1. Verify your new test suite by running:
@@ -196,9 +196,9 @@ This section is required, and defines the basic information of the TDVT suite.
 
 Option | Example Value | Default | Description | Required?
 -|-|-|-|-
-Name | mydb | N/A | Your datasource name | Yes
+Name | mydb | N/A | Your data source name | Yes
 CommandLineOverride | -DLogLevel=Debug | N/A | Space separated list of arguments that are passed through unchanged to tabquerytool | No
-MaxThread | 6 | 6 | Controls maximum number of threads to a single datasource. Does not apply when running TDVT with multiple datsources | No
+MaxThread | 6 | 6 | Controls maximum number of threads to a single data source. Does not apply when running TDVT with multiple data sources | No
 TimeoutSeconds | 6000 | 3600 | Controls how long it takes for | No
 LogicalQueryFormat | bool_lower | N/A | The logical query we use | Yes
 
@@ -257,7 +257,7 @@ Add this section to test that your Staples data test is loaded correctly. This s
 ### [ConnectionTests]
 An auto-generated section that is used to run tests to verify TDVT can connect to the Staples & cast_calcs tables.
 The Connection Tests, and any other tests with the attribute `SmokeTest = True`, are run before the other tests.
-They can be run by themselves using the --verify flag (e.g. tdvt run postgres --verify).
+They can be run by themselves using the --verify flag (for example, tdvt run postgres --verify).
 
 Option | Example Value | Default | Description | Required?
 -|-|-|-|-
@@ -265,7 +265,7 @@ CastCalcsTestEnabled | True | True | Runs connection smoke test against calcs ta
 StaplesTestEnabled | True | True | Runs connection smoke test against Staples table if true | No
 
 ## Example INI File
-This is a basic ini file that runs tests against our postgres_jdbc sample connector. Here, we use an already existing logical query format, skip some tests, and run connection smoke tests before the rest of the test groups.
+This is a basic ini file that runs tests against our postgres_jdbc sample connector. Here, we use an existing logical query format, skip some tests, and run connection smoke tests before the rest of the test groups.
 
 ```ini
 [Datasource]
@@ -294,7 +294,7 @@ Run TDVT from your working directory since it will need the TDS and INI files yo
 To view the latest usage information, run:
 `tdvt -h`
 
-To show the registered datasources and suites, run:
+To show the registered data sources and suites, run:
 `tdvt list --ds`
 
 To run a data source's tests:
@@ -406,7 +406,11 @@ TDVT logs are found in the main TDVT directory.
 
 **tdvt_results.csv** - Tableau-friendly result file. Load with a double-quote text qualifier.
 
-The above files have versions named "_\_combined._" (for example, tdvt_log_combined.txt). This indicates the file contains combined results from several test suites.
+The preceding files have versions named "_\_combined._" (for example, tdvt_log_combined.txt). This indicates the file contains combined results from several test suites.
+
+To specify a directory for the output files, use the "--output-dir" or "-o" flags followed by
+the directory path string. The directory must exist or the program will exit with an error.
+Files in the specified (or default) directory are overwritten with each run of the program.
 
 ## Architecture
 
@@ -424,7 +428,7 @@ The tabquery process compiles the test into SQL, runs it against your database, 
 TDVT then compares these result files to the expected result file.
 
 After all test suites are finished, TDVT compiles the results into a CSV file.
-The CSV file contains information such as the test name, a "passed" indicator, the generated SQL and the data (tuples) that came back from the database for each test case.
+The CSV file contains information such as the test name, a "passed" indicator, the generated SQL, and the data (tuples) that came back from the database for each test case.
 It also indicates which expected file most closely matched the actual results from the query.
 
 ### Expected files
@@ -435,7 +439,7 @@ You can find this by running:
 
 Expression tests have a name like "setup.agg.avg.txt" and a corresponding expected file like "expected.setup.agg.avg.txt".
 There may be optional alternative expected files like "expected.setup.agg.avg.1.txt", and so on.
-The expected files are located in the "exprtests" direcory within the TDVT package directory.
+The expected files are located in the "exprtests" directory within the TDVT package directory.
 
 Logical tests have names like "setup.Filter.slicing_Q_date_month_instance_filter.prefix_bool\_.xml".
 The last section of the name "prefix_bool\_" corresponds to the name of the logical query config from your mydb.ini file.
@@ -445,7 +449,7 @@ These various permutations do not affect the test results so the expected file h
 
 __Smoke tests fail and the rest of the tests are skipped__
 
-The first thing TDVT does is try and connect to your database using the .tds files you created. If these “smoke tests” can’t connect, all other tests will fail and so are skipped to save time.
+The first thing TDVT does is try to connect to your database using the .tds files you created. If these “smoke tests” can’t connect, all other tests will fail and so are skipped to save time.
 
 1. Check the TDS file: Open the TDS file in Tableau.
    Check to see if Tableau shows any error messages, prompts for a username and password, or asks for any additional information fix that's in the TDS file.
@@ -465,8 +469,8 @@ The first thing TDVT does is try and connect to your database using the .tds fil
 __Boolean data types are not recognized or your database doesn't support them__
 You may need to rename a column in the TDS file.
 For example, the database may integer columns instead of Booleans for the **bool0**, **bool1**, **bool2**, and **bool3** columns.
-In this case, you would want to load the table into your database using integer columns named **bool0\_** (a trailing underscore), etc.
-You can re-map these in the TDS file by adding a column definition like this:
+In this case, you would want to load the table into your database using integer columns named **bool0\_** (a trailing underscore), and so on.
+You can remap these in the TDS file by adding a column definition like this:
 
 ```xml
   <column datatype='boolean' name='[bool0]' role='dimension' type='nominal'>
@@ -503,14 +507,14 @@ __Try a different connector__
 It can be insightful to load the Calcs and Staples tables on a Postgres or MySQL server and run the tests in order to compare working SQL against what TDVT is generating for your database.
 Just add a new data source to TDVT that uses the native connector for that database.
 Do not use the Other Databases (ODBC) connector in this case.
-These tests should pass completely for these datasources.
+These tests should pass completely for these data sources.
 
-__Check your TDS is setup__
+__Check your TDS is set up__
 Make sure the TDS files include the <span style="font-family: courier new">password</span> element and that you have renamed the relations to <span style="font-family: courier new">leaf</span>, as indicated in the setup instructions.
 
 __Check log files__
 tdvt_log\*.txt contains <span style="font-family: courier new">--verbose</span> level logging.
-It can help to either run a single test or to run things in serial with <span style="font-family: courier new">-t 1 -tt 1</span> otherwise the log file will be interleaved by different sub-threads.
+It can help to either run a single test or to run things in serial with <span style="font-family: courier new">-t 1 -tt 1</span> otherwise the log file will be interleaved by different subthreads.
 tabquerytool writes log files to the "My Tableau Repository" folder.
 These can be useful if it isn't clear what is causing a test to fail.
 
