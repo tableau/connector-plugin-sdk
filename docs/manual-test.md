@@ -6,14 +6,14 @@ After you create your connector and validate it using TDVT, run these manual qua
 ## Before you begin
 
 Be sure that you complete all the following steps before you begin the manual tests for your connector.
-1.	Make sure your computer or virtual machine is running Windows, macOS or Linux.
+1.	Make sure your computer or virtual machine is running Windows, macOS, or Linux.
 1.	Install and run Tableau Desktop and Tableau Server.
 1.	Install an ODBC or JDBC driver for your database on Tableau Desktop and Tableau Server.
-1.	Setup your connectors following these [guidelines]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector).
+1.	Set up your connectors following these [guidelines]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector).
 
 ### On Tableau Desktop
 
-- Launch Tableau Desktop using `-DConnectPluginsPath` command line argument, pointing to your connector directory. For example:
+- Launch Tableau Desktop using `-DConnectPluginsPath` command-line argument, pointing to your connector directory. For example:
 
     On Windows:
 
@@ -44,7 +44,7 @@ Be sure that you complete all the following steps before you begin the manual te
     ```
     tsm pending-changes apply
     ```
-For more information about tsm, see tsm Command Line Reference in [Tableau Server on Windows Help](https://onlinehelp.tableau.com/current/server/en-us/cli_configuration-set_tsm.htm) or [Tableau Server on Linux Help](https://onlinehelp.tableau.com/current/server-linux/en-us/tsm.htm).
+For more information about tsm, see tsm Command-Line Reference in [Tableau Server on Windows Help](https://onlinehelp.tableau.com/current/server/en-us/cli_configuration-set_tsm.htm) or [Tableau Server on Linux Help](https://onlinehelp.tableau.com/current/server-linux/en-us/tsm.htm).
 
 
 ## Test your connector with Tableau Desktop
@@ -66,7 +66,7 @@ __Connect to the database with valid credentials__
 After you click your connector, close the window. It should return to the previous window without error.<br/>
 ![]({{ site.baseurl }}/assets/mt-cancel.png)
 
-1. Make valid entries in each field (Server, Username, Password, Port, etc.) and verify that you can connect.
+1. Make valid entries in each field (Server, Username, Password, Port, and so on) and verify that you can connect. Repeat this step with each supported auth mode.
 
 1. Verify that the default connection name is correct, and that you can change it.<br/>
 ![]({{ site.baseurl }}/assets/mt-cconnection-name.png)
@@ -75,16 +75,8 @@ After you click your connector, close the window. It should return to the previo
 ![]({{ site.baseurl }}/assets/mt-connect-auth.png)
 
 1. Verify that you can connect to a data source with SSL, if applicable.
-Select the **Require SSL** check box, and then click **Sign In**.<br/>
+Select the **Require SSL** checkbox, and then click **Sign In**.<br/>
 ![]({{ site.baseurl }}/assets/mt-connect-ssl.png)
-
-1. Verify that you can duplicate the data source and that the duplicate source name has "(copy)" appended to the end.<br/>
-![]({{ site.baseurl }}/assets/mt-duplicate.png)<br/>
-![]({{ site.baseurl }}/assets/mt-duplicate-copy.png)
-
-1. Verify that the data source connection properties are correct.<br/>
-![]({{ site.baseurl }}/assets/mt-prop-menu.png)<br/>
-![]({{ site.baseurl }}/assets/mt-properties.png)
 
 __Test extracts__
 
@@ -104,51 +96,12 @@ Change all possible items and verify that changes are applied.
 1. Right-click the data source and click **Edit Data Source**.<br/>
 ![]({{ site.baseurl }}/assets/mt-edit-data-source.png)
 The worksheet opens in Tableau.
-1. In the left pane, under **Connections**, click the drop-down menu next to the server name and click **Edit Connection**.<br/>
+1. In the left pane, under **Connections**, click the dropdown menu next to the server name and click **Edit Connection**.<br/>
 ![]({{ site.baseurl }}/assets/mt-edit-connection.png)
 1. Change something. For example, change the server.<br/>
 ![]({{ site.baseurl }}/assets/mt-change-server.png)
 1. After you click **Sign In**, you should see the new server name under **Connections**.<br/>
 ![]({{ site.baseurl }}/assets/mt-new-server.png)
-
-__Open a workbook with the connector missing__
-
-1. Create a workbook with a live connection using your connector.
-
-1. Save the workbook. The file should have a .twb filename extension.
-
-1. Close Tableau Desktop and remove your connector.
-
-1. Open Tableau Desktop and open the workbook you created. Verify that an error message displays:<br/>
-![]({{ site.baseurl }}/assets/mt-missing-connector-error.png)
-
-__Connect to a published data source with the connector missing__
-
-1. Remove your connector.
-
-1. Use Tableau Desktop to connect to a published data source with an extract. You should be able to connect without errors.
-
-1. Use Tableau Desktop to connect to a published data source without an extract. Verify that an error message displays:<br/>
-![]({{ site.baseurl }}/assets/mt-no-extract-error.png)
-
-__Download and open a workbook with the connector missing__
-
-1. Remove your connector.
-
-1. Download a workbook with an extract from Tableau Server and open it in Tableau Desktop. The workbook should open without errors.
-
-1. Download a workbook without an extract from Tableau Server and open it in Tableau Desktop. Verify that an error message displays:<br/>
-![]({{ site.baseurl }}/assets/mt-wkbk-no-extract-error.png)
-
-__Test localization__
-Change the language to any language but English (United States).
-
-1. From **Help**, select **Choose Language**, and then select a language.<br/>
-![]({{ site.baseurl }}/assets/mt-loc.png)
-
-1. Restart Tableau Desktop.
-
-1. Connect to your data source again and verify the localized text.
 
 __Connect to the correct database with the wrong credentials__
 - Verify that an error message appears
@@ -175,23 +128,20 @@ Perform the publishing tests listed below. For more information about publishing
 
 * Publish a workbook without an extract to Tableau Server *with the connector* installed on the server.
 The workbook should publish without errors.
-
-* Publish a data source with an extract to Tableau Server.
-    - Be sure the the connector is installed on the server.
-    - Make sure **Allow refresh access** is selected as an authentication option. To do this:
-        1. In the Publish Data Source dialog box, under **Authentication**, click __Edit__ next to **Refresh not enabled**.
-        1. Under **Authentication**, select **Allow refresh access** from the drop-down list.<br/>
-        ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)<br/>
-The workbook should publish without errors.
-
-* Publish a workbook without an extract to Tableau Server.
-    - Be sure the the connector is installed on the server.  *
     - Be sure not to embed credentials when you publish the workbook.
     - Open the published workbook.
     - Verify that a Sign In dialog opens.<br/>
     ![]({{ site.baseurl }}/assets/mt-embed-credentials.png)<br/>
     For more information, see [Set Credentials for Accessing Your Published Data](https://onlinehelp.tableau.com/current/pro/desktop/en-us/publishing_sharing_authentication.htm) in the Tableau Desktop and Web Authoring Help.
 
+
+* Publish a data source with an extract to Tableau Server.
+    - Be sure the the connector is installed on the server.
+    - Make sure **Allow refresh access** is selected as an authentication option. To do this:
+        1. In the Publish Data Source dialog box, under **Authentication**, click __Edit__ next to **Refresh not enabled**.
+        1. Under **Authentication**, select **Allow refresh access** from the dropdown list.<br/>
+        ![]({{ site.baseurl }}/assets/mt-pub-allow-refresh.png)<br/>
+The workbook should publish without errors.
 
 __Find publishing resources__
 
@@ -216,7 +166,7 @@ Refresh the extract on Tableau Server with the connector installed on the server
 
 __Create and open workbooks and data sources on Tableau Server__
 
-Create a new workbook on Tableau Server with the connector installed on the server:
+Create a workbook on Tableau Server with the connector installed on the server:
 
 1. Sign in to Tableau Server.
 
@@ -228,12 +178,12 @@ Create a new workbook on Tableau Server with the connector installed on the serv
 1. Select your connector. In this example, the connector name is MariaDB.<br/>
 ![]({{ site.baseurl }}/assets/mt-wkbk-mariadb.png)
 
-1. Enter the required information to sign in.<br/>
+1. Enter the required information to sign in. Repeat as necessary to test all auth modes.<br/>
 ![]({{ site.baseurl }}/assets/mt-wkbk-signin.png)
 
-1. After you connect to the data source, you should be able to create a new workbook and save it on the server.
+1. After you connect to the data source, you should be able to create a workbook and save it on the server.
 
-    **Note:** Web authoring (creating a new connection from the web) is not currently available for all connector superclasses. In those cases, your connector won't appear on the list of connectors on Tableau Server. If you can publish a workbook or data source using your connector to your server, then your connector is loaded correctly, even if you can't see it on the list of connectors.
+    **Note:** Web authoring (creating a connection from the web) is not currently available for all connector superclasses. In those cases, your connector won't appear on the list of connectors on Tableau Server. If you can publish a workbook or data source using your connector to your server, then your connector is loaded correctly, even if you can't see it on the list of connectors.
 
 ## OAuth Connector Test Cases
 If your connector supports OAuth Authentication, besides the previous test steps, there are some extra steps you need to verify for OAuth on Tableau Desktop/Server.
@@ -254,16 +204,16 @@ __Connect to the database with OAuth tokens__
 
 __Prerequisite__
 
-Follow this [instruction](oauth.md#oauth-on-tableau-server-&-tableau-online) to setup OAuth client for your connector on Server first.
+Follow this [instruction](oauth.md#oauth-on-tableau-server-&-tableau-online) to set up OAuth client for your connector on Server first.
 
 __Test refresing OAuth token on Tableau Server__
 
 If your connector supports oauth, you need to perform this extra step to make sure Tableau can successfully refresh your token.
 1. Go to user's server settings page and find the pane for Saved Credentials for Data Sources.
 
-1. Find your connector in the connector list and click **Add** button next to it, which will invoke the OAuth flow, authenticate yourself and we will save the oauth token securly in Tableau Server.
+1. Find your connector in the connector list and click **Add** button next to it, which will invoke the OAuth flow, authenticate yourself and we will save the OAuth token securely in Tableau Server.
 
-1. Examine the saved OAuth token, it should contain a username which uniquely identify you, it may also contain a instanceUrl if your oauthConfig file has OAUTH_SUPPORTS_CUSTOM_DOMAIN enabled.
+1. Examine the saved OAuth token. It should contain a username that uniquely identifies you. It can also contain a instanceUrl if your oauthConfig file has OAUTH_SUPPORTS_CUSTOM_DOMAIN enabled.
 
 1. Click the **Test** button next to your saved credential, it will try to refresh the accessToken and you should see a success message.
 ![]({{ site.baseurl }}/assets/oauth-server-test-token.png)
@@ -275,10 +225,10 @@ The publishing experience for OAuth is different than a username-password connec
 * Publish a data source with an extract to Tableau Server.
     - Be sure the the connector is installed on the server.
     - Make sure **Embed <username>** is selected as an authentication option. To do this:
-        1. For a datasource using OAuth, go to the server settings page to add your credential for the datasource.<br/>
+        1. For a data source using OAuth, go to the server settings page to add your credential for the data source.<br/>
         ![]({{ site.baseurl }}/assets/oauth-server-addtoken.png)
 
-        1. Then under **Authentication** select **Embed <username>** from the drop-down list.<br/>
+        1. Then under **Authentication** select **Embed <username>** from the dropdown list.<br/>
         ![]({{ site.baseurl }}/assets/oauth-desktop-publish.png)
 
 The workbook should publish without errors.
@@ -289,4 +239,30 @@ The workbook should publish without errors.
     - Open the published workbook.
     - Verify that a Sign In dialog opens.<br/>
     ![]({{ site.baseurl }}/assets/oauth-server-prompt.png)<br/>
-    - Click Signing in shuold invoke the OAuth flow and after authenticated you will be able to see the content.
+    - Click Signing in should invoke the OAuth flow and after authenticated you will be able to see the content.
+
+### Test a Connector Update
+This is the minimum set of manual checks to run through when making an update to your connector, but these tests alone do not guarantee that the update is bug-free. For small or cosmetic changes, or for updates to the connector signature only, the following may be enough, but for larger changes you may be required to run through the full set of manual test or re-run TDVT.
+
+__Ensure new update can connect to database with valid credentials__
+Note: this test case is a duplicate of other manual test cases. If you're running through the full manual test suite for the update this can be skipped.
+
+1. Open Tableau Desktop, and click on your connector in the connector list
+
+1. Make valid entries in each field (Server, Username, Password, Port, and so on) and verify that you can connect.
+
+1. Verify that you can connect using all supported methods of authentication.<br/>
+![]({{ site.baseurl }}/assets/mt-connect-auth.png)
+
+1. After connecting, go to a worksheet and drag some data onto the viz and ensure no errors occur and the viz shows expected content
+
+__Ensure workbooks made with previous version of connector can be opened with new workbook__
+
+1. Create a viz using the previous version of the connector. Ensure no errors occur and the viz shows expected content. Save as a .twb file.
+
+1. Close Tableau Desktop, and open a new instance of Tableau Desktop with the new version of your connector. (Note: Tableau must be restarted for changes to the connector to be picked up.)
+
+1. Open the .twb file you created with the old version of your connector. Ensure that the reconnect dialog is shown, and that the user is prompted to re-enter their credentials only.<br/>
+![]({{ site.baseurl }}/assets/mt-reconnect-dialog.png)
+
+1. Ensure no errors occur when viewing the viz, and that the viz appears the same as the previous version of the connector

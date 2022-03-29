@@ -4,15 +4,16 @@ title: Capabilities
 
 Use Tableau capabilities to customize and tune your connector behavior. 
 
-* [Metadata](#metadata)
-* [Temporary Tables](#temporary-tables)
-* [String Splits](#string-splits)
-* [Query](#query)
-* [JDBC](#jdbc)
-* [ODBC](#odbc)
-* [Stored Procedures](#stored-procedures)
-* [Isolation Level](#isolation-level)
-* [Uncommon](#uncommon)
+- [Metadata](#metadata)
+- [Temporary Tables](#temporary-tables)
+- [String Splits](#string-splits)
+- [Initial SQL](#initial-sql)
+- [Query](#query)
+- [JDBC](#jdbc)
+- [ODBC](#odbc)
+- [Stored Procedures](#stored-procedures)
+- [Isolation Level](#isolation-level)
+- [Uncommon](#uncommon)
 
 **Read the table**
 
@@ -26,21 +27,21 @@ Entry | Description
 
 Capability | Description | Default | Recommended 
 -|-|-|-
-CAP_FAST_METADATA | Set to 'yes' if you have small to moderate size schemas. This capability controls whether Tableau should enumerate all of the objects immediately when you connect. Set the value to “yes” to enable this capability for better performance when creating new connections. Disable this capability to allow search for specific schemas or tables instead of retrieving all objects. You can search for all objects by using an empty string. | yes | yes 
-CAP_QUERY_TOP_0_METADATA | Set to 'yes' if the datasource can handle a "TOP 0" request for retrieving metadata | no | **<span style="color:red">?</span>**    
-CAP_QUERY_WHERE_FALSE_METADATA | Set to 'yes' if the datasource can handle a "WHERE \<false\>" predicate for retrieving metadata | &ndash; | **<span style="color:red">?</span>** 
+CAP_FAST_METADATA | Set to 'yes' if you have small to moderate size schemas. This capability controls whether Tableau should enumerate all of the objects immediately when you connect. Set the value to “yes” to enable this capability for better performance when creating connections. Disable this capability to allow search for specific schemas or tables instead of retrieving all objects. You can search for all objects by using an empty string. | yes | yes 
+CAP_QUERY_TOP_0_METADATA | Set to 'yes' if the data source can handle a "TOP 0" request for retrieving metadata | no | **<span style="color:red">?</span>**    
+CAP_QUERY_WHERE_FALSE_METADATA | Set to 'yes' if the data source can handle a "WHERE \<false\>" predicate for retrieving metadata | &ndash; | **<span style="color:red">?</span>** 
 
 ## Temporary Tables
 
 Capability | Description | Default | Recommended
 -|-|-|-
-CAP_CREATE_TEMP_TABLES | Set to 'yes' if Tableau can create temporary tables needed for certain complex or optimized queries. Set to 'no' if creating temporary tables is not supported.  See also: CAP_SELECT_INTO. | &ndash; | **<span style="color:red">?</span>**  
-CAP_INDEX_TEMP_TABLES | Set to 'yes' if datasource supports creation of indexes on temp tables database | &ndash; | &ndash; 
+CAP_CREATE_TEMP_TABLES | Set to 'yes' if Tableau can create temporary tables needed for certain complex or optimized queries. Set to 'no' if creating temporary tables is not supported. See also: CAP_SELECT_INTO. | &ndash; | **<span style="color:red">?</span>**  
+CAP_INDEX_TEMP_TABLES | Set to 'yes' if data source supports creation of indexes on temp tables database | &ndash; | &ndash; 
 CAP_QUERY_USE_TEMP_TABLE_NAMES_AS_SUBQUERY_ALIASES | Set to 'yes' if Tableau must use generated temporary table names for aliases of subqueries because they might end up implemented as temporary tables | no | no
 CAP_SELECT_INTO | Set to 'yes' if Tableau can create a table on the fly from the resultset of another query. See also: CAP_CREATE_TEMP_TABLES. | &ndash; | **<span style="color:red">?</span>**   
 CAP_SELECT_TOP_INTO | Set to 'yes' if Tableau can use a TOP or LIMIT row-limiting clause when creating a table from a query resultset. | &ndash; | **<span style="color:red">?</span>**   
 CAP_ODBC_METADATA_FORCE_UTF8_TEMP_TABLE_COLUMN_SIZE | Set to 'yes' if when creating temp tables specify the size of varchar columns in bytes. | &ndash; | &ndash;
-CAP_TEMP_TABLES_NOT_SESSION_SCOPED | Set to 'yes' if this datasource uses regular tables to simulate temp tables. Temporary table creation is still controlled by CAP_CREATE_TEMP_TABLE or CAP_SELECT_INTO | &ndash; | &ndash; 
+CAP_TEMP_TABLES_NOT_SESSION_SCOPED | Set to 'yes' if this data source uses regular tables to simulate temp tables. Temporary table creation is still controlled by CAP_CREATE_TEMP_TABLE or CAP_SELECT_INTO | &ndash; | &ndash; 
 CAP_SUPPRESS_TEMP_TABLE_CHECKS | Set to 'yes' to skip the connection time check that determines if the user has permission to create temp tables. | no | no 
 
 ## String Splits 
@@ -62,7 +63,7 @@ Capability | Description | Default | Recommended
 -|-|-|-
 CAP_QUERY_AGG_NO_BOOLEXPR | Set to 'yes' to transform boolean expressions to integers for arguments to aggregates. Available in Tableau 2020.2 and newer. | &ndash; | &ndash;
 CAP_QUERY_ALLOW_JOIN_REORDER | Set to 'yes' to use query optimization to reduce database work with some inner and equality joins. | yes | yes 
-CAP_QUERY_ALLOW_PARTIAL_AGGREGATION | Tableau can minimize data movement (and boost performance) in federated join scenarios by performing as much aggregation as possible in remote databases before shipping the data back. This can introduce additional groupbys on the fields used in the join condition. If the join is on a string field, not all datasources handle the additional groupbys on strings efficiently, leading to a rapid degradation in performance the more join key fields are used. | yes | yes 
+CAP_QUERY_ALLOW_PARTIAL_AGGREGATION | Tableau can minimize data movement (and boost performance) in federated join scenarios by performing as much aggregation as possible in remote databases before shipping the data back. This can introduce additional groupbys on the fields used in the join condition. If the join is on a string field, not all data sources handle the additional groupbys on strings efficiently, leading to a rapid degradation in performance the more join key fields are used. | yes | yes 
 CAP_QUERY_BOOL_IDENTIFIER_TO_LOGICAL | Set to 'yes' if the dialect can handle WHEN [bit column] THEN or does it need something like WHEN [column] = 1 THEN. | &ndash; | &ndash; 
 CAP_QUERY_BOOLEXPR_TO_INTEXPR | Set to 'yes' if data source does not support booleans natively in a result set. Set to 'no' if booleans are supported natively. | &ndash; | **<span style="color:red">?</span>**   
 CAP_QUERY_CASE_MATCHES_NULL | Set to 'yes' if CASE can match a null in a valued CASE expression | no | no 
@@ -71,11 +72,11 @@ CAP_QUERY_CASE_PROMOTES_CHAR | Set to 'no' if CASE cannot promote character type
 CAP_QUERY_CAST_MONEY_AS_NUMERIC | Set to 'yes' to cast money as numeric. Available in Tableau 2021.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_FROM_REQUIRES_ALIAS | Set to 'yes' if the FROM clause must provide an alias for the given table. | &ndash; | &ndash;
 CAP_QUERY_GROUP_ALLOW_DUPLICATES | Set to 'no' if SQL queries cannot contain duplicate expressions in the GROUP BY clause (this is uncommon). | yes | yes
-CAP_QUERY_GROUP_BY_ALIAS | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by their corresponding alias in the SELECT list, e.g. GROUP BY "none_ShipCountry_nk". | no | no 
+CAP_QUERY_GROUP_BY_ALIAS | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by their corresponding alias in the SELECT list, for example, GROUP BY "none_ShipCountry_nk". | no | no 
 CAP_QUERY_GROUP_BY_BOOL | Set to 'yes' if the database can group by a raw boolean. Set to 'no' if booleans should be cast to an INT. Can also influence booleans in the SELECT clause. | no | **<span style="color:red">yes</span>** 
-CAP_QUERY_GROUP_BY_DEGREE | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by the ordinal position of each column, e.g. GROUP BY 2, 5. See also: CAP_QUERY_SORT_BY_DEGREE | no | **<span style="color:red">yes</span>**  
-CAP_QUERY_HAVING_REQUIRES_GROUP_BY | Set to 'yes' if Tableau must use an artificial grouping field for any query which has a HAVING clause but no grouping columns. | &ndash; | **<span style="color:red">?</span>** 
-CAP_QUERY_HAVING_UNSUPPORTED | Set to 'yes' if the SQL syntax for HAVING is unsupported. Tableau may be able to work around this using subqueries. See also: CAP_QUERY_SUBQUERIES. | &ndash; | &ndash; 
+CAP_QUERY_GROUP_BY_DEGREE | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by the ordinal position of each column, for example, GROUP BY 2, 5. See also: CAP_QUERY_SORT_BY_DEGREE | no | **<span style="color:red">yes</span>**  
+CAP_QUERY_HAVING_REQUIRES_GROUP_BY | Set to 'yes' if Tableau must use an artificial grouping field for any query that has a HAVING clause but no grouping columns. | &ndash; | **<span style="color:red">?</span>** 
+CAP_QUERY_HAVING_UNSUPPORTED | Set to 'yes' if the SQL syntax for HAVING is unsupported. Sometimes Tableau can work around this using subqueries. See also: CAP_QUERY_SUBQUERIES. | &ndash; | &ndash; 
 CAP_QUERY_INCLUDE_GROUP_BY_COLUMNS_IN_SELECT | Set to 'yes' to require all GROUP BY expressions to also appear in the SELECT expression list. | &ndash; | &ndash; 
 CAP_QUERY_INCLUDE_HAVING_COLUMNS_IN_SELECT | Set to 'yes' if the HAVING columns are always needed in the SELECT clause | &ndash; | &ndash; 
 CAP_QUERY_INITIAL_SQL_SPLIT_STATEMENTS | Set to 'yes' if the data source requires multiple statements issued as separate queries for Initial SQL | &ndash; | **<span style="color:red">?</span>**  
@@ -90,9 +91,9 @@ CAP_QUERY_NAKED_JOINS | Set to 'yes' if Tableau needs to wrap the base relation 
 CAP_QUERY_OUTER_JOIN_CONDITION_NO_TRIVIAL | Set to 'yes' to rewrite empty outer join conditions to non-trivial conditions. Available in Tableau 2020.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_SCALAR_SELECTS_ALL_IN_GROUP_BYS | Set to 'yes' if all scalar selects must be in an aggregated query's GROUP BY clause | &ndash; | &ndash;
 CAP_QUERY_SCALAR_SELECTS_SOME_IN_GROUP_BYS | Set to 'yes' if some scalar selects must be in an aggregated query's GROUP BY clause. Available in Tableau 2020.2 and newer. | &ndash; | &ndash;
-CAP_QUERY_SELECT_ALIASES_SORTED | Set to 'yes' if Tableau must impose a deterministic order on the SELECT expressions (sorted by alias) to ensure that query results can be properly matched with each field in the Tableau visualization. This is only required for data sources which do not preserve the aliases of the SELECT expressions when returning metadata with the query results. | no | no  
-CAP_QUERY_SORT_BY | Set to 'yes' to enables the 'Field' option in the Sort menu | no | **<span style="color:red">yes</span>**  
-CAP_QUERY_SORT_BY_DEGREE | Set to 'yes' if SQL queries can reference the sorting columns by the ordinal position of each column, e.g. ORDER BY 2, 5. See also: CAP_QUERY_GROUP_BY_DEGREE. | yes | **<span style="color:red">?</span>** 
+CAP_QUERY_SELECT_ALIASES_SORTED | Set to 'yes' if Tableau must impose a deterministic order on the SELECT expressions (sorted by alias) to ensure that query results can be properly matched with each field in the Tableau visualization. This is only required for data sources that do not preserve the aliases of the SELECT expressions when returning metadata with the query results. | no | no  
+CAP_QUERY_SORT_BY | Set to 'yes' to enable the 'Field' option in the Sort menu | no | **<span style="color:red">yes</span>**  
+CAP_QUERY_SORT_BY_DEGREE | Set to 'yes' if SQL queries can reference the sorting columns by the ordinal position of each column, for example, ORDER BY 2, 5. See also: CAP_QUERY_GROUP_BY_DEGREE. | yes | **<span style="color:red">?</span>** 
 CAP_QUERY_SORT_BY_NON_NUMERIC | Set to 'no' if data source cannot sort by non-numeric values | yes | yes 
 CAP_QUERY_SUBQUERIES | Set to 'yes' if the data source supports subqueries. | &ndash; | **<span style="color:red">yes</span>** 
 CAP_QUERY_SUBQUERIES_WITH_TOP | Set to 'yes' if the data source supports a TOP or LIMIT row-limiting clause within a subquery. | yes | **<span style="color:red">?</span>**  
@@ -139,8 +140,8 @@ CAP_JDBC_SUPPRESS_EMPTY_CATALOG_NAME | Set to 'yes' to ignore missing catalog. |
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash; 
-CAP_JDBC_SET_CLIENT_INFO | Enable the JDBC setClientInfo API to pass trace information to the database. Available in Tableau 2021.2 and newer for on-premise Tableau Server. Needs additional configuration see documentation. | &ndash; | &ndash;
-CAP_JDBC_TRIM_STRING_PADDING | Set to 'yes' to trim trailing whitespace from string columns which has been added by the driver. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
+CAP_JDBC_SET_CLIENT_INFO | Enable the JDBC setClientInfo API to pass trace information to the database. Available in Tableau 2021.2 and newer for on-premises Tableau Server. Needs additional configuration see documentation. | &ndash; | &ndash;
+CAP_JDBC_TRIM_STRING_PADDING | Set to 'yes' to trim trailing whitespace from string columns that have been added by the driver. Available in Tableau 2020.1 and newer. | &ndash; | &ndash; 
 CAP_JDBC_USE_ADAPTIVE_FETCH_SIZE | Set to 'yes' to use ResultSet metadata to determine optimal fetch size. May require CAP_JDBC_QUERY_FORCE_PREPARE to be enabled to work properly. Available in Tableau 2020.4 and newer. | yes | &ndash;
 CAP_JDBC_USE_SINGLE_ROW_FETCH | Set to 'yes' to use single row fetch. May require CAP_JDBC_QUERY_FORCE_PREPARE. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 
@@ -153,21 +154,21 @@ CAP_ODBC_BIND_BOOL_AS_WCHAR_TFLITERAL | Set to 'yes' to bind a Boolean data type
 CAP_ODBC_BIND_DETECT_ALIAS_CASE_FOLDING | Set to 'yes' to allow Tableau to detect and recover from an ODBC data source that reports the field names in a result set using only upper-case or lower-case characters, instead of the expected field names. | &ndash; | &ndash; 
 CAP_ODBC_BIND_FORCE_DATE_AS_CHAR | Set to 'yes' to force the Tableau native ODBC protocol to bind date values as CHAR. | &ndash; | &ndash; 
 CAP_ODBC_BIND_FORCE_DATETIME_AS_CHAR | Set to 'yes' to force the Tableau native ODBC protocol to bind datetime values as CHAR. | &ndash; | &ndash; 
-CAP_ODBC_BIND_FORCE_MAX_STRING_BUFFERS | Set to 'yes' to force the Tableau native ODBC protocol to use maximum-sized buffers (1MB) for strings instead of the size described by metadata. | &ndash; | &ndash; 
-CAP_ODBC_BIND_FORCE_MEDIUM_STRING_BUFFERS | Set to 'yes' to force the Tableau native ODBC protocol to use medium-sized buffers (1K) for strings instead of the size described by metadata. | &ndash; | &ndash; 
+CAP_ODBC_BIND_FORCE_MAX_STRING_BUFFERS | Set to 'yes' to force the Tableau native ODBC protocol to use maximum-sized buffers (1 MB) for strings instead of the size described by metadata. | &ndash; | &ndash; 
+CAP_ODBC_BIND_FORCE_MEDIUM_STRING_BUFFERS | Set to 'yes' to force the Tableau native ODBC protocol to use medium-sized buffers (1 K) for strings instead of the size described by metadata. | &ndash; | &ndash; 
 CAP_ODBC_BIND_FORCE_SIGNED | Set to 'yes' to force binding integers as signed. | &ndash; | &ndash; 
 CAP_ODBC_BIND_FORCE_SMALL_STRING_BUFFERS | Set to 'yes' to force the Tableau native ODBC protocol to use small buffers for strings instead of the size described by metadata. | &ndash; | &ndash; 
 CAP_ODBC_BIND_PRESERVE_BOM | Set to 'yes' to preserve BOM when present in strings. Hive will return BOM and treat strings containing it as distinct entities. | &ndash; | &ndash; 
 CAP_ODBC_BIND_SKIP_LOCAL_DATATYPE_UNKNOWN | Set to 'yes' to prevent the native ODBC Protocol from binding to columns having local data type DataType::Unknown in the expected metadata | &ndash; | &ndash;
 CAP_ODBC_BIND_SPATIAL_AS_WKT | Set to 'yes' to force binding Spatial data as WKT (Well Known Text) | &ndash; | &ndash; 
-CAP_ODBC_BIND_SUPPRESS_COERCE_TO_STRING | Set to 'yes' to prevent the Tableau native ODBC protocol from binding non-string data as strings (i.e. requesting driver conversion). | &ndash; | &ndash; 
+CAP_ODBC_BIND_SUPPRESS_COERCE_TO_STRING | Set to 'yes' to prevent the Tableau native ODBC protocol from binding non-string data as strings (that is, requesting driver conversion). | &ndash; | &ndash; 
 CAP_ODBC_BIND_SUPPRESS_INT64 | Set to 'yes' to prevent the Tableau native ODBC protocol from using 64-bit integers for large numeric data. | &ndash; | &ndash; 
 CAP_ODBC_BIND_SUPPRESS_PREFERRED_CHAR | Set to 'yes' to prevent the Tableau native ODBC protocol from preferring a character type that differs from the driver default. | &ndash; | &ndash; 
 CAP_ODBC_BIND_SUPPRESS_PREFERRED_TYPES | Set to 'yes' to prevent the Tableau native ODBC protocol from binding any data according to its preferred wire types. With this capability set, Tableau will only bind according to the data types described by the ODBC driver via metadata. | &ndash; | &ndash; 
 CAP_ODBC_BIND_SUPPRESS_WIDE_CHAR | Set to 'yes' to prevent the Tableau native ODBC protocol from binding strings a WCHAR. Instead they will be bound as single-byte CHAR arrays, and processed locally for any UTF-8 characters contained within. | &ndash; | &ndash; 
 CAP_ODBC_CONNECTION_STATE_VERIFY_FAST | Set to ‘yes’ to check if a connection is broken with a fast ODBC API call. | yes | yes 
 CAP_ODBC_CONNECTION_STATE_VERIFY_PROBE | Set to ‘yes’ to check if a connection is broken with a forced probe. | no | no 
-CAP_ODBC_CONNECTION_STATE_VERIFY_PROBE_IF_STALE | Set to ‘yes’ to check if a connection is broken with a forced probe only if it is "stale" (i.e., unused for about 30 minutes). | yes | yes 
+CAP_ODBC_CONNECTION_STATE_VERIFY_PROBE_IF_STALE | Set to ‘yes’ to check if a connection is broken with a forced probe only if it is "stale" (that is, unused for about 30 minutes). | yes | yes 
 CAP_ODBC_CONNECTION_STATE_VERIFY_PROBE_PREPARED_QUERY | Set to ‘yes’ to check if a connection is broken using a prepared query. | yes | yes 
 CAP_ODBC_CURSOR_DYNAMIC | Set to 'yes' to force the Tableau native ODBC protocol to set the cursor type for all statements to Dynamic (scrollable, detects added/removed/modified rows). | &ndash; | &ndash; 
 CAP_ODBC_CURSOR_FORWARD_ONLY | Set to 'yes' to force the Tableau native ODBC protocol to set the cursor type for all statements to Forward-only (non-scrollable). | &ndash; | **<span style="color:red">?</span>** 
@@ -222,7 +223,7 @@ CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL | Set to 'no' to disable decoding data l
 CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_SMALL | Set to 'yes' to use a small degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
 CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_MEDIUM | Set to 'yes' to use a medium degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
 CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_LARGE | Set to 'yes' to use a large degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
-CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_XL | Set to 'yes' to use a extra-large degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
+CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL_XL | Set to 'yes' to use an extra-large degree of parallelism when using CAP_ODBC_IMPORT_TRANSLATE_DATA_PARALLEL. Available in Tableau 2020.4 and newer. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_FORCE_LENGTH_AS_PRECISION | Set to 'yes' to force the Tableau native ODBC protocol to use the column "length" as the numeric precision. This is an uncommon setting. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_FORCE_NUM_PREC_RADIX_10 | Set to 'yes' to force the Tableau native ODBC protocol to assume the numeric precision is reported in base-10 digits. This is an uncommon setting. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_FORCE_UNKNOWN_AS_STRING | Set to 'yes' to force the Native ODBC Protocol to treat unknown data types as string instead of ignoring the associated column. | &ndash; | &ndash; 
@@ -230,7 +231,7 @@ CAP_ODBC_METADATA_FORCE_UTF8_IDENTIFIERS | Set to 'yes' to force the protocol to
 CAP_ODBC_METADATA_SKIP_DESC_TYPE_NAME | Set to 'yes' to remove the check for the SQL_DESC_TYPE_NAME attribute with the SQLColAttribute API. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_STRING_LENGTH_UNKNOWN | Set to 'yes' to prevent Tableau from allocating memory based on the driver-reported string length, which may not be known or reported properly. Instead, Tableau will use a fixed-sized string length, and will reallocate as needed to handle string data that is too large for the fixed-size buffer. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_STRING_TRUST_OCTET_LENGTH | Set to 'yes' to use the octet length reported by the driver for strings instead of computing it from the number of characters. | &ndash; | &ndash; 
-CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY | Set to 'yes' to prevent Tableau from executing a query as a means of reading metadata. While Tableau typically includes a row-limiting clause in such metadata queries (e.g., 'LIMIT', or 'WHERE 1=0'), this may not help when used with a Custom SQL connection for database systems with poor query optimizers. Note that this capability may prevent Tableau from determining the connection metadata properly. | &ndash; | &ndash; 
+CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY | Set to 'yes' to prevent Tableau from executing a query as a means of reading metadata. While Tableau typically includes a row-limiting clause in such metadata queries (for example, 'LIMIT', or 'WHERE 1=0'), this may not help when used with a Custom SQL connection for database systems with poor query optimizers. Note that this capability may prevent Tableau from determining the connection metadata properly. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_SUPPRESS_PREPARED_QUERY | Set to 'yes' to prevent Tableau from using a prepared query as a means of reading metadata. A prepared query is often the fastest way to accurately read metadata. However, not all database systems are capable of reporting metadata for a prepared query without actually executing the query. Note that certain metadata -- for example from connections using Custom SQL -- cannot be retrieved if this capability and CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY are both set. | &ndash; | &ndash; 
 CAP_ODBC_METADATA_SUPPRESS_READ_IDENTITY_COLUMNS | Set to 'no' to prevent reading identity column metadata | yes | yes 
 CAP_ODBC_METADATA_SUPPRESS_SELECT_STAR | Set to 'yes' to prevent reading metadata using a 'select *' query. | &ndash; | &ndash; 
@@ -245,9 +246,9 @@ CAP_ODBC_SUPPRESS_CATALOG_NAME | Set 'yes' to suppress passing catalog name for 
 CAP_ODBC_SUPPRESS_ENUMERATE_SCHEMA_WITHOUT_CATALOG | Set 'yes' to suppress enumerating schemas without a valid catalog. | &ndash; | &ndash;
 CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES | Set to 'yes' to prevent tables from "information_schema" schema from being returned by EnumerateTables | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_PG_TEMP_SCHEMA_TABLES | Set to 'yes' to prevent tables from "pg_temp" schema from being returned by EnumerateTables | &ndash; | &ndash;  
-CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_ALL_COMMAND_QUERIES | Set to 'yes' to execute all commands directly (i.e., no prepared statement). | &ndash; | &ndash; 
-CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_DDL_COMMAND_QUERIES | Set to 'yes' to execute DDL commands (e.g. CREATE TABLE) directly (i.e., no prepared statement). | &ndash; | &ndash; 
-CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_DML_COMMAND_QUERIES | Set to 'yes' to execute DML commands (e.g. INSERT INTO) directly (i.e, no prepared statement). | &ndash; | &ndash; 
+CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_ALL_COMMAND_QUERIES | Set to 'yes' to execute all commands directly (that is, no prepared statement). | &ndash; | &ndash; 
+CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_DDL_COMMAND_QUERIES | Set to 'yes' to execute DDL commands (for example, CREATE TABLE) directly (that is, no prepared statement). | &ndash; | &ndash; 
+CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_DML_COMMAND_QUERIES | Set to 'yes' to execute DML commands (for example, INSERT INTO) directly (i.e, no prepared statement). | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_NON_COMMAND_QUERIES | Set to 'yes' to execute all non-command queries directly (no prepared statement). | &ndash; | &ndash;
 CAP_ODBC_TRANSACTIONS_COMMIT_INVALIDATES_PREPARED_QUERY | Set to ‘yes’ to indicate that a transaction will invalidate all prepared statements and close any open cursors. | &ndash; | &ndash; 
 CAP_ODBC_TRANSACTIONS_SUPPRESS_EXPLICIT_COMMIT | Set to 'yes' to prevent the Native ODBC Protocol from explicitly managing transactions. | &ndash; | &ndash; 
@@ -287,7 +288,9 @@ CAP_SET_ISOLATION_LEVEL_VIA_SQL | Set to 'yes' to force Tableau to set the trans
 
 Capability | Description | Default | Recommended
 -|-|-|-
+CAP_CONNECT_NO_CUSTOM_SQL | Set to 'yes' to disable the custom sql option. | &ndash; | &ndash; 
 CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only. | &ndash; | &ndash;  
+CAP_EXTRACT_ONLY_REFRESH  | Set to 'yes' to enable extracted data to be refreshed. | &ndash; | &ndash;  
 CAP_FORCE_COUNT_FOR_NUMBEROFRECORDS | Set to 'yes' to force these alternatives for calculating number of records: <br>1. COUNT(1) rather than SUM(1) <br>2. COUNT(const) * const rather than SUM(const) <br>Available in Tableau 2020.2 and newer. | &ndash; | &ndash;  
-CAP_SUPPRESS_GET_SERVER_TIME | Some datasources, such as Hive, are very slow at retrieving the server time.  | &ndash; | &ndash; 
+CAP_SUPPRESS_GET_SERVER_TIME | Some data sources, such as Hive, are very slow at retrieving the server time.  | &ndash; | &ndash; 
 CAP_SUPPORTS_UNION | Set to 'no' if data source doesn't support UNION functionality. | yes | yes 

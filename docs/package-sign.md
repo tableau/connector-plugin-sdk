@@ -2,7 +2,7 @@
 title: Package and Sign Your Connector for Distribution 
 ---
 
-Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file.  Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. When the certificate expires, Tableau will reject the .taco file unless there is a valid timestamp.
+Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file. Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. When the certificate expires, Tableau will reject the .taco file unless there is a valid timestamp.
 
 Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory. 
 
@@ -95,7 +95,7 @@ mysql_odbc_sample.taco was created in E:\connector-plugin-sdk\connector-packager
 
 __Example 2__
 
-This example shows how a TACO file and log file are generated in a user-supplied locations:
+This example shows how a TACO file and log file are generated in a user-supplied location:
 
 ```
 (.venv) E:\connector-plugin-sdk\connector-packager>python -m connector_packager.package ..\samples\plugins\mysql_odbc  --dest e:\temp -l e:\temp
@@ -129,7 +129,7 @@ To sign a TACO file:
      `jarsigner -verify path_to_taco -verbose -certs -strict`
     If "jar verified" appears, your TACO file should be ready to be used in Tableau.
     1. Double-check the certificate chain to make sure that the final certificate is from your certificate authority.
-    1. Take note of when the TACO file will expire. Once it does, users will no longer be able use the connector in Tableau without disabling verification and you will need to provide a new signed TACO file.
+    1. Take note of when the TACO file will expire. After it does, users will no longer be able use the connector in Tableau without disabling verification and you will need to provide a new signed TACO file.
 
 ### Signing example
 

@@ -2,13 +2,13 @@
 title: Authentication Modes
 ---
 
-The authentication mode chosen below influences how and when a user is prompted to enter data source credentials. The primary scenarios where authentication occurs:
+The authentication mode influences how and when a user is prompted to enter data source credentials. The primary scenarios where authentication occurs:
 
-- Creating a new connection with the connection dialog
+- Creating a connection with the connection dialog
 - Opening a workbook and reconnecting to the data source
 - Publishing a workbook or data source to Tableau Server
 
-A combination of Connection Dialog and Connection Resolver changes implement each of these modes.
+A combination of Connection Dialog and Connection Resolver changes implements each of these modes.
 
 ## Supported Authentication Modes
 
@@ -25,7 +25,7 @@ The ```authentication``` attribute in a Tableau workbook (twb) or Tableau data s
 
 The specific usage patterns of these values can be found on the individual Connection Dialog pages:
 
-- [Connection Dialog v1]({{ site.baseurl }}/docs/ui#supported-authentication-modes) 
+- [Connection Dialog v1]({{ site.baseurl }}/docs/ui#supported-authentication-modes)
 - [Connection Dialog v2]({{ site.baseurl }}/docs/mcd#authentication)
 
 
@@ -33,7 +33,7 @@ The specific usage patterns of these values can be found on the individual Conne
 
 User is prompted for which authentication option to use and conditionally shown additional fields.  Depending on the option selected, the user may or may not be prompted for credentials when reconnecting to the data source.
 
-These are the relevant segments from the [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/multi_auth) that implements multiple authentication modes. 
+These are the relevant segments from the [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/multi_auth) that implements multiple authentication modes.
 
 ```xml
 <!-- Connection Dialog v2 -->
@@ -103,7 +103,7 @@ These are the relevant segments from the [sample](https://github.com/tableau/con
 
 ### Database impersonation using embedded credentials (Tableau Server only)
 
-This applies to databases which support a user(authenticated_user) that can delegate requests to another user(delegated_user) by enabling the client to pass a DelegationUID(delegated_user) to the database server. As a result of this, the query will run on the database with the privileges of the delegated_user. This form of delegation can be supported in Tableau Server by passing the identity of the logged in user as the DelegationUID to the database using JDBC driver properties or ODBC connection-string. This community [article](https://community.tableau.com/docs/DOC-11137) gives more information on Database Impersonation using Embedded credentials. At this time, connector-sdk only supports cases where the client connection to the database uses basic username-password authentication. Support for Kerberos authentication from client will be added later.
+This applies to databases that support a user(authenticated_user) that can delegate requests to another user(delegated_user) by enabling the client to pass a DelegationUID(delegated_user) to the database server. As a result of this, the query will run on the database with the privileges of the delegated_user. This form of delegation can be supported in Tableau Server by passing the identity of the logged in user as the DelegationUID to the database using JDBC driver properties or ODBC connection-string. This community [article](https://community.tableau.com/docs/DOC-11137) gives more information on Database Impersonation using Embedded credentials. At this time, connector-sdk only supports cases where the client connection to the database uses basic username-password authentication. Support for Kerberos authentication from client will be added later.
 
 Below is an example of how to pass DelegationUID in a JDBC plugin in Tableau Server. Please note that some JDBC drivers may have a different name for this property so take a look at driver documentation for the appropriate property name.
 
@@ -134,7 +134,7 @@ To enable the "Impersonate using embedded password" option in the publish dialog
     </customizations>
  ```
 
-The connector plugin present on a Tableau Server instance MUST contain the above two code changes and the server admin should run "tsm pending-changes apply". After this, user should be able to use a vanilla plugin on a Tableau Desktop Client with the same class name and capable of doing basic username-password authentication. Thereafter, when the user tries to publish a workbook using Tableau Desktop to a Tableau Server instance, they should be able to publish it using the option "Impersonate using embedded password". When the workbook is opened in Tableau Server, the delegation should have taken place automatically if appropriate delegation permissions are configured for the authenticated_user and delegated_user(user logged into Tableau server) or else an error message of this sort is thrown from the database "User user1 is not authorized to delegate to user2". For more information on deploying connector plugins in Tableau Server, please refer this [document]({{ site.baseurl }}/docs/run-taco)
+The connector plugin present on a Tableau Server instance MUST contain the above two code changes and the server admin should run "tsm pending-changes apply". After this, user should be able to use a vanilla plugin on a Tableau Desktop Client with the same class name and capable of doing basic username-password authentication. Thereafter, when the user tries to publish a workbook using Tableau Desktop to a Tableau Server instance, they should be able to publish it using the option "Impersonate using embedded password". When the workbook is opened in Tableau Server, the delegation should have taken place automatically if appropriate delegation permissions are configured for the authenticated_user and delegated_user(user logged into Tableau server) or else an error message of this sort is thrown from the database "User user1 is not authorized to delegate to user2". For more information on deploying connector plug-ins in Tableau Server, please refer this [document]({{ site.baseurl }}/docs/run-taco)
 
 A [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/plugins/db_impersonation) JDBC plugin is provided using an Impala database as an example. For documentation on how to configure delegation in Impala, refer to database [documentation](https://impala.apache.org/docs/build/html/topics/impala_delegation.html).
 
@@ -142,7 +142,7 @@ A [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/p
 
 When using 'hadoophive' or 'spark' as a base class there are additional constraints and requirements in the Connection Dialog and Connection Resolver.
 
-In the Connection Dialog, any authentication ```option``` elements used must match the definition below.
+In the Connection Dialog, any authentication ```option``` elements used must match the following definition.
 
 ```xml
 <!-- Connection Dialog V1 -->
