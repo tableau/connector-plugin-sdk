@@ -4,21 +4,22 @@
 
 This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
-The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2021.3**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau. You can download past releases of the SDK to work with older versions of Tableau if necessary.
+The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2021.4**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau. You can download past releases of the SDK to work with older versions of Tableau if necessary.
 
-| Tool                                             | Latest Version     |
-|--------------------------------------------------|--------------------|
-| Connector SDK for Tableau 2021.2                 | 09-09-2021         |
-| Connector SDK for Tableau 2021.1                 | 07-14-2021         |
-| Connector SDK for Tableau 2020.4                 | 03-29-2021         |
-| Connector SDK for Tableau 2020.3                 | 12-07-2020         |
-| Connector SDK for Tableau 2020.2                 | 8-12-2020          |
-| Connector SDK for Tableau 2020.1                 | 5-08-2020          |
-| Connector SDK for Tableau 2019.4                 | 3-13-2020          |
-| Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019         |
-| TDVT                                             | 2.3.4 (04-12-2021) |
-|                                                  | 1.5.24 (04-13-2020)|
-| Connector Packager                               | 2.1.0 (05-08-2020) |
+| Tool                                             | Latest Version      |
+|--------------------------------------------------|---------------------|
+| Connector SDK for Tableau 2021.3                 | 12-15-2021          |
+| Connector SDK for Tableau 2021.2                 | 09-09-2021          |
+| Connector SDK for Tableau 2021.1                 | 07-14-2021          |
+| Connector SDK for Tableau 2020.4                 | 03-29-2021          |
+| Connector SDK for Tableau 2020.3                 | 12-07-2020          |
+| Connector SDK for Tableau 2020.2                 | 8-12-2020           |
+| Connector SDK for Tableau 2020.1                 | 5-08-2020           |
+| Connector SDK for Tableau 2019.4                 | 3-13-2020           |
+| Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019          |
+| TDVT                                             | 2.6.2 (03-22-2022)  |
+|                                                  | 1.5.24 (04-13-2020) |
+| Connector Packager                               | 2.1.0 (05-08-2020)  |
 
 * [Why Connectors?](#why-connectors)
 * [Get started](#get-started)
@@ -48,14 +49,13 @@ The SDK includes several [standalone example connectors](https://github.com/tabl
 To work with connectors, you need the following:
 
 * Windows or Mac
-* Tableau Desktop or Server 2019.1 Beta 2 or higher
+* Tableau Desktop or Server 2020.4
 * Python 3.7 or higher
 * An ODBC or JDBC data source and driver
 * The provided test data loaded in your data source
 
 To package the connector into a .taco file, you will also need:
 
-* Tableau Desktop or Server 2019.4 Beta 1 or higher
 * JDK 8 or higher
 
 For a JDBC connector, your driver must fulfill the following requirements:

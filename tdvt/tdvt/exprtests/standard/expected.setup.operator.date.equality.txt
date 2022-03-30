@@ -1,0 +1,18 @@
+<results>
+  <test name='date0 == #7/4/1972#'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(397499995)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>

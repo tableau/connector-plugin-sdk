@@ -1,0 +1,27 @@
+<results>
+  <test name='date0 - datetime0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.memsql].[TEMP(Test)(937166222)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>-11710.521</value>
+      </tuple>
+      <tuple>
+        <value>-10491.333</value>
+      </tuple>
+      <tuple>
+        <value>-85.4289</value>
+      </tuple>
+      <tuple>
+        <value>-39.9794</value>
+      </tuple>
+      <tuple>
+        <value>-31.5516</value>
+      </tuple>
+    </table>
+  </test>
+</results>

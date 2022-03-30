@@ -11,6 +11,7 @@
     <customizations>
 
       <customization name='CAP_EXTRACT_ONLY' value='yes' />
+      <customization name='CAP_EXTRACT_ONLY_REFRESH' value='yes' />
 
     </customizations>
   </connection-customization>

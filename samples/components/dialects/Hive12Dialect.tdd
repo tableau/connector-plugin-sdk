@@ -1,4 +1,4 @@
-<dialect name='FullHive12Dialect' base='HiveDialect' class='hive_clone' version='18.1'>
+<dialect name='FullHive12Dialect' class='hive_clone' version='18.1'>
   <function-map>
     <function group='numeric' name='ABS' return-type='real'>
       <formula>ABS(%1)</formula>
@@ -1190,7 +1190,7 @@
       <argument type='datetime' />
     </date-function>
     <date-function name='DATEDIFF' return-type='int'>
-      <formula part='week'>FLOOR(DATEDIFF(NEXT_DAY(%3,%4),NEXT_DAY(%2,%4))/7</formula>
+      <formula part='week'>FLOOR(DATEDIFF(NEXT_DAY(%3,%4),NEXT_DAY(%2,%4))/7)</formula>
       <argument type='localstr' />
       <argument type='datetime' />
       <argument type='datetime' />
@@ -1320,7 +1320,9 @@
       </local-type>
     </format-column-definition>
     <format-date-literal formula="CAST('%1' AS DATE)"  format='yyyy-MM-dd' />
-    <format-datetime-literal formula="CAST('%1' AS TIMESTAMP)" format='yyyy-MM-dd HH:mm:ss' />
+    <format-datetime-literal formula="CAST('%1' AS TIMESTAMP)" format='yyyy-MM-dd HH:mm:ss.SSS' />
+    <format-false literal='false' predicate='false' />
+    <format-if-then-else value='IF' />
     <format-is-distinct value='Operator' />
     <format-null>
       <local-type name='bool' value='CAST(NULL AS BOOLEAN)' />
@@ -1330,6 +1332,7 @@
       <local-type name='date' value='CAST(NULL AS DATE)' />
       <local-type name='datetime' value='CAST(NULL AS TIMESTAMP)' />
     </format-null>
+    <format-order-by value='AliasDirection' />
     <format-select>
       <part name='Select' value='SELECT %1' />
       <part name='Into' value='INTO %1' />
@@ -1341,18 +1344,21 @@
       <part name='Top' value='LIMIT %1' />
       <part name='TopSampleRecords' value='ORDER BY rand()\nLIMIT %1' />
     </format-select>
-    <format-simple-case value='BalancedIIF' />
-    <format-true value='true' />
+    <format-simple-case value='BalancedIF' />
+    <format-string-literal value='Standard' />
+    <format-true literal='true' predicate='true' />
     <id-allowed-characters value='_abcdefghijklmnopqrstuvwxyz0123456789' />
     <id-case value='Lower' />
     <id-max-length value='63' />
     <id-quotes value='`' />
+    <start-of-week-format value='String' />
     <supported-joins>
-      <part name='Inner' />
-      <part name='Left' />
-      <part name='Right' />
-      <part name='Full' />
+      <part name='Inner' value='JOIN'/>
+      <part name='Left' value='LEFT OUTER JOIN'/>
+      <part name='Right' value='RIGHT OUTER JOIN'/>
+      <part name='Full' value='FULL OUTER JOIN'/>
     </supported-joins>
   </sql-format>
 
 </dialect>
+
