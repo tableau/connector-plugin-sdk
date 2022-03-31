@@ -132,16 +132,6 @@ See [resolvers](https://github.com/tableau/connector-plugin-sdk/tree/master/samp
 
 ## C++ objects and methods available to your JavaScript
 
-### Logging
-
-You can write to the Tableau log file (tabprotosrv.txt). Writing to the log file requires Debug level logging (-DLogLevel=Debug).
-
-Use care when logging so that you don’t expose sensitive information like passwords and other authentication information.
-
-    logging.Log("Hi")
-
----
-
 ### Connection Helper
 
 _Attribute names_
@@ -172,6 +162,18 @@ _Functions_
 
 Format the attributes as 'key=value'. By default, some values are escaped or wrapped in curly braces to follow the ODBC standard, but you can also do it here if needed.
 
+    String GetProductName();
+
+Returns the Tableau product name. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Possible values are: `TableauDesktop, TableauServer, TableauPrep, TableauBridge, Tableau`
+
+    String GetProductVersion();
+
+Returns the Tableau version as a string in Version.MaintenanceRelease format. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Example value: `2022.1.3` 
+
+    String GetPlatform();
+
+Returns the name of the operating system Tableau is running on. Possible values are: `win, mac, linux`
+
     bool MatchesConnectionAttributes(Object attr, Object inKey);
 
 Invokes attribute matching code.
@@ -179,13 +181,6 @@ Invokes attribute matching code.
     Map ParseODBCConnectString(String odbcConnectString);
 
 Returns a map of the key value pairs defined in the ```odbc-connect-string-extras``` string.
-
-    String GetPlatform();
-
-Returns the name of the operating system Tableau is running on. Possible values are:
-- win
-- mac
-- linux
 
 Example:
 
@@ -230,8 +225,11 @@ Example:
 ### ConnectionNormalizer and ConnectionMatcher JavaScript files
 The JavaScript files for connection normalizer and connection matcher are deprecated as of Tableau 2020.3. In Tableau 2021.2 support was removed and an error will occur when loading the connector. The element `<script file="fileName.js"/>`, which was added inside the `<connection-matcher>` and `<connection-normalizer>` element, and the `<connection-matcher>` element itself, are the deprecated APIs. The `<connection-normalizer>` element is still supported in the connectionResolver.tdr file as shown in the connection-normalizer section above.
 
-### SetImpersonateAttributes connection helper
+### `SetImpersonateAttributes` connection helper
 This connection helper is deprecated as of Tableau 2020.1, since we always set impersonate attributes for all connectors. Trying to use this in a JavaScript component will throw an error when attempting to connect.
 
-### <setImpersonateAttributes/> XML tag
-This XML tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
+### `<setImpersonateAttributes/>` XML tag
+`<setImpersonateAttributes/>` xml tag is deprecated as of Tableau 2020.1, though it has not yet been removed from the XSD. Since we always set this property starting with 2020.1, this tag is redundant.
+
+### Logging
+`logging.Log()` JavaScript function is deprecated in Tableau 2022.1 and maintainence releases starting in April 2022.  Any call to this function will log message "Connector SDK logging.log() function is deprecated." in the log file.
