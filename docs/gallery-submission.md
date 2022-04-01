@@ -49,7 +49,7 @@ Join our [Tableau Developer Program](https://www.tableau.com/developer) to gain 
 
 ### Step 2: Build your integration
 
-After you've signed up for our developer program, use the information in this Connector SDK documentation to get started building a connector. If you have issues with the SDK or need help, submit an issue through our [GitHub issues page](https://github.com/tableau/connector-plugin-sdk/issues).
+After you've signed up for our developer program, use the information in this Connector SDK documentation to get started building a connector. If you have issues with the SDK or need help, submit an issue through our [GitHub issues page](https://github.com/tableau/connector-plugin-sdk/issues) and include the [required artifacts](https://tableau.github.io/connector-plugin-sdk/docs/bug-artifacts) with the issue.
 
 Be sure to test your connector with the [TDVT suite](https://tableau.github.io/connector-plugin-sdk/docs/tdvt) to ensure that your connector meets our guidelines for connector functionality.
 
