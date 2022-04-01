@@ -16,18 +16,26 @@ Tableau loads connectors by directory in the following order:
 Starting in 2019.4, you can load packaged connectors (otherwise known as TACO files). To use a connector in earlier Tableau versions, or to run an unpackaged connector, see [Run Your "Under Development" Connector]({{ site.baseurl }}/docs/run-taco#run-your-under-development-connector) below.
 
 ## Run a packaged connector in Tableau Desktop
-1. Copy your packaged connector file (with a .taco filename extension) into your My Tableau Repository/Connectors directory.
+1. Copy the .taco file into your My Tableau Repository/Connectors directory.
+    - Windows: `C:\Users\\[Windows User]\Documents\My Tableau Repository\Connectors`
+    - macOS: `/Users/[user]/Documents/My Tableau Repository/Connectors`
 1. Launch Tableau Desktop.
 
 ## Run a packaged connector in Tableau Server
 ### Option 1
 For each machine:
-1. Drop your `.taco` file into the following directoy:
+1. Drop your `.taco` file into the following directory:
     - `[Tableau_Server_Installation_Directory]/data/tabsvc/vizqlserver/Connectors`
 1. To enable your connector for Prep, you also need to add your taco to the following locations:
     - Tableau Prep Conductor: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowprocessor/Connectors`
     - Tableau Flow Web Authoring: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowqueryservice/Connectors`
 1. Restart your server.
+
+## Run a packaged connector in Tableau Prep Builder
+1. Copy the .taco file to your My Tableau Prep Repository\Connectors directory:
+    - Windows: `C:\Users\\[Windows User]\Documents\My Tableau Prep Repository\Connectors`
+    - macOS: `/Users/[user]/Documents/My Tableau Prep Repository/Connectors`
+1. Launch Tableau Prep Builder.
 
 
 ### Option 2
