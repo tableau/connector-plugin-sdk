@@ -3,7 +3,8 @@ title: Tableau Server Installation Instructions Template
 ---
 
 1. Download the Connector file (.taco).
-2. Move the .taco file here: 
+2. Move the .taco file here:
+   -  Tableau Server: `[Tableau_Server_Installation_Directory]/data/tabsvc/vizqlserver/Connectors`
    -  Tableau Prep Conductor: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowprocessor/Connectors`
    -  Tableau Flow Web Authoring: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowqueryservice/Connectors`
 1. For a multi-node Tableau server, copy the Connector file (.taco) in the correct folder for each server node.
