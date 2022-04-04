@@ -322,7 +322,7 @@ Example:
 The identifier generation can include restrictions by character, casing and length. This is primarily used in table name mangling. 
 
 **id-allowed-characters** <br/>
-Comprehensive list of characters which can be used in identifiers. Any character that isn't allowed is replaced with `_`.
+Comprehensive list of characters which can be used in identifiers. Any character that isn't allowed is replaced with `_`. There is no restriction by default.
 
 **id-case** <br/>
 Normalize the identifier casing. If this element is omitted the identifier casing is not changed.
