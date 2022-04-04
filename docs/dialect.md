@@ -317,3 +317,27 @@ Example:
 
   Temporary table usage is also defined by capabilities in the manifest file.
   See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
+
+### Identifier Mangling:
+The identifier generation can include restrictions by character, casing and length. This is primarily used in table name mangling. 
+
+**id-allowed-characters** <br/>
+Comprehensive list of characters which can be used in identifiers. Any character that isn't allowed is replaced with `_`.
+
+**id-case** <br/>
+Normalize the identifier casing. If this element is omitted the identifier casing is not changed.
+The value for this property can be:
+  - __Upper__
+      Database expects uppercase identifiers
+  - __Lower__
+      Database expects lowercase identifiers
+
+**id-max-length** <br/>
+Restrict the maximum identifier length. There is no limit by default.
+
+Example:
+  ```xml
+    <id-allowed-characters value='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_' />
+    <id-case value='Lower' />
+    <id-max-length value='64' />
+ ```
