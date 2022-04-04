@@ -2,6 +2,8 @@
 title: Run Your Connector
 ---
 
+Note: the below is intended for connector developers. Customer-facing documentation is available [here](https://help.tableau.com/current/pro/desktop/en-us/examples_connector_sdk.htm).
+
 # Load order and class name collisions
 
 If a connector has the same class as a connector that has already been registered, the new connector will be rejected. This means that connectors loaded first have precedence when two connectors share the same class name.
@@ -21,8 +23,14 @@ Starting in 2019.4, you can load packaged connectors (otherwise known as TACO fi
     - macOS: `/Users/[user]/Documents/My Tableau Repository/Connectors`
 1. Launch Tableau Desktop.
 
+## Run a packaged connector in Tableau Prep Builder
+1. Copy the .taco file to your My Tableau Prep Repository\Connectors directory:
+    - Windows: `C:\Users\\[Windows User]\Documents\My Tableau Prep Repository\Connectors`
+    - macOS: `/Users/[user]/Documents/My Tableau Prep Repository/Connectors`
+1. Launch Tableau Prep Builder.
+
 ## Run a packaged connector in Tableau Server
-### Option 1
+### Option 1 (Preferred)
 For each machine:
 1. Drop your `.taco` file into the following directory:
     - `[Tableau_Server_Installation_Directory]/data/tabsvc/vizqlserver/Connectors`
@@ -31,14 +39,7 @@ For each machine:
     - Tableau Flow Web Authoring: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowqueryservice/Connectors`
 1. Restart your server.
 
-## Run a packaged connector in Tableau Prep Builder
-1. Copy the .taco file to your My Tableau Prep Repository\Connectors directory:
-    - Windows: `C:\Users\\[Windows User]\Documents\My Tableau Prep Repository\Connectors`
-    - macOS: `/Users/[user]/Documents/My Tableau Prep Repository/Connectors`
-1. Launch Tableau Prep Builder.
-
-
-### Option 2
+### Option 2 (For in-development connectors)
 1. Create a directory for Tableau connectors. This needs to be the same path on each machine, and on the same drive as the server is installed on. For example:
 `C:\tableau_connectors`
 1. Copy your packaged connector file (with a .taco filename extension) into  the folder your created on each node.
