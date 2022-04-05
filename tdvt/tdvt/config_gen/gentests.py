@@ -131,7 +131,7 @@ def get_modified_line(line, attrs, fields, field_name_map):
     new_line = new_line.replace('$Staples$', staples_table_name)
     return new_line
 
-def process_test_file(filename, ds_registry, output_dir, *col_names: Tuple[List]):
+def process_test_file(filename, ds_registry, output_dir, col_names: List[str]):
     if debug:
         print("Processing " + filename)
 
@@ -229,9 +229,13 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
     base_output_dir = output_dir
     create_dir(base_output_dir)
 
+    # TODO: Logic will go here to look at ds_registry and either use calcs/staples or use custom table;
+    #       that table or those tables will be used in process_test_files below.
     calcs_fields = CALCS_FIELDS
 
     staples_fields = STAPLES_FIELDS
+
+    fields = [calcs_fields, staples_fields]
 
     # Go through input and top level subdirs. Create those in the output and then process the files.
     for root, dirs, files in os.walk(input_dir):
@@ -245,4 +249,4 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
                 clean_create_dir(output_dir)
                 for input_root, input_dirs, input_files in os.walk(input_dir):
                     for input_filename in input_files:
-                        process_test_file(os.path.join(input_root, input_filename), ds_registry, output_dir, calcs_fields, staples_fields)
+                        process_test_file(os.path.join(input_root, input_filename), ds_registry, output_dir, fields)
