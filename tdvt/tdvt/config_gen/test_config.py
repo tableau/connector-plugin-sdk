@@ -280,8 +280,8 @@ class TestConfig(object):
     def __init__(self, dsname, logical_config_name, run_time_config=None):
         self.dsname = dsname
         self.logical_config_name = logical_config_name
-        self.calcs_tds = self.get_tds_name('cast_calcs.')
-        self.staples_tds = self.get_tds_name('Staples.')
+        # self.calcs_tds = self.get_tds_name('cast_calcs.')  # TODO: these get set but never used?
+        # self.staples_tds = self.get_tds_name('Staples.')  # TODO: really?
         self.logical_test_set = []
         self.expression_test_set = []
         self.smoke_test_set = []
