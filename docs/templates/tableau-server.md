@@ -3,9 +3,9 @@ title: Tableau Server Installation Instructions Template
 ---
 
 1. Download the Connector file (.taco).
-2. Move the .taco file here: 
-   -  Tableau Prep Conductor: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowprocessor/Connectors`
-   -  Tableau Flow Web Authoring: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowqueryservice/Connectors`
+2. Move the .taco file here:
+    - Windows: `C:\Program Files\Tableau\Connectors`
+    - Linux: `/opt/tableau/connectors`
 1. For a multi-node Tableau server, copy the Connector file (.taco) in the correct folder for each server node.
 3. Start Tableau and under **Connect**, select the `[Connector Name]` connector. (**Note**: You will be prompted if the driver is not yet installed.)
 4. Go to the [Driver Download](https://www.driver-download-link-here.com) page.
