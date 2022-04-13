@@ -10,7 +10,8 @@ If a connector has the same class as a connector that has already been registere
 
 Tableau loads connectors by directory in the following order:
 1. Built-in Tableau connectors
-1. Connectors located in "My Tableau Repository/Connectors"
+1. Connectors located in ``C:\Program Files\Tableau\Connectors` (Windows) or `/opt/tableau/connectors` (Linux)
+1. Connectors located in `My Tableau Repository/Connectors`
 1. (Optional) Connectors in the dev path specified by `-DConnectPluginsPath`
 
 # Run Your Packaged Connector (TACO file)
@@ -33,10 +34,17 @@ Starting in 2019.4, you can load packaged connectors (otherwise known as TACO fi
 ### Option 1 (Preferred)
 For each machine:
 1. Drop your `.taco` file into the following directory:
+    - Windows: `C:\Program Files\Tableau\Connectors`
+    - Linux: `/opt/tableau/connectors`
+1. Restart Tableau Server
+
+### Option 2
+For each machine:
+1. Drop your `.taco` file into the following directory:
     - `[Tableau_Server_Installation_Directory]/data/tabsvc/vizqlserver/Connectors`
 1. To enable your connector for Prep, you also need to add your taco to the following locations:
     - Tableau Prep Conductor: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowprocessor/Connectors`
-    - Tableau Flow Web Authoring: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowqueryservice/Connectors`
+    - Tableau Flow Web Authoring: `[Tableau_Server_Installation_Directory]/data/tabsvc/flowqueryservice/Connectors` or `[Tableau_Server_Installation_Directory]/data/tabsvc/flowminerva/Connectors/`, depending on which directory exists
 1. Restart your server.
 
 ### Option 2 (For in-development connectors)
