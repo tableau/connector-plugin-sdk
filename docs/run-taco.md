@@ -6,7 +6,7 @@ Note: the below is intended for connector developers. Customer-facing documentat
 
 # Load order and class name collisions
 
-## Tableau 2022.2 and above
+## Tableau 2022.2 and newer
 If a connector has the same class as a connector that has already been registered, Tableau will load the connector with the highest connector version number (the `plugin-version` attribute in the connector manifest).
 
 If both connectors have the same version, connector loaded first will have precedence. See the load order below.
