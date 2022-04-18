@@ -7,10 +7,9 @@ Note: the below is intended for connector developers. Customer-facing documentat
 # Load order and class name collisions
 
 ## Tableau 2022.2 and above
-If a connector has the same class as a connector that has already been registered, the new connector will be rejected. This means that connectors loaded first have precedence when two connectors share the same class nameTableau will load the connector with the highest connector version number (the plugin-version attribute in the connector manifest).
+If a connector has the same class as a connector that has already been registered, Tableau will load the connector with the highest connector version number (the `plugin-version` attribute in the connector manifest).
 
-If both connectors have the same version, the newer connector will be rejected. This means that connectors loaded first have precedence when two connectors share the same class name.
-
+If both connectors have the same version, connector loaded first will have precedence. See the load order below.
 ## Tableau versions older than 2022.2
 If a connector has the same class as a connector that has already been registered, the new connector will be rejected. This means that connectors loaded first have precedence when two connectors share the same class name.
 
