@@ -15,6 +15,7 @@
 
 
 import io
+import logging
 import shutil
 import subprocess
 import unittest
