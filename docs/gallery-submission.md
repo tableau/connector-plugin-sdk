@@ -134,7 +134,7 @@ To make things easy, we created templates for your custom installation instructi
 
 #### Manifest file
 
-Upload the manifest file (.taco) for your connector. Information in this file should match the information submitted on the form. TACO files must be [signed by a certificate authority]({{ site.baseurl }}/docs/log-entries) to be accepted. The certificate must be signed with a timestamp that will not expire during the support window for that release.
+Upload the TACO file for your connector. Information in this file should match the information submitted on the form. TACO files must be [signed by a certificate authority]({{ site.baseurl }}/docs/package-sign#sign-your-packaged-connector-with-jarsigner) to be accepted. The certificate must be signed with a timestamp that will be valid for the next 5 years.
 
 #### Terms of service
 
