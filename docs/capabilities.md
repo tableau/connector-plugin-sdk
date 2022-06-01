@@ -244,6 +244,7 @@ CAP_ODBC_SUPPORTS_LONG_DATA_BULK | Set to 'yes' if driver can fetch multiple lon
 CAP_ODBC_SUPPORTS_LONG_DATA_ORDERED | Set to 'yes' if driver requires long-data columns to come after non-long-data ones | no | no | 
 CAP_ODBC_SUPPRESS_CATALOG_NAME | Set 'yes' to suppress passing catalog name for SQLTables, SQLPrimaryKeys, SQLForeignKeys, SQLStatistics calls | &ndash; | &ndash;
 CAP_ODBC_SUPPRESS_ENUMERATE_SCHEMA_WITHOUT_CATALOG | Set 'yes' to suppress enumerating schemas without a valid catalog. | &ndash; | &ndash;
+CAP_ODBC_SUPPRESS_INFO_SCHEMA_SCHEMAS | Set to 'yes' to prevent schemas from "information_schema" schema from being returned by EnumerateSchemas | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES | Set to 'yes' to prevent tables from "information_schema" schema from being returned by EnumerateTables | &ndash; | &ndash; 
 CAP_ODBC_SUPPRESS_PG_TEMP_SCHEMA_TABLES | Set to 'yes' to prevent tables from "pg_temp" schema from being returned by EnumerateTables | &ndash; | &ndash;  
 CAP_ODBC_SUPPRESS_PREPARED_QUERY_FOR_ALL_COMMAND_QUERIES | Set to 'yes' to execute all commands directly (that is, no prepared statement). | &ndash; | &ndash; 
