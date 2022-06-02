@@ -85,3 +85,7 @@ STAPLES_FIELDS = [
     '[PID]',
     '[Market Segment]'
 ]
+
+DATA_TYPES = [
+    ''
+]

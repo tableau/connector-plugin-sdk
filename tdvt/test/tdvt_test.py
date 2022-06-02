@@ -33,6 +33,8 @@ from tdvt.config_gen.test_config import ExpressionTestSet, LogicalTestSet, RunTi
 from tdvt.test_results import *
 from tdvt.tabquery import *
 
+from tdvt.tdvt.config_gen.test_creator import TestCreator
+
 
 class DiffTest(unittest.TestCase):
     def test_diff(self):
@@ -965,6 +967,12 @@ class TabQueryPathTest(unittest.TestCase):
         self.assertTrue(t2.get_path('darwin') == 'mac')
         self.assertTrue(t2.get_path('linux') == 'linux')
         self.assertTrue(t2.get_path('windows') == 'win')
+
+
+class TestCreatorTest(unittest.TestCase):
+    def test_csv_path(self):
+        bad_test_creator = TestCreator('bad.csv', './does-not-exist', 'bad-ds')
+        self.assertFalse(bad_test_creator.check_csv_exists())
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
