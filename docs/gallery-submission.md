@@ -52,7 +52,7 @@ Be sure to test your connector with [the TDVT suite]({{ site.baseurl }}/docs/tdv
 
 ### Step 3: Join the Tableau Partner Network
 
-After you’ve built your integration and are passing 90% of TDVT results, join the Technology Track on our [Tableau Partner Network (TPN)](https://www.tableau.com/partners/become). By joining the TPN, you allow us to discuss confidential information with you and enable us to promote your products through our marketing channels, like the Tableau Exchange.
+Join the Technology Track on our [Tableau Partner Network (TPN)](https://www.tableau.com/partners/become) after you’ve built your integration and are passing 90% of TDVT results (all tests [marked as required](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/tdvt/metadata/priority.csv) should pass or should be acknowledged as not supported or a known bug for the underlying data source). By joining the TPN, you allow us to discuss confidential information with you and enable us to promote your products through our marketing channels, like the Tableau Exchange.
 
 In order to be approved to submit your connector to the Tableau Exchange, complete the following tasks with the TPN. 
 
@@ -132,7 +132,7 @@ To make things easy, we created templates for your custom installation instructi
 * [Tableau Prep Builder Installation Instructions JDBC Template](./templates/tableau-prep-jdbc-template.md)
 * [Tableau Server Installation Instructions Template](./templates/tableau-server.md)
 
-#### Manifest file
+#### TACO file
 
 Upload the TACO file for your connector. Information in this file should match the information submitted on the form. TACO files must be [signed by a certificate authority]({{ site.baseurl }}/docs/package-sign#sign-your-packaged-connector-with-jarsigner) to be accepted. The certificate must be signed with a timestamp that will be valid for the next 5 years.
 
@@ -192,7 +192,7 @@ Provide the unzipped source files for your connector so we can review each file.
 
 TDVT tests can be skipped for extract-only connectors.
 
-In most cases, TDVT should be passing more than 90% of test cases to be accepted.
+In most cases, TDVT should be passing more than 90% of test cases to be accepted. All tests [marked as required](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/tdvt/metadata/priority.csv) should pass or should be acknowledged as not supported or a known bug for the underlying data source.
 
 
 #### QA artifacts
