@@ -31,7 +31,7 @@ Starting in 2019.4, you can load packaged connectors (otherwise known as TACO fi
 1. Launch Tableau Prep Builder.
 
 ## Run a packaged connector in Tableau Server
-### Option 1 (Preferred)
+### Option 1 (Preferred, available in Tableau 2021.2 and newer)
 For each machine:
 1. Drop your `.taco` file into the following directory:
     - Windows: `C:\Program Files\Tableau\Connectors`
