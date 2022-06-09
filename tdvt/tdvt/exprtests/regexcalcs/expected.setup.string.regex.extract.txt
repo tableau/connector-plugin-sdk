@@ -1,8 +1,12 @@
 <results>
   <test name='REGEXP_EXTRACT([str0], &apos;(E.{3})&apos;)'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(E.{3})&apos;))[1]) AS &quot;TEMP(Test)(2625345313)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      42.000&#10;    </query-time>
     <table>
       <schema>
-        <column>[cast_calcs.bigquery].[TEMP(Test)(2625345313)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2625345313)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -12,6 +16,276 @@
       </tuple>
       <tuple>
         <value>&quot;ECHN&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT([key], &quot;(key)&quot;) //&quot;key&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;key&quot;, &apos;(key)&apos;))[1]) AS &quot;TEMP(Test)(896336668)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      44.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(896336668)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;key&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT([str0], &quot;(z)&quot;) //&quot;Null&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(z)&apos;))[1]) AS &quot;TEMP(Test)(3326887800)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      43.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3326887800)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;toyota&quot;, &quot;(o)&quot;) //&quot;o&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;toyota&apos;, &apos;(o)&apos;))[1]) AS &quot;TEMP(Test)(1576583407)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      45.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1576583407)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;o&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT([Num0], &quot;(0{2})&quot;) //&quot;00&quot;'>
+    <sql>
+      &#10;    </sql>
+    <query-time>
+      0.000&#10;    </query-time>
+    <error>
+      Reference to undefined field [Num0].&#10;Perhaps you meant [num0]?&#10;&#10;    </error>
+    <error-type>
+      Invalid Expression&#10;    </error-type>
+    <table>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;aaaa&quot;, &quot;(a{3})&quot;) //&quot;aaa&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;aaaa&apos;, &apos;(a{3})&apos;))[1]) AS &quot;TEMP(Test)(3304555633)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      44.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3304555633)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;aaa&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;([a-z0-9])&quot;) //&quot;a&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;abcdefghijklmnopqrstuvwxyz0123456789&apos;, &apos;([a-z0-9])&apos;))[1]) AS &quot;TEMP(Test)(3147127749)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      49.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3147127749)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;a&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;Abcd&quot;, &quot;(^a)&quot;) //&quot;Null&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;Abcd&apos;, &apos;(^a)&apos;))[1]) AS &quot;TEMP(Test)(745928603)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      45.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(745928603)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;Abcd&quot;, &quot;(^A)&quot;) //&quot;A&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;Abcd&apos;, &apos;(^A)&apos;))[1]) AS &quot;TEMP(Test)(2637813279)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      45.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2637813279)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;A&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;abcd&quot;, &quot;(a|b)&quot;) //&quot;a&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;abcd&apos;, &apos;(a|b)&apos;))[1]) AS &quot;TEMP(Test)(2786039392)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      42.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2786039392)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;a&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT([str0], &quot;(F{1,2})&quot;) //&quot;FF&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(F{1,2})&apos;))[1]) AS &quot;TEMP(Test)(910645776)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      52.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(910645776)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;F&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;FF&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;orange brooklyn&quot;, &quot;(o{1,2})&quot;) //&quot;o&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;orange brooklyn&apos;, &apos;(o{1,2})&apos;))[1]) AS &quot;TEMP(Test)(2511988120)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      46.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2511988120)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;o&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;abcde&quot;, &quot;(e$)&quot;) //&quot;e&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;abcde&apos;, &apos;(e$)&apos;))[1]) AS &quot;TEMP(Test)(2751135384)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      44.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2751135384)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;Cincinnati Outlaw Reds&quot;, &quot;([a-zA-Z])&quot;) //&quot;C&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;Cincinnati Outlaw Reds&apos;, &apos;([a-zA-Z])&apos;))[1]) AS &quot;TEMP(Test)(3254563272)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      47.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3254563272)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;C&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;Altoona bear cub&quot;, &quot;([^abc])&quot;) //&quot;A&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;Altoona bear cub&apos;, &apos;([^abc])&apos;))[1]) AS &quot;TEMP(Test)(3489372167)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      45.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3489372167)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;A&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;1-425-609-7808&quot;, &quot;(\d)&quot;) //&quot;1&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;1-425-609-7808&apos;, E&apos;(\\d)&apos;))[1]) AS &quot;TEMP(Test)(2843854345)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      43.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2843854345)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;) //&quot;support@xyz.com&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&apos;, E&apos;([a-z]*@[a-z]*[.][a-z]*)(\\s.[a-z])&apos;))[1]) AS &quot;TEMP(Test)(4283320813)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      42.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4283320813)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;support@xyz.com&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;) //&quot;abc&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;abc123ed567&apos;, &apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;))[1]) AS &quot;TEMP(Test)(4138226113)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      41.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4138226113)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abc&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;) //&quot;tableau&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;([a-z]{7})([0-9]{3})&apos;))[1]) AS &quot;TEMP(Test)(62650754)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      47.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(62650754)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;tableau&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;) //&quot;123&quot;'>
+    <sql>
+      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;[a-z]{7}([0-9]{3})&apos;))[1]) AS &quot;TEMP(Test)(3603944780)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
+    <query-time>
+      79.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3603944780)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;123&quot;</value>
       </tuple>
     </table>
   </test>
