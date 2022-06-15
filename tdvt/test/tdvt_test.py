@@ -1026,10 +1026,10 @@ class TestCreatorTest(unittest.TestCase):
 
     def test_bad_csv_path(self):
         bad_test_creator = TestCreator('bad.csv', 'bad-ds')
-        self.assertFalse(bad_test_creator.check_csv_exists())
+        self.assertFalse(bad_test_creator._check_csv_exists())
 
     def test_csv_path(self):
-        self.assertTrue(self.test_creator.check_csv_exists())
+        self.assertTrue(self.test_creator._check_csv_exists())
 
     def test_csv_to_list_returns_all_cols(self):
         columns = self.test_creator._csv_to_lists()

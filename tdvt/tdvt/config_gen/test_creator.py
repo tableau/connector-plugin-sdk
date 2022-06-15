@@ -38,6 +38,24 @@ class TestCreator:
     def _csv_column_checker(self, column):
         pass
 
+    def parse_csv(self):
+        """
+        This method needs to:
+          1. Check the csv file exists
+          2. Check the csv has correct headers
+          3. Dump columns into appropriate buckets (col name, type, all remaining data)
+        :None:
+        """
+        if self._check_csv_exists():
+            logging.info("Source CSV file found.")
+        else:
+            print("%f does not exist.".format(self.csv_file))
+            sys.exit(1)
+
+        # validate csv
+
+        # get data from csv into list of lists
+
     def write_expecteds_to_file(self, all_test_results: List):
         output_file_name = 'expected.setup.' + self.datasource_name + '_columns.txt'
         output_path = Path(self.output_dir) / Path(output_file_name)
@@ -45,7 +63,7 @@ class TestCreator:
             print("writing to {}".format(output_path))
             out.write("<results>\n")
             for item in all_test_results:
-                affix = self.return_expected_affix(item)
+                affix = self._return_expected_affix(item[1])
                 out.write("  <test name='{}'>\n".format(item[0]))  # TODO: we should make this a named tuple, not list
                 out.write("    <table>\n")
                 out.write("      <schema>\n")
@@ -59,17 +77,14 @@ class TestCreator:
                 out.write("  </test>\n".format(item[0]))
             out.write("</results>")
 
-    def _write_setup_file(self):
-        pass
-
-    def return_expected_affix(self, col: List) -> Optional[str]:
+    def _return_expected_affix(self, col: List) -> Optional[str]:
         """
         Uses a dict from constants to return any affix needed to format a result correctly.
         """
         col_type = col[1]
         return DATA_TYPES.get(col_type, None)
 
-    def _format_output_list_items(self, col: List, affix: str=None) -> List:
+    def _format_output_list_items(self, col: List, affix: str = None) -> List:
         """
         Takes list of results and appends affixes to each result, handling null and empty string values
         """
@@ -106,39 +121,15 @@ class TestCreator:
 
         return sorted_results
 
-
-
-    def check_csv_exists(self) -> bool:
+    def _check_csv_exists(self) -> bool:
         if self.csv_file.is_file():
             return True
         else:
             logging.error("CSV file does not exist at indicated path.")
             return False
 
-    def parse_csv(self):
-        """
-        This method needs to:
-          1. Check the csv file exists
-          2. Check the csv has correct headers
-          3. Dump columns into appropriate buckets (col name, type, all remaining data)
-        :None:
-        """
-        if self.check_csv_exists():
-            logging.info("Source CSV file found.")
-        else:
-            logging.warning("Exiting because CSV did not exist.")
-            print("%f does not exist.".format(self.csv_file))
-            sys.exit(1)
-
-        input_csv_columns: Dict[str, List[str]] = {}
-        # k:v = col_name: [type: str, [values]]
-
-        with open(self.csv_file, 'r') as csv_file:
-
-            for column in csv_file:
-                self._csv_column_checker(column)
-
-        # Open the CSV, check for headers, dump data for each col
+    def _write_setup_file(self):
+        pass
 
 
 class ExpectedCreator:
