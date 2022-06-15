@@ -25,23 +25,16 @@ class TestCreator:
         pass
 
     def _csv_to_lists(self) -> List:
-        with open(self.csv_file, newline='') as file:
-            reader = csv.reader(file)
-
-            headers = next(reader)
-            col_data_types = next(reader)
-
+        with open(self.csv_file, 'r') as f:
+            headers = f.readline().split(',')
             columns = []
-
             for header in headers:
-                columns.append([header])
-
-            for i, dt in enumerate(col_data_types):
-                columns[i].append(dt)
-
-            for row in reader:
-                for j, item in enumerate(row):
-                    columns[j].append(item if item else '%null%')
+                columns.append([header.replace('"', '')])
+            for i, row in enumerate(f.readlines()):
+                for j, item in enumerate(row.split(',')):
+                    if not item:
+                        item = '%null%'
+                    columns[j].append(item.replace('"', ''))
 
         return columns
 

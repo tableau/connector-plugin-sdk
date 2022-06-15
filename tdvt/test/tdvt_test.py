@@ -1034,7 +1034,48 @@ class TestCreatorTest(unittest.TestCase):
     def test_csv_to_list(self):
         columns = self.test_creator._csv_to_lists()
         self.assertEqual(
-            columns, []
+            columns[0],
+            ['key',
+             'string',
+             'key00',
+             'key01',
+             'key02',
+             'key03',
+             'key04',
+             'key05',
+             'key06',
+             'key07',
+             'key08',
+             'key09',
+             'key10',
+             'key11',
+             'key12',
+             'key13',
+             'key14',
+             'key15',
+             'key16']
+        )
+        self.assertEqual(
+            columns[25],
+            ['datetime1',
+             'datetime',
+             '%null%',
+             '%null%',
+             '',
+             '',
+             '',
+             '%null%',
+             '',
+             '',
+             '',
+             '%null%',
+             '',
+             '%null%',
+             '',
+             '',
+             '%null%',
+             '',
+             '']
         )
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
