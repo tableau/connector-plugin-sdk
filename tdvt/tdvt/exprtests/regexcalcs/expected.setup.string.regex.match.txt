@@ -1,4 +1,35 @@
 <results>
+<test name='REGEXP_MATCH([str0], &apos;OFFICE&apos;)'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;str0&quot; ~ &apos;OFFICE&apos;) AS &quot;TEMP(Test)(252242495)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      47.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(252242495)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH([str0], &apos;Z&apos;)'>
+    <sql>
+      SELECT (&quot;Calcs&quot;.&quot;str0&quot; ~ &apos;Z&apos;) AS &quot;TEMP(Test)(253222878)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      45.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(253222878)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
   <test name='REGEXP_MATCH(&quot;abc&quot;, &quot;abc&quot;) //true'>
     <sql>
       SELECT (&apos;abc&apos; ~ &apos;abc&apos;) AS &quot;TEMP(Test)(1791381358)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>

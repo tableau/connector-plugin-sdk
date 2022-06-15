@@ -658,18 +658,6 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 10) //&quot;No more than 9 capture groups can be specified.&quot;'>
-    <sql>
-      &#10;    </sql>
-    <query-time>
-      0.000&#10;    </query-time>
-    <error>
-      No more than 9 capture groups can be specified.&#10;&#10;    </error>
-    <error-type>
-      Invalid Expression&#10;    </error-type>
-    <table>
-    </table>
-  </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, -1) //&quot;Null&quot;'>
     <sql>
       SELECT NULL AS &quot;TEMP(Test)(364391053)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
@@ -738,18 +726,6 @@
       <tuple>
         <value>%null%</value>
       </tuple>
-    </table>
-  </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 10) //&quot;No more than 9 capture groups can be specified.&quot;'>
-    <sql>
-      &#10;    </sql>
-    <query-time>
-      0.000&#10;    </query-time>
-    <error>
-      No more than 9 capture groups can be specified.&#10;&#10;    </error>
-    <error-type>
-      Invalid Expression&#10;    </error-type>
-    <table>
     </table>
   </test>
 </results>

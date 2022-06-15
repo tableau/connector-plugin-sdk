@@ -2,7 +2,7 @@ REGEXP_EXTRACT([str0], '(E.{3})')
 REGEXP_EXTRACT([key], "(key)") //"key"
 REGEXP_EXTRACT([str0], "(z)") //"Null"
 REGEXP_EXTRACT("toyota", "(o)") //"o"
-REGEXP_EXTRACT([Num0], "(0{2})") //"00"
+REGEXP_EXTRACT([num0], "(0{2})") //"00"
 REGEXP_EXTRACT("aaaa", "(a{3})") //"aaa"
 REGEXP_EXTRACT("abcdefghijklmnopqrstuvwxyz0123456789", "([a-z0-9])") //"a"
 REGEXP_EXTRACT("Abcd", "(^a)") //"Null"

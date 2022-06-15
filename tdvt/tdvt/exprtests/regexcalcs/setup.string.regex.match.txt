@@ -1,3 +1,5 @@
+REGEXP_MATCH([str0], 'OFFICE')
+REGEXP_MATCH([str0], 'Z')
 REGEXP_MATCH("abc", "abc") //true
 REGEXP_MATCH("ABC", "z") //false
 REGEXP_MATCH("toyota", "0") //false
