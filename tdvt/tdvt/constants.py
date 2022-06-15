@@ -86,6 +86,7 @@ STAPLES_FIELDS = [
     '[Market Segment]'
 ]
 
-DATA_TYPES = [
-    ''
-]
+DATA_TYPES = {
+    'string': '&quot;',
+    'datetime': '#',
+}
