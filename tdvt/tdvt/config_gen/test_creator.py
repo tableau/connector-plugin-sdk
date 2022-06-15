@@ -3,62 +3,115 @@ TestCreator creates test cases from a csv file of expected types and values
 ExpectedCreator creates expecteds for an existing test case.
 """
 
-
 import csv, logging, sys
+import os
 
 from pathlib import Path
 from typing import Dict, List, Optional
 
 from ..constants import DATA_TYPES
 
-
 EMPTY_CELL = '%null%'
 
-class TestCreator:
-    csv_file: str
-    output_dir: Optional[str]=None
-    datasource_name: str
 
-    def __init__(self, csv_file, output_dir, datasource_name):
-        self.csv_file: Path = csv_file
-        self.output_dir: Path = output_dir
+class TestCreator:
+
+    def __init__(self, csv_file, datasource_name, output_dir=os.getcwd()):
+        self.csv_file: Path = Path(csv_file)
         self.datasource_name: str = datasource_name
+        self.output_dir: str = output_dir
 
     def _csv_column_checker(self, column):
         pass
 
-    def _csv_to_lists(self):
+    def _csv_to_lists(self) -> List:
         with open(self.csv_file, newline='') as file:
             reader = csv.reader(file)
 
             headers = next(reader)
-
-            num_of_headers = len(headers)
+            col_data_types = next(reader)
 
             columns = []
 
-            for i in range(num_of_headers):
-                columns.append([])
+            for header in headers:
+                columns.append([header])
 
-            for i, row in enumerate(reader):
-                for i, item in enumerate(row):
-                    columns[i].append()
+            for i, dt in enumerate(col_data_types):
+                columns[i].append(dt)
 
-            dict_out = {
-                header: None for header in headers
-            }
+            for row in reader:
+                for j, item in enumerate(row):
+                    columns[j].append(item if item else '%null%')
 
-            for i, h in enumerate(headers):
-                dict_out[h] = columns[i]
+        return columns
 
-    def _test_expected_formatter(self, col: List):
+    def _write_setup_file(self):
+        pass
+
+    def write_expecteds_to_file(self, all_test_results: List):
+        output_file_name = 'expected.setup.' + self.datasource_name + '_columns.txt'
+        output_path = Path(self.output_dir) / Path(output_file_name)
+        with open(output_path, 'x') as out:
+            print("writing to {}".format(output_path))
+            out.write("<results>\n")
+            for item in all_test_results:
+                affix = self.return_expected_affix(item)
+                out.write("  <test name='{}'>\n".format(item[0]))  # TODO: we should make this a named tuple, not list
+                out.write("    <table>\n")
+                out.write("      <schema>\n")
+                out.write("      </schema>\n")
+                for result in item[2]:
+                    formatted_result = affix + result + affix if affix else result
+                    out.write("        <tuple>\n")
+                    out.write("          {}\n".format(formatted_result))
+                    out.write("        </tuple>\n")
+                out.write("    </table>\n")
+                out.write("  </test>\n".format(item[0]))
+            out.write("</results>")
+
+    def return_expected_affix(self, col: List) -> Optional[str]:
         """
-        Needs to take the col type and then write each result element into the correct looking result type.
-        Needs to name the expected file that it's creating.
+        Uses a dict from constants to return any affix needed to format a result correctly.
         """
-        col_type = col[0]
-        col_data = col[1:]
+        col_type = col[1]
+        return DATA_TYPES.get(col_type, None)
 
+    def _format_output_list_items(self, col: List, affix: str=None) -> List:
+        """
+        Takes list of results and appends affixes to each result, handling null and empty string values
+        """
+        formatted_list = []
+        for item in col:
+            if item == '':
+                formatted_list.append('&quot;&quot;')
+            elif item == '%null%':
+                formatted_list.append(item)
+            else:
+                if affix:
+                    out = affix + item + affix
+                else:
+                    out = item
+                formatted_list.append(out)
+
+        return formatted_list
+
+    def _return_sorted_set_of_results(self, results: List) -> List:
+        # this method needs to deal with date/datetime things that are surrounded by #...#
+        # but also have %null% or '&quot;&quot;' in the col.
+        results_set = set(results)
+
+        first_elements = []
+
+        if '%null%' in results_set:
+            first_elements.append('%null%')
+            results_set.remove('%null%')
+        if '&quot;&quot;' in results_set:
+            first_elements.append('&quot;&quot;')
+            results_set.remove('&quot;&quot;')
+
+        sorted_results = first_elements + sorted(list(results_set))
+
+        return sorted_results
 
 
 
@@ -88,12 +141,11 @@ class TestCreator:
         # k:v = col_name: [type: str, [values]]
 
         with open(self.csv_file, 'r') as csv_file:
+
             for column in csv_file:
                 self._csv_column_checker(column)
 
         # Open the CSV, check for headers, dump data for each col
-
-
 
 
 class ExpectedCreator:
