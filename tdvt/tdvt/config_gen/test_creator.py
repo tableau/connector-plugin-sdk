@@ -21,10 +21,7 @@ class TestCreator:
         self.datasource_name: str = datasource_name
         self.output_dir: str = output_dir
 
-    def _csv_column_checker(self, column):
-        pass
-
-    def _csv_to_lists(self) -> List:
+    def _csv_to_lists(self) -> List[List[str]]:
         with open(self.csv_file, 'r') as f:
             headers = f.readline().split(',')
             columns = []
@@ -38,7 +35,7 @@ class TestCreator:
 
         return columns
 
-    def _write_setup_file(self):
+    def _csv_column_checker(self, column):
         pass
 
     def write_expecteds_to_file(self, all_test_results: List):
@@ -61,6 +58,9 @@ class TestCreator:
                 out.write("    </table>\n")
                 out.write("  </test>\n".format(item[0]))
             out.write("</results>")
+
+    def _write_setup_file(self):
+        pass
 
     def return_expected_affix(self, col: List) -> Optional[str]:
         """

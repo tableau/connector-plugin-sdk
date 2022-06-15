@@ -1031,7 +1031,11 @@ class TestCreatorTest(unittest.TestCase):
     def test_csv_path(self):
         self.assertTrue(self.test_creator.check_csv_exists())
 
-    def test_csv_to_list(self):
+    def test_csv_to_list_returns_all_cols(self):
+        columns = self.test_creator._csv_to_lists()
+        self.assertEqual(len(columns), 27)
+
+    def test_csv_to_list_returns_correct_data_with_no_tricks(self):
         columns = self.test_creator._csv_to_lists()
         self.assertEqual(
             columns[0],
@@ -1055,6 +1059,9 @@ class TestCreatorTest(unittest.TestCase):
              'key15',
              'key16']
         )
+
+    def test_csv_to_list_returns_correct_data_with_tricks(self):
+        columns = self.test_creator._csv_to_lists()
         self.assertEqual(
             columns[25],
             ['datetime1',
