@@ -26,19 +26,19 @@ class TestCreator:
             headers = f.readline().split(',')
             columns = []
             for header in headers:
-                columns.append([header.replace('"', '')])
+                columns.append([header.replace('"', '').replace('\n', '')])
             for i, row in enumerate(f.readlines()):
                 for j, item in enumerate(row.split(',')):
                     if not item:
                         item = '%null%'
-                    columns[j].append(item.replace('"', ''))
+                    columns[j].append(item.replace('"', '').replace('\n', ''))
 
         return columns
 
     def _csv_column_checker(self, column):
         pass
 
-    def parse_csv(self):
+    def parse_csv_to_list(self) -> List[List[str]]:
         """
         This method needs to:
           1. Check the csv file exists
@@ -55,6 +55,17 @@ class TestCreator:
         # validate csv
 
         # get data from csv into list of lists
+        csv_data = self._csv_to_lists()
+
+        # format the cols in list of lists
+        formatted_cols = self._format_output_list_items(csv_data)
+
+        formatted_results = [
+            self._return_sorted_set_of_results(col) for col in formatted_cols
+        ]
+
+        return formatted_results
+
 
     def write_expecteds_to_file(self, all_test_results: List):
         output_file_name = 'expected.setup.' + self.datasource_name + '_columns.txt'
@@ -77,38 +88,51 @@ class TestCreator:
                 out.write("  </test>\n".format(item[0]))
             out.write("</results>")
 
-    def _return_expected_affix(self, col: List) -> Optional[str]:
+    def _return_expected_affix(self, col_type: str) -> Optional[str]:
         """
         Uses a dict from constants to return any affix needed to format a result correctly.
         """
-        col_type = col[1]
         return DATA_TYPES.get(col_type, None)
 
-    def _format_output_list_items(self, col: List, affix: str = None) -> List:
+    def _format_output_list_items(self, cols: List) -> List:
         """
         Takes list of results and appends affixes to each result, handling null and empty string values
         """
-        formatted_list = []
-        for item in col:
-            if item == '':
-                formatted_list.append('&quot;&quot;')
-            elif item == '%null%':
-                formatted_list.append(item)
-            else:
-                if affix:
-                    out = affix + item + affix
-                else:
-                    out = item
-                formatted_list.append(out)
+        formatted_list_of_cols = []
 
-        return formatted_list
+        for col in cols:
+
+            col_name = col[0]
+            col_type = col[1]
+            col_data = col[2:]
+
+            col_out = [col_name]
+
+            affix = self._return_expected_affix(col_type)
+
+            for item in col_data:
+                if item == '':
+                    col_out.append('&quot;&quot;')
+                elif item == '%null%':
+                    col_out.append(item)
+                else:
+                    if affix:
+                        out = affix + item + affix
+                    else:
+                        out = item
+                    col_out.append(out)
+
+            formatted_list_of_cols.append(col_out)
+
+        return formatted_list_of_cols
 
     def _return_sorted_set_of_results(self, results: List) -> List:
         # this method needs to deal with date/datetime things that are surrounded by #...#
         # but also have %null% or '&quot;&quot;' in the col.
-        results_set = set(results)
+        first_elements = [results[0]]
 
-        first_elements = []
+        results_set = set(results[1:])
+
 
         if '%null%' in results_set:
             first_elements.append('%null%')
@@ -129,8 +153,8 @@ class TestCreator:
             return False
 
     def _write_setup_file(self):
+        """
+        TODO: this is for the datasource's .ini file
+        :return:
+        """
         pass
-
-
-class ExpectedCreator:
-    pass

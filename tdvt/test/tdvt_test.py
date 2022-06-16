@@ -1085,6 +1085,154 @@ class TestCreatorTest(unittest.TestCase):
              '']
         )
 
+    def test_csv_formatter_on_csv_col_of_strings_with_null_and_empty(self):
+        columns = self.test_creator._csv_to_lists()
+        self.assertEqual(
+            self.test_creator._format_output_list_items(columns)[25],
+            ['datetime1',
+             '%null%',
+             '%null%',
+             '&quot;&quot;',
+             '&quot;&quot;',
+             '&quot;&quot;',
+             '%null%',
+             '&quot;&quot;',
+             '&quot;&quot;',
+             '&quot;&quot;',
+             '%null%',
+             '&quot;&quot;',
+             '%null%',
+             '&quot;&quot;',
+             '&quot;&quot;',
+             '%null%',
+             '&quot;&quot;',
+             '&quot;&quot;'
+             ]
+        )
+
+    def test_csv_formatter_on_csv_col_of_dates(self):
+        columns = self.test_creator._csv_to_lists()
+        self.assertEqual(
+            self.test_creator._format_output_list_items(columns)[22],
+            ['time0',
+             '#1899-12-30 21:07:32#',
+             '#1900-01-01 13:48:48#',
+             '#1900-01-01 18:21:08#',
+             '#1900-01-01 18:51:48#',
+             '#1900-01-01 15:01:19#',
+             '#1900-01-01 08:59:39#',
+             '#1900-01-01 07:37:48#',
+             '#1900-01-01 19:45:54#',
+             '#1900-01-01 09:00:59#',
+             '#1900-01-01 20:36:00#',
+             '#1900-01-01 01:31:32#',
+             '#1899-12-30 22:15:40#',
+             '#1900-01-01 13:53:46#',
+             '#1900-01-01 04:57:51#',
+             '#1899-12-30 22:42:43#',
+             '#1899-12-30 22:24:08#',
+             '#1900-01-01 11:58:29#'
+             ]
+        )
+
+    def test_csv_formatter_has_pretty_last_col(self):
+        columns = self.test_creator._csv_to_lists()
+        self.assertEqual(
+            self.test_creator._format_output_list_items(columns)[26],
+            ['zzz',
+             '&quot;a&quot;',
+             '&quot;b&quot;',
+             '&quot;c&quot;',
+             '&quot;d&quot;',
+             '&quot;e&quot;',
+             '&quot;f&quot;',
+             '&quot;g&quot;',
+             '&quot;h&quot;',
+             '&quot;i&quot;',
+             '&quot;j&quot;',
+             '&quot;k&quot;',
+             '&quot;l&quot;',
+             '&quot;m&quot;',
+             '&quot;n&quot;',
+             '&quot;o&quot;',
+             '&quot;p&quot;',
+             '&quot;q&quot;'
+             ]
+        )
+
+    def test_formatted_results_sorts_time_properly(self):
+        columns = self.test_creator._csv_to_lists()
+        formatted_cols = self.test_creator._format_output_list_items(columns)
+        formatted_results = [
+            self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
+        ]
+        self.assertEqual(
+            formatted_results[24],
+            ['datetime0',
+             '#2004-07-04 22:49:28#',
+             '#2004-07-05 13:14:20#',
+             '#2004-07-09 10:17:35#',
+             '#2004-07-12 17:30:16#',
+             '#2004-07-14 07:43:00#',
+             '#2004-07-14 08:16:44#',
+             '#2004-07-17 14:01:56#',
+             '#2004-07-19 22:21:31#',
+             '#2004-07-22 00:30:23#',
+             '#2004-07-23 21:13:37#',
+             '#2004-07-25 15:22:26#',
+             '#2004-07-26 12:30:34#',
+             '#2004-07-28 06:54:50#',
+             '#2004-07-28 12:34:28#',
+             '#2004-07-28 23:30:22#',
+             '#2004-07-31 11:57:52#',
+             '#2004-08-02 07:59:23#'
+             ]
+        )
+
+    def test_formatted_results_sorts_sorted_col_corectly(self):
+        columns = self.test_creator._csv_to_lists()
+        formatted_cols = self.test_creator._format_output_list_items(columns)
+        formatted_results = [
+            self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
+        ]
+        self.assertEqual(
+            formatted_results[26],
+            ['zzz',
+             '&quot;a&quot;',
+             '&quot;b&quot;',
+             '&quot;c&quot;',
+             '&quot;d&quot;',
+             '&quot;e&quot;',
+             '&quot;f&quot;',
+             '&quot;g&quot;',
+             '&quot;h&quot;',
+             '&quot;i&quot;',
+             '&quot;j&quot;',
+             '&quot;k&quot;',
+             '&quot;l&quot;',
+             '&quot;m&quot;',
+             '&quot;n&quot;',
+             '&quot;o&quot;',
+             '&quot;p&quot;',
+             '&quot;q&quot;'
+             ]
+        )
+
+    def test_formatted_results_sorts_null_and_empty_string(self):
+        columns = self.test_creator._csv_to_lists()
+        formatted_cols = self.test_creator._format_output_list_items(columns)
+        formatted_results = [
+            self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
+        ]
+        self.assertEqual(
+            formatted_results[25],
+            ['datetime1',
+             '%null%',
+             '&quot;&quot;'
+             ]
+        )
+
+
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
 print("Using root dir " + str(ROOT_DIRECTORY))
