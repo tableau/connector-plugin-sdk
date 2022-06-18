@@ -3,11 +3,10 @@ TestCreator creates test cases from a csv file of expected types and values
 ExpectedCreator creates expecteds for an existing test case.
 """
 
-import csv, logging, sys
-import os
+import logging, os, sys
 
 from pathlib import Path
-from typing import Dict, List, Optional, Union, Tuple
+from typing import List, Optional, Tuple, Union
 
 from ..constants import DATA_TYPES
 
@@ -64,7 +63,7 @@ class TestCreator:
 
         return headers, formatted_results
 
-    def write_expecteds_to_file(self, list_to_write: Union[List[List[str]], List[str]], is_expected: bool=False):
+    def write_expecteds_to_file(self, list_to_write: Union[List[List[str]], List[str]], is_expected: bool = False):
         if is_expected:
             output_affix = 'expected.setup.'
         else:
@@ -76,7 +75,12 @@ class TestCreator:
             self._expecteds_writer(list_to_write, False)
         logging.info("Successfully wrote to {}".format(output_path))
 
-    def _expecteds_writer(self, out, list_to_write: Union[List[List[str]], List[str]], is_expected: bool=False):
+    def _expecteds_writer(
+            self,
+            out,
+            list_to_write: Union[List[List[str]], List[str]],
+            is_expected: bool = False
+    ) -> None:
         if is_expected:
             for item in list_to_write:
                 out.write(item + '\n')
@@ -165,4 +169,3 @@ class TestCreator:
         :return:
         """
         pass
-
