@@ -24,6 +24,7 @@ class TestCreator:
     def _csv_to_lists(self) -> Tuple[List[str], List[List[str]]]:
         with open(self.csv_file, 'r') as f:
             headers = f.readline().split(',')
+            cleaned_headers = [item.replace('"', '').replace('\n', '') for item in headers]
             columns = []
             for header in headers:
                 columns.append([header.replace('"', '').replace('\n', '')])
@@ -33,7 +34,7 @@ class TestCreator:
                         item = '%null%'
                     columns[j].append(item.replace('"', '').replace('\n', ''))
 
-        return headers, columns
+        return cleaned_headers, columns
 
     def parse_csv_to_list(self) -> Tuple[List[str], List[List[str]]]:
         """

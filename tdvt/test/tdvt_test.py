@@ -1020,9 +1020,10 @@ class TabQueryPathTest(unittest.TestCase):
 
 
 class TestCreatorTest(unittest.TestCase):
-    @classmethod
-    def setUp(self) -> None:
-        self.test_creator = TestCreator('tool_test/test_generation/csv_with_headers.csv', 'good_ds')
+    # @classmethod
+    # def setUp(self) -> None:
+    test_creator = TestCreator('tool_test/test_generation/csv_with_headers.csv', 'good_ds')
+    headers, columns = test_creator._csv_to_lists()
 
     def test_bad_csv_path(self):
         bad_test_creator = TestCreator('bad.csv', 'bad-ds')
@@ -1032,13 +1033,11 @@ class TestCreatorTest(unittest.TestCase):
         self.assertTrue(self.test_creator._check_csv_exists())
 
     def test_csv_to_list_returns_all_cols(self):
-        columns = self.test_creator._csv_to_lists()[1]
-        self.assertEqual(len(columns), 27)
+        self.assertEqual(len(self.columns), 27)
 
     def test_csv_to_list_returns_correct_data_with_no_tricks(self):
-        columns = self.test_creator._csv_to_lists()[1 ]
         self.assertEqual(
-            columns[0],
+            self.columns[0],
             ['key',
              'string',
              'key00',
@@ -1061,9 +1060,8 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_to_list_returns_correct_data_with_tricks(self):
-        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
-            columns[25],
+            self.columns[25],
             ['datetime1',
              'datetime',
              '%null%',
@@ -1086,9 +1084,8 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_formatter_on_csv_col_of_strings_with_null_and_empty(self):
-        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
-            self.test_creator._format_output_list_items(columns)[25],
+            self.test_creator._format_output_list_items(self.columns)[25],
             ['datetime1',
              '%null%',
              '%null%',
@@ -1111,9 +1108,8 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_formatter_on_csv_col_of_dates(self):
-        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
-            self.test_creator._format_output_list_items(columns)[22],
+            self.test_creator._format_output_list_items(self.columns)[22],
             ['time0',
              '#1899-12-30 21:07:32#',
              '#1900-01-01 13:48:48#',
@@ -1135,10 +1131,20 @@ class TestCreatorTest(unittest.TestCase):
              ]
         )
 
-    def test_csv_formatter_has_pretty_last_col(self):
-        columns = self.test_creator._csv_to_lists()[1]
+    def test_headers_are_correct(self):
         self.assertEqual(
-            self.test_creator._format_output_list_items(columns)[26],
+            self.headers[0:5],
+            ['key',
+             'num0',
+             'num1',
+             'num2',
+             'num3',
+             ]
+        )
+
+    def test_csv_formatter_has_pretty_last_col(self):
+        self.assertEqual(
+            self.test_creator._format_output_list_items(self.columns)[26],
             ['zzz',
              '&quot;a&quot;',
              '&quot;b&quot;',
@@ -1161,8 +1167,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_formatted_results_sorts_time_properly(self):
-        columns = self.test_creator._csv_to_lists()[1]
-        formatted_cols = self.test_creator._format_output_list_items(columns)
+        formatted_cols = self.test_creator._format_output_list_items(self.columns)
         formatted_results = [
             self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
         ]
@@ -1190,8 +1195,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_formatted_results_sorts_sorted_col_corectly(self):
-        columns = self.test_creator._csv_to_lists()[1]
-        formatted_cols = self.test_creator._format_output_list_items(columns)
+        formatted_cols = self.test_creator._format_output_list_items(self.columns)
         formatted_results = [
             self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
         ]
@@ -1219,8 +1223,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_formatted_results_sorts_null_and_empty_string(self):
-        columns = self.test_creator._csv_to_lists()[1]
-        formatted_cols = self.test_creator._format_output_list_items(columns)
+        formatted_cols = self.test_creator._format_output_list_items(self.columns)
         formatted_results = [
             self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
         ]
@@ -1277,7 +1280,7 @@ class TestCreatorTest(unittest.TestCase):
         content = out_temp.read()
         self.assertEqual(
             content,
-"""key
+            """key
 num0
 num1
 num2
