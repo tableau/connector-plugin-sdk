@@ -7,7 +7,7 @@ import csv, logging, sys
 import os
 
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union, Tuple
 
 from ..constants import DATA_TYPES
 
@@ -21,7 +21,7 @@ class TestCreator:
         self.datasource_name: str = datasource_name
         self.output_dir: str = output_dir
 
-    def _csv_to_lists(self) -> List[List[str]]:
+    def _csv_to_lists(self) -> Tuple[List[str], List[List[str]]]:
         with open(self.csv_file, 'r') as f:
             headers = f.readline().split(',')
             columns = []
@@ -33,12 +33,9 @@ class TestCreator:
                         item = '%null%'
                     columns[j].append(item.replace('"', '').replace('\n', ''))
 
-        return columns
+        return headers, columns
 
-    def _csv_column_checker(self, column):
-        pass
-
-    def parse_csv_to_list(self) -> List[List[str]]:
+    def parse_csv_to_list(self) -> Tuple[List[str], List[List[str]]]:
         """
         This method needs to:
           1. Check the csv file exists
@@ -55,7 +52,7 @@ class TestCreator:
         # validate csv
 
         # get data from csv into list of lists
-        csv_data = self._csv_to_lists()
+        headers, csv_data = self._csv_to_lists()
 
         # format the cols in list of lists
         formatted_cols = self._format_output_list_items(csv_data)
@@ -64,33 +61,43 @@ class TestCreator:
             self._return_sorted_set_of_results(col) for col in formatted_cols
         ]
 
-        return formatted_results
+        return headers, formatted_results
 
-
-    def write_expecteds_to_file(self, all_test_results: List):
-        output_file_name = 'expected.setup.' + self.datasource_name + '_columns.txt'
+    def write_expecteds_to_file(self, list_to_write: Union[List[List[str]], List[str]], is_expected: bool=False):
+        if is_expected:
+            output_affix = 'expected.setup.'
+        else:
+            output_affix = 'setup.'
+        output_file_name = output_affix + self.datasource_name + '_columns.txt'
         output_path = Path(self.output_dir) / Path(output_file_name)
         with open(output_path, 'x') as out:
-            print("writing to {}".format(output_path))
+            logging.info("writing to {}".format(output_path))
+            self._expecteds_writer(list_to_write, False)
+        logging.info("Successfully wrote to {}".format(output_path))
+
+    def _expecteds_writer(self, out, list_to_write: Union[List[List[str]], List[str]], is_expected: bool=False):
+        if is_expected:
+            for item in list_to_write:
+                out.write(item + '\n')
+        else:
             out.write("<results>\n")
-            for item in all_test_results:
-                affix = self._return_expected_affix(item[1])
-                out.write("  <test name='{}'>\n".format(item[0]))  # TODO: we should make this a named tuple, not list
+            for item in list_to_write:
+                out.write("  <test name='{}'>\n".format(item[0]))
                 out.write("    <table>\n")
                 out.write("      <schema>\n")
+                out.write("        <column></column>\n")
                 out.write("      </schema>\n")
-                for result in item[2]:
-                    formatted_result = affix + result + affix if affix else result
-                    out.write("        <tuple>\n")
-                    out.write("          {}\n".format(formatted_result))
-                    out.write("        </tuple>\n")
+                for result in item[1:]:
+                    out.write("      <tuple>\n")
+                    out.write("        <value>{}</value>\n".format(result))
+                    out.write("      </tuple>\n")
                 out.write("    </table>\n")
-                out.write("  </test>\n".format(item[0]))
+                out.write("  </test>\n")
             out.write("</results>")
 
     def _return_expected_affix(self, col_type: str) -> Optional[str]:
         """
-        Uses a dict from constants to return any affix needed to format a result correctly.
+        Uses a dict of constants to return any affix needed to format a result correctly.
         """
         return DATA_TYPES.get(col_type, None)
 
@@ -133,7 +140,6 @@ class TestCreator:
 
         results_set = set(results[1:])
 
-
         if '%null%' in results_set:
             first_elements.append('%null%')
             results_set.remove('%null%')
@@ -158,3 +164,4 @@ class TestCreator:
         :return:
         """
         pass
+

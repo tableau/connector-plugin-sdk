@@ -1032,11 +1032,11 @@ class TestCreatorTest(unittest.TestCase):
         self.assertTrue(self.test_creator._check_csv_exists())
 
     def test_csv_to_list_returns_all_cols(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(len(columns), 27)
 
     def test_csv_to_list_returns_correct_data_with_no_tricks(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1 ]
         self.assertEqual(
             columns[0],
             ['key',
@@ -1061,7 +1061,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_to_list_returns_correct_data_with_tricks(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
             columns[25],
             ['datetime1',
@@ -1086,7 +1086,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_formatter_on_csv_col_of_strings_with_null_and_empty(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
             self.test_creator._format_output_list_items(columns)[25],
             ['datetime1',
@@ -1111,7 +1111,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_formatter_on_csv_col_of_dates(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
             self.test_creator._format_output_list_items(columns)[22],
             ['time0',
@@ -1136,7 +1136,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_csv_formatter_has_pretty_last_col(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         self.assertEqual(
             self.test_creator._format_output_list_items(columns)[26],
             ['zzz',
@@ -1161,7 +1161,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_formatted_results_sorts_time_properly(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         formatted_cols = self.test_creator._format_output_list_items(columns)
         formatted_results = [
             self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
@@ -1190,7 +1190,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_formatted_results_sorts_sorted_col_corectly(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         formatted_cols = self.test_creator._format_output_list_items(columns)
         formatted_results = [
             self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
@@ -1219,7 +1219,7 @@ class TestCreatorTest(unittest.TestCase):
         )
 
     def test_formatted_results_sorts_null_and_empty_string(self):
-        columns = self.test_creator._csv_to_lists()
+        columns = self.test_creator._csv_to_lists()[1]
         formatted_cols = self.test_creator._format_output_list_items(columns)
         formatted_results = [
             self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
@@ -1230,6 +1230,59 @@ class TestCreatorTest(unittest.TestCase):
              '%null%',
              '&quot;&quot;'
              ]
+        )
+
+    @mock.patch("builtins.open", create=True)
+    def test_file_output_expecteds(self, mock_open):
+        columns = [[
+            'datetime1',
+            '%null%',
+            '&quot;&quot;'
+        ]]
+
+        out_temp = io.StringIO()
+
+        self.test_creator._expecteds_writer(out_temp, columns, False)
+        out_temp.seek(0)
+        content = out_temp.read()
+        self.assertEqual(
+            content,
+            """<results>
+  <test name='datetime1'>
+    <table>
+      <schema>
+        <column></column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>"""
+        )
+
+    @mock.patch("builtins.open", create=True)
+    def test_file_output_setup(self, mock_open):
+        columns = [
+            "key", "num0", "num1", "num2", "num3",
+        ]
+
+        out_temp = io.StringIO()
+
+        self.test_creator._expecteds_writer(out_temp, columns, True)
+        out_temp.seek(0)
+        content = out_temp.read()
+        self.assertEqual(
+            content,
+"""key
+num0
+num1
+num2
+num3
+"""
         )
 
 
