@@ -1,9 +1,5 @@
 <results>
   <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 0)'>
-    <sql>
-      SELECT SUBSTRING( &quot;Calcs&quot;.&quot;str0&quot;, &apos;(&apos; || &apos;(E.)&apos; || &apos;)&apos;) AS &quot;TEMP(Test)(24557538)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(24557538)(0)]</column>
@@ -20,10 +16,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 1)'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(E.)&apos;))[1]) AS &quot;TEMP(Test)(3541328736)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3541328736)(0)]</column>
@@ -40,10 +32,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH([str0], &quot;(ICE)&quot;, 1) //&quot;ICE&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(ICE)&apos;))[1]) AS &quot;TEMP(Test)(2711737136)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      55.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2711737136)(0)]</column>
@@ -57,10 +45,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH([str0], &quot;(ICE)&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&quot;Calcs&quot;.&quot;str0&quot;, &apos;(ICE)&apos;))[2]) AS &quot;TEMP(Test)(694303818)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      57.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(694303818)(0)]</column>
@@ -71,10 +55,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;ABC&quot;, &quot;(z)&quot;, 1) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;ABC&apos;, &apos;(z)&apos;))[1]) AS &quot;TEMP(Test)(3295419621)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      59.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3295419621)(0)]</column>
@@ -85,10 +65,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;ABC&quot;, &quot;(z)&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;ABC&apos;, &apos;(z)&apos;))[2]) AS &quot;TEMP(Test)(4270528)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      57.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(4270528)(0)]</column>
@@ -99,10 +75,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;toyota&quot;, &quot;(o)&quot;, 1) //&quot;o&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;toyota&apos;, &apos;(o)&apos;))[1]) AS &quot;TEMP(Test)(1530824443)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      61.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1530824443)(0)]</column>
@@ -113,10 +85,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;toyota&quot;, &quot;(o)&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;toyota&apos;, &apos;(o)&apos;))[2]) AS &quot;TEMP(Test)(3867824885)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      58.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3867824885)(0)]</column>
@@ -127,10 +95,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, 1) //&quot;aaa&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;aaaaaaaaa&apos;, &apos;(a{3})&apos;))[1]) AS &quot;TEMP(Test)(2715001940)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      54.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2715001940)(0)]</column>
@@ -141,10 +105,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;aaaaaaaaa&apos;, &apos;(a{3})&apos;))[2]) AS &quot;TEMP(Test)(1737505298)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      56.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1737505298)(0)]</column>
@@ -155,10 +115,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, 8) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;aaaaaaaaa&apos;, &apos;(a{3})&apos;))[8]) AS &quot;TEMP(Test)(4098988859)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(4098988859)(0)]</column>
@@ -169,10 +125,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;aaaa&quot;, &quot;(a{3})&quot;, 1) //&quot;aaa&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;aaaa&apos;, &apos;(a{3})&apos;))[1]) AS &quot;TEMP(Test)(338857176)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      63.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(338857176)(0)]</column>
@@ -183,10 +135,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;aaaa&quot;, &quot;(a{3})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;aaaa&apos;, &apos;(a{3})&apos;))[2]) AS &quot;TEMP(Test)(1972796001)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      63.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1972796001)(0)]</column>
@@ -197,10 +145,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;([a-z0-9])&quot;, 1) //&quot;a&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abcdefghijklmnopqrstuvwxyz0123456789&apos;, &apos;([a-z0-9])&apos;))[1]) AS &quot;TEMP(Test)(3643786729)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      68.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3643786729)(0)]</column>
@@ -211,10 +155,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;([a-z0-9]{5})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abcdefghijklmnopqrstuvwxyz0123456789&apos;, &apos;([a-z0-9]{5})&apos;))[2]) AS &quot;TEMP(Test)(2050754176)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2050754176)(0)]</column>
@@ -225,10 +165,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;abcd&quot;, &quot;(a|b)&quot;, 1) //&quot;a&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abcd&apos;, &apos;(a|b)&apos;))[1]) AS &quot;TEMP(Test)(1963486611)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      61.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1963486611)(0)]</column>
@@ -239,10 +175,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;abcd&quot;, &quot;(a|b)&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abcd&apos;, &apos;(a|b)&apos;))[2]) AS &quot;TEMP(Test)(2357371219)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      66.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2357371219)(0)]</column>
@@ -253,10 +185,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;orange brooklyn&quot;, &quot;(o{1,2})&quot;, 1) //&quot;o&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;orange brooklyn&apos;, &apos;(o{1,2})&apos;))[1]) AS &quot;TEMP(Test)(573080804)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      54.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(573080804)(0)]</column>
@@ -267,10 +195,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;orange brooklyn&quot;, &quot;(o{1,2})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;orange brooklyn&apos;, &apos;(o{1,2})&apos;))[2]) AS &quot;TEMP(Test)(2073894966)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      59.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2073894966)(0)]</column>
@@ -281,10 +205,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;brooklyn&quot;, &quot;(o{1,2})&quot;, 1) //&quot;oo&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;brooklyn&apos;, &apos;(o{1,2})&apos;))[1]) AS &quot;TEMP(Test)(1547755727)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      50.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1547755727)(0)]</column>
@@ -295,10 +215,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;brooklyn&quot;, &quot;(o{1,2})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;brooklyn&apos;, &apos;(o{1,2})&apos;))[2]) AS &quot;TEMP(Test)(1024155803)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      62.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1024155803)(0)]</column>
@@ -309,10 +225,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;Abcd&quot;, &quot;(^a)&quot;, 1) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;Abcd&apos;, &apos;(^a)&apos;))[1]) AS &quot;TEMP(Test)(2450199074)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      58.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2450199074)(0)]</column>
@@ -323,10 +235,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;Abcd&quot;, &quot;(^A)&quot;, 1) //&quot;A&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;Abcd&apos;, &apos;(^A)&apos;))[1]) AS &quot;TEMP(Test)(2143536478)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      58.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2143536478)(0)]</column>
@@ -337,10 +245,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;abcde&quot;, &quot;(e$)&quot;, 1) //&quot;e&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abcde&apos;, &apos;(e$)&apos;))[1]) AS &quot;TEMP(Test)(1714989694)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1714989694)(0)]</column>
@@ -351,10 +255,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;abcde abcde&quot;, &quot;(e$)&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abcde abcde&apos;, &apos;(e$)&apos;))[2]) AS &quot;TEMP(Test)(1088392094)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      68.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1088392094)(0)]</column>
@@ -365,10 +265,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;Cincinnati Outlaw Reds&quot;, &quot;([a-zA-Z])&quot;, 1) //&quot;C&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;Cincinnati Outlaw Reds&apos;, &apos;([a-zA-Z])&apos;))[1]) AS &quot;TEMP(Test)(88619849)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      63.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(88619849)(0)]</column>
@@ -379,10 +275,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;Altoona bear cub&quot;, &quot;([^abc])&quot;, 1) //&quot;A&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;Altoona bear cub&apos;, &apos;([^abc])&apos;))[1]) AS &quot;TEMP(Test)(2013919887)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2013919887)(0)]</column>
@@ -393,10 +285,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;Altoona bear cub&quot;, &quot;([^abc])&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;Altoona bear cub&apos;, &apos;([^abc])&apos;))[2]) AS &quot;TEMP(Test)(2958227623)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      64.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2958227623)(0)]</column>
@@ -406,81 +294,57 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;1-425-609-7808&quot;, &quot;(\d)&quot;, 1) //&quot;1&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;1-425-609-7808&apos;, E&apos;(\\d)&apos;))[1]) AS &quot;TEMP(Test)(3444493519)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      60.000&#10;    </query-time>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234&quot;, &quot;(\d)&quot;, 1) //&quot;1&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3444493519)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(874946818)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;1&quot;</value>
+        <value>&quot;9&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;1-425-609-7808&quot;, &quot;(\d)&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;1-425-609-7808&apos;, E&apos;(\\d)&apos;))[2]) AS &quot;TEMP(Test)(698617541)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d)&quot;, 2) //&quot;Null&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(698617541)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3894066583)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;1-425-609-7808&quot;, &quot;(\d{3})&quot;, 1) //&quot;425&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;1-425-609-7808&apos;, E&apos;(\\d{3})&apos;))[1]) AS &quot;TEMP(Test)(2213476843)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{3})&quot;, 1) //&quot;425&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2213476843)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1745242482)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;425&quot;</value>
+        <value>&quot;999&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;1-425-609-7808&quot;, &quot;(\d{3})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;1-425-609-7808&apos;, E&apos;(\\d{3})&apos;))[2]) AS &quot;TEMP(Test)(1030585826)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      52.000&#10;    </query-time>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{3})&quot;, 2) //&quot;Null&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1030585826)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(683229799)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;1-425-609-7808&quot;, &quot;(\d{4})&quot;, 1) //&quot;7808&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;1-425-609-7808&apos;, E&apos;(\\d{4})&apos;))[1]) AS &quot;TEMP(Test)(3684663865)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      47.000&#10;    </query-time>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{4})&quot;, 1) //&quot;7808&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3684663865)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(811142114)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;7808&quot;</value>
+        <value>&quot;1234&quot;</value>
       </tuple>
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 1) //&quot;support@xyz.com&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&apos;, E&apos;([a-z]*@[a-z]*[.][a-z]*)(\\s.[a-z])&apos;))[1]) AS &quot;TEMP(Test)(2589896552)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2589896552)(0)]</column>
@@ -491,10 +355,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 2) //&quot;on&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&apos;, E&apos;([a-z]*@[a-z]*[.][a-z]*)(\\s.[a-z])&apos;))[2]) AS &quot;TEMP(Test)(3331319414)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      55.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3331319414)(0)]</column>
@@ -505,10 +365,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])(\s\d\d)&quot;, 3) //&quot;11&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&apos;, E&apos;([a-z]*@[a-z]*[.][a-z]*)(\\s.[a-z])(\\s\\d\\d)&apos;))[3]) AS &quot;TEMP(Test)(2185699851)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      54.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2185699851)(0)]</column>
@@ -519,10 +375,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,1) //&quot;abc&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abc123ed567&apos;, &apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;))[1]) AS &quot;TEMP(Test)(301964984)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      56.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(301964984)(0)]</column>
@@ -533,10 +385,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,2) //&quot;123&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abc123ed567&apos;, &apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;))[2]) AS &quot;TEMP(Test)(1529693801)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(1529693801)(0)]</column>
@@ -547,10 +395,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,3) //&quot;ed&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abc123ed567&apos;, &apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;))[3]) AS &quot;TEMP(Test)(3675423960)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3675423960)(0)]</column>
@@ -561,10 +405,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,4) //&quot;567&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abc123ed567&apos;, &apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;))[4]) AS &quot;TEMP(Test)(218987385)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      60.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(218987385)(0)]</column>
@@ -575,10 +415,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,8) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;abc123ed567&apos;, &apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;))[8]) AS &quot;TEMP(Test)(738357213)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      55.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(738357213)(0)]</column>
@@ -589,10 +425,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, -1) //&quot;Null&quot;'>
-    <sql>
-      SELECT NULL AS &quot;TEMP(Test)(3111043654)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3111043654)(0)]</column>
@@ -603,10 +435,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 0) //&quot;tableau123&quot;'>
-    <sql>
-      SELECT SUBSTRING( &apos;tableau123&apos;, &apos;(&apos; || &apos;([a-z]{7})([0-9]{3})&apos; || &apos;)&apos;) AS &quot;TEMP(Test)(739615679)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      52.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(739615679)(0)]</column>
@@ -617,10 +445,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 1) //&quot;tableau&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;([a-z]{7})([0-9]{3})&apos;))[1]) AS &quot;TEMP(Test)(2760166733)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      52.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2760166733)(0)]</column>
@@ -631,10 +455,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 2) //&quot;123&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;([a-z]{7})([0-9]{3})&apos;))[2]) AS &quot;TEMP(Test)(4069580554)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      49.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(4069580554)(0)]</column>
@@ -645,10 +465,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 9) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;([a-z]{7})([0-9]{3})&apos;))[9]) AS &quot;TEMP(Test)(3922666451)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      56.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3922666451)(0)]</column>
@@ -659,10 +475,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, -1) //&quot;Null&quot;'>
-    <sql>
-      SELECT NULL AS &quot;TEMP(Test)(364391053)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      54.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(364391053)(0)]</column>
@@ -673,10 +485,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 0) //&quot;tableau123&quot;'>
-    <sql>
-      SELECT SUBSTRING( &apos;tableau123&apos;, &apos;(&apos; || &apos;[a-z]{7}([0-9]{3})&apos; || &apos;)&apos;) AS &quot;TEMP(Test)(3424450930)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      54.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(3424450930)(0)]</column>
@@ -687,10 +495,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 1) //&quot;123&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;[a-z]{7}([0-9]{3})&apos;))[1]) AS &quot;TEMP(Test)(2591794685)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      50.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2591794685)(0)]</column>
@@ -701,10 +505,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 2) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;[a-z]{7}([0-9]{3})&apos;))[2]) AS &quot;TEMP(Test)(2332643093)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      53.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2332643093)(0)]</column>
@@ -715,10 +515,6 @@
     </table>
   </test>
   <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 9) //&quot;Null&quot;'>
-    <sql>
-      SELECT (SELECT (REGEXP_MATCHES(&apos;tableau123&apos;, &apos;[a-z]{7}([0-9]{3})&apos;))[9]) AS &quot;TEMP(Test)(578860465)(0)&quot;&#10;FROM &quot;Calcs&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      51.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(578860465)(0)]</column>
