@@ -14,7 +14,7 @@ REGEXP_REPLACE("orange brooklyn", "(o{1,2})", "0") //"0range br0klyn"
 REGEXP_REPLACE("abcde", "(e$)", "1") //"abcd1"
 REGEXP_REPLACE("Cincinnati Outlaw Reds", "([a-zA-Z])", "1") //"1111111111 111111 1111"
 REGEXP_REPLACE("Altoona bear cub", "([^abc])", "1") //"111111a1b1a11c1b"
-REGEXP_REPLACE("1-425-609-7808", "(\d)", "a") //"a-aaa-aaa-aaaa"
+REGEXP_REPLACE("999-555-1234 ", "(\d)", "a") //"a-aaa-aaa-aaaa"
 REGEXP_REPLACE("I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015", "([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])", "Z") //"I called the number 4255671912 but got no response. Then I e-mailed Z 11/10/2015"
 REGEXP_REPLACE('abc123ed567','([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)','xyz') //'xyz'
 REGEXP_REPLACE('abc123ed567','([a-z]+)','xyz') //"xyz123xyz567"
