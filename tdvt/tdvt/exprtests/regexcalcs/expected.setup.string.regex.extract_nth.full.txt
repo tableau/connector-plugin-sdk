@@ -1,0 +1,527 @@
+<results>
+  <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 0)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(24557538)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH([str0], &apos;(E.)&apos;, 1)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3541328736)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;E &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;EC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH([str0], &quot;(ICE)&quot;, 1) //&quot;ICE&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2711737136)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ICE&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH([str0], &quot;(ICE)&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(694303818)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;ABC&quot;, &quot;(z)&quot;, 1) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3295419621)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;ABC&quot;, &quot;(z)&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4270528)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;toyota&quot;, &quot;(o)&quot;, 1) //&quot;o&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1530824443)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;o&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;toyota&quot;, &quot;(o)&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3867824885)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, 1) //&quot;aaa&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2715001940)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;aaa&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1737505298)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, 8) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4098988859)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;aaaa&quot;, &quot;(a{3})&quot;, 1) //&quot;aaa&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(338857176)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;aaa&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;aaaa&quot;, &quot;(a{3})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1972796001)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;([a-z0-9])&quot;, 1) //&quot;a&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3643786729)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;a&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;([a-z0-9]{5})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2050754176)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcd&quot;, &quot;(a|b)&quot;, 1) //&quot;a&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1963486611)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;a&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcd&quot;, &quot;(a|b)&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2357371219)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;orange brooklyn&quot;, &quot;(o{1,2})&quot;, 1) //&quot;o&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(573080804)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;o&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;orange brooklyn&quot;, &quot;(o{1,2})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2073894966)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;brooklyn&quot;, &quot;(o{1,2})&quot;, 1) //&quot;oo&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1547755727)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;oo&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;brooklyn&quot;, &quot;(o{1,2})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1024155803)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;Abcd&quot;, &quot;(^a)&quot;, 1) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2450199074)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;Abcd&quot;, &quot;(^A)&quot;, 1) //&quot;A&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2143536478)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;A&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcde&quot;, &quot;(e$)&quot;, 1) //&quot;e&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1714989694)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;abcde abcde&quot;, &quot;(e$)&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1088392094)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;Cincinnati Outlaw Reds&quot;, &quot;([a-zA-Z])&quot;, 1) //&quot;C&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(88619849)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;C&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;Altoona bear cub&quot;, &quot;([^abc])&quot;, 1) //&quot;A&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2013919887)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;A&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;Altoona bear cub&quot;, &quot;([^abc])&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2958227623)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234&quot;, &quot;(\d)&quot;, 1) //&quot;1&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(874946818)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;9&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d)&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3894066583)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{3})&quot;, 1) //&quot;425&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1745242482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;999&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{3})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(683229799)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{4})&quot;, 1) //&quot;7808&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(811142114)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1234&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 1) //&quot;support@xyz.com&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2589896552)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;support@xyz.com&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 2) //&quot;on&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3331319414)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot; on&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])(\s\d\d)&quot;, 3) //&quot;11&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2185699851)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot; 11&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,1) //&quot;abc&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(301964984)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abc&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,2) //&quot;123&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1529693801)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;123&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,3) //&quot;ed&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3675423960)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;ed&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,4) //&quot;567&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(218987385)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;567&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,8) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(738357213)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, -1) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3111043654)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 0) //&quot;tableau123&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(739615679)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;tableau123&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 1) //&quot;tableau&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2760166733)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;tableau&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 2) //&quot;123&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4069580554)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;123&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 9) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3922666451)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, -1) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(364391053)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 0) //&quot;tableau123&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3424450930)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;tableau123&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 1) //&quot;123&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2591794685)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;123&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 2) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2332643093)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 9) //&quot;Null&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(578860465)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

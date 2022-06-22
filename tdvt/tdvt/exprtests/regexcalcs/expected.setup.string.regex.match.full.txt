@@ -1,0 +1,215 @@
+<results>
+  <test name='REGEXP_MATCH([str0], &apos;OFFICE&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(252242495)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH([str0], &apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2463010958)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;abc&quot;, &quot;abc&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1791381358)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;ABC&quot;, &quot;z&quot;) //false'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(527576710)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;toyota&quot;, &quot;0&quot;) //false'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3849557534)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;aaaaaaaaa&quot;, &quot;a{3}&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(70303919)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;aaaa&quot;, &quot;a{3}&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2572059327)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;[a-z0-9]&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1998184482)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;Abcd&quot;, &quot;^a&quot;) //false'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2177503973)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;Abcd&quot;, &quot;^A&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2056972566)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;abcd&quot;, &quot;(a|b)&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1412071578)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;brooklyn&quot;, &quot;o{1,2}&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4042911571)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;orange brooklyn&quot;, &quot;o{1,2}&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1929015565)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;abcde&quot;, &quot;e$&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2705341318)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;Cincinnati Outlaw Reds&quot;, &quot;[a-zA-Z]&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3629216594)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;Altoona bear cub&quot;, &quot;[^abc]&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(3781051258)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;999-555-1234&quot;, &quot;\d&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1145472678)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&quot;I called the number 999-555-1234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2738606220)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;abc123ed567&apos;,&apos;([a-z]*)&apos;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(4186547846)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;abc123ed567&apos;,&apos;[a-z]*&apos;) //true'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2880800836)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_MATCH(&apos;abc123ed567&apos;,&apos;[1-9]{3}[a-z]{3}&apos;) //false'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1371196421)(0)]</column>
+      </schema>
+      <tuple>
+        <value>false</value>
+      </tuple>
+    </table>
+  </test>
+</results>
