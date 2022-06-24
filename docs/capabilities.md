@@ -109,7 +109,7 @@ CAP_QUERY_TOP_SAMPLE_FAST | Set to 'yes' if TOP with sampling is faster than TOP
 CAP_QUERY_TOP_SAMPLE_PERCENT | Set to 'yes' if TOP supports sampling by percentages | no | **<span style="color:red">?</span>**  
 CAP_QUERY_USE_DOMAIN_EXCEPT_OPTIMIZATION | When the number of selected items in a filter is greater than half the total number of items in the domain, save the excluded items instead of the included items to save space.  Available in Tableau 2022.2 and newer. | yes | yes 
 CAP_QUERY_USE_DOMAIN_RANGES_OPTIMIZATION | Set to 'no' if domain ranges cannot be used to optimize set functions. | yes | yes 
-CAP_QUERY_USE_DOMAIN_RANGES_OPTIMIZATION_STRINGS | Set to ‘yes’ if domain ranges should be used to optimize set functions for string data. | no | no 
+CAP_QUERY_USE_DOMAIN_RANGES_OPTIMIZATION_STRINGS | Set to ‘yes’ if domain ranges should be used to optimize set functions for string data. Available in Tableau 2022.2 and newer. | no | no 
 CAP_QUERY_USE_QUERY_FUSION | Set to ‘no’ to prevent Tableau from combining multiple individual queries into a single combined query. Turn off this capability for performance tuning or if the database is unable to process large queries.  | yes | yes 
 CAP_QUERY_WRAP_SUBQUERY_WITH_TOP | Set to 'yes' if the server can handle a subquery wrapped with only a TOP clause | no | no 
 
