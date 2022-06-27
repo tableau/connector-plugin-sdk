@@ -1,0 +1,34 @@
+<results>
+  <test name='STARTSWITH(str2, &apos;o&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2071564493)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>false</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='STARTSWITH(Int0, Null)'>
+    <error>
+      Reference to undefined field Int0.&#10;Perhaps you meant [int0]?&#10;&#10;    </error>
+    <error-type>
+      Invalid Expression&#10;    </error-type>
+    <table>
+    </table>
+  </test>
+  <test name='STARTSWITH(Num0, Null)'>
+    <error>
+      Reference to undefined field Num0.&#10;Perhaps you meant [num0]?&#10;&#10;    </error>
+    <error-type>
+      Invalid Expression&#10;    </error-type>
+    <table>
+    </table>
+  </test>
+</results>
