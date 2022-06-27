@@ -6,7 +6,7 @@ ExpectedCreator creates expecteds for an existing test case.
 import logging, os, sys
 
 from pathlib import Path
-from typing import List, Optional, Tuple, Union
+from typing import List, Optional, TextIO, Tuple, Union
 
 from ..constants import DATA_TYPES
 
@@ -70,18 +70,19 @@ class TestCreator:
             output_affix = 'setup.'
         output_file_name = output_affix + self.datasource_name + '_columns.txt'
         output_path = Path(self.output_dir) / Path(output_file_name)
-        with open(output_path, 'x') as out:
+        with open(output_path, 'w') as out:
+            print('writing to {}'.format(output_path))
             logging.info("writing to {}".format(output_path))
-            self._expecteds_writer(list_to_write, False)
+            self._expecteds_writer(out, list_to_write, is_expected)
         logging.info("Successfully wrote to {}".format(output_path))
 
     def _expecteds_writer(
             self,
-            out,
+            out: TextIO,
             list_to_write: Union[List[List[str]], List[str]],
-            is_expected: bool = False
+            is_expected: bool
     ) -> None:
-        if is_expected:
+        if is_expected is False:
             for item in list_to_write:
                 out.write(item + '\n')
         else:
@@ -133,6 +134,11 @@ class TestCreator:
                     else:
                         out = item
                     col_out.append(out)
+                if col_type == 'bool':
+                    item.lower().replace('false', '0').replace('true', '1')
+                if col_type in ['time', 'date', 'datetime']:
+                    pass
+
 
             formatted_list_of_cols.append(col_out)
 

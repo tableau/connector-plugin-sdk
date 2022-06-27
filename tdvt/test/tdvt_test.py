@@ -1245,7 +1245,7 @@ class TestCreatorTest(unittest.TestCase):
 
         out_temp = io.StringIO()
 
-        self.test_creator._expecteds_writer(out_temp, columns, False)
+        self.test_creator._expecteds_writer(out_temp, columns, True)
         out_temp.seek(0)
         content = out_temp.read()
         self.assertEqual(
@@ -1275,7 +1275,7 @@ class TestCreatorTest(unittest.TestCase):
 
         out_temp = io.StringIO()
 
-        self.test_creator._expecteds_writer(out_temp, columns, True)
+        self.test_creator._expecteds_writer(out_temp, columns, False)
         out_temp.seek(0)
         content = out_temp.read()
         self.assertEqual(

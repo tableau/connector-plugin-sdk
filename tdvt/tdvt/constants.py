@@ -89,4 +89,6 @@ STAPLES_FIELDS = [
 DATA_TYPES = {
     'string': '&quot;',
     'datetime': '#',
+    'date': '#',
+    'time': '#'
 }
