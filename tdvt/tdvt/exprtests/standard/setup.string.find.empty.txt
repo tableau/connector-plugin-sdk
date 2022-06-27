@@ -1,0 +1,2 @@
+FIND(str1, 'F')
+FIND(str1, 'f')

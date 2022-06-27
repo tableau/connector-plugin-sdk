@@ -1,0 +1,25 @@
+<results>
+  <test name='ENDSWITH(str2, &quot;&quot;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2867748994)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ENDSWITH(str1,&apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2210614618)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>
