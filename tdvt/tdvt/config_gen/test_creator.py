@@ -109,7 +109,9 @@ class TestCreator:
 
     def _format_output_list_items(self, cols: List) -> List:
         """
-        Takes list of results and appends affixes to each result, handling null and empty string values
+        Takes list of results and appends affixes to each result, handling null and empty string values.
+        Results list contains:
+          [name of column, type of column, n results...]
         """
         formatted_list_of_cols = []
 
@@ -135,14 +137,20 @@ class TestCreator:
                         out = item
                     col_out.append(out)
                 if col_type == 'bool':
-                    item.lower().replace('false', '0').replace('true', '1')
+                    self._format_bools(item)
                 if col_type in ['time', 'date', 'datetime']:
-                    pass
+                    self._format_datetime(item)
 
 
             formatted_list_of_cols.append(col_out)
 
         return formatted_list_of_cols
+
+    def _format_datetime(self, item: str) -> None:
+        pass
+
+    def _format_bools(self, item: str) -> None:
+        item.lower().replace('false', '0').replace('true', '1')
 
     def _return_sorted_set_of_results(self, results: List) -> List:
         # this method needs to deal with date/datetime things that are surrounded by #...#

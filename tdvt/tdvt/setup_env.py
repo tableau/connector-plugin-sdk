@@ -1,6 +1,8 @@
 import re
 from .resources import *
 from .config_gen.datasource_list import print_logical_configurations
+from .config_gen.test_creator import TestCreator
+
 
 def create_test_environment():
     """Create directories and necessary ini files."""
@@ -44,6 +46,15 @@ def add_datasource(name, ds_registry):
         create_password_file(name, connection_password_name, password)
     picked = False
     logical = None
+
+    # Find out if the datasource uses custom schema and create test files accordingly
+    if input("Would you like to use a custom schema? (y/n)").lower() == 'y':
+        csv_path = input("Enter the path to the custom schema csv file:")
+        tc = TestCreator(csv_path, name)
+        headers, formatted_results = tc.parse_csv_to_list()
+        tc.write_expecteds_to_file(headers, True)
+        tc.write_expecteds_to_file(formatted_results, False)
+
     while not picked:
         logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  #naqa: E501
         if logical == 'list':
@@ -59,7 +70,7 @@ def add_datasource(name, ds_registry):
     create_ds_ini_file(name, logical)
     update_tds_files(name, connection_password_name)
 
-def create_ds_ini_file(name, logical_config):  # TODO: Update to be flexible depending on custom schema.
+def create_ds_ini_file(name, logical_config, custom_schema: bool=False):  # TODO: Update to be flexible depending on custom schema.
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
