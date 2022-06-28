@@ -105,6 +105,7 @@ class TestRunner():
         self.test_set = test_set
         self.test_config = test_config
         self.error_code = 0
+        self.generate_expected = test_config.generate_expected
         self.thread_id = thread_id
         self.verbose = verbose
         self.thread_lock = lock
@@ -481,6 +482,8 @@ def create_parser() -> argparse.ArgumentParser:
     run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
                                         help='Writes log files to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
+    run_test_common_parser.add_argument('--generate_expected', dest='generate_expected', action='store_true',
+                                        help='Generate expected value files.', required=False)
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
@@ -504,7 +507,6 @@ def create_parser() -> argparse.ArgumentParser:
     run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
-
 
     #Run test pattern.
     run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
@@ -802,7 +804,6 @@ def run_generate(ds_registry):
     generate_files(ds_registry, True)
     end_time = time.time() - start_time
     print("Done: " + str(end_time))
-
 
 def main():
     parser, ds_registry, args = init()

@@ -28,9 +28,6 @@ from .tabquery import build_connectors_test_tabquery_command_line
 from .tabquery import build_tabquery_command_line
 from .test_results import *
 
-ALWAYS_GENERATE_EXPECTED = False
-
-
 class ConnectorsTest(object):
     def __init__(self, conn_test_name, conn_test_file, conn_test_password_file):
         self.conn_test_name = conn_test_name
@@ -226,7 +223,6 @@ class BatchQueueWork(object):
                 base_test_filepath = base_filepath
                 actual_filepath = actual_output_filepath
 
-
             result = compare_results(t.test_name, base_test_filepath, t.test_file, self)
             result.relative_test_file = t.relative_test_file
             result.cmd_output = self.cmd_output
@@ -383,11 +379,11 @@ def compare_results(test_name, test_file, full_test_file, work):
         result.error_status = TestErrorMissingActual()
         return result
 
-    expected_file_version = 0
+    expected_file_version: int = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
             logging.debug(work.get_thread_msg() + "Did not find expected file " + expected_file)
-            if ALWAYS_GENERATE_EXPECTED:
+            if test_config.generate_expected:
                 # There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
                 # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
                 logging.debug(
@@ -424,9 +420,8 @@ def compare_results(test_name, test_file, full_test_file, work):
         # Try another possible expected file.
         expected_file_version = expected_file_version + 1
 
-    # Exhausted all expected files. The test failed.
-    if ALWAYS_GENERATE_EXPECTED:
-        # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+    # Generate expected value if a passing one didn't exist
+    if test_config.generate_expected:
         actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
                                                                                               base_test_file,
                                                                                               test_config.output_dir)
