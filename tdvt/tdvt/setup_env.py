@@ -12,6 +12,7 @@ def create_test_environment():
     create_setup_structure()
     create_tdvt_ini_file()
 
+
 def create_setup_structure():
     try:
         os.mkdir('tds')
@@ -21,6 +22,7 @@ def create_setup_structure():
         os.makedirs('config/tdvt')
     except:
         pass
+
 
 def create_tdvt_ini_file():
     try:
@@ -32,19 +34,24 @@ def create_tdvt_ini_file():
         ini.write('[DEFAULT]\n')
         ini.write('TAB_CLI_EXE_X64 = Full Or Relative/Path/to/tabquerytool.exe\n')
         ini.write('TAB_CLI_EXE_MAC = Full Or Relataive/Path/to/tabquerytool.exe\n')
-        print ("Created ini file: " + ini_path)
-        print ("Please set the tabquery executable file path.")
+        print("Created ini file: " + ini_path)
+        print("Please set the tabquery executable file path.")
     except:
         pass
 
+
 def add_datasource(name, ds_registry):
-    """Create the datasource ini file and try to rename the connections in the tds file. This is a necessary step for the logical query tests."""
-    print ("Make sure you have already saved the appropriate TDS files in the tds directory.")
-    print ("Adding a new datasource [" + name + "] ...")
+    """
+        Create the datasource ini file and try to rename the connections in the tds file.
+        This is a necessary step for the logical query tests.
+    """
+    print("Make sure you have already saved the appropriate TDS files in the tds directory.")
+    print("Adding a new datasource [" + name + "] ...")
 
     connection_password_name = name + "_connection"
     password = None
-    if input("Would you like to setup a password file? (y/n) This is suitable for a single connection per tds (standard).").lower() == 'y':  #noqa: E501
+    if input(
+            "Would you like to setup a password file? (y/n) This is suitable for a single connection per tds (standard).").lower() == 'y':  # noqa: E501
         password = input("Enter the datasource password:")
         create_password_file(name, connection_password_name, password)
     picked = False
@@ -57,7 +64,7 @@ def add_datasource(name, ds_registry):
         output = input("Enter the output path for generated test files (default CWD):")
         output_dir = Path(output)
         if not output_dir.is_dir():
-            print ("Output directory does not exist. Please try again")
+            print("Output directory does not exist. Please try again")
             sys.exit()
 
         tc = TestCreator(csv_path, name, output_dir)
@@ -65,7 +72,8 @@ def add_datasource(name, ds_registry):
         tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
 
     while not picked:
-        logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  #naqa: E501
+        logical = input(
+            "Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  # naqa: E501
         if logical == 'list':
             print_logical_configurations(ds_registry)
         else:
@@ -79,7 +87,9 @@ def add_datasource(name, ds_registry):
     create_ds_ini_file(name, logical)
     update_tds_files(name, connection_password_name)
 
-def create_ds_ini_file(name, logical_config, custom_schema: bool=False):  # TODO: Update to be flexible depending on custom schema.
+
+def create_ds_ini_file(name, logical_config,
+                       custom_schema: bool = False):  # TODO: Update to be flexible depending on custom schema.
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
@@ -101,21 +111,21 @@ def create_ds_ini_file(name, logical_config, custom_schema: bool=False):  # TODO
         ini.write('[LODTests]\n')
         ini.write('\n')
         ini.write('[UnionTest]\n')
-        # TODO: custom schema block goes here
-        # blah
-        # TODO: everyone gets the following:
         ini.write('\n')
         ini.write('[ConnectionTests]\n')
         ini.write('StaplesTestEnabled = True\n')
         ini.write('CastCalcsTestEnabled = True\n')
+        # TODO: custom schema block goes here
+        # blah
         ini.write('\n')
 
-        print ("Created ini file: " + ini_path)
+        print("Created ini file: " + ini_path)
         if not logical_config:
-            print ("Please set the LogicalQueryFormat value to the expected format.")
+            print("Please set the LogicalQueryFormat value to the expected format.")
 
     except:
         pass
+
 
 def create_password_file(name, connection_name, password):
     try:
@@ -128,24 +138,27 @@ def create_password_file(name, connection_name, password):
 
         ini.write(connection_name + ';' + password + '\n')
 
-        print ("Created file: " + file_path)
+        print("Created file: " + file_path)
     except IOError as e:
         print(e)
         pass
 
+
 def update_tds_files(name, connection_password_name):
     # TODO: change this to get rid of calcs/staples hardcoding; handle custom table then fall back
-     mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'), connection_password_name)  # TODO: Update this to take whatever
-     mangle_tds(get_tds_full_path(get_root_dir(), 'Staples.' + name + '.tds'), connection_password_name)
+    mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'),
+               connection_password_name)  # TODO: Update this to take whatever
+    mangle_tds(get_tds_full_path(get_root_dir(), 'Staples.' + name + '.tds'), connection_password_name)
+
 
 def mangle_tds(file_path, connection_password_name):
-    print ('Modifying ' + file_path)
+    print('Modifying ' + file_path)
     try:
         r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
         r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
         r3 = re.compile('(^\s*<connection .*?)(\s*/>)')
 
-        f =  open(file_path, 'r')
+        f = open(file_path, 'r')
         new_tds = ''
         for line in f:
             new_line = line.rstrip()
@@ -164,9 +177,9 @@ def mangle_tds(file_path, connection_password_name):
             new_tds += new_line + '\n'
 
         f.close()
-        f =  open(file_path, 'w')
+        f = open(file_path, 'w')
         f.write(new_tds)
         f.close()
     except IOError as e:
-        print (e)
+        print(e)
         return

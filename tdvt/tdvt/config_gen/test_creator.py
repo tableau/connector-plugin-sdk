@@ -162,32 +162,32 @@ class TestCreator:
     def _format_bools(self, item: str) -> None:
         item.lower().replace('false', '0').replace('true', '1')
 
-def _return_sorted_set_of_results(
-        self,
-        results: List
-    ) -> List:
-        # this method needs to deal with date/datetime things that are surrounded by #...#
-        # but also have %null% or '&quot;&quot;' in the col.
-        data_type = results[1]
+    def _return_sorted_set_of_results(
+            self,
+            results: List
+        ) -> List:
+            # this method needs to deal with date/datetime things that are surrounded by #...#
+            # but also have %null% or '&quot;&quot;' in the col.
+            data_type = results[1]
 
-        first_elements = [results[0]]
+            first_elements = [results[0]]
 
-        results_set = set(results[2:])
+            results_set = set(results[2:])
 
-        if '%null%' in results_set:
-            first_elements.append('%null%')
-            results_set.remove('%null%')
-        if '&quot;&quot;' in results_set:
-            first_elements.append('&quot;&quot;')
-            results_set.remove('&quot;&quot;')
-        if data_type == 'int':
-            sorted_results = first_elements + sorted(list(results_set), key=int)
-        elif data_type == 'float':
-            sorted_results = first_elements + sorted(list(results_set), key=float)
-        else:
-            sorted_results = first_elements + sorted(list(results_set))
+            if '%null%' in results_set:
+                first_elements.append('%null%')
+                results_set.remove('%null%')
+            if '&quot;&quot;' in results_set:
+                first_elements.append('&quot;&quot;')
+                results_set.remove('&quot;&quot;')
+            if data_type == 'int':
+                sorted_results = first_elements + sorted(list(results_set), key=int)
+            if data_type == 'float':
+                sorted_results = first_elements + sorted(list(results_set), key=float)
+            else:
+                sorted_results = first_elements + sorted(list(results_set))
 
-        return sorted_results
+            return sorted_results
 
     def _check_csv_exists(self) -> bool:
         if self.csv_file.is_file():
