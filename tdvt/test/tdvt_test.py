@@ -1255,7 +1255,17 @@ class TestCreatorTest(unittest.TestCase):
         ]
         self.assertEqual(
             formatted_results[1],
-            ['num0', '%null%', '-15.7', '-12.3', '-3.5', '0.0', '3.5', '10', '12.3', '15.7']
+            ['num0',
+             '%null%',
+             '-15.7',
+             '-12.3',
+             '-3.5',
+             '0.0',
+             '3.5',
+             '10.0',
+             '12.3',
+             '15.7'
+             ]
         )
 
     def test_formatted_col_handles_bools_correctly(self):
@@ -1275,7 +1285,17 @@ class TestCreatorTest(unittest.TestCase):
         ]
         self.assertEqual(
             formatted_results[1],
-            ['num0', '%null%', '-15.7', '-12.3', '-3.5', '0.0', '3.5', '10', '12.3', '15.7']
+            ['num0',
+             '%null%',
+             '-15.7',
+             '-12.3',
+             '-3.5',
+             '0.0',
+             '3.5',
+             '10.0',
+             '12.3',
+             '15.7'
+             ]
         )
 
     @mock.patch("builtins.open", create=True)

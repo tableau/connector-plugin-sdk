@@ -138,8 +138,8 @@ class TestCreator:
                 else:
                     if col_type == 'bool':
                         out = item.lower().replace('0', 'false').replace('1', 'true')
-                    elif (col_type == 'float') and (item == '0'):
-                        out = '0.0'
+                    elif col_type == 'float':
+                        out = str(float(item))
                     elif affix:
                         out = affix + item + affix
                     else:
