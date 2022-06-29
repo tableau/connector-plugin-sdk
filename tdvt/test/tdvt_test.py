@@ -1257,6 +1257,7 @@ class TestCreatorTest(unittest.TestCase):
             formatted_results[1],
             ['num0', '%null%', '-15.7', '-12.3', '-3.5', '0', '3.5', '10', '12.3', '15.7']
         )
+
     @mock.patch("builtins.open", create=True)
     def test_file_output_expecteds(self, mock_open):
         columns = [[
