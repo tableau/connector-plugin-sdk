@@ -1087,6 +1087,7 @@ class TestCreatorTest(unittest.TestCase):
         self.assertEqual(
             self.test_creator._format_output_list_items(self.columns)[25],
             ['datetime1',
+             'datetime',
              '%null%',
              '%null%',
              '&quot;&quot;',
@@ -1111,6 +1112,7 @@ class TestCreatorTest(unittest.TestCase):
         self.assertEqual(
             self.test_creator._format_output_list_items(self.columns)[22],
             ['time0',
+             'datetime',
              '#1899-12-30 21:07:32#',
              '#1900-01-01 13:48:48#',
              '#1900-01-01 18:21:08#',
@@ -1146,6 +1148,7 @@ class TestCreatorTest(unittest.TestCase):
         self.assertEqual(
             self.test_creator._format_output_list_items(self.columns)[26],
             ['zzz',
+             'string',
              '&quot;a&quot;',
              '&quot;b&quot;',
              '&quot;c&quot;',
@@ -1235,6 +1238,25 @@ class TestCreatorTest(unittest.TestCase):
              ]
         )
 
+    def test_formatted_results_sorts_ints_correctly(self):
+        formatted_cols = self.test_creator._format_output_list_items(self.columns)
+        formatted_results = [
+            self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
+        ]
+        self.assertEqual(
+            formatted_results[12],
+            ['int2', '-9', '-8', '-6', '-5', '-4', '-3', '0', '2', '3', '4', '5', '6', '9']
+        )
+
+    def test_formatted_results_sorts_floats_correctly(self):
+        formatted_cols = self.test_creator._format_output_list_items(self.columns)
+        formatted_results = [
+            self.test_creator._return_sorted_set_of_results(col) for col in formatted_cols
+        ]
+        self.assertEqual(
+            formatted_results[1],
+            ['num0', '%null%', '-15.7', '-12.3', '-3.5', '0', '3.5', '10', '12.3', '15.7']
+        )
     @mock.patch("builtins.open", create=True)
     def test_file_output_expecteds(self, mock_open):
         columns = [[

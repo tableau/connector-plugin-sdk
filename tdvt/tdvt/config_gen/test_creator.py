@@ -126,7 +126,7 @@ class TestCreator:
             col_type = col[1]
             col_data = col[2:]
 
-            col_out = [col_name]
+            col_out = [col_name, col_type]
 
             affix = self._return_expected_affix(col_type)
 
@@ -157,9 +157,11 @@ class TestCreator:
     ) -> List:
         # this method needs to deal with date/datetime things that are surrounded by #...#
         # but also have %null% or '&quot;&quot;' in the col.
+        data_type = results[1]
+
         first_elements = [results[0]]
 
-        results_set = set(results[1:])
+        results_set = set(results[2:])
 
         if '%null%' in results_set:
             first_elements.append('%null%')
@@ -167,8 +169,12 @@ class TestCreator:
         if '&quot;&quot;' in results_set:
             first_elements.append('&quot;&quot;')
             results_set.remove('&quot;&quot;')
-
-        sorted_results = first_elements + sorted(list(results_set))
+        if data_type == 'int':
+            sorted_results = first_elements + sorted(list(results_set), key=int)
+        elif data_type == 'float':
+            sorted_results = first_elements + sorted(list(results_set), key=float)
+        else:
+            sorted_results = first_elements + sorted(list(results_set))
 
         return sorted_results
 
