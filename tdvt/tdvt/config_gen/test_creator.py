@@ -136,13 +136,16 @@ class TestCreator:
                 elif item == '%null%':
                     col_out.append(item)
                 else:
-                    if affix:
+                    if col_type == 'bool':
+                        out = item.lower().replace('0', 'false').replace('1', 'true')
+                    elif (col_type == 'float') and (item == '0'):
+                        out = '0.0'
+                    elif affix:
                         out = affix + item + affix
                     else:
                         out = item
                     col_out.append(out)
-                if col_type == 'bool':
-                    item.lower().replace('false', '0').replace('true', '1')
+
                 if col_type in ['time', 'date', 'datetime']:
                     pass
 
