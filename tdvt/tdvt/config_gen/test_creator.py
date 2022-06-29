@@ -63,7 +63,11 @@ class TestCreator:
 
         return headers, formatted_results
 
-    def write_expecteds_to_file(self, list_to_write: Union[List[List[str]], List[str]], is_expected: bool = False):
+    def write_expecteds_to_file(
+        self,
+        list_to_write: Union[List[List[str]], List[str]],
+        is_expected: bool = False
+    ) -> None:
         if is_expected:
             output_affix = 'expected.setup.'
         else:
@@ -107,7 +111,10 @@ class TestCreator:
         """
         return DATA_TYPES.get(col_type, None)
 
-    def _format_output_list_items(self, cols: List) -> List:
+    def _format_output_list_items(
+        self,
+        cols: List
+    ) -> List:
         """
         Takes list of results and appends affixes to each result, handling null and empty string values
         """
@@ -144,7 +151,10 @@ class TestCreator:
 
         return formatted_list_of_cols
 
-    def _return_sorted_set_of_results(self, results: List) -> List:
+    def _return_sorted_set_of_results(
+        self,
+        results: List
+    ) -> List:
         # this method needs to deal with date/datetime things that are surrounded by #...#
         # but also have %null% or '&quot;&quot;' in the col.
         first_elements = [results[0]]
