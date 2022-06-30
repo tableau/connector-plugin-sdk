@@ -464,6 +464,7 @@ action_usage_text = '''
 run_file_usage_text = '''
 '''
 
+
 def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
