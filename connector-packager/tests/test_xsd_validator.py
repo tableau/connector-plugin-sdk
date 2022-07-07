@@ -335,7 +335,7 @@ class TestXSDValidator(unittest.TestCase):
 
     def test_warn_server_attribute(self):
         file_to_test = ConnectorFile("connectionResolver.tdr", "connection-resolver")
-        
+
         print("\nTest no warning when server is in required attributes list.")
         test_tdr_file = TEST_FOLDER / "server_attribute/with_server.tdr"
         with self.assertLogs('packager_logger', level='WARNING') as cm:
