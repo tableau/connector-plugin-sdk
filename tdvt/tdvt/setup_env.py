@@ -50,10 +50,12 @@ def add_datasource(name, ds_registry):
     # Find out if the datasource uses custom schema and create test files accordingly
     if input("Would you like to use a custom schema? (y/n)").lower() == 'y':
         csv_path = input("Enter the path to the custom schema csv file:")
+        # TODO: prompt for output directory; if not provided, default is cwd
+        # TODO: add path validation for custom output directory; should go in TestCreator methods somewhere.
         tc = TestCreator(csv_path, name)
         headers, formatted_results = tc.parse_csv_to_list()
-        tc.write_expecteds_to_file(headers, True)
-        tc.write_expecteds_to_file(formatted_results, False)
+        tc.write_expecteds_to_file(headers, True)  # this creates the test setup file.
+        tc.write_expecteds_to_file(formatted_results, False)  # this creates the test expected files.
 
     while not picked:
         logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  #naqa: E501

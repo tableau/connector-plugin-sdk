@@ -63,7 +63,11 @@ class TestCreator:
 
         return headers, formatted_results
 
-    def write_expecteds_to_file(self, list_to_write: Union[List[List[str]], List[str]], is_expected: bool = False):
+    def write_expecteds_to_file(
+            self,
+            list_to_write: Union[List[List[str]], List[str]],
+            is_expected: bool = False
+    ) -> None:
         if is_expected:
             output_affix = 'expected.setup.'
         else:
@@ -140,7 +144,6 @@ class TestCreator:
                     self._format_bools(item)
                 if col_type in ['time', 'date', 'datetime']:
                     self._format_datetime(item)
-
 
             formatted_list_of_cols.append(col_out)
 
