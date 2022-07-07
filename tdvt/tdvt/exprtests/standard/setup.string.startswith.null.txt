@@ -1,5 +1,5 @@
 STARTSWITH(str2, 'o')
-STARTSWITH(Int0, Null)
-STARTSWITH(Num0, Null)
+STARTSWITH(int0, Null)
+STARTSWITH(num0, Null)
 
 

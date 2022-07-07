@@ -1,2 +1,2 @@
 FIND(str1, Null)
-find(Int0, Null)
+find(int0, Null)
