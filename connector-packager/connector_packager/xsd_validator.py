@@ -210,6 +210,7 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
             if field_name in field_names:
                 xml_violations_buffer.append("A field with the field name = " + field_name +
                                                 " already exists. Cannot have multiple fields with the same name.")
+                                                
 
                 return False
             if field_name == 'instanceurl':
@@ -354,11 +355,19 @@ def warn_file_specific_rules_tdr(path_to_file: Path):
         return
 
     authentication_attr_exists = False
+    server_attr_exists = False
     for attr in attribute_list.iter('attr'):
         if attr.text == 'authentication':
             authentication_attr_exists = True
-            break
+
+        if attr.text == 'server':
+            server_attr_exists = True
+            
 
     if not authentication_attr_exists:
         logger.warning("Warning: 'authentication' attribute is missing from "
                        "<connection-normalizer>/<required-attributes>/<attribute-list> in " + str(path_to_file) + ".")
+
+    if not server_attr_exists:
+            logger.warning("Warning: 'server' attribute is missing from "
+                        "<connection-normalizer>/<required-attributes>/<attribute-list> in " + str(path_to_file) + ".")
