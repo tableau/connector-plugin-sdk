@@ -1,7 +1,10 @@
 import re
-from .resources import *
+import sys
+from pathlib import Path
+
 from .config_gen.datasource_list import print_logical_configurations
 from .config_gen.test_creator import TestCreator
+from .resources import *
 
 
 def create_test_environment():
@@ -50,12 +53,16 @@ def add_datasource(name, ds_registry):
     # Find out if the datasource uses custom schema and create test files accordingly
     if input("Would you like to use a custom schema? (y/n)").lower() == 'y':
         csv_path = input("Enter the path to the custom schema csv file:")
-        # TODO: prompt for output directory; if not provided, default is cwd
-        # TODO: add path validation for custom output directory; should go in TestCreator methods somewhere.
-        tc = TestCreator(csv_path, name)
+
+        output = input("Enter the output path for generated test files (default CWD):")
+        output_dir = Path(output)
+        if not output_dir.is_dir():
+            print ("Output directory does not exist. Please try again")
+            sys.exit()
+
+        tc = TestCreator(csv_path, name, output_dir)
         headers, formatted_results = tc.parse_csv_to_list()
-        tc.write_expecteds_to_file(headers, True)  # this creates the test setup file.
-        tc.write_expecteds_to_file(formatted_results, False)  # this creates the test expected files.
+        tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
 
     while not picked:
         logical = input("Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  #naqa: E501

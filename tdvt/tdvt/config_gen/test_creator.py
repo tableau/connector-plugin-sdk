@@ -3,8 +3,9 @@ TestCreator creates test cases from a csv file of expected types and values
 ExpectedCreator creates expecteds for an existing test case.
 """
 
-import logging, os, sys
-
+import logging
+import os
+import sys
 from pathlib import Path
 from typing import List, Optional, TextIO, Tuple, Union
 
@@ -46,7 +47,7 @@ class TestCreator:
         if self._check_csv_exists():
             logging.info("Source CSV file found.")
         else:
-            print("%f does not exist.".format(self.csv_file))
+            print("{} does not exist.".format(self.csv_file))
             sys.exit(1)
 
         # validate csv
