@@ -216,8 +216,10 @@ class BatchQueueWork(object):
 
             if self.test_config.logical:
                 # Copy the test process filename to the actual. filename.
-                actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(t.test_file,
-                                                                                                    self.test_config.output_dir)
+                actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(
+                    t.test_file,
+                    self.test_config.output_dir
+                )
                 logging.debug(self.get_thread_msg() + "Copying test process output {0} to actual file {1}".format(
                     existing_output_filepath, actual_output_filepath))
                 try_move(existing_output_filepath, actual_output_filepath)

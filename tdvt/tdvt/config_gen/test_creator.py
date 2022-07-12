@@ -3,8 +3,9 @@ TestCreator creates test cases from a csv file of expected types and values
 ExpectedCreator creates expecteds for an existing test case.
 """
 
-import logging, os, sys
-
+import logging
+import os
+import sys
 from pathlib import Path
 from typing import List, Optional, TextIO, Tuple, Union
 
@@ -46,7 +47,7 @@ class TestCreator:
         if self._check_csv_exists():
             logging.info("Source CSV file found.")
         else:
-            print("%f does not exist.".format(self.csv_file))
+            print("{} does not exist.".format(self.csv_file))
             sys.exit(1)
 
         # validate csv
@@ -116,7 +117,9 @@ class TestCreator:
         cols: List
     ) -> List:
         """
-        Takes list of results and appends affixes to each result, handling null and empty string values
+        Takes list of results and appends affixes to each result, handling null and empty string values.
+        Results list contains:
+          [name of column, type of column, n results...]
         """
         formatted_list_of_cols = []
 
@@ -137,24 +140,29 @@ class TestCreator:
                     col_out.append(item)
                 else:
                     if col_type == 'bool':
-                        out = item.lower().replace('0', 'false').replace('1', 'true')
+                        self._format_bools(item)
                     elif col_type == 'float':
                         out = str(float(item))
+                    elif col_type in ['time', 'date', 'datetime']:
+                        self._format_datetime(item)
                     elif affix:
                         out = affix + item + affix
                     else:
                         out = item
                     col_out.append(out)
-
-                if col_type in ['time', 'date', 'datetime']:
-                    pass
-
+                
 
             formatted_list_of_cols.append(col_out)
 
         return formatted_list_of_cols
 
-    def _return_sorted_set_of_results(
+    def _format_datetime(self, item: str) -> None:
+        pass
+
+    def _format_bools(self, item: str) -> None:
+        item.lower().replace('false', '0').replace('true', '1')
+
+def _return_sorted_set_of_results(
         self,
         results: List
     ) -> List:
