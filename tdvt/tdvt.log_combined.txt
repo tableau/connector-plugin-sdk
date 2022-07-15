@@ -1,0 +1,8 @@
+2022-07-14 11:02:10,790 TDVT version: 2.6.6
+2022-07-14 11:02:10,790 TDVT Arguments: Namespace(verbose=False, command='run-pattern', thread_count=None, noclean=False, generate=False, compare_sql=False, nocompare_tuples=False, compare_error=False, custom_output_dir=None, ds=['hyper_native'], expression_pattern='exprtestsregexcalcssetup.string.regex.find.txt', logical_pattern=None, tds_pattern='cast_calcs.postgres.tds', test_pattern_exclude=None)
+2022-07-14 11:02:10,791 Reading registry ini file [/Users/s.davis/PycharmProjects/connector-plugin-sdk/tdvt/tdvt/config/registry/mac.ini]
+2022-07-14 11:02:10,791 TABQUERY_CLI_PATH environment variable not set. Trying ini files.
+2022-07-14 11:02:10,791 Reading tdvt ini file [/Users/s.davis/PycharmProjects/connector-plugin-sdk/tdvt/tdvt/config/tdvt/tdvt.ini]
+2022-07-14 11:02:10,791 Reading tdvt ini file tabquerycli path is [/Applications/Tableau XXXX.X.app/Contents/MacOS/tabquerytool]
+2022-07-14 11:02:10,791 Checking generated logical setup files...
+2022-07-14 11:02:10,827 Could not find tabquery at [/Applications/Tableau XXXX.X.app/Contents/MacOS/tabquerytool]

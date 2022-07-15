@@ -1,0 +1,42 @@
+<results>
+  <test name='FIND(str1, &apos;F&apos;)'>
+    <sql>
+      SELECT TABLEAU.FIND(&quot;Extract&quot;.&quot;str1&quot;, &apos;F&apos;) AS &quot;TEMP(Test)(2687833661)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      4.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(2687833661)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FIND(str1, &apos;f&apos;)'>
+    <sql>
+      SELECT TABLEAU.FIND(&quot;Extract&quot;.&quot;str1&quot;, &apos;f&apos;) AS &quot;TEMP(Test)(3929268539)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      4.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper_native].[TEMP(Test)(3929268539)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+      <tuple>
+        <value>4</value>
+      </tuple>
+      <tuple>
+        <value>9</value>
+      </tuple>
+    </table>
+  </test>
+</results>
