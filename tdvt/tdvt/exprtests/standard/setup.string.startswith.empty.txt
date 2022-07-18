@@ -1,2 +1,2 @@
 STARTSWITH([str2], "")
-STARTSWITH(str1,'')
+STARTSWITH([str1], '')
