@@ -1,2 +1,2 @@
-ENDSWITH(str2, "")
-ENDSWITH(str1,'')
+ENDSWITH([str2], "")
+ENDSWITH([str1],'')
