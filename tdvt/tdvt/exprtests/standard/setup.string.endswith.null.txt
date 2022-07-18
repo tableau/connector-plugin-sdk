@@ -1,3 +1,2 @@
 ENDSWITH(str2, Null)
 ENDSWITH(str1,'')
-ENDSWITH(Num0, Null)
