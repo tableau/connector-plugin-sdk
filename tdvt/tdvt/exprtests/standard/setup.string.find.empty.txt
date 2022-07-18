@@ -1,2 +1,2 @@
-FIND(str1, 'F')
-FIND(str1, 'f')
+FIND([str1], '')
+FIND([str2], '')
