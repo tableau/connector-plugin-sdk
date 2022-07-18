@@ -1,2 +1,1 @@
 STARTSWITH([str2], 'o')
-STARTSWITH(Int0, Null)
