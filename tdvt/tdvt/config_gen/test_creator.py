@@ -21,22 +21,20 @@ class TestCreator:
         self.datasource_name: str = datasource_name
         self.output_dir: str = output_dir
 
-    def _csv_to_lists(self) -> Tuple[List[str], List[List[str]]]:
+    def _csv_to_lists(self) -> Tuple[List[str], List[str]]:
         with open(self.csv_file, 'r') as f:
             headers = f.readline().split(',')
             cleaned_headers = [item.replace('"', '').replace('\n', '') for item in headers]
-            columns = []
-            for header in headers:
-                columns.append([header.replace('"', '').replace('\n', '')])
-            for i, row in enumerate(f.readlines()):
-                for j, item in enumerate(row.split(',')):
-                    if not item:
-                        item = '%null%'
-                    columns[j].append(item.replace('"', '').replace('\n', ''))
+            col_types = f.readline().split(',')
+            cleaned_col_types = [item.replace('"', '').replace('\n', '') for item in col_types]
 
-        return cleaned_headers, columns
+            if len(cleaned_headers) != len(cleaned_col_types):
+                logging.error("CSV file has different number of column names and data types than expected.")
+                sys.exit(1)
 
-    def parse_csv_to_list(self) -> Tuple[List[str], List[List[str]]]:
+        return cleaned_headers, cleaned_col_types
+
+    def parse_csv_to_list(self) -> Tuple[List[str], List[str]]:
         """
         This method needs to:
           1. Check the csv file exists
@@ -44,9 +42,7 @@ class TestCreator:
           3. Dump columns into appropriate buckets (col name, type, all remaining data)
         :None:
         """
-        if self._check_csv_exists():
-            logging.info("Source CSV file found.")
-        else:
+        if not self._check_csv_exists():
             print("{} does not exist.".format(self.csv_file))
             sys.exit(1)
 
@@ -55,31 +51,25 @@ class TestCreator:
         # get data from csv into list of lists
         headers, csv_data = self._csv_to_lists()
 
-        # format the cols in list of lists
-        formatted_cols = self._format_output_list_items(csv_data)
-
-        formatted_results = [
-            self._return_sorted_set_of_results(col) for col in formatted_cols
-        ]
-
-        return headers, formatted_results
+        return headers, csv_data
 
     def write_expecteds_to_file(
         self,
-        list_to_write: Union[List[List[str]], List[str]],
+        list_to_write: List[str],
         is_expected: bool = False
     ) -> None:
         if is_expected:
             output_affix = 'expected.setup.'
         else:
             output_affix = 'setup.'
-        output_file_name = output_affix + self.datasource_name + '_columns.txt'
-        output_path = Path(self.output_dir) / Path(output_file_name)
-        with open(output_path, 'w') as out:
-            print('writing to {}'.format(output_path))
-            logging.info("writing to {}".format(output_path))
-            self._expecteds_writer(out, list_to_write, is_expected)
-        logging.info("Successfully wrote to {}".format(output_path))
+        for item in list_to_write:
+            output_file_name = output_affix + self.datasource_name + '.' + item + '_column.txt'
+            output_path = Path(self.output_dir) / Path(output_file_name)
+            with open(output_path, 'w') as out:
+                print('writing to {}'.format(output_path))
+                logging.info("writing to {}".format(output_path))
+                self._expecteds_writer(out, item, is_expected)
+            logging.info("Successfully wrote to {}".format(output_path))
 
     def _expecteds_writer(
             self,
@@ -88,8 +78,7 @@ class TestCreator:
             is_expected: bool
     ) -> None:
         if is_expected is False:
-            for item in list_to_write:
-                out.write(item + '\n')
+            out.write(list_to_write + '\n')
         else:
             out.write("<results>\n")
             for item in list_to_write:
@@ -191,9 +180,10 @@ class TestCreator:
 
     def _check_csv_exists(self) -> bool:
         if self.csv_file.is_file():
+            logging.info("Source CSV file found.")
             return True
         else:
-            logging.error("CSV file does not exist at indicated path.")
+            logging.error("CSV file does not exist at indicated path: {}.".format(self.csv_file))
             return False
 
     def _write_setup_file(self):
