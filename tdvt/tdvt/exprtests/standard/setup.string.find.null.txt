@@ -1,2 +1,3 @@
-FIND(str1, Null)
+FIND([str1], Null)
+FIND([str2], Null)
 find(Int0, Null)
