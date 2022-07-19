@@ -169,7 +169,7 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;) //&quot;support@xyz.com&quot;'>
+  <test name='REGEXP_EXTRACT(&quot;I called the number 9995551234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;) //&quot;support@xyz.com&quot;'>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(4283320813)(0)]</column>
