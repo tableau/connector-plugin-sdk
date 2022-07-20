@@ -1,20 +1,22 @@
 <results>
-  <test name='FIND(str1, Null)'>
+  <test name='FIND([str1], Null)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(41317274)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1308123450)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
     </table>
   </test>
-  <test name='find(Int0, Null)'>
-    <error>
-      Reference to undefined field Int0.&#10;Perhaps you meant [int0]?&#10;&#10;    </error>
-    <error-type>
-      Invalid Expression&#10;    </error-type>
+  <test name='FIND([str2], Null)'>
     <table>
+      <schema>
+        <column>[cast_calcs.postgres].[TEMP(Test)(160257391)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
     </table>
   </test>
 </results>
