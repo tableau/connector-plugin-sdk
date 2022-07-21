@@ -1,5 +1,5 @@
 """
-TestCreator creates test cases from a csv file of expected types and values
+TestCreator creates test case setup files from a csv file of expected types and values.
 ExpectedCreator creates expecteds for an existing test case.
 """
 
@@ -19,7 +19,7 @@ class TestCreator:
     def __init__(self, csv_file, datasource_name, output_dir=os.getcwd()):
         self.csv_file: Path = Path(csv_file)
         self.datasource_name: str = datasource_name
-        self.output_dir: str = output_dir
+        self.output_dir: Path = Path(output_dir)
 
     def _csv_to_lists(self) -> Tuple[List[str], List[str]]:
         with open(self.csv_file, 'r') as f:
@@ -42,11 +42,9 @@ class TestCreator:
           3. Dump columns into appropriate buckets (col name, type, all remaining data)
         :None:
         """
-        if not self._check_csv_exists():
+        if not self._check_output_and_input_exist():
             print("{} does not exist.".format(self.csv_file))
             sys.exit(1)
-
-        # validate csv
 
         # get data from csv into list of lists
         headers, csv_data = self._csv_to_lists()
@@ -56,28 +54,28 @@ class TestCreator:
     def write_expecteds_to_file(
         self,
         list_to_write: List[str],
-        is_expected: bool = False
+        is_expected_file: bool = False
     ) -> None:
-        if is_expected:
+        if is_expected_file:
             output_affix = 'expected.setup.'
         else:
             output_affix = 'setup.'
         for item in list_to_write:
             output_file_name = output_affix + self.datasource_name + '.' + item + '_column.txt'
-            output_path = Path(self.output_dir) / Path(output_file_name)
+            output_path = self.output_dir / output_file_name
             with open(output_path, 'w') as out:
                 print('writing to {}'.format(output_path))
                 logging.info("writing to {}".format(output_path))
-                self._expecteds_writer(out, item, is_expected)
+                self._expecteds_writer(out, item, is_expected_file)
             logging.info("Successfully wrote to {}".format(output_path))
 
     def _expecteds_writer(
             self,
             out: TextIO,
-            list_to_write: Union[List[List[str]], List[str]],
-            is_expected: bool
+            list_to_write: Union[List[List[str]], List[str], str],
+            is_expected_file: bool
     ) -> None:
-        if is_expected is False:
+        if not is_expected_file:
             out.write(list_to_write + '\n')
         else:
             out.write("<results>\n")
@@ -178,13 +176,19 @@ class TestCreator:
 
             return sorted_results
 
-    def _check_csv_exists(self) -> bool:
-        if self.csv_file.is_file():
+    def _check_output_and_input_exist(self) -> bool:
+        result = True
+        if self.csv_file.is_file() and self.output_dir.is_dir():
             logging.info("Source CSV file found.")
-            return True
+            logging.info("Output directory found.")
         else:
-            logging.error("CSV file does not exist at indicated path: {}.".format(self.csv_file))
-            return False
+            if not self.csv_file.is_file():
+                logging.error("CSV file does not exist at indicated path: {}.".format(self.csv_file))
+            if not self.output_dir.is_dir():
+                logging.error("Output directory {} does not exist.".format(self.output_dir))
+            result = False
+
+        return result
 
     def _write_setup_file(self):
         """
