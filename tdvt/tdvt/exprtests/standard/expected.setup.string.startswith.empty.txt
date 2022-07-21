@@ -1,224 +1,24 @@
 <results>
-  <test name='FIND(str2, &quot;&quot;)'>
+  <test name='STARTSWITH([str2], &quot;&quot;)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2173576987)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(436726530)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
       </tuple>
       <tuple>
-        <value>1</value>
+        <value>true</value>
       </tuple>
     </table>
   </test>
-  <test name='find(str1,&apos;&apos;)'>
+  <test name='STARTSWITH([str1], &apos;&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3849805421)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1934003116)(0)]</column>
       </schema>
       <tuple>
-        <value>1</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='find(str1,&apos;&apos;,6)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(410287316)(0)]</column>
-      </schema>
-      <tuple>
-        <value>6</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(abc)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(927641167)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(z)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1191716386)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(o)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(741429166)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(a{3})&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(508549308)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(a{3})&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(508549308)(1)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;([a-z0-9])&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1129909127)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(^a)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1157781429)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(^A)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1411395584)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(a|b)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(821821871)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(o{1,2})&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3924337318)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(o{1,2})&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3924337318)(1)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(e$)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1262075301)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;([a-zA-Z])&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(235761359)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;([^abc])&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1276732778)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;(\d)&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2305880266)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(917176514)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3640624825)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;([a-z]{7})([0-9]{3})&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1356826139)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
-      </tuple>
-    </table>
-  </test>
-  <test name='FIND(str1, &quot;[a-z]{7}([0-9]{3})&quot;)'>
-    <table>
-      <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1285723275)(0)]</column>
-      </schema>
-      <tuple>
-        <value>0</value>
+        <value>true</value>
       </tuple>
     </table>
   </test>
