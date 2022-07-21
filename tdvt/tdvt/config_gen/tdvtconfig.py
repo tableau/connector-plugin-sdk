@@ -31,6 +31,7 @@ class TdvtInvocation(object):
         self.tested_run_time_config = None
         self.tabquery_path = ''
         self.generate_expected = False
+        self.schema_name: str = 'TestV1'
 
         if from_args:
             self.init_from_args(from_args)
@@ -44,6 +45,7 @@ class TdvtInvocation(object):
         self.timeout_seconds = rtt.timeout_seconds
         self.d_override = rtt.d_override
         self.run_as_perf = rtt.run_as_perf
+        self.schema_name = rtt.schema_name
         self.tested_run_time_config = rtt
         if rtt.tabquery_paths:
             self.tabquery_path = rtt.tabquery_paths.to_array()
