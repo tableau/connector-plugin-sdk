@@ -253,11 +253,19 @@ class RunTimeTestConfig(object):
     """
         Tracks specifics about how a group of tests were run.
     """
-    def __init__(self, timeout_seconds=60*60, maxthread=0, d_override='', run_as_perf=False):
+    def __init__(
+            self,
+            timeout_seconds: int=60*60,
+            maxthread: int=0,
+            d_override: str='',
+            run_as_perf: bool=False,
+            schema_name: str='TestV1'
+    ):
         self.timeout_seconds = timeout_seconds
         self.d_override = d_override
         self.run_as_perf = run_as_perf
         self.maxthread = int(maxthread)
+        self.schema_name = schema_name
         self.tabquery_paths = None
 
     def set_tabquery_paths(self, linux_path, mac_path, windows_path):

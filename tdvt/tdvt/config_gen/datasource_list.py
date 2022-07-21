@@ -170,7 +170,8 @@ def load_test(config, test_dir=get_root_dir()):
         dsconfig.getint('TimeoutSeconds', 60 * 60),
         dsconfig.get('MaxThread', '0'),
         dsconfig.get('CommandLineOverride', ''),
-        dsconfig.getboolean('RunAsPerf', False)
+        dsconfig.getboolean('RunAsPerf', False),
+        dsconfig.get('SchemaName', 'TestV1'),
     )
     run_time_config.set_tabquery_paths(
         dsconfig.get('TabQueryPathLinux', ''),
