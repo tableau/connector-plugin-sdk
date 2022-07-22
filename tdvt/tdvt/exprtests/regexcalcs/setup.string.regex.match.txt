@@ -1,21 +1,2 @@
 REGEXP_MATCH([str0], 'OFFICE')
 REGEXP_MATCH([str0], '')
-REGEXP_MATCH("abc", "abc") //true
-REGEXP_MATCH("ABC", "z") //false
-REGEXP_MATCH("toyota", "0") //false
-REGEXP_MATCH("aaaaaaaaa", "a{3}") //true
-REGEXP_MATCH("aaaa", "a{3}") //true
-REGEXP_MATCH("abcdefghijklmnopqrstuvwxyz0123456789", "[a-z0-9]") //true
-REGEXP_MATCH("Abcd", "^a") //false
-REGEXP_MATCH("Abcd", "^A") //true
-REGEXP_MATCH("abcd", "(a|b)") //true
-REGEXP_MATCH("brooklyn", "o{1,2}") //true
-REGEXP_MATCH("orange brooklyn", "o{1,2}") //true
-REGEXP_MATCH("abcde", "e$") //true
-REGEXP_MATCH("Cincinnati Outlaw Reds", "[a-zA-Z]") //true
-REGEXP_MATCH("Altoona bear cub", "[^abc]") //true
-REGEXP_MATCH("999-555-1234", "\d") //true
-REGEXP_MATCH("I called the number 999-555-1234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015", "([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])") //true
-REGEXP_MATCH('abc123ed567','([a-z]*)') //true
-REGEXP_MATCH('abc123ed567','[a-z]*') //true
-REGEXP_MATCH('abc123ed567','[1-9]{3}[a-z]{3}') //false
