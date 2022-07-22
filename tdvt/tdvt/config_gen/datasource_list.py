@@ -156,6 +156,7 @@ def load_test(config, test_dir=get_root_dir()):
     percentile_test = 'PercentileTests'
     logical_config = 'LogicalConfig'
     connection_test = 'ConnectionTests'
+    custom_schema_tests = 'CustomSchemaTests'
 
     KEY_EXCLUSIONS = 'Exclusions'
 

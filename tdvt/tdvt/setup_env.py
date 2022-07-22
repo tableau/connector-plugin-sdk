@@ -49,17 +49,22 @@ def add_datasource(name, ds_registry):
     print("Adding a new datasource [" + name + "] ...")
 
     connection_password_name = name + "_connection"
-    password = None
     if input(
             "Would you like to setup a password file? (y/n) This is suitable for a single connection per tds (standard).").lower() == 'y':  # noqa: E501
         password = input("Enter the datasource password:")
         create_password_file(name, connection_password_name, password)
     picked = False
     logical = None
+    custom_schema_name = None
+    custom_table_name = None
 
-    # Find out if the datasource uses custom schema and create test files accordingly
-    if input("Would you like to use a custom schema? (y/n)").lower() == 'y':
-        csv_path = input("Enter the path to the custom schema csv file:")
+    # Find out if the datasource uses custom table and create test files accordingly
+    if input("Would you like to run TDVT against a schema other than TestV1? (y/n) ").lower() == 'y':
+        custom_schema_name = input("Enter the schema name: ")
+
+    if input("Would you like to run TDVT against a custom table? (y/n)").lower() == 'y':
+        custom_table = True
+        csv_path = input("Enter the path to the custom table csv file:")
 
         output = input("Enter the output path for generated test files (default CWD):")
         output_dir = Path(output)
@@ -84,12 +89,11 @@ def add_datasource(name, ds_registry):
         if logical == 's':
             logical = None
 
-    create_ds_ini_file(name, logical)
+    create_ds_ini_file(name, logical, custom_schema_name, custom_test_dir)
     update_tds_files(name, connection_password_name)
 
 
-def create_ds_ini_file(name, logical_config,
-                       custom_schema: bool = False):  # TODO: Update to be flexible depending on custom schema.
+def create_ds_ini_file(name, logical_config, custom_schema: bool = False, custom_test_dir=None):  # TODO: Update to be flexible depending on custom schema.
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
