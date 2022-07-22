@@ -1,6 +1,5 @@
 <results>
   <test name='ENDSWITH([str2], Null)'>
-      49.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.postgres].[TEMP(Test)(2555269169)(0)]</column>
