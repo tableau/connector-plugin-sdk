@@ -231,11 +231,8 @@ def generate_logical_files(input_dir, output_dir, ds_registry, force=False):
 
     # TODO: Logic will go here to look at ds_registry and either use calcs/staples or use custom table;
     #       that table or those tables will be used in process_test_files below.
-    calcs_fields = CALCS_FIELDS
 
-    staples_fields = STAPLES_FIELDS
-
-    fields = [calcs_fields, staples_fields]
+    fields = [CALCS_FIELDS, STAPLES_FIELDS]
 
     # Go through input and top level subdirs. Create those in the output and then process the files.
     for root, dirs, files in os.walk(input_dir):
