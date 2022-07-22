@@ -314,10 +314,10 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{3})&quot;, 1) //&quot;425&quot;'>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{3})&quot;, 1) //&quot;999&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1745242482)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(44948427)(0)]</column>
       </schema>
       <tuple>
         <value>&quot;999&quot;</value>
@@ -334,40 +334,40 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{4})&quot;, 1) //&quot;7808&quot;'>
+  <test name='REGEXP_EXTRACT_NTH(&quot;999-555-1234 &quot;, &quot;(\d{4})&quot;, 1) //&quot;1234&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(811142114)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(1538934323)(0)]</column>
       </schema>
       <tuple>
         <value>&quot;1234&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 1) //&quot;support@xyz.com&quot;'>
+  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 9995551234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 1) //&quot;support@xyz.com&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2589896552)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(171779559)(0)]</column>
       </schema>
       <tuple>
         <value>&quot;support@xyz.com&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 2) //&quot;on&quot;'>
+  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 9995551234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, 2) //&quot;on&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3331319414)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(2588755660)(0)]</column>
       </schema>
       <tuple>
         <value>&quot; on&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 4255671912 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])(\s\d\d)&quot;, 3) //&quot;11&quot;'>
+  <test name='REGEXP_EXTRACT_NTH(&quot;I called the number 9995551234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])(\s\d\d)&quot;, 3) //&quot;11&quot;'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2185699851)(0)]</column>
+        <column>[cast_calcs.postgres].[TEMP(Test)(867714265)(0)]</column>
       </schema>
       <tuple>
         <value>&quot; 11&quot;</value>
