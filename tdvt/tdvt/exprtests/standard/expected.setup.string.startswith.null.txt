@@ -2,7 +2,7 @@
   <test name='STARTSWITH([str2], Null)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1383748766)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1383748766)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -12,7 +12,7 @@
   <test name='STARTSWITH([str1], Null)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(4104079651)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4104079651)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

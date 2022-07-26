@@ -2,7 +2,7 @@
   <test name='FIND([str1], Null)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1308123450)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1308123450)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -12,7 +12,7 @@
   <test name='FIND([str2], Null)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(160257391)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(160257391)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

@@ -2,28 +2,24 @@
   <test name='FIND(str1, &apos;F&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2687833661)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3932018927)(0)]</column>
       </schema>
       <tuple>
-        <value>0</value>
-      </tuple>
-      <tuple>
-        <value>4</value>
-      </tuple>
-      <tuple>
-        <value>9</value>
+        <value>1</value>
       </tuple>
     </table>
   </test>
   <test name='FIND(str1, &apos;f&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3929268539)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3098842035)(0)]</column>
       </schema>
       <tuple>
-        <value>0</value>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
       </tuple>
     </table>
   </test>
 </results>
-
