@@ -39,4 +39,38 @@
       </tuple>
     </table>
   </test>
+    <test name='REGEXP_REPLACE(&quot;abc&quot;, &quot;(abc)&quot;,&quot;abc&quot;) //&quot;abc&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.googlebigquery].[TEMP(Test)(4108908428)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abc&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;ABC&quot;, &quot;(z)&quot;, &quot;y&quot;) //&quot;ABC&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.googlebigquery].[TEMP(Test)(1967059872)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;ABC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;toyota&quot;, &quot;(o)&quot;,&quot;0&quot;) //&quot;t0y0ta&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.googlebigquery].[TEMP(Test)(4025788428)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;t0y0ta&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, &quot;b&quot;) //&quot;bbb&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.googlebigquery].[TEMP(Test)(4183930898)(0)]</column>
 </results>
