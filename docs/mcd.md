@@ -127,7 +127,7 @@ Additionally there are a set of reserved `name` attribute values not documented 
 
 ### Endpoint
 
-The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.
+The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.  `server` is a required attribute and the packager will give warning if it is not present in `connection-fields.xml` and `connection-resolver.tdr` files.
 
 The connection field names below should specify the `endpoint` category.
 
@@ -148,7 +148,7 @@ The connection field names below can specify the `endpoint` or `general` categor
 
 ### Authentication
 
-The authentication attributes control how and when a user is prompted to enter data source credentials. The primary scenarios where authentication occurs:
+The authentication attributes control how and when a user is prompted to enter data source credentials. `authentication` is a required attribute and the packager will give warning if it is not present in `connection-fields.xml` and `connection-resolver.tdr` files. The primary scenarios where authentication occurs:
 
 - Creating a connection with the connection dialog
 - Opening a workbook and reconnecting to the data source
@@ -341,3 +341,11 @@ The Connection Metadata file below matches the default--that is, what you get if
 The left side image below shows what the Schema Viewer will look like with this Connection Metadata file. The right side shows what it will look like if you remove the `<schema>` element from the file.
 
 ![alt text]({{ site.baseurl }}/assets/mcd-schema-viewer-1.png "Schema Viewer with Connection Metadata file")&nbsp;![alt text]({{ site.baseurl }}/assets/mcd-schema-viewer-2.png "Schema Viewer after removing schema element from Connection Metadata file")
+
+# Reuired Fields
+
+
+
+If you don't provide a Connection Metadata file, then by default all three selectors will be shown.
+
+The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file.
