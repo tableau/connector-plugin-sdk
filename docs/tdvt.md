@@ -545,5 +545,5 @@ Check that any <span style="font-family: courier new">date-format</span> element
 __The agg.countd expression test and the join.null.int logical tests are failing__
 Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
 
-__The date string format vary according to OS date format settings__
+__Date string format varies according to OS date format settings__
 TDVT requires the OS locale be set to English/US so that the dates are formatted mm/dd/yyyy. 
