@@ -341,11 +341,3 @@ The Connection Metadata file below matches the default--that is, what you get if
 The left side image below shows what the Schema Viewer will look like with this Connection Metadata file. The right side shows what it will look like if you remove the `<schema>` element from the file.
 
 ![alt text]({{ site.baseurl }}/assets/mcd-schema-viewer-1.png "Schema Viewer with Connection Metadata file")&nbsp;![alt text]({{ site.baseurl }}/assets/mcd-schema-viewer-2.png "Schema Viewer after removing schema element from Connection Metadata file")
-
-# Reuired Fields
-
-
-
-If you don't provide a Connection Metadata file, then by default all three selectors will be shown.
-
-The Connection Metadata file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/connector_plugin_metadata.xsd)) is the one named in the manifest in the `<connection-metadata>` element. Here we discuss the structure of this file.
