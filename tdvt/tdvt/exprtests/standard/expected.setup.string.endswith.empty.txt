@@ -1,0 +1,25 @@
+<results>
+  <test name='ENDSWITH([str2], &quot;&quot;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4278160486)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='ENDSWITH([str1],&apos;&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1694178741)(0)]</column>
+      </schema>
+      <tuple>
+        <value>true</value>
+      </tuple>
+    </table>
+  </test>
+</results>
