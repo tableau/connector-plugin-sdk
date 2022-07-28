@@ -1,0 +1,2 @@
+STARTSWITH([str2], Null)
+STARTSWITH([str1], Null)
