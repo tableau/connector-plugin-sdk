@@ -116,3 +116,5 @@ Using Regedit on Windows delete this folder from the registry:
 
  Example: 
 `rm $HOME/Library/Preferences/com.tableau.Tableau-2022.2.plist`
+
+**Note:** Removing the `.plist` file remove the connection cache for all the connectors. 
