@@ -69,23 +69,23 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_EXTRACT(&apos;H���rtl - Caaf�&apos;, &apos;-( Ca?+af�)&apos;)'>
+  <test name='REGEXP_EXTRACT(&apos;Hääärtl - Caafé&apos;, &apos;-( Ca?+afé)&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(928305238)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3856522784)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot; Caaf�&quot;</value>
+        <value>&quot; Caafé&quot;</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_REPLACE(&apos;H���rtl - Caaf�&apos;, &apos;-( Ca?+af�)&apos;,&apos;newcafe&apos;)'>
+  <test name='REGEXP_REPLACE(&apos;Hääärtl - Caafé&apos;, &apos;-( Ca?+afé)&apos;,&apos;newcafe&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(1022209434)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2445092460)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;H���rtl newcafe&quot;</value>
+        <value>&quot;Hääärtl newcafe&quot;</value>
       </tuple>
     </table>
   </test>
@@ -299,13 +299,13 @@
         <value>&quot;DOT MATRIX PRINTERS&quot;</value>
       </tuple>
       <tuple>
+        <value>&quot;doubleS&quot;</value>
+      </tuple>
+      <tuple>
         <value>&quot;DVD&quot;</value>
       </tuple>
       <tuple>
         <value>&quot;ERICSSON&quot;</value>
-      </tuple>
-      <tuple>
-        <value>&quot;doubleS&quot;</value>
       </tuple>
     </table>
   </test>
@@ -540,23 +540,23 @@
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_MATCH(&apos;B���T�F�L100&apos;,&apos;(?&lt;=B���T�F�L)\d{3}&apos;)'>
+  <test name='REGEXP_MATCH(&apos;BÊÂÙTÌFÜL100&apos;,&apos;(?&lt;=BÊÂÙTÌFÜL)\d{3}&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(542144291)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(576082448)(0)]</column>
       </schema>
       <tuple>
         <value>true</value>
       </tuple>
     </table>
   </test>
-  <test name='REGEXP_REPLACE(&apos;B���T�F�L100B���T�F�L&apos;,&apos;(?&lt;=B���T�F�L)\d{3}&apos;,&apos;Replaced&apos;)'>
+  <test name='REGEXP_REPLACE(&apos;BÊÂÙTÌFÜL100BÊÂÙTÌFÜL&apos;,&apos;(?&lt;=BÊÂÙTÌFÜL)\d{3}&apos;,&apos;Replaced&apos;)'>
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(2176422136)(0)]</column>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3877500847)(0)]</column>
       </schema>
       <tuple>
-        <value>&quot;B���T�F�LReplacedB���T�F�L&quot;</value>
+        <value>&quot;BÊÂÙTÌFÜLReplacedBÊÂÙTÌFÜL&quot;</value>
       </tuple>
     </table>
   </test>
