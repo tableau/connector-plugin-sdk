@@ -549,7 +549,7 @@ def return_logging_path(args: argparse.ArgumentParser) -> str:
             sys.exit("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
         else:
             pass
-    return 'tdvt.log_combined.txt'
+    return 'tdvt_log_combined.txt'
 
 
 def init():
