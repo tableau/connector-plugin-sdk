@@ -1,6 +1,7 @@
 import re
 import sys
 from pathlib import Path
+from typing import Optional
 
 from .config_gen.datasource_list import print_logical_configurations
 from .config_gen.test_creator import TestCreator
@@ -93,7 +94,12 @@ def add_datasource(name, ds_registry):
     update_tds_files(name, connection_password_name)
 
 
-def create_ds_ini_file(name, logical_config, custom_schema: bool = False, custom_test_dir=None):  # TODO: Update to be flexible depending on custom schema.
+def create_ds_ini_file(
+        name,
+        logical_config,
+        custom_schema_name: Optional[str]=None,
+        custom_test_dir: Optional[str]=None
+):  # TODO: Update to be flexible depending on custom schema.
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
