@@ -10,10 +10,6 @@
     </table>
   </test>
   <test name='CONTAINS([str2], Null)'>
-    <sql>
-      SELECT TABLEAU.CONTAINS(&quot;Extract&quot;.&quot;str2&quot;,null::text) AS &quot;TEMP(Test)(1217164105)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      11.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1217164105)(0)]</column>
