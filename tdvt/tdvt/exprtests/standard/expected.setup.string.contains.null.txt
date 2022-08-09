@@ -1,9 +1,5 @@
 <results>
   <test name='CONTAINS([str1], Null)'>
-    <sql>
-      SELECT TABLEAU.CONTAINS(&quot;Extract&quot;.&quot;str1&quot;,null::text) AS &quot;TEMP(Test)(1991836379)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      24.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1991836379)(0)]</column>
