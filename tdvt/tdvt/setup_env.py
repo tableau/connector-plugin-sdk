@@ -51,7 +51,9 @@ def add_datasource(name, ds_registry):
 
     connection_password_name = name + "_connection"
     if input(
-            "Would you like to setup a password file? (y/n) This is suitable for a single connection per tds (standard).").lower() == 'y':  # noqa: E501
+            "Would you like to setup a password file? (y/n) "
+            "This is suitable for a single connection per tds (standard). "
+    ).lower() == 'y':
         password = input("Enter the datasource password:")
         create_password_file(name, connection_password_name, password)
     picked = False
@@ -63,14 +65,14 @@ def add_datasource(name, ds_registry):
     if input("Would you like to run TDVT against a schema other than TestV1? (y/n) ").lower() == 'y':
         custom_schema_name = input("Enter the schema name: ")
 
-    if input("Would you like to run TDVT against a custom table? (y/n)").lower() == 'y':
+    if input("Would you like to run TDVT against a custom table? (y/n) ").lower() == 'y':
         custom_table = True
-        csv_path = input("Enter the path to the custom table csv file:")
+        csv_path = input("Enter the path to the custom table csv file: ")
 
-        output = input("Enter the output path for generated test files (default CWD):")
+        output = input("Enter the output path for generated test files (default CWD): ")
         output_dir = Path(output)
         if not output_dir.is_dir():
-            print("Output directory does not exist. Please try again")
+            print("Output directory does not exist. Please try again.")
             sys.exit()
 
         tc = TestCreator(csv_path, name, output_dir)
@@ -79,7 +81,8 @@ def add_datasource(name, ds_registry):
 
     while not picked:
         logical = input(
-            "Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now:")  # naqa: E501
+            "Enter the logical config to use or type 'list' to see the options or 's' to skip selecting one now: "
+        )
         if logical == 'list':
             print_logical_configurations(ds_registry)
         else:
