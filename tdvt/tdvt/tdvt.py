@@ -108,6 +108,7 @@ class TestRunner():
         self.test_set = test_set
         self.test_config = test_config
         self.error_code = 0
+        self.generate_expected = test_config.generate_expected
         self.thread_id = thread_id
         self.verbose = verbose
         self.thread_lock = lock
@@ -483,6 +484,8 @@ def create_parser():
     run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
                                         help='Writes log files to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
+    run_test_common_parser.add_argument('--generate_expected', dest='generate_expected', action='store_true',
+                                        help='Generate expected value files.', required=False)                        
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.

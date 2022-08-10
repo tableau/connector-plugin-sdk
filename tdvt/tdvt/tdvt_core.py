@@ -28,9 +28,6 @@ from .tabquery import build_connectors_test_tabquery_command_line
 from .tabquery import build_tabquery_command_line
 from .test_results import *
 
-ALWAYS_GENERATE_EXPECTED = False
-
-
 class ConnectorsTest(object):
     def __init__(self, conn_test_name, conn_test_file, conn_test_password_file):
         self.conn_test_name = conn_test_name
@@ -385,7 +382,7 @@ def compare_results(test_name, test_file, full_test_file, work):
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
             logging.debug(work.get_thread_msg() + "Did not find expected file " + expected_file)
-            if ALWAYS_GENERATE_EXPECTED:
+            if test_config.generate_expected:
                 # There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
                 # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
                 logging.debug(
@@ -423,7 +420,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         expected_file_version = expected_file_version + 1
 
     # Exhausted all expected files. The test failed.
-    if ALWAYS_GENERATE_EXPECTED:
+    if test_config.generate_expected:
         # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
         actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
                                                                                               base_test_file,

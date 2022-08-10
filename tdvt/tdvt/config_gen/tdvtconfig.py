@@ -30,6 +30,7 @@ class TdvtInvocation(object):
         self.tds = ''
         self.tested_run_time_config = None
         self.tabquery_path = ''
+        self.generate_expected = False
 
         if from_args:
             self.init_from_args(from_args)
@@ -60,6 +61,8 @@ class TdvtInvocation(object):
             self.verbose = args.verbose
         if args.custom_output_dir:
             self.custom_output_dir = args.custom_output_dir
+        if args.generate_expected:
+            self.generate_expected = True
 
     def init_from_json(self, json):
         self.tested_sql = json.get('tested_sql', self.tested_sql)
