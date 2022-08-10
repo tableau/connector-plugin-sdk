@@ -54,7 +54,7 @@ def add_datasource(name, ds_registry):
             "Would you like to setup a password file? (y/n) "
             "This is suitable for a single connection per tds (standard). "
     ).lower() == 'y':
-        password = input("Enter the datasource password:")
+        password = input("Enter the datasource password: ")
         create_password_file(name, connection_password_name, password)
     picked = False
     logical = None
@@ -69,8 +69,12 @@ def add_datasource(name, ds_registry):
         custom_table = True
         csv_path = input("Enter the path to the custom table csv file: ")
 
-        output = input("Enter the output path for generated test files (default CWD): ")
-        output_dir = Path(output)
+        output = input("Enter the output path for generated test files (default CWD/custom_tests): ")
+        output_dir = None
+        if output.lower() != '':
+            output_dir = Path(Path(os.getcwd()) / 'custom_tests')
+        else:
+            output_dir = Path(output)
         if not output_dir.is_dir():
             print("Output directory does not exist. Please try again.")
             sys.exit()
@@ -93,7 +97,7 @@ def add_datasource(name, ds_registry):
         if logical == 's':
             logical = None
 
-    create_ds_ini_file(name, logical, custom_schema_name, custom_test_dir)
+    create_ds_ini_file(name, logical, custom_schema_name, output_dir)
     update_tds_files(name, connection_password_name)
 
 
