@@ -485,7 +485,7 @@ def create_parser():
                                         help='Writes log files to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
     run_test_common_parser.add_argument('--generate_expected', dest='generate_expected', action='store_true',
-                                        help='Generate expected value files.', required=False)                        
+                                        help='Generate expected value files.', required=False)
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
