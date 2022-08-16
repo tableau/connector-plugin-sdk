@@ -59,4 +59,54 @@
       </tuple>
     </table>
   </test>
+  <test name='DATEDIFF(&apos;iso-weekday&apos;, DATETIME(#2014-12-29 00:00:00#), DATETIME(#2014-12-29 00:00:00#)) // 0'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3913663284)(0)]</column>
+      </schema>
+      <tuple>
+        <value>0</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-weekday&apos;, DATETIME(#2014-12-29 00:00:00#), DATETIME(#2015-01-04 00:00:00#)) // 6'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(4037347153)(0)]</column>
+      </schema>
+      <tuple>
+        <value>6</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-weekday&apos;, DATETIME(#2013-12-30 00:00:00#), DATETIME(#2014-01-07 00:00:00#)) // 8'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2280193443)(0)]</column>
+      </schema>
+      <tuple>
+        <value>8</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-weekday&apos;, DATETIME(#2014-01-07 00:00:00#), DATETIME(#2013-12-30 00:00:00#)) // -8'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(415906835)(0)]</column>
+      </schema>
+      <tuple>
+        <value>-8</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='DATEDIFF(&apos;iso-weekday&apos;, DATETIME(#2014-12-28 00:00:00#), DATETIME(#2015-12-28 00:00:00#)) // 365'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(2535829540)(0)]</column>
+      </schema>
+      <tuple>
+        <value>365</value>
+      </tuple>
+    </table>
+  </test>
 </results>
