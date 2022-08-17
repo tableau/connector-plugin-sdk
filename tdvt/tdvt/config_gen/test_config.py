@@ -5,6 +5,8 @@
 
 import glob
 import re
+from typing import Optional
+
 from ..resources import *
 from ..tabquery_path import TabQueryPath
 
@@ -259,7 +261,7 @@ class RunTimeTestConfig(object):
             maxthread: int=0,
             d_override: str='',
             run_as_perf: bool=False,
-            schema_name: str='TestV1'
+            schema_name: Optional[str]=None,
     ):
         self.timeout_seconds = timeout_seconds
         self.d_override = d_override

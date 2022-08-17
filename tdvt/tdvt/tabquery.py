@@ -79,6 +79,9 @@ class TabqueryCommandLine(object):
         cmdline.extend(tds_arg)
         cmdline.extend(["--combined"])
 
+        if work.test_config.tested_run_time_config.schema_name:
+            cmdline.extend(["--schema", work.test_config.tested_run_time_config.schema_name])
+
         password_file = work.test_set.get_password_file_name()
         if os.path.isfile(password_file):
             password_arg = ["--password-file", password_file]

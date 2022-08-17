@@ -308,15 +308,14 @@ def load_test(config, test_dir=get_root_dir()):
     # TODO: This is for custom tables with custom schema
     if custom_schema_tests in config.sections():
         try:
-            custom_schema_tests = config[custom_schema_tests]
-            tds_name = custom_schema_tests.get('TDS', '')
-            custom_test_dir = custom_schema_tests.get('TestDir', '')
+            cst = config[custom_schema_tests]
+            tds_name = cst.get('TDS', '')
             all_ini_sections.remove(custom_schema_tests)
             test_config.add_expression_test(
-                'expression.custom_schema.', tds_name, custom_schema_tests.get(KEY_EXCLUSIONS, ''),
-                'exprtests/percentile', custom_test_dir, get_password_file(custom_schema_tests),
-                get_expected_message(custom_schema_tests), get_is_smoke_test(custom_schema_tests),
-                get_is_test_enabled(custom_schema_tests), False
+                'custom_tests', tds_name, cst.get(KEY_EXCLUSIONS, ''),
+                'exprtests/custom_tests', test_dir, get_password_file(cst),
+                get_expected_message(cst), get_is_smoke_test(cst),
+                get_is_test_enabled(cst), False
             )
         except KeyError as e:
             logging.debug(e)

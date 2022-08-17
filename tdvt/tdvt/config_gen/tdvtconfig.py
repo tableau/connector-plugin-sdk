@@ -1,6 +1,7 @@
 """ Test result and configuration related classes. """
 
 import sys
+from typing import Optional
 
 from .test_config import TestConfig, RunTimeTestConfig
 
@@ -31,7 +32,7 @@ class TdvtInvocation(object):
         self.tested_run_time_config = None
         self.tabquery_path = ''
         self.generate_expected = False
-        self.schema_name: str = 'TestV1'
+        self.schema_name: Optional[str] = None
 
         if from_args:
             self.init_from_args(from_args)

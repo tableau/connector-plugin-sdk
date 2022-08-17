@@ -1,3 +1,4 @@
+import os
 import re
 import sys
 from pathlib import Path
@@ -59,7 +60,8 @@ def add_datasource(name, ds_registry):
     picked = False
     logical = None
     custom_schema_name = None
-    custom_table_name = None
+    output_dir = None
+    tds_name = None
 
     # Find out if the datasource uses custom table and create test files accordingly
     if input("Would you like to run TDVT against a schema other than TestV1? (y/n) ").lower() == 'y':
@@ -67,17 +69,23 @@ def add_datasource(name, ds_registry):
 
     if input("Would you like to run TDVT against a custom table? (y/n) ").lower() == 'y':
         custom_table = True
+        tds_name = input("What is the name of your tds file? ")
         csv_path = input("Enter the path to the custom table csv file: ")
 
-        output = input("Enter the output path for generated test files (default CWD/custom_tests): ")
-        output_dir = None
-        if output.lower() != '':
-            output_dir = Path(Path(os.getcwd()) / 'custom_tests')
+        print("Creating tdvt/exprtests/custom_tests if it does not exist.")
+        if os.path.isdir('tdvt/exprtests/custom_tests'):
+            print("tdvt/exprtests/custom_tests already exists.")
+            print("Please make sure the directory is empty before continuing.")
+            ignored_input = ("Press any key to continue. ")
         else:
-            output_dir = Path(output)
-        if not output_dir.is_dir():
-            print("Output directory does not exist. Please try again.")
-            sys.exit()
+            try:
+                os.mkdir('exprtests/custom_tests')
+            except Exception as e:
+                print("Could not create custom_tests directory. Error was " + str(e))
+                print("Please create the directory manually and run the script again.")
+        output_dir = Path(Path(os.getcwd()) / 'tdvt/exprtests/custom_tests')
+
+        print("Test directory created. Generating setup files to enumerate table rows.")
 
         tc = TestCreator(csv_path, name, output_dir)
         headers, formatted_results = tc.parse_csv_to_list()
@@ -97,16 +105,26 @@ def add_datasource(name, ds_registry):
         if logical == 's':
             logical = None
 
-    create_ds_ini_file(name, logical, custom_schema_name, output_dir)
-    update_tds_files(name, connection_password_name)
+    create_ds_ini_file(name, logical, custom_schema_name, tds_name)
+    if not custom_table:
+        update_tds_files(name, connection_password_name)
+
+    if output_dir:
+        print("Setup complete.")
+        print("Please run your test against your custom table by running the following command:")
+        print("\tpython -m tdvt.tdvt run {} --generate_expected".format(name))
+        print("This will generate the expected results for the test in:")
+        print("\t{}".format(output_dir))
+        print("After you verify the contents of the expecteds, tests can be run with:")
+        print("\tpython -m tdvt.tdvt run {}".format(name))
 
 
 def create_ds_ini_file(
         name,
         logical_config,
-        custom_schema_name: Optional[str]=None,
-        custom_test_dir: Optional[str]=None
-):  # TODO: Update to be flexible depending on custom schema.
+        custom_schema_name: Optional[str] = None,
+        tds_name: Optional[str] = None
+):
     try:
         ini_path = 'config/' + name + '.ini'
         if os.path.isfile(ini_path):
@@ -121,19 +139,22 @@ def create_ds_ini_file(
             ini.write('LogicalQueryFormat = TODO\n')
         else:
             ini.write('LogicalQueryFormat = ' + logical_config + '\n')
+        if custom_schema_name:
+            ini.write('SchemaName = ' + custom_schema_name + '\n')
         ini.write('\n')
-        # TODO: the next part is taken out for custom schema
-        ini.write('[StandardTests]\n')
-        ini.write('\n')
-        ini.write('[LODTests]\n')
-        ini.write('\n')
-        ini.write('[UnionTest]\n')
-        ini.write('\n')
-        ini.write('[ConnectionTests]\n')
-        ini.write('StaplesTestEnabled = True\n')
-        ini.write('CastCalcsTestEnabled = True\n')
-        # TODO: custom schema block goes here
-        # blah
+        if not tds_name:
+            ini.write('[StandardTests]\n')
+            ini.write('\n')
+            ini.write('[LODTests]\n')
+            ini.write('\n')
+            ini.write('[UnionTest]\n')
+            ini.write('\n')
+            ini.write('[ConnectionTests]\n')
+            ini.write('StaplesTestEnabled = True\n')
+            ini.write('CastCalcsTestEnabled = True\n')
+        if tds_name:
+            ini.write('[CustomSchemaTests]\n')
+            ini.write('TDS = ' + tds_name + '\n')
         ini.write('\n')
 
         print("Created ini file: " + ini_path)

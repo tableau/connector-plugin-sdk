@@ -115,7 +115,7 @@ class BatchQueueWork(object):
 
     def create_test_result(self, test_result_file, test_category):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                          test_result_file.relative_test_file, self.test_set, test_category, TestMetadata('Unknown'))
+                            test_result_file.relative_test_file, self.test_set, test_category, TestMetadata('Unknown'))
         test_name = result.get_name()
         if test_name in self.metadata_map:
             result.test_metadata = self.metadata_map[test_name]
