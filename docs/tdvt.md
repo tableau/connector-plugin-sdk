@@ -581,4 +581,4 @@ __test.txt__
 C:\connector-plugin-sdk\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B1713.simple.xml
 C:\connector-plugin-sdk\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B27875-asc-nulls-first.simple.xml
 ```
-The logs (`jprotocolserver.log` and `log.txt`) for the TDVT test are generated in the specified log folder which can be used to debug the TDVT test in the Tableau server. git c
+The logs (`jprotocolserver.log` and `log.txt`) for the TDVT test are generated in the specified log folder which can be used to debug the TDVT test in the Tableau server.
