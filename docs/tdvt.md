@@ -544,3 +544,41 @@ Check that any <span style="font-family: courier new">date-format</span> element
 
 __The agg.countd expression test and the join.null.int logical tests are failing__
 Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
+
+## Running TDVT test with tabquerytoolsrv.exe
+You can run a particular TDVT test with the help of a test setup file using tabquerytoolsrv.exe. `tabquerytoolsrv.exe` is located in `C:\Program Files\Tableau\Tableau Server\packages\bin.<version_code>\tabquerytoolsrv.exe` for Windows and `/opt/tableau/tableau_server/packages/bin.<version_code>/tabquerytoolsrv` for Linux. 
+ Before being able to run TDVT tests using tabquerytoolsrv make sure that: 
+   - Your instance of the tableau server is running 
+   - Your server license has been activated 
+Once the above steps are verified you should be able to run TDVT tests using tabquerytoolsrv by running the following command:
+
+__For Windows__
+```
+ tabquerytoolsrv.exe --query-file-list D:\test\tests.txt -d D:\path_to_tds\cast_calcs.db.tds --combined --password-file D:\path_to_tds\db.password --output-dir D:\test -DLogDir=D:\test -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable -DParamFile="C:\ProgramData\Tableau\Tableau Server\data\tabsvc\config\minerva_0.<version_code>\workgroup.yml,C:\ProgramData\Tableau\Tableau Server\data\tabsvc\config\minerva_0.<version_code>\minerva.yml"
+Attempting to run query...
+Run query successful! Check output file
+```
+
+__For Linux:__
+```
+./tabquerytoolsrv  --query-file-list ~/test/tests.txt -d  ~/path_to_tds/cast_calcs.db.tds --combined --password-file ~/path_to_tds/db.password --output-dir ~/test -DLogDir=~/test -DOverride=ProtocolServerNewLog -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable -DParamFile="/var/opt/tableau/tableau_server/data/tabsvc/config/minerva_0.<version_code>/workgroup.yml,/var/opt/tableau/tableau_server/data/tabsvc/config/minerva_0.<version_code>/minerva.yml
+Attempting to run query...
+Run query successful! Check output file
+```
+
+Here, 
+```
+query-file-list: File containing the list of Logical Query files
+DLogDir: The directory where logs are written
+password-file: Optional path to a file containing the password for the .tds file
+DParamFile: Verifies that a valid license exists for tableau server
+```
+
+The path to the tests that need to get tested should be added to the test.txt file. Please select the correct version of the test based on how tables are structured in your database.The `test.xml` files are located in the [connector-sdk](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt) repository. An example of tests.txt file in windows for the above command is 
+
+__test.txt__
+```
+C:\connector-plugin-sdk\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B1713.simple.xml
+C:\connector-plugin-sdk\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B27875-asc-nulls-first.simple.xml
+```
+The logs (`jprotocolserver.log` and `log.txt`) for the TDVT test are generated in the specified log folder which can be used to debug the TDVT test in the Tableau server. git c
