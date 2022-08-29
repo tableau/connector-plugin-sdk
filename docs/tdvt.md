@@ -97,6 +97,8 @@ Note that tdvt_workspace should contain the following subdirectories: config, pl
    For example:
    `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 1234.1\bin\tabquerytool.exe`
 
+__Note:__ For setting up TDVT using Tableau Linux Server please click [here](/connector-plugin-sdk/docs/tdvt#running-tdvt-test-with-tabquerytoolsrv-in-linux-server). 
+
 
 
 ## About running TDVT
