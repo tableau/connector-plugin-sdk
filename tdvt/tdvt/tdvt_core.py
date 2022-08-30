@@ -16,17 +16,18 @@ import subprocess
 import sys
 import time
 import zipfile
+from typing import Dict, List, Optional, Tuple
 
-from defusedxml.ElementTree import parse, ParseError
-from typing import Dict, Optional, Tuple
+from defusedxml.ElementTree import ParseError, parse
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
-from .constants import PERFLAB_CSV_HEADERS, TUPLE_DISPLAY_LIMIT, DEFAULT_CSV_HEADERS
+from .constants import (DEFAULT_CSV_HEADERS, PERFLAB_CSV_HEADERS,
+                        TUPLE_DISPLAY_LIMIT)
 from .resources import *
-from .tabquery import build_connectors_test_tabquery_command_line
-from .tabquery import build_tabquery_command_line
+from .tabquery import (build_connectors_test_tabquery_command_line,
+                       build_tabquery_command_line)
 from .test_results import *
 
 ALWAYS_GENERATE_EXPECTED = False
@@ -642,7 +643,7 @@ def return_csv_dialect(is_perf_run: bool = False):
         return 'tdvt'
 
 
-def get_csv_header_data(all_test_results, is_perf_run: bool):
+def get_csv_header_data(all_test_results, is_perf_run: bool) -> List[str]:
     if is_perf_run:
         csv_header = PERFLAB_CSV_HEADERS
     else:
