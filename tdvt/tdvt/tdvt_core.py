@@ -566,9 +566,9 @@ def get_csv_row_data(tds_name: str, test_name: str, test_path: str, test_result:
             columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
                    test_case_name, test_type, priority, categories, functions, cmd_output, error_msg, error_type,
                    time, generated_sql, actual_tuples, expected_tuples]
-        if test_result.test_config.tested_sql and not perf_run:
+        if test_result.test_config.tested_sql and not is_perf_run:
             columns.extend([expected_sql, expected_time])
-        if test_result.test_config.tested_error and not perf_run:
+        if test_result.test_config.tested_error and not is_perf_run:
             columns.extend([actual_error, expected_error])
         return columns
 
