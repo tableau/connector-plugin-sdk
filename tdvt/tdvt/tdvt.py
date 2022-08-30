@@ -34,6 +34,9 @@ from .version import __version__
 from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
 
 
+TDVT_LOG_FILE_NAME = 'tdvt_log_combined.txt'
+
+
 class TestOutputFiles(object):
     output_actuals = 'tdvt_actuals_combined.zip'
     output_tabquery_log = 'tabquery_logs.zip'
@@ -559,12 +562,12 @@ def check_if_custom_output_dir_exists(custom_output_dir: str) -> bool:
 def return_logging_path(args: argparse.ArgumentParser) -> str:
     if hasattr(args, 'custom_output_dir'):
         if args.custom_output_dir is not None and check_if_custom_output_dir_exists(args.custom_output_dir):
-            return os.path.join(args.custom_output_dir, 'tdvt_log_combined.txt')
+            return os.path.join(args.custom_output_dir, TDVT_LOG_FILE_NAME)
         elif args.custom_output_dir is not None:
             sys.exit("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
         else:
             pass
-    return 'tdvt.log_combined.txt'
+    return TDVT_LOG_FILE_NAME
 
 
 def init():
