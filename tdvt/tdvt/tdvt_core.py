@@ -697,7 +697,7 @@ def write_csv_test_output(
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
         if not test_result or not test_result.get_test_case_count():
-            csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result, perf_run))
+            csv_out.writerow(get_csv_row_data(tdsname, test_name, path, test_result))
             if not test_result.all_passed():
                 total_failed_tests += 1
             total_tests += 1

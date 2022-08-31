@@ -489,6 +489,8 @@ def create_parser():
     run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
                                         help='Writes log files to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
+    run_test_common_parser.add_argument('--perf-run', dest='perf_run', action='store_true', default=False)
+    run_test_common_parser.add_argument('--iteration', dest='perf_iteration', type=int)
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
@@ -512,8 +514,6 @@ def create_parser():
     run_test_parser.add_argument('--force-run', dest='force_run', action='store_true', help='Attempts to run the tests for a data source, even if its smoke tests fail.')
     run_test_parser.add_argument('--logical', '-q', dest='logical_only', help='Only run logical tests whose config file name matches the supplied string, or all if blank.', required=False, default=None, const='*', nargs='?')
     run_test_parser.add_argument('--expression', '-e', dest='expression_only', help='Only run expression tests whose config file name matches the suppled string, or all if blank.', required=False, default=None, const='*', nargs='?')
-    run_test_parser.add_argument('--perf-run', dest='perf_run', action='store_true')
-    run_test_parser.add_argument('--iteration', dest='perf_iteration', type=int)
 
     #Run test pattern.
     run_test_pattern_parser = subparsers.add_parser('run-pattern', help='Run individual tests using a pattern.', parents=[run_test_common_parser], usage=run_pattern_usage_text)
