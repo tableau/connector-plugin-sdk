@@ -573,5 +573,5 @@ Example mydb.ini file
    ...
    ```
 
-You should be able to run the TDVT tests following the steps in [this](/connector-plugin-sdk/docs/tdvt) doc. 
+You should be able to run the TDVT tests following the steps in [this]({{ site.baseurl }}/docs/tdvt) doc. 
 
