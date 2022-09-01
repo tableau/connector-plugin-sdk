@@ -97,6 +97,8 @@ Note that tdvt_workspace should contain the following subdirectories: config, pl
    For example:
    `TAB_CLI_EXE_X64 = C:\Program Files\Tableau\Tableau 1234.1\bin\tabquerytool.exe`
 
+__Note:__ For setting up TDVT using Tableau Linux Server please click [here](/connector-plugin-sdk/docs/tdvt#running-tdvt-test-with-tabquerytoolsrv-in-linux-server). 
+
 
 
 ## About running TDVT
@@ -544,3 +546,32 @@ Check that any <span style="font-family: courier new">date-format</span> element
 
 __The agg.countd expression test and the join.null.int logical tests are failing__
 Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
+
+## Running TDVT test with tabquerytoolsrv in Linux Server
+You can run TDVT tests by configuring the setup file below to use `tabquerytoolsrv`. `tabquerytoolsrv` is located in `/opt/tableau/tableau_server/packages/bin.<version_code>/tabquerytoolsrv`, where <version_code> corresponds to the version of Tableau Server (ie 2022.3).
+ Before being able to run TDVT tests using tabquerytoolsrv make sure that: 
+   - Your instance of the tableau server is running. Click [here](https://help.tableau.com/current/server/en-us/cli_start_tsm.htm) for more details.
+   - Your server license has been activated. Click [here](https://help.tableau.com/current/server/en-us/cli_licenses_tsm.htm) for more details. 
+
+Once the above steps are verified you should be able to run TDVT tests using `tabquerytoolsrv` by running the following command:
+Update the `tdvt_override.ini` file to use `tabquerytoolsrv`
+
+   ```
+   [DEFAULT]
+   TAB_CLI_EXE_LINUX = /opt/tableau/tableau_server/packages/bin.<version_code>/tabquerytoolsrv
+   ```
+Update the mydb.ini file to have `-DParamFile` which specifies the as a `CommandLineOverride`. 
+Example mydb.ini file
+
+   ```ini
+   [Datasource]
+   Name = mydb
+   LogicalQueryFormat = simple
+   CommandLineOverride = -DParamFile=/var/opt/tableau/tableau_server/data/tabsvc/config/minerva_0.<version_code>/workgroup.yml,/var/opt/tableau/tableau_server/data/tabsvc/config/minerva_0.<version_code>/minerva.yml
+   [StandardTests]
+   ExpressionExclusions_Standard = string.isdate
+   ...
+   ```
+
+You should be able to run the TDVT tests following the steps in [this]({{ site.baseurl }}/docs/tdvt) doc. 
+
