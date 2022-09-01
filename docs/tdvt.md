@@ -548,7 +548,7 @@ __The agg.countd expression test and the join.null.int logical tests are failing
 Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
 
 ## Running TDVT test with tabquerytoolsrv in Linux Server
-You can run a particular TDVT tests with the help of a test setup file using `tabquerytoolsrv`. `tabquerytoolsrv` is located in `/opt/tableau/tableau_server/packages/bin.<version_code>/tabquerytoolsrv`.
+You can run TDVT tests by configuring the setup file below to use `tabquerytoolsrv`. `tabquerytoolsrv` is located in `/opt/tableau/tableau_server/packages/bin.<version_code>/tabquerytoolsrv`.
  Before being able to run TDVT tests using tabquerytoolsrv make sure that: 
    - Your instance of the tableau server is running. Click [here](https://help.tableau.com/current/server/en-us/cli_start_tsm.htm) for more details.
    - Your server license has been activated. Click [here](https://help.tableau.com/current/server/en-us/cli_licenses_tsm.htm) for more details. 
