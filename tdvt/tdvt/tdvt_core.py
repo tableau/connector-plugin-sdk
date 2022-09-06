@@ -43,15 +43,8 @@ class ConnectorsTest(object):
 
     def run_connectors_test(self):
         cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file, self.conn_test_password_file)
-        self.cmd_output = str(
-            subprocess.check_call(
-                cmdline,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT,
-                universal_newlines=True,
-                timeout=self.timeout_seconds
-            )
-        )
+        self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
+                                                      timeout=self.timeout_seconds))
         print(self.cmd_output)
         sys.exit(0)
 
@@ -258,16 +251,8 @@ class BatchQueueWork(object):
         self.load_test_metadata()
 
     def run_process(self, cmdline):
-        self.cmd_output = str(
-            subprocess.check_call(
-                cmdline,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.STDOUT,
-                universal_newlines=True,
-                timeout=self.timeout_seconds
-            )
-        )
-
+        self.cmd_output = str(subprocess.check_output(cmdline, stderr=subprocess.STDOUT, universal_newlines=True,
+                                                      timeout=self.timeout_seconds))
     def run(self, test_list):
 
         if self.test_set.test_is_enabled is False:
