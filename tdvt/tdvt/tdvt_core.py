@@ -23,8 +23,7 @@ from defusedxml.ElementTree import ParseError, parse
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
-from .constants import (DEFAULT_CSV_HEADERS, PERFLAB_CSV_HEADERS,
-                        TUPLE_DISPLAY_LIMIT)
+from .constants import DEFAULT_CSV_HEADERS, PERFLAB_CSV_HEADERS, TUPLE_DISPLAY_LIMIT
 from .resources import *
 from .tabquery import (build_connectors_test_tabquery_command_line,
                        build_tabquery_command_line)
