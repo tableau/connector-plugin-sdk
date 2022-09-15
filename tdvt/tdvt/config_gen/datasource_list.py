@@ -77,15 +77,14 @@ def get_expected_message(config):
 
 
 def get_is_smoke_test(config):
-    return config.get('SmokeTest', 'False') == 'True'
+    return config.getboolean('SmokeTest', True)
 
 
 def get_is_test_enabled(config, key_name=None):
     if key_name:
-        return config.get(key_name, 'True') == 'True'
+        return config.getboolean(key_name, True)
     else:
-        return config.get('Enabled', 'True') == 'True'
-
+        return config.getboolean('Enabled', True)
 
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
