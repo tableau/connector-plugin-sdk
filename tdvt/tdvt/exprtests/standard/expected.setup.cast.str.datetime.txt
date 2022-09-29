@@ -1,9 +1,5 @@
 <results>
   <test name='DATETIME(&apos;1900-01-01 01:00:00&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATETIME(&apos;1900-01-01 01:00:00&apos;) AS &quot;TEMP(Test)(3780030237)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      16.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3780030237)(0)]</column>
@@ -14,10 +10,6 @@
     </table>
   </test>
   <test name='DATETIME(&apos;1900-12-30 12:00:00&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATETIME(&apos;1900-12-30 12:00:00&apos;) AS &quot;TEMP(Test)(4058757556)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      11.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(4058757556)(0)]</column>
@@ -28,10 +20,6 @@
     </table>
   </test>
   <test name='DATETIME(&apos;1900-12-31 23:59:59&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATETIME(&apos;1900-12-31 23:59:59&apos;) AS &quot;TEMP(Test)(1074810153)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      12.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(1074810153)(0)]</column>
@@ -42,10 +30,6 @@
     </table>
   </test>
   <test name='DATETIME(&apos;2018-01-01 01:00:00&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATETIME(&apos;2018-01-01 01:00:00&apos;) AS &quot;TEMP(Test)(2063044213)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      12.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(2063044213)(0)]</column>
@@ -56,10 +40,6 @@
     </table>
   </test>
   <test name='DATETIME(&apos;2018-12-29 12:00:00&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATETIME(&apos;2018-12-29 12:00:00&apos;) AS &quot;TEMP(Test)(3918407122)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      12.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(3918407122)(0)]</column>
@@ -70,10 +50,6 @@
     </table>
   </test>
   <test name='DATETIME(&apos;2018-12-31 23:59:59&apos;)'>
-    <sql>
-      SELECT TABLEAU.DATETIME(&apos;2018-12-31 23:59:59&apos;) AS &quot;TEMP(Test)(4279642737)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;HAVING (COUNT(1) &gt; 0)&#10;    </sql>
-    <query-time>
-      12.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(4279642737)(0)]</column>
@@ -84,10 +60,6 @@
     </table>
   </test>
   <test name='DATETIME(STR([datetime0]))'>
-    <sql>
-      SELECT TABLEAU.DATETIME(CAST(&quot;Extract&quot;.&quot;datetime0&quot; AS TEXT OR NULL)) AS &quot;TEMP(Test)(643525976)(0)&quot;&#10;FROM &quot;Extract&quot;.&quot;Extract&quot; &quot;Extract&quot;&#10;GROUP BY 1&#10;    </sql>
-    <query-time>
-      12.000&#10;    </query-time>
     <table>
       <schema>
         <column>[cast_calcs.hyper].[TEMP(Test)(643525976)(0)]</column>
