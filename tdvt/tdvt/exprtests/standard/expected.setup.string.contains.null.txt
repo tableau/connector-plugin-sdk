@@ -1,0 +1,22 @@
+<results>
+  <test name='CONTAINS([str1], Null)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1991836379)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='CONTAINS([str2], Null)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(1217164105)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+    </table>
+  </test>
+</results>

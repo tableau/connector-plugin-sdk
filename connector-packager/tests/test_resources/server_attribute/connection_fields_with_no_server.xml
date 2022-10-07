@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+
+  <field name="port" label="Port" value-type="string" category="endpoint" default-value="5432" />
+
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
+  <field name="username" label="Username" value-type="string" category="authentication" />
+
+  <field name="password" label="Password" value-type="string" category="authentication" secure="true" />
+
+</connection-fields>
