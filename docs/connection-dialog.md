@@ -100,3 +100,21 @@ __connectionProperties.js (JDBC only)__
 ## Localize your connector
 
 For information on localizing your connection dialogs, see [Localize Your Connector]({{ site.baseurl }}/docs/localize).
+
+## Clear Connection Cache
+Clearing the connection cache might be a necessary step in the development and testing of the connection. To clear last successful connection cache you need to:
+
+**For Windows**
+
+Using Regedit on Windows delete this folder from the registry: 
+`Computer\HKEY_CURRENT_USER\SOFTWARE\Tableau\Tableau <version>\ConnectionSettings\<connector_class>`
+
+**For Mac** 
+
+ Follow the following commands
+`rm $HOME/Library/Preferences/com.tableau.Tableau-version.plist`
+
+ Example: 
+`rm $HOME/Library/Preferences/com.tableau.Tableau-2022.2.plist`
+
+**Note:** Removing the `.plist` file remove the connection cache for all the connectors. 

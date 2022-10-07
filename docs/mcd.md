@@ -127,7 +127,7 @@ Additionally there are a set of reserved `name` attribute values not documented 
 
 ### Endpoint
 
-The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.
+The endpoint attributes describe the unique parameters of a connection. Many connections provide additional field names and values not defined by the platform.  `server` is a required attribute and the packager will give warning if it is not present in `connection-fields.xml` and `connection-resolver.tdr` files.
 
 The connection field names below should specify the `endpoint` category.
 
@@ -148,7 +148,7 @@ The connection field names below can specify the `endpoint` or `general` categor
 
 ### Authentication
 
-The authentication attributes control how and when a user is prompted to enter data source credentials. The primary scenarios where authentication occurs:
+The authentication attributes control how and when a user is prompted to enter data source credentials. `authentication` is a required attribute and the packager will give warning if it is not present in `connection-fields.xml` and `connection-resolver.tdr` files. The primary scenarios where authentication occurs:
 
 - Creating a connection with the connection dialog
 - Opening a workbook and reconnecting to the data source
