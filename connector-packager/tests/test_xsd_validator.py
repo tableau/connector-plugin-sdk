@@ -332,3 +332,37 @@ class TestXSDValidator(unittest.TestCase):
         properties.is_jdbc = True
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, properties),
                         "required connection-properties found and marked as invalid")
+
+    def test_warn_server_attribute(self):
+        file_to_test = ConnectorFile("connectionResolver.tdr", "connection-resolver")
+
+        print("\nTest no warning when server is in required attributes list.")
+        test_tdr_file = TEST_FOLDER / "server_attribute/with_server.tdr"
+        with self.assertLogs('packager_logger', level='WARNING') as cm:
+            # Log a dummy message so that the log will exist.
+            logging.getLogger('packager_logger').warning('dummy message')
+            warn_file_specific_rules(file_to_test, test_tdr_file)
+
+        self.assertEqual(len(cm.output), 1)
+        self.assertNotIn("'server' attribute is missing", cm.output[0],
+                         "\"'server' attribute is missing\" found in warning message")
+
+        print("Test no warning when required attributes list is not specified.")
+        test_tdr_file = TEST_FOLDER / "server_attribute/no_required_attributes_list.tdr"
+        with self.assertLogs('packager_logger', level='WARNING') as cm:
+            # Log a dummy message so that the log will exist.
+            logging.getLogger('packager_logger').warning('dummy message')
+            warn_file_specific_rules(file_to_test, test_tdr_file)
+
+        self.assertEqual(len(cm.output), 1)
+        self.assertNotIn("'server' attribute is missing", cm.output[0],
+                         "\"'server' attribute is missing\" found in warning message")
+
+        print("Test warning when server attribute is not in required attributes list.")
+        test_tdr_file = TEST_FOLDER / "server_attribute/without_server.tdr"
+        with self.assertLogs('packager_logger', level='WARNING') as cm:
+            warn_file_specific_rules(file_to_test, test_tdr_file)
+
+        self.assertEqual(len(cm.output), 1)
+        self.assertIn("'server' attribute is missing", cm.output[0],
+                      "\"'server' attribute is missing\" not found in warning message")
