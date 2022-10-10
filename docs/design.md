@@ -29,9 +29,9 @@ You might find other superclass values in the workbook XML from an existing Tabl
 Plugin-version is a requirement for submitting your connector to Tableau Exchange.  It helps customers and partners understand which version of a connector is being used currently and if it is the most up-to-date.
 You should start your plugin version with `plugin-version='1.0.0'` and increment it based on major or minor changes to your connector.
 
-## Know the min-tableau-version
-For the min-tableau-version, is checked before a connector is loaded in Tableau. If the current version of Tableau is less than the min-tableau-version then the connector is not loaded.
-This is set by the packager and if set manually will be overwritten.
+## Know about min-version-tableau
+The `min-version-tableau` value is set in manifest.xml, and represents the oldest version of Tableau that the connector will work with. If the current version of Tableau is less than the min-tableau-version then the connector is not loaded.
+The packager will automatically set this value based on the features the connector uses. In most cases, the value of `min-version-tableau` detected by the packager is accurate and no action is needed on the part of the connector author. If that value has been set manually in manifest.xml before packaging, the packager will not overwrite a `min-version-tableau` value that is higher than the one the packager detected, but will overwrite an existing value that is lower.
 
 ***Note: `version` in the manifest file does not refer to plugin version. Please leave this set to `version='18.1'`*** <br />
 

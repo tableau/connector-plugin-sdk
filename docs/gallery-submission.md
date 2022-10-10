@@ -82,7 +82,7 @@ As part of the connector review we will perform a security review of your connec
 ### Step 4: Fill out the form to create a connector listing
 
 1. Sign in to the [Tableau Exchange](https://exchange.tableau.com/) website.
-2. Click on your initials in the upper-right corner and select **Contributor Console**. If you don't have access to the contributor console, reach out to the Tableau Partner Network for help. If other members of your organization already have access to the contributor console, they can also give you access.
+2. Click on your initials in the upper-right corner and select **Contributor Console**. If you don't have access to the contributor console, reach out to the Tableau Partner Network for help.
 2. On the Contributor Console, click the **Create** button then select **Connector**.
 3. Fill out the form for your connector, following the guidance under [Tableau Exchange submission materials and details](#tableau-exchange-submission-materials-and-details).
 4. To see what your connector listing will look like, click the **Preview** button at the bottom of the form. 

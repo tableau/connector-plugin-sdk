@@ -547,6 +547,9 @@ Check that any <span style="font-family: courier new">date-format</span> element
 __The agg.countd expression test and the join.null.int logical tests are failing__
 Check that your database is correctly returning column nullability information in the metadata. See [Design Considerations]({{ site.baseurl }}/docs/design) for more information.
 
+__Date string format varies according to OS date format settings__
+TDVT requires the OS locale be set to English/US so that the dates are formatted mm/dd/yyyy. 
+
 ## Running TDVT test with tabquerytoolsrv in Linux Server
 You can run TDVT tests by configuring the setup file below to use `tabquerytoolsrv`. `tabquerytoolsrv` is located in `/opt/tableau/tableau_server/packages/bin.<version_code>/tabquerytoolsrv`, where <version_code> corresponds to the version of Tableau Server (ie 2022.3).
  Before being able to run TDVT tests using tabquerytoolsrv make sure that: 
