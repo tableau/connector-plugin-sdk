@@ -293,7 +293,7 @@ CAP_SET_ISOLATION_LEVEL_VIA_SQL | Set to 'yes' to force Tableau to set the trans
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_CONNECT_NO_CUSTOM_SQL | Set to 'yes' to disable the custom sql option. | &ndash; | &ndash; 
-CAP_EQUALITY_JOINS_ONLY  | Set to 'yes' to restrict connector to only allow equality joins. | &ndash; | &ndash;  
+CAP_EQUALITY_JOINS_ONLY | Set to 'yes' to restrict connector to only allow equality joins. Available in Tableau 2022.1 and newer. | &ndash; | &ndash;  
 CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only. | &ndash; | &ndash;  
 CAP_EXTRACT_ONLY_REFRESH  | Set to 'yes' to enable extracted data to be refreshed. | &ndash; | &ndash;  
 CAP_FORCE_CONNECTION_VERIFICATION | Set to 'yes' to verify connection status during initial connection by running a probe query. Available in Tableau 2022.2 and newer. | &ndash; | &ndash; 
