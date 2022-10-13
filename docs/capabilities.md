@@ -71,6 +71,7 @@ CAP_QUERY_CASE_OUT_NO_BOOL_OPS | Set to 'yes' if CASE outputs cannot contain boo
 CAP_QUERY_CASE_PROMOTES_CHAR | Set to 'no' if CASE cannot promote character types? | yes | yes 
 CAP_QUERY_CAST_MONEY_AS_NUMERIC | Set to 'yes' to cast money as numeric. Available in Tableau 2021.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_FROM_REQUIRES_ALIAS | Set to 'yes' if the FROM clause must provide an alias for the given table. | &ndash; | &ndash;
+CAP_QUERY_FULLJOIN_IND | Set to 'yes' to support full joins with Is-Not-Distinct semantics. | &ndash; | &ndash;
 CAP_QUERY_GROUP_ALLOW_DUPLICATES | Set to 'no' if SQL queries cannot contain duplicate expressions in the GROUP BY clause (this is uncommon). | yes | yes
 CAP_QUERY_GROUP_BY_ALIAS | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by their corresponding alias in the SELECT list, for example, GROUP BY "none_ShipCountry_nk". | no | no 
 CAP_QUERY_GROUP_BY_BOOL | Set to 'yes' if the database can group by a raw boolean. Set to 'no' if booleans should be cast to an INT. Can also influence booleans in the SELECT clause. | no | **<span style="color:red">yes</span>** 
