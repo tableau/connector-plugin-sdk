@@ -29,7 +29,7 @@ This is an example of a Tableau Connection Dialog (.tcd) file with localized str
 ## Add string translations
 You can add string translations to a connection dialog using resource files. Each language has its own resource file. The resource files must follow this naming convention:
 
-<span style="font-family: courier new">resources-*language*-*region*.xml</span>
+<span style="font-family: courier new">resources-*language*_*region*.xml</span>
 
   where:
   - *language* is a lowercase two-letter language code.
@@ -48,6 +48,7 @@ resources-it_IT.xml
 resources-ja_JP.xml
 resources-ko_KR.xml
 resources-pt_BR.xml
+resources-sv_SE.xml
 resources-zh_CN.xml
 resources-zh_TW.xml
 ```

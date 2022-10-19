@@ -71,6 +71,7 @@ CAP_QUERY_CASE_OUT_NO_BOOL_OPS | Set to 'yes' if CASE outputs cannot contain boo
 CAP_QUERY_CASE_PROMOTES_CHAR | Set to 'no' if CASE cannot promote character types? | yes | yes 
 CAP_QUERY_CAST_MONEY_AS_NUMERIC | Set to 'yes' to cast money as numeric. Available in Tableau 2021.1 and newer. | &ndash; | &ndash;
 CAP_QUERY_FROM_REQUIRES_ALIAS | Set to 'yes' if the FROM clause must provide an alias for the given table. | &ndash; | &ndash;
+CAP_QUERY_FULLJOIN_IND | Set to 'yes' to support full joins with Is-Not-Distinct semantics. | &ndash; | &ndash;
 CAP_QUERY_GROUP_ALLOW_DUPLICATES | Set to 'no' if SQL queries cannot contain duplicate expressions in the GROUP BY clause (this is uncommon). | yes | yes
 CAP_QUERY_GROUP_BY_ALIAS | Set to 'yes' if SQL queries with aggregations can reference the grouping columns by their corresponding alias in the SELECT list, for example, GROUP BY "none_ShipCountry_nk". | no | no 
 CAP_QUERY_GROUP_BY_BOOL | Set to 'yes' if the database can group by a raw boolean. Set to 'no' if booleans should be cast to an INT. Can also influence booleans in the SELECT clause. | no | **<span style="color:red">yes</span>** 
@@ -139,6 +140,7 @@ CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries. Requires CAP_
 CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_EMPTY_CATALOG_NAME | Set to 'yes' to ignore missing catalog. | &ndash; | &ndash;
+CAP_JDBC_SUPPRESS_EMPTY_SCHEMA_NAME | Set to 'yes' to ignore missing schema. Available in Tableau 2022.2 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash; 
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash; 
@@ -292,6 +294,7 @@ CAP_SET_ISOLATION_LEVEL_VIA_SQL | Set to 'yes' to force Tableau to set the trans
 Capability | Description | Default | Recommended
 -|-|-|-
 CAP_CONNECT_NO_CUSTOM_SQL | Set to 'yes' to disable the custom sql option. | &ndash; | &ndash; 
+CAP_EQUALITY_JOINS_ONLY | Set to 'yes' to restrict connector to only allow equality joins. Available in Tableau 2022.1 and newer. | &ndash; | &ndash;  
 CAP_EXTRACT_ONLY | Set to 'yes' to perform queries on extracted data only. | &ndash; | &ndash;  
 CAP_EXTRACT_ONLY_REFRESH  | Set to 'yes' to enable extracted data to be refreshed. | &ndash; | &ndash;  
 CAP_FORCE_CONNECTION_VERIFICATION | Set to 'yes' to verify connection status during initial connection by running a probe query. Available in Tableau 2022.2 and newer. | &ndash; | &ndash; 
