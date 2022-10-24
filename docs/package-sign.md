@@ -4,9 +4,14 @@ title: Package and Sign Your Connector for Distribution 
 
 Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file. Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. When the certificate expires, Tableau will reject the .taco file unless there is a valid timestamp.
 
-Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory. 
+Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory.
 
 This document explains how to package and sign your connector using the Connector SDK. 
+
+**In this section**
+
+* TOC
+{:toc}
 
 ## Before you begin 
 
@@ -50,11 +55,11 @@ Here's one method to do that:
     `git clone https://github.com/tableau/connector-plugin-sdk.git`
 
 1.  Set up the virtual environment by going to the connector-packager folder and running `python –m venv .venv`.     
-For example: 
+For example:
     `C:\connector-plugin-sdk\connector-packager> python -m venv .venv`
     For more information about venv, see [venv – Creation of virtual environments](https://docs.python.org/3/library/venv.html) on the Python website.
 
-1.  Activate the virtual environment using the activate command. 
+1.  Activate the virtual environment using the activate command.
 For example, on Windows:
 `C:\connector-plugin-sdk\connector-packager>.\.venv\Scripts\activate`  
 Or, on Mac:
@@ -73,7 +78,7 @@ Or, on Linux:
 
 You must run the connector-packager tool from the connector-plugin-sdk/connector-packager/ directory. The packaged TACO file, by  default, will be generated within packaged-connector folder. There are several ways to run the tool:
 
--   To package the connector, run this command: 
+-   To package the connector, run this command:
  `python -m connector_packager.package [path_to_plugin_folder]`
 
 -   To validate that the XML files are valid without packaging the connector, run this command:

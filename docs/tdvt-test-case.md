@@ -2,6 +2,12 @@
 title: Fixing TDVT Test Failures
 ---
 
+**In this section**
+
+* TOC
+{:toc}
+
+## Overview
 How to leverage the results workbook is explained [step by step in our YouTube guide](https://youtu.be/rAgnnByJIJA) [[28:26](https://youtu.be/rAgnnByJIJA?t=1706)]. Running TDVT produces a CSV file with data on all the tests cases that were executed, and the best way to view data is, of course, in Tableau. We provide a [TDVT Results Workbook](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/TDVT%20Results.twb) that gives you a high-level overview on how many tests passed in each category and gives you tools to drill down to individual test cases and see the expected values versus actual values, the sql statement that was sent to the database, and any errors Tableau reported while running the test.
 
 ![]({{ site.baseurl }}/assets/tdvt_results_dashboard.png)

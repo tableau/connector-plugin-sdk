@@ -2,6 +2,12 @@
 title: Authentication Modes
 ---
 
+**In this section**
+
+* TOC
+{:toc}
+
+## Overview
 The authentication mode influences how and when a user is prompted to enter data source credentials. The primary scenarios where authentication occurs:
 
 - Creating a connection with the connection dialog

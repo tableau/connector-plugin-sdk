@@ -1,7 +1,12 @@
 ---
 title: Build the Connection Dialog
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 The connection dialog prompts the user to enter connection and authentication information. That information is passed into the Connector Builder script to build the connection string. The dialog appears when creating a new connection or editing an existing connection and is used by both Tableau Desktop and Tableau Server.
 
 The connection dialog can be defined in two different ways:
@@ -106,15 +111,15 @@ Clearing the connection cache might be a necessary step in the development and t
 
 **For Windows**
 
-Using Regedit on Windows delete this folder from the registry: 
+Using Regedit on Windows delete this folder from the registry:
 `Computer\HKEY_CURRENT_USER\SOFTWARE\Tableau\Tableau <version>\ConnectionSettings\<connector_class>`
 
-**For Mac** 
+**For Mac**
 
  Follow the following commands
 `rm $HOME/Library/Preferences/com.tableau.Tableau-version.plist`
 
- Example: 
+ Example:
 `rm $HOME/Library/Preferences/com.tableau.Tableau-2022.2.plist`
 
-**Note:** Removing the `.plist` file remove the connection cache for all the connectors. 
+**Note:** Removing the `.plist` file remove the connection cache for all the connectors.

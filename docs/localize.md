@@ -1,14 +1,19 @@
 ---
 title: Localize Your Connector
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 Tableau products are localized in English (United States), English (United Kingdom), French (France), French (Canada), German, Brazilian Portuguese, Spanish, Korean, Japanese, simplified Chinese, and traditional Chinese.
 
 Connector SDK supports localizing connectors in these languages. You can localize the strings that display in the Tableau user interface, such as the connector name and the prompts in the connection dialog.
 
 For the best user experience with Tableau, we recommended that you include translation support in your connector.
 ## Specify localized strings
-You can specify localized strings using the <span style="font-family: courier new">@string/<string_id>/</span> tag. For example:    
+You can specify localized strings using the <span style="font-family: courier new">@string/<string_id>/</span> tag. For example:
   `@string/database_prompt/`
 
  You can use the tag anywhere a string is defined in the manifest.xml file or the Tableau Connection Dialog (.tcd) file.
@@ -35,7 +40,7 @@ You can add string translations to a connection dialog using resource files. Eac
   - *language* is a lowercase two-letter language code.
   - *region* is an uppercase two-letter region code.
 
-This list shows the resource filenames for the currently supported languages:  
+This list shows the resource filenames for the currently supported languages:
 ```
 resources-de_DE.xml
 resources-en_GB.xml
@@ -60,7 +65,7 @@ When you use any localized strings in your connector, you must include resources
 
 Here are examples of resources-en_US.xml (English/United States) and the corresponding resources-es_ES.xml (Spanish/Spain) resource files.
 
-__resources-en_US.xml__  
+__resources-en_US.xml__
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
@@ -68,7 +73,7 @@ __resources-en_US.xml__
   <string name="database_prompt">Database:</string>
 </resources>
 ```
-__resources-es_ES.xml__  
+__resources-es_ES.xml__
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>

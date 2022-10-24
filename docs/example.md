@@ -1,7 +1,12 @@
 ---
 title: Connector Example
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 A Tableau connector is a set of files that describe the UI elements needed to collect user input for creating a connection to a data source, any dialect or customizations needed, a connection string builder, driver resolver, and the ODBC- or JDBC-based driver.
 
 Tableau connector files include:
@@ -80,7 +85,7 @@ The TDR file also contains the connection-normalizer and the driver-resolver sec
             <attr>dbname</attr>
             <attr>username</attr>
             <attr>password</attr>
-        </attribute-list>               
+        </attribute-list>
     </required-attributes>
 </connection-normalizer>
 

@@ -4,6 +4,11 @@ title: Run Your Connector
 
 Note: the below is intended for connector developers. Customer-facing documentation is available [here](https://help.tableau.com/current/pro/desktop/en-us/examples_connector_sdk.htm).
 
+**In this section**
+
+* TOC
+{:toc}
+
 # Load order and class name collisions
 
 ## Tableau 2022.2 and newer

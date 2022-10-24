@@ -1,7 +1,12 @@
 ---
 title: Connector Design Considerations
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 The choices you make when creating a connector can include which superclass and dialect to use, and how you want to tune your connection using Tableau capabilities.
 
 Also be sure to read the [Security Considerations]({{ site.baseurl }}/docs/security-considerations) page.

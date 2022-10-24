@@ -1,7 +1,12 @@
 ---
 title: Create a Tableau Dialect Definition File
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 A Tableau Dialect Definition file (.tdd) maps Tableau's query language to a database’s SQL. This is an XML file with a .tdd filename extension, and is one of the main components of a Tableau connector.
 
 You should create a dialect definition file whenever you need to make changes to an existing Tableau dialect or define an entirely new dialect. If your connector uses the same SQL dialect as the connector it’s based on, such as PostgreSQL, then a new  TDD file isn't necessary.
@@ -319,7 +324,7 @@ Example:
   See the temp table capabilities [here]({{ site.baseurl }}/docs/capabilities) for more details.
 
 ### Identifier Mangling:
-The identifier generation can include restrictions by character, casing and length. This is primarily used in table name mangling. 
+The identifier generation can include restrictions by character, casing and length. This is primarily used in table name mangling.
 
 **id-allowed-characters** <br/>
 Comprehensive list of characters which can be used in identifiers. Any character that isn't allowed is replaced with `_`. There is no restriction by default.
