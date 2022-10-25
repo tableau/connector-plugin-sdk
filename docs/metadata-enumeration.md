@@ -2,7 +2,12 @@
 title: Metadata Enumeration
 ---
 
-Connection metadata refers to the set of APIs Tableau uses to model Catalog/Schema/Table hierarchy, as well as table column details like name, type and constraints. When connecting to a data source Tableau needs to start by enumerating the hierarchy and related entities. When selecting a table, or connecting to an existing saved connection, the column level info needs to be queried as well. 
+Connection metadata refers to the set of APIs Tableau uses to model Catalog/Schema/Table hierarchy, as well as table column details like name, type and constraints. When connecting to a data source Tableau needs to start by enumerating the hierarchy and related entities. When selecting a table, or connecting to an existing saved connection, the column level info needs to be queried as well.
+
+**In this section**
+
+* TOC
+{:toc}
 
 ## ODBC Metadata Enumeration
 ODBC capabilities determine the method Tableau uses to read ODBC metadata.  Note that the scenarios below are in order and the scenario that returns results first is used, all others are skipped. The detailed logs of reading ODBC metadata are logged with `SQLODBCProtocol::ReadMetadataImpl` keyword.  You should be able to find those log lines in tabprotosrv log file with `Debug` level logging.
@@ -46,7 +51,7 @@ For all Tableau connector capabilities, please refer to capabilities [documentat
 ## Catalog Hierarchy
 The Tableau platform refers to ODBC and JDBC Catalog as [Database](https://tableau.github.io/connector-plugin-sdk/docs/mcd#the-connection-metadata-file) in the SDK. It also uses the term Database by default in the product UI.
 
-Connectors do not call JDBC `setCatalog` or send a `USE <Catalog>` query. When the user selects Database it should be passed on the ODBC connection string or JDBC url/properties as appropriate. 
+Connectors do not call JDBC `setCatalog` or send a `USE <Catalog>` query. When the user selects Database it should be passed on the ODBC connection string or JDBC url/properties as appropriate.
 
 Tableau only sends Schema.Table queries, not the fully qualified table names, which is why passing the Database value as a part of the connection is required.  See Tableau product [documentation](https://help.tableau.com/current/pro/desktop/en-us/joining_tables.htm#crossdatabase-joins) for more details on the cross-database join scenario.
 

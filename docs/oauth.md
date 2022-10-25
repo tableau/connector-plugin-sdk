@@ -3,6 +3,11 @@ title: OAuth Authentication Support
 ---
 **IMPORTANT:** This feature is available in Tableau 2021.1 and newer.
 
+**In this section**
+
+* TOC
+{:toc}
+
 # How to enable OAuth for a plugin connector
 
 First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/snowflake_oauth.
@@ -227,7 +232,7 @@ Replace [your_dbclass] with the `dbclass` element registered in your oauthConfig
 Tableau Online is managed by Tableau. So, in order for a connector to work on Tableau Online, instructions to create a clientId, clientSecret, and redirect_uri will need to be provided.
 
 ## Site-Wide OAuth Clients
-Another way is through the site level OAuth client feature where the server admin for Tableau Server, or site admin for Tableau Online, will be able to register the OAuth client on a particular site. For example setting Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.  
+Another way is through the site level OAuth client feature where the server admin for Tableau Server, or site admin for Tableau Online, will be able to register the OAuth client on a particular site. For example setting Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.
 The OAuth clients will only be effective in the particular site, it did not require a restart and take precedence over the server-wide OAuth clients if any.
 
 | Server-Wide OAuth Clients  | Site-Wide OAuth Clients |

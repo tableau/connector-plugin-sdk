@@ -8,6 +8,11 @@ During the connector review for the Tableau Exchange, the connector will go thro
 
 Tableau will also pull any connector from the Tableau Exchange that is found to have a security vulnerability. That vulnerability must be addressed before the connector can return to the Exchange.
 
+**In this section**
+
+* TOC
+{:toc}
+
 
 # Secure Attributes on the Connection Dialog
 

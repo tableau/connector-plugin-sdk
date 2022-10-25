@@ -5,7 +5,10 @@ title: Connection Dialog v2
 
 Connection Dialog v2 is a new feature that enables a more fully data-driven connection dialog for plugin connectors. Additionally, it provides some control over the metadata hierarchy elements--Database, Schema, and Table--both in the connection dialog and in the schema viewer, which the user sees after the connection is established.
 
+**In this section**
 
+* TOC
+{:toc}
 # How to Use Connection Dialog v2
 
 To use Connection Dialog v2, in the manifest replace `<connection-dialog>` with `<connection-fields>`, shown in the following example. The connector will fail to load if both elements appear in the manifest.

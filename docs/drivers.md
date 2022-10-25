@@ -1,7 +1,12 @@
 ---
 title: Driver Requirements
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 Connectors built with the Connector SDK use either an ODBC or a JDBC driver to communicate with the database.
 
 The Tableau Exchange requires using a JDBC driver.
