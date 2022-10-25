@@ -286,7 +286,8 @@ The end user or admin can specify custom OAuth configs for desktop applications,
 ## Server Level OAuth Clients
 **This is an older approach that may not work for plugins with with multiple OAuth configs. In most cases [Site Level OAuth Clients](#site-level-oauth-clients) are preferred.**
 
-You need to configure the OAuth client on server for all connectors using saved credentials (aka Custom OAuth), which includes all plugins. Execute the following command, substituting the values for your OAuth client.
+You need to configure the OAuth client on server for all connectors using saved credentials (aka Custom OAuth), which includes all plugins. Execute the following command, substituting the values for your OAuth client. Note if you have multiple OAuth Configs, the oauth.config.id should be formatted as `dbClass:oauthConfigId`.
+
 ```
 tsm configuration set -k oauth.config.clients -v "[{\"oauth.config.id\":\"[dbclass]\", \"oauth.config.client_id\":\"[client_id]\", \"oauth.config.client_secret\":\"[client_secret]\", \"oauth.config.redirect_uri\":\"[redirect_url]\"}]" --force-keys
 ```
