@@ -43,8 +43,8 @@ To enable OAuth for your connector add an `<oauth-config>` field in the manifest
 ```
 
 Starting in Tableau 2023.1, you can add multiple OAuth configs, embedded in the plugin. The end users may also provide external/custom OAuth configurations:
-- By installing the config files in the Tableau directory. See [Create Site OAuth Client](#create-site-oauth-client-20231)
-- By uploading the config for a site level OAuth client. See [External OAuth Config on Desktop](#externalcustom-oauth-configs-on-desktop)
+- By installing the config files in the Tableau directory. See [External OAuth Config on Desktop](#externalcustom-oauth-configs-on-desktop)
+- By uploading the config for a site level OAuth client. See [Create Site OAuth Client](#create-site-oauth-client-20231) 
 
 However in both cases, at least one embedded config is still required.
 
@@ -121,7 +121,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 | Name  | Type | Meaning | Required? | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
 | dbclass | String | The connector class which this OAuth config applies to. | Yes | The dbclass must be same with as the `class` attribute in manifest.xml |
-| oauthConfigId | String | Unique ID for this OAuth config | No |  New in Tableau 2023.1. This is a required attribute if there are multiple OAuth configs defined for a connector.
+| oauthConfigId | String | Unique ID for this OAuth config | No |  New in Tableau 2023.1. This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an external config this must begin with the prefix "custom_".**
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. This will configure the URL for the authorization response browser redirect. Must be a URL of the form `http://localhost:[portnumber]/Callback`.  This element can be specified multiple times, one for each port. Example: http://localhost:55557/Callback|
