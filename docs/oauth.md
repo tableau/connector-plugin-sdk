@@ -163,7 +163,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 
 | Capability Name  | Description | Default | Recommendation |
 | ----  | ------- | --------- | ----------- |
-| OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN | Enable this if your IDP has different URLs. The OAuth config will specify the relative paths for the URLs, and the end user will have to provide the IDP hostname when creating a new connection. | false | - |
+| OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN | Enable this if your IDP has different URLs. The OAuth config will specify the relative paths for the URLs, and the end user will have to provide the IDP hostname when creating a new connection. **Note: OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN only works for embedded OAuth config. External OAuth config should specify the instance URL in the config file, if required.** | false | - |
 | OAUTH_CAP_REQUIRE_PKCE | Whether your OAuth provider supports PKCE, more details: https://oauth.net/2/pkce/ | false | true |
 | OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD | Whether your OAuth provider PKCE requires code_challenging_method passed in. If set to true, we are using S256 by default. | false | true |
 | OAUTH_CAP_SUPPORTS_STATE | Used to protect against CSRF attacks, more details: https://auth0.com/docs/protocols/state-parameters | false | true |
