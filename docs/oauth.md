@@ -79,7 +79,7 @@ In your *connectionFields.xml* file make sure to add an `authentication` field w
     </field>
 ```
 ---
-In your *connectionBuilder.js* file you need to use your DB specific logic to handle how to pass in OAuth attributes. Example:
+In your *connectionProperties.js* file you need to use your connector specific logic to handle how to pass in OAuth attributes. Example:
 
 ```js
 
@@ -121,7 +121,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 | Name  | Type | Meaning | Required? | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
 | dbclass | String | The connector class which this OAuth config applies to. | Yes | The dbclass must be same with as the `class` attribute in manifest.xml |
-| oauthConfigId | String | Unique ID for this OAuth config | No |  New in Tableau 2023.1. This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an external config this must begin with the prefix "custom_".**
+| oauthConfigId | String | Unique ID for this OAuth config | No |  New in Tableau 2023.1. This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an external/custom config this must begin with the prefix "custom_".**
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | clienSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. This will configure the URL for the authorization response browser redirect. Must be a URL of the form `http://localhost:[portnumber]/Callback`.  This element can be specified multiple times, one for each port. Example: http://localhost:55557/Callback|
@@ -163,14 +163,14 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 
 | Capability Name  | Description | Default | Recommendation |
 | ----  | ------- | --------- | ----------- |
-| OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN | Enable this if your IDP has different URLs. The OAuth config will specify the relative paths for the URLs, and the end user will have to provide the IDP hostname when creating a new connection. **Note: OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN only works for embedded OAuth config. External OAuth config should specify the instance URL in the config file, if required.** | false | - |
+| OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN | Enable this if your IDP has different URLs. The OAuth config will specify the relative paths for the URLs, and the end user will have to provide the IDP hostname when creating a new connection. **OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN only works for embedded OAuth config.** See [Instance URL/Custom Domain](#instance-urlcustom-domain) for more information. | false | - |
 | OAUTH_CAP_REQUIRE_PKCE | Whether your OAuth provider supports PKCE, more details: https://oauth.net/2/pkce/ | false | true |
 | OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD | Whether your OAuth provider PKCE requires code_challenging_method passed in. If set to true, we are using S256 by default. | false | true |
 | OAUTH_CAP_SUPPORTS_STATE | Used to protect against CSRF attacks, more details: https://auth0.com/docs/protocols/state-parameters | false | true |
 | OAUTH_CAP_GET_USERNAME_USES_POST_REQUEST | Only use if you define a USERINFO_URI in oauthConfig file to retrieve the userinfo in a separate request | false | - |
 | OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM | Use this if Client secrets are expected in the query parameter instead of the request header. | false | - |
 | OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL | Only relevant for desktop apps (Tableau Desktop and Prep). Use this when your authorization server doesn't allow dynamic port ranges for localhost/native apps. | false | - |
-| OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS | Only relevant for desktop apps (Tableau Desktop and Prep). When enabled the desktop app callback will use loopback address instead of "localhost". Not compatible with OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL. For more info see https://developers.google.com/identity/protocols/oauth2/native-app | false | - |
+| OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS | Only relevant for desktop apps (Tableau Desktop and Prep). When enabled the desktop app callback will use loopback address instead of "localhost". If using OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, the redirectUri must still specify localhost, but is rewritten. For more info see https://developers.google.com/identity/protocols/oauth2/native-app | false | - |
 | OAUTH_CAP_REQUIRES_PROMPT_CONSENT | Add prompt=consent to the request. | false | - |
 | OAUTH_CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add prompt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
 | OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. For example, https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
@@ -256,7 +256,9 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 ```
 
 ## Instance URL/Custom Domain
-Some IDPs have a single global endpoint, such as https://accounts.google.com/o/oauth2/. Others have different instances, for example Okta would have a different instance URL for each customer. If your authorization server or IDP has different instances, then enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. In this case the end users will be prompted for the URL when connecting.
+Some IDPs have a single global endpoint, such as https://accounts.google.com/o/oauth2/. Others have different instances, for example Okta would have a different instance URL for each customer. If your authorization server or IDP has different instances, then either:
+- Enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. This only works with embedded OAuth configs. The instance URL will be collected later from the end-user or the admin.
+- Create seperate external/custom OAuth configs for each custom domain. External OAuth config shouldn't set OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN, and should specify authUri, tokenUri, userInfoUri fields as absolute paths, which contains the custom domain/instance URL.
 
 ## Multiple Embedded OAuth Configs
 *\*Available starting in Tableau 2023.1*
