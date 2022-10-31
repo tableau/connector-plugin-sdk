@@ -46,12 +46,12 @@ class TestOutputFiles(object):
     combined_output = []
 
     @classmethod
-    def copy_output_file(cls, src_name, src_dir):
+    def copy_output_file(cls, src_name, src_dir, csv_dialect):
         src = os.path.join(src_dir, src_name)
         logging.debug("Copying {0} to output".format(src))
         try:
             with open(src, 'r', encoding='utf8') as src_file:
-                reader = csv.DictReader(src_file)
+                reader = csv.DictReader(src_file, dialect=csv_dialect)
                 for row in reader:
                     cls.combined_output.append(row)
 
@@ -60,7 +60,7 @@ class TestOutputFiles(object):
             return
 
     @classmethod
-    def write_test_results_csv(cls, args, custom_output_dir: str = ''):
+    def write_test_results_csv(cls, perf_run: bool, custom_output_dir: str = ''):
         if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
@@ -81,7 +81,7 @@ class TestOutputFiles(object):
                 writer = csv.DictWriter(
                     dst_file,
                     fieldnames=cls.combined_output[0],
-                    dialect=return_csv_dialect(args.perf_run),
+                    dialect=return_csv_dialect(perf_run),
                     quoting=csv.QUOTE_MINIMAL
                 )
                 writer.writeheader()
@@ -139,8 +139,8 @@ class TestRunner():
                 inner_output = os.path.join(optional_dir_name, file_to_be_zipped)
                 myzip.write(actual, inner_output)
 
-    def copy_output_files(self):
-        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir)
+    def copy_output_files(self, csv_dialect):
+        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir, csv_dialect)
 
     def copy_test_result_file(self):
         src = os.path.join(self.temp_dir, "tdvt_output.json")
@@ -183,10 +183,12 @@ class TestRunner():
 
     def copy_files_and_cleanup(self):
         left_temp_dir = False
+        csv_dialect = 'perflab' if self.test_config.run_as_perf else 'tdvt'
+        # if
         try:
             self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, is_logs=False)
             self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, is_logs=True)
-            self.copy_output_files()
+            self.copy_output_files(csv_dialect)
             self.copy_test_result_file()
         except Exception as e:
             print(e)
@@ -606,7 +608,7 @@ def active_thread_count(threads):
     return active
 
 
-def test_runner(all_tests, test_queue, max_threads, args) -> Tuple[int, int, int, int]:
+def test_runner(all_tests: List[TestRunner], test_queue: queue.Queue, max_threads: int) -> Tuple[int, int, int, int]:
     for i in range(0, max_threads):
         worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
         worker.setDaemon(True)
@@ -623,7 +625,9 @@ def test_runner(all_tests, test_queue, max_threads, args) -> Tuple[int, int, int
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv(args, work.test_config.custom_output_dir)
+    is_perf_run = all_tests[0].test_config.run_as_perf
+    custom_output_dir = all_tests[0].test_config.custom_output_dir
+    TestOutputFiles.write_test_results_csv(is_perf_run, custom_output_dir)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
@@ -681,7 +685,7 @@ def run_tests_impl(
         print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.\n")
 
         failed_smoke_tests, skipped_smoke_tests, disabled_smoke_tests, total_smoke_tests = test_runner(
-            smoke_tests, smoke_test_queue, smoke_test_threads, args
+            smoke_tests, smoke_test_queue, smoke_test_threads
         )
 
         smoke_tests_run = total_smoke_tests - disabled_smoke_tests
