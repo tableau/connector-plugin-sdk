@@ -16,9 +16,11 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 HTTPS_STRING = "https://"
 TRANSLATABLE_STRING_PREFIX = "@string/"
-TABLEAU_FALLBACK_LANGUAGE = "en_US"  # If localizing a connector, US English must be translated since we'll fall back to the English strings if we can't find one for the correct language
+# If localizing a connector, US English must be translated since we'll fall back to the English strings if we can't
+# find one for the correct language
+TABLEAU_FALLBACK_LANGUAGE = "en_US"
 TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR",
-                               "pt_BR", "zh_CN", "zh_TW"]
+                               "pt_BR", "sv_SE", "zh_CN", "zh_TW"]
 
 
 class XMLParser:
@@ -86,7 +88,9 @@ class XMLParser:
                 self.file_list.append(ConnectorFile(fallback_resource_file_name, "resource"))
                 logging.debug("Adding file to list (name = " + fallback_resource_file_name + ", type = resource)")
             else:
-                logger.error("Error: Found localized strings but " + fallback_resource_file_name + " does not exist. US English translations are required to fall back on if other languages are not translated.")
+                logger.error("Error: Found localized strings but " + fallback_resource_file_name +
+                             " does not exist. US English translations are required to fall back on if other languages"
+                             " are not translated.")
                 return None
 
             # Check for files for each of the languages we suport
@@ -124,7 +128,7 @@ class XMLParser:
 
         # If the file is too big, we shouldn't try and parse it, just log the violation and move on
         if path_to_file.stat().st_size > MAX_FILE_SIZE:
-            logging.error(file_to_parse.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + " KB")
+            logging.error(file_to_parse.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + "KB")
             return False
 
         # Get XML file ready for parsing
@@ -143,7 +147,8 @@ class XMLParser:
         for child in root.iter():
 
             # Check the tag
-            # Oauth config file uses dbclass tag instead of class attribute. We need to make sure that matches the class name as well.
+            # Oauth config file uses dbclass tag instead of class attribute. We need to make sure that matches the
+            # class name as well.
             if child.tag == "dbclass":
                 if child.text != self.class_name:
                     logging.error("Error: dbclass in file " + file_to_parse.file_name +
