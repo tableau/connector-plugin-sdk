@@ -720,7 +720,7 @@ def run_tests_impl(
 
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
     start_time = time.time()
-    failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads, args)
+    failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads)
 
     failed_tests += failed_smoke_tests
     skipped_tests += skipped_smoke_tests
