@@ -7,6 +7,7 @@ import configparser
 import glob
 import os.path
 import logging
+from typing import List, Optional
 
 from .gentests import list_configs, list_config
 from ..resources import *
@@ -407,12 +408,12 @@ class TestRegistry(object):
     def add_test(self, test_config):
         self.dsnames[test_config.dsname] = test_config
 
-    def get_datasource_info(self, dsname):
+    def get_datasource_info(self, dsname) -> Optional[TestConfig]:
         if dsname in self.dsnames:
             return self.dsnames[dsname]
         return None
 
-    def get_datasources(self, suite):
+    def get_datasources(self, suite) -> Optional[List]:
         ds_to_run = []
         if not suite:
             return

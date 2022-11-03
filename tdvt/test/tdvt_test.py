@@ -296,7 +296,7 @@ class ArgumentTest(unittest.TestCase):
         self.assertTrue('sqldb' in ds)
         self.assertTrue('mysqldb' in ds)
 
-        
+
 
 class CommandLineTest(unittest.TestCase):
     def setUp(self):
@@ -369,7 +369,7 @@ class CommandLineTest(unittest.TestCase):
             expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable --test_arg my/output/dir'  # noqa: E501
         else:
             self.skipTest("Unsupported test OS: {}".format(sys.platform))
-        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
+        self.assertEquals(cmd_line_str, expected)
 
     def test_command_line_no_expected(self):
         self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
