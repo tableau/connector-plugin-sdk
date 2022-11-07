@@ -14,6 +14,7 @@ title: OAuth Authentication Support
   - [Instance URL/Custom Domain](#instance-urlcustom-domain)
   - [Multiple Embedded OAuth Configs](#multiple-embedded-oauth-configs)
 - [OAuth on Tableau Desktop/Tableau Prep](#oauth-on-tableau-desktoptableau-prep)
+  - [redirectUrisDesktop Format](#redirecturisdesktop-format)
   - [External/Custom OAuth Configs on Desktop](#externalcustom-oauth-configs-on-desktop)
 - [OAuth on Tableau Server & Tableau Online](#oauth-on-tableau-server--tableau-online)
   - [Server Level OAuth Clients](#server-level-oauth-clients)
@@ -124,7 +125,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 | oauthConfigId | String | Unique ID for this OAuth config | Recommended | *New in Tableau 2023.1.* This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an external/custom config this must begin with the prefix "custom_".**
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | clientSecretDesktop | String | Client Secret you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
-| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. This will configure the URL for the authorization response browser redirect. Must be a URL of the form `http://localhost:[portnumber]/Callback`.  This element can be specified multiple times, one for each port. Example: http://localhost:55557/Callback|
+| redirectUrisDesktop | String[] | Redirect Urls for Desktop | No	| Only required when `OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL` is set to true. This will configure the URL for the authorization response browser redirect. See [redirectUrisDesktop Format](#redirecturisdesktop-format) below for the URL format. This element can be specified multiple times, one for each port. Example: http://localhost:55557/Callback|
 | authUri | String | Authorization endpoint URI | Yes | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/authorize`
 | tokenUri | String | Token endpoint URI | Yes | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/token`
 | userInfoUri | String | User Info UrI | No | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/userinfo`
@@ -274,7 +275,11 @@ Tableau Desktop uses a shared client ID and client secret which is embedded in t
 
 If the authorization server supports dynamic port ranges for native applications then that should be used. This is the default behavior for Tableau OAuth clients. For example `http://localhost:*/Callback`.
 
-If the authorization server does not support this, then enable OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, and specify a set of `<redirectUrisDesktop>` in the OAuth config. The redirectUrisDesktop must be of the form `http://localhost:[portnumber]/Callback`. If you need to use loopback address, you can enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS, but the `<redirectUrisDesktop>` should still specify localhost. The callback at runtime will be rewritten to something like http://127.0.0.1:55555/Callback.
+If the authorization server does not support this, then enable OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, and specify a set of `<redirectUrisDesktop>` in the OAuth config. 
+
+### redirectUrisDesktop Format 
+- Before Tableau 2023.1, the redirectUrisDesktop must be of the form `http://localhost:[portnumber]/Callback`. If you need to use loopback address other than localhost, you can enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS, but the `<redirectUrisDesktop>` should still specify localhost. The callback at runtime will be rewritten to something like http://127.0.0.1:55555/Callback.
+- Starting in Tableau 2023.1, You can use any valid loopback address like `http://localhost:[portnumber]/Callback`, `http://127.0.0.1:[portnumber]/Callback`(IPv4), `http://[::1]:[portnumber]/Callback`(IPv6). If you use loopback address other than localhost, enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS as well.
 
 For more information on see [RFC 8252: Loopback Interface Redirection](https://datatracker.ietf.org/doc/html/rfc8252#section-7.3).
 
