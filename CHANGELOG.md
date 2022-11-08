@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2022-11-08
+### Changed
+- Update `oauth_config.xsd` to include `oauthConfigId` and `defaultInstanceUrl` fields
 ## 2021-09-02
 ### Changed
 - Validate max length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
