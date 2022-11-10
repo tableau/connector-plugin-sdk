@@ -150,6 +150,28 @@ class TestXSDValidator(unittest.TestCase):
         self.assertTrue(validate_all_xml(files_list, test_folder, properties_uses_tcd),
          "InstanceURL not in required-attributes is valid")
 
+    def test_validate_oauth_config_id(self):
+        test_file = TEST_FOLDER / "oauth_config_id/valid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "Valid XML file not marked as valid")
+
+        test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "oauthConfig should be able to have no oauthConfigId field")
+
+        test_file = TEST_FOLDER / "oauth_config_id/invalid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "There can only be one oauthConfigId field")
+
     def test_warn_defaultSQLDialect_as_base(self):
 
         test_dialect_file = TEST_FOLDER / "defaultSQLDialect_as_base/dialect.tdd"
