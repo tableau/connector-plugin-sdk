@@ -1,7 +1,7 @@
 # Tableau Connector SDK Changelog
-## 2022-11-08
+## 2022-11-16
 ### Changed
-- Update `oauth_config.xsd` to include `oauthConfigId` field and update `min-version-tableau` to be 2023.1 if present
+- Update `oauth_config.xsd` to include `oauthConfigId` field and update `min-version-tableau` to be 2021.4 if present
 ## 2021-09-02
 ### Changed
 - Validate max length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`

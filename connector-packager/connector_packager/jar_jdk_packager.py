@@ -55,12 +55,12 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
                 min_version_tableau = "2020.3"
             reasons.append("Connector uses Connection Dialogs V2, which was added in the 2020.3 release")
         elif connector_file.file_type == "oauth-config":
-            # Check to see if we're using oauthConfigId, which needs 2023.1+
+            # Check to see if we're using oauthConfigId, which needs 2021.4+
             pluginOAuthConfigRoot = ET.parse(input_dir / connector_file.file_name).getroot()
             oauthConfigId = pluginOAuthConfigRoot.find('.//oauthConfigId')
-            if (oauthConfigId is not None):
-                min_version_tableau = "2023.1"
-                reasons.append("Connector contains an oauthConfigId field, which was added in the 2023.1 release")
+            if (oauthConfigId is not None and 2021.4 > float(min_version_tableau)):
+                min_version_tableau = "2021.4"
+                reasons.append("Connector contains an oauthConfigId field, which was added in the 2021.4 release")
             elif 2021.1 > float(min_version_tableau):
                 min_version_tableau = "2021.1"
             reasons.append("Connector uses OAuth, which was added in the 2021.1 release")

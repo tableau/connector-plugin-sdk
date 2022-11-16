@@ -15,7 +15,7 @@ MANIFEST_FILE_NAME = "manifest.xml"
 
 VERSION_2020_3 = "2020.3"
 VERSION_2021_1 = "2021.1"
-VERSION_2023_1 = "2023.1"
+VERSION_2021_4 = "2021.4"
 VERSION_FUTURE = "2525.1"
 VERSION_THREE_PART = "2021.1.3"
 
@@ -273,7 +273,7 @@ class TestJarPackager(unittest.TestCase):
 
         manifest = ET.parse(path_to_extracted_manifest)
         self.assertEqual(manifest.getroot().get("min-version-tableau"),
-                         VERSION_2023_1, "wrong min-version-tableau attr or doesn't exist")
+                         VERSION_2021_4, "wrong min-version-tableau attr or doesn't exist")
 
         if dest_dir.exists():
             shutil.rmtree(dest_dir)
