@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2022-11-21
+### Changed
+- Update `connector_plugin_manifest_latest.xsd` to allow multple `oauth-config` fields and update `min-version-tableau` to be 2021.4 if present
 ## 2022-11-16
 ### Changed
 - Update `oauth_config.xsd` to include `oauthConfigId` field and update `min-version-tableau` to be 2021.4 if present

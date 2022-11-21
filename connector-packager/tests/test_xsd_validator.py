@@ -388,3 +388,17 @@ class TestXSDValidator(unittest.TestCase):
         self.assertEqual(len(cm.output), 1)
         self.assertIn("'server' attribute is missing", cm.output[0],
                       "\"'server' attribute is missing\" not found in warning message")
+    
+    def test_validate_multiple_oauth_config(self):
+        xml_violations_buffer = []
+        file_to_test = ConnectorFile("manifest.xml", "manifest")
+
+        print("Test that 2 oauth-config fields are validated")
+        test_file = TEST_FOLDER / "multiple_oauth_config/test_manifest_files/manifest_2_config.xml"
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "2 OAuth Config Fields are marked as invalid")
+
+        print("Test that 3 oauth-config fields are validated")
+        test_file = TEST_FOLDER / "multiple_oauth_config/test_manifest_files/manifest_2_config.xml"
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "3 OAuth Config Fields are marked as invalid")

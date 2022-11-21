@@ -73,6 +73,11 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
                 if 2021.1 > float(min_version_tableau):
                     min_version_tableau = "2021.1"
                 reasons.append("Connector uses inferred connection resolver, which was added in the 2021.1 release")
+        elif connector_file.file_type == "manifest":
+            manifestRoot = ET.parse(input_dir / connector_file.file_name).getroot()
+            oauthConfigs = manifestRoot.findall('.//oauth-config')
+            if (oauthConfigs is not None and len(oauthConfigs) > 1 and 2021.4 > float(min_version_tableau)):
+                min_version_tableau = "2021.4"
 
     if version.parse(cur_min_version_tableau) > version.parse(min_version_tableau):
         reasons.append("min-tableau-version set to " + cur_min_version_tableau + ", since that is higher than calculated version of " + min_version_tableau)

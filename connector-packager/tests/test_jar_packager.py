@@ -277,3 +277,51 @@ class TestJarPackager(unittest.TestCase):
 
         if dest_dir.exists():
             shutil.rmtree(dest_dir)
+
+    def test_jdk_create_jar_with_multiple_configs(self):
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script"),
+            ConnectorFile("oauth-config.xml", "oauth-config"),
+            ConnectorFile("oauth-config-copy.xml", "oauth-config")]
+        source_dir = TEST_FOLDER / Path("multiple_oauth_config/full_connector")
+        dest_dir = TEST_FOLDER / Path("packaged-connector-by-jdk/")
+        package_name = "test_multiple_oauth.taco"
+
+        jdk_create_jar(source_dir, files_list, package_name, dest_dir)
+
+        path_to_test_file = dest_dir / Path(package_name)
+        self.assertTrue(os.path.isfile(path_to_test_file), "taco file doesn't exist")
+
+        # test min support tableau version is stamped
+        args = ["jar", "xf", package_name, MANIFEST_FILE_NAME]
+        p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
+        self.assertEqual(p.wait(), 0, "can not extract manfifest file from taco")
+        path_to_extracted_manifest = dest_dir / MANIFEST_FILE_NAME
+        self.assertTrue(os.path.isfile(path_to_extracted_manifest), "extracted manifest file doesn't exist")
+
+        manifest = ET.parse(path_to_extracted_manifest)
+        self.assertEqual(manifest.getroot().get("min-version-tableau"),
+                         VERSION_2021_4, "wrong min-version-tableau attr or doesn't exist")
+
+        # test to see if oauth-config.xml file was packaged
+        args = ["jar", "xf", package_name, "oauth-config.xml"]
+        p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
+        self.assertEqual(p.wait(), 0, "can not extract oauth-config.xml from taco")
+        path_to_extracted_oauth_config = dest_dir / "oauth-config.xml"
+        self.assertTrue(os.path.isfile(path_to_extracted_oauth_config), "extracted oauth-config.xml file doesn't exist")
+
+        # test to see if oauth-config-copy.xml file was packaged
+        args = ["jar", "xf", package_name, "oauth-config-copy.xml"]
+        p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
+        self.assertEqual(p.wait(), 0, "can not extract oauth-config-copy.xml from taco")
+        path_to_extracted_oauth_config = dest_dir / "oauth-config-copy.xml"
+        self.assertTrue(os.path.isfile(path_to_extracted_oauth_config), "extracted oauth-config-copy.xml file doesn't exist")
+
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
