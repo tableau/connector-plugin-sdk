@@ -309,14 +309,14 @@ class TestJarPackager(unittest.TestCase):
         self.assertEqual(manifest.getroot().get("min-version-tableau"),
                          VERSION_2021_4, "wrong min-version-tableau attr or doesn't exist")
 
-        # check if oauth-config.xml was packaged
+        # test to see if oauth-config.xml file was packaged
         args = ["jar", "xf", package_name, "oauth-config.xml"]
         p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
         self.assertEqual(p.wait(), 0, "can not extract oauth-config.xml from taco")
         path_to_extracted_oauth_config = dest_dir / "oauth-config.xml"
         self.assertTrue(os.path.isfile(path_to_extracted_oauth_config), "extracted oauth-config.xml file doesn't exist")
 
-        # check if oauth-config-copy.xml was packaged
+        # test to see if oauth-config-copy.xml file was packaged
         args = ["jar", "xf", package_name, "oauth-config-copy.xml"]
         p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
         self.assertEqual(p.wait(), 0, "can not extract oauth-config-copy.xml from taco")
