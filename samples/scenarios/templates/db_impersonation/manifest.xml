@@ -46,8 +46,9 @@
       <customization name="CAP_JDBC_QUERY_CANCEL" value="yes"/>
       <customization name="CAP_AUTH_DB_IMPERSONATE" value="yes"/>
     </customizations>
-  </connection-customization>
-  <connection-dialog file='connection-dialog.tcd'/>
+    </connection-customization>
+  <connection-fields   file='connection-fields.xml'/>
+  <connection-metadata file='connection-metadata.xml'/>
   <connection-resolver file="connectionResolver.tdr"/>
   <dialect file='dialect_plugin.tdd'/>
 </connector-plugin>
