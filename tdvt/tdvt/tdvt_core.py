@@ -16,16 +16,16 @@ import subprocess
 import sys
 import time
 import zipfile
+from typing import Dict, List, Optional, Tuple
 
-from defusedxml.ElementTree import parse, ParseError
-from typing import Dict, Optional, Tuple
+from defusedxml.ElementTree import ParseError, parse
 
 from .config_gen.genconfig import generate_config_files
 from .config_gen.gentests import generate_logical_files
 from .config_gen.test_config import TestSet
+from .constants import DEFAULT_CSV_HEADERS, PERFLAB_CSV_HEADERS, TUPLE_DISPLAY_LIMIT
 from .resources import *
-from .tabquery import build_connectors_test_tabquery_command_line
-from .tabquery import build_tabquery_command_line
+from .tabquery import build_connectors_test_tabquery_command_line, build_tabquery_command_line
 from .test_results import *
 
 ALWAYS_GENERATE_EXPECTED = False
@@ -37,6 +37,7 @@ class ConnectorsTest(object):
         self.conn_test_file = conn_test_file
         self.conn_test_password_file = conn_test_password_file
         self.timeout_seconds = 10
+        self.cmd_output: str = ''
 
     def run_connectors_test(self):
         cmdline = build_connectors_test_tabquery_command_line(self.conn_test_name, self.conn_test_file, self.conn_test_password_file)
@@ -70,7 +71,7 @@ class BatchQueueWork(object):
         self.results = {}
         self.thread_id = -1
         self.timeout_seconds = test_config.timeout_seconds
-        self.cmd_output = None
+        self.cmd_output = ''
         self.saved_error_message = None
         self.log_zip_file = ''
         self.verbose = test_config.verbose
@@ -301,7 +302,7 @@ class BatchQueueWork(object):
         return total_time_ms
 
 
-def do_work(work):
+def do_work(work: BatchQueueWork):
     logging.debug(work.get_thread_msg() + "Running test:" + work.test_name)
     if work.test_set.test_is_enabled is False:
         work.error_state = TestErrorDisabledTest()
@@ -448,8 +449,8 @@ def write_json_results(all_test_results):
     json_file.close()
 
 
-def write_standard_test_output(all_test_results: Dict, output_dir: str):
-    """Write the standard output. """
+def write_standard_test_output(all_test_results: Dict[str, TestResult], output_dir: str):
+    """Write the standard output to JSON. """
     passed = [x for x in all_test_results.values()
               if x.all_passed() is True
               and x.test_set.test_is_enabled
@@ -483,7 +484,7 @@ def get_tuple_display_limit():
     return 100
 
 
-def get_csv_row_data(tds_name, test_name, test_path, test_result: TestResult, test_case_index=0):
+def get_csv_row_data(tds_name: str, test_name: str, test_path: str, test_result: TestResult, test_case_index=0):
     # A few of the tests generate thousands of tuples. Limit how many to include in the csv since it makes it unweildly.
     passed = False
     skipped = False
@@ -512,6 +513,10 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result: TestResult, te
     if cmd_output and len(cmd_output) > 4096:
         cmd_output = cmd_output[:4096] + "<output_truncated>"
 
+    # info for perf run output
+    is_perf_run = test_result.test_config.run_as_perf
+    perf_iteration = test_result.test_config.iteration
+
     priority = test_result.test_metadata.get_priority() if test_result and test_result.test_metadata else 'unknown'
     categories = test_result.test_metadata.concat_categories() if test_result and test_result.test_metadata else 'unknown'
     functions = test_result.test_metadata.concat_functions() if test_result and test_result.test_metadata else 'unknown'
@@ -521,12 +526,32 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result: TestResult, te
         error_type = test_result.get_failure_message() if test_result else None
         if test_result.all_passed():
             passed = True
-        columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
+        if is_perf_run:
+            columns = [
+                suite,
+                test_set_name,
+                test_name,
+                tds_name,
+                passed,
+                None,
+                perf_iteration,
+                None,
+                None,
+                error_msg.replace("\n", "") if error_msg else None,
+                passed,
+                None,
+                None,
+                "Query Time",
+                "TimeTest",
+                0
+        ]
+        else:
+            columns = [suite, test_set_name, tds_name, test_name, test_path, passed, matched_expected, diff_count,
                    test_case_name, test_type, priority, categories, functions, cmd_output, error_msg, error_type,
                    time, generated_sql, actual_tuples, expected_tuples]
-        if test_result.test_config.tested_sql:
+        if test_result.test_config.tested_sql and not is_perf_run:
             columns.extend([expected_sql, expected_time])
-        if test_result.test_config.tested_error:
+        if test_result.test_config.tested_error and not is_perf_run:
             columns.extend([actual_error, expected_error])
         return columns
 
@@ -543,12 +568,12 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result: TestResult, te
     generated_sql = case.get_sql_text()
     test_case_name = case.name
 
-    actual_tuples = "\n".join(case.get_tuples()[0:get_tuple_display_limit()])
+    actual_tuples = "\n".join(case.get_tuples()[0:TUPLE_DISPLAY_LIMIT])
     actual_error = case.error_message
     if test_result.best_matching_expected_results:
         expected_case = test_result.best_matching_expected_results.get_test_case(test_case_index)
         expected_tuples = expected_case.get_tuples() if expected_case else ""
-        expected_tuples = "\n".join(expected_tuples[0:get_tuple_display_limit()])
+        expected_tuples = "\n".join(expected_tuples[0:TUPLE_DISPLAY_LIMIT])
         expected_sql = expected_case.get_sql_text() if expected_case else ""
         expected_time = expected_case.execution_time if expected_case else ""
         expected_error = expected_case.error_message if expected_case else ""
@@ -563,17 +588,70 @@ def get_csv_row_data(tds_name, test_name, test_path, test_result: TestResult, te
         error_msg = test_result.saved_error_message if test_result.saved_error_message else error_msg
         error_type = test_result.get_error_type()
 
-    columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected),
-               str(diff_count), test_case_name, test_type, priority, categories, functions, cmd_output,
-               str(error_msg), str(error_type), float(case.execution_time), generated_sql, actual_tuples,
-               expected_tuples]
+    if is_perf_run:
+        columns = [
+            suite,
+            test_set_name,
+            test_name,
+            tds_name,
+            None,
+            None,
+            perf_iteration,
+            None,
+            None,
+            error_msg.replace("\n", "") if error_msg else None,
+            passed,
+            None,
+            None,
+            "Query Time",
+            "TimeTest",
+            case.execution_time
+        ]
+    else:
+        columns = [suite, test_set_name, tds_name, test_name, test_path, str(passed), str(matched_expected),
+                str(diff_count), test_case_name, test_type, priority, categories, functions, cmd_output,
+                str(error_msg), str(error_type), float(case.execution_time), generated_sql, actual_tuples,
+                expected_tuples]
     if test_result.test_config.tested_sql:
         columns.extend([expected_sql, float(expected_time)])
     if test_result.test_config.tested_error:
         columns.extend([actual_error, expected_error])
     return columns
 
-def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -> Optional[Tuple[int, int, int, int]]:
+
+def return_csv_dialect(is_perf_run: bool = False):
+    if is_perf_run:
+        return 'perflab'
+    else:
+        return 'tdvt'
+
+
+def get_csv_header_data(all_test_results, is_perf_run: bool) -> List[str]:
+    if is_perf_run:
+        csv_header = PERFLAB_CSV_HEADERS
+    else:
+        tuple_limit_str = '(' + str(TUPLE_DISPLAY_LIMIT) + ')tuples'
+        actual_tuples_header = 'Actual ' + tuple_limit_str
+        expected_tuples_header = 'Expected ' + tuple_limit_str
+        # Suite is the datasource name (ie mydb).
+        # Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
+        csv_header = DEFAULT_CSV_HEADERS
+        csv_header.extend([actual_tuples_header, expected_tuples_header])
+        results_values = list(all_test_results.values())
+        if results_values:
+            if results_values[0].test_config.tested_sql:
+                csv_header.extend(['Expected SQL', 'Expected Query Time (ms)'])
+            if results_values[0].test_config.tested_error:
+                csv_header.extend(['Actual Error', 'Expected Error'])
+    return csv_header
+
+
+def write_csv_test_output(
+    all_test_results: Dict[str, TestResult],
+    tds_file: str,
+    skip_header: bool,
+    output_dir: str,
+) -> Optional[Tuple[int, int, int, int]]:
     csv_file_path = os.path.join(output_dir, 'test_results.csv')
     try:
         file_out = open(csv_file_path, 'w', encoding='utf8')
@@ -581,23 +659,9 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
         logging.debug("Could not open output file [{0}].".format(csv_file_path))
         return
 
-    csv_out = csv.writer(file_out, dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
-    tupleLimitStr = '(' + str(get_tuple_display_limit()) + ')tuples'
-    actualTuplesHeader = 'Actual ' + tupleLimitStr
-    expectedTuplesHeader = 'Expected ' + tupleLimitStr
-    # Suite is the datasource name (ie mydb).
-    # Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
-    csvheader = ['Suite', 'Test Set', 'TDSName', 'TestName', 'TestPath', 'Passed', 'Closest Expected', 'Diff count',
-                 'Test Case', 'Test Type', 'Priority', 'Categories', 'Functions', 'Process Output', 'Error Msg', 'Error Type', 'Query Time (ms)',
-                 'Generated SQL', actualTuplesHeader, expectedTuplesHeader]
-    results_values = list(all_test_results.values())
-    if results_values:
-        if results_values[0].test_config.tested_sql:
-            csvheader.extend(['Expected SQL', 'Expected Query Time (ms)'])
-        if results_values[0].test_config.tested_error:
-            csvheader.extend(['Actual Error', 'Expected Error'])
-    if not skip_header:
-        csv_out.writerow(csvheader)
+    # set writer to use correct csv dialect
+    is_perf_run = list(all_test_results.values())[0].test_config.run_as_perf
+    csv_out = csv.writer(file_out, dialect=return_csv_dialect(is_perf_run), quoting=csv.QUOTE_MINIMAL)
 
     tdsname = os.path.splitext(os.path.split(tds_file)[1])[0]
     # Write the csv file.
@@ -605,6 +669,13 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
     total_skipped_tests = 0
     total_disabled_tests = 0
     total_tests = 0
+
+    # get and write csv_header
+    csv_header = get_csv_header_data(all_test_results, is_perf_run)
+
+    if not skip_header:
+        csv_out.writerow(csv_header)
+
     for path, test_result in all_test_results.items():
         generated_sql = ''
         test_name = test_result.get_name() if test_result.get_name() else path
@@ -627,7 +698,12 @@ def write_csv_test_output(all_test_results, tds_file, skip_header, output_dir) -
     return total_failed_tests, total_skipped_tests, total_disabled_tests, total_tests
 
 
-def process_test_results(all_test_results, tds_file, skip_header, output_dir):
+def process_test_results(
+        all_test_results,
+        tds_file,
+        skip_header,
+        output_dir,
+) -> Optional[Tuple[int, int, int, int]]:
     if not all_test_results:
         return 0, 0, 0, 0
     write_standard_test_output(all_test_results, output_dir)
@@ -731,6 +807,7 @@ def run_tests(tdvt_test_config: TdvtInvocation, test_set: TestSet):
     all_test_results = run_tests_impl(test_set, tdvt_test_config)
 
     return process_test_results(all_test_results, tds_file, tdvt_test_config.noheader, output_dir)
+
 
 def run_connectors_test_core(conn_test_name, conn_test_file, conn_test_password_file = None):
     connectors_test = ConnectorsTest(conn_test_name, conn_test_file, conn_test_password_file)
