@@ -1,6 +1,12 @@
 ---
 title: Tableau Connector SDK
 ---
+**In this section**
+
+* TOC
+{:toc}
+
+## Overview
 Tableau has great connectivity that allows you to visualize data from virtually anywhere. Tableau includes dozens of connectors already, and also gives you the tools to build a new connector with the Tableau Connector SDK.
 
 With this SDK, you can create a connector that you can use to visualize your data from any database through an ODBC or JDBC driver.

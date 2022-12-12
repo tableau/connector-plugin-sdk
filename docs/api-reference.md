@@ -2,6 +2,10 @@
 title: Connector API Reference
 ---
 
+**In this section**
+
+* TOC
+{:toc}
 ## Connection Resolver \*.tdr
 
 Defines the connection to your data source.
@@ -168,7 +172,7 @@ Returns the Tableau product name. This value should not be used for conditional 
 
     String GetProductVersion();
 
-Returns the Tableau version as a string in Version.MaintenanceRelease format. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Example value: `2022.1.3` 
+Returns the Tableau version as a string in Version.MaintenanceRelease format. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Example value: `2022.1.3`
 
     String GetPlatform();
 
