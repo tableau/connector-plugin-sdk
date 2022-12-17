@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2022-12-16
+### Changed
+- Convert database impersonation sample to Connection Dialog V2     
 ## 2021-09-02
 ### Changed
 - Validate max length of `name` in Company-G in `connector_plugin_manifest_latest.xsd`
