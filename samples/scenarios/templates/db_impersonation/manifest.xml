@@ -4,7 +4,7 @@
   <vendor-information>
     <company name="Company"/>
     <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
-    <driver-download-link url = "some url"/>
+    <driver-download-link url = "https://www.tableau.com/support/drivers"/>
   </vendor-information>
   <connection-customization class="impala_jdbc_delegationUID" enabled="true" version="10.0">
     <vendor name="vendor"/>
