@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
-<connector-plugin class='impala_jdbc_delegationUID' superclass='jdbc' plugin-version='1.0.0' name='Impala JDBC Plugin' version='19.4' min-version-tableau='2020.3'>
+<connector-plugin class='impala_jdbc_delegationUID' superclass='jdbc' plugin-version='0.0.0' name='Impala JDBC Plugin' version='18.1' min-version-tableau='2020.4'>
   <vendor-information>
-    <company name="Company"/>
-    <support-link url = "https://github.com/tableau/connector-plugin-sdk"/>
-    <driver-download-link url = "https://www.cloudera.com/downloads/connectors/impala/jdbc"/>
+    <company name="Company Name"/>
+    <support-link url="https://example.com"/>
+    <driver-download-link url="https://drivers.example.com"/>
   </vendor-information>
   <connection-customization class="impala_jdbc_delegationUID" enabled="true" version="10.0">
     <vendor name="vendor"/>
