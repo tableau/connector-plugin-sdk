@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<connection-fields>
+  <field name="server" label="Server" value-type="string" category="endpoint" />
+
+  <field name="port" label="Port" value-type="string" category="endpoint" default-value="21050" />
+
+  <field name="authentication" label="Authentication" category="authentication" value-type="selection" >
+    <selection-group>
+      <option value="auth-none" label="No Authentication"/>
+      <option value="auth-user" label="Username"/>
+      <option value="auth-user-pass" label="Username and Password"/>
+    </selection-group>
+  </field>
+
+  <field name="username" label="Username" category="authentication" value-type="string">
+    <conditions>
+      <condition field="authentication" value="auth-user"/>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+
+  <field name="password" label="Password" category="authentication" value-type="string" secure="true">
+    <conditions>
+      <condition field="authentication" value="auth-user-pass"/>
+    </conditions>
+  </field>
+  
+  <field name="sslmode" label="Require SSL" value-type="boolean" category="general" default-value="" >
+    <boolean-options>
+      <false-value value="" />
+      <true-value value="require" />
+    </boolean-options>
+  </field>
+
+</connection-fields>
