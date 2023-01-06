@@ -353,7 +353,7 @@ as passed-in parameters.
       <xs:enumeration value="WSTR"/>
       <xs:enumeration value="NUMERIC"/>
       <xs:enumeration value="UDT"/>
-      <xs:enumeration value="DATE"/>
+      <xs:enumeration value="DBDATE"/>
       <xs:enumeration value="TIME"/>
       <xs:enumeration value="TIMESTAMP"/>
     </xs:restriction>
