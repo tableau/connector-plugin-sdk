@@ -7,7 +7,7 @@ from typing import Optional
 from .config_gen.datasource_list import print_logical_configurations
 from .config_gen.test_creator import TestCreator
 from .resources import *
-from .constants import *
+from .constants import CUSTOM_TEST_SETS
 
 
 def create_test_environment():
