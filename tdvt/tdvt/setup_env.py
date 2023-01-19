@@ -100,10 +100,10 @@ def add_datasource(name, ds_registry):
         if os.path.isdir('tdvt/exprtests/custom_tests'):
             print("tdvt/exprtests/custom_tests already exists.")
             print("Please make sure the directory is empty before continuing.")
-            ignored_input = ("Press any key to continue. ")
+            ignored_input = input("Press any key to continue. ")
         else:
             try:
-                os.mkdir('exprtests/custom_tests')
+                os.mkdir('tdvt/exprtests/custom_tests')
             except Exception as e:
                 print("Could not create custom_tests directory. Error was " + str(e))
                 print("Please create the directory manually and run the script again.")
@@ -116,7 +116,6 @@ def add_datasource(name, ds_registry):
         tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
 
 
-        # this is where you will start asking them which test sets they want to run.
         """
         Iterate through dict of test sets and ask user if they want to run each one.
           - the dict of test sets will live in constants.py and looks like:
@@ -131,6 +130,28 @@ def add_datasource(name, ds_registry):
           - If they do, add the test set (e.g. the key) to a list of test sets to run.
           - Return the list of test sets to run, which will be fed to a function.
          """
+        tests = []  # This is our list of tests to run.
+        msg = ""
+        for i in CUSTOM_TABLE_TEST_SET:  # Include the nice_name & url for each prompt.
+            item = CUSTOM_TABLE_TEST_SET[i]
+            try:
+                nice_name = item.get("nice_name");
+                url_for_docs = item.get("url_for_docs");
+            except TypeError:
+                print("Error reading file format.")
+                nice_name = "no nice_name provided"
+                url_for_docs = "*no url provided*"
+
+            msg = "Do you want to run the " + nice_name + " suit? Learn more about it at " \
+                  + url_for_docs + " y/n: "
+            prompt = input(msg)
+
+            while prompt != 'y' and prompt != 'Y' and prompt != "n" and prompt != "N":
+                print("Please enter 'y' or 'n': ")
+                prompt = input(msg)
+            if prompt == "y" or prompt == "Y":
+                tests.append(i)
+                print(tests)
 
 
     while not picked:

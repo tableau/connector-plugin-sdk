@@ -237,14 +237,33 @@ TEST_ARGUMENT_DATA_TYPES = {
 
 CUSTOM_TABLE_TEST_SET = {
     'agg': {
-        'nice_name': 'aggregation',
-        'description of the suite': 'blah',
+        'nice_name': 'Aggregation',
+        'description of the suite': 'tests aggregation functions including sum, count, avg, min, max, and distinct',
         'url_for_docs': 'https://blah.com',
             },
-    'math': {},
-    'operator': {},
+    'cast': {
+        'nice_name': 'Cast',
+        'description of the suite': 'tests casting functions',
+        'url_for_docs': 'https://blah.com',
+    },
+    'date': {
+        'nice_name': 'Date',
+        'description of the suite': 'tests date functions max, min, misc, today, and cast',
+        'url_for_docs': 'https://blah.com',
+    },
+    'math': {
+        'nice_name': 'Math',
+        'description of the suite': 'tests a variety of math functions',
+        'url_for_docs': 'https://blah.com',
+    },
+    'operator': {
+        'nice_name': 'Operator',
+        'description of the suite': 'tests operator functions bool, date, int, num, and str',
+        'url_for_docs': 'https://blah.com',
+    },
+    'string': {
+        'nice_name': 'String',
+        'description of the suite': 'tests a variety of string functions',
+        'url_for_docs': 'https://blah.com',
+    }
 }
-    # 'agg2': {
-    #     'nice_name': 'aggregation2',
-    # }
-# }
