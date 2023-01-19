@@ -2,14 +2,15 @@
 TestCreator creates test case setup files from a csv file of expected types and values.
 ExpectedCreator creates expecteds for an existing test case.
 """
-
+import csv
+from collections import Counter
 import logging
 import os
 import sys
 from pathlib import Path
-from typing import List, Optional, TextIO, Tuple, Union
+from typing import Counter, List, Optional, TextIO, Tuple, Union, Dict
 
-from ..constants import DATA_TYPES
+from ..constants import DATA_TYPES, TEST_ARGUMENT_DATA_TYPES
 
 EMPTY_CELL = '%null%'
 
@@ -27,12 +28,26 @@ class TestCreator:
             cleaned_headers = [item.replace('"', '').replace('\n', '') for item in headers]
             col_types = f.readline().split(',')
             cleaned_col_types = [item.replace('"', '').replace('\n', '') for item in col_types]
+            # TODO: when we care about null/empty, we add that here
 
             if len(cleaned_headers) != len(cleaned_col_types):
                 logging.error("CSV file has different number of column names and data types than expected.")
                 sys.exit(1)
 
         return cleaned_headers, cleaned_col_types
+
+    def _return_data_type_count(self, tuple_of_csv_data: Tuple[List[str], List[str]]) -> Counter:
+        """
+        This method returns the number of data types in the csv file.
+        :param tuple_of_csv_data: Tuple of lists of headers and data types
+        :return: int of number of data types
+        """
+        col_data_types = tuple_of_csv_data[1]
+        return Counter(col_data_types)
+
+    def get_count_of_data_types_in_csv(self) -> Counter:
+        csv_tuple = self._csv_to_lists()
+        return self._return_data_type_count(csv_tuple)
 
     def parse_csv_to_list(self) -> Tuple[List[str], List[str]]:
         """
@@ -51,6 +66,10 @@ class TestCreator:
 
         return headers, csv_data
 
+    # def parse_csv_to_dict(self) -> Dict[str, Dict[str]]:
+    #     pass
+
+
     def write_expecteds_to_file(
         self,
         list_to_write: List[str],
@@ -66,10 +85,10 @@ class TestCreator:
             with open(output_path, 'w') as out:
                 print('writing to {}'.format(output_path))
                 logging.info("writing to {}".format(output_path))
-                self._expecteds_writer(out, item, is_expected_file)
+                self._test_file_writer(out, item, is_expected_file)
             logging.info("Successfully wrote to {}".format(output_path))
 
-    def _expecteds_writer(
+    def _test_file_writer(
             self,
             out: TextIO,
             list_to_write: Union[List[List[str]], List[str], str],
@@ -93,88 +112,88 @@ class TestCreator:
                 out.write("  </test>\n")
             out.write("</results>")
 
-    def _return_expected_affix(self, col_type: str) -> Optional[str]:
-        """
-        Uses a dict of constants to return any affix needed to format a result correctly.
-        """
-        return DATA_TYPES.get(col_type, None)
+    # def _return_expected_affix(self, col_type: str) -> Optional[str]:
+    #     """
+    #     Uses a dict of constants to return any affix needed to format a result correctly.
+    #     """
+    #     return DATA_TYPES.get(col_type, None)
 
-    def _format_output_list_items(
-        self,
-        cols: List
-    ) -> List:
-        """
-        Takes list of results and appends affixes to each result, handling null and empty string values.
-        Results list contains:
-          [name of column, type of column, n results...]
-        """
-        formatted_list_of_cols = []
+    # # def _format_output_list_items(
+    # #     self,
+    # #     cols: List
+    # # ) -> List:
+    # #     """
+    # #     Takes list of results and appends affixes to each result, handling null and empty string values.
+    # #     Results list contains:
+    # #       [name of column, type of column, n results...]
+    # #     """
+    # #     formatted_list_of_cols = []
 
-        for col in cols:
+    # #     for col in cols:
 
-            col_name = col[0]
-            col_type = col[1]
-            col_data = col[2:]
+    # #         col_name = col[0]
+    # #         col_type = col[1]
+    # #         col_data = col[2:]
 
-            col_out = [col_name, col_type]
+    # #         col_out = [col_name, col_type]
 
-            affix = self._return_expected_affix(col_type)
+    # #         affix = self._return_expected_affix(col_type)
 
-            for item in col_data:
-                if item == '':
-                    col_out.append('&quot;&quot;')
-                elif item == '%null%':
-                    col_out.append(item)
-                else:
-                    if col_type == 'bool':
-                        self._format_bools(item)
-                    elif col_type == 'float':
-                        out = str(float(item))
-                    elif col_type in ['time', 'date', 'datetime']:
-                        self._format_datetime(item)
-                    elif affix:
-                        out = affix + item + affix
-                    else:
-                        out = item
-                    col_out.append(out)
-                
+    # #         for item in col_data:
+    # #             if item == '':
+    # #                 col_out.append('&quot;&quot;')
+    # #             elif item == '%null%':
+    # #                 col_out.append(item)
+    # #             else:
+    # #                 if col_type == 'bool':
+    # #                     self._format_bools(item)
+    # #                 elif col_type == 'float':
+    # #                     out = str(float(item))
+    # #                 elif col_type in ['time', 'date', 'datetime']:
+    # #                     self._format_datetime(item)
+    # #                 elif affix:
+    # #                     out = affix + item + affix
+    # #                 else:
+    # #                     out = item
+    # #                 col_out.append(out)
 
-            formatted_list_of_cols.append(col_out)
 
-        return formatted_list_of_cols
+    # #         formatted_list_of_cols.append(col_out)
 
-    def _format_datetime(self, item: str) -> None:
-        pass
+    # #     return formatted_list_of_cols
 
-    def _format_bools(self, item: str) -> None:
-        item.lower().replace('false', '0').replace('true', '1')
+    # # def _format_datetime(self, item: str) -> None:
+    # #     pass
 
-    def _return_sorted_set_of_results(
-            self,
-            results: List
-        ) -> List:
-            # this method needs to deal with date/datetime things that are surrounded by #...#
-            # but also have %null% or '&quot;&quot;' in the col.
-            data_type = results[1]
+    # # def _format_bools(self, item: str) -> None:
+    # #     item.lower().replace('false', '0').replace('true', '1')
 
-            first_elements = [results[0]]
+    # def _return_sorted_set_of_results(
+    #         self,
+    #         results: List
+    #     ) -> List:
+    #         # this method needs to deal with date/datetime things that are surrounded by #...#
+    #         # but also have %null% or '&quot;&quot;' in the col.
+    #         data_type = results[1]
 
-            results_set = set(results[2:])
+    #         first_elements = [results[0]]
 
-            if '%null%' in results_set:
-                first_elements.append('%null%')
-                results_set.remove('%null%')
-            if '&quot;&quot;' in results_set:
-                first_elements.append('&quot;&quot;')
-                results_set.remove('&quot;&quot;')
-            if data_type == 'int':
-                sorted_results = first_elements + sorted(list(results_set), key=int)
-            if data_type == 'float':
-                sorted_results = first_elements + sorted(list(results_set), key=float)
-            else:
-                sorted_results = first_elements + sorted(list(results_set))
+    #         results_set = set(results[2:])
 
-            return sorted_results
+    #         if '%null%' in results_set:
+    #             first_elements.append('%null%')
+    #             results_set.remove('%null%')
+    #         if '&quot;&quot;' in results_set:
+    #             first_elements.append('&quot;&quot;')
+    #             results_set.remove('&quot;&quot;')
+    #         if data_type == 'int':
+    #             sorted_results = first_elements + sorted(list(results_set), key=int)
+    #         if data_type == 'float':
+    #             sorted_results = first_elements + sorted(list(results_set), key=float)
+    #         else:
+    #             sorted_results = first_elements + sorted(list(results_set))
+
+    #         return sorted_results
 
     def _check_output_and_input_exist(self) -> bool:
         result = True
@@ -190,9 +209,40 @@ class TestCreator:
 
         return result
 
-    def _write_setup_file(self):
+    def _parse_col_constants(self) -> Dict[str, List[str]]:
         """
-        TODO: this is for the datasource's .ini file
-        :return:
+        Parses TEST_ARGUMENT_DATA_TYPES from constants file to get the column names.
         """
-        pass
+
+        col_type_map = {
+            k: [] for k in TEST_ARGUMENT_DATA_TYPES.keys()
+        }
+        return col_type_map
+
+    def _map_user_cols_to_test_cols(self) -> Dict[str, Dict[str, str]]:
+        with open(self.csv_file, 'r') as f:
+            reader = csv.reader(f)
+            data = zip(*[row for row in reader])
+            user_cols_dict = {
+                row[0]: {
+                    'type': row[1],
+                    'data_shape': row[2],
+                    'alts': row[3]
+                } for row in data
+            }
+        return user_cols_dict
+
+    def map_user_cols_to_test_args(self) -> Dict[str, List[str]]:
+        user_cols_dict = self._map_user_cols_to_test_cols()
+        test_args_dict = self._parse_col_constants()
+        for key in user_cols_dict.keys():
+            for tkey in TEST_ARGUMENT_DATA_TYPES.keys():
+                if user_cols_dict[key] == TEST_ARGUMENT_DATA_TYPES[tkey]:
+                    test_args_dict[tkey].append(key)
+        return test_args_dict
+
+    def rewrite_tests_to_use_user_cols(self) -> None:
+        test_args_dict = self.map_user_cols_to_test_args()
+        for key in test_args_dict.keys():
+            if test_args_dict[key]:
+                self._rewrite_test(key, test_args_dict[key])

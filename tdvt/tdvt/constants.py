@@ -93,15 +93,158 @@ DATA_TYPES = {
     'time': '#'
 }
 
-CUSTOM_TEST_SETS = {
-    'agg': {
-        'nice_name': 'Suite Name',
-        'description of the suite': 'blah',
-        'url_for_docs': 'https://blah.com',
-    },
-    'agg2': {
-        'nice_name': 'Suite Name',
-        'description of the suite': 'blah',
-        'url_for_docs': 'https://blah.com',
-    }
+DATA_SHAPES = {
+
 }
+
+TEST_ARGUMENT_DATA_TYPES = {
+    'key': {
+        'type': 'VARCHAR',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'num0': {
+        'type': 'FLOAT',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'True',
+    },
+    'num1': {
+        'type': 'FLOAT',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'num2': {
+        'type': 'FLOAT',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'num3': {
+        'type': 'FLOAT',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'True',
+    },
+    'num4': {
+        'type': 'FLOAT',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'True',
+    },
+    'str0': {
+        'type': 'VARCHAR',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'str1': {
+        'type': 'VARCHAR',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'str2': {
+        'type': 'VARCHAR',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'str3': {
+        'type': 'VARCHAR',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'int0': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'int1': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'True',
+    },
+    'int2': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'True',
+    },
+    'int3': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'bool0': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'bool1': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'bool2': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'bool3': {
+        'type': 'INTEGER',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'date0': {
+        'type': 'DATE',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'date1': {
+        'type': 'DATE',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'date2': {
+        'type': 'DATE',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'date3': {
+        'type': 'DATE',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'time0': {
+        'type': 'TIMESTAMP',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'time1': {
+        'type': 'TIME',
+        'data_shape': 'no_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'datetime0': {
+        'type': 'TIMESTAMP',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+    'datetime1': {
+        'type': 'VARCHAR',
+        'data_shape': 'contains_empties_contains_nulls',
+        'alts': 'False',
+    },
+    'zzz': {
+        'type': 'VARCHAR',
+        'data_shape': 'no_empties_no_nulls',
+        'alts': 'False',
+    },
+}
+
+CUSTOM_TABLE_TEST_SET = {
+    'agg': {
+        'nice_name': 'aggregation',
+        'description of the suite': 'blah',
+        'url_for_docs': 'https://blah.com',
+            },
+    'math': {},
+    'operator': {},
+}
+    # 'agg2': {
+    #     'nice_name': 'aggregation2',
+    # }
+# }

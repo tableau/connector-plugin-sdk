@@ -1,13 +1,14 @@
+import csv
 import os
 import re
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Dict, List, Optional
 
 from .config_gen.datasource_list import print_logical_configurations
 from .config_gen.test_creator import TestCreator
 from .resources import *
-from .constants import *
+from .constants import CUSTOM_TABLE_TEST_SET
 
 
 def create_test_environment():
@@ -42,6 +43,28 @@ def create_tdvt_ini_file():
     except:
         pass
 
+
+def parse_test_args_to_data_types(
+    custom_table_cols_and_types: List[Dict[str, str]],
+    tableau_data_type_map: Dict[str, str]
+) -> Dict[str, str]:
+    """Parse the column names and data types from the csv file."""
+    col_names = []
+    data_types = []
+    for col in custom_table_cols_and_types:
+        col_names.append(col['name'])
+        data_types.append(col['type'])
+    return dict(zip(col_names, data_types))
+
+def parse_custom_schema_csv_file(csv_path):
+    """Parse the custom schema csv file and return a list of the headers and a list of the rows."""
+    with open(csv_path, 'r') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        headers = next(csv_reader)
+        rows = []
+        for row in csv_reader:
+            rows.append(row)
+    return headers, rows
 
 def add_datasource(name, ds_registry):
     """
@@ -92,17 +115,23 @@ def add_datasource(name, ds_registry):
         headers, formatted_results = tc.parse_csv_to_list()
         tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
 
-        tests = []  # This is our list of tests to run.
-        msg = ""
-        for i in CUSTOM_TEST_SETS.keys():  # Include the nice_name & url for each prompt.
-            msg = "Do you want to run the " + CUSTOM_TEST_SETS(i)["nice_name"] + " suit? Learn more about it at "\
-                  + CUSTOM_TEST_SETS(i)["url_for_docs"] + " y/n"
-        prompt = input(msg)
-        while prompt != 'y' or prompt != 'Y' or prompt != "n" or prompt != "N":
-            print("Please enter 'y' or 'no'")
-            prompt = input(msg)
-        if prompt == "y" or prompt == "Y":
-            tests.append(i)
+
+        # this is where you will start asking them which test sets they want to run.
+        """
+        Iterate through dict of test sets and ask user if they want to run each one.
+          - the dict of test sets will live in constants.py and looks like:
+             dict_of_test_sets = {
+                'agg': {
+                    'nice_name': 'aggregation',
+                    'description of the suite': 'blah',
+                    'url_for_docs': 'https://blah.com',
+                },
+            }
+            "Do you want to run the {aggregations} suite? Details on the test cases are at {url}. (y/n)"
+          - If they do, add the test set (e.g. the key) to a list of test sets to run.
+          - Return the list of test sets to run, which will be fed to a function.
+         """
+
 
     while not picked:
         logical = input(
