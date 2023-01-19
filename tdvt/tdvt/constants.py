@@ -92,3 +92,16 @@ DATA_TYPES = {
     'date': '#',
     'time': '#'
 }
+
+CUSTOM_TEST_SETS = {
+    'agg': {
+        'nice_name': 'Suite Name',
+        'description of the suite': 'blah',
+        'url_for_docs': 'https://blah.com',
+    },
+    'agg2': {
+        'nice_name': 'Suite Name',
+        'description of the suite': 'blah',
+        'url_for_docs': 'https://blah.com',
+    }
+}

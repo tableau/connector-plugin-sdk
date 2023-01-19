@@ -7,6 +7,7 @@ from typing import Optional
 from .config_gen.datasource_list import print_logical_configurations
 from .config_gen.test_creator import TestCreator
 from .resources import *
+from .constants import *
 
 
 def create_test_environment():
@@ -90,6 +91,18 @@ def add_datasource(name, ds_registry):
         tc = TestCreator(csv_path, name, output_dir)
         headers, formatted_results = tc.parse_csv_to_list()
         tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
+
+        tests = []  # This is our list of tests to run.
+        msg = ""
+        for i in CUSTOM_TEST_SETS.keys():  # Include the nice_name & url for each prompt.
+            msg = "Do you want to run the " + CUSTOM_TEST_SETS(i)["nice_name"] + " suit? Learn more about it at "\
+                  + CUSTOM_TEST_SETS(i)["url_for_docs"] + " y/n"
+        prompt = input(msg)
+        while prompt != 'y' or prompt != 'Y' or prompt != "n" or prompt != "N":
+            print("Please enter 'y' or 'no'")
+            prompt = input(msg)
+        if prompt == "y" or prompt == "Y":
+            tests.append(i)
 
     while not picked:
         logical = input(
