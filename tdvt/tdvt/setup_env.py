@@ -96,10 +96,10 @@ def add_datasource(name, ds_registry):
         msg = ""
         for i in CUSTOM_TEST_SETS.keys():  # Include the nice_name & url for each prompt.
             msg = "Do you want to run the " + CUSTOM_TEST_SETS(i)["nice_name"] + " suit? Learn more about it at "\
-                  + CUSTOM_TEST_SETS(i)["url_for_docs"] + " y/n"
+                  + CUSTOM_TEST_SETS(i)["url_for_docs"] + " y/n: "
         prompt = input(msg)
         while prompt != 'y' or prompt != 'Y' or prompt != "n" or prompt != "N":
-            print("Please enter 'y' or 'n'")
+            print("Please enter 'y' or 'n': ")
             prompt = input(msg)
         if prompt == "y" or prompt == "Y":
             tests.append(i)
