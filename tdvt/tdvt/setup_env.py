@@ -99,7 +99,7 @@ def add_datasource(name, ds_registry):
                   + CUSTOM_TEST_SETS(i)["url_for_docs"] + " y/n"
         prompt = input(msg)
         while prompt != 'y' or prompt != 'Y' or prompt != "n" or prompt != "N":
-            print("Please enter 'y' or 'no'")
+            print("Please enter 'y' or 'n'")
             prompt = input(msg)
         if prompt == "y" or prompt == "Y":
             tests.append(i)
