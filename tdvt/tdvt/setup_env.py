@@ -139,8 +139,8 @@ def add_datasource(name, ds_registry):
                 url_for_docs = item.get("url_for_docs");
             except TypeError:
                 print("Error reading file format.")
-                nice_name = "no nice_name provided"
-                url_for_docs = "*no url provided*"
+                nice_name = "*no nice_name provided*"
+                url_for_docs = "*no url_for_docs provided*"
 
             msg = "Do you want to run the " + nice_name + " suit? Learn more about it at " \
                   + url_for_docs + " y/n: "
