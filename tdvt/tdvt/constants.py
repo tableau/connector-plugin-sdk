@@ -234,3 +234,17 @@ TEST_ARGUMENT_DATA_TYPES = {
         'alts': 'False',
     },
 }
+
+CUSTOM_TABLE_TEST_SET = {
+    'agg': {
+        'nice_name': 'aggregation',
+        'description of the suite': 'blah',
+        'url_for_docs': 'https://blah.com',
+            },
+    'math': {},
+    'operator': {},
+}
+    # 'agg2': {
+    #     'nice_name': 'aggregation2',
+    # }
+# }
