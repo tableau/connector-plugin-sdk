@@ -131,7 +131,6 @@ def add_datasource(name, ds_registry):
           - Return the list of test sets to run, which will be fed to a function.
          """
         tests = []  # This is our list of tests to run.
-        msg = ""
         for i in CUSTOM_TABLE_TEST_SET:  # Include the nice_name & url for each prompt.
             item = CUSTOM_TABLE_TEST_SET[i]
             try:
@@ -152,7 +151,6 @@ def add_datasource(name, ds_registry):
             if prompt == "y" or prompt == "Y":
                 tests.append(i)
                 print(tests)
-
 
     while not picked:
         logical = input(
