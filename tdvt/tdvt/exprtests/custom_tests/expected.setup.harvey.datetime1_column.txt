@@ -1,0 +1,19 @@
+<results>
+  <test name='datetime1'>
+    <sql>
+      SELECT &quot;WonderHamster&quot;.&quot;datetime1&quot; AS &quot;TEMP(Test)(1108086785)(0)&quot;&#10;FROM &quot;public&quot;.&quot;WonderHamster&quot; &quot;WonderHamster&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      8.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[WonderHamster.harvey].[TEMP(Test)(1108086785)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

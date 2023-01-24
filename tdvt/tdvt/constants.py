@@ -236,6 +236,8 @@ TEST_ARGUMENT_DATA_TYPES = {
 }
 
 CUSTOM_TABLE_TEST_SET = {
+    # the dict keys align with the name of test sets in tdvt/exprtests/standard
+    # the keys are used to find the test files (e.g. setup.agg) in tdvt/exprtests/standard
     'agg': {
         'nice_name': 'Aggregation',
         'description of the suite': 'tests aggregation functions including sum, count, avg, min, max, and distinct',
@@ -267,3 +269,23 @@ CUSTOM_TABLE_TEST_SET = {
         'url_for_docs': 'https://blah.com',
     }
 }
+
+CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS = (
+    # a list of (expression [for now]) test sets that should be excluded
+    # these tests have hard-coded args (e.g. strings) that were chosen specifically
+    # for data in cast_calcs.
+    # This is a tuple because the str.startswith() method won't take a list.
+    'setup.date.cast',
+    'setup.date.dateadd',
+    'setup.date.datediff',
+    'setup.date.datename',
+    'setup.date.datepart',
+    'setup.date.datetrunc',
+    'setup.date.datetrunc',
+    'setup.operator.str',
+    'setup.string.contains',
+    'setup.string.endswith',
+    'setup.string.find',
+    'setup.string.space',
+    'setup.string.startswith',
+)

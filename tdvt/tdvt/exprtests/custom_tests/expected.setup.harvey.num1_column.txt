@@ -1,0 +1,64 @@
+<results>
+  <test name='num1'>
+    <sql>
+      SELECT &quot;WonderHamster&quot;.&quot;num1&quot; AS &quot;TEMP(Test)(129981160)(0)&quot;&#10;FROM &quot;public&quot;.&quot;WonderHamster&quot; &quot;WonderHamster&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[WonderHamster.harvey].[TEMP(Test)(129981160)(0)]</column>
+      </schema>
+      <tuple>
+        <value>2.47</value>
+      </tuple>
+      <tuple>
+        <value>6.71</value>
+      </tuple>
+      <tuple>
+        <value>7.1</value>
+      </tuple>
+      <tuple>
+        <value>7.12</value>
+      </tuple>
+      <tuple>
+        <value>7.43</value>
+      </tuple>
+      <tuple>
+        <value>8.42</value>
+      </tuple>
+      <tuple>
+        <value>9.05</value>
+      </tuple>
+      <tuple>
+        <value>9.38</value>
+      </tuple>
+      <tuple>
+        <value>9.47</value>
+      </tuple>
+      <tuple>
+        <value>9.78</value>
+      </tuple>
+      <tuple>
+        <value>10.32</value>
+      </tuple>
+      <tuple>
+        <value>10.37</value>
+      </tuple>
+      <tuple>
+        <value>11.38</value>
+      </tuple>
+      <tuple>
+        <value>12.05</value>
+      </tuple>
+      <tuple>
+        <value>12.4</value>
+      </tuple>
+      <tuple>
+        <value>16.42</value>
+      </tuple>
+      <tuple>
+        <value>16.81</value>
+      </tuple>
+    </table>
+  </test>
+</results>

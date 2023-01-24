@@ -1,0 +1,52 @@
+<results>
+  <test name='time1'>
+    <sql>
+      SELECT (CAST(&apos;1899-12-30&apos; AS DATE) + &quot;WonderHamster&quot;.&quot;time1&quot;) AS &quot;TEMP(Test)(665897456)(0)&quot;&#10;FROM &quot;public&quot;.&quot;WonderHamster&quot; &quot;WonderHamster&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[WonderHamster.harvey].[TEMP(Test)(665897456)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#00:05:57#</value>
+      </tuple>
+      <tuple>
+        <value>#02:05:25#</value>
+      </tuple>
+      <tuple>
+        <value>#04:40:49#</value>
+      </tuple>
+      <tuple>
+        <value>#04:48:07#</value>
+      </tuple>
+      <tuple>
+        <value>#09:33:31#</value>
+      </tuple>
+      <tuple>
+        <value>#12:33:57#</value>
+      </tuple>
+      <tuple>
+        <value>#18:58:41#</value>
+      </tuple>
+      <tuple>
+        <value>#19:36:22#</value>
+      </tuple>
+      <tuple>
+        <value>#19:48:23#</value>
+      </tuple>
+      <tuple>
+        <value>#19:57:33#</value>
+      </tuple>
+      <tuple>
+        <value>#22:20:14#</value>
+      </tuple>
+      <tuple>
+        <value>#22:50:16#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

@@ -1,0 +1,64 @@
+<results>
+  <test name='date1'>
+    <sql>
+      SELECT &quot;WonderHamster&quot;.&quot;date1&quot; AS &quot;TEMP(Test)(1295100109)(0)&quot;&#10;FROM &quot;public&quot;.&quot;WonderHamster&quot; &quot;WonderHamster&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[WonderHamster.harvey].[TEMP(Test)(1295100109)(0)]</column>
+      </schema>
+      <tuple>
+        <value>#2004-04-01#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-02#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-03#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-04#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-05#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-06#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-07#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-08#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-09#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-10#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-11#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-12#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-13#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-14#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-15#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-16#</value>
+      </tuple>
+      <tuple>
+        <value>#2004-04-17#</value>
+      </tuple>
+    </table>
+  </test>
+</results>

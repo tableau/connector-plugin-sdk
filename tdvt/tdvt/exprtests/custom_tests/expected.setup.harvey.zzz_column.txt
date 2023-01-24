@@ -1,0 +1,64 @@
+<results>
+  <test name='zzz'>
+    <sql>
+      SELECT &quot;WonderHamster&quot;.&quot;zzz&quot; AS &quot;TEMP(Test)(1729594319)(0)&quot;&#10;FROM &quot;public&quot;.&quot;WonderHamster&quot; &quot;WonderHamster&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      6.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[WonderHamster.harvey].[TEMP(Test)(1729594319)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;a&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;b&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;c&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;d&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;e&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;f&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;g&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;h&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;i&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;j&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;k&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;l&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;m&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;n&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;o&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;p&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;q&quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>

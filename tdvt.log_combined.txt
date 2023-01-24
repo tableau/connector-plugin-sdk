@@ -1,0 +1,6 @@
+2022-08-09 09:52:35,167 TDVT version: 2.6.7
+2022-08-09 09:52:35,167 TDVT Arguments: Namespace(action_generate=False, add_ds='wonderhamster', command='action', diff=None, setup=False, verbose=False)
+2022-08-09 09:52:35,168 Reading registry ini file [/Users/lpetschauer/PycharmProjects/connector-plugin-sdk/tdvt/tdvt/config/registry/mac.ini]
+2022-08-09 09:52:35,168 TABQUERY_CLI_PATH environment variable not set. Trying ini files.
+2022-08-09 09:52:35,169 Reading tdvt ini file [/Users/lpetschauer/PycharmProjects/connector-plugin-sdk/tdvt/tdvt/config/tdvt/tdvt.ini]
+2022-08-09 09:52:35,169 Reading tdvt ini file tabquerycli path is [/Applications/Tableau XXXX.X.app/Contents/MacOS/tabquerytool]

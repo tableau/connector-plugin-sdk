@@ -1,0 +1,43 @@
+<results>
+  <test name='date3'>
+    <sql>
+      SELECT &quot;WonderHamster&quot;.&quot;date3&quot; AS &quot;TEMP(Test)(550459061)(0)&quot;&#10;FROM &quot;public&quot;.&quot;WonderHamster&quot; &quot;WonderHamster&quot;&#10;GROUP BY 1&#10;    </sql>
+    <query-time>
+      7.000&#10;    </query-time>
+    <table>
+      <schema>
+        <column>[WonderHamster.harvey].[TEMP(Test)(550459061)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>#1979-04-01#</value>
+      </tuple>
+      <tuple>
+        <value>#1983-05-22#</value>
+      </tuple>
+      <tuple>
+        <value>#1986-03-20#</value>
+      </tuple>
+      <tuple>
+        <value>#1986-11-08#</value>
+      </tuple>
+      <tuple>
+        <value>#1992-01-18#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-03-07#</value>
+      </tuple>
+      <tuple>
+        <value>#1996-05-13#</value>
+      </tuple>
+      <tuple>
+        <value>#1997-02-02#</value>
+      </tuple>
+      <tuple>
+        <value>#1999-08-20#</value>
+      </tuple>
+    </table>
+  </test>
+</results>
