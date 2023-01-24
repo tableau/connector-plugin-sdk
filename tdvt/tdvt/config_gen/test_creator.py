@@ -3,14 +3,17 @@ TestCreator creates test case setup files from a csv file of expected types and 
 ExpectedCreator creates expecteds for an existing test case.
 """
 import csv
-from collections import Counter
 import logging
 import os
+import random
 import sys
+
+from collections import Counter
 from pathlib import Path
 from typing import Counter, List, Optional, TextIO, Tuple, Union, Dict
 
-from ..constants import DATA_TYPES, TEST_ARGUMENT_DATA_TYPES
+from ..constants import DATA_TYPES, TEST_ARGUMENT_DATA_TYPES, CUSTOM_TABLE_TEST_SET, \
+    CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
 
 EMPTY_CELL = '%null%'
 
@@ -69,11 +72,10 @@ class TestCreator:
     # def parse_csv_to_dict(self) -> Dict[str, Dict[str]]:
     #     pass
 
-
     def write_expecteds_to_file(
-        self,
-        list_to_write: List[str],
-        is_expected_file: bool = False
+            self,
+            list_to_write: List[str],
+            is_expected_file: bool = False
     ) -> None:
         if is_expected_file:
             output_affix = 'expected.setup.'
@@ -156,7 +158,6 @@ class TestCreator:
     # #                 else:
     # #                     out = item
     # #                 col_out.append(out)
-
 
     # #         formatted_list_of_cols.append(col_out)
 
@@ -241,8 +242,74 @@ class TestCreator:
                     test_args_dict[tkey].append(key)
         return test_args_dict
 
-    def rewrite_tests_to_use_user_cols(self) -> None:
+    def rewrite_tests_to_use_user_cols(self, test_sets_to_run: List[str]) -> None:
         test_args_dict = self.map_user_cols_to_test_args()
-        for key in test_args_dict.keys():
-            if test_args_dict[key]:
-                self._rewrite_test(key, test_args_dict[key])
+        """
+        We will do the following here:
+        1. Read in the test file
+           a. it could be a blank line or a commented out line; handle them.
+           a. create output file to read using two `with` statements
+           b. need to filter out the test sets that won't work (see the spreadsheet)
+             - this is from CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
+        2. Find the test arguments
+           a. use regex for this. need to differentiate between col names and str args.
+        3. Replace the test arguments with the user's column names
+           a. if the user col does not have equivalent arg(s), comment out the test 
+              and add explanation ('no matching test arg')
+           b. need to make sure we don't repeat the same col in test args. add a check
+              if there aren't unique args, comment out the test and add explanation
+        4. Write the new test file to the output directory 
+        """
+        test_suite_names = tuple('setup.' + key for key in test_sets_to_run)
+        if len(test_suite_names) == 0:
+            print("No test sets specified. Exiting.")
+            return
+
+        test_dir = os.getcwd() + '/tdvt/tdvt/exprtests/standard/'
+        test_setup_files = [
+            item for item in os.listdir(test_dir)
+            if item.startswith(test_suite_names)
+               and not item.startswith(CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS)
+        ]
+        print("Creating custom test files for the following test suites: {}".format(test_setup_files))
+        for test_file in test_setup_files:
+            with open(test_dir + test_file, 'r') as source_file, open(self.output_dir / test_file, 'w') as out_file:
+                for line in source_file:
+                    processed_line = self._process_line(line, test_args_dict)
+                    out_file.write(processed_line)
+            print("\tCreated {}".format(self.output_dir / test_file))
+
+    def _process_line(self, line: str, test_args_dict: List[Dict[str, List]]) -> str:
+        # turn commented out tests into blank lines
+        if line.startswith('//') or line == '\n':
+            return '\n'
+        # take care of col names that are in the test args
+        else:
+            test_col_names = TEST_ARGUMENT_DATA_TYPES.keys()
+            extant_cols = [
+                col_name for col_name in test_col_names
+                if col_name in line
+            ]
+            # TODO: Validate the below
+            user_col_test_col_map = {}
+            for column in extant_cols:
+                if len(test_args_dict[column]) == 0:
+                    new_line = '// ' + line + '  {} has no matching column in the user table. {}'.format(column, line)
+                    return new_line
+                else:
+                    no_match = True
+                    while test_args_dict[column] and no_match:
+                        possible_user_col = random.choice(test_args_dict[column])
+                        if possible_user_col in user_col_test_col_map.values():
+                            test_args_dict[column].pop(possible_user_col)
+                        else:
+                            no_match = False
+                    if no_match:
+                        return '// ' + line + '  {} has no matching column in the user table. {}'.format(column, line)
+                    user_col_test_col_map[column] = possible_user_col
+
+            for k in user_col_test_col_map.keys():
+                line.replace(k, user_col_test_col_map[k])
+            return line
+
+        return '// ' + line + ' there was an error processing this line'
