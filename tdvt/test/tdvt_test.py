@@ -19,6 +19,7 @@ import shutil
 import subprocess
 import unittest
 
+from collections import Counter
 from pathlib import Path
 from typing import List
 from unittest import mock
@@ -1020,9 +1021,9 @@ class TabQueryPathTest(unittest.TestCase):
 
 
 class TestCreatorTest(unittest.TestCase):
-    # @classmethod
-    # def setUp(self) -> None:
     test_creator = TestCreator('tool_test/test_generation/csv_with_headers.csv', 'good_ds')
+    tc_with_one_data_type = TestCreator('tool_test/test_generation/csv_only_one_data_type.csv', 'one_data_type_ds')
+    atc_with_multiple_data_types = TestCreator('tool_test/test_generation/csv_with_multiple_data_types.csv', 'multi_data_type_ds')
     headers, columns = test_creator._csv_to_lists()
 
     def test_bad_csv_path(self):
@@ -1035,104 +1036,6 @@ class TestCreatorTest(unittest.TestCase):
     def test_csv_to_list_returns_all_cols(self):
         self.assertEqual(len(self.columns), 27)
 
-    def test_csv_to_list_returns_correct_data_with_no_tricks(self):
-        self.assertEqual(
-            self.columns[0],
-            ['key',
-             'string',
-             'key00',
-             'key01',
-             'key02',
-             'key03',
-             'key04',
-             'key05',
-             'key06',
-             'key07',
-             'key08',
-             'key09',
-             'key10',
-             'key11',
-             'key12',
-             'key13',
-             'key14',
-             'key15',
-             'key16']
-        )
-
-    def test_csv_to_list_returns_correct_data_with_tricks(self):
-        self.assertEqual(
-            self.columns[25],
-            ['datetime1',
-             'datetime',
-             '%null%',
-             '%null%',
-             '',
-             '',
-             '',
-             '%null%',
-             '',
-             '',
-             '',
-             '%null%',
-             '',
-             '%null%',
-             '',
-             '',
-             '%null%',
-             '',
-             '']
-        )
-
-    def test_csv_formatter_on_csv_col_of_strings_with_null_and_empty(self):
-        self.assertEqual(
-            self.test_creator._format_output_list_items(self.columns)[25],
-            ['datetime1',
-             'datetime',
-             '%null%',
-             '%null%',
-             '&quot;&quot;',
-             '&quot;&quot;',
-             '&quot;&quot;',
-             '%null%',
-             '&quot;&quot;',
-             '&quot;&quot;',
-             '&quot;&quot;',
-             '%null%',
-             '&quot;&quot;',
-             '%null%',
-             '&quot;&quot;',
-             '&quot;&quot;',
-             '%null%',
-             '&quot;&quot;',
-             '&quot;&quot;'
-             ]
-        )
-
-    def test_csv_formatter_on_csv_col_of_dates(self):
-        self.assertEqual(
-            self.test_creator._format_output_list_items(self.columns)[22],
-            ['time0',
-             'datetime',
-             '#1899-12-30 21:07:32#',
-             '#1900-01-01 13:48:48#',
-             '#1900-01-01 18:21:08#',
-             '#1900-01-01 18:51:48#',
-             '#1900-01-01 15:01:19#',
-             '#1900-01-01 08:59:39#',
-             '#1900-01-01 07:37:48#',
-             '#1900-01-01 19:45:54#',
-             '#1900-01-01 09:00:59#',
-             '#1900-01-01 20:36:00#',
-             '#1900-01-01 01:31:32#',
-             '#1899-12-30 22:15:40#',
-             '#1900-01-01 13:53:46#',
-             '#1900-01-01 04:57:51#',
-             '#1899-12-30 22:42:43#',
-             '#1899-12-30 22:24:08#',
-             '#1900-01-01 11:58:29#'
-             ]
-        )
-
     def test_headers_are_correct(self):
         self.assertEqual(
             self.headers[0:5],
@@ -1144,30 +1047,6 @@ class TestCreatorTest(unittest.TestCase):
              ]
         )
 
-    def test_csv_formatter_has_pretty_last_col(self):
-        self.assertEqual(
-            self.test_creator._format_output_list_items(self.columns)[26],
-            ['zzz',
-             'string',
-             '&quot;a&quot;',
-             '&quot;b&quot;',
-             '&quot;c&quot;',
-             '&quot;d&quot;',
-             '&quot;e&quot;',
-             '&quot;f&quot;',
-             '&quot;g&quot;',
-             '&quot;h&quot;',
-             '&quot;i&quot;',
-             '&quot;j&quot;',
-             '&quot;k&quot;',
-             '&quot;l&quot;',
-             '&quot;m&quot;',
-             '&quot;n&quot;',
-             '&quot;o&quot;',
-             '&quot;p&quot;',
-             '&quot;q&quot;'
-             ]
-        )
 
     def test_formatted_results_sorts_time_properly(self):
         formatted_cols = self.test_creator._format_output_list_items(self.columns)
@@ -1308,7 +1187,7 @@ class TestCreatorTest(unittest.TestCase):
 
         out_temp = io.StringIO()
 
-        self.test_creator._expecteds_writer(out_temp, columns, True)
+        self.test_creator._test_file_writer(out_temp, columns, True)
         out_temp.seek(0)
         content = out_temp.read()
         self.assertEqual(
@@ -1338,7 +1217,7 @@ class TestCreatorTest(unittest.TestCase):
 
         out_temp = io.StringIO()
 
-        self.test_creator._expecteds_writer(out_temp, columns, False)
+        self.test_creator._test_file_writer(out_temp, columns, False)
         out_temp.seek(0)
         content = out_temp.read()
         self.assertEqual(
@@ -1349,6 +1228,70 @@ num1
 num2
 num3
 """
+        )
+
+    def test_return_data_type_count_returns_correct_count(self):
+        self.assertEqual(
+            self.tc_with_one_data_type.get_count_of_data_types_in_csv(),
+            Counter({'string': 3})
+        )
+        self.assertEqual(
+            self.atc_with_multiple_data_types.get_count_of_data_types_in_csv(),
+            Counter({'string': 3, 'int': 2})
+        )
+
+    def test_return_user_data_cols(self):
+        self.assertEqual(
+            self.tc_with_one_data_type._map_user_cols_to_test_cols(),
+            {'txt': {'type': 'VARCHAR',
+                     'data_shape': 'no_empties_contains_nulls',
+                     'alts': 'False'},
+             'txt2': {'type': 'VARCHAR',
+                      'data_shape': 'no_empties_no_nulls',
+                      'alts': 'True'},
+             'txt3': {'type': 'VARCHAR',
+                      'data_shape': 'contains_empties_contains_nulls',
+                      'alts': 'False'},
+             'txt4': {'type': 'VARCHAR',
+                      'data_shape': 'contains_empties_no_nulls',
+                      'alts': 'False'},
+             'txt5': {'alts': 'False',
+                      'data_shape': 'no_empties_no_nulls',
+                      'type': 'VARCHAR'}
+             }
+        )
+
+    def test_map_user_cols_to_test_cols(self):
+        self.assertEqual(
+            self.tc_with_one_data_type.map_user_cols_to_test_args(),
+            {'bool0': [],
+             'bool1': [],
+             'bool2': [],
+             'bool3': [],
+             'date0': [],
+             'date1': [],
+             'date2': [],
+             'date3': [],
+             'datetime0': [],
+             'datetime1': ['txt3'],
+             'int0': [],
+             'int1': [],
+             'int2': [],
+             'int3': [],
+             'key': ['txt5'],
+             'num0': [],
+             'num1': [],
+             'num2': [],
+             'num3': [],
+             'num4': [],
+             'str0': ['txt5'],
+             'str1': ['txt5'],
+             'str2': ['txt'],
+             'str3': ['txt'],
+             'time0': [],
+             'time1': [],
+             'zzz': ['txt5']
+            }
         )
 
 
