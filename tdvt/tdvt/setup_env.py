@@ -56,6 +56,7 @@ def parse_test_args_to_data_types(
         data_types.append(col['type'])
     return dict(zip(col_names, data_types))
 
+
 def parse_custom_schema_csv_file(csv_path):
     """Parse the custom schema csv file and return a list of the headers and a list of the rows."""
     with open(csv_path, 'r') as csv_file:
@@ -65,6 +66,7 @@ def parse_custom_schema_csv_file(csv_path):
         for row in csv_reader:
             rows.append(row)
     return headers, rows
+
 
 def add_datasource(name, ds_registry):
     """
@@ -115,21 +117,6 @@ def add_datasource(name, ds_registry):
         headers, formatted_results = tc.parse_csv_to_list()
         tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
 
-
-        """
-        Iterate through dict of test sets and ask user if they want to run each one.
-          - the dict of test sets will live in constants.py and looks like:
-             dict_of_test_sets = {
-                'agg': {
-                    'nice_name': 'aggregation',
-                    'description of the suite': 'blah',
-                    'url_for_docs': 'https://blah.com',
-                },
-            }
-            "Do you want to run the {aggregations} suite? Details on the test cases are at {url}. (y/n)"
-          - If they do, add the test set (e.g. the key) to a list of test sets to run.
-          - Return the list of test sets to run, which will be fed to a function.
-         """
         tests = []  # This is our list of tests to run.
         msg = ""
         for i in CUSTOM_TABLE_TEST_SET:  # Include the nice_name & url for each prompt.
@@ -142,17 +129,17 @@ def add_datasource(name, ds_registry):
                 nice_name = "*no nice_name provided*"
                 url_for_docs = "*no url_for_docs provided*"
 
-            msg = "Do you want to run the " + nice_name + " suit? Learn more about it at " \
+            msg = "Do you want to run the " + nice_name + " suite? Learn more about it at " \
                   + url_for_docs + " y/n: "
-            prompt = input(msg)
+            prompt = input(msg).lower()
 
-            while prompt != 'y' and prompt != 'Y' and prompt != "n" and prompt != "N":
+            while prompt != 'y' and prompt != "n":
                 print("Please enter 'y' or 'n': ")
                 prompt = input(msg)
-            if prompt == "y" or prompt == "Y":
+            if prompt == "y":
                 tests.append(i)
-                print(tests)
-
+        if tests:
+            tc.rewrite_tests_to_use_user_cols(tests)
 
     while not picked:
         logical = input(
