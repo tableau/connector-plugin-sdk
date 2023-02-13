@@ -25,7 +25,7 @@ class TdvtInvocation(object):
         self.noheader = False
         self.thread_count = 6
         self.leave_temp_dir = False
-        self.run_as_perf = test_config.run_time_config.run_as_perf if test_config else False
+        self.run_as_perf = False
         self.thread_id = -1
         self.tds = ''
         self.tested_run_time_config = None
