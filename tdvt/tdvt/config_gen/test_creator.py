@@ -265,7 +265,7 @@ class TestCreator:
             print("No test sets specified. Exiting.")
             return
 
-        test_dir = os.getcwd() + '/tdvt/tdvt/exprtests/standard/'
+        test_dir = get_root_dir() + '/exprtests/standard/'
         test_setup_files = [
             item for item in os.listdir(test_dir)
             if item.startswith(test_suite_names)
