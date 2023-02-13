@@ -6,6 +6,7 @@ from .tabquery_path import TabQueryPath
 
 tab_cli_exe = ''
 
+
 def configure_tabquery_path():
     """Setup the tabquery path from ini settings."""
     global tab_cli_exe
@@ -32,6 +33,7 @@ def configure_tabquery_path():
             tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
         logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
 
+
 def get_max_process_level_of_parallelization(desired_threads):
     if sys.platform.startswith("darwin") and 'tabquerytool' in tab_cli_exe:
         return 1
@@ -39,17 +41,11 @@ def get_max_process_level_of_parallelization(desired_threads):
 
 
 def build_tabquery_command_line(work):
-    try:
-        sys.path.insert(0, get_extensions_dir())
-        from extend_tabquery import TabqueryCommandLineExtension
-        sys.path.pop(0)
-        tb = TabqueryCommandLineExtension()
-        logging.debug("Imported extension extend_tabquery")
-    except ImportError:
-        tb = TabqueryCommandLine()
+    tb = TabqueryCommandLine()
 
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
+
 
 def build_connectors_test_tabquery_command_line(conn_test_name, conn_test_file_name, conn_test_password_file):
     global tab_cli_exe
@@ -59,6 +55,7 @@ def build_connectors_test_tabquery_command_line(conn_test_name, conn_test_file_n
     if conn_test_password_file:
         cmdline.extend(["--conn-test-password-file", conn_test_password_file])
     return cmdline
+
 
 class TabqueryCommandLine(object):
     def extend_command_line(self, cmdline, work):
@@ -87,7 +84,7 @@ class TabqueryCommandLine(object):
         if work.test_config.output_dir:
             cmdline.extend(["--output-dir", work.test_config.output_dir])
 
-        #Save all the log files from the core Tableau process.
+        # Save all the log files from the core Tableau process.
         cmdline.extend(["-DLogDir=" + work.test_config.log_dir])
         cmdline.extend(["-DOverride=ProtocolServerNewLog"])
 
@@ -97,8 +94,8 @@ class TabqueryCommandLine(object):
 
         logical_rewrite_iter = next((i for i in cmdline if i.find('-DLogicalQueryRewriteDisable') != -1), None)
         if logical_rewrite_iter == None:
-            #Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
-            #that tests what you would expect.
+            # Disable constant expression folding. This will bypass the VizEngine for certain simple calculations. This way we run a full database query
+            # that tests what you would expect.
             cmdline.extend(["-DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall"])
 
         # LogicalQuery cache can cache results across multiple expressions, and prevent
@@ -108,6 +105,7 @@ class TabqueryCommandLine(object):
         self.extend_command_line(cmdline, work)
         work.test_config.command_line = cmdline
         return cmdline
+
 
 def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
     global tab_cli_exe
@@ -123,5 +121,3 @@ def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
-
-
