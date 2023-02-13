@@ -285,31 +285,31 @@ class TestCreator:
             return '\n'
         # take care of col names that are in the test args
         else:
+            line = line.strip('\n')
             test_col_names = TEST_ARGUMENT_DATA_TYPES.keys()
             extant_cols = [
                 col_name for col_name in test_col_names
                 if col_name in line
             ]
-            # TODO: Validate the below
             user_col_test_col_map = {}
             for column in extant_cols:
                 if len(test_args_dict[column]) == 0:
-                    new_line = '// ' + line + '  {} has no matching column in the user table. {}'.format(column, line)
+                    new_line = '// ' + line + '  {} has no matching column in the user table.\n'.format(column)
                     return new_line
                 else:
                     no_match = True
                     while test_args_dict[column] and no_match:
                         possible_user_col = random.choice(test_args_dict[column])
                         if possible_user_col in user_col_test_col_map.values():
-                            test_args_dict[column].pop(possible_user_col)
+                            test_args_dict[column].remove(possible_user_col)
                         else:
                             no_match = False
                     if no_match:
-                        return '// ' + line + '  {} has no matching column in the user table. {}'.format(column, line)
+                        return '// ' + line + '  {} has no matching column in the user table.\n'.format(column)
                     user_col_test_col_map[column] = possible_user_col
 
             for k in user_col_test_col_map.keys():
-                line.replace(k, user_col_test_col_map[k])
-            return line
+                line = line.replace(k, user_col_test_col_map[k])
+            return line + '\n'
 
-        return '// ' + line + ' there was an error processing this line'
+        return '// ' + line + ' there was an error processing this line\n'
