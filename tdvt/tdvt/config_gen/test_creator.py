@@ -270,7 +270,7 @@ class TestCreator:
         test_setup_files = [
             item for item in os.listdir(test_dir)
             if item.startswith(test_suite_names)
-               and not item.startswith(CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS)
+            and not item.startswith(CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS)
         ]
         print("Creating custom test files for the following test suites: {}".format(test_setup_files))
         for test_file in test_setup_files:
