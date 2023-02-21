@@ -81,8 +81,6 @@ Similar to connection-builder but is used to build the JDBC properties file. For
 
 Defines the unique set of connection attributes that is used to generate a connection "key" and has important security considerations. Connections can be reused and shared within Tableau processes based on this key, so it must contain attributes whose values will be unique in a given security context. Username is a commonly used attribute that will make a unique connection for each user, for example.
 
-Starting in Tableau 2021.1 a connector using Connection Dialog V2 style, connection-fields, can let the system determine at runtime the correct connection-normalizer by not defining it. Any connection-normalizer defined in the tdr file will take precedence at runtime. To use set min-version-tableau='2021.1' or newer in the manifest file.
-
 **Type:** XML
 
 The connection-normalizer is represented using an XML component in the [connectionResolver.tdr](https://github.com/tableau/connector-plugin-sdk/blob/master/samples/plugins/postgres_odbc/connectionResolver.tdr) file. An example is :
