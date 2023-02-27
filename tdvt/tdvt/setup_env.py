@@ -117,8 +117,22 @@ def add_datasource(name, ds_registry):
         headers, formatted_results = tc.parse_csv_to_list()
         tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
 
+
+        """
+        Iterate through dict of test sets and ask user if they want to run each one.
+          - the dict of test sets will live in constants.py and looks like:
+             dict_of_test_sets = {
+                'agg': {
+                    'nice_name': 'aggregation',
+                    'description of the suite': 'blah',
+                    'url_for_docs': 'https://blah.com',
+                },
+            }
+            "Do you want to run the {aggregations} suite? Details on the test cases are at {url}. (y/n)"
+          - If they do, add the test set (e.g. the key) to a list of test sets to run.
+          - Return the list of test sets to run, which will be fed to a function.
+         """
         tests = []  # This is our list of tests to run.
-        msg = ""
         for i in CUSTOM_TABLE_TEST_SET:  # Include the nice_name & url for each prompt.
             item = CUSTOM_TABLE_TEST_SET[i]
             try:
