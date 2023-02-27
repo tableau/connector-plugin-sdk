@@ -56,8 +56,8 @@ Each connection attribute is represented by a field element in the XML. The fiel
 | default-value | Default value for the attribute | Yes	| Default values by value-type <br> string: `""` <br> option: first option <br> boolean: `false` <br> file: `""` | |
 | optional | Whether the user must specify a value for the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | If a field is in the `advanced` category and is not optional, it must be given a default value. |
 | editable | Whether the user can edit the attribute | Yes | Allowed values: `true`, `false`. <br> Default value: `true`. | When set to `false`, the attribute is not shown in the connection dialog, and its default-value is passed to the ConnectionBuilder(). |
-| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | In the 2020.2 release only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. **Any fields not marked secure will be logged and persisted to Tableau workbook XML in plain text.** |
-| category | Specifies which tab contains the field for the attribute. | Yes | Allowed values: <br> `endpoint` (for server, port, and so on) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | In the 2020.2 release this has minimal effect; `<initial-sql>` and `<advanced>` are not supported. |
+| secure | Whether the attribute value is sensitive data, and should be suppressed from logs | Yes | Allowed values: `true`, `false`. <br> Default value: `false`. | Only `password` is allowed to be secure. The connector will not load if other fields are specified as secure. **Any fields not marked secure will be logged and persisted to Tableau workbook XML in plain text.** |
+| category | Supports the platform integration. Additionally defines the field sort order by category for the attribute. | Yes | Allowed values, in sort order: <br> `endpoint` (for server, port, and so on) <br> `metadata` (for data hierarchy) <br> `authentication` <br> `general` <br> `ssl` <br> `initial-sql` <br> `advanced` <br> Default value: `general` | See [Connection Field Platform Integration]({{ site.baseurl }}/docs/mcd#connection-field-platform-integration) section for additional category guidance: <br> [endpoint]({{ site.baseurl }}/docs/mcd#endpoint) <br> [authentication]({{ site.baseurl }}/docs/mcd#authentication) <br> [ssl]({{ site.baseurl }}/docs/mcd#ssl) <br> <br> Fields with `advanced` category will appear on the Advanced tab |
 
 ### `<validation-rule>`
 
@@ -143,7 +143,7 @@ The connection field names below should specify the `endpoint` category.
 
 The SSL requirements of the connection. No platform functionality is provided at this time, but field name and values are reserved based on historical usage. If used, the value is generally passed to driver via ODBC connection string or JDBC properties.
 
-The connection field names below can specify the `endpoint` or `general` category depending on dialog layout preference.
+The connection field names below can specify the `endpoint`, `ssl`, or `general` category depending on dialog layout preference.
 
 | Name  | Meaning | Optional? | Value Notes |
 | ----  | ------- | --------- | ----------- |
