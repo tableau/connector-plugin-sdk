@@ -15,6 +15,8 @@ Also be sure to read the [Security Considerations]({{ site.baseurl }}/docs/secur
 
 The <span style="font-family: courier new">class</span> attribute is a unique key for your connector. Make it something that is unlikely to be used by another connector. When Tableau loads the connectors at startup, if the class is already registered, the connector will not be loaded. The class is also stamped in Tableau Workbook (.twb or .twbx) files and Tableau Data Source (.tds) files to identify what connector that particular connection was using.
 
+**Important note: The connector class attribute cannot be changed once the connector is released. If the connector class is changed, workbooks and datasources made with the old version of the connector will not work.**
+
 ## Choose a superclass
 
 Connectors work using an inheritance pattern. The superclass refers to the Tableau native connector from which your connector inherits behavior.
