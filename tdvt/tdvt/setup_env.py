@@ -99,13 +99,13 @@ def add_datasource(name, ds_registry):
         csv_path = input("Enter the path to the custom table csv file: ")
 
         print("Creating tdvt/exprtests/custom_tests if it does not exist.")
-        if os.path.isdir(get_local_test_dir() + '/tdvt/exprtests/custom_tests'):
+        if os.path.isdir(get_root_dir() + '/exprtests/custom_tests'):
             print("tdvt/exprtests/custom_tests already exists.")
             print("Please make sure the directory is empty before continuing.")
             ignored_input = input("Press any key to continue. ")
         else:
             try:
-                os.mkdir(get_local_test_dir() + '/tdvt/exprtests/custom_tests')
+                os.mkdir(get_root_dir() + '/exprtests/custom_tests')
             except Exception as e:
                 print("Could not create custom_tests directory. Error was " + str(e))
                 print("Please create the directory manually and run the script again.")
