@@ -169,22 +169,22 @@ TEST_ARGUMENT_DATA_TYPES = {
         'alts': 'False',
     },
     'bool0': {
-        'type': 'INTEGER',
+        'type': 'BOOLEAN',
         'data_shape': 'no_empties_contains_nulls',
         'alts': 'False',
     },
     'bool1': {
-        'type': 'INTEGER',
+        'type': 'BOOLEAN',
         'data_shape': 'no_empties_contains_nulls',
         'alts': 'False',
     },
     'bool2': {
-        'type': 'INTEGER',
+        'type': 'BOOLEAN',
         'data_shape': 'no_empties_no_nulls',
         'alts': 'False',
     },
     'bool3': {
-        'type': 'INTEGER',
+        'type': 'BOOLEAN',
         'data_shape': 'no_empties_contains_nulls',
         'alts': 'False',
     },
