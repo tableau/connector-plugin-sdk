@@ -199,17 +199,14 @@ class TestCreator:
                     processed_line, skipped = self._process_line(line, test_args_dict)
                     skipped_lines += skipped
                     lines_out.append(processed_line)
-                    print(lines_out)
-                output_file = test_file
-                if all_lines == skipped_lines:
-                    output_file = 'SKIP.' + test_file
-                    print("\tAll tests in {} were skipped. Creating file {}.".format(test_file, output_file))
-                with open(self.output_dir / output_file, 'w') as out_file:
-                    for line in lines_out:
-                        print('now writing to the file {}'.format(self.output_dir / output_file))
-                        print('\t' + line)
-                        out_file.write(line)
-            print("\tCreated {}".format(self.output_dir / output_file))
+            output_file_name = test_file
+            if all_lines == skipped_lines:
+                output_file_name = 'SKIP.' + test_file
+            with open(self.output_dir / output_file_name, 'w') as out_file:
+                for line in lines_out:
+                    out_file.write(line)
+            print("\tCreated {}".format(self.output_dir / output_file_name))
+
 
     def _process_line(self, line: str, test_args_dict: List[Dict[str, List]]) -> Tuple[str, int]:
         ignored_line = 0
@@ -234,10 +231,11 @@ class TestCreator:
                     return new_line, ignored_line
                 else:
                     no_match = True
-                    while test_args_dict[column] and no_match:
-                        possible_user_col = random.choice(test_args_dict[column])
+                    column_at_hand = test_args_dict[column].copy()
+                    while column_at_hand and no_match:
+                        possible_user_col = random.choice(column_at_hand)
                         if possible_user_col in user_col_test_col_map.values():
-                            test_args_dict[column].remove(possible_user_col)
+                            column_at_hand.remove(possible_user_col)
                         else:
                             no_match = False
                     if no_match:
