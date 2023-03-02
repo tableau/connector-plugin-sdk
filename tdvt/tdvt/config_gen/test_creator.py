@@ -70,8 +70,6 @@ class TestCreator:
 
         return headers, csv_data
 
-    # def parse_csv_to_dict(self) -> Dict[str, Dict[str]]:
-    #     pass
 
     def write_expecteds_to_file(
             self,
@@ -114,88 +112,6 @@ class TestCreator:
                 out.write("    </table>\n")
                 out.write("  </test>\n")
             out.write("</results>")
-
-    # def _return_expected_affix(self, col_type: str) -> Optional[str]:
-    #     """
-    #     Uses a dict of constants to return any affix needed to format a result correctly.
-    #     """
-    #     return DATA_TYPES.get(col_type, None)
-
-    # # def _format_output_list_items(
-    # #     self,
-    # #     cols: List
-    # # ) -> List:
-    # #     """
-    # #     Takes list of results and appends affixes to each result, handling null and empty string values.
-    # #     Results list contains:
-    # #       [name of column, type of column, n results...]
-    # #     """
-    # #     formatted_list_of_cols = []
-
-    # #     for col in cols:
-
-    # #         col_name = col[0]
-    # #         col_type = col[1]
-    # #         col_data = col[2:]
-
-    # #         col_out = [col_name, col_type]
-
-    # #         affix = self._return_expected_affix(col_type)
-
-    # #         for item in col_data:
-    # #             if item == '':
-    # #                 col_out.append('&quot;&quot;')
-    # #             elif item == '%null%':
-    # #                 col_out.append(item)
-    # #             else:
-    # #                 if col_type == 'bool':
-    # #                     self._format_bools(item)
-    # #                 elif col_type == 'float':
-    # #                     out = str(float(item))
-    # #                 elif col_type in ['time', 'date', 'datetime']:
-    # #                     self._format_datetime(item)
-    # #                 elif affix:
-    # #                     out = affix + item + affix
-    # #                 else:
-    # #                     out = item
-    # #                 col_out.append(out)
-
-    # #         formatted_list_of_cols.append(col_out)
-
-    # #     return formatted_list_of_cols
-
-    # # def _format_datetime(self, item: str) -> None:
-    # #     pass
-
-    # # def _format_bools(self, item: str) -> None:
-    # #     item.lower().replace('false', '0').replace('true', '1')
-
-    # def _return_sorted_set_of_results(
-    #         self,
-    #         results: List
-    #     ) -> List:
-    #         # this method needs to deal with date/datetime things that are surrounded by #...#
-    #         # but also have %null% or '&quot;&quot;' in the col.
-    #         data_type = results[1]
-
-    #         first_elements = [results[0]]
-
-    #         results_set = set(results[2:])
-
-    #         if '%null%' in results_set:
-    #             first_elements.append('%null%')
-    #             results_set.remove('%null%')
-    #         if '&quot;&quot;' in results_set:
-    #             first_elements.append('&quot;&quot;')
-    #             results_set.remove('&quot;&quot;')
-    #         if data_type == 'int':
-    #             sorted_results = first_elements + sorted(list(results_set), key=int)
-    #         if data_type == 'float':
-    #             sorted_results = first_elements + sorted(list(results_set), key=float)
-    #         else:
-    #             sorted_results = first_elements + sorted(list(results_set))
-
-    #         return sorted_results
 
     def _check_output_and_input_exist(self) -> bool:
         result = True
@@ -274,16 +190,33 @@ class TestCreator:
         ]
         print("Creating custom test files for the following test suites: {}".format(test_setup_files))
         for test_file in test_setup_files:
-            with open(test_dir + test_file, 'r') as source_file, open(self.output_dir / test_file, 'w') as out_file:
+            with open(test_dir + test_file, 'r') as source_file:
+                skipped_lines = 0
+                all_lines = 0
+                lines_out = []
                 for line in source_file:
-                    processed_line = self._process_line(line, test_args_dict)
-                    out_file.write(processed_line)
-            print("\tCreated {}".format(self.output_dir / test_file))
+                    all_lines += 1
+                    processed_line, skipped = self._process_line(line, test_args_dict)
+                    skipped_lines += skipped
+                    lines_out.append(processed_line)
+                    print(lines_out)
+                output_file = test_file
+                if all_lines == skipped_lines:
+                    output_file = 'SKIP.' + test_file
+                    print("\tAll tests in {} were skipped. Creating file {}.".format(test_file, output_file))
+                with open(self.output_dir / output_file, 'w') as out_file:
+                    for line in lines_out:
+                        print('now writing to the file {}'.format(self.output_dir / output_file))
+                        print('\t' + line)
+                        out_file.write(line)
+            print("\tCreated {}".format(self.output_dir / output_file))
 
-    def _process_line(self, line: str, test_args_dict: List[Dict[str, List]]) -> str:
+    def _process_line(self, line: str, test_args_dict: List[Dict[str, List]]) -> Tuple[str, int]:
+        ignored_line = 0
         # turn commented out tests into blank lines
         if line.startswith('//') or line == '\n':
-            return '\n'
+            ignored_line += 1
+            return '\n', ignored_line
         # take care of col names that are in the test args
         else:
             line = line.strip('\n')
@@ -295,8 +228,10 @@ class TestCreator:
             user_col_test_col_map = {}
             for column in extant_cols:
                 if len(test_args_dict[column]) == 0:
+                    print("NO MATCHING COLUMN FOR {}".format(column))
                     new_line = '// ' + line + '  {} has no matching column in the user table.\n'.format(column)
-                    return new_line
+                    ignored_line += 1
+                    return new_line, ignored_line
                 else:
                     no_match = True
                     while test_args_dict[column] and no_match:
@@ -306,11 +241,14 @@ class TestCreator:
                         else:
                             no_match = False
                     if no_match:
-                        return '// ' + line + '  {} has no matching column in the user table.\n'.format(column)
+                        ignored_line += 1
+                        return '// ' + line + '  {} has no matching column in the user table.\n'.format(column), ignored_line
+
                     user_col_test_col_map[column] = possible_user_col
 
             for k in user_col_test_col_map.keys():
                 line = line.replace(k, user_col_test_col_map[k])
-            return line + '\n'
+            return line + '\n', ignored_line
 
-        return '// ' + line + ' there was an error processing this line\n'
+        ignored_line += 1
+        return ('// ' + line + ' there was an error processing this line\n', ignored_line)
