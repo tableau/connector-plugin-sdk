@@ -10,7 +10,7 @@ import sys
 
 from collections import Counter
 from pathlib import Path
-from typing import Counter, List, Optional, TextIO, Tuple, Union, Dict
+from typing import Counter, List, TextIO, Tuple, Union, Dict
 
 from ..constants import DATA_TYPES, TEST_ARGUMENT_DATA_TYPES, CUSTOM_TABLE_TEST_SET, \
     CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
