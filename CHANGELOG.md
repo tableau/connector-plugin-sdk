@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2022-12-16
+### Changed
+- Convert database impersonation sample to Connection Dialog V2     
 ## 2022-11-21
 ### Changed
 - Update `connector_plugin_manifest_latest.xsd` to allow multple `oauth-config` fields and update `min-version-tableau` to be 2021.4 if present
