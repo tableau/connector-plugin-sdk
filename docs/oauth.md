@@ -2,30 +2,12 @@
 title: OAuth Authentication Support
 ---
 **IMPORTANT:** OAuth for plugins is available in Tableau 2021.1 and newer. Multi-IDP config for plugins is available starting in Tableau 2023.1. 
-
-- [How to Enable OAuth for a Plugin Connector](#how-to-enable-oauth-for-a-plugin-connector)
-  - [OAuth Only](#oauth-only)
-  - [Multiple Authentication Options](#multiple-authentication-options)
-- [The OAuth Config File](#the-oauth-config-file)
-  - [XML Elements](#xml-elements)
-  - [Response Attribute Mapping](#response-attribute-mapping)
-  - [OAuth Capabilities](#oauth-capabilities)
-  - [Example OAuthConfig File](#example-oauthconfig-file)
-  - [Instance URL/Custom Domain](#instance-urlcustom-domain)
-  - [Multiple Embedded OAuth Configs](#multiple-embedded-oauth-configs)
-- [OAuth on Tableau Desktop/Tableau Prep](#oauth-on-tableau-desktoptableau-prep)
-  - [redirectUrisDesktop Format](#redirecturisdesktop-format)
-  - [External/Custom OAuth Configs on Desktop](#externalcustom-oauth-configs-on-desktop)
-- [OAuth on Tableau Server & Tableau Online](#oauth-on-tableau-server--tableau-online)
-  - [Server Level OAuth Clients](#server-level-oauth-clients)
-  - [Site Level OAuth Clients](#site-level-oauth-clients)
-    - [Create Site OAuth Client (Pre 2023.1)](#create-site-oauth-client-pre-20231)
-    - [Create Site OAuth Client (2023.1+)](#create-site-oauth-client-20231)
-- [Site vs Server OAuth Client](#site-vs-server-oauth-client)
-  - [Saved Credentials](#saved-credentials)
-  - [Desktop Publish flow](#desktop-publish-flow)
-  - [Tableau Server Web Authoring flow](#tableau-server-web-authoring-flow)
   
+**In this section**
+
+* TOC
+{:toc}
+
 # How to Enable OAuth for a Plugin Connector
 
 First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/snowflake_oauth.
@@ -320,6 +302,10 @@ To create a client for an embedded config, select the config ID.
 To create a client for an custom config, upload the config XML file.
 
 ![Image](../assets/create-oauth-client-custom.png)
+
+## Site-Wide OAuth Clients
+Another way is through the site level OAuth client feature where the server admin for Tableau Server, or site admin for Tableau Online, will be able to register the OAuth client on a particular site. For example setting Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.
+The OAuth clients will only be effective in the particular site, it did not require a restart and take precedence over the server-wide OAuth clients if any.
 
 # Site vs Server OAuth Client
 

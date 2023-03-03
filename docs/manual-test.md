@@ -3,6 +3,11 @@ title: Run Manual QA Tests
 ---
 After you create your connector and validate it using TDVT, run these manual quality assurance tests to confirm that your connector works as expected.
 
+**In this section**
+
+* TOC
+{:toc}
+
 ## Before you begin
 
 Be sure that you complete all the following steps before you begin the manual tests for your connector.

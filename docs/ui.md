@@ -4,6 +4,11 @@ title: Connection Dialog v1
 
 Connection Dialog v2 is the recommended pattern for new connectors. For more details see the [Connection Dialog v2]({{ site.baseurl }}/docs/mcd) page.
 
+**In this section**
+
+* TOC
+{:toc}
+
 ## Define Tableau Custom Dialog file elements
 
 The TCD file defines which UI elements display in the dialog.  The Connection Dialog V1 is a fixed list as defined by the file [XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/tcd_latest.xsd).
