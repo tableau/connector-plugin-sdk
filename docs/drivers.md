@@ -1,7 +1,12 @@
 ---
 title: Driver Requirements
 ---
+**In this section**
 
+* TOC
+{:toc}
+
+## Overview
 Connectors built with the Connector SDK use either an ODBC or a JDBC driver to communicate with the database.
 
 The Tableau Exchange requires using a JDBC driver.
@@ -46,4 +51,4 @@ SQLSTATE | Error | Scenario
 08001 | Unable to Connect | Client unable to connect to server
 28000 | Invalid Authorization Specialization | User enters invalid credentials (Bad username\password, and so on)
 
-You can see the full list of SQLSTATES in the official [ODBC documentation](https://docs.microsoft.com/en-us/sql/odbc/reference/appendixes/appendix-a-odbc-error-codes?view=sql-server-ver15) and official [JDBC documentation](https://docs.oracle.com/cd/E15817_01/appdev.111/b31228/appd.htm).
+You can see the full list of SQLSTATES in the official [ODBC documentation](https://docs.microsoft.com/en-us/sql/odbc/reference/appendixes/appendix-a-odbc-error-codes?view=sql-server-ver15). JDBC drivers should ensure [SQLException.getSQLState](https://docs.oracle.com/javase/7/docs/api/java/sql/SQLException.html#getSQLState()) contains accurate SQLStates. A general list of SQLStates can also be found [here](https://en.wikipedia.org/wiki/SQLSTATE).
