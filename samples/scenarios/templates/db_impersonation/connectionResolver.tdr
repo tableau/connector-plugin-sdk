@@ -9,7 +9,8 @@
         <attribute-list>
           <attr>class</attr>
           <attr>server</attr>
-          <attr>port</attr>
+	  <attr>port</attr>
+	  <attr>authentication</attr>
           <attr>username</attr>
           <attr>password</attr>
           <attr>sslmode</attr>

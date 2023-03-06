@@ -4,10 +4,12 @@
 
 This project consists of documentation, example files, the Tableau Datasource Verification Tool (TDVT) test harness, and a packaging tool that you can use to build and customize a Tableau Connector that uses an ODBC or JDBC driver.
 
-The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2022.2**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau. You can download past releases of the SDK to work with older versions of Tableau if necessary.
+The latest version of the SDK is always targeted towards the latest, non-beta version of Tableau. Right now, this is **Tableau Desktop/Server 2022.4**. This means that the samples may not work on older versions of Tableau, and connectors packaged with newer versions of the SDK may not work in older versions of Tableau. You can download past releases of the SDK to work with older versions of Tableau if necessary.
 
 | Tool                                             | Latest Version      |
 |--------------------------------------------------|---------------------|
+| Connector SDK for Tableau 2022.3                 | 12-14-2022          |
+| Connector SDK for Tableau 2022.2                 | 10-18-2022          |
 | Connector SDK for Tableau 2022.1                 | 06-29-2022          |
 | Connector SDK for Tableau 2021.4                 | 03-31-2022          |
 | Connector SDK for Tableau 2021.3                 | 12-15-2021          |
@@ -19,7 +21,7 @@ The latest version of the SDK is always targeted towards the latest, non-beta ve
 | Connector SDK for Tableau 2020.1                 | 5-08-2020           |
 | Connector SDK for Tableau 2019.4                 | 3-13-2020           |
 | Connector Packager SDK (Beta) for Tableau 2019.3 | 12-11-2019          |
-| TDVT                                             | 2.6.2 (03-22-2022)  |
+| TDVT                                             | 2.7.0 (10-28-2022)  |
 |                                                  | 1.5.24 (04-13-2020) |
 | Connector Packager                               | 2.1.0 (05-08-2020)  |
 
