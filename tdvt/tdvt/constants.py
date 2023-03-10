@@ -240,33 +240,33 @@ CUSTOM_TABLE_TEST_SET = {
     # the keys are used to find the test files (e.g. setup.agg) in tdvt/exprtests/standard
     'agg': {
         'nice_name': 'Aggregation',
-        'description of the suite': 'tests aggregation functions including sum, count, avg, min, max, and distinct',
-        'url_for_docs': 'https://blah.com',
+        'description': 'tests aggregation functions including sum, count, avg, min, max, and distinct',
+        'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#agg-suite',
             },
     'cast': {
         'nice_name': 'Cast',
-        'description of the suite': 'tests casting functions',
-        'url_for_docs': 'https://blah.com',
+        'description': 'tests casting functions',
+        'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#cast-suite',
     },
     'date': {
         'nice_name': 'Date',
-        'description of the suite': 'tests date functions max, min, misc, today, and cast',
-        'url_for_docs': 'https://blah.com',
+        'description': 'tests date functions max, min, misc, today, and cast',
+        'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#date-suite',
     },
     'math': {
         'nice_name': 'Math',
-        'description of the suite': 'tests a variety of math functions',
-        'url_for_docs': 'https://blah.com',
+        'description': 'tests a variety of math functions',
+        'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#math-suite',
     },
     'operator': {
         'nice_name': 'Operator',
-        'description of the suite': 'tests operator functions bool, date, int, num, and str',
-        'url_for_docs': 'https://blah.com',
+        'description': 'tests operator functions bool, date, int, num, and str',
+        'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#operator-suite',
     },
     'string': {
         'nice_name': 'String',
-        'description of the suite': 'tests a variety of string functions',
-        'url_for_docs': 'https://blah.com',
+        'description': 'tests a variety of string functions',
+        'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#string-suite',
     }
 }
 
