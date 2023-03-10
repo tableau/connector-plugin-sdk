@@ -188,7 +188,7 @@ class TestCreator:
             if item.startswith(test_suite_names)
             and not item.startswith(CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS)
         ]
-        print("Creating custom test files for the following test suites: {}".format(test_setup_files))
+        print("Creating custom test files for the following test suites: {}".format(test_sets_to_run))
         for test_file in test_setup_files:
             with open(test_dir + test_file, 'r') as source_file:
                 skipped_lines = 0
@@ -225,7 +225,6 @@ class TestCreator:
             user_col_test_col_map = {}
             for column in extant_cols:
                 if len(test_args_dict[column]) == 0:
-                    print("NO MATCHING COLUMN FOR {}".format(column))
                     new_line = '// ' + line + '  {} has no matching column in the user table.\n'.format(column)
                     ignored_line += 1
                     return new_line, ignored_line
