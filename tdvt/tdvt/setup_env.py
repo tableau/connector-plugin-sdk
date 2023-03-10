@@ -143,8 +143,9 @@ def add_datasource(name, ds_registry):
                 nice_name = "*no nice_name provided*"
                 url_for_docs = "*no url_for_docs provided*"
 
-            msg = "Do you want to run the " + nice_name + " suite? Learn more about it at " \
-                  + url_for_docs + " y/n: "
+            msg = "Do you want to run the {} suite? Learn more about it at {}. y/n: ".format(
+                nice_name, url_for_docs
+            )
             prompt = input(msg).lower()
 
             while prompt != 'y' and prompt != "n":
