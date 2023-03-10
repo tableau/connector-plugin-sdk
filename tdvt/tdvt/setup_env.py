@@ -136,8 +136,8 @@ def add_datasource(name, ds_registry):
         for i in CUSTOM_TABLE_TEST_SET:  # Include the nice_name & url for each prompt.
             item = CUSTOM_TABLE_TEST_SET[i]
             try:
-                nice_name = item.get("nice_name");
-                url_for_docs = item.get("url_for_docs");
+                nice_name = item.get("nice_name")
+                url_for_docs = item.get("url_for_docs")
             except TypeError:
                 print("Error reading file format.")
                 nice_name = "*no nice_name provided*"
