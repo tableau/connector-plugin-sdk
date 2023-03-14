@@ -65,7 +65,7 @@ Multiple expected files are supported.
     - Pip (by default comes by with the Python installation)
       Be sure to enable the "install environmental variables" option.
     - An ODBC or JDBC driver for your database.
-    - The Calcs and Staples table loaded in your database.
+    - The Calcs and Staples table loaded in your database. If your database does not support Calcs/Staples, you can run against a table of your choosing. See the section below on [Testing Novel Tables](#testing-novel-tables) before continuing.
 1. Clone the [TDVT Python module](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt).
 You can create an archive package and install that, or install from the live directory if you want to modify TDVT. Run the following commands from the top level "tdvt" directory.
     - Create an archive package in the dist folder:
@@ -144,7 +144,16 @@ Choose to generate the password file and choose the logical query config. This c
 1. Edit the generated tds/mydb.password file and enter the password for your connection. If your connection needs multiple fields for authentication such as OAuth tokens, pass them in a json string like this: {"ACCESSTOKEN" : "your_access_token", "REFRESHTOKEN" : "your_refresh_token"}. You can obtain "your_access_token" and "your_refresh_token" from any third-party tool to retrieve OAuth tokens such as Postman.
 __Note:__ This can also be done manually. See [The Sample TDS Files](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt/samples/tds).
 
-1. Verify your new test suite by running:
+1. If your data source uses a schema name other that `TestV1`, answer `y` to the prompt, and enter the schema name.
+
+1. If your data source does not contain the `Calcs`
+ and `Staples` tables, answer `y` to the prompt "Would you like to run TDVT against a custom table?".
+
+1. Enter the name of your tds file.
+
+2. If you are running tests against a custom table, enter the full path to your CSV file (described here), and select the test suites (if any) you would like to run. (Details on the test suites is available here.)
+
+3. Verify your new test suite by running:
 `tdvt list --ds mydb`.
 It should show you a list of test suites associated with this data source.
 
@@ -193,6 +202,63 @@ There are also mappings for some column names in case your database doesn't supp
 For example, some databases may not support spaces in identifiers, in which case you can look for a logical configuration that replaces them with underscores and name the columns in your table accordingly.
 - In this case, the logical configuration named "dbo" matches.
 - If none of the logical configurations work for your data source, then you can create your own in the .ini file. See the following section.
+
+## Testing Novel Tables
+As of version 2.8.0, TDVT supports running tests against _any_ table, not just `Calcs` and `Staples`.
+
+If you want to use TDVT to test your connector against a custom table, you are provided with two options:
+1. **Connection Tests** - TDVT will generate a set of tests to `tdvt/exprtests/custom_tests` that enumerate each of the columns in your table.
+2. **Expression Tests** - TDVT can attempt to generate and run suites of expression tests against your table. In order to do this, you will need to provide a `.csv` file (described below) with data about your table's columns and choose which test suites you would like to run against your table. TDVT will then map the columns to columns in the [Calcs table](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv) to determine which expression tests can be run against it. TDVT uses strict matching to the `Calcs` columns; you can edit generated test cases to run against columns of your choosing if the strict matching disallows too many tests.
+
+### Custom Table CSV File
+The CSV file should contain an equal number of columns as those in the table. Each column should have four rows with the following data:
+
+Row               | Content
+-|-
+Column name       | String
+Data type         | String
+Data shape        | String
+Positive/Negative | True/False
+
+
+**Column Name**: Name of the column as in your `.tds` file.
+
+**Data type**: Data type per Standard SQL data types. Types that can be matched with the `Calcs` table are:
+- BOOLEAN
+- DATE
+- FLOAT
+- INTEGER
+- TIME
+- TIMESTAMP
+- VARCHAR
+
+**Data shape**: Enter one of the following:
+
+Data Shape | Description | Calcs Reference Column
+-|-|-
+no_empties_no_nulls | All fields in the column are populated. | [key](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
+no_empties_contains_nulls | Fields in the column may contain a null value. | [int1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
+contains_empties_contains_nulls | Some fields in the column contain nulls, some contain no data (e.g. an empty string). | [datetime1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
+
+**Positive/Negative**: Does the column contain positive and negative values. (True/False)
+
+For reference, a full mapping of Calcs columns to data shapes can be found in the TEST_ARGUMENT_DATA_TYPES constant in [tdvt/tdvt/constants.py](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/tdvt/constants.py)
+
+#### Custom Table Test Suites
+
+Depending on the contents of your table, you can choose any number of the following optional test suites to run against your table. Below are the test groups and links to the test suites that can be run against your table.
+
+Test Group | Test Suites
+-|-
+Agg | - [agg.avg](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.avg.txt)<br />- [agg.count](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.count.txt)<br /> - [agg.countd](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.countd.txt)<br /> - [agg.max](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.max.txt)<br /> - [agg.min](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.min.txt)<br /> - [agg.stddev](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.stddev.txt)<br /> - [agg.sum](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.sum.txt)<br /> - [agg.var](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.agg.var.txt)
+Cast | - [cast.float.string](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.float.string.txt)<br />- [cast.float](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.float.txt)<br />- [cast.int.nulls](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.int.nulls.txt)<br />- [cast.int](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.int.txt)<br />- [cast.str.date](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.str.date.txt)<br />- [cast.str.str](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.str.str.txt)<br />- [cast.str](https://github.com/tableau/connector-plugin-sdk/blob/test-generation-from-csv/tdvt/tdvt/exprtests/standard/setup.cast.str.txt)
+Date | - asdf
+Math | - asdf
+Operator | []()<br />-
+String | - []()<br />-
+
+TDVT carries out strict one-to-one matching of columns. This means that some tests may be excluded even though they could run. After tests are generated, **check the `setup.{test name}.txt` files in `tdvt/exprtests/custom_tests` to see if any excluded tests include function you believe can run against your  table**. You can point them to the desired column name, run tests, and then look at the expected file created to validate the results.
+
 
 ## INI file structure
 Your mydb.ini file will define your new TDVT test suite, and has the following sections.
@@ -581,4 +647,3 @@ Example mydb.ini file
    ```
 
 You should be able to run the TDVT tests following the steps in [this]({{ site.baseurl }}/docs/tdvt) doc.
-
