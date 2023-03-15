@@ -245,7 +245,7 @@ Add this section to run LOD tests. This section is required.
 Option | Example Value | Default | Description | Required?
 -|-|-|-|-
 LogicalExclusions_Staples | Filter.Trademark | N/A | Exclude logical tests that target the Staples table | No
-ExpressionExclusions_Standard | string.ascii,string.char | N/A | Exclude expression tests| No
+ExpressionExclusions_Calcs | lod.calcs | N/A | Exclude expression tests| No
 
 ### [UnionTest]
 Add this section to run Union tests. This section is required.
