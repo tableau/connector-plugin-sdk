@@ -145,7 +145,7 @@ Tableau uses the Connection Builder script (connectionBuilder.js) to create the 
 Some values -- such as username, password, and database name -- are user entries from the connection dialog.
 They are mapped to ODBC or JDBC connection string values that the driver (in this case, PostgresSQL) uses.
 Other attributes (such as BOOLSASCHAR and LFCONVERSION in this example) have values set to useful defaults. These depend on which driver you are using to connect to your database.
-You can use this script to set any other connection string options that you would like to pass to the driver.
+You can use this script to set any other connection string options that you would like to pass to the driver. **If you are using a JDBC based connector, you shouldn't put secrets in the URL.** Use the connectionProperties.js described below to handle secrets.
 
 This is an example Connection Builder script for ODBC:
 

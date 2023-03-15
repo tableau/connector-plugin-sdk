@@ -166,7 +166,7 @@ Format the attributes as 'key=value'. By default, some values are escaped or wra
 
     String GetProductName();
 
-Returns the Tableau product name. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Possible values are: `TableauDesktop, TableauServer, TableauPrep, TableauBridge, Tableau`
+Returns the Tableau product name. This value should not be used for conditional logic within the connector. Available in Tableau 2022.1 and newer. Possible values are: `TableauDesktop, TableauServer, TableauCloud, TableauPrep, TableauBridge, Tableau`
 
     String GetProductVersion();
 
