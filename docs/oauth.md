@@ -96,7 +96,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 
 ## XML Elements
 
-`<pluginOAuthConfig>`
+```<pluginOAuthConfig>```
   is the parent element for all fields below.
 
 
