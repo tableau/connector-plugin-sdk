@@ -115,7 +115,7 @@ def add_datasource(name, ds_registry):
 
         tc = TestCreator(csv_path, name, output_dir)
         headers, formatted_results = tc.parse_csv_to_list()
-        tc.write_expecteds_to_file(headers, False)  # this creates the test setup file.
+        tc.write_test_files(headers)  # this creates the test setup file.
 
 
         """

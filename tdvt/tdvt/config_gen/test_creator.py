@@ -40,19 +40,6 @@ class TestCreator:
 
         return cleaned_headers, cleaned_col_types
 
-    def _return_data_type_count(self, tuple_of_csv_data: Tuple[List[str], List[str]]) -> Counter:
-        """
-        This method returns the number of data types in the csv file.
-        :param tuple_of_csv_data: Tuple of lists of headers and data types
-        :return: int of number of data types
-        """
-        col_data_types = tuple_of_csv_data[1]
-        return Counter(col_data_types)
-
-    def get_count_of_data_types_in_csv(self) -> Counter:
-        csv_tuple = self._csv_to_lists()
-        return self._return_data_type_count(csv_tuple)
-
     def parse_csv_to_list(self) -> Tuple[List[str], List[str]]:
         """
         This method needs to:
@@ -61,7 +48,7 @@ class TestCreator:
           3. Dump columns into appropriate buckets (col name, type, all remaining data)
         :None:
         """
-        if not self._check_output_and_input_exist():
+        if not self._check_output_dir_and_input_csv_exist():
             print("{} does not exist.".format(self.csv_file))
             sys.exit(1)
 
@@ -70,50 +57,18 @@ class TestCreator:
 
         return headers, csv_data
 
-
-    def write_expecteds_to_file(
-            self,
-            list_to_write: List[str],
-            is_expected_file: bool = False
-    ) -> None:
-        if is_expected_file:
-            output_affix = 'expected.setup.'
-        else:
-            output_affix = 'setup.'
+    def write_test_files(self, list_to_write: List[str]) -> None:
+        output_affix = 'setup.'
         for item in list_to_write:
             output_file_name = output_affix + self.datasource_name + '.' + item + '_column.txt'
             output_path = self.output_dir / output_file_name
             with open(output_path, 'w') as out:
                 print('writing to {}'.format(output_path))
                 logging.info("writing to {}".format(output_path))
-                self._test_file_writer(out, item, is_expected_file)
+                out.write(item + '\n')
             logging.info("Successfully wrote to {}".format(output_path))
 
-    def _test_file_writer(
-            self,
-            out: TextIO,
-            list_to_write: Union[List[List[str]], List[str], str],
-            is_expected_file: bool
-    ) -> None:
-        if not is_expected_file:
-            out.write(list_to_write + '\n')
-        else:
-            out.write("<results>\n")
-            for item in list_to_write:
-                out.write("  <test name='{}'>\n".format(item[0]))
-                out.write("    <table>\n")
-                out.write("      <schema>\n")
-                out.write("        <column></column>\n")
-                out.write("      </schema>\n")
-                for result in item[1:]:
-                    out.write("      <tuple>\n")
-                    out.write("        <value>{}</value>\n".format(result))
-                    out.write("      </tuple>\n")
-                out.write("    </table>\n")
-                out.write("  </test>\n")
-            out.write("</results>")
-
-    def _check_output_and_input_exist(self) -> bool:
+    def _check_output_dir_and_input_csv_exist(self) -> bool:
         result = True
         if self.csv_file.is_file() and self.output_dir.is_dir():
             logging.info("Source CSV file found.")
@@ -127,7 +82,8 @@ class TestCreator:
 
         return result
 
-    def _parse_col_constants(self) -> Dict[str, List[str]]:
+    @staticmethod
+    def _parse_col_constants() -> Dict[str, List[str]]:
         """
         Parses TEST_ARGUMENT_DATA_TYPES from constants file to get the column names.
         """
@@ -161,22 +117,7 @@ class TestCreator:
 
     def rewrite_tests_to_use_user_cols(self, test_sets_to_run: List[str]) -> None:
         test_args_dict = self.map_user_cols_to_test_args()
-        """
-        We will do the following here:
-        1. Read in the test file
-           a. it could be a blank line or a commented out line; handle them.
-           a. create output file to read using two `with` statements
-           b. need to filter out the test sets that won't work (see the spreadsheet)
-             - this is from CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
-        2. Find the test arguments
-           a. use regex for this. need to differentiate between col names and str args.
-        3. Replace the test arguments with the user's column names
-           a. if the user col does not have equivalent arg(s), comment out the test 
-              and add explanation ('no matching test arg')
-           b. need to make sure we don't repeat the same col in test args. add a check
-              if there aren't unique args, comment out the test and add explanation
-        4. Write the new test file to the output directory 
-        """
+
         test_suite_names = tuple('setup.' + key for key in test_sets_to_run)
         if len(test_suite_names) == 0:
             print("No test sets specified. Exiting.")
@@ -207,8 +148,8 @@ class TestCreator:
                     out_file.write(line)
             print("\tCreated {}".format(self.output_dir / output_file_name))
 
-
-    def _process_line(self, line: str, test_args_dict: List[Dict[str, List]]) -> Tuple[str, int]:
+    @staticmethod
+    def _process_line(line: str, test_args_dict: List[Dict[str, List]]) -> Tuple[str, int]:
         ignored_line = 0
         # turn commented out tests into blank lines
         if line.startswith('//') or line == '\n':
@@ -225,7 +166,7 @@ class TestCreator:
             user_col_test_col_map = {}
             for column in extant_cols:
                 if len(test_args_dict[column]) == 0:
-                    new_line = '// ' + line + '  {} has no matching column in the user table.\n'.format(column)
+                    new_line = '// {}  {} has no matching column in the user table.\n'.format(line, column)
                     ignored_line += 1
                     return new_line, ignored_line
                 else:
@@ -239,13 +180,11 @@ class TestCreator:
                             no_match = False
                     if no_match:
                         ignored_line += 1
-                        return '// ' + line + '  {} has no matching column in the user table.\n'.format(column), ignored_line
+                        return '// {}  {} has no matching column in the user table.\n'.format(
+                            line, column), ignored_line
 
                     user_col_test_col_map[column] = possible_user_col
 
             for k in user_col_test_col_map.keys():
                 line = line.replace(k, user_col_test_col_map[k])
             return line + '\n', ignored_line
-
-        ignored_line += 1
-        return ('// ' + line + ' there was an error processing this line\n', ignored_line)
