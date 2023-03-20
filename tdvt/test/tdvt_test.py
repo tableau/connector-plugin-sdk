@@ -358,24 +358,6 @@ class CommandLineTest(unittest.TestCase):
         cmd_line_str = ' '.join(cmd_line)
         self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
 
-    def test_command_line_full_extension(self):
-
-        self.test_config.output_dir = 'my/output/dir'
-        self.test_config.d_override = '-DLogLevel=Debug'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
-
-        work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
-        work.test_extension = True
-        cmd_line = build_tabquery_command_line_local(work)
-        cmd_line_str = ' '.join(cmd_line)
-        if sys.platform in ('win32', 'cygwin'):
-            expected = 'tabquerytool.exe --expression-file-list my/output/dir\mytest\\tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir\mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable --test_arg my/output/dir'  # noqa: E501
-        elif sys.platform in ('darwin', 'linux'):
-            expected = 'tabquerytool --expression-file-list my/output/dir/mytest/tests.txt -d mytds.tds --combined --output-dir my/output/dir -DLogDir=my/output/dir/mytest -DOverride=ProtocolServerNewLog -DLogLevel=Debug -DLogicalQueryRewriteDisable=Funcall:RewriteConstantFuncall -DInMemoryLogicalCacheDisable --test_arg my/output/dir'  # noqa: E501
-        else:
-            self.skipTest("Unsupported test OS: {}".format(sys.platform))
-        self.assertTrue(cmd_line_str == expected, 'Actual: ' + cmd_line_str + ': Expected: ' + expected)
-
     def test_command_line_no_expected(self):
         self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)

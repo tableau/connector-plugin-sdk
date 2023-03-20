@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pluginOAuthConfig>
+    <dbclass>test_oauth</dbclass>
+
+    <clientIdDesktop>******</clientIdDesktop>
+    <clientSecretDesktop>******</clientSecretDesktop>
+    <redirectUrisDesktop>http://localhost:55555/Callback</redirectUrisDesktop>
+
+    <authUri>/oauth2/v2.0/authorize</authUri>
+    <tokenUri>/oauth2/v2.0/token</tokenUri>
+
+    <scopes>openid</scopes>
+    <scopes>email</scopes>
+    <scopes>profile</scopes>
+    <scopes>offline_access</scopes>
+
+</pluginOAuthConfig>

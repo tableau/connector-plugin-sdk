@@ -147,7 +147,7 @@
         <xs:element minOccurs="0" name="connection-metadata" type="ScriptElement-CT"/>
         <xs:element minOccurs="0" name="connection-resolver" type="ScriptElement-CT"/>
         <xs:element minOccurs="0" name="dialect" type="ScriptElement-CT"/>
-        <xs:element minOccurs="0" name="oauth-config" type="ScriptElement-CT"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="oauth-config" type="ScriptElement-CT"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" name="license-key" type="LicenseKey-ST"/>
       </xs:sequence>
 

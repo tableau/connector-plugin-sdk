@@ -140,21 +140,6 @@
       <argument type='int' />
       <argument type='int' />
     </function>
-    <function group='numeric' name='MAX' return-type='str'>
-      <formula>(CASE WHEN (%1 IS NULL) OR (%2 IS NULL) THEN STRING(NULL) WHEN %1 &gt; %2 THEN %1 ELSE %2 END)</formula>
-      <argument type='str' />
-      <argument type='str' />
-    </function>
-    <function group='numeric' name='MAX' return-type='datetime'>
-      <formula>(CASE WHEN (%1 IS NULL) OR (%2 IS NULL) THEN CAST(NULL AS TIMESTAMP) WHEN CAST(%1 AS TIMESTAMP) &gt; CAST(%2 AS TIMESTAMP) THEN %1 ELSE %2 END)</formula>
-      <argument type='datetime' />
-      <argument type='datetime' />
-    </function>
-    <function group='numeric' name='MAX' return-type='date'>
-      <formula>(CASE WHEN (%1 IS NULL) OR (%2 IS NULL) THEN NULL WHEN TIMESTAMP(%1) &gt; TIMESTAMP(%2) THEN %1 ELSE %2 END)</formula>
-      <argument type='date' />
-      <argument type='date' />
-    </function>
     <function group='numeric' name='MIN' return-type='real'>
       <formula>(CASE&#10;&#9;WHEN %1 IS NULL OR %2 IS NULL THEN NULL&#10;&#9;WHEN %1 &lt; %2 THEN %1&#10;&#9;ELSE %2 END)</formula>
       <argument type='real' />
@@ -164,21 +149,6 @@
       <formula>(CASE&#10;&#9;WHEN %1 IS NULL OR %2 IS NULL THEN NULL&#10;&#9;WHEN %1 &gt; %2 THEN %2&#10;&#9;ELSE %1 END)</formula>
       <argument type='int' />
       <argument type='int' />
-    </function>
-    <function group='numeric' name='MIN' return-type='str'>
-      <formula>(CASE WHEN (%1 IS NULL) OR (%2 IS NULL) THEN STRING(NULL) WHEN %1 &lt; %2 THEN %1 ELSE %2 END)</formula>
-      <argument type='str' />
-      <argument type='str' />
-    </function>
-    <function group='numeric' name='MIN' return-type='datetime'>
-      <formula>(CASE WHEN (%1 IS NULL) OR (%2 IS NULL) THEN TIMESTAMP(NULL) WHEN %1 &lt; %2 THEN %1 ELSE %2 END)</formula>
-      <argument type='datetime' />
-      <argument type='datetime' />
-    </function>
-    <function group='numeric' name='MIN' return-type='date'>
-      <formula>(CASE WHEN (%1 IS NULL) OR (%2 IS NULL) THEN NULL WHEN TIMESTAMP(%1) &lt; TIMESTAMP(%2) THEN %1 ELSE %2 END)</formula>
-      <argument type='date' />
-      <argument type='date' />
     </function>
     <function group='numeric' name='MOD' return-type='int'>
       <formula>MOD(%1,%2)</formula>

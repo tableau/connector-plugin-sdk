@@ -2,6 +2,7 @@
     Test driver script for the Tableau Datasource Verification Tool
 
 """
+
 import sys
 
 if sys.version_info[0] < 3:
@@ -21,12 +22,12 @@ import zipfile
 from pathlib import Path
 from typing import List, Optional, Tuple, Union
 
-from .config_gen.datasource_list import print_ds, print_configurations, print_logical_configurations
+from .config_gen.datasource_list import TestRegistry, print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
 from .setup_env import create_test_environment, add_datasource
 from .tabquery import *
-from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core
+from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core, return_csv_dialect
 from .version import __version__
 
 # This contains the dictionary of configs you can run.
@@ -45,43 +46,46 @@ class TestOutputFiles(object):
     combined_output = []
 
     @classmethod
-    def copy_output_file(c, src_name, src_dir):
+    def copy_output_file(cls, src_name, src_dir, csv_dialect):
         src = os.path.join(src_dir, src_name)
         logging.debug("Copying {0} to output".format(src))
         try:
             with open(src, 'r', encoding='utf8') as src_file:
-                reader = csv.DictReader(src_file, dialect='tdvt')
+                reader = csv.DictReader(src_file, dialect=csv_dialect)
                 for row in reader:
-                    c.combined_output.append(row)
+                    cls.combined_output.append(row)
 
         except IOError as e:
             logging.debug("Exception while copying files: " + str(e))
             return
 
     @classmethod
-    def write_test_results_csv(c, custom_output_dir: str=''):
-        if not c.combined_output:
+    def write_test_results_csv(cls, perf_run: bool, custom_output_dir: str = ''):
+        if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
 
-        logging.debug("Copying output to {0}".format(c.output_csv))
+        logging.debug("Copying output to {0}".format(cls.output_csv))
         # Sort combined_output on the number of distinct functions (order of complexity)
         sort_by_complexity = lambda row: len(row['Functions'].split(','))
         try:
-            c.combined_output.sort(key=sort_by_complexity)
+            cls.combined_output.sort(key=sort_by_complexity)
         except KeyError as e:
             logging.debug("Tried to sort output on a key that doesn't exist. Leaving output unsorted.")
 
-        dst = os.path.join(os.getcwd(), c.output_csv)
+        dst = os.path.join(os.getcwd(), cls.output_csv)
         if custom_output_dir != '':
-            dst = os.path.join(Path(custom_output_dir), c.output_csv)
+            dst = os.path.join(Path(custom_output_dir), cls.output_csv)
         try:
-            dst_exists = os.path.isfile(dst)
             with open(dst, 'w', encoding='utf8') as dst_file:
-                writer = csv.DictWriter(dst_file, fieldnames=c.combined_output[0],
-                    dialect='tdvt', quoting=csv.QUOTE_MINIMAL)
+                writer = csv.DictWriter(
+                    dst_file,
+                    fieldnames=cls.combined_output[0],
+                    dialect=return_csv_dialect(perf_run),
+                    quoting=csv.QUOTE_MINIMAL
+                )
                 writer.writeheader()
-                for row in c.combined_output:
+                for row in cls.combined_output:
                     writer.writerow(row)
         except IOError as e:
             logging.debug("Exception while writing to file: " + str(e))
@@ -95,7 +99,7 @@ def do_test_queue_work(i, q):
     abort_test_run = False
     while True:
         # This blocks if the queue is empty.
-        work = q.get()
+        work: TestRunner = q.get()
 
         work.run()
 
@@ -136,8 +140,8 @@ class TestRunner():
                 inner_output = os.path.join(optional_dir_name, file_to_be_zipped)
                 myzip.write(actual, inner_output)
 
-    def copy_output_files(self):
-        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir)
+    def copy_output_files(self, csv_dialect):
+        TestOutputFiles.copy_output_file("test_results.csv", self.temp_dir, csv_dialect)
 
     def copy_test_result_file(self):
         src = os.path.join(self.temp_dir, "tdvt_output.json")
@@ -180,10 +184,11 @@ class TestRunner():
 
     def copy_files_and_cleanup(self):
         left_temp_dir = False
+        csv_dialect = 'perflab' if self.test_config.run_as_perf else 'tdvt'
         try:
             self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, is_logs=False)
             self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, is_logs=True)
-            self.copy_output_files()
+            self.copy_output_files(csv_dialect)
             self.copy_test_result_file()
         except Exception as e:
             print(e)
@@ -244,7 +249,9 @@ def get_datasource_registry(platform):
     return reg
 
 
-def enqueue_single_test(args, ds_info: TestConfig, suite) -> Union[Tuple[None, None], Tuple[Union[SingleLogicalTestSet, SingleExpressionTestSet], TdvtInvocation]]:  # noqa: E501
+def enqueue_single_test(
+        args, ds_info: TestConfig, suite
+) -> Union[Tuple[None, None], Tuple[Union[SingleLogicalTestSet, SingleExpressionTestSet], TdvtInvocation]]:
     if not args.command == 'run-pattern' or not args.tds_pattern or (args.logical_pattern and args.expression_pattern):
         return None, None
 
@@ -487,6 +494,8 @@ def create_parser() -> argparse.ArgumentParser:
                                         required=False, default=None, const='*', nargs='?')
     run_test_common_parser.add_argument('--generate_expected', dest='generate_expected', action='store_true',
                                         help='Generate expected value files.', required=False)
+    run_test_common_parser.add_argument('--perf-run', dest='perf_run', action='store_true', default=False)
+    run_test_common_parser.add_argument('--iteration', dest='perf_iteration', type=int)
     subparsers = parser.add_subparsers(help='commands', dest='command')
 
     #Get information.
@@ -543,6 +552,14 @@ def register_tdvt_dialect():
     custom_dialect.skipinitialspace = True
     csv.register_dialect('tdvt', custom_dialect)
 
+def register_perflab_dialect():
+    custom_dialect = csv.excel
+    custom_dialect.lineterminator = '\n'
+    custom_dialect.delimiter = '|'
+    custom_dialect.strict = True
+    custom_dialect.skipinitialspace = True
+    csv.register_dialect('perflab', custom_dialect)
+
 def check_if_custom_output_dir_exists(custom_output_dir: str) -> bool:
     return Path(custom_output_dir).is_dir()
 
@@ -579,6 +596,7 @@ def init():
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
     register_tdvt_dialect()
+    register_perflab_dialect()
 
     return parser, ds_reg, args
 
@@ -593,7 +611,7 @@ def active_thread_count(threads):
     return active
 
 
-def test_runner(all_tests, test_queue, max_threads):
+def test_runner(all_tests: List[TestRunner], test_queue: queue.Queue, max_threads: int) -> Tuple[int, int, int, int]:
     for i in range(0, max_threads):
         worker = threading.Thread(target=do_test_queue_work, args=(i, test_queue))
         worker.setDaemon(True)
@@ -610,11 +628,17 @@ def test_runner(all_tests, test_queue, max_threads):
         skipped_tests += work.skipped_tests if work.skipped_tests else 0
         disabled_tests += work.disabled_tests if work.disabled_tests else 0
         total_tests += work.total_tests if work.total_tests else 0
-    TestOutputFiles.write_test_results_csv(work.test_config.custom_output_dir)
+    is_perf_run = all_tests[0].test_config.run_as_perf
+    custom_output_dir = all_tests[0].test_config.custom_output_dir
+    TestOutputFiles.write_test_results_csv(is_perf_run, custom_output_dir)
     return failed_tests, skipped_tests, disabled_tests, total_tests
 
 
-def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, args) -> Optional[Tuple[int, int, int, int]]:
+def run_tests_impl(
+    tests: List[Tuple[TestSet, TdvtInvocation]],
+    max_threads: int,
+    args
+) -> Optional[Tuple[int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
         sys.exit()
@@ -664,7 +688,8 @@ def run_tests_impl(tests: List[Tuple[TestSet, TestConfig]], max_threads: int, ar
         print("Starting smoke tests. Creating", str(smoke_test_threads), "worker threads.\n")
 
         failed_smoke_tests, skipped_smoke_tests, disabled_smoke_tests, total_smoke_tests = test_runner(
-            smoke_tests, smoke_test_queue, smoke_test_threads)
+            smoke_tests, smoke_test_queue, smoke_test_threads
+        )
 
         smoke_tests_run = total_smoke_tests - disabled_smoke_tests
 
@@ -730,7 +755,7 @@ def get_ds_list(ds):
     ds_list = [x.strip() for x in ds_list]
     return ds_list
 
-def run_desired_tests(args, ds_registry):
+def run_desired_tests(args, ds_registry: TestRegistry):
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
@@ -747,7 +772,7 @@ def run_desired_tests(args, ds_registry):
         sys.exit(0)
 
     max_threads = get_level_of_parallelization(args)
-    test_sets: List[TestSet] = []
+    test_sets: List[Tuple[TestSet, TestConfig], Tuple[TestSet, TdvtInvocation]] = []
 
     for ds in ds_to_run:
         ds_info = ds_registry.get_datasource_info(ds)

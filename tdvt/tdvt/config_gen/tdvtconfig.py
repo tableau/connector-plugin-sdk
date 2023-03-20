@@ -31,6 +31,7 @@ class TdvtInvocation(object):
         self.tds = ''
         self.tested_run_time_config = None
         self.tabquery_path = ''
+        self.iteration: int = 0
         self.generate_expected = False
         self.schema_name: Optional[str] = None
 
@@ -45,7 +46,7 @@ class TdvtInvocation(object):
     def set_run_time_test_config(self, rtt: RunTimeTestConfig):
         self.timeout_seconds = rtt.timeout_seconds
         self.d_override = rtt.d_override
-        self.run_as_perf = rtt.run_as_perf
+        self.run_as_perf = rtt.run_as_perf or self.run_as_perf
         self.schema_name = rtt.schema_name
         self.tested_run_time_config = rtt
         if rtt.tabquery_paths:
@@ -64,6 +65,10 @@ class TdvtInvocation(object):
             self.verbose = args.verbose
         if args.custom_output_dir:
             self.custom_output_dir = args.custom_output_dir
+        if args.perf_run:
+            self.run_as_perf = True
+        if args.perf_iteration:
+            self.iteration = args.perf_iteration
         if args.generate_expected:
             self.generate_expected = True
 
