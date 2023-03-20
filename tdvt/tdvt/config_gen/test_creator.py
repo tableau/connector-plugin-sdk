@@ -180,7 +180,7 @@ class TestCreator:
                             no_match = False
                     if no_match:
                         ignored_line += 1
-                        return '// {}  {} has no matching column in the user table.\n'.format(
+                        return '// {}  {} has no unique matching column in the user table.\n'.format(
                             line, column), ignored_line
 
                     user_col_test_col_map[column] = possible_user_col
