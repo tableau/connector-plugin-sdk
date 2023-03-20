@@ -1023,7 +1023,10 @@ class TabQueryPathTest(unittest.TestCase):
 class TestCreatorTest(unittest.TestCase):
     test_creator = TestCreator('tool_test/test_generation/csv_with_headers.csv', 'good_ds')
     tc_with_one_data_type = TestCreator('tool_test/test_generation/csv_only_one_data_type.csv', 'one_data_type_ds')
-    atc_with_multiple_data_types = TestCreator('tool_test/test_generation/csv_with_multiple_data_types.csv', 'multi_data_type_ds')
+    tc_with_perfect_match = TestCreator('tool_test/test_generation/full_map_to_calcs.csv', 'perfect_match_ds')
+    tc_missing_t0 = TestCreator('tool_test/test_generation/map_to_calcs_missing_t0.csv', 'missing_t0_ds')
+    atc_with_multiple_data_types = TestCreator('tool_test/test_generation/csv_with_multiple_data_types.csv.csv',
+                                               'multi_data_type_ds')
     headers, columns = test_creator._csv_to_lists()
 
     def test_bad_csv_path(self):
@@ -1098,9 +1101,72 @@ class TestCreatorTest(unittest.TestCase):
              'time0': [],
              'time1': [],
              'zzz': ['txt5']
-            }
+             }
         )
 
+    def test_map_user_cols_to_test_cols_perfect_match(self):
+        self.assertEqual(
+            self.tc_with_perfect_match.map_user_cols_to_test_args(),
+            {'bool0': ['b0', 'b1', 'b3'],
+             'bool1': ['b0', 'b1', 'b3'],
+             'bool2': ['b2'],
+             'bool3': ['b0', 'b1', 'b3'],
+             'date0': ['d0', 'd3'],
+             'date1': ['d1', 'd2'],
+             'date2': ['d1', 'd2'],
+             'date3': ['d0', 'd3'],
+             'datetime0': ['t0', 'dt0'],
+             'datetime1': ['dt1'],
+             'int0': ['i0'],
+             'int1': ['i1'],
+             'int2': ['i2'],
+             'int3': ['i3'],
+             'key': ['k', 's0', 's1', 'z'],
+             'num0': ['n0', 'n4'],
+             'num1': ['n1'],
+             'num2': ['n2'],
+             'num3': ['n3'],
+             'num4': ['n0', 'n4'],
+             'str0': ['k', 's0', 's1', 'z'],
+             'str1': ['k', 's0', 's1', 'z'],
+             'str2': ['s2', 's3'],
+             'str3': ['s2', 's3'],
+             'time0': ['t0', 'dt0'],
+             'time1': ['t1'],
+             'zzz': ['k', 's0', 's1', 'z']}
+        )
+
+    def test_map_user_cols_to_test_cols_missing_t0(self):
+        self.assertEqual(
+            self.tc_missing_t0.map_user_cols_to_test_args(),
+            {'bool0': ['b0', 'b1', 'b3'],
+             'bool1': ['b0', 'b1', 'b3'],
+             'bool2': ['b2'],
+             'bool3': ['b0', 'b1', 'b3'],
+             'date0': ['d0', 'd3'],
+             'date1': ['d1', 'd2'],
+             'date2': ['d1', 'd2'],
+             'date3': ['d0', 'd3'],
+             'datetime0': ['dt0'],
+             'datetime1': ['dt1'],
+             'int0': ['i0'],
+             'int1': ['i1'],
+             'int2': ['i2'],
+             'int3': ['i3'],
+             'key': ['k', 's0', 's1', 'z'],
+             'num0': ['n0', 'n4'],
+             'num1': ['n1'],
+             'num2': ['n2'],
+             'num3': ['n3'],
+             'num4': ['n0', 'n4'],
+             'str0': ['k', 's0', 's1', 'z'],
+             'str1': ['k', 's0', 's1', 'z'],
+             'str2': ['s2', 's3'],
+             'str3': ['s2', 's3'],
+             'time0': ['dt0'],
+             'time1': ['t1'],
+             'zzz': ['k', 's0', 's1', 'z']}
+        )
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
