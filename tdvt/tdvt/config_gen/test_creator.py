@@ -41,13 +41,6 @@ class TestCreator:
         return cleaned_headers, cleaned_col_types
 
     def parse_csv_to_list(self) -> Tuple[List[str], List[str]]:
-        """
-        This method needs to:
-          1. Check the csv file exists
-          2. Check the csv has correct headers
-          3. Dump columns into appropriate buckets (col name, type, all remaining data)
-        :None:
-        """
         if not self._check_output_dir_and_input_csv_exist():
             print("{} does not exist.".format(self.csv_file))
             sys.exit(1)
@@ -109,10 +102,10 @@ class TestCreator:
     def map_user_cols_to_test_args(self) -> Dict[str, List[str]]:
         user_cols_dict = self._map_user_cols_to_test_cols()
         test_args_dict = self._parse_col_constants()
-        for key in user_cols_dict.keys():
-            for tkey in TEST_ARGUMENT_DATA_TYPES.keys():
-                if user_cols_dict[key] == TEST_ARGUMENT_DATA_TYPES[tkey]:
-                    test_args_dict[tkey].append(key)
+        for user_col in user_cols_dict.keys():
+            for test_col in TEST_ARGUMENT_DATA_TYPES.keys():
+                if user_cols_dict[user_col] == TEST_ARGUMENT_DATA_TYPES[test_col]:
+                    test_args_dict[test_col].append(user_col)
         return test_args_dict
 
     def rewrite_tests_to_use_user_cols(self, test_sets_to_run: List[str]) -> None:
