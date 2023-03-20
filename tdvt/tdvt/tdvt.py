@@ -112,6 +112,7 @@ class TestRunner():
         self.test_set = test_set
         self.test_config = test_config
         self.error_code = 0
+        self.generate_expected = test_config.generate_expected
         self.thread_id = thread_id
         self.verbose = verbose
         self.thread_lock = lock
@@ -184,7 +185,6 @@ class TestRunner():
     def copy_files_and_cleanup(self):
         left_temp_dir = False
         csv_dialect = 'perflab' if self.test_config.run_as_perf else 'tdvt'
-        # if
         try:
             self.copy_files_to_zip(TestOutputFiles.output_actuals, self.temp_dir, is_logs=False)
             self.copy_files_to_zip(TestOutputFiles.output_tabquery_log, self.temp_dir, is_logs=True)
@@ -475,7 +475,8 @@ action_usage_text = '''
 run_file_usage_text = '''
 '''
 
-def create_parser():
+
+def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
     parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
 
@@ -491,6 +492,8 @@ def create_parser():
     run_test_common_parser.add_argument('--output-dir', '-o', dest='custom_output_dir',
                                         help='Writes log files to a specified directory. The directory must exist.',
                                         required=False, default=None, const='*', nargs='?')
+    run_test_common_parser.add_argument('--generate_expected', dest='generate_expected', action='store_true',
+                                        help='Generate expected value files.', required=False)
     run_test_common_parser.add_argument('--perf-run', dest='perf_run', action='store_true', default=False)
     run_test_common_parser.add_argument('--iteration', dest='perf_iteration', type=int)
     subparsers = parser.add_subparsers(help='commands', dest='command')
@@ -829,7 +832,6 @@ def run_generate(ds_registry):
     generate_files(ds_registry, True)
     end_time = time.time() - start_time
     print("Done: " + str(end_time))
-
 
 def main():
     parser, ds_registry, args = init()
