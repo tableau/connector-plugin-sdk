@@ -71,7 +71,7 @@ class TabqueryCommandLine(object):
         cmdline.extend(tds_arg)
         cmdline.extend(["--combined"])
 
-        if work.test_config.tested_run_time_config.schema_name:
+        if work.test_config.tested_run_time_config and work.test_config.tested_run_time_config.schema_name:
             cmdline.extend(["--schema", work.test_config.tested_run_time_config.schema_name])
 
         password_file = work.test_set.get_password_file_name()
@@ -118,5 +118,3 @@ def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
-
-
