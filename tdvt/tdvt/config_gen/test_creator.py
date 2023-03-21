@@ -32,7 +32,6 @@ class TestCreator:
             cleaned_headers = [item.replace('"', '').replace('\n', '') for item in headers]
             col_types = f.readline().split(',')
             cleaned_col_types = [item.replace('"', '').replace('\n', '') for item in col_types]
-            # TODO: when we care about null/empty, we add that here
 
             if len(cleaned_headers) != len(cleaned_col_types):
                 logging.error("CSV file has different number of column names and data types than expected.")
