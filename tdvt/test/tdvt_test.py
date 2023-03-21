@@ -1003,7 +1003,7 @@ class TabQueryPathTest(unittest.TestCase):
 
 
 class TestCreatorTest(unittest.TestCase):
-    test_creator = TestCreator('tool_test/test_generation/csv_with_headers.csv', 'good_ds')
+    test_creator = TestCreator('tool_test/test_generation/full_map_to_calcs.csv', 'good_ds')
     tc_with_one_data_type = TestCreator('tool_test/test_generation/csv_only_one_data_type.csv', 'one_data_type_ds')
     tc_with_perfect_match = TestCreator('tool_test/test_generation/full_map_to_calcs.csv', 'perfect_match_ds')
     tc_missing_t0 = TestCreator('tool_test/test_generation/map_to_calcs_missing_t0.csv', 'missing_t0_ds')
@@ -1024,11 +1024,11 @@ class TestCreatorTest(unittest.TestCase):
     def test_headers_are_correct(self):
         self.assertEqual(
             self.headers[0:5],
-            ['key',
-             'num0',
-             'num1',
-             'num2',
-             'num3',
+            ['k',
+             'n0',
+             'n1',
+             'n2',
+             'n3',
              ]
         )
 
@@ -1149,6 +1149,7 @@ class TestCreatorTest(unittest.TestCase):
              'time1': ['t1'],
              'zzz': ['k', 's0', 's1', 'z']}
         )
+
 
 ROOT_DIRECTORY = pkg_resources.resource_filename(__name__, '')
 TEST_DIRECTORY = pkg_resources.resource_filename(__name__, 'tool_test')
