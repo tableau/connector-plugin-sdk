@@ -25,6 +25,7 @@
   <xs:complexType name="pluginOAuthConfigType">
     <xs:sequence>
       <xs:element type="xs:string" name="dbclass"/>
+      <xs:element type="xs:string" name="oauthConfigId" maxOccurs="1" minOccurs="0"/>
       <!--Allow registering oauth for server use only, mostly for connectorless OAuth-->
       <xs:element type="xs:string" name="clientIdDesktop" maxOccurs="1" minOccurs="0"/>
       <!--Some oauth provider allow native app using oauth without clientSecret-->
