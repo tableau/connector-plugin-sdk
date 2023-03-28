@@ -1,0 +1,27 @@
+{
+    "txt": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "txt2": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "True"
+    },
+    "txt3": {
+        "type": "VARCHAR",
+        "data_shape": "contains_empties_contains_nulls",
+        "alts": "False"
+    },
+    "txt4": {
+        "type": "VARCHAR",
+        "data_shape": "contains_empties_no_nulls",
+        "alts": "False"
+    },
+    "txt5": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    }
+}

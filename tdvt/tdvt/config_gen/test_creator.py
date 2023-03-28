@@ -1,53 +1,42 @@
 """
-TestCreator creates test case setup files from a csv file of expected types and values.
+TestCreator creates test case setup files from a json file of expected types and values.
 ExpectedCreator creates expecteds for an existing test case.
 """
-import csv
+import json
 import logging
 import os
 import random
 import sys
 
-from collections import Counter
 from pathlib import Path
-from typing import Counter, List, TextIO, Tuple, Union, Dict
+from typing import List, Tuple, Dict
 
-from ..constants import DATA_TYPES, TEST_ARGUMENT_DATA_TYPES, CUSTOM_TABLE_TEST_SET, \
-    CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
+from ..constants import TEST_ARGUMENT_DATA_TYPES, CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
 from ..resources import get_root_dir
-
-EMPTY_CELL = '%null%'
 
 
 class TestCreator:
 
-    def __init__(self, csv_file, datasource_name, output_dir=os.getcwd()):
-        self.csv_file: Path = Path(csv_file)
+    def __init__(self, json_file, datasource_name, output_dir=os.getcwd()):
+        self.json_file: Path = Path(json_file)
         self.datasource_name: str = datasource_name
         self.output_dir: Path = Path(output_dir)
 
-    def _csv_to_lists(self) -> Tuple[List[str], List[str]]:
-        with open(self.csv_file, 'r') as f:
-            headers = f.readline().split(',')
-            cleaned_headers = [item.replace('"', '').replace('\n', '') for item in headers]
-            col_types = f.readline().split(',')
-            cleaned_col_types = [item.replace('"', '').replace('\n', '') for item in col_types]
+    def _json_to_header_list(self) -> List[str]:
+        json_file = self.json_file
+        with open(json_file, 'r') as f:
+            json_dict = json.load(f)
+        headers = list(json_dict.keys())
+        return headers
 
-            if len(cleaned_headers) != len(cleaned_col_types):
-                logging.error("CSV file has different number of column names and data types than expected.")
-                sys.exit(1)
-
-        return cleaned_headers, cleaned_col_types
-
-    def parse_csv_to_list(self) -> Tuple[List[str], List[str]]:
-        if not self._check_output_dir_and_input_csv_exist():
-            print("{} does not exist.".format(self.csv_file))
+    def parse_json_to_list_of_columns(self) -> List[str]:
+        if not self._check_output_dir_and_input_json_exist():
+            print("{} does not exist.".format(self.json_file))
             sys.exit(1)
 
-        # get data from csv into list of lists
-        headers, csv_data = self._csv_to_lists()
+        headers = self._json_to_header_list()
 
-        return headers, csv_data
+        return headers
 
     def write_test_files(self, list_to_write: List[str]) -> None:
         output_affix = 'setup.'
@@ -60,14 +49,14 @@ class TestCreator:
                 out.write(item + '\n')
             logging.info("Successfully wrote to {}".format(output_path))
 
-    def _check_output_dir_and_input_csv_exist(self) -> bool:
+    def _check_output_dir_and_input_json_exist(self) -> bool:
         result = True
-        if self.csv_file.is_file() and self.output_dir.is_dir():
-            logging.info("Source CSV file found.")
+        if self.json_file.is_file() and self.output_dir.is_dir():
+            logging.info("Source JSON file found.")
             logging.info("Output directory found.")
         else:
-            if not self.csv_file.is_file():
-                logging.error("CSV file does not exist at indicated path: {}.".format(self.csv_file))
+            if not self.json_file.is_file():
+                logging.error("JSON file does not exist at indicated path: {}.".format(self.json_file))
             if not self.output_dir.is_dir():
                 logging.error("Output directory {} does not exist.".format(self.output_dir))
             result = False
@@ -86,16 +75,8 @@ class TestCreator:
         return col_type_map
 
     def _map_user_cols_to_test_cols(self) -> Dict[str, Dict[str, str]]:
-        with open(self.csv_file, 'r') as f:
-            reader = csv.reader(f)
-            data = zip(*[row for row in reader])
-            user_cols_dict = {
-                row[0]: {
-                    'type': row[1],
-                    'data_shape': row[2],
-                    'alts': row[3]
-                } for row in data
-            }
+        with open(self.json_file, 'r') as f:
+            user_cols_dict = json.load(f)
         return user_cols_dict
 
     def map_user_cols_to_test_args(self) -> Dict[str, List[str]]:

@@ -1,0 +1,132 @@
+{
+    "k": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "n0": {
+        "type": "FLOAT",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "True"
+    },
+    "n1": {
+        "type": "FLOAT",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "n2": {
+        "type": "FLOAT",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "n3": {
+        "type": "FLOAT",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "True"
+    },
+    "n4": {
+        "type": "FLOAT",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "True"
+    },
+    "s0": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "s1": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "s2": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "s3": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "i0": {
+        "type": "INTEGER",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "i1": {
+        "type": "INTEGER",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "True"
+    },
+    "i2": {
+        "type": "INTEGER",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "True"
+    },
+    "i3": {
+        "type": "INTEGER",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "b0": {
+        "type": "BOOLEAN",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "b1": {
+        "type": "BOOLEAN",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "b2": {
+        "type": "BOOLEAN",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "b3": {
+        "type": "BOOLEAN",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "d0": {
+        "type": "DATE",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "d1": {
+        "type": "DATE",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "d2": {
+        "type": "DATE",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "d3": {
+        "type": "DATE",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "t1": {
+        "type": "TIME",
+        "data_shape": "no_empties_contains_nulls",
+        "alts": "False"
+    },
+    "dt0": {
+        "type": "TIMESTAMP",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    },
+    "dt1": {
+        "type": "VARCHAR",
+        "data_shape": "contains_empties_contains_nulls",
+        "alts": "False"
+    },
+    "z": {
+        "type": "VARCHAR",
+        "data_shape": "no_empties_no_nulls",
+        "alts": "False"
+    }
+}

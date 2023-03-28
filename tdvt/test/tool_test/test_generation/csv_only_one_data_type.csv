@@ -1,4 +1,0 @@
-"txt","txt2","txt3","txt4","txt5"
-"VARCHAR","VARCHAR","VARCHAR","VARCHAR","VARCHAR"
-"no_empties_contains_nulls","no_empties_no_nulls","contains_empties_contains_nulls","contains_empties_no_nulls","no_empties_no_nulls"
-"False","True","False","False","False"

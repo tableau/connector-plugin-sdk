@@ -1003,23 +1003,21 @@ class TabQueryPathTest(unittest.TestCase):
 
 
 class TestCreatorTest(unittest.TestCase):
-    test_creator = TestCreator('tool_test/test_generation/full_map_to_calcs.csv', 'good_ds')
-    tc_with_one_data_type = TestCreator('tool_test/test_generation/csv_only_one_data_type.csv', 'one_data_type_ds')
-    tc_with_perfect_match = TestCreator('tool_test/test_generation/full_map_to_calcs.csv', 'perfect_match_ds')
-    tc_missing_t0 = TestCreator('tool_test/test_generation/map_to_calcs_missing_t0.csv', 'missing_t0_ds')
-    atc_with_multiple_data_types = TestCreator('tool_test/test_generation/csv_with_multiple_data_types.csv.csv',
-                                               'multi_data_type_ds')
-    headers, columns = test_creator._csv_to_lists()
+    test_creator = TestCreator('tool_test/test_generation/full_map_to_calcs.json', 'good_ds')
+    tc_with_one_data_type = TestCreator('tool_test/test_generation/only_one_data_type.json', 'one_data_type_ds')
+    tc_with_perfect_match = TestCreator('tool_test/test_generation/full_map_to_calcs.json', 'perfect_match_ds')
+    tc_missing_t0 = TestCreator('tool_test/test_generation/full_map_to_calcs_missing_t0.json', 'missing_t0_ds')
+    headers = test_creator._json_to_header_list()
 
     def test_bad_csv_path(self):
         bad_test_creator = TestCreator('bad.csv', 'bad-ds')
-        self.assertFalse(bad_test_creator._check_output_dir_and_input_csv_exist())
+        self.assertFalse(bad_test_creator._check_output_dir_and_input_json_exist())
 
     def test_csv_path(self):
-        self.assertTrue(self.test_creator._check_output_dir_and_input_csv_exist())
+        self.assertTrue(self.test_creator._check_output_dir_and_input_json_exist())
 
     def test_csv_to_list_returns_all_cols(self):
-        self.assertEqual(len(self.columns), 27)
+        self.assertEqual(len(self.headers), 27)
 
     def test_headers_are_correct(self):
         self.assertEqual(
