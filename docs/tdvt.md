@@ -151,7 +151,7 @@ __Note:__ This can also be done manually. See [The Sample TDS Files](https://git
 
 1. Enter the name of your tds file.
 
-2. If you are running tests against a custom table, enter the full path to your CSV file (described here), and select the test suites (if any) you would like to run. (Details on the test suites is available here.)
+2. If you are running tests against a custom table, enter the full path to your JSON file (described below), and select the test suites (if any) you would like to run. (Details on the test suites is available below in Testing Novel Tables.)
 
 3. Verify your new test suite by running:
 `tdvt list --ds mydb`.
