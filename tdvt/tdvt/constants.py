@@ -86,17 +86,7 @@ STAPLES_FIELDS = [
     '[Market Segment]'
 ]
 
-DATA_TYPES = {
-    'string': '&quot;',
-    'datetime': '#',
-    'date': '#',
-    'time': '#'
-}
-
-DATA_SHAPES = {
-
-}
-
+# Constants for custom test generation
 TEST_ARGUMENT_DATA_TYPES = {
     'key': {
         'type': 'VARCHAR',
@@ -289,6 +279,8 @@ CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS = (
     'setup.string.space',
     'setup.string.startswith',
 )
+
+# Constants for CSV output
 DEFAULT_CSV_HEADERS = [
     'Suite',
     'Test Set',
