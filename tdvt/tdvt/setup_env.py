@@ -44,29 +44,6 @@ def create_tdvt_ini_file():
         pass
 
 
-def parse_test_args_to_data_types(
-    custom_table_cols_and_types: List[Dict[str, str]],
-    tableau_data_type_map: Dict[str, str]
-) -> Dict[str, str]:
-    """Parse the column names and data types from the csv file."""
-    col_names = []
-    data_types = []
-    for col in custom_table_cols_and_types:
-        col_names.append(col['name'])
-        data_types.append(col['type'])
-    return dict(zip(col_names, data_types))
-
-
-def parse_custom_schema_csv_file(csv_path):
-    """Parse the custom schema csv file and return a list of the headers and a list of the rows."""
-    with open(csv_path, 'r') as csv_file:
-        csv_reader = csv.reader(csv_file)
-        headers = next(csv_reader)
-        rows = []
-        for row in csv_reader:
-            rows.append(row)
-    return headers, rows
-
 
 def add_datasource(name, ds_registry):
     """
