@@ -34,6 +34,7 @@
       <xs:element type="xs:string" name="authUri"/>
       <xs:element type="xs:string" name="tokenUri"/>
       <xs:element type="xs:string" name="userInfoUri" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:string" name="instanceUrlSuffix" maxOccurs="1" minOccurs="0"/>
       <xs:element type="xs:string" name="instanceUrlValidationRegex" maxOccurs="1" minOccurs="0"/>
       <xs:element type="xs:string" name="scopes" maxOccurs="unbounded" minOccurs="1"/>
       <xs:element type="xs:string" name="requiredAuthAttrs" maxOccurs="unbounded" minOccurs="0"/>
