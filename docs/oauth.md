@@ -108,6 +108,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 | authUri | String | Authorization endpoint URI | Yes | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/authorize` |
 | tokenUri | String | Token endpoint URI | Yes | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/token` |
 | userInfoUri | String | User Info UrI | No | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/userinfo` |
+| instanceUrlSuffix | String | If OAUTH_CAP_INFER_INSTANCE_URL_FROM_SERVER is set, this will be concatenated with the user-provided server field like `https://{SERVER}{instanceUrlSuffix}`. Otherwise, ignored. |
 | instanceUrlValidationRegex | String | Use to validate against your OAuth instance Url. | No | Uses [Java regex pattern](https://docs.oracle.com/en/java/javase/11/docs/api/index.html) syntax, which is similar to PCRE. Example: `^https://(.+\\.)?(myidp.com\\.(com\|us\|cn\|de))(.*)` |
 | scopes | String[] | scopes | Yes | |
 | capabilities |  Map<String, Bool>  | Customizes the OAuth flow | No | See [OAuth Capabilies](#oauth-capabilities) below for details. |
@@ -155,6 +156,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 | OAUTH_CAP_REQUIRES_PROMPT_CONSENT | Add prompt=consent to the request. | false | - |
 | OAUTH_CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add prompt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
 | OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. For example, https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
+| OAUTH_CAP_INFER_INSTANCE_URL_FROM_SERVER | Used to concatenate the user-provided server with the `instanceUrlSuffix` field in the format of `https://{SERVER}{instanceUrlSuffix}`. | false | - |
 
 ---
 ## Example OAuthConfig File
