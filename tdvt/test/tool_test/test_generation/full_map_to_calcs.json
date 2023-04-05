@@ -1,137 +1,164 @@
 {
     "k": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
     },
     "n0": {
-        "type": "FLOAT",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "True"
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "FLOAT"
     },
     "n1": {
-        "type": "FLOAT",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "FLOAT"
     },
     "n2": {
-        "type": "FLOAT",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "FLOAT"
     },
     "n3": {
-        "type": "FLOAT",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "True"
+        "empties": false,
+        "negatives": true,
+        "nulls": false,
+        "type": "FLOAT"
     },
     "n4": {
-        "type": "FLOAT",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "True"
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "FLOAT"
     },
     "s0": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
     },
     "s1": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
     },
     "s2": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
     },
     "s3": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
     },
     "i0": {
-        "type": "INTEGER",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "INTEGER"
     },
     "i1": {
-        "type": "INTEGER",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "True"
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "INTEGER"
     },
     "i2": {
-        "type": "INTEGER",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "True"
+        "empties": false,
+        "negatives": true,
+        "nulls": false,
+        "type": "INTEGER"
     },
     "i3": {
-        "type": "INTEGER",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "INTEGER"
     },
     "b0": {
-        "type": "BOOLEAN",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "BOOLEAN"
     },
     "b1": {
-        "type": "BOOLEAN",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "BOOLEAN"
     },
     "b2": {
-        "type": "BOOLEAN",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "BOOLEAN"
     },
     "b3": {
-        "type": "BOOLEAN",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "BOOLEAN"
     },
     "d0": {
-        "type": "DATE",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "DATE"
     },
     "d1": {
-        "type": "DATE",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "DATE"
     },
     "d2": {
-        "type": "DATE",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "DATE"
     },
     "d3": {
-        "type": "DATE",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "DATE"
     },
     "t0": {
-        "type": "TIMESTAMP",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "TIMESTAMP"
     },
     "t1": {
-        "type": "TIME",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "TIME"
     },
     "dt0": {
-        "type": "TIMESTAMP",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "TIMESTAMP"
     },
     "dt1": {
-        "type": "VARCHAR",
-        "data_shape": "contains_empties_contains_nulls",
-        "alts": "False"
+        "empties": true,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
     },
     "z": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
     }
 }

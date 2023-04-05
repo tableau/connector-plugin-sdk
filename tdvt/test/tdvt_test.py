@@ -1033,22 +1033,26 @@ class TestCreatorTest(unittest.TestCase):
     def test_return_user_data_cols(self):
         self.assertEqual(
             self.tc_with_one_data_type._map_user_cols_to_test_cols(),
-            {'txt': {'type': 'VARCHAR',
-                     'data_shape': 'no_empties_contains_nulls',
-                     'alts': 'False'},
-             'txt2': {'type': 'VARCHAR',
-                      'data_shape': 'no_empties_no_nulls',
-                      'alts': 'True'},
-             'txt3': {'type': 'VARCHAR',
-                      'data_shape': 'contains_empties_contains_nulls',
-                      'alts': 'False'},
-             'txt4': {'type': 'VARCHAR',
-                      'data_shape': 'contains_empties_no_nulls',
-                      'alts': 'False'},
-             'txt5': {'alts': 'False',
-                      'data_shape': 'no_empties_no_nulls',
-                      'type': 'VARCHAR'}
-             }
+            {'txt': {'empties': False,
+                     'negatives': False,
+                     'nulls': True,
+                     'type': 'VARCHAR'},
+             'txt2': {'empties': False,
+                      'negatives': True,
+                      'nulls': False,
+                      'type': 'VARCHAR'},
+             'txt3': {'empties': True,
+                      'negatives': False,
+                      'nulls': True,
+                      'type': 'VARCHAR'},
+             'txt4': {'empties': True,
+                      'negatives': False,
+                      'nulls': False,
+                      'type': 'VARCHAR'},
+             'txt5': {'empties': False,
+                      'negatives': False,
+                      'nulls': False,
+                      'type': 'VARCHAR'}}
         )
 
     def test_map_user_cols_to_test_cols(self):

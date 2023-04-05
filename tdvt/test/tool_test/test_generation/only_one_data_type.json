@@ -1,27 +1,32 @@
 {
     "txt": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_contains_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
     },
     "txt2": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "True"
+        "empties": false,
+        "negatives": true,
+        "nulls": false,
+        "type": "VARCHAR"
     },
     "txt3": {
-        "type": "VARCHAR",
-        "data_shape": "contains_empties_contains_nulls",
-        "alts": "False"
+        "empties": true,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
     },
     "txt4": {
-        "type": "VARCHAR",
-        "data_shape": "contains_empties_no_nulls",
-        "alts": "False"
+        "empties": true,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
     },
     "txt5": {
-        "type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "False"
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
     }
 }
