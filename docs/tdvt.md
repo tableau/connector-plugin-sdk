@@ -211,26 +211,34 @@ If you want to use TDVT to test your connector against a custom table, you are p
 2. **Expression Tests** - TDVT can attempt to generate and run suites of expression tests against your table. In order to do this, you will need to provide a `.json` file (described below) with data about your table's columns and choose which test suites you would like to run against your table. TDVT will then map the columns to columns in the [Calcs table](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv) to determine which expression tests can be run against it. TDVT uses strict matching to the `Calcs` columns; you can edit generated test cases to run against columns of your choosing if the strict matching disallows too many tests.
 
 ### Custom Table JSON File
-To create custom tests, you need to create a json file that describes your table's columns. The json file should contain objects that each describes a column in your table. The following is an example of a json file that describes a table with two columns:
+To create custom tests, you need to create a json file that describes your table's columns. The json file should contain objects that each describes a column in your table. Note that the order of the keys describing the data in each column matters; they should be in alphabetic orer as below. The following is an example of a json file that describes a table with two columns:
 ```
     {
-        "column1": {
-        "data_type": "VARCHAR",
-        "data_shape": "no_empties_no_nulls",
-        "alts": "True"
+    "k": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
         },
-        "column2": {
-        "data_type": "INTEGER",
-        "data_shape": "no_empties_contains_nulls",
-        "alts" "False"
-        }
+    "n0": {
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "FLOAT"
+        },
+    "cool_column": {
+        "empties": true,
+        "negatives": true,
+        "nulls": false,
+        "type": "TIMESTAMP"
+        },
     }
 ```
 
 
 **Column Name**: Name of the column as in your `.tds` file.
 
-**Data type**: Data type per Standard SQL data types. Types that can be matched with the `Calcs` table are:
+**`type`**: Data type per Standard SQL data types. Types that can be matched with the `Calcs` table are:
 - BOOLEAN
 - DATE
 - FLOAT
@@ -239,15 +247,15 @@ To create custom tests, you need to create a json file that describes your table
 - TIMESTAMP
 - VARCHAR
 
-**Data shape**: Enter one of the following:
+**`nulls` and `empties`**: Enter `true` or `false` for each of the following:
 
 Data Shape | Description | Calcs Reference Column
 -|-|-
-no_empties_no_nulls | All fields in the column are populated. | [key](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
-no_empties_contains_nulls | Fields in the column may contain a null value. | [int1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
-contains_empties_contains_nulls | Some fields in the column contain nulls, some contain no data (e.g. an empty string). | [datetime1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
 
-**Alts**: Does the column contain positive and negative values. (True/False)
+`nulls` | Fields in the column may contain a null value. | [int1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
+`empties` | Fields in the column may contain no data (e.g. an empty string). | [datetime1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
+
+**`negatives`**: Does the column contain positive and negative values. (True/False)
 
 For reference, a full mapping of Calcs columns to data shapes can be found in the TEST_ARGUMENT_DATA_TYPES constant in [tdvt/tdvt/constants.py](https://github.com/tableau/connector-plugin-sdk/blob/master/tdvt/tdvt/constants.py)
 
