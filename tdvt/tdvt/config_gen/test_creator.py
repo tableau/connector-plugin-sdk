@@ -146,7 +146,7 @@ class TestCreator:
                     no_match = True
                     column_at_hand = test_args_dict[column].copy()
                     while column_at_hand and no_match:
-                        possible_user_col = random.choice(column_at_hand)
+                        possible_user_col = column_at_hand[0]
                         if possible_user_col in user_col_test_col_map.values():
                             column_at_hand.remove(possible_user_col)
                         else:
