@@ -60,7 +60,11 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
             
             oauthConfigId = pluginOAuthConfigRoot.find('.//oauthConfigId')
             instanceUrlSuffix = pluginOAuthConfigRoot.find('.//instanceUrlSuffix')
-            if (instanceUrlSuffix is not None and 2023.1 > float(min_version_tableau)):
+            configLabel = pluginOAuthConfigRoot.find('.//configLabel')
+            if (configLabel is not None and 2023.2 > float(min_version_tableau)):
+                min_version_tableau = "2023.2"
+                reasons.append("Connector uses configLabel field, which was added in the 2023.2 release")
+            elif (instanceUrlSuffix is not None and 2023.1 > float(min_version_tableau)):
                 min_version_tableau = "2023.1"
                 reasons.append("Connector uses instanceUrlSuffix field, which was added in the 2023.1 release")
             elif (oauthConfigId is not None and 2021.4 > float(min_version_tableau)):
