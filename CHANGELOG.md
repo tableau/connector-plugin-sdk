@@ -1,4 +1,7 @@
 # Tableau Connector SDK Changelog
+## 2023-04-10
+### Changed
+- Update `oauth_config.xsd` to include `configLabel` field and update `min-version-tableau` to be 2023.2 if present
 ## 2023-04-04
 ### Changed
 - Update `oauth_config.xsd` to include `instanceUrlSuffix` field and update `min-version-tableau` to be 2023.1 if present
