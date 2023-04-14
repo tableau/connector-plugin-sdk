@@ -416,9 +416,9 @@ class TestXSDValidator(unittest.TestCase):
         xml_violations_buffer = []
 
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
-                        "oauthConfig should be able to have no oauthConfigId field")
+                        "oauthConfig should be able to have no instanceUrlSuffix field")
 
-        test_file = TEST_FOLDER / "oauth_config_id/invalid/oauth-config.xml"
+        test_file = TEST_FOLDER / "oauth_instance_url_suffix/invalid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
