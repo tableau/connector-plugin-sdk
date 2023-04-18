@@ -12,7 +12,7 @@ You can search for relevant logs by searching the logs `connector-plugin`, `conn
 
 ## Connector Doesn't show in Connector List
 If your connector does not show up :
-- Check the Tableau logs for any failures for your connector in `/Users/<username>/Documents/My Tableau Repository/Logs/log.txt`. Tableau logs all the file paths for the tacos attempted to load under the keyword `connector-plugin`, and they can search for their connector class or their taco's file name to jump to it directly. If you don't see any log lines for your connector, please check it in the correct place.
+- Check the Tableau logs for any failures for your connector in `/Users/<username>/Documents/My Tableau Repository/Logs/log.txt`. Tableau logs all the file paths for the tacos attempted to load under the keyword `connector-plugin`, and you can search for your connector class or your taco's file name to jump to it directly to that part of. If you don't see any log lines for your connector, please check it in the correct place.
 - Check the location of the taco. Follow the section  **Use a connector built with Tableau Connector SDK**
   in [this doc](https://help.tableau.com/current/pro/desktop/en-us/examples_connector_sdk.htm#use-a-connector-built-with-tableau-connector-sdk){:target="_blank"}
 
