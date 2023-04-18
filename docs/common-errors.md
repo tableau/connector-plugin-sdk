@@ -11,10 +11,8 @@ You can search for relevant logs by searching the logs `connector-plugin`, `conn
 [Tableau Log Viewer](https://github.com/tableau/tableau-log-viewer){:target="_blank"} is a good tool to view and filter relevant logs when developing your connector. 
 
 ## Connector Doesn't show in Connector List
-If your connector does not show up :
-- Check the Tableau logs for any failures for your connector in `/Users/<username>/Documents/My Tableau Repository/Logs/log.txt`. Tableau logs all the file paths for the tacos attempted to load under the keyword `connector-plugin`, and you can search for your connector class or your taco's file name to jump to it directly to that part of. If you don't see any log lines for your connector, please check it in the correct place.
-- Check the location of the taco. Follow the section  **Use a connector built with Tableau Connector SDK**
-  in [this doc](https://help.tableau.com/current/pro/desktop/en-us/examples_connector_sdk.htm#use-a-connector-built-with-tableau-connector-sdk){:target="_blank"}
+If your connector does not show up, please check the Tableau logs for any failures for your connector in `/Users/<username>/Documents/My Tableau Repository/Logs/log.txt`. Tableau logs all the file paths for the tacos attempted to load under the keyword `connector-plugin`, and you can search for your connector class or your taco's file name to jump to it directly to that part. If you don't see any log lines for your connector, please check it in the correct place. Follow the section  **Use a connector built with Tableau Connector SDK**
+  in [this doc](https://help.tableau.com/current/pro/desktop/en-us/examples_connector_sdk.htm#use-a-connector-built-with-tableau-connector-sdk){:target="_blank"} to check where the taco should be placed. 
 
 ##  Plugin Script Faliure
 If you get 
