@@ -109,6 +109,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 | tokenUri | String | Token endpoint URI | Yes | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/token` |
 | userInfoUri | String | User Info UrI | No | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/userinfo` |
 | instanceUrlValidationRegex | String | Use to validate against your OAuth instance Url. | No | Uses [Java regex pattern](https://docs.oracle.com/en/java/javase/11/docs/api/index.html) syntax, which is similar to PCRE. Example: `^https://(.+\\.)?(myidp.com\\.(com\|us\|cn\|de))(.*)` |
+| defaultInstanceUrl | String | Instance URL that can be used when the user does not provide one on the client side. | No | OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN must be set to true in order to be consumed. Otherwise, ignored. |
 | scopes | String[] | scopes | Yes | |
 | capabilities |  Map<String, Bool>  | Customizes the OAuth flow | No | See [OAuth Capabilies](#oauth-capabilities) below for details. |
 | accessTokenResponseMaps |  Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | Yes | See table below for more info. |
@@ -238,7 +239,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 
 ## Instance URL/Custom Domain
 Some IDPs have a single global endpoint, such as https://accounts.google.com/o/oauth2/. Others have different instances, for example Okta would have a different instance URL for each customer. If your authorization server or IDP has different instances, then either:
-- Enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. This only works with embedded OAuth configs. The instance URL will be collected later from the end-user or the admin.
+- Enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. This only works with embedded OAuth configs. The instance URL will be either be collected later from the end-user or be extracted via the embedded OAuth configs' `defaultInstanceUrl` field.
 - Create seperate external/custom OAuth configs for each custom domain. External OAuth config shouldn't set OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN, and should specify authUri, tokenUri, userInfoUri fields as absolute paths, which contains the custom domain/instance URL.
 
 ## Multiple Embedded OAuth Configs
