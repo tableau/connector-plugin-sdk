@@ -641,7 +641,7 @@ def return_csv_dialect(is_perf_run: bool = False):
 
 def get_csv_header_data(all_test_results, is_perf_run: bool) -> List[str]:
     if is_perf_run:
-        csv_header = PERFLAB_CSV_HEADERS.copy()
+        csv_header = PERFLAB_CSV_HEADERS
     else:
         tuple_limit_str = '(' + str(TUPLE_DISPLAY_LIMIT) + ')tuples'
         actual_tuples_header = 'Actual ' + tuple_limit_str
