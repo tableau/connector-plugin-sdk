@@ -641,14 +641,14 @@ def return_csv_dialect(is_perf_run: bool = False):
 
 def get_csv_header_data(all_test_results, is_perf_run: bool) -> List[str]:
     if is_perf_run:
-        csv_header = PERFLAB_CSV_HEADERS
+        csv_header = PERFLAB_CSV_HEADERS.copy()
     else:
         tuple_limit_str = '(' + str(TUPLE_DISPLAY_LIMIT) + ')tuples'
         actual_tuples_header = 'Actual ' + tuple_limit_str
         expected_tuples_header = 'Expected ' + tuple_limit_str
         # Suite is the datasource name (ie mydb).
         # Test Set is the grouping that defines related tests. run tdvt --list mydb to see them.
-        csv_header = DEFAULT_CSV_HEADERS
+        csv_header = DEFAULT_CSV_HEADERS.copy()
         csv_header.extend([actual_tuples_header, expected_tuples_header])
         results_values = list(all_test_results.values())
         if results_values:
