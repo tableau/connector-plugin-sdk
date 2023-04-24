@@ -157,6 +157,7 @@ def load_test(config, test_dir=get_root_dir()):
     percentile_test = 'PercentileTests'
     logical_config = 'LogicalConfig'
     connection_test = 'ConnectionTests'
+    custom_schema_tests = 'CustomSchemaTests'
 
     KEY_EXCLUSIONS = 'Exclusions'
 
@@ -171,7 +172,8 @@ def load_test(config, test_dir=get_root_dir()):
         dsconfig.getint('TimeoutSeconds', 60 * 60),
         dsconfig.get('MaxThread', '0'),
         dsconfig.get('CommandLineOverride', ''),
-        dsconfig.getboolean('RunAsPerf', False)
+        dsconfig.getboolean('RunAsPerf', False),
+        dsconfig.get('SchemaName', 'TestV1'),
     )
     run_time_config.set_tabquery_paths(
         dsconfig.get('TabQueryPathLinux', ''),
@@ -300,6 +302,22 @@ def load_test(config, test_dir=get_root_dir()):
                 else:
                     cfg_data[name][k] = cfg[k]
             test_config.add_logical_config(cfg_data)
+        except KeyError as e:
+            logging.debug(e)
+            pass
+
+    # TODO: This is for custom tables with custom schema
+    if custom_schema_tests in config.sections():
+        try:
+            cst = config[custom_schema_tests]
+            tds_name = cst.get('TDS', '')
+            all_ini_sections.remove(custom_schema_tests)
+            test_config.add_expression_test(
+                'custom_tests', tds_name, cst.get(KEY_EXCLUSIONS, ''),
+                'exprtests/custom_tests', test_dir, get_password_file(cst),
+                get_expected_message(cst), get_is_smoke_test(cst),
+                get_is_test_enabled(cst), False
+            )
         except KeyError as e:
             logging.debug(e)
             pass

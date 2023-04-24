@@ -28,9 +28,6 @@ from .resources import *
 from .tabquery import build_connectors_test_tabquery_command_line, build_tabquery_command_line
 from .test_results import *
 
-ALWAYS_GENERATE_EXPECTED = False
-
-
 class ConnectorsTest(object):
     def __init__(self, conn_test_name, conn_test_file, conn_test_password_file):
         self.conn_test_name = conn_test_name
@@ -119,7 +116,7 @@ class BatchQueueWork(object):
 
     def create_test_result(self, test_result_file, test_category):
         result = TestResult(test_result_file.test_name, self.test_config, test_result_file.test_file,
-                          test_result_file.relative_test_file, self.test_set, test_category, TestMetadata('Unknown'))
+                            test_result_file.relative_test_file, self.test_set, test_category, TestMetadata('Unknown'))
         test_name = result.get_name()
         if test_name in self.metadata_map:
             result.test_metadata = self.metadata_map[test_name]
@@ -217,14 +214,15 @@ class BatchQueueWork(object):
 
             if self.test_config.logical:
                 # Copy the test process filename to the actual. filename.
-                actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(t.test_file,
-                                                                                                    self.test_config.output_dir)
+                actual_output_filepath, base_filepath = self.test_set.get_actual_and_base_file_path(
+                    t.test_file,
+                    self.test_config.output_dir
+                )
                 logging.debug(self.get_thread_msg() + "Copying test process output {0} to actual file {1}".format(
                     existing_output_filepath, actual_output_filepath))
                 try_move(existing_output_filepath, actual_output_filepath)
                 base_test_filepath = base_filepath
                 actual_filepath = actual_output_filepath
-
 
             result = compare_results(t.test_name, base_test_filepath, t.test_file, self)
             result.relative_test_file = t.relative_test_file
@@ -355,6 +353,17 @@ def save_results_diff(actual_file, diff_file, expected_file, diff_string):
         pass
 
 
+def expected_contains_error_tag(expected_file) -> bool:
+    """
+    This function
+    """
+    with open(expected_file, 'r') as f:
+        file_content = f.read()
+        if '<error>' in file_content:
+            return True
+    return False
+
+
 def compare_results(test_name, test_file, full_test_file, work):
     """Return a TestResult object that specifies what was tested and whether it passed.
        test_file is the full path to the test file (base test name without any logical specification).
@@ -382,17 +391,22 @@ def compare_results(test_name, test_file, full_test_file, work):
         result.error_status = TestErrorMissingActual()
         return result
 
-    expected_file_version = 0
+    expected_file_version: int = 0
     for expected_file in expected_files:
         if not os.path.isfile(expected_file):
             logging.debug(work.get_thread_msg() + "Did not find expected file " + expected_file)
-            if ALWAYS_GENERATE_EXPECTED:
+            if test_config.generate_expected:
                 # There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
                 # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+                if expected_contains_error_tag(expected_file):
+                    logging.error(work.get_thread_msg() + "Expected file contains error tag, not copying actual to expected.")
+                    result.error_status = TestErrorOther()
+                    return result
+                logging.warning("No actual file found, generating and moving expected file.")
                 logging.debug(
                     work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
                 try_move(actual_file, expected_file)
-            result.error_status = TestErrorOther()
+            result.error_status = TestErrorMissingActual()
             return result
         # Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
         logging.debug(work.get_thread_msg() + " Comparing " + actual_file + " to " + expected_file)
@@ -423,9 +437,8 @@ def compare_results(test_name, test_file, full_test_file, work):
         # Try another possible expected file.
         expected_file_version = expected_file_version + 1
 
-    # Exhausted all expected files. The test failed.
-    if ALWAYS_GENERATE_EXPECTED:
-        # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
+    # Generate expected value if a passing one didn't exist
+    if test_config.generate_expected:
         actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
                                                                                               base_test_file,
                                                                                               test_config.output_dir)

@@ -21,4 +21,4 @@ jobs:
     - name: Run TDVT unit tests
       run: |
         cd tdvt/test
-        python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest ResultsTest ResultsExceptionTest
+        python tdvt_test.py -v CommandLineTest ConfigTest DiffTest PrintConfigurationsTest ResultsTest ResultsExceptionTest TestCreatorTest
