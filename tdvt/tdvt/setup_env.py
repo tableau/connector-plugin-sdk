@@ -63,6 +63,7 @@ def add_datasource(name, ds_registry):
     picked = False
     logical = None
     custom_schema_name = None
+    custom_table = None
     output_dir = None
     tds_name = None
 
