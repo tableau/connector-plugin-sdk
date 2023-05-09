@@ -161,3 +161,6 @@ class TestCreator:
             for k in user_col_test_col_map.keys():
                 line = line.replace(k, user_col_test_col_map[k])
             return line + '\n', ignored_line
+
+    def create_custom_expression_tests_for_renamed_staples_and_calcs_tables(self):
+        pass
