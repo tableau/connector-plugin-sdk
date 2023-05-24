@@ -93,6 +93,11 @@ def get_standard_expression_test_path(config: configparser.ConfigParser):
     return test_dir + 'setup.*.txt'
 
 
+def get_lod_expression_test_path(config: configparser.ConfigParser):
+    test_dir = config.get('TestPath', 'exprtests/lodcalcs/')
+    return test_dir + 'setup.*.txt'
+
+
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
         for config in list_config(ds_registry, config_name):
@@ -221,7 +226,7 @@ def load_test(config, test_dir=get_root_dir()):
                                          get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
                                          get_is_test_enabled(lod), False)
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''),
-                                            'exprtests/lodcalcs/setup.*.txt', test_dir, get_password_file(lod),
+                                            get_lod_expression_test_path(lod), test_dir, get_password_file(lod),
                                             get_expected_message(lod), get_is_smoke_test(lod), get_is_test_enabled(lod),
                                             False)
         except KeyError as e:
