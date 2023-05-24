@@ -81,9 +81,8 @@ def add_datasource(name, ds_registry):
             sys.exit(1)
         output_dir = create_custom_test_dir(name)
         tc = TestCreator(col_mapping_json_path, name, output_dir)
-
         tc.create_custom_expression_tests_for_renamed_staples_and_calcs_tables()
-
+        print("Created custom expression tests for renamed staples and calcs tables.")
 
     if not renamed_cols and input("Would you like to run TDVT against a custom table? (y/n) ").lower() == 'y':
         custom_table = True
@@ -134,7 +133,7 @@ def add_datasource(name, ds_registry):
         if logical == 's':
             logical = None
 
-    create_ds_ini_file(name, logical, custom_schema_name, tds_name)
+    create_ds_ini_file(name, logical, custom_schema_name, tds_name, renamed_cols)
     if not custom_table:
         update_tds_files(name, connection_password_name)
 
@@ -171,7 +170,8 @@ def create_ds_ini_file(
         name,
         logical_config,
         custom_schema_name: Optional[str] = None,
-        tds_name: Optional[str] = None
+        tds_name: Optional[str] = None,
+        renamed_cols: bool = False
 ):
     try:
         ini_path = 'config/' + name + '.ini'
@@ -192,14 +192,19 @@ def create_ds_ini_file(
         ini.write('\n')
         if not tds_name:
             ini.write('[StandardTests]\n')
+            if renamed_cols:
+                ini.write('TestPath = exprtests/custom_tests/{}/standard/\n'.format(name))
             ini.write('\n')
             ini.write('[LODTests]\n')
+            if renamed_cols:
+                ini.write('TestPath = exprtests/custom_tests/{}/lodcalcs/\n'.format(name))
             ini.write('\n')
             ini.write('[UnionTest]\n')
             ini.write('\n')
-            ini.write('[ConnectionTests]\n')
-            ini.write('StaplesTestEnabled = True\n')
-            ini.write('CastCalcsTestEnabled = True\n')
+            if not renamed_cols:
+                ini.write('[ConnectionTests]\n')
+                ini.write('StaplesTestEnabled = True\n')
+                ini.write('CastCalcsTestEnabled = True\n')
         if tds_name:
             ini.write('[CustomSchemaTests]\n')
             ini.write('TDS = ' + tds_name + '\n')
