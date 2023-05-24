@@ -88,6 +88,11 @@ def get_is_test_enabled(config, key_name=None):
         return config.get('Enabled', 'True') == 'True'
 
 
+def get_standard_expression_test_path(config: configparser.ConfigParser):
+    test_dir = config.get('TestPath', 'exprtests/standard/')
+    return test_dir + 'setup.*.txt'
+
+
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
         for config in list_config(ds_registry, config_name):
@@ -199,7 +204,7 @@ def load_test(config, test_dir=get_root_dir()):
                                          get_is_smoke_test(standard), get_is_test_enabled(standard), False)
             test_config.add_expression_test('expression.standard.', CALCS_TDS,
                                             standard.get('ExpressionExclusions_Standard', ''),
-                                            'exprtests/standard/setup.*.txt',
+                                            get_standard_expression_test_path(standard),
                                             test_dir, get_password_file(standard), get_expected_message(standard),
                                             get_is_smoke_test(standard), get_is_test_enabled(standard), False)
         except KeyError as e:
