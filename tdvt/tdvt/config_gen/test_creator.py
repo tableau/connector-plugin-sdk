@@ -122,7 +122,7 @@ class TestCreator:
             print("\tCreated {}".format(self.output_dir / output_file_name))
 
     @staticmethod
-    def _process_line(line: str, test_args_dict: List[Dict[str, List]]) -> Tuple[str, int]:
+    def _process_line(line: str, test_args_dict: Dict[str, List]) -> Tuple[str, int]:
         ignored_line = 0
         # turn commented out tests into blank lines
         if line.startswith('//') or line == '\n':
