@@ -5,6 +5,7 @@ ExpectedCreator creates expecteds for an existing test case.
 import json
 import logging
 import os
+import re
 import shutil
 import sys
 
@@ -166,13 +167,14 @@ class TestCreator:
     def create_custom_expression_tests_for_renamed_staples_and_calcs_tables(self):
         with open(self.json_file, 'r') as f:
             user_cols_dict = json.load(f)
-        all_user_cols = {**user_cols_dict['staples'], **user_cols_dict['calcs']}
+        all_user_cols = user_cols_dict['calcs']
 
         test_dir = get_root_dir() + '/exprtests/'
         output_dir = get_root_dir() + '/exprtests/custom_tests/{}/'.format(self.datasource_name)
 
         print('Copying test files to: {}'.format(output_dir))
-        shutil.copytree(test_dir, output_dir)
+        shutil.copytree(test_dir, output_dir)  # this requires the custom_tests dir to not exist
+                                               # when we standardize around python 3.9 we can let it exist
 
         for root, dirs, files in os.walk(output_dir):
             for filename in files:
@@ -180,10 +182,12 @@ class TestCreator:
                     filepath = os.path.join(root, filename)
                     with open(filepath, 'r') as f:
                         file_content = f.read()
-                    for k, v in all_user_cols.items():
-                        file_content = file_content.replace(k, v)
+                    new_content = re.sub(
+                        r'\[?\b([a-z]+\d?)\]?',
+                        lambda match: all_user_cols.get(match.group(1), match.group(0)), file_content
+                    )
                     with open(filepath, 'w') as f:
-                        f.write(file_content)
+                        f.write(new_content)
 
     def validate_mapping_dict(self) -> Tuple[bool, bool]:
         cleaned_staples_cols = [item.strip('[').strip(']') for item in STAPLES_FIELDS]

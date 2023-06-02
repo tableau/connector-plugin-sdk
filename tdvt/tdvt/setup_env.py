@@ -137,7 +137,7 @@ def add_datasource(name, ds_registry):
     if not custom_table:
         update_tds_files(name, connection_password_name)
 
-    if output_dir:
+    if custom_table:
         print("Setup complete.")
         print("Please run your test against your custom table by running the following command:")
         print("\tpython -m tdvt.tdvt run {} --generate_expected".format(name))
