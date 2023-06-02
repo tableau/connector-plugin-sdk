@@ -201,10 +201,11 @@ def create_ds_ini_file(
             ini.write('\n')
             ini.write('[UnionTest]\n')
             ini.write('\n')
-            if not renamed_cols:
-                ini.write('[ConnectionTests]\n')
-                ini.write('StaplesTestEnabled = True\n')
-                ini.write('CastCalcsTestEnabled = True\n')
+            ini.write('[ConnectionTests]\n')
+            ini.write('StaplesTestEnabled = True\n')
+            ini.write('CastCalcsTestEnabled = True\n')
+            if renamed_cols:
+                ini.write('TestPath = exprtests/custom_tests/{}/pretest/connection_tests/\n'.format(name))
         if tds_name:
             ini.write('[CustomSchemaTests]\n')
             ini.write('TDS = ' + tds_name + '\n')

@@ -165,6 +165,9 @@ class TestCreator:
             return line + '\n', ignored_line
 
     def create_custom_expression_tests_for_renamed_staples_and_calcs_tables(self):
+        if not self._validate_mapping_dict():
+            print("Input validation failed. Please check your json file. Exiting.")
+            sys.exit(1)
         with open(self.json_file, 'r') as f:
             user_cols_dict = json.load(f)
         all_user_cols = user_cols_dict['calcs']
@@ -189,21 +192,17 @@ class TestCreator:
                     with open(filepath, 'w') as f:
                         f.write(new_content)
 
-    def validate_mapping_dict(self) -> Tuple[bool, bool]:
-        cleaned_staples_cols = [item.strip('[').strip(']') for item in STAPLES_FIELDS]
+    def _validate_mapping_dict(self) -> bool:
         cleaned_calcs_cols = [item.strip('[').strip(']') for item in CALCS_FIELDS if
                               item not in CALCS_EXPRESSION_EXCLUSIONS
                               ]
         with open(self.json_file, 'r') as f:
             user_cols_dict = json.load(f)
-        user_staples, user_calcs = user_cols_dict['staples'], user_cols_dict['calcs']
-        staples_match, calcs_match = True, True
+        user_calcs = user_cols_dict['calcs']
+        calcs_match = True
         for k in cleaned_calcs_cols:
             if k not in user_calcs or not user_calcs[k]:
                 logging.error("Calcs column {} not found in user table.".format(k))
                 calcs_match = False
-        for k in cleaned_staples_cols:
-            if k not in user_staples or not user_staples[k]:
-                logging.error("Staples column {} not found in user table.".format(k))
-                staples_match = False
-        return calcs_match, staples_match
+
+        return calcs_match
