@@ -326,3 +326,36 @@ class TestJarPackager(unittest.TestCase):
 
         if dest_dir.exists():
             shutil.rmtree(dest_dir)
+
+    def test_jdk_create_jar_oauth_with_instance_url_suffix(self):
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xml", "connection-resolver"),
+            ConnectorFile("connectionProperties.js", "script"),
+            ConnectorFile("oauth-config-with-suffix.xml", "oauth-config")]
+        source_dir = TEST_FOLDER / Path("oauth_connector")
+        dest_dir = TEST_FOLDER / Path("packaged-connector-by-jdk/")
+        package_name = "test_oauth.taco"
+
+        jdk_create_jar(source_dir, files_list, package_name, dest_dir)
+
+        path_to_test_file = dest_dir / Path(package_name)
+        self.assertTrue(os.path.isfile(path_to_test_file), "taco file doesn't exist")
+
+        # test min support tableau version is stamped
+        args = ["jar", "xf", package_name, MANIFEST_FILE_NAME]
+        p = subprocess.Popen(args, cwd=os.path.abspath(dest_dir))
+        self.assertEqual(p.wait(), 0, "can not extract manfifest file from taco")
+        path_to_extracted_manifest = dest_dir / MANIFEST_FILE_NAME
+        self.assertTrue(os.path.isfile(path_to_extracted_manifest), "extracted manifest file doesn't exist")
+
+        manifest = ET.parse(path_to_extracted_manifest)
+        self.assertEqual(manifest.getroot().get("min-version-tableau"),
+                         VERSION_2023_1, "wrong min-version-tableau attr or doesn't exist")
+
+        if dest_dir.exists():
+            shutil.rmtree(dest_dir)
