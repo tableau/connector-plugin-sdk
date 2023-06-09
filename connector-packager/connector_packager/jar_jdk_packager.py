@@ -57,8 +57,13 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
         elif connector_file.file_type == "oauth-config":
             # Check to see if we're using oauthConfigId, which needs 2021.4+
             pluginOAuthConfigRoot = ET.parse(input_dir / connector_file.file_name).getroot()
+            
             oauthConfigId = pluginOAuthConfigRoot.find('.//oauthConfigId')
-            if (oauthConfigId is not None and 2021.4 > float(min_version_tableau)):
+            instanceUrlSuffix = pluginOAuthConfigRoot.find('.//instanceUrlSuffix')
+            if (instanceUrlSuffix is not None and 2023.1 > float(min_version_tableau)):
+                min_version_tableau = "2023.1"
+                reasons.append("Connector uses instanceUrlSuffix field, which was added in the 2023.1 release")
+            elif (oauthConfigId is not None and 2021.4 > float(min_version_tableau)):
                 min_version_tableau = "2021.4"
                 reasons.append("Connector contains an oauthConfigId field, which was added in the 2021.4 release")
             elif 2021.1 > float(min_version_tableau):
@@ -76,8 +81,8 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
         elif connector_file.file_type == "manifest":
             manifestRoot = ET.parse(input_dir / connector_file.file_name).getroot()
             oauthConfigs = manifestRoot.findall('.//oauth-config')
-            if (oauthConfigs is not None and len(oauthConfigs) > 1 and 2021.4 > float(min_version_tableau)):
-                min_version_tableau = "2021.4"
+            if (oauthConfigs is not None and len(oauthConfigs) > 1 and 2023.1 > float(min_version_tableau)):
+                min_version_tableau = "2023.1"
 
     if version.parse(cur_min_version_tableau) > version.parse(min_version_tableau):
         reasons.append("min-tableau-version set to " + cur_min_version_tableau + ", since that is higher than calculated version of " + min_version_tableau)
