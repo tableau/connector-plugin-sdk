@@ -5,6 +5,8 @@
 
 import glob
 import re
+from typing import Optional
+
 from ..resources import *
 from ..tabquery_path import TabQueryPath
 
@@ -253,11 +255,19 @@ class RunTimeTestConfig(object):
     """
         Tracks specifics about how a group of tests were run.
     """
-    def __init__(self, timeout_seconds=60*60, maxthread=0, d_override='', run_as_perf=False):
+    def __init__(
+            self,
+            timeout_seconds: int=60*60,
+            maxthread: int=0,
+            d_override: str='',
+            run_as_perf: bool=False,
+            schema_name: Optional[str]=None,
+    ):
         self.timeout_seconds = timeout_seconds
         self.d_override = d_override
         self.run_as_perf = run_as_perf
         self.maxthread = int(maxthread)
+        self.schema_name = schema_name
         self.tabquery_paths = None
 
     def set_tabquery_paths(self, linux_path, mac_path, windows_path):
@@ -280,8 +290,8 @@ class TestConfig(object):
     def __init__(self, dsname, logical_config_name, run_time_config=None):
         self.dsname = dsname
         self.logical_config_name = logical_config_name
-        self.calcs_tds = self.get_tds_name('cast_calcs.')
-        self.staples_tds = self.get_tds_name('Staples.')
+        # self.calcs_tds = self.get_tds_name('cast_calcs.')  # TODO: these get set but never used?
+        # self.staples_tds = self.get_tds_name('Staples.')  # TODO: really?
         self.logical_test_set = []
         self.expression_test_set = []
         self.smoke_test_set = []

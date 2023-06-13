@@ -1,6 +1,7 @@
 """ Test result and configuration related classes. """
 
 import sys
+from typing import Optional
 
 from .test_config import TestConfig, RunTimeTestConfig
 
@@ -31,6 +32,8 @@ class TdvtInvocation(object):
         self.tested_run_time_config = None
         self.tabquery_path = ''
         self.iteration: int = 0
+        self.generate_expected = False
+        self.schema_name: Optional[str] = None
 
         if from_args:
             self.init_from_args(from_args)
@@ -44,6 +47,7 @@ class TdvtInvocation(object):
         self.timeout_seconds = rtt.timeout_seconds
         self.d_override = rtt.d_override
         self.run_as_perf = rtt.run_as_perf or self.run_as_perf
+        self.schema_name = rtt.schema_name
         self.tested_run_time_config = rtt
         if rtt.tabquery_paths:
             self.tabquery_path = rtt.tabquery_paths.to_array()
@@ -65,6 +69,9 @@ class TdvtInvocation(object):
             self.run_as_perf = True
         if args.perf_iteration:
             self.iteration = args.perf_iteration
+        if args.generate_expected:
+            self.generate_expected = True
+
 
     def init_from_json(self, json):
         self.tested_sql = json.get('tested_sql', self.tested_sql)

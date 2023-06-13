@@ -309,7 +309,7 @@ class TestJarPackager(unittest.TestCase):
 
         manifest = ET.parse(path_to_extracted_manifest)
         self.assertEqual(manifest.getroot().get("min-version-tableau"),
-                         VERSION_2021_4, "wrong min-version-tableau attr or doesn't exist")
+                         VERSION_2023_1, "wrong min-version-tableau attr or doesn't exist")
 
         # test to see if oauth-config.xml file was packaged
         args = ["jar", "xf", package_name, "oauth-config.xml"]

@@ -138,6 +138,9 @@ dmypy.json
 packager_tests_logs.txt
 packaging_logs.txt
 
+# MacOS
+.DS_Store
+
 # TDVT logs
 tabquery_logs.zip
 tdvt_actuals_combined.zip
