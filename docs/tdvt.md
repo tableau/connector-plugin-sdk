@@ -63,7 +63,27 @@ Multiple expected files are supported.
     - An ODBC or JDBC driver for your database.
     - The Calcs and Staples table loaded in your database.
 1. Clone the [TDVT Python module](https://github.com/tableau/connector-plugin-sdk/tree/master/tdvt).
-You can create an archive package and install that, or install from the live directory if you want to modify TDVT. Historically, TDVT has supported the Python version specification using py -3. Instead, setup your venv so that your Python executable is named 'python3'. Now run the following commands from the top level "tdvt" directory: 
+You can create an archive package and install that, or install from the live directory if you want to modify TDVT. Historically, TDVT has supported the Python version specification using py -3. Instead, setup your venv so that your default Python executable is Python3.
+
+    We suggest you create and activate a venv:
+
+        $ python -m venv ./tdvt-venv
+        $ source tdvt-venv/bin/activate
+
+        or on Windows:
+
+        D:\src> python -m venv ./tdvt-venv
+        D:\src> tdvt-venv/Scripts/activate.bat
+
+    You will know your venv is activated if (tdvt-venv) appears before your prompt. Alternatively, do a $which python to make sure it's pointing to a python executable in /tdvt-venv
+
+    Install TDVT:
+
+        $ (tdvt-venv) cd connector-plugin-sdk/tdvt
+        $ (tdvt-venv) python -m pip install -e .
+        The . at the end is important. You can verify it installed by doing $ pip list
+
+Now run the following commands from the top level "tdvt" directory: 
     - Create an archive package in the dist folder:
 `python3 setup.py sdist --formats gztar`
     - Change directory to dist and install from the archived file:
