@@ -67,8 +67,10 @@ You can create an archive package and install that, or install from the live dir
 
     We suggest you create and activate a venv:
 
+        ```
         $ python -m venv ./tdvt-venv
         $ source tdvt-venv/bin/activate
+        ```
 
         or on Windows:
 
