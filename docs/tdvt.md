@@ -477,9 +477,6 @@ The first thing TDVT does is try to connect to your database using the .tds file
 <span style="font-family: courier new">CommandLineOverride = -DLogLevel=Debug -DConnectPluginsPath=[PathToPluginsFolder]</span>
    Make sure that the DConnectPluginsPath attribute is present and correct.
 
-1. Check Python version. If you are using both Python 2.x and Python 3, then run TDVT using the command:
-`python tdvt.py …`
-
 1. Check tabquerytool.exe. This file should be placed in your Tableau bin directory and tdvt/config/tdvt_override.ini should be updated to point at that executable.
 
 __Boolean data types are not recognized or your database doesn't support them__
