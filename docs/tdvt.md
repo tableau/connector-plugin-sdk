@@ -74,15 +74,17 @@ You can create an archive package and install that, or install from the live dir
 
         or on Windows:
 
+        ```
         D:\src> python -m venv ./tdvt-venv
         D:\src> tdvt-venv/Scripts/activate.bat
-
+        ```
     You will know your venv is activated if (tdvt-venv) appears before your prompt. Alternatively, do a $which python to make sure it's pointing to a python executable in /tdvt-venv
 
     Install TDVT:
-
+        ```
         $ (tdvt-venv) cd connector-plugin-sdk/tdvt
         $ (tdvt-venv) python -m pip install -e .
+        ```
         The . at the end is important. You can verify it installed by doing $ pip list
 
 Now run the following commands from the top level "tdvt" directory: 
