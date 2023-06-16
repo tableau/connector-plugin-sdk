@@ -234,7 +234,7 @@ def load_test(config, test_dir=get_root_dir()):
             staples_data = config[staples_data_test]
             all_ini_sections.remove(staples_data_test)
             test_config.add_expression_test('expression.staples.', STAPLES_TDS, '',
-                                            get_expression_test_dir_path(staples_data, 'exprtests/staples/setup.*.txt'),
+                                            get_expression_test_dir_path(staples_data, 'exprtests/staples/'),
                                             test_dir, get_password_file(staples_data),
                                             get_expected_message(staples_data), get_is_smoke_test(staples_data),
                                             get_is_test_enabled(staples_data), False)
