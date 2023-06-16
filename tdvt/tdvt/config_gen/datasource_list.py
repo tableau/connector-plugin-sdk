@@ -261,7 +261,7 @@ def load_test(config, test_dir=get_root_dir()):
             regex = config[regex_test]
             all_ini_sections.remove(regex_test)
             test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''),
-                                            get_expression_test_dir_path(regex, 'exprtests/regexcalcs'), test_dir,
+                                            get_expression_test_dir_path(regex, 'exprtests/regexcalcs/'), test_dir,
                                             get_password_file(regex), get_expected_message(regex),
                                             get_is_smoke_test(regex), get_is_test_enabled(regex), False)
         except KeyError as e:
@@ -274,7 +274,7 @@ def load_test(config, test_dir=get_root_dir()):
             median = config[median_test]
             all_ini_sections.remove(median_test)
             test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''),
-                                            get_expression_test_dir_path(median, 'exprtests/median'), test_dir,
+                                            get_expression_test_dir_path(median, 'exprtests/median/'), test_dir,
                                             get_password_file(median), get_expected_message(median),
                                             get_is_smoke_test(median), get_is_test_enabled(median), False)
         except KeyError as e:
