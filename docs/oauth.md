@@ -256,7 +256,7 @@ OAuth configs may also be specified independent of the plugin using site-level O
 # OAuth on Tableau Desktop/Tableau Prep
 Tableau Desktop uses a shared client ID and client secret which is embedded in the plugin. It also uses localhost callbacks to receive the authorization code response. The plugin developer (or whoever provides the OAuth config) must ensure that the localhost or loopback callback URLs are configured on the whitelist for the authorization server.
 
-If the authorization server supports dynamic port ranges for native applications then that should be used. This is the default behavior for Tableau OAuth clients. For example `http://localhost:*/Callback`.
+If the authorization server supports dynamic port ranges for native applications then that should be used. This is the default behavior for Tableau OAuth clients.
 
 If the authorization server does not support this, then enable OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, and specify a set of `<redirectUrisDesktop>` in the OAuth config.
 
