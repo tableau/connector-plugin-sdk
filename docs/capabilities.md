@@ -137,7 +137,7 @@ CAP_JDBC_SUPPRESS_EMPTY_SCHEMA_NAME | Set to 'yes' to ignore missing schema. Ava
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_TABLES | Set to 'yes' to disable table enumeration. | &ndash; | &ndash;
-CAP_JDBC_SET_CLIENT_INFO | Enable the JDBC setClientInfo API to pass trace information to the database. Available in Tableau 2021.2 and newer for on-premises Tableau Server. Needs additional configuration see documentation. | &ndash; | &ndash;
+CAP_JDBC_SET_CLIENT_INFO | Enable the JDBC setClientInfo API to pass trace information to the database. Available in Tableau 2021.2 and newer for on-premises Tableau Server. Needs additional configuration, see [documentation](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_how_to_query_tagging.htm). | &ndash; | &ndash;
 CAP_JDBC_TRIM_STRING_PADDING | Set to 'yes' to trim trailing whitespace from string columns that have been added by the driver. Available in Tableau 2020.1 and newer. | &ndash; | &ndash;
 CAP_JDBC_USE_ADAPTIVE_FETCH_SIZE | Set to 'yes' to use ResultSet metadata to determine optimal fetch size. May require CAP_JDBC_QUERY_FORCE_PREPARE to be enabled to work properly. Available in Tableau 2020.4 and newer. | yes | &ndash;
 CAP_JDBC_USE_SINGLE_ROW_FETCH | Set to 'yes' to use single row fetch. May require CAP_JDBC_QUERY_FORCE_PREPARE. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
