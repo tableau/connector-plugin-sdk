@@ -5,13 +5,15 @@ ExpectedCreator creates expecteds for an existing test case.
 import json
 import logging
 import os
-import random
+import re
+import shutil
 import sys
 
 from pathlib import Path
 from typing import List, Tuple, Dict
 
-from ..constants import TEST_ARGUMENT_DATA_TYPES, CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS
+from ..constants import TEST_ARGUMENT_DATA_TYPES, CUSTOM_TABLE_EXPRESSION_TEST_EXCLUSIONS, STAPLES_FIELDS, CALCS_FIELDS, \
+    CALCS_EXPRESSION_EXCLUSIONS
 from ..resources import get_root_dir
 
 
@@ -122,7 +124,7 @@ class TestCreator:
             print("\tCreated {}".format(self.output_dir / output_file_name))
 
     @staticmethod
-    def _process_line(line: str, test_args_dict: List[Dict[str, List]]) -> Tuple[str, int]:
+    def _process_line(line: str, test_args_dict: Dict[str, List]) -> Tuple[str, int]:
         ignored_line = 0
         # turn commented out tests into blank lines
         if line.startswith('//') or line == '\n':
@@ -161,3 +163,46 @@ class TestCreator:
             for k in user_col_test_col_map.keys():
                 line = line.replace(k, user_col_test_col_map[k])
             return line + '\n', ignored_line
+
+    def create_custom_expression_tests_for_renamed_staples_and_calcs_tables(self):
+        if not self._validate_mapping_dict():
+            print("Input validation failed. Please check your json file. Exiting.")
+            sys.exit(1)
+        with open(self.json_file, 'r') as f:
+            user_cols_dict = json.load(f)
+        all_user_cols = user_cols_dict['calcs']
+
+        test_dir = get_root_dir() + '/exprtests/'
+        output_dir = get_root_dir() + '/exprtests/custom_tests/{}/'.format(self.datasource_name)
+
+        print('Copying test files to: {}'.format(output_dir))
+        shutil.copytree(test_dir, output_dir)  # this requires the custom_tests dir to not exist
+                                               # when we standardize around python 3.9 we can let it exist
+
+        for root, dirs, files in os.walk(output_dir):
+            for filename in files:
+                if filename.endswith('.txt'):
+                    filepath = os.path.join(root, filename)
+                    with open(filepath, 'r') as f:
+                        file_content = f.read()
+                    new_content = re.sub(
+                        r'\[?\b([a-z]+\d?)\]?',
+                        lambda match: all_user_cols.get(match.group(1), match.group(0)), file_content
+                    )
+                    with open(filepath, 'w') as f:
+                        f.write(new_content)
+
+    def _validate_mapping_dict(self) -> bool:
+        cleaned_calcs_cols = [item.strip('[').strip(']') for item in CALCS_FIELDS if
+                              item not in CALCS_EXPRESSION_EXCLUSIONS
+                              ]
+        with open(self.json_file, 'r') as f:
+            user_cols_dict = json.load(f)
+        user_calcs = user_cols_dict['calcs']
+        calcs_match = True
+        for k in cleaned_calcs_cols:
+            if k not in user_calcs or not user_calcs[k]:
+                logging.error("Calcs column {} not found in user table.".format(k))
+                calcs_match = False
+
+        return calcs_match

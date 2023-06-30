@@ -101,6 +101,10 @@ def get_new_field_name(field, attrs):
         m = re.search('\[(.*)\]', new_field, flags=re.IGNORECASE)
         if m:
             new_field = '[' + m.group(1) + attrs['fieldnamePostfix'] + ']'
+    if 'fieldnamePrefix' in attrs:
+        m = re.search('\[(.*)\]', new_field, flags=re.IGNORECASE)
+        if m:
+            new_field = '[' + attrs['fieldnamePrebfix'] + m.group(1) + ']'
 
     return new_field
 
