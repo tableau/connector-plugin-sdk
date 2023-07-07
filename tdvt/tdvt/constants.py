@@ -33,6 +33,13 @@ CALCS_FIELDS = [
     '[zzz]'
 ]
 
+CALCS_EXPRESSION_EXCLUSIONS = [
+    '[bool0_]',
+    '[bool1_]',
+    '[bool2_]',
+    '[bool3_]'
+]
+
 STAPLES_FIELDS = [
     '[Item Count]',
     '[Ship Priority]',
@@ -259,7 +266,7 @@ CUSTOM_TABLE_TEST_SET = {
         'nice_name': 'Aggregation',
         'description': 'tests aggregation functions including sum, count, avg, min, max, and distinct',
         'url_for_docs': 'https://tableau.github.io/connector-plugin-sdk/docs/tdvt#agg-suite',
-            },
+    },
     'cast': {
         'nice_name': 'Cast',
         'description': 'tests casting functions',

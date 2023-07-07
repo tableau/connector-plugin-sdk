@@ -44,7 +44,6 @@ def create_tdvt_ini_file():
         pass
 
 
-
 def add_datasource(name, ds_registry):
     """
         Create the datasource ini file and try to rename the connections in the tds file.
@@ -66,32 +65,33 @@ def add_datasource(name, ds_registry):
     custom_table = None
     output_dir = None
     tds_name = None
+    renamed_cols = False
 
     # Find out if the datasource uses custom table and create test files accordingly
     if input("Would you like to run TDVT against a schema other than TestV1? (y/n) ").lower() == 'y':
         custom_schema_name = input("Enter the schema name: ")
 
-    if input("Would you like to run TDVT against a custom table? (y/n) ").lower() == 'y':
+    if input("Do you have the Staples & Calcs tables loaded using different column names "
+             "(e.g. num0_col instead of num0)? (y/n) ").lower() == 'y':
+        renamed_cols = True
+        col_mapping_json_path = Path(input("Enter the path to the column mapping json file: "))
+        if not col_mapping_json_path.exists():
+            logging.error("Could not find the file at {}".format(col_mapping_json_path))
+            print("Could not find the file at the path provided. Please try again.")
+            sys.exit(1)
+        output_dir = create_custom_test_dir(name)
+        tc = TestCreator(col_mapping_json_path, name, output_dir)
+        tc.create_custom_expression_tests_for_renamed_staples_and_calcs_tables()
+        print("Created custom expression tests for renamed staples and calcs tables.")
+
+    if not renamed_cols and input("Would you like to run TDVT against a custom table? (y/n) ").lower() == 'y':
         custom_table = True
         tds_name = input("What is the name of your tds file? ")
-        csv_path = input("Enter the path to the custom table csv file: ")
+        custom_table_json_path = input("Enter the path to the custom table csv file: ")
 
-        print("Creating tdvt/exprtests/custom_tests if it does not exist.")
-        if os.path.isdir(get_root_dir() + '/exprtests/custom_tests'):
-            print("tdvt/exprtests/custom_tests already exists.")
-            print("Please make sure the directory is empty before continuing.")
-            ignored_input = input("Press any key to continue. ")
-        else:
-            try:
-                os.mkdir(get_root_dir() + '/exprtests/custom_tests')
-            except Exception as e:
-                print("Could not create custom_tests directory. Error was " + str(e))
-                print("Please create the directory manually and run the script again.")
-        output_dir = Path(Path(os.getcwd()) / 'tdvt/exprtests/custom_tests')
+        output_dir = create_custom_test_dir()
 
-        print("Test directory created. Generating setup files to enumerate table rows.")
-
-        tc = TestCreator(csv_path, name, output_dir)
+        tc = TestCreator(custom_table_json_path, name, output_dir)
         headers = tc.parse_json_to_list_of_columns()
         tc.write_test_files(headers)  # this creates the test setup file.
 
@@ -133,11 +133,11 @@ def add_datasource(name, ds_registry):
         if logical == 's':
             logical = None
 
-    create_ds_ini_file(name, logical, custom_schema_name, tds_name)
+    create_ds_ini_file(name, logical, custom_schema_name, tds_name, renamed_cols)
     if not custom_table:
         update_tds_files(name, connection_password_name)
 
-    if output_dir:
+    if custom_table:
         print("Setup complete.")
         print("Please run your test against your custom table by running the following command:")
         print("\tpython -m tdvt.tdvt run {} --generate_expected".format(name))
@@ -147,11 +147,31 @@ def add_datasource(name, ds_registry):
         print("\tpython -m tdvt.tdvt run {}".format(name))
 
 
+def create_custom_test_dir(datasource_name=None) -> str:
+    if datasource_name:
+        output_dir = get_root_dir() + '/exprtests/custom_tests/{}'.format(datasource_name)
+    else:
+        output_dir = get_root_dir() + '/exprtests/custom_tests'
+    print("Creating {} if it does not exist.".format(output_dir))
+    if os.path.isdir(output_dir):
+        print("{} already exists.".format(output_dir))
+        print("Please make sure the directory is empty before continuing.")
+        ignored_input = input("Press any key to continue. ")
+    try:
+        os.mkdir(output_dir)
+    except Exception as e:
+        print("Could not create custom_tests directory. Error was " + str(e))
+        print("Please create the directory manually and run the script again.")
+    print("Test directory created.")
+    return output_dir
+
+
 def create_ds_ini_file(
         name,
         logical_config,
         custom_schema_name: Optional[str] = None,
-        tds_name: Optional[str] = None
+        tds_name: Optional[str] = None,
+        renamed_cols: bool = False
 ):
     try:
         ini_path = 'config/' + name + '.ini'
@@ -172,14 +192,20 @@ def create_ds_ini_file(
         ini.write('\n')
         if not tds_name:
             ini.write('[StandardTests]\n')
+            if renamed_cols:
+                ini.write('TestPath = exprtests/custom_tests/{}/standard/\n'.format(name))
             ini.write('\n')
             ini.write('[LODTests]\n')
+            if renamed_cols:
+                ini.write('TestPath = exprtests/custom_tests/{}/lodcalcs/\n'.format(name))
             ini.write('\n')
             ini.write('[UnionTest]\n')
             ini.write('\n')
             ini.write('[ConnectionTests]\n')
             ini.write('StaplesTestEnabled = True\n')
             ini.write('CastCalcsTestEnabled = True\n')
+            if renamed_cols:
+                ini.write('TestPath = exprtests/custom_tests/{}/pretest/connection_tests/\n'.format(name))
         if tds_name:
             ini.write('[CustomSchemaTests]\n')
             ini.write('TDS = ' + tds_name + '\n')
@@ -222,7 +248,7 @@ def mangle_tds(file_path, connection_password_name):
     try:
         r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
         r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
-        r3 = re.compile('(^\s*<connection .*?)(\s*/>)')
+        r3 = re.compile('(^\s*<connection .*?).*?(\' .*>)')
 
         f = open(file_path, 'r')
         new_tds = ''

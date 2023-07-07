@@ -424,3 +424,25 @@ class TestXSDValidator(unittest.TestCase):
 
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "The instanceUrlSuffix must be located after authUri and tokenUri.")
+        
+    def test_validate_config_label(self):
+        test_file = TEST_FOLDER / "oauth_config_label/valid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "Valid XML file not marked as valid")
+
+        test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "oauthConfig should be able to have no configLabel field")
+
+        test_file = TEST_FOLDER / "oauth_config_label/invalid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "The configLabel field must be located after authUri and tokenUri.")
