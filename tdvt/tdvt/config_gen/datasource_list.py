@@ -356,23 +356,17 @@ def load_test(config, test_dir=get_root_dir()):
                 logging.debug(e)
                 pass
         # Add smoke tests
-        elif sect.get('StaplesTestEnabled') == 'True' or sect.get('CalcsTestEnabled') == 'True':
+        elif connection_test in section:
             try:
                 all_ini_sections.remove(section)
-                if sect.get('StaplesTestEnabled') == 'True':
-                    test_config.add_logical_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                 test_config.get_logical_test_path(
-                                                     'logicaltests/setup/connection_test/setup.staples.*.'),
-                                                 # noqa: E501
-                                                 test_dir, get_password_file(sect), get_expected_message(sect), True,
-                                                 get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
-                if sect.get('CalcsTestEnabled') == 'True':
-                    test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                    get_expression_test_dir_path(sect,
-                                                                                 'exprtests/pretest/connection_tests/calcs/'),
-                                                    # noqa: E501
-                                                    test_dir, get_password_file(sect), get_expected_message(sect), True,
-                                                    get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
+                test_config.add_logical_test('StaplesConnectionTest', STAPLES_TDS, sect.get(KEY_EXCLUSIONS, ''),
+                                             test_config.get_logical_test_path('logicaltests/setup/connection_test/setup.staples.*.'),  # noqa: E501
+                                             test_dir, get_password_file(sect), get_expected_message(sect), True,
+                                             get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
+                test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
+                                                get_expression_test_dir_path(sect, 'exprtests/pretest/connection_tests/calcs/'),  # noqa: E501
+                                                test_dir, get_password_file(sect), get_expected_message(sect), True,
+                                                get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)
                 pass
