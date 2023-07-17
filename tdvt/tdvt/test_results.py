@@ -226,7 +226,7 @@ class TestResult(object):
                 return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config, self.test_metadata)
             else:
                 return TestCaseResult('', str(test_case_count), "", test_case_count, '',
-                                      TestErrorDisabledTest(), None, self.test_config)
+                                      TestErrorDisabledTest(), None, self.test_config, self.test_metadata)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
                 return TestCaseResult('', 0, "", 0, '', TestErrorSkippedTest(), None, self.test_config, self.test_metadata)
