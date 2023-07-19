@@ -64,7 +64,7 @@
           </named-connection>
         </named-connections>
         <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1gc4mna00d9z6u19vsqbk09t94y2leaf' name='test_metadata.csv' table='[test_metadata#csv]' type='table'>
-          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
             <column datatype='string' name='Test Category' ordinal='0' />
             <column datatype='string' name='Test Path Categorized' ordinal='1' />
             <column datatype='string' name='Test Name Categorized' ordinal='2' />
@@ -98,7 +98,7 @@
             </columns>
           </relation>
           <relation connection='textscan.1gc4mna00d9z6u19vsqbk09t94y2leaf' name='test_metadata.csv' table='[test_metadata#csv]' type='table'>
-            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
               <column datatype='string' name='Test Category' ordinal='0' />
               <column datatype='string' name='Test Path Categorized' ordinal='1' />
               <column datatype='string' name='Test Name Categorized' ordinal='2' />
@@ -162,7 +162,7 @@
             <attributes>
               <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
               <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
-              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
               <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
               <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
               <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
@@ -1965,7 +1965,7 @@ Error while execut&quot;</bucket>
           <object caption='test_metadata.csv' id='test_metadata.csv_1038D6413E4D4B23BA44E2CB2F24DE1D'>
             <properties context=''>
               <relation connection='textscan.1gc4mna00d9z6u19vsqbk09t94y2leaf' name='test_metadata.csv' table='[test_metadata#csv]' type='table'>
-                <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
                   <column datatype='string' name='Test Category' ordinal='0' />
                   <column datatype='string' name='Test Path Categorized' ordinal='1' />
                   <column datatype='string' name='Test Name Categorized' ordinal='2' />
@@ -3498,8 +3498,8 @@ Error while execut&quot;</bucket>
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='700' minheight='700' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='93' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98222' id='92' param='vert' type-v2='layout-flow' w='99058' x='471' y='889'>
+            <zone h='100000' id='95' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='94' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000'>
                 <zone fixed-size='280' h='98222' id='3' is-fixed='true' name='Test Details' w='99058' x='471' y='889'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -3524,7 +3524,7 @@ Error while execut&quot;</bucket>
     </dashboard>
   </dashboards>
   <windows source-height='30'>
-    <window class='dashboard' maximized='true' name='TDVT Test Results' tab-color='#f66273'>
+    <window class='dashboard' name='TDVT Test Results' tab-color='#f66273'>
       <viewpoints>
         <viewpoint name='Scorecard'>
           <zoom type='entire-view' />
@@ -3565,7 +3565,7 @@ Error while execut&quot;</bucket>
       <active id='-1' />
       <simple-id uuid='{7F596838-4E12-47D0-ACE3-FF3E28FACE00}' />
     </window>
-    <window class='worksheet' name='Single Test View' tab-color='#f66273'>
+    <window class='worksheet' maximized='true' name='Single Test View' tab-color='#f66273'>
       <cards>
         <edge name='left'>
           <strip size='152'>
