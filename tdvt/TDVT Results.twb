@@ -60,7 +60,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='test_results_combined' name='textscan.1gc4mna00d9z6u19vsqbk09t94y2leaf'>
-            <connection class='textscan' directory='/Users/s.davis/Desktop' filename='test_results_combined.csv' password='' server='' workgroup-auth-mode='as-is' />
+            <connection class='textscan' directory='' filename='test_results_combined.csv' password='' server='' workgroup-auth-mode='as-is' />
           </named-connection>
         </named-connections>
         <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='textscan.1gc4mna00d9z6u19vsqbk09t94y2leaf' name='test_metadata.csv' table='[test_metadata#csv]' type='table'>
