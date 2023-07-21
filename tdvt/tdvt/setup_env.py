@@ -237,7 +237,6 @@ def create_password_file(name, connection_name, password):
 
 
 def update_tds_files(name, connection_password_name):
-    # TODO: change this to get rid of calcs/staples hardcoding; handle custom table then fall back
     mangle_tds(get_tds_full_path(get_root_dir(), 'cast_calcs.' + name + '.tds'),
                connection_password_name)  # TODO: Update this to take whatever
     mangle_tds(get_tds_full_path(get_root_dir(), 'Staples.' + name + '.tds'), connection_password_name)

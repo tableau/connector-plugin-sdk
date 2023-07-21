@@ -438,7 +438,7 @@ def compare_results(test_name, test_file, full_test_file, work):
         # Try another possible expected file.
         expected_file_version = expected_file_version + 1
 
-    # Generate expected value if a passing one didn't exist
+    # Exhausted all expected files. The test failed.
     if test_config.generate_expected:
         actual_file, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root,
                                                                                               base_test_file,
