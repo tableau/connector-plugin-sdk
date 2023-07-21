@@ -399,7 +399,8 @@ def compare_results(test_name, test_file, full_test_file, work):
                 # There is an actual but no expected, copy the actual to expected and return since there is nothing to compare against.
                 # This is off by default since it can make tests pass when they should really fail. Might be a good command line option though.
                 if expected_contains_error_tag(expected_file):
-                    logging.error(work.get_thread_msg() + "Expected file contains error tag, not copying actual to expected.")
+                    logging.error(
+                        work.get_thread_msg() + "Expected file contains error tag, not copying actual to expected.")
                     result.error_status = TestErrorOther()
                     return result
                 logging.warning("No actual file found, generating and moving expected file.")
