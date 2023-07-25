@@ -1,1 +1,3 @@
+DATEADD('second', 1, [date2])
+
 DATEADD('second', 1, [datetime0])

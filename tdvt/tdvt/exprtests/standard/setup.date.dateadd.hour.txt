@@ -1,2 +1,3 @@
-DATEADD('hour', 1, [datetime0])
+DATEADD('hour', 1, [date2])
 
+DATEADD('hour', 1, [datetime0])
