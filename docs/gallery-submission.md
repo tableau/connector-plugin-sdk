@@ -232,11 +232,50 @@ If your connector is a beta release, be sure to update the connector when you ar
 1. To update the connector you will need to provide updated artifacts, see below for required materials.
 2. Add a list of the changes made in the commit comments.
 
-**Review materials needed**:
-- Video or screenshots of you running the [QA tests for a connector update]({{ site.baseurl }}/docs/manual-test#test-a-connector-update)
-- [Verification that your TACO file is signed](#verification-that-taco-file-is-signed)
+#### Review materials needed
 
-Depending on the changes that you made to the connector, we might need to conduct a full technical review. In that case, you will need to provide additional materials from those listed under [Step 5: Submit source code and test artifacts via GitHub](#step-5-submit-source-code-and-test-artifacts-via-github). 
+Here is a list of review materials needed for connector updates depending on the extent of the changes. 
+- Always: Video or screenshots of you running the [QA tests for a connector update]({{ site.baseurl }}/docs/manual-test#test-a-connector-update)
+- Always: [Verification that your TACO file is signed](#verification-that-taco-file-is-signed)
+- One or more changes listed in List B below: Full TDVT results
+- One or more changes listed in List C below: Full manual tests
+- Changes to vendor-defined fields: A list of all vendor-defined fields (vendor1,2, and 3 in a .tcd file, or fields with a 'v-' prefix in connection-fields) that define what they are, give sample input, and confirm that the can never contain PII
+ 
+Note: The review materials are additive. A connector with changes on both list B and C require TDVT and manual test results, for example.
+
+**Forbidden Changes**
+The following changes are forbidden, and will never be approved:
+- Changing the connector class. This breaks old workbooks and is, in essence, a new connector.
+
+#### List A: Minor Changes
+Certain cosmetic or light changes do not trigger any additional required materials. 
+
+- Changes in the taco signature. If the only change to the connector is that it has been re-signed, and the new signature is valid, no further review is necessary.
+- Cosmetic UI string changes:
+ * The display name of the connector in the manifest
+ * The company name in the vendor-information section of the manifest
+ * The support link in the vendor-information section of the manifest (note: verify that new url is accessible)
+ * The company name in the vendor-information section of the manifest (note: verify that new url is accessible)
+ * The label attribute for a field in the connection-fields.xml file, or for the vendor1, vendor2, or vendor3 fields in a .tcd file
+- Simple code changes in the connection-builder or connection-properties script
+- CAP_SUPPORTS_INITIAL_SQL or CAP_CONNECT_NO_CUSTOM_SQL being enabled/disabled in the manifest file
+
+#### List B: Major Changes (query related)
+The following changes will require a new round of TDVT tests and a review from a Tableau dev:
+
+- Dialect changes. (Note: For dialect changes, the partner still needs to provide TDVT results, but do not need manual test results)
+- Capability changes in the manifest file
+
+#### List C: Major Changes (non-query related)
+The following changes will require a new set of manual test results and a review from a Tableau dev to ensure no breaking change:
+
+- Changes to the required-attributes list (note: this is a breaking change, so a Tableau dev will need to look over this to make sure it is OK)
+- New UI elements
+- Adding new auth mode (for OAuth, they will also need to go through the OAuth review process)
+- Capability changes in the manifest file
+  
+The above lists are guidelines and Tableau reserves the right to request more review materials if needed. 
+
 
 ### Step 8. Upate the Exchange listing
 
