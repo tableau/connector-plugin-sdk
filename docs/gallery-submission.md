@@ -38,9 +38,11 @@ Building a connector generally takes two to six weeks, depending on complexity. 
 
 ## Get started
 
+
 ### Step 0. (Optional) Join the Tableau Developer Program 
 
 Joining the [Tableau Developer Program](https://www.tableau.com/developer) isn't required, but it does give you access to a free personal development sandbox with the latest pre-release version of Tableau Online.
+
 
 
 ### Step 1: Build and test your connector
@@ -50,6 +52,7 @@ Use the information in the [Connector SDK documentation]({{ site.baseurl }}/docs
 Be sure to test your connector with [the TDVT suite]({{ site.baseurl }}/docs/tdvt) to ensure that your connector meets our guidelines for connector functionality.
 
 **Note:** The Tableau Exchange no longer accepts submissions of ODBC connectors. Only JDBC connectors are accepted.
+
 
 
 ### Step 2: Join the Tableau Partner Network
@@ -78,7 +81,8 @@ All Tableau Exchange Agreements are processed through Service Now. A copy of the
 
 
 
-## Submit code via GitHub and publish on Exchang
+## Submit code via GitHub and publish on Exchange
+
 
 ### Step 3: Submit source code and test artifacts via GitHub
 
@@ -118,6 +122,7 @@ List of all vendor-defined fields (vendor1 , vendor2, and vendor3 in a .tcd file
 #### Verification that TACO file is signed
 
 Include a screenshot or text file of the full output of the command `jarsigner -verify path_to_taco -verbose -certs -strict` to show that your connector is signed by a trusted certificate authority. For more information, see [Get your connector signed]({{ site.baseurl }}/docs/package-sign#get-your-connector-signed).
+
 
   
 ### Step 4: Publish connector on the Tableau Exchange website
@@ -192,26 +197,16 @@ All of the following materials are required for submission of a connector to the
 
 
 
-## Go to market 
-
-### Step 5: Prepare go-to-market materials and submit them for review
+### Step 5: Prepare go-to-market materials
 
 Partners are welcome to publish blog posts and press releases announcing the availability of their connector on the Tableau Exchange. Marketing materials should specify the joint-value proposition of the offering and tell the story of how your Tableau integration is uniquely suited to solve customer challenges. 
 
 Once customers are benefitting from your Tableau integration, we’ve found public customer case studies to be the most impactful method for promoting joint-solutions. The best performing customer case studies are evergreen and applicable to a broad number of customers by demonstrating how your integration solves for pain points commonly experienced across your industry. Typically, case studies are hosted on our partner’s sites.
 
-**Blog posts and press releases**
-- Review the Tableau Partner Brand Guidelines accessible via the Partner Portal.
-- Draft your blog post and/or press release and submit it to the Partner Marketing team via email to [partnermarketing@tableau.com](mailto:partnermarketing@tableau.com) for initial review.
-  * We require at least a two-week approval timeline.
-- If you would like, please include a suggested quote attributed to a Tableau spokesperson. Tableau reserves the right to make edits and will also help determine the appropriate spokesperson.
+- **Blog posts and press releases**: You can find Tableau Partner Brand Guidelines on the Partner Portal.
+- **Customer case studies**: We encourage you to share your customer case studies on the Partner Portal. Examples of quality case studies can be found on [Tableau Customer Stories](https://www.tableau.com/solutions/customers?utm_campaign_id=2017049&utm_campaign=Prospecting-ALL-ALL-ALL-ALL-ALL&utm_medium=Paid+Search&utm_source=Google+Search&utm_language=EN&utm_country=USCA&kw=&adgroup=CTX-Trial-Solutions-DSA&adused=DSA&matchtype=&placement=&d=7013y000000vYhH&gclid=Cj0KCQjwxtSSBhDYARIsAEn0thSVm6r1Gf3jy7oz8rRi8r6j4q3zSMF8CU5lCZCHPeUExa4pYnE7XcUaAmM7EALw_wcB&gclsrc=aw.ds).
+- **Social media**: There are no guarantees our brand social team can engage/amplify every and all partner social media posts, but partners are welcome to tag us on both [LinkedIn](https://www.linkedin.com/company/tableau-software) and Twitter ([@Tableau](https://twitter.com/tableau)) for consideration. 
 
-**Customer case studies**
-- Submit your customer case study via the Partner Portal.
-- Examples of quality case studies can be found on [Tableau Customer Stories](https://www.tableau.com/solutions/customers?utm_campaign_id=2017049&utm_campaign=Prospecting-ALL-ALL-ALL-ALL-ALL&utm_medium=Paid+Search&utm_source=Google+Search&utm_language=EN&utm_country=USCA&kw=&adgroup=CTX-Trial-Solutions-DSA&adused=DSA&matchtype=&placement=&d=7013y000000vYhH&gclid=Cj0KCQjwxtSSBhDYARIsAEn0thSVm6r1Gf3jy7oz8rRi8r6j4q3zSMF8CU5lCZCHPeUExa4pYnE7XcUaAmM7EALw_wcB&gclsrc=aw.ds).
-
-**Social media**
-- There are no guarantees our brand social team can engage/amplify every and all partner social media posts, but partners are welcome to tag us on both [LinkedIn](https://www.linkedin.com/company/tableau-software) and Twitter ([@Tableau](https://twitter.com/tableau)) for consideration. 
 
 
 ### Step 6: Publish go-to-market materials when your connector launches
