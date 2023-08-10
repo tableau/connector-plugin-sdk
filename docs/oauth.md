@@ -3,96 +3,24 @@ title: OAuth Authentication Support
 ---
 **IMPORTANT:** OAuth for plugins is available in Tableau 2021.1 and newer. Multi-IDP config for plugins is available starting in Tableau 2023.1.
 
+This document explains how to configure and use OAuth. It's meant for admins and plugin developers. For information on adding OAuth to a connector plugin [OAuth Development](./oauth-dev.md).
+
 **In this section**
 
 * TOC
 {:toc}
 
-# How to Enable OAuth for a Plugin Connector
-
-First check your database and driver documentation to make sure it supports OAuth. For a complete example please refer to https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/snowflake_oauth.
-
-To enable OAuth for your connector add an `<oauth-config>` field in the manifest.xml and link to an oauthConfig.xml you created, described below.
-
-```xml
-  manifest.xml
-
-  <?xml version='1.0' encoding='utf-8' ?>
-  <connector-plugin class=...>
-    ...
-    <dialect file='dialect.tdd'/>
-    <oauth-config file='oauthConfigPing.xml'/>    <!-- add this to to define your OAuth Configs -->
-  </connector-plugin>
-```
-
-Starting in Tableau 2023.1, you can add multiple OAuth configs, embedded in the plugin. The end users may also provide external/custom OAuth configurations:
-- By installing the config files in the Tableau directory. See [External OAuth Config on Desktop](#externalcustom-oauth-configs-on-desktop)
-- By uploading the config for a site level OAuth client. See [Create Site OAuth Client](#create-site-oauth-client-20231)
-
-However in both cases, at least one embedded config is still required.
-
-```xml
-  manifest.xml
-
-  <?xml version='1.0' encoding='utf-8' ?>
-
-  <connector-plugin class=...>
-    ...
-    <dialect file='dialect.tdd'/>
-    <oauth-config file='oauthConfigPing.xml'/>
-    <oauth-config file='oauthConfigOkta.xml'/>
-  </connector-plugin>
-```
-
----
-In your *connectionFields.xml* file make sure to add an `authentication` field with a value equal to `oauth`. For example:
-
-## OAuth Only
-
-```xml
-    <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="oauth" />
-```
-## Multiple Authentication Options
-```xml
-    <field name="authentication" label="Authentication" category="authentication" value-type="selection" default-value="auth-user-pass" >
-        <selection-group>
-            <option value="auth-user-pass" label="Username and Password"/>
-            <option value="oauth" label="OAuth"/>
-        </selection-group>
-    </field>
-```
----
-In your *connectionProperties.js* file you need to use your connector specific logic to handle how to pass in OAuth attributes. Example:
-
-```js
-
-  if (authAttrValue == "oauth")
-  {
-      params["AUTHENTICATOR"] = "OAUTH";
-      params["TOKEN"] = attr["ACCESSTOKEN"];
-  }
-```
----
-In your *connectionResolver.tdr* file, the following related OAuth attributes will be automatically included so you do not need to define them:
-```ACCESSTOKEN, REFRESHTOKEN, access-token-issue-time, access-token-expires-in, CLIENTID, CLIENTSECRET, oauth-client, id-token (if any), instanceurl (if any)```
-You still need to define other required attributes for your connector; `authentication` and `username` are currently required for OAuth connections so make sure to add them as well.
-
-```xml
-<required-attributes>
-    <attribute-list>
-        <attr>server</attr>
-        <attr>dbname</attr>
-        <attr>sslmode</attr>
-        <attr>authentication</attr>
-        <attr>username</attr>
-    </attribute-list>
-</required-attributes>
-```
 # The OAuth Config File
 
-The OAuth Config file defines your connector's OAuth configuration and also provides the ability to customize how the OAuth flow should work.
+This file configures a connector to run OAuth flows against a particular IDP. The XML schema is defined here: [XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/oauth_config.xsd).
 
-The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blob/master/validation/oauth_config.xsd)) is identified in the main plugin manifest using the `<oauth-config>` element. Here we discuss the structure of this file.
+This file may be provided in the following ways:
+- Bundled in the connector package (only available to plugin authors)
+- Installing on a client machine for Tableau Desktop, Prep, or Bridge
+- Installing for a site on Tableau Cloud or Tableau Server
+
+We refer to the first option as an "Embedded" config, and the second two as "Custom."
+
 
 ## XML Elements
 
@@ -101,7 +29,7 @@ The OAuth Config file ([XSD](https://github.com/tableau/connector-plugin-sdk/blo
 | Name  | Type | Meaning | Required | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
 | dbclass | String | The connector class which this OAuth config applies to. | Yes | The dbclass must be same with as the `class` attribute in manifest.xml |
-| oauthConfigId | String | Unique ID for this OAuth config | Recommended | *New in Tableau 2023.1.* This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an external/custom config this must begin with the prefix "custom_".** |
+| oauthConfigId | String | Unique ID for this OAuth config | Recommended | *New in Tableau 2023.1.* This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an custom config this must begin with the prefix "custom_".** |
 | configLabel | String | Label that is used as a display to users in place of the oauthConfigId. | No | *New in Tableau 2023.2.* This must only contain alphanumeric characters, "_", "-", and spaces in order to be considered valid. |
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | clientSecretDesktop | String | Client Secret you registered for Tableau Desktop | Recommended | This is not considered a secret and will be stored in plain text |
@@ -242,16 +170,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 ## Instance URL/Custom Domain
 Some IDPs have a single global endpoint, such as https://accounts.google.com/o/oauth2/. Others have different instances, for example Okta would have a different instance URL for each customer. If your authorization server or IDP has different instances, then either:
 - Enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. This only works with embedded OAuth configs. The instance URL will be collected later from the end-user or the admin.
-- Create seperate external/custom OAuth configs for each custom domain. External OAuth config shouldn't set OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN, and should specify authUri, tokenUri, userInfoUri fields as absolute paths, which contains the custom domain/instance URL.
-
-## Multiple Embedded OAuth Configs
-*\*Available starting in Tableau 2023.1*
-
-The plugin developer may add multiple embedded OAuth configs to the plugin starting in Tableau 2023.1. Each should have a new element `<oauthConfigId>`. This should be unique and is displayed in the UI. The user will be prompted to select from the available configurations when creating a connection.
-
-![Image](../assets/connection-dialog-oauth-configs.png)
-
-OAuth configs may also be specified independent of the plugin using site-level OAuth clients or by installing in the Tableau directory for desktop applications. See below for more information.
+- Create seperate custom OAuth configs for each instance. Custom OAuth config shouldn't set OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN, and should specify authUri, tokenUri, userInfoUri fields as absolute paths, which contains the instance URL.
 
 # OAuth on Tableau Desktop/Tableau Prep
 Tableau Desktop uses a shared client ID and client secret which is embedded in the plugin. It also uses localhost callbacks to receive the authorization code response. The plugin developer (or whoever provides the OAuth config) must ensure that the localhost or loopback callback URLs are configured on the whitelist for the authorization server.
@@ -266,10 +185,10 @@ If the authorization server does not support this, then enable OAUTH_CAP_FIXED_P
 
 For more information on see [RFC 8252: Loopback Interface Redirection](https://datatracker.ietf.org/doc/html/rfc8252#section-7.3).
 
-## External/Custom OAuth Configs on Desktop
-*\*Available starting in Tableau 2023.1*
+## Custom OAuth Configs on Desktop
+*Available starting in Tableau 2023.1*
 
-The end user or admin can specify custom OAuth configs for desktop applications, independent of the plugin connector. These should be installed in `My Tableau Repository/OAuthConfigs` or `My Tableau Prep Repository/OAuthConfigs`. They must define the new field `oauthConfigId`. The user will be prompted to select from available configs when creating the connection.
+The end user or admin can specify custom OAuth configs for desktop applications, independent of the plugin connector. These should be installed in the repository folder which corresponds to the application, such as `"My Tableau Repository/OAuthConfigs"` or `"My Tableau Prep Repository/OAuthConfigs"`. They must define the new field `oauthConfigId`. The user will be prompted to select from available configs when creating the connection.
 
 # OAuth on Tableau Server & Tableau Online
 
@@ -285,15 +204,15 @@ The value `dbclass` should match that configured in the plugin manifest and OAut
 
 
 ## Site Level OAuth Clients
-The preferred way to configure OAuth is using site level OAuth clients. These are configured by the server admin for Tableau Server, or site admin for Tableau Online. For an example of configuring an Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.
+The preferred way to configure OAuth on Tableau Cloud/Server is by using site level OAuth clients. These are configured by the server admin for Tableau Server, or site admin for Tableau Online. For an example of configuring an Azure AD OAuth client on a site: https://help.tableau.com/current/server/en-us/config_oauth_azure_ad.htm.
 
-The OAuth clients will only be effective for a particular site, and will not not require a restart. They will take take precedence over the server-level OAuth clients if any. For each site, there is only one OAuth client allowed for each OAuth config.
+The site OAuth clients will only be effective for a particular site, and will not not require a restart. They will take take precedence over the server-level OAuth clients if any. For each site, there is only one OAuth client allowed for each OAuth config.
 
 ### Create Site OAuth Client (Pre 2023.1)
 ![Image](../assets/create-oauth-client-embedded-legacy.png)
 
 ### Create Site OAuth Client (2023.1+)
-Starting in Tableau 2023.1, you can have multiple OAuth configs for a connector. These may be embedded or external/custom.
+Starting in Tableau 2023.1, you can have multiple OAuth configs for a connector. These may be embedded or custom.
 
 To create a client for an embedded config, select the config ID.
 
