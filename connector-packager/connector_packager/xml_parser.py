@@ -39,6 +39,8 @@ class XMLParser:
         self.class_name = None  # Get this from the class name in the manifest file
         self.file_list = []  # list of files to package
         self.loc_strings = []  # list of loc strings so we can make sure they are covered in the resource files.
+        self.null_oauth_config_found = False # whether or not we found a null oauth config
+        self.num_oauth_configs_found = 0 # number of oauth configs found, so we can fail the connector if there are non-null cconfigs and a null config
 
     def generate_file_list(self) -> Optional[List[ConnectorFile]]:
         """
@@ -157,46 +159,65 @@ class XMLParser:
                                   file_to_parse.file_name)
                     return False
 
+            # If oauth-config attribute, keep track of how many we find. Enforce that if null oauth config only one config is defined
+            if child.tag == "oauth-config":
+                if self.null_oauth_config_found:
+                    logger.error("Error: cannot declare a null OAuth config in connector with non-null configs")
+                    return False
+                
+                if 'file' in child.attrib and child.attrib['file'] == "null_config":
+                    
+                    # If we already found oauth configs and then found a null config, reject the connector
+                    if self.num_oauth_configs_found > 0:
+                        logger.error("Error: cannot declare a null OAuth config in connector with non-null configs")
+                        return False
+                    else:
+                        logger.debug("Null OAuth config found")
+                        self.null_oauth_config_found = True
+                
+                self.num_oauth_configs_found+=1
+
+
+
             # Check the attributes
             # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
-            if 'file' in child.attrib:
+            if 'file' in child.attrib and not (child.tag == "oauth-config" and child.attrib['file'] == "null_config"):
+                    # Check to make sure the file actually exists
+                    new_file_path = str(self.path_to_folder / child.attrib['file'])
 
-                # Check to make sure the file actually exists
-                new_file_path = str(self.path_to_folder / child.attrib['file'])
-
-                if not os.path.isfile(new_file_path):
-                    logger.debug("Error: " + new_file_path + " does not exist but is referenced in " +
-                                 str(file_to_parse.file_name))
-                    return False
-
-                # Make new connector file object
-                logging.debug("Adding file to list (name = " + child.attrib['file'] + ", type = " + child.tag + ")")
-                new_file = ConnectorFile(child.attrib['file'], child.tag)
-
-                # figure out if new file is in the list
-                already_in_list = new_file in self.file_list
-
-                # add new file to list
-                self.file_list.append(new_file)
-
-                # If connection-metadata, make sure that connection-fields file exists
-                if child.tag == 'connection-metadata':
-                    connection_fields_exists = False
-
-                    for xml_file in self.file_list:
-                        if xml_file.file_type == 'connection-fields':
-                            connection_fields_exists = True
-                            break
-
-                    if not connection_fields_exists:
-                        logger.debug("Error: connection-metadata file requires a connection-fields file")
+                    if not os.path.isfile(new_file_path):
+                        logger.error("Error: " + new_file_path + " does not exist but is referenced in " +
+                                    str(file_to_parse.file_name))
                         return False
 
-                # If not a script and not in list, parse the file for more files to include
-                if child.tag != 'script' and not already_in_list:
-                    children_valid = self.parse_file(new_file)
-                    if not children_valid:
-                        return False
+                    # Make new connector file object
+                    logging.debug("Adding file to list (name = " + child.attrib['file'] + ", type = " + child.tag + ")")
+                    new_file = ConnectorFile(child.attrib['file'], child.tag)
+
+                    # figure out if new file is in the list
+                    already_in_list = new_file in self.file_list
+
+                    # add new file to list
+                    self.file_list.append(new_file)
+
+                    # If connection-metadata, make sure that connection-fields file exists
+                    if child.tag == 'connection-metadata':
+                        connection_fields_exists = False
+
+                        for xml_file in self.file_list:
+                            if xml_file.file_type == 'connection-fields':
+                                connection_fields_exists = True
+                                break
+
+                        if not connection_fields_exists:
+                            logger.debug("Error: connection-metadata file requires a connection-fields file")
+                            return False
+
+                    # If not a script and not in list, parse the file for more files to include
+                    if child.tag != 'script' and not already_in_list:
+                        children_valid = self.parse_file(new_file)
+                        if not children_valid:
+                            return False
 
             if 'url' in child.attrib:
 
