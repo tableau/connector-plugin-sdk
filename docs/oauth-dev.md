@@ -29,11 +29,7 @@ For a complete example please refer to https://github.com/tableau/connector-plug
   </connector-plugin>
 ```
 
-Starting in Tableau 2023.1, you can add multiple OAuth configs, embedded in the plugin. The end users may also provide external/custom OAuth configurations:
-- By installing the config files in the Tableau directory. See [Custom OAuth Config on Desktop](./oauth.md#custom-oauth-configs-on-desktop)
-- By uploading the config for a site level OAuth client. See [Create Site OAuth Client](./oauth.md#create-site-oauth-client-20231)
-
-However in both cases, at least one embedded config is still required. We are currently working to remove this requirement. See [issue 1108](https://github.com/tableau/connector-plugin-sdk/issues/1108).
+Starting in Tableau 2023.1, you can add [multiple embedded OAuth configs](#multiple-embedded-oauth-configs). The end users may also provide their own custom OAuth config.  However in both cases, at least one embedded config is still required. We are currently working to remove this requirement. See [issue 1108](https://github.com/tableau/connector-plugin-sdk/issues/1108).
 
 ```xml
   manifest.xml

@@ -18,11 +18,10 @@ This file configures a connector to run OAuth flows against a particular IDP. Th
 
 This file may be provided in the following ways:
 - Bundled in the connector package (only available to plugin authors)
-- Installing on a client machine for Tableau Desktop, Prep, or Bridge
-- Installing for a site on Tableau Cloud or Tableau Server
+- Installing on a client machine for Tableau Desktop, Prep, or Bridge. See [Custom OAuth Config on Desktop](./oauth.md#custom-oauth-configs-on-desktop)
+- Installing for a site on Tableau Cloud or Tableau Server. [Create Site OAuth Client](./oauth.md#create-site-oauth-client-20231)
 
-We refer to the first option as an "Embedded" config, and the second two as "Custom."
-
+We refer to the first option as an "Embedded" config, and the second two as "Custom." The latter two options are only available starting in Tableau 2023.1. Also before 2023.1 you can only embded a single OAuth Config.
 
 ## XML Elements
 
