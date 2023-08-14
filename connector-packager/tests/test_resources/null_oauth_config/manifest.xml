@@ -3,9 +3,9 @@
 <connector-plugin class='null_oauth_config' superclass='odbc' plugin-version='0.0.0' name='Null OAuth Config' version='18.1'>
   <vendor-information>
       <company name="Sample Company"/>
-      <support-link url = "http://example.com"/>
+      <support-link url = "https://example.com"/>
   </vendor-information>
-  <connection-customization class="snowflake_oauth" enabled="true" version="10.0">
+  <connection-customization class="null_oauth_config" enabled="true" version="10.0">
     <vendor name="vendor"/>
     <driver name="driver"/>
      <customizations>
@@ -14,7 +14,7 @@
     </customizations>
   </connection-customization>
   <connection-fields file='connectionFields.xml'/>
-  <connection-resolver file="connectionResolver.tdr"/>
-  <dialect file='dialect.tdd'/>
+  <connection-resolver file="connectionResolver.xml"/>
+  <dialect file='dialect.xml'/>
   <oauth-config file='null_config'/>
 </connector-plugin>
