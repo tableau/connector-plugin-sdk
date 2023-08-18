@@ -312,7 +312,7 @@ def load_test(config, test_dir=get_root_dir()):
             logging.debug(e)
             pass
 
-    # TODO: This is for custom tables with custom schema
+    # This is for custom tables with custom schema
     if custom_schema_tests in config.sections():
         try:
             cst = config[custom_schema_tests]

@@ -483,7 +483,7 @@ class TestResult(object):
 
             # Compare the tuples.
             if config.tested_tuples:
-                diff, diff_string = self.diff_table_node(actual_testcase_self.table, expected_testcase_self.table,
+                diff, diff_string = self.diff_table_node(actual_testcase_self, expected_testcase_self.table,
                                                          diff_string, expected_testcase_self.name)
                 actual_testcase_self.passed_tuples = diff == 0
                 diff_counts[test_case] = diff
@@ -498,11 +498,11 @@ class TestResult(object):
         self.diff_string = diff_string
         return diff_counts, diff_string
 
-    def diff_table_node(self, actual_table, expected_table, diff_string, test_name):
-        if actual_table == None or expected_table == None:
+    def diff_table_node(self, actual_result: TestCaseResult, expected_table, diff_string, test_name):
+        if actual_result.table is None or expected_table is None:
             return (-1, diff_string)
 
-        actual_tuples = actual_table.findall('tuple')
+        actual_tuples = actual_result.table.findall('tuple')
         expected_tuples = expected_table.findall('tuple')
 
         if actual_tuples == None and expected_tuples == None:
@@ -518,7 +518,11 @@ class TestResult(object):
             diff_string += "\tDifferent number of tuples.\n"
 
         if not len(actual_tuples):
-            diff_string += "\tNo 'actual' file tuples.\n"
+            if actual_result.error_message:
+                diff_string += "\tData source threw an error: {}"\
+                    .format(actual_result.error_message.replace('\n', '').lstrip())
+            else:
+                diff_string += "\tNo 'actual' file tuples.\n"
 
         diff_count = 0
 
