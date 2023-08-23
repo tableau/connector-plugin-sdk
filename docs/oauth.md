@@ -1,7 +1,7 @@
 ---
 title: OAuth Configuration and Usage
 ---
-**IMPORTANT:** OAuth for plugins is available in Tableau 2021.1 and newer. Multi-IDP config for plugins is available starting in Tableau 2023.1.
+OAuth for plugins is available in Tableau 2021.1 and newer. Multi-IDP config for plugins is available starting in Tableau 2023.1.
 
 This document explains how to configure and use OAuth. It's meant for admins and plugin developers. For information on adding OAuth to a connector plugin, see [OAuth Development](./oauth-dev.md).
 

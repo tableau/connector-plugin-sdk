@@ -1,5 +1,5 @@
 ---
-title: OAuth for Plugins
+title: OAuth for Connector Developers
 ---
 **IMPORTANT:** OAuth for plugins is available in Tableau 2021.1 and newer. Multi-IDP config for plugins is available starting in Tableau 2023.1.
 
