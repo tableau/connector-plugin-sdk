@@ -29,6 +29,10 @@
       <value>true</value>
     </entry>
     <entry>
+      <key>OAUTH_CAP_SUPPORTS_STATE</key>
+      <value>true</value>
+    </entry>
+    <entry>
       <key>OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM</key>
       <value>true</value>
     </entry>

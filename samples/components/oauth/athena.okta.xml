@@ -16,28 +16,20 @@
   <scopes>offline_access</scopes>
   <capabilities>
     <entry>
-      <key>OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS</key>
-      <value>false</value>
-    </entry>
-    <entry>
       <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
       <value>true</value>
     </entry>
     <entry>
       <key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
-      <value>false</value>
+      <value>true</value>
     </entry>
     <entry>
       <key>OAUTH_CAP_REQUIRE_PKCE</key>
-      <value>false</value>
+      <value>true</value>
     </entry>
     <entry>
       <key>OAUTH_CAP_SUPPORTS_STATE</key>
       <value>true</value>
-    </entry>
-    <entry>
-      <key>OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN</key>
-      <value>false</value>
     </entry>
     <entry>
       <key>OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM</key>
