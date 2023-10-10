@@ -107,11 +107,28 @@ These are the relevant segments from the [sample](https://github.com/tableau/con
 })
 ```
 
-### Database impersonation using embedded credentials (Tableau Server only)
+## Database Impersonation
+On Tableau Server or Cloud, you can delegate the identity of the viewer using database impersonation. This only works when a connection is first published from Tableau Desktop with impersonation. It does not yet work with create datasource on the web. Only if the connection is marked for impersonation will the identity of the viewer be passed to the connection builders. This is because those connections must be marked as user specific. 
 
-This applies to databases that support a user(authenticated_user) that can delegate requests to another user(delegated_user) by enabling the client to pass a DelegationUID(delegated_user) to the database server. As a result of this, the query will run on the database with the privileges of the delegated_user. This form of delegation can be supported in Tableau Server by passing the identity of the logged in user as the DelegationUID to the database using JDBC driver properties or ODBC connection-string. This community [article](https://community.tableau.com/docs/DOC-11137) gives more information on Database Impersonation using Embedded credentials. At this time, connector-sdk only supports cases where the client connection to the database uses basic username-password authentication. Support for Kerberos authentication from client will be added later.
+![Image](../assets/impersonate-embedded-pw.png)
 
-Below is an example of how to pass DelegationUID in a JDBC plugin in Tableau Server. Please note that some JDBC drivers may have a different name for this property so take a look at driver documentation for the appropriate property name.
+To show the impersonate option in the publish dialog you must have enabled CAP_AUTH_DB_IMPERSONATE in the plugin manifest.xml.
+ ```xml
+    <customizations>
+      <customization name="CAP_AUTH_DB_IMPERSONATE" value="yes"/>
+    </customizations>
+ ```
+
+There are two types of database impersonation, see sections below for details.
+- Impersonation using embedded credentials
+- Impersonation using integrated authentication
+
+
+See community [article](https://community.tableau.com/docs/DOC-11137) for more information on impersonation.
+
+### Database Impersonation Using Embedded Credentials
+For impersonation with embedded credentials, the username and password should be for a service account with permission to delegate/impersonate other users.  The example below uses the driver property `DelegationUID` to pass the viewers identity through. Consult your driver documentation for the correct property name. 
+
 
  ```javascript
     // Connection properties
@@ -132,17 +149,27 @@ Below is an example of how to pass DelegationUID in a JDBC plugin in Tableau Ser
     }
  ```
 
-To enable the "Impersonate using embedded password" option in the publish dialog ensure CAP_AUTH_DB_IMPERSONATE is enabled in the plugin manifest.xml.
+ A [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/templates/db_impersonation) JDBC plugin is provided using an Impala database as an example. For documentation on how to configure delegation in Impala, refer to database [documentation](https://impala.apache.org/docs/build/html/topics/impala_delegation.html).
+
+### Database Impersonation Using Integrated Authentication
+Integrated authentication in the context of Tableau usually means Kerberos. We will authenticate using the Tableau Kerberos "RunAs" account, and then send the user identity to the database using the driver properties similar to the embedded credentials example above.
+
+We also support [Kerberos constrained delegation](https://help.tableau.com/current/server/en-us/kerberos_delegation.htm), but that relies on delegation features of the Kerberos prototocol itself. This is not considered "database impersonation."
+
+For on-premise Tableau Server, integrated authentication can be configured to mean other authentication methods transparent to Tableau, such as X509 certificate/private keys installed on the host. To enable this add an authentication option like below, and run the following TSM commands.
+
  ```xml
-   // manifest.xml
-    <customizations>
-      <customization name="CAP_AUTH_DB_IMPERSONATE" value="yes"/>
-    </customizations>
- ```
+<field name="authentication" label="Authentication" category="authentication" value-type="selection">
+  <selection-group>
+    <option value="auth-integrated" label="x509" />
+  </selection-group>
+</field>
+```
 
-The connector plugin present on a Tableau Server instance MUST contain the above two code changes and the server admin should run "tsm pending-changes apply". After this, user should be able to use a vanilla plugin on a Tableau Desktop Client with the same class name and capable of doing basic username-password authentication. Thereafter, when the user tries to publish a workbook using Tableau Desktop to a Tableau Server instance, they should be able to publish it using the option "Impersonate using embedded password". When the workbook is opened in Tableau Server, the delegation should have taken place automatically if appropriate delegation permissions are configured for the authenticated_user and delegated_user(user logged into Tableau server) or else an error message of this sort is thrown from the database "User user1 is not authorized to delegate to user2". For more information on deploying connector plug-ins in Tableau Server, please refer this [document]({{ site.baseurl }}/docs/run-taco)
-
-A [sample](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/scenarios/templates/db_impersonation) JDBC plugin is provided using an Impala database as an example. For documentation on how to configure delegation in Impala, refer to database [documentation](https://impala.apache.org/docs/build/html/topics/impala_delegation.html).
+```sh
+tsm configuration set -k native_api.UseKerberosForRunasDbImpersonation -v false
+tsm pending-changes apply
+```
 
 ## Considerations for 'hadoophive' and 'spark' base classes
 
