@@ -1,2 +1,2 @@
 SQUARE([int2])
-square(num0)
+square([num0])

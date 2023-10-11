@@ -1,2 +1,2 @@
 LEN("data")
-len(str2)
+len([str2])

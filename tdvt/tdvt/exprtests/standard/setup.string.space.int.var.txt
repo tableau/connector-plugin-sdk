@@ -1,1 +1,1 @@
-SPACE(int2)
+SPACE([int2])
