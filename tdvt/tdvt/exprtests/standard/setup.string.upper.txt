@@ -1,2 +1,2 @@
 UPPER("data")
-upper(str2)
+upper([str2])

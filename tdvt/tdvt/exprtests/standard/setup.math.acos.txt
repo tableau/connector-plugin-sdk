@@ -1,1 +1,1 @@
-acos(num0/20)
+acos([num0]/20)

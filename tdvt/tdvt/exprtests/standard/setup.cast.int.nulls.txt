@@ -1,2 +1,2 @@
 INT([num4])
-int(str(num4)+str(int0))
+int(str([num4])+str([int0]))

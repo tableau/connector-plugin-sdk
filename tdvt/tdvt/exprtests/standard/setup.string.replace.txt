@@ -1,2 +1,2 @@
 REPLACE("cat", "c", "b") //cat->bat
-REPLACE(str2, "e", "o")
+REPLACE([str2], "e", "o")
