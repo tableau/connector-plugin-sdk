@@ -5,6 +5,7 @@ description: Build connectors to connect to ODBC and JDBC data sources in Tablea
 repository: "tableau/connector-plugin-sdk"
 baseurl: "/connector-plugin-sdk"
 permalinks: pretty
+theme: minima
 defaults:
   - scope:
       path: "" # Apply to all files

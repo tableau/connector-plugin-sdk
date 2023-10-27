@@ -9,7 +9,7 @@ layout: home
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="main-container">
         {% include header.html %}
         {{ content }}
         {% include footer.html %}

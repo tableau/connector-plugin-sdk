@@ -268,6 +268,12 @@ html {
     }
 }
 
+@media screen and (min-width: 1000px) {
+    .container #main-container {
+      width: 80%
+    }
+}
+
 .column { float: left; }
 .size-1of1 { width: 100%; }
 .size-1of2 { width: 50%; }
