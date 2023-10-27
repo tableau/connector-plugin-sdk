@@ -1,0 +1,164 @@
+{
+    "k": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
+    },
+    "n0": {
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "FLOAT"
+    },
+    "n1": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "FLOAT"
+    },
+    "n2": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "FLOAT"
+    },
+    "n3": {
+        "empties": false,
+        "negatives": true,
+        "nulls": false,
+        "type": "FLOAT"
+    },
+    "n4": {
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "FLOAT"
+    },
+    "s0": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
+    },
+    "s1": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
+    },
+    "s2": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
+    },
+    "s3": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
+    },
+    "i0": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "INTEGER"
+    },
+    "i1": {
+        "empties": false,
+        "negatives": true,
+        "nulls": true,
+        "type": "INTEGER"
+    },
+    "i2": {
+        "empties": false,
+        "negatives": true,
+        "nulls": false,
+        "type": "INTEGER"
+    },
+    "i3": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "INTEGER"
+    },
+    "b0": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "BOOLEAN"
+    },
+    "b1": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "BOOLEAN"
+    },
+    "b2": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "BOOLEAN"
+    },
+    "b3": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "BOOLEAN"
+    },
+    "d0": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "DATE"
+    },
+    "d1": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "DATE"
+    },
+    "d2": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "DATE"
+    },
+    "d3": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "DATE"
+    },
+    "t0": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "TIMESTAMP"
+    },
+    "t1": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "TIME"
+    },
+    "dt0": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "TIMESTAMP"
+    },
+    "dt1": {
+        "empties": true,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
+    },
+    "z": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
+    }
+}

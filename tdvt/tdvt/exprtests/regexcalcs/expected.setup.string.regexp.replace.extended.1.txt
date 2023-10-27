@@ -39,4 +39,194 @@
       </tuple>
     </table>
   </test>
+  <test name='REGEXP_REPLACE(&quot;abc&quot;, &quot;(abc)&quot;,&quot;abc&quot;) //&quot;abc&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(4108908428)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abc&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;ABC&quot;, &quot;(z)&quot;, &quot;y&quot;) //&quot;ABC&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(1967059872)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;ABC&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;toyota&quot;, &quot;(o)&quot;,&quot;0&quot;) //&quot;t0y0ta&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(4025788428)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;t0y0ta&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;aaaaaaaaa&quot;, &quot;(a{3})&quot;, &quot;b&quot;) //&quot;bbb&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(4183930898)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;bbb&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;aaaa&quot;, &quot;(a{3})&quot;, &quot;b&quot;) //&quot;ba&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3374241581)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;ba&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;abcdefghijklmnopqrstuvwxyz0123456789&quot;, &quot;([a-z0-9])&quot;, &quot;*&quot;) //&quot;************************************&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3147043889)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;************************************&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;Abcd&quot;, &quot;(^a)&quot;, &quot;z&quot;) //&quot;Abcd&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(595674223)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;Abcd&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;Abcd&quot;, &quot;(^A)&quot;, &quot;z&quot;) //&quot;zbcd&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(993370521)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;zbcd&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;abcd&quot;, &quot;(a|b)&quot;, &quot;z&quot;) //&quot;zzcd&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(2936725215)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;zzcd&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;brooklyn&quot;, &quot;(o{1,2})&quot;, &quot;0&quot;) //&quot;br0klyn&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(2272875897)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;br0klyn&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;orange brooklyn&quot;, &quot;(o{1,2})&quot;, &quot;0&quot;) //&quot;0range br0klyn&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3256919441)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;0range br0klyn&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;abcde&quot;, &quot;(e$)&quot;, &quot;1&quot;) //&quot;abcd1&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(4012386913)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;abcd1&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;Cincinnati Outlaw Reds&quot;, &quot;([a-zA-Z])&quot;, &quot;1&quot;) //&quot;1111111111 111111 1111&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(1723922930)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;1111111111 111111 1111&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;Altoona bear cub&quot;, &quot;([^abc])&quot;, &quot;1&quot;) //&quot;111111a1b1a11c1b&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(456797192)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;111111a1b1a11c1b&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;999-555-1234 &quot;, &quot;(\d)&quot;, &quot;a&quot;) //&quot;a-aaa-aaa-aaaa&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(1326462750)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;aaa-aaa-aaaa &quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&quot;I called the number 9995551234 but got no response. Then I e-mailed support@xyz.com on 11/10/2015&quot;, &quot;([a-z]*@[a-z]*[.][a-z]*)(\s.[a-z])&quot;, &quot;Z&quot;) //&quot;I called the number 9995551234 but got no response. Then I e-mailed Z 11/10/2015&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(3637970952)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;I called the number 9995551234 but got no response. Then I e-mailed Z 11/10/2015&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&apos;abc123ed567&apos;,&apos;([a-z]*)([1-9]{3})([a-z]{2})([1-9]*)&apos;,&apos;xyz&apos;) //&apos;xyz&apos;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(935878825)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;xyz&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&apos;abc123ed567&apos;,&apos;([a-z]+)&apos;,&apos;xyz&apos;) //&quot;xyz123xyz567&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(2921603628)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;xyz123xyz567&quot;</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='REGEXP_REPLACE(&apos;abc123ed567&apos;,&apos;([a-z]*[1-9]{3})&apos;,&apos;xyz&apos;) //&quot;xyzxyz&quot;'>
+    <table>
+      <schema>
+        <column>[cast_calcs.bigquery].[TEMP(Test)(592586719)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;xyzxyz&quot;</value>
+      </tuple>
+    </table>
+  </test>
 </results>

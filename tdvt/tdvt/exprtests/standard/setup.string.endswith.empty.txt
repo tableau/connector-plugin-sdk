@@ -1,0 +1,2 @@
+ENDSWITH([str2], "")
+ENDSWITH([str1],'')

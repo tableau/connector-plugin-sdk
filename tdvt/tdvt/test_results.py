@@ -3,6 +3,7 @@
 import math
 import json
 import re
+from typing import Optional
 
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet
@@ -212,12 +213,12 @@ class TestResult(object):
         self.test_case_map = []
         self.cmd_output = ''
         self.relative_test_file = relative_test_file
-        self.test_set: TestSet = test_set
-        self.test_metadata = test_metadata
+        self.test_set: Optional[TestSet] = test_set
+        self.test_metadata: Optional[TestMetadata] = test_metadata
 
         self.parse_default_test_cases()
 
-    def return_testcaseresult_for_not_run_tests(self, test_case_count=None):
+    def return_testcaseresult_for_not_run_tests(self, test_case_count=None) -> TestCaseResult:
         # TestCaseResult error messages should be specific to that exact test case. Overall test problems should be
         # set at a higher level (TestResult).
         if self.test_set.test_is_enabled is False:
@@ -225,7 +226,7 @@ class TestResult(object):
                 return TestCaseResult('', 0, "", 0, '', TestErrorDisabledTest(), None, self.test_config, self.test_metadata)
             else:
                 return TestCaseResult('', str(test_case_count), "", test_case_count, '',
-                                      TestErrorDisabledTest(), None, self.test_config)
+                                      TestErrorDisabledTest(), None, self.test_config, self.test_metadata)
         elif self.test_set.test_is_skipped is True:
             if self.test_set.is_logical:
                 return TestCaseResult('', 0, "", 0, '', TestErrorSkippedTest(), None, self.test_config, self.test_metadata)
@@ -482,7 +483,7 @@ class TestResult(object):
 
             # Compare the tuples.
             if config.tested_tuples:
-                diff, diff_string = self.diff_table_node(actual_testcase_self.table, expected_testcase_self.table,
+                diff, diff_string = self.diff_table_node(actual_testcase_self, expected_testcase_self.table,
                                                          diff_string, expected_testcase_self.name)
                 actual_testcase_self.passed_tuples = diff == 0
                 diff_counts[test_case] = diff
@@ -497,11 +498,11 @@ class TestResult(object):
         self.diff_string = diff_string
         return diff_counts, diff_string
 
-    def diff_table_node(self, actual_table, expected_table, diff_string, test_name):
-        if actual_table == None or expected_table == None:
+    def diff_table_node(self, actual_result: TestCaseResult, expected_table, diff_string, test_name):
+        if actual_result.table is None or expected_table is None:
             return (-1, diff_string)
 
-        actual_tuples = actual_table.findall('tuple')
+        actual_tuples = actual_result.table.findall('tuple')
         expected_tuples = expected_table.findall('tuple')
 
         if actual_tuples == None and expected_tuples == None:
@@ -517,7 +518,11 @@ class TestResult(object):
             diff_string += "\tDifferent number of tuples.\n"
 
         if not len(actual_tuples):
-            diff_string += "\tNo 'actual' file tuples.\n"
+            if actual_result.error_message:
+                diff_string += "\tData source threw an error: {}"\
+                    .format(actual_result.error_message.replace('\n', '').lstrip())
+            else:
+                diff_string += "\tNo 'actual' file tuples.\n"
 
         diff_count = 0
 

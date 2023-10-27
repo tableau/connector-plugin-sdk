@@ -1,2 +1,2 @@
 COT([int2])
-cot(num0)
+cot([num0])

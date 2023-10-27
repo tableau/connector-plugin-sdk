@@ -1,0 +1,3 @@
+[datetime0] - [time0]
+FLOAT([datetime0] - [time0])
+ROUND([datetime0] - [time0])

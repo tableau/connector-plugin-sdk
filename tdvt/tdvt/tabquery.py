@@ -1,5 +1,4 @@
 import configparser
-import os
 import sys
 
 from .resources import *
@@ -38,16 +37,9 @@ def get_max_process_level_of_parallelization(desired_threads):
         return 1
     return desired_threads
 
-def build_tabquery_command_line(work):
-    try:
-        sys.path.insert(0, get_extensions_dir())
-        from extend_tabquery import TabqueryCommandLineExtension
-        sys.path.pop(0)
-        tb = TabqueryCommandLineExtension()
-        logging.debug("Imported extension extend_tabquery")
-    except:
-        tb = TabqueryCommandLine()
 
+def build_tabquery_command_line(work):
+    tb = TabqueryCommandLine()
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
 
@@ -78,6 +70,9 @@ class TabqueryCommandLine(object):
         tds_arg = ["-d", work.test_config.tds]
         cmdline.extend(tds_arg)
         cmdline.extend(["--combined"])
+
+        if work.test_config.tested_run_time_config and work.test_config.tested_run_time_config.schema_name:
+            cmdline.extend(["--schema", work.test_config.tested_run_time_config.schema_name])
 
         password_file = work.test_set.get_password_file_name()
         if os.path.isfile(password_file):
@@ -123,5 +118,3 @@ def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
 
     logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False
-
-

@@ -1,0 +1,2 @@
+CONTAINS([str1], Null)
+CONTAINS([str2], Null)

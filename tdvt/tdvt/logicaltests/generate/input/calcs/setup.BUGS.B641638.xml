@@ -45,9 +45,6 @@
         </cols>
         <type>
           <schema>
-            <field name='[Number of Records]'>
-              <type name='top' />
-            </field>
             <field name='[bool0]'>
               <type name='top' />
             </field>

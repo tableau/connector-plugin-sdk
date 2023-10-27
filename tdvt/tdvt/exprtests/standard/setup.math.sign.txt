@@ -1,2 +1,2 @@
 SIGN([int2])
-sign(num0)
+sign([num0])

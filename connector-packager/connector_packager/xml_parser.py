@@ -16,9 +16,11 @@ logger = logging.getLogger('packager_logger')
 MAX_FILE_SIZE = 1024 * 256  # This is based on the max file size we will load on the Tableau side
 HTTPS_STRING = "https://"
 TRANSLATABLE_STRING_PREFIX = "@string/"
-TABLEAU_FALLBACK_LANGUAGE = "en_US"  # If localizing a connector, US English must be translated since we'll fall back to the English strings if we can't find one for the correct language
+# If localizing a connector, US English must be translated since we'll fall back to the English strings if we can't
+# find one for the correct language
+TABLEAU_FALLBACK_LANGUAGE = "en_US"
 TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR",
-                               "pt_BR", "zh_CN", "zh_TW"]
+                               "pt_BR", "sv_SE", "th_TH", "zh_CN", "zh_TW"]
 
 
 class XMLParser:
@@ -38,6 +40,8 @@ class XMLParser:
         self.file_list = []  # list of files to package
         self.loc_strings = []  # list of loc strings so we can make sure they are covered in the resource files.
         self.connector_version = None # Get ths from the plugin-version attribute in the manifest
+        self.null_oauth_config_found = False # whether or not we found a null oauth config
+        self.num_oauth_configs_found = 0 # number of oauth configs found, so we can fail the connector if there are non-null cconfigs and a null config
 
     def generate_file_list(self) -> Optional[List[ConnectorFile]]:
         """
@@ -87,7 +91,9 @@ class XMLParser:
                 self.file_list.append(ConnectorFile(fallback_resource_file_name, "resource"))
                 logging.debug("Adding file to list (name = " + fallback_resource_file_name + ", type = resource)")
             else:
-                logger.error("Error: Found localized strings but " + fallback_resource_file_name + " does not exist. US English translations are required to fall back on if other languages are not translated.")
+                logger.error("Error: Found localized strings but " + fallback_resource_file_name +
+                             " does not exist. US English translations are required to fall back on if other languages"
+                             " are not translated.")
                 return None
 
             # Check for files for each of the languages we suport
@@ -125,7 +131,7 @@ class XMLParser:
 
         # If the file is too big, we shouldn't try and parse it, just log the violation and move on
         if path_to_file.stat().st_size > MAX_FILE_SIZE:
-            logging.error(file_to_parse.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + " KB")
+            logging.error(file_to_parse.file_name + " exceeds maximum size of " + str(int(MAX_FILE_SIZE / 1024)) + "KB")
             return False
 
         # Get XML file ready for parsing
@@ -144,7 +150,8 @@ class XMLParser:
         for child in root.iter():
 
             # Check the tag
-            # Oauth config file uses dbclass tag instead of class attribute. We need to make sure that matches the class name as well.
+            # Oauth config file uses dbclass tag instead of class attribute. We need to make sure that matches the
+            # class name as well.
             if child.tag == "dbclass":
                 if child.text != self.class_name:
                     logging.error("Error: dbclass in file " + file_to_parse.file_name +
@@ -153,46 +160,65 @@ class XMLParser:
                                   file_to_parse.file_name)
                     return False
 
+            # If oauth-config attribute, keep track of how many we find. Enforce that if null oauth config only one config is defined
+            if child.tag == "oauth-config":
+                if self.null_oauth_config_found:
+                    logger.error("Error: cannot declare a null OAuth config in connector with non-null configs")
+                    return False
+                
+                if 'file' in child.attrib and child.attrib['file'] == "null_config":
+                    
+                    # If we already found oauth configs and then found a null config, reject the connector
+                    if self.num_oauth_configs_found > 0:
+                        logger.error("Error: cannot declare a null OAuth config in connector with non-null configs")
+                        return False
+                    else:
+                        logger.debug("Null OAuth config found")
+                        self.null_oauth_config_found = True
+                
+                self.num_oauth_configs_found+=1
+
+
+
             # Check the attributes
             # If xml element has file attribute, add it to the file list. If it's not a script, parse that file too.
-            if 'file' in child.attrib:
+            if 'file' in child.attrib and not (child.tag == "oauth-config" and child.attrib['file'] == "null_config"):
+                    # Check to make sure the file actually exists
+                    new_file_path = str(self.path_to_folder / child.attrib['file'])
 
-                # Check to make sure the file actually exists
-                new_file_path = str(self.path_to_folder / child.attrib['file'])
-
-                if not os.path.isfile(new_file_path):
-                    logger.debug("Error: " + new_file_path + " does not exist but is referenced in " +
-                                 str(file_to_parse.file_name))
-                    return False
-
-                # Make new connector file object
-                logging.debug("Adding file to list (name = " + child.attrib['file'] + ", type = " + child.tag + ")")
-                new_file = ConnectorFile(child.attrib['file'], child.tag)
-
-                # figure out if new file is in the list
-                already_in_list = new_file in self.file_list
-
-                # add new file to list
-                self.file_list.append(new_file)
-
-                # If connection-metadata, make sure that connection-fields file exists
-                if child.tag == 'connection-metadata':
-                    connection_fields_exists = False
-
-                    for xml_file in self.file_list:
-                        if xml_file.file_type == 'connection-fields':
-                            connection_fields_exists = True
-                            break
-
-                    if not connection_fields_exists:
-                        logger.debug("Error: connection-metadata file requires a connection-fields file")
+                    if not os.path.isfile(new_file_path):
+                        logger.error("Error: " + new_file_path + " does not exist but is referenced in " +
+                                    str(file_to_parse.file_name))
                         return False
 
-                # If not a script and not in list, parse the file for more files to include
-                if child.tag != 'script' and not already_in_list:
-                    children_valid = self.parse_file(new_file)
-                    if not children_valid:
-                        return False
+                    # Make new connector file object
+                    logging.debug("Adding file to list (name = " + child.attrib['file'] + ", type = " + child.tag + ")")
+                    new_file = ConnectorFile(child.attrib['file'], child.tag)
+
+                    # figure out if new file is in the list
+                    already_in_list = new_file in self.file_list
+
+                    # add new file to list
+                    self.file_list.append(new_file)
+
+                    # If connection-metadata, make sure that connection-fields file exists
+                    if child.tag == 'connection-metadata':
+                        connection_fields_exists = False
+
+                        for xml_file in self.file_list:
+                            if xml_file.file_type == 'connection-fields':
+                                connection_fields_exists = True
+                                break
+
+                        if not connection_fields_exists:
+                            logger.debug("Error: connection-metadata file requires a connection-fields file")
+                            return False
+
+                    # If not a script and not in list, parse the file for more files to include
+                    if child.tag != 'script' and not already_in_list:
+                        children_valid = self.parse_file(new_file)
+                        if not children_valid:
+                            return False
 
             if 'url' in child.attrib:
 

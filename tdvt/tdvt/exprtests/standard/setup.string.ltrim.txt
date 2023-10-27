@@ -1,1 +1,1 @@
-LTRIM(" " + str2 + " ")
+LTRIM(" " + [str2] + " ")

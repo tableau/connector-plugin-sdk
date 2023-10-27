@@ -1,0 +1,25 @@
+<results>
+  <test name='FIND(str1, &apos;F&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3932018927)(0)]</column>
+      </schema>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+  <test name='FIND(str1, &apos;f&apos;)'>
+    <table>
+      <schema>
+        <column>[cast_calcs.hyper].[TEMP(Test)(3098842035)(0)]</column>
+      </schema>
+      <tuple>
+        <value>%null%</value>
+      </tuple>
+      <tuple>
+        <value>1</value>
+      </tuple>
+    </table>
+  </test>
+</results>

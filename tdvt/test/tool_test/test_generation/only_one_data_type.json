@@ -1,0 +1,32 @@
+{
+    "txt": {
+        "empties": false,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
+    },
+    "txt2": {
+        "empties": false,
+        "negatives": true,
+        "nulls": false,
+        "type": "VARCHAR"
+    },
+    "txt3": {
+        "empties": true,
+        "negatives": false,
+        "nulls": true,
+        "type": "VARCHAR"
+    },
+    "txt4": {
+        "empties": true,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
+    },
+    "txt5": {
+        "empties": false,
+        "negatives": false,
+        "nulls": false,
+        "type": "VARCHAR"
+    }
+}

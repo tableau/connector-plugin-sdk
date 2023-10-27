@@ -48,11 +48,12 @@ class TestXMLParser(unittest.TestCase):
         actual_file_list, actual_class_name, actual_connector_version = self.parser_test_case(TEST_FOLDER / Path("non_https"),
                                                                     expected_file_list, expected_class_name)
         self.assertFalse(actual_file_list, "Connector with non-https urls returned a file list when it shouldn't")
-
+        
         # Test connector with missing English transaltion
         actual_file_list, actual_class_name, actual_connector_version = self.parser_test_case(TEST_FOLDER / Path("missing_english_translation"),
                                                                     expected_file_list, expected_class_name)
-        self.assertFalse(actual_file_list, "Connector with localized strings but without a resources-en_US.xml file returned a file list when it shouldn't")
+        self.assertFalse(actual_file_list, "Connector with localized strings but without a resources-en_US.xml file "
+                                           "returned a file list when it shouldn't")
 
     def test_generate_file_list_mcd(self):
         # Test modular dialog connector

@@ -1,1 +1,1 @@
-asin(num0/20)
+asin([num0]/20)

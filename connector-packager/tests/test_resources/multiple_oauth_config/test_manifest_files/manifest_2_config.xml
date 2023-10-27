@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<connector-plugin class='test_oauth' superclass='jdbc' plugin-version='0.0.1' name='test' version='18.1'>
+  <vendor-information>
+    <company name="Connector SDK"/>
+    <support-link url = "https://example.com"/>
+  </vendor-information>
+  <connection-fields file='connectionFields.xml'/>
+  <connection-metadata file='connectionMetadata.xml'/>
+  <connection-resolver file="connectionResolver.xml"/>
+  <dialect file='dialect.xml'/>
+  <oauth-config file="oauth-config.xml"/>
+  <oauth-config file="oauth-config2.xml"/>
+</connector-plugin>
