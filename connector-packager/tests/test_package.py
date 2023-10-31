@@ -13,7 +13,7 @@ class TestPackage(unittest.TestCase):
 
     def test_package_main(self):
 
-        expected_package_name = "postgres_odbc"
+        expected_package_name = "postgres_odbc-v0.0.0"
         expected_dest_directory = Path("tests/test_resources/jars")
         files_directory = Path("tests/test_resources/valid_connector")
 
