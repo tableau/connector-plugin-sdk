@@ -57,8 +57,14 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
         elif connector_file.file_type == "oauth-config":
             # Check to see if we're using oauthConfigId, which needs 2021.4+
             pluginOAuthConfigRoot = ET.parse(input_dir / connector_file.file_name).getroot()
-            
             oauthConfigId = pluginOAuthConfigRoot.find('.//oauthConfigId')
+            defaultInstanceUrl = pluginOAuthConfigRoot.find('.//defaultInstanceUrl')
+            if (defaultInstanceUrl is not None and 2023.3 > float(min_version_tableau)):
+                min_version_tableau = "2023.3"
+                reasons.append("Connector uses defaultInstanceUrl field, which was added in the 2023.3 release")
+            elif (oauthConfigId is not None and 2021.4 > float(min_version_tableau)):
+                min_version_tableau = "2021.4"
+                reasons.append("Connector contains an oauthConfigId field, which was added in the 2021.4 release")
             instanceUrlSuffix = pluginOAuthConfigRoot.find('.//instanceUrlSuffix')
             configLabel = pluginOAuthConfigRoot.find('.//configLabel')
             if (configLabel is not None and 2023.2 > float(min_version_tableau)):
