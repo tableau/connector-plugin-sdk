@@ -8,7 +8,6 @@
     <redirectUrisDesktop>http://localhost:55557/Callback</redirectUrisDesktop>
     <redirectUrisDesktop>http://localhost:55558/Callback</redirectUrisDesktop>
     <redirectUrisDesktop>http://localhost:55559/Callback</redirectUrisDesktop>
-    <redirectUrisServerCustom>http://localhost/auth/add_oauth_token</redirectUrisServerCustom>
     <authUri>/oauth/authorize</authUri>
     <tokenUri>/oauth/token-request</tokenUri>
     <instanceUrlValidationRegex>^https:\/\/(.+\.)?(snowflakecomputing\.(com|us|cn|de))(.*)</instanceUrlValidationRegex>

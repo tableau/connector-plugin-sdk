@@ -28,7 +28,6 @@ def get_logical_config_templates(ds_registry):
 
     return all_templates
 
-
 def get_logical_config_template(ds_registry, config_name):
     return get_logical_config_templates(ds_registry)[config_name]
 
@@ -124,7 +123,6 @@ def get_modified_line(line, attrs, fields, field_name_map):
     for field in fields:
         new_line = new_line.replace(field, field_name_map[field])
 
-    # TODO: refactor the below
     calcs_table_name = get_customized_table_name(attrs, 'Calcs')
     staples_table_name = get_customized_table_name(attrs, 'Staples')
     new_line = new_line.replace('$Calcs$', calcs_table_name)
@@ -207,7 +205,6 @@ def list_configs(ds_registry, target_config_name=None):
         field_name_map = get_field_name_map(fields, cfg_template)
         configs += get_config_text(config_name, cfg_template, fields, field_name_map)
     return configs
-
 
 def clean_create_dir(new_dir):
     try:

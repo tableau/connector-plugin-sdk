@@ -1,2 +1,2 @@
 ATAN([int2])
-atan(num0)
+atan([num0])

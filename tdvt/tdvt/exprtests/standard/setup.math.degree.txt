@@ -1,2 +1,2 @@
 DEGREES([int2])
-degrees(num0)
+degrees([num0])

@@ -2,6 +2,12 @@
 ## 2023-04-20
 ### Changed
 - Update `oauth_config.xsd` to include `defaultInstanceUrl` field and update `min-version-tableau` to be 2023.3 if present
+## 2023-04-10
+### Changed
+- Update `oauth_config.xsd` to include `configLabel` field and update `min-version-tableau` to be 2023.2 if present
+## 2023-04-04
+### Changed
+- Update `oauth_config.xsd` to include `instanceUrlSuffix` field and update `min-version-tableau` to be 2023.1 if present
 ## 2022-12-16
 ### Changed
 - Convert database impersonation sample to Connection Dialog V2     

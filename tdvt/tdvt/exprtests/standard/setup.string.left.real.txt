@@ -1,1 +1,1 @@
-left(str0,num4)
+left([str0],[num4])

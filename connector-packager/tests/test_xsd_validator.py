@@ -388,7 +388,7 @@ class TestXSDValidator(unittest.TestCase):
         self.assertEqual(len(cm.output), 1)
         self.assertIn("'server' attribute is missing", cm.output[0],
                       "\"'server' attribute is missing\" not found in warning message")
-    
+
     def test_validate_multiple_oauth_config(self):
         xml_violations_buffer = []
         file_to_test = ConnectorFile("manifest.xml", "manifest")
@@ -402,7 +402,7 @@ class TestXSDValidator(unittest.TestCase):
         test_file = TEST_FOLDER / "multiple_oauth_config/test_manifest_files/manifest_2_config.xml"
         self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "3 OAuth Config Fields are marked as invalid")
-        
+
     def test_validate_default_instance_url(self):
         test_file = TEST_FOLDER / "oauth_default_instance_url/valid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
@@ -424,3 +424,47 @@ class TestXSDValidator(unittest.TestCase):
 
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "The defaultInstanceUrl must be located after authUri and tokenUri.")
+
+    def test_validate_instance_url_suffix(self):
+        test_file = TEST_FOLDER / "oauth_instance_url_suffix/valid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "Valid XML file not marked as valid")
+
+        test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "oauthConfig should be able to have no instanceUrlSuffix field")
+
+        test_file = TEST_FOLDER / "oauth_instance_url_suffix/invalid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "The instanceUrlSuffix must be located after authUri and tokenUri.")
+
+    def test_validate_config_label(self):
+        test_file = TEST_FOLDER / "oauth_config_label/valid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "Valid XML file not marked as valid")
+
+        test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "oauthConfig should be able to have no configLabel field")
+
+        test_file = TEST_FOLDER / "oauth_config_label/invalid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "The configLabel field must be located after authUri and tokenUri.")

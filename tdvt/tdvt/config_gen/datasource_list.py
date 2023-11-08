@@ -88,6 +88,11 @@ def get_is_test_enabled(config, key_name=None):
         return config.get('Enabled', 'True') == 'True'
 
 
+def get_expression_test_dir_path(config: configparser.ConfigParser, default_path=None):
+    test_dir = config.get('TestPath', default_path)
+    return test_dir + 'setup.*.txt'
+
+
 def print_logical_configurations(ds_registry, config_name=None):
     if config_name:
         for config in list_config(ds_registry, config_name):
@@ -199,7 +204,7 @@ def load_test(config, test_dir=get_root_dir()):
                                          get_is_smoke_test(standard), get_is_test_enabled(standard), False)
             test_config.add_expression_test('expression.standard.', CALCS_TDS,
                                             standard.get('ExpressionExclusions_Standard', ''),
-                                            'exprtests/standard/setup.*.txt',
+                                            get_expression_test_dir_path(standard, 'exprtests/standard/'),
                                             test_dir, get_password_file(standard), get_expected_message(standard),
                                             get_is_smoke_test(standard), get_is_test_enabled(standard), False)
         except KeyError as e:
@@ -216,9 +221,9 @@ def load_test(config, test_dir=get_root_dir()):
                                          get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
                                          get_is_test_enabled(lod), False)
             test_config.add_expression_test('expression.lod.', CALCS_TDS, lod.get('ExpressionExclusions_Calcs', ''),
-                                            'exprtests/lodcalcs/setup.*.txt', test_dir, get_password_file(lod),
-                                            get_expected_message(lod), get_is_smoke_test(lod), get_is_test_enabled(lod),
-                                            False)
+                                            get_expression_test_dir_path(lod, 'exprtests/lodcalcs/'), test_dir,
+                                            get_password_file(lod), get_expected_message(lod), get_is_smoke_test(lod),
+                                            get_is_test_enabled(lod), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -228,7 +233,8 @@ def load_test(config, test_dir=get_root_dir()):
         try:
             staples_data = config[staples_data_test]
             all_ini_sections.remove(staples_data_test)
-            test_config.add_expression_test('expression.staples.', STAPLES_TDS, '', 'exprtests/staples/setup.*.txt',
+            test_config.add_expression_test('expression.staples.', STAPLES_TDS, '',
+                                            get_expression_test_dir_path(staples_data, 'exprtests/staples/'),
                                             test_dir, get_password_file(staples_data),
                                             get_expected_message(staples_data), get_is_smoke_test(staples_data),
                                             get_is_test_enabled(staples_data), False)
@@ -255,9 +261,9 @@ def load_test(config, test_dir=get_root_dir()):
             regex = config[regex_test]
             all_ini_sections.remove(regex_test)
             test_config.add_expression_test('expression.regex.', CALCS_TDS, regex.get(KEY_EXCLUSIONS, ''),
-                                            'exprtests/regexcalcs', test_dir, get_password_file(regex),
-                                            get_expected_message(regex), get_is_smoke_test(regex),
-                                            get_is_test_enabled(regex), False)
+                                            get_expression_test_dir_path(regex, 'exprtests/regexcalcs/'), test_dir,
+                                            get_password_file(regex), get_expected_message(regex),
+                                            get_is_smoke_test(regex), get_is_test_enabled(regex), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -268,9 +274,9 @@ def load_test(config, test_dir=get_root_dir()):
             median = config[median_test]
             all_ini_sections.remove(median_test)
             test_config.add_expression_test('expression.median.', CALCS_TDS, median.get(KEY_EXCLUSIONS, ''),
-                                            'exprtests/median', test_dir, get_password_file(median),
-                                            get_expected_message(median), get_is_smoke_test(median),
-                                            get_is_test_enabled(median), False)
+                                            get_expression_test_dir_path(median, 'exprtests/median/'), test_dir,
+                                            get_password_file(median), get_expected_message(median),
+                                            get_is_smoke_test(median), get_is_test_enabled(median), False)
         except KeyError as e:
             logging.debug(e)
             pass
@@ -306,7 +312,7 @@ def load_test(config, test_dir=get_root_dir()):
             logging.debug(e)
             pass
 
-    # TODO: This is for custom tables with custom schema
+    # This is for custom tables with custom schema
     if custom_schema_tests in config.sections():
         try:
             cst = config[custom_schema_tests]
@@ -358,8 +364,8 @@ def load_test(config, test_dir=get_root_dir()):
                                              test_dir, get_password_file(sect), get_expected_message(sect), True,
                                              get_is_test_enabled(sect, 'StaplesTestEnabled'), False)
                 test_config.add_expression_test('CastCalcsConnectionTest', CALCS_TDS, sect.get(KEY_EXCLUSIONS, ''),
-                                                'exprtests/pretest/connection_tests/calcs/', test_dir,
-                                                get_password_file(sect), get_expected_message(sect), True,
+                                                get_expression_test_dir_path(sect, 'exprtests/pretest/connection_tests/calcs/'),  # noqa: E501
+                                                test_dir, get_password_file(sect), get_expected_message(sect), True,
                                                 get_is_test_enabled(sect, 'CastCalcsTestEnabled'), False)
             except KeyError as e:
                 logging.debug(e)

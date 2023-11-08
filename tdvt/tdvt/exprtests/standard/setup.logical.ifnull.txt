@@ -1,1 +1,1 @@
-IFNULL(COUNTD(num2), 0)
+IFNULL(COUNTD([num2]), 0)

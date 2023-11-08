@@ -125,7 +125,7 @@ def main():
         return
 
     package_dest_path = Path(args.dest)
-    package_name = xmlparser.class_name + PACKAGED_EXTENSION
+    package_name = xmlparser.class_name + "-v" + xmlparser.connector_version + PACKAGED_EXTENSION
 
     if not jdk_create_jar(path_from_args, files_to_package, package_name, package_dest_path):
         logger.info("Taco packaging failed. Check " + str(log_file) + " for more information.")

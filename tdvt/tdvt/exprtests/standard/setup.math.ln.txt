@@ -1,2 +1,2 @@
 LN([int2])
-ln(num0)
+ln([num0])
