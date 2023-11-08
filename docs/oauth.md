@@ -40,6 +40,7 @@ We refer to the first option as an "Embedded" config, and the second two as "Cus
 | userInfoUri | String | User Info UrI | No | If OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN is set this is a relative path to the instance URL like `/oauth2/v2.0/userinfo` |
 | instanceUrlSuffix | String | Instance URL Suffix | No | If OAUTH_CAP_INFER_INSTANCE_URL_FROM_SERVER is set to true, this will be concatenated with the user-provided server field like `https://{SERVER}{instanceUrlSuffix}`. Otherwise, ignored. |
 | instanceUrlValidationRegex | String | Use to validate against your OAuth instance Url. | No | Uses [Java regex pattern](https://docs.oracle.com/en/java/javase/11/docs/api/index.html) syntax, which is similar to PCRE. Example: `^https://(.+\\.)?(myidp.com\\.(com\|us\|cn\|de))(.*)` |
+| defaultInstanceUrl | String | Instance URL that can be used when the user does not provide one on the client side. | No | OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN must be set to true in order to be consumed. Otherwise, ignored. |
 | scopes | String[] | scopes | Yes | |
 | capabilities |  Map<String, Bool>  | Customizes the OAuth flow | No | See [OAuth Capabilies](#oauth-capabilities) below for details. |
 | accessTokenResponseMaps |  Map<String, String> | Key value pair that maps an initial token request response attribute <value> to Tableau recognized attribute <key> | Yes | See table below for more info. |
@@ -165,6 +166,20 @@ This set of OAuth Config capabilities is not shared with the regular connector c
     <!-- No refreshTokenResponseMaps needed since it's the same as accessTokenResponseMaps -->
  </pluginOAuthConfig>
 ```
+
+## Instance URL/Custom Domain
+Some IDPs have a single global endpoint, such as https://accounts.google.com/o/oauth2/. Others have different instances, for example Okta would have a different instance URL for each customer. If your authorization server or IDP has different instances, then either:
+- Enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. This only works with embedded OAuth configs. The instance URL will be either be collected later from the end-user or be extracted via the embedded OAuth configs' `defaultInstanceUrl` field.
+- Create seperate external/custom OAuth configs for each custom domain. External OAuth config shouldn't set OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN, and should specify authUri, tokenUri, userInfoUri fields as absolute paths, which contains the custom domain/instance URL.
+
+## Multiple Embedded OAuth Configs
+*\*Available starting in Tableau 2023.1*
+
+The plugin developer may add multiple embedded OAuth configs to the plugin starting in Tableau 2023.1. Each should have a new element `<oauthConfigId>`. This should be unique and is displayed in the UI. The user will be prompted to select from the available configurations when creating a connection.
+
+![Image](../assets/connection-dialog-oauth-configs.png)
+
+OAuth configs may also be specified independent of the plugin using site-level OAuth clients or by installing in the Tableau directory for desktop applications. See below for more information.
 
 # OAuth on Tableau Desktop/Tableau Prep
 Tableau Desktop uses a shared client ID and client secret which is embedded in the plugin. It also uses localhost callbacks to receive the authorization code response. The plugin developer (or whoever provides the OAuth config) must ensure that the localhost or loopback callback URLs are configured on the whitelist for the authorization server.
