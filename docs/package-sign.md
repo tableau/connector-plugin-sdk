@@ -2,7 +2,12 @@
 title: Package and Sign Your Connector for Distribution 
 ---
 
-Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file. Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. When the certificate expires, Tableau will reject the .taco file unless there is a valid timestamp.
+Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file. Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. For a partner connector taco to be accepted by Tableau: 
+- The signer is the organization that built the connector.
+- The signature has a timestamp.
+- The signature/timestamp expiration date is far enough in the future (at least five years).
+
+Tableau will reject the .taco file unless there is a valid timestamp.
 
 Tableau Desktop verifies and loads signed connectors from a standard location (My Tableau Repository\\Connectors) or from a user supplied directory.
 
@@ -169,7 +174,7 @@ __Step 3: Use jarsigner to sign TACO file__
 Using the keystore you imported your signed certificate to, use jarsigner to sign your TACO file:
 `jarsigner -keystore your_keystore path_to_taco your_alias -tsa url`
 
-The `-tsa url` argument is optional, but **strongly encouraged**. It's the url to a Timestamp Authority, and by adding this argument you will stamp the signed TACO file with a timestamp, extending its period of validity. While there are several free options for timestamp authority, the CA you got the certificate from will most likely have a timestamp authority you can use.
+The `-tsa url` argument is **required**. It's the url to a Timestamp Authority, and by adding this argument you will stamp the signed TACO file with a timestamp, extending its period of validity. While there are several free options for timestamp authority, the CA you got the certificate from will most likely have a timestamp authority you can use.
 
 For more information about jarsigner arguments, see the Java Documentation about [jarsigner](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/jarsigner.html).
 
