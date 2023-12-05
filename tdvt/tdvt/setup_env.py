@@ -245,32 +245,42 @@ def update_tds_files(name, connection_password_name):
 def mangle_tds(file_path, connection_password_name):
     print('Modifying ' + file_path)
     try:
-        r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
-        r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
-        r3 = re.compile('(^\s*<connection .*?)(\s*/>)')
-
-        f = open(file_path, 'r')
-        new_tds = ''
-        for line in f:
-            new_line = line.rstrip()
-            m1 = r1.match(line)
-            if m1:
-                new_line = m1.group(1) + 'leaf' + m1.group(2)
-
-            m2 = r2.match(line)
-            if m2:
-                new_line = m2.group(1) + 'leaf' + m2.group(2)
-
-            m3 = r3.match(line)
-            if m3 and not 'tdvtconnection=\'' in line.lower():
-                new_line = m3.group(1) + ' tdvtconnection=\'' + connection_password_name + '\' ' + m3.group(2)
-
-            new_tds += new_line + '\n'
-
-        f.close()
+        with open(file_path, 'r') as f:
+        new_tds = updated_tds_as_str(f, connection_password_name)
         f = open(file_path, 'w')
         f.write(new_tds)
         f.close()
     except IOError as e:
         print(e)
         return
+
+def get_tds_new_line(rmatch: Optional[re.Match[str]], mid_str: str, connection_password_name=None):
+    new_line = ''
+    new_line = rmatch.group(1) + mid_str + connection_password_name + '\' ' + rmatch.group(2)
+
+    return new_line
+
+
+def updated_tds_as_str(f, connection_name) -> str:
+    r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
+    r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
+    r3 = re.compile('(^\s*<connection .*?).*?(\' .*>)')
+
+    new_tds = ''
+
+    for line in f:
+        new_line = line.rstrip()
+        m1 = r1.match(line)
+        if m1:
+            new_line = m1.group(1) + 'leaf' + m1.group(2)
+
+        m2 = r2.match(line)
+        if m2:
+            new_line = m2.group(1) + 'leaf' + m2.group(2)
+
+        m3 = r3.match(line)
+        if m3 and not 'tdvtconnection=\'' in line.lower():
+            new_line = m3.group(1) + 'tdvtconnection=\'' + connection_name + m3.group(2)
+
+        new_tds += new_line + '\n'
+    return new_tds

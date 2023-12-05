@@ -15,6 +15,7 @@
 
 import io
 import logging
+import re
 import shutil
 import subprocess
 import unittest
@@ -34,6 +35,7 @@ from tdvt.test_results import *
 from tdvt.tabquery import *
 
 from tdvt.config_gen.test_creator import TestCreator
+from tdvt.setup_env import updated_tds_as_str
 
 
 class DiffTest(unittest.TestCase):
@@ -1150,6 +1152,29 @@ class TestCreatorTest(unittest.TestCase):
              'time0': ['dt0'],
              'time1': ['t1'],
              'zzz': ['k', 's0', 's1', 'z']}
+        )
+
+class MangleTest(unittest.TestCase):
+
+    with open('tool_test/tds/cast_calcs.tde.tds', 'r') as f:
+        new_lines = updated_tds_as_str(f, 'postgres_connection')
+
+    def test_mangletds_tdvtconnection(self):
+        self.assertIn(
+            "<connection tdvtconnection='postgres_connection' class='sqlserver' dbname='TestV1' odbc-native-protocol='yes' one-time-sql='' server='mssql2014' username='test' />",
+            self.new_lines
+        )
+
+    def test_mangletds_relation_connection(self):
+        self.assertIn(
+            "<relation connection='leaf' name='Calcs' table='[dbo].[Calcs]' type='table' />",
+            self.new_lines
+        )
+
+    def test_mangletds_named_connection(self):
+        self.assertIn(
+            "<named-connection caption='mssql2014' name='leaf'>",
+            self.new_lines
         )
 
 

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [2.9.5] - 2023-08-28
+- Add regex/tds mangling tests.
+
+## [2.9.4] - 2023-08-09
+- Add more `dateadd` tests.
+
+## [2.9.3] - 2023-07-26
+- PR 1151 from the monolith, add missing metadata argument.
+
 ## [2.7.6]. - 2023-10-11
 - Use quoting for column references in the expression tests.
 
