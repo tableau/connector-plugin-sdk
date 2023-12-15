@@ -5,7 +5,7 @@
         <column>[cast_calcs.sparksql].[TEMP(Test)(1005283190)(0)]</column>
       </schema>
       <tuple>
-        <value>9.98</value>
+        <value>10.98</value>
       </tuple>
     </table>
   </test>
