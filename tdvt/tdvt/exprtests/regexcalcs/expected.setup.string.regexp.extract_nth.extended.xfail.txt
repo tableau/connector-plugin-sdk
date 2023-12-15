@@ -1,0 +1,18 @@
+<results>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;[a-z]{7}([0-9]{3})&quot;, 10) //&quot;No more than 9 capture groups can be specified.&quot;'>
+    <error>
+      No more than 9 capture groups can be specified.&#10;&#10;    </error>
+    <error-type>
+      Invalid Expression&#10;    </error-type>
+    <table>
+    </table>
+  </test>
+  <test name='REGEXP_EXTRACT_NTH(&quot;tableau123&quot;, &quot;([a-z]{7})([0-9]{3})&quot;, 10) //&quot;No more than 9 capture groups can be specified.&quot;'>
+    <error>
+      No more than 9 capture groups can be specified.&#10;&#10;    </error>
+    <error-type>
+      Invalid Expression&#10;    </error-type>
+    <table>
+    </table>
+  </test>
+</results>
