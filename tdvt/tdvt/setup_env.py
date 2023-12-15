@@ -246,10 +246,10 @@ def mangle_tds(file_path, connection_password_name):
     print('Modifying ' + file_path)
     try:
         with open(file_path, 'r') as f:
-        new_tds = updated_tds_as_str(f, connection_password_name)
-        f = open(file_path, 'w')
-        f.write(new_tds)
-        f.close()
+            new_tds = updated_tds_as_str(f, connection_password_name)
+            f = open(file_path, 'w')
+            f.write(new_tds)
+            f.close()
     except IOError as e:
         print(e)
         return
