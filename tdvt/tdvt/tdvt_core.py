@@ -338,7 +338,28 @@ def try_move(srcfile, destfile):
             time.sleep(0.05)
 
 
+def try_clean_and_move(srcfile, destfile):
+    file_xml = get_cleaned_results(srcfile)
 
+    with open(destfile, 'w') as file2:
+        file2.write(file_xml)
+
+    os.remove(srcfile)
+
+
+def get_cleaned_results(srcfile):
+    file_xml = ''
+    try:
+        with open(srcfile, 'r') as file1:
+            file_xml = file1.read()
+            file_xml = re.sub(r"<sql>[\S\s]*?<\/sql>\s*\n    ", '', file_xml)
+            file_xml = re.sub(r"<query-time>[\S\s]*?<\/query-time>\s*\n    ", '', file_xml)
+
+    except FileNotFoundError:
+        msg = "The file " + srcfile + "does not exist."
+        print(msg)
+
+    return file_xml
 
 
 def save_results_diff(actual_file, diff_file, expected_file, diff_string):
@@ -406,7 +427,7 @@ def compare_results(test_name, test_file, full_test_file, work):
                 logging.warning("No actual file found, generating and moving expected file.")
                 logging.debug(
                     work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, expected_file))
-                try_move(actual_file, expected_file)
+                try_clean_and_move(actual_file, expected_file)
             result.error_status = TestErrorMissingActual()
             return result
         # Try other possible expected files. These are numbered like 'expected.setup.math.1.txt', 'expected.setup.math.2.txt' etc.
@@ -444,7 +465,7 @@ def compare_results(test_name, test_file, full_test_file, work):
                                                                                               base_test_file,
                                                                                               test_config.output_dir)
         logging.debug(work.get_thread_msg() + "Copying actual [{}] to expected [{}]".format(actual_file, next_path))
-        try_move(actual_file, next_path)
+        try_clean_and_move(actual_file, next_path)
     # This will re-diff the results against the best expected file to ensure the test pass indicator and diff count is correct.
     diff_count, diff_string = result.diff_test_results(result.best_matching_expected_results)
     save_results_diff(actual_file, actual_diff_file, result.path_to_expected, diff_string)

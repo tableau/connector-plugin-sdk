@@ -36,6 +36,7 @@ from tdvt.tabquery import *
 
 from tdvt.config_gen.test_creator import TestCreator
 from tdvt.setup_env import updated_tds_as_str
+from tdvt.tdvt_core import get_cleaned_results
 
 
 class DiffTest(unittest.TestCase):
@@ -978,6 +979,12 @@ class ResultsExceptionTest(unittest.TestCase):
             self.assertTrue(actual_message == expected_message,
                             "Expected [{0}] got [{1}]".format(expected_message, actual_message))
             self.assertIsInstance(mock_batch.results[test_file].error_status, expected_state)
+
+    def test_get_cleaned_results(self):
+        srcfile = TEST_DIRECTORY + '/exprtests/expected.setup.agg.avg.txt'
+        cleaned_results = get_cleaned_results(srcfile)
+        self.assertIn("AVG([int0])'>\n    <table>", cleaned_results)
+        self.assertIn("AVG([num4])'>\n    <table>", cleaned_results)
 
 
 class TabQueryPathTest(unittest.TestCase):
