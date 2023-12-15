@@ -4,6 +4,7 @@
 """
 
 import sys
+import platform
 
 if sys.version_info[0] < 3:
     raise EnvironmentError("TDVT requires Python 3 or greater.")
@@ -25,13 +26,13 @@ from typing import List, Optional, Tuple, Union
 from .config_gen.datasource_list import TestRegistry, print_ds, print_configurations, print_logical_configurations
 from .config_gen.tdvtconfig import TdvtInvocation
 from .config_gen.test_config import TestSet, SingleLogicalTestSet, SingleExpressionTestSet, FileTestSet, TestConfig, RunTimeTestConfig
-from .setup_env import create_test_environment, add_datasource
+from .setup_env import create_test_environment, add_datasource, get_failed_cmd_line
 from .tabquery import *
 from .tdvt_core import generate_files, run_diff, run_tests, run_connectors_test_core, return_csv_dialect
 from .version import __version__
 
 # This contains the dictionary of configs you can run.
-from .config_gen.datasource_list import WindowsRegistry, MacRegistry, LinuxRegistry
+from .config_gen.datasource_list import WindowsRegistry, MacRegistry, MacArmRegistry, LinuxRegistry
 
 
 TDVT_LOG_FILE_NAME = 'tdvt_log_combined.txt'
@@ -56,7 +57,7 @@ class TestOutputFiles(object):
                     cls.combined_output.append(row)
 
         except IOError as e:
-            logging.debug("Exception while copying files: " + str(e))
+            logging.error("Exception while copying files: " + str(e))
             return
 
     @classmethod
@@ -64,6 +65,13 @@ class TestOutputFiles(object):
         if not cls.combined_output:
             logging.debug("write_test_results_csv called with no test output")
             return
+
+        # Create command line string for failed test.
+        failed_test_cmd = ''
+        for i in range(len(cls.combined_output)):
+            if cls.combined_output[i].get('Passed') == 'False':
+                failed_test_cmd = get_failed_cmd_line(cls, i)
+                cls.combined_output[i]['Error Msg'] += ' To run this test: \n' + failed_test_cmd
 
         logging.debug("Copying output to {0}".format(cls.output_csv))
         # Sort combined_output on the number of distinct functions (order of complexity)
@@ -88,7 +96,7 @@ class TestOutputFiles(object):
                 for row in cls.combined_output:
                     writer.writerow(row)
         except IOError as e:
-            logging.debug("Exception while writing to file: " + str(e))
+            logging.error("Exception while writing to file: " + str(e))
             return
 
 def do_test_queue_work(i, q):
@@ -208,7 +216,8 @@ class TestRunner():
         # Send output to null.
         DEVNULL = open(os.devnull, 'wb')
         output = DEVNULL if not self.verbose else None
-        logging.debug("\nRunning tdvt " + str(self.test_config) + " tdvt thread id: " + str(self.thread_id) + "\n")
+        logging.info("Running tdvt\tRunning {0}-{1}".format(self.test_config.suite_name, self.test_config.config_file))
+        logging.debug("\t\tthread id: {}".format(self.thread_id))
         print("Running {0} {1} {2}\n".format(self.test_config.suite_name, self.test_config.config_file,
                                              str(self.thread_id)))
 
@@ -237,9 +246,11 @@ def delete_output_files(root_dir):
                     continue
 
 
-def get_datasource_registry(platform):
+def get_datasource_registry(platform_name):
     """Get the datasources to run based on the suite parameter."""
-    if sys.platform.startswith("darwin"):
+    if sys.platform.startswith("darwin") and platform.machine() == 'arm64':
+        reg = MacArmRegistry()
+    elif sys.platform.startswith("darwin"):
         reg = MacRegistry()
     elif sys.platform.startswith("linux"):
         reg = LinuxRegistry()
@@ -376,11 +387,11 @@ def enqueue_tests(ds_info, args, suite):
 
     for x in tests:
         if not x.generate_test_file_list():
-            logging.error("No tests found for config " + str(x))
-            return test_set_configs
+            logging.error("No tests found for config {}".format(x.config_name))
+            continue
 
     for test_set in tests:
-        tdvt_invocation = TdvtInvocation(from_args=args, test_config = ds_info)
+        tdvt_invocation = TdvtInvocation(from_args=args, test_config=ds_info)
         tdvt_invocation.logical = test_set.is_logical_test()
         tdvt_invocation.tds = test_set.tds_name
         tdvt_invocation.config_file = test_set.config_name
@@ -417,17 +428,19 @@ run_usage_text = '''
     The 'run' argument can also take the --verify flag to run a connection test against tests with SmokeTest = True set.
         run postgres_odbc --verify
 
-    Both logical and expression tests are run by default.
-    Run all expression tests
+    Both logical and expression tests are run by default; you can run only one suite using the -e or -q flag.
+    Run all expression tests:
        run postgres_odbc -e
 
-    Run all logical tests
+    Run all logical tests:
         run postgres_odbc -q
 
     There are multiple suites of expression tests, for example, standard and LOD (level of detail). The config files that drive the tests
     are named expression_test.sqlserver.cfg and expression.lod.sqlserver.cfg.
     To run just one of those try entering part of the config name as an argument:
         run postgres_odbc -e lod
+        
+    To run a single test set, using the run-pattern command rather than the run command. See the run-pattern command for more details.
 
 '''
 
@@ -475,10 +488,33 @@ action_usage_text = '''
 run_file_usage_text = '''
 '''
 
-
 def create_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description='TDVT - Tableau Datasource Verification Tool.')
-    parser.add_argument('--verbose', dest='verbose', action='store_true', help='Verbose output.', required=False)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawTextHelpFormatter,
+        description="""
+                _____ ______     _______ 
+               |_   _|  _ \ \   / /_   _|
+                 | | | | | \ \ / /  | | 
+                 | | | |_| |\ V /   | |  
+                 |_| |____/  \_/    |_|  
+        The Tableau Datasource Verification Tool
+        """
+    )
+    parser.add_argument(
+        '--verbose',
+        dest='verbose',
+        action='store_true',
+        help='Verbose logging - DEBUG level and up. Default is INFO',
+        required=False
+    )
+    parser.add_argument(
+        '--loose-comparison',
+        dest='loose_comparison',
+        action='store_true',
+        default=False,
+        help='Loose comparison. Default is strict comparison.',
+        required=False
+    )
 
     #Common run test options.
     run_test_common_parser = argparse.ArgumentParser(description='Common test run options.', add_help=False)
@@ -564,12 +600,16 @@ def check_if_custom_output_dir_exists(custom_output_dir: str) -> bool:
     return Path(custom_output_dir).is_dir()
 
 
-def return_logging_path(args: argparse.ArgumentParser) -> str:
-    if hasattr(args, 'custom_output_dir'):
-        if args.custom_output_dir is not None and check_if_custom_output_dir_exists(args.custom_output_dir):
+def return_logging_path(args: argparse.Namespace) -> str:
+    if hasattr(args, "custom_output_dir"):
+        if args.custom_output_dir is not None and check_if_custom_output_dir_exists(
+            args.custom_output_dir
+        ):
             return os.path.join(args.custom_output_dir, TDVT_LOG_FILE_NAME)
         elif args.custom_output_dir is not None:
-            sys.exit("The specified output directory doesn't exist: %s" % Path(args.custom_output_dir))
+            sys.exit(
+                f"The specified output directory doesn't exist: {args.custom_output_dir}"
+            )
         else:
             pass
     return TDVT_LOG_FILE_NAME
@@ -579,19 +619,17 @@ def init():
     parser = create_parser()
     args = parser.parse_args()
     # Create logger.
-    logging.basicConfig(filename=return_logging_path(args), level=logging.DEBUG, filemode='w',
-                        format='%(asctime)s %(message)s')
+    log_path = return_logging_path(args)
+    logging.basicConfig(filename=log_path, level=logging.INFO, filemode='w',
+                        format='%(asctime)s %(levelname)s %(message)s', force=True)
     logger = logging.getLogger()
+    if args.verbose:
+        logger.setLevel(logging.DEBUG)
     ch = logging.StreamHandler()
-    if 'verbose' in args and args.verbose:
-        # Log to console also.
-        ch.setLevel(logging.DEBUG)
-    else:
-        args.verbose = False
-        ch.setLevel(logging.WARNING)
+    ch.setLevel(logging.WARNING)
     logger.addHandler(ch)
 
-    logging.debug('TDVT version: ' + str(__version__))
+    logging.info('TDVT version: ' + str(__version__))
     logging.debug('TDVT Arguments: ' + str(args))
     ds_reg = get_datasource_registry(sys.platform)
     configure_tabquery_path()
@@ -637,7 +675,7 @@ def test_runner(all_tests: List[TestRunner], test_queue: queue.Queue, max_thread
 def run_tests_impl(
     tests: List[Tuple[TestSet, TdvtInvocation]],
     max_threads: int,
-    args
+    args: argparse.Namespace,
 ) -> Optional[Tuple[int, int, int, int]]:
     if not tests:
         print("No tests found. Check arguments.")
@@ -722,6 +760,7 @@ def run_tests_impl(
         test_queue.put(item)
 
     print("\nStarting tests. Creating " + str(max_threads) + " worker threads.")
+    logging.info("Testing using {} threads.".format(max_threads))
     start_time = time.time()
     failed_tests, skipped_tests, disabled_tests, total_tests = test_runner(final_work, test_queue, max_threads)
 
@@ -746,7 +785,12 @@ def run_tests_impl(
     print("\tMain test time: {} seconds".format(main_test_time))
     print("\tTotal time: {} seconds".format(total_run_time))
 
+    logging.info("Test Count: {}, Tests Run: {}, Passed: {}, Failed: {}, Disabled: {}, Skipped: {}".format(
+            total_tests, total_tests_run, total_passed_tests, failed_tests, disabled_tests, skipped_tests
+        )
+    )
     return failed_tests, skipped_tests, disabled_tests, total_tests
+
 
 def get_ds_list(ds):
     if not ds:
@@ -755,7 +799,11 @@ def get_ds_list(ds):
     ds_list = [x.strip() for x in ds_list]
     return ds_list
 
-def run_desired_tests(args, ds_registry: TestRegistry):
+
+def run_desired_tests(
+        args: argparse.Namespace,
+        ds_registry: TestRegistry
+):
     generate_files(ds_registry, False)
     ds_to_run = ds_registry.get_datasources(get_ds_list(args.ds))
     if not ds_to_run:
@@ -814,10 +862,11 @@ def run_connectors_test(args):
     else:
          print(run_connectors_test_core( args.conn_test, args.conn_test_file))
 
+
 def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     """Rerun all the failed tests listed in the json file."""
 
-    logging.debug("Running failed tests from : " + str(run_file))
+    logging.info("Running failed tests from : " + str(run_file))
     # See if we need to generate test setup files.
     root_directory = get_root_dir()
 
@@ -827,11 +876,13 @@ def run_file(run_file: Path, output_dir: Path, threads: int, args) -> int:
     # This can be a retry-step.
     return 0
 
+
 def run_generate(ds_registry):
     start_time = time.time()
     generate_files(ds_registry, True)
     end_time = time.time() - start_time
     print("Done: " + str(end_time))
+
 
 def main():
     parser, ds_registry, args = init()
@@ -875,6 +926,7 @@ def main():
     logging.error("Could not interpret arguments. Nothing done.")
     parser.print_help()
     sys.exit(-1)
+
 
 if __name__ == '__main__':
     main()

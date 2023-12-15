@@ -1,4 +1,6 @@
 import configparser
+import logging
+import platform
 import sys
 
 from .resources import *
@@ -21,16 +23,31 @@ def configure_tabquery_path():
         config = configparser.ConfigParser()
 
         tdvt_cfg = get_ini_path_local_first('config/tdvt', 'tdvt')
-        logging.debug("Reading tdvt ini file [{}]".format(tdvt_cfg))
+        logging.info("Reading tdvt ini file [{}]".format(tdvt_cfg))
         config.read(tdvt_cfg)
 
-        if sys.platform.startswith("darwin"):
-            tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_MAC']
-        elif sys.platform.startswith("linux"):
+        logging.info(f"Running TDVT on {platform.system()}/{platform.machine()}")
+        if platform.system() == "Darwin":
+            tab_cli_exe_key = "TAB_CLI_EXE_MAC_ARM" if platform.machine() == "arm64" else "TAB_CLI_EXE_MAC"
+            try:
+                tab_cli_exe = config['DEFAULT'][tab_cli_exe_key]
+            except KeyError:
+                if tab_cli_exe_key == 'TAB_CLI_EXE_MAC_ARM':
+                    logging.warning(f"TDVT is running on an ARM Mac, but TAB_CLI_EXE_MAC_ARM does not exist in "
+                                    f"{tdvt_cfg}. Falling back to TAB_CLI_EXE_MAC path.")
+                    tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_MAC']
+                    logging.info("Using TAB_CLI_EXE_MAC path")
+                else:
+                    logging.error(f"Could not get {tab_cli_exe_key} from {tdvt_cfg}, exiting.")
+                    sys.exit(1)
+        elif platform.system() == "Linux":
             tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_LINUX']
+            logging.info("Using TAB_CLI_EXE_LINUX path.")
         else:
             tab_cli_exe = config['DEFAULT']['TAB_CLI_EXE_X64']
-        logging.debug("Reading tdvt ini file tabquerycli path is [{}]".format(tab_cli_exe))
+            logging.info("Using TAB_CLI_EXE_X86 path.")
+
+        logging.info(f"Reading tdvt ini {tdvt_cfg} file tabquerycli path is {tab_cli_exe}")
 
 def get_max_process_level_of_parallelization(desired_threads):
     if sys.platform.startswith("darwin") and 'tabquerytool' in tab_cli_exe:
@@ -40,6 +57,7 @@ def get_max_process_level_of_parallelization(desired_threads):
 
 def build_tabquery_command_line(work):
     tb = TabqueryCommandLine()
+
     cmdline = tb.build_tabquery_command_line(work)
     return cmdline
 
@@ -109,12 +127,12 @@ def tabquerycli_exists(tabquery_cli_path: TabQueryPath = None):
     if tabquery_cli_path:
         resolved_path = tabquery_cli_path.get_path(sys.platform)
         if os.path.isfile(resolved_path):
-            logging.debug("Found tabquery at [{0}]".format(resolved_path))
+            logging.info("Found tabquery at [{0}]".format(resolved_path))
             return True
 
     if os.path.isfile(tab_cli_exe):
-        logging.debug("Found tabquery at [{0}]".format(tab_cli_exe))
+        logging.info("Found tabquery at [{0}]".format(tab_cli_exe))
         return True
 
-    logging.debug("Could not find tabquery at [{0}]".format(tab_cli_exe))
+    logging.error("Could not find tabquery at [{0}]".format(tab_cli_exe))
     return False

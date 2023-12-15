@@ -1,8 +1,8 @@
 <results>
-  <test name='power(int0,0.5)'>
+  <test name='power(int0,0.5)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3264960529)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(3264960529)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -30,10 +30,10 @@
       </tuple>
     </table>
   </test>
-  <test name='power(num1,0.1*num0)'>
+  <test name='power(num1,0.1*num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2631457506)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2631457506)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

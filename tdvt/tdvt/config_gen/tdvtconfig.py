@@ -34,6 +34,7 @@ class TdvtInvocation(object):
         self.iteration: int = 0
         self.generate_expected = False
         self.schema_name: Optional[str] = None
+        self.loose_comparison = False
 
         if from_args:
             self.init_from_args(from_args)
@@ -71,6 +72,8 @@ class TdvtInvocation(object):
             self.iteration = args.perf_iteration
         if args.generate_expected:
             self.generate_expected = True
+        if args.loose_comparison:
+            self.loose_comparison = True
 
 
     def init_from_json(self, json):
@@ -90,12 +93,13 @@ class TdvtInvocation(object):
             rtt.set_tabquery_path_from_array(self.tabquery_path)
             self.tested_run_time_config = rtt
         self.thread_count = json.get('thread_count', self.thread_count)
+        self.loose_comparison = json.get('loose_comparison', self.loose_comparison)
 
     def __str__(self):
         return ("suite [{}]: tested sql [{}]: tested tuples [{}]: tested error [{}]: output dir [{}]: " +
-            "logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}]").format(
+                "logical [{}]: config file [{}]: override [{}]: tds [{}]: thread [{}], loose comparison [{}]").format(
                 self.suite_name, self.tested_sql, self.tested_tuples, self.tested_error, self.output_dir,
-                self.logical, self.config_file, self.d_override, self.tds, self.thread_count)
+                self.logical, self.config_file, self.d_override, self.tds, self.thread_count, self.loose_comparison)
 
     def __json__(self):
         return {
@@ -111,7 +115,8 @@ class TdvtInvocation(object):
             'tds': self.tds,
             'noheader': self.noheader,
             'tabquery_path': self.tabquery_path,
-            'thread_count': self.thread_count}
+            'thread_count': self.thread_count,
+            'loose_comparison': self.loose_comparison}
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):

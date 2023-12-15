@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Filter.Add_to_context.postgres91.xml'>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Filter.Add_to_context.postgres91.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.postgres91].[Market Segment]</column>
@@ -9,8 +9,8 @@
         <column>[Staples.postgres91].[Prod Type2]</column>
         <column>[Staples.postgres91].[Prod Type3]</column>
         <column>[Staples.postgres91].[Prod Type4]</column>
-        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
-        <column>[Staples.postgres91].[sum:Sales Total:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Gross Profit:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Sales Total:ok]</column>
       </schema>
       <tuple>
         <value>&quot;CONSUMER&quot;</value>

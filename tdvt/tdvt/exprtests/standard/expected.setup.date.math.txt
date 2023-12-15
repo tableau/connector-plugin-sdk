@@ -251,10 +251,10 @@
       </tuple>
     </table>
   </test>
-  <test name='[datetime0] - [datetime0]'>
+  <test name='[datetime0] - [datetime0]' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2141740056)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2141740056)(0)]</column>
       </schema>
       <tuple>
         <value>0.0</value>

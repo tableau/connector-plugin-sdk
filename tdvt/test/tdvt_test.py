@@ -15,11 +15,13 @@
 
 import io
 import logging
+import platform
+import re
 import shutil
 import subprocess
+import sys
 import unittest
 
-from collections import Counter
 from pathlib import Path
 from typing import List
 from unittest import mock
@@ -34,9 +36,13 @@ from tdvt.test_results import *
 from tdvt.tabquery import *
 
 from tdvt.config_gen.test_creator import TestCreator
+from tdvt.setup_env import updated_tds_as_str, get_failed_cmd_line
+from tdvt.tdvt_core import get_cleaned_results, do_work
+from tdvt.tdvt import TestOutputFiles
 
 
 class DiffTest(unittest.TestCase):
+
     def test_diff(self):
         logging.debug("Starting diff tests:\n")
         subdir = 'diff_tests'
@@ -316,8 +322,9 @@ class CommandLineTest(unittest.TestCase):
     def test_command_line_override_full(self):
         linux_path = 'some_other_linux'
         mac_path = 'another_mac'
+        mac_arm_path = 'another_arm_mac'
         win_path = 'something_windows.exe'
-        self.test_config.tested_run_time_config.set_tabquery_paths(linux_path, mac_path, win_path)
+        self.test_config.tested_run_time_config.set_tabquery_paths(linux_path, mac_path, mac_arm_path, win_path)
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -334,7 +341,7 @@ class CommandLineTest(unittest.TestCase):
     def test_command_line_full(self):
         self.test_config.output_dir = 'my/output/dir'
         self.test_config.d_override = '-DLogLevel=Debug'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -349,7 +356,7 @@ class CommandLineTest(unittest.TestCase):
 
     def test_password_file(self):
         self.test_config.output_dir = 'my/output/dir'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
         suite = 'password_test'
 
         self.test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', self.test_config.tds, '', self.test_file, suite)
@@ -359,7 +366,7 @@ class CommandLineTest(unittest.TestCase):
         self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
 
     def test_command_line_no_expected(self):
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
@@ -373,7 +380,7 @@ class CommandLineTest(unittest.TestCase):
 
     def test_command_line_multiple_override(self):
         self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -396,7 +403,7 @@ class CommandLineTest(unittest.TestCase):
 
         test_file = 'some/test/file.txt'
         test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', test_config.tds, '', self.test_file, '')
-        test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool.exe")
+        test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -630,7 +637,7 @@ class ConfigTest(unittest.TestCase):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'override.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
-        x = test_config.get_logical_tests() + test_config.get_expression_tests()
+        list_of_test_sets = test_config.get_logical_tests() + test_config.get_expression_tests()
 
         test1 = LogicalTestSet(test_config.dsname, TEST_DIRECTORY, 'logical.calcs.bigquery', 'cast_calcs.bigquery.tds',
                                '', 'logicaltests/setup/calcs/setup.*.bigquery.xml', test_config.dsname)
@@ -647,15 +654,18 @@ class ConfigTest(unittest.TestCase):
                         'Override did not match: ' + test_config.run_time_config.d_override)
 
         for test in tests:
-            found = [y for y in x if y == test]
-            self.assertTrue(found, "[Did not find expected value of [{0}]".format(test))
+            found = [y for y in list_of_test_sets if y == test]
+            self.assertTrue(found, "[Did not find expected value of [{0}]; found {1}".format(test, found))
 
     def test_load_tabquery_override(self):
         config = configparser.ConfigParser()
         config.read(get_path('tool_test/ini', 'postgres_jdbc_tabquerytool.ini', __name__))
         test_config = datasource_list.load_test(config, TEST_DIRECTORY)
 
-        self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("darwin") == 'tabquerytool_mac')
+        if sys.platform.startswith('darwin') and platform.machine() == 'arm64':
+            self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("darwin") == 'tabquerytool_mac_arm')
+        else:
+            self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("darwin") == 'tabquerytool_mac')
         self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("linux") == 'tabquerytool_linux')
         self.assertTrue(test_config.run_time_config.tabquery_paths.get_path("win32") == 'tabquerytool_windows.exe')
 
@@ -977,27 +987,45 @@ class ResultsExceptionTest(unittest.TestCase):
                             "Expected [{0}] got [{1}]".format(expected_message, actual_message))
             self.assertIsInstance(mock_batch.results[test_file].error_status, expected_state)
 
+    def test_get_cleaned_results(self):
+        srcfile = TEST_DIRECTORY + '/exprtests/expected.setup.agg.avg.txt'
+        cleaned_results = get_cleaned_results(srcfile)
+        self.assertIn("AVG([int0])'>\n    <table>", cleaned_results)
+        self.assertIn("AVG([num4])'>\n    <table>", cleaned_results)
+
 
 class TabQueryPathTest(unittest.TestCase):
     def test_init(self):
-        t = TabQueryPath('linux/linux', 'mac/mac/mac', 'win\\win.exe')
-        a = str(t.get_path('darwin'))
-        self.assertTrue(str(t.get_path('darwin')) == 'mac/mac/mac')
+        t = TabQueryPath('linux/linux', 'mac/mac/mac', 'mac_arm/mac_arm/mac_arm', 'win\\win.exe')
+        if sys.platform.startswith("darwin"):
+            if platform.machine() == 'arm64':
+                self.assertTrue(str(t.get_path('darwin')) == 'mac_arm/mac_arm/mac_arm')
+            else:
+                self.assertTrue(str(t.get_path('darwin')) == 'mac/mac/mac')
         self.assertTrue(str(t.get_path('linux')) == 'linux/linux')
         self.assertTrue(str(t.get_path('windows')) == 'win\\win.exe')
 
     def test_string(self):
-        t = TabQueryPath('linux', 'mac', 'win')
-        self.assertTrue(t.get_path('darwin') == 'mac')
+        t = TabQueryPath('linux', 'mac', 'mac_arm', 'win')
+        if sys.platform.startswith("darwin"):
+            if platform.machine() == 'arm64':
+                self.assertTrue(t.get_path('darwin') == 'mac_arm')
+            else:
+                self.assertTrue(t.get_path('darwin') == 'mac')
         self.assertTrue(t.get_path('linux') == 'linux')
         self.assertTrue(t.get_path('windows') == 'win')
 
         string_value = t.to_array()
         self.assertTrue(string_value[0] == 'linux')
         self.assertTrue(string_value[1] == 'mac')
-        self.assertTrue(string_value[2] == 'win')
+        self.assertTrue(string_value[2] == 'mac_arm')
+        self.assertTrue(string_value[3] == 'win')
         t2 = TabQueryPath.from_array(string_value)
-        self.assertTrue(t2.get_path('darwin') == 'mac')
+        if sys.platform.startswith("darwin"):
+            if platform.machine() == 'arm64':
+                self.assertTrue(t2.get_path('darwin') == 'mac_arm')
+            else:
+                self.assertTrue(t2.get_path('darwin') == 'mac')
         self.assertTrue(t2.get_path('linux') == 'linux')
         self.assertTrue(t2.get_path('windows') == 'win')
 
@@ -1150,6 +1178,190 @@ class TestCreatorTest(unittest.TestCase):
              'time0': ['dt0'],
              'time1': ['t1'],
              'zzz': ['k', 's0', 's1', 'z']}
+        )
+
+class MangleTest(unittest.TestCase):
+
+    with open('tool_test/tds/cast_calcs.tde.tds', 'r') as f:
+        new_lines = updated_tds_as_str(f, 'postgres_connection')
+
+    def test_mangletds_tdvtconnection(self):
+        self.assertIn(
+            "<connection tdvtconnection='postgres_connection' class='sqlserver' dbname='TestV1' odbc-native-protocol='yes' one-time-sql='' server='mssql2014' username='test' />",
+            self.new_lines
+        )
+
+    def test_mangletds_relation_connection(self):
+        self.assertIn(
+            "<relation connection='leaf' name='Calcs' table='[dbo].[Calcs]' type='table' />",
+            self.new_lines
+        )
+
+    def test_mangletds_named_connection(self):
+        self.assertIn(
+            "<named-connection caption='mssql2014' name='leaf'>",
+            self.new_lines
+        )
+
+class TestOutputFilesTest(unittest.TestCase):
+    good_test_results = TestOutputFiles()
+    good_test_results.combined_output = [
+        {'Suite': 'postgres', 'Test Set': 'StaplesConnectionTestpostgres', 'TDSName': 'Staples.postgres',
+         'TestName': 'staples.connection.test',
+         'TestPath': 'path/to/tdvt/root/logicaltests/setup/connection_test/setup.staples.connection.test.simple.xml',
+         'Passed': 'True', 'Closest Expected': '0', 'Diff count': '0',
+         'Test Case': 'path/to/tdvt/root/tdvt/tdvt/tdvt/logicaltests/setup/connection_test/setup.staples.connection.test.simple.xml',
+         'Test Type': 'logical', 'Priority': 'unknown', 'Categories': 'unknown', 'Functions': 'unknown',
+         'Process Output': 'Attempting to run query...\nRun query successful! Check output file\n', 'Error Msg': 'None',
+         'Error Type': 'None', 'Query Time (ms)': '169.0',
+         'Generated SQL': '\n      SELECT "Staples"."Discount" AS "Ship Priority"\nFROM "Staples"\nGROUP BY 1\n    ',
+         'Actual (100)tuples': '"0"\n"0.01"\n"0.02"\n"0.03"\n"0.04"\n"0.05"\n"0.06"\n"0.07"\n"0.08"\n"0.09"\n"0.1"\n"0.11"\n"0.12"\n"0.13"\n"0.15"\n"0.21"\n"0.24"\n"0.27"\n"0.3"\n"0.36"\n"0.39"',
+         'Expected (100)tuples': '"0"\n"0.01"\n"0.02"\n"0.03"\n"0.04"\n"0.05"\n"0.06"\n"0.07"\n"0.08"\n"0.09"\n"0.1"\n"0.11"\n"0.12"\n"0.13"\n"0.15"\n"0.21"\n"0.24"\n"0.27"\n"0.3"\n"0.36"\n"0.39"'},
+        {'Suite': 'postgres', 'Test Set': 'CastCalcsConnectionTestpostgres', 'TDSName': 'cast_calcs.postgres',
+         'TestName': 'calcs_connection_test',
+         'TestPath': 'path/to/tdvt/root/tdvt/tdvt/tdvt/exprtests/pretest/connection_tests/calcs/setup.calcs_connection_test.txt',
+         'Passed': 'True', 'Closest Expected': '0', 'Diff count': '0', 'Test Case': 'key', 'Test Type': 'expression',
+         'Priority': 'unknown', 'Categories': 'unknown', 'Functions': 'unknown', 'Process Output': '',
+         'Error Msg': 'None', 'Error Type': 'None', 'Query Time (ms)': '200.0',
+         'Generated SQL': '\n      SELECT "Calcs"."key" AS "TEMP(Test)(3382465274)(0)"\nFROM "Calcs"\nGROUP BY 1\n    ',
+         'Actual (100)tuples': '"key00"\n"key01"\n"key02"\n"key03"\n"key04"\n"key05"\n"key06"\n"key07"\n"key08"\n"key09"\n"key10"\n"key11"\n"key12"\n"key13"\n"key14"\n"key15"\n"key16"',
+         'Expected (100)tuples': '"key00"\n"key01"\n"key02"\n"key03"\n"key04"\n"key05"\n"key06"\n"key07"\n"key08"\n"key09"\n"key10"\n"key11"\n"key12"\n"key13"\n"key14"\n"key15"\n"key16"'}]
+
+    def test_logical_test_return(self):
+        cmd_line = get_failed_cmd_line(self.good_test_results, 0)
+        expected = 'python -m run-pattern postgres --logp path/to/tdvt/root/logicaltests/setup/connection_test/setup.staples.connection.test.simple.xml --tdp Staples.postgres.tds'
+        self.assertEqual(cmd_line, expected)
+
+    def test_expression_test_return(self):
+        cmd_line = get_failed_cmd_line(self.good_test_results, 1)
+        expected = 'python -m run-pattern postgres --exp path/to/tdvt/root/tdvt/tdvt/tdvt/exprtests/pretest/connection_tests/calcs/setup.calcs_connection_test.txt --tdp cast_calcs.postgres.tds'
+        self.assertEqual(cmd_line, expected)
+
+
+class Do_WorkFunctionTest(unittest.TestCase):
+    def setUp(self):
+        error_message = 'Mock RunTime Error'
+        self.mock_tests = [TestFile('tests', './tests/e/suite1/setup.mytest.txt')]
+        self.test_config = TdvtInvocation()
+        self.ts1_expr = MockTestSet('not used', 'not used', 'mock ds', 'tests', 'mock config', 'mock.tds', '',
+                                    'tests/*.txt', False, 'mock suite expression', '', '')
+        self.mock_batch = MockBatchQueueWork(self.mock_tests, self.test_config, self.ts1_expr)
+
+    def tearDown(self):
+        pass
+
+    def test_mock_batch_init(self):
+        self.assertIsInstance(self.mock_batch, MockBatchQueueWork)
+
+    def test_mock_batch_do_work(self):
+        do_work(self.mock_batch)
+        self.assertEqual(self.mock_batch.error_state, None)
+
+    def test_mock_batch_do_work_disabled_test(self):
+        self.mock_batch.test_set.test_is_enabled = False
+        do_work(self.mock_batch)
+
+        self.assertIsInstance(self.mock_batch.error_state, TestErrorDisabledTest)
+
+    def test_mock_batch_do_work_skipped_test(self):
+        self.mock_batch.test_set.test_is_skipped = True
+        do_work(self.mock_batch)
+
+        self.assertIsInstance(self.mock_batch.error_state, TestErrorSkippedTest)
+
+
+class ToleranceTest(unittest.TestCase):
+    """
+    The TestResult.actual_expected_comparison() method returns True when actual & expected match, and False if there is
+    no match.
+    """
+    tr = TestResult()
+
+    def test_actual_expected_nulls_that_match_no_tolerance(self):
+
+        self.assertTrue(
+            self.tr.actual_expected_comparison('%null%', '%null%', None, False)
+        )
+
+    def test_actual_expected_nulls_match_with_tolerance_and_data_type(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('%null%', '%null%', 0.05, True, 'float')
+        )
+
+    def test_actual_is_null_expected_is_float(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1.001', '%null%', 0.05, True, 'float')
+        )
+
+    def test_actual_expected_comparison_method_no_match_no_tolerance(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1', '2', None, False)
+        )
+
+    def test_actual_expected_comparison_method_no_match_no_tolerance_loose_enabled(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1', '2', None, True)
+        )
+
+    def test_actual_expected_comparison_method_match_with_or_without_tolerance(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1.01', '1.01', 0.05, True, 'float')
+        )
+
+    def test_actual_expected_comparison_method_match_with_or_without_tolerance_loose_disabled(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1.01', '1.01', 0.05, False, 'float')
+        )
+
+    def test_actual_expected_comparison_method_match_only_with_tolerance(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1.01', '1.05', 0.05, True, 'float')
+        )
+
+    def test_actual_expected_comparison_method_no_match_with_tolerance(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1.01', '1.25', 0.05, True, 'float')
+        )
+
+    def test_actual_expected_comparison_tolerance_with_trailing_zeors(self):
+        # this test is for GitHub Issue 1178
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1.01', '1.0100000', 0.05, True, 'float')
+        )
+
+    def test_actual_is_float_expected_is_int_with_tolerance(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1', '1.01', 0.05, True, 'float')
+        )
+
+    def test_actual_is_int_expected_is_float_with_tolerance(self):
+        self.assertTrue(
+           self.tr.actual_expected_comparison('1.01', '1', 0.05, True, 'float')
+        )
+
+    def test_comparison_method_with_tolerance_but_no_datatype_matches(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1.01', '1.01', 0.05, True, None)
+        )
+
+    def test_comparison_method_with_tolerance_but_no_datatype_does_not_match(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1.01', '1.25', 0.05, True, None)
+        )
+
+    def test_comparison_method_with_datatype_only(self):
+        self.assertTrue(
+            self.tr.actual_expected_comparison('1.01', '1.01', None, True, 'float')
+        )
+
+    def test_comparison_method_with_datatype_only_does_not_match(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1.01', '1.25', None, True, 'float')
+        )
+
+    def test_comparison_method_with_null_as_actual(self):
+        self.assertFalse(
+            self.tr.actual_expected_comparison('1.00', '%null%', .05, True, 'float')
         )
 
 

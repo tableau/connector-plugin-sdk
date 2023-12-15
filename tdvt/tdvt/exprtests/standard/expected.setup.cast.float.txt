@@ -1,8 +1,8 @@
 <results>
-  <test name='FLOAT([int1])'>
+  <test name='FLOAT([int1])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1533389080)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1533389080)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -30,10 +30,10 @@
       </tuple>
     </table>
   </test>
-  <test name='FLOAT([bool0])'>
+  <test name='FLOAT([bool0])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2538631291)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2538631291)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -46,10 +46,10 @@
       </tuple>
     </table>
   </test>
-  <test name='FLOAT([date0])'>
+  <test name='FLOAT([date0])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(64617177)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(64617177)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -71,10 +71,10 @@
       </tuple>
     </table>
   </test>
-  <test name='FLOAT([num2])'>
+  <test name='FLOAT([num2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2707307071)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2707307071)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

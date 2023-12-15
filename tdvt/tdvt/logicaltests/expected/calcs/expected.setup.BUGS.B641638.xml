@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='d:\dev\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B641638.Extract.xml'>
+  <test name='d:\dev\tdvt\tdvt\logicaltests\setup\calcs\setup.BUGS.B641638.Extract.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[cast_calcs.hyper_native].[str1]</column>
-        <column>[cast_calcs.hyper_native].[sum:num1:ok]</column>
+        <column return-type="float">[cast_calcs.hyper_native].[sum:num1:ok]</column>
         <column>[cast_calcs.hyper_native].[time0]</column>
       </schema>
       <tuple>

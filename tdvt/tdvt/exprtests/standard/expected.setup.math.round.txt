@@ -1,8 +1,8 @@
 <results>
-  <test name='ROUND([int2])'>
+  <test name='ROUND([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(366741644)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(366741644)(0)]</column>
       </schema>
       <tuple>
         <value>-9.0</value>
@@ -48,7 +48,7 @@
   <test name='ROUND([int2], 2)'>
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1240237577)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1240237577)(0)]</column>
       </schema>
       <tuple>
         <value>-9.0</value>
@@ -91,10 +91,10 @@
       </tuple>
     </table>
   </test>
-  <test name='round(num0)'>
+  <test name='round(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3892529067)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(3892529067)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -125,10 +125,10 @@
       </tuple>
     </table>
   </test>
-  <test name='round(num4,1)'>
+  <test name='round(num4,1)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2722044748)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2722044748)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

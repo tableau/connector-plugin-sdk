@@ -18,10 +18,10 @@
       </tuple>
     </table>
   </test>
-  <test name='int0 / int1'>
+  <test name='int0 / int1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2402101080)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(2402101080)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -40,10 +40,10 @@
       </tuple>
     </table>
   </test>
-  <test name='int3 / int2'>
+  <test name='int3 / int2' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3559262472)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(3559262472)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -95,10 +95,10 @@
       </tuple>
     </table>
   </test>
-  <test name='int0 ^ num1'>
+  <test name='int0 ^ num1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(4265403921)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(4265403921)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

@@ -1,8 +1,8 @@
 <results>
-  <test name='acos(num0/20)'>
+  <test name='acos(num0/20)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(4196263986)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(4196263986)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

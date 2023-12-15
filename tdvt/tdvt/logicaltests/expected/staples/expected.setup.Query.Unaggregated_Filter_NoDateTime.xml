@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Unaggregated_Filter_NoDateTime.postgres91.xml'>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Unaggregated_Filter_NoDateTime.postgres91.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.postgres91].[Call Center Region]</column>
         <column>[Staples.postgres91].[PID]</column>
-        <column>[Staples.postgres91].[sum:Customer Balance:ok]</column>
-        <column>[Staples.postgres91].[sum:Order Quantity:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Customer Balance:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Order Quantity:ok]</column>
         <column>[Staples.postgres91].[yr:Order Date:ok]</column>
       </schema>
       <tuple>

@@ -1,11 +1,14 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B27875-desc-nulls-last.postgres91.xml'>
+  <test
+    name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.BUGS.B27875-desc-nulls-last.postgres91.xml'
+    tolerance="0.05"
+  >
     <table>
       <schema>
         <column>[cast_calcs.postgres91].[key]</column>
-        <column>[cast_calcs.postgres91].[sum:num2:ok]</column>
+        <column return-type="float">[cast_calcs.postgres91].[sum:num2:ok]</column>
       </schema>
       <tuple>
         <value>&quot;key00&quot;</value>

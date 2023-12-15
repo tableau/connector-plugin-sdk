@@ -1,8 +1,8 @@
 <results>
-  <test name='SQRT([int2])'>
+  <test name='SQRT([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2398974448)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2398974448)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -30,10 +30,10 @@
       </tuple>
     </table>
   </test>
-  <test name='sqrt(num0)'>
+  <test name='sqrt(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(634651992)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(634651992)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

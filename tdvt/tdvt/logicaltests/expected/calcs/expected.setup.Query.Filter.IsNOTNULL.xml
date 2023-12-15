@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Query.Filter.IsNOTNULL.postgres91.xml'>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/calcs\setup.Query.Filter.IsNOTNULL.postgres91.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[cast_calcs.postgres91].[str2]</column>
-        <column>[cast_calcs.postgres91].[sum:num3:ok]</column>
+        <column return-type="float">[cast_calcs.postgres91].[sum:num3:ok]</column>
       </schema>
       <tuple>
         <value>&quot;eight&quot;</value>

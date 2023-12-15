@@ -1,8 +1,8 @@
 <results>
-  <test name='abs(num0)'>
+  <test name='abs(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3816473022)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(3816473022)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -24,10 +24,10 @@
       </tuple>
     </table>
   </test>
-  <test name='[num0]'>
+  <test name='[num0]' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(965512284)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(965512284)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -58,10 +58,10 @@
       </tuple>
     </table>
   </test>
-  <test name='[num1]'>
+  <test name='[num1]' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1826927073)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(1826927073)(0)]</column>
       </schema>
       <tuple>
         <value>2.47</value>
@@ -116,10 +116,10 @@
       </tuple>
     </table>
   </test>
-  <test name='-num0'>
+  <test name='-num0' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(4188722171)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(4188722171)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -150,10 +150,10 @@
       </tuple>
     </table>
   </test>
-  <test name='num0 / num1'>
+  <test name='num0 / num1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(272703322)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(272703322)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -280,10 +280,10 @@
       </tuple>
     </table>
   </test>
-  <test name='num0 - num1'>
+  <test name='num0 - num1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(3781247900)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(3781247900)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -346,10 +346,10 @@
       </tuple>
     </table>
   </test>
-  <test name='num0 + num1'>
+  <test name='num0 + num1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(977554451)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(977554451)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -380,10 +380,10 @@
       </tuple>
     </table>
   </test>
-  <test name='num0 ^ num1'>
+  <test name='num0 ^ num1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(637953353)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(637953353)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -405,10 +405,10 @@
       </tuple>
     </table>
   </test>
-  <test name='num0 * num1'>
+  <test name='num0 * num1' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(1861245368)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(1861245368)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

@@ -1,8 +1,8 @@
 <results>
-  <test name='TAN([int2])'>
+  <test name='TAN([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1227693937)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1227693937)(0)]</column>
       </schema>
       <tuple>
         <value>-3.380515</value>

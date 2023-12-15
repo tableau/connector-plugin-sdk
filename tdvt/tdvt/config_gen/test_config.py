@@ -24,13 +24,16 @@ class TestFile(object):
     def __str__(self):
         return self.test_path
 
+
 class TestSet(object):
     """
         Represents everything needed to run a set of tests. This includes a path to the test files, which tds etc.
     """
-    def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
-                 expected_message: str = '', smoke_test: bool = False, test_is_enabled: bool = True,
-                 test_is_skipped: bool = False):
+    def __init__(
+        self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, is_logical, suite_name, password_file,
+        expected_message: str = '', smoke_test: bool = False, test_is_enabled: bool = True,
+        test_is_skipped: bool = False
+    ):
         self.ds_name = ds_name
         self.suite_name = suite_name
         self.config_name = config_name
@@ -52,7 +55,9 @@ class TestSet(object):
         return self.is_logical
 
     def get_password_file_name(self):
-        return get_resource_full_path(self.root_dir, self.suite_name + ".password", "tds") if not self.password_file else get_resource_full_path(self.root_dir, self.password_file, "tds")
+        return get_resource_full_path(self.root_dir, self.suite_name + ".password", "tds") \
+            if not self.password_file \
+            else get_resource_full_path(self.root_dir, self.password_file, "tds")
 
     def get_expected_message(self):
         return self.expected_message
@@ -117,7 +122,7 @@ class TestSet(object):
                 break
 
         if added_test == len(tests_to_run):
-            logging.debug("Could not find any tests for [" + "] or [".join(checked_paths)  + "]. Check the path.")
+            logging.error("Could not find any tests for [" + "] or [".join(checked_paths)  + "]. Check the path.")
 
         logging.debug("Found " + str(len(tests_to_run)) + " tests to run before exclusions.")
 
@@ -147,7 +152,10 @@ class TestSet(object):
         return [] if not self.exclusions else self.exclusions.split(',')
 
     def __str__(self):
-        return "[name={0}] [tds={1}] [exclusions={2}] [test pattern={3}] [is_logical={4}] [root_dir={5}]".format(self.config_name, self.tds_name, self.exclusions, self.test_pattern, self.is_logical, self.root_dir)
+        return (
+            f"[name={self.config_name}] [tds={self.tds_name}] [exclusions={self.exclusions}] \
+              [test pattern={self.test_pattern}] [is_logical={self.is_logical}] [root_dir={self.root_dir}]"
+        )
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
@@ -213,12 +221,16 @@ class LogicalTestSet(TestSet):
         existing_output_filepath, actual_output_filepath, base_test_name, base_filepath, expected_dir = get_logical_test_file_paths(test_file, output_dir)
         return actual_output_filepath, base_filepath
 
+
 class ExpressionTestSet(TestSet):
-    def __init__(self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
-                 expected_message='', smoke_test=False, test_is_enabled=True, test_is_skipped=False):
-        super(ExpressionTestSet, self).__init__(ds_name, root_dir, config_name, tds_name,
-                                                exclusions, test_pattern, False, suite, password_file, expected_message,
-                                                smoke_test, test_is_enabled, test_is_skipped)
+    def __init__(
+            self, ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, suite, password_file='',
+            expected_message='', smoke_test=False, test_is_enabled=True, test_is_skipped=False
+    ):
+        super(ExpressionTestSet, self).__init__(
+            ds_name, root_dir, config_name, tds_name, exclusions, test_pattern, False, suite, password_file,
+            expected_message, smoke_test, test_is_enabled, test_is_skipped
+        )
 
     def get_expected_output_file_path(self, test_file, output_dir):
         base_test_file = get_base_test(test_file)
@@ -226,30 +238,36 @@ class ExpressionTestSet(TestSet):
         existing_output_filepath, actual_diff_file, setup, expected_files, next_path = get_test_file_paths(test_file_root, base_test_file, output_dir)
         return existing_output_filepath
 
+
 class SingleLogicalTestSet(LogicalTestSet):
     def __init__(self, ds_name, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
                  expected_message='', smoke_test=False, test_is_enabled=True, test_is_skipped=False):
-        super(SingleLogicalTestSet, self).__init__(ds_name, root_dir, 'temp' + ds_info.dsname, tds_pattern,
-                                                   exclude_pattern, test_pattern, ds_info.dsname,
-                                                   password_file, expected_message, smoke_test, test_is_enabled,
-                                                   test_is_skipped)
+        super(SingleLogicalTestSet, self).__init__(
+            ds_name, root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern, ds_info.dsname,
+            password_file, expected_message, smoke_test, test_is_enabled, test_is_skipped
+        )
         self.test_pattern = self.test_pattern.replace('?', ds_info.logical_config_name)
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
 
+
 class SingleExpressionTestSet(ExpressionTestSet):
     def __init__(self, ds_name, root_dir, test_pattern, tds_pattern, exclude_pattern, ds_info, password_file='',
-                 expected_message='', smoke_test=False, test_is_enabled=True, test_is_skipped=False):
-        super(SingleExpressionTestSet, self).__init__(ds_name, root_dir, 'temp' + ds_info.dsname, tds_pattern,
-                                                      exclude_pattern, test_pattern, ds_info.dsname,
-                                                      password_file, expected_message, smoke_test, test_is_enabled,
-                                                      test_is_skipped)
+                 expected_message='', smoke_test=False, test_is_enabled=True, test_is_skipped=False,
+         ):
+        super(SingleExpressionTestSet, self).__init__(
+            ds_name, root_dir, 'temp' + ds_info.dsname, tds_pattern, exclude_pattern, test_pattern, ds_info.dsname,
+            password_file, expected_message, smoke_test, test_is_enabled, test_is_skipped
+        )
         self.tds_name = tds_pattern.replace('*', ds_info.dsname)
+
 
 def build_config_name(prefix, dsname):
     return prefix + dsname + '.cfg'
 
+
 def build_tds_name(prefix, dsname):
     return prefix + dsname + '.tds'
+
 
 class RunTimeTestConfig(object):
     """
@@ -257,11 +275,11 @@ class RunTimeTestConfig(object):
     """
     def __init__(
             self,
-            timeout_seconds: int=60*60,
-            maxthread: int=0,
-            d_override: str='',
-            run_as_perf: bool=False,
-            schema_name: Optional[str]=None,
+            timeout_seconds: int = 60*60,
+            maxthread: int = 0,
+            d_override: str = '',
+            run_as_perf: bool = False,
+            schema_name: Optional[str] = None,
     ):
         self.timeout_seconds = timeout_seconds
         self.d_override = d_override
@@ -270,10 +288,10 @@ class RunTimeTestConfig(object):
         self.schema_name = schema_name
         self.tabquery_paths = None
 
-    def set_tabquery_paths(self, linux_path, mac_path, windows_path):
-        if not linux_path and not mac_path and not windows_path:
+    def set_tabquery_paths(self, linux_path, mac_path, mac_arm_path, windows_path):
+        if not linux_path and not mac_path and not mac_arm_path and not windows_path:
             return
-        self.tabquery_paths = TabQueryPath(linux_path, mac_path, windows_path)
+        self.tabquery_paths = TabQueryPath(linux_path, mac_path, mac_arm_path, windows_path)
 
     def set_tabquery_path_from_array(self, path_list):
         if not path_list:

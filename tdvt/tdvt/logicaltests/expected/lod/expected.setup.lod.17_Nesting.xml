@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.17_Nesting.dbo.xml'>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.17_Nesting.dbo.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.sqlserver].[Prod Type1]</column>
         <column>[Staples.sqlserver].[Ship Mode]</column>
-        <column>[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(1075333431)(0)]</column>
-        <column>[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(260755027)(0)]</column>
-        <column>[Staples.sqlserver].[avg:Calculation_8601225013155991:ok]</column>
-        <column>[Staples.sqlserver].[sum:Calculation_9271225012544475:ok]</column>
-        <column>[Staples.sqlserver].[sum:LOD - Nesting - 2 (copy):ok]</column>
-        <column>[Staples.sqlserver].[sum:LOD - Nesting - 3 (copy):ok]</column>
+        <column return-type="float">[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(1075333431)(0)]</column>
+        <column return-type="float">[Staples.sqlserver].[TEMP(attr:LOD - Nesting - 1 (copy):qk)(260755027)(0)]</column>
+        <column return-type="float">[Staples.sqlserver].[avg:Calculation_8601225013155991:ok]</column>
+        <column return-type="float">[Staples.sqlserver].[sum:Calculation_9271225012544475:ok]</column>
+        <column return-type="float">[Staples.sqlserver].[sum:LOD - Nesting - 2 (copy):ok]</column>
+        <column return-type="float">[Staples.sqlserver].[sum:LOD - Nesting - 3 (copy):ok]</column>
       </schema>
       <tuple>
         <value>&quot;FURNITURE&quot;</value>

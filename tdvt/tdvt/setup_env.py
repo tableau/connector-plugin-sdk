@@ -11,6 +11,7 @@ from .resources import *
 from .constants import CUSTOM_TABLE_TEST_SET
 
 
+
 def create_test_environment():
     """Create directories and necessary ini files."""
     create_setup_structure()
@@ -245,32 +246,66 @@ def update_tds_files(name, connection_password_name):
 def mangle_tds(file_path, connection_password_name):
     print('Modifying ' + file_path)
     try:
-        r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
-        r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
-        r3 = re.compile('(^\s*<connection .*?)(\s*/>)')
-
-        f = open(file_path, 'r')
-        new_tds = ''
-        for line in f:
-            new_line = line.rstrip()
-            m1 = r1.match(line)
-            if m1:
-                new_line = m1.group(1) + 'leaf' + m1.group(2)
-
-            m2 = r2.match(line)
-            if m2:
-                new_line = m2.group(1) + 'leaf' + m2.group(2)
-
-            m3 = r3.match(line)
-            if m3 and not 'tdvtconnection=\'' in line.lower():
-                new_line = m3.group(1) + ' tdvtconnection=\'' + connection_password_name + '\' ' + m3.group(2)
-
-            new_tds += new_line + '\n'
-
-        f.close()
+        with open(file_path, 'r') as f:
+            new_tds = updated_tds_as_str(f, connection_password_name)
         f = open(file_path, 'w')
         f.write(new_tds)
         f.close()
     except IOError as e:
         print(e)
         return
+
+
+def get_tds_new_line(rmatch: Optional[re.Match[str]], mid_str: str, connection_password_name=None):
+    new_line = ''
+    new_line = rmatch.group(1) + mid_str + connection_password_name + '\' ' + rmatch.group(2)
+
+    return new_line
+
+
+def updated_tds_as_str(f, connection_name) -> str:
+    r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
+    r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
+    r3 = re.compile('(^\s*<connection .*?).*?(\' .*>)')
+
+    new_tds = ''
+
+    for line in f:
+        new_line = line.rstrip()
+        m1 = r1.match(line)
+        if m1:
+            new_line = m1.group(1) + 'leaf' + m1.group(2)
+
+        m2 = r2.match(line)
+        if m2:
+            new_line = m2.group(1) + 'leaf' + m2.group(2)
+
+        m3 = r3.match(line)
+        if m3 and not 'tdvtconnection=\'' in line.lower():
+            new_line = m3.group(1) + 'tdvtconnection=\'' + connection_name + m3.group(2)
+
+        new_tds += new_line + '\n'
+    return new_tds
+
+def get_failed_cmd_line(cls, index):
+    res_info = cls.combined_output[index]
+    ds = res_info.get('Suite')
+    tds_name = res_info.get('TDSName')
+    ab_path = res_info.get('TestPath')
+    test_type = res_info.get('Test Type')
+    if test_type == 'expression':
+        test_type = 'exp'
+    else:
+        test_type = 'logp'
+    if get_root_dir() in ab_path:
+        test_path = ab_path.split(get_root_dir())[1].replace('\\','/').lstrip('/')
+    else:
+        test_path = ab_path
+    str_info = {'ds': ds,
+                'tds_name': tds_name,
+                'test_path': test_path,
+                'test_type': test_type
+                }
+    cmd_line = 'python -m run-pattern {ds} --{test_type} {test_path} --tdp {tds_name}.tds'.format(**str_info)
+
+    return cmd_line

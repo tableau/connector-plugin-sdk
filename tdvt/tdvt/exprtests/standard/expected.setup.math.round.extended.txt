@@ -1,8 +1,8 @@
 <results>
-  <test name='round(num0, 1.0)'>
+  <test name='round(num0, 1.0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(2652477747)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(2652477747)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -33,10 +33,10 @@
       </tuple>
     </table>
   </test>
-  <test name='round(num4, 1.0)'>
+  <test name='round(num4, 1.0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres].[TEMP(Test)(105980138)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres].[TEMP(Test)(105980138)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

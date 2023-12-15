@@ -1,8 +1,8 @@
 <results>
-  <test name='SIN([int2])'>
+  <test name='SIN([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(527156183)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(527156183)(0)]</column>
       </schema>
       <tuple>
         <value>-0.98935825</value>
@@ -45,10 +45,10 @@
       </tuple>
     </table>
   </test>
-  <test name='sin(num0)'>
+  <test name='sin(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1184030290)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1184030290)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
