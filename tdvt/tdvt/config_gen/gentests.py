@@ -15,10 +15,6 @@ from .templates import template_attributes
 from ..constants import CALCS_FIELDS, STAPLES_FIELDS
 
 
-from .templates import *
-
-
-
 def get_logical_config_templates(ds_registry):
     all_templates = template_attributes.copy()
 
