@@ -4,6 +4,61 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [2.13.4] - 2023-12-20
+- Some nits from making the release PR.
+
+## [2.13.3] - 2023-12-04
+- Change ARM tabquery path logic, falling back to regular Mac path if no arm-specific one is found.
+
+## [2.13.2] - 2023-12-04
+- Add expecteds with tolerance tags.
+
+## [2.13.1] - 2023-12-01
+- Fix bug in Mac ARM path logic.
+
+## [2.13.0] - 2023-11-28
+- Add support for Apple Silicon-specific tabquery path in tdvt.ini
+
+## [2.12.0] - 2023-11-14
+- Add support for tolerance, changing how test actuals and expecteds are compared to use `math.isclose()` if a tolerance value is included in expected file.
+
+## [2.11.3] - 2023-10-15
+- Escape column names in expression tests. Contributed by @wnob via [PR 1194](https://github.com/tableau/connector-plugin-sdk/pull/1194).
+
+## [2.11.2] - 2023-10-09
+- Fixed error produced by zip log deletion attempts.
+- Added unit testing around BatchQueueWork do_work().
+
+## [2.11.1] - 2023-09-29
+- Changed verbiage and added newline to failed test run commands to test results.
+
+## [2.11.0] - 2023-09-27
+- Added failed test run commands to test results.
+
+## [2.10.0] - 2023-09-19
+- Update logging so `tdvt_log_combined.txt` is less verbose by default, but can have the current output using the `--verbose` flag.
+- Update various logging calls to use the appropriate logging level throughout TDVT.
+- Fix a bug that kept `tdvt_log_combined.txt` from being created but not being appended.
+
+## [2.9.8] - 2023-09-13
+- Add more REGEXP test cases
+
+## [2.9.7] - 2023-08-28
+- Added formatting for generated expected files.
+
+## [2.9.6] - 2023-08-28
+- Address Spark SQL test issue
+
+## [2.9.5] - 2023-08-28
+- Add regex/tds mangling tests.
+
+## [2.9.4] - 2023-08-09
+- Add more `dateadd` tests.
+
+## [2.9.3] - 2023-07-26
+- PR 1151 from the monolith, add missing metadata argument.
+
 ## [2.7.6]. - 2023-10-11
 - Use quoting for column references in the expression tests.
 
