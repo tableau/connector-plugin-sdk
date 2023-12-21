@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.MultipleFilters.postgres91.xml'>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.MultipleFilters.postgres91.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.postgres91].[Call Center Region]</column>
         <column>[Staples.postgres91].[Order ID]</column>
         <column>[Staples.postgres91].[Product Container]</column>
-        <column>[Staples.postgres91].[avg:Gross Profit:ok]</column>
+        <column return-type="float">[Staples.postgres91].[avg:Gross Profit:ok]</column>
         <column>[Staples.postgres91].[mn:Order Date:ok]</column>
-        <column>[Staples.postgres91].[sum:Price:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Price:ok]</column>
         <column>[Staples.postgres91].[yr:Order Date:ok]</column>
       </schema>
       <tuple>

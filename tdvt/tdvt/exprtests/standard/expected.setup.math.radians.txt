@@ -1,8 +1,8 @@
 <results>
-  <test name='RADIANS([int2])'>
+  <test name='RADIANS([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1973795369)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1973795369)(0)]</column>
       </schema>
       <tuple>
         <value>-0.15707963</value>
@@ -45,10 +45,10 @@
       </tuple>
     </table>
   </test>
-  <test name='radians(num0)'>
+  <test name='radians(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2823743498)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2823743498)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

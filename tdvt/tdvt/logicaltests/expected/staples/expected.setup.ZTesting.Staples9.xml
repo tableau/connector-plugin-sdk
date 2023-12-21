@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.ZTesting.Staples9.postgres91.xml'>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.ZTesting.Staples9.postgres91.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.postgres91].[PID]</column>
-        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
-        <column>[Staples.postgres91].[sum:Sales Total:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Gross Profit:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Sales Total:ok]</column>
       </schema>
       <tuple>
         <value>45686</value>

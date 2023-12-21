@@ -1,8 +1,8 @@
 <results>
-  <test name='FLOAT([int0]) % FLOAT([int1])'>
+  <test name='FLOAT([int0]) % FLOAT([int1])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.hyper_native].[TEMP(Test)(89230338)(0)]</column>
+        <column return-type="float">[cast_calcs.hyper_native].[TEMP(Test)(89230338)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -65,10 +65,10 @@
       </tuple>
     </table>
   </test>
-  <test name='FLOAT([int0]) % INT([num1])'>
+  <test name='FLOAT([int0]) % INT([num1])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.hyper_native].[TEMP(Test)(3148432521)(0)]</column>
+        <column return-type="float">[cast_calcs.hyper_native].[TEMP(Test)(3148432521)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.1_Difference From with Cross Join.dbo.xml'>
+  <test name='E:\dev\data-dev2\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.1_Difference From with Cross Join.dbo.xml'  tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.sqlserver].[Customer Name]</column>
         <column>[Staples.sqlserver].[LOD - Fixed - 2 (copy)]</column>
-        <column>[Staples.sqlserver].[sum:Sales Total:ok]</column>
+        <column return-type="float">[Staples.sqlserver].[sum:Sales Total:ok]</column>
       </schema>
       <tuple>
         <value>&quot;Barbara Fisher&quot;</value>

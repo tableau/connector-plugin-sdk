@@ -30,10 +30,10 @@
       </tuple>
     </table>
   </test>
-  <test name='abs(num0)'>
+  <test name='abs(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3816473022)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(3816473022)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

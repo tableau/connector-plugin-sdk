@@ -49,16 +49,16 @@
           </cols>
           <type>
             <schema>
-              <field name="[bool0_]">
+              <field name="[bool0]">
                 <type name="top" />
               </field>
-              <field name="[bool1_]">
+              <field name="[bool1]">
                 <type name="top" />
               </field>
-              <field name="[bool2_]">
+              <field name="[bool2]">
                 <type name="top" />
               </field>
-              <field name="[bool3_]">
+              <field name="[bool3]">
                 <type name="top" />
               </field>
               <field name="[date0]">

@@ -58,10 +58,10 @@
       </tuple>
     </table>
   </test>
-  <test name='iif(bool0,num0,num1,num2) '>
+  <test name='iif(bool0,num0,num1,num2) ' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver].[TEMP(Test)(3428504110)(0)]</column>
+        <column return-type="float">[cast_calcs.sqlserver].[TEMP(Test)(3428504110)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -156,10 +156,10 @@
       </tuple>
     </table>
   </test>
-  <test name='iif(bool0,num0,num1) '>
+  <test name='iif(bool0,num0,num1) ' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver].[TEMP(Test)(750655768)(0)]</column>
+        <column return-type="float">[cast_calcs.sqlserver].[TEMP(Test)(750655768)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -257,10 +257,10 @@
       </tuple>
     </table>
   </test>
-  <test name=' if bool0 then num0 else num1 end'>
+  <test name=' if bool0 then num0 else num1 end' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.sqlserver].[TEMP(Test)(898375479)(0)]</column>
+        <column return-type="float">[cast_calcs.sqlserver].[TEMP(Test)(898375479)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

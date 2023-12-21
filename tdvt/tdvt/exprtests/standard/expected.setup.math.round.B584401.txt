@@ -1,8 +1,8 @@
 <results>
-  <test name='ROUND([num3],0)'>
+  <test name='ROUND([num3],0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(3830326670)(0)]</column>
+        <column return-type="float">[cast_calcs.hyper].[TEMP(Test)(3830326670)(0)]</column>
       </schema>
       <tuple>
         <value>-20.0</value>
@@ -45,10 +45,10 @@
       </tuple>
     </table>
   </test>
-  <test name='ROUND([num3])'>
+  <test name='ROUND([num3])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.hyper].[TEMP(Test)(4174655436)(0)]</column>
+        <column return-type="float">[cast_calcs.hyper].[TEMP(Test)(4174655436)(0)]</column>
       </schema>
       <tuple>
         <value>-20.0</value>

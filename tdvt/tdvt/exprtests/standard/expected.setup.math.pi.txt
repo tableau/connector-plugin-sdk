@@ -1,18 +1,18 @@
 <results>
-  <test name='PI()'>
+  <test name='PI()' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(356598120)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(356598120)(0)]</column>
       </schema>
       <tuple>
         <value>3.1415927</value>
       </tuple>
     </table>
   </test>
-  <test name='pi()*num0'>
+  <test name='pi()*num0' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1299212312)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1299212312)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

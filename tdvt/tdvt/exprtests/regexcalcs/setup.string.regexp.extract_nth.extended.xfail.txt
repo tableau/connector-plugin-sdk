@@ -1,0 +1,2 @@
+REGEXP_EXTRACT_NTH("tableau123", "[a-z]{7}([0-9]{3})", 10) //"No more than 9 capture groups can be specified."
+REGEXP_EXTRACT_NTH("tableau123", "([a-z]{7})([0-9]{3})", 10) //"No more than 9 capture groups can be specified."

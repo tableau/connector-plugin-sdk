@@ -1,8 +1,8 @@
 <results>
-  <test name='LOG([int2])'>
+  <test name='LOG([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(114283928)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(114283928)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -27,10 +27,10 @@
       </tuple>
     </table>
   </test>
-  <test name='LOG([int2],2)'>
+  <test name='LOG([int2],2)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3322085183)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(3322085183)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -55,10 +55,10 @@
       </tuple>
     </table>
   </test>
-  <test name='log(num0)'>
+  <test name='log(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1814892178)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1814892178)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>
@@ -77,10 +77,10 @@
       </tuple>
     </table>
   </test>
-  <test name='log(num0,2)'>
+  <test name='log(num0,2)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(3081102343)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(3081102343)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

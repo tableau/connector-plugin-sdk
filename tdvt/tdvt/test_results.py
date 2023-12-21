@@ -1,5 +1,5 @@
 """ Test result and configuration related classes. """
-
+import logging
 import math
 import json
 import re
@@ -42,7 +42,8 @@ class TestCaseResult(object):
         ie The math.round test contains ROUND(int), ROUND(num) etc test cases.
 
     """
-    def __init__(self, name, id, sql, query_time, error_msg, error_type, table, test_config, test_metadata):
+    def __init__(self, name, id, sql, query_time, error_msg, error_type, table, test_config, test_metadata,
+                 test_tolerance=None):
         self.name = name
         self.id = id
         self.sql = sql
@@ -57,6 +58,7 @@ class TestCaseResult(object):
         self.passed_error = False
         self.tested_config = test_config
         self.test_metadata = test_metadata
+        self.test_tolerance = test_tolerance
 
     def set_diff(self, diff_string, diff_count):
         self.diff_string = diff_string
@@ -210,7 +212,7 @@ class TestResult(object):
         self.path_to_expected = ''
         self.path_to_actual = ''
         self.overall_error_message = ''
-        self.test_case_map = []
+        self.test_case_map: list[Optional[TestCaseResult]] = []
         self.cmd_output = ''
         self.relative_test_file = relative_test_file
         self.test_set: Optional[TestSet] = test_set
@@ -322,10 +324,22 @@ class TestResult(object):
             sq = node.text if node is not None else ''
 
             test_child_name = test_child.get('name')
+
+            test_child_tolerance = test_child.get('tolerance')
             if not test_child_name:
                 continue
-            test_result = TestCaseResult(test_child_name, str(
-                i), sq, query_time, error_msg, error_type, test_child.find('table'), self.test_config, self.test_metadata)
+            test_result = TestCaseResult(
+                test_child_name,
+                str(i),
+                sq,
+                query_time,
+                error_msg,
+                error_type,
+                test_child.find('table'),
+                self.test_config,
+                self.test_metadata,
+                test_child_tolerance
+            )
             temp_test_cases.append(test_result)
 
         if temp_test_cases:
@@ -446,7 +460,7 @@ class TestResult(object):
     def get_test_case_count(self):
         return len(self.test_case_map) if self.test_case_map else 0
 
-    def get_test_case(self, index):
+    def get_test_case(self, index: int) -> Optional[TestCaseResult]:
         case = None
         try:
             case = self.test_case_map[index]
@@ -483,7 +497,7 @@ class TestResult(object):
 
             # Compare the tuples.
             if config.tested_tuples:
-                diff, diff_string = self.diff_table_node(actual_testcase_self, expected_testcase_self.table,
+                diff, diff_string = self.diff_table_node(actual_testcase_self, expected_testcase_self,
                                                          diff_string, expected_testcase_self.name)
                 actual_testcase_self.passed_tuples = diff == 0
                 diff_counts[test_case] = diff
@@ -498,12 +512,55 @@ class TestResult(object):
         self.diff_string = diff_string
         return diff_counts, diff_string
 
-    def diff_table_node(self, actual_result: TestCaseResult, expected_table, diff_string, test_name):
-        if actual_result.table is None or expected_table is None:
+    def actual_expected_comparison(
+            self,
+            expected: str,
+            actual: str,
+            tolerance: Optional[float],
+            loose_comparison_enabled: bool,
+            data_type: Optional[str] = None
+    ) -> bool:
+        """
+        Compares actual and expected values, returning True if they match.
+        """
+        if actual == '%null%':
+            return expected == actual
+        elif data_type and tolerance and loose_comparison_enabled:
+
+            if data_type == 'float':
+                try:
+                    cleaned_expected = float(expected.replace('"', '').replace('&quot;', ''))
+                    cleaned_actual = float(actual.replace('"', '').replace('&quot;', ''))
+                except ValueError:
+                    logging.error(
+                        f'Could not convert expected or actual to {data_type}. Expected: {expected}, actual: {actual}'
+                    )
+                    return expected != actual
+                logging.info(f"Loose comparison enabled for {self.name}: tolerance={tolerance}, data_type={data_type}")
+                return math.isclose(cleaned_actual, cleaned_expected, rel_tol=tolerance)
+            else:
+                return expected == actual
+        else:
+            return expected == actual
+
+    def diff_table_node(
+            self,
+            actual_result: TestCaseResult,
+            expected_result: TestCaseResult,
+            diff_string: str,
+            test_name: str
+    ) -> tuple[int, str]:
+        if actual_result.table is None or expected_result is None:
             return (-1, diff_string)
 
+        # TODO: add flexibility about tolerance if it exists; maybe we want date stamp flexibility, etc.
+
+        expected_result_table = expected_result.table
+        test_case_tolerance = self.get_test_case_tolerance(expected_result)
+
         actual_tuples = actual_result.table.findall('tuple')
-        expected_tuples = expected_table.findall('tuple')
+        expected_tuples = expected_result_table.findall('tuple')
+        column_return_type = expected_result_table.findall('schema/column')
 
         if actual_tuples == None and expected_tuples == None:
             return (0, diff_string)
@@ -526,6 +583,11 @@ class TestResult(object):
 
         diff_count = 0
 
+        data_type_list = [item.attrib.get('return-type') for item in column_return_type]
+
+        if not data_type_list:
+            data_type_list = [None]
+
         expected_tuple_list = []
         for j in expected_tuples:
             for k in j.findall('value'):
@@ -536,17 +598,39 @@ class TestResult(object):
             for k in j.findall('value'):
                 actual_tuple_list.append(k.text)
 
-        diff_count = sum(a != b for a, b in zip(
-            actual_tuple_list, expected_tuple_list))
+        full_count_data_type = data_type_list * (len(actual_tuple_list) // len(data_type_list))
+
+        if len(full_count_data_type) != len(actual_tuple_list):
+            logging.error("Data type list and actual tuple list are not the same length.")
+            return -1, 'Error: Data type list and actual tuple list are not the same length.'
+
+        loose_comparison_enabled = self.test_config.loose_comparison
+
+        diff_count = 0
         diff_count += abs(len(actual_tuple_list) - len(expected_tuple_list))
 
-        for a, b in zip(actual_tuple_list, expected_tuple_list):
-            if a != b:
+        for actual_value, expected_value, data_type in zip(
+            actual_tuple_list, expected_tuple_list, full_count_data_type
+        ):
+            if not self.actual_expected_comparison(
+                    actual_value, expected_value, test_case_tolerance, loose_comparison_enabled, data_type
+            ):
+                diff_count += 1
                 diff_string += "\t <<<< >>>> \n"
-                diff_string += "\tactual: " + a + "\n"
-                diff_string += "\texpected: " + b + "\n"
+                diff_string += "\tactual: " + actual_value + "\n"
+                diff_string += "\texpected: " + expected_value + "\n"
 
-        return (diff_count, diff_string)
+        return diff_count, diff_string
+
+    def get_test_case_tolerance(self, expected_result) -> Optional[float]:
+        test_case_tolerance = expected_result.test_tolerance
+        if test_case_tolerance:
+            try:
+                test_case_tolerance = float(test_case_tolerance)
+            except ValueError:
+                logging.warning("Tolerance couldn't be cast to float. Not using.")
+                test_case_tolerance = None
+        return test_case_tolerance
 
     def diff_sql_node(self, actual_sql, expected_sql, diff_string):
         if actual_sql == None and expected_sql == None:

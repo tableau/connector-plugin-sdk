@@ -1,8 +1,8 @@
 <results>
-  <test name='[date2] - [date2]'>
+  <test name='[date2] - [date2]' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(1152843842)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(1152843842)(0)]</column>
       </schema>
       <tuple>
         <value>0.0</value>

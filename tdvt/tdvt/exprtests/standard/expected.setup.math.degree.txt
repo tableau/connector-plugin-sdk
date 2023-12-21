@@ -1,8 +1,8 @@
 <results>
-  <test name='DEGREES([int2])'>
+  <test name='DEGREES([int2])' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(2688244734)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(2688244734)(0)]</column>
       </schema>
       <tuple>
         <value>-515.66202</value>
@@ -45,10 +45,10 @@
       </tuple>
     </table>
   </test>
-  <test name='degrees(num0)'>
+  <test name='degrees(num0)' tolerance="0.05">
     <table>
       <schema>
-        <column>[cast_calcs.postgres91].[TEMP(Test)(583539797)(0)]</column>
+        <column return-type="float">[cast_calcs.postgres91].[TEMP(Test)(583539797)(0)]</column>
       </schema>
       <tuple>
         <value>%null%</value>

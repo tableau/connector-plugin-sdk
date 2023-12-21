@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <results>
-  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Dates_MDY_Filtered.postgres91.xml'>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests/staples\setup.Query.Dates_MDY_Filtered.postgres91.xml' tolerance="0.05">
     <table>
       <schema>
         <column>[Staples.postgres91].[md:Order Date:ok]</column>
-        <column>[Staples.postgres91].[sum:Gross Profit:ok]</column>
+        <column return-type="float">[Staples.postgres91].[sum:Gross Profit:ok]</column>
       </schema>
       <tuple>
         <value>19970102</value>

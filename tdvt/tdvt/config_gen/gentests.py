@@ -7,14 +7,12 @@ import logging
 import os
 import re
 import shutil
+
 from string import Template
 from typing import Dict, List, Tuple
 
 from .templates import template_attributes
 from ..constants import CALCS_FIELDS, STAPLES_FIELDS
-
-
-debug = False
 
 
 def get_logical_config_templates(ds_registry):
@@ -129,22 +127,21 @@ def get_modified_line(line, attrs, fields, field_name_map):
     new_line = new_line.replace('$Staples$', staples_table_name)
     return new_line
 
+
+
 def process_test_file(filename, ds_registry, output_dir, col_names: List[List[str]]):
-    if debug:
-        print("Processing " + filename)
+    logging.debug("Processing " + filename)
 
     input_file = open(filename, 'r', encoding='utf-8')
     base_name = os.path.basename(filename)
-    if debug:
-        print("base_name " + base_name)
+    logging.debug("base_name " + base_name)
     match = re.search('setup\.(.*)\.xml', base_name)
     if match:
         test_name = match.group(1)
     else:
         test_name = os.path.splitext(base_name)[0]
 
-    if debug:
-        print("Test " + test_name)
+    logging.debug("Test " + test_name)
 
     fields = []
     for table in col_names:
