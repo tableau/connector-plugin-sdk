@@ -57,7 +57,7 @@ To work with connectors, you need the following:
 
 * Windows or Mac
 * Tableau Desktop or Server 2020.4
-* Python 3.7 or higher
+* Python 3.9 or higher
 * An ODBC or JDBC data source and driver
 * The provided test data loaded in your data source
 
