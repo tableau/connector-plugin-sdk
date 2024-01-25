@@ -61,7 +61,7 @@ Multiple expected files are supported.
 1. Be sure your system includes these prerequisites:
     - PC or VM running Windows or macOS.
     - Tableau Desktop installed
-    - Python 3.7 (See: [Windows releases](https://www.python.org/downloads/windows/) / [Mac releases](https://www.python.org/downloads/mac-osx/))
+    - Python 3.7+ (See: [Windows releases](https://www.python.org/downloads/windows/) / [Mac releases](https://www.python.org/downloads/mac-osx/))
     - Pip (by default comes by with the Python installation)
       Be sure to enable the "install environmental variables" option.
     - An ODBC or JDBC driver for your database.
@@ -87,19 +87,12 @@ You can create an archive package and install that, or install from the live dir
     Install TDVT:
         ```
         $ (tdvt-venv) cd connector-plugin-sdk/tdvt
-        $ (tdvt-venv) python -m pip install -e .
+        $ (tdvt-venv) pip install -e .
         ```
-        The . at the end is important. You can verify it installed by doing $ pip list
+        The . at the end is important.
 
-Now run the following commands from the top level "tdvt" directory: 
-    - Create an archive package in the dist folder:
-`python setup.py sdist --formats gztar`
-    - Change directory to dist and install from the archived file:
-`python -m pip install tdvt-1.1.59.zip`
-   __Note:__ Instead of A and B, you can install the live version:
-    `python -m pip install -e .`
-    - Verify it is installed:
- `python -m pip list`
+   Verify it is installed:
+      ```pip list````
 
 1. Extract and then load the [TestV1 dataset](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1) into your database.
 __Notes:__
@@ -115,8 +108,8 @@ TDVT checks the current working directory for the test configuration files that 
     - Run these steps to set up TDVT with a sample data source:
         1. Create a new directory, for example:
     `tdvt_workspace`
-        1. Copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
-        1. Copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.
+        2. Copy the contents of connector-plugin-sdk/tdvt/samples to tdvt_workspace.
+        3. Copy the connector-plugin-sdk/samples/plugins folder to tdvt_workspace.
 Note that tdvt_workspace should contain the following subdirectories: config, plugins, tds.
     - Or,  run this command to set up TDVT with an empty environment:
 `python -m tdvt.tdvt action --setup`
@@ -547,7 +540,7 @@ It also indicates which expected file most closely matched the actual results fr
 
 The expected files are located in the TDVT Python package location.
 You can find this by running:
-`python -m pip show tdvt`.
+`pip show tdvt`.
 
 Expression tests have a name like "setup.agg.avg.txt" and a corresponding expected file like "expected.setup.agg.avg.txt".
 There may be optional alternative expected files like "expected.setup.agg.avg.1.txt", and so on.

@@ -2,7 +2,7 @@
 title: Package and Sign Your Connector for Distribution 
 ---
 
-Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file. Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. For a partner connector taco to be accepted by Tableau: 
+Packaging provides a convenient way to distribute your connector as a single .taco (Tableau Connector) file. Signing ensures that Tableau will load only .taco files that have been signed with a currently valid certificate, ensuring that they haven't been tampered with. Signing is done using the JDK and a certificate trusted by a root certificate authority (CA) that has been installed in your Java environment. For a partner connector taco to be accepted by Tableau:
 - The signer is the organization that built the connector.
 - The signature has a timestamp.
 - The signature/timestamp expiration date is far enough in the future (at least five years).
@@ -76,7 +76,7 @@ Or, on Linux:
 1.  Install the packaging module in the virtual environment: 
 
     ```
-    (.venv) C:\connector-plugin-sdk\connector-packager>python setup.py install  
+    (.venv) C:\connector-plugin-sdk\connector-packager>pip install -e .  
     ```
 
 ## Package the connector
