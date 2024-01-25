@@ -20,9 +20,8 @@ This document explains how to package and sign your connector using the Connecto
 
 ## Before you begin 
 
-Be sure your system includes the following:
-
--   Python version 3.7.3 or later 
+Be sure your system includes the follo
+-   Python version 3.9 or later 
 
 -   Java JDK is installed, JAVA\_HOME is set, and the JDK is in your PATH environment variable 
 

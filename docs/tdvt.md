@@ -61,7 +61,7 @@ Multiple expected files are supported.
 1. Be sure your system includes these prerequisites:
     - PC or VM running Windows or macOS.
     - Tableau Desktop installed
-    - Python 3.7+ (See: [Windows releases](https://www.python.org/downloads/windows/) / [Mac releases](https://www.python.org/downloads/mac-osx/))
+    - Python 3.9+ (See: [Windows releases](https://www.python.org/downloads/windows/) / [Mac releases](https://www.python.org/downloads/mac-osx/))
     - Pip (by default comes by with the Python installation)
       Be sure to enable the "install environmental variables" option.
     - An ODBC or JDBC driver for your database.
