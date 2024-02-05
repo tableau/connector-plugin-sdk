@@ -1,0 +1,30 @@
+<results>
+  <test name='SPACE([int2])'>
+    <table>
+      <schema>
+        <column>[cast_calcs.salesforce_uip].[TEMP(Test)(2968663989)(0)]</column>
+      </schema>
+      <tuple>
+        <value>&quot;&quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;  &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;   &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;    &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;     &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;      &quot;</value>
+      </tuple>
+      <tuple>
+        <value>&quot;         &quot;</value>
+      </tuple>
+    </table>
+  </test>
+</results>
