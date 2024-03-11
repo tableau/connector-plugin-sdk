@@ -264,25 +264,24 @@ def get_tds_new_line(rmatch: Optional[re.Match[str]], mid_str: str, connection_p
 
 
 def updated_tds_as_str(f, connection_name) -> str:
-    r1 = re.compile('(^\s*<named-connection .*? name=\').*?(\'>)')
-    r2 = re.compile('(^\s*<.*relation connection=\').*?(\' .*>)')
-    r3 = re.compile('(^\s*<connection .*?).*?(\' .*>)')
-
+    r1 = re.compile('(^\s*<named-connection.*?name=\')(.*?)(\'>)')  # no space because of redshift_singlenode
+    r2 = re.compile('(^\s*<.*relation connection=\')(.*?)(\' .*>)')
+    r3 = re.compile('(^\s*<connection)(\s)(.*/>)')
     new_tds = ''
 
     for line in f:
         new_line = line.rstrip()
         m1 = r1.match(line)
         if m1:
-            new_line = m1.group(1) + 'leaf' + m1.group(2)
+            new_line = m1.string.replace(m1.group(2), 'leaf')
 
         m2 = r2.match(line)
         if m2:
-            new_line = m2.group(1) + 'leaf' + m2.group(2)
+            new_line = m2.string.replace(m2.group(2), 'leaf')
 
         m3 = r3.match(line)
         if m3 and not 'tdvtconnection=\'' in line.lower():
-            new_line = m3.group(1) + 'tdvtconnection=\'' + connection_name + m3.group(2)
+            new_line = f"{m3.group(1)} tdvtconnection='{connection_name}' {m3.group(3)}"
 
         new_tds += new_line + '\n'
     return new_tds
