@@ -1183,12 +1183,28 @@ class TestCreatorTest(unittest.TestCase):
 class MangleTest(unittest.TestCase):
 
     with open('tool_test/tds/cast_calcs.tde.tds', 'r') as f:
-        new_lines = updated_tds_as_str(f, 'postgres_connection')
+        new_lines = updated_tds_as_str(f, 'sqlserver_connection')
+
+    with open('tool_test/tds/cast_calcs.postgres.tds', 'r') as postgres:
+        postgres_tds = updated_tds_as_str(postgres, 'postgres_connection')
+
+    with open('tool_test/tds/cast_calcs.hana.tds', 'r') as hana:
+        hana_tds = updated_tds_as_str(hana, 'hana_connection')
+
 
     def test_mangletds_tdvtconnection(self):
+
         self.assertIn(
-            "<connection tdvtconnection='postgres_connection' class='sqlserver' dbname='TestV1' odbc-native-protocol='yes' one-time-sql='' server='mssql2014' username='test' />",
+            "<connection tdvtconnection='sqlserver_connection' authentication='sqlserver' class='sqlserver' dbname='TestV1' odbc-native-protocol='yes' one-time-sql='' server='mssql2014' username='test' />",
             self.new_lines
+        )
+        self.assertIn(
+            "<connection tdvtconnection='postgres_connection' authentication='username-password' class='postgres' dbname='TestV1' one-time-sql='' port='1234' server='postgres.server' username='test' />",
+            self.postgres_tds
+        )
+        self.assertIn(
+            "<connection tdvtconnection='hana_connection' authentication='username-password' class='saphana' connection-type='SingleNode' one-time-sql='' port='11235' schema='TESTV1' server='hana.harvey.hamster' sslcert='' sslmode='' username='harvey_wonder_hamster' workgroup-auth-mode=''>",
+            self.hana_tds
         )
 
     def test_mangletds_relation_connection(self):
@@ -1196,11 +1212,39 @@ class MangleTest(unittest.TestCase):
             "<relation connection='leaf' name='Calcs' table='[dbo].[Calcs]' type='table' />",
             self.new_lines
         )
+        self.assertIn(
+            "<relation connection='leaf' name='Calcs' table='[public].[Calcs]' type='table' />",
+            self.postgres_tds
+        )
+        self.assertIn(
+            "<_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='leaf' name='Calcs' table='[public].[Calcs]' type='table' />",
+            self.postgres_tds
+        )
+        self.assertIn(
+            "<_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='leaf' name='Calcs' table='[public].[Calcs]' type='table' />",
+            self.postgres_tds
+        )
+        self.assertIn(
+            "<relation connection='leaf' name='Calcs' table='[TESTV1].[Calcs]' type='table' />",
+            self.hana_tds
+        )
+        self.assertIn(
+            "<_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='leaf' name='Calcs' table='[TESTV1].[Calcs]' type='table' />",
+            self.hana_tds
+        )
 
     def test_mangletds_named_connection(self):
         self.assertIn(
             "<named-connection caption='mssql2014' name='leaf'>",
             self.new_lines
+        )
+        self.assertIn(
+            "<named-connection caption='postgres.server' name='leaf'>",
+            self.postgres_tds
+        )
+        self.assertIn(
+            "<named-connection name='leaf'>",
+            self.hana_tds
         )
 
 class TestOutputFilesTest(unittest.TestCase):
