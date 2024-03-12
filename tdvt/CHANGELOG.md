@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.13.7] - 2024-03-12
+- Fix regex that changes tds files.
+
+## [2.13.6] - 2024-01-25
+- Add string.space.empty test.
+
+## [2.13.5] - 2024-01-11
+- Align expected files with datatype handling
 
 ## [2.13.4] - 2023-12-20
 - Some nits from making the release PR.
