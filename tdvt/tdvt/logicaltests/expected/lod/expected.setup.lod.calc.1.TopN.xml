@@ -9,71 +9,71 @@
       </schema>
       <tuple>
         <value>&quot;APPLIANCES&quot;</value>
-        <value>3211255.0</value>
+        <value>3211255</value>
       </tuple>
       <tuple>
         <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
-        <value>3486043.0</value>
+        <value>3486043</value>
       </tuple>
       <tuple>
         <value>&quot;BOOKCASES&quot;</value>
-        <value>3192047.0</value>
+        <value>3192047</value>
       </tuple>
       <tuple>
         <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
-        <value>6394825.0</value>
+        <value>6394825</value>
       </tuple>
       <tuple>
         <value>&quot;COMPUTER PERIPHERALS&quot;</value>
-        <value>3181279.0</value>
+        <value>3181279</value>
       </tuple>
       <tuple>
         <value>&quot;COPIERS AND FAX&quot;</value>
-        <value>3937480.0</value>
+        <value>3937480</value>
       </tuple>
       <tuple>
         <value>&quot;ENVELOPES&quot;</value>
-        <value>499500.0</value>
+        <value>499500</value>
       </tuple>
       <tuple>
         <value>&quot;LABELS&quot;</value>
-        <value>252067.0</value>
+        <value>252067</value>
       </tuple>
       <tuple>
         <value>&quot;OFFICE FURNISHINGS&quot;</value>
-        <value>2445700.0</value>
+        <value>2445700</value>
       </tuple>
       <tuple>
         <value>&quot;OFFICE MACHINES&quot;</value>
-        <value>9186301.0</value>
+        <value>9186301</value>
       </tuple>
       <tuple>
         <value>&quot;PAPER&quot;</value>
-        <value>1886099.0</value>
+        <value>1886099</value>
       </tuple>
       <tuple>
         <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
-        <value>728282.0</value>
+        <value>728282</value>
       </tuple>
       <tuple>
         <value>&quot;RUBBER BANDS&quot;</value>
-        <value>59076.0</value>
+        <value>59076</value>
       </tuple>
       <tuple>
         <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
-        <value>717918.0</value>
+        <value>717918</value>
       </tuple>
       <tuple>
         <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
-        <value>3920902.0</value>
+        <value>3920902</value>
       </tuple>
       <tuple>
         <value>&quot;TABLES&quot;</value>
-        <value>8647254.0</value>
+        <value>8647254</value>
       </tuple>
       <tuple>
         <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
-        <value>8361507.0</value>
+        <value>8361507</value>
       </tuple>
     </table>
   </test>
