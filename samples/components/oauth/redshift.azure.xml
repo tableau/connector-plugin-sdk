@@ -17,6 +17,8 @@
   <tokenUri>https://login.microsoftonline.com/${tenant}/oauth2/v2.0/token</tokenUri>
   <scopes>openid</scopes>
   <scopes>email</scopes>
+  <!-- profile scope needed for preferred_username -->
+  <scopes>profile</scopes>
   <scopes>offline_access</scopes>
   <capabilities>
     <entry>

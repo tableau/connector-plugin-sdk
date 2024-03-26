@@ -67,7 +67,7 @@
     </entry>
     <entry>
       <key>username</key>
-      <value>email</value>
+      <value>preferred_username</value>
     </entry>
   </accessTokenResponseMaps>
 </pluginOAuthConfig>
