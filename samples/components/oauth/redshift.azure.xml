@@ -66,9 +66,11 @@
       <key>id-token</key>
       <value>id_token</value>
     </entry>
+    <!-- preferred_username only available in Azure v2 tokens. If using v1 tokens use email instead.  -->
+    <!-- https://learn.microsoft.com/en-us/entra/identity-platform/id-token-claims-reference#payload-claims -->
     <entry>
       <key>username</key>
-      <value>email</value>
+      <value>preferred_username</value>
     </entry>
   </accessTokenResponseMaps>
  </pluginOAuthConfig>
