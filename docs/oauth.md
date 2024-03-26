@@ -21,7 +21,7 @@ This file may be provided in the following ways:
 - Installing on a client machine for Tableau Desktop, Prep, or Bridge. See [Custom OAuth Config on Desktop](./oauth.md#custom-oauth-configs-on-desktop)
 - Installing for a site on Tableau Cloud or Tableau Server. [Create Site OAuth Client](./oauth.md#create-site-oauth-client-20231)
 
-We refer to the first option as an "Embedded" config, and the second two as "Custom." The latter two options are only available starting in Tableau 2023.1. Also before 2023.1 you can only embded a single OAuth Config.
+We refer to the first option as an "Embedded" config, and the second two as "Custom." The latter two options are only available starting in Tableau 2023.1. Also before 2023.1 you can only embed a single OAuth Config.
 
 ## XML Elements
 
@@ -184,9 +184,7 @@ OAuth configs may also be specified independent of the plugin using site-level O
 # OAuth on Tableau Desktop/Tableau Prep
 Tableau Desktop uses a shared client ID and client secret which is embedded in the plugin. It also uses localhost callbacks to receive the authorization code response. The plugin developer (or whoever provides the OAuth config) must ensure that the localhost or loopback callback URLs are configured on the whitelist for the authorization server.
 
-If the authorization server supports dynamic port ranges for native applications then that should be used. This is the default behavior for Tableau OAuth clients.
-
-If the authorization server does not support this, then enable OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, and specify a set of `<redirectUrisDesktop>` in the OAuth config.
+If the authorization server supports dynamic port ranges for native applications then that should be used. This is the default behavior for Tableau OAuth clients. If the authorization server does not support this, then enable OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, and specify a set of `<redirectUrisDesktop>` in the OAuth config.
 
 ### redirectUrisDesktop Format
 - Before Tableau 2023.1, the redirectUrisDesktop must be of the form `http://localhost:[portnumber]/Callback`. If you need to use loopback address other than localhost, you can enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS, but the `<redirectUrisDesktop>` should still specify localhost. The callback at runtime will be rewritten to something like http://127.0.0.1:55555/Callback.
@@ -197,7 +195,9 @@ For more information on see [RFC 8252: Loopback Interface Redirection](https://d
 ## Custom OAuth Configs on Desktop
 *Available starting in Tableau 2023.1*
 
-The end user or admin can specify custom OAuth configs for desktop applications, independent of the plugin connector. These should be installed in the repository folder which corresponds to the application, such as `"My Tableau Repository/OAuthConfigs"` or `"My Tableau Prep Repository/OAuthConfigs"`. They must define the new field `oauthConfigId`. The user will be prompted to select from available configs when creating the connection.
+The end user or admin can specify custom OAuth configs for desktop applications, independent of the plugin connector. These should be installed in the repository folder which corresponds to the application, such as `My Tableau Repository/OAuthConfigs` or `My Tableau Prep Repository/OAuthConfigs`. They must define the new field `oauthConfigId`. The user will be prompted to select from available configs when creating the connection.
+
+When installing or testing custom OAuth configs on desktop, you must restart the application to pick up the changes.
 
 # OAuth on Tableau Server & Tableau Online
 
