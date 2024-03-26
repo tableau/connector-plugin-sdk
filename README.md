@@ -8,8 +8,8 @@ The latest version of the SDK is always targeted towards the latest, non-beta ve
 
 | Tool                                             | Latest Version      |
 |--------------------------------------------------|---------------------|
-| [Connector SDK for Tableau 2024.1](https://github.com/tableau/connector-plugin-sdk/releases/tag/tableau-2024.1)                 | 03-13-2024          |
-| [Connector SDK for Tableau 2023.2](https://github.com/tableau/connector-plugin-sdk/tree/tableau-2023.2)                 | 11-06-2023          |
+| Connector SDK for Tableau 2023.3                 | 03-26-2024          |
+| Connector SDK for Tableau 2023.2                 | 11-06-2023          |
 | Connector SDK for Tableau 2023.1                 | 06-15-2023          |
 | Connector SDK for Tableau 2022.4                 | 03-15-2023          |
 | Connector SDK for Tableau 2022.3                 | 12-14-2022          |
