@@ -39,7 +39,7 @@
     </entry>
     <entry>
       <key>OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM</key>
-      <value>false</value>
+      <value>true</value>
     </entry>
     <entry>
       <key>OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN</key>
