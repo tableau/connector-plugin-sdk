@@ -58,6 +58,10 @@
       <value>refresh_token</value>
     </entry>
     <entry>
+      <key>access-token-issue-time</key>
+      <value>issued_at</value>
+    </entry>
+    <entry>
       <key>id-token</key>
       <value>id_token</value>
     </entry>

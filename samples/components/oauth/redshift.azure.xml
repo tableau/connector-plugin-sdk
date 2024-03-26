@@ -59,6 +59,10 @@
       <value>refresh_token</value>
     </entry>
     <entry>
+      <key>access-token-issue-time</key>
+      <value>issued_at</value>
+    </entry>
+    <entry>
       <key>access-token-expires-in</key>
       <value>expires_in</value>
     </entry>
