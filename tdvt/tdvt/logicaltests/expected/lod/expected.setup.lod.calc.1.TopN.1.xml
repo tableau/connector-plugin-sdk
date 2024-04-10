@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<results>
+  <test name='D:\dev\data-dev\tableau-tests\tdvt\logicaltests\setup\lod\setup.lod.calc.1.TopN.dbo.xml'>
+    <table>
+      <schema>
+        <column>[Staples.lod.sqlserver].[Prod Type2]</column>
+        <column>[Staples.lod.sqlserver].[sum:Sales Total:ok]</column>
+      </schema>
+      <tuple>
+        <value>&quot;APPLIANCES&quot;</value>
+        <value>3211255.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BINDERS AND BINDER ACCESSORIES&quot;</value>
+        <value>3486043.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;BOOKCASES&quot;</value>
+        <value>3192047.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;CHAIRS &amp; CHAIRMATS&quot;</value>
+        <value>6394825.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COMPUTER PERIPHERALS&quot;</value>
+        <value>3181279.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;COPIERS AND FAX&quot;</value>
+        <value>3937480.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;ENVELOPES&quot;</value>
+        <value>499500.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;LABELS&quot;</value>
+        <value>252067.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE FURNISHINGS&quot;</value>
+        <value>2445700.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;OFFICE MACHINES&quot;</value>
+        <value>9186301.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PAPER&quot;</value>
+        <value>1886099.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;PENS &amp; ART SUPPLIES&quot;</value>
+        <value>728282.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;RUBBER BANDS&quot;</value>
+        <value>59076.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;SCISSORS, RULERS AND TRIMMERS&quot;</value>
+        <value>717918.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;STORAGE &amp; ORGANIZATION&quot;</value>
+        <value>3920902.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TABLES&quot;</value>
+        <value>8647254.0</value>
+      </tuple>
+      <tuple>
+        <value>&quot;TELEPHONES AND COMMUNICATION&quot;</value>
+        <value>8361507.0</value>
+      </tuple>
+    </table>
+  </test>
+</results>
