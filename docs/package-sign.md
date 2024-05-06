@@ -129,6 +129,8 @@ A packaged Tableau Connector (.taco) file is, functionally the same as a JAR fil
 
 **Important note**: Certificates are only valid for a certain amount of time, and Tableau does not load connectors with expired certificates. To mitigate this, use a timestamp as described in the signing example below. Timestamps use a timestamp authority to confirm that the certificate was valid when it was signed, even if the certificate is now expired, and timestamps are valid for much longer.
 
+The instructions below are provided as an example. Certificate authorities may have additional requirements not listed here.
+
 To sign a TACO file:
 1. Generate a certificate signature request (CSR). You can use Java's [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/keytool.html) to generate this.
 1. Send the CSR to a certificate authority that is trusted by the Java key store. Make sure that certificate you get is a code-signing certificate.
@@ -142,7 +144,7 @@ To sign a TACO file:
 
 ### Signing example
 
-Getting a certificate is a multi-step process. This example illustrates how to sign a TACO file with a basic signed certificate.
+Getting a certificate is a multi-step process. This example illustrates how to sign a TACO file with a basic signed certificate. Before starting, read the documentation for your certificate authority to make sure youa re complying with any additional requiremnts. 
 
 __Step 1: Generate a Certificate Signing Request (CSR) file__
 
@@ -159,6 +161,8 @@ A certificate signing request (CSR) is a request for a certificate authority (CA
 Keep all files you've generated (the key pair, the keystore, and the csr) secure, you will need them later.
 
 For more information about keytool arguments, see the Java Documentation about [keytool](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) on the Oracle website.
+
+__Note:__ Many certificate authorities now require CSRs to be generated on [Hardware Security Module (HSM)]((https://en.wikipedia.org/wiki/Hardware_security_module)). Before genereating your CSR, check your certificate authority's doucmentation and obtain a HSM device that meets the certification reqruiments. For example, Digicert [requires hardware certified as FIPS 140 Level 2, Common Criteria EAL 4+, or equivalent]([url](https://docs.digicert.com/en/certcentral/manage-certificates/code-signing-certificates/order-a-code-signing-certificate.html)).
 
 
 __Step 2: Get the CSR signed by the certificate authority__
