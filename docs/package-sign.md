@@ -144,7 +144,7 @@ To sign a TACO file:
 
 ### Signing example
 
-Getting a certificate is a multi-step process. This example illustrates how to sign a TACO file with a basic signed certificate. Before starting, read the documentation for your certificate authority to make sure youa re complying with any additional requiremnts. 
+Getting a certificate is a multi-step process. This example illustrates how to sign a TACO file with a basic signed certificate. Before starting, read the documentation for your certificate authority to make sure you are complying with any additional requirements. 
 
 __Step 1: Generate a Certificate Signing Request (CSR) file__
 
