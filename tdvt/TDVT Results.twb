@@ -1806,6 +1806,29 @@
               </multibucket>
             </map>
           </encoding>
+          <encoding attr='color' field='[none:Priority:nk]' type='palette'>
+            <map to='#419eb6'>
+              <bucket>%null%</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;Unknown&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;Smoke&quot;</bucket>
+            </map>
+            <map to='#9e3a26'>
+              <bucket>&quot;Required&quot;</bucket>
+            </map>
+            <map to='#edc948'>
+              <bucket>&quot;unknown&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Required If Supported&quot;</bucket>
+            </map>
+            <map to='#f4d166'>
+              <bucket>&quot;Recommended&quot;</bucket>
+            </map>
+          </encoding>
           <encoding attr='color' field='[none:Calculation_1487173092642668549:nk]' palette='orange_gold_10_0' type='palette'>
             <map to='#9e3a26'>
               <bucket>&quot;ERROR: function substr(unknown, double precision) does not exist;
@@ -2049,29 +2072,6 @@ WHERE (CAST(REP&quot;</bucket>
               <bucket>true</bucket>
             </map>
           </encoding>
-          <encoding attr='color' field='[none:Priority:nk]' type='palette'>
-            <map to='#419eb6'>
-              <bucket>%null%</bucket>
-            </map>
-            <map to='#59a14f'>
-              <bucket>&quot;Unknown&quot;</bucket>
-            </map>
-            <map to='#76b7b2'>
-              <bucket>&quot;Smoke&quot;</bucket>
-            </map>
-            <map to='#9e3a26'>
-              <bucket>&quot;Required&quot;</bucket>
-            </map>
-            <map to='#edc948'>
-              <bucket>&quot;unknown&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;Required If Supported&quot;</bucket>
-            </map>
-            <map to='#f4d166'>
-              <bucket>&quot;Recommended&quot;</bucket>
-            </map>
-          </encoding>
         </style-rule>
       </style>
       <semantic-values>
@@ -2298,7 +2298,7 @@ WHERE (CAST(REP&quot;</bucket>
             </view>
             <mark class='Automatic' />
             <encodings>
-              <color column='[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Priority:nk]' />
+              <color column='[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Passed:nk]' />
             </encodings>
             <customized-tooltip show-buttons='false'>
               <formatted-text>
@@ -3175,7 +3175,7 @@ WHERE (CAST(REP&quot;</bucket>
                         </zone-style>
                       </zone>
                       <zone h='76243' id='1' name='Test Cast Performance by Percent' show-title='false' w='49659' x='341' y='23102'>
-                        <layout-cache type-h='cell' type-w='fixed' />
+                        <layout-cache cell-count-h='19' non-cell-size-h='20' type-h='cell' type-w='fixed' />
                         <zone-style>
                           <format attr='border-color' value='#000000' />
                           <format attr='border-style' value='none' />
@@ -3251,7 +3251,7 @@ WHERE (CAST(REP&quot;</bucket>
     </dashboard>
   </dashboards>
   <windows source-height='30'>
-    <window class='dashboard' name='TDVT Test Results' tab-color='#f66273'>
+    <window class='dashboard' maximized='true' name='TDVT Test Results' tab-color='#f66273'>
       <viewpoints>
         <viewpoint name='Scorecard'>
           <zoom type='entire-view' />
@@ -3277,10 +3277,10 @@ WHERE (CAST(REP&quot;</bucket>
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='26' />
+      <active id='37' />
       <simple-id uuid='{2D6FA6D1-7583-4F8A-8D32-A4CB27A17223}' />
     </window>
-    <window class='worksheet' maximized='true' name='Details'>
+    <window class='worksheet' name='Details'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3325,7 +3325,7 @@ WHERE (CAST(REP&quot;</bucket>
             <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Expected (100)tuples:nk]</field>
             <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Functions:nk]</field>
             <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Generated SQL:nk]</field>
-            <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Priority:nk]</field>
+            <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Passed:nk]</field>
             <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:Test Case:nk]</field>
             <field>[textscan.1gc4mna00d9z6u19vsqbk09t94y2].[none:TestName:nk]</field>
           </color-one-way>
