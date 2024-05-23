@@ -331,7 +331,10 @@ class CommandLineTest(unittest.TestCase):
         if sys.platform in ('win32', 'cygwin'):
             expected = win_path
         elif sys.platform == 'darwin':
-            expected = mac_path
+            if platform.machine() == 'arm64':
+                expected = mac_arm_path
+            else:
+                expected = mac_path
         elif sys.platform == 'linux':
             expected = linux_path
         else:
@@ -341,7 +344,7 @@ class CommandLineTest(unittest.TestCase):
     def test_command_line_full(self):
         self.test_config.output_dir = 'my/output/dir'
         self.test_config.d_override = '-DLogLevel=Debug'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -356,7 +359,7 @@ class CommandLineTest(unittest.TestCase):
 
     def test_password_file(self):
         self.test_config.output_dir = 'my/output/dir'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool", "tabquerytool.exe")
         suite = 'password_test'
 
         self.test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', self.test_config.tds, '', self.test_file, suite)
@@ -366,7 +369,7 @@ class CommandLineTest(unittest.TestCase):
         self.assertTrue('--password-file' in cmd_line_str and 'password_test.password' in cmd_line_str)
 
     def test_command_line_no_expected(self):
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool", "tabquerytool.exe")
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
         cmd_line_str = ' '.join(cmd_line)
@@ -380,7 +383,7 @@ class CommandLineTest(unittest.TestCase):
 
     def test_command_line_multiple_override(self):
         self.test_config.d_override = '-DLogLevel=Debug -DUseJDBC -DOverride=MongoDBConnector:on,SomethingElse:off'
-        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
+        self.test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(self.test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
@@ -403,7 +406,7 @@ class CommandLineTest(unittest.TestCase):
 
         test_file = 'some/test/file.txt'
         test_set = ExpressionTestSet('', TEST_DIRECTORY, 'mytest', test_config.tds, '', self.test_file, '')
-        test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerycli", "tabquerytool.exe")
+        test_config.tested_run_time_config.set_tabquery_paths("tabquerytool", "tabquerytool", "tabquerytool", "tabquerytool.exe")
 
         work = tdvt_core.BatchQueueWork(test_config, self.test_set)
         cmd_line = build_tabquery_command_line_local(work)
