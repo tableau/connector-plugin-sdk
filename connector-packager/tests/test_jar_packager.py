@@ -454,7 +454,7 @@ class TestJarPackager(unittest.TestCase):
 
         manifest = ET.parse(path_to_extracted_manifest)
         self.assertEqual(manifest.getroot().get("min-version-tableau"),
-                         VERSION_2024_1, "wrong min-version-tableau attr or doesn't exist")
+                         VERSION_2023_3, "wrong min-version-tableau attr or doesn't exist")
 
         if dest_dir.exists():
             shutil.rmtree(dest_dir)
