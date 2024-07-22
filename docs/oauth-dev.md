@@ -44,7 +44,7 @@ Starting in Tableau 2023.1, you can add [multiple embedded OAuth configs](#multi
   </connector-plugin>
 ```
 
-Starting in Tableau 2024.1, you can create a connector that does not have a default embedded OAuth config. To do this, add a oauth-config element with `file=null_config`. The customer will be required to provide their own custom OAuth config before making an OAuth connection.
+Starting in Tableau 2023.3, you can create a connector that does not have a default embedded OAuth config. To do this, add a oauth-config element with `file=null_config`. The customer will be required to provide their own custom OAuth config before making an OAuth connection.
 
 ```xml
   manifest.xml
