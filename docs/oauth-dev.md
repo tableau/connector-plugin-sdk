@@ -29,7 +29,7 @@ For a complete example please refer to https://github.com/tableau/connector-plug
   </connector-plugin>
 ```
 
-Starting in Tableau 2023.1, you can add [multiple embedded OAuth configs](#multiple-embedded-oauth-configs). The end users may also provide their own custom OAuth config.  However in both cases, at least one embedded config is still required. We are currently working to remove this requirement. See [issue 1108](https://github.com/tableau/connector-plugin-sdk/issues/1108).
+Starting in Tableau 2023.1, you can add [multiple embedded OAuth configs](#multiple-embedded-oauth-configs). The end users may also provide their own custom OAuth config.
 
 ```xml
   manifest.xml
@@ -41,6 +41,19 @@ Starting in Tableau 2023.1, you can add [multiple embedded OAuth configs](#multi
     <dialect file='dialect.tdd'/>
     <oauth-config file='oauthConfigPing.xml'/>
     <oauth-config file='oauthConfigOkta.xml'/>
+  </connector-plugin>
+```
+
+Starting in Tableau 2024.1, you can create a connector that does not have a default embedded OAuth config. To do this, add a oauth-config element with `file=null_config`. The customer will be required to provide their own custom OAuth config before making an OAuth connection.
+
+```xml
+  manifest.xml
+
+  <?xml version='1.0' encoding='utf-8' ?>
+  <connector-plugin class=...>
+    ...
+    <dialect file='dialect.tdd'/>
+    <oauth-config file='null_config'/>
   </connector-plugin>
 ```
 
