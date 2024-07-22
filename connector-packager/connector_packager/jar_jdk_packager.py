@@ -97,7 +97,7 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
             elif (oauthConfigs is not None and len(oauthConfigs) == 1):
                 firstConfig = oauthConfigs[0]
                 if firstConfig.attrib['file'] == "null_config" and 2023.3 > float(min_version_tableau):
-                    min_version_tableau = "2022023.3"
+                    min_version_tableau = "2023.3"
                     reasons.append("Connector uses Null OAuth Config, which was added in the 2023.3 release")
 
     if version.parse(cur_min_version_tableau) > version.parse(min_version_tableau):
