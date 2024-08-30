@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pluginOAuthConfig>
+  <!-- support for Snowflake external OAuth was added in 2024.3, this sample will not work in older versions -->
   <dbclass>snowflake</dbclass>
   <!-- For external configs, prefix with "custom_".  -->
   <!-- For configs embedded in the connector package, don't prefix with "custom_".  -->
