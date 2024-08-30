@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pluginOAuthConfig>
+  <dbclass>snowflake</dbclass>
+  <!-- For external configs, prefix with "custom_".  -->
+  <!-- For configs embedded in the connector package, don't prefix with "custom_".  -->
+  <oauthConfigId>custom_snowflake_azure</oauthConfigId>
+  <!-- Config label added in 2023.2. Avoid if backwards compatibility is needed. -->
+  <configLabel>Azure</configLabel>
+  <clientIdDesktop>$clientID</clientIdDesktop>
+  <clientSecretDesktop>$clientSecret</clientSecretDesktop>
+  <redirectUrisDesktop>http://localhost:55556/Callback</redirectUrisDesktop>
+  <redirectUrisDesktop>http://localhost:55557/Callback</redirectUrisDesktop>
+  <redirectUrisDesktop>http://localhost:55558/Callback</redirectUrisDesktop>
+  <redirectUrisDesktop>http://localhost:55559/Callback</redirectUrisDesktop>
+  <!-- For multitenant apps use the common endpoint, for single tenant apps use the directory specific endpoint. -->
+  <authUri>https://login.microsoftonline.com/${tenant}/oauth2/v2.0/authorize</authUri>
+  <tokenUri>https://login.microsoftonline.com/${tenant}/oauth2/v2.0/token</tokenUri>
+  <scopes>openid</scopes>
+  <scopes>email</scopes>
+  <!-- profile scope needed for preferred_username -->
+  <scopes>profile</scopes>
+  <scopes>offline_access</scopes>
+  <!-- the scope must be fully qualified, including the Microsoft Entra ID App URI (e.g. scope=https://example.com/wergheroifvj25/session:role:<role_name>). see https://docs.snowflake.com/en/user-guide/oauth-azure#configuration-procedure -->
+  <scopes>$session_role_scope</scopes>
+  <capabilities>
+    <entry>
+      <key>OAUTH_CAP_REQUIRES_PROMPT_SELECT_ACCOUNT</key>
+      <value>true</value>
+    </entry>
+    <entry>
+      <key>OAUTH_CAP_REQUIRE_PKCE</key>
+      <value>true</value>
+    </entry>
+    <entry>
+      <key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+      <value>true</value>
+    </entry>
+    <entry>
+      <key>OAUTH_CAP_SUPPORTS_STATE</key>
+      <value>true</value>
+    </entry>
+    <entry>
+      <key>OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM</key>
+      <value>true</value>
+    </entry>
+    <entry>
+      <key>OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN</key>
+      <value>true</value>
+    </entry>
+    <!-- Depending on the Azure application, dynamic ports may not be allowed. Enable this if not allowed. -->
+    <entry>
+      <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+      <value>false</value>
+    </entry>
+  </capabilities>
+  <accessTokenResponseMaps>
+    <entry>
+      <key>ACCESSTOKEN</key>
+      <value>access_token</value>
+    </entry>
+    <entry>
+      <key>REFRESHTOKEN</key>
+      <value>refresh_token</value>
+    </entry>
+    <entry>
+      <key>access-token-issue-time</key>
+      <value>issued_at</value>
+    </entry>
+    <entry>
+      <key>access-token-expires-in</key>
+      <value>expires_in</value>
+    </entry>
+    <entry>
+      <key>id-token</key>
+      <value>id_token</value>
+    </entry>
+    <!-- preferred_username only available in Azure v2 tokens. If using v1 tokens use email instead.  -->
+    <!-- https://learn.microsoft.com/en-us/entra/identity-platform/id-token-claims-reference#payload-claims -->
+    <entry>
+      <key>username</key>
+      <value>preferred_username</value>
+    </entry>
+  </accessTokenResponseMaps>
+ </pluginOAuthConfig>
+
