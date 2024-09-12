@@ -76,12 +76,13 @@ You can create an archive package and install that, or install from the live dir
         $ source tdvt-venv/bin/activate
         ```
 
-        or on Windows:
+    or on Windows:
 
         ```
         D:\src> python -m venv ./tdvt-venv
         D:\src> tdvt-venv/Scripts/activate.bat
         ```
+   
     You will know your venv is activated if (tdvt-venv) appears before your prompt. Alternatively, do a $which python to make sure it's pointing to a python executable in /tdvt-venv
 
     Install TDVT:
@@ -89,10 +90,21 @@ You can create an archive package and install that, or install from the live dir
         $ (tdvt-venv) cd connector-plugin-sdk/tdvt
         $ (tdvt-venv) pip install -e .
         ```
-        The . at the end is important.
+   
+    The . at the end is important.
 
    Verify it is installed:
-      ```pip list````
+   
+      ```
+      $ (tdvt-venv) pip list
+      Package    Version Location
+    ---------- ------- -------------------------------------------------
+    defusedxml 0.7.1
+    pip        21.2.4
+    setuptools 58.0.4
+    tdvt       2.13.7  /your/working/dir/connector-plugin-sdk/tdvt
+      ````
+  Note that TDVT's `Location` is where you cloned the package. 
 
 1. Extract and then load the [TestV1 dataset](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1) into your database.
 __Notes:__
@@ -267,8 +279,7 @@ To create custom tests, you need to create a json file that describes your table
 **`nulls` and `empties`**: Enter `true` or `false` for each of the following:
 
 Data Shape | Description | Calcs Reference Column
--|-|-
-
+- | - | - 
 `nulls` | Fields in the column may contain a null value. | [int1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
 `empties` | Fields in the column may contain no data (e.g. an empty string). | [datetime1](https://github.com/tableau/connector-plugin-sdk/blob/master/tests/datasets/TestV1/Calcs_headers.csv)
 
