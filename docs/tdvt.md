@@ -86,26 +86,26 @@ You can create an archive package and install that, or install from the live dir
     You will know your venv is activated if (tdvt-venv) appears before your prompt. Alternatively, do a $which python to make sure it's pointing to a python executable in /tdvt-venv
 
     Install TDVT:
+
         ```
         $ (tdvt-venv) cd connector-plugin-sdk/tdvt
         $ (tdvt-venv) pip install -e .
         ```
    
-    The . at the end is important.
+    The `.` at the end is important.
 
-   Verify it is installed:
+   You can then verify TDVT is installed:
    
       ```
       $ (tdvt-venv) pip list
       Package    Version Location
-    ---------- ------- -------------------------------------------------
-    defusedxml 0.7.1
-    pip        21.2.4
-    setuptools 58.0.4
-    tdvt       2.13.7  /your/working/dir/connector-plugin-sdk/tdvt
-      ````
-  Note that TDVT's `Location` is where you cloned the package. 
-
+      ---------- ------- -------------------------------------------------
+      defusedxml 0.7.1
+      pip        21.2.4
+      setuptools 58.0.4
+      tdvt       2.13.7  /your/working/dir/connector-plugin-sdk/tdvt
+         ```
+   Note that TDVT's `Location` is where you cloned the package. 
 1. Extract and then load the [TestV1 dataset](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1) into your database.
 __Notes:__
     - See [Postgres Example](https://github.com/tableau/connector-plugin-sdk/tree/master/tests/datasets/TestV1/postgres/README.md) for an example of loading data into a database
@@ -136,14 +136,14 @@ __Note:__ For setting up TDVT using Tableau Linux Server please click [here](/co
 
 ## About running TDVT
 
-- When TDVT is installed as a Python module, invoke it as follows:
-`python -m tdvt.tdvt`
+- When TDVT is installed as a Python module, call it as a module:
+`$ python -m tdvt.tdvt`
 - Make sure you're using the correctly using Python 3 if you have multiple versions of python installed.
 - TDVT makes searches relative to the current working directory to find the config and setup files it needs.
 - Always run TDVT commands from the top-level directory of your generated folder structure.
 - Use double quotes to wrap arguments that contain spaces.
 
-`tdvt run mydb --generate` is used to update some config files.
+`python -m tdvt.tdvt run mydb --generate` is used to update some config files.
 You need to run it if you add a new data source or change your mydb.ini file.
 
 ## Test a new data source
