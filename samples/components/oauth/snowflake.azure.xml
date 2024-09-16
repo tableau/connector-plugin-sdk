@@ -51,7 +51,7 @@
     <!-- Depending on the Azure application, dynamic ports may not be allowed. Enable this if not allowed. -->
     <entry>
       <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
-      <value>false</value>
+      <value>true</value>
     </entry>
   </capabilities>
   <accessTokenResponseMaps>

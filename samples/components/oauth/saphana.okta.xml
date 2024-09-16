@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pluginOAuthConfig>
+    <dbclass>saphana</dbclass>
+    <!-- For external configs, prefix with "custom_".  -->
+    <!-- For configs embedded in the connector package, don't prefix with "custom_".  -->
+    <oauthConfigId>custom_saphana_azure</oauthConfigId>
+    <!-- Config label added in 2023.2. Avoid if backwards compatibility is needed. -->
+    <configLabel>Okta</configLabel>
+    <clientIdDesktop>$clientID</clientIdDesktop>
+    <clientSecretDesktop>$clientSecret</clientSecretDesktop>
+    <redirectUrisDesktop>http://localhost:56666/Callback</redirectUrisDesktop>
+    <redirectUrisDesktop>http://localhost:56667/Callback</redirectUrisDesktop>
+    <redirectUrisDesktop>http://localhost:56668/Callback</redirectUrisDesktop>
+    <authUri>https://${yourOktaDomain}/oauth2/{authServerName}/v1/authorize</authUri>
+    <tokenUri>https://${yourOktaDomain}/oauth2/{authServerName}/v1/token</tokenUri>
+
+    <scopes>openid</scopes>
+    <scopes>email</scopes>
+    <scopes>profile</scopes>
+    <scopes>offline_access</scopes>
+    
+    <capabilities>
+       <!-- Depending on the Okta application, dynamic ports may not be allowed. Enable this if not allowed. -->
+        <entry>
+            <key>OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>OAUTH_CAP_PKCE_REQUIRES_CODE_CHALLENGE_METHOD</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>OAUTH_CAP_REQUIRE_PKCE</key>
+            <value>true</value>
+        </entry>
+        <entry>
+            <key>OAUTH_CAP_SUPPORTS_STATE</key>
+            <value>true</value>
+        </entry>        
+        <entry>
+            <key>OAUTH_CAP_CLIENT_SECRET_IN_URL_QUERY_PARAM</key>
+            <value>true</value>
+        </entry>        
+        <entry>
+            <key>OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN</key>
+            <value>true</value>
+        </entry>        
+    </capabilities>
+    <accessTokenResponseMaps>
+        <entry>
+            <key>ACCESSTOKEN</key>
+            <value>access_token</value>
+        </entry>
+        <entry>
+            <key>REFRESHTOKEN</key>
+            <value>refresh_token</value>
+        </entry>
+        <entry>
+            <key>access-token-issue-time</key>
+            <value>issued_at</value>
+        </entry>
+        <entry>
+            <key>access-token-expires-in</key>
+            <value>expires_in</value>
+        </entry>
+        <entry>
+            <key>id-token</key>
+            <value>id_token</value>
+        </entry>
+        <!-- https://developer.okta.com/docs/api/openapi/okta-oauth/guides/overview/ -->
+        <entry>
+            <key>username</key>
+            <value>preferred_username</value>
+        </entry>
+    </accessTokenResponseMaps>
+</pluginOAuthConfig>
+
