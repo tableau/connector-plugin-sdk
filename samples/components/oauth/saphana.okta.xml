@@ -3,7 +3,7 @@
     <dbclass>saphana</dbclass>
     <!-- For external configs, prefix with "custom_".  -->
     <!-- For configs embedded in the connector package, don't prefix with "custom_".  -->
-    <oauthConfigId>custom_saphana_azure</oauthConfigId>
+    <oauthConfigId>custom_saphana_okta</oauthConfigId>
     <!-- Config label added in 2023.2. Avoid if backwards compatibility is needed. -->
     <configLabel>Okta</configLabel>
     <clientIdDesktop>$clientID</clientIdDesktop>
