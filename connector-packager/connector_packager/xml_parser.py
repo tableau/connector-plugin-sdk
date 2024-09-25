@@ -20,7 +20,7 @@ TRANSLATABLE_STRING_PREFIX = "@string/"
 # find one for the correct language
 TABLEAU_FALLBACK_LANGUAGE = "en_US"
 TABLEAU_SUPPORTED_LANGUAGES = ["de_DE", "en_GB", "es_ES", "fr_CA", "fr_FR", "ga_IE", "it_IT", "ja_JP", "ko_KR",
-                               "pt_BR", "sv_SE", "th_TH", "zh_CN", "zh_TW"]
+                               "nl_NL", "pt_BR", "sv_SE", "th_TH", "zh_CN", "zh_TW"]
 
 
 class XMLParser:
