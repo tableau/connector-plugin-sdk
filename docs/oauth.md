@@ -7,6 +7,9 @@ This document explains how to configure and use OAuth. It's meant for admins and
 
 We have templates for common IDPs in the [samples](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/components/oauth). In general, you should only need to substitute the desktop client ID and secret, and the URL of the IDP. However, there may be additional modifications needed to account for differences such as with PKCE and scopes.
 
+<div class="alert alert-info"><b>Note</b>: Single use refresh tokens are not supported for OAuth connections to Tableau at this time. In most cases, you can set up your identity provider (such as Okta or Redshift IDC) to use rolling refresh tokens instead. For more information, see your provider’s OAuth documentation. </div>
+<br/>
+
 **In this section**
 
 * TOC
