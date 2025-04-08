@@ -90,6 +90,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 | OAUTH_CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add prompt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
 | OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. For example, https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
 | OAUTH_CAP_INFER_INSTANCE_URL_FROM_SERVER | Used to concatenate the user-provided server with the `instanceUrlSuffix` field in the format of `https://{SERVER}{instanceUrlSuffix}`. | false | - |
+| OAUTH_CAP_SINGLE_USE_REFRESH_TOKEN | Starting in Tableau 2025.2, use this if the external IDP supports the single use refresh token for OAuth | false | - |
 
 ---
 ## Example OAuthConfig File
