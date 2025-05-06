@@ -32,7 +32,7 @@ We refer to the first option as an "Embedded" config, and the second two as "Cus
 | Name  | Type | Meaning | Required | Notes |
 | ----  | ------- | --------- | ----------- | ----------- |
 | dbclass | String | The connector class which this OAuth config applies to. | Yes | The dbclass must be same with as the `class` attribute in manifest.xml |
-| oauthConfigId | String | Unique ID for this OAuth config | Recommended | *New in Tableau 2023.1.* This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an custom config this must begin with the prefix "custom_".** |
+| oauthConfigId | String | Unique ID for this OAuth config | Recommended | *New in Tableau 2023.1.* This is a required attribute if there are multiple OAuth configs defined for a connector. **When using an custom config this must begin with the prefix "custom_".** Note: Oauth config IDs have a maximum limit of 36 characters. IDs longer than this might not generate an error, but will not work.|
 | configLabel | String | Label that is used as a display to users in place of the oauthConfigId. | No | *New in Tableau 2023.2.* This must only contain alphanumeric characters, "_", "-", and spaces in order to be considered valid. |
 | clientIdDesktop | String | Client ID you registered for Tableau Desktop | No | This is not considered a secret and will be stored in plain text |
 | clientSecretDesktop | String | Client Secret you registered for Tableau Desktop | Recommended | This is not considered a secret and will be stored in plain text |
