@@ -133,6 +133,7 @@ CAP_JDBC_QUERY_CANCEL | Set to 'yes' if driver can cancel queries. Requires CAP_
 CAP_JDBC_QUERY_DISABLE_AUTO_COMMIT | Set to 'yes' to disable the default auto-commit mode when running query. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_QUERY_FORCE_PREPARE | Set to 'yes' to always prepare the query before execution. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_EMPTY_CATALOG_NAME | Set to 'yes' to ignore missing catalog. | &ndash; | &ndash;
+CAP_JDBC_INCLUDE_CATALOG_NAME | Set 'yes' to include the catalog (database) name in fully qualified table names in queries. Tableau does not use setCatalog() or send USE <catalog>. The catalog must be specified in the connection string or JDBC properties. | yes | &ndash;
 CAP_JDBC_SUPPRESS_EMPTY_SCHEMA_NAME | Set to 'yes' to ignore missing schema. Available in Tableau 2022.2 and newer. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_DATABASES | Set to 'yes' to disable database enumeration. | &ndash; | &ndash;
 CAP_JDBC_SUPPRESS_ENUMERATE_SCHEMAS | Set to 'yes' to disable schema enumeration. | &ndash; | &ndash;
@@ -240,6 +241,7 @@ CAP_ODBC_REBIND_SKIP_UNBIND | Set to 'yes' to force the Tableau native ODBC prot
 CAP_ODBC_SUPPORTS_LONG_DATA_BULK | Set to 'yes' if driver can fetch multiple long-data rows at a time. | no | no |
 CAP_ODBC_SUPPORTS_LONG_DATA_ORDERED | Set to 'yes' if driver requires long-data columns to come after non-long-data ones | no | no |
 CAP_ODBC_SUPPRESS_CATALOG_NAME | Set 'yes' to suppress passing catalog name for SQLTables, SQLPrimaryKeys, SQLForeignKeys, SQLStatistics calls | &ndash; | &ndash;
+CAP_ODBC_INCLUDE_CATALOG_NAME | Set 'yes' to include the catalog (database) name in fully qualified table names in queries, as Tableau does not explicitly set the catalog and it must be in the ODBC connection string. | yes | &ndash;
 CAP_ODBC_SUPPRESS_ENUMERATE_SCHEMA_WITHOUT_CATALOG | Set 'yes' to suppress enumerating schemas without a valid catalog. | &ndash; | &ndash;
 CAP_ODBC_SUPPRESS_INFO_SCHEMA_SCHEMAS | Set to 'yes' to prevent schemas from "information_schema" schema from being returned by EnumerateSchemas | &ndash; | &ndash;
 CAP_ODBC_SUPPRESS_INFO_SCHEMA_TABLES | Set to 'yes' to prevent tables from "information_schema" schema from being returned by EnumerateTables | &ndash; | &ndash;
