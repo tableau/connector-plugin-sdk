@@ -57,6 +57,7 @@ resources-sv_SE.xml
 resources-th_TH.xml
 resources-zh_CN.xml
 resources-zh_TW.xml
+resources-nl_NL.xml
 ```
 __Note:__ The resource files must be encoded in UTF-8.
 
@@ -80,5 +81,13 @@ __resources-es_ES.xml__
 <resources>
   <string name="port_prompt">Puerto:</string>
   <string name="database_prompt">Base de datos:</string>
+</resources>
+```
+__resources-nl_NL.xml__
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="port_prompt">Poort:</string>
+  <string name="database_prompt">Database:</string>
 </resources>
 ```
