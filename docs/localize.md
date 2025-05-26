@@ -57,6 +57,7 @@ resources-sv_SE.xml
 resources-th_TH.xml
 resources-zh_CN.xml
 resources-zh_TW.xml
+resources-nl_NL.xml
 ```
 __Note:__ The resource files must be encoded in UTF-8.
 
