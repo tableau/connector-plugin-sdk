@@ -30,7 +30,7 @@ Capability | Description | Default | Recommended
 CAP_CREATE_TEMP_TABLES | Set to 'yes' if Tableau can create temporary tables needed for certain complex or optimized queries. Set to 'no' if creating temporary tables is not supported. See also: CAP_SELECT_INTO. | &ndash; | **<span style="color:red">?</span>**
 CAP_INDEX_TEMP_TABLES | Set to 'yes' if data source supports creation of indexes on temp tables database | &ndash; | &ndash;
 CAP_QUERY_USE_TEMP_TABLE_NAMES_AS_SUBQUERY_ALIASES | Set to 'yes' if Tableau must use generated temporary table names for aliases of subqueries because they might end up implemented as temporary tables | no | no
-CAP_SELECT_INTO | Set to 'yes' if Tableau can create a table on the fly from the resultset of another query. Set to 'no' which will prevent tableau from generating statements and it will use the alternative approach. See also: CAP_CREATE_TEMP_TABLES. | &ndash; | **<span style="color:red">?</span>**
+CAP_SELECT_INTO | Set to 'yes' if Tableau can create a table on the fly from the resultset of another query. See also: CAP_CREATE_TEMP_TABLES. | &ndash; | **<span style="color:red">?</span>**
 CAP_SELECT_TOP_INTO | Set to 'yes' if Tableau can use a TOP or LIMIT row-limiting clause when creating a table from a query resultset. | &ndash; | **<span style="color:red">?</span>**
 CAP_ODBC_METADATA_FORCE_UTF8_TEMP_TABLE_COLUMN_SIZE | Set to 'yes' if when creating temp tables specify the size of varchar columns in bytes. | &ndash; | &ndash;
 CAP_TEMP_TABLES_NOT_SESSION_SCOPED | Set to 'yes' if this data source uses regular tables to simulate temp tables. Temporary table creation is still controlled by CAP_CREATE_TEMP_TABLE or CAP_SELECT_INTO | &ndash; | &ndash;
