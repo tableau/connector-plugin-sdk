@@ -113,7 +113,9 @@ __Important:__ Your database must support subqueries or temporary tables for com
 - CAP_SELECT_INTO
 - CAP_SELECT_TOP_INTO
 
-If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities#temporary-tables). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large datasets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.
+If your database supports temp tables, we recommend that you enable them through the appropriate [Capabilities]({{ site.baseurl }}/docs/capabilities#temporary-tables). If the temp table capabilities are set, the connector will perform a simple check at connection time to confirm that the user can create a temp table in the current database environment. If the user does not have permission or the capabilities are disabled, then Tableau will attempt to generate an alternative query to retrieve the necessary results. Often these queries need subqueries and the performance can be poor, particularly with large datasets. If the connector does not support temporary tables or subqueries, then Tableau will report an error and will be unable to proceed.  
+
+The CAP_CREATE_TEMP_TABLES controls overall usage of temporary tables. The CAP_SELECT_INTO determines if `SELECT INTO` is used to populate the tables. If CAP_SELECT_INTO is set to 'no' may attempt to `INSERT` into the temp table, but this is less common.
 
 A common example is filtering the top three regions by sum of sales. You can try this using our Staples sample table by dragging [Market Segment] to __Rows__, then drag it again to __Filters__. Click the Top tab and select [Sales Total] aggregated by sum.
 
