@@ -112,9 +112,8 @@ This set of OAuth Config capabilities is not shared with the regular connector c
     <redirectUrisDesktop>http://localhost:55559/Callback</redirectUrisDesktop>
     <redirectUrisDesktop>http://localhost:555510/Callback</redirectUrisDesktop>
 
-    <authUri>https://my.idp.com/oauth2/v1/authorize</authUri>
-    <tokenUri>https://my.idp.com/oauth/token-request</tokenUri>
-
+    <authUri>/v1/authorize</authUri>
+    <tokenUri>/v1/token</tokenUri>
     <instanceUrlValidationRegex>^https:\/\/(.+\.)?(supercloud\.(com|us|cn|de))(.*)</instanceUrlValidationRegex>
     <scopes>refresh_token</scopes>
     <scopes>profile</scopes>
@@ -175,6 +174,24 @@ Some IDPs have a single global endpoint, such as https://accounts.google.com/o/o
 - Enable OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN. This only works with embedded OAuth configs. The instance URL will be either be collected later from the end-user or be extracted via the embedded OAuth configs' `defaultInstanceUrl` field.
 - Create seperate external/custom OAuth configs for each custom domain. External OAuth config shouldn't set OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN, and should specify authUri, tokenUri, userInfoUri fields as absolute paths, which contains the custom domain/instance URL.
 
+For the second case your OAuth config would include something like this:
+```xml
+    <authUri>https://myidp/oauth/v1/authorize</authUri>
+    <tokenUri>https://myidp/oauth/v1/token</tokenUri>
+    <userInfoUri>https://myidp/oauth/v1/userinfo</userInfoUri>
+    <!-- No instanceUrlValidationRegex needed, since its hard coded above. -->
+
+    <scopes>refresh_token</scopes>
+    <scopes>profile</scopes>
+    <scopes>email</scopes>
+    <capabilities>
+        <entry>
+            <key>OAUTH_CAP_SUPPORTS_CUSTOM_DOMAIN</key>
+            <value>false</value>
+        </entry>
+    ...
+```
+
 ## Multiple Embedded OAuth Configs
 *\*Available starting in Tableau 2023.1*
 
@@ -190,10 +207,15 @@ Tableau Desktop uses a shared client ID and client secret which is embedded in t
 If the authorization server supports dynamic port ranges for native applications then that should be used. This is the default behavior for Tableau OAuth clients. If the authorization server does not support this, then enable OAUTH_CAP_FIXED_PORT_IN_CALLBACK_URL, and specify a set of `<redirectUrisDesktop>` in the OAuth config.
 
 ### redirectUrisDesktop Format
-- Before Tableau 2023.1, the redirectUrisDesktop must be of the form `http://localhost:[portnumber]/Callback`. If you need to use loopback address other than localhost, you can enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS, but the `<redirectUrisDesktop>` should still specify localhost. The callback at runtime will be rewritten to something like http://127.0.0.1:55555/Callback.
 - Starting in Tableau 2023.1, You can use any valid loopback address like `http://localhost:[portnumber]/Callback`, `http://127.0.0.1:[portnumber]/Callback` (IPv4), `http://[::1]:[portnumber]/Callback` (IPv6). If you use loopback address other than localhost, enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS as well.
+- Before Tableau 2023.1, the redirectUrisDesktop must be of the form `http://localhost:[portnumber]/Callback`. If you need to use loopback address other than localhost, you can enable OAUTH_CAP_SUPPORTS_HTTP_SCHEME_LOOPBACK_REDIRECT_URLS, but the `<redirectUrisDesktop>` should still specify localhost. The callback at runtime will be rewritten to something like http://127.0.0.1:55555/Callback.
 
 For more information on see [RFC 8252: Loopback Interface Redirection](https://datatracker.ietf.org/doc/html/rfc8252#section-7.3).
+
+### Desktop Secrets
+Native installed applications cannot distribute client secrets confidentially. This is expected and allowed by the OAuth spec, see [RFC 8252](https://datatracker.ietf.org/doc/html/rfc8252#section-8.5). Instead of relying on client secrets for security, we follow best practice and use the authorization code flow with PKCE. For custom OAuth configs, if your IDP does not require a client secret for desktop apps, then ignore it, but be sure to enable PKCE.
+
+
 
 ## Custom OAuth Configs on Desktop
 *Available starting in Tableau 2023.1*
