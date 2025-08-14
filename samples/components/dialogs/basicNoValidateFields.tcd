@@ -1,6 +1,0 @@
-<connection-dialog class='example'>
-  <connection-config>
-    <authentication-mode value='BasicNoValidateFields' />
-    <port-prompt value="Port: " default="1234" />
-  </connection-config>
-</connection-dialog>
