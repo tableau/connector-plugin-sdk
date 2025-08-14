@@ -1,9 +1,0 @@
-<connection-dialog class='example'>
-  <connection-config>
-    <authentication-mode value='None' />
-    <authentication-options>
-      <option name="None" default="true" value="auth-none" />
-    </authentication-options>
-    <port-prompt value="Port: " default="1234" />
-  </connection-config>
-</connection-dialog>
