@@ -19,6 +19,7 @@ VALID_XML_EXTENSIONS = ['tcd', 'tdr', 'tdd', 'xml']  # These are the file extens
 PLATFORM_FIELD_NAMES = ['server', 'port', 'sslmode', 'authentication', 'username', 'password', 'instanceurl', 'vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAMES = ['vendor1', 'vendor2', 'vendor3']
 VENDOR_FIELD_NAME_PREFIX = 'v-'
+VENDOR_FIELD_PROHIBITED_WORDS = ['token', 'secret', 'password']
 
 # Holds the mapping between file type and XSD file name
 XSD_DICT = {
@@ -196,9 +197,16 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
     root = xml_tree.getroot()
 
     for child in root.iter('field'):
+
         if 'name' in child.attrib:
             field_name = child.attrib['name']
             properties.connection_fields.append(field_name)
+
+            # Only password is allowed to be secure
+            field_marked_secure = child.attrib.get('secure','false') == 'true'
+            if field_marked_secure and field_name != 'password':
+                xml_violations_buffer.append(field_name + " cannot be marked as secure: Only 'password' field can be marked as secure")
+                return False
 
             if field_name in VENDOR_FIELD_NAMES or field_name.startswith(VENDOR_FIELD_NAME_PREFIX):
                 properties.vendor_defined_fields.append(field_name)
@@ -227,6 +235,14 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
                                                     "of documentation for more information.")
                     return False
 
+            if not field_marked_secure:
+                for word in VENDOR_FIELD_PROHIBITED_WORDS:
+                    if word in field_name.lower():
+                        xml_violations_buffer.append(field_name + " is not marked as secure and contains prohibited word '" + word + "'. The values of non-secure fields will be logged in plain text.")
+                        return False
+                
+
+            
             field_names.add(field_name)
 
         if 'category' in child.attrib:

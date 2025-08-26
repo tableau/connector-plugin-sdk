@@ -1,0 +1,10 @@
+<connection-fields>
+  <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
+
+  <!-- -  is valid -->
+  <field label='SecureField' name='v-very-secure'
+          value-type='string' default-value='' optional='true'
+          secure='true' category='advanced'>
+  </field>
+  
+</connection-fields>
