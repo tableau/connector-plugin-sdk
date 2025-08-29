@@ -266,6 +266,21 @@ class TestXSDValidator(unittest.TestCase):
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "XML Validation failed for connectionFields.xml")
 
+        print("Test connectionFields is invalidated by non-password field marked secure")
+        test_file = TEST_FOLDER / "field_name_validation/invalid/non_password_secure_field/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "XML Validation failed for connectionFields.xml")
+
+        print("Test connectionFields is invalidated by non-secure field containing prohibited word")
+        test_file = TEST_FOLDER / "field_name_validation/invalid/prohibited_word/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "XML Validation failed for connectionFields.xml")
+        
+        print("Test connectionFields is invalidated by non-secure field containing prohibited word in label")
+        test_file = TEST_FOLDER / "field_name_validation/invalid/prohibited_word_label/connectionFields.xml"
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "XML Validation failed for connectionFields.xml")
+
         logging.debug("test_validate_connetion_field_name xml violations:")
         for violation in xml_violations_buffer:
             logging.debug(violation)
