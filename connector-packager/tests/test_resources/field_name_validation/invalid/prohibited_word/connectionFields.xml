@@ -1,8 +1,8 @@
 <connection-fields>
   <field name="authentication" label="Authentication" category="authentication" value-type="string" editable="false" default-value="auth-user-pass" />
 
-  <!-- -  is valid -->
-  <field label='EpicPassword' name='v-epic-password'
+  <!-- -  has banned word in field name -->
+  <field label='Epic' name='v-epic-password'
           value-type='string' default-value='' optional='true'
           secure='false' category='advanced'>
   </field>

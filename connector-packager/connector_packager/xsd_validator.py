@@ -200,6 +200,7 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
 
         if 'name' in child.attrib:
             field_name = child.attrib['name']
+            display_name = child.attrib['label']
             properties.connection_fields.append(field_name)
 
             # Only password is allowed to be secure
@@ -240,6 +241,12 @@ def validate_file_specific_rules_connection_fields(file_to_test: ConnectorFile, 
                     if word in field_name.lower():
                         xml_violations_buffer.append(field_name + " is not marked as secure and contains prohibited word '" + word + "'. The values of non-secure fields will be logged in plain text.")
                         return False
+                    
+                if display_name is not None:
+                    for word in VENDOR_FIELD_PROHIBITED_WORDS:
+                        if word in display_name.lower():
+                            xml_violations_buffer.append(field_name + " is not marked as secure and contains prohibited word '" + word + "' in the display name: " + display_name + ". The values of non-secure fields will be logged in plain text.")
+                            return False
                 
 
             
