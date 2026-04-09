@@ -120,6 +120,7 @@ CAP_JDBC_EXPORT_BIND_BOOL_AS_INTEGER  | Set to 'yes' to bind Tableau booleans to
 CAP_JDBC_EXPORT_DATA_BATCH | Set to 'no' to disable the use of JDBC batch operations for data insert. | yes | yes
 CAP_JDBC_INSERT_COERCE_INT_TO_BOOL | Set to 'yes' to convert integer type to boolean only when the column type and source type are different. Available in Tableau 2021.2 and newer. | &ndash; | &ndash;
 CAP_JDBC_MAX_STRING_LENGTH_MEDIUM | Set to 'yes' to use 512 character string length limit. Default is 16K. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
+CAP_JDBC_METADATA_BIND_TIMESTAMPTZ_TO_DATETIME | Set to 'yes' to treat JDBC TIMESTAMP_WITH_TIMEZONE and TIME_WITH_TIMEZONE types as Date & Time fields in Tableau. | &ndash; | &ndash;
 CAP_JDBC_METADATA_GET_INDEX_INFO | Set to 'no' to disable reading index info | yes | yes
 CAP_JDBC_METADATA_IGNORE_NULLABILITY | Set to 'yes' to ignore column nullability retrieved from query metadata and always set it to true for all columns in the query result. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
 CAP_JDBC_METADATA_NUMERIC_DEFAULT_PREC_SCALE_DOUBLE | Set to 'yes' to use precision=17 and no scale for numeric with undefined precision/scale. Available in Tableau 2020.4 and newer. | &ndash; | &ndash;
