@@ -175,6 +175,9 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
     elif file_to_test.file_type == 'connection-dialog':
         return validate_file_specific_rules_tcd(file_to_test, path_to_file, xml_violations_buffer, properties)
+    elif file_to_test.file_type == 'oauth-config':
+        return validate_file_specific_rules_oauth_config(file_to_test, path_to_file, xml_violations_buffer, properties)
+    
 
     return True
 
@@ -345,6 +348,21 @@ def validate_file_specific_rules_tcd(file_to_test: ConnectorFile, path_to_file: 
     vendor3 = root.find('.//connection-config/vendor3-prompt')
     if vendor3 is not None:
         properties.vendor_defined_fields.append('vendor3')
+
+    return True
+
+def validate_file_specific_rules_oauth_config(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    
+    # oauthConfigId is case sensitive, and if it's default it must be lowercase
+    oauthConfigId = root.find('.//oauthConfigId')
+    if oauthConfigId is not None and 'default' == oauthConfigId.text.lower():
+        if 'default' != oauthConfigId.text:
+            xml_violations_buffer.append("'default' OAuth Config must be lowercase as oauthConfigId is case sensitive" +
+                                    str(path_to_file) + ".")
+            return False
+                
 
     return True
 

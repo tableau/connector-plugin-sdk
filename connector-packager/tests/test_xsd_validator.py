@@ -483,3 +483,18 @@ class TestXSDValidator(unittest.TestCase):
 
         self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
                          "The configLabel field must be located after authUri and tokenUri.")
+        
+    def test_validate_oauth_default_config_id(self):
+        test_file = TEST_FOLDER / "oauth_default_config_id/valid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                        "Lowercase default should be accepted")
+
+        test_file = TEST_FOLDER / "oauth_default_config_id/invalid/oauth-config.xml"
+        file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
+        xml_violations_buffer = []
+
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+                         "Uppercase default should be rejected")
