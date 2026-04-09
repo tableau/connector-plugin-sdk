@@ -505,12 +505,6 @@ class TestXSDValidator(unittest.TestCase):
 
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
-            ConnectorFile("connectionFields.xml", "connection-fields"),
-            ConnectorFile("connectionBuilder.js", "script"),
-            ConnectorFile("connectionProperties.js", "script"),
-            ConnectorFile("dialect.xml", "dialect"),
-            ConnectorFile("connectionResolver.xmls", "connection-resolver"),
-            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
             ConnectorFile("oauth-config.xml", "oauth-config"),
             ConnectorFile("oauth-config2.xml", "oauth-config"),
             ConnectorFile("oauth-config3.xml", "oauth-config")]
@@ -522,12 +516,6 @@ class TestXSDValidator(unittest.TestCase):
 
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
-            ConnectorFile("connectionFields.xml", "connection-fields"),
-            ConnectorFile("connectionBuilder.js", "script"),
-            ConnectorFile("connectionProperties.js", "script"),
-            ConnectorFile("dialect.xml", "dialect"),
-            ConnectorFile("connectionResolver.xmls", "connection-resolver"),
-            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
             ConnectorFile("oauth-config.xml", "oauth-config"),
             ConnectorFile("oauth-config2.xml", "oauth-config")]
 
@@ -538,12 +526,6 @@ class TestXSDValidator(unittest.TestCase):
 
         files_list = [
             ConnectorFile("manifest.xml", "manifest"),
-            ConnectorFile("connectionFields.xml", "connection-fields"),
-            ConnectorFile("connectionBuilder.js", "script"),
-            ConnectorFile("connectionProperties.js", "script"),
-            ConnectorFile("dialect.xml", "dialect"),
-            ConnectorFile("connectionResolver.xmls", "connection-resolver"),
-            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
             ConnectorFile("oauth-config.xml", "oauth-config"),
             ConnectorFile("oauth-config2.xml", "oauth-config")]
 
