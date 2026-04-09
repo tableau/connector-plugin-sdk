@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 
 TEST_FOLDER = Path("tests/test_resources")
 
-dummy_properties = ConnectorProperties()
+def get_dummy_properties():
+    return ConnectorProperties()
 
 
 class TestXSDValidator(unittest.TestCase):
@@ -27,14 +28,14 @@ class TestXSDValidator(unittest.TestCase):
             ConnectorFile("connectionResolver.tdr", "connection-resolver"),
             ConnectorFile("resources-en_US.xml", "resource")]
 
-        self.assertTrue(validate_all_xml(files_list, test_folder, dummy_properties), "Valid connector not marked as valid")
+        self.assertTrue(validate_all_xml(files_list, test_folder, get_dummy_properties()), "Valid connector not marked as valid")
 
         print("\nTest broken xml. Throws a XML validation error.")
         test_folder = TEST_FOLDER / Path("broken_xml")
 
         files_list = [ConnectorFile("manifest.xml", "manifest")]
 
-        self.assertFalse(validate_all_xml(files_list, test_folder, dummy_properties), "Invalid connector was marked as valid")
+        self.assertFalse(validate_all_xml(files_list, test_folder, get_dummy_properties()), "Invalid connector was marked as valid")
 
     def test_validate_single_file(self):
 
@@ -42,25 +43,25 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("manifest.xml", "manifest")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         test_file = TEST_FOLDER / Path("big_manifest/manifest.xml")
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "Big XML file marked as valid")
 
         print("\nTest broken xml. Throws XML validation error.")
         test_file = TEST_FOLDER / Path("broken_xml/manifest.xml")
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML file that doesn't follow schema marked as valid")
 
         print("\nTest malformed xml. Throws XML validation error.")
         test_file = TEST_FOLDER / Path("broken_xml/connectionResolver.tdr")
         file_to_test = ConnectorFile("connectionResolver.tdr", "connection-resolver")
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "Malformed XML file marked as valid")
 
         logging.debug("test_validate_single_file xml violations:")
@@ -73,12 +74,12 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         print("\nTest malformed xml. Throws XML validation error.")
         test_file = TEST_FOLDER / "broken_xml/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML file with invalid name values marked as valid")
 
         logging.debug("test_validate_vendor_prefix xml violations:")
@@ -91,12 +92,12 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         print("\nTest missing default-value for non-optional advanced field. Throws XML validation error.")
         test_file = TEST_FOLDER / "advanced_required_missing_default/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML file containing required field in 'advanced' category with no default value marked as valid")
 
         logging.debug("test_validate_required_advanced_field_has_default_value xml violations:")
@@ -109,12 +110,12 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         print("\nTest duplicate fields not allowed. Throws XML validation error.")
         test_file = TEST_FOLDER / "duplicate_fields/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "A field with the field name = server already exists. Cannot have multiple fields with the same name.")
 
         logging.debug("test_validate_duplicate_fields_absent xml violations:")
@@ -126,14 +127,14 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         test_file = TEST_FOLDER / "instanceurl/connectionFields.xml"
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         xml_violations_buffer = []
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "An instanceurl field must be conditional to authentication field with value=oauth")
 
         # instanceURL should not be required in required-attributes since it's automatically added
@@ -155,21 +156,21 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "oauthConfig should be able to have no oauthConfigId field")
 
         test_file = TEST_FOLDER / "oauth_config_id/invalid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "There can only be one oauthConfigId field")
 
     def test_warn_defaultSQLDialect_as_base(self):
@@ -237,48 +238,48 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("connectionFields.xml", "connection-fields")
         print("Test connectionFields is validated by XSD when field name is vaild ")
         xml_violations_buffer = []
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "XML Validation passed for connectionFields.xml")
 
         print("Test connectionFields is invalidated by XSD when field name"
         "contains special character other than - or _")
         test_file = TEST_FOLDER / "field_name_validation/invalid/special_character/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
 
         print("Test connectionFields is invalidated by XSD when field name starts with a number")
         test_file = TEST_FOLDER / "field_name_validation/invalid/starting_number/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
 
         print("Test connectionFields is invalidated by XSD when field name starts with a space")
         test_file = TEST_FOLDER / "field_name_validation/invalid/starting_space/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
         print("Test connectionFields is invalidated by XSD when field name has space in between")
 
         test_file = TEST_FOLDER / "field_name_validation/invalid/space_in_between/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
 
         print("Test connectionFields is invalidated by XSD when field name ends with a space")
         test_file = TEST_FOLDER / "field_name_validation/invalid/ending_space/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
 
         print("Test connectionFields is invalidated by non-password field marked secure")
         test_file = TEST_FOLDER / "field_name_validation/invalid/non_password_secure_field/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
 
         print("Test connectionFields is invalidated by non-secure field containing prohibited word")
         test_file = TEST_FOLDER / "field_name_validation/invalid/prohibited_word/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
         
         print("Test connectionFields is invalidated by non-secure field containing prohibited word in label")
         test_file = TEST_FOLDER / "field_name_validation/invalid/prohibited_word_label/connectionFields.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "XML Validation failed for connectionFields.xml")
 
         logging.debug("test_validate_connetion_field_name xml violations:")
@@ -334,12 +335,12 @@ class TestXSDValidator(unittest.TestCase):
 
         print("Test that company name with length less than 1 is invalidated")
         test_file = TEST_FOLDER / "company_name_length_validation/min/manifest.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "Empty company name marked as valid")
 
         print("Test that company name with length greater than 24 is invalidated")
         test_file = TEST_FOLDER / "company_name_length_validation/max/manifest.xml"
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "Company name with length greater than 24 marked as valid")
 
     def test_validate_jdbc_properties_builder(self):
@@ -410,12 +411,12 @@ class TestXSDValidator(unittest.TestCase):
 
         print("Test that 2 oauth-config fields are validated")
         test_file = TEST_FOLDER / "multiple_oauth_config/test_manifest_files/manifest_2_config.xml"
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "2 OAuth Config Fields are marked as invalid")
 
         print("Test that 3 oauth-config fields are validated")
         test_file = TEST_FOLDER / "multiple_oauth_config/test_manifest_files/manifest_2_config.xml"
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "3 OAuth Config Fields are marked as invalid")
 
     def test_validate_default_instance_url(self):
@@ -423,21 +424,21 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "oauthConfig should be able to have no defaultInstanceUrl field")
 
         test_file = TEST_FOLDER / "oauth_default_instance_url/invalid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "The defaultInstanceUrl must be located after authUri and tokenUri.")
 
     def test_validate_instance_url_suffix(self):
@@ -445,21 +446,21 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "oauthConfig should be able to have no instanceUrlSuffix field")
 
         test_file = TEST_FOLDER / "oauth_instance_url_suffix/invalid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "The instanceUrlSuffix must be located after authUri and tokenUri.")
 
     def test_validate_config_label(self):
@@ -467,21 +468,21 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Valid XML file not marked as valid")
 
         test_file = TEST_FOLDER / "oauth_connector/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "oauthConfig should be able to have no configLabel field")
 
         test_file = TEST_FOLDER / "oauth_config_label/invalid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "The configLabel field must be located after authUri and tokenUri.")
         
     def test_validate_oauth_default_config_id(self):
@@ -489,12 +490,61 @@ class TestXSDValidator(unittest.TestCase):
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertTrue(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                         "Lowercase default should be accepted")
 
         test_file = TEST_FOLDER / "oauth_default_config_id/invalid/oauth-config.xml"
         file_to_test = ConnectorFile("oauth-config.xml", "oauth-config")
         xml_violations_buffer = []
 
-        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, dummy_properties),
+        self.assertFalse(validate_single_file(file_to_test, test_file, xml_violations_buffer, get_dummy_properties()),
                          "Uppercase default should be rejected")
+        
+    def test_validate_oauth_duplicatet_config_id(self):
+        test_folder = TEST_FOLDER / Path("oauth_duplicate_config_ids")
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("connectionProperties.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xmls", "connection-resolver"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("oauth-config.xml", "oauth-config"),
+            ConnectorFile("oauth-config2.xml", "oauth-config"),
+            ConnectorFile("oauth-config3.xml", "oauth-config")]
+
+        self.assertFalse(validate_all_xml(files_list, test_folder, get_dummy_properties()), "Connector with duplicate config ids marked as valid")
+
+    def test_validate_oauth_default_and_missing_ids(self):
+        test_folder = TEST_FOLDER / Path("oauth_default_and_missing_ids")
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("connectionProperties.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xmls", "connection-resolver"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("oauth-config.xml", "oauth-config"),
+            ConnectorFile("oauth-config2.xml", "oauth-config")]
+
+        self.assertFalse(validate_all_xml(files_list, test_folder, get_dummy_properties()), "Connector with default and missing config ids marked as valid")
+
+    def test_validate_oauth_no_default(self):
+        test_folder = TEST_FOLDER / Path("oauth_no_default")
+
+        files_list = [
+            ConnectorFile("manifest.xml", "manifest"),
+            ConnectorFile("connectionFields.xml", "connection-fields"),
+            ConnectorFile("connectionBuilder.js", "script"),
+            ConnectorFile("connectionProperties.js", "script"),
+            ConnectorFile("dialect.xml", "dialect"),
+            ConnectorFile("connectionResolver.xmls", "connection-resolver"),
+            ConnectorFile("connectionMetadata.xml", "connection-metadata"),
+            ConnectorFile("oauth-config.xml", "oauth-config"),
+            ConnectorFile("oauth-config2.xml", "oauth-config")]
+
+        self.assertFalse(validate_all_xml(files_list, test_folder, get_dummy_properties()), "Connector with default and missing config ids marked as valid")
