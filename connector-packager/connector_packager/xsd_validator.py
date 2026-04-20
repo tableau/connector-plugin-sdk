@@ -74,6 +74,12 @@ def validate_all_xml(files_list: List[ConnectorFile], folder_path: Path, propert
 
         warn_file_specific_rules(file_to_test, path_to_file)
 
+    # If we have oauth-configs, we need to confirm we have at least one default config
+    if len(properties.oauth_config_ids) > 1:
+        if "default" not in properties.oauth_config_ids:
+            xml_violations_found += 1
+            xml_violations_buffer.append("Connector has embedded OAuth configs, but does not define a default config.")
+    
     if xml_violations_found <= 0:
         logger.debug("No XML violations found")
     else:
@@ -175,6 +181,9 @@ def validate_file_specific_rules(file_to_test: ConnectorFile, path_to_file: Path
         return validate_file_specific_rules_tdr(file_to_test, path_to_file, xml_violations_buffer, properties)
     elif file_to_test.file_type == 'connection-dialog':
         return validate_file_specific_rules_tcd(file_to_test, path_to_file, xml_violations_buffer, properties)
+    elif file_to_test.file_type == 'oauth-config':
+        return validate_file_specific_rules_oauth_config(file_to_test, path_to_file, xml_violations_buffer, properties)
+    
 
     return True
 
@@ -345,6 +354,43 @@ def validate_file_specific_rules_tcd(file_to_test: ConnectorFile, path_to_file: 
     vendor3 = root.find('.//connection-config/vendor3-prompt')
     if vendor3 is not None:
         properties.vendor_defined_fields.append('vendor3')
+
+    return True
+
+def validate_file_specific_rules_oauth_config(file_to_test: ConnectorFile, path_to_file: Path, xml_violations_buffer: List[str], properties: ConnectorProperties) -> bool:
+    xml_tree = parse(str(path_to_file))
+    root = xml_tree.getroot()
+    
+    
+    oauthConfigId = root.find('.//oauthConfigId')
+
+    # No config id is equivilant to default
+    if oauthConfigId is None:
+        if "default" in properties.oauth_config_ids:
+            xml_violations_buffer.append("Multiple defualt OAuth configs (Note: no oauthConfigId is equivilant to default). " +
+                                    str(path_to_file))
+            return False
+        else:
+            properties.oauth_config_ids.append("default")
+            return True
+
+    # oauthConfigId is case sensitive, and if it's default it must be lowercase
+    if oauthConfigId.text.lower() == 'default':
+        if 'default' != oauthConfigId.text:
+            xml_violations_buffer.append("'default' OAuth Config must be lowercase as oauthConfigId is case sensitive. " +
+                                    str(path_to_file))
+            return False
+
+    # Check that new oauth config is unique
+    if oauthConfigId.text in properties.oauth_config_ids:
+        xml_violations_buffer.append("OAuth config ID of '" + oauthConfigId.text + "' already defined. " +
+                                str(path_to_file))
+        return False
+    else:
+        properties.oauth_config_ids.append(oauthConfigId.text)
+
+   
+                
 
     return True
 
