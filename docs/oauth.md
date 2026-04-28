@@ -7,7 +7,11 @@ This document explains how to configure and use OAuth. It's meant for admins and
 
 We have templates for common IDPs in the [samples](https://github.com/tableau/connector-plugin-sdk/tree/master/samples/components/oauth). In general, you should only need to substitute the desktop client ID and secret, and the URL of the IDP. However, there may be additional modifications needed to account for differences such as with PKCE and scopes.
 
-**Note**: Single use refresh tokens (sometimes called rolling refresh tokens or refresh token rotation) are not supported for OAuth connections to Tableau at this time. Support for these tokens are planned for a future release.
+
+<div class="alert alert-info"><p>
+<b>Note:</b> Single use refresh tokens (sometimes called rolling refresh tokens or refresh token rotation) are supported in Tableau Cloud, starting with the 2025.2 (Summer 2025) release, and in Tableau Server, starting with the 2025.3 release, if the IDP of the data source provider supports it. See <a href="{{site.baseurl}}/docs/oauth.html#oauth-capabilities">OAuth Capabilities</a>.
+</p></div>
+
 
 **In this section**
 
@@ -90,7 +94,7 @@ This set of OAuth Config capabilities is not shared with the regular connector c
 | OAUTH_CAP_REQUIRES_PROMPT_SELECT_ACCOUNT | Add prompt=select_account to the request. More details: https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow | false | - |
 | OAUTH_CAP_SUPPORTS_GET_USERINFO_FROM_ID_TOKEN | Used when your OAuth response contains a JWT style ID_TOKEN that can be parsed out to get actual username. For example, https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens | false | - |
 | OAUTH_CAP_INFER_INSTANCE_URL_FROM_SERVER | Used to concatenate the user-provided server with the `instanceUrlSuffix` field in the format of `https://{SERVER}{instanceUrlSuffix}`. | false | - |
-| OAUTH_CAP_SINGLE_USE_REFRESH_TOKEN | Starting in Tableau 2025.2, use this if the external IDP supports the single use refresh token for OAuth | false | - |
+| OAUTH_CAP_SINGLE_USE_REFRESH_TOKEN | Starting in Tableau Cloud 2025.2 and Tableau Server 2025.3, use this if the external IDP supports the single use refresh token for OAuth | false | - |
 
 ---
 ## Example OAuthConfig File
