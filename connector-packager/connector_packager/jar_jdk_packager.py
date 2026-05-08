@@ -84,7 +84,7 @@ def get_min_support_version(file_list: List[ConnectorFile], cur_min_version_tabl
             tdr_root = ET.parse(input_dir / connector_file.file_name).getroot()
             attribute_list = tdr_root.find('.//connection-normalizer/required-attributes/attribute-list')
 
-            if not attribute_list:
+            if attribute_list is None:
                 if 2021.1 > float(min_version_tableau):
                     min_version_tableau = "2021.1"
                 reasons.append("Connector uses inferred connection resolver, which was added in the 2021.1 release")
