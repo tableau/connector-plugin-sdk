@@ -19,7 +19,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: ${{matrix.java}}
+    - name: Install connector-packager and dependencies
+      run: |
+        cd connector-packager
+        pip install -e .
+        pip install pytest
     - name: Run Connector Packager unit tests with JDK ${{ matrix.java }}
       run: |
         cd connector-packager
-        python setup.py test
+        pytest tests/ -v

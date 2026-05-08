@@ -94,7 +94,12 @@ The [Pyright](https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyr
 ### Test `connector-packager` Module
 
 ```
-(.venv) PS connector-plugin-sdk\connector-packager> python setup.py test
+(.venv) PS connector-plugin-sdk\connector-packager> pytest tests/
+```
+
+Or with verbose output:
+```
+(.venv) PS connector-plugin-sdk\connector-packager> pytest tests/ -v
 ```
 
 ### Run the `connector-packager` Module

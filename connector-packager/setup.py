@@ -14,9 +14,10 @@ setup(
     packages=['connector_packager'],
     license='MIT',
     description='A Python module for packaging a Tableau connector.',
-    test_suite='tests',
     python_requires='>3.7',
     install_requires=['xmlschema', 'defusedxml', 'packaging'],
-    tests_require=['six'],
+    extras_require={
+        'dev': ['pytest>=7.0.0'],
+    },
     include_package_data=True
 )
