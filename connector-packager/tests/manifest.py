@@ -5,7 +5,7 @@ Module for JAR manifest.
 import os
 
 from collections import OrderedDict
-from six import BytesIO
+from io import BytesIO
 from connector_packager.version import __version__
 
 
