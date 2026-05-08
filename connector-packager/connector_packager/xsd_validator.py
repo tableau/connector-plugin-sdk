@@ -303,14 +303,14 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
 
     # The connection resolver appears after the dialog elements in the manifest's xml, so we know
     # USES_TCD is accurate here
-    if not attribute_list and properties.uses_tcd:
+    if attribute_list is None and properties.uses_tcd:
         xml_violations_buffer.append("Connectors using a .tcd file cannot use inferred connection resolver,"
                                      "must manually populate required-attributes/attributes-list in "
                                      + str(path_to_file) + ".")
         return False
 
     # Check that all the connection-fields attributes are in the required attributes
-    if properties.connection_fields and attribute_list:
+    if properties.connection_fields and attribute_list is not None:
         attributes = []
         for attr in attribute_list.iter():
             attributes.append(attr.text)
@@ -332,7 +332,7 @@ def validate_file_specific_rules_tdr(file_to_test: ConnectorFile, path_to_file: 
 
     properties_builder = root.find('.//connection-properties')
 
-    if not properties_builder and properties.is_jdbc:
+    if properties_builder is None and properties.is_jdbc:
         xml_violations_buffer.append("Connectors using a 'jdbc' superclass must declare a <connection-properties> element in " +
                                      str(path_to_file) + ".")
         return False
@@ -419,7 +419,7 @@ def warn_file_specific_rules_tdr(path_to_file: Path):
     root = xml_tree.getroot()
     attribute_list = root.find('.//connection-normalizer/required-attributes/attribute-list')
 
-    if not attribute_list:
+    if attribute_list is None:
         return
 
     authentication_attr_exists = False
